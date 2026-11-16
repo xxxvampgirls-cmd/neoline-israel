@@ -728,6 +728,12 @@ body{width:100%;max-width:100%;overflow-x:clip}
  .ad-disclaimer{font-size:9px;margin-top:12px}
 }
 @media(max-width:370px){.ad-section.shell{padding-inline:13px!important}.ad-copy,.rtl .ad-copy{padding-inline:16px}}
+
+.ad-actions{display:flex;gap:9px;align-items:center;flex-wrap:wrap}
+.ad-share{background:#fff;border:1px solid #bcddf7;border-radius:12px;color:#166baa;font-size:11px;font-weight:800;min-height:41px;padding:8px 13px}
+.ad-share:hover{background:#e6f5ff}
+.ad-share:focus-visible{outline:2px solid #0b7ed0;outline-offset:2px}
+@media(max-width:720px){.ad-share{min-height:43px;padding-inline:12px}.ad-actions{gap:8px}}
 </style><!-- Cloudflare Pages Git reconnection deployment probe: 2026-11-16 --></head><body>
 <div class="top-strip" data-i="strip">NEOLINE ISRAEL · CONCEPT STORE · ДЕМОНСТРАЦИОННАЯ ВЕРСИЯ · ЦЕНЫ ОРИЕНТИРОВОЧНЫЕ</div><div class="sticky"><div class="shell header"><a class="brand" href="#top" aria-label="Neoline Israel"><span><strong>NEOLINE</strong><small>ISRAEL · CONCEPT</small></span><span class="brand-star" title="Israel" aria-label="Звезда Давида"><svg viewBox="0 0 48 48" width="21" height="21" aria-hidden="true"><path d="M24 4 42 36H6Z M24 44 6 12h36Z" fill="none" stroke="#117bca" stroke-width="3.3" stroke-linejoin="round"/></svg></span></a><nav class="nav"><button data-scroll="catalog" class="active" data-i="navCatalog">Каталог</button><button data-scroll="advantages" data-i="navBenefits">Преимущества</button><button data-scroll="installation" data-i="navInstall">Установка и доставка</button><button data-scroll="footer" data-i="navContact">Контакты</button></nav><div class="head-actions"><div class="flag-switcher" role="group" aria-label="Язык / Language / שפה / اللغة"><button class="flag-choice active" type="button" data-language="ru" title="Русский" aria-label="Русский язык" aria-pressed="true"><span class="flag-graphic" aria-hidden="true"><svg viewBox="0 0 36 24" xmlns="http://www.w3.org/2000/svg" focusable="false"><rect width="36" height="24" fill="#fff"/><path d="M0 8h36v8H0z" fill="#0039a6"/><path d="M0 16h36v8H0z" fill="#d52b1e"/></svg></span></button><button class="flag-choice" type="button" data-language="he" title="עברית" aria-label="עברית - Hebrew" aria-pressed="false"><span class="flag-graphic" aria-hidden="true"><svg viewBox="0 0 36 24" xmlns="http://www.w3.org/2000/svg" focusable="false"><rect width="36" height="24" fill="#fff"/><path d="M0 3h36v3H0zm0 15h36v3H0z" fill="#0038b8"/><path d="M18 7.5l5.5 9.5h-11zM18 16.5l-5.5-9.5h11z" stroke="#0038b8" stroke-width="1.15" fill="none" stroke-linejoin="round"/></svg></span></button><button class="flag-choice" type="button" data-language="en" title="English" aria-label="English language" aria-pressed="false"><span class="flag-graphic" aria-hidden="true"><svg viewBox="0 0 36 24" xmlns="http://www.w3.org/2000/svg" focusable="false"><rect width="36" height="24" fill="#012169"/><path d="M0 0l36 24M36 0L0 24" stroke="#fff" stroke-width="6"/><path d="M0 0l36 24M36 0L0 24" stroke="#c8102e" stroke-width="2.5"/><path d="M18 0v24M0 12h36" stroke="#fff" stroke-width="9"/><path d="M18 0v24M0 12h36" stroke="#c8102e" stroke-width="4.6"/></svg></span></button><button class="flag-choice flag-choice--text flag-choice--arabic" type="button" data-language="ar" title="العربية" aria-label="اللغة العربية" aria-pressed="false" lang="ar" dir="rtl">عربي</button></div><select class="language language-native" id="lang" aria-label="Language" tabindex="-1"><option value="ru">RU</option><option value="he">עברית</option><option value="en">ENG</option><option value="ar">العربية</option></select></div></div></div>
 <main id="top"><section class="showcase" aria-label="Featured products"><div class="hero-stage"><div id="showcaseSlides" aria-live="polite"></div><div class="showcase-controls"><button class="showcase-arrow" id="slidePrev" aria-label="Previous">‹</button><div id="showcaseDots" class="showcase-dots"></div><button class="showcase-arrow" id="slideNext" aria-label="Next">›</button></div><div class="sneak" aria-label="Highlights"><span>✡ NEOLINE ISRAEL · CONCEPT</span><span>◉ 4K · 2K · Wi-Fi</span><span>🚙 Dash cams</span><span>₪ Estimated local pricing</span></div></div></section>
@@ -737,7 +743,7 @@ body{width:100%;max-width:100%;overflow-x:clip}
 <p class="ad-kicker" id="adKicker">ТЕХНОЛОГИИ ДЛЯ ВАШЕЙ ДОРОГИ</p>
 <h2 id="adTitle">Видеть больше.<br><em>Сохранять главное.</em></h2>
 <p class="ad-lead" id="adLead">Чёткие детали каждой поездки. Откройте возможности NEOLINE Argus 4K Dual.</p>
-<button type="button" class="ad-button" id="adMore"><span id="adButtonText">Смотреть флагман</span><span aria-hidden="true">↗</span></button>
+<div class="ad-actions"><button type="button" class="ad-button" id="adMore"><span id="adButtonText">Смотреть флагман</span><span aria-hidden="true">↗</span></button><button type="button" class="ad-share" id="adShare" aria-label="Поделиться ссылкой" title="Поделиться">↗ <span id="adShareLabel">Поделиться</span></button></div>
 <small class="ad-disclaimer" id="adDisclaimer">Концепт рекламы · продажи в Израиле пока не открыты</small>
 </div><div class="ad-photo-area">
 <img src="https://neoline.ru/upload/iblock/18e/inssnto8g0d3gybtezvvy1hbmmj1vjje/016.jpg" loading="lazy" decoding="async" alt="NEOLINE Argus 4K Dual" onerror="this.hidden=true;this.nextElementSibling.hidden=false">
@@ -880,7 +886,16 @@ ru:['ТЕХНОЛОГИИ ДЛЯ ВАШЕЙ ДОРОГИ','Видеть боль
 en:['TECHNOLOGY FOR EVERY ROAD','See more.<br><em>Capture what matters.</em>','Discover the details of every drive with NEOLINE Argus 4K Dual.','Discover the flagship','Concept advertisement · sales have not launched in Israel'],
 he:['טכנולוגיה לכל נסיעה','לראות יותר.<br><em>לשמור על מה שחשוב.</em>','גלו את הפרטים בכל נסיעה עם NEOLINE Argus 4K Dual.','לצפייה בדגם הדגל','פרסומת לקונספט · המכירות בישראל טרם החלו'],
 ar:['تقنية لكل رحلة','شاهد أكثر.<br><em>احتفظ بالتفاصيل.</em>','اكتشف تفاصيل كل رحلة مع NEOLINE Argus 4K Dual.','اكتشف الطراز الرائد','إعلان توضيحي · لم تبدأ المبيعات في إسرائيل بعد']};
-function renderAd(){const a=adCopy[lang]||adCopy.ru;$('adKicker').textContent=a[0];$('adTitle').innerHTML=a[1];$('adLead').textContent=a[2];$('adButtonText').textContent=a[3];$('adDisclaimer').textContent=a[4]}
+function renderAd(){const a=adCopy[lang]||adCopy.ru;$('adKicker').textContent=a[0];$('adTitle').innerHTML=a[1];$('adLead').textContent=a[2];$('adButtonText').textContent=a[3];$('adDisclaimer').textContent=a[4];$('adShareLabel').textContent=({ru:'Поделиться',en:'Share',he:'שיתוף',ar:'مشاركة'})[lang]||'Share'}
 $('adMore').onclick=()=>openProduct(6);
+$('adShare').onclick=async()=>{
+ const shareTitle='NEOLINE Israel';
+ const url=new URL(location.href);url.search='';url.hash='';
+ try{
+  if(navigator.share){await navigator.share({title:shareTitle,text:({ru:'Технологии для вашей дороги. NEOLINE Israel — концепт.',en:'Discover NEOLINE Israel — concept showroom.',he:'NEOLINE Israel — תצוגת קונספט',ar:'NEOLINE Israel — معرض تجريبي'})[lang],url:url.href})}
+  else if(navigator.clipboard){await navigator.clipboard.writeText(url.href);toast(({ru:'Ссылка скопирована',en:'Link copied',he:'הקישור הועתק',ar:'تم نسخ الرابط'})[lang])}
+  else {window.prompt('Copy link',url.href)}
+ }catch(e){if(e.name!=='AbortError')toast(({ru:'Не удалось поделиться',en:'Could not share',he:'השיתוף נכשל',ar:'تعذرت المشاركة'})[lang])}
+};
 let preferredLang='ru';try{const saved=localStorage.getItem('neoline-language');if(['ru','he','en','ar'].includes(saved))preferredLang=saved}catch(e){}changeLang(preferredLang);updateCounts();
 </script></body></html>
