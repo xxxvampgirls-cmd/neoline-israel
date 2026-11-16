@@ -264,11 +264,14 @@ def detail(url,group):
    if intro and token in ("Отзывы","Комплектация","В корзину","Рассчитать доставку"):break
    if len(token)<70 or len(token)>900:continue
    low=token.lower()
-   if any(k in low for k in ("₽","руб./мес","в рассрочку","заказать звонок","интернет-магазин представительского класса","публичной офертой","телеграм","нашли дешевле","подписаться")):continue
+   if any(k in low for k in ("₽","руб./мес","в рассрочку","заказать звонок","интернет-магазин представительского класса","публичной офертой","телеграм","нашли дешевле","подписаться","cookie","соглашаетесь с политикой","политикой использования","конфиденциальности","персональных данных","оформить заказ","рассчитать доставку")):continue
    if token in intro or token==title:continue
    intro.append(token)
    if len(" ".join(intro))>=360 or len(intro)>=3:break
-  excerpt=" ".join(intro)[:470].rsplit(" ",1)[0] if intro else ""
+  excerpt=" ".join(intro) if intro else ""
+  if len(excerpt)>440:
+   sentence_end=excerpt.rfind(". ",245,440)
+   excerpt=(excerpt[:sentence_end+1] if sentence_end>0 else excerpt[:436].rsplit(" ",1)[0]+"…")
   short=name+" — "+label.lower()+"."
   if excerpt: short+=" "+excerpt
   if highlights:short+=" Основные параметры: "+"; ".join(highlights[:4])+"."
