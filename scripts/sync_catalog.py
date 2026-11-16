@@ -245,8 +245,9 @@ def detail(url,group):
   cat,label=group
   title_lower=title.lower()
   if "уценк" in title_lower:cat="sale"
+  elif re.search(r"кабел|креплен|держател|адаптер|компрессор|power cord|fuse cord|hardwire|x-cop magnet|x-cop pad|фильтр|powerbook|мультитул|задняя камера",title,re.I):cat="accessories"
   elif re.search(r"гибрид|радар-детектором|roadmaster|deepscan|shadow wi-fi|spectrum dual",title,re.I):cat="hybrid"
-  elif re.search(r"радар-детектор|x-cop 6200s|x-cop 8700s",title,re.I):cat="radar"
+  elif re.search(r"^радар-детектор|^сигнатурный радар-детектор|^neoline x-cop (5900|6100|6200|8700|8900)",title,re.I):cat="radar"
   elif re.search(r"динамики|акустик|ultera",title,re.I):cat="audio"
   elif re.search(r"видеорегистратор|wowcam|smartway|argus|flash 2k|easydrive|g-tech",title,re.I):
    cat="dual" if re.search(r"dual|двумя камер|заднего вида|зеркало",title,re.I) else "single"
