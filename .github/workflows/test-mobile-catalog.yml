@@ -43,6 +43,18 @@ jobs:
             }
             await page.setViewportSize({width:390,height:844});
             const total=await page.locator('#products .product').count();
+            const layout=await page.evaluate(()=>{
+              const catalog=document.getElementById('catalog'),heading=catalog.querySelector('.section-head');
+              const tab=catalog.querySelector('#tabs');
+              return {status:!!document.getElementById('catalogSourceStatus'),
+                paddingTop:parseFloat(getComputedStyle(catalog).paddingTop),
+                headGap:parseFloat(getComputedStyle(heading).rowGap),
+                sectionMargin:parseFloat(getComputedStyle(heading).marginBottom),
+                titleTabDistance:Math.round(tab.getBoundingClientRect().top-heading.firstElementChild.getBoundingClientRect().bottom)};
+            });
+            if(layout.status||layout.paddingTop>16||layout.headGap>15||layout.titleTabDistance>28)
+              throw Error('Catalog spacing/status issue: '+JSON.stringify(layout));
+            console.log('CATALOG COMPACT PASS '+JSON.stringify(layout));
             const radios=page.locator('button[data-cat="radar"]');
             if(await radios.count()!==1)throw Error('Radar category button not found');
             await radios.click();
