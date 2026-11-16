@@ -1,19 +1,16 @@
 {
-  "timestamp": "2026-11-16T20:38:36.808749+00:00",
+  "timestamp": "2026-11-16T20:41:08.166199+00:00",
   "categories": {
-    "gibridy": 0,
-    "videoregistratory": 0,
+    "gibridy": 7,
+    "videoregistratory": 9,
     "radar-detektory": 2,
     "aksessuary": 31,
     "akustika": 0,
     "discount": 0
   },
   "discovered": 54,
-  "unparsedUrls": [
-    "https://neoline.ru/shop/gibrid-videoregistratora-s-radar-detektorom-neoline-spectrum/",
-    "https://neoline.ru/shop/gibrid-videoregistratora-s-radar-detektorom-neoline-x-cop-citysmart/"
-  ],
-  "parsed": 52,
-  "photos": 156,
+  "unparsedUrls": [],
+  "parsed": 54,
+  "photos": 162,
   "withoutPhotos": []
 }
