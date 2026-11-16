@@ -314,6 +314,45 @@ body{width:100%;max-width:100%;overflow-x:clip}
   .icon-btn{width:31px;height:33px}
   .featured-slide .featured-image{height:230px}
 }
+
+/* Compact first-screen product showcase polish */
+.featured-image{background:radial-gradient(circle at 50% 48%,#d9efff 0%,#fff 61%,#e9f6ff 100%);border:1px solid #d0e8fa;border-radius:21px;overflow:hidden}
+.feature-img-tag{position:absolute;top:12px;left:14px;z-index:3;font-size:10px;font-weight:800;color:#2171ac;background:#fffffff2;border:1px solid #d4e8f6;border-radius:20px;padding:7px 11px;box-shadow:0 5px 18px #2671aa14;max-width:80%;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.feature-img-prev,.feature-img-next,.feature-img-zoom{position:absolute;z-index:4;display:grid;place-items:center;background:#fffffff2;color:#0d75c3;border:1px solid #c6e2f8;box-shadow:0 8px 22px #115c9330;border-radius:50%;cursor:pointer}
+.feature-img-prev,.feature-img-next{top:50%;transform:translateY(-50%);width:40px;height:40px;font-size:26px}
+.feature-img-prev{left:11px}.feature-img-next{right:11px}
+.feature-img-zoom{right:12px;bottom:12px;width:34px;height:34px;font-size:17px}
+.feature-img-prev:hover,.feature-img-next:hover,.feature-img-zoom:hover{background:#087bd1;color:white}
+.feature-img-fallback{position:relative;z-index:2;width:76%;display:flex;justify-content:center;align-items:center}
+.feature-img-fallback[hidden]{display:none}
+.feature-img-fallback svg{display:block;width:100%;max-height:230px}
+.featured-image img[hidden]{display:none}
+.featured-price small{font-size:11px}
+@media(max-width:720px){
+ .featured-slide.active{padding:12px 14px 14px!important}
+ .featured-slide .featured-image{border-radius:17px;min-height:0;height:clamp(220px,66vw,280px)!important;max-height:34vh;overflow:hidden;order:-1!important}
+ .featured-slide .featured-image img{height:88%!important;max-height:265px;max-width:99%;filter:drop-shadow(0 12px 14px #12568a25)}
+ .feature-img-tag{top:8px;left:8px;font-size:9px;padding:5px 8px}
+ .feature-img-prev,.feature-img-next{height:35px;width:35px;font-size:24px}
+ .feature-img-prev{left:5px}.feature-img-next{right:5px}
+ .feature-img-zoom{bottom:7px;right:7px;height:32px;width:32px}
+ .featured-slide .feature-copy{display:flex;flex-direction:column;margin-top:9px;gap:0}
+ .featured-slide .eyebrow{order:0;font-size:9px;letter-spacing:.04em;line-height:1.2}
+ .featured-slide .eyebrow:before{width:14px}
+ .featured-slide h1{order:1;font-size:clamp(24px,7vw,30px)!important;line-height:1.06!important;margin:7px 0 5px!important;letter-spacing:-.045em}
+ .featured-slide .featured-price{order:2;margin:8px 0 0!important;font-size:23px;line-height:1.2}
+ .featured-slide .featured-price small{font-size:10px;display:inline;margin-inline-start:8px;color:#68869f}
+ .featured-slide .featured-cta{order:3;display:flex;gap:7px;margin-top:10px!important}
+ .featured-slide .featured-cta .primary,.featured-slide .featured-cta .secondary{min-height:42px!important;padding:9px 8px!important;font-size:11px!important}
+ .featured-slide .featured-tags{order:4;display:flex;gap:6px;margin:10px 0 0!important;flex-wrap:wrap}
+ .featured-slide .featured-tags span{padding:5px 9px;font-size:9px}
+ .featured-slide .hero-lead{order:5;font-size:11px!important;line-height:1.36!important;margin:8px 0 0!important;display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;overflow:hidden}
+ .showcase-controls{padding:8px 8px 10px!important}
+ .showcase-controls .showcase-arrow{display:none}
+ .showcase-dot{width:25px!important;height:5px!important;border-radius:7px}.showcase-dot.active{width:42px!important}
+ .sneak{display:none}
+ .national-line{padding-top:9px!important;padding-bottom:9px!important}
+}
 </style><!-- Cloudflare Pages Git reconnection deployment probe: 2026-11-16 --></head><body>
 <div class="top-strip" data-i="strip">NEOLINE ISRAEL · CONCEPT STORE · ДЕМОНСТРАЦИОННАЯ ВЕРСИЯ · ЦЕНЫ ОРИЕНТИРОВОЧНЫЕ</div><div class="sticky"><div class="shell header"><a class="brand" href="#top" aria-label="Neoline Israel"><span class="mark"><svg viewBox="0 0 48 48" width="39" height="39" aria-hidden="true"><path d="M3 29 25 5h13L16 29H3Z" fill="#00a4e6"/><path d="M10 28h13l11-12h11L23 42H10V28Z" fill="#1264be"/></svg></span><span><strong>NEOLINE</strong><small>ISRAEL · CONCEPT</small></span></a><nav class="nav"><button data-scroll="catalog" class="active" data-i="navCatalog">Каталог</button><button data-scroll="advantages" data-i="navBenefits">Преимущества</button><button data-scroll="installation" data-i="navInstall">Установка и доставка</button><button data-scroll="footer" data-i="navContact">Контакты</button></nav><div class="head-actions"><div class="flag-switcher" role="group" aria-label="Выбор языка / Language / שפה"><button class="flag-choice active" type="button" data-language="ru" title="Русский" aria-label="Русский язык" aria-pressed="true"><span aria-hidden="true">🇷🇺</span></button><button class="flag-choice" type="button" data-language="he" title="עברית" aria-label="עברית - Hebrew" aria-pressed="false"><span aria-hidden="true">🇮🇱</span></button><button class="flag-choice" type="button" data-language="en" title="English" aria-label="English language" aria-pressed="false"><span aria-hidden="true">🇬🇧</span></button></div><select class="language language-native" id="lang" aria-label="Language" tabindex="-1"><option value="ru">RU</option><option value="he">עברית</option><option value="en">EN</option></select><button class="icon-btn" id="favOpen" title="Избранное">♡<span class="count" id="favCount" style="display:none">0</span></button><button class="icon-btn" id="cartOpen" title="Корзина">♧<span class="count" id="cartCount">0</span></button></div></div></div>
 <main id="top"><section class="showcase" aria-label="Featured products"><div class="hero-stage"><div id="showcaseSlides" aria-live="polite"></div><div class="showcase-controls"><button class="showcase-arrow" id="slidePrev" aria-label="Previous">‹</button><div id="showcaseDots" class="showcase-dots"></div><button class="showcase-arrow" id="slideNext" aria-label="Next">›</button></div><div class="sneak" aria-label="Highlights"><span>✡ NEOLINE ISRAEL · CONCEPT</span><span>◉ 4K · 2K · Wi-Fi</span><span>🚙 Dash cams</span><span>₪ Estimated local pricing</span></div></div></section>
@@ -367,14 +406,32 @@ function label(k){return (ultra[lang]||ultra.ru)[k]||k}
 function productMedia(p){return '<img class="product-photo" loading="lazy" decoding="async" src="'+media[p.id][0]+'" alt="'+p.name.replace(/"/g,'&quot;')+'" onerror="this.onerror=null;this.style.opacity=.35" />'}
 let slideIndex=0,slideTimer=null;
 const featuredIds=[6,2,7];
+
 function renderShowcase(){
-const host=$('showcaseSlides');if(!host)return;
-const html=featuredIds.map((id,i)=>{const p=products.find(x=>x.id===id);return '<article class="featured-slide '+(i===slideIndex?'active':'')+'"><div class="feature-copy"><div class="eyebrow">'+label('best')+'</div><h1>'+label('hero'+(i+1))+'</h1><p class="hero-lead">'+label('heroText'+(i+1))+'</p><div class="featured-tags">'+datas[id].slice(0,3).map(x=>'<span>'+x+'</span>').join('')+'</div><div class="featured-price">₪'+p.price.toLocaleString('en-US')+'<small>'+label('promoNote')+'</small></div><div class="featured-cta"><button class="primary" data-open-feature="'+id+'">'+label('more')+' ↗</button><button class="secondary" data-add-feature="'+id+'">+ '+label('buy')+'</button></div></div><div class="featured-image"><img src="'+media[id][0]+'" alt="'+p.name+'" decoding="async" '+(i?'loading="lazy"':'fetchpriority="high"')+' onerror="this.onerror=null;this.style.opacity=.3"></div></article>'}).join('');
-host.innerHTML=html;
-$('showcaseDots').innerHTML=featuredIds.map((v,i)=>'<button class="showcase-dot '+(i===slideIndex?'active':'')+'" data-dot="'+i+'" aria-label="Slide '+(i+1)+'"></button>').join('');
-host.querySelectorAll('[data-open-feature]').forEach(el=>el.onclick=()=>openProduct(Number(el.dataset.openFeature)));
-host.querySelectorAll('[data-add-feature]').forEach(el=>el.onclick=()=>add(Number(el.dataset.addFeature)));
-$('showcaseDots').querySelectorAll('[data-dot]').forEach(el=>el.onclick=()=>setSlide(Number(el.dataset.dot)));
+ const host=$('showcaseSlides');if(!host)return;
+ host.innerHTML=featuredIds.map((id,i)=>{
+  const p=products.find(x=>x.id===id),source=(media[id]||[])[0]||'';
+  return '<article class="featured-slide '+(i===slideIndex?'active':'')+'" aria-label="'+p.name+'">'
+   +'<div class="feature-copy"><div class="eyebrow">'+p.name+'</div><h1>'+label('hero'+(i+1))+'</h1>'
+   +'<p class="hero-lead">'+label('heroText'+(i+1))+'</p>'
+   +'<div class="featured-tags">'+datas[id].slice(0,2).map(x=>'<span>'+x+'</span>').join('')+'</div>'
+   +'<div class="featured-price">₪'+p.price.toLocaleString('en-US')+'<small>'+t('estimated')+'</small></div>'
+   +'<div class="featured-cta"><button class="primary" data-open-feature="'+id+'">'+label('more')+' ↗</button><button class="secondary" data-add-feature="'+id+'">+ '+label('buy')+'</button></div></div>'
+   +'<div class="featured-image"><div class="feature-img-tag">NEOLINE • '+p.name.replace('NEOLINE ','')+'</div>'
+   +'<img src="'+source+'" alt="'+p.name+'" decoding="async" '+(i?'loading="lazy"':'fetchpriority="high"')+' onerror="this.hidden=true;this.nextElementSibling.hidden=false">'
+   +'<span class="feature-img-fallback" hidden>'+deviceSvg(p.shape)+'</span>'
+   +'<button class="feature-img-prev" type="button" data-feature-prev aria-label="Previous model">‹</button>'
+   +'<button class="feature-img-next" type="button" data-feature-next aria-label="Next model">›</button>'
+   +'<button class="feature-img-zoom" type="button" data-feature-zoom="'+id+'" aria-label="View '+p.name+' photos">↗</button>'
+   +'</div></article>';
+ }).join('');
+ $('showcaseDots').innerHTML=featuredIds.map((v,i)=>'<button class="showcase-dot '+(i===slideIndex?'active':'')+'" data-dot="'+i+'" aria-label="Slide '+(i+1)+'"></button>').join('');
+ host.querySelectorAll('[data-open-feature]').forEach(el=>el.onclick=()=>openProduct(Number(el.dataset.openFeature)));
+ host.querySelectorAll('[data-add-feature]').forEach(el=>el.onclick=()=>add(Number(el.dataset.addFeature)));
+ host.querySelectorAll('[data-feature-zoom]').forEach(el=>el.onclick=()=>openProduct(Number(el.dataset.featureZoom)));
+ host.querySelectorAll('[data-feature-prev]').forEach(el=>el.onclick=()=>setSlide(slideIndex-1));
+ host.querySelectorAll('[data-feature-next]').forEach(el=>el.onclick=()=>setSlide(slideIndex+1));
+ $('showcaseDots').querySelectorAll('[data-dot]').forEach(el=>el.onclick=()=>setSlide(Number(el.dataset.dot)));
 }
 function setSlide(i){slideIndex=(i+featuredIds.length)%featuredIds.length;renderShowcase();restartSlides()}
 function restartSlides(){clearInterval(slideTimer);if(!window.matchMedia('(prefers-reduced-motion: reduce)').matches)slideTimer=setInterval(()=>{if(!document.hidden&&!$('productModal').classList.contains('open')){slideIndex=(slideIndex+1)%featuredIds.length;renderShowcase()}},6500)}
