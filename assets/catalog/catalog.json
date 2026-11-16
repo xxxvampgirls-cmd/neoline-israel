@@ -1,7 +1,7 @@
 {
   "version": 1,
   "source": "https://neoline.ru/shop/",
-  "updated": "2026-11-16T20:26:59.572306+00:00",
+  "updated": "2026-11-16T20:29:15.715169+00:00",
   "products": [
     {
       "id": 133214697389,
@@ -62,6 +62,43 @@
         "./assets/catalog/images/747440919228-3.webp"
       ],
       "spec": []
+    },
+    {
+      "id": 414463685743,
+      "name": "Neoline Мультитул Нож M",
+      "category": "accessories",
+      "group": "Аксессуары",
+      "description": "Neoline Мультитул Нож M — аксессуары.",
+      "specs": [],
+      "source": "https://neoline.ru/shop/multitul_nozh_m/",
+      "images": [
+        "./assets/catalog/images/414463685743-1.webp",
+        "./assets/catalog/images/414463685743-2.webp",
+        "./assets/catalog/images/414463685743-3.webp"
+      ],
+      "spec": []
+    },
+    {
+      "id": 637819513172,
+      "name": "Neoline Мультитул Пассатижи L",
+      "category": "accessories",
+      "group": "Аксессуары",
+      "description": "Neoline Мультитул Пассатижи L — аксессуары. Основные параметры: Вес: 300г.",
+      "specs": [
+        {
+          "label": "Вес",
+          "value": "300г"
+        }
+      ],
+      "source": "https://neoline.ru/shop/multitul_passatizhi_l_/",
+      "images": [
+        "./assets/catalog/images/637819513172-1.webp",
+        "./assets/catalog/images/637819513172-2.webp",
+        "./assets/catalog/images/637819513172-3.webp"
+      ],
+      "spec": [
+        "300г"
+      ]
     },
     {
       "id": 875455561443,
@@ -1086,6 +1123,21 @@
         "./assets/catalog/images/53159148980-1.webp",
         "./assets/catalog/images/53159148980-2.webp",
         "./assets/catalog/images/53159148980-3.webp"
+      ],
+      "spec": []
+    },
+    {
+      "id": 53499792058,
+      "name": "Neoline Крепление к лобовому стеклу на 3M скотче с активной зарядкой H91 3M Power для гибридов",
+      "category": "hybrid",
+      "group": "Аксессуары",
+      "description": "Neoline Крепление к лобовому стеклу на 3M скотче с активной зарядкой H91 3M Power для гибридов — аксессуары.",
+      "specs": [],
+      "source": "https://neoline.ru/shop/neoline_h91_3m_power/",
+      "images": [
+        "./assets/catalog/images/53499792058-1.webp",
+        "./assets/catalog/images/53499792058-2.webp",
+        "./assets/catalog/images/53499792058-3.webp"
       ],
       "spec": []
     },

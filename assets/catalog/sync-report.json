@@ -1,5 +1,5 @@
 {
-  "timestamp": "2026-11-16T20:26:59.572306+00:00",
+  "timestamp": "2026-11-16T20:29:15.715169+00:00",
   "categories": {
     "gibridy": 8,
     "videoregistratory": 10,
@@ -9,7 +9,7 @@
     "discount": 1
   },
   "discovered": 55,
-  "parsed": 51,
-  "photos": 153,
+  "parsed": 54,
+  "photos": 162,
   "withoutPhotos": []
 }
