@@ -165,11 +165,24 @@ window.NEOLINE_DETAILS = (() => {
       note:['База камер на российском сайте описывает покрытие РФ и других регионов; работа предупреждений в Израиле не подтверждена. Для парковочного режима требуется постоянное питание.','The Russian database description concerns Russia and other regions; speed-camera alert coverage in Israel is not confirmed. Parking monitoring needs continuous power.','מאגר מצלמות האכיפה מתואר עבור רוסיה ואזורים נוספים; לא אומתה פעילות ההתראות בישראל. מצב חניה דורש מתח קבוע.','تغطي قاعدة بيانات الرادارات مناطق روسيا وغيرها؛ لم نؤكد عمل تنبيهاتها في إسرائيل. المراقبة أثناء الوقوف تحتاج طاقة دائمة.']
     }
   };
+  const valueNames={
+    'Supercapacitor':['Суперконденсатор','Supercapacitor','קבל־על','مكثف فائق'],
+    '3M adhesive':['На 3M-скотче','3M adhesive','דבק 3M','لاصق 3M'],
+    'Windshield / 3M':['На стекло / 3M','Windshield / 3M','שמשה / דבק 3M','الزجاج الأمامي / 3M'],
+    'Rear-view mirror':['Поверх салонного зеркала','Over the rear-view mirror','מעל המראה הפנימית','فوق المرآة الداخلية'],
+    '3M adhesive + suction':['3M-скотч + присоска','3M adhesive + suction','דבק 3M + תושבת ואקום','لاصق 3M + شفاط'],
+    'Discreet split system':['Разнесённая скрытая установка','Discreet split system','מערכת מפוצלת נסתרת','نظام منفصل وخفي'],
+    'Regional GPS database':['Региональная GPS-база камер','Regional GPS database','מאגר GPS אזורי','قاعدة GPS إقليمية'],
+    'International database':['Международная база камер','International database','מאגר מצלמות בינלאומי','قاعدة بيانات دولية'],
+    '7 glass elements':['7 стеклянных линз','7 glass elements','7 רכיבי עדשה מזכוכית','7 عناصر عدسة زجاجية'],
+    'TS · loop':['TS · циклическая запись','TS · loop recording','TS · הקלטה מחזורית','TS · تسجيل حلقي']
+  };
+  function localValue(v,lang){if(v==='yes')return L(ui.yes,lang);if(v==='no')return L(ui.no,lang);return valueNames[v]?L(valueNames[v],lang):v}
   const read=(id,lang='ru')=>{
     const p=data[id];if(!p)return null;
     return {source:p.source,summary:L(p.summary,lang),
       features:p.features.map(key=>({title:L(feat[key][0],lang),desc:L(feat[key][1],lang)})),
-      specs:Object.entries(p.specs).map(([key,v])=>({key,label:L(specNames[key],lang),value:v==='yes'?L(ui.yes,lang):v==='no'?L(ui.no,lang):v})),
+      specs:Object.entries(p.specs).map(([key,v])=>({key,label:L(specNames[key],lang),value:localValue(v,lang)})),
       kit:p.kit.map(key=>L(kits[key],lang)),
       note:L(p.note,lang)};
   };
