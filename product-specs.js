@@ -10,6 +10,7 @@ window.NEOLINE_DETAILS = (() => {
     included:['Комплектация','In the box','תכולת האריזה','محتويات العلبة'],
     installation:['Установка и замечания','Setup & notes','התקנה והערות','التركيب والملاحظات'],
     documentation:['Инструкция и источник','Manual & official source','מדריך ומקור רשמי','الدليل والمصدر الرسمي'],
+    downloadManual:['Инструкция производителя (PDF, русский) ↗','Manufacturer manual (PDF, Russian) ↗','מדריך היצרן (PDF, רוסית) ↗','دليل الشركة (PDF بالروسية) ↗'],
     source:['Карточка на сайте NEOLINE','Manufacturer product page','דף המוצר באתר היצרן','صفحة المنتج لدى الشركة'],
     checked:['Данные сверены с русским сайтом производителя. Изложение сокращено; уточняйте совместимость и комплектацию по инструкции.','Facts checked against the manufacturer’s Russian website. Summarized; check compatibility and box contents in the manual.','הנתונים נבדקו מול האתר הרוסי של היצרן. המידע תומצת; יש לבדוק תאימות ותכולה במדריך.','تم التحقق من المعلومات في موقع الشركة الروسي. النص ملخّص؛ يرجى مراجعة الدليل للتوافق والمحتويات.'],
     sourceNotice:['Цены на этом сайте — демонстрационные, не официальная цена NEOLINE и не предложение о продаже.','Prices on this site are illustrative, not NEOLINE’s official prices or an offer for sale.','המחירים באתר להמחשה בלבד ואינם מחירים רשמיים של NEOLINE או הצעת מכר.','الأسعار في هذا الموقع توضيحية وليست أسعار NEOLINE الرسمية أو عرض بيع.'],
@@ -121,7 +122,7 @@ window.NEOLINE_DETAILS = (() => {
       summary:['Двухканальный регистратор с 2K-видео спереди, Full HD сзади, HDR, IPS-дисплеем 3,2″ и влагозащищённой задней камерой IP67.','Dual-channel recording with 2K front video, Full HD rear video, HDR, a 3.2-inch IPS screen and an IP67 rear camera.','הקלטה דו־ערוצית: 2K מקדימה ו־Full HD מאחור, HDR, מסך IPS בגודל 3.2″ ומצלמה אחורית בתקן IP67.','تسجيل مزدوج بدقة 2K أماماً وFull HD خلفاً مع HDR وشاشة IPS مقاس 3.2 بوصة وكاميرا خلفية IP67.'],
       features:['dual2k','hdr','rearip','wifi','g','park','timelapse'],
       specs:{front:'2560×1440 · 25 fps',rear:'1920×1080 · Full HD',cameras:'2',angle:'170° + 120°',lens:'F/1.7 (front)',screen:'3.2″ IPS',sensor:'GalaxyCore',wireless:'Wi-Fi',app:'Road Video',storage:'microSD ≤256 GB',GPS:'no',impact:'yes',parking:'yes',protection:'IP67 (rear)',install:'Windshield / 3M'},
-      kit:['main','back','tape','charger','manual','mounting'],
+      kit:['main','back','tape','charger','rearCable6','manual','mounting'],
       note:['Для парковочного режима требуется постоянное питание. На официальной странице заявлена влагозащита задней камеры IP67; GPS-модуль отсутствует.','Continuous power is required for parking mode. The official page specifies IP67 rear-camera protection and no GPS module.','מצב חניה דורש חשמל קבוע. האתר הרשמי מציין IP67 למצלמה האחורית וללא מודול GPS.','وضع الوقوف يتطلب طاقة دائمة. تحدد صفحة الشركة حماية IP67 للخلفية وعدم وجود GPS.']
     },
     4:{
@@ -178,9 +179,20 @@ window.NEOLINE_DETAILS = (() => {
     'TS · loop':['TS · циклическая запись','TS · loop recording','TS · הקלטה מחזורית','TS · تسجيل حلقي']
   };
   function localValue(v,lang){if(v==='yes')return L(ui.yes,lang);if(v==='no')return L(ui.no,lang);return valueNames[v]?L(valueNames[v],lang):v}
+  /* Direct PDF destinations extracted from the documentation links in the
+     Russian official product pages. Documents are hosted by NEOLINE. */
+  const manuals={
+    1:'https://neoline.ru/upload/iblock/410/b4hdz0tiqy9nlj8t5wjuhp510bjovumq/%D0%98%D0%BD%D1%81%D1%82%D1%80%D1%83%D0%BA%D1%86%D0%B8%D1%8F%20Wowcam.pdf?v=1763388577',
+    3:'https://neoline.ru/upload/iblock/912/0yppwdistetvjcb2djulbewlrhny56zk/%D0%98%D0%BD%D1%81%D1%82%D1%80%D1%83%D0%BA%D1%86%D0%B8%D1%8F%20Flash2k%20Dual.pdf?v=1759390526',
+    4:'https://neoline.ru/upload/iblock/a5c/gh0t40y599hnrscwd4jpppd5mw5lw32i/%D0%98%D0%BD%D1%81%D1%82%D1%80%D1%83%D0%BA%D1%86%D0%B8%D1%8F%20Easydrive2k.pdf?v=1759390540',
+    5:'https://neoline.ru/upload/iblock/36d/4p70m4jkyjm7zhvlisxbiboslgje2282/%D0%98%D0%BD%D1%81%D1%82%D1%80%D1%83%D0%BA%D1%86%D0%B8%D1%8F%20Argus4k.pdf?v=1759734230',
+    6:'https://neoline.ru/upload/iblock/36d/4p70m4jkyjm7zhvlisxbiboslgje2282/%D0%98%D0%BD%D1%81%D1%82%D1%80%D1%83%D0%BA%D1%86%D0%B8%D1%8F%20Argus4k.pdf?v=1759734230',
+    7:'https://neoline.ru/upload/iblock/7e6/7iwh3bqpazaogk2853kf62kiw5ll23bu/%D0%98%D0%BD%D1%81%D1%82%D1%80%D0%A3%D0%9A%D0%A6%D0%98%D0%AF%20SMARTWAY.pdf?v=1745914198',
+    8:'https://neoline.ru/upload/iblock/7e6/4v70n3qjgw7mlv3x2cf3kvf2ja1xnhlh/%D0%98%D0%BD%D1%81%D1%82%D1%80%D0%A3%D0%9A%D0%A6%D0%98%D0%AF%20X54.pdf?v=1759390549'
+  };
   const read=(id,lang='ru')=>{
     const p=data[id];if(!p)return null;
-    return {source:p.source,summary:L(p.summary,lang),
+    return {source:p.source,manual:manuals[id]||null,summary:L(p.summary,lang),
       features:p.features.map(key=>({title:L(feat[key][0],lang),desc:L(feat[key][1],lang)})),
       specs:Object.entries(p.specs).map(([key,v])=>({key,label:L(specNames[key],lang),value:localValue(v,lang)})),
       kit:p.kit.map(key=>L(kits[key],lang)),
