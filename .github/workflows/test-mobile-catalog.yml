@@ -42,6 +42,28 @@ jobs:
               console.log('BRAND PASS mobileWidth='+width+' cleanLogo='+mark.width+' languageStart='+languages.x+' actualFlag=true');
             }
             await page.setViewportSize({width:390,height:844});
+            const footSpace=await page.evaluate(()=>{
+              const install=document.querySelector('#installation');
+              const story=install.querySelector('.story');
+              const footer=document.querySelector('footer.footer');
+              const logo=footer.querySelector('.footer-brand');
+              const details=footer.querySelector('.footer-grid');
+              const p=footer.querySelector('[data-i="footerPricing"]');
+              const end=footer.getBoundingClientRect().bottom;
+              return {
+                installBottom:parseFloat(getComputedStyle(install).paddingBottom),
+                footerTop:parseFloat(getComputedStyle(footer).paddingTop),
+                footerBottom:parseFloat(getComputedStyle(footer).paddingBottom),
+                footerGap:parseFloat(getComputedStyle(details).rowGap),
+                spaceAfterStory:Math.round(logo.getBoundingClientRect().top-story.getBoundingClientRect().bottom),
+                lastTextToFooterBottom:Math.round(end-p.getBoundingClientRect().bottom)
+              };
+            });
+            if(footSpace.installBottom>8||footSpace.footerTop>16||footSpace.footerBottom>16||
+               footSpace.footerGap>12||footSpace.spaceAfterStory>35||footSpace.lastTextToFooterBottom>18){
+               throw Error('Footer empty-space regression: '+JSON.stringify(footSpace));
+            }
+            console.log('FOOTER COMPACT PASS '+JSON.stringify(footSpace));
             const total=await page.locator('#products .product').count();
             const layout=await page.evaluate(()=>{
               const catalog=document.getElementById('catalog'),heading=catalog.querySelector('.section-head');
