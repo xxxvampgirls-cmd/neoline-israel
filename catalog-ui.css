@@ -1,5 +1,4 @@
 /* Extension for fully sourced Russian NEOLINE catalog (existing site unchanged). */
-.catalog-source-status{min-height:16px;font-size:11px;color:#6387a5;padding:0 0 14px}
 .catalog-price-pending{font-size:12px!important;font-weight:800!important;color:#2876ad!important;line-height:1.4!important;max-width:175px}
 .catalog-image-empty{display:flex;justify-content:center;align-items:center;min-height:160px;width:100%;height:100%;font-size:12px;color:#688fac;background:radial-gradient(ellipse,#fff,#ecf5fd);padding:14px;text-align:center}
 .catalog-origin{display:inline-flex;justify-content:center;align-items:center;margin-top:15px;padding:13px 16px;border:1px solid #c0dbef;border-radius:12px;text-decoration:none;color:#126cab;background:#fff;font-size:12px;font-weight:800}
@@ -10,4 +9,15 @@
 .catalog-import-property{display:flex;flex-direction:column;padding:11px 0;gap:4px;border-bottom:1px solid #e3eef8;min-width:0}
 .catalog-import-property strong{font-size:11px;color:#6b8297;font-weight:650}
 .catalog-import-property span{font-size:12px;color:#163f63;overflow-wrap:anywhere}
-@media(max-width:720px){.catalog-import-detail{padding:8px 14px 20px}.catalog-import-grid{grid-template-columns:1fr}.catalog-source-status{padding-bottom:11px}}
+@media(max-width:720px){.catalog-import-detail{padding:8px 14px 20px}.catalog-import-grid{grid-template-columns:1fr}}
+
+/* Tighter connection from the advertising carousel to the catalog.
+   Removes only decorative dead space; keeps title, categories, search and products. */
+#catalog.section.shell{padding-top:22px!important}
+#catalog .section-head{gap:16px;margin-bottom:18px}
+#catalog .section-head>.tabs{padding-top:0;margin-top:0}
+@media(max-width:720px){
+  #catalog.section.shell{padding-top:12px!important}
+  #catalog .section-head{gap:12px!important;margin-bottom:13px!important}
+  #catalog .section-head>.tabs{padding-top:0;padding-bottom:5px}
+}
