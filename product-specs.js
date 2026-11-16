@@ -187,8 +187,8 @@ window.NEOLINE_DETAILS = (() => {
     4:'https://neoline.ru/upload/iblock/a5c/gh0t40y599hnrscwd4jpppd5mw5lw32i/%D0%98%D0%BD%D1%81%D1%82%D1%80%D1%83%D0%BA%D1%86%D0%B8%D1%8F%20Easydrive2k.pdf?v=1759390540',
     5:'https://neoline.ru/upload/iblock/36d/4p70m4jkyjm7zhvlisxbiboslgje2282/%D0%98%D0%BD%D1%81%D1%82%D1%80%D1%83%D0%BA%D1%86%D0%B8%D1%8F%20Argus4k.pdf?v=1759734230',
     6:'https://neoline.ru/upload/iblock/36d/4p70m4jkyjm7zhvlisxbiboslgje2282/%D0%98%D0%BD%D1%81%D1%82%D1%80%D1%83%D0%BA%D1%86%D0%B8%D1%8F%20Argus4k.pdf?v=1759734230',
-    7:'https://neoline.ru/upload/iblock/7e6/7iwh3bqpazaogk2853kf62kiw5ll23bu/%D0%98%D0%BD%D1%81%D1%82%D1%80%D0%A3%D0%9A%D0%A6%D0%98%D0%AF%20SMARTWAY.pdf?v=1745914198',
-    8:'https://neoline.ru/upload/iblock/7e6/4v70n3qjgw7mlv3x2cf3kvf2ja1xnhlh/%D0%98%D0%BD%D1%81%D1%82%D1%80%D0%A3%D0%9A%D0%A6%D0%98%D0%AF%20X54.pdf?v=1759390549'
+    7:'https://neoline.ru/upload/iblock/7e6/7iwh3bqpazaogk2853kf62kiw5ll23bu/%D0%98%D0%BD%D1%81%D1%82%D1%80%D0%98%D0%BD%D1%81%D1%82%D1%80%D1%83%D0%BA%D1%86%D0%B8%D1%8F%20SMARTWAY.pdf?v=1745914198',
+    8:'https://neoline.ru/upload/iblock/7e6/4v70n3qjgw7mlv3x2cf3kvf2ja1xnhlh/%D0%98%D0%BD%D1%81%D1%82%D1%80%D0%98%D0%BD%D1%81%D1%82%D1%80%D1%83%D0%BA%D1%86%D0%B8%D1%8F%20X54.pdf?v=1759390549'
   };
   const read=(id,lang='ru')=>{
     const p=data[id];if(!p)return null;
