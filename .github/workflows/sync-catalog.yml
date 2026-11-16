@@ -1,0 +1,45 @@
+name: Sync NEOLINE Russia product catalog
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/sync-catalog.yml'
+      - 'scripts/sync_catalog.py'
+  schedule:
+    - cron: '15 4 * * 1'
+permissions:
+  contents: write
+concurrency:
+  group: neoline-catalog-sync
+  cancel-in-progress: false
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - name: Checkout main
+        uses: actions/checkout@v4
+        with:
+          ref: main
+          persist-credentials: true
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install dependencies
+        run: python -m pip install --disable-pip-version-check 'requests>=2.31,<3' 'beautifulsoup4>=4.12,<5' 'Pillow>=11,<13' 'numpy>=2,<3' 'opencv-python-headless>=4.10,<5'
+      - name: Import verified Russian shop items and process product images
+        run: python scripts/sync_catalog.py
+      - name: Commit validated catalog
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add assets/catalog/
+          if git diff --cached --quiet; then
+            echo 'No catalog changes'
+            exit 0
+          fi
+          git commit -m 'Sync Russian NEOLINE product catalog and processed images'
+          git pull --rebase origin main
+          git push origin HEAD:main
