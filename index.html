@@ -353,6 +353,135 @@ body{width:100%;max-width:100%;overflow-x:clip}
  .sneak{display:none}
  .national-line{padding-top:9px!important;padding-bottom:9px!important}
 }
+
+/* Product catalog image containment and seamless backgrounds — Nov 2026 */
+.products{
+ display:grid;
+ grid-template-columns:repeat(3,minmax(0,1fr));
+ gap:18px;
+ align-items:stretch;
+}
+.product{
+ display:flex;
+ flex-direction:column;
+ min-width:0;
+ width:100%;
+ max-width:100%;
+ overflow:hidden!important;
+ border-radius:20px;
+ isolation:isolate;
+}
+.product-art{
+ position:relative;
+ width:100%;
+ max-width:100%;
+ min-width:0;
+ height:clamp(185px,19vw,270px);
+ display:flex;
+ align-items:center;
+ justify-content:center;
+ overflow:hidden!important;
+ isolation:isolate;
+ background:radial-gradient(ellipse at 50% 50%,#e9f5ff 0%,#fff 75%)!important;
+}
+.product-art .photo-trigger{
+ position:absolute!important;
+ inset:0!important;
+ width:100%!important;
+ height:100%!important;
+ max-width:100%!important;
+ max-height:100%!important;
+ min-width:0!important;
+ min-height:0!important;
+ display:block!important;
+ padding:0!important;
+ margin:0!important;
+ overflow:hidden!important;
+ border:0!important;
+ border-radius:0!important;
+ background:transparent!important;
+ box-sizing:border-box!important;
+ cursor:zoom-in;
+}
+.product-art .photo-trigger>img{
+ position:absolute!important;
+ top:0!important;
+ left:0!important;
+ display:block!important;
+ width:100%!important;
+ height:100%!important;
+ min-width:0!important;
+ min-height:0!important;
+ max-width:100%!important;
+ max-height:100%!important;
+ object-fit:contain!important;
+ object-position:center!important;
+ mix-blend-mode:multiply!important;
+ filter:brightness(1.055) contrast(1.055) drop-shadow(0 12px 15px #18487315)!important;
+ transform:scale(1.18)!important;
+ transform-origin:center center!important;
+ transition:transform .3s ease!important;
+}
+.product-art .photo-trigger>img[hidden]{display:none!important}
+.product-art .photo-trigger:hover>img{transform:scale(1.25)!important}
+.product-art .photo-trigger>.fallback{
+ position:absolute!important;
+ top:50%!important;
+ left:50%!important;
+ transform:translate(-50%,-50%)!important;
+ width:85%!important;
+ max-height:85%!important;
+ display:flex!important;
+ align-items:center;
+ justify-content:center;
+}
+.product-art .photo-trigger>.fallback[hidden]{display:none!important}
+.product-art .photo-trigger>.fallback svg{display:block!important;width:100%!important;height:auto!important;max-height:100%!important}
+.product-art>svg{display:block!important;width:78%!important;max-width:85%!important;height:auto!important;max-height:80%!important}
+.product-art>.badge,.product-art>.heart{z-index:4}
+.product-content{
+ flex:1 1 auto;
+ position:relative;
+ z-index:3;
+ min-width:0;
+ width:100%;
+ max-width:100%;
+ background:#fff!important;
+ overflow:hidden;
+ box-sizing:border-box;
+}
+.product-name{
+ max-width:100%;
+ white-space:normal;
+ overflow-wrap:anywhere;
+ word-break:normal;
+ line-height:1.42;
+}
+.product .spec{max-width:100%;overflow-wrap:anywhere}
+.product .price-row{min-width:0;max-width:100%}
+.product .price-row .price{min-width:0;overflow-wrap:anywhere}
+.product .details-link{display:block;max-width:100%;white-space:normal;overflow-wrap:anywhere;line-height:1.45}
+@media(min-width:721px) and (max-width:1100px){
+ .products{grid-template-columns:repeat(2,minmax(0,1fr))}
+ .product-art{height:clamp(195px,24vw,290px)}
+}
+@media(max-width:720px){
+ .products{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+ .product-art{height:clamp(144px,40vw,205px)!important;min-height:0}
+ .product-art .photo-trigger>img{transform:scale(1.27)!important}
+ .product-art .photo-trigger:hover>img{transform:scale(1.31)!important}
+ .product-content{padding:12px!important}
+ .product-name{font-size:12px;line-height:1.36}
+ .product .spec{font-size:10px;line-height:1.5}
+ .product .price-row .price{font-size:clamp(17px,4.6vw,20px)}
+ .product .details-link{font-size:11px;padding-top:8px}
+}
+@media(max-width:360px){
+ .products{gap:8px}
+ .product-art{height:140px!important}
+ .product-content{padding:10px!important}
+ .product .price-row .price{font-size:16px}
+}
 </style><!-- Cloudflare Pages Git reconnection deployment probe: 2026-11-16 --></head><body>
 <div class="top-strip" data-i="strip">NEOLINE ISRAEL · CONCEPT STORE · ДЕМОНСТРАЦИОННАЯ ВЕРСИЯ · ЦЕНЫ ОРИЕНТИРОВОЧНЫЕ</div><div class="sticky"><div class="shell header"><a class="brand" href="#top" aria-label="Neoline Israel"><span class="mark"><svg viewBox="0 0 48 48" width="39" height="39" aria-hidden="true"><path d="M3 29 25 5h13L16 29H3Z" fill="#00a4e6"/><path d="M10 28h13l11-12h11L23 42H10V28Z" fill="#1264be"/></svg></span><span><strong>NEOLINE</strong><small>ISRAEL · CONCEPT</small></span></a><nav class="nav"><button data-scroll="catalog" class="active" data-i="navCatalog">Каталог</button><button data-scroll="advantages" data-i="navBenefits">Преимущества</button><button data-scroll="installation" data-i="navInstall">Установка и доставка</button><button data-scroll="footer" data-i="navContact">Контакты</button></nav><div class="head-actions"><div class="flag-switcher" role="group" aria-label="Выбор языка / Language / שפה"><button class="flag-choice active" type="button" data-language="ru" title="Русский" aria-label="Русский язык" aria-pressed="true"><span aria-hidden="true">🇷🇺</span></button><button class="flag-choice" type="button" data-language="he" title="עברית" aria-label="עברית - Hebrew" aria-pressed="false"><span aria-hidden="true">🇮🇱</span></button><button class="flag-choice" type="button" data-language="en" title="English" aria-label="English language" aria-pressed="false"><span aria-hidden="true">🇬🇧</span></button></div><select class="language language-native" id="lang" aria-label="Language" tabindex="-1"><option value="ru">RU</option><option value="he">עברית</option><option value="en">EN</option></select><button class="icon-btn" id="favOpen" title="Избранное">♡<span class="count" id="favCount" style="display:none">0</span></button><button class="icon-btn" id="cartOpen" title="Корзина">♧<span class="count" id="cartCount">0</span></button></div></div></div>
 <main id="top"><section class="showcase" aria-label="Featured products"><div class="hero-stage"><div id="showcaseSlides" aria-live="polite"></div><div class="showcase-controls"><button class="showcase-arrow" id="slidePrev" aria-label="Previous">‹</button><div id="showcaseDots" class="showcase-dots"></div><button class="showcase-arrow" id="slideNext" aria-label="Next">›</button></div><div class="sneak" aria-label="Highlights"><span>✡ NEOLINE ISRAEL · CONCEPT</span><span>◉ 4K · 2K · Wi-Fi</span><span>🚙 Dash cams</span><span>₪ Estimated local pricing</span></div></div></section>
