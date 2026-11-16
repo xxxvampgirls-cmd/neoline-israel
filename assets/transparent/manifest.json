@@ -1,0 +1,33 @@
+{
+  "version": 1,
+  "models": {
+    "1": {
+      "path": "./assets/transparent/neoline-01.png",
+      "source": "https://neoline.ru/upload/iblock/33a/zyf5s1j6fgp8a3prqvn0ttov631sq405/%D0%B8%D0%B7%D0%BE%D0%B1%D1%80%D0%B0%D0%B6%D0%B5%D0%BD%D0%B8%D0%B5_2024-12-16_122806231.png"
+    },
+    "2": {
+      "path": "./assets/transparent/neoline-02.png",
+      "source": "https://cdn.vseinstrumenti.ru/images/goods/oborudovanie-dlya-avtoservisa-i-garazha/avtoaksessuary/13050101/1000x1000/159630689.jpg"
+    },
+    "3": {
+      "path": "./assets/transparent/neoline-03.png",
+      "source": "https://asset.openshop.uz/uploads/products/photos/202506/PFAaXfmxx0BNoFwWySHCvX1EG5JKq1QH.png"
+    },
+    "4": {
+      "path": "./assets/transparent/neoline-04.png",
+      "source": "https://castore.uz/upload/iblock/4d0/x0ya56x9jmgus4wfg54z3892m36emf4v/videoregistrator-neoline-easydrive-2k-wi-fi-dual-1.jpg"
+    },
+    "5": {
+      "path": "./assets/transparent/neoline-05.png",
+      "source": "https://audiohead.ru/upload/iblock/aa2/2pi1vc865undgluyx4mwgzgovzzhk05a/neoline_argus_4k_3288405_2.jpg"
+    },
+    "6": {
+      "path": "./assets/transparent/neoline-06.png",
+      "source": "https://cdn1.technopark.ru/technopark/photos_resized/product/1000_1000/769957/5_769957.jpg"
+    },
+    "7": {
+      "path": "./assets/transparent/neoline-07.png",
+      "source": "https://neoline.ru/upload/iblock/da2/nrtlbv473vk4nrmsit0x2t3qbjv2jx35/SmartWay.jpg"
+    }
+  }
+}
