@@ -33,7 +33,8 @@ jobs:
                   verified=(('src="./catalog-ui.js"' in html) and
                             ("renderExtendedProducts" in script) and
                             len(manifest.get("products",[]))>=50)
-                  print(f"HTML integration={('src=\"./catalog-ui.js\"' in html)}, script={len(script)} bytes, product_count={len(manifest.get('products',[]))}",flush=True)
+                  marker = 'src="./catalog-ui.js"'
+                  print(f"HTML integration={marker in html}, script={len(script)} bytes, product_count={len(manifest.get('products',[]))}",flush=True)
                   if verified:
                       print("PASS: published site serves the full NEOLINE catalog",flush=True)
                       success=True
