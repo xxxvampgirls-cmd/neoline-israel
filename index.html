@@ -602,6 +602,37 @@ body{width:100%;max-width:100%;overflow-x:clip}
  .brand strong{font-size:14px}
  .flag-choice{width:27px;height:30px}
 }
+
+/* Language selector refinement: flags and Arabic label never collide. */
+.header .head-actions{display:flex;align-items:center;flex:0 0 auto;min-width:0}
+.flag-switcher{display:inline-flex!important;align-items:center;justify-content:center;gap:5px!important;padding:5px 7px!important;flex:0 0 auto;min-width:0;max-width:100%;direction:ltr;white-space:nowrap}
+.flag-switcher .flag-choice{display:inline-flex!important;justify-content:center;align-items:center;flex:0 0 37px!important;width:37px!important;height:38px!important;min-width:37px;min-height:38px;padding:4px!important;box-sizing:border-box!important;overflow:hidden;line-height:1!important}
+.flag-switcher .flag-choice .flag-graphic{display:flex;justify-content:center;align-items:center;width:28px;height:20px}
+.flag-switcher .flag-choice .flag-graphic svg{height:20px;width:28px;display:block}
+.flag-switcher .flag-choice--arabic{font-size:12px!important;flex:0 0 51px!important;width:51px!important;min-width:51px;direction:rtl;letter-spacing:0!important;font-family:Arial,Tahoma,sans-serif}
+@media(max-width:720px){
+ .flag-switcher{gap:3px!important;padding:3px 4px!important}
+ .flag-switcher .flag-choice{flex-basis:32px!important;width:32px!important;min-width:32px;height:35px!important;min-height:35px;padding:3px!important}
+ .flag-switcher .flag-choice .flag-graphic,.flag-switcher .flag-choice .flag-graphic svg{width:26px;height:18px}
+ .flag-switcher .flag-choice--arabic{flex-basis:43px!important;width:43px!important;min-width:43px;font-size:11px!important}
+}
+@media(max-width:420px){
+ .header{gap:4px}
+ .header .brand{gap:3px}
+ .flag-switcher{gap:1px!important;padding:2px!important}
+ .flag-switcher .flag-choice{flex-basis:29px!important;width:29px!important;min-width:29px;height:32px!important;min-height:32px;padding:2px!important}
+ .flag-switcher .flag-choice .flag-graphic,.flag-switcher .flag-choice .flag-graphic svg{width:24px;height:17px}
+ .flag-switcher .flag-choice--arabic{flex-basis:38px!important;width:38px!important;min-width:38px;font-size:10px!important}
+ .header .brand strong{letter-spacing:.02em}
+}
+@media(max-width:350px){
+ .header .brand strong{font-size:13px}
+ .header .brand small{font-size:6px}
+ .brand-star{width:13px;height:14px}
+ .brand-star svg{height:14px;width:13px}
+ .header .flag-switcher .flag-choice{flex-basis:26px!important;width:26px!important;min-width:26px}
+ .header .flag-switcher .flag-choice--arabic{flex-basis:34px!important;width:34px!important;min-width:34px}
+}
 </style><!-- Cloudflare Pages Git reconnection deployment probe: 2026-11-16 --></head><body>
 <div class="top-strip" data-i="strip">NEOLINE ISRAEL · CONCEPT STORE · ДЕМОНСТРАЦИОННАЯ ВЕРСИЯ · ЦЕНЫ ОРИЕНТИРОВОЧНЫЕ</div><div class="sticky"><div class="shell header"><a class="brand" href="#top" aria-label="Neoline Israel"><span><strong>NEOLINE</strong><small>ISRAEL · CONCEPT</small></span><span class="brand-star" title="Israel" aria-label="Звезда Давида"><svg viewBox="0 0 48 48" width="21" height="21" aria-hidden="true"><path d="M24 4 42 36H6Z M24 44 6 12h36Z" fill="none" stroke="#117bca" stroke-width="3.3" stroke-linejoin="round"/></svg></span></a><nav class="nav"><button data-scroll="catalog" class="active" data-i="navCatalog">Каталог</button><button data-scroll="advantages" data-i="navBenefits">Преимущества</button><button data-scroll="installation" data-i="navInstall">Установка и доставка</button><button data-scroll="footer" data-i="navContact">Контакты</button></nav><div class="head-actions"><div class="flag-switcher" role="group" aria-label="Язык / Language / שפה / اللغة"><button class="flag-choice active" type="button" data-language="ru" title="Русский" aria-label="Русский язык" aria-pressed="true"><span class="flag-graphic" aria-hidden="true"><svg viewBox="0 0 36 24" xmlns="http://www.w3.org/2000/svg" focusable="false"><rect width="36" height="24" fill="#fff"/><path d="M0 8h36v8H0z" fill="#0039a6"/><path d="M0 16h36v8H0z" fill="#d52b1e"/></svg></span></button><button class="flag-choice" type="button" data-language="he" title="עברית" aria-label="עברית - Hebrew" aria-pressed="false"><span class="flag-graphic" aria-hidden="true"><svg viewBox="0 0 36 24" xmlns="http://www.w3.org/2000/svg" focusable="false"><rect width="36" height="24" fill="#fff"/><path d="M0 3h36v3H0zm0 15h36v3H0z" fill="#0038b8"/><path d="M18 7.5l5.5 9.5h-11zM18 16.5l-5.5-9.5h11z" stroke="#0038b8" stroke-width="1.15" fill="none" stroke-linejoin="round"/></svg></span></button><button class="flag-choice" type="button" data-language="en" title="English" aria-label="English language" aria-pressed="false"><span class="flag-graphic" aria-hidden="true"><svg viewBox="0 0 36 24" xmlns="http://www.w3.org/2000/svg" focusable="false"><rect width="36" height="24" fill="#012169"/><path d="M0 0l36 24M36 0L0 24" stroke="#fff" stroke-width="6"/><path d="M0 0l36 24M36 0L0 24" stroke="#c8102e" stroke-width="2.5"/><path d="M18 0v24M0 12h36" stroke="#fff" stroke-width="9"/><path d="M18 0v24M0 12h36" stroke="#c8102e" stroke-width="4.6"/></svg></span></button><button class="flag-choice flag-choice--text flag-choice--arabic" type="button" data-language="ar" title="العربية" aria-label="اللغة العربية" aria-pressed="false" lang="ar" dir="rtl">عربي</button></div><select class="language language-native" id="lang" aria-label="Language" tabindex="-1"><option value="ru">RU</option><option value="he">עברית</option><option value="en">ENG</option><option value="ar">العربية</option></select><button class="icon-btn" id="favOpen" title="Избранное">♡<span class="count" id="favCount" style="display:none">0</span></button><button class="icon-btn" id="cartOpen" title="Корзина">♧<span class="count" id="cartCount">0</span></button></div></div></div>
 <main id="top"><section class="showcase" aria-label="Featured products"><div class="hero-stage"><div id="showcaseSlides" aria-live="polite"></div><div class="showcase-controls"><button class="showcase-arrow" id="slidePrev" aria-label="Previous">‹</button><div id="showcaseDots" class="showcase-dots"></div><button class="showcase-arrow" id="slideNext" aria-label="Next">›</button></div><div class="sneak" aria-label="Highlights"><span>✡ NEOLINE ISRAEL · CONCEPT</span><span>◉ 4K · 2K · Wi-Fi</span><span>🚙 Dash cams</span><span>₪ Estimated local pricing</span></div></div></section>
