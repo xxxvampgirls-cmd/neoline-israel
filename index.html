@@ -648,6 +648,36 @@ body{width:100%;max-width:100%;overflow-x:clip}
 .flag-switcher>.flag-choice--arabic:focus-visible{outline:2px solid #087bd4!important;outline-offset:2px}
 @media(max-width:720px){.flag-switcher>.flag-choice--arabic{margin-inline-start:5px}}
 @media(max-width:420px){.flag-switcher>.flag-choice--arabic{margin-inline-start:3px}}
+
+/* Photography refresh: full-white seamless image area replaces pasted white
+   picture rectangles; blue accents stay in borders, typography and controls. */
+.featured-slide.active{background:#fff!important;border:1px solid #cde4f8;box-shadow:0 18px 44px #2479be18}
+.featured-slide:before{display:none!important}
+.featured-slide .featured-image,.featured-image{background:#fff!important;border:0!important;border-radius:16px!important}
+.featured-slide .featured-image img{mix-blend-mode:normal!important;filter:none!important;object-fit:contain!important;display:block;margin:auto}
+.feature-img-tag{background:#fffefa!important;box-shadow:0 4px 12px #2a68a614}
+.product-art{background:#fff!important}
+.product-art .photo-trigger>img{mix-blend-mode:normal!important;filter:none!important}
+.product .product-art{border-bottom:1px solid #e8f1fa}
+.modal-media{background:#fff!important}
+.modal-big{mix-blend-mode:normal!important;filter:none!important}
+.modal-gallery-controls{display:flex;align-items:center;justify-content:space-between;gap:12px;width:min(100%,250px);margin:0 auto 8px;direction:ltr}
+.modal-gallery-controls span{min-width:62px;text-align:center;font-size:12px;font-weight:800;color:#52799c}
+.modal-photo-arrow{display:grid;place-items:center;flex:none;width:37px;height:37px;border-radius:50%;border:1px solid #bfdff8;background:#eff8ff;color:#147cc5;font-size:26px;font-weight:500;line-height:1}
+.modal-photo-arrow:hover,.modal-photo-arrow:focus-visible{background:#117fcd;color:#fff}
+.modal-thumbs{scrollbar-width:thin}
+.modal-thumbs button.active{border-color:#117ac7}
+@media(max-width:720px){
+ .featured-slide.active{background:#fff!important}
+ .featured-slide .featured-image{height:clamp(224px,65vw,310px)!important;max-height:34vh;border-radius:15px!important}
+ .featured-slide .featured-image img{max-width:96%!important;max-height:98%!important;width:96%!important;height:96%!important;object-fit:contain!important}
+ .product-art{background:#fff!important}
+ .product-art .photo-trigger>img{transform:scale(1.08)!important;object-position:center}
+ .product-art .photo-trigger:hover>img{transform:scale(1.08)!important}
+ .modal-media{padding-top:54px}
+ .modal-big{height:clamp(180px,58vw,262px)}
+ .modal-gallery-controls{margin-top:2px}
+}
 </style><!-- Cloudflare Pages Git reconnection deployment probe: 2026-11-16 --></head><body>
 <div class="top-strip" data-i="strip">NEOLINE ISRAEL · CONCEPT STORE · ДЕМОНСТРАЦИОННАЯ ВЕРСИЯ · ЦЕНЫ ОРИЕНТИРОВОЧНЫЕ</div><div class="sticky"><div class="shell header"><a class="brand" href="#top" aria-label="Neoline Israel"><span><strong>NEOLINE</strong><small>ISRAEL · CONCEPT</small></span><span class="brand-star" title="Israel" aria-label="Звезда Давида"><svg viewBox="0 0 48 48" width="21" height="21" aria-hidden="true"><path d="M24 4 42 36H6Z M24 44 6 12h36Z" fill="none" stroke="#117bca" stroke-width="3.3" stroke-linejoin="round"/></svg></span></a><nav class="nav"><button data-scroll="catalog" class="active" data-i="navCatalog">Каталог</button><button data-scroll="advantages" data-i="navBenefits">Преимущества</button><button data-scroll="installation" data-i="navInstall">Установка и доставка</button><button data-scroll="footer" data-i="navContact">Контакты</button></nav><div class="head-actions"><div class="flag-switcher" role="group" aria-label="Язык / Language / שפה / اللغة"><button class="flag-choice active" type="button" data-language="ru" title="Русский" aria-label="Русский язык" aria-pressed="true"><span class="flag-graphic" aria-hidden="true"><svg viewBox="0 0 36 24" xmlns="http://www.w3.org/2000/svg" focusable="false"><rect width="36" height="24" fill="#fff"/><path d="M0 8h36v8H0z" fill="#0039a6"/><path d="M0 16h36v8H0z" fill="#d52b1e"/></svg></span></button><button class="flag-choice" type="button" data-language="he" title="עברית" aria-label="עברית - Hebrew" aria-pressed="false"><span class="flag-graphic" aria-hidden="true"><svg viewBox="0 0 36 24" xmlns="http://www.w3.org/2000/svg" focusable="false"><rect width="36" height="24" fill="#fff"/><path d="M0 3h36v3H0zm0 15h36v3H0z" fill="#0038b8"/><path d="M18 7.5l5.5 9.5h-11zM18 16.5l-5.5-9.5h11z" stroke="#0038b8" stroke-width="1.15" fill="none" stroke-linejoin="round"/></svg></span></button><button class="flag-choice" type="button" data-language="en" title="English" aria-label="English language" aria-pressed="false"><span class="flag-graphic" aria-hidden="true"><svg viewBox="0 0 36 24" xmlns="http://www.w3.org/2000/svg" focusable="false"><rect width="36" height="24" fill="#012169"/><path d="M0 0l36 24M36 0L0 24" stroke="#fff" stroke-width="6"/><path d="M0 0l36 24M36 0L0 24" stroke="#c8102e" stroke-width="2.5"/><path d="M18 0v24M0 12h36" stroke="#fff" stroke-width="9"/><path d="M18 0v24M0 12h36" stroke="#c8102e" stroke-width="4.6"/></svg></span></button><button class="flag-choice flag-choice--text flag-choice--arabic" type="button" data-language="ar" title="العربية" aria-label="اللغة العربية" aria-pressed="false" lang="ar" dir="rtl">عربي</button></div><select class="language language-native" id="lang" aria-label="Language" tabindex="-1"><option value="ru">RU</option><option value="he">עברית</option><option value="en">ENG</option><option value="ar">العربية</option></select><button class="icon-btn" id="favOpen" title="Избранное">♡<span class="count" id="favCount" style="display:none">0</span></button><button class="icon-btn" id="cartOpen" title="Корзина">♧<span class="count" id="cartCount">0</span></button></div></div></div>
 <main id="top"><section class="showcase" aria-label="Featured products"><div class="hero-stage"><div id="showcaseSlides" aria-live="polite"></div><div class="showcase-controls"><button class="showcase-arrow" id="slidePrev" aria-label="Previous">‹</button><div id="showcaseDots" class="showcase-dots"></div><button class="showcase-arrow" id="slideNext" aria-label="Next">›</button></div><div class="sneak" aria-label="Highlights"><span>✡ NEOLINE ISRAEL · CONCEPT</span><span>◉ 4K · 2K · Wi-Fi</span><span>🚙 Dash cams</span><span>₪ Estimated local pricing</span></div></div></section>
@@ -663,13 +693,13 @@ let lang='ru',cat='all',cart={},favs=new Set(),mode='cart';const $=id=>document.
 
 /* Verified model imagery sourced from NEOLINE and identified retailers; demo only. */
 const media={
-1:["https://neoline.ru/upload/iblock/33a/zyf5s1j6fgp8a3prqvn0ttov631sq405/%D0%B8%D0%B7%D0%BE%D0%B1%D1%80%D0%B0%D0%B6%D0%B5%D0%BD%D0%B8%D0%B5_2024-12-16_122806231.png"],
+1:["https://neoline.ru/upload/iblock/33a/zyf5s1j6fgp8a3prqvn0ttov631sq405/%D0%B8%D0%B7%D0%BE%D0%B1%D1%80%D0%B0%D0%B6%D0%B5%D0%BD%D0%B8%D0%B5_2024-12-16_122806231.png","https://api.technodom.kz/f3/api/v1/images/800/800/289027_4.jpg"],
 2:["https://cdn.vseinstrumenti.ru/images/goods/oborudovanie-dlya-avtoservisa-i-garazha/avtoaksessuary/13050101/1000x1000/159630689.jpg","https://object.pscloud.io/cms/cms/Photo/img_0_427_262_0_1_dYkFnH.webp","https://neoline.ru/upload/medialibrary/689/cr0q2twe3153h33sgnh75ko2rwxwmfgu/004_Wi-Fi_Flash-2k.jpg"],
-3:["https://asset.openshop.uz/uploads/products/photos/202506/PFAaXfmxx0BNoFwWySHCvX1EG5JKq1QH.png"],
-4:["https://castore.uz/upload/iblock/4d0/x0ya56x9jmgus4wfg54z3892m36emf4v/videoregistrator-neoline-easydrive-2k-wi-fi-dual-1.jpg"],
+3:["https://asset.openshop.uz/uploads/products/photos/202506/PFAaXfmxx0BNoFwWySHCvX1EG5JKq1QH.png","https://neoline.ru/upload/iblock/b1b/r2vwocxdqsua6u0m0oefckdmp0wnxz89/013.jpg"],
+4:["https://castore.uz/upload/iblock/4d0/x0ya56x9jmgus4wfg54z3892m36emf4v/videoregistrator-neoline-easydrive-2k-wi-fi-dual-1.jpg","https://neoline.ru/upload/medialibrary/6ae/54l95tybosr8801542sar8qtjcx1ogs1/013_%D0%A3%D1%81%D1%82%D0%B0%D0%BD%D0%BE%D0%B2%D0%BA%D0%B0.jpg","https://neoline.ru/upload/medialibrary/6c6/gcpvf3aqp7jw564sl9ld03q3ax0t7qi2/007_%D0%90%D1%81%D1%81%D0%B8%D1%81%D1%82%D0%B5%D0%BD%D1%82-%D0%BF%D0%B0%D1%80%D0%BA%D0%BE%D0%B2%D0%BA%D0%B8_Easydrive-2K-Dual.jpg"],
 5:["https://audiohead.ru/upload/iblock/aa2/2pi1vc865undgluyx4mwgzgovzzhk05a/neoline_argus_4k_3288405_2.jpg","https://www.prekesvisiems.lt/images/uploader/ne/1188x1188.g/neoline-argus-4k-3-1.png?v=1727885369","https://neoline.ru/upload/iblock/18e/inssnto8g0d3gybtezvvy1hbmmj1vjje/016.jpg"],
 6:["https://neoline.ru/upload/iblock/18e/inssnto8g0d3gybtezvvy1hbmmj1vjje/016.jpg","https://cdn1.technopark.ru/technopark/photos_resized/product/1000_1000/769957/5_769957.jpg"],
-7:["https://neoline.ru/upload/iblock/da2/nrtlbv473vk4nrmsit0x2t3qbjv2jx35/SmartWay.jpg"],
+7:["https://neoline.ru/upload/iblock/da2/nrtlbv473vk4nrmsit0x2t3qbjv2jx35/SmartWay.jpg","https://neoline.ru/upload/iblock/c6f/kgydmlt250snwdpq882f5rdhswp9lj7w/Smartway8.jpg"],
 8:["https://neoline.ru/upload/medialibrary/08b/b3mhp2ticqj9w5pr56ae01htbh9if4tc/%D0%9A%D0%BE%D0%BF%D0%B8%D1%8F%20000%20%28%D0%B2%29.jpg"]
 };
 const datas={
@@ -732,9 +762,17 @@ function renderShowcase(){
 function setSlide(i){slideIndex=(i+featuredIds.length)%featuredIds.length;renderShowcase();restartSlides()}
 function restartSlides(){clearInterval(slideTimer);if(!window.matchMedia('(prefers-reduced-motion: reduce)').matches)slideTimer=setInterval(()=>{if(!document.hidden&&!$('productModal').classList.contains('open')){slideIndex=(slideIndex+1)%featuredIds.length;renderShowcase()}},6500)}
 function openProduct(id){const p=products.find(v=>v.id===id);if(!p)return;const imgs=media[id];const attrs=datas[id];
-$('productModalBody').innerHTML='<div class="modal-grid"><div class="modal-media"><img class="modal-big" id="modalBig" src="'+imgs[0]+'" alt="'+p.name+'" onerror="this.onerror=null;this.style.opacity=.3"><div class="modal-thumbs">'+imgs.map((x,i)=>'<button class="'+(i===0?'active':'')+'" data-img="'+i+'" aria-label="Photo '+(i+1)+'"><img loading="lazy" src="'+x+'" alt=""></button>').join('')+'</div><span class="modal-help" style="text-align:center">'+label('photos')+' · '+imgs.length+'</span></div><div class="modal-content"><div class="kicker">'+label('star')+'</div><h2>'+p.name+'</h2><p>'+label('promo')+'</p><div class="modal-details">'+attrs.map(x=>'<div><b>✦</b>'+x+'</div>').join('')+'</div><div class="modal-price">₪'+p.price.toLocaleString('en-US')+'</div><div class="modal-help">'+label('promoNote')+'</div><div class="modal-actions"><button class="primary" id="modalAdd">+ '+label('buy')+'</button><a class="secondary" href="'+productUrls[id]+'" rel="noopener" target="_blank">'+label('official')+' ↗</a></div><div class="notice">'+label('delivery')+'</div></div></div>';
-const big=$('modalBig');big.onclick=()=>{$('lightboxImg').src=big.src;$('photoLightbox').classList.add('open')};
-$('productModalBody').querySelectorAll('[data-img]').forEach(el=>el.onclick=()=>{big.src=imgs[Number(el.dataset.img)];$('productModalBody').querySelectorAll('[data-img]').forEach(b=>b.classList.toggle('active',b===el))});
+$('productModalBody').innerHTML='<div class="modal-grid"><div class="modal-media"><img class="modal-big" id="modalBig" src="'+imgs[0]+'" alt="'+p.name+'" onerror="this.onerror=null;this.style.opacity=.3"><div class="modal-gallery-controls"><button class="modal-photo-arrow" type="button" id="modalPrevImage" aria-label="Previous photo">‹</button><span id="modalPhotoCounter" aria-live="polite">1 / '+imgs.length+'</span><button class="modal-photo-arrow" type="button" id="modalNextImage" aria-label="Next photo">›</button></div><div class="modal-thumbs">'+imgs.map((x,i)=>'<button class="'+(i===0?'active':'')+'" data-img="'+i+'" aria-label="Photo '+(i+1)+'"><img loading="lazy" src="'+x+'" alt=""></button>').join('')+'</div><span class="modal-help" style="text-align:center">'+label('photos')+' · '+imgs.length+'</span></div><div class="modal-content"><div class="kicker">'+label('star')+'</div><h2>'+p.name+'</h2><p>'+label('promo')+'</p><div class="modal-details">'+attrs.map(x=>'<div><b>✦</b>'+x+'</div>').join('')+'</div><div class="modal-price">₪'+p.price.toLocaleString('en-US')+'</div><div class="modal-help">'+label('promoNote')+'</div><div class="modal-actions"><button class="primary" id="modalAdd">+ '+label('buy')+'</button><a class="secondary" href="'+productUrls[id]+'" rel="noopener" target="_blank">'+label('official')+' ↗</a></div><div class="notice">'+label('delivery')+'</div></div></div>';
+const big=$('modalBig');big.onclick=()=>{if(big.dataset.swiped)return;$('lightboxImg').src=big.src;$('photoLightbox').classList.add('open')};
+let currentPhoto=0;
+const thumbBtns=[...$('productModalBody').querySelectorAll('[data-img]')];
+function goPhoto(index){currentPhoto=(index+imgs.length)%imgs.length;big.src=imgs[currentPhoto];big.alt=p.name+' – '+(currentPhoto+1)+' / '+imgs.length;$('modalPhotoCounter').textContent=(currentPhoto+1)+' / '+imgs.length;thumbBtns.forEach((b,i)=>b.classList.toggle('active',i===currentPhoto));thumbBtns[currentPhoto]?.scrollIntoView({behavior:'smooth',block:'nearest',inline:'nearest'})}
+thumbBtns.forEach((el,i)=>el.onclick=()=>goPhoto(i));
+$('modalPrevImage').onclick=()=>goPhoto(currentPhoto-1);
+$('modalNextImage').onclick=()=>goPhoto(currentPhoto+1);
+let firstTouchX=0,firstTouchY=0;
+big.addEventListener('touchstart',e=>{if(e.touches.length===1){firstTouchX=e.touches[0].clientX;firstTouchY=e.touches[0].clientY}},{passive:true});
+big.addEventListener('touchend',e=>{if(!firstTouchX)return;const dx=e.changedTouches[0].clientX-firstTouchX,dy=e.changedTouches[0].clientY-firstTouchY;firstTouchX=0;if(Math.abs(dx)>48&&Math.abs(dx)>Math.abs(dy)*1.3){goPhoto(currentPhoto+(dx<0?1:-1));big.dataset.swiped='yes';setTimeout(()=>{big.dataset.swiped=''},350)}},{passive:true});
 $('modalAdd').onclick=()=>{add(id);closeProduct()};$('productModal').classList.add('open');$('productModal').querySelector('.product-panel').scrollTop=0;document.body.style.overflow='hidden';clearInterval(slideTimer)}
 function closeProduct(){$('productModal').classList.remove('open');document.body.style.overflow='';restartSlides()}
 $('closeProduct').onclick=closeProduct;
