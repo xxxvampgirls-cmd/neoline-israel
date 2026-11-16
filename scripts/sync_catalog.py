@@ -199,6 +199,16 @@ def collect_specs(soup):
  for tr in soup.select("tr"):
   cells=tr.find_all(["td","th"],recursive=False)
   if len(cells)==2:add(cells[0].get_text(" ",strip=True),cells[1].get_text(" ",strip=True))
+ # Product feature lists often contain 'Parameter – Value' outside tables.
+ for li in soup.select("li"):
+  txt=tidy(li.get_text(" ",strip=True))
+  if len(txt)>155 or len(txt)<8:continue
+  for sep in (" – ", " — ", ": "):
+   if sep in txt:
+    k,v=txt.split(sep,1)
+    if k.lower().strip() not in ("описание","характеристики","комплектация"):
+     add(k,v)
+    break
  for dl in soup.select("dl"):
   keys=dl.find_all("dt",recursive=False);vals=dl.find_all("dd",recursive=False)
   for k,v in zip(keys,vals):add(k.get_text(" ",strip=True),v.get_text(" ",strip=True))
@@ -219,7 +229,8 @@ def detail(url,group):
   h=soup.find("h1")
   title=tidy(h.get_text(" ",strip=True) if h else data.get("name"))
   if not title or len(title)>180:return None
-  if not any(q in title.lower() for q in ("neoline","неолайн","x-cop","wowcam","ultera")):return None
+  # The shop also sells third-party memory cards, so do not require the name
+  # to contain the NEOLINE brand; only verified /shop/product/ URLs qualify.
   specs=collect_specs(soup)
   cat,label=group
   title_lower=title.lower()
@@ -234,7 +245,20 @@ def detail(url,group):
   ident=1000+int(digits[:10],16)
   # Factual text constructed from metadata rather than a copied manufacturer paragraph.
   highlights=[x["label"]+": "+x["value"] for x in specs[:6]]
-  short= name+" — "+label.lower()+"."
+  # Short factual excerpt (at most ~70 words) from the *specific* product
+  # description; keep manufacturer page as the link for the full original.
+  intro=[]
+  if h:
+   for block in h.find_all_next(["p","li"],limit=100):
+    t=tidy(block.get_text(" ",strip=True))
+    if "Отзывы"==t or "В корзину"==t:break
+    if len(t)<55 or len(t)>600 or "руб." in t or "корзин" in t.lower():continue
+    if any(t==old for old in intro):continue
+    intro.append(t)
+    if len(" ".join(intro))>310:break
+  excerpt=" ".join(intro)[:410].rsplit(" ",1)[0] if intro else ""
+  short=name+" — "+label.lower()+"."
+  if excerpt: short+=" "+excerpt
   if highlights:short+=" Основные параметры: "+"; ".join(highlights[:4])+"."
   entry={"id":ident,"name":name,"category":cat,"group":label,
          "description":short[:700],"specs":specs,
