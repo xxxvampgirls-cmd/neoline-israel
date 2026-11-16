@@ -1113,6 +1113,64 @@ body{width:100%;max-width:100%;overflow-x:clip}
   }
 }
 
+
+/* Advertising animation: a camera slowly approaches during its slide,
+   then slides gently into the next ad. Stripes and controls remain still. */
+#showcaseSlides{position:relative;isolation:isolate}
+#showcaseSlides .featured-slide.active:not(.ad-exiting){
+ z-index:2;animation:adCardEnter .7s cubic-bezier(.17,.67,.29,1) both!important;
+}
+#showcaseSlides .featured-slide.ad-exiting{
+ position:absolute!important;inset:0;width:100%;z-index:1;
+ pointer-events:none!important;
+ animation:adCardExit .72s cubic-bezier(.35,0,.6,1) forwards!important;
+}
+@keyframes adCardEnter{
+ from{opacity:0;transform:translate3d(25px,0,0) scale(.991)}
+ to{opacity:1;transform:translate3d(0,0,0) scale(1)}
+}
+@keyframes adCardExit{
+ from{opacity:1;transform:translate3d(0,0,0) scale(1)}
+ to{opacity:0;transform:translate3d(-25px,0,0) scale(.991)}
+}
+#showcaseSlides .featured-slide{--ad-motion-duration:7.6s}
+#showcaseSlides .featured-slide--israel{--ad-motion-duration:10.5s}
+#showcaseSlides .featured-slide.active:not(.ad-exiting) .featured-image > img:not([hidden]),
+#showcaseSlides .featured-slide.active:not(.ad-exiting) .featured-image .feature-img-fallback:not([hidden]){
+ transform-origin:50% 54%;
+ animation:adCameraApproach var(--ad-motion-duration) cubic-bezier(.2,.05,.55,1) both;
+ will-change:transform;
+}
+@keyframes adCameraApproach{
+ from{transform:translate3d(0,2%,0) scale(.97)}
+ to{transform:translate3d(0,-1%,0) scale(1.085)}
+}
+#showcaseSlides .featured-slide.active:not(.ad-exiting) .ad-device-shadow{
+ transform-origin:center;
+ animation:adCameraShadow var(--ad-motion-duration) ease-out both;
+}
+@keyframes adCameraShadow{
+ from{opacity:.65;transform:scale(.87)}
+ to{opacity:.95;transform:scale(1.06)}
+}
+/* Separate, non-rotating promotional tile has a subtle continuous motion. */
+.ad-panel .ad-photo-area > img:not([hidden]){
+ transform-origin:center center;
+ animation:adStandaloneBreathe 7.6s ease-in-out infinite alternate;
+}
+@keyframes adStandaloneBreathe{
+ from{transform:translate3d(0,2px,0) scale(.99)}
+ to{transform:translate3d(0,-4px,0) scale(1.055)}
+}
+@media(prefers-reduced-motion:reduce){
+ #showcaseSlides .featured-slide.active:not(.ad-exiting),
+ #showcaseSlides .featured-slide.ad-exiting,
+ #showcaseSlides .featured-slide.active .featured-image > img,
+ #showcaseSlides .featured-slide.active .feature-img-fallback,
+ #showcaseSlides .featured-slide.active .ad-device-shadow,
+ .ad-panel .ad-photo-area > img{animation:none!important;transform:none!important}
+}
+
 </style><!-- Cloudflare Pages Git reconnection deployment probe: 2026-11-16 --></head><body>
 <div class="sticky"><div class="shell header"><a class="brand brand-original" href="#top" aria-label="NEOLINE"><span class="brand-lockup"><img class="brand-clean" src="assets/neoline-clean.svg" alt="NEOLINE" width="501" height="108" decoding="async"></span></a><nav class="nav"><button data-scroll="catalog" class="active" data-i="navCatalog">Каталог</button><button data-scroll="advantages" data-i="navBenefits">Преимущества</button><button data-scroll="installation" data-i="navInstall">Установка и доставка</button><button data-scroll="footer" data-i="navContact">Контакты</button></nav><div class="head-actions"><div class="flag-switcher" role="group" aria-label="Язык / Language / שפה / اللغة"><button class="flag-choice active" type="button" data-language="ru" title="Русский" aria-label="Русский язык" aria-pressed="true"><span class="flag-graphic" aria-hidden="true"><svg viewBox="0 0 36 24" xmlns="http://www.w3.org/2000/svg" focusable="false"><rect width="36" height="24" fill="#fff"/><path d="M0 8h36v8H0z" fill="#0039a6"/><path d="M0 16h36v8H0z" fill="#d52b1e"/></svg></span></button><button class="flag-choice" type="button" data-language="he" title="עברית" aria-label="עברית - Hebrew" aria-pressed="false"><span class="flag-graphic" aria-hidden="true"><svg viewBox="0 0 36 24" xmlns="http://www.w3.org/2000/svg" focusable="false"><rect width="36" height="24" fill="#fff"/><path d="M0 3h36v3H0zm0 15h36v3H0z" fill="#0038b8"/><path d="M18 7.5l5.5 9.5h-11zM18 16.5l-5.5-9.5h11z" stroke="#0038b8" stroke-width="1.15" fill="none" stroke-linejoin="round"/></svg></span></button><button class="flag-choice" type="button" data-language="en" title="English" aria-label="English language" aria-pressed="false"><span class="flag-graphic" aria-hidden="true"><svg viewBox="0 0 36 24" xmlns="http://www.w3.org/2000/svg" focusable="false"><rect width="36" height="24" fill="#012169"/><path d="M0 0l36 24M36 0L0 24" stroke="#fff" stroke-width="6"/><path d="M0 0l36 24M36 0L0 24" stroke="#c8102e" stroke-width="2.5"/><path d="M18 0v24M0 12h36" stroke="#fff" stroke-width="9"/><path d="M18 0v24M0 12h36" stroke="#c8102e" stroke-width="4.6"/></svg></span></button><button class="flag-choice flag-choice--text flag-choice--arabic" type="button" data-language="ar" title="العربية" aria-label="اللغة العربية" aria-pressed="false" lang="ar" dir="rtl">عربي</button></div><select class="language language-native" id="lang" aria-label="Language" tabindex="-1"><option value="ru">RU</option><option value="he">עברית</option><option value="en">ENG</option><option value="ar">العربية</option></select></div></div></div>
 <main id="top"><section class="showcase" aria-label="Featured products"><div class="hero-stage"><div id="showcaseSlides" aria-live="polite"></div><div class="showcase-controls"><button class="showcase-arrow" id="slidePrev" aria-label="Previous">‹</button><div id="showcaseDots" class="showcase-dots"></div><button class="showcase-arrow" id="slideNext" aria-label="Next">›</button></div><div class="sneak" aria-label="Highlights"><span>NEOLINE ISRAEL · CONCEPT</span><span>◉ 4K · 2K · Wi-Fi</span><span>🚙 Dash cams</span><span>₪ Estimated local pricing</span></div></div></section>
@@ -1177,7 +1235,7 @@ ar:{"best":"طراز رئيسي · اختيار العرض","star":"منتج م�
 };
 function label(k){return (ultra[lang]||ultra.ru)[k]||k}
 function productMedia(p){return '<img class="product-photo" loading="lazy" decoding="async" src="'+media[p.id][0]+'" alt="'+p.name.replace(/"/g,'&quot;')+'" onerror="this.onerror=null;this.style.opacity=.35" />'}
-let slideIndex=0,slideTimer=null;
+let slideIndex=0,slideTimer=null,showcaseExitTimer=null;
 const featuredIds=[0,6,2,7];
 
 
@@ -1256,6 +1314,7 @@ function firstIsraelSlide(){
 }
 function renderShowcase(){
  const host=$('showcaseSlides');if(!host)return;
+ clearTimeout(showcaseExitTimer);
  host.innerHTML=featuredIds.map((id,i)=>{
   if(id===0)return firstIsraelSlide();
   const p=products.find(x=>x.id===id),source=(media[id]||[])[0]||'';
@@ -1273,6 +1332,7 @@ function renderShowcase(){
    +'<button class="feature-img-zoom" type="button" data-feature-zoom="'+id+'" aria-label="View '+p.name+' photos">↗</button>'
    +'</div></article>';
  }).join('');
+ host.querySelectorAll('.featured-slide:not(.active)').forEach(el=>el.setAttribute('inert',''));
  $('showcaseDots').innerHTML=featuredIds.map((v,i)=>'<button class="showcase-dot '+(i===slideIndex?'active':'')+'" data-dot="'+i+'" aria-label="Slide '+(i+1)+'"></button>').join('');
  host.querySelectorAll('[data-open-feature]').forEach(el=>el.onclick=()=>openProduct(Number(el.dataset.openFeature)));
  host.querySelectorAll('[data-feature-catalog]').forEach(el=>el.onclick=()=>document.getElementById('catalog').scrollIntoView({behavior:'smooth'}));
@@ -1282,8 +1342,38 @@ function renderShowcase(){
  host.querySelectorAll('[data-feature-next]').forEach(el=>el.onclick=()=>setSlide(slideIndex+1));
  $('showcaseDots').querySelectorAll('[data-dot]').forEach(el=>el.onclick=()=>setSlide(Number(el.dataset.dot)));
 }
-function setSlide(i){slideIndex=(i+featuredIds.length)%featuredIds.length;renderShowcase();restartSlides()}
-function restartSlides(){clearTimeout(slideTimer);if(window.matchMedia('(prefers-reduced-motion: reduce)').matches)return;const tick=()=>{if(!document.hidden&&!$('productModal').classList.contains('open')){slideIndex=(slideIndex+1)%featuredIds.length;renderShowcase()}slideTimer=setTimeout(tick,slideIndex===0?10500:7600)};slideTimer=setTimeout(tick,slideIndex===0?10500:7600)}
+/* Keep the panels mounted so the old campaign can slide out while the
+   next zooming product moves in. Manual swipes and auto-rotation use one path. */
+function revealShowcaseSlide(index){
+ const next=(index+featuredIds.length)%featuredIds.length;
+ const host=$('showcaseSlides');
+ const slides=Array.from(host.querySelectorAll('.featured-slide'));
+ if(slides.length!==featuredIds.length){slideIndex=next;renderShowcase();return}
+ if(next===slideIndex)return;
+ clearTimeout(showcaseExitTimer);
+ host.querySelectorAll('.ad-exiting').forEach(el=>{
+  el.classList.remove('ad-exiting','active');
+  el.setAttribute('inert','');
+ });
+ const previous=slides[slideIndex],incoming=slides[next];
+ if(previous){previous.classList.add('ad-exiting');previous.setAttribute('inert','');}
+ incoming.classList.remove('ad-exiting');
+ incoming.classList.add('active');
+ incoming.removeAttribute('inert');
+ slideIndex=next;
+ $('showcaseDots').querySelectorAll('.showcase-dot').forEach((dot,i)=>dot.classList.toggle('active',i===next));
+ if(previous)showcaseExitTimer=setTimeout(()=>previous.classList.remove('active','ad-exiting'),740);
+}
+function setSlide(i){revealShowcaseSlide(i);restartSlides()}
+function restartSlides(){
+ clearTimeout(slideTimer);
+ if(window.matchMedia('(prefers-reduced-motion: reduce)').matches)return;
+ const tick=()=>{
+  if(!document.hidden&&!$('productModal').classList.contains('open'))revealShowcaseSlide(slideIndex+1);
+  slideTimer=setTimeout(tick,slideIndex===0?10500:7600);
+ };
+ slideTimer=setTimeout(tick,slideIndex===0?10500:7600);
+}
 
 function escapeDetailText(value){return String(value??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
 function renderProductDetails(id){
