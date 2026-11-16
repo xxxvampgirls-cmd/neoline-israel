@@ -1,0 +1,45 @@
+name: Browser-check NEOLINE catalog on mobile
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/test-mobile-catalog.yml'
+permissions:
+  contents: read
+jobs:
+  smoke:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - name: Prepare browser testing
+        run: |
+          npm install --no-save playwright
+          npx playwright install chromium
+      - name: Test live category filters, photos and details on a phone-sized browser
+        run: |
+          node <<'JS'
+          const {chromium}=require('playwright');
+          (async()=>{
+            const browser=await chromium.launch({headless:true});
+            const page=await browser.newPage({viewport:{width:390,height:844},deviceScaleFactor:2,isMobile:true,hasTouch:true});
+            const errors=[];
+            page.on('pageerror',e=>errors.push(e.message));
+            await page.goto('https://neoline-israel.pages.dev/',{waitUntil:'domcontentloaded',timeout:30000});
+            await page.waitForFunction(()=>document.querySelectorAll('#products .product').length>=50,{timeout:35000});
+            const total=await page.locator('#products .product').count();
+            const radios=page.locator('button[data-cat="radar"]');
+            if(await radios.count()!==1)throw Error('Radar category button not found');
+            await radios.click();
+            const radarCount=await page.locator('#products .product').count();
+            if(radarCount<4)throw Error('Radar product filtering failed: '+radarCount);
+            const details=page.locator('#products .product [data-details]');
+            await details.first().click();
+            if(!await page.locator('.catalog-import-detail').isVisible())throw Error('Imported product details did not open');
+            const specCount=await page.locator('.catalog-import-property').count();
+            await page.screenshot({path:'/tmp/neoline-catalog-mobile.png'});
+            console.log('MOBILE PASS totalProducts='+total+' radarProducts='+radarCount+' importedDetailsSpecs='+specCount+' JSerrors='+JSON.stringify(errors));
+            if(errors.length)throw Error('JavaScript errors: '+errors.join('; '));
+            await browser.close();
+          })().catch(e=>{console.error(e);process.exit(1)});
+          JS
