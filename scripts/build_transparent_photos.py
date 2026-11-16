@@ -49,6 +49,10 @@ PHOTOS = {
     "https://neoline.ru/upload/iblock/c6f/kgydmlt250snwdpq882f5rdhswp9lj7w/Smartway8.jpg"
   ],
   "8": [
+    "https://avatars.mds.yandex.net/get-mpic/4289990/2a00000192313e7c320ac9095647daab060b/orig",
+    "https://static-data2.manualslib.com/product-images/ad2/3562292/neoline-g-tech-x54-dash-cameras.jpg",
+    "https://neoline.ru/upload/iblock/ceb/vaqfzeocgbs4n7hsm37eprgz1ngjswtx/%D0%9A%D0%BE%D0%BF%D0%B8%D1%8F%20003%20%281%29.jpg",
+    "https://neoline.ru/upload/iblock/e2e/nxq90j7g6rzyjiuvxh8g5obi7dygdj60/%D0%9A%D0%BE%D0%BF%D0%B8%D1%8F%20006%20%281%29.jpg",
     "https://neoline.ru/upload/medialibrary/08b/b3mhp2ticqj9w5pr56ae01htbh9if4tc/%D0%9A%D0%BE%D0%BF%D0%B8%D1%8F%20000%20%28%D0%B2%29.jpg"
   ]
 }
