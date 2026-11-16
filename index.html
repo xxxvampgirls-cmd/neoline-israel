@@ -241,6 +241,29 @@ body{padding-bottom:70px}.top-strip{font-size:9px;padding:8px 6px}
 }
 @media(max-width:360px){.brand strong{font-size:15px}.hero-btns .primary,.hero-btns .secondary{padding:11px 9px}.visual{height:365px}.showcase-frame{height:210px}.product-art{height:140px}.price{font-size:16px}.gallery-top-label{letter-spacing:.04em}}
 @media(prefers-reduced-motion:reduce){*,*:before,*:after{scroll-behavior:auto!important;animation-duration:.01ms!important;transition-duration:.01ms!important}}
+
+/* Responsive hotfix: prevent horizontal panning and oversized mobile tab labels */
+html{max-width:100%;overflow-x:clip;-webkit-text-size-adjust:100%;text-size-adjust:100%}
+body{width:100%;max-width:100%;overflow-x:clip}
+.sticky,.showcase,.hero,.section,.footer{max-width:100%}
+.shell,.hero-stage,.featured-slide,.product,.product-content{min-width:0}
+.featured-image,.feature-copy{min-width:0}
+.product-name,.featured-slide h1{overflow-wrap:anywhere}
+@media(max-width:720px){
+ .header{width:100%;min-width:0}
+ .header .brand{min-width:0;flex-shrink:1}
+ .header .head-actions{flex-shrink:0}
+ .hero-stage{width:100%;padding-left:12px;padding-right:12px}
+ .featured-slide{width:100%;max-width:100%;padding-inline:19px}
+ .featured-slide h1{font-size:clamp(31px,9vw,39px);max-width:100%}
+ .featured-cta>*{min-width:0}
+ .national-line{flex-wrap:wrap;gap:8px}
+ .national-line>span{min-width:0;flex-wrap:wrap}
+ .mobile-nav{display:grid!important;grid-template-columns:repeat(4,minmax(0,1fr));width:100%;left:0;right:0;gap:0;padding-inline:3px;box-sizing:border-box}
+ .mobile-nav button{display:flex;flex-direction:column;align-items:center;justify-content:center;min-width:0;max-width:100%;gap:4px;padding:4px 1px;font-size:10px}
+ .mobile-nav button span:first-child{font-size:20px;line-height:24px}
+ .mobile-nav button span:last-child{font-size:10px!important;white-space:nowrap;max-width:100%;overflow:hidden;text-overflow:ellipsis;line-height:15px}
+}
 </style></head><body>
 <div class="top-strip" data-i="strip">NEOLINE ISRAEL · CONCEPT STORE · ДЕМОНСТРАЦИОННАЯ ВЕРСИЯ · ЦЕНЫ ОРИЕНТИРОВОЧНЫЕ</div><div class="sticky"><div class="shell header"><a class="brand" href="#top" aria-label="Neoline Israel"><span class="mark"><svg viewBox="0 0 48 48" width="39" height="39" aria-hidden="true"><path d="M3 29 25 5h13L16 29H3Z" fill="#00a4e6"/><path d="M10 28h13l11-12h11L23 42H10V28Z" fill="#1264be"/></svg></span><span><strong>NEOLINE</strong><small>ISRAEL · CONCEPT</small></span><span class="israel-star" title="Israel"><svg viewBox="0 0 60 60" width="19" height="19" role="img" aria-label="Звезда Давида"><path d="M30 6 52 45H8Z M30 54 8 15h44Z" fill="none" stroke="currentColor" stroke-width="4" stroke-linejoin="round"/></svg></span></a><span class="il-flag" title="Israel" aria-label="Israel">✡</span><nav class="nav"><button data-scroll="catalog" class="active" data-i="navCatalog">Каталог</button><button data-scroll="advantages" data-i="navBenefits">Преимущества</button><button data-scroll="installation" data-i="navInstall">Установка и доставка</button><button data-scroll="footer" data-i="navContact">Контакты</button></nav><div class="head-actions"><select class="language" id="lang" aria-label="Language"><option value="ru">RU</option><option value="he">עברית</option><option value="en">EN</option></select><button class="icon-btn" id="favOpen" title="Избранное">♡<span class="count" id="favCount" style="display:none">0</span></button><button class="icon-btn" id="cartOpen" title="Корзина">♧<span class="count" id="cartCount">0</span></button></div></div></div>
 <main id="top"><section class="showcase" aria-label="Featured products"><div class="hero-stage"><div id="showcaseSlides" aria-live="polite"></div><div class="showcase-controls"><button class="showcase-arrow" id="slidePrev" aria-label="Previous">‹</button><div id="showcaseDots" class="showcase-dots"></div><button class="showcase-arrow" id="slideNext" aria-label="Next">›</button></div><div class="sneak" aria-label="Highlights"><span>✡ NEOLINE ISRAEL · CONCEPT</span><span>◉ 4K · 2K · Wi-Fi</span><span>🚙 Dash cams</span><span>₪ Estimated local pricing</span></div></div></section>
