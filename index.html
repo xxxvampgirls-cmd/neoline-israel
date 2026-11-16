@@ -958,8 +958,60 @@ body{width:100%;max-width:100%;overflow-x:clip}
 @media(max-width:720px){
  .header .brand-original .brand-horiz-type{clip-path:inset(0 0 31% 0)!important}
 }
+
+/* FINAL approved clean logo: the ORIGINAL image contains a tiny printed
+   "Freedom in Motion" slogan inside the wordmark image. Crop those bottom
+   pixels from the wordmark only. This is not an HTML subtitle. */
+.brand-original .brand-horiz-type{
+ clip-path:inset(0 0 31% 0)!important;
+ -webkit-clip-path:inset(0 0 31% 0)!important;
+}
+/* Logo = NEOLINE emblem + original wordmark + separate Star of David.
+   No blue "concept/demo/prices" bar above; that information remains in footer. */
+.header .brand-original .brand-star{margin-inline-start:4px!important;flex:none}
+.header .brand-original .brand-star svg{display:block}
+@media(max-width:720px){
+ .header{height:64px!important;align-items:center!important}
+ .header .brand-original .brand-star{width:18px!important;height:20px!important;margin-inline-start:3px!important}
+ .header .brand-original .brand-star svg{width:18px!important;height:18px!important}
+}
+@media(max-width:385px){
+ .header .brand-original .brand-star{width:15px!important}
+ .header .brand-original .brand-star svg{width:15px!important;height:15px!important}
+}
+/* First visible hero = Israeli campaign. Keep actual NEOLINE camera art;
+   blue Star of David and flag stripes are decorative background elements. */
+.featured-slide--israel.active{background:linear-gradient(122deg,#f8fcff 7%,#e5f5ff 72%,#d5edff 100%)!important;border:1px solid #b6daf7!important}
+.featured-slide--israel .feature-copy{position:relative;z-index:3}
+.featured-slide--israel .feature-copy h1{letter-spacing:-.046em}
+.featured-slide--israel .feature-copy h1 em{color:#087bca}
+.featured-slide--israel .israel-ad-note{font-size:10px;line-height:1.5;letter-spacing:.015em;font-weight:700;color:#668eab;margin:15px 0 0}
+.featured-slide--israel .israel-featured-image{position:relative;isolation:isolate;overflow:hidden;background:radial-gradient(ellipse at 50% 55%,#f9fdff 15%,#e0f1ff 93%)!important;border:1px solid #cce8fb!important;border-radius:22px!important}
+.featured-slide--israel .israel-promo-flag{position:absolute;inset:0;z-index:0;display:flex;flex-direction:column;align-items:center;justify-content:space-between;padding:23px 0;pointer-events:none;opacity:.55}
+.featured-slide--israel .israel-promo-band{width:100%;height:19px;background:linear-gradient(90deg,#4fa9e955,#1388d7,#4fa9e955);filter:blur(.2px)}
+.featured-slide--israel .israel-promo-star{position:absolute;right:9%;top:16%;width:clamp(96px,27%,154px);height:auto;filter:drop-shadow(0 4px 15px #1786da22);opacity:.58}
+.featured-slide--israel .israel-featured-image>img{position:relative;z-index:1;width:90%!important;height:90%!important;max-width:92%!important;max-height:94%!important;object-fit:contain!important;mix-blend-mode:multiply;filter:drop-shadow(0 14px 15px #165b9133)!important}
+.featured-slide--israel .israel-featured-image>img[src*="assets/transparent/"]{mix-blend-mode:normal!important}
+.featured-slide--israel .israel-featured-image .feature-img-fallback{position:relative;z-index:1}
+.featured-slide--israel .israel-featured-image .feature-img-tag{z-index:4}
+.featured-slide--israel .israel-featured-image .feature-img-prev,.featured-slide--israel .israel-featured-image .feature-img-next,.featured-slide--israel .israel-featured-image .feature-img-zoom{z-index:5}
+.featured-slide--israel .featured-cta .primary{background:linear-gradient(115deg,#0877ca,#05a1e7);box-shadow:0 10px 25px #0b80c638}
+@media(max-width:720px){
+ .featured-slide--israel.active{padding:14px 16px 20px!important}
+ .featured-slide--israel .israel-featured-image{height:clamp(234px,70vw,298px)!important;max-height:none!important;border-radius:18px!important}
+ .featured-slide--israel .israel-featured-image>img{width:87%!important;height:88%!important;max-width:88%!important;max-height:91%!important}
+ .featured-slide--israel .israel-promo-flag{padding:17px 0}
+ .featured-slide--israel .israel-promo-band{height:13px}
+ .featured-slide--israel .israel-promo-star{width:95px;right:10%;top:23%}
+ .featured-slide--israel .feature-copy{margin-top:8px}
+ .featured-slide--israel .feature-copy h1{font-size:clamp(27px,7.6vw,35px)!important;line-height:1.1!important}
+ .featured-slide--israel .feature-copy .hero-lead{display:block!important;font-size:12px;line-height:1.52;margin:7px 0}
+ .featured-slide--israel .israel-ad-note{font-size:9px;margin-top:5px;order:2}
+ .featured-slide--israel .featured-cta{order:3!important;display:flex;gap:8px;align-items:stretch;margin-top:12px!important}
+ .featured-slide--israel .featured-cta>*{flex:1;min-width:0;font-size:11px!important}
+}
 </style><!-- Cloudflare Pages Git reconnection deployment probe: 2026-11-16 --></head><body>
-<div class="top-strip" data-i="strip">NEOLINE ISRAEL · CONCEPT STORE · ДЕМОНСТРАЦИОННАЯ ВЕРСИЯ · ЦЕНЫ ОРИЕНТИРОВОЧНЫЕ</div><div class="sticky"><div class="shell header"><a class="brand brand-original" href="#top" aria-label="NEOLINE"><span class="brand-lockup"><span class="brand-horiz" role="img" aria-label="NEOLINE"><span class="brand-horiz-emblem" aria-hidden="true"></span><span class="brand-horiz-type" aria-hidden="true"></span><span class="brand-horiz-fallback" aria-hidden="true">NEOLINE</span></span></span><span class="brand-star" title="Israel" aria-label="Звезда Давида"><svg viewBox="0 0 48 48" width="21" height="21" aria-hidden="true"><path d="M24 4 42 36H6Z M24 44 6 12h36Z" fill="none" stroke="#117bca" stroke-width="3.3" stroke-linejoin="round"/></svg></span></a><nav class="nav"><button data-scroll="catalog" class="active" data-i="navCatalog">Каталог</button><button data-scroll="advantages" data-i="navBenefits">Преимущества</button><button data-scroll="installation" data-i="navInstall">Установка и доставка</button><button data-scroll="footer" data-i="navContact">Контакты</button></nav><div class="head-actions"><div class="flag-switcher" role="group" aria-label="Язык / Language / שפה / اللغة"><button class="flag-choice active" type="button" data-language="ru" title="Русский" aria-label="Русский язык" aria-pressed="true"><span class="flag-graphic" aria-hidden="true"><svg viewBox="0 0 36 24" xmlns="http://www.w3.org/2000/svg" focusable="false"><rect width="36" height="24" fill="#fff"/><path d="M0 8h36v8H0z" fill="#0039a6"/><path d="M0 16h36v8H0z" fill="#d52b1e"/></svg></span></button><button class="flag-choice" type="button" data-language="he" title="עברית" aria-label="עברית - Hebrew" aria-pressed="false"><span class="flag-graphic" aria-hidden="true"><svg viewBox="0 0 36 24" xmlns="http://www.w3.org/2000/svg" focusable="false"><rect width="36" height="24" fill="#fff"/><path d="M0 3h36v3H0zm0 15h36v3H0z" fill="#0038b8"/><path d="M18 7.5l5.5 9.5h-11zM18 16.5l-5.5-9.5h11z" stroke="#0038b8" stroke-width="1.15" fill="none" stroke-linejoin="round"/></svg></span></button><button class="flag-choice" type="button" data-language="en" title="English" aria-label="English language" aria-pressed="false"><span class="flag-graphic" aria-hidden="true"><svg viewBox="0 0 36 24" xmlns="http://www.w3.org/2000/svg" focusable="false"><rect width="36" height="24" fill="#012169"/><path d="M0 0l36 24M36 0L0 24" stroke="#fff" stroke-width="6"/><path d="M0 0l36 24M36 0L0 24" stroke="#c8102e" stroke-width="2.5"/><path d="M18 0v24M0 12h36" stroke="#fff" stroke-width="9"/><path d="M18 0v24M0 12h36" stroke="#c8102e" stroke-width="4.6"/></svg></span></button><button class="flag-choice flag-choice--text flag-choice--arabic" type="button" data-language="ar" title="العربية" aria-label="اللغة العربية" aria-pressed="false" lang="ar" dir="rtl">عربي</button></div><select class="language language-native" id="lang" aria-label="Language" tabindex="-1"><option value="ru">RU</option><option value="he">עברית</option><option value="en">ENG</option><option value="ar">العربية</option></select></div></div></div>
+<div class="sticky"><div class="shell header"><a class="brand brand-original" href="#top" aria-label="NEOLINE"><span class="brand-lockup"><span class="brand-horiz" role="img" aria-label="NEOLINE"><span class="brand-horiz-emblem" aria-hidden="true"></span><span class="brand-horiz-type" aria-hidden="true"></span><span class="brand-horiz-fallback" aria-hidden="true">NEOLINE</span></span></span><span class="brand-star" title="Israel" aria-label="Звезда Давида"><svg viewBox="0 0 48 48" width="21" height="21" aria-hidden="true"><path d="M24 4 42 36H6Z M24 44 6 12h36Z" fill="none" stroke="#117bca" stroke-width="3.3" stroke-linejoin="round"/></svg></span></a><nav class="nav"><button data-scroll="catalog" class="active" data-i="navCatalog">Каталог</button><button data-scroll="advantages" data-i="navBenefits">Преимущества</button><button data-scroll="installation" data-i="navInstall">Установка и доставка</button><button data-scroll="footer" data-i="navContact">Контакты</button></nav><div class="head-actions"><div class="flag-switcher" role="group" aria-label="Язык / Language / שפה / اللغة"><button class="flag-choice active" type="button" data-language="ru" title="Русский" aria-label="Русский язык" aria-pressed="true"><span class="flag-graphic" aria-hidden="true"><svg viewBox="0 0 36 24" xmlns="http://www.w3.org/2000/svg" focusable="false"><rect width="36" height="24" fill="#fff"/><path d="M0 8h36v8H0z" fill="#0039a6"/><path d="M0 16h36v8H0z" fill="#d52b1e"/></svg></span></button><button class="flag-choice" type="button" data-language="he" title="עברית" aria-label="עברית - Hebrew" aria-pressed="false"><span class="flag-graphic" aria-hidden="true"><svg viewBox="0 0 36 24" xmlns="http://www.w3.org/2000/svg" focusable="false"><rect width="36" height="24" fill="#fff"/><path d="M0 3h36v3H0zm0 15h36v3H0z" fill="#0038b8"/><path d="M18 7.5l5.5 9.5h-11zM18 16.5l-5.5-9.5h11z" stroke="#0038b8" stroke-width="1.15" fill="none" stroke-linejoin="round"/></svg></span></button><button class="flag-choice" type="button" data-language="en" title="English" aria-label="English language" aria-pressed="false"><span class="flag-graphic" aria-hidden="true"><svg viewBox="0 0 36 24" xmlns="http://www.w3.org/2000/svg" focusable="false"><rect width="36" height="24" fill="#012169"/><path d="M0 0l36 24M36 0L0 24" stroke="#fff" stroke-width="6"/><path d="M0 0l36 24M36 0L0 24" stroke="#c8102e" stroke-width="2.5"/><path d="M18 0v24M0 12h36" stroke="#fff" stroke-width="9"/><path d="M18 0v24M0 12h36" stroke="#c8102e" stroke-width="4.6"/></svg></span></button><button class="flag-choice flag-choice--text flag-choice--arabic" type="button" data-language="ar" title="العربية" aria-label="اللغة العربية" aria-pressed="false" lang="ar" dir="rtl">عربي</button></div><select class="language language-native" id="lang" aria-label="Language" tabindex="-1"><option value="ru">RU</option><option value="he">עברית</option><option value="en">ENG</option><option value="ar">العربية</option></select></div></div></div>
 <main id="top"><section class="showcase" aria-label="Featured products"><div class="hero-stage"><div id="showcaseSlides" aria-live="polite"></div><div class="showcase-controls"><button class="showcase-arrow" id="slidePrev" aria-label="Previous">‹</button><div id="showcaseDots" class="showcase-dots"></div><button class="showcase-arrow" id="slideNext" aria-label="Next">›</button></div><div class="sneak" aria-label="Highlights"><span>✡ NEOLINE ISRAEL · CONCEPT</span><span>◉ 4K · 2K · Wi-Fi</span><span>🚙 Dash cams</span><span>₪ Estimated local pricing</span></div></div></section>
 <section class="ad-section shell" aria-label="NEOLINE Israel promotional spotlight">
 <div class="ad-panel"><div class="ad-copy">
@@ -1023,7 +1075,7 @@ ar:{"best":"طراز رئيسي · اختيار العرض","star":"منتج م�
 function label(k){return (ultra[lang]||ultra.ru)[k]||k}
 function productMedia(p){return '<img class="product-photo" loading="lazy" decoding="async" src="'+media[p.id][0]+'" alt="'+p.name.replace(/"/g,'&quot;')+'" onerror="this.onerror=null;this.style.opacity=.35" />'}
 let slideIndex=0,slideTimer=null;
-const featuredIds=[6,2,7];
+const featuredIds=[0,6,2,7];
 
 
 /* Use available photos of the SAME NEOLINE model before displaying a fallback.
@@ -1074,9 +1126,36 @@ function recoverPhoto(img,id){
  const placeholder=img.nextElementSibling;
  if(placeholder&&(placeholder.classList.contains('fallback')||placeholder.classList.contains('feature-img-fallback')||placeholder.classList.contains('modal-big-fallback')))placeholder.hidden=false;
 }
+
+/* The FIRST carousel frame is the Israel-themed advertisement. Product frames
+   follow automatically; the original separate marketing section stays below. */
+const israelPromo={
+ru:{eyebrow:'NEOLINE · ISRAEL',title:'Новые горизонты.<br><em>Технологии NEOLINE.</em>',lead:'Откройте для себя видеорегистраторы 4K и 2K в нашем демонстрационном каталоге для Израиля.',cta:'Смотреть каталог',model:'Argus 4K Dual',note:'Концепт магазина · продажи пока не запущены',imageAlt:'Видеорегистратор NEOLINE Argus 4K Dual'},
+en:{eyebrow:'NEOLINE · ISRAEL',title:'A new perspective.<br><em>NEOLINE technology.</em>',lead:'Explore 4K and 2K dash cameras in our concept showroom for Israel.',cta:'Explore cameras',model:'Argus 4K Dual',note:'Concept showroom · sales not launched',imageAlt:'NEOLINE Argus 4K Dual dash camera'},
+he:{eyebrow:'NEOLINE · ISRAEL',title:'זווית חדשה.<br><em>הטכנולוגיה של NEOLINE.</em>',lead:'גלו מצלמות דרך באיכות 4K ו־2K בקטלוג ההדגמה שלנו לישראל.',cta:'לצפייה בדגמים',model:'Argus 4K Dual',note:'חנות קונספט · המכירות טרם החלו',imageAlt:'מצלמת דרך NEOLINE Argus 4K Dual'},
+ar:{eyebrow:'NEOLINE · ISRAEL',title:'رؤية جديدة.<br><em>تقنيات NEOLINE.</em>',lead:'تعرّف على كاميرات السيارة بدقة 4K و2K في معرضنا التجريبي لإسرائيل.',cta:'اكتشف الكاميرات',model:'Argus 4K Dual',note:'متجر تجريبي · لم تبدأ المبيعات بعد',imageAlt:'كاميرا NEOLINE Argus 4K Dual'}
+};
+function firstIsraelSlide(){
+ const a=israelPromo[lang]||israelPromo.ru;
+ const star='<svg class="israel-promo-star" viewBox="0 0 100 100" aria-hidden="true"><path d="M50 9 85 70H15Z M50 91 15 30h70Z" fill="none" stroke="#177ac8" stroke-width="3.4" stroke-linejoin="round"/></svg>';
+ return '<article class="featured-slide featured-slide--israel '+(slideIndex===0?'active':'')+'" aria-label="NEOLINE Israel campaign">'
+  +'<div class="feature-copy"><div class="eyebrow">'+a.eyebrow+'</div><h1>'+a.title+'</h1>'
+  +'<p class="hero-lead">'+a.lead+'</p>'
+  +'<div class="israel-ad-note">'+a.note+'</div>'
+  +'<div class="featured-cta"><button class="primary" type="button" data-feature-catalog>'+a.cta+' ↗</button><button class="secondary" type="button" data-open-feature="6">'+a.model+'</button></div></div>'
+  +'<div class="featured-image israel-featured-image"><div class="israel-promo-flag" aria-hidden="true"><span class="israel-promo-band"></span>'+star+'<span class="israel-promo-band"></span></div>'
+  +'<div class="feature-img-tag">NEOLINE • ISRAEL</div>'
+  +'<img src="'+media[6][0]+'" alt="'+a.imageAlt+'" decoding="async" fetchpriority="high" onerror="recoverPhoto(this,6)">'
+  +'<span class="feature-img-fallback" hidden>'+deviceSvg('dualargus')+'</span>'
+  +'<button class="feature-img-prev" type="button" data-feature-prev aria-label="Previous slide">‹</button>'
+  +'<button class="feature-img-next" type="button" data-feature-next aria-label="Next slide">›</button>'
+  +'<button class="feature-img-zoom" type="button" data-feature-zoom="6" aria-label="Argus 4K Dual photos">↗</button>'
+  +'</div></article>';
+}
 function renderShowcase(){
  const host=$('showcaseSlides');if(!host)return;
  host.innerHTML=featuredIds.map((id,i)=>{
+  if(id===0)return firstIsraelSlide();
   const p=products.find(x=>x.id===id),source=(media[id]||[])[0]||'';
   return '<article class="featured-slide '+(i===slideIndex?'active':'')+'" aria-label="'+p.name+'">'
    +'<div class="feature-copy"><div class="eyebrow">'+p.name+'</div><h1>'+label('hero'+(i+1))+'</h1>'
@@ -1094,6 +1173,7 @@ function renderShowcase(){
  }).join('');
  $('showcaseDots').innerHTML=featuredIds.map((v,i)=>'<button class="showcase-dot '+(i===slideIndex?'active':'')+'" data-dot="'+i+'" aria-label="Slide '+(i+1)+'"></button>').join('');
  host.querySelectorAll('[data-open-feature]').forEach(el=>el.onclick=()=>openProduct(Number(el.dataset.openFeature)));
+ host.querySelectorAll('[data-feature-catalog]').forEach(el=>el.onclick=()=>document.getElementById('catalog').scrollIntoView({behavior:'smooth'}));
  host.querySelectorAll('[data-add-feature]').forEach(el=>el.onclick=()=>add(Number(el.dataset.addFeature)));
  host.querySelectorAll('[data-feature-zoom]').forEach(el=>el.onclick=()=>openProduct(Number(el.dataset.featureZoom)));
  host.querySelectorAll('[data-feature-prev]').forEach(el=>el.onclick=()=>setSlide(slideIndex-1));
@@ -1101,7 +1181,7 @@ function renderShowcase(){
  $('showcaseDots').querySelectorAll('[data-dot]').forEach(el=>el.onclick=()=>setSlide(Number(el.dataset.dot)));
 }
 function setSlide(i){slideIndex=(i+featuredIds.length)%featuredIds.length;renderShowcase();restartSlides()}
-function restartSlides(){clearInterval(slideTimer);if(!window.matchMedia('(prefers-reduced-motion: reduce)').matches)slideTimer=setInterval(()=>{if(!document.hidden&&!$('productModal').classList.contains('open')){slideIndex=(slideIndex+1)%featuredIds.length;renderShowcase()}},6500)}
+function restartSlides(){clearTimeout(slideTimer);if(window.matchMedia('(prefers-reduced-motion: reduce)').matches)return;const tick=()=>{if(!document.hidden&&!$('productModal').classList.contains('open')){slideIndex=(slideIndex+1)%featuredIds.length;renderShowcase()}slideTimer=setTimeout(tick,slideIndex===0?10500:7600)};slideTimer=setTimeout(tick,slideIndex===0?10500:7600)}
 
 function escapeDetailText(value){return String(value??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
 function renderProductDetails(id){
