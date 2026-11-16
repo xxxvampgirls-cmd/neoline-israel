@@ -1083,6 +1083,36 @@ body{width:100%;max-width:100%;overflow-x:clip}
   .ad-panel .ad-photo-area{border-radius:17px!important}
 }
 
+
+/* Advertising motion: slow product push-in before the existing automatic slide change.
+   Bands, labels, buttons and the gentle ground shadow remain stationary. */
+@keyframes neolineAdProductApproach{
+  from{transform:translate3d(0,8px,0) scale(.94)}
+  to{transform:translate3d(0,-4px,0) scale(var(--ad-product-final-scale,1.075))}
+}
+.featured-slide.active{
+  --ad-product-duration:7.6s;
+  --ad-product-final-scale:1.075;
+}
+.featured-slide--israel.active{--ad-product-duration:10.5s}
+.featured-slide.active .featured-image > img,
+.featured-slide.active .featured-image > .feature-img-fallback{
+  animation:neolineAdProductApproach var(--ad-product-duration) cubic-bezier(.18,.38,.28,1) both;
+  transform-origin:50% 50%;
+  will-change:transform;
+}
+@media(max-width:720px){
+  .featured-slide.active{--ad-product-final-scale:1.04}
+}
+@media(prefers-reduced-motion:reduce){
+  .featured-slide.active .featured-image > img,
+  .featured-slide.active .featured-image > .feature-img-fallback{
+    animation:none;
+    transform:none;
+    will-change:auto;
+  }
+}
+
 </style><!-- Cloudflare Pages Git reconnection deployment probe: 2026-11-16 --></head><body>
 <div class="sticky"><div class="shell header"><a class="brand brand-original" href="#top" aria-label="NEOLINE"><span class="brand-lockup"><img class="brand-clean" src="assets/neoline-clean.svg" alt="NEOLINE" width="501" height="108" decoding="async"></span></a><nav class="nav"><button data-scroll="catalog" class="active" data-i="navCatalog">Каталог</button><button data-scroll="advantages" data-i="navBenefits">Преимущества</button><button data-scroll="installation" data-i="navInstall">Установка и доставка</button><button data-scroll="footer" data-i="navContact">Контакты</button></nav><div class="head-actions"><div class="flag-switcher" role="group" aria-label="Язык / Language / שפה / اللغة"><button class="flag-choice active" type="button" data-language="ru" title="Русский" aria-label="Русский язык" aria-pressed="true"><span class="flag-graphic" aria-hidden="true"><svg viewBox="0 0 36 24" xmlns="http://www.w3.org/2000/svg" focusable="false"><rect width="36" height="24" fill="#fff"/><path d="M0 8h36v8H0z" fill="#0039a6"/><path d="M0 16h36v8H0z" fill="#d52b1e"/></svg></span></button><button class="flag-choice" type="button" data-language="he" title="עברית" aria-label="עברית - Hebrew" aria-pressed="false"><span class="flag-graphic" aria-hidden="true"><svg viewBox="0 0 36 24" xmlns="http://www.w3.org/2000/svg" focusable="false"><rect width="36" height="24" fill="#fff"/><path d="M0 3h36v3H0zm0 15h36v3H0z" fill="#0038b8"/><path d="M18 7.5l5.5 9.5h-11zM18 16.5l-5.5-9.5h11z" stroke="#0038b8" stroke-width="1.15" fill="none" stroke-linejoin="round"/></svg></span></button><button class="flag-choice" type="button" data-language="en" title="English" aria-label="English language" aria-pressed="false"><span class="flag-graphic" aria-hidden="true"><svg viewBox="0 0 36 24" xmlns="http://www.w3.org/2000/svg" focusable="false"><rect width="36" height="24" fill="#012169"/><path d="M0 0l36 24M36 0L0 24" stroke="#fff" stroke-width="6"/><path d="M0 0l36 24M36 0L0 24" stroke="#c8102e" stroke-width="2.5"/><path d="M18 0v24M0 12h36" stroke="#fff" stroke-width="9"/><path d="M18 0v24M0 12h36" stroke="#c8102e" stroke-width="4.6"/></svg></span></button><button class="flag-choice flag-choice--text flag-choice--arabic" type="button" data-language="ar" title="العربية" aria-label="اللغة العربية" aria-pressed="false" lang="ar" dir="rtl">عربي</button></div><select class="language language-native" id="lang" aria-label="Language" tabindex="-1"><option value="ru">RU</option><option value="he">עברית</option><option value="en">ENG</option><option value="ar">العربية</option></select></div></div></div>
 <main id="top"><section class="showcase" aria-label="Featured products"><div class="hero-stage"><div id="showcaseSlides" aria-live="polite"></div><div class="showcase-controls"><button class="showcase-arrow" id="slidePrev" aria-label="Previous">‹</button><div id="showcaseDots" class="showcase-dots"></div><button class="showcase-arrow" id="slideNext" aria-label="Next">›</button></div><div class="sneak" aria-label="Highlights"><span>NEOLINE ISRAEL · CONCEPT</span><span>◉ 4K · 2K · Wi-Fi</span><span>🚙 Dash cams</span><span>₪ Estimated local pricing</span></div></div></section>
