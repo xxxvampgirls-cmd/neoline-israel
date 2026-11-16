@@ -1,15 +1,15 @@
 {
-  "timestamp": "2026-11-16T20:20:19.175725+00:00",
+  "timestamp": "2026-11-16T20:26:59.572306+00:00",
   "categories": {
-    "gibridy": 0,
-    "videoregistratory": 0,
+    "gibridy": 8,
+    "videoregistratory": 10,
     "radar-detektory": 3,
     "aksessuary": 32,
     "akustika": 0,
-    "utsenka": 0
+    "discount": 1
   },
-  "discovered": 54,
-  "parsed": 48,
-  "photos": 144,
+  "discovered": 55,
+  "parsed": 51,
+  "photos": 153,
   "withoutPhotos": []
 }
