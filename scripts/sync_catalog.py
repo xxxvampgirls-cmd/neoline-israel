@@ -347,11 +347,14 @@ def main():
   (OUT/"sync-report.json").write_text(json.dumps(report,ensure_ascii=False,indent=2)+"\n")
   return 2
  entries=[]
+ unparsed=[]
  with ThreadPoolExecutor(max_workers=5) as pool:
-  futures=[pool.submit(detail,url,group) for url,group in sorted(pages.items())]
+  futures={pool.submit(detail,url,group):url for url,group in sorted(pages.items())}
   for future in as_completed(futures):
    item=future.result()
    if item:entries.append(item)
+   else:unparsed.append(futures[future])
+ report["unparsedUrls"]=sorted(unparsed)
  if len(entries)<12:
   print("Insufficient verified product detail pages; not overwriting catalog",flush=True)
   report["parsed"]=len(entries)
