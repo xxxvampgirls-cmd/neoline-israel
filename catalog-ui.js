@@ -16,10 +16,13 @@ function secureSource(value){
 }
 function securePhoto(value){return typeof value==="string"&&/^\.\/assets\/catalog\/images\/\d+-\d+\.webp$/.test(value)?value:null}
 function inferCategory(p){
- const t=p.name.toLowerCase();
- if(/гибрид|радар-детектором|x-cop roadmaster|deepscan|shadow wi-fi|spectrum dual/.test(t))return "hybrid";
- if(/радар-детектор|x-cop 6200s|x-cop 8700s/.test(t))return "radar";
+ const t=p.name.toLowerCase().trim();
+ // Compatibility accessories often contain the words "radar-detector" or
+ // "hybrid" but are NOT detectors. Match the product type before keywords.
+ if(/кабел|креплен|держател|адаптер|компрессор|power cord|fuse cord|hardwire|x-cop magnet|x-cop pad|фильтр|powerbook|мультитул|задняя камера/.test(t))return "accessories";
  if(/динамики|акустик|ultera/.test(t))return "audio";
+ if(/гибрид|^видеорегистратор с радар-детектором|радар-детектором/.test(t))return "hybrid";
+ if(/^радар-детектор|^сигнатурный радар-детектор|^neoline x-cop (5900|6100|6200|8700|8900)/.test(t))return "radar";
  if(/видеорегистратор|wowcam|smartway|argus|flash 2k|easydrive|g-tech/.test(t))return /dual|двумя камер|заднего вида|зеркало/.test(t)?"dual":"single";
  if(p.category==="sale")return "sale";
  return "accessories";
