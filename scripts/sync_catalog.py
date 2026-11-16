@@ -209,6 +209,16 @@ def collect_specs(soup):
     if k.lower().strip() not in ("описание","характеристики","комплектация"):
      add(k,v)
     break
+ # Some accessory pages use line-break text, not HTML lists or tables.
+ for line in soup.get_text("\n",strip=True).split("\n"):
+  line=tidy(line).lstrip("•-– ").strip()
+  if len(line)>165 or len(line)<8:continue
+  for separator in (" – ", " — ", ": "):
+   if separator in line:
+    label,value=line.split(separator,1)
+    if len(label)<=52 and len(value)<=105:
+     add(label,value)
+    break
  for dl in soup.select("dl"):
   keys=dl.find_all("dt",recursive=False);vals=dl.find_all("dd",recursive=False)
   for k,v in zip(keys,vals):add(k.get_text(" ",strip=True),v.get_text(" ",strip=True))
@@ -245,18 +255,20 @@ def detail(url,group):
   ident=1000+int(digits[:10],16)
   # Factual text constructed from metadata rather than a copied manufacturer paragraph.
   highlights=[x["label"]+": "+x["value"] for x in specs[:6]]
-  # Short factual excerpt (at most ~70 words) from the *specific* product
-  # description; keep manufacturer page as the link for the full original.
+  # The manufacturer often uses DIV and BR for overview copy, not P tags.
+  # Keep only a short source-specific factual excerpt, never full marketing text.
+  tokens=[tidy(x) for x in soup.stripped_strings]
+  title_pos=next((i for i,t in enumerate(tokens) if t==title),0)
   intro=[]
-  if h:
-   for block in h.find_all_next(["p","li"],limit=100):
-    t=tidy(block.get_text(" ",strip=True))
-    if "Отзывы"==t or "В корзину"==t:break
-    if len(t)<55 or len(t)>600 or "руб." in t or "корзин" in t.lower():continue
-    if any(t==old for old in intro):continue
-    intro.append(t)
-    if len(" ".join(intro))>310:break
-  excerpt=" ".join(intro)[:410].rsplit(" ",1)[0] if intro else ""
+  for token in tokens[title_pos+1:title_pos+190]:
+   if intro and token in ("Отзывы","Комплектация","В корзину","Рассчитать доставку"):break
+   if len(token)<70 or len(token)>900:continue
+   low=token.lower()
+   if any(k in low for k in ("₽","руб./мес","в рассрочку","заказать звонок","интернет-магазин представительского класса","публичной офертой","телеграм","нашли дешевле","подписаться")):continue
+   if token in intro or token==title:continue
+   intro.append(token)
+   if len(" ".join(intro))>=360 or len(intro)>=3:break
+  excerpt=" ".join(intro)[:470].rsplit(" ",1)[0] if intro else ""
   short=name+" — "+label.lower()+"."
   if excerpt: short+=" "+excerpt
   if highlights:short+=" Основные параметры: "+"; ".join(highlights[:4])+"."
