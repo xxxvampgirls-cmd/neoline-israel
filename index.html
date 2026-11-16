@@ -683,6 +683,8 @@ body{width:100%;max-width:100%;overflow-x:clip}
 .header .head-actions{margin-inline-start:auto}
 .mobile-nav .mobile-action-with-count{position:relative}
 .mobile-nav .mobile-counter{position:absolute;top:0;left:calc(50% + 7px);display:grid;place-items:center;min-width:18px;height:18px;padding:0 4px;background:#0c78d0;color:#fff;border:2px solid #fff;border-radius:20px;font:800 10px/1 Manrope,Arial,sans-serif;box-shadow:0 3px 8px #1157a749;z-index:2}
+/* Explicit label targeting: favorites/cart have a trailing count badge, not a trailing label. */
+.mobile-nav button > span[data-i]{display:block;max-width:100%;min-width:0;font-family:Manrope,Arial,sans-serif;font-size:11px!important;font-weight:500;line-height:16px;text-align:center;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .mobile-nav .mobile-counter[hidden],.desktop-dock .dock-count[hidden]{display:none!important}
 .desktop-dock{position:fixed;bottom:22px;right:22px;z-index:34;display:flex;gap:11px;padding:10px;background:#fffffff2;backdrop-filter:blur(18px);border-radius:19px;border:1px solid #d3e7fa;box-shadow:0 14px 32px #1e66a833}
 .desktop-dock button{position:relative;display:grid;place-items:center;width:43px;height:43px;border:1px solid #d6e8f8;border-radius:12px;color:#1378c8;background:#ecf7ff}
