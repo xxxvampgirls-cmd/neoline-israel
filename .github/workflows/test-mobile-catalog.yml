@@ -32,11 +32,14 @@ jobs:
             if(await radios.count()!==1)throw Error('Radar category button not found');
             await radios.click();
             const radarCount=await page.locator('#products .product').count();
-            if(radarCount<4)throw Error('Radar product filtering failed: '+radarCount);
+            if(radarCount<2)throw Error('Radar product filtering failed: '+radarCount);
+            const radarNames=await page.locator('#products .product .product-name').allTextContents();
+            if(radarNames.some(name=>!/^Радар-детектор|^Сигнатурный радар-детектор/i.test(name)))throw Error('Accessories leaked into radar category: '+radarNames.join(', '));
             const details=page.locator('#products .product [data-details]');
             await details.first().click();
             if(!await page.locator('.catalog-import-detail').isVisible())throw Error('Imported product details did not open');
             const specCount=await page.locator('.catalog-import-property').count();
+            if(specCount<5)throw Error('Imported radar technical specifications not shown: '+specCount);
             await page.screenshot({path:'/tmp/neoline-catalog-mobile.png'});
             console.log('MOBILE PASS totalProducts='+total+' radarProducts='+radarCount+' importedDetailsSpecs='+specCount+' JSerrors='+JSON.stringify(errors));
             if(errors.length)throw Error('JavaScript errors: '+errors.join('; '));
