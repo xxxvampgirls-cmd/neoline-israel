@@ -28,7 +28,7 @@ SECTIONS = {
   "radar-detektory": ("radar", "Радар-детекторы"),
   "aksessuary": ("accessories", "Аксессуары"),
   "akustika": ("audio", "Автомобильная акустика"),
-  "utsenka": ("sale", "Уценённые товары"),
+  "discount": ("sale", "Уценённые товары"),
 }
 OTHER_CATEGORIES = set(SECTIONS) | {
  "kompressory","kabeli-pitaniya","karty-pamyati","derzhateli",
@@ -48,10 +48,17 @@ def tidy(value):
  return re.sub(r"\s+"," ",str(value or "")).strip()
 
 
-def get(url, *, timeout=18):
- r = S.get(url, timeout=timeout, allow_redirects=True)
- r.raise_for_status()
- return r
+def get(url, *, timeout=26):
+ last=None
+ for attempt in range(2):
+  try:
+   r=S.get(url,timeout=(8,timeout),allow_redirects=True)
+   r.raise_for_status()
+   return r
+  except (requests.Timeout,requests.ConnectionError) as exc:
+   last=exc
+   if attempt==0:time.sleep(1.4)
+ raise last
 
 
 def canonical(url):
@@ -106,6 +113,13 @@ def discover():
     print(f"WARN listing {slug}/{page}: {exc}",flush=True)
     break
   metrics[slug]=len(seen)
+ # Explicitly validated active product pages that may be missed by listing timeouts.
+ for path,group in {
+  "/shop/videoregistrator-neoline-wowcam-2/":("camera","Видеорегистраторы"),
+  "/shop/gibrid-videoregistratora-s-radar-detektorom-neoline-x-cop-citysmart/":("hybrid","Гибриды"),
+  "/shop/gibrid-videoregistratora-s-radar-detektorom-neoline-spectrum/":("hybrid","Гибриды"),
+ }.items():
+  found.setdefault(HOST+path,group)
  # Root store sometimes contains products not visible in category menus.
  for page in range(1,9):
   try:
@@ -208,8 +222,13 @@ def detail(url,group):
   if not any(q in title.lower() for q in ("neoline","неолайн","x-cop","wowcam","ultera")):return None
   specs=collect_specs(soup)
   cat,label=group
-  if cat=="camera":
-   cat="dual" if re.search(r"\bdual\b|двумя камерами|зеркало",title,re.I) else "single"
+  title_lower=title.lower()
+  if "уценк" in title_lower:cat="sale"
+  elif re.search(r"гибрид|радар-детектором|roadmaster|deepscan|shadow wi-fi|spectrum dual",title,re.I):cat="hybrid"
+  elif re.search(r"радар-детектор|x-cop 6200s|x-cop 8700s",title,re.I):cat="radar"
+  elif re.search(r"динамики|акустик|ultera",title,re.I):cat="audio"
+  elif re.search(r"видеорегистратор|wowcam|smartway|argus|flash 2k|easydrive|g-tech",title,re.I):
+   cat="dual" if re.search(r"dual|двумя камер|заднего вида|зеркало",title,re.I) else "single"
   name=title if "neoline" in title.lower() else "Neoline "+title
   digits=hashlib.sha256(url.encode()).hexdigest()
   ident=1000+int(digits[:10],16)
