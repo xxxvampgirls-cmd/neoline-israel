@@ -1,0 +1,46 @@
+name: Verify published NEOLINE catalog
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/verify-live.yml'
+permissions:
+  contents: read
+jobs:
+  check-site:
+    runs-on: ubuntu-latest
+    timeout-minutes: 6
+    steps:
+      - name: Check Cloudflare public site and catalog data
+        shell: bash
+        run: |
+          python - <<'PY'
+          import json, time, urllib.request
+          base="https://neoline-israel.pages.dev/"
+          success=False
+          for attempt in range(4):
+              print(f"Public website check {attempt+1}/4",flush=True)
+              try:
+                  def read(path):
+                      with urllib.request.urlopen(
+                          urllib.request.Request(base+path,headers={"User-Agent":"Mozilla/5.0"}),
+                          timeout=14) as resp:
+                          return resp.read()
+                  html=read("").decode("utf-8","replace")
+                  script=read("catalog-ui.js").decode("utf-8","replace")
+                  manifest=json.loads(read("assets/catalog/catalog.json"))
+                  verified=(('src="./catalog-ui.js"' in html) and
+                            ("renderExtendedProducts" in script) and
+                            len(manifest.get("products",[]))>=50)
+                  print(f"HTML integration={('src=\"./catalog-ui.js\"' in html)}, script={len(script)} bytes, product_count={len(manifest.get('products',[]))}",flush=True)
+                  if verified:
+                      print("PASS: published site serves the full NEOLINE catalog",flush=True)
+                      success=True
+                      break
+              except Exception as exc:
+                  print("Public website not verified:",type(exc).__name__,str(exc),flush=True)
+              time.sleep(20)
+          if not success:
+              raise SystemExit("FAIL: Cloudflare deployment unverified; GitHub source may be newer than public site")
+          PY
