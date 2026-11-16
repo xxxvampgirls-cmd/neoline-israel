@@ -1010,6 +1010,33 @@ body{width:100%;max-width:100%;overflow-x:clip}
  .featured-slide--israel .featured-cta{order:3!important;display:flex;gap:8px;align-items:stretch;margin-top:12px!important}
  .featured-slide--israel .featured-cta>*{flex:1;min-width:0;font-size:11px!important}
 }
+
+/* Harmonized symbol sizes: manufacturer emblem, original NEOLINE wordmark,
+   separate Star of David. The embedded tagline is hidden by logo cropping. */
+.header .brand-original .brand-star{
+ flex:0 0 36px!important;width:36px!important;height:39px!important;
+ margin-inline-start:7px!important;margin-left:0!important;
+ display:grid!important;place-items:center!important;
+}
+.header .brand-original .brand-star svg{width:35px!important;height:35px!important;filter:drop-shadow(0 2px 3px #1a77bf21)}
+.header .brand-original .brand-horiz-type{clip-path:inset(0 0 33% 0)!important}
+@media(max-width:1100px){
+ .header .brand-original .brand-star{flex-basis:34px!important;width:34px!important;height:36px!important;margin-inline-start:5px!important}
+ .header .brand-original .brand-star svg{width:33px!important;height:33px!important}
+}
+@media(max-width:720px){
+ .header .brand-original .brand-star{flex-basis:34px!important;width:34px!important;height:35px!important;margin-inline-start:4px!important}
+ .header .brand-original .brand-star svg{width:33px!important;height:33px!important}
+ .header .head-actions{min-width:0}
+}
+@media(max-width:415px){
+ .header .brand-original .brand-star{flex-basis:30px!important;width:30px!important;height:32px!important;margin-inline-start:3px!important}
+ .header .brand-original .brand-star svg{width:29px!important;height:29px!important}
+}
+@media(max-width:350px){
+ .header .brand-original .brand-star{flex-basis:26px!important;width:26px!important;height:28px!important;margin-inline-start:2px!important}
+ .header .brand-original .brand-star svg{width:25px!important;height:25px!important}
+}
 </style><!-- Cloudflare Pages Git reconnection deployment probe: 2026-11-16 --></head><body>
 <div class="sticky"><div class="shell header"><a class="brand brand-original" href="#top" aria-label="NEOLINE"><span class="brand-lockup"><span class="brand-horiz" role="img" aria-label="NEOLINE"><span class="brand-horiz-emblem" aria-hidden="true"></span><span class="brand-horiz-type" aria-hidden="true"></span><span class="brand-horiz-fallback" aria-hidden="true">NEOLINE</span></span></span><span class="brand-star" title="Israel" aria-label="Звезда Давида"><svg viewBox="0 0 48 48" width="21" height="21" aria-hidden="true"><path d="M24 4 42 36H6Z M24 44 6 12h36Z" fill="none" stroke="#117bca" stroke-width="3.3" stroke-linejoin="round"/></svg></span></a><nav class="nav"><button data-scroll="catalog" class="active" data-i="navCatalog">Каталог</button><button data-scroll="advantages" data-i="navBenefits">Преимущества</button><button data-scroll="installation" data-i="navInstall">Установка и доставка</button><button data-scroll="footer" data-i="navContact">Контакты</button></nav><div class="head-actions"><div class="flag-switcher" role="group" aria-label="Язык / Language / שפה / اللغة"><button class="flag-choice active" type="button" data-language="ru" title="Русский" aria-label="Русский язык" aria-pressed="true"><span class="flag-graphic" aria-hidden="true"><svg viewBox="0 0 36 24" xmlns="http://www.w3.org/2000/svg" focusable="false"><rect width="36" height="24" fill="#fff"/><path d="M0 8h36v8H0z" fill="#0039a6"/><path d="M0 16h36v8H0z" fill="#d52b1e"/></svg></span></button><button class="flag-choice" type="button" data-language="he" title="עברית" aria-label="עברית - Hebrew" aria-pressed="false"><span class="flag-graphic" aria-hidden="true"><svg viewBox="0 0 36 24" xmlns="http://www.w3.org/2000/svg" focusable="false"><rect width="36" height="24" fill="#fff"/><path d="M0 3h36v3H0zm0 15h36v3H0z" fill="#0038b8"/><path d="M18 7.5l5.5 9.5h-11zM18 16.5l-5.5-9.5h11z" stroke="#0038b8" stroke-width="1.15" fill="none" stroke-linejoin="round"/></svg></span></button><button class="flag-choice" type="button" data-language="en" title="English" aria-label="English language" aria-pressed="false"><span class="flag-graphic" aria-hidden="true"><svg viewBox="0 0 36 24" xmlns="http://www.w3.org/2000/svg" focusable="false"><rect width="36" height="24" fill="#012169"/><path d="M0 0l36 24M36 0L0 24" stroke="#fff" stroke-width="6"/><path d="M0 0l36 24M36 0L0 24" stroke="#c8102e" stroke-width="2.5"/><path d="M18 0v24M0 12h36" stroke="#fff" stroke-width="9"/><path d="M18 0v24M0 12h36" stroke="#c8102e" stroke-width="4.6"/></svg></span></button><button class="flag-choice flag-choice--text flag-choice--arabic" type="button" data-language="ar" title="العربية" aria-label="اللغة العربية" aria-pressed="false" lang="ar" dir="rtl">عربي</button></div><select class="language language-native" id="lang" aria-label="Language" tabindex="-1"><option value="ru">RU</option><option value="he">עברית</option><option value="en">ENG</option><option value="ar">العربية</option></select></div></div></div>
 <main id="top"><section class="showcase" aria-label="Featured products"><div class="hero-stage"><div id="showcaseSlides" aria-live="polite"></div><div class="showcase-controls"><button class="showcase-arrow" id="slidePrev" aria-label="Previous">‹</button><div id="showcaseDots" class="showcase-dots"></div><button class="showcase-arrow" id="slideNext" aria-label="Next">›</button></div><div class="sneak" aria-label="Highlights"><span>✡ NEOLINE ISRAEL · CONCEPT</span><span>◉ 4K · 2K · Wi-Fi</span><span>🚙 Dash cams</span><span>₪ Estimated local pricing</span></div></div></section>
@@ -1130,10 +1157,10 @@ function recoverPhoto(img,id){
 /* The FIRST carousel frame is the Israel-themed advertisement. Product frames
    follow automatically; the original separate marketing section stays below. */
 const israelPromo={
-ru:{eyebrow:'NEOLINE · ISRAEL',title:'Новые горизонты.<br><em>Технологии NEOLINE.</em>',lead:'Откройте для себя видеорегистраторы 4K и 2K в нашем демонстрационном каталоге для Израиля.',cta:'Смотреть каталог',model:'Argus 4K Dual',note:'Концепт магазина · продажи пока не запущены',imageAlt:'Видеорегистратор NEOLINE Argus 4K Dual'},
-en:{eyebrow:'NEOLINE · ISRAEL',title:'A new perspective.<br><em>NEOLINE technology.</em>',lead:'Explore 4K and 2K dash cameras in our concept showroom for Israel.',cta:'Explore cameras',model:'Argus 4K Dual',note:'Concept showroom · sales not launched',imageAlt:'NEOLINE Argus 4K Dual dash camera'},
-he:{eyebrow:'NEOLINE · ISRAEL',title:'זווית חדשה.<br><em>הטכנולוגיה של NEOLINE.</em>',lead:'גלו מצלמות דרך באיכות 4K ו־2K בקטלוג ההדגמה שלנו לישראל.',cta:'לצפייה בדגמים',model:'Argus 4K Dual',note:'חנות קונספט · המכירות טרם החלו',imageAlt:'מצלמת דרך NEOLINE Argus 4K Dual'},
-ar:{eyebrow:'NEOLINE · ISRAEL',title:'رؤية جديدة.<br><em>تقنيات NEOLINE.</em>',lead:'تعرّف على كاميرات السيارة بدقة 4K و2K في معرضنا التجريبي لإسرائيل.',cta:'اكتشف الكاميرات',model:'Argus 4K Dual',note:'متجر تجريبي · لم تبدأ المبيعات بعد',imageAlt:'كاميرا NEOLINE Argus 4K Dual'}
+ru:{eyebrow:'NEOLINE · ISRAEL',title:'NEOLINE —<br><em>для дорог Израиля.</em>',lead:'Технологии мирового бренда NEOLINE: видеорегистраторы 4K и 2K. Знакомьтесь с будущим израильским проектом.',cta:'Смотреть каталог',model:'Argus 4K Dual',note:'Концепт магазина · продажи пока не запущены',imageAlt:'Видеорегистратор NEOLINE Argus 4K Dual'},
+en:{eyebrow:'NEOLINE · ISRAEL',title:'NEOLINE —<br><em>for Israeli roads.</em>',lead:'Explore 4K and 2K dash cameras from NEOLINE, a global automotive technology brand, in our Israel concept showroom.',cta:'Explore cameras',model:'Argus 4K Dual',note:'Concept showroom · sales not launched',imageAlt:'NEOLINE Argus 4K Dual dash camera'},
+he:{eyebrow:'NEOLINE · ISRAEL',title:'NEOLINE —<br><em>לכבישי ישראל.</em>',lead:'גלו מצלמות דרך באיכות 4K ו־2K של מותג NEOLINE בקטלוג הקונספט שלנו לישראל.',cta:'לצפייה בדגמים',model:'Argus 4K Dual',note:'חנות קונספט · המכירות טרם החלו',imageAlt:'מצלמת דרך NEOLINE Argus 4K Dual'},
+ar:{eyebrow:'NEOLINE · ISRAEL',title:'NEOLINE —<br><em>لطرق إسرائيل.</em>',lead:'اكتشف كاميرات السيارة بدقة 4K و2K من علامة NEOLINE العالمية في معرضنا التجريبي المخصص لإسرائيل.',cta:'اكتشف الكاميرات',model:'Argus 4K Dual',note:'متجر تجريبي · لم تبدأ المبيعات بعد',imageAlt:'كاميرا NEOLINE Argus 4K Dual'}
 };
 function firstIsraelSlide(){
  const a=israelPromo[lang]||israelPromo.ru;
