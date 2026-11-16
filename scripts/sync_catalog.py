@@ -70,7 +70,7 @@ def canonical(url):
 
 def is_product(url):
  p=urlparse(url).path.strip("/").split("/")
- return len(p)==2 and p[0]=="shop" and p[1] not in OTHER_CATEGORIES
+ return len(p)==2 and p[0]=="shop" and p[1] not in OTHER_CATEGORIES and not p[1].endswith(".php")
 
 
 def find_links(soup):
