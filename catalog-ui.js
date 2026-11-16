@@ -74,8 +74,7 @@ function renderExtendedTabs(){
  const tabs=list.filter(([cat])=>cat==="all"||products.some(p=>p.category===cat));
  $('tabs').innerHTML=tabs.map(([code,key])=>'<button class="tab '+(cat===code?'active':'')+'" data-cat="'+code+'">'+esc(names[lang]?.[key]||t(key))+'</button>').join('');
  document.querySelectorAll('[data-cat]').forEach(e=>e.onclick=()=>{cat=e.dataset.cat;renderTabs();renderProducts()});
- const status=$('catalogSourceStatus');
- if(status&&imported.size)status.textContent=ui("total")+": "+products.length+" · "+ui("from");
+
 }
 function importedModal(id){
  const p=products.find(x=>x.id===id),info=imported.get(id);
