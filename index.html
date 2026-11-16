@@ -1185,8 +1185,8 @@ function renderShowcase(){
   if(id===0)return firstIsraelSlide();
   const p=products.find(x=>x.id===id),source=(media[id]||[])[0]||'';
   return '<article class="featured-slide '+(i===slideIndex?'active':'')+'" aria-label="'+p.name+'">'
-   +'<div class="feature-copy"><div class="eyebrow">'+p.name+'</div><h1>'+label('hero'+(i+1))+'</h1>'
-   +'<p class="hero-lead">'+label('heroText'+(i+1))+'</p>'
+   +'<div class="feature-copy"><div class="eyebrow">'+p.name+'</div><h1>'+label('hero'+i)+'</h1>'
+   +'<p class="hero-lead">'+label('heroText'+i)+'</p>'
    +'<div class="featured-tags">'+datas[id].slice(0,2).map(x=>'<span>'+x+'</span>').join('')+'</div>'
    +'<div class="featured-price">₪'+p.price.toLocaleString('en-US')+'<small>'+t('estimated')+'</small></div>'
    +'<div class="featured-cta"><button class="primary" data-open-feature="'+id+'">'+label('more')+' ↗</button><button class="secondary" data-add-feature="'+id+'">+ '+label('buy')+'</button></div></div>'
