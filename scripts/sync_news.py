@@ -46,14 +46,14 @@ FEEDS=[
 ]
 CATEGORIES=("accidents","speed","laws","roads","cars")
 KEYWORDS={
- "accidents":["תאונ","התנגש","נפגע","פצוע","הרוג","נהרג","דרס","collision","crash","accident","road fatal","дтп","авари"],
+ "accidents":["תאונ","התנגש","דרס","collision","crash","accident","road fatal","дтп","авари"],
  "speed":["מהירות","מכמונת","מצלמות","אכיפה","speed camera","speeding","speed limit","скорост","радар","штраф за скорость"],
- "laws":["תקנות התעבורה","חוקי תנועה","חוק התעבורה","רישיון נהיגה","רישיון רכב","קנסות נהגים","נהיגה בשכרות","driving law","traffic law","regulation","licens","правила дорожного движения"],
- "roads":["כביש","פקק","עומס תנועה","עומסי תנועה","נתיב","מחלף","road closure","highway","traffic jam","дорог","шоссе","пробк"],
- "cars":["רכב","רכבי","רכב חדש","מכוני","מכונית","חשמליות","טעינה","car","auto","vehicle","electric","tesla","автомобил","электромобил"],
+ "laws":["תקנות התעבורה","חוקי תנועה","חוק התעבורה","רישיון","רשיון","קנסות נהגים","נהיגה בשכרות","חובה להדליק אורות","driving law","traffic law","regulation","licens","правила дорожного движения"],
+ "roads":["חסימות","סגירת כביש","כביש חסום","פקק","עומס תנועה","עומסי תנועה","מחלף","road closure","highway closure","traffic jam","дорог","шоссе","пробк"],
+ "cars":["רכב","רכבי","רכב חדש","מכוני","מכונית","חשמליות","טעינה","car ","cars","automotive","vehicle","electric vehicle","tesla","автомобил","электромобил"],
 }
 EXCLUDE=("טיל","איראן","לבנון","מלחמה","טיסה","מטוס","אירוויזיון",
- "כדורגל","מכבי חיפה","הפועל באר שבע","וולט","wolt","aircraft","airline","missile")
+ "כדורגל","מכבי חיפה","הפועל באר שבע","וולט","wolt","aircraft","airline","missile","רכבת","אוטובוס","train","autopsy")
 LOCALES=("ru","he","en","ar")
 BRIEFS={
  "accidents":{"ru":"Дорожное происшествие в Израиле. Обстоятельства и актуальные сведения — в материале источника.","he":"דיווח על תאונת דרכים בישראל. פרטים ועדכונים בכתבת המקור.","en":"A reported road incident in Israel. Details and updates are in the original report.","ar":"تقرير عن حادث مروري في إسرائيل. التفاصيل والتحديثات في المصدر."},
@@ -185,7 +185,7 @@ def article(entry,provider):
  # Publisher must be an actual article link, not front page or feed itself.
  path=urlparse(url).path
  if path in ("/","/rss","/feed") or "/rss/" in path:return None
- id=hashlib.sha256((provider.lower()+"|"+url.split("?")[0]).encode("utf-8")).hexdigest()[:20]
+ id=hashlib.sha256(url.split("?")[0].encode("utf-8")).hexdigest()[:20]
  return {"id":id,"titleOriginal":title,"sourceLanguage":"he" if re.search(r"[\u0590-\u05ff]",title) else "en",
   "date":pub.isoformat().replace("+00:00","Z"),"url":url,"publisher":provider,
   "category":kind,"art":kind,"image":f"./assets/news/images/{id}.svg",
@@ -223,7 +223,14 @@ def main():
  ROOT.mkdir(parents=True,exist_ok=True)
  IMAGES.mkdir(parents=True,exist_ok=True)
  previous=read_previous()
- keep={x["id"]:x for x in previous if valid(x)}
+ keep={}
+ for x in previous:
+  if not valid(x):continue
+  canonical_id=hashlib.sha256(x["url"].split("?")[0].encode("utf-8")).hexdigest()[:20]
+  if canonical_id in keep:continue
+  x["id"]=canonical_id
+  x["image"]=f"./assets/news/images/{canonical_id}.svg"
+  keep[canonical_id]=x
  # Prune the old broken Google News links instead of sending readers to 429 pages.
  existing_google=sum(1 for x in previous if "google." in urlparse(x.get("url","")).netloc)
  feed_stats={}
