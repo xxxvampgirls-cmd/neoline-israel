@@ -52,6 +52,25 @@ jobs:
             await page.waitForFunction(()=>document.querySelectorAll('.news-card').length>0 || !document.getElementById('newsEmpty').hidden,{timeout:30000});
             const data=await page.evaluate(async()=>await (await fetch('./assets/news/news.json')).json());
             if(data.version!==1||data.retentionDays!==30||data.lawsRetentionMonths!==6)throw Error('Wrong archive configuration');
+            const carousel=page.locator('#newsFeatureCarousel');
+            await page.waitForFunction(()=>document.querySelectorAll('.news-feature-dot').length===10,{timeout:15000});
+            if(!await carousel.isVisible())throw Error('Top ten-news carousel is hidden');
+            const firstFeature=await carousel.locator('.news-feature-title').innerText();
+            const firstPicture=carousel.locator('.news-feature-img');
+            if(await firstPicture.count()!==1)throw Error('Expected one carousel image in the DOM');
+            await page.locator('#newsFeatureNext').click();
+            const secondFeature=await carousel.locator('.news-feature-title').innerText();
+            if(firstFeature===secondFeature)throw Error('Carousel next arrow did not change the story');
+            const counter=await page.locator('#newsFeatureCounter').textContent();
+            if(!/02\s*\/\s*10/.test(counter))throw Error('Wrong carousel counter after next: '+counter);
+            await page.locator('#newsFeaturePrev').click();
+            if(await carousel.locator('.news-feature-title').innerText()!==firstFeature)
+              throw Error('Carousel prev did not restore the first story');
+            if(await carousel.locator('.news-feature-img').count()!==1)
+              throw Error('Carousel must keep only the active photo in DOM');
+            const blueDots=await page.locator('.news-art').first().evaluate(el=>getComputedStyle(el,'::after').backgroundImage);
+            if(!blueDots.includes('radial-gradient'))throw Error('Blue photo dot-grid is missing');
+            console.log('FEATURE CAROUSEL PASS: 10 dots, next/prev, one image, editorial overlay');
             const now=Date.now(),limit=now-30*86400*1000;
             const cutoff=new Date(now),day=cutoff.getUTCDate();
             cutoff.setUTCDate(1);cutoff.setUTCMonth(cutoff.getUTCMonth()-6);
