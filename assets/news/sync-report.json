@@ -1,0 +1,16 @@
+{
+  "updated": "2026-11-17T07:30:47.878378Z",
+  "sources": {
+    "Израильские СМИ · laws": 4,
+    "Израильские СМИ · roads": 10
+  },
+  "new": 8,
+  "retained": 8,
+  "expiredOrDuplicate": 0,
+  "errors": {
+    "Минтранс (официально)": "403 Client Error: Forbidden for url: https://www.gov.il/he/api/NewsApi/rss/48eaee91-0c97-4ef3-b364-50ae52e3b56f",
+    "Израильские СМИ · accidents": "429 Client Error: Too Many Requests for url: https://news.google.com/rss/search?q=%28%22%D7%AA%D7%90%D7%95%D7%A0%D7%AA+%D7%93%D7%A8%D7%9B%D7%99%D7%9D%",
+    "Израильские СМИ · speed": "429 Client Error: Too Many Requests for url: https://news.google.com/rss/search?q=%28%22%D7%9E%D7%A6%D7%9C%D7%9E%D7%95%D7%AA+%D7%9E%D7%94%D7%99%D7%A8%",
+    "Израильские СМИ · cars": "429 Client Error: Too Many Requests for url: https://news.google.com/rss/search?q=%28%22%D7%A8%D7%9B%D7%91+%D7%97%D7%93%D7%A9%22+OR+%22%D7%9E%D7%9B%D7"
+  }
+}

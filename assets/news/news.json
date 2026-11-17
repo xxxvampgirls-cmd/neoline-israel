@@ -1,0 +1,111 @@
+{
+  "version": 1,
+  "updated": "2026-11-17T07:30:47.878378Z",
+  "retentionDays": 30,
+  "items": [
+    {
+      "id": "2126682482994d6ca0cb",
+      "title": "Важная новость для водителей: блокпосты на подъездных путях к порту в субботу вечером",
+      "titleOriginal": "עדכון חשוב לנהגים: חסימות כבישים בדרכי הגישה לנמל במוצאי שבת",
+      "summary": "Обновление о дорожной обстановке или ограничениях движения.",
+      "date": "2026-11-13T11:26:40Z",
+      "category": "roads",
+      "publisher": "אשדוד אונליין",
+      "url": "https://news.google.com/rss/articles/CBMi0gJBVV95cUxNQkFFSjFGNklmeWU0Rk96dExDYlVBMVpwU3BEOUpsUHNoa2tCUHQ4bWdXdWVlWXpxME1jOHQ5aFlMNUhBVGJMT2s1U2h4bElSeWRaaUwzZ3JQMnBPNVJ6eVMzRVdFd3pFaFBLRnNNbzlQZXFEb0ZDRlVJYTJaTUdjdEU0Wm02VjR1Um8ydy1mNU14MWJIOUdiMzdDaHU4UEdYN0RjWWdJYmNURU9QWG9GUnZYeGVsZ1AwWmhOV3A5WlNfMEhUcEFDYVlXd0VfLXhIckQ0ODRPbVhhckx1MWxHWUR2c0hSZDNnUDRQN1dyNFBxOWxkdHV0aXdlS0w5Ul9qMDNJVzVBRGdRT2w2OU4xREdDNXJ2VXJOZ1dtUVh0QlhEc0tzdV9oUmNWV1h5ZDczSVktYVJ6N1NKUnJWQTFBMkpJcFR2V2dtRmF1b3J4N3I4UQ?oc=5",
+      "translated": true,
+      "official": false,
+      "art": "roads"
+    },
+    {
+      "id": "85c65b76783dc88e95df",
+      "title": "Блокпосты в Иерусалиме и Бейт-Шемеше: беспорядки в двух местах, полиция готовится к эвакуации",
+      "titleOriginal": "חסימות כבישים בירושלים ובבית שמש: הפרות סדר בשני מוקדים, המשטרה נערכת לפינוי",
+      "summary": "Обновление о дорожной обстановке или ограничениях движения.",
+      "date": "2026-11-11T18:44:00Z",
+      "category": "roads",
+      "publisher": "PassportNews",
+      "url": "https://news.google.com/rss/articles/CBMiU0FVX3lxTE1yU3dKZm5mMkl4SW1ST1JzSmc5RVJLcU9YcHZCT3M2amJGUHowMm9BTlN6bG9ZOXo2bm4tR0g5NU9Qd3J6cFlSaTBVbVFVQ1E4Y2V3?oc=5",
+      "translated": true,
+      "official": false,
+      "art": "roads"
+    },
+    {
+      "id": "29d93778342ad0eeb138",
+      "title": "Угроза закрытия Walt: требование возбудить уголовное дело против компании и гендиректора",
+      "titleOriginal": "איום סגירה על וולט: דרישה לחקירה פלילית נגד החברה והמנכ\"ל",
+      "summary": "Обновление о дорожной обстановке или ограничениях движения.",
+      "date": "2026-11-10T07:15:41Z",
+      "category": "roads",
+      "publisher": "היום",
+      "url": "https://news.google.com/rss/articles/CBMiaEFVX3lxTE5WZXJkQkNxVThiS21KNHJCSElCZkdKVHI4VVVOU3hIUlVwYzctVUhxTjF0cTRsWlVxdmFZNGlpMk1FTmg2RThXX1pTN2pmdmp4NzZYaDZ1ZHFOMldQc2h1R2R1Qk9ETEJt?oc=5",
+      "translated": true,
+      "official": false,
+      "art": "roads"
+    },
+    {
+      "id": "6afe74967dd6df5b1220",
+      "title": "Опасность закрытия Volt в Израиле: необычное требование госоргана",
+      "titleOriginal": "סכנת סגירה לוולט בישראל: הדרישה החריגה של הגוף הממשלתי",
+      "summary": "Обновление о дорожной обстановке или ограничениях движения.",
+      "date": "2026-11-09T09:55:13Z",
+      "category": "roads",
+      "publisher": "מעריב",
+      "url": "https://news.google.com/rss/articles/CBMiXkFVX3lxTFBiQWNDLWNRN0Q5VV9kYUhLRzRKMDYweW5iQWN5dmdyRldlTVF1dnhfdXpSTzd2RWtsLTdVdXBuMy1OQjV3c1JMOWZzcU1kM1R5LUNBYWlIOHlGa3FWWEE?oc=5",
+      "translated": true,
+      "official": false,
+      "art": "roads"
+    },
+    {
+      "id": "a91d0ae12cb95e99c5c5",
+      "title": "Эйлат находится в осаде: все дороги, ведущие в город и из города, перекрыты",
+      "titleOriginal": "אילת נצורה: כל הכבישים המובילים אל העיר וממנה נחסמו",
+      "summary": "Обновление о дорожной обстановке или ограничениях движения.",
+      "date": "2026-10-27T07:00:00Z",
+      "category": "roads",
+      "publisher": "מקור ראשון",
+      "url": "https://news.google.com/rss/articles/CBMiZkFVX3lxTE9oWWFEdnBKbWpzZmh3b3RtaXBYSWtDclZiWlNWbTZaSHBPcWI2ZmhrTncxVnd2OExoT1VqcmFkemxHcFdGRVFjeFVqWTc2c2haenVBRm5udVdOTjRFbkY3V08wcnlMdw?oc=5",
+      "translated": true,
+      "official": false,
+      "art": "roads"
+    },
+    {
+      "id": "8ecb81ac5acb8ea808c9",
+      "title": "Блокпосты из-за погодных условий на юге",
+      "titleOriginal": "חסימות כבישים בעקבות מזג האוויר בדרום",
+      "summary": "Обновление о дорожной обстановке или ограничениях движения.",
+      "date": "2026-10-27T07:00:00Z",
+      "category": "roads",
+      "publisher": "יישובניק נט",
+      "url": "https://news.google.com/rss/articles/CBMiggNBVV95cUxOTnBWSEM5S1ZBc2s4cUs5UEdWeGl0MlVfWWp3TFUyRTN6OUlWZHlvQkJWeTAxX01EQksyV0x3QU5vU0I5Qnh5SndOaXlwM1p4MTFSWGlpTDVBMTN1YzM2NXJhRVBnZDZ2ZlRFTGU4dmttZTVpNmxjSGNra2ZVUkVuQjZWUEhiRkVXMTNiNjZLRm9ITUFlZzFOZWc3NlZKeEJ3U0RrRU9aVUg0V0tmbllLZHFlTVdKc0ZkNmlPM01hX2RoT3pjR2RBanNNUS1TWmFTbEE4THg4aE9md08zbm5kQTJDUFhmQ3hWTkx5dVdfa2x4VmpmbkllQ3dxanZ1Um4zY3pDR081OUR4dTM1NXR4dl8tVkp4SzQ4dlJRVzRWeE1kQ2p4b3BlT3NITTUzYVY2b3J5MUowWjNmajJ5dmMyb1dXaFJDWnhnZUtXOFUxSnBWQS1Tem01dHN4b3dwams1bFBTS2Rlb0pVWi1xM2VBMlVJY2c2N1Q0WkpZR3BVbkYtdw?oc=5",
+      "translated": true,
+      "official": false,
+      "art": "roads"
+    },
+    {
+      "id": "c6714244494607a849fd",
+      "title": "Накануне выборов: в Эйлате ожидаются блокпосты",
+      "titleOriginal": "לקראת הבחירות: אלו השעות שבהן צפויות חסימות כבישים באילת",
+      "summary": "Обновление о дорожной обстановке или ограничениях движения.",
+      "date": "2026-10-26T07:00:00Z",
+      "category": "roads",
+      "publisher": "היום",
+      "url": "https://news.google.com/rss/articles/CBMiZEFVX3lxTFByRFp1dlJPb0VHLTNtS3FRQUgyMk1IYnkzUjBPOEJDYWFDV2FJdjUwN3hsQzVDMW5tY2NQMDQtS0hDb3dqVGE3RXRPRlNHRGlndXlQaFdwVFVxUnZqY004aW44RWs?oc=5",
+      "translated": true,
+      "official": false,
+      "art": "roads"
+    },
+    {
+      "id": "a181f012c62eb983d314",
+      "title": "«Маккаби Хайфа» против «Хапоэль Беэр-Шева»: блокады, пробки на дорогах и усиление безопасности в Сами Офере",
+      "titleOriginal": "מכבי חיפה מול הפועל באר שבע: חסימות, עומסי תנועה ואבטחה מוגברת בסמי עופר",
+      "summary": "Обновление о дорожной обстановке или ограничениях движения.",
+      "date": "2026-10-26T07:00:00Z",
+      "category": "roads",
+      "publisher": "NWS חדשות חיפה והסביבה",
+      "url": "https://news.google.com/rss/articles/CBMiRkFVX3lxTE5uOVhFQnpfd3ktdVZoR0dWLS1FMG0zTTNlajVNblJpOHhQTzZSNU11aWRsVUY5cmhCOGVTei1BUnJEZ1VOR2c?oc=5",
+      "translated": true,
+      "official": false,
+      "art": "roads"
+    }
+  ]
+}
