@@ -75,3 +75,12 @@
   .mobile-nav .mobile-icon svg{width:25px!important;height:25px!important}
   .mobile-nav button > span:last-child{font-size:9px!important}
 }
+
+/* Eight-product fold: remaining catalog rows appear only after visitor asks. */
+.catalog-show-more{display:flex;flex-direction:column;gap:8px;align-items:center;justify-content:center;padding:20px 0 9px}
+.catalog-show-more[hidden]{display:none!important}
+.catalog-show-more button{border:1px solid #98cee9;border-radius:15px;background:linear-gradient(110deg,#fafdff,#dfecfb);box-shadow:0 8px 22px #1680b01c;padding:13px 24px;font-size:13px;font-weight:850;color:#136aa4;cursor:pointer;min-width:210px;transition:transform .2s,box-shadow .2s}
+.catalog-show-more button:hover{transform:translateY(-2px);box-shadow:0 11px 26px #1680b02c}
+.catalog-show-more button:focus-visible{outline:3px solid #66bded;outline-offset:3px}
+.catalog-show-more span{font-size:11px;font-weight:650;color:#7292ad}
+@media(max-width:720px){.catalog-show-more{padding:14px 0 7px}.catalog-show-more button{width:90%;max-width:360px;padding:14px 12px;font-size:12px}}
