@@ -1,0 +1,58 @@
+name: Refresh Israel automotive news (30-day archive)
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '17 4,10,16,22 * * *'
+  push:
+    branches: [main]
+    paths:
+      - 'scripts/sync_news.py'
+      - '.github/workflows/sync-news.yml'
+permissions:
+  contents: write
+concurrency:
+  group: israel-automotive-news-refresh
+  cancel-in-progress: false
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    timeout-minutes: 24
+    steps:
+      - name: Check out project
+        uses: actions/checkout@v4
+        with:
+          ref: main
+          persist-credentials: true
+      - name: Configure Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install feed libraries
+        run: python -m pip install --disable-pip-version-check 'requests>=2.31,<3' 'beautifulsoup4>=4.12,<5' 'feedparser>=6,<7'
+      - name: Gather current news, expire every item older than 30 days
+        run: python scripts/sync_news.py
+      - name: Strictly validate 30-day retention and source links
+        run: |
+          python - <<'PY'
+          import datetime as dt,json
+          p=json.load(open("assets/news/news.json",encoding="utf-8"))
+          now=dt.datetime.now(dt.timezone.utc)
+          assert p["retentionDays"]==30
+          for item in p["items"]:
+              age=now-dt.datetime.fromisoformat(item["date"].replace("Z","+00:00"))
+              assert dt.timedelta(0)<=age<=dt.timedelta(days=30,minutes=2),(item["title"],age)
+              assert item["url"].startswith(("https://","http://"))
+          print("Verified current news:",len(p["items"]))
+          PY
+      - name: Publish refreshed rolling archive
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add assets/news/news.json assets/news/sync-report.json
+          if git diff --cached --quiet; then
+            echo "No updates to news archive"
+            exit 0
+          fi
+          git commit -m "Refresh Israel automotive news and remove items older than 30 days"
+          git pull --rebase origin main
+          git push origin HEAD:main
