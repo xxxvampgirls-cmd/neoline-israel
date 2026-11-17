@@ -41,14 +41,18 @@ jobs:
           for item in p["items"]:
               age=now-dt.datetime.fromisoformat(item["date"].replace("Z","+00:00"))
               assert dt.timedelta(0)<=age<=dt.timedelta(days=30,minutes=2),(item["title"],age)
-              assert item["url"].startswith(("https://","http://"))
+              assert item["url"].startswith("https://")
+              assert "google." not in item["url"].split("/")[2]
+              assert "translations" in item
+              from pathlib import Path
+              assert Path(item["image"].lstrip("./")).is_file(),item["image"]
           print("Verified current news:",len(p["items"]))
           PY
       - name: Publish refreshed rolling archive
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add assets/news/news.json assets/news/sync-report.json
+          git add -A assets/news/
           if git diff --cached --quiet; then
             echo "No updates to news archive"
             exit 0
