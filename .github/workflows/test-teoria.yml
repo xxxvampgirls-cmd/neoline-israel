@@ -300,11 +300,11 @@ jobs:
                 photoOverflow:getComputedStyle(el.querySelector('.theory-featured-image')).overflow,
                 slideOverflow:getComputedStyle(el).overflow,
                 deviceAnimation:getComputedStyle(device).animationName,
-                roadSweep:(()=>{
-                  const stripes=el.querySelector('.ad-photo-stripes');
-                  return {front:getComputedStyle(stripes,'::before').animationName,
-                          back:getComputedStyle(stripes,'::after').animationName};
-                })(),
+                fineTrails:[...el.querySelectorAll('.ad-photo-stripes .ad-speed-trail')].filter(n=>getComputedStyle(n).display!=='none').map(n=>({
+                  name:getComputedStyle(n).animationName,blur:getComputedStyle(n).filter,
+                  duration:parseFloat(getComputedStyle(n).animationDuration),
+                  delay:parseFloat(getComputedStyle(n).animationDelay)
+                })),
                 hasPrev:!!el.querySelector('[data-feature-prev]'),
                 hasNext:!!el.querySelector('[data-feature-next]'),
                 pageWidth:document.documentElement.scrollWidth,viewport:innerWidth
@@ -320,17 +320,16 @@ jobs:
               throw Error('Device must subtly escape above photo frame');
             if(artwork.deviceAnimation==='none')
               throw Error('Gentle floating motion missing');
-            if(artwork.roadSweep.front!=='neolineRoadSweep'||artwork.roadSweep.back!=='neolineRoadSweep')
-              throw Error('Unified speed effect missing on theory slide '+JSON.stringify(artwork.roadSweep));
+            if(artwork.fineTrails.length<5||artwork.fineTrails.some(x=>x.name!=='neolineIndependentRoadTrail'))
+              throw Error('Independent speed trails missing on theory slide '+JSON.stringify(artwork.fineTrails));
             await page.emulateMedia({reducedMotion:'reduce'});
             const reducedMotion=await last.locator('.ad-photo-stripes').first().evaluate(n=>({
-              front:getComputedStyle(n,'::before').animationName,
-              back:getComputedStyle(n,'::after').animationName,
+              trails:[...n.querySelectorAll('.ad-speed-trail')].map(t=>getComputedStyle(t).animationName),
               top:getComputedStyle(n.querySelector('.ad-photo-band')).animationName,
               bottom:getComputedStyle(n.querySelector('.ad-photo-band:nth-child(2)')).animationName
             }));
             if(reducedMotion.top!=='none'||reducedMotion.bottom!=='none'||
-               reducedMotion.front!=='none'||reducedMotion.back!=='none')
+               reducedMotion.trails.some(x=>x!=='none'))
               throw Error('Reduced motion not respected '+JSON.stringify(reducedMotion));
             await page.emulateMedia({reducedMotion:'no-preference'});
             for(let i=0;i<5;i++){
@@ -348,24 +347,37 @@ jobs:
                   width:parseFloat(getComputedStyle(b).width)
                 }));
                 const feather=focus?getComputedStyle(focus):null;
-                return {bands:bands.length,ribbons,
+                const trails=[...stripes.querySelectorAll('.ad-speed-trail')]
+                  .filter(n=>getComputedStyle(n).display!=='none')
+                  .map(n=>{
+                    const v=getComputedStyle(n);
+                    return {name:v.animationName,seconds:parseFloat(v.animationDuration),
+                            phase:parseFloat(v.animationDelay),thickness:parseFloat(v.height),
+                            blur:parseFloat(v.filter.match(/blur\\(([^)]+)\\)/)?.[1]||'0'),
+                            peak:parseFloat(v.getPropertyValue('--trail-peak')),
+                            z:parseInt(v.zIndex,10)};
+                  });
+                return {bands:bands.length,ribbons,trails,
                         focus:!!focus,
                         focusZ:feather?parseInt(feather.zIndex,10):-1,
-                        focusGradient:feather?.backgroundImage.includes('radial-gradient')||false,
-                        front:getComputedStyle(stripes,'::before').animationName,
-                        back:getComputedStyle(stripes,'::after').animationName,
-                        fastSeconds:parseFloat(getComputedStyle(stripes,'::before').animationDuration)};
+                        focusGradient:feather?.backgroundImage.includes('radial-gradient')||false};
               });
               if(speed.bands!==2||!speed.focus||!speed.focusGradient||
-                 speed.ribbons.some(b=>b.z<=speed.focusZ)||
-                 speed.ribbons.some(b=>b.width<300)||
-                 speed.front!=='neolineRoadSweep'||speed.back!=='neolineRoadSweep'||
-                speed.ribbons[0].name!=='neolineMainBandLeftToRight'||
-                speed.ribbons[1].name!=='neolineMainBandRightToLeft'||
-                speed.ribbons.some(b=>!(b.seconds>speed.fastSeconds&&b.seconds<18))||
-                speed.ribbons.some(b=>!(b.height>=8&&b.height<=16))||
-                speed.ribbons[0].height===speed.ribbons[1].height)
-                throw Error('Slide '+(i+1)+' needs two opposite slow ribbons and faster thin trails '+JSON.stringify(speed));
+                 speed.ribbons.some(b=>b.z<=speed.focusZ)||speed.ribbons.some(b=>b.width<300)||
+                 speed.ribbons[0].name!=='neolineMainBandLeftToRight'||
+                 speed.ribbons[1].name!=='neolineMainBandRightToLeft'||
+                 speed.ribbons.some(b=>!(b.height>=8&&b.height<=16))||
+                 speed.ribbons[0].height===speed.ribbons[1].height||
+                 speed.trails.length<5||speed.trails.length>7||
+                 speed.trails.some(t=>t.name!=='neolineIndependentRoadTrail')||
+                 speed.trails.some(t=>!(t.blur>.3&&t.blur<=1.3&&t.z<speed.focusZ))||
+                 speed.trails.some(t=>!(t.seconds>=3&&t.seconds<speed.ribbons[0].seconds&&
+                                         t.seconds<speed.ribbons[1].seconds))||
+                 new Set(speed.trails.map(t=>t.seconds)).size!==speed.trails.length||
+                 new Set(speed.trails.map(t=>t.phase)).size!==speed.trails.length||
+                 new Set(speed.trails.map(t=>t.peak)).size<5||
+                 new Set(speed.trails.map(t=>t.thickness)).size<5)
+                throw Error('Slide '+(i+1)+' needs unsynchronized soft streaks and two opposing crisp ribbons '+JSON.stringify(speed));
             }
             await page.locator('#showcaseDots .showcase-dot').last().click();
             await page.waitForFunction(()=>document.querySelector('#showcaseSlides .featured-slide--theory')?.classList.contains('active'));
