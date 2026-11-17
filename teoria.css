@@ -374,3 +374,227 @@ body.game-active .game-hero{display:none!important}
 @media(prefers-reduced-motion:reduce){
  .theory-bottom,.theory-bottom a{transition:none!important;will-change:auto}
 }
+
+
+/* ==============================================================
+   NEOLINE GAME OVER V4 · premium compact branded hero + 3-life
+   finish screen. Based on approved white/cyan/navy concept art.
+   The header REMAINS SHORT so all modes fit in the first fold.
+   ============================================================== */
+.game-hero{
+ position:relative;
+ isolation:isolate;
+ overflow:hidden;
+ border:1px solid #bfdeee;
+ border-radius:21px;
+ background:
+  radial-gradient(circle at 91% 48%,#b0e6ff85,transparent 44%),
+  linear-gradient(113deg,#ffffff 5%,#f2fcff 60%,#d6f1ff 100%);
+ box-shadow:0 6px 15px #185d891b,inset 0 1px 1px #fff;
+}
+.game-hero::before{
+ content:"";position:absolute;z-index:-1;pointer-events:none;
+ right:0;bottom:-62px;width:240px;height:130px;
+ transform:rotate(-21deg);
+ background:linear-gradient(90deg,#6dd4f52f,#159bdd30);
+ border-radius:100% 0 0 0;
+}
+.game-hero::after{
+ content:"";position:absolute;z-index:-1;pointer-events:none;
+ left:17px;bottom:4px;
+ width:98px;height:4px;
+ border-radius:100% 30% 100% 40%;
+ background:linear-gradient(90deg,#11aadd,#37cef0 75%,transparent);
+ transform:rotate(-5deg);
+}
+.game-hero .eyebrow{color:#158cb8;letter-spacing:.13em}
+.game-hero h1{color:#092b48;font-weight:850;letter-spacing:-.052em}
+.game-hero .hero-mini{
+ position:relative;
+ background:linear-gradient(145deg,#e2f8ff,#d8f0ff 70%,#fff);
+ border:1px solid #d4eefb;
+ box-shadow:inset 0 0 0 2px #ffffffa8,0 5px 15px #15578b20;
+}
+.game-hero .hero-mini-svg{
+ display:block;width:100%;height:100%;
+ filter:drop-shadow(0 2px 3px #11578a21);
+}
+@media(min-width:721px){
+ .game-hero{grid-template-columns:minmax(0,1fr) 100px;min-height:100px;padding-block:16px}
+ .game-hero .hero-mini{width:99px;height:83px}
+ .game-hero::after{bottom:12px;width:150px}
+}
+@media(max-width:720px){
+ .game-hero{padding:9px 11px;min-height:72px;grid-template-columns:minmax(0,1fr) 71px}
+ .game-hero .hero-mini{width:71px;height:54px;border-radius:13px}
+ .game-hero::after{bottom:3px;width:77px;height:3px;left:13px}
+ .game-hero .eyebrow{font-size:8px}
+ .game-hero h1{margin:4px 0 0;line-height:1.12;font-size:25px!important}
+}
+@media(max-width:355px){
+ .game-hero{grid-template-columns:minmax(0,1fr) 64px}
+ .game-hero .hero-mini{width:64px;height:51px}
+ .game-hero h1{font-size:22px!important}
+}
+
+/* Show this as a real functional modal, never merely a picture. */
+body.game-over-open{overflow:hidden}
+body.game-over-open .theory-bottom{opacity:0!important;visibility:hidden!important;pointer-events:none!important}
+.gameover-overlay{
+ position:fixed;z-index:180;inset:0;
+ display:grid;place-items:center;
+ padding:16px;
+ isolation:isolate;
+}
+.gameover-backdrop{
+ position:absolute;z-index:0;inset:0;
+ background:linear-gradient(150deg,#08223c58,#16476b5e);
+ backdrop-filter:blur(8px);
+ -webkit-backdrop-filter:blur(8px);
+}
+.gameover-card{
+ position:relative;z-index:1;
+ width:min(490px,100%);
+ max-height:calc(100dvh - 28px);
+ overflow-y:auto;overflow-x:hidden;
+ scrollbar-width:thin;
+ display:flex;flex-direction:column;align-items:center;
+ text-align:center;
+ border-radius:30px;
+ border:3px solid #fff;
+ padding:40px clamp(20px,6vw,40px) 35px;
+ background:
+  radial-gradient(ellipse at 52% 41%,#ffffff 10%,#f4fbff 70%,#deeffc 100%);
+ box-shadow:0 17px 50px #063a6570,0 3px 0 #ffffff9c inset,0 0 0 2px #8ed8fa69;
+ color:#0a2d50;
+ animation:neolineGameOverPop .4s cubic-bezier(.17,.8,.21,1) both;
+}
+.gameover-card::before,
+.gameover-card::after{
+ content:"";position:absolute;pointer-events:none;z-index:-1;
+ border-radius:50%;
+}
+.gameover-card::before{
+ top:-128px;left:-125px;width:250px;height:250px;
+ border:35px solid #32cefa4a;box-shadow:0 0 0 39px #b0ebff4f;
+}
+.gameover-card::after{
+ right:-133px;bottom:-147px;width:278px;height:278px;
+ border:40px solid #28c9f65e;box-shadow:0 0 0 39px #7edfff37;
+}
+.gameover-close{
+ position:absolute;z-index:4;top:15px;right:15px;
+ display:grid;place-items:center;
+ width:37px;height:37px;min-width:37px;
+ background:linear-gradient(140deg,#e3f6ff,#c3eaff);
+ color:#16446a;border:0;border-radius:50%;
+ font:700 30px/1 Arial,sans-serif;
+ box-shadow:0 3px 12px #164c7920;
+}
+.gameover-hearts{
+ position:relative;z-index:2;
+ display:flex;align-items:center;justify-content:center;
+ gap:12px;margin:20px 0 20px;
+ filter:drop-shadow(0 5px 5px #b3223540);
+}
+.gameover-hearts span{
+ display:block;font-size:clamp(37px,8.5vw,46px);
+ line-height:1;
+ animation:neolineHeartFall .6s cubic-bezier(.18,.72,.25,1) both;
+}
+.gameover-hearts span:nth-child(2){animation-delay:.09s}
+.gameover-hearts span:nth-child(3){animation-delay:.18s}
+.gameover-title{
+ position:relative;z-index:2;
+ margin:1px 0 7px;
+ font:900 clamp(37px,9.7vw,54px)/1.05 Manrope,Arial,sans-serif;
+ letter-spacing:-.075em;
+ color:#08284b;
+ white-space:nowrap;
+}
+.gameover-underline{
+ width:108px;height:5px;margin:12px auto 25px;
+ border-radius:90% 20% 90% 15%;
+ background:linear-gradient(90deg,#00b3e5,#21d1f1,transparent);
+ transform:rotate(-4deg);
+}
+.gameover-message{
+ position:relative;z-index:2;
+ margin:0;
+ font-size:clamp(14px,4vw,17px);
+ font-weight:650;line-height:1.62;
+ color:#284665;
+}
+.gameover-score{
+ position:relative;z-index:2;
+ display:inline-block;
+ padding:6px 14px;margin:17px auto 22px;
+ color:#3b7eac;background:#e8f7ffb0;
+ border:1px solid #bfe4f8;border-radius:99px;
+ font-size:12px;font-weight:800;direction:ltr;
+}
+.gameover-actions{
+ position:relative;z-index:2;
+ display:grid;gap:12px;width:100%;
+}
+.gameover-retry,.gameover-modes{
+ width:100%;min-height:57px;padding:12px 20px;
+ border-radius:999px;cursor:pointer;
+ display:flex;align-items:center;justify-content:center;gap:14px;
+ font:900 clamp(14px,4.3vw,17px)/1.25 Manrope,Arial,sans-serif;
+ transition:transform .2s,box-shadow .2s,background .2s;
+}
+.gameover-retry{
+ border:1px solid #00a3d6;
+ color:#fff;
+ background:linear-gradient(105deg,#07bceb,#039ed2 56%,#0087bc);
+ box-shadow:0 8px 18px #0487c157,inset 0 1px 0 #ffffff8a;
+}
+.gameover-retry .gameover-button-icon{
+ font-size:19px;color:#fff;border-right:1px solid #ffffffa6;
+ padding-inline-end:13px;
+}
+.gameover-modes{
+ border:2px solid #9bdaff;color:#123d63;
+ background:linear-gradient(115deg,#e8f7ff,#d4f0ff);
+ box-shadow:0 6px 14px #1d73a52e,inset 0 1px 0 #fff;
+}
+.gameover-modes svg{flex:none}
+.gameover-retry:hover,.gameover-modes:hover{
+ transform:translateY(-2px);box-shadow:0 10px 23px #0c6f9c48;
+}
+.gameover-retry:active,.gameover-modes:active{
+ transform:translateY(1px) scale(.987)
+}
+.gameover-retry:focus-visible,.gameover-modes:focus-visible,.gameover-close:focus-visible{
+ outline:3px solid #157fdb;outline-offset:3px;
+}
+html[dir=rtl] .gameover-close{right:auto;left:15px}
+@keyframes neolineGameOverPop{
+ from{opacity:0;transform:translateY(18px) scale(.95)}
+ to{opacity:1;transform:translateY(0) scale(1)}
+}
+@keyframes neolineHeartFall{
+ from{opacity:0;transform:translateY(-14px) scale(1.17)}
+ to{opacity:1;transform:translateY(0) scale(1)}
+}
+@media(max-width:720px){
+ .gameover-card{
+  padding:34px 24px 28px;border-radius:25px;
+ }
+ .gameover-hearts{margin:19px 0 16px;gap:8px}
+ .gameover-underline{margin:10px auto 18px}
+ .gameover-score{margin:13px auto 17px}
+ .gameover-retry,.gameover-modes{min-height:54px}
+}
+@media(max-height:590px){
+ .gameover-card{padding-top:16px;padding-bottom:15px}
+ .gameover-hearts{margin:10px auto}
+ .gameover-title{font-size:37px}
+ .gameover-underline{margin:8px auto 12px}
+ .gameover-score{margin:9px auto}
+}
+@media(prefers-reduced-motion:reduce){
+ .gameover-card,.gameover-hearts span{animation:none!important}
+ .gameover-retry,.gameover-modes{transition:none!important}
+}
