@@ -604,3 +604,79 @@ html[dir=rtl] .news-feature-credit{right:auto;left:12px}
 @media(prefers-reduced-motion:reduce){
  .traffic-refresh,.traffic-report summary:after{transition:none}
 }
+
+/* Official Waze Live Map embed: opt-in to avoid network/CPU on initial news load. */
+.traffic-waze{
+ margin-top:12px;
+ border:1px solid #b5e1f4;
+ border-radius:16px;
+ background:linear-gradient(135deg,#f0faff 0%,#dff3ff 100%);
+ overflow:hidden;
+}
+.traffic-waze>summary{
+ list-style:none;display:flex;align-items:center;gap:11px;
+ padding:10px 12px;cursor:pointer;min-height:56px;
+}
+.traffic-waze>summary::-webkit-details-marker{display:none}
+.traffic-waze>summary:hover{background:#e0f5ff}
+.traffic-waze-icon{
+ display:grid;place-items:center;width:36px;height:36px;flex:none;
+ border-radius:12px;background:#fff;border:1px solid #c3e7f9;
+ box-shadow:0 2px 9px #1c7aaf15;color:#127ebc;
+}
+.traffic-waze-icon svg{width:22px;height:22px}
+.traffic-waze-heading{display:flex;flex:1;min-width:0;flex-direction:column;gap:3px}
+.traffic-waze-heading strong{font-size:13px;line-height:1.2;color:#174870;font-weight:900}
+.traffic-waze-heading small{font-size:10px;line-height:1.35;color:#5788a7}
+.traffic-waze-chevron{
+ color:#127db5;font-size:20px;font-weight:900;transition:transform .2s;
+}
+.traffic-waze[open] .traffic-waze-chevron{transform:rotate(180deg)}
+.traffic-waze-content{padding:0 12px 12px}
+.traffic-waze-areas{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:9px}
+.traffic-waze-areas button{
+ appearance:none;border:1px solid #bfdded;border-radius:9px;
+ padding:7px 10px;font-size:10px;font-weight:800;line-height:1.2;
+ background:#fff;color:#346a8b;cursor:pointer;
+}
+.traffic-waze-areas button.active{
+ background:#117fbe;color:#fff;border-color:#117fbe;
+ box-shadow:0 3px 10px #237da83a;
+}
+.traffic-waze-frame{
+ position:relative;width:100%;height:clamp(280px,39vw,430px);overflow:hidden;
+ border-radius:13px;background:#e6f5fc;border:1px solid #badcec;
+}
+.traffic-waze-frame iframe{
+ display:block;border:0;width:100%;height:100%;background:#e6f5fc;
+}
+.traffic-waze-loading{
+ position:absolute;inset:0;display:grid;place-items:center;text-align:center;
+ padding:20px;color:#397495;font-weight:750;font-size:11px;
+}
+.traffic-waze-foot{
+ display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;
+ gap:8px 13px;padding:9px 1px 0;
+}
+.traffic-waze-foot span{
+ color:#6d8da4;font-size:9px;line-height:1.55;flex:1 1 250px;
+}
+.traffic-waze-foot a{
+ white-space:nowrap;font-size:10px;font-weight:850;color:#117dba;
+ border-radius:8px;padding:5px 7px;border:1px solid #b9dbf2;background:#fff;
+}
+.traffic-waze-foot a:hover{background:#d5f1ff}
+.traffic-waze>summary:focus-visible,.traffic-waze-areas button:focus-visible,
+.traffic-waze-foot a:focus-visible{outline:3px solid #1698d5;outline-offset:2px}
+@media(max-width:760px){
+ .traffic-waze{margin-top:10px;border-radius:13px}
+ .traffic-waze>summary{min-height:50px;padding:8px;gap:9px}
+ .traffic-waze-icon{width:31px;height:31px;border-radius:10px}
+ .traffic-waze-icon svg{width:19px;height:19px}
+ .traffic-waze-heading strong{font-size:12px}
+ .traffic-waze-heading small{font-size:9px}
+ .traffic-waze-content{padding:0 7px 8px}
+ .traffic-waze-frame{height:clamp(290px,91vw,405px);border-radius:10px}
+ .traffic-waze-areas button{font-size:9px;padding:6px 8px}
+}
+@media(prefers-reduced-motion:reduce){.traffic-waze-chevron{transition:none}}
