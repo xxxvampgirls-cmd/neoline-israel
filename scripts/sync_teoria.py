@@ -145,6 +145,17 @@ def main():
         results[lang]=result
         print("VALIDATED",lang,len(ordered),"B",sum("B" in x["classes"] for x in ordered),
               "with images",sum(bool(x["image"]) for x in ordered),flush=True)
+    # The Russian official spreadsheet omits image tags for many sign
+    # questions. Reuse ONLY the original government photo from the exact
+    # same official numeric question ID in Hebrew/English, never stock photos.
+    official_images={q["id"]:q["image"] for lang in ("he","en")
+                     for q in results[lang]["questions"] if q["image"]}
+    inherited=0
+    for q in results["ru"]["questions"]:
+        if not q["image"] and official_images.get(q["id"]):
+            q["image"]=official_images[q["id"]]
+            inherited+=1
+    print("Russian bank recovered",inherited,"original gov.il sign/road images by matching official question ID",flush=True)
     # Commit only once all three original-language banks are valid.
     for lang,record in results.items():
         (OUT/(lang+".json")).write_text(json.dumps(record,ensure_ascii=False,separators=(",",":"))+"\n",encoding="utf8")
