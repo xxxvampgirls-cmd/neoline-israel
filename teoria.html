@@ -5,7 +5,7 @@
 <title>Теория Израиля — игровая подготовка · NEOLINE</title>
 <meta name="description" content="Игровая подготовка к израильскому теоретическому экзамену на водительские права: настоящие вопросы Министерства транспорта, дорожные знаки, экзамен 30 вопросов и работа над ошибками.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="stylesheet" href="./teoria.css?v=20261117-gameover-v5">
+<link rel="stylesheet" href="./teoria.css?v=20261117-compact-hud-v6">
 </head><body>
 <header class="topbar"><div class="shell top-inner">
   <a class="brand" href="./" aria-label="На главную NEOLINE"><img src="./assets/neoline-clean.svg?v=20261116-compact" width="501" height="108" alt="NEOLINE"></a>
@@ -65,9 +65,17 @@
  <div class="source-links"><a href="https://data.gov.il/he/datasets/ministry_of_transport/tqru" target="_blank" rel="noopener noreferrer" id="sourceBank">Государственный банк вопросов ↗</a><a href="https://www.gov.il/en/service/apply_for_new_driver_drivers_license" target="_blank" rel="noopener noreferrer" id="sourceRules">Официальные условия экзамена ↗</a></div>
 </section>
 <section class="game-panel playing" id="gamePlaying" hidden aria-label="Вопросы игры">
- <div class="play-top"><button type="button" class="small-back" id="exitQuiz">← <span id="exitLabel">К выбору режима</span></button><span class="mode-pill" id="currentMode">Игра</span><span class="timer" id="timerBox" hidden><span aria-hidden="true">◷</span> <time id="timer">40:00</time></span></div>
- <div class="play-meta"><span id="questionCounter">1 / 10</span><span id="scoreMeta">+0 XP</span><span id="lifeMeta">♥ ♥ ♥</span></div>
- <div class="progress-track" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" id="progress" aria-label="Прогресс вопросов"><div id="progressFill"></div></div>
+ <div class="quiz-hud" aria-label="Информация о прохождении">
+  <button type="button" class="small-back hud-back" id="exitQuiz" aria-label="Вернуться к выбору режима" title="К выбору режима"><svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 5 7 12l7 7"/></svg><span id="exitLabel">Режимы</span></button>
+  <div class="hud-progress" role="progressbar" aria-valuemin="0" aria-valuemax="10" aria-valuenow="0" aria-label="Отвечено вопросов" id="progress">
+   <span class="hud-progress-orbit" id="progressFill" aria-hidden="true"></span>
+   <span class="hud-progress-inner"><strong id="questionCounter">0 / 10</strong><small id="progressCaption">ОТВЕЧЕНО</small></span>
+  </div>
+  <div class="hud-info">
+   <span class="mode-pill" id="currentMode">Игра</span>
+   <div class="hud-metrics"><span class="hud-lives" id="lifeMeta" aria-label="Осталось 3 жизни">♥ ♥ ♥</span><span class="hud-xp" id="scoreMeta">+0 XP</span><span class="timer" id="timerBox" hidden><span aria-hidden="true">◷</span> <time id="timer">40:00</time></span></div>
+  </div>
+ </div>
  <article class="question-card"><div class="question-eyebrow"><span id="questionTopic">Правила дорожного движения</span><span class="question-id" id="questionId">№ 0000</span></div><h2 id="questionText" dir="auto">Загрузка вопроса…</h2><div class="question-picture" id="questionPicture" hidden><img id="signPicture" alt="" decoding="async"></div><div class="answer-list" id="answers" role="group" aria-label="Варианты ответа"></div><div class="feedback" id="feedback" hidden aria-live="polite"></div><div class="question-bottom"><span id="questionTip">Выбери один правильный ответ.</span><button type="button" id="nextQuestion" class="primary" disabled>Далее →</button></div></article>
 </section>
 <section class="game-panel outcome" id="gameResult" hidden aria-live="polite">
@@ -115,5 +123,5 @@
   <a href="./delivery.html" data-theory-nav="delivery" id="theoryNavDelivery" aria-label="Доставка"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 7h12v10H3z"/><path d="M15 10h3l3 4v3h-6"/><circle cx="7" cy="19" r="2"/><circle cx="17" cy="19" r="2"/></svg><span>Доставка</span></a>
   <a href="./?panel=cart" data-theory-nav="cart" id="theoryNavCart" aria-label="Корзина"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 8h14l1.2 13H3.8L5 8Z"/><path d="M9 9V6a3 3 0 0 1 6 0v3"/></svg><span>Корзина</span></a>
 </nav>
-<script src="./teoria.js?v=20261117-gameover-v5" defer></script>
+<script src="./teoria.js?v=20261117-compact-hud-v6" defer></script>
 </body></html>
