@@ -47,6 +47,14 @@ jobs:
             if(data.items.some(x=>Date.parse(x.date)<limit))throw Error('Expired item in published news JSON');
             if(data.items.some(x=>/news\.google\.com|google\.com\/sorry/.test(x.url)))throw Error('Google redirects are not direct publisher links');
             if(data.items.some(x=>!x.image||!x.translations))throw Error('Missing editorial artwork or language fields');
+            for(const article of data.items){
+              for(const lang of ['ru','he','en','ar']){
+                if(!article.translations[lang]?.title||!article.translations[lang]?.summary)
+                  throw Error('Translation missing for '+article.id+' / '+lang);
+              }
+              const picture=await page.request.get(new URL(article.image,page.url()).href);
+              if(!picture.ok())throw Error('Illustration URL not published: '+article.image+' / '+picture.status());
+            }
             const cards=await page.locator('.news-card').count();
             if(cards!==data.items.length)throw Error('News cards do not match fresh JSON: cards='+cards+', feed='+data.items.length);
             if(cards){
