@@ -70,6 +70,24 @@ jobs:
               throw Error('Carousel must keep only the active photo in DOM');
             const blueDots=await page.locator('.news-art').first().evaluate(el=>getComputedStyle(el,'::after').backgroundImage);
             if(!blueDots.includes('radial-gradient'))throw Error('Blue photo dot-grid is missing');
+            // User-approved layout: the carousel photo must span the same width
+            // as cards below, while preserving the earlier mobile image height.
+            const geometry=await page.evaluate(()=>{
+              const hero=document.querySelector('.news-feature-slide').getBoundingClientRect();
+              const card=document.querySelector('.news-card').getBoundingClientRect();
+              const frame=document.querySelector('.news-feature-carousel').getBoundingClientRect();
+              const deco=document.querySelector('.news-feature-blueprint');
+              const dot=document.querySelector('.news-art-decoration');
+              return {heroWidth:hero.width,cardWidth:card.width,heroHeight:hero.height,
+               frameWidth:frame.width,decoration:!!deco,cardDecoration:!!dot};
+            });
+            if(!geometry.decoration||!geometry.cardDecoration)
+              throw Error('Approved design #4 cyan photo decorations missing: '+JSON.stringify(geometry));
+            if(Math.abs(geometry.heroWidth-geometry.cardWidth)>4)
+              throw Error('Carousel is not as wide as lower news photography: '+JSON.stringify(geometry));
+            if(Math.abs(geometry.heroHeight-245)>2)
+              throw Error('Carousel mobile image height changed unexpectedly: '+JSON.stringify(geometry));
+            console.log('PHOTO DESIGN #4 PASS: width aligned and mobile image height retained '+JSON.stringify(geometry));
             console.log('FEATURE CAROUSEL PASS: 10 dots, next/prev, one image, editorial overlay');
             const now=Date.now(),limit=now-30*86400*1000;
             const cutoff=new Date(now),day=cutoff.getUTCDate();
