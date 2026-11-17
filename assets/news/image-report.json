@@ -1,10 +1,10 @@
 {
-  "articles": 96,
+  "articles": 99,
   "aiGenerated": 0,
-  "freeLicensedPhotoThumbsCreated": 8,
+  "freeLicensedPhotoThumbsCreated": 3,
   "notAvailable": 0,
-  "existingImages": 88,
-  "maxNewImageKB": 38.3,
+  "existingImages": 96,
+  "maxNewImageKB": 43.2,
   "deletedExpiredImages": 0,
   "aiKeyConfigured": false
 }
