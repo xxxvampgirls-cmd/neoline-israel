@@ -184,7 +184,11 @@ jobs:
                navi.darkCardColor!=='rgb(255, 255, 255)')
               throw Error('Brand palette, vector game modes or dock broken '+JSON.stringify(navi));
             if(navi.width>navi.viewport+3)throw Error('Nav/design causes 320px horizontal scroll');
-            await page.evaluate(()=>window.scrollTo(0,document.body.scrollHeight));
+            // A 720px high phone can fit most of this deliberately compact game;
+            // shrink only the test viewport's height so downward scroll >105px exists.
+            await page.setViewportSize({width:320,height:500});
+            await page.evaluate(()=>window.scrollTo(0,document.documentElement.scrollHeight));
+            console.log('BOTTOM NAV SCROLL DEBUG '+JSON.stringify(await page.evaluate(()=>({y:scrollY,scrollHeight:document.documentElement.scrollHeight,innerHeight,nav:document.getElementById('theoryBottomNav').className}))));
             await page.waitForFunction(()=>{const x=document.querySelector('#theoryBottomNav');return x.classList.contains('nav-scroll-hidden')&&getComputedStyle(x).visibility==='hidden';},null,{timeout:9000});
             await page.evaluate(()=>window.scrollBy(0,-140));
             await page.waitForFunction(()=>!document.getElementById('theoryBottomNav').classList.contains('nav-scroll-hidden'));
