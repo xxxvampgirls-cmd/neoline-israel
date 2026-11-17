@@ -274,3 +274,131 @@ html[dir=rtl] .news-art-caption{text-align:right}
 .news-art-caption{border:0;background:transparent;padding:0;text-align:start;cursor:pointer;font-family:Manrope,Arial,sans-serif}
 .news-art-caption:hover{text-decoration:underline;text-decoration-color:#d5f1ff88;text-underline-offset:3px}
 .news-title-button:focus-visible,.news-art-caption:focus-visible{outline:3px solid #54b4ef;outline-offset:4px;border-radius:5px}
+
+
+/* NEOLINE editorial hero · photo-driven top-ten carousel, same pacing as homepage.
+   All decoration is lightweight CSS — no additional network-heavy assets. */
+.news-cover{
+ display:grid;
+ grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);
+ align-items:center;
+ gap:clamp(17px,3vw,34px);
+ padding:clamp(21px,3vw,37px);
+ background:linear-gradient(125deg,#f8fcff 0%,#ecf8ff 47%,#d6edfc 100%);
+}
+.news-cover-copy{position:relative;min-width:0;z-index:1}
+.news-cover h1{font-size:clamp(29px,3.6vw,48px);max-width:550px}
+.news-cover p{font-size:13px;max-width:520px}
+.news-feature-carousel{
+ position:relative;min-width:0;z-index:2;
+ background:linear-gradient(135deg,#dceffc,#c1e6fa);
+ border:1px solid #add4ec;
+ border-radius:23px;
+ padding:7px;
+ box-shadow:0 20px 44px #1e6ba526,0 1px 2px #1473ae16;
+}
+.news-feature-slide{height:clamp(290px,31vw,395px);min-width:0;overflow:hidden;border-radius:17px;background:linear-gradient(140deg,#e3f5ff,#6bb9e0);position:relative}
+.news-feature-story{position:relative;display:block;width:100%;height:100%;overflow:hidden;isolation:isolate;color:white;animation:newsHeroSlideIn .52s ease both}
+.news-feature-story:before{
+ content:"";position:absolute;inset:0;z-index:2;pointer-events:none;
+ background:linear-gradient(180deg,#0e5c903b 0%,transparent 24%,#052e4d3b 42%,#062c50ce 72%,#051f3df2 100%);
+}
+.news-feature-photo{position:absolute;inset:0;display:block;z-index:0;
+ background:linear-gradient(142deg,#3c93cb,#c8eaff);
+}
+.news-feature-img{width:100%;height:100%;display:block;object-fit:cover;object-position:center;filter:saturate(1.06) contrast(1.04);transition:transform .7s ease}
+.news-feature-story:hover .news-feature-img{transform:scale(1.045)}
+.news-feature-pattern{
+ position:absolute;z-index:3;right:0;top:0;width:62%;height:62%;pointer-events:none;
+ background-image:
+   radial-gradient(circle at center,#c2ecffb4 1.2px,transparent 1.85px),
+   linear-gradient(90deg,#35c0ff50 1px,transparent 1px),
+   linear-gradient(0deg,#35c0ff4b 1px,transparent 1px);
+ background-size:15px 15px,44px 44px,44px 44px;
+ -webkit-mask-image:linear-gradient(250deg,#0009 12%,transparent 87%);
+ mask-image:linear-gradient(250deg,#0009 12%,transparent 87%);
+ opacity:.75;
+}
+.news-feature-copy{position:absolute;z-index:4;bottom:0;left:0;right:0;display:flex;flex-direction:column;gap:12px;padding:34px 27px 24px;text-align:start}
+.news-feature-tag{align-self:flex-start;display:inline-block;background:#0e82c7d9;color:#fff;border:1px solid #ffffff70;backdrop-filter:blur(5px);border-radius:30px;padding:7px 11px;font-size:9px;line-height:1.3;font-weight:850;letter-spacing:.08em}
+.news-feature-tag i{font-style:normal;opacity:.65;padding:0 3px}
+.news-feature-title{font-size:clamp(20px,2.35vw,30px);font-weight:850;line-height:1.24;letter-spacing:-.032em;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden;text-wrap:pretty;text-shadow:0 3px 8px #042c4c7a}
+.news-feature-footer{display:flex;gap:9px;flex-wrap:wrap;align-items:center;font-size:10px;line-height:1.5;font-weight:650;color:#d9ecfa}
+.news-feature-go{margin-inline-start:auto;display:inline-block;border:1px solid #b0e9ff81;background:#ffffff26;backdrop-filter:blur(5px);border-radius:9px;padding:6px 8px;color:white;font-weight:800;white-space:nowrap}
+.news-feature-controls{display:flex;align-items:center;justify-content:center;gap:10px;padding:12px 4px 5px;min-height:53px}
+.news-feature-controls[hidden]{display:none}
+.news-feature-arrow{width:34px;height:34px;border-radius:50%;background:#fff;color:#1177be;border:1px solid #badcf3;font-size:23px;line-height:1;box-shadow:0 3px 10px #1a7cc217;flex:none}
+.news-feature-arrow:hover{background:#1689d7;color:white}
+.news-feature-dots{display:flex;gap:6px;align-items:center;justify-content:center;min-width:0}
+.news-feature-dot{width:7px;height:7px;border-radius:8px;border:0;background:#9dc9e6;padding:0;flex:none;transition:width .2s,background .2s}
+.news-feature-dot.active{width:24px;background:#087bc7}
+.news-feature-dot:hover{background:#2a9be2}
+.news-feature-counter{font-size:10px;font-weight:850;letter-spacing:.1em;color:#5e88a3;min-width:49px;text-align:center;white-space:nowrap}
+.news-feature-loading{display:grid;place-items:center;height:100%;padding:25px;font-size:14px;color:#256a9a;text-align:center}
+.news-feature-story:focus-visible,.news-feature-dot:focus-visible,.news-feature-arrow:focus-visible{outline:3px solid #0c96ed;outline-offset:-3px}
+html[dir=rtl] .news-feature-pattern{left:0;right:auto;transform:scaleX(-1)}
+html[dir=rtl] .news-feature-copy{text-align:right}
+@keyframes newsHeroSlideIn{from{opacity:.2;transform:translateY(7px)}to{opacity:1;transform:translateY(0)}}
+
+/* Blue micro-square/dot matrix, glowing corner insets and photographic
+   grading across news images, without replacing or altering licensed photos. */
+.news-card{border-color:#c7e3f6;box-shadow:0 10px 27px #1264a417,0 1px 0 #fff inset}
+.news-art{isolation:isolate;border-bottom:3px solid #43a8e7}
+.news-art:after{
+ content:"";display:block!important;position:absolute;left:auto!important;right:0;top:0!important;bottom:auto!important;
+ width:52%!important;height:63%!important;z-index:3;transform:none!important;
+ pointer-events:none;opacity:.75!important;border:0!important;
+ background-image:
+  radial-gradient(circle at center,#bcecffad 1.1px,transparent 1.9px),
+  linear-gradient(90deg,#69c9ff55 1px,transparent 1px),
+  linear-gradient(0deg,#69c9ff55 1px,transparent 1px)!important;
+ background-size:15px 15px,48px 48px,48px 48px!important;
+ -webkit-mask-image:linear-gradient(255deg,#000b,transparent 90%);
+ mask-image:linear-gradient(255deg,#000b,transparent 90%);
+}
+.news-art:has(.news-art-image){background:#cfeefe}
+.news-art-image{filter:saturate(1.11) contrast(1.045) brightness(1.02)}
+.news-art-type{box-shadow:0 5px 19px #032e547d}
+.news-art-caption{max-width:92%;text-shadow:0 2px 8px #002641cf}
+html[dir=rtl] .news-art:after{right:auto;left:0!important;transform:scaleX(-1)!important}
+@media(max-width:1040px){
+ .news-cover{grid-template-columns:minmax(0,.92fr) minmax(0,1.08fr);gap:17px}
+ .news-cover h1{font-size:clamp(27px,3.7vw,39px)}
+ .news-feature-slide{height:325px}
+ .news-feature-copy{padding:29px 18px 20px;gap:10px}
+ .news-feature-title{font-size:21px}
+}
+@media(max-width:760px){
+ .news-cover{display:flex;flex-direction:column;align-items:stretch;gap:19px;padding:19px 15px 14px;margin-top:12px;border-radius:22px}
+ .news-cover h1{font-size:clamp(28px,6.3vw,36px);margin:10px 0}
+ .news-cover p{font-size:12px;line-height:1.6}
+ .news-fresh-row{margin-top:12px}
+ .news-language-bar{margin-top:10px}
+ .news-feature-carousel{border-radius:19px;padding:6px}
+ .news-feature-slide{height:clamp(245px,59vw,330px);border-radius:14px}
+ .news-feature-copy{padding:31px 16px 17px;gap:9px}
+ .news-feature-title{font-size:clamp(17px,4.75vw,23px)}
+ .news-feature-tag{font-size:8px;padding:6px 9px}
+ .news-feature-footer{font-size:9px;gap:5px}
+ .news-feature-go{font-size:9px}
+ .news-feature-controls{gap:9px;min-height:43px;padding:9px 2px 3px}
+ .news-feature-dot{width:6px;height:6px}
+ .news-feature-dot.active{width:19px}
+ .news-feature-dots{gap:5px}
+ .news-feature-arrow{width:30px;height:30px;font-size:21px}
+ .news-feature-counter{font-size:9px;min-width:43px}
+ .news-art:after{width:55%!important;height:58%!important}
+}
+@media(max-width:360px){
+ .news-cover{padding:16px 11px 11px}
+ .news-feature-slide{height:248px}
+ .news-feature-copy{padding:30px 11px 15px}
+ .news-feature-title{font-size:17px;line-height:1.25}
+ .news-feature-dots{gap:4px}
+ .news-feature-arrow{width:28px;height:28px}
+}
+@media(prefers-reduced-motion:reduce){
+ .news-feature-story{animation:none}
+ .news-feature-img,.news-feature-dot{transition:none}
+ .news-feature-story:hover .news-feature-img{transform:none}
+}
