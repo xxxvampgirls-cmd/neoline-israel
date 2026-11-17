@@ -22,7 +22,6 @@ import xml.etree.ElementTree as ET
 import feedparser
 import requests
 from collections import Counter, defaultdict
-from news_images import generate_thumbnail
 from bs4 import BeautifulSoup
 
 ROOT=Path("assets/news")
@@ -35,8 +34,6 @@ CUTOFF=NOW-dt.timedelta(days=30)
 MAX_ITEMS=300
 NEW_PER_RUN=100
 MAX_PER_SOURCE=65
-MAX_AI_PER_RUN=min(12,max(0,int(os.getenv('NEOLINE_IMAGE_RUN_LIMIT','6'))))
-MAX_AI_PER_DAY=min(24,max(0,int(os.getenv('NEOLINE_IMAGE_DAILY_LIMIT','15'))))
 S=requests.Session()
 S.headers.update({"User-Agent":"Mozilla/5.0 (compatible; NEOLINE-Israel-Headlines/2.0)","Accept-Language":"he-IL,he;q=.8,en;q=.5"})
 # Direct, public RSS feeds published by the outlets. Avoid Google News article
@@ -196,6 +193,8 @@ def unique_svg(entry):
 def publisher_name(provider):
  if provider.startswith("Walla"):return "Walla"
  if provider.startswith("Maariv"):return "Maariv"
+ if provider.startswith("Ynet"):return "Ynet"
+ if provider.startswith("Israel Hayom"):return "Israel Hayom"
  if provider.startswith("Globes"):return "Globes"
  return provider
 
@@ -294,10 +293,6 @@ def main():
   time.sleep(.5)
  recent=select_diverse(x for x in keep.values() if valid(x))
  new_count=0
- today=NOW.date().isoformat()
- generated_today=sum(1 for x in previous if str(x.get("imageGeneratedAt","")).startswith(today))
- image_quota=max(0,min(MAX_AI_PER_RUN,MAX_AI_PER_DAY-generated_today))
- images_generated=0
  for x in recent:
   has_full=all(isinstance(x.get("translations",{}).get(lang),dict)
                and x["translations"][lang].get("title") for lang in LOCALES)
@@ -307,37 +302,22 @@ def main():
   else:
    x["title"]=x["titleOriginal"]
    x["summary"]=BRIEFS[x["category"]]["ru"]
+  # Photographic thumbnails are created separately in build_news_thumbnails.py.
   photo=IMAGES/(x["id"]+".webp")
-  if photo.is_file():
-   x["image"]="./assets/news/images/"+x["id"]+".webp"
-   x["imageKind"]="ai-generated"
-  elif images_generated<image_quota and os.getenv("OPENAI_API_KEY","").strip():
-   if generate_thumbnail(x,photo):
-    x["image"]="./assets/news/images/"+x["id"]+".webp"
-    x["imageKind"]="ai-generated"
-    x["imageGeneratedAt"]=NOW.isoformat().replace("+00:00","Z")
-    images_generated+=1
-  if x.get("imageKind")!="ai-generated":
-   image=IMAGES/(x["id"]+".svg")
-   x["image"]="./assets/news/images/"+x["id"]+".svg"
-   x["imageKind"]="vector-placeholder"
-   if not image.exists():image.write_text(unique_svg(x),encoding="utf-8")
+  x["image"]=("./assets/news/images/"+x["id"]+".webp") if photo.is_file() else None
  # Avoid accumulating stale image files beyond one month.
- live_names={x["image"].rsplit("/",1)[-1] for x in recent}
+ live_names={x["id"]+".webp" for x in recent}
  deleted=0
  for path in list(IMAGES.glob("*.svg"))+list(IMAGES.glob("*.webp")):
   if path.name not in live_names:path.unlink();deleted+=1
  last=NOW.isoformat().replace("+00:00","Z") if feed_stats else ""
  payload={"version":1,"retentionDays":30,"updated":last,"items":recent}
  report={"attempted":NOW.isoformat().replace("+00:00","Z"),"feeds":feed_stats,
-  "new":discovered,"retained":len(recent),"imageCount":len(live_names),
+  "new":discovered,"retained":len(recent),"imageCount":sum(bool(x["image"]) for x in recent),
   "deletedImages":deleted,"discardedGoogleLinks":existing_google,"errors":errors,
   "directLinksOnly":all(allowed(x["url"]) for x in recent),
   "sourceCount":len(set(x["publisher"] for x in recent)),
-  "sources":dict(Counter(x["publisher"] for x in recent)),
-  "generatedAIImages":images_generated,
-  "aiImagesTotal":sum(x.get("imageKind")=="ai-generated" for x in recent),
-  "imageGenerationEnabled":bool(os.getenv("OPENAI_API_KEY","").strip())}
+  "sources":dict(Counter(x["publisher"] for x in recent))}
  assert all(valid(x) for x in recent) and report["directLinksOnly"]
  DEST.write_text(json.dumps(payload,ensure_ascii=False,indent=2)+"\n",encoding="utf-8")
  REPORT.write_text(json.dumps(report,ensure_ascii=False,indent=2)+"\n",encoding="utf-8")
