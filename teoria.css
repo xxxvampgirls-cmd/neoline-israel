@@ -648,3 +648,89 @@ html[dir=rtl] .gameover-close{right:auto;left:15px}
  .gameover-retry,.gameover-modes{min-height:38px;padding:6px}
 }
 @media(prefers-reduced-motion:reduce){.gameover-promo img{animation:none!important}}
+
+/* THEORY v6 · a single compact dashboard replaces the old 3 stacked play bars. */
+#gamePlaying{scroll-margin-top:84px}
+#gamePlaying .quiz-hud{display:grid;grid-template-columns:auto 80px minmax(0,1fr);align-items:center;gap:14px;min-width:0}
+#gamePlaying .hud-back{
+ display:flex;align-items:center;justify-content:center;gap:5px;align-self:center;
+ border-radius:13px;min-height:43px;padding:9px 12px;font-size:11px;
+ white-space:nowrap;color:#1c6897;background:#f3fbff;border:1px solid #bfe3f5;
+}
+#gamePlaying .hud-back svg{flex:none}
+#gamePlaying .hud-progress{
+ --quiz-angle:0deg;
+ position:relative;width:80px;height:80px;flex:none;
+ display:grid;place-items:center;border-radius:50%;
+ filter:drop-shadow(0 3px 6px #0d7ebc22);
+}
+#gamePlaying .hud-progress-orbit{
+ position:absolute;inset:0;border-radius:50%;
+ background:conic-gradient(from -90deg,#00b9ed 0deg,#1484d2 var(--quiz-angle),#d5ebf8 var(--quiz-angle) 360deg);
+ transition:background .3s ease;
+}
+#gamePlaying .hud-progress-inner{
+ position:relative;z-index:1;display:flex;flex-direction:column;
+ align-items:center;justify-content:center;gap:0;
+ width:calc(100% - 11px);height:calc(100% - 11px);border-radius:50%;
+ background:linear-gradient(150deg,#fff,#eaf9ff);
+ box-shadow:inset 0 2px 4px #13568413;
+ color:#095782;direction:ltr;
+}
+#gamePlaying .hud-progress-inner strong{
+ font-size:14px;line-height:1.3;letter-spacing:-.04em;
+ font-variant-numeric:tabular-nums;font-weight:900;
+}
+#gamePlaying .hud-progress-inner small{
+ font-size:7px;line-height:1.1;letter-spacing:.02em;font-weight:900;
+ color:#4b93b9;text-transform:uppercase;
+}
+#gamePlaying .hud-info{min-width:0;display:flex;flex-direction:column;gap:8px;align-items:flex-start}
+#gamePlaying .mode-pill{
+ margin:0;max-width:100%;min-width:0;overflow:hidden;text-overflow:ellipsis;
+ white-space:nowrap;display:block;border-radius:11px;padding:5px 10px;
+ background:#e9f6ff;border:1px solid #cdeafb;color:#186d9f;font-size:11px;
+}
+#gamePlaying .hud-metrics{display:flex;flex-wrap:wrap;align-items:center;gap:6px 10px;max-width:100%}
+#gamePlaying .hud-lives{
+ display:inline-flex;align-items:center;white-space:nowrap;
+ color:#0b9fcf;font-size:20px;line-height:1;letter-spacing:.05em;
+ text-shadow:0 2px 6px #4bc9f13b;
+}
+#gamePlaying .hud-xp{
+ display:inline-flex;align-items:center;white-space:nowrap;
+ color:#0d6d9f;font-size:11px;font-weight:900;
+ padding:4px 9px;background:#e6f6ff;border:1px solid #c4e7fa;border-radius:999px;
+ font-variant-numeric:tabular-nums;
+}
+#gamePlaying .hud-metrics .timer{font-size:12px;padding:3px 8px;border-radius:9px}
+#gamePlaying .question-card{margin-top:10px}
+html[dir=rtl] #gamePlaying .hud-back svg{transform:scaleX(-1)}
+@media(max-width:720px){
+ #gamePlaying{padding:11px 12px 13px;margin-top:7px}
+ #gamePlaying .quiz-hud{grid-template-columns:auto 66px minmax(0,1fr);gap:8px}
+ #gamePlaying .hud-back{font-size:10px;min-height:39px;padding:7px 8px;gap:3px}
+ #gamePlaying .hud-back svg{width:14px;height:14px}
+ #gamePlaying .hud-progress{width:66px;height:66px}
+ #gamePlaying .hud-progress-inner{width:calc(100% - 9px);height:calc(100% - 9px)}
+ #gamePlaying .hud-progress-inner strong{font-size:12px}
+ #gamePlaying .hud-progress-inner small{font-size:6.5px}
+ #gamePlaying .hud-info{gap:5px}
+ #gamePlaying .mode-pill{font-size:9px;max-width:100%;padding:4px 8px}
+ #gamePlaying .hud-metrics{gap:4px 8px}
+ #gamePlaying .hud-lives{font-size:17px;letter-spacing:0}
+ #gamePlaying .hud-xp{font-size:10px;padding:3px 6px}
+ #gamePlaying .hud-metrics .timer{font-size:11px;padding:3px 5px}
+ #gamePlaying .question-card{margin-top:9px;padding-top:11px}
+ #gamePlaying .question-card h2{margin-top:9px;margin-bottom:12px}
+}
+@media(max-width:355px){
+ #gamePlaying .quiz-hud{grid-template-columns:auto 56px minmax(0,1fr);gap:6px}
+ #gamePlaying .hud-back{padding:6px;font-size:9px}
+ #gamePlaying .hud-progress{width:56px;height:56px}
+ #gamePlaying .hud-progress-inner strong{font-size:11px}
+ #gamePlaying .hud-progress-inner small{font-size:6px}
+ #gamePlaying .hud-lives{font-size:15px}
+ #gamePlaying .hud-xp{font-size:9px}
+}
+@media(prefers-reduced-motion:reduce){#gamePlaying .hud-progress-orbit{transition:none}}
