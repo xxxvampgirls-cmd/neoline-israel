@@ -26,7 +26,10 @@ jobs:
             const errors=[];
             page.on('pageerror',e=>errors.push(e.message));
             await page.goto('https://neoline-israel.pages.dev/',{waitUntil:'domcontentloaded',timeout:30000});
-            await page.waitForFunction(()=>document.querySelectorAll('#products .product').length>=50,{timeout:35000});
+            await page.waitForFunction(()=>document.querySelectorAll('#products .product').length===8 && document.querySelector('#catalogShowMoreBtn')?.offsetParent!==null,{timeout:35000});
+            await page.locator('#catalogShowMoreBtn').click();
+            await page.waitForFunction(()=>document.querySelectorAll('#products .product').length===16,{timeout:10000});
+            console.log('FIRST EIGHT PRODUCTS PASS: 8 visible, more displays 16');
             for(const width of [320,390]){
               await page.setViewportSize({width,height:844});
               await page.waitForFunction(()=>{const img=document.querySelector('.header .brand-clean');return img?.complete && img.naturalWidth>0;},{timeout:15000});
