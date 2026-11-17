@@ -111,17 +111,18 @@ jobs:
              const link=await page.locator('.news-card .news-link').first().getAttribute('href');
              if(!link||!link.startsWith('http'))throw Error('News item has no valid source link');
             }
-            const openCount=await page.locator('.news-card [data-open-story]').count();
-            console.log('NEWS DEBUG openButtons='+openCount+' cards='+await page.locator('.news-card').count()+
-             ' firstCard='+JSON.stringify((await page.locator('.news-card').first().evaluate(el=>el.outerHTML.slice(0,1050)))));
-            if(!openCount)throw Error('News headline expand control was not rendered');
-            await page.locator('.news-card [data-open-story]').first().click();
-            const opened=page.locator('.news-card').first().locator('details.news-expand');
-            if(!await opened.evaluate(el=>el.open))throw Error('News article did not expand');
-            if(!await opened.locator('.news-expanded-source').isVisible())throw Error('Expanded story has no original source');
-            await opened.locator('summary').click();
-            if(await opened.evaluate(el=>el.open))throw Error('News did not collapse');
-            console.log('NEWS EXPAND PASS');
+            // Individual accordions were intentionally removed: the expand button
+            // applies to the entire feed, and each headline links to its publisher.
+            if(await page.locator('.news-card details.news-expand').count()!==0)
+              throw Error('Per-article accordion should not be present');
+            const headlines=page.locator('.news-card a.news-title-button');
+            if(await headlines.count()<cards)throw Error('A news headline lost its publisher link');
+            const headlineHref=await headlines.first().getAttribute('href');
+            if(!headlineHref||!headlineHref.startsWith('https://'))
+              throw Error('News headline does not link to the original publisher');
+            if(await headlines.first().getAttribute('target')!=='_blank')
+              throw Error('News headlines should open the publisher in a new tab');
+            console.log('NEWS CLICK-THROUGH PASS');
             const languages=await page.locator('[data-news-lang]').count();
             if(languages!==4)throw Error('Four-language news selection missing');
             for(const code of ['he','en','ar','ru']){
