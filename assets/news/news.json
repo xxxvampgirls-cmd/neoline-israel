@@ -2,7 +2,7 @@
   "version": 1,
   "retentionDays": 30,
   "lawsRetentionMonths": 6,
-  "updated": "2026-11-17T10:48:53.414971Z",
+  "updated": "2026-11-17T10:51:00.289249Z",
   "items": [
     {
       "id": "01120a3d0005b8c1e505",
@@ -115,9 +115,11 @@
       "translated": true,
       "imageType": "licensedPhoto",
       "imageCredit": {
-        "text": "Rakoon · CC0",
-        "url": "https://commons.wikimedia.org/wiki/File:20150812_August_2015_in_Tel_Aviv_03.jpg"
-      }
+        "text": "Qyd (talk · contribs) · CC BY 2.5",
+        "url": "https://commons.wikimedia.org/wiki/File:Bighorn_highway_40.JPG"
+      },
+      "subjectPhotoChecked": true,
+      "subjectPhotoMatched": true
     },
     {
       "id": "9543fb4ded3dfa1aabbc",
@@ -231,9 +233,11 @@
       "translated": true,
       "imageType": "licensedPhoto",
       "imageCredit": {
-        "text": "Grogan, Brian\nRelated names:\n\nAyers, Thomas\nRaymond, Israel W\nConness, John\nOlmsted, Frederick Law\nL · Public domain",
-        "url": "https://commons.wikimedia.org/wiki/File:AHWAHNEE_MEADOW._SOUTHSIDE_DRIVE_AT_BOTTOM_OF_MEADOW_AND_AHWAHNEE_ROAD_AT_TOP_OF_MEADOW._NOTE_OLD_ROAD_ALIGNMENT_AT_EAST_EDGE_OF_MEADOW._-_Yosemite_National_Park_Roads_and_HAER_CAL,22-YOSEM,5-18.tif"
-      }
+        "text": "RickP 19:10, 16 June 2006 (UTC) · CC BY 2.5",
+        "url": "https://commons.wikimedia.org/wiki/File:Highway_6_Narbeta_bridge_and_Meiser_b1.jpg"
+      },
+      "subjectPhotoChecked": true,
+      "subjectPhotoMatched": true
     },
     {
       "id": "1b6d8f8a9c0f97c229b0",
@@ -347,7 +351,8 @@
       "imageCredit": {
         "text": "Rakoon · CC0",
         "url": "https://commons.wikimedia.org/wiki/File:20150812_August_2015_in_Tel_Aviv_03.jpg"
-      }
+      },
+      "subjectPhotoChecked": true
     },
     {
       "id": "057ca10ba17a49970e92",
@@ -893,7 +898,8 @@
       "imageCredit": {
         "text": "Ivan Radic · CC BY 2.0",
         "url": "https://commons.wikimedia.org/wiki/File:Close-up_of_an_electric_car_charging._Traffic_lights_in_a_blurry_background.jpg"
-      }
+      },
+      "subjectPhotoChecked": true
     },
     {
       "id": "a41b423566b7aab7ce0a",
@@ -1008,7 +1014,8 @@
       "imageCredit": {
         "text": "Eric Friedebach · CC BY 2.0",
         "url": "https://commons.wikimedia.org/wiki/File:1973_Ford_Mustang_Interior_Dashboard_(51838912069).jpg"
-      }
+      },
+      "subjectPhotoChecked": true
     },
     {
       "id": "825a9e9e7693453d9e1f",
@@ -1044,9 +1051,11 @@
       "translated": true,
       "imageType": "licensedPhoto",
       "imageCredit": {
-        "text": "Judgefloro · Public domain",
-        "url": "https://commons.wikimedia.org/wiki/File:0426Paniqui-Moncada,_Tarlac_Arterial_Road_01.JPG"
-      }
+        "text": "RickP 19:10, 16 June 2006 (UTC) · CC BY 2.5",
+        "url": "https://commons.wikimedia.org/wiki/File:Highway_6_Narbeta_bridge_and_Meiser_b1.jpg"
+      },
+      "subjectPhotoChecked": true,
+      "subjectPhotoMatched": true
     },
     {
       "id": "a06790d059facc2b99fd",
@@ -1122,7 +1131,8 @@
       "imageCredit": {
         "text": "Eric Friedebach · CC BY 2.0",
         "url": "https://commons.wikimedia.org/wiki/File:1973_Ford_Mustang_Interior_Dashboard_(51838912069).jpg"
-      }
+      },
+      "subjectPhotoChecked": true
     },
     {
       "id": "e4e9dc9a17eaceb834b7",
@@ -1160,7 +1170,8 @@
       "imageCredit": {
         "text": "Ivan Radic · CC BY 2.0",
         "url": "https://commons.wikimedia.org/wiki/File:Close-up_of_an_electric_car_charging._Traffic_lights_in_a_blurry_background.jpg"
-      }
+      },
+      "subjectPhotoChecked": true
     },
     {
       "id": "500ae92367be020532b1",
