@@ -397,46 +397,57 @@ jobs:
                  new Set(speed.trails.map(t=>t.thickness)).size<5)
                 throw Error('Slide '+(i+1)+' needs unsynchronized soft streaks and two opposing crisp ribbons '+JSON.stringify(speed));
             }
-            // One lightweight virtual conveyor belt: copy + halo + shadow + device.
-            // Both slabs travel with ONE transform and ONE shared timing.
+            // Only two PNG cutouts move: blue bands, white focus disc,
+            // photo stage, text and main layout remain in place throughout.
             await page.locator('#showcaseDots .showcase-dot').first().click();
-            await page.waitForTimeout(850);
+            await page.waitForTimeout(930);
             await page.locator('#showcaseDots .showcase-dot').nth(1).click();
             const forward=await page.evaluate(()=>{
               const cards=document.querySelectorAll('#showcaseSlides .featured-slide');
               const left=cards[0],right=cards[1];
-              const moveOut=left.querySelector('.feature-slide-flight');
-              const moveIn=right.querySelector('.feature-slide-flight');
-              const photoOut=left.querySelector('.featured-image'),photoIn=right.querySelector('.featured-image');
+              const outImage=left.querySelector('.featured-image > img:not([hidden])')||
+                             left.querySelector('.featured-image > .feature-img-fallback:not([hidden])');
+              const inImage=right.querySelector('.featured-image > img:not([hidden])')||
+                            right.querySelector('.featured-image > .feature-img-fallback:not([hidden])');
+              const stage=right.querySelector('.featured-image');
+              const bands=stage.querySelectorAll('.ad-photo-band');
               return {out:left.className,arrive:right.className,
-                      outAnim:getComputedStyle(moveOut).animationName,
-                      inAnim:getComputedStyle(moveIn).animationName,
-                      cardAnim:getComputedStyle(right).animationName,
-                      photoAnim:getComputedStyle(photoIn).animationName,
-                      outOpacity:getComputedStyle(left).opacity,
-                      outTiming:getComputedStyle(moveOut).animationDuration,
-                      inTiming:getComputedStyle(moveIn).animationDuration,
-                      wrapperCount:document.querySelectorAll('#showcaseSlides .feature-slide-flight').length,
-                      hasCopy:!!moveOut.querySelector('.feature-copy')&&!!moveIn.querySelector('.feature-copy'),
-                      hasHalo:!!photoOut.querySelector('.ad-photo-focus')&&!!photoIn.querySelector('.ad-photo-focus'),
-                      hasShadow:!!photoOut.querySelector('.ad-device-shadow')&&!!photoIn.querySelector('.ad-device-shadow')};
+                      outAnim:getComputedStyle(outImage).animationName,
+                      inAnim:getComputedStyle(inImage).animationName,
+                      copyAnim:getComputedStyle(right.querySelector('.feature-slide-flight')).animationName,
+                      stageAnim:getComputedStyle(stage).animationName,
+                      stageTransform:getComputedStyle(stage).transform,
+                      glowAnim:getComputedStyle(stage.querySelector('.ad-photo-focus')).animationName,
+                      outStage:getComputedStyle(left.querySelector('.featured-image')).backgroundColor,
+                      oldBg:getComputedStyle(left.querySelector('.ad-photo-stripes')).visibility,
+                      newBg:getComputedStyle(right.querySelector('.ad-photo-stripes')).visibility,
+                      outOpacity:getComputedStyle(outImage).opacity,
+                      inOpacity:getComputedStyle(inImage).opacity,
+                      mainBands:[...bands].map(b=>getComputedStyle(b).animationName),
+                      hasHalo:!!stage.querySelector('.ad-photo-focus'),
+                      hasContactShadow:!!stage.querySelector('.ad-device-shadow')};
             });
             if(!forward.out.includes('ad-exiting')||!forward.arrive.includes('ad-arriving')||
-               forward.outAnim!=='neolineSeamlessLeaveLeft'||forward.inAnim!=='neolineSeamlessEnterRight'||
-               forward.cardAnim!=='none'||forward.photoAnim!=='none'||forward.outOpacity!=='1'||
-               forward.outTiming!==forward.inTiming||forward.wrapperCount!==5||
-               !forward.hasCopy||!forward.hasHalo||!forward.hasShadow)
-              throw Error('Ad change must be ONE unbroken passage, no duplicate fade/slide '+JSON.stringify(forward));
-            await page.waitForTimeout(900);
+               forward.outAnim!=='neolineCutoutLeaveLeft'||
+               forward.inAnim!=='neolineCutoutEnterRight'||
+               forward.copyAnim!=='none'||forward.stageAnim!=='none'||
+               forward.stageTransform!=='none'||forward.glowAnim!=='none'||
+               forward.oldBg!=='hidden'||forward.newBg!=='visible'||
+               forward.outOpacity!=='1'||forward.inOpacity!=='1'||
+               !forward.hasHalo||!forward.hasContactShadow||
+               forward.mainBands[0]!=='neolineMainBandLeftToRight'||
+               forward.mainBands[1]!=='neolineMainBandRightToLeft')
+              throw Error('Only PNG cutouts should slide over a fixed, continuously animated background '+JSON.stringify(forward));
+            await page.waitForTimeout(950);
             await page.waitForFunction(()=>!document.querySelector('#showcaseSlides .featured-slide.ad-exiting'));
             await page.locator('#showcaseDots .showcase-dot').first().click();
             const backward=await page.evaluate(()=>{
               const cards=document.querySelectorAll('#showcaseSlides .featured-slide');
-              return {out:getComputedStyle(cards[1].querySelector('.feature-slide-flight')).animationName,
-                      enter:getComputedStyle(cards[0].querySelector('.feature-slide-flight')).animationName};
+              return {out:getComputedStyle(cards[1].querySelector('.featured-image > img:not([hidden])')).animationName,
+                      enter:getComputedStyle(cards[0].querySelector('.featured-image > img:not([hidden])')).animationName};
             });
-            if(backward.out!=='neolineSeamlessLeaveRight'||backward.enter!=='neolineSeamlessEnterLeft')
-              throw Error('Reverse arrow must reverse entire synchronized content '+JSON.stringify(backward));
+            if(backward.out!=='neolineCutoutLeaveRight'||backward.enter!=='neolineCutoutEnterLeft')
+              throw Error('Backward movement should slide only PNGs in reverse '+JSON.stringify(backward));
             await page.waitForTimeout(950);
             // Motion-reduction preferences must never leave a flying ghost.
             await page.emulateMedia({reducedMotion:'reduce'});
