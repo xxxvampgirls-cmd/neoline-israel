@@ -1,7 +1,7 @@
 {
   "version": 1,
   "retentionDays": 30,
-  "updated": "2026-11-17T08:34:59.220293Z",
+  "updated": "2026-11-17T08:35:29.897842Z",
   "items": [
     {
       "id": "1b6d8f8a9c0f97c229b0",
@@ -34,7 +34,12 @@
       },
       "title": "В районе Сдерота 20-летнего пешехода сбила машина, его состояние тяжелое",
       "summary": "Дорожное происшествие в Израиле. Обстоятельства и актуальные сведения — в материале источника.",
-      "translated": true
+      "translated": true,
+      "imageType": "licensedPhoto",
+      "imageCredit": {
+        "text": "No machine-readable author provided. EPO assumed (based on copyright claims). · CC BY 2.5",
+        "url": "https://commons.wikimedia.org/wiki/File:Falck_sv_04.jpg"
+      }
     },
     {
       "id": "ce5de5cd824d3a5f58eb",
@@ -67,7 +72,12 @@
       },
       "title": "20-летний мужчина получил серьезные травмы в результате наезда автомобиля на 334-м шоссе.",
       "summary": "Дорожное происшествие в Израиле. Обстоятельства и актуальные сведения — в материале источника.",
-      "translated": true
+      "translated": true,
+      "imageType": "licensedPhoto",
+      "imageCredit": {
+        "text": "Jeff Attaway from Abuja, Nigeria · CC BY 2.0",
+        "url": "https://commons.wikimedia.org/wiki/File:Bad_one_-_auto_wreck_in_Dakar_Senegal,_2011.jpg"
+      }
     },
     {
       "id": "1a65ff3993516263eca9",
