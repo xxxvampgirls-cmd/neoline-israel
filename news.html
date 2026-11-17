@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#f5fbff">
+<meta name="description" content="Автоновости Израиля: дорожные происшествия, ограничения скорости, изменения ПДД, дороги и автомобильный рынок. Только публикации последних 30 дней.">
+<title>Автоновости Израиля — NEOLINE Israel</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="news-ui.css">
+</head><body>
+<header class="news-header"><div class="shell news-header-inner">
+  <a class="news-logo" href="./" aria-label="NEOLINE Israel — главная"><img src="assets/neoline-clean.svg?v=20261116-compact" alt="NEOLINE" width="501" height="108"></a>
+  <nav class="news-top-links"><a href="./#catalog" id="returnCatalog">← Каталог</a><a class="current" href="./news.html" aria-current="page">◫ Новости</a></nav>
+</div></header>
+<main class="shell">
+<section class="news-cover">
+ <div class="news-eyebrow" id="newsEyebrow">NEOLINE · ИЗРАИЛЬ · АВТОНОВОСТИ</div>
+ <h1 id="newsHeading">Что происходит <em>на дорогах Израиля</em></h1>
+ <p id="newsIntro">Аварии, камеры контроля скорости, новые правила, дороги и автомобили. Коротко о главном — с датой публикации и ссылкой на первоисточник.</p>
+ <div class="news-fresh-row"><span class="news-fresh-pill" id="newsRetention">Только последние 30 дней</span><span class="news-updated" id="newsUpdated" aria-live="polite">Загружаем свежие публикации…</span></div>
+</section>
+<div class="news-searchbar"><label class="news-search"><input id="newsSearch" type="search" aria-label="Поиск по новостям" placeholder="Найти новость…" autocomplete="off"></label></div>
+<div class="news-categories" id="newsCategories" aria-label="Темы новостей"></div>
+<div id="newsGrid" class="news-grid" aria-live="polite"></div>
+<div id="newsEmpty" class="news-no-results" hidden></div>
+<p id="newsCopyright" class="news-legal">Мы публикуем только краткие самостоятельные справки и ссылки на оригинальные материалы. Иллюстрации на карточках созданы для NEOLINE Israel и не являются фотографиями происшествий. Проверяйте действующие правила по официальным публикациям Министерства транспорта Израиля.</p>
+</main>
+<nav class="news-bottom" aria-label="Главное меню">
+<a href="./" id="newsHome"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m3 10 9-7 9 7v10a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V10Z"/><path d="M9 21v-8h6v8"/></svg><span>Главная</span></a>
+<a href="./#catalog" id="newsCatalog"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></svg><span>Каталог</span></a>
+<a href="./news.html" aria-current="page" class="active" id="newsNews"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M7 8h4v4H7zM14 8h4M14 11h4M7 16h11"/></svg><span>Новости</span></a>
+<a href="./?panel=fav" id="newsFav"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1.1-1.1a5.5 5.5 0 1 0-7.8 7.8L12 21l8.8-8.6a5.5 5.5 0 0 0 0-7.8Z"/></svg><span>Избранное</span></a>
+<a href="./?panel=cart" id="newsCart"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 8h14l1.2 13H3.8L5 8Z"/><path d="M9 9V6a3 3 0 0 1 6 0v3"/></svg><span>Корзина</span></a>
+</nav>
+<script src="news-ui.js" defer></script>
+</body></html>
