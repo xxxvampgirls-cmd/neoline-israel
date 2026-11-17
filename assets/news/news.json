@@ -2,7 +2,7 @@
   "version": 1,
   "retentionDays": 30,
   "lawsRetentionMonths": 6,
-  "updated": "2026-11-17T10:51:00.289249Z",
+  "updated": "2026-11-17T10:53:23.394417Z",
   "items": [
     {
       "id": "01120a3d0005b8c1e505",
@@ -115,11 +115,11 @@
       "translated": true,
       "imageType": "licensedPhoto",
       "imageCredit": {
-        "text": "Qyd (talk · contribs) · CC BY 2.5",
-        "url": "https://commons.wikimedia.org/wiki/File:Bighorn_highway_40.JPG"
+        "text": "Rakoon · CC0",
+        "url": "https://commons.wikimedia.org/wiki/File:20150812_August_2015_in_Tel_Aviv_03.jpg"
       },
       "subjectPhotoChecked": true,
-      "subjectPhotoMatched": true
+      "subjectPhotoMatched": false
     },
     {
       "id": "9543fb4ded3dfa1aabbc",
@@ -1248,7 +1248,8 @@
       "imageCredit": {
         "text": "Eric Friedebach · CC BY 2.0",
         "url": "https://commons.wikimedia.org/wiki/File:1973_Ford_Mustang_Interior_Dashboard_(51838912069).jpg"
-      }
+      },
+      "subjectPhotoChecked": true
     },
     {
       "id": "29eac7c61f2dbd8989e8",
@@ -1404,7 +1405,8 @@
       "imageCredit": {
         "text": "Eric Friedebach · CC BY 2.0",
         "url": "https://commons.wikimedia.org/wiki/File:1973_Ford_Mustang_Interior_Dashboard_(51838912069).jpg"
-      }
+      },
+      "subjectPhotoChecked": true
     },
     {
       "id": "9fa2f4ba586eee65d885",
@@ -1480,7 +1482,8 @@
       "imageCredit": {
         "text": "Eric Friedebach · CC BY 2.0",
         "url": "https://commons.wikimedia.org/wiki/File:1973_Ford_Mustang_Interior_Dashboard_(51838912069).jpg"
-      }
+      },
+      "subjectPhotoChecked": true
     },
     {
       "id": "86fdba46bbbaa58e49ef",
@@ -1518,7 +1521,8 @@
       "imageCredit": {
         "text": "Eric Friedebach · CC BY 2.0",
         "url": "https://commons.wikimedia.org/wiki/File:1973_Ford_Mustang_Interior_Dashboard_(51838912069).jpg"
-      }
+      },
+      "subjectPhotoChecked": true
     },
     {
       "id": "388236aae3431109d2d9",
@@ -1634,7 +1638,8 @@
       "imageCredit": {
         "text": "Ivan Radic · CC BY 2.0",
         "url": "https://commons.wikimedia.org/wiki/File:Close-up_of_an_electric_car_charging._Traffic_lights_in_a_blurry_background.jpg"
-      }
+      },
+      "subjectPhotoChecked": true
     },
     {
       "id": "a0467e98ee5ed2dbfe29",
@@ -1751,7 +1756,8 @@
       "imageCredit": {
         "text": "Eric Friedebach · CC BY 2.0",
         "url": "https://commons.wikimedia.org/wiki/File:1973_Ford_Mustang_Interior_Dashboard_(51838912069).jpg"
-      }
+      },
+      "subjectPhotoChecked": true
     },
     {
       "id": "3d8e62d00854ce1b351d",
@@ -1868,7 +1874,8 @@
       "imageCredit": {
         "text": "Eric Friedebach · CC BY 2.0",
         "url": "https://commons.wikimedia.org/wiki/File:1973_Ford_Mustang_Interior_Dashboard_(51838912069).jpg"
-      }
+      },
+      "subjectPhotoChecked": true
     },
     {
       "id": "c7cc82e345b6b58d8a8e",
@@ -1944,7 +1951,8 @@
       "imageCredit": {
         "text": "Eric Friedebach · CC BY 2.0",
         "url": "https://commons.wikimedia.org/wiki/File:1973_Ford_Mustang_Interior_Dashboard_(51838912069).jpg"
-      }
+      },
+      "subjectPhotoChecked": true
     },
     {
       "id": "bbdab420f7fa9d538488",
