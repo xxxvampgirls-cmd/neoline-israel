@@ -357,11 +357,27 @@ jobs:
                             peak:parseFloat(v.getPropertyValue('--trail-peak')),
                             z:parseInt(v.zIndex,10)};
                   });
+                const product=el.querySelector('.featured-image > img');
+                const ground=el.querySelector('.ad-device-shadow');
+                const theoryDevice=el.querySelector('.theory-device');
+                const theoryHalo=el.querySelector('.theory-halo');
                 return {bands:bands.length,ribbons,trails,
                         focus:!!focus,
                         focusZ:feather?parseInt(feather.zIndex,10):-1,
-                        focusGradient:feather?.backgroundImage.includes('radial-gradient')||false};
+                        focusGradient:feather?.backgroundImage.includes('radial-gradient')||false,
+                        focusWidth:focus?.getBoundingClientRect().width,
+                        stageWidth:stripes.getBoundingClientRect().width,
+                        itemFilter:product?getComputedStyle(product).filter:null,
+                        floorGradient:ground?getComputedStyle(ground).backgroundImage:null,
+                        floorFilter:ground?getComputedStyle(ground).filter:null,
+                        deviceShadow:theoryDevice?getComputedStyle(theoryDevice).boxShadow:null,
+                        theoryHaloRatio:theoryHalo?theoryHalo.getBoundingClientRect().width/stripes.getBoundingClientRect().width:null};
               });
+              if(!speed.focusWidth||speed.focusWidth>=speed.stageWidth*.76||
+                 (speed.itemFilter&&!speed.itemFilter.includes('drop-shadow'))||
+                 (speed.floorGradient&&(!speed.floorGradient.includes('radial-gradient')||speed.floorFilter!=='none'))||
+                 (speed.deviceShadow&&(!speed.deviceShadow.includes('rgb(')||speed.theoryHaloRatio>=.72)))
+                throw Error('Product needs compact white halo and distinct depth shadow '+JSON.stringify(speed));
               if(speed.bands!==2||!speed.focus||!speed.focusGradient||
                  speed.ribbons.some(b=>b.z<=speed.focusZ)||speed.ribbons.some(b=>b.width<300)||
                  speed.ribbons[0].name!=='neolineMainBandLeftToRight'||
