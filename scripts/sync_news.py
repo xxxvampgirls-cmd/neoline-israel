@@ -54,8 +54,6 @@ FEEDS=[
  ("Globes · צרכנות","https://www.globes.co.il/webservice/rss/rssfeeder.asmx/FeederNode?iID=821"),
  ("Autonews Israel","https://autonews.co.il/feed/"),
  ("Srugim","https://www.srugim.co.il/feed"),
- ("Ynet · Новости","https://www.ynet.co.il/Integration/StoryRss2.xml"),
- ("Ynet · Репортажи","https://www.ynet.co.il/Integration/StoryRss1854.xml"),
  ("Haaretz","https://www.haaretz.com/srv/israel-news-rss"),
  ("Israel Hayom · English","https://www.israelhayom.com/feed/"),
 ]
@@ -100,6 +98,7 @@ def aware(value):
 def relevant(title):
  low=title.lower()
  if any(x in low for x in EXCLUDE):return None
+ if any(x in low for x in ("פיגוע","מחבלים","טרור","גרזנים","טרוריסט")):return None
  # Accidents are identified before the generic vehicle category.
  for section in ("accidents","speed","laws","roads"):
   if any(x in low for x in KEYWORDS[section]):return section
