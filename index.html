@@ -1184,87 +1184,84 @@ body{width:100%;max-width:100%;overflow-x:clip}
 }
 
 
-/* 3D carousel handoff — do not fade the outgoing product away.
-   Move the entire visual unit (cutout, contact shadow, white focus disc and
-   fine streaks) fully past the phone/desktop viewport. The headline changes
-   independently; the card's frame stays in place. No videos or scripting
-   per frame: two GPU-friendly transforms on the currently switching slides. */
-#showcaseSlides .featured-slide.ad-arriving.active:not(.ad-exiting){
+/* ONE seamless carousel movement: text + device + its white backlight
+   + floor shadow are transported by ONE shared wrapper, not separate animations.
+   The card itself remains stationary; neither old nor new content dissolves.
+   At any moment the two compositions sit next to one another on the SAME
+   horizontal virtual belt. Exactly 100% opposing translations prevent gaps. */
+#showcaseSlides .featured-slide .feature-slide-flight{
+ display:grid;
+ grid-template-columns:minmax(0,1fr) minmax(0,1.05fr);
+ align-items:center;
+ min-width:0;width:100%;height:100%;
+ grid-column:1/-1;
+}
+#showcaseSlides .featured-slide.active:not(.ad-exiting){
  animation:none!important;
+ transform:none!important;
  z-index:2;
- overflow:visible!important;
 }
 #showcaseSlides .featured-slide.ad-exiting{
+ position:absolute!important;inset:0;width:100%;
+ z-index:3;pointer-events:none!important;
+ background:transparent!important;
+ border-color:transparent!important;
+ box-shadow:none!important;
  animation:none!important;
- z-index:3;
+ transform:none!important;
+}
+#showcaseSlides .featured-slide.ad-exiting:before{opacity:0}
+#showcaseSlides .featured-slide:is(.ad-exiting,.ad-arriving){
  overflow:visible!important;
- background:transparent!important;
- border-color:transparent!important;
- box-shadow:none!important;
 }
-#showcaseSlides .featured-slide.ad-exiting::before{
- opacity:0;
-}
-#showcaseSlides .featured-slide:is(.ad-arriving,.ad-exiting) .featured-image{
+#showcaseSlides .featured-slide:is(.ad-exiting,.ad-arriving) .feature-slide-flight{
  will-change:transform;
- overflow:visible!important;
 }
-#showcaseSlides .featured-slide.ad-exiting .featured-image{
- background:transparent!important;
- border-color:transparent!important;
- box-shadow:none!important;
-}
-#showcaseSlides .featured-slide:is(.ad-arriving,.ad-exiting) .featured-image
+#showcaseSlides .featured-slide:is(.ad-exiting,.ad-arriving)
  :is(.feature-img-prev,.feature-img-next,.feature-img-zoom){
  opacity:0;pointer-events:none;
 }
-/* Show the new title almost immediately; previous copy fades as its
-   physical product continues off-screen, rather than fading the product. */
-#showcaseSlides .featured-slide.ad-exiting .feature-copy{
- animation:neolineFlightCopyOut .26s ease-in forwards;
+/* Both ends use the exact same time curve: one continuous passage,
+   not a separate card fade, text fade or independent product flight. */
+#showcaseSlides .featured-slide.ad-exiting.ad-move-forward .feature-slide-flight{
+ animation:neolineSeamlessLeaveLeft .79s cubic-bezier(.42,.03,.19,1) both!important;
 }
-#showcaseSlides .featured-slide.ad-arriving .feature-copy{
- animation:neolineFlightCopyIn .44s .12s ease-out both;
+#showcaseSlides .featured-slide.ad-arriving.ad-move-forward .feature-slide-flight{
+ animation:neolineSeamlessEnterRight .79s cubic-bezier(.42,.03,.19,1) both!important;
 }
-@keyframes neolineFlightCopyOut{
- from{opacity:1;transform:translate3d(0,0,0)}
- to{opacity:0;transform:translate3d(-10px,0,0)}
+#showcaseSlides .featured-slide.ad-exiting.ad-move-backward .feature-slide-flight{
+ animation:neolineSeamlessLeaveRight .79s cubic-bezier(.42,.03,.19,1) both!important;
 }
-@keyframes neolineFlightCopyIn{
- from{opacity:0;transform:translate3d(10px,0,0)}
- to{opacity:1;transform:translate3d(0,0,0)}
+#showcaseSlides .featured-slide.ad-arriving.ad-move-backward .feature-slide-flight{
+ animation:neolineSeamlessEnterLeft .79s cubic-bezier(.42,.03,.19,1) both!important;
 }
-#showcaseSlides .featured-slide.ad-exiting.ad-move-forward .featured-image{
- animation:neolineProductFlyLeft .88s cubic-bezier(.56,.03,.85,.4) both!important;
+@keyframes neolineSeamlessLeaveLeft{
+ from{transform:translate3d(0,0,0)}
+ to{transform:translate3d(-100%,0,0)}
 }
-#showcaseSlides .featured-slide.ad-arriving.ad-move-forward .featured-image{
- animation:neolineProductFlyFromRight .88s cubic-bezier(.19,.78,.26,1) both!important;
+@keyframes neolineSeamlessEnterRight{
+ from{transform:translate3d(100%,0,0)}
+ to{transform:translate3d(0,0,0)}
 }
-#showcaseSlides .featured-slide.ad-exiting.ad-move-backward .featured-image{
- animation:neolineProductFlyRight .88s cubic-bezier(.56,.03,.85,.4) both!important;
+@keyframes neolineSeamlessLeaveRight{
+ from{transform:translate3d(0,0,0)}
+ to{transform:translate3d(100%,0,0)}
 }
-#showcaseSlides .featured-slide.ad-arriving.ad-move-backward .featured-image{
- animation:neolineProductFlyFromLeft .88s cubic-bezier(.19,.78,.26,1) both!important;
+@keyframes neolineSeamlessEnterLeft{
+ from{transform:translate3d(-100%,0,0)}
+ to{transform:translate3d(0,0,0)}
 }
-@keyframes neolineProductFlyLeft{
- from{transform:translate3d(0,0,0) scale(1)}
- to{transform:translate3d(calc(-100vw - 100%),0,0) rotate(-3deg) scale(.94)}
-}
-@keyframes neolineProductFlyFromRight{
- from{transform:translate3d(calc(100vw + 100%),0,0) rotate(3deg) scale(.94)}
- to{transform:translate3d(0,0,0) scale(1)}
-}
-@keyframes neolineProductFlyRight{
- from{transform:translate3d(0,0,0) scale(1)}
- to{transform:translate3d(calc(100vw + 100%),0,0) rotate(3deg) scale(.94)}
-}
-@keyframes neolineProductFlyFromLeft{
- from{transform:translate3d(calc(-100vw - 100%),0,0) rotate(-3deg) scale(.94)}
- to{transform:translate3d(0,0,0) scale(1)}
+@media(max-width:720px){
+ #showcaseSlides .featured-slide .feature-slide-flight{
+  display:flex;
+  flex-direction:column;
+  align-items:stretch;
+  height:auto;
+  width:100%;
+ }
 }
 @media(prefers-reduced-motion:reduce){
- #showcaseSlides .featured-slide:is(.ad-arriving,.ad-exiting) .featured-image,
- #showcaseSlides .featured-slide:is(.ad-arriving,.ad-exiting) .feature-copy{
+ #showcaseSlides .featured-slide:is(.ad-arriving,.ad-exiting) .feature-slide-flight{
   animation:none!important;transform:none!important;will-change:auto!important;
  }
 }
@@ -2004,6 +2001,17 @@ function renderShowcase(){
    +'<button class="feature-img-zoom" type="button" data-feature-zoom="'+id+'" aria-label="View '+p.name+' photos">↗</button>'
    +'</div></article>';
  }).join('');
+ // Wrap the two halves of each slide in ONE movable, grid/flex-matched stage.
+ // Its sole transform drives the entire handoff; the parent card never moves.
+ host.querySelectorAll('.featured-slide').forEach(slide=>{
+  const copy=slide.querySelector(':scope > .feature-copy');
+  const picture=slide.querySelector(':scope > .featured-image');
+  if(!copy||!picture)return;
+  const flight=document.createElement('div');
+  flight.className='feature-slide-flight';
+  copy.before(flight);
+  flight.append(copy,picture);
+ });
  host.querySelectorAll('.featured-slide:not(.active)').forEach(el=>el.setAttribute('inert',''));
  $('showcaseDots').innerHTML=featuredIds.map((v,i)=>'<button class="showcase-dot '+(i===slideIndex?'active':'')+'" data-dot="'+i+'" aria-label="Slide '+(i+1)+'"></button>').join('');
  host.querySelectorAll('[data-open-feature]').forEach(el=>el.onclick=()=>openProduct(Number(el.dataset.openFeature)));
@@ -2014,8 +2022,7 @@ function renderShowcase(){
  host.querySelectorAll('[data-feature-next]').forEach(el=>el.onclick=()=>setSlide(slideIndex+1));
  $('showcaseDots').querySelectorAll('[data-dot]').forEach(el=>el.onclick=()=>setSlide(Number(el.dataset.dot)));
 }
-/* Preserve the incoming/outgoing product, white light and natural shadow
-   as one visible flying object. Both manual and timed slides use this path. */
+/* A single synchronized horizontal handoff across all five slides. */
 function revealShowcaseSlide(index){
  const next=(index+featuredIds.length)%featuredIds.length;
  const host=$('showcaseSlides');
@@ -2024,7 +2031,6 @@ function revealShowcaseSlide(index){
  if(next===slideIndex)return;
  clearTimeout(showcaseExitTimer);
  const previous=slides[slideIndex],incoming=slides[next];
- // A quick second tap cancels stale flights without leaving ghost cards.
  for(const el of slides){
   el.classList.remove('ad-exiting','ad-arriving','ad-move-forward','ad-move-backward');
   if(el!==previous&&el.classList.contains('active')){
@@ -2035,7 +2041,7 @@ function revealShowcaseSlide(index){
  const direction=index<slideIndex?'ad-move-backward':'ad-move-forward';
  if(previous){
   previous.setAttribute('inert','');
-  if(reduced){previous.classList.remove('active')}
+  if(reduced)previous.classList.remove('active');
   else previous.classList.add('ad-exiting',direction);
  }
  incoming.classList.add('active');
@@ -2047,7 +2053,7 @@ function revealShowcaseSlide(index){
   showcaseExitTimer=setTimeout(()=>{
    previous?.classList.remove('active','ad-exiting','ad-move-forward','ad-move-backward');
    incoming.classList.remove('ad-arriving','ad-move-forward','ad-move-backward');
-  },900);
+  },810);
  }
 }
 function setSlide(i){revealShowcaseSlide(i);restartSlides()}
