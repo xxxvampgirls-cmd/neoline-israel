@@ -496,3 +496,26 @@ html[dir=rtl] .news-feature-credit{right:auto;left:12px}
  .news-feature-credit{font-size:7px;top:8px;right:9px;max-width:52%;padding:4px 6px}
  html[dir=rtl] .news-feature-credit{right:auto;left:9px}
 }
+
+
+/* Reader-first compact news header: no visible archive counters, publisher
+   bookkeeping or long introductory text above the rotating photo stories. */
+.news-cover{margin-top:6px;padding-top:15px;padding-bottom:13px;row-gap:12px}
+.news-cover #newsIntro,.news-cover .news-fresh-row{display:none!important}
+.news-cover-copy{align-self:center}
+.news-cover .news-language-bar{grid-column:1/-1;margin:0;align-items:center;gap:7px}
+.news-cover .news-eyebrow{font-size:10px}
+.news-cover h1{margin:7px 0 3px}
+@media(max-width:760px){
+ .news-cover{margin-top:4px;padding-top:8px;padding-bottom:8px;gap:9px}
+ .news-cover .news-eyebrow{display:none}
+ .news-cover-copy{padding-inline:12px}
+ .news-cover h1{font-size:clamp(24px,6vw,30px);line-height:1.12;margin:0 0 2px}
+ .news-cover .news-language-bar{order:3;align-self:flex-start;padding-inline:12px;padding-bottom:4px;margin-top:0}
+ .news-cover .news-language-bar button{padding:6px 10px;min-height:31px}
+ .news-feature-carousel{order:2}
+}
+@media(max-width:360px){
+ .news-cover-copy,.news-cover .news-language-bar{padding-inline:10px}
+ .news-cover h1{font-size:24px}
+}
