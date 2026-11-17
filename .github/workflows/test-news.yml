@@ -8,6 +8,7 @@ on:
       - "news-ui.js"
       - "news-ui.css"
       - "catalog-ui.css"
+      - "catalog-ui.js"
       - "index.html"
       - "delivery.html"
       - "pickup-ui.css"
