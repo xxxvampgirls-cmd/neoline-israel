@@ -2,7 +2,7 @@
   "version": 1,
   "retentionDays": 30,
   "lawsRetentionMonths": 6,
-  "updated": "2026-11-17T10:47:36.438613Z",
+  "updated": "2026-11-17T10:48:53.414971Z",
   "items": [
     {
       "id": "01120a3d0005b8c1e505",
@@ -78,7 +78,8 @@
       "imageCredit": {
         "text": "Eric Friedebach · CC BY 2.0",
         "url": "https://commons.wikimedia.org/wiki/File:1973_Ford_Mustang_Interior_Dashboard_(51838912069).jpg"
-      }
+      },
+      "subjectPhotoChecked": true
     },
     {
       "id": "19e23c0c176ec1db1895",
@@ -152,9 +153,11 @@
       "translated": true,
       "imageType": "licensedPhoto",
       "imageCredit": {
-        "text": "Eric Friedebach · CC BY 2.0",
-        "url": "https://commons.wikimedia.org/wiki/File:1973_Ford_Mustang_Interior_Dashboard_(51838912069).jpg"
-      }
+        "text": "MoCars · CC0",
+        "url": "https://commons.wikimedia.org/wiki/File:2024_BYD_Dolphin_Premium_Standard_Range_in_Coral_Pink_01.jpg"
+      },
+      "subjectPhotoChecked": true,
+      "subjectPhotoMatched": true
     },
     {
       "id": "012d5943214e1c545480",
@@ -535,7 +538,8 @@
       "imageCredit": {
         "text": "Eric Friedebach · CC BY 2.0",
         "url": "https://commons.wikimedia.org/wiki/File:1973_Ford_Mustang_Interior_Dashboard_(51838912069).jpg"
-      }
+      },
+      "subjectPhotoChecked": true
     },
     {
       "titleOriginal": "מצלמות המהירות הוותיקות החלו לחלק דוחות גם על חריגות קלות, ובכביש 6 הופעלה מערכת שקילה חדשה",
@@ -652,7 +656,8 @@
       "imageCredit": {
         "text": "Eric Friedebach · CC BY 2.0",
         "url": "https://commons.wikimedia.org/wiki/File:1973_Ford_Mustang_Interior_Dashboard_(51838912069).jpg"
-      }
+      },
+      "subjectPhotoChecked": true
     },
     {
       "id": "6cc126ef03218901938b",
@@ -691,7 +696,8 @@
       "imageCredit": {
         "text": "Eric Friedebach · CC BY 2.0",
         "url": "https://commons.wikimedia.org/wiki/File:1973_Ford_Mustang_Interior_Dashboard_(51838912069).jpg"
-      }
+      },
+      "subjectPhotoChecked": true
     },
     {
       "id": "396aed84edd8d0a23969",
@@ -729,7 +735,8 @@
       "imageCredit": {
         "text": "Ivan Radic · CC BY 2.0",
         "url": "https://commons.wikimedia.org/wiki/File:Close-up_of_an_electric_car_charging._Traffic_lights_in_a_blurry_background.jpg"
-      }
+      },
+      "subjectPhotoChecked": true
     },
     {
       "id": "60b9d4ece67c7f4667d4",
@@ -765,9 +772,11 @@
       "translated": true,
       "imageType": "licensedPhoto",
       "imageCredit": {
-        "text": "Eric Friedebach · CC BY 2.0",
-        "url": "https://commons.wikimedia.org/wiki/File:1973_Ford_Mustang_Interior_Dashboard_(51838912069).jpg"
-      }
+        "text": "Steve Jurvetson from Los Altos, USA · CC BY 2.0",
+        "url": "https://commons.wikimedia.org/wiki/File:Front_of_the_Tesla_Cybercab.jpg"
+      },
+      "subjectPhotoChecked": true,
+      "subjectPhotoMatched": true
     },
     {
       "id": "3d252cafd2173f2c43cd",
@@ -803,9 +812,11 @@
       "translated": true,
       "imageType": "licensedPhoto",
       "imageCredit": {
-        "text": "Eric Friedebach · CC BY 2.0",
-        "url": "https://commons.wikimedia.org/wiki/File:1973_Ford_Mustang_Interior_Dashboard_(51838912069).jpg"
-      }
+        "text": "Steve Jurvetson from Los Altos, USA · CC BY 2.0",
+        "url": "https://commons.wikimedia.org/wiki/File:Front_of_the_Tesla_Cybercab.jpg"
+      },
+      "subjectPhotoChecked": true,
+      "subjectPhotoMatched": true
     },
     {
       "id": "6083502c7ac99fe25ed3",
