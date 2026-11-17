@@ -1,0 +1,58 @@
+name: Sync verified official Israeli theory exam bank (CC BY)
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '27 3 * * 1'  # weekly official-source check; no browser API calls
+  push:
+    branches: [main]
+    paths:
+      - 'scripts/sync_teoria.py'
+      - '.github/workflows/sync-teoria.yml'
+permissions:
+  contents: write
+concurrency:
+  group: israel-official-driving-theory-bank
+  cancel-in-progress: false
+jobs:
+  import:
+    runs-on: ubuntu-latest
+    timeout-minutes: 18
+    steps:
+      - name: Checkout project
+        uses: actions/checkout@v4
+        with:
+          ref: main
+          persist-credentials: true
+      - name: Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install official source parsers
+        run: python -m pip install --disable-pip-version-check "requests>=2.31,<3" "beautifulsoup4>=4.12,<5" "openpyxl>=3.1,<4"
+      - name: Fetch official licensed questions and correct answers
+        run: python scripts/sync_teoria.py
+      - name: Validate complete bank and B licence questions
+        run: |
+          python - <<'PY'
+          import json,pathlib
+          for lang in ('ru','he','en'):
+            a=json.loads(pathlib.Path('assets/teoria/'+lang+'.json').read_text(encoding='utf-8'))
+            items=a['questions']
+            assert len(items)>=900,(lang,len(items))
+            assert sum('B' in q['classes'] for q in items)>=450,(lang,'B subset')
+            assert all(len(q['a'])==4 and 0<=q['correct']<4 and q['q'] for q in items)
+            assert len({q['id'] for q in items})==len(items)
+            print(lang,'official questions:',len(items),'for B:',sum('B' in q['classes'] for q in items))
+          PY
+      - name: Publish changed verified official bank
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add assets/teoria/
+          if git diff --cached --quiet; then
+            echo "No changes to official theory question bank"
+            exit 0
+          fi
+          git commit -m "Update licensed official Israeli driving theory questions"
+          git pull --rebase origin main
+          git push origin HEAD:main
