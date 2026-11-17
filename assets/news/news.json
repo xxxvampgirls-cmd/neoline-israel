@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updated": "2026-11-17T07:37:11.608667Z",
+  "updated": "2026-11-17T07:37:44.125772Z",
   "retentionDays": 30,
   "items": [
     {
@@ -280,6 +280,19 @@
       "id": "a5c40cdcc7c64781d0aa",
       "title": "Побоище на дорогах: мотоциклист погиб сегодня в ДТП возле развязки Гат-Римон",
       "titleOriginal": "הקטל בכבישים: רוכב אופנוע נהרג בתאונה סמוך למחלף גת רימון | היום",
+      "summary": "Сообщение о дорожном происшествии в Израиле.",
+      "date": "2026-11-13T01:49:18Z",
+      "category": "accidents",
+      "publisher": "היום",
+      "url": "https://news.google.com/rss/articles/CBMiaEFVX3lxTE5mMC1mUFcxb1JaME9EOHd3aTYzM2g2RnkwY0NKc1c4a0k5WHlvRWs2eFNfc0FZXzQweXA2TzBIQzZvWlNKRnNDZFRld09WZGVkb1hGWUhGcHl0aEhQZERUR2hSdm5NMVpB?oc=5",
+      "translated": true,
+      "official": false,
+      "art": "accidents"
+    },
+    {
+      "id": "2a72ed918281e4cf3f0f",
+      "title": "Побоище на дорогах: мотоциклист погиб в ДТП возле развязки Гат-Римон",
+      "titleOriginal": "הקטל בכבישים: רוכב אופנוע נהרג בתאונה סמוך למחלף גת רימון",
       "summary": "Сообщение о дорожном происшествии в Израиле.",
       "date": "2026-11-13T01:49:18Z",
       "category": "accidents",
