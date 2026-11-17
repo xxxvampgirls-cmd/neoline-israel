@@ -1513,9 +1513,35 @@ html[dir=rtl] .theory-preview{text-align:right}
   opacity:.9;
 }
 #showcaseSlides .featured-slide--theory .theory-stage .ad-photo-stripes{opacity:.9}
+/* Both original full-width blue ribbons glide in OPPOSITE directions.
+   Oversize the ribbons within their clipped stage to avoid exposed edges.
+   Only compositor-friendly transforms animate; no background repaint. */
 #showcaseSlides .featured-slide .ad-photo-stripes .ad-photo-band{
-  position:relative;z-index:1;
-  background:linear-gradient(90deg,#4bb5ee8a 0%,#0c87cfce 36%,#87d9ffba 53%,#0d88d0d1 73%,#4ab2ee88 100%);
+  position:relative;z-index:1;flex:none;
+  width:126%;margin-left:-13%;
+  height:15px;border-radius:999px;
+  background:linear-gradient(90deg,transparent 0%,#5ebdf1a6 11%,#168cdbdd 27%,#b5edffdb 42%,#0a7ec8d1 59%,#55baeead 78%,transparent 100%);
+  box-shadow:0 1px 3px #1886c51c;
+}
+#showcaseSlides .featured-slide .ad-photo-stripes .ad-photo-band:nth-child(2){
+  height:12px;
+  background:linear-gradient(90deg,transparent 0%,#53b3e9a3 15%,#0d83cad3 34%,#379fdfb0 47%,#c8f3ffe8 68%,#1788cece 82%,transparent 100%);
+}
+#showcaseSlides .featured-slide.active:not(.ad-exiting) .ad-photo-stripes .ad-photo-band:first-child{
+  animation:neolineMainBandLeftToRight 12.8s ease-in-out infinite alternate;
+  will-change:transform;
+}
+#showcaseSlides .featured-slide.active:not(.ad-exiting) .ad-photo-stripes .ad-photo-band:nth-child(2){
+  animation:neolineMainBandRightToLeft 15.4s ease-in-out infinite alternate;
+  will-change:transform;
+}
+@keyframes neolineMainBandLeftToRight{
+  from{transform:translate3d(-7%,0,0)}
+  to{transform:translate3d(7%,0,0)}
+}
+@keyframes neolineMainBandRightToLeft{
+  from{transform:translate3d(7%,0,0)}
+  to{transform:translate3d(-7%,0,0)}
 }
 #showcaseSlides .featured-slide .ad-photo-stripes::before,
 #showcaseSlides .featured-slide .ad-photo-stripes::after{
@@ -1526,16 +1552,16 @@ html[dir=rtl] .theory-preview{text-align:right}
   pointer-events:none;
   opacity:0;
   background:
-    linear-gradient(90deg,transparent,#178ed3aa 27%,#bcf0ffed 55%,transparent) 10% 17% / 62% 4px no-repeat,
-    linear-gradient(90deg,transparent,#0786d3bd 30%,#e3f8ffeb 59%,transparent) 28% 39% / 71% 5px no-repeat,
-    linear-gradient(90deg,transparent,#148bd0a8 25%,#a4e6fff0 52%,transparent) 18% 67% / 78% 4px no-repeat,
-    linear-gradient(90deg,transparent,#2a9bd1aa 31%,#e3faffd9 54%,transparent) 39% 85% / 47% 3px no-repeat;
+    linear-gradient(90deg,transparent,#178ed388 27%,#bcf0ffc5 55%,transparent) 10% 17% / 62% 2px no-repeat,
+    linear-gradient(90deg,transparent,#0786d3c2 30%,#e3f8ffef 59%,transparent) 28% 39% / 71% 4px no-repeat,
+    linear-gradient(90deg,transparent,#148bd073 25%,#a4e6ffb0 52%,transparent) 18% 67% / 78% 3px no-repeat,
+    linear-gradient(90deg,transparent,#2a9bd18a 31%,#e3faffbf 54%,transparent) 39% 85% / 47% 1.5px no-repeat;
 }
 #showcaseSlides .featured-slide .ad-photo-stripes::after{
   background:
-    linear-gradient(90deg,transparent,#0e83c9a8 26%,#d5f7ffe8 52%,transparent) 29% 27% / 67% 3px no-repeat,
-    linear-gradient(90deg,transparent,#0580cbb8 26%,#b9edfff0 57%,transparent) 8% 57% / 81% 5px no-repeat,
-    linear-gradient(90deg,transparent,#218dccaa 30%,#e4faffef 55%,transparent) 40% 78% / 53% 4px no-repeat;
+    linear-gradient(90deg,transparent,#0e83c991 26%,#d5f7ffb4 52%,transparent) 29% 27% / 67% 2.5px no-repeat,
+    linear-gradient(90deg,transparent,#0580cbdb 26%,#b9edffee 57%,transparent) 8% 57% / 81% 4px no-repeat,
+    linear-gradient(90deg,transparent,#218dcc7a 30%,#e4faffb1 55%,transparent) 40% 78% / 53% 2px no-repeat;
 }
 #showcaseSlides .featured-slide.active:not(.ad-exiting) .ad-photo-stripes::before{
   animation:neolineRoadSweep 3.8s linear infinite;
@@ -1552,8 +1578,10 @@ html[dir=rtl] .theory-preview{text-align:right}
   100%{transform:translate3d(-53%,0,0) scaleX(1.2);opacity:0}
 }
 @media(max-width:720px){
-  #showcaseSlides .featured-slide .ad-photo-stripes::before,
-  #showcaseSlides .featured-slide .ad-photo-stripes::after{background-size:62% 3px,71% 3px,78% 3px,47% 2px}
+  #showcaseSlides .featured-slide .ad-photo-stripes .ad-photo-band:first-child{height:11px}
+  #showcaseSlides .featured-slide .ad-photo-stripes .ad-photo-band:nth-child(2){height:9px}
+  #showcaseSlides .featured-slide.active:not(.ad-exiting) .ad-photo-stripes .ad-photo-band:first-child{animation-duration:13.8s}
+  #showcaseSlides .featured-slide.active:not(.ad-exiting) .ad-photo-stripes .ad-photo-band:nth-child(2){animation-duration:16.5s}
   #showcaseSlides .featured-slide.active:not(.ad-exiting) .ad-photo-stripes::before{animation-duration:4.5s}
   #showcaseSlides .featured-slide.active:not(.ad-exiting) .ad-photo-stripes::after{animation-duration:5.8s}
 }
@@ -1561,6 +1589,9 @@ html[dir=rtl] .theory-preview{text-align:right}
   #showcaseSlides .featured-slide .ad-photo-stripes::before,
   #showcaseSlides .featured-slide .ad-photo-stripes::after{
     animation:none!important;opacity:0!important;will-change:auto!important;
+  }
+  #showcaseSlides .featured-slide .ad-photo-stripes .ad-photo-band{
+    animation:none!important;transform:none!important;will-change:auto!important;
   }
 }
 
