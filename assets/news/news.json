@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updated": "2026-11-17T07:33:13.993544Z",
+  "updated": "2026-11-17T07:34:23.557459Z",
   "retentionDays": 30,
   "items": [
     {
@@ -511,32 +511,6 @@
       "art": "accidents"
     },
     {
-      "id": "29d93778342ad0eeb138",
-      "title": "Угроза закрытия Walt: требование возбудить уголовное дело против компании и гендиректора",
-      "titleOriginal": "איום סגירה על וולט: דרישה לחקירה פלילית נגד החברה והמנכ\"ל",
-      "summary": "Обновление о дорожной обстановке или ограничениях движения.",
-      "date": "2026-11-10T07:15:41Z",
-      "category": "roads",
-      "publisher": "היום",
-      "url": "https://news.google.com/rss/articles/CBMiaEFVX3lxTE5WZXJkQkNxVThiS21KNHJCSElCZkdKVHI4VVVOU3hIUlVwYzctVUhxTjF0cTRsWlVxdmFZNGlpMk1FTmg2RThXX1pTN2pmdmp4NzZYaDZ1ZHFOMldQc2h1R2R1Qk9ETEJt?oc=5",
-      "translated": true,
-      "official": false,
-      "art": "roads"
-    },
-    {
-      "id": "6afe74967dd6df5b1220",
-      "title": "Опасность закрытия Volt в Израиле: необычное требование госоргана",
-      "titleOriginal": "סכנת סגירה לוולט בישראל: הדרישה החריגה של הגוף הממשלתי",
-      "summary": "Обновление о дорожной обстановке или ограничениях движения.",
-      "date": "2026-11-09T09:55:13Z",
-      "category": "roads",
-      "publisher": "מעריב",
-      "url": "https://news.google.com/rss/articles/CBMiXkFVX3lxTFBiQWNDLWNRN0Q5VV9kYUhLRzRKMDYweW5iQWN5dmdyRldlTVF1dnhfdXpSTzd2RWtsLTdVdXBuMy1OQjV3c1JMOWZzcU1kM1R5LUNBYWlIOHlGa3FWWEE?oc=5",
-      "translated": true,
-      "official": false,
-      "art": "roads"
-    },
-    {
       "id": "a91d0ae12cb95e99c5c5",
       "title": "Эйлат находится в осаде: все дороги, ведущие в город и из города, перекрыты",
       "titleOriginal": "אילת נצורה: כל הכבישים המובילים אל העיר וממנה נחסמו",
@@ -571,19 +545,6 @@
       "category": "roads",
       "publisher": "היום",
       "url": "https://news.google.com/rss/articles/CBMiZEFVX3lxTFByRFp1dlJPb0VHLTNtS3FRQUgyMk1IYnkzUjBPOEJDYWFDV2FJdjUwN3hsQzVDMW5tY2NQMDQtS0hDb3dqVGE3RXRPRlNHRGlndXlQaFdwVFVxUnZqY004aW44RWs?oc=5",
-      "translated": true,
-      "official": false,
-      "art": "roads"
-    },
-    {
-      "id": "a181f012c62eb983d314",
-      "title": "«Маккаби Хайфа» против «Хапоэль Беэр-Шева»: блокады, пробки на дорогах и усиление безопасности в Сами Офере",
-      "titleOriginal": "מכבי חיפה מול הפועל באר שבע: חסימות, עומסי תנועה ואבטחה מוגברת בסמי עופר",
-      "summary": "Обновление о дорожной обстановке или ограничениях движения.",
-      "date": "2026-10-26T07:00:00Z",
-      "category": "roads",
-      "publisher": "NWS חדשות חיפה והסביבה",
-      "url": "https://news.google.com/rss/articles/CBMiRkFVX3lxTE5uOVhFQnpfd3ktdVZoR0dWLS1FMG0zTTNlajVNblJpOHhQTzZSNU11aWRsVUY5cmhCOGVTei1BUnJEZ1VOR2c?oc=5",
       "translated": true,
       "official": false,
       "art": "roads"
