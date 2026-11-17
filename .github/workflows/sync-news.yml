@@ -7,6 +7,7 @@ on:
     branches: [main]
     paths:
       - 'scripts/sync_news.py'
+      - 'scripts/telegram_news.py'
       - 'scripts/build_news_thumbnails.py'
       - '.github/workflows/sync-news.yml'
 permissions:
@@ -56,7 +57,13 @@ jobs:
                   assert image.is_file(),item["image"]
                   assert image.suffix==".webp",(image,item["image"])
                   assert image.stat().st_size<90_000,(image,image.stat().st_size)
-          print("Verified current news:",len(p["items"]))
+          # Files of expired stories must not remain in deployed news assets.
+          image_dir=Path("assets/news/images")
+          expected={item["id"]+".webp" for item in p["items"] if item.get("image")}
+          actual={file.name for file in image_dir.glob("*.webp")}
+          assert actual==expected,{"orphan_images":sorted(actual-expected),"missing_images":sorted(expected-actual)}
+          assert not list(image_dir.glob("*.svg")), "Old SVG illustrations must not accumulate"
+          print("Verified current news:",len(p["items"]),"image files:",len(actual),"orphan files: 0")
           PY
       - name: Publish refreshed rolling archive
         run: |
