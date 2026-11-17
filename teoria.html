@@ -5,7 +5,7 @@
 <title>Теория Израиля — игровая подготовка · NEOLINE</title>
 <meta name="description" content="Игровая подготовка к израильскому теоретическому экзамену на водительские права: настоящие вопросы Министерства транспорта, дорожные знаки, экзамен 30 вопросов и работа над ошибками.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="stylesheet" href="./teoria.css?v=20261117-mode-nav-v3">
+<link rel="stylesheet" href="./teoria.css?v=20261117-gameover-v4">
 </head><body>
 <header class="topbar"><div class="shell top-inner">
   <a class="brand" href="./" aria-label="На главную NEOLINE"><img src="./assets/neoline-clean.svg?v=20261116-compact" width="501" height="108" alt="NEOLINE"></a>
@@ -17,7 +17,32 @@
   <span class="eyebrow" id="heroEyebrow">NEOLINE · ИЗРАИЛЬ</span>
   <h1 id="heroTitle">Теория вождения</h1>
  </div>
- <div class="hero-mini" aria-hidden="true"><span class="hero-mini-road"></span><span class="hero-mini-sign">50</span><span class="hero-mini-car">🚙</span><span class="hero-mini-check">✓</span></div>
+
+ <div class="hero-mini" aria-hidden="true">
+  <svg class="hero-mini-svg" viewBox="0 0 144 108" xmlns="http://www.w3.org/2000/svg" focusable="false">
+   <defs>
+    <linearGradient id="heroMiniBlue" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#67dbff"/><stop offset=".46" stop-color="#0876bd"/><stop offset="1" stop-color="#002e57"/></linearGradient>
+    <linearGradient id="heroMiniCar" x1="0" y1="0" x2=".9" y2="1"><stop stop-color="#f1fdff"/><stop offset=".45" stop-color="#0d9de1"/><stop offset="1" stop-color="#065580"/></linearGradient>
+   </defs>
+   <path d="M88-15 157 23 118 120 37 120Z" fill="url(#heroMiniBlue)"/>
+   <path d="M117-7 168 22 127 125" stroke="#99e4ff" stroke-width="5" fill="none" opacity=".8"/>
+   <path d="m91 24-39 86m51-82-32 70" stroke="#d7f9ff" stroke-width="3" stroke-dasharray="14 11" fill="none" opacity=".83"/>
+   <circle cx="111" cy="26" r="25" fill="#fff" stroke="#e44452" stroke-width="7"/>
+   <text x="111" y="34" font-family="Arial,sans-serif" font-size="25" font-weight="800" text-anchor="middle" fill="#123654">50</text>
+   <g transform="translate(8 47) rotate(-12 49 24)">
+    <ellipse cx="52" cy="51" rx="43" ry="9" fill="#053d61" opacity=".26"/>
+    <path d="M9 32 23 13Q26 9 32 9h40q6 0 10 6l11 18 3 18H7z" fill="url(#heroMiniCar)" stroke="#e2faff" stroke-width="2.7" stroke-linejoin="round"/>
+    <path d="M29 14h43l12 19H19z" fill="#073f67" stroke="#b9f3ff" stroke-width="2.5"/>
+    <path d="M52 14v18" stroke="#89dfff" stroke-width="2"/>
+    <path d="M12 38h79" stroke="#c9faff" stroke-width="3.5" stroke-linecap="round"/>
+    <path d="M7 43h13m61 0h14" stroke="#ffffff" stroke-width="5" stroke-linecap="round"/>
+    <circle cx="27" cy="52" r="8" fill="#092538" stroke="#8baab9" stroke-width="3"/>
+    <circle cx="78" cy="52" r="8" fill="#092538" stroke="#8baab9" stroke-width="3"/>
+   </g>
+   <circle cx="122" cy="79" r="18" fill="#09a98d" stroke="#fff" stroke-width="5"/>
+   <path d="m114 78 6 7 12-15" fill="none" stroke="#fff" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+  </svg>
+ </div>
 </section>
 <section class="game-panel" id="gameLobby" aria-label="Выбор режима">
  <div class="panel-toolbar">
@@ -51,6 +76,29 @@
  <div class="result-buttons"><button type="button" class="primary" id="restartMode">↻ <span id="restartLabel">Ещё раз</span></button><button type="button" class="secondary" id="backToModes"><span id="backModesLabel">Другие режимы</span> →</button></div>
 </section>
 </main>
+
+<section class="gameover-overlay" id="gameOver" role="dialog" aria-modal="true" aria-labelledby="gameOverTitle" aria-describedby="gameOverMessage" hidden>
+ <div class="gameover-backdrop" aria-hidden="true"></div>
+ <div class="gameover-card">
+  <span class="gameover-corner gameover-corner-top" aria-hidden="true"></span>
+  <span class="gameover-corner gameover-corner-bottom" aria-hidden="true"></span>
+  <button type="button" class="gameover-close" id="gameOverClose" aria-label="Закрыть и вернуться к режимам">×</button>
+  <div class="gameover-hearts" aria-hidden="true">
+   <span>💔</span><span>💔</span><span>💔</span>
+  </div>
+  <h2 class="gameover-title" id="gameOverTitle">GAME OVER</h2>
+  <span class="gameover-underline" aria-hidden="true"></span>
+  <p class="gameover-message" id="gameOverMessage">Три жизни закончились.<br>Не огорчайся — попробуй ещё раз!</p>
+  <p class="gameover-score" id="gameOverScore" aria-live="polite">0 / 3 · +0 XP</p>
+  <div class="gameover-actions">
+   <button type="button" class="gameover-retry" id="gameOverRetry"><span class="gameover-button-icon" aria-hidden="true">▶</span><span id="gameOverRetryLabel">Играть снова</span></button>
+   <button type="button" class="gameover-modes" id="gameOverModes">
+    <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></svg>
+    <span id="gameOverModesLabel">К выбору режимов</span>
+   </button>
+  </div>
+ </div>
+</section>
 <footer class="footer shell"><span>NEOLINE ISRAEL · THEORY QUEST</span><a href="./" id="footerBack">На главную ↗</a></footer>
 
 <nav class="theory-bottom" id="theoryBottomNav" aria-label="Основная навигация NEOLINE">
@@ -60,5 +108,5 @@
   <a href="./delivery.html" data-theory-nav="delivery" id="theoryNavDelivery" aria-label="Доставка"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 7h12v10H3z"/><path d="M15 10h3l3 4v3h-6"/><circle cx="7" cy="19" r="2"/><circle cx="17" cy="19" r="2"/></svg><span>Доставка</span></a>
   <a href="./?panel=cart" data-theory-nav="cart" id="theoryNavCart" aria-label="Корзина"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 8h14l1.2 13H3.8L5 8Z"/><path d="M9 9V6a3 3 0 0 1 6 0v3"/></svg><span>Корзина</span></a>
 </nav>
-<script src="./teoria.js?v=20261117-mode-nav-v3" defer></script>
+<script src="./teoria.js?v=20261117-gameover-v4" defer></script>
 </body></html>
