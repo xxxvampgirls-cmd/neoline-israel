@@ -1,7 +1,7 @@
 {
   "version": 1,
   "retentionDays": 30,
-  "updated": "2026-11-17T08:35:29.897842Z",
+  "updated": "2026-11-17T08:36:06.780114Z",
   "items": [
     {
       "id": "1b6d8f8a9c0f97c229b0",
@@ -158,42 +158,29 @@
       }
     },
     {
-      "id": "419690fed163182a806c",
-      "titleOriginal": "מחקר / הציבור מעדיף מס נסועה על כלל כלי הרכב, לא רק על מכוניות חשמליות",
+      "id": "a41b423566b7aab7ce0a",
+      "titleOriginal": "בהתנגשות עם רכב צבאי: הרוגה בתאונת דרכים קטלנית בעכו | תיעוד",
       "sourceLanguage": "he",
-      "date": "2026-11-15T11:03:39Z",
-      "url": "https://autonews.co.il/%d7%9e%d7%97%d7%a7%d7%a8-%d7%a6%d7%99%d7%91%d7%95%d7%a8-%d7%9e%d7%a2%d7%93%d7%99%d7%a3-%d7%9e%d7%a1-%d7%a0%d7%a1%d7%95%d7%a2%d7%94-%d7%a2%d7%9c-%d7%9b%d7%9c%d7%9c-%d7%9b%d7%9c%d7%99-%d7%94%d7%a8/",
-      "publisher": "Autonews Israel",
-      "category": "cars",
-      "art": "cars",
-      "image": "./assets/news/images/419690fed163182a806c.webp",
+      "date": "2026-11-14T20:29:00Z",
+      "url": "https://www.mako.co.il/news-israel/2026_q4/Article-7b0ea65229bd1a1026.htm",
+      "publisher": "Mako · Израиль",
+      "category": "accidents",
+      "art": "accidents",
+      "image": "./assets/news/images/a41b423566b7aab7ce0a.webp",
       "official": false,
       "translations": {
         "he": {
-          "title": "מחקר / הציבור מעדיף מס נסועה על כלל כלי הרכב, לא רק על מכוניות חשמליות",
-          "summary": "כתבה על מכוניות או שוק הרכב בישראל. פרטים באתר המקור."
-        },
-        "ru": {
-          "title": "Исследования / Общественность предпочитает взимать туристический налог со всех транспортных средств, а не только с электромобилей",
-          "summary": "Материал об автомобиле или автомобильном рынке Израиля. Подробности — на сайте издания."
-        },
-        "en": {
-          "title": "Research / The public prefers a travel tax on all vehicles, not just electric cars",
-          "summary": "An update about vehicles or Israel's car market. Details are available at the source."
-        },
-        "ar": {
-          "title": "بحث / الجمهور يفضل فرض ضريبة السفر على جميع المركبات وليس السيارات الكهربائية فقط",
-          "summary": "تحديث عن السيارات أو سوق المركبات في إسرائيل. التفاصيل في المصدر."
+          "title": "בהתנגשות עם רכב צבאי: הרוגה בתאונת דרכים קטלנית בעכו | תיעוד",
+          "summary": "דיווח על תאונת דרכים בישראל. פרטים ועדכונים בכתבת המקור."
         }
       },
-      "title": "Исследования / Общественность предпочитает взимать туристический налог со всех транспортных средств, а не только с электромобилей",
-      "summary": "Материал об автомобиле или автомобильном рынке Израиля. Подробности — на сайте издания.",
-      "translated": true,
-      "imageKind": "ai-generated",
+      "title": "בהתנגשות עם רכב צבאי: הרוגה בתאונת דרכים קטלנית בעכו | תיעוד",
+      "summary": "Дорожное происшествие в Израиле. Обстоятельства и актуальные сведения — в материале источника.",
+      "translated": false,
       "imageType": "licensedPhoto",
       "imageCredit": {
-        "text": "Ivan Radic · CC BY 2.0",
-        "url": "https://commons.wikimedia.org/wiki/File:Close-up_of_an_electric_car_charging._Traffic_lights_in_a_blurry_background.jpg"
+        "text": "Jeff Attaway from Abuja, Nigeria · CC BY 2.0",
+        "url": "https://commons.wikimedia.org/wiki/File:Bad_one_-_auto_wreck_in_Dakar_Senegal,_2011.jpg"
       }
     },
     {
@@ -233,6 +220,110 @@
       "imageCredit": {
         "text": "Eric Friedebach · CC BY 2.0",
         "url": "https://commons.wikimedia.org/wiki/File:1973_Ford_Mustang_Interior_Dashboard_(51838912069).jpg"
+      }
+    },
+    {
+      "id": "419690fed163182a806c",
+      "titleOriginal": "מחקר / הציבור מעדיף מס נסועה על כלל כלי הרכב, לא רק על מכוניות חשמליות",
+      "sourceLanguage": "he",
+      "date": "2026-11-15T11:03:39Z",
+      "url": "https://autonews.co.il/%d7%9e%d7%97%d7%a7%d7%a8-%d7%a6%d7%99%d7%91%d7%95%d7%a8-%d7%9e%d7%a2%d7%93%d7%99%d7%a3-%d7%9e%d7%a1-%d7%a0%d7%a1%d7%95%d7%a2%d7%94-%d7%a2%d7%9c-%d7%9b%d7%9c%d7%9c-%d7%9b%d7%9c%d7%99-%d7%94%d7%a8/",
+      "publisher": "Autonews Israel",
+      "category": "cars",
+      "art": "cars",
+      "image": "./assets/news/images/419690fed163182a806c.webp",
+      "official": false,
+      "translations": {
+        "he": {
+          "title": "מחקר / הציבור מעדיף מס נסועה על כלל כלי הרכב, לא רק על מכוניות חשמליות",
+          "summary": "כתבה על מכוניות או שוק הרכב בישראל. פרטים באתר המקור."
+        },
+        "ru": {
+          "title": "Исследования / Общественность предпочитает взимать туристический налог со всех транспортных средств, а не только с электромобилей",
+          "summary": "Материал об автомобиле или автомобильном рынке Израиля. Подробности — на сайте издания."
+        },
+        "en": {
+          "title": "Research / The public prefers a travel tax on all vehicles, not just electric cars",
+          "summary": "An update about vehicles or Israel's car market. Details are available at the source."
+        },
+        "ar": {
+          "title": "بحث / الجمهور يفضل فرض ضريبة السفر على جميع المركبات وليس السيارات الكهربائية فقط",
+          "summary": "تحديث عن السيارات أو سوق المركبات في إسرائيل. التفاصيل في المصدر."
+        }
+      },
+      "title": "Исследования / Общественность предпочитает взимать туристический налог со всех транспортных средств, а не только с электромобилей",
+      "summary": "Материал об автомобиле или автомобильном рынке Израиля. Подробности — на сайте издания.",
+      "translated": true,
+      "imageKind": "ai-generated",
+      "imageType": "licensedPhoto",
+      "imageCredit": {
+        "text": "Ivan Radic · CC BY 2.0",
+        "url": "https://commons.wikimedia.org/wiki/File:Close-up_of_an_electric_car_charging._Traffic_lights_in_a_blurry_background.jpg"
+      }
+    },
+    {
+      "id": "825a9e9e7693453d9e1f",
+      "titleOriginal": "בתוך פחות משעה: גבר נהרג בכביש 6, אישה נהרגה בכביש 7",
+      "sourceLanguage": "he",
+      "date": "2026-11-11T19:34:00Z",
+      "url": "https://www.mako.co.il/news-israel/2026_q4/Article-643393d4b0cc1a1027.htm",
+      "publisher": "Mako · Израиль",
+      "category": "roads",
+      "art": "roads",
+      "image": "./assets/news/images/825a9e9e7693453d9e1f.webp",
+      "official": false,
+      "translations": {
+        "he": {
+          "title": "בתוך פחות משעה: גבר נהרג בכביש 6, אישה נהרגה בכביש 7",
+          "summary": "עדכון על מצב התנועה. לפני הנסיעה בדקו אם ההגבלות עדיין בתוקף."
+        }
+      },
+      "title": "בתוך פחות משעה: גבר נהרג בכביש 6, אישה נהרגה בכביש 7",
+      "summary": "Информация о дорожной ситуации. Перед поездкой проверьте, действуют ли ограничения сейчас.",
+      "translated": false,
+      "imageType": "licensedPhoto",
+      "imageCredit": {
+        "text": "Judgefloro · Public domain",
+        "url": "https://commons.wikimedia.org/wiki/File:0426Paniqui-Moncada,_Tarlac_Arterial_Road_01.JPG"
+      }
+    },
+    {
+      "id": "29eac7c61f2dbd8989e8",
+      "titleOriginal": "יש לכם רשיון B? תוכלו לנהוג בחשמליות, כולל מסחריות, במשקל של עד 4.25 טון",
+      "sourceLanguage": "he",
+      "date": "2026-11-09T20:59:00Z",
+      "url": "https://cars.walla.co.il/item/3875628",
+      "publisher": "Walla · Авто",
+      "category": "laws",
+      "art": "laws",
+      "image": "./assets/news/images/29eac7c61f2dbd8989e8.webp",
+      "official": false,
+      "translations": {
+        "he": {
+          "title": "יש לכם רשיון B? תוכלו לנהוג בחשמליות, כולל מסחריות, במשקל של עד 4.25 טון",
+          "summary": "דיווח על תקנות נהיגה. יש לאמת את מעמד החוק ותאריך התחולה במקור רשמי."
+        },
+        "ru": {
+          "title": "У вас есть лицензия B? Можно управлять трамваями, в том числе коммерческими, массой до 4,25 тонн.",
+          "summary": "Публикация о правилах для водителей. Статус закона и дату вступления в силу нужно сверять с официальными документами."
+        },
+        "en": {
+          "title": "Do you have a B license? You can drive trams, including commercial ones, weighing up to 4.25 tons",
+          "summary": "A report concerning driving rules. Verify legal status and effective dates with official documents."
+        },
+        "ar": {
+          "title": "هل لديك رخصة B؟ يمكنك قيادة الترام، بما في ذلك التجاري، الذي يصل وزنه إلى 4.25 طن",
+          "summary": "تقرير حول قواعد القيادة. تحقق من حالة القانون وتاريخ سريانه في المصادر الرسمية."
+        }
+      },
+      "title": "У вас есть лицензия B? Можно управлять трамваями, в том числе коммерческими, массой до 4,25 тонн.",
+      "summary": "Публикация о правилах для водителей. Статус закона и дату вступления в силу нужно сверять с официальными документами.",
+      "translated": true,
+      "imageKind": "ai-generated",
+      "imageType": "licensedPhoto",
+      "imageCredit": {
+        "text": "Wikimedia Commons · CC BY 4.0",
+        "url": "https://commons.wikimedia.org/wiki/File:Close_up_of_Carmen_Rupe_pedestrian_crossing_light.jpg"
       }
     },
     {
@@ -311,45 +402,6 @@
       "imageCredit": {
         "text": "Eric Friedebach · CC BY 2.0",
         "url": "https://commons.wikimedia.org/wiki/File:1973_Ford_Mustang_Interior_Dashboard_(51838912069).jpg"
-      }
-    },
-    {
-      "id": "29eac7c61f2dbd8989e8",
-      "titleOriginal": "יש לכם רשיון B? תוכלו לנהוג בחשמליות, כולל מסחריות, במשקל של עד 4.25 טון",
-      "sourceLanguage": "he",
-      "date": "2026-11-09T20:59:00Z",
-      "url": "https://cars.walla.co.il/item/3875628",
-      "publisher": "Walla · Авто",
-      "category": "laws",
-      "art": "laws",
-      "image": "./assets/news/images/29eac7c61f2dbd8989e8.webp",
-      "official": false,
-      "translations": {
-        "he": {
-          "title": "יש לכם רשיון B? תוכלו לנהוג בחשמליות, כולל מסחריות, במשקל של עד 4.25 טון",
-          "summary": "דיווח על תקנות נהיגה. יש לאמת את מעמד החוק ותאריך התחולה במקור רשמי."
-        },
-        "ru": {
-          "title": "У вас есть лицензия B? Можно управлять трамваями, в том числе коммерческими, массой до 4,25 тонн.",
-          "summary": "Публикация о правилах для водителей. Статус закона и дату вступления в силу нужно сверять с официальными документами."
-        },
-        "en": {
-          "title": "Do you have a B license? You can drive trams, including commercial ones, weighing up to 4.25 tons",
-          "summary": "A report concerning driving rules. Verify legal status and effective dates with official documents."
-        },
-        "ar": {
-          "title": "هل لديك رخصة B؟ يمكنك قيادة الترام، بما في ذلك التجاري، الذي يصل وزنه إلى 4.25 طن",
-          "summary": "تقرير حول قواعد القيادة. تحقق من حالة القانون وتاريخ سريانه في المصادر الرسمية."
-        }
-      },
-      "title": "У вас есть лицензия B? Можно управлять трамваями, в том числе коммерческими, массой до 4,25 тонн.",
-      "summary": "Публикация о правилах для водителей. Статус закона и дату вступления в силу нужно сверять с официальными документами.",
-      "translated": true,
-      "imageKind": "ai-generated",
-      "imageType": "licensedPhoto",
-      "imageCredit": {
-        "text": "Wikimedia Commons · CC BY 4.0",
-        "url": "https://commons.wikimedia.org/wiki/File:Close_up_of_Carmen_Rupe_pedestrian_crossing_light.jpg"
       }
     },
     {
