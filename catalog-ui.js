@@ -64,7 +64,7 @@ function renderExtendedProducts(){
   const price=p.isImported?'<div class="catalog-price-pending">'+esc(ui("price"))+'</div>':'<div class="price">₪'+p.price.toLocaleString('en-US')+'<small>'+t('estimated')+'</small></div>';
   const buy=p.isImported?"":'<button class="add" data-add="'+p.id+'" aria-label="Add to cart">+</button>';
   const specs=(p.spec||[]).map(esc).join(' · ');
-  return '<article class="product"><div class="product-art">'+art+'<span class="badge">'+badge+'</span><button class="heart '+(favs.has(p.id)?'active':'')+'" data-fav="'+p.id+'" aria-label="Favorite">'+(favs.has(p.id)?'♥':'♡')+'</button></div><div class="product-content"><div class="product-name">'+esc(p.name)+'</div><div class="spec">'+specs+'</div><div class="price-row">'+price+buy+'</div><button class="details-link" data-details="'+p.id+'">'+(p.isImported?esc(ui('details')):extraTranslations[lang].productDetails)+'</button></div></article>';
+  return '<article class="product"><div class="product-art">'+art+'<span class="badge">'+badge+'</span></div><div class="product-content"><div class="product-name">'+esc(p.name)+'</div><div class="spec">'+specs+'</div><div class="price-row">'+price+buy+'</div><button class="details-link" data-details="'+p.id+'">'+(p.isImported?esc(ui('details')):extraTranslations[lang].productDetails)+'</button></div></article>';
  }).join(''):'<div class="empty">'+esc(t('resultsEmpty'))+'</div>';
  const more=$('catalogShowMore'),button=$('catalogShowMoreBtn'),count=$('catalogProductCount');
  if(more&&button&&count){
@@ -75,7 +75,7 @@ function renderExtendedProducts(){
   button.setAttribute('aria-expanded',visibleItems.length>8?'true':'false');
  }
  document.querySelectorAll('[data-add]').forEach(e=>e.onclick=()=>add(Number(e.dataset.add)));
- document.querySelectorAll('[data-fav]').forEach(e=>e.onclick=()=>toggleFav(Number(e.dataset.fav)));
+
  document.querySelectorAll('[data-photo]').forEach(e=>e.onclick=()=>openProduct(Number(e.dataset.photo)));
  document.querySelectorAll('[data-details]').forEach(e=>e.onclick=()=>openProduct(Number(e.dataset.details)));
 }
