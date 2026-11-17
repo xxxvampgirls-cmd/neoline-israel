@@ -1222,6 +1222,14 @@ body{width:100%;max-width:100%;overflow-x:clip}
 #showcaseSlides .featured-slide:is(.ad-exiting,.ad-arriving) .featured-image{
  animation:none!important;transform:none!important;
 }
+/* Travel only one item-width plus a small gutter, so both PNG cutouts stay
+   in view during the handoff instead of leaving an empty pause in the center. */
+#showcaseSlides .featured-slide .featured-image > :is(img,.feature-img-fallback){
+ --cutout-travel:calc(100% + 42px);
+}
+#showcaseSlides .featured-slide :is(.theory-device,.theory-back-card,.theory-floating-award){
+ --cutout-travel:calc(100vw + 100%);
+}
 /* Cancel the old 7.6s independent product push-in: it interferes with
    the handoff and creates a second apparent transition. */
 #showcaseSlides .featured-slide .featured-image > img:not([hidden]),
@@ -1251,18 +1259,18 @@ body{width:100%;max-width:100%;overflow-x:clip}
    beyond the clipping edge, including its own drop-shadow. */
 @keyframes neolineCutoutLeaveLeft{
  from{transform:translate3d(0,0,0)}
- to{transform:translate3d(calc(-100vw - 100%),0,0)}
+ to{transform:translate3d(calc(var(--cutout-travel) * -1),0,0)}
 }
 @keyframes neolineCutoutEnterRight{
- from{transform:translate3d(calc(100vw + 100%),0,0)}
+ from{transform:translate3d(var(--cutout-travel),0,0)}
  to{transform:translate3d(0,0,0)}
 }
 @keyframes neolineCutoutLeaveRight{
  from{transform:translate3d(0,0,0)}
- to{transform:translate3d(calc(100vw + 100%),0,0)}
+ to{transform:translate3d(var(--cutout-travel),0,0)}
 }
 @keyframes neolineCutoutEnterLeft{
- from{transform:translate3d(calc(-100vw - 100%),0,0)}
+ from{transform:translate3d(calc(var(--cutout-travel) * -1),0,0)}
  to{transform:translate3d(0,0,0)}
 }
 /* The game promo has a CSS-rendered 'device' rather than a PNG: animate
