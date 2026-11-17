@@ -3,9 +3,9 @@
 (()=>{
 "use strict";
 const $=id=>document.getElementById(id);
-const state={items:[],category:"all",query:"",lang:"ru",visible:9,rendered:0};
-const PAGE_SIZE=9;
-let scrollObserver=null;
+const PAGE_SIZE=8;
+const state={items:[],category:"all",query:"",lang:"ru",visible:PAGE_SIZE,rendered:0};
+let lastExpiryCheck=Date.now();
 try{const saved=localStorage.getItem("neoline-language");if(["ru","he","en","ar"].includes(saved))state.lang=saved}catch(e){}
 const i18n={
 ru:{eyebrow:"NEOLINE · ИЗРАИЛЬ · АВТОНОВОСТИ",heading:"Что происходит <em>на дорогах Израиля</em>",intro:"Аварии, камеры контроля скорости, новые правила, дороги и автомобили. Коротко о главном — с датой публикации и ссылкой на первоисточник.",period:"Только последние 30 дней",search:"Найти новость…",all:"Все",accidents:"ДТП",speed:"Скорость",laws:"Правила и законы",roads:"Дороги",cars:"Автомобили",updated:"Обновлено",empty:"За последние 30 дней пока нет проверенных материалов в этой категории. Попробуйте другую тему.",noFeed:"Сейчас нет доступных новостей за последние 30 дней. Как только появятся новые проверенные публикации, они автоматически отобразятся здесь.",read:"Читать источник",expand:"Развернуть новость",collapse:"Свернуть",original:"Заголовок первоисточника",allPeriod:"Новости за 30 дней · законы за 6 месяцев",lawsPeriod:"Правила и законы · последние 6 месяцев",image:"Иллюстрация",home:"Главная",catalog:"Каталог",news:"Новости",fav:"Избранное",cart:"Корзина",back:"← Каталог",warning:"Это информационная сводка, а не подтверждение вступления закона в силу.",legal:"Короткие справки, дата и ссылка на первоисточник. Обложки — нейросетевые изображения либо фотографии по свободной лицензии с указанием автора; они не являются снимками описанных происшествий. Статус правил дорожного движения сверяйте с официальными публикациями Министерства транспорта Израиля."},
@@ -157,7 +157,12 @@ async function load(){
  }
  tabs();render();
 }
-$("newsMoreButton").addEventListener("click",()=>{state.visible+=PAGE_SIZE;render(true)});
+$("newsMoreButton").addEventListener("click",()=>{
+ // Append just 8 more articles when the visitor explicitly requests them.
+ if($("newsLoadMore").hidden)return;
+ state.visible+=PAGE_SIZE;
+ render(true);
+});
 $("newsGrid").addEventListener("click",event=>{
  const trigger=event.target.closest("[data-open-story]");
  if(!trigger)return;
@@ -167,18 +172,16 @@ $("newsGrid").addEventListener("click",event=>{
   if(panel.open)panel.scrollIntoView({behavior:"smooth",block:"nearest"});
  }
 });
-if("IntersectionObserver" in window){
- scrollObserver=new IntersectionObserver(entries=>{
-  if(entries.some(x=>x.isIntersecting)&&!$("newsLoadMore").hidden){state.visible+=PAGE_SIZE;render(true)}
- },{rootMargin:"160px 0px"});
- scrollObserver.observe($("newsLoadMore"));
-}
 $("newsSearch").addEventListener("input",e=>{state.query=e.target.value;state.visible=PAGE_SIZE;render()});
 document.querySelectorAll('[data-news-lang]').forEach(el=>el.addEventListener('click',()=>{
  state.lang=el.dataset.newsLang;
  try{localStorage.setItem("neoline-language",state.lang)}catch(e){}
  localize();tabs();render();
 }));
-document.addEventListener("visibilitychange",()=>{if(!document.hidden)render()});
+document.addEventListener("visibilitychange",()=>{
+ // Only recheck age limits after a long idle period; no needless DOM rebuilds.
+ if(document.hidden||Date.now()-lastExpiryCheck<3600000)return;
+ lastExpiryCheck=Date.now();tabs();render();
+});
 localize();tabs();load();
 })();
