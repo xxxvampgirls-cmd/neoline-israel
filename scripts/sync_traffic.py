@@ -32,7 +32,7 @@ CONTEXT_RE = re.compile(
     r"כביש|נתיב|מחלף|צומת|תנועה|איילון|גשר|road|lane|highway", re.I
 )
 CLOSED_RE = re.compile(
-    r"נחסמ|חסומ|חסום|חסימה|חסימות|נסגר|סגור|סגיר|חסמ|סגר|"
+    r"נחסמ|נחסם|חסומ|חסום|חסימה|חסימות|נסגר|סגור|סגיר|חסמ|חסם|סגר|"
     r"blocked|closed|closure", re.I
 )
 OPENED_RE = re.compile(
