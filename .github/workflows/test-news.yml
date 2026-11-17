@@ -9,6 +9,8 @@ on:
       - "news-ui.css"
       - "catalog-ui.css"
       - "index.html"
+      - "delivery.html"
+      - "pickup-ui.css"
       - ".github/workflows/test-news.yml"
 permissions:
   contents: read
