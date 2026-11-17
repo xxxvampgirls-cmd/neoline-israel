@@ -455,14 +455,14 @@ body.game-over-open .theory-bottom{opacity:0!important;visibility:hidden!importa
 .gameover-card{
  position:relative;z-index:1;
  width:min(490px,100%);
- max-height:calc(100dvh - 28px);
- overflow-y:auto;overflow-x:hidden;
+ max-height:calc(100dvh - 20px);
+ overflow:hidden;
  scrollbar-width:thin;
  display:flex;flex-direction:column;align-items:center;
  text-align:center;
  border-radius:30px;
  border:3px solid #fff;
- padding:40px clamp(20px,6vw,40px) 35px;
+ padding:24px clamp(16px,5vw,30px) 20px;
  background:
   radial-gradient(ellipse at 52% 41%,#ffffff 10%,#f4fbff 70%,#deeffc 100%);
  box-shadow:0 17px 50px #063a6570,0 3px 0 #ffffff9c inset,0 0 0 2px #8ed8fa69;
@@ -494,16 +494,15 @@ body.game-over-open .theory-bottom{opacity:0!important;visibility:hidden!importa
 .gameover-hearts{
  position:relative;z-index:2;
  display:flex;align-items:center;justify-content:center;
- gap:12px;margin:20px 0 20px;
- filter:drop-shadow(0 5px 5px #b3223540);
+ gap:10px;margin:7px 0 9px;
+ color:#1596da;filter:drop-shadow(0 5px 5px #1596da38);
 }
-.gameover-hearts span{
- display:block;font-size:clamp(37px,8.5vw,46px);
- line-height:1;
+ .gameover-hearts svg{
+ display:block;width:clamp(30px,8.5vw,42px);height:clamp(30px,8.5vw,42px);
  animation:neolineHeartFall .6s cubic-bezier(.18,.72,.25,1) both;
 }
-.gameover-hearts span:nth-child(2){animation-delay:.09s}
-.gameover-hearts span:nth-child(3){animation-delay:.18s}
+.gameover-hearts svg:nth-child(2){animation-delay:.09s}
+.gameover-hearts svg:nth-child(3){animation-delay:.18s}
 .gameover-title{
  position:relative;z-index:2;
  margin:1px 0 7px;
@@ -513,7 +512,7 @@ body.game-over-open .theory-bottom{opacity:0!important;visibility:hidden!importa
  white-space:nowrap;
 }
 .gameover-underline{
- width:108px;height:5px;margin:12px auto 25px;
+ width:108px;height:5px;margin:6px auto 12px;
  border-radius:90% 20% 90% 15%;
  background:linear-gradient(90deg,#00b3e5,#21d1f1,transparent);
  transform:rotate(-4deg);
@@ -528,20 +527,20 @@ body.game-over-open .theory-bottom{opacity:0!important;visibility:hidden!importa
 .gameover-score{
  position:relative;z-index:2;
  display:inline-block;
- padding:6px 14px;margin:17px auto 22px;
+ padding:6px 14px;margin:10px auto 12px;
  color:#3b7eac;background:#e8f7ffb0;
  border:1px solid #bfe4f8;border-radius:99px;
  font-size:12px;font-weight:800;direction:ltr;
 }
 .gameover-actions{
  position:relative;z-index:2;
- display:grid;gap:12px;width:100%;
+ display:grid;gap:8px;width:100%;
 }
 .gameover-retry,.gameover-modes{
- width:100%;min-height:57px;padding:12px 20px;
+ width:100%;min-height:47px;padding:9px 14px;
  border-radius:999px;cursor:pointer;
  display:flex;align-items:center;justify-content:center;gap:14px;
- font:900 clamp(14px,4.3vw,17px)/1.25 Manrope,Arial,sans-serif;
+ font:900 clamp(13px,4vw,16px)/1.25 Manrope,Arial,sans-serif;
  transition:transform .2s,box-shadow .2s,background .2s;
 }
 .gameover-retry{
@@ -580,12 +579,12 @@ html[dir=rtl] .gameover-close{right:auto;left:15px}
 }
 @media(max-width:720px){
  .gameover-card{
-  padding:34px 24px 28px;border-radius:25px;
+  padding:16px 14px 14px;border-radius:25px;
  }
- .gameover-hearts{margin:19px 0 16px;gap:8px}
- .gameover-underline{margin:10px auto 18px}
- .gameover-score{margin:13px auto 17px}
- .gameover-retry,.gameover-modes{min-height:54px}
+ .gameover-hearts{margin:5px 0 8px;gap:8px}
+ .gameover-underline{margin:5px auto 9px}
+ .gameover-score{margin:8px auto 10px}
+ .gameover-retry,.gameover-modes{min-height:45px}
 }
 @media(max-height:590px){
  .gameover-card{padding-top:16px;padding-bottom:15px}
@@ -595,6 +594,57 @@ html[dir=rtl] .gameover-close{right:auto;left:15px}
  .gameover-score{margin:9px auto}
 }
 @media(prefers-reduced-motion:reduce){
- .gameover-card,.gameover-hearts span{animation:none!important}
+ .gameover-card,.gameover-hearts svg,.gameover-promo img{animation:none!important}
  .gameover-retry,.gameover-modes{transition:none!important}
 }
+
+/* Compact, accessible product discovery inside the branded Game Over overlay. */
+.gameover-promo{
+ z-index:2;position:relative;width:100%;display:flex;align-items:center;justify-content:space-between;
+ gap:10px;padding:8px 10px;margin:0 0 11px;text-align:start;
+ border:1px solid #b4dcf4;border-radius:18px;
+ background:linear-gradient(110deg,#f8fdff,#e2f4ff);
+ box-shadow:0 5px 13px #165e8c18;
+}
+.gameover-promo-main{display:flex;align-items:center;gap:9px;min-width:0;flex:1}
+.gameover-promo img{
+ width:66px;height:66px;min-width:66px;object-fit:contain;
+ filter:drop-shadow(0 3px 6px #1c69913b);
+ animation:neolinePromoFloat 4.8s ease-in-out infinite;
+}
+.gameover-promo-copy{min-width:0;display:flex;flex-direction:column;gap:1px}
+.gameover-promo-copy>span{font-size:10px;color:#3b779e;font-weight:800}
+.gameover-promo-copy strong{font-size:12px;line-height:1.2;color:#114c70}
+.gameover-promo-copy small{font-size:10px;color:#658ea6}
+.gameover-promo-link{
+ border:1px solid #9dd5f3;border-radius:12px;padding:8px;
+ color:#0d699f;background:#fff;max-width:120px;flex:none;
+ font-size:11px;line-height:1.25;font-weight:850;text-align:center;
+}
+.gameover-promo-link:hover{background:#d9f3ff}
+.gameover-promo-link:focus-visible{outline:3px solid #157fdb;outline-offset:3px}
+@keyframes neolinePromoFloat{0%,100%{transform:scale(1)}50%{transform:scale(1.055)}}
+@media(max-width:720px){
+ .gameover-promo{gap:7px;padding:5px 7px;margin-bottom:9px}
+ .gameover-promo img{width:50px;height:50px;min-width:50px}
+ .gameover-promo-copy>span,.gameover-promo-copy small{font-size:9px}
+ .gameover-promo-copy strong{font-size:11px}
+ .gameover-promo-link{max-width:108px;font-size:10px;padding:7px 6px}
+ .gameover-title{font-size:clamp(32px,9vw,43px)}
+ .gameover-message{line-height:1.35}
+}
+@media(max-height:520px){
+ .gameover-card{padding-top:8px;padding-bottom:8px}
+ .gameover-hearts{margin:0}
+ .gameover-hearts svg{width:26px;height:26px}
+ .gameover-title{font-size:29px;line-height:1}
+ .gameover-underline{margin:2px auto 6px}
+ .gameover-message{font-size:12px;line-height:1.25}
+ .gameover-score{margin:5px auto 6px;padding:3px 8px}
+ .gameover-promo{margin-bottom:6px;padding:3px 6px}
+ .gameover-promo img{width:40px;height:40px;min-width:40px}
+ .gameover-promo-copy small{display:none}
+ .gameover-actions{gap:5px}
+ .gameover-retry,.gameover-modes{min-height:38px;padding:6px}
+}
+@media(prefers-reduced-motion:reduce){.gameover-promo img{animation:none!important}}
