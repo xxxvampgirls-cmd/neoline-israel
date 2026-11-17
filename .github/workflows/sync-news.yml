@@ -2,11 +2,12 @@ name: Refresh Israel automotive news (30-day archive)
 on:
   workflow_dispatch:
   schedule:
-    - cron: '17 5 * * *'  # daily; limit publisher rate throttling
+    - cron: '17 5 * * *'  # daily, 30-day archive
   push:
     branches: [main]
     paths:
       - 'scripts/sync_news.py'
+      - 'scripts/build_news_thumbnails.py'
       - '.github/workflows/sync-news.yml'
 permissions:
   contents: write
@@ -16,7 +17,7 @@ concurrency:
 jobs:
   refresh:
     runs-on: ubuntu-latest
-    timeout-minutes: 24
+    timeout-minutes: 45
     steps:
       - name: Check out project
         uses: actions/checkout@v4
@@ -28,9 +29,14 @@ jobs:
         with:
           python-version: '3.12'
       - name: Install feed libraries
-        run: python -m pip install --disable-pip-version-check 'requests>=2.31,<3' 'beautifulsoup4>=4.12,<5' 'feedparser>=6,<7'
+        run: python -m pip install --disable-pip-version-check 'requests>=2.31,<3' 'beautifulsoup4>=4.12,<5' 'feedparser>=6,<7' 'Pillow>=11,<13'
       - name: Gather current news, expire every item older than 30 days
         run: python scripts/sync_news.py
+      - name: Build compressed 16:9 image thumbnails (licensed photos; optional paid AI)
+        env:
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+          MAX_AI_PER_RUN: "2"
+        run: python scripts/build_news_thumbnails.py
       - name: Strictly validate 30-day retention and source links
         run: |
           python - <<'PY'
@@ -45,7 +51,11 @@ jobs:
               assert "google." not in item["url"].split("/")[2]
               assert "translations" in item
               from pathlib import Path
-              assert Path(item["image"].lstrip("./")).is_file(),item["image"]
+              if item.get("image"):
+                  image=Path(item["image"].lstrip("./"))
+                  assert image.is_file(),item["image"]
+                  assert image.suffix==".webp",(image,item["image"])
+                  assert image.stat().st_size<90_000,(image,image.stat().st_size)
           print("Verified current news:",len(p["items"]))
           PY
       - name: Publish refreshed rolling archive
