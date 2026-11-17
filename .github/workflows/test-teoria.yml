@@ -197,7 +197,6 @@ jobs:
             if(artwork.foreground.width<artwork.stage.width*1.1||
                artwork.foreground.top>=artwork.stage.top)
               throw Error('Game art must extend OUTSIDE the photo frame rather than hiding under it');
-            if(!window.matchMedia){} // evaluated in browser below for animation support
             if(artwork.carAnimation==='none'||artwork.cardAnimation==='none')
               throw Error('Subtle car/card motion missing from the active slide');
             if(artwork.pageWidth>artwork.viewport+3)
