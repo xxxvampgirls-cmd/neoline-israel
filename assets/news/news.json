@@ -2,7 +2,7 @@
   "version": 1,
   "retentionDays": 30,
   "lawsRetentionMonths": 6,
-  "updated": "2026-11-17T10:53:23.394417Z",
+  "updated": "2026-11-17T10:54:39.753267Z",
   "items": [
     {
       "id": "01120a3d0005b8c1e505",
@@ -1990,7 +1990,8 @@
       "imageCredit": {
         "text": "Eric Friedebach · CC BY 2.0",
         "url": "https://commons.wikimedia.org/wiki/File:1973_Ford_Mustang_Interior_Dashboard_(51838912069).jpg"
-      }
+      },
+      "subjectPhotoChecked": true
     },
     {
       "id": "b6b16f68cf9892ffd0e7",
@@ -2066,7 +2067,8 @@
       "imageCredit": {
         "text": "Ivan Radic · CC BY 2.0",
         "url": "https://commons.wikimedia.org/wiki/File:Close-up_of_an_electric_car_charging._Traffic_lights_in_a_blurry_background.jpg"
-      }
+      },
+      "subjectPhotoChecked": true
     },
     {
       "id": "79df53609138c1864198",
@@ -2105,7 +2107,8 @@
       "imageCredit": {
         "text": "Eric Friedebach · CC BY 2.0",
         "url": "https://commons.wikimedia.org/wiki/File:1973_Ford_Mustang_Interior_Dashboard_(51838912069).jpg"
-      }
+      },
+      "subjectPhotoChecked": true
     },
     {
       "id": "2b9f8bb4a11fffd62c50",
@@ -2143,7 +2146,8 @@
       "imageCredit": {
         "text": "Eric Friedebach · CC BY 2.0",
         "url": "https://commons.wikimedia.org/wiki/File:1973_Ford_Mustang_Interior_Dashboard_(51838912069).jpg"
-      }
+      },
+      "subjectPhotoChecked": true
     },
     {
       "id": "7c193e0d09f585831fa0",
@@ -2181,7 +2185,8 @@
       "imageCredit": {
         "text": "Eric Friedebach · CC BY 2.0",
         "url": "https://commons.wikimedia.org/wiki/File:1973_Ford_Mustang_Interior_Dashboard_(51838912069).jpg"
-      }
+      },
+      "subjectPhotoChecked": true
     },
     {
       "id": "f927a1c96bf616445fab",
@@ -2220,7 +2225,8 @@
       "imageCredit": {
         "text": "Ivan Radic · CC BY 2.0",
         "url": "https://commons.wikimedia.org/wiki/File:Close-up_of_an_electric_car_charging._Traffic_lights_in_a_blurry_background.jpg"
-      }
+      },
+      "subjectPhotoChecked": true
     },
     {
       "id": "c0574ac9b24c0f469e34",
@@ -2296,7 +2302,8 @@
       "imageCredit": {
         "text": "Eric Friedebach · CC BY 2.0",
         "url": "https://commons.wikimedia.org/wiki/File:1973_Ford_Mustang_Interior_Dashboard_(51838912069).jpg"
-      }
+      },
+      "subjectPhotoChecked": true
     },
     {
       "id": "e41933ff7d130fb2bb9d",
@@ -2335,7 +2342,8 @@
       "imageCredit": {
         "text": "Eric Friedebach · CC BY 2.0",
         "url": "https://commons.wikimedia.org/wiki/File:1973_Ford_Mustang_Interior_Dashboard_(51838912069).jpg"
-      }
+      },
+      "subjectPhotoChecked": true
     },
     {
       "id": "954c10633c24e3464fa2",
