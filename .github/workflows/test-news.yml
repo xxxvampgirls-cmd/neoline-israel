@@ -46,23 +46,35 @@ jobs:
             const limit=Date.now()-30*86400*1000;
             if(data.items.some(x=>Date.parse(x.date)<limit))throw Error('Expired item in published news JSON');
             if(data.items.some(x=>/news\.google\.com|google\.com\/sorry/.test(x.url)))throw Error('Google redirects are not direct publisher links');
-            if(data.items.some(x=>!x.image||!x.translations))throw Error('Missing editorial artwork or language fields');
+            if(data.items.some(x=>!x.translations))throw Error('Missing language fields');
             for(const article of data.items){
               for(const lang of ['ru','he','en','ar']){
                 if(!article.translations[lang]?.title||!article.translations[lang]?.summary)
                   throw Error('Translation missing for '+article.id+' / '+lang);
               }
-              const picture=await page.request.get(new URL(article.image,page.url()).href);
-              if(!picture.ok())throw Error('Illustration URL not published: '+article.image+' / '+picture.status());
+              if(article.image){
+                const picture=await page.request.get(new URL(article.image,page.url()).href);
+                if(!picture.ok())throw Error('Thumbnail URL not published: '+article.image+' / '+picture.status());
+                if(article.image.endsWith('.webp')&&(await picture.body()).length>=90_000)
+                  throw Error('Thumbnail exceeds 90 KB: '+article.image);
+              }
             }
             const cards=await page.locator('.news-card').count();
-            if(cards!==data.items.length)throw Error('News cards do not match fresh JSON: cards='+cards+', feed='+data.items.length);
+            const expectedFirst=Math.min(9,data.items.length);
+            if(cards!==expectedFirst)throw Error('Initial lazy batch wrong: cards='+cards+', first='+expectedFirst+', feed='+data.items.length);
+            if(data.items.length>9){
+              await page.locator('#newsMoreButton').click();
+              const next=await page.locator('.news-card').count();
+              if(next<=cards||next>cards+9)throw Error('Lazy news pagination broken '+cards+' -> '+next);
+            }
             if(cards){
-             const image=page.locator('.news-card .news-art img, .news-card .news-art svg').first();
-             if(!await image.isVisible())throw Error('News illustration missing');
-             if(await image.evaluate(el=>el.tagName.toLowerCase())==='img' &&
-                !await image.evaluate(el=>el.complete&&el.naturalWidth>0))
-               throw Error('Unique news illustration file did not load');
+             const image=page.locator('.news-card .news-art img, .news-card .news-photo-placeholder').first();
+             if(!await image.isVisible())throw Error('News thumbnail or fallback missing');
+             if(await image.evaluate(el=>el.tagName.toLowerCase())==='img'){
+               await image.evaluate(el=>el.decode().catch(()=>null));
+               if(!await image.evaluate(el=>el.complete&&el.naturalWidth>0))
+                 throw Error('Thumbnail did not load');
+             }
              const link=await page.locator('.news-card .news-link').first().getAttribute('href');
              if(!link||!link.startsWith('http'))throw Error('News item has no valid source link');
             }
