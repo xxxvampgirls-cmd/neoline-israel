@@ -1552,6 +1552,83 @@ html[dir=rtl] .theory-preview{text-align:right}
   animation:none!important;will-change:auto;
  }
 }
+
+/* LAST THEORY SLIDE / subtle car-window motion, entirely behind the 3D
+   quiz device. Compositor-only streaks simulate roadside parallax: distant
+   glows move slowly, near ones pass faster and widen toward the viewer.
+   The original two blue photographic bands remain unchanged in number. */
+#showcaseSlides .featured-slide--theory .theory-stage .ad-photo-stripes{
+  isolation:isolate;
+}
+#showcaseSlides .featured-slide--theory .theory-stage .ad-photo-band{
+  position:relative;z-index:1;
+  background:linear-gradient(100deg,#51b2ed70 0%,#198bd5b3 29%,#9be4ff9e 49%,#198bd5bc 73%,#55b3ec70 100%);
+  background-size:210% 100%;
+}
+#showcaseSlides .featured-slide--theory .theory-window-streak{
+  position:absolute;display:block;z-index:0;pointer-events:none;
+  left:25%;width:64%;height:3px;border-radius:999px;opacity:0;
+  background:linear-gradient(90deg,transparent 0%,#6dcaf18c 20%,#fff9 62%,transparent 100%);
+  box-shadow:0 0 11px #4fbff34d;transform-origin:70% 50%;
+}
+#showcaseSlides .featured-slide--theory .theory-window-streak--far{
+  top:26%;height:2px;width:49%;left:35%;filter:blur(1px);
+}
+#showcaseSlides .featured-slide--theory .theory-window-streak--mid{
+  top:44%;height:3px;width:60%;left:31%;filter:blur(1.4px);
+}
+#showcaseSlides .featured-slide--theory .theory-window-streak--near{
+  top:74%;height:5px;width:72%;left:26%;filter:blur(2px);
+}
+#showcaseSlides .featured-slide--theory .theory-window-streak--glint{
+  top:83%;height:2px;width:43%;left:42%;filter:blur(.8px);
+}
+#showcaseSlides .featured-slide--theory.active:not(.ad-exiting) .theory-window-streak{
+  animation:neolineTheoryDriveBy 3.2s linear infinite;
+  will-change:transform,opacity;
+}
+#showcaseSlides .featured-slide--theory.active:not(.ad-exiting) .theory-window-streak--far{
+  animation-duration:5.4s;animation-delay:-3.7s;
+}
+#showcaseSlides .featured-slide--theory.active:not(.ad-exiting) .theory-window-streak--mid{
+  animation-duration:3.9s;animation-delay:-1.25s;
+}
+#showcaseSlides .featured-slide--theory.active:not(.ad-exiting) .theory-window-streak--near{
+  animation-duration:2.85s;animation-delay:-1.8s;
+}
+#showcaseSlides .featured-slide--theory.active:not(.ad-exiting) .theory-window-streak--glint{
+  animation-duration:4.6s;animation-delay:-2.4s;
+}
+#showcaseSlides .featured-slide--theory.active:not(.ad-exiting) .theory-stage .ad-photo-band{
+  animation:neolineTheoryBandCruise 7s ease-in-out infinite alternate;
+}
+#showcaseSlides .featured-slide--theory.active:not(.ad-exiting) .theory-stage .ad-photo-band:nth-child(2){
+  animation-delay:-3.5s;animation-duration:8.5s;
+}
+@keyframes neolineTheoryDriveBy{
+  0%{transform:translate3d(100%,0,0) scaleX(.25) skewX(-17deg);opacity:0}
+  14%{opacity:.20}
+  48%{opacity:.43}
+  81%{opacity:.28}
+  100%{transform:translate3d(-205%,0,0) scaleX(1.8) skewX(-7deg);opacity:0}
+}
+@keyframes neolineTheoryBandCruise{
+  from{background-position:0% 50%}
+  to{background-position:100% 50%}
+}
+@media(max-width:720px){
+  #showcaseSlides .featured-slide--theory .theory-window-streak{opacity:0}
+  #showcaseSlides .featured-slide--theory.active:not(.ad-exiting) .theory-window-streak--far{animation-duration:6.4s}
+  #showcaseSlides .featured-slide--theory.active:not(.ad-exiting) .theory-window-streak--near{animation-duration:3.7s}
+}
+@media(prefers-reduced-motion:reduce){
+  #showcaseSlides .featured-slide--theory .theory-window-streak,
+  #showcaseSlides .featured-slide--theory .theory-stage .ad-photo-band{
+    animation:none!important;will-change:auto!important;
+  }
+  #showcaseSlides .featured-slide--theory .theory-window-streak{opacity:0!important}
+}
+
 /* Bottom five-item navigation stays unchanged in function; polish only
    provides tactile feedback, clear hit targets and a subtle active marker. */
 @media(max-width:720px){
@@ -1765,7 +1842,9 @@ const theoryPromo={
    the light-blue image frame, while the CTA remains a real accessible link. */
 function theoryScene(){
  return '<div class="theory-stage">'
-  +'<div class="ad-photo-stripes" aria-hidden="true"><span class="ad-photo-band"></span><span class="ad-photo-band"></span></div>'
+  +'<div class="ad-photo-stripes" aria-hidden="true"><span class="ad-photo-band"></span><span class="ad-photo-band"></span>'
+   +'<span class="theory-window-streak theory-window-streak--far"></span><span class="theory-window-streak theory-window-streak--mid"></span>'
+   +'<span class="theory-window-streak theory-window-streak--near"></span><span class="theory-window-streak theory-window-streak--glint"></span></div>'
   +'<span class="theory-halo" aria-hidden="true"></span>'
   +'<span class="theory-ambient-light" aria-hidden="true"></span>'
   +'<span class="theory-stage-floor" aria-hidden="true"></span>'
