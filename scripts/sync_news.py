@@ -24,6 +24,7 @@ import requests
 from collections import Counter, defaultdict
 from bs4 import BeautifulSoup
 from telegram_news import collect as collect_public_telegram
+from facebook_news import collect as collect_authorized_facebook
 
 ROOT=Path("assets/news")
 IMAGES=ROOT/"images"
@@ -344,6 +345,22 @@ def main():
   print(f"TELEGRAM {len(telegram_posts)} collected; channels={telegram_stats}",flush=True)
  except Exception as exc:
   errors["Telegram public channels"]=f"{type(exc).__name__}: {str(exc)[:100]}"
+ # Facebook is opt-in and only reads authorized page posts using Meta Graph API.
+ # If not configured, no Facebook post is invented or represented as collected.
+ facebook_stats={}
+ facebook_state="not_configured"
+ if os.getenv("FACEBOOK_GRAPH_TOKEN","").strip():
+  facebook_state="configured"
+  try:
+   facebook_posts,facebook_stats,facebook_errors=collect_authorized_facebook(S,CUTOFF,NOW)
+   for name,entry in facebook_posts:
+    item=article(entry,name)
+    if not item or item["id"] in keep:continue
+    keep[item["id"]]=item;discovered+=1
+   errors.update(facebook_errors)
+   print(f"FACEBOOK {len(facebook_posts)} collected from authorized pages",flush=True)
+  except Exception as exc:
+   errors["Facebook Page Graph API"]=type(exc).__name__+" (check permissions)"
  recent=select_diverse(x for x in keep.values() if valid(x))
  new_count=0
  for x in recent:
@@ -366,6 +383,7 @@ def main():
  last=NOW.isoformat().replace("+00:00","Z") if feed_stats else ""
  payload={"version":1,"retentionDays":30,"updated":last,"items":recent}
  report={"attempted":NOW.isoformat().replace("+00:00","Z"),"feeds":feed_stats,"telegram":telegram_stats,
+  "facebook":facebook_stats,"facebookState":facebook_state,
   "new":discovered,"retained":len(recent),"imageCount":sum(bool(x["image"]) for x in recent),
   "deletedImages":deleted,"discardedGoogleLinks":existing_google,"errors":errors,
   "directLinksOnly":all(allowed(x["url"]) for x in recent),
