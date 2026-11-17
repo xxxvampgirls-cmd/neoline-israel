@@ -1,0 +1,97 @@
+/* Rolling 30-day automotive news – never show expired articles, even if the
+   scheduled sync is delayed or the visitor keeps an old browser cache. */
+(()=>{
+"use strict";
+const $=id=>document.getElementById(id);
+const state={items:[],category:"all",query:"",lang:"ru"};
+try{const saved=localStorage.getItem("neoline-language");if(["ru","he","en","ar"].includes(saved))state.lang=saved}catch(e){}
+const i18n={
+ru:{eyebrow:"NEOLINE · ИЗРАИЛЬ · АВТОНОВОСТИ",heading:"Что происходит <em>на дорогах Израиля</em>",intro:"Аварии, камеры контроля скорости, новые правила, дороги и автомобили. Коротко о главном — с датой публикации и ссылкой на первоисточник.",period:"Только последние 30 дней",search:"Найти новость…",all:"Все",accidents:"ДТП",speed:"Скорость",laws:"Правила и законы",roads:"Дороги",cars:"Автомобили",updated:"Обновлено",empty:"За последние 30 дней пока нет проверенных материалов в этой категории. Попробуйте другую тему.",noFeed:"Сейчас нет доступных новостей за последние 30 дней. Как только появятся новые проверенные публикации, они автоматически отобразятся здесь.",read:"Читать источник",image:"Иллюстрация",home:"Главная",catalog:"Каталог",news:"Новости",fav:"Избранное",cart:"Корзина",back:"← Каталог",warning:"Это информационная сводка, а не подтверждение вступления закона в силу.",legal:"Короткие справки, дата и ссылка на первоисточник. Тематические иллюстрации — собственное оформление NEOLINE Israel, не фотографии происшествий. Статус правил дорожного движения сверяйте с официальными публикациями Министерства транспорта Израиля."},
+en:{eyebrow:"NEOLINE · ISRAEL · AUTO NEWS",heading:"What's happening <em>on Israel's roads</em>",intro:"Traffic accidents, speed cameras, rules, roads and new cars. Short updates with original sources.",period:"Last 30 days only",search:"Search news…",all:"All",accidents:"Crashes",speed:"Speed",laws:"Rules and laws",roads:"Roads",cars:"Cars",updated:"Updated",empty:"No verified reports in this category during the last 30 days.",noFeed:"No recent verified reports yet. New items will appear here after the next update.",read:"Read source",image:"Illustration",home:"Home",catalog:"Catalog",news:"News",fav:"Favorites",cart:"Cart",back:"← Catalog",warning:"An article does not confirm a rule has entered into force.",legal:"Short source-linked reports. Thematic NEOLINE illustrations are not photographs of actual events. Check official Ministry of Transport publications for current legal rules."},
+he:{eyebrow:"NEOLINE · ישראל · חדשות רכב",heading:"מה חדש <em>בכבישי ישראל</em>",intro:"תאונות, מצלמות מהירות, חוקים, כבישים ורכב. עדכונים קצרים עם קישורים למקורות.",period:"רק ב־30 הימים האחרונים",search:"חיפוש בחדשות…",all:"הכול",accidents:"תאונות",speed:"מהירות",laws:"חוקים",roads:"כבישים",cars:"רכב",updated:"עודכן",empty:"אין כתבות מאומתות בקטגוריה זו בחודש האחרון.",noFeed:"אין כרגע כתבות מעודכנות ומאומתות. פרסומים חדשים יופיעו לאחר עדכון.",read:"למקור",image:"איור",home:"ראשי",catalog:"קטלוג",news:"חדשות",fav:"מועדפים",cart:"סל",back:"← קטלוג",warning:"פרסום על הצעה אינו אישור שהחוק נכנס לתוקף.",legal:"תקצירים קצרים וקישורים למקור. האיורים הם של NEOLINE ולא תמונות של אירועים אמיתיים. יש לבדוק תקנות עדכניות במשרד התחבורה."},
+ar:{eyebrow:"NEOLINE · إسرائيل · أخبار السيارات",heading:"ما الجديد <em>على طرق إسرائيل</em>",intro:"حوادث وكاميرات السرعة والأنظمة والطرق والسيارات. تحديثات قصيرة مع روابط المصادر.",period:"آخر 30 يومًا فقط",search:"البحث في الأخبار…",all:"الكل",accidents:"حوادث",speed:"السرعة",laws:"القوانين",roads:"الطرق",cars:"السيارات",updated:"آخر تحديث",empty:"لا توجد أخبار موثقة في هذه الفئة خلال آخر 30 يومًا.",noFeed:"لا توجد أخبار حديثة موثقة حاليًا. ستظهر المنشورات الجديدة بعد التحديث.",read:"اقرأ المصدر",image:"رسم توضيحي",home:"الرئيسية",catalog:"الكتالوج",news:"الأخبار",fav:"المفضلة",cart:"السلة",back:"← الكتالوج",warning:"وجود خبر عن مقترح لا يعني دخوله حيز التنفيذ.",legal:"ملخصات قصيرة وروابط للمصادر. الرسوم التوضيحية من NEOLINE وليست صورًا للأحداث. تحقق من القواعد السارية لدى وزارة النقل."}
+};
+const tr=k=>(i18n[state.lang]||i18n.ru)[k]||k;
+const safe=str=>String(str??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const safeURL=url=>{try{const x=new URL(url);return x.protocol==="https:"||x.protocol==="http:"?x.href:""}catch(e){return ""}};
+const artPaths={
+accidents:'<path d="M70 98 102 62l29 27 23-32 25 34" fill="none" stroke="#215b88" stroke-width="6" stroke-linejoin="round"/><path d="m153 57 8-9m-30 10-5-11" stroke="#0b8cd1" stroke-width="5" stroke-linecap="round"/><path d="M51 110h140" stroke="#287cb3" stroke-width="4" stroke-linecap="round"/><path d="m173 25 23 43h-46z" fill="#fff" stroke="#067cc4" stroke-width="4"/><path d="M173 39v13" stroke="#067cc4" stroke-width="4" stroke-linecap="round"/><circle cx="173" cy="60" r="2" fill="#067cc4"/>',
+speed:'<rect x="78" y="25" width="88" height="88" rx="18" fill="#fff" stroke="#3d8dbe" stroke-width="4"/><circle cx="122" cy="68" r="28" fill="#dcf3ff" stroke="#1281bb" stroke-width="3"/><path d="M122 68l18-19" stroke="#056bad" stroke-width="5" stroke-linecap="round"/><path d="M107 89h31" stroke="#82b8d7" stroke-width="3" stroke-linecap="round"/><path d="M160 91h25v18h-25" stroke="#247db0" stroke-width="5" fill="#bceaff"/><path d="M96 30h52" stroke="#7bbdeb" stroke-width="3"/>',
+laws:'<rect x="83" y="18" width="89" height="117" rx="10" fill="#fff" stroke="#378cbe" stroke-width="4"/><path d="M104 48h47M104 61h47M104 74h33M104 98h43" stroke="#87b7d8" stroke-width="4" stroke-linecap="round"/><circle cx="162" cy="107" r="18" fill="#bee9fb" stroke="#167db8" stroke-width="3"/><path d="m152 107 8 7 13-17" stroke="#0a719e" stroke-width="4" fill="none" stroke-linecap="round" stroke-linejoin="round"/>',
+roads:'<path d="m94 14-37 123h146L162 14Z" fill="#aecfe4" stroke="#3e8abd" stroke-width="3"/><path d="m128 17 1 120" stroke="#fff" stroke-width="6" stroke-dasharray="17 16"/><path d="M80 99h96" stroke="#fff" stroke-width="5"/><rect x="65" y="77" width="125" height="24" rx="5" fill="#f7fbff" stroke="#237cb4" stroke-width="3"/><path d="M85 80v17M111 80v17M137 80v17M163 80v17" stroke="#2f9eda" stroke-width="8"/>',
+cars:'<path d="M43 94h151l-9-30-28-24H89L64 64Z" fill="#e7f7ff" stroke="#147cb4" stroke-width="4" stroke-linejoin="round"/><path d="m91 44-17 26h100l-22-26Z" fill="#95d9f2" stroke="#2e8ab9" stroke-width="3"/><path d="M43 94v20h159V94" fill="#d8eafb" stroke="#147cb4" stroke-width="4"/><circle cx="81" cy="114" r="14" fill="#3e7299" stroke="#fff" stroke-width="5"/><circle cx="164" cy="114" r="14" fill="#3e7299" stroke="#fff" stroke-width="5"/><path d="M47 86h18m114 0h18" stroke="#0fa0e5" stroke-width="5" stroke-linecap="round"/>'
+};
+function artwork(kind){
+ const name=artPaths[kind]||artPaths.cars;
+ return '<svg role="img" aria-label="'+safe(tr("image"))+'" viewBox="0 0 244 153" xmlns="http://www.w3.org/2000/svg">'+
+ '<ellipse cx="122" cy="143" rx="95" ry="6" fill="#1e74b51c"/>'+name+'</svg>';
+}
+function displayDate(value){
+ const date=new Date(value);
+ if(!Number.isFinite(+date))return "";
+ const locale={ru:"ru-RU",en:"en-GB",he:"he-IL",ar:"ar-IL"}[state.lang]||"ru-RU";
+ return new Intl.DateTimeFormat(locale,{day:"numeric",month:"short",year:"numeric",timeZone:"Asia/Jerusalem"}).format(date);
+}
+function currentOnly(o){
+ const t=Date.parse(o.date),now=Date.now();
+ return Number.isFinite(t)&&t<=now+12*3600e3&&t>=now-30*86400e3&&safeURL(o.url)&&o.title&&o.category in artPaths;
+}
+function localize(){
+ document.documentElement.lang=state.lang;
+ document.documentElement.dir=["he","ar"].includes(state.lang)?"rtl":"ltr";
+ $("newsEyebrow").textContent=tr("eyebrow");$("newsHeading").innerHTML=tr("heading");
+ $("newsIntro").textContent=tr("intro");$("newsRetention").textContent=tr("period");
+ $("newsSearch").placeholder=tr("search");
+ $("newsCopyright").textContent=tr("legal");
+ $("returnCatalog").textContent=tr("back");
+ for(const [id,k] of [["newsHome","home"],["newsCatalog","catalog"],["newsNews","news"],["newsFav","fav"],["newsCart","cart"]]){
+  const label=$(id).querySelector("span");if(label)label.textContent=tr(k);
+ }
+}
+function tabs(){
+ const cats=["all","accidents","speed","laws","roads","cars"];
+ $("newsCategories").innerHTML=cats.map(k=>'<button class="news-chip '+(state.category===k?'active':'')+'" type="button" data-news-category="'+k+'">'+safe(tr(k))+'</button>').join("");
+ $("newsCategories").querySelectorAll("button").forEach(el=>el.onclick=()=>{state.category=el.dataset.newsCategory;tabs();render()});
+}
+function render(){
+ // Enforce expiration at every render, including after a tab or search click.
+ const recent=state.items.filter(currentOnly);
+ const query=state.query.trim().toLocaleLowerCase();
+ const list=recent.filter(x=>(state.category==="all"||x.category===state.category)
+  &&(!query||[x.title,x.titleOriginal,x.publisher,x.summary].join(" ").toLocaleLowerCase().includes(query)));
+ $("newsGrid").innerHTML=list.map(item=>{
+  const label=tr(item.category),url=safeURL(item.url);
+  return '<article class="news-card">'+
+   '<div class="news-art"><span class="news-art-type">'+safe(label)+'</span>'+artwork(item.art||item.category)+
+   '<span class="news-art-source">'+safe(tr("image"))+'</span></div>'+
+   '<div class="news-card-body"><div class="news-card-meta">'+safe(displayDate(item.date))+
+   ' <b>· '+safe(item.publisher||"")+'</b>'+(item.official?' · gov.il':'')+'</div>'+
+   '<h2 dir="auto">'+safe(item.title)+'</h2>'+
+   '<p class="summary">'+safe(item.summary||"")+'</p>'+
+   (item.category==="laws"&&!item.official?'<p class="summary">'+safe(tr("warning"))+'</p>':'')+
+   '<a class="news-link" href="'+safe(url)+'" target="_blank" rel="noopener noreferrer nofollow">'+safe(tr("read"))+' ↗</a></div></article>';
+ }).join("");
+ $("newsEmpty").hidden=list.length>0;
+ if(!list.length)$("newsEmpty").textContent=recent.length?tr("empty"):tr("noFeed");
+}
+async function load(){
+ try{
+  const response=await fetch("./assets/news/news.json",{cache:"no-store"});
+  if(!response.ok)throw new Error("feed not yet published");
+  const data=await response.json();
+  if(data.version!==1||!Array.isArray(data.items)||data.retentionDays!==30)throw new Error("bad feed");
+  state.items=data.items.filter(currentOnly);
+  state.items.sort((a,b)=>Date.parse(b.date)-Date.parse(a.date));
+  const stamp=new Date(data.updated);
+  $("newsUpdated").textContent=Number.isFinite(+stamp)?tr("updated")+": "+displayDate(stamp):"";
+ }catch(e){
+  console.warn("News feed temporarily unavailable:",e.message);
+  $("newsUpdated").textContent="";
+  state.items=[];
+ }
+ tabs();render();
+}
+$("newsSearch").addEventListener("input",e=>{state.query=e.target.value;render()});
+document.addEventListener("visibilitychange",()=>{if(!document.hidden)render()});
+localize();tabs();load();
+})();
