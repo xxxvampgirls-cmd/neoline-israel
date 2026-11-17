@@ -1521,6 +1521,34 @@ html[dir=rtl] .theory-preview{text-align:right}
  }
 }
 
+
+/* NEOLINE mobile navigation: glide off-screen while reading down the page,
+   then return softly on an intentional upward scroll. */
+@media(max-width:720px){
+ .mobile-nav{
+  transform:translate3d(0,0,0);
+  opacity:1;
+  visibility:visible;
+  transition:transform .43s cubic-bezier(.2,.75,.24,1),
+             opacity .30s ease,visibility .43s linear!important;
+  will-change:transform;
+ }
+ .mobile-nav.nav-scroll-hidden{
+  transform:translate3d(0,calc(100% + 24px),0);
+  opacity:0;
+  visibility:hidden;
+  pointer-events:none;
+ }
+ .mobile-nav:focus-within{
+  transform:translate3d(0,0,0)!important;
+  opacity:1!important;
+  visibility:visible!important;
+ }
+}
+@media(prefers-reduced-motion:reduce){
+ .mobile-nav{transition:none!important;will-change:auto}
+}
+
 </style><link rel="stylesheet" href="./catalog-ui.css"><link rel="stylesheet" href="./pickup-ui.css"><!-- Cloudflare Pages Git reconnection deployment probe: 2026-11-16 --></head><body>
 <div class="sticky"><div class="shell header"><a class="brand brand-original" href="#top" aria-label="NEOLINE"><span class="brand-lockup"><img class="brand-clean" src="assets/neoline-clean.svg?v=20261116-compact" alt="NEOLINE" width="501" height="108" decoding="async"></span></a><nav class="nav"><button data-scroll="catalog" class="active" data-i="navCatalog">Каталог</button><button type="button" id="openNewsHeader" aria-label="Автоновости Израиля"><span id="headerNewsLabel">Новости</span></button><button data-scroll="advantages" data-i="navBenefits">Преимущества</button><button data-scroll="installation" data-i="navInstall">Установка и доставка</button><button data-scroll="footer" data-i="navContact">Контакты</button></nav><div class="head-actions"><div class="flag-switcher" role="group" aria-label="Язык / Language / שפה / اللغة"><button class="flag-choice active" type="button" data-language="ru" title="Русский" aria-label="Русский язык" aria-pressed="true"><span class="flag-graphic" aria-hidden="true"><svg viewBox="0 0 36 24" xmlns="http://www.w3.org/2000/svg" focusable="false"><rect width="36" height="24" fill="#fff"/><path d="M0 8h36v8H0z" fill="#0039a6"/><path d="M0 16h36v8H0z" fill="#d52b1e"/></svg></span></button><button class="flag-choice" type="button" data-language="he" title="עברית" aria-label="עברית - Hebrew" aria-pressed="false"><span class="flag-graphic" aria-hidden="true"><svg viewBox="0 0 36 24" xmlns="http://www.w3.org/2000/svg" focusable="false"><rect width="36" height="24" fill="#fff"/><path d="M0 4h36v2.3H0zm0 13.7h36V20H0z" fill="#0038b8"/><g stroke="#0038b8" stroke-width="1.25" fill="none" stroke-linejoin="round" stroke-linecap="round"><path d="M18 7.6 23.4 16.4H12.6Z"/><path d="M18 16.4 12.6 7.6h10.8Z"/></g></svg></span></button><button class="flag-choice" type="button" data-language="en" title="English" aria-label="English language" aria-pressed="false"><span class="flag-graphic" aria-hidden="true"><svg viewBox="0 0 36 24" xmlns="http://www.w3.org/2000/svg" focusable="false"><rect width="36" height="24" fill="#012169"/><path d="M0 0l36 24M36 0L0 24" stroke="#fff" stroke-width="6"/><path d="M0 0l36 24M36 0L0 24" stroke="#c8102e" stroke-width="2.5"/><path d="M18 0v24M0 12h36" stroke="#fff" stroke-width="9"/><path d="M18 0v24M0 12h36" stroke="#c8102e" stroke-width="4.6"/></svg></span></button><button class="flag-choice flag-choice--text flag-choice--arabic" type="button" data-language="ar" title="العربية" aria-label="اللغة العربية" aria-pressed="false" lang="ar" dir="rtl">عربي</button></div><select class="language language-native" id="lang" aria-label="Language" tabindex="-1"><option value="ru">RU</option><option value="he">עברית</option><option value="en">ENG</option><option value="ar">العربية</option></select></div></div></div>
 <main id="top"><section class="showcase" aria-label="Featured products"><div class="hero-stage"><div id="showcaseSlides" aria-live="polite"></div><div class="showcase-controls"><button class="showcase-arrow" id="slidePrev" aria-label="Previous">‹</button><div id="showcaseDots" class="showcase-dots"></div><button class="showcase-arrow" id="slideNext" aria-label="Next">›</button></div><div class="sneak" aria-label="Highlights"><span>NEOLINE ISRAEL · CONCEPT</span><span>◉ 4K · 2K · Wi-Fi</span><span>🚙 Dash cams</span><span>₪ Estimated local pricing</span></div></div></section>
@@ -1911,4 +1939,60 @@ let preferredLang='ru';try{const saved=localStorage.getItem('neoline-language');
  const panel=new URLSearchParams(location.search).get('panel');
  if(panel==='cart')requestAnimationFrame(()=>{if(typeof openDrawer==='function')openDrawer(panel)});
 })();
-</script></body></html>
+</script>
+<script>
+/* neolineNavAutoHide v1: mobile bottom dock hides on meaningful downward
+   scrolling, returns on upward scrolling; tap jitter and overscroll ignored. */
+(function(){
+ "use strict";
+ const bar=document.querySelector('.mobile-nav');
+ if(!bar)return;
+ const mobile=window.matchMedia('(max-width:720px)');
+ const TOP_SAFE_ZONE=105;
+ const HIDE_DISTANCE=24;
+ const SHOW_DISTANCE=13;
+ let lastY=Math.max(0,window.scrollY||0);
+ let direction=0;
+ let travel=0;
+ let queued=false;
+ function show(){
+  bar.classList.remove('nav-scroll-hidden');
+ }
+ function hide(){
+  if(!bar.matches(':focus-within'))bar.classList.add('nav-scroll-hidden');
+ }
+ function check(){
+  queued=false;
+  const y=Math.max(0,window.scrollY||window.pageYOffset||0);
+  const delta=y-lastY;
+  lastY=y;
+  if(!mobile.matches){
+   show();direction=0;travel=0;return;
+  }
+  if(y<TOP_SAFE_ZONE){
+   show();direction=0;travel=0;return;
+  }
+  // Ignore sub-pixel momentum, small bouncing gestures and scroll jitter.
+  if(Math.abs(delta)<1.4)return;
+  const nextDirection=delta>0?1:-1;
+  if(nextDirection!==direction){
+   direction=nextDirection;
+   travel=0;
+  }
+  travel+=Math.abs(delta);
+  if(direction>0 && travel>=HIDE_DISTANCE)hide();
+  else if(direction<0 && travel>=SHOW_DISTANCE)show();
+ }
+ window.addEventListener('scroll',()=>{
+  if(!queued){queued=true;requestAnimationFrame(check);}
+ },{passive:true});
+ window.addEventListener('resize',()=>{
+  lastY=Math.max(0,window.scrollY||0);
+  direction=0;travel=0;
+  if(!mobile.matches||lastY<TOP_SAFE_ZONE)show();
+ },{passive:true});
+ bar.addEventListener('focusin',show);
+ bar.dataset.navScrollBehavior='directional';
+})();
+</script>
+</body></html>
