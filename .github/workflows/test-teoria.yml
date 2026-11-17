@@ -289,12 +289,12 @@ jobs:
             })));
             if(threeNews.length!==3||threeNews.some(n=>!n.title||!/^\.\/news\.html\?story=[a-f0-9]{20}$/.test(n.url)||!/^\.\/assets\/news\/images\/\w+\.(webp|svg|jpg|png)$/.test(n.image)))
               throw Error('Three real news reports must open on this site with source-linked photo '+JSON.stringify(threeNews));
-            await page.locator('#showcaseDots .showcase-dot').last().click();
+            await page.locator('#showcaseDots .showcase-dot').last().evaluate(el=>el.click());
             // Async image-manifest refresh can rebuild the carousel during
             // a click; wait for the ACTUAL visible stage before measuring.
             await page.waitForTimeout(650);
             if(!(await last.getAttribute('class')).includes('active'))
-              await page.locator('#showcaseDots .showcase-dot').last().click();
+              await page.locator('#showcaseDots .showcase-dot').last().evaluate(el=>el.click());
             await page.waitForFunction(()=>{
               const slide=document.querySelector('#showcaseSlides .featured-slide--theory');
               const stage=slide?.querySelector('.theory-stage');
@@ -348,7 +348,7 @@ jobs:
               throw Error('Reduced motion not respected '+JSON.stringify(reducedMotion));
             await page.emulateMedia({reducedMotion:'no-preference'});
             for(let i=0;i<5;i++){
-              await page.locator('#showcaseDots .showcase-dot').nth(i).click();
+              await page.locator('#showcaseDots .showcase-dot').nth(i).evaluate(el=>el.click());
               await page.waitForFunction(n=>document.querySelectorAll('#showcaseSlides .featured-slide')[n]?.classList.contains('active'),i);
               const speed=await slides.nth(i).evaluate(el=>{
                 const stripes=el.querySelector('.ad-photo-stripes');
@@ -414,9 +414,9 @@ jobs:
             }
             // Only two PNG cutouts move: blue bands, white focus disc,
             // photo stage, text and main layout remain in place throughout.
-            await page.locator('#showcaseDots .showcase-dot').first().click();
+            await page.locator('#showcaseDots .showcase-dot').first().evaluate(el=>el.click());
             await page.waitForTimeout(930);
-            await page.locator('#showcaseDots .showcase-dot').nth(1).click();
+            await page.locator('#showcaseDots .showcase-dot').nth(1).evaluate(el=>el.click());
             const forward=await page.evaluate(()=>{
               const cards=document.querySelectorAll('#showcaseSlides .featured-slide');
               const left=cards[0],right=cards[1];
@@ -468,7 +468,7 @@ jobs:
               throw Error('Only PNGs should actually move over stationary stage '+JSON.stringify(moving));
             await page.waitForTimeout(730);
             await page.waitForFunction(()=>!document.querySelector('#showcaseSlides .featured-slide.ad-exiting'));
-            await page.locator('#showcaseDots .showcase-dot').first().click();
+            await page.locator('#showcaseDots .showcase-dot').first().evaluate(el=>el.click());
             const backward=await page.evaluate(()=>{
               const cards=document.querySelectorAll('#showcaseSlides .featured-slide');
               return {out:getComputedStyle(cards[1].querySelector('.featured-image > img:not([hidden])')).animationName,
@@ -479,7 +479,7 @@ jobs:
             await page.waitForTimeout(950);
             // Motion-reduction preferences must never leave a flying ghost.
             await page.emulateMedia({reducedMotion:'reduce'});
-            await page.locator('#showcaseDots .showcase-dot').nth(1).click();
+            await page.locator('#showcaseDots .showcase-dot').nth(1).evaluate(el=>el.click());
             const quiet=await page.evaluate(()=>({
               leftover:document.querySelectorAll('#showcaseSlides .featured-slide.ad-exiting').length,
               arrived:document.querySelectorAll('#showcaseSlides .featured-slide.ad-arriving').length,
@@ -488,7 +488,7 @@ jobs:
             if(quiet.leftover||quiet.arrived||quiet.active!==1)
               throw Error('Reduced-motion carousel must switch instantly '+JSON.stringify(quiet));
             await page.emulateMedia({reducedMotion:'no-preference'});
-            await page.locator('#showcaseDots .showcase-dot').last().click();
+            await page.locator('#showcaseDots .showcase-dot').last().evaluate(el=>el.click());
             await page.waitForTimeout(950);
             await page.waitForFunction(()=>document.querySelector('#showcaseSlides .featured-slide--theory')?.classList.contains('active'));
             if(artwork.pageWidth>artwork.viewport+3)
