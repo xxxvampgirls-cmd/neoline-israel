@@ -1,0 +1,18 @@
+{
+  "version": 1,
+  "note": "Facebook news ingestion is disabled until Meta grants the required page permissions. Never include tokens in this file. Curated official accounts only; add confirmed Page IDs and set enabled=true with approved credentials.",
+  "pages": [
+    {
+      "name": "Полиция Израиля (официальная Facebook-страница)",
+      "id": "",
+      "enabled": false,
+      "verified": false
+    },
+    {
+      "name": "РАЛБАД — Национальное управление безопасности на дорогах (официальная страница)",
+      "id": "",
+      "enabled": false,
+      "verified": false
+    }
+  ]
+}
