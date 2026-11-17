@@ -40,8 +40,16 @@ jobs:
             await page.locator('#catalogShowMoreBtn').click();
             await page.waitForFunction(()=>document.querySelectorAll('#products .product').length===16,{timeout:10000});
             console.log('PRODUCT FIRST 8 PASS: 8 -> 16');
-            const tabs=await page.locator('.mobile-nav>button').count();
-            if(tabs!==5)throw Error('Expected five mobile navigation buttons, got '+tabs);
+            const tabs=await page.locator('.mobile-nav>button, .mobile-nav>a').count();
+            if(tabs!==5)throw Error('Expected five mobile navigation controls, got '+tabs);
+            const deliveryTab=page.locator('#mobileDelivery');
+            if(!await deliveryTab.isVisible()||!String(await deliveryTab.getAttribute('href')).endsWith('/delivery.html'))
+              throw Error('Delivery tab missing from homepage bottom navigation');
+            if(await page.locator('#mobileFav, #desktopFav, .product .heart').count())
+              throw Error('Favorites/heart control still shown');
+            if(await page.locator('#desktopDelivery').count()!==1)
+              throw Error('Desktop delivery shortcut missing');
+            console.log('HOMEPAGE DELIVERY NAV PASS: no favorites, truck link available');
             const target=await page.locator('#openNewsMobile').evaluate(el=>({html:el.outerHTML,disabled:el.disabled}));
             console.log('NEWS TARGET '+JSON.stringify(target)+' before URL='+page.url());
             await page.locator('#openNewsMobile').click();
@@ -49,6 +57,25 @@ jobs:
             console.log('NEWS AFTER CLICK URL='+page.url());
             await page.waitForURL(url=>/\/news(?:\.html)?\/?$/.test(new URL(url).pathname),{timeout:15000});
             await page.waitForSelector('#newsGrid',{state:'attached',timeout:12000});
+            if(await page.locator('#newsFav').count()!==0||await page.locator('#newsDelivery').count()!==1)
+              throw Error('News bottom nav should replace Favorites with Delivery');
+            const compact=await page.evaluate(()=>{
+              const carousel=document.getElementById('newsFeatureCarousel');
+              const title=document.getElementById('newsHeading');
+              return {top:carousel.getBoundingClientRect().top,
+               titleBottom:title.getBoundingClientRect().bottom,
+               intro:getComputedStyle(document.getElementById('newsIntro')).display,
+               stats:getComputedStyle(document.querySelector('.news-fresh-row')).display,
+               langTop:document.getElementById('newsLanguages').getBoundingClientRect().top,
+               imageBottom:carousel.getBoundingClientRect().bottom};
+            });
+            if(compact.intro!=='none'||compact.stats!=='none')
+              throw Error('Reader-unnecessary news information remains visible: '+JSON.stringify(compact));
+            if(compact.langTop<compact.imageBottom-1)
+              throw Error('Languages still take space above carousel: '+JSON.stringify(compact));
+            if(compact.top>225||compact.top-compact.titleBottom>25)
+              throw Error('Carousel must sit high, immediately under headline: '+JSON.stringify(compact));
+            console.log('COMPACT NEWS HERO PASS '+JSON.stringify(compact));
             await page.waitForFunction(()=>document.querySelectorAll('.news-card').length>0 || !document.getElementById('newsEmpty').hidden,{timeout:30000});
             const data=await page.evaluate(async()=>await (await fetch('./assets/news/news.json')).json());
             if(data.version!==1||data.retentionDays!==30||data.lawsRetentionMonths!==6)throw Error('Wrong archive configuration');
@@ -181,6 +208,9 @@ jobs:
             if(renderedExpired!==0)throw Error('Old news was not filtered by client');
             if(errors.length)throw Error('JS page errors: '+errors.join(' | '));
             console.log('NEWS MOBILE PASS tabs='+tabs+' currentItems='+cards+' expiredRendered='+renderedExpired+' noHorizontalScroll=true JSerrors=0');
+            await page.locator('#newsDelivery').click();
+            await page.waitForURL(url=>/\/delivery(?:\.html)?\/?$/.test(new URL(url).pathname),{timeout:15000});
+            console.log('NEWS DELIVERY LINK PASS');
             await page.goto('https://neoline-israel.pages.dev/delivery.html',{waitUntil:'domcontentloaded',timeout:40000});
             await page.waitForSelector('.network[data-provider="boxit"]');
             const colors=await page.evaluate(()=>({
