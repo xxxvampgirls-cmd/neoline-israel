@@ -21,12 +21,62 @@ function saveStats(){safeStorePut(statsKey(),JSON.stringify(stats))}
 function shuffled(values){const out=[...values];for(let i=out.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[out[i],out[j]]=[out[j],out[i]]}return out}
 function classes(){return state.pool.filter(q=>q.classes.includes(state.licence))}
 function sourceFor(lang){return "https://data.gov.il/he/datasets/ministry_of_transport/"+({ru:"tqru",he:"tqhe",en:"tqen"}[lang]||"tqru")}
+
+const NAV_LABELS={
+ ru:{home:"Главная",catalog:"Каталог",news:"Новости",delivery:"Доставка",cart:"Корзина"},
+ he:{home:"ראשי",catalog:"קטלוג",news:"חדשות",delivery:"משלוח",cart:"סל"},
+ en:{home:"Home",catalog:"Catalog",news:"News",delivery:"Delivery",cart:"Cart"}
+};
+function updateTheoryNavigation(){
+ const labels=NAV_LABELS[state.lang]||NAV_LABELS.ru;
+ document.querySelectorAll("[data-theory-nav]").forEach(link=>{
+  const translated=labels[link.dataset.theoryNav];
+  if(!translated)return;
+  const caption=link.querySelector("span");
+  if(caption)caption.textContent=translated;
+  link.setAttribute("aria-label",translated);
+ });
+}
+function initTheoryNavAutoHide(){
+ const dock=$("theoryBottomNav");
+ if(!dock)return;
+ const mobile=window.matchMedia("(max-width:720px)");
+ let lastY=Math.max(0,window.scrollY||0),direction=0,travel=0,queued=false;
+ function update(){
+  queued=false;
+  const y=Math.max(0,window.scrollY||0),delta=y-lastY;lastY=y;
+  if(!mobile.matches||y<105){
+   dock.classList.remove("nav-scroll-hidden");
+   direction=0;travel=0;return;
+  }
+  if(Math.abs(delta)<1.4)return;
+  const next=delta>0?1:-1;
+  if(next!==direction){direction=next;travel=0}
+  travel+=Math.abs(delta);
+  if(next>0&&travel>=24&&!dock.matches(":focus-within")){
+   dock.classList.add("nav-scroll-hidden");
+  }else if(next<0&&travel>=13){
+   dock.classList.remove("nav-scroll-hidden");
+  }
+ }
+ window.addEventListener("scroll",()=>{
+  if(!queued){queued=true;requestAnimationFrame(update)}
+ },{passive:true});
+ window.addEventListener("resize",()=>{
+  lastY=Math.max(0,window.scrollY||0);direction=0;travel=0;
+  if(!mobile.matches||lastY<105)dock.classList.remove("nav-scroll-hidden");
+ },{passive:true});
+ dock.addEventListener("focusin",()=>dock.classList.remove("nav-scroll-hidden"));
+ dock.dataset.navScrollBehavior="directional";
+}
+
 function setCopy(){
  document.documentElement.lang=state.lang;
  document.documentElement.dir=state.lang==="he"?"rtl":"ltr";
  for(const id of ["backHome","heroEyebrow","heroSubtitle","badgeOfficial","badgeFree","badgeB","selectLabel","selectTitle","progressSummary","licenseLabel","statSeenLabel","statAccuracyLabel","statMistakesLabel","modeRoute","descRoute","ctaRoute","modeSigns","descSigns","ctaSigns","modeExam","descExam","ctaExam","modeMistakes","descMistakes","ctaMistakes","modeMarathon","descMarathon","ctaMarathon","sourceNotice","sourceBank","sourceRules","exitLabel","questionTip","resultKicker","resultPercentLabel","resultXPLabel","restartLabel","backModesLabel","footerBack"]){
   const el=$(id);if(el&&text(id))el.textContent=typeof text(id)==="function"?"":text(id)
  }
+ updateTheoryNavigation();
  $("heroTitle").innerHTML=text("heroTitle");
  $("sourceBank").href=sourceFor(state.lang);
  document.querySelectorAll("[data-lang]").forEach(b=>{b.classList.toggle("on",b.dataset.lang===state.lang);b.setAttribute("aria-pressed",String(b.dataset.lang===state.lang))});
@@ -265,6 +315,7 @@ function finishSession(timedOut){
  refreshStats();
 }
 function init(){
+ initTheoryNavAutoHide();
  const saved=safeStoreGet("neoline-language");
  state.lang=DICTS[saved]?saved:"ru";
  const license=safeStoreGet("neoline-teoria-licence");
