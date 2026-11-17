@@ -1626,8 +1626,8 @@ html[dir=rtl] .theory-preview{text-align:right}
   #showcaseSlides .featured-slide .ad-photo-stripes .ad-photo-band:nth-child(2){height:9px}
   #showcaseSlides .featured-slide.active:not(.ad-exiting) .ad-photo-stripes .ad-photo-band:first-child{animation-duration:10.4s}
   #showcaseSlides .featured-slide.active:not(.ad-exiting) .ad-photo-stripes .ad-photo-band:nth-child(2){animation-duration:11.9s}
-  /* One-pixel optical softness on small devices without a canvas or video. */
-  #showcaseSlides .featured-slide .ad-photo-stripes .ad-speed-trail{filter:blur(calc(var(--trail-blur)*.7))}
+  /* Six lightweight trails on phones; all seven remain on larger screens. */
+  #showcaseSlides .featured-slide .ad-photo-stripes .ad-speed-trail--7{display:none}
 }
 @media(prefers-reduced-motion:reduce){
   #showcaseSlides .featured-slide .ad-photo-stripes::before,
