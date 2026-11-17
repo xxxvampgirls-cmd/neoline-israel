@@ -1,213 +1,272 @@
 #!/usr/bin/env python3
-"""NEOLINE Israel: rolling 30-day automotive headlines from Israeli sources.
+"""NEOLINE Israel news — direct publisher links, original art, four locales.
 
-Stores only original brief headline summaries and clickable source links, not
-full articles or publishers' photos. Images are our own themed SVG artwork.
-RSS is discovery metadata only. Dates are verified and enforced at import time.
+RSS is used only for factual metadata and links; no republished article text.
+Every dated item has a generated *unique* editorial SVG, shared across
+Russian/Hebrew/English/Arabic. Missing translations remain clearly source
+language instead of being fabricated. Never keep items older than 30 days.
 """
 from __future__ import annotations
 import datetime as dt
 import hashlib
 import html
 import json
-import os
+import math
+import random
 import re
-import sys
 import time
 from pathlib import Path
-from urllib.parse import urlencode,urlparse
-import requests
+from urllib.parse import urlparse
+import xml.etree.ElementTree as ET
 import feedparser
+import requests
 from bs4 import BeautifulSoup
 
 ROOT=Path("assets/news")
+IMAGES=ROOT/"images"
 DEST=ROOT/"news.json"
 REPORT=ROOT/"sync-report.json"
-TZ=dt.timezone.utc
-NOW=dt.datetime.now(TZ)
+UTC=dt.timezone.utc
+NOW=dt.datetime.now(UTC)
 CUTOFF=NOW-dt.timedelta(days=30)
-MAX_ITEMS=180
+MAX_ITEMS=110
+NEW_PER_RUN=32
 S=requests.Session()
-S.headers.update({"User-Agent":"Mozilla/5.0 (compatible; NEOLINEIsraelNews/1.0; original outbound links)","Accept-Language":"he-IL,he;q=0.9,en;q=0.6"})
-QUERIES={
- "accidents":'תאונת דרכים ישראל',
- "speed":'מצלמות מהירות ישראל',
- "laws":'תקנות תעבורה נהגים ישראל',
- "roads":'חסימות כבישים ישראל',
- "cars":'רכב חשמלי ישראל',
-}
-MOT_RSS="https://www.gov.il/he/api/NewsApi/rss/48eaee91-0c97-4ef3-b364-50ae52e3b56f"
+S.headers.update({"User-Agent":"Mozilla/5.0 (compatible; NEOLINE-Israel-Headlines/2.0)","Accept-Language":"he-IL,he;q=.8,en;q=.5"})
+# Direct, public RSS feeds published by the outlets. Avoid Google News article
+# redirect URLs which return "We're sorry" / 429 to the end user.
+FEEDS=[
+ ("Walla · Авто","https://rss.walla.co.il/feed/4705"),
+ ("Walla · Безопасность","https://rss.walla.co.il/feed/4734"),
+ ("Walla · Право и страхование","https://rss.walla.co.il/feed/4715"),
+ ("Walla · Все автомобили","https://rss.walla.co.il/feed/4700"),
+ ("Walla · Новости Израиля","https://www.walla.co.il/rss/feed/news/israel"),
+ ("The Times of Israel","https://www.timesofisrael.com/feed/"),
+ ("The Jerusalem Post","https://www.jpost.com/rss/rssfeedsfrontpage.aspx"),
+]
 CATEGORIES=("accidents","speed","laws","roads","cars")
 KEYWORDS={
- "accidents":["תאונ","התנגש","נפגע","פצוע","הרוג","נהרג","collision","crash","accident","дтп","авари"],
- "speed":["מהירות","מצלמת מהירות","מצלמות מהירות","מכמונת","speed camera","speed limit","скорост","штраф за скорость"],
- "laws":["תקנות התעבורה","חוקי תנועה","חוק התעבורה","רישיון נהיגה","רישיון רכב","קנסות נהגים","traffic law","driving regulation","пдд","правила дорожного движения"],
- "roads":["כביש","פקק","עומס תנועה","עומסי תנועה","נתיב","מחלף","road closure","traffic jam","дорог","шоссе","пробк"],
- "cars":["רכב ","רכבי ","רכב חדש","שוק הרכב","מכוני","מכונית","חשמליות","מכוניות חשמליות","טעינת רכב","car market","electric car","automotiv","электромобил","автомобил"],
+ "accidents":["תאונ","התנגש","נפגע","פצוע","הרוג","נהרג","דרס","collision","crash","accident","road fatal","дтп","авари"],
+ "speed":["מהירות","מכמונת","מצלמות","אכיפה","speed camera","speeding","speed limit","скорост","радар","штраф за скорость"],
+ "laws":["תקנות התעבורה","חוקי תנועה","חוק התעבורה","רישיון נהיגה","רישיון רכב","קנסות נהגים","נהיגה בשכרות","driving law","traffic law","regulation","licens","правила дорожного движения"],
+ "roads":["כביש","פקק","עומס תנועה","עומסי תנועה","נתיב","מחלף","road closure","highway","traffic jam","дорог","шоссе","пробк"],
+ "cars":["רכב","רכבי","רכב חדש","מכוני","מכונית","חשמליות","טעינה","car","auto","vehicle","electric","tesla","автомобил","электромобил"],
 }
-# Explicitly exclude irrelevant military, global politics and aviation results
-EXCLUDE=["טיל","איראן","לבנון","מלחמה","טיסה","מטוס","אירוויזיון","עזה","כדורגל","aircraft","airline","וולט","wolt","מכבי חיפה","הפועל באר שבע"]
-def text(raw):
- return re.sub(r"\s+"," ",BeautifulSoup(html.unescape(raw or ""),"html.parser").get_text(" ",strip=True)).strip()
-def safe(url):
- p=urlparse(str(url))
- return p.scheme in ("http","https") and bool(p.hostname) and not any(x in p.hostname for x in ("localhost",)) 
-def aware(date):
- if not date:return None
+EXCLUDE=("טיל","איראן","לבנון","מלחמה","טיסה","מטוס","אירוויזיון",
+ "כדורגל","מכבי חיפה","הפועל באר שבע","וולט","wolt","aircraft","airline","missile")
+LOCALES=("ru","he","en","ar")
+BRIEFS={
+ "accidents":{"ru":"Дорожное происшествие в Израиле. Обстоятельства и актуальные сведения — в материале источника.","he":"דיווח על תאונת דרכים בישראל. פרטים ועדכונים בכתבת המקור.","en":"A reported road incident in Israel. Details and updates are in the original report.","ar":"تقرير عن حادث مروري في إسرائيل. التفاصيل والتحديثات في المصدر."},
+ "speed":{"ru":"Сообщение о контроле скорости или дорожных камерах. Проверьте место и действующие правила в источнике.","he":"דיווח על אכיפת מהירות או מצלמות. יש לבדוק את המיקום והכללים במקור.","en":"An update on speed enforcement or road cameras. Check locations and current rules in the source.","ar":"تحديث بشأن ضبط السرعة أو كاميرات الطرق. تحقق من الموقع والقواعد الحالية في المصدر."},
+ "laws":{"ru":"Публикация о правилах для водителей. Статус закона и дату вступления в силу нужно сверять с официальными документами.","he":"דיווח על תקנות נהיגה. יש לאמת את מעמד החוק ותאריך התחולה במקור רשמי.","en":"A report concerning driving rules. Verify legal status and effective dates with official documents.","ar":"تقرير حول قواعد القيادة. تحقق من حالة القانون وتاريخ سريانه في المصادر الرسمية."},
+ "roads":{"ru":"Информация о дорожной ситуации. Перед поездкой проверьте, действуют ли ограничения сейчас.","he":"עדכון על מצב התנועה. לפני הנסיעה בדקו אם ההגבלות עדיין בתוקף.","en":"A road-conditions update. Check whether restrictions still apply before travelling.","ar":"تحديث عن حالة الطرق. تحقق من استمرار القيود قبل السفر."},
+ "cars":{"ru":"Материал об автомобиле или автомобильном рынке Израиля. Подробности — на сайте издания.","he":"כתבה על מכוניות או שוק הרכב בישראל. פרטים באתר המקור.","en":"An update about vehicles or Israel's car market. Details are available at the source.","ar":"تحديث عن السيارات أو سوق المركبات في إسرائيل. التفاصيل في المصدر."}
+}
+def tidy(value):
+ return re.sub(r"\s+"," ",BeautifulSoup(html.unescape(str(value or "")),"html.parser").get_text(" ",strip=True)).strip()
+def allowed(url):
  try:
-  if hasattr(date,"tm_year"):
-   return dt.datetime(*date[:6],tzinfo=TZ)
-  parsed=dt.datetime.fromisoformat(str(date).replace("Z","+00:00"))
-  return parsed.replace(tzinfo=TZ) if not parsed.tzinfo else parsed.astimezone(TZ)
+  p=urlparse(str(url))
+  return (p.scheme=="https" and p.hostname
+    and not p.hostname.endswith(("google.com","news.google.com","google.co.il"))
+    and p.hostname not in ("localhost","127.0.0.1"))
+ except Exception:return False
+def aware(value):
+ if not value:return None
+ try:
+  if hasattr(value,"tm_year"):
+   return dt.datetime(*value[:6],tzinfo=UTC)
+  t=dt.datetime.fromisoformat(str(value).replace("Z","+00:00"))
+  return t.astimezone(UTC) if t.tzinfo else t.replace(tzinfo=UTC)
  except Exception:return None
-def category(title):
+def relevant(title):
  low=title.lower()
- for kind in ("accidents","speed","laws","roads","cars"):
-  if any(x in low for x in KEYWORDS[kind]):return kind
+ if any(x in low for x in EXCLUDE):return None
+ # Specific terms override generic "car" or "road".
+ for section in ("accidents","speed","laws","roads","cars"):
+  if any(x in low for x in KEYWORDS[section]):return section
  return None
-def translate_ru(value):
- if not value or not re.search(r"[\u0590-\u05ff\u0600-\u06ff]",value):return value
- # If Google Translate is inaccessible, never invent a translation.
- try:
-  response=S.get("https://translate.googleapis.com/translate_a/single",
-    params={"client":"gtx","sl":"auto","tl":"ru","dt":"t","q":value[:470]},timeout=9)
-  response.raise_for_status()
-  data=response.json()
-  out="".join(piece[0] for piece in data[0] if isinstance(piece,list) and piece and isinstance(piece[0],str))
-  return text(out)[:480] if out else value
- except Exception:return value
-def read_feed(url):
- last=None
- for attempt in range(3):
+def feed(url):
+ err=None
+ for attempt in range(2):
   try:
-   response=S.get(url,timeout=(10,25))
-   if response.status_code in (429,503):
-    last=RuntimeError(f"Feed temporarily rate limited ({response.status_code})")
-    if attempt<2:
-     time.sleep(2.5*(attempt+1))
-     continue
-   response.raise_for_status()
-   xml=feedparser.parse(response.content)
-   if xml.bozo and not xml.entries:raise ValueError("Malformed/empty RSS")
-   return xml.entries
-  except requests.RequestException as exc:
-   last=exc
-   if attempt<2:time.sleep(1.5*(attempt+1))
- raise last or RuntimeError("Feed unavailable")
-def google_url(q,window):
- params={"q":q+f" when:{window}d","hl":"he","gl":"IL","ceid":"IL:he"}
- return "https://news.google.com/rss/search?"+urlencode(params)
-def new_entry(entry, source_type="news", existing=None):
- title=text(entry.get("title",""))
- if not title or len(title)<14 or len(title)>250:return None
- date=aware(entry.get("published_parsed") or entry.get("updated_parsed") or entry.get("published"))
- if not date or date<CUTOFF or date>NOW+dt.timedelta(hours=12):return None
- link=str(entry.get("link",""))
- if not safe(link):return None
- source=entry.get("source",{})
- if isinstance(source,dict):source_name=text(source.get("title",""))
- else:source_name=""
- if source_type=="official":source_name="Министерство транспорта Израиля"
- if not source_name:source_name=urlparse(link).hostname or "СМИ Израиля"
- # Google News appends ' - Publisher' to RSS titles. Remove just that suffix.
- if " - " in title and source_type!="official":title=title.rsplit(" - ",1)[0].strip()
- low=title.lower()
- if source_type!="official" and any(x in low for x in EXCLUDE):return None
- section=category(title)
- if section is None:return None
- uid=hashlib.sha256((title.lower()+"|"+source_name.lower()).encode("utf-8")).hexdigest()[:20]
- if existing and uid in existing and existing[uid].get("category")==section:
-  return existing[uid]
- # For Google News, outbound clicks go through Google News to the publisher.
- # We do not claim that this URL is the publisher URL.
- title_ru=translate_ru(title)
- translated=title_ru!=title or not re.search(r"[\u0590-\u05ff]",title)
- snippet=""
- if source_type=="official":
-  source_description=text(entry.get("summary",""))
-  if source_description and len(source_description)>40:
-   snippet=translate_ru(source_description[:270])
- # Avoid copying an entire RSS description or one-to-one lengthy paragraphs.
- if snippet:
-  snippet=snippet[:170].rsplit(" ",1)[0]+"…" if len(snippet)>180 else snippet[:180]
+   r=S.get(url,timeout=(9,20),allow_redirects=True)
+   r.raise_for_status()
+   p=feedparser.parse(r.content)
+   if not p.entries:raise ValueError("Feed has no entries")
+   return p.entries
+  except (requests.RequestException,ValueError) as e:
+   err=e
+   if attempt==0:time.sleep(1.5)
+ raise err
+def translate(value,to_lang):
+ # The endpoint is optional, not guaranteed; failed translations are not faked.
+ if not value:return ""
+ if to_lang=="he" and re.search(r"[\u0590-\u05ff]",value):return value
+ if to_lang=="en" and value.isascii():return value
+ try:
+  resp=S.get("https://translate.googleapis.com/translate_a/single",
+   params={"client":"gtx","sl":"auto","tl":to_lang,"dt":"t","q":value[:250]},
+   timeout=(6,10))
+  resp.raise_for_status()
+  result="".join(x[0] for x in resp.json()[0] if isinstance(x,list) and x and isinstance(x[0],str))
+  return tidy(result)[:250] if result else ""
+ except (ValueError,requests.RequestException):return ""
+def unique_svg(entry):
+ """Deterministic original automotive illustration made from story keywords.
+    Does not depict or claim to depict the real incident or persons involved."""
+ cat=entry["category"]
+ id=entry["id"]
+ randomizer=random.Random(int(id[:12],16))
+ blue=randomizer.choice(["#1688d5","#0a72b3","#2097ce"])
+ ink=randomizer.choice(["#17334c","#1e425d","#254563"])
+ pale=randomizer.choice(["#edf9ff","#e2f4ff","#dcecff"])
+ sunset=randomizer.randint(42,64)
+ lane=randomizer.choice([620,660,710])
+ carx=randomizer.randint(500,790)
+ sedan=(f'<g transform="translate({carx} 490)">'
+   '<ellipse cx="158" cy="199" rx="190" ry="22" fill="#163b5c" opacity=".16"/>'
+   f'<path d="M8 133 49 80Q68 56 101 51L241 49q34 5 53 40l32 44 28 9v51H-8v-43z" fill="{ink}" stroke="#81c8eb" stroke-width="5"/>'
+   '<path d="m69 83 36-19h125l34 42H50z" fill="#94dfff" opacity=".92"/>'
+   '<rect x="15" y="141" width="37" height="21" rx="8" fill="#dcf5ff"/><rect x="310" y="141" width="35" height="20" rx="8" fill="#ffdbb0"/>'
+   '<circle cx="78" cy="192" r="30" fill="#102c42" stroke="#b0e4ff" stroke-width="9"/>'
+   '<circle cx="285" cy="192" r="30" fill="#102c42" stroke="#b0e4ff" stroke-width="9"/></g>')
+ city=''.join(f'<rect x="{n*113-14}" y="{randomizer.randint(250,340)}" width="{randomizer.randint(55,83)}" height="250" rx="6" fill="#ffffff" opacity=".20"/>' for n in range(16))
+ if cat=="speed":
+  focus=(f'<g transform="translate(198 268)"><rect x="0" y="25" width="236" height="186" rx="34" fill="#ffffff" stroke="{blue}" stroke-width="10"/>'
+   f'<circle cx="118" cy="115" r="69" fill="{pale}" stroke="{blue}" stroke-width="8"/>'
+   f'<path d="m119 115 45-36" stroke="{ink}" stroke-width="12" stroke-linecap="round"/><circle cx="119" cy="115" r="10" fill="{ink}"/>'
+   f'<rect x="208" y="74" width="70" height="68" rx="13" fill="{ink}"/><circle cx="241" cy="108" r="19" fill="{blue}"/></g>')
+ elif cat=="laws":
+  focus=(f'<g transform="translate(175 200) rotate({randomizer.randint(-5,5)} 190 180)">'
+   f'<rect x="64" y="24" width="278" height="350" rx="30" fill="#ffffff" stroke="{blue}" stroke-width="9"/>'
+   f'<path d="M100 108h188M100 155h188M100 202h165M100 248h185" stroke="#9bbdd5" stroke-width="10" stroke-linecap="round"/>'
+   '<circle cx="284" cy="297" r="50" fill="#b7edff" stroke="#1a81c8" stroke-width="9"/>'
+   f'<path d="m261 298 16 17 27-36" stroke="{ink}" stroke-width="12" fill="none" stroke-linecap="round"/></g>')
+ elif cat=="accidents":
+  focus=('<g transform="translate(215 275)"><path d="M175 0 340 290H10Z" fill="#fff4e4" stroke="#efac4b" stroke-width="18" stroke-linejoin="round"/>'
+   '<path d="M175 90v93" stroke="#b96e11" stroke-width="22" stroke-linecap="round"/><circle cx="175" cy="231" r="12" fill="#b96e11"/>'
+   '</g>')
+ elif cat=="roads":
+  focus=(f'<g transform="translate(230 270)"><rect x="0" y="0" width="320" height="195" rx="20" fill="{ink}" stroke="#b6e6ff" stroke-width="11"/>'
+    '<path d="M35 54h250" stroke="#e0f8ff" stroke-width="17" stroke-linecap="round"/>'
+    '<path d="M35 126h250" stroke="#e0f8ff" stroke-width="17" stroke-dasharray="30 26" stroke-linecap="round"/>'
+    f'<path d="m185 95 46 40 54-59" fill="none" stroke="{blue}" stroke-width="17" stroke-linecap="round"/></g>')
  else:
-  detail={"accidents":"Сообщение о дорожном происшествии в Израиле.",
-          "speed":"Информация о контроле скорости, дорожных камерах или штрафах.",
-          "laws":"Сообщение о возможных изменениях правил для водителей. Проверяйте статус закона в официальных источниках.",
-          "roads":"Обновление о дорожной обстановке или ограничениях движения.",
-          "cars":"Новости авторынка Израиля и автомобильных технологий."}
-  snippet=detail[section]
- # This is NOT "law enacted" confirmation.
- return {
-  "id":uid,"title":title_ru[:200],"titleOriginal":title[:250],
-  "summary":snippet[:250],"date":date.isoformat().replace("+00:00","Z"),
-  "category":section,"publisher":source_name[:90],"url":link,
-  "translated":bool(translated),"official":source_type=="official",
-  "art":section,
- }
+  focus=(f'<g transform="translate(240 225)"><circle cx="215" cy="190" r="145" fill="#ffffff" opacity=".52"/>'
+   f'<path d="M85 285q-40-22-20-65l44-90q18-38 64-37h142q51 0 68 46l35 83q9 35-22 63" fill="{ink}" stroke="#83d4f4" stroke-width="9"/>'
+   '<path d="M128 153h202l34 89H90z" fill="#8fddf8" opacity=".85"/>'
+   '<circle cx="136" cy="289" r="34" fill="#102c42" stroke="#b1e7ff" stroke-width="12"/>'
+   '<circle cx="347" cy="289" r="34" fill="#102c42" stroke="#b1e7ff" stroke-width="12"/></g>')
+ dots=''.join(f'<circle cx="{randomizer.randint(85,1510)}" cy="{randomizer.randint(125,435)}" r="{randomizer.randint(4,16)}" fill="#ffffff" opacity="{randomizer.randint(15,40)/100:.2f}"/>' for _ in range(23))
+ # Deliberately no text in the image: one asset in all four languages.
+ return (f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" role="img" aria-label="Independent automotive editorial illustration">'
+  f'<defs><linearGradient id="sky" x2="1" y2="1"><stop stop-color="{pale}"/><stop offset=".67" stop-color="#abdaf3"/><stop offset="1" stop-color="#6baedb"/></linearGradient>'
+  '<linearGradient id="road" x2="0" y2="1"><stop stop-color="#476982"/><stop offset="1" stop-color="#0d243a"/></linearGradient>'
+  '<filter id="shade"><feGaussianBlur stdDeviation="12"/></filter></defs>'
+  '<rect width="1600" height="900" fill="url(#sky)"/>'
+  f'<circle cx="1270" cy="{sunset*6}" r="250" fill="#ffffff" opacity=".31"/>'
+  f'{city}{dots}'
+  f'<path d="M0 630Q500 530 1600 605v330H0Z" fill="#a3d1e8"/>'
+  f'<path d="M{lane-220} 525h{lane+180}l430 405H50z" fill="url(#road)"/>'
+  '<path d="M790 560 870 900" fill="none" stroke="#c1e6f9" stroke-width="12" stroke-dasharray="65 60" opacity=".75"/>'
+  f'<ellipse cx="790" cy="700" rx="395" ry="70" fill="#173652" opacity=".22" filter="url(#shade)"/>'
+  f'{sedan}{focus}'
+  f'<path d="M0 55H1600M0 830H1600" stroke="{blue}" stroke-width="24" opacity=".34"/>'
+  '<rect x="43" y="47" width="1514" height="806" rx="46" fill="none" stroke="#ffffff" stroke-width="5" opacity=".52"/>'
+  '</svg>')
+def article(entry,provider):
+ title=tidy(entry.get("title",""))
+ pub=aware(entry.get("published_parsed") or entry.get("updated_parsed") or entry.get("published"))
+ url=str(entry.get("link",""))
+ if not (14<len(title)<250 and pub and CUTOFF<=pub<=NOW+dt.timedelta(hours=6) and allowed(url)):return None
+ kind=relevant(title)
+ if not kind:return None
+ # Publisher must be an actual article link, not front page or feed itself.
+ path=urlparse(url).path
+ if path in ("/","/rss","/feed") or "/rss/" in path:return None
+ id=hashlib.sha256((provider.lower()+"|"+url.split("?")[0]).encode("utf-8")).hexdigest()[:20]
+ return {"id":id,"titleOriginal":title,"sourceLanguage":"he" if re.search(r"[\u0590-\u05ff]",title) else "en",
+  "date":pub.isoformat().replace("+00:00","Z"),"url":url,"publisher":provider,
+  "category":kind,"art":kind,"image":f"./assets/news/images/{id}.svg",
+  "official":False,"translations":{}}
+def valid(item):
+ if not isinstance(item,dict):return False
+ stamp=aware(item.get("date"))
+ return (bool(stamp and CUTOFF<=stamp<=NOW+dt.timedelta(hours=6)) and allowed(item.get("url"))
+  and item.get("category") in CATEGORIES and item.get("id")
+  and item.get("titleOriginal") and
+  not any(s in item["titleOriginal"].lower() for s in EXCLUDE))
 def read_previous():
  try:
-  data=json.loads(DEST.read_text("utf-8"))
-  if data.get("version")!=1:return []
-  return [x for x in data.get("items",[]) if isinstance(x,dict)]
- except (FileNotFoundError,ValueError,OSError):return []
-def clean_old(obj):
- try:
-  date=aware(obj.get("date"))
-  return (date is not None and CUTOFF<=date<=NOW+dt.timedelta(hours=12)
-    and obj.get("category") in CATEGORIES and safe(obj.get("url",""))
-    and category(str(obj.get("titleOriginal","")))==obj.get("category")
-    and not any(x in str(obj.get("titleOriginal","")).lower() for x in EXCLUDE)
-    and len(str(obj.get("title","")))>8)
- except Exception:return False
+  p=json.loads(DEST.read_text(encoding="utf-8"))
+  return [x for x in p.get("items",[]) if valid(x)]
+ except (ValueError,OSError):return []
+def enrich(item):
+ titles=item.get("translations",{})
+ if not isinstance(titles,dict):titles={}
+ original=item["titleOriginal"]
+ if not any(x in titles for x in LOCALES):
+  titles["he"]={"title":original,"summary":BRIEFS[item["category"]]["he"]} if item["sourceLanguage"]=="he" else {}
+ for lang in LOCALES:
+  cached=titles.get(lang,{})
+  if cached.get("title") and cached.get("summary"):continue
+  head=original if (lang==item["sourceLanguage"]) else translate(original,lang)
+  if head:titles[lang]={"title":head,"summary":BRIEFS[item["category"]][lang]}
+ # The UI will fall back to the original headline (not to a false translation).
+ item["translations"]=titles
+ item["title"]=titles.get("ru",{}).get("title") or original
+ item["summary"]=titles.get("ru",{}).get("summary") or BRIEFS[item["category"]]["ru"]
+ item["translated"]=bool(titles.get("ru",{}).get("title"))
+ return item
 def main():
  ROOT.mkdir(parents=True,exist_ok=True)
+ IMAGES.mkdir(parents=True,exist_ok=True)
  previous=read_previous()
- merged={obj["id"]:obj for obj in previous if clean_old(obj) and "id" in obj}
- count_by_source={}
- added=0;errors={}
- first_run=not DEST.exists() or len(merged)<25
- feeds=[("Минтранс (официально)",MOT_RSS,"official")]
- for section,q in QUERIES.items():
-  feeds.append((f"Израильские СМИ · {section}",google_url(q,30 if first_run else 7),"news"))
- for source_name,url,kind in feeds:
+ keep={x["id"]:x for x in previous if valid(x)}
+ # Prune the old broken Google News links instead of sending readers to 429 pages.
+ existing_google=sum(1 for x in previous if "google." in urlparse(x.get("url","")).netloc)
+ feed_stats={}
+ errors={}
+ discovered=0
+ for provider,url in FEEDS:
   try:
-   items=read_feed(url)
-   count_by_source[source_name]=len(items)
-   for entry in items[:70]:
-    article=new_entry(entry,kind,merged)
-    if article is None:continue
-    if article["id"] not in merged:added+=1
-    merged[article["id"]]=article
-   print(f"OK source {source_name}: feed={len(items)} accepted-now={len(merged)}",flush=True)
+   entries=feed(url)
+   feed_stats[provider]=len(entries)
+   for e in entries[:85]:
+    item=article(e,provider)
+    if not item or item["id"] in keep:continue
+    keep[item["id"]]=item;discovered+=1
+   print(f"FEED {provider}: {len(entries)} entries, collected {len(keep)}",flush=True)
   except Exception as exc:
-   errors[source_name]=str(exc)[:150]
-   print(f"WARN source {source_name}: {type(exc).__name__}: {exc}",flush=True)
-  time.sleep(1.3)
- # If all sources fail, preserve previous CURRENT items and prune stale ones.
- items=sorted(merged.values(),key=lambda x:x["date"],reverse=True)
- used=set();retained=[]
- for obj in items:
-  key=re.sub(r"[^a-zа-яё0-9\u0590-\u05ff]+","",obj.get("titleOriginal","").lower())
-  if key in used:continue
-  used.add(key);retained.append(obj)
- retained=retained[:MAX_ITEMS]
- # Do not show "updated just now" when every upstream feed was blocked.
- try:
-  previous_update=json.loads(DEST.read_text("utf-8")).get("updated","")
- except (ValueError,OSError):
-  previous_update=""
- last_success=NOW.isoformat().replace("+00:00","Z") if count_by_source else previous_update
- payload={"version":1,"updated":last_success,"retentionDays":30,"items":retained}
- report={"attempted":NOW.isoformat().replace("+00:00","Z"),
-         "lastSuccessfulFetch":last_success,"sources":count_by_source,"new":added,
-         "retained":len(retained),"expiredOrDuplicate":len(previous)+added-len(retained),
-         "errors":errors}
- # The file should never retain material older than 30 days.
- assert all(clean_old(x) for x in retained)
- DEST.write_text(json.dumps(payload,ensure_ascii=False,indent=2)+"\n","utf-8")
- REPORT.write_text(json.dumps(report,ensure_ascii=False,indent=2)+"\n","utf-8")
+   errors[provider]=f"{type(exc).__name__}: {str(exc)[:100]}"
+   print(f"WARN {provider}: {errors[provider]}",flush=True)
+  time.sleep(.5)
+ recent=sorted((x for x in keep.values() if valid(x)),key=lambda x:x["date"],reverse=True)
+ recent=recent[:MAX_ITEMS]
+ new_count=0
+ for x in recent:
+  if new_count<NEW_PER_RUN or x.get("translations"):
+   enrich(x)
+   if not x.get("translations"):new_count+=1
+  else:
+   x["title"]=x["titleOriginal"]
+   x["summary"]=BRIEFS[x["category"]]["ru"]
+  image=IMAGES/(x["id"]+".svg")
+  if not image.exists():image.write_text(unique_svg(x),encoding="utf-8")
+ # Avoid accumulating stale image files beyond one month.
+ live_names={x["id"]+".svg" for x in recent}
+ deleted=0
+ for path in IMAGES.glob("*.svg"):
+  if path.name not in live_names:path.unlink();deleted+=1
+ last=NOW.isoformat().replace("+00:00","Z") if feed_stats else ""
+ payload={"version":1,"retentionDays":30,"updated":last,"items":recent}
+ report={"attempted":NOW.isoformat().replace("+00:00","Z"),"feeds":feed_stats,
+  "new":discovered,"retained":len(recent),"imageCount":len(live_names),
+  "deletedImages":deleted,"discardedGoogleLinks":existing_google,"errors":errors,
+  "directLinksOnly":all(allowed(x["url"]) for x in recent)}
+ assert all(valid(x) for x in recent) and report["directLinksOnly"]
+ DEST.write_text(json.dumps(payload,ensure_ascii=False,indent=2)+"\n",encoding="utf-8")
+ REPORT.write_text(json.dumps(report,ensure_ascii=False,indent=2)+"\n",encoding="utf-8")
  print("RESULT "+json.dumps(report,ensure_ascii=False),flush=True)
- # No fake updates, no filler content when source unavailable.
- return 0
-if __name__=="__main__":sys.exit(main())
+if __name__=="__main__":main()
