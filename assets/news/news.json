@@ -1,124 +1,40 @@
 {
   "version": 1,
   "retentionDays": 30,
-  "updated": "2026-11-17T08:31:46.767653Z",
+  "updated": "2026-11-17T08:33:34.642953Z",
   "items": [
-    {
-      "id": "06a5646c88d47e6666f5",
-      "titleOriginal": "סנטימטר אחד שעשה את ההבדל: הניתוח המורכב שהציל תינוק בן שלושה שבועות",
-      "sourceLanguage": "he",
-      "date": "2026-11-17T08:18:41Z",
-      "url": "https://www.maariv.co.il/news/health/article-1389342",
-      "publisher": "Maariv",
-      "category": "cars",
-      "art": "cars",
-      "image": "./assets/news/images/06a5646c88d47e6666f5.webp",
-      "official": false,
-      "translations": {
-        "he": {
-          "title": "סנטימטר אחד שעשה את ההבדל: הניתוח המורכב שהציל תינוק בן שלושה שבועות",
-          "summary": "כתבה על מכוניות או שוק הרכב בישראל. פרטים באתר המקור."
-        },
-        "ru": {
-          "title": "Один сантиметр, который изменил ситуацию: сложная операция, спасшая трехнедельного ребенка",
-          "summary": "Материал об автомобиле или автомобильном рынке Израиля. Подробности — на сайте издания."
-        },
-        "en": {
-          "title": "One centimeter that made the difference: the complex surgery that saved a three-week-old baby",
-          "summary": "An update about vehicles or Israel's car market. Details are available at the source."
-        },
-        "ar": {
-          "title": "سنتيمتر واحد أحدث الفارق: الجراحة المعقدة التي أنقذت طفلاً عمره ثلاثة أسابيع",
-          "summary": "تحديث عن السيارات أو سوق المركبات في إسرائيل. التفاصيل في المصدر."
-        }
-      },
-      "title": "Один сантиметр, который изменил ситуацию: сложная операция, спасшая трехнедельного ребенка",
-      "summary": "Материал об автомобиле или автомобильном рынке Израиля. Подробности — на сайте издания.",
-      "translated": true,
-      "imageKind": "ai-generated",
-      "imageType": "licensedPhoto",
-      "imageCredit": {
-        "text": "Eric Friedebach · CC BY 2.0",
-        "url": "https://commons.wikimedia.org/wiki/File:1973_Ford_Mustang_Interior_Dashboard_(51838912069).jpg"
-      }
-    },
     {
       "id": "1b6d8f8a9c0f97c229b0",
       "titleOriginal": "הולך רגל בן 20 נפגע מרכב באזור שדרות, מצבו קשה",
       "sourceLanguage": "he",
       "date": "2026-11-17T06:11:27Z",
       "url": "https://www.ynet.co.il/news/article/r1ws0vfcfx",
-      "publisher": "Ynet · Репортажи",
-      "category": "cars",
-      "art": "cars",
+      "publisher": "Ynet",
+      "category": "accidents",
+      "art": "accidents",
       "image": "./assets/news/images/1b6d8f8a9c0f97c229b0.webp",
       "official": false,
       "translations": {
         "he": {
           "title": "הולך רגל בן 20 נפגע מרכב באזור שדרות, מצבו קשה",
-          "summary": "כתבה על מכוניות או שוק הרכב בישראל. פרטים באתר המקור."
-        },
-        "ru": {
-          "title": "В районе Сдерота 20-летнего пешехода сбила машина, его состояние тяжелое",
-          "summary": "Материал об автомобиле или автомобильном рынке Израиля. Подробности — на сайте издания."
-        },
-        "en": {
-          "title": "A 20-year-old pedestrian was hit by a car in the Sderot area, his condition is serious",
-          "summary": "An update about vehicles or Israel's car market. Details are available at the source."
-        },
-        "ar": {
-          "title": "إصابة شاب 20 عاما بحادث دهس في منطقة سديروت وحالته خطيرة",
-          "summary": "تحديث عن السيارات أو سوق المركبات في إسرائيل. التفاصيل في المصدر."
-        }
-      },
-      "title": "В районе Сдерота 20-летнего пешехода сбила машина, его состояние тяжелое",
-      "summary": "Материал об автомобиле или автомобильном рынке Израиля. Подробности — на сайте издания.",
-      "translated": true,
-      "imageKind": "ai-generated",
-      "imageType": "licensedPhoto",
-      "imageCredit": {
-        "text": "Eric Friedebach · CC BY 2.0",
-        "url": "https://commons.wikimedia.org/wiki/File:1973_Ford_Mustang_Interior_Dashboard_(51838912069).jpg"
-      }
-    },
-    {
-      "id": "3b0a8c088bd83d54b5dd",
-      "titleOriginal": "פיגוע סמוך ליריחו: מחבלים דרסו ישראלים ותקפו אותם בגרזנים",
-      "sourceLanguage": "he",
-      "date": "2026-11-17T04:38:23Z",
-      "url": "https://www.srugim.co.il/101016362-פיגוע-סמוך-ליריחו-מחבלים-דרסו-ישראלים",
-      "publisher": "Srugim",
-      "category": "accidents",
-      "art": "accidents",
-      "image": "./assets/news/images/3b0a8c088bd83d54b5dd.webp",
-      "official": false,
-      "translations": {
-        "he": {
-          "title": "פיגוע סמוך ליריחו: מחבלים דרסו ישראלים ותקפו אותם בגרזנים",
           "summary": "דיווח על תאונת דרכים בישראל. פרטים ועדכונים בכתבת המקור."
         },
         "ru": {
-          "title": "Атака под Иерихоном: террористы наехали на израильтян и напали на них с топорами",
+          "title": "В районе Сдерота 20-летнего пешехода сбила машина, его состояние тяжелое",
           "summary": "Дорожное происшествие в Израиле. Обстоятельства и актуальные сведения — в материале источника."
         },
         "en": {
-          "title": "Attack near Jericho: terrorists ran over Israelis and attacked them with axes",
+          "title": "A 20-year-old pedestrian was hit by a car in the Sderot area, his condition is serious",
           "summary": "A reported road incident in Israel. Details and updates are in the original report."
         },
         "ar": {
-          "title": "هجوم قرب أريحا: دهس الإرهابيون إسرائيليين وهاجموهم بالفؤوس",
+          "title": "إصابة شاب 20 عاما بحادث دهس في منطقة سديروت وحالته خطيرة",
           "summary": "تقرير عن حادث مروري في إسرائيل. التفاصيل والتحديثات في المصدر."
         }
       },
-      "title": "Атака под Иерихоном: террористы наехали на израильтян и напали на них с топорами",
+      "title": "В районе Сдерота 20-летнего пешехода сбила машина, его состояние тяжелое",
       "summary": "Дорожное происшествие в Израиле. Обстоятельства и актуальные сведения — в материале источника.",
-      "translated": true,
-      "imageKind": "ai-generated",
-      "imageType": "licensedPhoto",
-      "imageCredit": {
-        "text": "No machine-readable author provided. EPO assumed (based on copyright claims). · CC BY 2.5",
-        "url": "https://commons.wikimedia.org/wiki/File:Falck_sv_04.jpg"
-      }
+      "translated": true
     },
     {
       "id": "ce5de5cd824d3a5f58eb",
@@ -127,76 +43,31 @@
       "date": "2026-11-17T06:08:35Z",
       "url": "https://www.maariv.co.il/breaking-news/article-1389290",
       "publisher": "Maariv",
-      "category": "cars",
-      "art": "cars",
+      "category": "accidents",
+      "art": "accidents",
       "image": "./assets/news/images/ce5de5cd824d3a5f58eb.webp",
       "official": false,
       "translations": {
         "he": {
           "title": "צעיר בן 20 נפצע קשה בעקבות פגיעת רכב בכביש 334",
-          "summary": "כתבה על מכוניות או שוק הרכב בישראל. פרטים באתר המקור."
+          "summary": "דיווח על תאונת דרכים בישראל. פרטים ועדכונים בכתבת המקור."
         },
         "ru": {
           "title": "20-летний мужчина получил серьезные травмы в результате наезда автомобиля на 334-м шоссе.",
-          "summary": "Материал об автомобиле или автомобильном рынке Израиля. Подробности — на сайте издания."
+          "summary": "Дорожное происшествие в Израиле. Обстоятельства и актуальные сведения — в материале источника."
         },
         "en": {
           "title": "A 20-year-old man was seriously injured after being hit by a vehicle on Route 334",
-          "summary": "An update about vehicles or Israel's car market. Details are available at the source."
+          "summary": "A reported road incident in Israel. Details and updates are in the original report."
         },
         "ar": {
           "title": "أصيب شاب (20 عاما) بجروح خطيرة بعد أن صدمته مركبة على شارع 334",
-          "summary": "تحديث عن السيارات أو سوق المركبات في إسرائيل. التفاصيل في المصدر."
+          "summary": "تقرير عن حادث مروري في إسرائيل. التفاصيل والتحديثات في المصدر."
         }
       },
       "title": "20-летний мужчина получил серьезные травмы в результате наезда автомобиля на 334-м шоссе.",
-      "summary": "Материал об автомобиле или автомобильном рынке Израиля. Подробности — на сайте издания.",
-      "translated": true,
-      "imageKind": "ai-generated",
-      "imageType": "licensedPhoto",
-      "imageCredit": {
-        "text": "Eric Friedebach · CC BY 2.0",
-        "url": "https://commons.wikimedia.org/wiki/File:1973_Ford_Mustang_Interior_Dashboard_(51838912069).jpg"
-      }
-    },
-    {
-      "id": "6dc552b96e2434276511",
-      "titleOriginal": "תיעוד: הרכב הישראלי שהותקף ביריחו באלות וגרזנים",
-      "sourceLanguage": "he",
-      "date": "2026-11-16T23:26:03Z",
-      "url": "https://www.ynet.co.il/news/article/sjtl1ffafg",
-      "publisher": "Ynet · Репортажи",
-      "category": "cars",
-      "art": "cars",
-      "image": "./assets/news/images/6dc552b96e2434276511.webp",
-      "official": false,
-      "translations": {
-        "he": {
-          "title": "תיעוד: הרכב הישראלי שהותקף ביריחו באלות וגרזנים",
-          "summary": "כתבה על מכוניות או שוק הרכב בישראל. פרטים באתר המקור."
-        },
-        "ru": {
-          "title": "Документация: Израильский автомобиль, на который в Иерихоне напали с дубинками и топорами.",
-          "summary": "Материал об автомобиле или автомобильном рынке Израиля. Подробности — на сайте издания."
-        },
-        "en": {
-          "title": "Documentation: The Israeli vehicle that was attacked in Jericho with clubs and axes",
-          "summary": "An update about vehicles or Israel's car market. Details are available at the source."
-        },
-        "ar": {
-          "title": "توثيق: السيارة الإسرائيلية التي تعرضت للهجوم في أريحا بالهراوات والفؤوس",
-          "summary": "تحديث عن السيارات أو سوق المركبات في إسرائيل. التفاصيل في المصدر."
-        }
-      },
-      "title": "Документация: Израильский автомобиль, на который в Иерихоне напали с дубинками и топорами.",
-      "summary": "Материал об автомобиле или автомобильном рынке Израиля. Подробности — на сайте издания.",
-      "translated": true,
-      "imageKind": "ai-generated",
-      "imageType": "licensedPhoto",
-      "imageCredit": {
-        "text": "Eric Friedebach · CC BY 2.0",
-        "url": "https://commons.wikimedia.org/wiki/File:1973_Ford_Mustang_Interior_Dashboard_(51838912069).jpg"
-      }
+      "summary": "Дорожное происшествие в Израиле. Обстоятельства и актуальные сведения — в материале источника.",
+      "translated": true
     },
     {
       "id": "1a65ff3993516263eca9",
@@ -228,84 +99,6 @@
         }
       },
       "title": "Верховный суд одобрил компромиссное решение: около 4,5 млн шекелей для пострадавшего в автокатастрофе на работе",
-      "summary": "Дорожное происшествие в Израиле. Обстоятельства и актуальные сведения — в материале источника.",
-      "translated": true,
-      "imageKind": "ai-generated",
-      "imageType": "licensedPhoto",
-      "imageCredit": {
-        "text": "Jeff Attaway from Abuja, Nigeria · CC BY 2.0",
-        "url": "https://commons.wikimedia.org/wiki/File:Bad_one_-_auto_wreck_in_Dakar_Senegal,_2011.jpg"
-      }
-    },
-    {
-      "id": "b79332175d28c4f0141e",
-      "titleOriginal": "פיגוע משולב סמוך ליריחו: מחבלים ניגחו רכב שבו נסעו ישראלים ותקפו את יושביו",
-      "sourceLanguage": "he",
-      "date": "2026-11-16T22:40:56Z",
-      "url": "https://www.maariv.co.il/news/military/article-1389266",
-      "publisher": "Maariv",
-      "category": "cars",
-      "art": "cars",
-      "image": "./assets/news/images/b79332175d28c4f0141e.webp",
-      "official": false,
-      "translations": {
-        "he": {
-          "title": "פיגוע משולב סמוך ליריחו: מחבלים ניגחו רכב שבו נסעו ישראלים ותקפו את יושביו",
-          "summary": "כתבה על מכוניות או שוק הרכב בישראל. פרטים באתר המקור."
-        },
-        "ru": {
-          "title": "Комбинированная атака под Иерихоном: террористы протаранили автомобиль, в котором ехали израильтяне, и напали на его пассажиров",
-          "summary": "Материал об автомобиле или автомобильном рынке Израиля. Подробности — на сайте издания."
-        },
-        "en": {
-          "title": "A combined attack near Jericho: terrorists rammed a vehicle in which Israelis were traveling and attacked its occupants",
-          "summary": "An update about vehicles or Israel's car market. Details are available at the source."
-        },
-        "ar": {
-          "title": "هجوم مشترك قرب أريحا: صدم الإرهابيون مركبة كان يستقلها إسرائيليون وهاجموا ركابها",
-          "summary": "تحديث عن السيارات أو سوق المركبات في إسرائيل. التفاصيل في المصدر."
-        }
-      },
-      "title": "Комбинированная атака под Иерихоном: террористы протаранили автомобиль, в котором ехали израильтяне, и напали на его пассажиров",
-      "summary": "Материал об автомобиле или автомобильном рынке Израиля. Подробности — на сайте издания.",
-      "translated": true,
-      "imageKind": "ai-generated",
-      "imageType": "licensedPhoto",
-      "imageCredit": {
-        "text": "Ivan Radic · CC BY 2.0",
-        "url": "https://commons.wikimedia.org/wiki/File:Close-up_of_an_electric_car_charging._Traffic_lights_in_a_blurry_background.jpg"
-      }
-    },
-    {
-      "id": "370dddf90a124ee5faa0",
-      "titleOriginal": "חשד לפיגוע ביריחו: פלסטינים התנגשו ברכב ישראלי ותקפו את יושביו בגרזנים",
-      "sourceLanguage": "he",
-      "date": "2026-11-16T22:47:36Z",
-      "url": "https://www.ynet.co.il/news/article/r1tnpwkafe",
-      "publisher": "Ynet · Репортажи",
-      "category": "accidents",
-      "art": "accidents",
-      "image": "./assets/news/images/370dddf90a124ee5faa0.webp",
-      "official": false,
-      "translations": {
-        "he": {
-          "title": "חשד לפיגוע ביריחו: פלסטינים התנגשו ברכב ישראלי ותקפו את יושביו בגרזנים",
-          "summary": "דיווח על תאונת דרכים בישראל. פרטים ועדכונים בכתבת המקור."
-        },
-        "ru": {
-          "title": "Подозрение на нападение в Иерихоне: палестинцы столкнулись с израильским автомобилем и напали на его пассажиров с топорами",
-          "summary": "Дорожное происшествие в Израиле. Обстоятельства и актуальные сведения — в материале источника."
-        },
-        "en": {
-          "title": "Suspicion of an attack in Jericho: Palestinians collided with an Israeli vehicle and attacked its occupants with axes",
-          "summary": "A reported road incident in Israel. Details and updates are in the original report."
-        },
-        "ar": {
-          "title": "شبهة هجوم في أريحا: فلسطينيون يصطدمون بمركبة إسرائيلية ويعتدون على ركابها بالفؤوس",
-          "summary": "تقرير عن حادث مروري في إسرائيل. التفاصيل والتحديثات في المصدر."
-        }
-      },
-      "title": "Подозрение на нападение в Иерихоне: палестинцы столкнулись с израильским автомобилем и напали на его пассажиров с топорами",
       "summary": "Дорожное происшествие в Израиле. Обстоятельства и актуальные сведения — в материале источника.",
       "translated": true,
       "imageKind": "ai-generated",
@@ -355,42 +148,42 @@
       }
     },
     {
-      "id": "f6c69d587ebd2726b493",
-      "titleOriginal": "גם חיים לוינסון נכנס לתמונה: מאות התגובות הגיעו במהירות",
+      "id": "419690fed163182a806c",
+      "titleOriginal": "מחקר / הציבור מעדיף מס נסועה על כלל כלי הרכב, לא רק על מכוניות חשמליות",
       "sourceLanguage": "he",
-      "date": "2026-11-16T16:12:12Z",
-      "url": "https://www.maariv.co.il/economy/israel/article-1389165",
-      "publisher": "Maariv",
-      "category": "speed",
-      "art": "speed",
-      "image": "./assets/news/images/f6c69d587ebd2726b493.webp",
+      "date": "2026-11-15T11:03:39Z",
+      "url": "https://autonews.co.il/%d7%9e%d7%97%d7%a7%d7%a8-%d7%a6%d7%99%d7%91%d7%95%d7%a8-%d7%9e%d7%a2%d7%93%d7%99%d7%a3-%d7%9e%d7%a1-%d7%a0%d7%a1%d7%95%d7%a2%d7%94-%d7%a2%d7%9c-%d7%9b%d7%9c%d7%9c-%d7%9b%d7%9c%d7%99-%d7%94%d7%a8/",
+      "publisher": "Autonews Israel",
+      "category": "cars",
+      "art": "cars",
+      "image": "./assets/news/images/419690fed163182a806c.webp",
       "official": false,
       "translations": {
         "he": {
-          "title": "גם חיים לוינסון נכנס לתמונה: מאות התגובות הגיעו במהירות",
-          "summary": "דיווח על אכיפת מהירות או מצלמות. יש לבדוק את המיקום והכללים במקור."
+          "title": "מחקר / הציבור מעדיף מס נסועה על כלל כלי הרכב, לא רק על מכוניות חשמליות",
+          "summary": "כתבה על מכוניות או שוק הרכב בישראל. פרטים באתר המקור."
         },
         "ru": {
-          "title": "Хаим Левинсон также вошел в число участников: сотни ответов пришли быстро.",
-          "summary": "Сообщение о контроле скорости или дорожных камерах. Проверьте место и действующие правила в источнике."
+          "title": "Исследования / Общественность предпочитает взимать туристический налог со всех транспортных средств, а не только с электромобилей",
+          "summary": "Материал об автомобиле или автомобильном рынке Израиля. Подробности — на сайте издания."
         },
         "en": {
-          "title": "Haim Levinson also entered the picture: the hundreds of responses arrived quickly",
-          "summary": "An update on speed enforcement or road cameras. Check locations and current rules in the source."
+          "title": "Research / The public prefers a travel tax on all vehicles, not just electric cars",
+          "summary": "An update about vehicles or Israel's car market. Details are available at the source."
         },
         "ar": {
-          "title": "ودخل حاييم ليفينسون أيضا إلى الصورة: مئات الردود وصلت بسرعة",
-          "summary": "تحديث بشأن ضبط السرعة أو كاميرات الطرق. تحقق من الموقع والقواعد الحالية في المصدر."
+          "title": "بحث / الجمهور يفضل فرض ضريبة السفر على جميع المركبات وليس السيارات الكهربائية فقط",
+          "summary": "تحديث عن السيارات أو سوق المركبات في إسرائيل. التفاصيل في المصدر."
         }
       },
-      "title": "Хаим Левинсон также вошел в число участников: сотни ответов пришли быстро.",
-      "summary": "Сообщение о контроле скорости или дорожных камерах. Проверьте место и действующие правила в источнике.",
+      "title": "Исследования / Общественность предпочитает взимать туристический налог со всех транспортных средств, а не только с электромобилей",
+      "summary": "Материал об автомобиле или автомобильном рынке Израиля. Подробности — на сайте издания.",
       "translated": true,
       "imageKind": "ai-generated",
       "imageType": "licensedPhoto",
       "imageCredit": {
-        "text": "Trougnouf (Benoit Brummer) · CC BY 4.0",
-        "url": "https://commons.wikimedia.org/wiki/File:Roadside_cat_in_Belœil,_Belgium_(DSCF4999).jpg"
+        "text": "Ivan Radic · CC BY 2.0",
+        "url": "https://commons.wikimedia.org/wiki/File:Close-up_of_an_electric_car_charging._Traffic_lights_in_a_blurry_background.jpg"
       }
     },
     {
@@ -433,45 +226,6 @@
       }
     },
     {
-      "id": "419690fed163182a806c",
-      "titleOriginal": "מחקר / הציבור מעדיף מס נסועה על כלל כלי הרכב, לא רק על מכוניות חשמליות",
-      "sourceLanguage": "he",
-      "date": "2026-11-15T11:03:39Z",
-      "url": "https://autonews.co.il/%d7%9e%d7%97%d7%a7%d7%a8-%d7%a6%d7%99%d7%91%d7%95%d7%a8-%d7%9e%d7%a2%d7%93%d7%99%d7%a3-%d7%9e%d7%a1-%d7%a0%d7%a1%d7%95%d7%a2%d7%94-%d7%a2%d7%9c-%d7%9b%d7%9c%d7%9c-%d7%9b%d7%9c%d7%99-%d7%94%d7%a8/",
-      "publisher": "Autonews Israel",
-      "category": "cars",
-      "art": "cars",
-      "image": "./assets/news/images/419690fed163182a806c.webp",
-      "official": false,
-      "translations": {
-        "he": {
-          "title": "מחקר / הציבור מעדיף מס נסועה על כלל כלי הרכב, לא רק על מכוניות חשמליות",
-          "summary": "כתבה על מכוניות או שוק הרכב בישראל. פרטים באתר המקור."
-        },
-        "ru": {
-          "title": "Исследования / Общественность предпочитает взимать туристический налог со всех транспортных средств, а не только с электромобилей",
-          "summary": "Материал об автомобиле или автомобильном рынке Израиля. Подробности — на сайте издания."
-        },
-        "en": {
-          "title": "Research / The public prefers a travel tax on all vehicles, not just electric cars",
-          "summary": "An update about vehicles or Israel's car market. Details are available at the source."
-        },
-        "ar": {
-          "title": "بحث / الجمهور يفضل فرض ضريبة السفر على جميع المركبات وليس السيارات الكهربائية فقط",
-          "summary": "تحديث عن السيارات أو سوق المركبات في إسرائيل. التفاصيل في المصدر."
-        }
-      },
-      "title": "Исследования / Общественность предпочитает взимать туристический налог со всех транспортных средств, а не только с электромобилей",
-      "summary": "Материал об автомобиле или автомобильном рынке Израиля. Подробности — на сайте издания.",
-      "translated": true,
-      "imageKind": "ai-generated",
-      "imageType": "licensedPhoto",
-      "imageCredit": {
-        "text": "Ivan Radic · CC BY 2.0",
-        "url": "https://commons.wikimedia.org/wiki/File:Close-up_of_an_electric_car_charging._Traffic_lights_in_a_blurry_background.jpg"
-      }
-    },
-    {
       "id": "ce75bbfc3a3349e5fd25",
       "titleOriginal": "רובוטקסים / May Mobilty יצא לגיוס הון בספאק, הודיעה על רכישת אלפי מכוניות פולקסווגן",
       "sourceLanguage": "he",
@@ -501,6 +255,45 @@
         }
       },
       "title": "Robotxim/May Mobilty вышла на сбор капитала в Спаке, объявила о покупке тысяч автомобилей Volkswagen",
+      "summary": "Материал об автомобиле или автомобильном рынке Израиля. Подробности — на сайте издания.",
+      "translated": true,
+      "imageKind": "ai-generated",
+      "imageType": "licensedPhoto",
+      "imageCredit": {
+        "text": "Eric Friedebach · CC BY 2.0",
+        "url": "https://commons.wikimedia.org/wiki/File:1973_Ford_Mustang_Interior_Dashboard_(51838912069).jpg"
+      }
+    },
+    {
+      "id": "ba19d32a9f258dc849a4",
+      "titleOriginal": "השקה מקומית / דלק רכב משיקה סדרה 3, דור 8, מערכות הנעה הייבריד ביניים",
+      "sourceLanguage": "he",
+      "date": "2026-11-14T10:10:23Z",
+      "url": "https://autonews.co.il/%d7%94%d7%a9%d7%a7%d7%94-%d7%9e%d7%a7%d7%95%d7%9e%d7%99%d7%aa-%d7%93%d7%9c%d7%a7-%d7%a8%d7%9b%d7%91-%d7%9e%d7%a9%d7%99%d7%a7%d7%94-%d7%a1%d7%93%d7%a8%d7%94-3-%d7%93%d7%95%d7%a8-8-%d7%9e%d7%a2/",
+      "publisher": "Autonews Israel",
+      "category": "cars",
+      "art": "cars",
+      "image": "./assets/news/images/ba19d32a9f258dc849a4.webp",
+      "official": false,
+      "translations": {
+        "he": {
+          "title": "השקה מקומית / דלק רכב משיקה סדרה 3, דור 8, מערכות הנעה הייבריד ביניים",
+          "summary": "כתבה על מכוניות או שוק הרכב בישראל. פרטים באתר המקור."
+        },
+        "ru": {
+          "title": "Локальный запуск / Delek Automotive запускает промежуточные гибридные приводные системы Series 3, Generation 8",
+          "summary": "Материал об автомобиле или автомобильном рынке Израиля. Подробности — на сайте издания."
+        },
+        "en": {
+          "title": "Local launch / Delek Automotive launches Series 3, Generation 8, intermediate hybrid drive systems",
+          "summary": "An update about vehicles or Israel's car market. Details are available at the source."
+        },
+        "ar": {
+          "title": "الإطلاق المحلي / تطلق شركة Delek Automotive الجيل الثالث من أنظمة الدفع الهجين المتوسطة من الجيل الثامن",
+          "summary": "تحديث عن السيارات أو سوق المركبات في إسرائيل. التفاصيل في المصدر."
+        }
+      },
+      "title": "Локальный запуск / Delek Automotive запускает промежуточные гибридные приводные системы Series 3, Generation 8",
       "summary": "Материал об автомобиле или автомобильном рынке Израиля. Подробности — на сайте издания.",
       "translated": true,
       "imageKind": "ai-generated",
@@ -547,45 +340,6 @@
       "imageCredit": {
         "text": "Wikimedia Commons · CC BY 4.0",
         "url": "https://commons.wikimedia.org/wiki/File:Close_up_of_Carmen_Rupe_pedestrian_crossing_light.jpg"
-      }
-    },
-    {
-      "id": "ba19d32a9f258dc849a4",
-      "titleOriginal": "השקה מקומית / דלק רכב משיקה סדרה 3, דור 8, מערכות הנעה הייבריד ביניים",
-      "sourceLanguage": "he",
-      "date": "2026-11-14T10:10:23Z",
-      "url": "https://autonews.co.il/%d7%94%d7%a9%d7%a7%d7%94-%d7%9e%d7%a7%d7%95%d7%9e%d7%99%d7%aa-%d7%93%d7%9c%d7%a7-%d7%a8%d7%9b%d7%91-%d7%9e%d7%a9%d7%99%d7%a7%d7%94-%d7%a1%d7%93%d7%a8%d7%94-3-%d7%93%d7%95%d7%a8-8-%d7%9e%d7%a2/",
-      "publisher": "Autonews Israel",
-      "category": "cars",
-      "art": "cars",
-      "image": "./assets/news/images/ba19d32a9f258dc849a4.webp",
-      "official": false,
-      "translations": {
-        "he": {
-          "title": "השקה מקומית / דלק רכב משיקה סדרה 3, דור 8, מערכות הנעה הייבריד ביניים",
-          "summary": "כתבה על מכוניות או שוק הרכב בישראל. פרטים באתר המקור."
-        },
-        "ru": {
-          "title": "Локальный запуск / Delek Automotive запускает промежуточные гибридные приводные системы Series 3, Generation 8",
-          "summary": "Материал об автомобиле или автомобильном рынке Израиля. Подробности — на сайте издания."
-        },
-        "en": {
-          "title": "Local launch / Delek Automotive launches Series 3, Generation 8, intermediate hybrid drive systems",
-          "summary": "An update about vehicles or Israel's car market. Details are available at the source."
-        },
-        "ar": {
-          "title": "الإطلاق المحلي / تطلق شركة Delek Automotive الجيل الثالث من أنظمة الدفع الهجين المتوسطة من الجيل الثامن",
-          "summary": "تحديث عن السيارات أو سوق المركبات في إسرائيل. التفاصيل في المصدر."
-        }
-      },
-      "title": "Локальный запуск / Delek Automotive запускает промежуточные гибридные приводные системы Series 3, Generation 8",
-      "summary": "Материал об автомобиле или автомобильном рынке Израиля. Подробности — на сайте издания.",
-      "translated": true,
-      "imageKind": "ai-generated",
-      "imageType": "licensedPhoto",
-      "imageCredit": {
-        "text": "Eric Friedebach · CC BY 2.0",
-        "url": "https://commons.wikimedia.org/wiki/File:1973_Ford_Mustang_Interior_Dashboard_(51838912069).jpg"
       }
     },
     {

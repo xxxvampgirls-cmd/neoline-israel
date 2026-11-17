@@ -1,5 +1,5 @@
 {
-  "attempted": "2026-11-17T08:31:46.767653Z",
+  "attempted": "2026-11-17T08:33:34.642953Z",
   "feeds": {
     "Walla · Авто": 30,
     "Walla · Безопасность": 30,
@@ -17,10 +17,10 @@
     "Ynet · Репортажи": 30,
     "Haaretz": 20
   },
-  "new": 0,
-  "retained": 24,
-  "imageCount": 24,
-  "deletedImages": 0,
+  "new": 2,
+  "retained": 18,
+  "imageCount": 18,
+  "deletedImages": 6,
   "discardedGoogleLinks": 0,
   "errors": {
     "The Times of Israel": "HTTPError: 403 Client Error: Forbidden for url: https://www.timesofisrael.com/feed/",
@@ -28,11 +28,10 @@
     "Israel Hayom · English": "HTTPError: 403 Client Error: Forbidden for url: https://www.israelhayom.com/feed/"
   },
   "directLinksOnly": true,
-  "sourceCount": 7,
+  "sourceCount": 6,
   "sources": {
-    "Maariv": 4,
-    "Ynet · Репортажи": 3,
-    "Srugim": 1,
+    "Ynet": 1,
+    "Maariv": 1,
     "Walla · Новости Израиля": 1,
     "Autonews Israel": 4,
     "Walla · Авто": 5,
