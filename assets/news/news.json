@@ -1,7 +1,7 @@
 {
   "version": 1,
   "retentionDays": 30,
-  "updated": "2026-11-17T09:10:23.618787Z",
+  "updated": "2026-11-17T09:19:43.854562Z",
   "items": [
     {
       "id": "e891ac473e1765f97972",
@@ -39,6 +39,44 @@
       "imageCredit": {
         "text": "Grogan, Brian\nRelated names:\n\nAyers, Thomas\nRaymond, Israel W\nConness, John\nOlmsted, Frederick Law\nL · Public domain",
         "url": "https://commons.wikimedia.org/wiki/File:AHWAHNEE_MEADOW._SOUTHSIDE_DRIVE_AT_BOTTOM_OF_MEADOW_AND_AHWAHNEE_ROAD_AT_TOP_OF_MEADOW._NOTE_OLD_ROAD_ALIGNMENT_AT_EAST_EDGE_OF_MEADOW._-_Yosemite_National_Park_Roads_and_HAER_CAL,22-YOSEM,5-18.tif"
+      }
+    },
+    {
+      "id": "9543fb4ded3dfa1aabbc",
+      "titleOriginal": "מ-130 אלף שקל: BYD דולפין G פלאג-אין בישראל",
+      "sourceLanguage": "he",
+      "date": "2026-11-17T09:03:05Z",
+      "url": "https://wheel.co.il/%d7%9e-130-%d7%90%d7%9c%d7%a3-%d7%a9%d7%a7%d7%9c-byd-%d7%93%d7%95%d7%9c%d7%a4%d7%99%d7%9f-g-%d7%a4%d7%9c%d7%90%d7%92-%d7%90%d7%99%d7%9f-%d7%91%d7%99%d7%a9%d7%a8%d7%90%d7%9c/",
+      "publisher": "Wheel · Автоновости",
+      "category": "cars",
+      "art": "cars",
+      "image": "./assets/news/images/9543fb4ded3dfa1aabbc.webp",
+      "official": false,
+      "translations": {
+        "he": {
+          "title": "מ-130 אלף שקל: BYD דולפין G פלאג-אין בישראל",
+          "summary": "כתבה על מכוניות או שוק הרכב בישראל. פרטים באתר המקור."
+        },
+        "ru": {
+          "title": "От 130 000 шекелей: плагин BYD Dolphin G в Израиле",
+          "summary": "Материал об автомобиле или автомобильном рынке Израиля. Подробности — на сайте издания."
+        },
+        "en": {
+          "title": "From NIS 130,000: BYD Dolphin G plug-in in Israel",
+          "summary": "An update about vehicles or Israel's car market. Details are available at the source."
+        },
+        "ar": {
+          "title": "من 130.000 شيكل: BYD Dolphin G Plug-in في إسرائيل",
+          "summary": "تحديث عن السيارات أو سوق المركبات في إسرائيل. التفاصيل في المصدر."
+        }
+      },
+      "title": "От 130 000 шекелей: плагин BYD Dolphin G в Израиле",
+      "summary": "Материал об автомобиле или автомобильном рынке Израиля. Подробности — на сайте издания.",
+      "translated": true,
+      "imageType": "licensedPhoto",
+      "imageCredit": {
+        "text": "Eric Friedebach · CC BY 2.0",
+        "url": "https://commons.wikimedia.org/wiki/File:1973_Ford_Mustang_Interior_Dashboard_(51838912069).jpg"
       }
     },
     {
@@ -1075,42 +1113,41 @@
       }
     },
     {
-      "id": "29eac7c61f2dbd8989e8",
-      "titleOriginal": "יש לכם רשיון B? תוכלו לנהוג בחשמליות, כולל מסחריות, במשקל של עד 4.25 טון",
+      "id": "e4e9dc9a17eaceb834b7",
+      "titleOriginal": "משה קארס: מה עושים עם רכב ישן שכבר לא שווה תיקון",
       "sourceLanguage": "he",
-      "date": "2026-11-09T20:59:00Z",
-      "url": "https://cars.walla.co.il/item/3875628",
-      "publisher": "Walla · Авто",
-      "category": "laws",
-      "art": "laws",
-      "image": "./assets/news/images/29eac7c61f2dbd8989e8.webp",
+      "date": "2026-11-11T16:30:43Z",
+      "url": "https://wheel.co.il/%d7%9e%d7%a9%d7%94-%d7%a7%d7%90%d7%a8%d7%a1-%d7%9e%d7%94-%d7%a2%d7%95%d7%a9%d7%99%d7%9d-%d7%a2%d7%9d-%d7%a8%d7%9b%d7%91-%d7%99%d7%a9%d7%9f-%d7%a9%d7%9b%d7%91%d7%a8-%d7%9c%d7%90-%d7%a9%d7%95%d7%95/",
+      "publisher": "Wheel · Автоновости",
+      "category": "cars",
+      "art": "cars",
+      "image": "./assets/news/images/e4e9dc9a17eaceb834b7.webp",
       "official": false,
       "translations": {
         "he": {
-          "title": "יש לכם רשיון B? תוכלו לנהוג בחשמליות, כולל מסחריות, במשקל של עד 4.25 טון",
-          "summary": "דיווח על תקנות נהיגה. יש לאמת את מעמד החוק ותאריך התחולה במקור רשמי."
+          "title": "משה קארס: מה עושים עם רכב ישן שכבר לא שווה תיקון",
+          "summary": "כתבה על מכוניות או שוק הרכב בישראל. פרטים באתר המקור."
         },
         "ru": {
-          "title": "У вас есть лицензия B? Можно управлять трамваями, в том числе коммерческими, массой до 4,25 тонн.",
-          "summary": "Публикация о правилах для водителей. Статус закона и дату вступления в силу нужно сверять с официальными документами."
+          "title": "Моше Карс: Что вы делаете со старой машиной, которую уже не стоит ремонтировать?",
+          "summary": "Материал об автомобиле или автомобильном рынке Израиля. Подробности — на сайте издания."
         },
         "en": {
-          "title": "Do you have a B license? You can drive trams, including commercial ones, weighing up to 4.25 tons",
-          "summary": "A report concerning driving rules. Verify legal status and effective dates with official documents."
+          "title": "Moshe Kars: What do you do with an old car that is no longer worth repairing?",
+          "summary": "An update about vehicles or Israel's car market. Details are available at the source."
         },
         "ar": {
-          "title": "هل لديك رخصة B؟ يمكنك قيادة الترام، بما في ذلك التجاري، الذي يصل وزنه إلى 4.25 طن",
-          "summary": "تقرير حول قواعد القيادة. تحقق من حالة القانون وتاريخ سريانه في المصادر الرسمية."
+          "title": "موشيه كارس: ماذا تفعل بسيارة قديمة لم تعد تستحق الإصلاح؟",
+          "summary": "تحديث عن السيارات أو سوق المركبات في إسرائيل. التفاصيل في المصدر."
         }
       },
-      "title": "У вас есть лицензия B? Можно управлять трамваями, в том числе коммерческими, массой до 4,25 тонн.",
-      "summary": "Публикация о правилах для водителей. Статус закона и дату вступления в силу нужно сверять с официальными документами.",
+      "title": "Моше Карс: Что вы делаете со старой машиной, которую уже не стоит ремонтировать?",
+      "summary": "Материал об автомобиле или автомобильном рынке Израиля. Подробности — на сайте издания.",
       "translated": true,
-      "imageKind": "ai-generated",
       "imageType": "licensedPhoto",
       "imageCredit": {
-        "text": "Wikimedia Commons · CC BY 4.0",
-        "url": "https://commons.wikimedia.org/wiki/File:Close_up_of_Carmen_Rupe_pedestrian_crossing_light.jpg"
+        "text": "Ivan Radic · CC BY 2.0",
+        "url": "https://commons.wikimedia.org/wiki/File:Close-up_of_an_electric_car_charging._Traffic_lights_in_a_blurry_background.jpg"
       }
     },
     {
@@ -1191,6 +1228,121 @@
       }
     },
     {
+      "id": "29eac7c61f2dbd8989e8",
+      "titleOriginal": "יש לכם רשיון B? תוכלו לנהוג בחשמליות, כולל מסחריות, במשקל של עד 4.25 טון",
+      "sourceLanguage": "he",
+      "date": "2026-11-09T20:59:00Z",
+      "url": "https://cars.walla.co.il/item/3875628",
+      "publisher": "Walla · Авто",
+      "category": "laws",
+      "art": "laws",
+      "image": "./assets/news/images/29eac7c61f2dbd8989e8.webp",
+      "official": false,
+      "translations": {
+        "he": {
+          "title": "יש לכם רשיון B? תוכלו לנהוג בחשמליות, כולל מסחריות, במשקל של עד 4.25 טון",
+          "summary": "דיווח על תקנות נהיגה. יש לאמת את מעמד החוק ותאריך התחולה במקור רשמי."
+        },
+        "ru": {
+          "title": "У вас есть лицензия B? Можно управлять трамваями, в том числе коммерческими, массой до 4,25 тонн.",
+          "summary": "Публикация о правилах для водителей. Статус закона и дату вступления в силу нужно сверять с официальными документами."
+        },
+        "en": {
+          "title": "Do you have a B license? You can drive trams, including commercial ones, weighing up to 4.25 tons",
+          "summary": "A report concerning driving rules. Verify legal status and effective dates with official documents."
+        },
+        "ar": {
+          "title": "هل لديك رخصة B؟ يمكنك قيادة الترام، بما في ذلك التجاري، الذي يصل وزنه إلى 4.25 طن",
+          "summary": "تقرير حول قواعد القيادة. تحقق من حالة القانون وتاريخ سريانه في المصادر الرسمية."
+        }
+      },
+      "title": "У вас есть лицензия B? Можно управлять трамваями, в том числе коммерческими, массой до 4,25 тонн.",
+      "summary": "Публикация о правилах для водителей. Статус закона и дату вступления в силу нужно сверять с официальными документами.",
+      "translated": true,
+      "imageKind": "ai-generated",
+      "imageType": "licensedPhoto",
+      "imageCredit": {
+        "text": "Wikimedia Commons · CC BY 4.0",
+        "url": "https://commons.wikimedia.org/wiki/File:Close_up_of_Carmen_Rupe_pedestrian_crossing_light.jpg"
+      }
+    },
+    {
+      "id": "82f9297bada5770a8f24",
+      "titleOriginal": "בן 40 נפגע מרכב בקרית ביאליק - מצבו קשה",
+      "sourceLanguage": "he",
+      "date": "2026-11-16T13:31:26Z",
+      "url": "https://t.me/uh1221/27407",
+      "publisher": "Ихуд Ацала · Telegram",
+      "category": "accidents",
+      "art": "accidents",
+      "image": "./assets/news/images/82f9297bada5770a8f24.webp",
+      "official": false,
+      "translations": {
+        "he": {
+          "title": "בן 40 נפגע מרכב בקרית ביאליק - מצבו קשה",
+          "summary": "דיווח על תאונת דרכים בישראל. פרטים ועדכונים בכתבת המקור."
+        },
+        "ru": {
+          "title": "В Кирьят-Бялике 40-летнего мужчину сбила машина - его состояние тяжелое",
+          "summary": "Дорожное происшествие в Израиле. Обстоятельства и актуальные сведения — в материале источника."
+        },
+        "en": {
+          "title": "A 40-year-old man was hit by a car in Kiryat Bialik - his condition is serious",
+          "summary": "A reported road incident in Israel. Details and updates are in the original report."
+        },
+        "ar": {
+          "title": "صدمت سيارة رجلا يبلغ من العمر 40 عاما في كريات بياليك، وحالته خطيرة",
+          "summary": "تقرير عن حادث مروري في إسرائيل. التفاصيل والتحديثات في المصدر."
+        }
+      },
+      "title": "В Кирьят-Бялике 40-летнего мужчину сбила машина - его состояние тяжелое",
+      "summary": "Дорожное происшествие в Израиле. Обстоятельства и актуальные сведения — в материале источника.",
+      "translated": true,
+      "imageType": "licensedPhoto",
+      "imageCredit": {
+        "text": "Wikimedia Commons · Public domain",
+        "url": "https://commons.wikimedia.org/wiki/File:Hurricane_Rita_Evacuation_ambulance_1.jpg"
+      }
+    },
+    {
+      "id": "7880d874e3362c62b8c8",
+      "titleOriginal": "אמבטיה לכפות הרגליים במכונית: קבלו את אליפות הגימיק המופרך ביותר בתעשיית הרכב",
+      "sourceLanguage": "he",
+      "date": "2026-11-05T09:10:32Z",
+      "url": "https://thecar.co.il/%d7%90%d7%9e%d7%91%d7%98%d7%99%d7%94-%d7%9c%d7%a8%d7%92%d7%9c%d7%99%d7%99%d7%9d-%d7%90%d7%9c%d7%99%d7%a4%d7%95%d7%aa-%d7%92%d7%99%d7%9e%d7%99%d7%a7%d7%99%d7%9d-%d7%91%d7%a8%d7%9b%d7%91/",
+      "publisher": "TheCar · Автоновости",
+      "category": "cars",
+      "art": "cars",
+      "image": "./assets/news/images/7880d874e3362c62b8c8.webp",
+      "official": false,
+      "translations": {
+        "he": {
+          "title": "אמבטיה לכפות הרגליים במכונית: קבלו את אליפות הגימיק המופרך ביותר בתעשיית הרכב",
+          "summary": "כתבה על מכוניות או שוק הרכב בישראל. פרטים באתר המקור."
+        },
+        "ru": {
+          "title": "Ванночка для ног в машине: получи чемпионат, самый абсурдный трюк в автоиндустрии",
+          "summary": "Материал об автомобиле или автомобильном рынке Израиля. Подробности — на сайте издания."
+        },
+        "en": {
+          "title": "Foot bath in the car: get the championship of the most absurd gimmick in the car industry",
+          "summary": "An update about vehicles or Israel's car market. Details are available at the source."
+        },
+        "ar": {
+          "title": "حمام القدم في السيارة: احصل على بطولة أكثر وسيلة للتحايل سخافة في صناعة السيارات",
+          "summary": "تحديث عن السيارات أو سوق المركبات في إسرائيل. التفاصيل في المصدر."
+        }
+      },
+      "title": "Ванночка для ног в машине: получи чемпионат, самый абсурдный трюк в автоиндустрии",
+      "summary": "Материал об автомобиле или автомобильном рынке Израиля. Подробности — на сайте издания.",
+      "translated": true,
+      "imageType": "licensedPhoto",
+      "imageCredit": {
+        "text": "Eric Friedebach · CC BY 2.0",
+        "url": "https://commons.wikimedia.org/wiki/File:1973_Ford_Mustang_Interior_Dashboard_(51838912069).jpg"
+      }
+    },
+    {
       "id": "d142b35bf1342c908ea0",
       "titleOriginal": "משומשות: הביקוש לבנזין בירידה, החשמליות וההיברידיות מזנקות",
       "sourceLanguage": "he",
@@ -1230,41 +1382,41 @@
       }
     },
     {
-      "id": "82f9297bada5770a8f24",
-      "titleOriginal": "בן 40 נפגע מרכב בקרית ביאליק - מצבו קשה",
+      "id": "9fa2f4ba586eee65d885",
+      "titleOriginal": "תאונה בכביש 531: שתי נשים במצב בינוני וקל כתוצאה מתאונה",
       "sourceLanguage": "he",
-      "date": "2026-11-16T13:31:26Z",
-      "url": "https://t.me/uh1221/27407",
+      "date": "2026-11-16T11:28:25Z",
+      "url": "https://t.me/uh1221/27404",
       "publisher": "Ихуд Ацала · Telegram",
       "category": "accidents",
       "art": "accidents",
-      "image": "./assets/news/images/82f9297bada5770a8f24.webp",
+      "image": "./assets/news/images/9fa2f4ba586eee65d885.webp",
       "official": false,
       "translations": {
         "he": {
-          "title": "בן 40 נפגע מרכב בקרית ביאליק - מצבו קשה",
+          "title": "תאונה בכביש 531: שתי נשים במצב בינוני וקל כתוצאה מתאונה",
           "summary": "דיווח על תאונת דרכים בישראל. פרטים ועדכונים בכתבת המקור."
         },
         "ru": {
-          "title": "В Кирьят-Бялике 40-летнего мужчину сбила машина - его состояние тяжелое",
+          "title": "ДТП на трассе 531: две женщины в состоянии средней и легкой степени в результате ДТП",
           "summary": "Дорожное происшествие в Израиле. Обстоятельства и актуальные сведения — в материале источника."
         },
         "en": {
-          "title": "A 40-year-old man was hit by a car in Kiryat Bialik - his condition is serious",
+          "title": "Accident on road 531: two women in moderate and light condition as a result of an accident",
           "summary": "A reported road incident in Israel. Details and updates are in the original report."
         },
         "ar": {
-          "title": "صدمت سيارة رجلا يبلغ من العمر 40 عاما في كريات بياليك، وحالته خطيرة",
+          "title": "حادث على طريق 531: سيدتان بحالة متوسطة وخفيفة نتيجة حادث",
           "summary": "تقرير عن حادث مروري في إسرائيل. التفاصيل والتحديثات في المصدر."
         }
       },
-      "title": "В Кирьят-Бялике 40-летнего мужчину сбила машина - его состояние тяжелое",
+      "title": "ДТП на трассе 531: две женщины в состоянии средней и легкой степени в результате ДТП",
       "summary": "Дорожное происшествие в Израиле. Обстоятельства и актуальные сведения — в материале источника.",
       "translated": true,
       "imageType": "licensedPhoto",
       "imageCredit": {
-        "text": "Wikimedia Commons · Public domain",
-        "url": "https://commons.wikimedia.org/wiki/File:Hurricane_Rita_Evacuation_ambulance_1.jpg"
+        "text": "Jeff Attaway from Abuja, Nigeria · CC BY 2.0",
+        "url": "https://commons.wikimedia.org/wiki/File:Bad_one_-_auto_wreck_in_Dakar_Senegal,_2011.jpg"
       }
     },
     {
@@ -1346,44 +1498,6 @@
       }
     },
     {
-      "id": "9fa2f4ba586eee65d885",
-      "titleOriginal": "תאונה בכביש 531: שתי נשים במצב בינוני וקל כתוצאה מתאונה",
-      "sourceLanguage": "he",
-      "date": "2026-11-16T11:28:25Z",
-      "url": "https://t.me/uh1221/27404",
-      "publisher": "Ихуд Ацала · Telegram",
-      "category": "accidents",
-      "art": "accidents",
-      "image": "./assets/news/images/9fa2f4ba586eee65d885.webp",
-      "official": false,
-      "translations": {
-        "he": {
-          "title": "תאונה בכביש 531: שתי נשים במצב בינוני וקל כתוצאה מתאונה",
-          "summary": "דיווח על תאונת דרכים בישראל. פרטים ועדכונים בכתבת המקור."
-        },
-        "ru": {
-          "title": "ДТП на трассе 531: две женщины в состоянии средней и легкой степени в результате ДТП",
-          "summary": "Дорожное происшествие в Израиле. Обстоятельства и актуальные сведения — в материале источника."
-        },
-        "en": {
-          "title": "Accident on road 531: two women in moderate and light condition as a result of an accident",
-          "summary": "A reported road incident in Israel. Details and updates are in the original report."
-        },
-        "ar": {
-          "title": "حادث على طريق 531: سيدتان بحالة متوسطة وخفيفة نتيجة حادث",
-          "summary": "تقرير عن حادث مروري في إسرائيل. التفاصيل والتحديثات في المصدر."
-        }
-      },
-      "title": "ДТП на трассе 531: две женщины в состоянии средней и легкой степени в результате ДТП",
-      "summary": "Дорожное происшествие в Израиле. Обстоятельства и актуальные сведения — в материале источника.",
-      "translated": true,
-      "imageType": "licensedPhoto",
-      "imageCredit": {
-        "text": "Jeff Attaway from Abuja, Nigeria · CC BY 2.0",
-        "url": "https://commons.wikimedia.org/wiki/File:Bad_one_-_auto_wreck_in_Dakar_Senegal,_2011.jpg"
-      }
-    },
-    {
       "id": "388236aae3431109d2d9",
       "titleOriginal": "תאונה עם מעורבות שני כלי רכב אירעה בכביש 356 בסמוך למיצד.",
       "sourceLanguage": "he",
@@ -1419,6 +1533,44 @@
       "imageCredit": {
         "text": "Jeff Attaway from Abuja, Nigeria · CC BY 2.0",
         "url": "https://commons.wikimedia.org/wiki/File:Bad_one_-_auto_wreck_in_Dakar_Senegal,_2011.jpg"
+      }
+    },
+    {
+      "id": "c035b434587066ec16b9",
+      "titleOriginal": "הפתרון לטעינת רכב חשמלי בלי חניה פרטית: רשת החשמל העירונית",
+      "sourceLanguage": "he",
+      "date": "2026-11-01T10:03:14Z",
+      "url": "https://thecar.co.il/%d7%94%d7%a4%d7%aa%d7%a8%d7%95%d7%9f-%d7%9c%d7%98%d7%a2%d7%99%d7%a0%d7%aa-%d7%a8%d7%9b%d7%91-%d7%97%d7%a9%d7%9e%d7%9c%d7%99-%d7%91%d7%9c%d7%99-%d7%97%d7%a0%d7%99%d7%94-%d7%a4%d7%a8%d7%98%d7%99%d7%aa/",
+      "publisher": "TheCar · Автоновости",
+      "category": "cars",
+      "art": "cars",
+      "image": "./assets/news/images/c035b434587066ec16b9.webp",
+      "official": false,
+      "translations": {
+        "he": {
+          "title": "הפתרון לטעינת רכב חשמלי בלי חניה פרטית: רשת החשמל העירונית",
+          "summary": "כתבה על מכוניות או שוק הרכב בישראל. פרטים באתר המקור."
+        },
+        "ru": {
+          "title": "Решение для зарядки электромобиля без частной парковки: муниципальная электросеть",
+          "summary": "Материал об автомобиле или автомобильном рынке Израиля. Подробности — на сайте издания."
+        },
+        "en": {
+          "title": "The solution for charging an electric vehicle without private parking: the municipal electricity grid",
+          "summary": "An update about vehicles or Israel's car market. Details are available at the source."
+        },
+        "ar": {
+          "title": "الحل لشحن السيارة الكهربائية بدون موقف خاص: شبكة الكهرباء البلدية",
+          "summary": "تحديث عن السيارات أو سوق المركبات في إسرائيل. التفاصيل في المصدر."
+        }
+      },
+      "title": "Решение для зарядки электромобиля без частной парковки: муниципальная электросеть",
+      "summary": "Материал об автомобиле или автомобильном рынке Израиля. Подробности — на сайте издания.",
+      "translated": true,
+      "imageType": "licensedPhoto",
+      "imageCredit": {
+        "text": "Eric Friedebach · CC BY 2.0",
+        "url": "https://commons.wikimedia.org/wiki/File:1973_Ford_Mustang_Interior_Dashboard_(51838912069).jpg"
       }
     },
     {
@@ -1498,6 +1650,83 @@
       }
     },
     {
+      "id": "3f6d4b3f1a4ee09ee3fc",
+      "titleOriginal": "ג'נרל מוטורס מול טסלה: נכון שהבטחנו, אבל לא הבטחנו לקיים",
+      "sourceLanguage": "he",
+      "date": "2026-10-22T08:07:24Z",
+      "url": "https://thecar.co.il/%d7%92%d7%a0%d7%a8%d7%9c-%d7%9e%d7%95%d7%98%d7%95%d7%a8%d7%a1-%d7%9e%d7%95%d7%9c-%d7%98%d7%a1%d7%9c%d7%94-%d7%9c%d7%90-%d7%94%d7%91%d7%98%d7%97%d7%a0%d7%95-%d7%9c%d7%a7%d7%99%d7%99%d7%9d/",
+      "publisher": "TheCar · Автоновости",
+      "category": "cars",
+      "art": "cars",
+      "image": "./assets/news/images/3f6d4b3f1a4ee09ee3fc.webp",
+      "official": false,
+      "translations": {
+        "he": {
+          "title": "ג'נרל מוטורס מול טסלה: נכון שהבטחנו, אבל לא הבטחנו לקיים",
+          "summary": "כתבה על מכוניות או שוק הרכב בישראל. פרטים באתר המקור."
+        },
+        "ru": {
+          "title": "General Motors против Tesla: это правда, что мы обещали, но не обещали выполнить",
+          "summary": "Материал об автомобиле или автомобильном рынке Израиля. Подробности — на сайте издания."
+        },
+        "en": {
+          "title": "General Motors vs. Tesla: It's true that we promised, but we didn't promise to deliver",
+          "summary": "An update about vehicles or Israel's car market. Details are available at the source."
+        },
+        "ar": {
+          "title": "جنرال موتورز ضد تسلا: صحيح أننا وعدنا، لكننا لم نعد بالوفاء",
+          "summary": "تحديث عن السيارات أو سوق المركبات في إسرائيل. التفاصيل في المصدر."
+        }
+      },
+      "title": "General Motors против Tesla: это правда, что мы обещали, но не обещали выполнить",
+      "summary": "Материал об автомобиле или автомобильном рынке Израиля. Подробности — на сайте издания.",
+      "translated": true,
+      "imageType": "licensedPhoto",
+      "imageCredit": {
+        "text": "Ivan Radic · CC BY 2.0",
+        "url": "https://commons.wikimedia.org/wiki/File:Close-up_of_an_electric_car_charging._Traffic_lights_in_a_blurry_background.jpg"
+      }
+    },
+    {
+      "id": "e49311e8b46bc9e7c4ca",
+      "titleOriginal": "למה באמת ירדו מחירי ביטוח הרכב בישראל, ומה הקשר להודו",
+      "sourceLanguage": "he",
+      "date": "2026-11-06T15:03:00Z",
+      "url": "https://cars.walla.co.il/item/3875222",
+      "publisher": "Walla · Авто",
+      "category": "cars",
+      "art": "cars",
+      "image": "./assets/news/images/e49311e8b46bc9e7c4ca.webp",
+      "official": false,
+      "translations": {
+        "he": {
+          "title": "למה באמת ירדו מחירי ביטוח הרכב בישראל, ומה הקשר להודו",
+          "summary": "כתבה על מכוניות או שוק הרכב בישראל. פרטים באתר המקור."
+        },
+        "ru": {
+          "title": "Почему в Израиле действительно снизились цены на автострахование и какое это имеет отношение к Индии?",
+          "summary": "Материал об автомобиле или автомобильном рынке Израиля. Подробности — на сайте издания."
+        },
+        "en": {
+          "title": "Why did car insurance prices really go down in Israel, and what does it have to do with India?",
+          "summary": "An update about vehicles or Israel's car market. Details are available at the source."
+        },
+        "ar": {
+          "title": "لماذا انخفضت أسعار التأمين على السيارات في إسرائيل فعلا، وما علاقتها بالهند؟",
+          "summary": "تحديث عن السيارات أو سوق المركبات في إسرائيل. التفاصيل في المصدر."
+        }
+      },
+      "title": "Почему в Израиле действительно снизились цены на автострахование и какое это имеет отношение к Индии?",
+      "summary": "Материал об автомобиле или автомобильном рынке Израиля. Подробности — на сайте издания.",
+      "translated": true,
+      "imageKind": "ai-generated",
+      "imageType": "licensedPhoto",
+      "imageCredit": {
+        "text": "Eric Friedebach · CC BY 2.0",
+        "url": "https://commons.wikimedia.org/wiki/File:1973_Ford_Mustang_Interior_Dashboard_(51838912069).jpg"
+      }
+    },
+    {
       "id": "c4c48915651e72f6614e",
       "titleOriginal": "כפר סבא: פועל נפצע בינוני בתאונת עבודה",
       "sourceLanguage": "he",
@@ -1536,35 +1765,73 @@
       }
     },
     {
-      "id": "e49311e8b46bc9e7c4ca",
-      "titleOriginal": "למה באמת ירדו מחירי ביטוח הרכב בישראל, ומה הקשר להודו",
+      "id": "7c193e0d09f585831fa0",
+      "titleOriginal": "יחד נתקן: כך נעצור את גניבות הרכב",
       "sourceLanguage": "he",
-      "date": "2026-11-06T15:03:00Z",
-      "url": "https://cars.walla.co.il/item/3875222",
-      "publisher": "Walla · Авто",
+      "date": "2026-10-21T06:55:25Z",
+      "url": "https://thecar.co.il/%d7%99%d7%97%d7%93-%d7%a0%d7%aa%d7%a7%d7%9f-%d7%9b%d7%9a-%d7%a0%d7%a2%d7%a6%d7%95%d7%a8-%d7%90%d7%aa-%d7%92%d7%a0%d7%99%d7%91%d7%95%d7%aa-%d7%94%d7%a8%d7%9b%d7%91/",
+      "publisher": "TheCar · Автоновости",
       "category": "cars",
       "art": "cars",
-      "image": "./assets/news/images/e49311e8b46bc9e7c4ca.webp",
+      "image": "./assets/news/images/7c193e0d09f585831fa0.webp",
       "official": false,
       "translations": {
         "he": {
-          "title": "למה באמת ירדו מחירי ביטוח הרכב בישראל, ומה הקשר להודו",
+          "title": "יחד נתקן: כך נעצור את גניבות הרכב",
           "summary": "כתבה על מכוניות או שוק הרכב בישראל. פרטים באתר המקור."
         },
         "ru": {
-          "title": "Почему в Израиле действительно снизились цены на автострахование и какое это имеет отношение к Индии?",
+          "title": "Вместе исправим: так мы остановим угоны автомобилей",
           "summary": "Материал об автомобиле или автомобильном рынке Израиля. Подробности — на сайте издания."
         },
         "en": {
-          "title": "Why did car insurance prices really go down in Israel, and what does it have to do with India?",
+          "title": "Together we will fix: this is how we will stop car thefts",
           "summary": "An update about vehicles or Israel's car market. Details are available at the source."
         },
         "ar": {
-          "title": "لماذا انخفضت أسعار التأمين على السيارات في إسرائيل فعلا، وما علاقتها بالهند؟",
+          "title": "معًا سوف نصلح الأمر: هكذا سنوقف سرقة السيارات",
           "summary": "تحديث عن السيارات أو سوق المركبات في إسرائيل. التفاصيل في المصدر."
         }
       },
-      "title": "Почему в Израиле действительно снизились цены на автострахование и какое это имеет отношение к Индии?",
+      "title": "Вместе исправим: так мы остановим угоны автомобилей",
+      "summary": "Материал об автомобиле или автомобильном рынке Израиля. Подробности — на сайте издания.",
+      "translated": true,
+      "imageType": "licensedPhoto",
+      "imageCredit": {
+        "text": "Eric Friedebach · CC BY 2.0",
+        "url": "https://commons.wikimedia.org/wiki/File:1973_Ford_Mustang_Interior_Dashboard_(51838912069).jpg"
+      }
+    },
+    {
+      "id": "f6100d44247e4e75550d",
+      "titleOriginal": "בלי כבל טעינה: ג'אקו 7 מקבל גרסה היברידית רגילה: מ-170 אלף שקל",
+      "sourceLanguage": "he",
+      "date": "2026-11-04T14:00:00Z",
+      "url": "https://cars.walla.co.il/item/3874968",
+      "publisher": "Walla · Авто",
+      "category": "cars",
+      "art": "cars",
+      "image": "./assets/news/images/f6100d44247e4e75550d.webp",
+      "official": false,
+      "translations": {
+        "he": {
+          "title": "בלי כבל טעינה: ג'אקו 7 מקבל גרסה היברידית רגילה: מ-170 אלף שקל",
+          "summary": "כתבה על מכוניות או שוק הרכב בישראל. פרטים באתר המקור."
+        },
+        "ru": {
+          "title": "Без зарядного кабеля: Jaco 7 получает обычную гибридную версию: от 170 000 шекелей",
+          "summary": "Материал об автомобиле или автомобильном рынке Израиля. Подробности — на сайте издания."
+        },
+        "en": {
+          "title": "Without a charging cable: Jaco 7 gets a regular hybrid version: from NIS 170,000",
+          "summary": "An update about vehicles or Israel's car market. Details are available at the source."
+        },
+        "ar": {
+          "title": "بدون كابل شحن: يحصل Jaco 7 على نسخة هجينة عادية: بسعر يبدأ من 170,000 شيكل",
+          "summary": "تحديث عن السيارات أو سوق المركبات في إسرائيل. التفاصيل في المصدر."
+        }
+      },
+      "title": "Без зарядного кабеля: Jaco 7 получает обычную гибридную версию: от 170 000 шекелей",
       "summary": "Материал об автомобиле или автомобильном рынке Израиля. Подробности — на сайте издания.",
       "translated": true,
       "imageKind": "ai-generated",
@@ -1613,6 +1880,82 @@
       }
     },
     {
+      "id": "c3170ab9e95f97f571d7",
+      "titleOriginal": "אחרי שהעשן התפזר: מה העולם מרוויח מטסלה רודסטר?",
+      "sourceLanguage": "he",
+      "date": "2026-10-18T17:23:37Z",
+      "url": "https://thecar.co.il/%d7%9e%d7%94-%d7%94%d7%a2%d7%95%d7%9c%d7%9d-%d7%9e%d7%a8%d7%95%d7%95%d7%99%d7%97-%d7%9e%d7%98%d7%a1%d7%9c%d7%94-%d7%a8%d7%95%d7%93%d7%a1%d7%98%d7%a8/",
+      "publisher": "TheCar · Автоновости",
+      "category": "cars",
+      "art": "cars",
+      "image": "./assets/news/images/c3170ab9e95f97f571d7.webp",
+      "official": false,
+      "translations": {
+        "he": {
+          "title": "אחרי שהעשן התפזר: מה העולם מרוויח מטסלה רודסטר?",
+          "summary": "כתבה על מכוניות או שוק הרכב בישראל. פרטים באתר המקור."
+        },
+        "ru": {
+          "title": "После того, как дым рассеется: что мир получит от родстера Tesla?",
+          "summary": "Материал об автомобиле или автомобильном рынке Израиля. Подробности — на сайте издания."
+        },
+        "en": {
+          "title": "After the smoke clears: What does the world gain from the Tesla Roadster?",
+          "summary": "An update about vehicles or Israel's car market. Details are available at the source."
+        },
+        "ar": {
+          "title": "بعد انقشاع الدخان: ماذا يستفيد العالم من تسلا رودستر؟",
+          "summary": "تحديث عن السيارات أو سوق المركبات في إسرائيل. التفاصيل في المصدر."
+        }
+      },
+      "title": "После того, как дым рассеется: что мир получит от родстера Tesla?",
+      "summary": "Материал об автомобиле или автомобильном рынке Израиля. Подробности — на сайте издания.",
+      "translated": true,
+      "imageType": "licensedPhoto",
+      "imageCredit": {
+        "text": "Eric Friedebach · CC BY 2.0",
+        "url": "https://commons.wikimedia.org/wiki/File:1973_Ford_Mustang_Interior_Dashboard_(51838912069).jpg"
+      }
+    },
+    {
+      "id": "bbdab420f7fa9d538488",
+      "titleOriginal": "הוזלות במקסוס, דגמי בסיס חדשים בפולקסווגן",
+      "sourceLanguage": "he",
+      "date": "2026-11-03T20:37:00Z",
+      "url": "https://cars.walla.co.il/item/3874850",
+      "publisher": "Walla",
+      "category": "cars",
+      "art": "cars",
+      "image": "./assets/news/images/bbdab420f7fa9d538488.webp",
+      "official": false,
+      "translations": {
+        "he": {
+          "title": "הוזלות במקסוס, דגמי בסיס חדשים בפולקסווגן",
+          "summary": "כתבה על מכוניות או שוק הרכב בישראל. פרטים באתר המקור."
+        },
+        "ru": {
+          "title": "Скидки в Maxus, новые базовые модели в Volkswagen",
+          "summary": "Материал об автомобиле или автомобильном рынке Израиля. Подробности — на сайте издания."
+        },
+        "en": {
+          "title": "Discounts at Maxus, new base models at Volkswagen",
+          "summary": "An update about vehicles or Israel's car market. Details are available at the source."
+        },
+        "ar": {
+          "title": "خصومات في Maxus، نماذج أساسية جديدة في فولكس واجن",
+          "summary": "تحديث عن السيارات أو سوق المركبات في إسرائيل. التفاصيل في المصدر."
+        }
+      },
+      "title": "Скидки в Maxus, новые базовые модели в Volkswagen",
+      "summary": "Материал об автомобиле или автомобильном рынке Израиля. Подробности — на сайте издания.",
+      "translated": true,
+      "imageType": "licensedPhoto",
+      "imageCredit": {
+        "text": "Eric Friedebach · CC BY 2.0",
+        "url": "https://commons.wikimedia.org/wiki/File:1973_Ford_Mustang_Interior_Dashboard_(51838912069).jpg"
+      }
+    },
+    {
       "id": "c7cc82e345b6b58d8a8e",
       "titleOriginal": "ירושלים: הולך רגל כבן 10 נפגע מרכב - מצבו בינוני",
       "sourceLanguage": "he",
@@ -1651,35 +1994,73 @@
       }
     },
     {
-      "id": "f6100d44247e4e75550d",
-      "titleOriginal": "בלי כבל טעינה: ג'אקו 7 מקבל גרסה היברידית רגילה: מ-170 אלף שקל",
+      "id": "e2765d46eba5cb861c1a",
+      "titleOriginal": "יחד נתקן: כך נחתוך ב -50% את עלויות אחזקת הרכב בישראל",
       "sourceLanguage": "he",
-      "date": "2026-11-04T14:00:00Z",
-      "url": "https://cars.walla.co.il/item/3874968",
-      "publisher": "Walla · Авто",
+      "date": "2026-10-18T10:05:56Z",
+      "url": "https://thecar.co.il/%d7%99%d7%97%d7%93-%d7%a0%d7%aa%d7%a7%d7%9f-%d7%9b%d7%9a-%d7%a0%d7%97%d7%aa%d7%95%d7%9a-%d7%91-50-%d7%a2%d7%9c%d7%95%d7%99%d7%95%d7%aa-%d7%90%d7%97%d7%96%d7%a7%d7%aa-%d7%a8%d7%9b%d7%91/",
+      "publisher": "TheCar · Автоновости",
       "category": "cars",
       "art": "cars",
-      "image": "./assets/news/images/f6100d44247e4e75550d.webp",
+      "image": "./assets/news/images/e2765d46eba5cb861c1a.webp",
       "official": false,
       "translations": {
         "he": {
-          "title": "בלי כבל טעינה: ג'אקו 7 מקבל גרסה היברידית רגילה: מ-170 אלף שקל",
+          "title": "יחד נתקן: כך נחתוך ב -50% את עלויות אחזקת הרכב בישראל",
           "summary": "כתבה על מכוניות או שוק הרכב בישראל. פרטים באתר המקור."
         },
         "ru": {
-          "title": "Без зарядного кабеля: Jaco 7 получает обычную гибридную версию: от 170 000 шекелей",
+          "title": "Вместе исправим: так мы сократим расходы на обслуживание автомобилей в Израиле на 50%",
           "summary": "Материал об автомобиле или автомобильном рынке Израиля. Подробности — на сайте издания."
         },
         "en": {
-          "title": "Without a charging cable: Jaco 7 gets a regular hybrid version: from NIS 170,000",
+          "title": "Together we will fix: this is how we will cut the costs of car maintenance in Israel by 50%",
           "summary": "An update about vehicles or Israel's car market. Details are available at the source."
         },
         "ar": {
-          "title": "بدون كابل شحن: يحصل Jaco 7 على نسخة هجينة عادية: بسعر يبدأ من 170,000 شيكل",
+          "title": "معًا سنصلح الأمر: هكذا سنخفض تكاليف صيانة السيارات في إسرائيل بنسبة 50%",
           "summary": "تحديث عن السيارات أو سوق المركبات في إسرائيل. التفاصيل في المصدر."
         }
       },
-      "title": "Без зарядного кабеля: Jaco 7 получает обычную гибридную версию: от 170 000 шекелей",
+      "title": "Вместе исправим: так мы сократим расходы на обслуживание автомобилей в Израиле на 50%",
+      "summary": "Материал об автомобиле или автомобильном рынке Израиля. Подробности — на сайте издания.",
+      "translated": true,
+      "imageType": "licensedPhoto",
+      "imageCredit": {
+        "text": "Eric Friedebach · CC BY 2.0",
+        "url": "https://commons.wikimedia.org/wiki/File:1973_Ford_Mustang_Interior_Dashboard_(51838912069).jpg"
+      }
+    },
+    {
+      "id": "79df53609138c1864198",
+      "titleOriginal": "רמת גן משיקה רשת טעינה לחשמליות: מה המחיר?",
+      "sourceLanguage": "he",
+      "date": "2026-11-01T22:52:00Z",
+      "url": "https://cars.walla.co.il/item/3874559",
+      "publisher": "Walla · Все автомобили",
+      "category": "cars",
+      "art": "cars",
+      "image": "./assets/news/images/79df53609138c1864198.webp",
+      "official": false,
+      "translations": {
+        "he": {
+          "title": "רמת גן משיקה רשת טעינה לחשמליות: מה המחיר?",
+          "summary": "כתבה על מכוניות או שוק הרכב בישראל. פרטים באתר המקור."
+        },
+        "ru": {
+          "title": "В Рамат-Гане запускается сеть зарядки для трамваев: какая цена?",
+          "summary": "Материал об автомобиле или автомобильном рынке Израиля. Подробности — на сайте издания."
+        },
+        "en": {
+          "title": "Ramat Gan launches a charging network for trams: what is the price?",
+          "summary": "An update about vehicles or Israel's car market. Details are available at the source."
+        },
+        "ar": {
+          "title": "رمات غان تطلق شبكة شحن للترام: ما هو السعر؟",
+          "summary": "تحديث عن السيارات أو سوق المركبات في إسرائيل. التفاصيل في المصدر."
+        }
+      },
+      "title": "В Рамат-Гане запускается сеть зарядки для трамваев: какая цена?",
       "summary": "Материал об автомобиле или автомобильном рынке Израиля. Подробности — на сайте издания.",
       "translated": true,
       "imageKind": "ai-generated",
@@ -1766,41 +2147,42 @@
       }
     },
     {
-      "id": "bbdab420f7fa9d538488",
-      "titleOriginal": "הוזלות במקסוס, דגמי בסיס חדשים בפולקסווגן",
+      "id": "f927a1c96bf616445fab",
+      "titleOriginal": "לקחים מהטרגדיה: איך מכוונים רכב שטח במעבר מכשול",
       "sourceLanguage": "he",
-      "date": "2026-11-03T20:37:00Z",
-      "url": "https://cars.walla.co.il/item/3874850",
-      "publisher": "Walla",
+      "date": "2026-11-01T21:17:00Z",
+      "url": "https://cars.walla.co.il/item/3874554",
+      "publisher": "Walla · Все автомобили",
       "category": "cars",
       "art": "cars",
-      "image": "./assets/news/images/bbdab420f7fa9d538488.webp",
+      "image": "./assets/news/images/f927a1c96bf616445fab.webp",
       "official": false,
       "translations": {
         "he": {
-          "title": "הוזלות במקסוס, דגמי בסיס חדשים בפולקסווגן",
+          "title": "לקחים מהטרגדיה: איך מכוונים רכב שטח במעבר מכשול",
           "summary": "כתבה על מכוניות או שוק הרכב בישראל. פרטים באתר המקור."
         },
         "ru": {
-          "title": "Скидки в Maxus, новые базовые модели в Volkswagen",
+          "title": "Уроки трагедии: как управлять внедорожником при преодолении препятствия",
           "summary": "Материал об автомобиле или автомобильном рынке Израиля. Подробности — на сайте издания."
         },
         "en": {
-          "title": "Discounts at Maxus, new base models at Volkswagen",
+          "title": "Lessons from the tragedy: how to steer an SUV when crossing an obstacle",
           "summary": "An update about vehicles or Israel's car market. Details are available at the source."
         },
         "ar": {
-          "title": "خصومات في Maxus، نماذج أساسية جديدة في فولكس واجن",
+          "title": "الدروس المستفادة من المأساة: كيفية توجيه سيارة الدفع الرباعي عند عبور عقبة",
           "summary": "تحديث عن السيارات أو سوق المركبات في إسرائيل. التفاصيل في المصدر."
         }
       },
-      "title": "Скидки в Maxus, новые базовые модели в Volkswagen",
+      "title": "Уроки трагедии: как управлять внедорожником при преодолении препятствия",
       "summary": "Материал об автомобиле или автомобильном рынке Израиля. Подробности — на сайте издания.",
       "translated": true,
+      "imageKind": "ai-generated",
       "imageType": "licensedPhoto",
       "imageCredit": {
-        "text": "Eric Friedebach · CC BY 2.0",
-        "url": "https://commons.wikimedia.org/wiki/File:1973_Ford_Mustang_Interior_Dashboard_(51838912069).jpg"
+        "text": "Ivan Radic · CC BY 2.0",
+        "url": "https://commons.wikimedia.org/wiki/File:Close-up_of_an_electric_car_charging._Traffic_lights_in_a_blurry_background.jpg"
       }
     },
     {
@@ -1880,35 +2262,35 @@
       }
     },
     {
-      "id": "79df53609138c1864198",
-      "titleOriginal": "רמת גן משיקה רשת טעינה לחשמליות: מה המחיר?",
+      "id": "e41933ff7d130fb2bb9d",
+      "titleOriginal": "מאות רכבים מכונס נכסים נמכרים בפחות עשרות אחוזים, אז מדוע הקונים הפוטנציאליים נשארים מחוץ למכרז?",
       "sourceLanguage": "he",
-      "date": "2026-11-01T22:52:00Z",
-      "url": "https://cars.walla.co.il/item/3874559",
+      "date": "2026-11-01T11:09:00Z",
+      "url": "https://cars.walla.co.il/item/3874448",
       "publisher": "Walla · Все автомобили",
       "category": "cars",
       "art": "cars",
-      "image": "./assets/news/images/79df53609138c1864198.webp",
+      "image": "./assets/news/images/e41933ff7d130fb2bb9d.webp",
       "official": false,
       "translations": {
         "he": {
-          "title": "רמת גן משיקה רשת טעינה לחשמליות: מה המחיר?",
+          "title": "מאות רכבים מכונס נכסים נמכרים בפחות עשרות אחוזים, אז מדוע הקונים הפוטנציאליים נשארים מחוץ למכרז?",
           "summary": "כתבה על מכוניות או שוק הרכב בישראל. פרטים באתר המקור."
         },
         "ru": {
-          "title": "В Рамат-Гане запускается сеть зарядки для трамваев: какая цена?",
+          "title": "Сотни автомобилей-приемников продаются на десятки процентов дешевле, так почему же потенциальные покупатели остаются вне аукциона?",
           "summary": "Материал об автомобиле или автомобильном рынке Израиля. Подробности — на сайте издания."
         },
         "en": {
-          "title": "Ramat Gan launches a charging network for trams: what is the price?",
+          "title": "Hundreds of receiver vehicles are sold for tens of percent less, so why are the potential buyers left out of the auction?",
           "summary": "An update about vehicles or Israel's car market. Details are available at the source."
         },
         "ar": {
-          "title": "رمات غان تطلق شبكة شحن للترام: ما هو السعر؟",
+          "title": "يتم بيع المئات من مركبات الاستقبال بعشرات بالمائة أقل، فلماذا يتم استبعاد المشترين المحتملين من المزاد؟",
           "summary": "تحديث عن السيارات أو سوق المركبات في إسرائيل. التفاصيل في المصدر."
         }
       },
-      "title": "В Рамат-Гане запускается сеть зарядки для трамваев: какая цена?",
+      "title": "Сотни автомобилей-приемников продаются на десятки процентов дешевле, так почему же потенциальные покупатели остаются вне аукциона?",
       "summary": "Материал об автомобиле или автомобильном рынке Израиля. Подробности — на сайте издания.",
       "translated": true,
       "imageKind": "ai-generated",
@@ -1995,42 +2377,42 @@
       }
     },
     {
-      "id": "f927a1c96bf616445fab",
-      "titleOriginal": "לקחים מהטרגדיה: איך מכוונים רכב שטח במעבר מכשול",
+      "id": "8da0d7e6aaf29974e4b9",
+      "titleOriginal": "זכרתם? חובה להדליק אורות גם ביום בכבישים הבין־עירוניים",
       "sourceLanguage": "he",
-      "date": "2026-11-01T21:17:00Z",
-      "url": "https://cars.walla.co.il/item/3874554",
+      "date": "2026-11-01T07:07:00Z",
+      "url": "https://cars.walla.co.il/item/3873034",
       "publisher": "Walla · Все автомобили",
-      "category": "cars",
-      "art": "cars",
-      "image": "./assets/news/images/f927a1c96bf616445fab.webp",
+      "category": "laws",
+      "art": "laws",
+      "image": "./assets/news/images/8da0d7e6aaf29974e4b9.webp",
       "official": false,
       "translations": {
         "he": {
-          "title": "לקחים מהטרגדיה: איך מכוונים רכב שטח במעבר מכשול",
-          "summary": "כתבה על מכוניות או שוק הרכב בישראל. פרטים באתר המקור."
+          "title": "זכרתם? חובה להדליק אורות גם ביום בכבישים הבין־עירוניים",
+          "summary": "דיווח על תקנות נהיגה. יש לאמת את מעמד החוק ותאריך התחולה במקור רשמי."
         },
         "ru": {
-          "title": "Уроки трагедии: как управлять внедорожником при преодолении препятствия",
-          "summary": "Материал об автомобиле или автомобильном рынке Израиля. Подробности — на сайте издания."
+          "title": "ты помнишь, что на междугородних дорогах свет нужно включать даже днём",
+          "summary": "Публикация о правилах для водителей. Статус закона и дату вступления в силу нужно сверять с официальными документами."
         },
         "en": {
-          "title": "Lessons from the tragedy: how to steer an SUV when crossing an obstacle",
-          "summary": "An update about vehicles or Israel's car market. Details are available at the source."
+          "title": "did you remember Lights must be turned on even during the day on intercity roads",
+          "summary": "A report concerning driving rules. Verify legal status and effective dates with official documents."
         },
         "ar": {
-          "title": "الدروس المستفادة من المأساة: كيفية توجيه سيارة الدفع الرباعي عند عبور عقبة",
-          "summary": "تحديث عن السيارات أو سوق المركبات في إسرائيل. التفاصيل في المصدر."
+          "title": "هل تتذكر أنه يجب تشغيل الأضواء حتى أثناء النهار على الطرق بين المدن",
+          "summary": "تقرير حول قواعد القيادة. تحقق من حالة القانون وتاريخ سريانه في المصادر الرسمية."
         }
       },
-      "title": "Уроки трагедии: как управлять внедорожником при преодолении препятствия",
-      "summary": "Материал об автомобиле или автомобильном рынке Израиля. Подробности — на сайте издания.",
+      "title": "ты помнишь, что на междугородних дорогах свет нужно включать даже днём",
+      "summary": "Публикация о правилах для водителей. Статус закона и дату вступления в силу нужно сверять с официальными документами.",
       "translated": true,
       "imageKind": "ai-generated",
       "imageType": "licensedPhoto",
       "imageCredit": {
-        "text": "Ivan Radic · CC BY 2.0",
-        "url": "https://commons.wikimedia.org/wiki/File:Close-up_of_an_electric_car_charging._Traffic_lights_in_a_blurry_background.jpg"
+        "text": "CZmarlin — Christopher Ziemnowicz, a photo credit would be appreciated if this image is used anywher · CC BY 4.0",
+        "url": "https://commons.wikimedia.org/wiki/File:1967_Rambler_American_Rogue_convertible_in_Apollo_Yellow_with_290_4-bbl_and_4-speed_at_2024_AMO_meet_08of11.jpg"
       }
     },
     {
@@ -2110,42 +2492,41 @@
       }
     },
     {
-      "id": "e41933ff7d130fb2bb9d",
-      "titleOriginal": "מאות רכבים מכונס נכסים נמכרים בפחות עשרות אחוזים, אז מדוע הקונים הפוטנציאליים נשארים מחוץ למכרז?",
+      "id": "2c4584c5e877e25e077e",
+      "titleOriginal": "פולקסווגן גולף R בישראל: 333 כ\"ס, 310 אלף שקל",
       "sourceLanguage": "he",
-      "date": "2026-11-01T11:09:00Z",
-      "url": "https://cars.walla.co.il/item/3874448",
-      "publisher": "Walla · Все автомобили",
+      "date": "2026-10-27T20:12:00Z",
+      "url": "https://cars.walla.co.il/item/3873967",
+      "publisher": "Walla",
       "category": "cars",
       "art": "cars",
-      "image": "./assets/news/images/e41933ff7d130fb2bb9d.webp",
+      "image": "./assets/news/images/2c4584c5e877e25e077e.webp",
       "official": false,
       "translations": {
         "he": {
-          "title": "מאות רכבים מכונס נכסים נמכרים בפחות עשרות אחוזים, אז מדוע הקונים הפוטנציאליים נשארים מחוץ למכרז?",
+          "title": "פולקסווגן גולף R בישראל: 333 כ\"ס, 310 אלף שקל",
           "summary": "כתבה על מכוניות או שוק הרכב בישראל. פרטים באתר המקור."
         },
         "ru": {
-          "title": "Сотни автомобилей-приемников продаются на десятки процентов дешевле, так почему же потенциальные покупатели остаются вне аукциона?",
+          "title": "Volkswagen Golf R в Израиле: 333 л.с., 310 000 шекелей",
           "summary": "Материал об автомобиле или автомобильном рынке Израиля. Подробности — на сайте издания."
         },
         "en": {
-          "title": "Hundreds of receiver vehicles are sold for tens of percent less, so why are the potential buyers left out of the auction?",
+          "title": "Volkswagen Golf R in Israel: 333 hp, NIS 310,000",
           "summary": "An update about vehicles or Israel's car market. Details are available at the source."
         },
         "ar": {
-          "title": "يتم بيع المئات من مركبات الاستقبال بعشرات بالمائة أقل، فلماذا يتم استبعاد المشترين المحتملين من المزاد؟",
+          "title": "فولكس فاجن جولف آر في إسرائيل: 333 حصاناً، 310 آلاف شيكل",
           "summary": "تحديث عن السيارات أو سوق المركبات في إسرائيل. التفاصيل في المصدر."
         }
       },
-      "title": "Сотни автомобилей-приемников продаются на десятки процентов дешевле, так почему же потенциальные покупатели остаются вне аукциона?",
+      "title": "Volkswagen Golf R в Израиле: 333 л.с., 310 000 шекелей",
       "summary": "Материал об автомобиле или автомобильном рынке Израиля. Подробности — на сайте издания.",
       "translated": true,
-      "imageKind": "ai-generated",
       "imageType": "licensedPhoto",
       "imageCredit": {
-        "text": "Eric Friedebach · CC BY 2.0",
-        "url": "https://commons.wikimedia.org/wiki/File:1973_Ford_Mustang_Interior_Dashboard_(51838912069).jpg"
+        "text": "Ivan Radic · CC BY 2.0",
+        "url": "https://commons.wikimedia.org/wiki/File:Close-up_of_an_electric_car_charging._Traffic_lights_in_a_blurry_background.jpg"
       }
     },
     {
@@ -2225,42 +2606,42 @@
       }
     },
     {
-      "id": "8da0d7e6aaf29974e4b9",
-      "titleOriginal": "זכרתם? חובה להדליק אורות גם ביום בכבישים הבין־עירוניים",
+      "id": "8afa884f224efe65331b",
+      "titleOriginal": "דירוג 2026: המכוניות הכי אמינות - ואלה שלא",
       "sourceLanguage": "he",
-      "date": "2026-11-01T07:07:00Z",
-      "url": "https://cars.walla.co.il/item/3873034",
+      "date": "2026-10-26T19:09:00Z",
+      "url": "https://cars.walla.co.il/item/3873849",
       "publisher": "Walla · Все автомобили",
-      "category": "laws",
-      "art": "laws",
-      "image": "./assets/news/images/8da0d7e6aaf29974e4b9.webp",
+      "category": "cars",
+      "art": "cars",
+      "image": "./assets/news/images/8afa884f224efe65331b.webp",
       "official": false,
       "translations": {
         "he": {
-          "title": "זכרתם? חובה להדליק אורות גם ביום בכבישים הבין־עירוניים",
-          "summary": "דיווח על תקנות נהיגה. יש לאמת את מעמד החוק ותאריך התחולה במקור רשמי."
+          "title": "דירוג 2026: המכוניות הכי אמינות - ואלה שלא",
+          "summary": "כתבה על מכוניות או שוק הרכב בישראל. פרטים באתר המקור."
         },
         "ru": {
-          "title": "ты помнишь, что на междугородних дорогах свет нужно включать даже днём",
-          "summary": "Публикация о правилах для водителей. Статус закона и дату вступления в силу нужно сверять с официальными документами."
+          "title": "Рейтинг 2026: самые надежные автомобили — и те, которые таковыми не являются",
+          "summary": "Материал об автомобиле или автомобильном рынке Израиля. Подробности — на сайте издания."
         },
         "en": {
-          "title": "did you remember Lights must be turned on even during the day on intercity roads",
-          "summary": "A report concerning driving rules. Verify legal status and effective dates with official documents."
+          "title": "2026 ranking: the most reliable cars - and those that are not",
+          "summary": "An update about vehicles or Israel's car market. Details are available at the source."
         },
         "ar": {
-          "title": "هل تتذكر أنه يجب تشغيل الأضواء حتى أثناء النهار على الطرق بين المدن",
-          "summary": "تقرير حول قواعد القيادة. تحقق من حالة القانون وتاريخ سريانه في المصادر الرسمية."
+          "title": "تصنيف 2026: السيارات الأكثر موثوقية - وتلك التي ليست كذلك",
+          "summary": "تحديث عن السيارات أو سوق المركبات في إسرائيل. التفاصيل في المصدر."
         }
       },
-      "title": "ты помнишь, что на междугородних дорогах свет нужно включать даже днём",
-      "summary": "Публикация о правилах для водителей. Статус закона и дату вступления в силу нужно сверять с официальными документами.",
+      "title": "Рейтинг 2026: самые надежные автомобили — и те, которые таковыми не являются",
+      "summary": "Материал об автомобиле или автомобильном рынке Израиля. Подробности — на сайте издания.",
       "translated": true,
       "imageKind": "ai-generated",
       "imageType": "licensedPhoto",
       "imageCredit": {
-        "text": "CZmarlin — Christopher Ziemnowicz, a photo credit would be appreciated if this image is used anywher · CC BY 4.0",
-        "url": "https://commons.wikimedia.org/wiki/File:1967_Rambler_American_Rogue_convertible_in_Apollo_Yellow_with_290_4-bbl_and_4-speed_at_2024_AMO_meet_08of11.jpg"
+        "text": "Ivan Radic · CC BY 2.0",
+        "url": "https://commons.wikimedia.org/wiki/File:Close-up_of_an_electric_car_charging._Traffic_lights_in_a_blurry_background.jpg"
       }
     },
     {
@@ -2340,41 +2721,42 @@
       }
     },
     {
-      "id": "2c4584c5e877e25e077e",
-      "titleOriginal": "פולקסווגן גולף R בישראל: 333 כ\"ס, 310 אלף שקל",
+      "id": "49f8482a0c05fbd3d62e",
+      "titleOriginal": "בוחרים רכב חדש: כל מבצעי הרכב וההנחות ביום הבחירות",
       "sourceLanguage": "he",
-      "date": "2026-10-27T20:12:00Z",
-      "url": "https://cars.walla.co.il/item/3873967",
-      "publisher": "Walla",
+      "date": "2026-10-25T19:32:00Z",
+      "url": "https://cars.walla.co.il/item/3873697",
+      "publisher": "Walla · Все автомобили",
       "category": "cars",
       "art": "cars",
-      "image": "./assets/news/images/2c4584c5e877e25e077e.webp",
+      "image": "./assets/news/images/49f8482a0c05fbd3d62e.webp",
       "official": false,
       "translations": {
         "he": {
-          "title": "פולקסווגן גולף R בישראל: 333 כ\"ס, 310 אלף שקל",
+          "title": "בוחרים רכב חדש: כל מבצעי הרכב וההנחות ביום הבחירות",
           "summary": "כתבה על מכוניות או שוק הרכב בישראל. פרטים באתר המקור."
         },
         "ru": {
-          "title": "Volkswagen Golf R в Израиле: 333 л.с., 310 000 шекелей",
+          "title": "Выбери новую машину: все автомобильные предложения и скидки в день выборов",
           "summary": "Материал об автомобиле или автомобильном рынке Израиля. Подробности — на сайте издания."
         },
         "en": {
-          "title": "Volkswagen Golf R in Israel: 333 hp, NIS 310,000",
+          "title": "Choose a new car: all car deals and discounts on election day",
           "summary": "An update about vehicles or Israel's car market. Details are available at the source."
         },
         "ar": {
-          "title": "فولكس فاجن جولف آر في إسرائيل: 333 حصاناً، 310 آلاف شيكل",
+          "title": "اختر سيارة جديدة: جميع عروض وخصومات السيارات في يوم الانتخابات",
           "summary": "تحديث عن السيارات أو سوق المركبات في إسرائيل. التفاصيل في المصدر."
         }
       },
-      "title": "Volkswagen Golf R в Израиле: 333 л.с., 310 000 шекелей",
+      "title": "Выбери новую машину: все автомобильные предложения и скидки в день выборов",
       "summary": "Материал об автомобиле или автомобильном рынке Израиля. Подробности — на сайте издания.",
       "translated": true,
+      "imageKind": "ai-generated",
       "imageType": "licensedPhoto",
       "imageCredit": {
-        "text": "Ivan Radic · CC BY 2.0",
-        "url": "https://commons.wikimedia.org/wiki/File:Close-up_of_an_electric_car_charging._Traffic_lights_in_a_blurry_background.jpg"
+        "text": "Eric Friedebach · CC BY 2.0",
+        "url": "https://commons.wikimedia.org/wiki/File:1973_Ford_Mustang_Interior_Dashboard_(51838912069).jpg"
       }
     },
     {
@@ -2454,45 +2836,6 @@
       }
     },
     {
-      "id": "8afa884f224efe65331b",
-      "titleOriginal": "דירוג 2026: המכוניות הכי אמינות - ואלה שלא",
-      "sourceLanguage": "he",
-      "date": "2026-10-26T19:09:00Z",
-      "url": "https://cars.walla.co.il/item/3873849",
-      "publisher": "Walla · Все автомобили",
-      "category": "cars",
-      "art": "cars",
-      "image": "./assets/news/images/8afa884f224efe65331b.webp",
-      "official": false,
-      "translations": {
-        "he": {
-          "title": "דירוג 2026: המכוניות הכי אמינות - ואלה שלא",
-          "summary": "כתבה על מכוניות או שוק הרכב בישראל. פרטים באתר המקור."
-        },
-        "ru": {
-          "title": "Рейтинг 2026: самые надежные автомобили — и те, которые таковыми не являются",
-          "summary": "Материал об автомобиле или автомобильном рынке Израиля. Подробности — на сайте издания."
-        },
-        "en": {
-          "title": "2026 ranking: the most reliable cars - and those that are not",
-          "summary": "An update about vehicles or Israel's car market. Details are available at the source."
-        },
-        "ar": {
-          "title": "تصنيف 2026: السيارات الأكثر موثوقية - وتلك التي ليست كذلك",
-          "summary": "تحديث عن السيارات أو سوق المركبات في إسرائيل. التفاصيل في المصدر."
-        }
-      },
-      "title": "Рейтинг 2026: самые надежные автомобили — и те, которые таковыми не являются",
-      "summary": "Материал об автомобиле или автомобильном рынке Израиля. Подробности — на сайте издания.",
-      "translated": true,
-      "imageKind": "ai-generated",
-      "imageType": "licensedPhoto",
-      "imageCredit": {
-        "text": "Ivan Radic · CC BY 2.0",
-        "url": "https://commons.wikimedia.org/wiki/File:Close-up_of_an_electric_car_charging._Traffic_lights_in_a_blurry_background.jpg"
-      }
-    },
-    {
       "id": "106ee4aaa859340b5bf7",
       "titleOriginal": "תאונה עם מעורבות משאית ורכב פרטי אירעה ברחוב הנחושת באשדוד.",
       "sourceLanguage": "he",
@@ -2566,45 +2909,6 @@
       "imageCredit": {
         "text": "Wikimedia Commons · Public domain",
         "url": "https://commons.wikimedia.org/wiki/File:Hurricane_Rita_Evacuation_ambulance_1.jpg"
-      }
-    },
-    {
-      "id": "49f8482a0c05fbd3d62e",
-      "titleOriginal": "בוחרים רכב חדש: כל מבצעי הרכב וההנחות ביום הבחירות",
-      "sourceLanguage": "he",
-      "date": "2026-10-25T19:32:00Z",
-      "url": "https://cars.walla.co.il/item/3873697",
-      "publisher": "Walla · Все автомобили",
-      "category": "cars",
-      "art": "cars",
-      "image": "./assets/news/images/49f8482a0c05fbd3d62e.webp",
-      "official": false,
-      "translations": {
-        "he": {
-          "title": "בוחרים רכב חדש: כל מבצעי הרכב וההנחות ביום הבחירות",
-          "summary": "כתבה על מכוניות או שוק הרכב בישראל. פרטים באתר המקור."
-        },
-        "ru": {
-          "title": "Выбери новую машину: все автомобильные предложения и скидки в день выборов",
-          "summary": "Материал об автомобиле или автомобильном рынке Израиля. Подробности — на сайте издания."
-        },
-        "en": {
-          "title": "Choose a new car: all car deals and discounts on election day",
-          "summary": "An update about vehicles or Israel's car market. Details are available at the source."
-        },
-        "ar": {
-          "title": "اختر سيارة جديدة: جميع عروض وخصومات السيارات في يوم الانتخابات",
-          "summary": "تحديث عن السيارات أو سوق المركبات في إسرائيل. التفاصيل في المصدر."
-        }
-      },
-      "title": "Выбери новую машину: все автомобильные предложения и скидки в день выборов",
-      "summary": "Материал об автомобиле или автомобильном рынке Израиля. Подробности — на сайте издания.",
-      "translated": true,
-      "imageKind": "ai-generated",
-      "imageType": "licensedPhoto",
-      "imageCredit": {
-        "text": "Eric Friedebach · CC BY 2.0",
-        "url": "https://commons.wikimedia.org/wiki/File:1973_Ford_Mustang_Interior_Dashboard_(51838912069).jpg"
       }
     },
     {

@@ -1,5 +1,5 @@
 {
-  "attempted": "2026-11-17T09:10:23.618787Z",
+  "attempted": "2026-11-17T09:19:43.854562Z",
   "feeds": {
     "Walla · Авто": 30,
     "Walla · Безопасность": 30,
@@ -8,6 +8,9 @@
     "Walla · Новости Израиля": 30,
     "The Jerusalem Post": 26,
     "Arutz Sheva · Israel National News": 10,
+    "Wheel · Автоновости": 10,
+    "TheCar · Автоновости": 100,
+    "Мицу · Камеры скорости": 2,
     "Maariv · חדשות": 20,
     "Maariv · מבזקים": 20,
     "Maariv · כלכלה": 20,
@@ -24,9 +27,9 @@
     "Алексей Железнов · Telegram": 1,
     "NEWSru.co.il · Telegram": 4
   },
-  "new": 18,
-  "retained": 100,
-  "imageCount": 99,
+  "new": 26,
+  "retained": 108,
+  "imageCount": 100,
   "deletedImages": 0,
   "discardedGoogleLinks": 0,
   "errors": {
@@ -37,9 +40,10 @@
   },
   "directLinksOnly": true,
   "manuallyVerified": 2,
-  "sourceCount": 14,
+  "sourceCount": 16,
   "sources": {
     "NEWSru.co.il · Telegram": 3,
+    "Wheel · Автоновости": 2,
     "Arutz Sheva · Israel National News": 1,
     "Ихуд Ацала · Telegram": 65,
     "Ynet": 1,
@@ -51,6 +55,7 @@
     "Autonews Israel": 6,
     "Walla · Авто": 5,
     "Mako · Израиль": 2,
+    "TheCar · Автоновости": 6,
     "Arutz Sheva": 1,
     "Walla · Все автомобили": 6
   }
