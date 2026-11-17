@@ -29,8 +29,8 @@ REPORT=ROOT/"sync-report.json"
 UTC=dt.timezone.utc
 NOW=dt.datetime.now(UTC)
 CUTOFF=NOW-dt.timedelta(days=30)
-MAX_ITEMS=110
-NEW_PER_RUN=32
+MAX_ITEMS=300
+NEW_PER_RUN=80
 S=requests.Session()
 S.headers.update({"User-Agent":"Mozilla/5.0 (compatible; NEOLINE-Israel-Headlines/2.0)","Accept-Language":"he-IL,he;q=.8,en;q=.5"})
 # Direct, public RSS feeds published by the outlets. Avoid Google News article
@@ -43,6 +43,14 @@ FEEDS=[
  ("Walla · Новости Израиля","https://www.walla.co.il/rss/feed/news/israel"),
  ("The Times of Israel","https://www.timesofisrael.com/feed/"),
  ("The Jerusalem Post","https://www.jpost.com/rss/rssfeedsfrontpage.aspx"),
+ # Additional independent Israeli publications; failures are logged and skipped.
+ ("Maariv · חדשות","https://www.maariv.co.il/rss/rsschadashot"),
+ ("Maariv · מבזקים","https://www.maariv.co.il/rss/rssfeedsmivzakichadashot"),
+ ("Maariv · כלכלה","https://www.maariv.co.il/rss/rssfeedskalkalabaarez"),
+ ("Israel Hayom","https://www.israelhayom.co.il/rss"),
+ ("Globes · צרכנות","https://www.globes.co.il/webservice/rss/rssfeeder.asmx/FeederNode?iID=821"),
+ ("Autonews Israel","https://autonews.co.il/feed/"),
+ ("Srugim","https://www.srugim.co.il/feed"),
 ]
 CATEGORIES=("accidents","speed","laws","roads","cars")
 KEYWORDS={
@@ -175,6 +183,12 @@ def unique_svg(entry):
   f'<path d="M0 55H1600M0 830H1600" stroke="{blue}" stroke-width="24" opacity=".34"/>'
   '<rect x="43" y="47" width="1514" height="806" rx="46" fill="none" stroke="#ffffff" stroke-width="5" opacity=".52"/>'
   '</svg>')
+def publisher_name(provider):
+ if provider.startswith("Walla"):return "Walla"
+ if provider.startswith("Maariv"):return "Maariv"
+ if provider.startswith("Globes"):return "Globes"
+ return provider
+
 def article(entry,provider):
  title=tidy(entry.get("title",""))
  pub=aware(entry.get("published_parsed") or entry.get("updated_parsed") or entry.get("published"))
@@ -187,7 +201,7 @@ def article(entry,provider):
  if path in ("/","/rss","/feed") or "/rss/" in path:return None
  id=hashlib.sha256(url.split("?")[0].encode("utf-8")).hexdigest()[:20]
  return {"id":id,"titleOriginal":title,"sourceLanguage":"he" if re.search(r"[\u0590-\u05ff]",title) else "en",
-  "date":pub.isoformat().replace("+00:00","Z"),"url":url,"publisher":provider,
+  "date":pub.isoformat().replace("+00:00","Z"),"url":url,"publisher":publisher_name(provider),
   "category":kind,"art":kind,"image":f"./assets/news/images/{id}.svg",
   "official":False,"translations":{}}
 def valid(item):
@@ -241,7 +255,7 @@ def main():
   try:
    entries=feed(url)
    feed_stats[provider]=len(entries)
-   for e in entries[:85]:
+   for e in entries[:180]:
     item=article(e,provider)
     if not item or item["id"] in keep:continue
     keep[item["id"]]=item;discovered+=1
