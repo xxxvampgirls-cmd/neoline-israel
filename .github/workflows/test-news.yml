@@ -53,6 +53,13 @@ jobs:
             console.log('HOMEPAGE DELIVERY NAV PASS: no favorites, truck link available');
             const target=await page.locator('#openNewsMobile').evaluate(el=>({html:el.outerHTML,disabled:el.disabled}));
             console.log('NEWS TARGET '+JSON.stringify(target)+' before URL='+page.url());
+            // The auto-hiding dock is intentionally hidden while scrolling down.
+            // Restore it by scrolling UP before attempting a real mobile tap.
+            await page.evaluate(()=>window.scrollTo({top:0,behavior:'instant'}));
+            await page.waitForFunction(()=>document.querySelector('.mobile-nav')&&
+              getComputedStyle(document.querySelector('.mobile-nav')).visibility!=='hidden',
+              null,{timeout:8000});
+            await page.waitForTimeout(450);
             await page.locator('#openNewsMobile').click();
             await page.waitForTimeout(1600);
             console.log('NEWS AFTER CLICK URL='+page.url());
