@@ -15,3 +15,18 @@ html[dir=rtl] .brand img{object-position:right center}html[dir=rtl] .road-scene{
 @media(max-width:650px){.shell{padding-inline:15px}.top-inner{min-height:64px}.brand img{width:174px;max-height:52px}.back{padding:9px 11px;font-size:10px;border-radius:12px}.game-hero{grid-template-columns:1fr;gap:11px;padding:23px 19px 0;border-radius:22px;margin-top:12px;min-height:0}.game-hero h1{font-size:clamp(30px,7.8vw,43px)}.game-hero p{font-size:12px;line-height:1.7;margin:10px 0}.hero-chips{gap:5px}.hero-chips span{font-size:9px;padding:5px 7px}.road-scene{min-height:142px;max-height:142px;margin:3px -19px 0;border-radius:0 0 22px 22px}.scene-road{top:9%;left:19%;width:110%}.scene-car{transform:scale(.8) rotate(-15deg);bottom:0;left:44%}.road-sign{transform:scale(.69);right:13%;top:0}.scene-flag{left:12%;top:12%;font-size:27px}.game-panel{margin-block:12px 17px;padding:16px;border-radius:21px}.panel-toolbar{display:flex;flex-direction:column;gap:13px;align-items:stretch}.toolbar-title h2{font-size:23px}.settings{justify-content:space-between}.bank-status{font-size:11px;padding:12px}.stats-row{gap:6px;margin:12px 0}.stat{padding:11px 7px;border-radius:12px}.stat strong{font-size:19px}.stat span{font-size:8px}.routes{gap:8px}.route-card{padding:13px 11px;border-radius:16px;gap:9px;min-height:209px}.route-icon{width:37px;height:37px;border-radius:11px;font-size:21px}.route-length{font-size:10px}.route-card strong{font-size:14px}.route-card>span:not(.route-top):not(.route-cta){font-size:10px;line-height:1.5}.route-cta{font-size:10px}.source-note{margin-top:17px;font-size:9px}.source-links{gap:10px}.source-links a{font-size:9px}.question-card{padding:16px 13px 19px;margin-top:14px;border-radius:17px}.question-card h2{font-size:19px;margin:13px 0 19px}.answer-list{gap:9px}.answer{padding:12px 11px;font-size:11.5px;gap:9px;border-radius:12px}.answer .letter{min-width:26px;width:26px;height:26px}.play-top{gap:7px}.mode-pill{font-size:9px;padding:7px}.timer{font-size:12px;padding:6px 8px}.small-back{font-size:9px;padding:8px}.play-meta{font-size:10px;margin:15px 0 8px}.question-bottom>span{font-size:9px}.primary,.secondary{font-size:11px;padding:11px 14px}.outcome{padding:26px 17px}.footer{font-size:9px;padding-bottom:24px}}
 @media(max-width:355px){.brand img{width:146px}.game-hero h1{font-size:28px}.route-card{min-height:226px}.switch button{min-width:34px;padding:6px 8px}.stat strong{font-size:17px}.answer{font-size:11px}}
 @media(prefers-reduced-motion:reduce){*,*:before,*:after{scroll-behavior:auto!important;animation:none!important;transition:none!important}}
+
+/* Journey through EVERY government-bank question without random repeats. */
+.route-full{grid-column:1/-1;display:grid;grid-template-columns:82px minmax(140px,.75fr) minmax(0,1.5fr) auto;
+ align-items:center;min-height:112px;gap:13px;
+ background:linear-gradient(115deg,#eafaff,#e4f5ff 43%,#d7f2ff);border-color:#afdaf0;padding:16px 21px}
+.route-full .route-top{position:relative;align-self:center;justify-content:flex-start;gap:0}
+.route-full .route-length{position:absolute;right:0;top:0;transform:translate(30%,-25%);border:1px solid #b5e1f5}
+.route-full>span:not(.route-top):not(.route-cta){font-size:11px;color:#557b99}
+.route-full .route-cta{margin-top:0;white-space:nowrap}
+@media(max-width:650px){.route-full{display:flex;flex-wrap:wrap;gap:9px;padding:14px;min-height:0;grid-column:1/-1;flex-direction:row}
+ .route-full .route-top{gap:5px}.route-full .route-length{position:static;transform:none}
+ .route-full strong{flex:1;font-size:15px}
+ .route-full>span:not(.route-top):not(.route-cta){flex:1 0 100%;font-size:10px}
+ .route-full .route-cta{flex:1 0 100%}
+}
