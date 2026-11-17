@@ -8,6 +8,7 @@ language instead of being fabricated. Never keep items older than 30 days.
 """
 from __future__ import annotations
 import datetime as dt
+import calendar
 import hashlib
 import html
 import json
@@ -33,6 +34,13 @@ REPORT=ROOT/"sync-report.json"
 UTC=dt.timezone.utc
 NOW=dt.datetime.now(UTC)
 CUTOFF=NOW-dt.timedelta(days=30)
+def months_ago(when, n):
+ index=when.year*12+when.month-1-n
+ year,month=index//12,index%12+1
+ return when.replace(year=year,month=month,day=min(when.day,calendar.monthrange(year,month)[1]))
+LAW_CUTOFF=months_ago(NOW,6)
+def cutoff_for(section):
+ return LAW_CUTOFF if section=="laws" else CUTOFF
 MAX_ITEMS=300
 NEW_PER_RUN=100
 MAX_PER_SOURCE=65
@@ -226,9 +234,9 @@ def article(entry,provider):
  title=tidy(entry.get("title",""))
  pub=aware(entry.get("published_parsed") or entry.get("updated_parsed") or entry.get("published"))
  url=str(entry.get("link",""))
- if not (14<len(title)<250 and pub and CUTOFF<=pub<=NOW+dt.timedelta(hours=6) and allowed(url)):return None
+ if not (14<len(title)<250 and pub and pub<=NOW+dt.timedelta(hours=6) and allowed(url)):return None
  kind=relevant(title)
- if not kind:return None
+ if not kind or pub<cutoff_for(kind):return None
  # Publisher must be an actual article link, not front page or feed itself.
  path=urlparse(url).path
  if path in ("/","/rss","/feed") or "/rss/" in path:return None
@@ -240,10 +248,12 @@ def article(entry,provider):
 def valid(item):
  if not isinstance(item,dict):return False
  stamp=aware(item.get("date"))
- return (bool(stamp and CUTOFF<=stamp<=NOW+dt.timedelta(hours=6)) and allowed(item.get("url"))
+ return (bool(stamp and stamp>=cutoff_for(item.get("category")) and stamp<=NOW+dt.timedelta(hours=6)) and allowed(item.get("url"))
   and item.get("category") in CATEGORIES and item.get("id")
   and item.get("titleOriginal") and
-  relevant(item.get("titleOriginal",""))==item.get("category")
+  (relevant(item.get("titleOriginal",""))==item.get("category") or (
+   item.get("category")=="laws" and item.get("official")==True and
+   (urlparse(item.get("url","")).hostname or "").lower()=="main.knesset.gov.il"))
   and not any(x in item["titleOriginal"].lower() for x in EXCLUDE))
 def read_previous():
  try:
@@ -309,7 +319,7 @@ def main():
    item["id"]=uid
    if not valid(item):continue
    domain=urlparse(item["url"]).hostname or ""
-   if domain not in ("www.calcalist.co.il","www.inn.co.il","www.davar1.co.il","www.gov.il"):continue
+   if domain not in ("www.calcalist.co.il","www.inn.co.il","www.davar1.co.il","www.gov.il","main.knesset.gov.il"):continue
    item["title"]=item["translations"]["ru"]["title"]
    item["summary"]=item["translations"]["ru"]["summary"]
    item["translated"]=True
@@ -384,13 +394,13 @@ def main():
  for path in list(IMAGES.glob("*.svg"))+list(IMAGES.glob("*.webp")):
   if path.name not in live_names:path.unlink();deleted+=1
  last=NOW.isoformat().replace("+00:00","Z") if feed_stats else ""
- payload={"version":1,"retentionDays":30,"updated":last,"items":recent}
+ payload={"version":1,"retentionDays":30,"lawsRetentionMonths":6,"updated":last,"items":recent}
  report={"attempted":NOW.isoformat().replace("+00:00","Z"),"feeds":feed_stats,"telegram":telegram_stats,
   "facebook":facebook_stats,"facebookState":facebook_state,
   "new":discovered,"retained":len(recent),"imageCount":sum(bool(x["image"]) for x in recent),
   "deletedImages":deleted,"discardedGoogleLinks":existing_google,"errors":errors,
   "directLinksOnly":all(allowed(x["url"]) for x in recent),
-  "manuallyVerified":verified_count,
+  "manuallyVerified":verified_count,"lawsRetentionMonths":6,"lawsStories":sum(x["category"]=="laws" for x in recent),
   "sourceCount":len(set(x["publisher"] for x in recent)),
   "sources":dict(Counter(x["publisher"] for x in recent))}
  assert all(valid(x) for x in recent) and report["directLinksOnly"]
