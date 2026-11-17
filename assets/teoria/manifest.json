@@ -1,0 +1,24 @@
+{
+  "version": 1,
+  "fetched": "2026-11-17T11:28:54.640344+00:00",
+  "languages": {
+    "ru": {
+      "count": 1801,
+      "classB": 1277,
+      "imageCount": 0
+    },
+    "he": {
+      "count": 1802,
+      "classB": 1273,
+      "imageCount": 595
+    },
+    "en": {
+      "count": 1803,
+      "classB": 1278,
+      "imageCount": 598
+    }
+  },
+  "source": "https://data.gov.il/he/datasets/ministry_of_transport/tqru",
+  "license": "Creative Commons Attribution (CC BY)",
+  "publisher": "Israel Ministry of Transport and Road Safety"
+}
