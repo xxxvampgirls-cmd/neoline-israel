@@ -353,7 +353,7 @@ jobs:
                     const v=getComputedStyle(n);
                     return {name:v.animationName,seconds:parseFloat(v.animationDuration),
                             phase:parseFloat(v.animationDelay),thickness:parseFloat(v.height),
-                            blur:parseFloat(v.filter.match(/blur\\(([^)]+)\\)/)?.[1]||'0'),
+                            blur:parseFloat(v.filter.replace('blur(','')),
                             peak:parseFloat(v.getPropertyValue('--trail-peak')),
                             z:parseInt(v.zIndex,10)};
                   });
