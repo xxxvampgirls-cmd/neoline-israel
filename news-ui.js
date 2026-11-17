@@ -86,12 +86,14 @@ function drawFeature(){
  if(!list.length){host.innerHTML='<p class="news-feature-loading">'+safe(featureTr("empty"))+'</p>';return}
  const item=list[feature.index],localized=localStory(item),url=safeURL(item.url),pic=newsPicture(item);
  const photo=pic?'<img src="'+safe(pic)+'" width="640" height="360" decoding="async" alt="" class="news-feature-img">':'';
+ const creditURL=item.imageCredit&&safeURL(item.imageCredit.url);
+ const attribution=creditURL?'<a class="news-feature-credit" href="'+safe(creditURL)+'" target="_blank" rel="noopener noreferrer" title="'+safe(item.imageCredit.text||"Photo credit")+'">'+safe(item.imageCredit.text||"Photo credit")+'</a>':'';
  host.innerHTML='<a class="news-feature-story" href="'+safe(url)+'" target="_blank" rel="noopener noreferrer nofollow" aria-label="'+safe(localized.title)+'">'+
   '<span class="news-feature-photo">'+photo+'</span>'+
   '<span class="news-feature-pattern" aria-hidden="true"></span><span class="news-feature-blueprint" aria-hidden="true"></span>'+
   '<span class="news-feature-copy"><span class="news-feature-tag">'+safe(featureTr("latest"))+' <i>·</i> '+safe(tr(item.category))+'</span>'+
   '<strong class="news-feature-title" dir="auto">'+safe(localized.title)+'</strong>'+
-  '<span class="news-feature-footer">'+safe(displayDate(item.date))+' · '+safe(item.publisher||"")+'<span class="news-feature-go">'+safe(featureTr("view"))+' ↗</span></span></span></a>';
+  '<span class="news-feature-footer">'+safe(displayDate(item.date))+' · '+safe(item.publisher||"")+'<span class="news-feature-go">'+safe(featureTr("view"))+' ↗</span></span></span></a>'+attribution;
  const dots=$("newsFeatureDots");
  if(dots.childElementCount!==list.length){
   dots.innerHTML=list.map((v,i)=>'<button type="button" data-feature-dot="'+i+'" class="news-feature-dot" aria-label="'+safe(featureTr("slide"))+' '+(i+1)+' '+safe(featureTr("of"))+' '+list.length+'"></button>').join("");
@@ -197,7 +199,7 @@ function render(append=false){
   const image=pic?
    '<img class="news-art-image" loading="'+(pos<2?'eager':'lazy')+'" decoding="async" width="640" height="360" alt="'+safe(tr("image"))+'" src="'+safe(pic)+'">':
    '<div class="news-photo-placeholder" aria-hidden="true"></div>';
-  const type=item.imageType==="sourceLicensedPhoto"?({ru:"Фото первоисточника",en:"Publisher photo",he:"צילום מהמקור",ar:"صورة المصدر"}[state.lang]):
+  const type=item.imageType==="sourceLicensedPhoto"?({ru:"Фото из публикации",en:"Publisher photo",he:"צילום מהמקור",ar:"صورة المصدر"}[state.lang]):
    item.imageType==="ai"?({ru:"AI · иллюстрация",en:"AI · illustration",he:"AI · הדמיה",ar:"AI · صورة توضيحية"}[state.lang]):
    item.imageType==="licensedPhoto"?({ru:"Фото · иллюстрация",en:"Photo · illustration",he:"צילום · המחשה",ar:"صورة توضيحية"}[state.lang]):tr("image");
   const photoCredit=item.imageCredit&&item.imageCredit.url?
