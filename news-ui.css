@@ -402,3 +402,80 @@ html[dir=rtl] .news-art:after{right:auto;left:0!important;transform:scaleX(-1)!i
  .news-feature-img,.news-feature-dot{transition:none}
  .news-feature-story:hover .news-feature-img{transform:none}
 }
+
+
+/* Approved photo treatment #4: restrained NEOLINE cyan corners, translucent
+   diagonals and square/dot micro-patterns. Always keep the real photo visible. */
+.news-feature-story::after{
+ content:"";position:absolute;inset:0;z-index:3;pointer-events:none;
+ background:linear-gradient(128deg,#41cbff69 0%,#1d87d642 42%,transparent 100%);
+ clip-path:polygon(0 0,36% 0,0 37%);
+}
+.news-feature-pattern{
+ left:9px;right:auto;top:8px;width:43%;height:36%;
+ background-image:radial-gradient(circle at center,#ffffffb9 1.25px,transparent 2px),
+  linear-gradient(90deg,#d9f7ff65 1px,transparent 1px),
+  linear-gradient(0deg,#d9f7ff65 1px,transparent 1px);
+ background-size:15px 15px,48px 48px,48px 48px;
+ -webkit-mask-image:linear-gradient(135deg,#000 4%,transparent 88%);
+ mask-image:linear-gradient(135deg,#000 4%,transparent 88%);
+ opacity:.7;
+}
+.news-feature-blueprint{position:absolute;inset:0;display:block;z-index:3;pointer-events:none}
+.news-feature-blueprint::before{
+ content:"";position:absolute;right:0;bottom:0;width:40%;height:55%;
+ background:linear-gradient(320deg,#16bafa9c 0%,#298dd453 60%,transparent 100%);
+ clip-path:polygon(100% 0,100% 100%,0 100%);
+}
+.news-feature-blueprint::after{
+ content:"";position:absolute;right:10px;bottom:7px;width:27%;height:30%;opacity:.8;
+ background-image:radial-gradient(circle at center,#f2fdffc7 1.25px,transparent 2px);
+ background-size:15px 15px;
+ -webkit-mask-image:linear-gradient(315deg,#000 10%,transparent 89%);
+ mask-image:linear-gradient(315deg,#000 10%,transparent 89%);
+}
+.news-feature-story{outline:1px solid #ffffffb8;outline-offset:-4px}
+.news-feature-story:before{
+ background:linear-gradient(180deg,#1278b12e 0%,transparent 36%,#043c633c 54%,#082943c9 83%,#092643e9 100%);
+}
+.news-feature-img{
+ filter:saturate(1.07) contrast(1.03) brightness(1.025) sepia(.035);
+}
+.news-feature-go{border-color:#ffffff6b;background:#1682bf65}
+.news-feature-carousel{background:linear-gradient(135deg,#def4ff,#ccecff);border-color:#badff2}
+.news-art-decoration{position:absolute;inset:0;z-index:3;pointer-events:none;overflow:hidden}
+.news-art-decoration::before{
+ content:"";position:absolute;inset:0;
+ background:linear-gradient(130deg,#38bdf862 0%,#0b86cb29 52%,transparent 95%);
+ clip-path:polygon(0 0,34% 0,0 42%);
+}
+.news-art-decoration::after{
+ content:"";position:absolute;inset:0;
+ background:linear-gradient(315deg,#1ca9f39d 0%,#349fdd4b 50%,transparent 100%);
+ clip-path:polygon(100% 56%,100% 100%,59% 100%);
+}
+.news-art:after{right:auto!important;left:7px!important;top:6px!important;width:43%!important;height:38%!important;opacity:.6!important;
+ -webkit-mask-image:linear-gradient(135deg,#000,transparent 89%);
+ mask-image:linear-gradient(135deg,#000,transparent 89%);
+}
+html[dir=rtl] .news-feature-pattern{left:auto;right:9px;transform:scaleX(-1)}
+html[dir=rtl] .news-feature-story:after{transform:scaleX(-1)}
+html[dir=rtl] .news-feature-blueprint{transform:scaleX(-1)}
+html[dir=rtl] .news-art-decoration{transform:scaleX(-1)}
+html[dir=rtl] .news-art:after{right:7px!important;left:auto!important;transform:scaleX(-1)!important}
+@media(max-width:760px){
+ /* Only the width changes. Keep previously approved image height unchanged.
+    Full-bleed slide aligns with the lower news cards inside the same .shell. */
+ .news-cover{padding-inline:0}
+ .news-cover-copy{padding-inline:15px}
+ .news-feature-carousel{width:100%;margin-inline:0;padding:0;border:0;border-radius:21px;box-shadow:none;background:transparent}
+ .news-feature-slide{height:clamp(245px,59vw,330px);border-radius:20px}
+ .news-feature-controls{padding-inline:8px}
+}
+@media(max-width:360px){
+ .news-cover-copy{padding-inline:11px}
+ .news-feature-slide{height:248px}
+}
+@media(prefers-reduced-motion:reduce){
+ .news-feature-blueprint,.news-art-decoration{transition:none}
+}
