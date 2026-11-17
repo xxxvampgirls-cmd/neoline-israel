@@ -1061,14 +1061,15 @@ body{width:100%;max-width:100%;overflow-x:clip}
 }
 .featured-slide .featured-image .ad-device-shadow,
 .ad-panel .ad-photo-area .ad-device-shadow{
-  position:absolute;z-index:1;left:18%;bottom:8%;width:64%;height:15%;
+  position:absolute;z-index:1;left:23%;bottom:6%;width:54%;height:17%;
   border-radius:50%;pointer-events:none;
-  background:radial-gradient(ellipse at center,#143f6533 0%,#143f6517 43%,transparent 73%);
-  filter:blur(8px);
+  background:radial-gradient(ellipse at center,#103f658b 0%,#17497057 35%,#17497019 61%,transparent 83%);
+  /* Feathered gradient provides a realistic contact shadow without filter:blur. */
+  filter:none;
 }
 .featured-slide .featured-image > img,
 .ad-panel .ad-photo-area > img{
-  position:relative;z-index:2;filter:drop-shadow(0 10px 11px #153e602b)!important;
+  position:relative;z-index:2;filter:drop-shadow(0 13px 12px #10375c87)!important;
 }
 .featured-slide .featured-image .feature-img-tag,
 .ad-panel .ad-photo-area .ad-image-label{z-index:4}
@@ -1077,12 +1078,23 @@ body{width:100%;max-width:100%;overflow-x:clip}
   .ad-panel .ad-photo-area .ad-photo-stripes{padding:17px 0}
   .ad-photo-stripes .ad-photo-band{height:13px}
   .featured-slide .featured-image .ad-device-shadow,
-  .ad-panel .ad-photo-area .ad-device-shadow{bottom:7%;height:16%;filter:blur(6px)}
+  .ad-panel .ad-photo-area .ad-device-shadow{bottom:6%;height:15%;filter:none}
   .featured-slide .featured-image > img,
-  .ad-panel .ad-photo-area > img{filter:drop-shadow(0 7px 8px #153e6028)!important}
+  .ad-panel .ad-photo-area > img{filter:drop-shadow(0 9px 9px #10385e83)!important}
   .ad-panel .ad-photo-area{border-radius:17px!important}
 }
 
+
+/* Fallback SVG products receive the same cutout-style depth as photos. */
+#showcaseSlides .featured-slide .featured-image > .feature-img-fallback:not([hidden]){
+  position:relative;z-index:2;
+  filter:drop-shadow(0 13px 12px #10375c87);
+}
+@media(max-width:720px){
+  #showcaseSlides .featured-slide .featured-image > .feature-img-fallback:not([hidden]){
+    filter:drop-shadow(0 9px 9px #10385e83);
+  }
+}
 
 /* Advertising motion: slow product push-in before the existing automatic slide change.
    Bands, labels, buttons and the gentle ground shadow remain stationary. */
@@ -1245,7 +1257,7 @@ html[dir=rtl] .theory-preview{text-align:right}
 }
 #showcaseSlides .featured-slide--theory .theory-stage .ad-photo-band{height:18px}
 #showcaseSlides .featured-slide--theory .theory-halo{
- position:absolute;z-index:0;left:14%;top:5%;width:76%;aspect-ratio:1;border-radius:50%;
+ position:absolute;z-index:0;left:20%;top:11%;width:63%;aspect-ratio:1;border-radius:50%;
  border:1px solid #ffffffed;
  background:radial-gradient(circle at 37% 28%,#fff 19%,#f7fdff 50%,#d7ebfc 100%);
  box-shadow:0 12px 36px #237eb421, inset 0 1px 28px #fff;
@@ -1258,9 +1270,9 @@ html[dir=rtl] .theory-preview{text-align:right}
  filter:blur(12px);
 }
 #showcaseSlides .featured-slide--theory .theory-stage-floor{
- position:absolute;z-index:1;left:17%;bottom:6%;width:73%;height:12%;
- border-radius:50%;background:radial-gradient(ellipse,#123d685a,transparent 76%);
- filter:blur(13px);pointer-events:none;
+ position:absolute;z-index:1;left:21%;bottom:5%;width:66%;height:15%;
+ border-radius:50%;background:radial-gradient(ellipse,#0c355a91 0%,#154b7952 36%,transparent 77%);
+ filter:blur(8px);pointer-events:none;
 }
 #showcaseSlides .featured-slide--theory .theory-track{
  position:absolute;z-index:1;inset:17% 11% 10%;pointer-events:none;
@@ -1313,8 +1325,8 @@ html[dir=rtl] .theory-preview{text-align:right}
  border-radius:26px;padding:6px;
  border:1px solid #bbdff5;
  background:linear-gradient(130deg,#ffffff,#cce7f9 70%,#8fc6e7);
- box-shadow:inset 0 2px 3px #fff,0 1px 1px #31678d30,15px 26px 28px #114a7a33,
-  2px 7px 9px #1557851b;
+ box-shadow:inset 0 2px 3px #fff,0 1px 1px #31678d30,15px 24px 25px #123d6269,
+  2px 8px 11px #103c6280;
  transform:rotate(-8deg) perspective(760px) rotateY(-6deg);
  transform-origin:53% 72%;
  will-change:transform;
@@ -1461,7 +1473,7 @@ html[dir=rtl] .theory-preview{text-align:right}
  #showcaseSlides .featured-slide--theory .theory-stage{height:100%;min-height:0;border-radius:17px}
  #showcaseSlides .featured-slide--theory .theory-stage .ad-photo-stripes{padding:19px 0}
  #showcaseSlides .featured-slide--theory .theory-stage .ad-photo-band{height:13px}
- #showcaseSlides .featured-slide--theory .theory-halo{top:11%;left:15%;width:74%}
+ #showcaseSlides .featured-slide--theory .theory-halo{top:16%;left:19%;width:63%}
  #showcaseSlides .featured-slide--theory .theory-back-card{
   top:13%;left:34%;width:59%;height:75%;border-radius:19px;
  }
@@ -1519,7 +1531,7 @@ html[dir=rtl] .theory-preview{text-align:right}
   position:absolute;
   z-index:1;
   left:50%;top:50%;
-  width:min(88%,440px);aspect-ratio:1;
+  width:min(66%,310px);aspect-ratio:1;
   border-radius:50%;
   transform:translate3d(-50%,-50%,0);
   background:radial-gradient(circle at center,
@@ -1527,6 +1539,8 @@ html[dir=rtl] .theory-preview{text-align:right}
     #ffffffba 59%,#ffffff53 69%,#ffffff00 82%);
   pointer-events:none;
 }
+/* More compact central glow leaves the product edges clear. The two
+   moving blue bands remain above it, and fine streaks vanish beneath it. */
 /* The TWO broad, original blue ribbons stay sharp over the white disc.
    Large highlighted segments make their opposite movement easy to see
    even on short 7.6-second slides; all movement is transform-only. */
@@ -1621,7 +1635,7 @@ html[dir=rtl] .theory-preview{text-align:right}
   100%{transform:translate3d(var(--trail-end),0,0) scaleX(1.05);opacity:0}
 }
 @media(max-width:720px){
-  .ad-photo-stripes .ad-photo-focus{width:min(91%,330px)}
+  .ad-photo-stripes .ad-photo-focus{width:min(67%,220px)}
   #showcaseSlides .featured-slide .ad-photo-stripes .ad-photo-band:first-child{height:11px}
   #showcaseSlides .featured-slide .ad-photo-stripes .ad-photo-band:nth-child(2){height:9px}
   #showcaseSlides .featured-slide.active:not(.ad-exiting) .ad-photo-stripes .ad-photo-band:first-child{animation-duration:10.4s}
