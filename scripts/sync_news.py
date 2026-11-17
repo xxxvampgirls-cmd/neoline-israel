@@ -23,6 +23,7 @@ import feedparser
 import requests
 from collections import Counter, defaultdict
 from bs4 import BeautifulSoup
+from telegram_news import collect as collect_public_telegram
 
 ROOT=Path("assets/news")
 IMAGES=ROOT/"images"
@@ -64,7 +65,7 @@ CATEGORIES=("accidents","speed","laws","roads","cars")
 # inside unrelated words like "מורכב", and "במהירות" means merely "quickly".
 KEYWORDS={
  "accidents":["תאונ","התנגש","דרס","נדרס","פגע וברח","פגיעת רכב","נפגע מרכב","התהפך הרכב","דריסת","collision","crash","accident","road fatal","hit-and-run","road death","дтп","авари"],
- "speed":["מהירות מופרזת","מצלמות מהירות","נהיגה במהירות","מכמונת","מצלמת מהירות","אכיפת מהירות","speed camera","speeding","speed limit","speed trap","speed enforcement","скорост","радар","штраф за скорость"],
+ "speed":["מהירות מופרזת","מצלמות מהירות","נהיגה במהירות","מכמונת","מצלמת מהירות","אכיפת מהירות","קמ\"ש","קמ״ש","הגבלת מהירות","מצלמות א-3","speed camera","speeding","speed limit","speed trap","speed enforcement","скорост","радар","штраф за скорость"],
  "laws":["תקנות התעבורה","חוקי תנועה","חוק התעבורה","רישיון נהיגה","רשיון נהיגה","רשיון b","רישיון b","קנסות נהגים","קנסות תנועה","נהיגה בשכרות","חובה להדליק אורות","driving law","traffic law","road regulation","driving licens","traffic fine","правила дорожного движения"],
  "roads":["חסימות כבישים","סגירת כביש","כביש חסום","כביש 6","כביש 1","נתיבי איילון","פקק","עומס תנועה","עומסי תנועה","מחלף","road closure","highway closure","traffic jam","highway traffic","дорог","шоссе","пробк"],
  "cars":["רכבי","רכבים","רכב חדש","מכונית","מכוניות","חשמליות","טעינה","כלי רכב","car ","cars","automotive","vehicle","electric vehicle","tesla","автомобил","электромобил"],
@@ -102,7 +103,7 @@ def relevant(title):
  if any(x in low for x in EXCLUDE):return None
  if any(x in low for x in ("פיגוע","מחבלים","טרור","גרזנים","טרוריסט")):return None
  # Accidents are identified before the generic vehicle category.
- for section in ("accidents","speed","laws","roads"):
+ for section in ("speed","accidents","laws","roads"):
   if any(x in low for x in KEYWORDS[section]):return section
  if any(x in low for x in KEYWORDS["cars"]):return "cars"
  # Hebrew standalone vehicle nouns, optionally with common prepositions:
@@ -299,6 +300,19 @@ def main():
    errors[provider]=f"{type(exc).__name__}: {str(exc)[:100]}"
    print(f"WARN {provider}: {errors[provider]}",flush=True)
   time.sleep(.5)
+ # Public Telegram message previews from verified Israel traffic/safety channels.
+ # Keep publisher attribution and direct original post links, never embed media.
+ telegram_stats={}
+ try:
+  telegram_posts,telegram_stats,telegram_errors=collect_public_telegram(S,CUTOFF,NOW)
+  for name,entry in telegram_posts:
+   item=article(entry,name)
+   if not item or item["id"] in keep:continue
+   keep[item["id"]]=item;discovered+=1
+  errors.update(telegram_errors)
+  print(f"TELEGRAM {len(telegram_posts)} collected; channels={telegram_stats}",flush=True)
+ except Exception as exc:
+  errors["Telegram public channels"]=f"{type(exc).__name__}: {str(exc)[:100]}"
  recent=select_diverse(x for x in keep.values() if valid(x))
  new_count=0
  for x in recent:
@@ -320,7 +334,7 @@ def main():
   if path.name not in live_names:path.unlink();deleted+=1
  last=NOW.isoformat().replace("+00:00","Z") if feed_stats else ""
  payload={"version":1,"retentionDays":30,"updated":last,"items":recent}
- report={"attempted":NOW.isoformat().replace("+00:00","Z"),"feeds":feed_stats,
+ report={"attempted":NOW.isoformat().replace("+00:00","Z"),"feeds":feed_stats,"telegram":telegram_stats,
   "new":discovered,"retained":len(recent),"imageCount":sum(bool(x["image"]) for x in recent),
   "deletedImages":deleted,"discardedGoogleLinks":existing_google,"errors":errors,
   "directLinksOnly":all(allowed(x["url"]) for x in recent),
