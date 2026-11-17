@@ -1184,84 +1184,126 @@ body{width:100%;max-width:100%;overflow-x:clip}
 }
 
 
-/* ONE seamless carousel movement: text + device + its white backlight
-   + floor shadow are transported by ONE shared wrapper, not separate animations.
-   The card itself remains stationary; neither old nor new content dissolves.
-   At any moment the two compositions sit next to one another on the SAME
-   horizontal virtual belt. Exactly 100% opposing translations prevent gaps. */
+/* CUTOUT-ONLY HERO CAROUSEL
+   The blue stage, two ribbons, independent trails and white focus never
+   translate or fade. Outgoing card becomes a transparent overlay exposing ONLY
+   its product cutout; the incoming card supplies the unchanged static stage.
+   Both PNGs use the exact same timing function to exchange in one gesture. */
 #showcaseSlides .featured-slide .feature-slide-flight{
  display:grid;
  grid-template-columns:minmax(0,1fr) minmax(0,1.05fr);
- align-items:center;
- min-width:0;width:100%;height:100%;
- grid-column:1/-1;
+ align-items:center;min-width:0;width:100%;height:100%;grid-column:1/-1;
 }
 #showcaseSlides .featured-slide.active:not(.ad-exiting){
- animation:none!important;
- transform:none!important;
- z-index:2;
+ animation:none!important;transform:none!important;z-index:2;
 }
 #showcaseSlides .featured-slide.ad-exiting{
- position:absolute!important;inset:0;width:100%;
- z-index:3;pointer-events:none!important;
- background:transparent!important;
- border-color:transparent!important;
+ position:absolute!important;inset:0;width:100%;z-index:3;
+ pointer-events:none!important;
+ animation:none!important;transform:none!important;
+ background:transparent!important;border-color:transparent!important;
  box-shadow:none!important;
- animation:none!important;
- transform:none!important;
 }
-#showcaseSlides .featured-slide.ad-exiting:before{opacity:0}
-#showcaseSlides .featured-slide:is(.ad-exiting,.ad-arriving){
- overflow:visible!important;
+#showcaseSlides .featured-slide.ad-exiting::before{display:none!important}
+#showcaseSlides .featured-slide.ad-exiting .feature-copy{visibility:hidden!important}
+#showcaseSlides .featured-slide.ad-exiting .featured-image{
+ background:transparent!important;border-color:transparent!important;
+ box-shadow:none!important;overflow:visible!important;
 }
-#showcaseSlides .featured-slide:is(.ad-exiting,.ad-arriving) .feature-slide-flight{
+#showcaseSlides .featured-slide.ad-exiting .featured-image:before{display:none!important}
+#showcaseSlides .featured-slide.ad-exiting .ad-photo-stripes,
+#showcaseSlides .featured-slide.ad-exiting .ad-device-shadow,
+#showcaseSlides .featured-slide.ad-exiting .feature-img-tag,
+#showcaseSlides .featured-slide.ad-exiting
+ :is(.feature-img-prev,.feature-img-next,.feature-img-zoom){visibility:hidden!important}
+#showcaseSlides .featured-slide.ad-arriving
+ :is(.feature-img-prev,.feature-img-next,.feature-img-zoom){pointer-events:none}
+#showcaseSlides .featured-slide:is(.ad-exiting,.ad-arriving) .feature-slide-flight,
+#showcaseSlides .featured-slide:is(.ad-exiting,.ad-arriving) .featured-image{
+ animation:none!important;transform:none!important;
+}
+/* Cancel the old 7.6s independent product push-in: it interferes with
+   the handoff and creates a second apparent transition. */
+#showcaseSlides .featured-slide .featured-image > img:not([hidden]),
+#showcaseSlides .featured-slide .featured-image > .feature-img-fallback:not([hidden]),
+#showcaseSlides .featured-slide .ad-device-shadow{animation:none!important}
+#showcaseSlides .featured-slide:is(.ad-arriving,.ad-exiting)
+ .featured-image > :is(img:not([hidden]),.feature-img-fallback:not([hidden])){
  will-change:transform;
 }
-#showcaseSlides .featured-slide:is(.ad-exiting,.ad-arriving)
- :is(.feature-img-prev,.feature-img-next,.feature-img-zoom){
- opacity:0;pointer-events:none;
+#showcaseSlides .featured-slide.ad-exiting.ad-move-forward
+ .featured-image > :is(img:not([hidden]),.feature-img-fallback:not([hidden])){
+ animation:neolineCutoutLeaveLeft .84s cubic-bezier(.43,.08,.3,1) both!important;
 }
-/* Both ends use the exact same time curve: one continuous passage,
-   not a separate card fade, text fade or independent product flight. */
-#showcaseSlides .featured-slide.ad-exiting.ad-move-forward .feature-slide-flight{
- animation:neolineSeamlessLeaveLeft .79s cubic-bezier(.42,.03,.19,1) both!important;
+#showcaseSlides .featured-slide.ad-arriving.ad-move-forward
+ .featured-image > :is(img:not([hidden]),.feature-img-fallback:not([hidden])){
+ animation:neolineCutoutEnterRight .84s cubic-bezier(.43,.08,.3,1) both!important;
 }
-#showcaseSlides .featured-slide.ad-arriving.ad-move-forward .feature-slide-flight{
- animation:neolineSeamlessEnterRight .79s cubic-bezier(.42,.03,.19,1) both!important;
+#showcaseSlides .featured-slide.ad-exiting.ad-move-backward
+ .featured-image > :is(img:not([hidden]),.feature-img-fallback:not([hidden])){
+ animation:neolineCutoutLeaveRight .84s cubic-bezier(.43,.08,.3,1) both!important;
 }
-#showcaseSlides .featured-slide.ad-exiting.ad-move-backward .feature-slide-flight{
- animation:neolineSeamlessLeaveRight .79s cubic-bezier(.42,.03,.19,1) both!important;
+#showcaseSlides .featured-slide.ad-arriving.ad-move-backward
+ .featured-image > :is(img:not([hidden]),.feature-img-fallback:not([hidden])){
+ animation:neolineCutoutEnterLeft .84s cubic-bezier(.43,.08,.3,1) both!important;
 }
-#showcaseSlides .featured-slide.ad-arriving.ad-move-backward .feature-slide-flight{
- animation:neolineSeamlessEnterLeft .79s cubic-bezier(.42,.03,.19,1) both!important;
-}
-@keyframes neolineSeamlessLeaveLeft{
+/* Distance is relative to the picture viewport so the full PNG travels
+   beyond the clipping edge, including its own drop-shadow. */
+@keyframes neolineCutoutLeaveLeft{
  from{transform:translate3d(0,0,0)}
- to{transform:translate3d(-100%,0,0)}
+ to{transform:translate3d(calc(-100vw - 100%),0,0)}
 }
-@keyframes neolineSeamlessEnterRight{
- from{transform:translate3d(100%,0,0)}
+@keyframes neolineCutoutEnterRight{
+ from{transform:translate3d(calc(100vw + 100%),0,0)}
  to{transform:translate3d(0,0,0)}
 }
-@keyframes neolineSeamlessLeaveRight{
+@keyframes neolineCutoutLeaveRight{
  from{transform:translate3d(0,0,0)}
- to{transform:translate3d(100%,0,0)}
+ to{transform:translate3d(calc(100vw + 100%),0,0)}
 }
-@keyframes neolineSeamlessEnterLeft{
- from{transform:translate3d(-100%,0,0)}
+@keyframes neolineCutoutEnterLeft{
+ from{transform:translate3d(calc(-100vw - 100%),0,0)}
  to{transform:translate3d(0,0,0)}
+}
+/* The game promo has a CSS-rendered 'device' rather than a PNG: animate
+   only its foreground device/cards, never its backdrop or white halo. */
+#showcaseSlides .featured-slide.ad-exiting .theory-stage{
+ background:transparent!important;border-color:transparent!important;box-shadow:none!important;
+}
+#showcaseSlides .featured-slide.ad-exiting .theory-stage > :not(.theory-device):not(.theory-back-card):not(.theory-floating-award){
+ visibility:hidden!important;
+}
+#showcaseSlides .featured-slide.ad-exiting .theory-featured-image{
+ background:transparent!important;
+}
+#showcaseSlides .featured-slide:is(.ad-arriving,.ad-exiting)
+ :is(.theory-device,.theory-back-card,.theory-floating-award){
+ will-change:transform;
+}
+#showcaseSlides .featured-slide.ad-exiting.ad-move-forward
+ :is(.theory-device,.theory-back-card,.theory-floating-award){
+ animation:neolineCutoutLeaveLeft .84s cubic-bezier(.43,.08,.3,1) both!important;
+}
+#showcaseSlides .featured-slide.ad-arriving.ad-move-forward
+ :is(.theory-device,.theory-back-card,.theory-floating-award){
+ animation:neolineCutoutEnterRight .84s cubic-bezier(.43,.08,.3,1) both!important;
+}
+#showcaseSlides .featured-slide.ad-exiting.ad-move-backward
+ :is(.theory-device,.theory-back-card,.theory-floating-award){
+ animation:neolineCutoutLeaveRight .84s cubic-bezier(.43,.08,.3,1) both!important;
+}
+#showcaseSlides .featured-slide.ad-arriving.ad-move-backward
+ :is(.theory-device,.theory-back-card,.theory-floating-award){
+ animation:neolineCutoutEnterLeft .84s cubic-bezier(.43,.08,.3,1) both!important;
 }
 @media(max-width:720px){
  #showcaseSlides .featured-slide .feature-slide-flight{
-  display:flex;
-  flex-direction:column;
-  align-items:stretch;
-  height:auto;
-  width:100%;
+  display:flex;flex-direction:column;align-items:stretch;height:auto;width:100%;
  }
 }
 @media(prefers-reduced-motion:reduce){
- #showcaseSlides .featured-slide:is(.ad-arriving,.ad-exiting) .feature-slide-flight{
+ #showcaseSlides .featured-slide:is(.ad-arriving,.ad-exiting)
+ :is(img,.feature-img-fallback,.theory-device,.theory-back-card,.theory-floating-award){
   animation:none!important;transform:none!important;will-change:auto!important;
  }
 }
@@ -2022,7 +2064,8 @@ function renderShowcase(){
  host.querySelectorAll('[data-feature-next]').forEach(el=>el.onclick=()=>setSlide(slideIndex+1));
  $('showcaseDots').querySelectorAll('[data-dot]').forEach(el=>el.onclick=()=>setSlide(Number(el.dataset.dot)));
 }
-/* A single synchronized horizontal handoff across all five slides. */
+/* Change the slide content while its picture backplate stays stationary.
+   Only cutout PNGs (or the game's foreground device) travel across the stage. */
 function revealShowcaseSlide(index){
  const next=(index+featuredIds.length)%featuredIds.length;
  const host=$('showcaseSlides');
@@ -2053,7 +2096,7 @@ function revealShowcaseSlide(index){
   showcaseExitTimer=setTimeout(()=>{
    previous?.classList.remove('active','ad-exiting','ad-move-forward','ad-move-backward');
    incoming.classList.remove('ad-arriving','ad-move-forward','ad-move-backward');
-  },810);
+  },880);
  }
 }
 function setSlide(i){revealShowcaseSlide(i);restartSlides()}
