@@ -1220,143 +1220,200 @@ html[dir=rtl] .theory-preview{text-align:right}
 @media(max-width:650px){.featured-slide--theory.active{padding:14px 16px 18px!important}.featured-slide--theory .theory-featured-image{height:clamp(220px,66vw,290px)!important;max-height:34vh;border-radius:17px!important}.featured-slide--theory .feature-copy h1{font-size:clamp(27px,7.6vw,35px)!important;line-height:1.1!important}.featured-slide--theory .hero-lead{display:block!important;font-size:12px;line-height:1.52;margin:7px 0}.featured-slide--theory .theory-art-sign{width:57px;height:57px;border-width:7px;font-size:19px}.featured-slide--theory .theory-art-car{font-size:63px}.featured-slide--theory .theory-art-check{width:46px;height:46px;font-size:25px}.featured-slide--theory .theory-art-quiz b{font-size:42px}.featured-slide--theory .featured-cta a.primary{width:100%;padding:10px;font-size:12px}}
 
 
-/* THEORY CAROUSEL ART · same blue bands and photographic depth as device slides
-   The foreground scene escapes the INNER picture frame by design. */
+
+/* Theory campaign: premium digital quiz display presented exactly like a
+   NEOLINE product photograph. No cartoon car, giant sign cluster, or doodles.
+   The upper/lower blue bands, white halo and ground shadow match product ads. */
 #showcaseSlides .featured-slide--theory.active{
  overflow:visible!important;
- isolation:isolate;
 }
 #showcaseSlides .featured-slide--theory .theory-featured-image{
  position:relative!important;
+ z-index:2;
  overflow:visible!important;
  isolation:isolate;
- z-index:3;
  border:0!important;
- border-radius:19px!important;
  background:transparent!important;
+ border-radius:20px!important;
  box-shadow:none!important;
 }
 #showcaseSlides .featured-slide--theory .theory-stage{
  position:relative;
- width:100%;height:100%;
- min-height:340px;
+ width:100%;
+ height:100%;
+ min-height:330px;
+ border:1px solid #cbe6f7;
  border-radius:20px;
- background:radial-gradient(ellipse at 53% 37%,#fcffff 3%,#e4f6ff 62%,#d3edff 100%);
- border:1px solid #cbe6fa;
- box-shadow:inset 0 2px 16px #c8e8fa65,0 7px 19px #2c8abb17;
+ background:radial-gradient(ellipse at 50% 44%,#ffffff 7%,#e9f7ff 62%,#dcedff 100%);
+ box-shadow:0 8px 21px #1c6fa51a,inset 0 2px 21px #ffffff88;
  overflow:visible;
  isolation:isolate;
 }
 #showcaseSlides .featured-slide--theory .theory-stage .ad-photo-stripes{
- z-index:0;opacity:.62;
  border-radius:inherit;overflow:hidden;
- padding:30px 0;
+ z-index:0;opacity:.58;padding:24px 0;
 }
-#showcaseSlides .featured-slide--theory .theory-stage .ad-photo-band{height:19px}
+#showcaseSlides .featured-slide--theory .theory-stage .ad-photo-band{height:18px}
 #showcaseSlides .featured-slide--theory .theory-halo{
- position:absolute;z-index:0;
- top:9%;left:21%;width:73%;aspect-ratio:1;
- border-radius:50%;
- background:radial-gradient(circle at 38% 34%,#fff 21%,#f7fdff 58%,#d7ebff 95%);
- border:1px solid #ffffffc9;
- box-shadow:0 8px 34px #3287bf25,inset 0 0 33px #ffffff;
- pointer-events:none;
+ position:absolute;left:22%;top:10%;width:63%;aspect-ratio:1;border-radius:50%;
+ background:radial-gradient(circle at 37% 32%,#fff 22%,#f9fdff 53%,#dfedff 100%);
+ border:1px solid #ffffffdd;
+ box-shadow:0 9px 34px #287bb220,inset 0 1px 13px #fff;
+ pointer-events:none;z-index:1;
 }
 #showcaseSlides .featured-slide--theory .theory-stage-floor{
- position:absolute;z-index:1;pointer-events:none;
- bottom:6%;left:19%;width:72%;height:14%;
- border-radius:50%;
- background:radial-gradient(ellipse,#164b7940,transparent 69%);
- filter:blur(11px);
+ position:absolute;z-index:1;left:19%;bottom:7%;width:66%;height:11%;
+ border-radius:50%;background:radial-gradient(ellipse,#1c4e7553,transparent 73%);
+ filter:blur(12px);pointer-events:none;
 }
-#showcaseSlides .featured-slide--theory .theory-scene-svg{
- position:absolute;
- z-index:3;
- display:block;
- width:117%;max-width:none;
- height:119%;
- left:-9%;top:-15%;
- overflow:visible;
- filter:drop-shadow(0 9px 11px #19476732);
- pointer-events:none;
+#showcaseSlides .featured-slide--theory .theory-device{
+ position:absolute;z-index:3;
+ width:61%;height:97%;
+ top:-5%;left:21%;
+ max-width:345px;
+ border-radius:29px;
+ padding:8px;
+ border:1px solid #8da3b7;
+ background:linear-gradient(129deg,#3b4859 0%,#091723 20%,#1b303d 56%,#64788a 88%,#102336 100%);
+ box-shadow:inset 0 1px 2px #e6f4ff88,inset 0 -1px 4px #0006,
+  17px 25px 27px #25577b2e,4px 7px 8px #1a446536;
+ transform:rotate(-7deg) perspective(620px) rotateY(-8deg);
+ transform-origin:50% 75%;
+ will-change:transform;
 }
-#showcaseSlides .featured-slide--theory .theory-scene-tag{z-index:6;top:12px;left:14px}
+#showcaseSlides .featured-slide--theory .theory-device:before{
+ content:"";position:absolute;z-index:-1;top:9px;left:98%;height:calc(100% - 19px);
+ width:10px;border-radius:0 18px 16px 0;
+ background:linear-gradient(90deg,#122a3c,#5b798f 48%,#112f45);
+ transform:skewY(10deg);
+ box-shadow:2px 3px 6px #1f4c7544;
+}
+#showcaseSlides .featured-slide--theory .theory-device-screen{
+ display:flex;flex-direction:column;
+ width:100%;height:100%;min-height:0;min-width:0;
+ box-sizing:border-box;overflow:hidden;
+ border:1px solid #a7d4f1;border-radius:22px;
+ background:linear-gradient(169deg,#fcffff 0%,#f1faff 55%,#dcf0ff 100%);
+ box-shadow:inset 0 0 11px #a1c9e636;
+}
+#showcaseSlides .featured-slide--theory .theory-screen-header{
+ display:flex;align-items:center;justify-content:space-between;gap:5px;
+ padding:12px 13px 10px;
+ border-bottom:1px solid #d8eaf8;
+ background:linear-gradient(110deg,#f7fcff,#ebf8ff);
+ font-size:10px;font-weight:900;color:#1876bc;
+}
+#showcaseSlides .featured-slide--theory .theory-screen-logo{
+ display:inline-flex;align-items:center;gap:6px;letter-spacing:.1em;
+ white-space:nowrap;
+}
+#showcaseSlides .featured-slide--theory .theory-screen-logo:before{
+ content:"";display:block;height:13px;width:5px;border-radius:3px;
+ background:#06a5dd;box-shadow:5px 0 0 #80d4f6;
+ transform:skew(-16deg);
+}
+#showcaseSlides .featured-slide--theory .theory-screen-progress{
+ color:#7293ac;font-size:9px;font-weight:800;white-space:nowrap;
+}
+#showcaseSlides .featured-slide--theory .theory-screen-body{
+ flex:1;min-height:0;
+ display:flex;flex-direction:column;align-items:center;justify-content:space-evenly;
+ padding:8px 18px 11px;gap:8px;
+}
+#showcaseSlides .featured-slide--theory .theory-screen-sign{
+ display:grid;place-items:center;aspect-ratio:1;
+ width:clamp(64px,34%,106px);max-height:37%;
+ border:clamp(7px,1.3vw,11px) solid #e34d58;border-radius:50%;
+ background:#fff;color:#1e3143;
+ font:900 clamp(25px,3vw,47px)/1 Manrope,Arial,sans-serif;
+ box-shadow:0 8px 14px #1f629b1b,0 0 0 2px #ffffff;
+}
+#showcaseSlides .featured-slide--theory .theory-screen-lines{
+ width:95%;display:grid;gap:7px;
+}
+#showcaseSlides .featured-slide--theory .theory-screen-lines i{
+ display:block;border-radius:10px;height:10px;
+ background:linear-gradient(90deg,#8fb9d5,#d7eaf7);
+ opacity:.8;
+}
+#showcaseSlides .featured-slide--theory .theory-screen-lines i:nth-child(1){width:96%}
+#showcaseSlides .featured-slide--theory .theory-screen-lines i:nth-child(2){width:80%}
+#showcaseSlides .featured-slide--theory .theory-screen-lines i:nth-child(3){width:60%}
+#showcaseSlides .featured-slide--theory .theory-screen-answer{
+ width:100%;min-height:42px;padding:7px 11px;display:flex;align-items:center;gap:10px;
+ border-radius:12px;background:#e7f8f2;
+ border:1px solid #a7e4cf;
+ box-shadow:0 4px 11px #1b9f7620;
+}
+#showcaseSlides .featured-slide--theory .theory-screen-answer b{
+ display:grid;place-items:center;flex:0 0 30px;height:30px;
+ border-radius:50%;background:#20b78a;color:white;
+ font:900 20px/1 Manrope,Arial,sans-serif;
+}
+#showcaseSlides .featured-slide--theory .theory-screen-answer i{
+ width:54%;height:10px;border-radius:6px;background:#a1d9bf;
+}
+#showcaseSlides .featured-slide--theory .theory-scene-tag{z-index:6;top:12px;left:13px}
 #showcaseSlides .featured-slide--theory .theory-stage .feature-img-prev,
-#showcaseSlides .featured-slide--theory .theory-stage .feature-img-next{z-index:7;top:50%}
-#showcaseSlides .featured-slide--theory .theory-scene-car,
-#showcaseSlides .featured-slide--theory .theory-scene-signs,
-#showcaseSlides .featured-slide--theory .theory-scene-quiz,
-#showcaseSlides .featured-slide--theory .theory-scene-check{
- transform-box:fill-box;transform-origin:center center;
+#showcaseSlides .featured-slide--theory .theory-stage .feature-img-next{
+ z-index:7;top:50%;
 }
-#showcaseSlides .featured-slide--theory.active:not(.ad-exiting) .theory-scene-car{
- animation:theoryCarGlide 6.6s ease-in-out infinite alternate;
-}
-#showcaseSlides .featured-slide--theory.active:not(.ad-exiting) .theory-scene-quiz{
- animation:theoryCardDrift 6.9s ease-in-out infinite alternate;
-}
-#showcaseSlides .featured-slide--theory.active:not(.ad-exiting) .theory-scene-signs{
- animation:theorySignsFloat 7.6s ease-in-out infinite alternate;
+#showcaseSlides .featured-slide--theory.active:not(.ad-exiting) .theory-device{
+ animation:neolineTheoryPremiumFloat 7.8s ease-in-out infinite alternate;
 }
 #showcaseSlides .featured-slide--theory.active:not(.ad-exiting) .theory-halo{
- animation:theoryHaloBreath 6.8s ease-in-out infinite alternate;
+ animation:neolineTheoryHalo 8s ease-in-out infinite alternate;
 }
-@keyframes theoryCarGlide{
- from{transform:translate(-7px,5px) scale(.975)}
- to{transform:translate(6px,-6px) scale(1.045)}
+@keyframes neolineTheoryPremiumFloat{
+ from{transform:translate3d(-3px,5px,0) rotate(-7deg) perspective(620px) rotateY(-8deg) scale(.985)}
+ to{transform:translate3d(5px,-7px,0) rotate(-5.5deg) perspective(620px) rotateY(-6deg) scale(1.035)}
 }
-@keyframes theoryCardDrift{
- from{transform:translate(1px,4px) rotate(-1deg)}
- to{transform:translate(3px,-9px) rotate(1.2deg)}
-}
-@keyframes theorySignsFloat{
- from{transform:translate(-2px,4px)}
- to{transform:translate(3px,-4px)}
-}
-@keyframes theoryHaloBreath{
- from{opacity:.88;transform:scale(.97)}
+@keyframes neolineTheoryHalo{
+ from{opacity:.86;transform:scale(.975)}
  to{opacity:1;transform:scale(1.035)}
 }
 @media(max-width:900px){
  #showcaseSlides .featured-slide--theory .theory-stage{min-height:290px}
- #showcaseSlides .featured-slide--theory .theory-scene-svg{width:118%;left:-10%;height:122%;top:-15%}
+ #showcaseSlides .featured-slide--theory .theory-device{width:60%;left:22%;max-width:none}
 }
 @media(max-width:720px){
- #showcaseSlides .featured-slide--theory.active{overflow:visible!important}
  #showcaseSlides .featured-slide--theory .theory-featured-image{
-  height:clamp(224px,66vw,300px)!important;
-  max-height:38vh!important;
-  margin:8px 0 6px;
-  order:-1!important;
-  overflow:visible!important;
+  height:clamp(224px,66vw,295px)!important;max-height:38vh!important;
+  overflow:visible!important;order:-1!important;margin:8px 0 9px;
  }
  #showcaseSlides .featured-slide--theory .theory-stage{
-  min-height:0;height:100%;border-radius:17px;
+  height:100%;min-height:0;border-radius:17px;
  }
  #showcaseSlides .featured-slide--theory .theory-stage .ad-photo-stripes{padding:19px 0}
  #showcaseSlides .featured-slide--theory .theory-stage .ad-photo-band{height:13px}
- #showcaseSlides .featured-slide--theory .theory-halo{top:10%;left:21%;width:72%}
- #showcaseSlides .featured-slide--theory .theory-scene-svg{
-  width:118%;height:123%;top:-18%;left:-9%;
-  filter:drop-shadow(0 5px 7px #1947672b);
+ #showcaseSlides .featured-slide--theory .theory-halo{left:22%;top:13%;width:65%}
+ #showcaseSlides .featured-slide--theory .theory-device{
+  top:-5%;left:23%;width:59%;height:99%;
+  border-radius:20px;padding:6px;
  }
+ #showcaseSlides .featured-slide--theory .theory-device-screen{border-radius:15px}
+ #showcaseSlides .featured-slide--theory .theory-screen-header{padding:9px 10px 7px;font-size:8px}
+ #showcaseSlides .featured-slide--theory .theory-screen-progress{font-size:8px}
+ #showcaseSlides .featured-slide--theory .theory-screen-body{padding:5px 12px 9px;gap:5px}
+ #showcaseSlides .featured-slide--theory .theory-screen-sign{width:37%;font-size:clamp(24px,6vw,34px);border-width:7px}
+ #showcaseSlides .featured-slide--theory .theory-screen-lines{gap:5px}
+ #showcaseSlides .featured-slide--theory .theory-screen-lines i{height:7px}
+ #showcaseSlides .featured-slide--theory .theory-screen-answer{min-height:32px;padding:4px 8px;gap:7px}
+ #showcaseSlides .featured-slide--theory .theory-screen-answer b{height:23px;flex-basis:23px;font-size:15px}
+ #showcaseSlides .featured-slide--theory .theory-screen-answer i{height:8px}
  #showcaseSlides .featured-slide--theory .theory-scene-tag{top:8px;left:8px}
  #showcaseSlides .featured-slide--theory .theory-featured-image .feature-img-prev{left:5px}
  #showcaseSlides .featured-slide--theory .theory-featured-image .feature-img-next{right:5px}
  #showcaseSlides .featured-slide--theory .feature-copy{position:relative;z-index:5}
- #showcaseSlides .featured-slide--theory .hero-lead{overflow:visible}
 }
 @media(max-width:380px){
- #showcaseSlides .featured-slide--theory .theory-featured-image{height:clamp(205px,65vw,250px)!important}
- #showcaseSlides .featured-slide--theory .theory-scene-svg{width:117%;left:-9%}
+ #showcaseSlides .featured-slide--theory .theory-featured-image{height:clamp(205px,65vw,248px)!important}
+ #showcaseSlides .featured-slide--theory .theory-device{width:58%;left:24%}
 }
 @media(prefers-reduced-motion:reduce){
- #showcaseSlides .featured-slide--theory .theory-scene-car,
- #showcaseSlides .featured-slide--theory .theory-scene-signs,
- #showcaseSlides .featured-slide--theory .theory-scene-quiz,
- #showcaseSlides .featured-slide--theory .theory-scene-check,
+ #showcaseSlides .featured-slide--theory .theory-device,
  #showcaseSlides .featured-slide--theory .theory-halo{
-  animation:none!important;transform:none!important;
+  animation:none!important;will-change:auto;transform:rotate(-6deg)!important;
  }
 }
 
@@ -1440,7 +1497,7 @@ ar:{"best":"طراز رئيسي · اختيار العرض","star":"منتج م�
 function label(k){return (ultra[lang]||ultra.ru)[k]||k}
 function productMedia(p){return '<img class="product-photo" loading="lazy" decoding="async" src="'+media[p.id][0]+'" alt="'+p.name.replace(/"/g,'&quot;')+'" onerror="this.onerror=null;this.style.opacity=.35" />'}
 let slideIndex=0,slideTimer=null,showcaseExitTimer=null;
-const featuredIds=[0,'theory',1,2,7];
+const featuredIds=[0,1,2,7,'theory'];
 
 
 /* Use available photos of the SAME NEOLINE model before displaying a fallback.
@@ -1527,101 +1584,18 @@ const theoryPromo={
    rather than a flat screenshot: its car, cards and signs can float outside
    the light-blue image frame, while the CTA remains a real accessible link. */
 function theoryScene(){
- return `<div class="theory-stage">
-  <div class="ad-photo-stripes"><span class="ad-photo-band"></span><span class="ad-photo-band"></span></div>
-  <span class="theory-halo"></span>
-  <span class="theory-stage-floor"></span>
-  <svg class="theory-scene-svg" viewBox="0 0 660 480" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
-    <defs>
-      <linearGradient id="theory-car-silver" x1="0" y1=".08" x2=".94" y2=".91">
-        <stop offset="0" stop-color="#ffffff"/><stop offset=".24" stop-color="#e1f5ff"/>
-        <stop offset=".54" stop-color="#9fc9e3"/><stop offset=".77" stop-color="#f4fcff"/>
-        <stop offset="1" stop-color="#729bb9"/>
-      </linearGradient>
-      <linearGradient id="theory-car-windshield" x1=".25" y1="0" x2=".8" y2="1">
-        <stop offset="0" stop-color="#83cef4"/><stop offset=".33" stop-color="#276d9b"/>
-        <stop offset=".82" stop-color="#102b4d"/><stop offset="1" stop-color="#091d35"/>
-      </linearGradient>
-      <linearGradient id="theory-road-surface" x1="0" y1="0" x2=".8" y2="1">
-        <stop offset="0" stop-color="#9cdaf9"/><stop offset=".45" stop-color="#5d99bc"/>
-        <stop offset="1" stop-color="#d7efff"/>
-      </linearGradient>
-      <linearGradient id="theory-blue-disc" x1="0" y1="0" x2=".9" y2="1">
-        <stop offset="0" stop-color="#69caff"/><stop offset=".52" stop-color="#1b8bd8"/>
-        <stop offset="1" stop-color="#0863b5"/>
-      </linearGradient>
-      <linearGradient id="theory-quiz-paper" x1="0" y1="0" x2="1" y2="1">
-        <stop offset="0" stop-color="#ffffff"/><stop offset="1" stop-color="#d8efff"/>
-      </linearGradient>
-      <radialGradient id="theory-headlight"><stop stop-color="#ffffff"/><stop offset=".32" stop-color="#e8fbff"/><stop offset="1" stop-color="#55b4f7" stop-opacity=".2"/></radialGradient>
-      <filter id="theory-art-shadow" x="-55%" y="-55%" width="220%" height="220%"><feGaussianBlur stdDeviation="9"/></filter>
-      <filter id="theory-soft-glow" x="-55%" y="-55%" width="220%" height="220%"><feGaussianBlur stdDeviation="7"/></filter>
-    </defs>
-    <g class="theory-scenery">
-      <path d="M74 419 Q218 363 578 378 L683 460 H72Z" fill="url(#theory-road-surface)" opacity=".66"/>
-      <path d="M192 447 Q374 392 620 436" stroke="#f5fdff" stroke-width="9" fill="none" opacity=".85"/>
-      <ellipse cx="377" cy="414" rx="218" ry="35" fill="#1b4d78" opacity=".22" filter="url(#theory-art-shadow)"/>
-    </g>
-    <g class="theory-scene-signs">
-      <path d="M233 104 L220 356" stroke="#6e98b5" stroke-width="10" stroke-linecap="round"/>
-      <path d="M269 144 L262 379" stroke="#7fa0b8" stroke-width="10" stroke-linecap="round"/>
-      <g transform="translate(153 20) rotate(-8 76 77)">
-        <path d="M79 4 Q88 4 93 13 L156 135 Q161 145 154 151 Q150 156 141 156 H15 Q1 156 3 140 L63 14 Q68 4 79 4Z" fill="#ee535b" stroke="#f9ffff" stroke-width="8" stroke-linejoin="round"/>
-        <path d="M79 37 L128 134 H30Z" fill="#ffffff"/>
-        <path d="M85 65 Q63 74 84 93 Q99 104 72 116" fill="none" stroke="#183c5b" stroke-width="11" stroke-linecap="round"/>
-        <path d="m63 111 10 16 13-14" fill="none" stroke="#183c5b" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
-      </g>
-      <g transform="translate(188 181) rotate(4 64 64)">
-        <circle cx="65" cy="65" r="66" fill="#fff" stroke="#dbf5ff" stroke-width="9"/>
-        <circle cx="65" cy="65" r="55" fill="url(#theory-blue-disc)" stroke="#7fd7ff" stroke-width="4"/>
-        <path d="m43 65 44 0-12-13m12 13-13 15" stroke="#fff" stroke-width="11" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
-      </g>
-    </g>
-    <g class="theory-scene-quiz">
-      <g transform="translate(421 31) rotate(11 100 137)">
-        <rect x="5" y="7" width="210" height="289" rx="24" fill="#1b83c6" opacity=".21" filter="url(#theory-art-shadow)"/>
-        <rect x="0" y="0" width="206" height="290" rx="23" fill="url(#theory-quiz-paper)" stroke="#188bd6" stroke-width="10"/>
-        <rect x="19" y="26" width="166" height="58" rx="13" fill="#daf9e9"/>
-        <rect x="28" y="37" width="37" height="35" rx="9" fill="#22bc81"/>
-        <path d="m37 54 9 9 15-19" stroke="#fff" stroke-width="7" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
-        <path d="M81 47h89M81 64h68" stroke="#84d4b0" stroke-width="12" stroke-linecap="round"/>
-        <rect x="28" y="114" width="36" height="35" rx="7" fill="#f4fbff" stroke="#9abddd" stroke-width="5"/>
-        <rect x="28" y="174" width="36" height="35" rx="7" fill="#f4fbff" stroke="#9abddd" stroke-width="5"/>
-        <path d="M80 125h83M80 141h69M80 186h90M80 201h72" stroke="#9bbfe0" stroke-width="11" stroke-linecap="round"/>
-      </g>
-    </g>
-    <g class="theory-scene-car">
-      <ellipse cx="382" cy="393" rx="174" ry="27" fill="#0e4067" opacity=".27" filter="url(#theory-art-shadow)"/>
-      <path d="M183 293 Q188 254 235 238 L350 191 Q398 174 465 208 L553 254 Q587 264 593 297 L603 349 Q601 382 567 392 L242 409 Q207 405 191 383 L179 331Z" fill="url(#theory-car-silver)" stroke="#659bbb" stroke-width="4"/>
-      <path d="M238 242 350 193 Q393 175 463 211 L530 256 501 269 Q401 244 277 274Z" fill="#cae8f7"/>
-      <path d="M260 242 354 203 Q395 191 450 219 L512 257 278 263Z" fill="url(#theory-car-windshield)" stroke="#f4fdff" stroke-width="9"/>
-      <path d="M350 206 366 262" stroke="#d7efff" stroke-width="7" opacity=".68"/>
-      <path d="M183 300 Q319 273 477 281 Q571 285 593 303 L597 344 Q560 383 394 395 L245 395 Q208 382 185 351Z" fill="url(#theory-car-silver)" stroke="#8ab8d0" stroke-width="3"/>
-      <path d="M191 312 Q331 292 482 297 Q553 299 589 318" stroke="#ffffff" stroke-width="10" fill="none" opacity=".79" stroke-linecap="round"/>
-      <path d="M207 346 Q389 330 577 347 L571 373 Q399 395 242 385Z" fill="#15283e" stroke="#5684a0" stroke-width="4"/>
-      <path d="M267 353 Q390 342 523 355 L518 371 Q383 383 278 374Z" fill="#0a1b2d"/>
-      <path d="M272 359h237M280 369h217" stroke="#647f94" stroke-width="3" opacity=".65"/>
-      <path d="M202 315 268 309 Q282 318 267 332 L206 345Z" fill="#f3ffff" stroke="#66baff" stroke-width="6"/>
-      <path d="M525 315 587 319 584 343 530 330Z" fill="#f3ffff" stroke="#66baff" stroke-width="6"/>
-      <path d="M208 318 264 315" stroke="#fff" stroke-width="8" stroke-linecap="round"/>
-      <path d="M532 319 582 325" stroke="#fff" stroke-width="8" stroke-linecap="round"/>
-      <ellipse cx="232" cy="395" rx="28" ry="20" fill="#12243a"/>
-      <ellipse cx="562" cy="383" rx="27" ry="18" fill="#12243a"/>
-      <path d="M304 377 Q398 368 492 377 L489 392 Q389 400 308 391Z" fill="#e8f4ff" stroke="#7ea6c4" stroke-width="3"/>
-      <path d="M342 383h108" stroke="#1779b9" stroke-width="4" opacity=".45"/>
-      <path d="M218 306 Q342 283 477 289" fill="none" stroke="#ffffff" stroke-width="7" stroke-linecap="round" opacity=".7"/>
-      <path d="M240 278 275 265M493 268 515 261" stroke="#fff" stroke-width="5" stroke-linecap="round" opacity=".88"/>
-    </g>
-    <g class="theory-scene-check" transform="translate(543 342)">
-      <circle cx="0" cy="0" r="41" fill="#c1fff0" opacity=".3"/>
-      <circle cx="0" cy="0" r="33" fill="#1cba93" stroke="#e8fffa" stroke-width="7"/>
-      <path d="m-14 0 10 11 19-24" stroke="#fff" stroke-width="9" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
-    </g>
-  </svg>
-  <span class="feature-img-tag theory-scene-tag">NEOLINE · THEORY GAME</span>
-  <button type="button" class="feature-img-prev" data-feature-prev aria-label="Previous slide">‹</button>
-  <button type="button" class="feature-img-next" data-feature-next aria-label="Next slide">›</button>
- </div>`;
+ return '<div class="theory-stage">'
+  +'<div class="ad-photo-stripes" aria-hidden="true"><span class="ad-photo-band"></span><span class="ad-photo-band"></span></div>'
+  +'<span class="theory-halo" aria-hidden="true"></span><span class="theory-stage-floor" aria-hidden="true"></span>'
+  +'<div class="theory-device" aria-hidden="true"><div class="theory-device-screen">'
+  +'<div class="theory-screen-header"><span class="theory-screen-logo">NEOLINE</span><span class="theory-screen-progress">07 / 30</span></div>'
+  +'<div class="theory-screen-body"><span class="theory-screen-sign">50</span>'
+  +'<div class="theory-screen-lines"><i></i><i></i><i></i></div>'
+  +'<div class="theory-screen-answer"><b>✓</b><i></i></div></div></div></div>'
+  +'<span class="feature-img-tag theory-scene-tag">NEOLINE · THEORY GAME</span>'
+  +'<button type="button" class="feature-img-prev" data-feature-prev aria-label="Previous slide">‹</button>'
+  +'<button type="button" class="feature-img-next" data-feature-next aria-label="Next slide">›</button>'
+  +'</div>';
 }
 function theorySlide(i){
  const a=theoryPromo[lang]||theoryPromo.ru;
