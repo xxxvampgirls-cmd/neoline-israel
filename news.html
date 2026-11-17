@@ -15,9 +15,9 @@
  <div class="news-cover-copy">
   <div class="news-eyebrow" id="newsEyebrow">NEOLINE · ИЗРАИЛЬ · АВТОНОВОСТИ</div>
   <h1 id="newsHeading">Что происходит <em>на дорогах Израиля</em></h1>
-  <p id="newsIntro">Аварии, камеры контроля скорости, новые правила, дороги и автомобили. Коротко о главном — с датой публикации и ссылкой на первоисточник.</p>
-  <div class="news-fresh-row"><span class="news-fresh-pill" id="newsRetention">Новости 30 дней · законы 6 месяцев</span><span class="news-updated" id="newsUpdated" aria-live="polite">Загружаем свежие публикации…</span></div>
-  <div class="news-language-bar" id="newsLanguages" role="group" aria-label="Язык новостей / News language"><button type="button" data-news-lang="ru" class="active">RU</button><button type="button" data-news-lang="he" lang="he">עברית</button><button type="button" data-news-lang="en">EN</button><button type="button" data-news-lang="ar" lang="ar">عربي</button></div>
+  <p id="newsIntro" hidden aria-hidden="true">Аварии, камеры контроля скорости, новые правила, дороги и автомобили. Коротко о главном — с датой публикации и ссылкой на первоисточник.</p>
+  <div class="news-fresh-row" hidden aria-hidden="true"><span class="news-fresh-pill" id="newsRetention">Новости 30 дней · законы 6 месяцев</span><span class="news-updated" id="newsUpdated" aria-live="polite">Загружаем свежие публикации…</span></div>
+
  </div>
  <div class="news-feature-carousel" id="newsFeatureCarousel" role="region" aria-roledescription="carousel" aria-label="Последние новости" tabindex="0">
   <div id="newsFeatureSlide" class="news-feature-slide" aria-live="off">
@@ -30,6 +30,7 @@
    <button type="button" class="news-feature-arrow" id="newsFeatureNext" aria-label="Следующая новость">›</button>
   </div>
  </div>
+  <div class="news-language-bar" id="newsLanguages" role="group" aria-label="Язык новостей / News language"><button type="button" data-news-lang="ru" class="active">RU</button><button type="button" data-news-lang="he" lang="he">עברית</button><button type="button" data-news-lang="en">EN</button><button type="button" data-news-lang="ar" lang="ar">عربي</button></div>
 </section>
 <div class="news-searchbar"><label class="news-search"><input id="newsSearch" type="search" aria-label="Поиск по новостям" placeholder="Найти новость…" autocomplete="off"></label></div>
 <div class="news-categories" id="newsCategories" aria-label="Темы новостей"></div>
@@ -42,7 +43,7 @@
 <a href="./" id="newsHome"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m3 10 9-7 9 7v10a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V10Z"/><path d="M9 21v-8h6v8"/></svg><span>Главная</span></a>
 <a href="./#catalog" id="newsCatalog"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></svg><span>Каталог</span></a>
 <a href="./news.html" aria-current="page" class="active" id="newsNews"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M7 8h4v4H7zM14 8h4M14 11h4M7 16h11"/></svg><span>Новости</span></a>
-<a href="./?panel=fav" id="newsFav"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1.1-1.1a5.5 5.5 0 1 0-7.8 7.8L12 21l8.8-8.6a5.5 5.5 0 0 0 0-7.8Z"/></svg><span>Избранное</span></a>
+<a href="./delivery.html" id="newsDelivery"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 7h12v10H3z"/><path d="M15 10h3l3 4v3h-6"/><circle cx="7" cy="19" r="2"/><circle cx="17" cy="19" r="2"/></svg><span>Доставка</span></a>
 <a href="./?panel=cart" id="newsCart"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 8h14l1.2 13H3.8L5 8Z"/><path d="M9 9V6a3 3 0 0 1 6 0v3"/></svg><span>Корзина</span></a>
 </nav>
 <script src="news-ui.js" defer></script>
