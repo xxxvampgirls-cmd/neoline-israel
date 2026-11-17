@@ -1,5 +1,5 @@
 {
-  "attempted": "2026-11-17T09:19:43.854562Z",
+  "attempted": "2026-11-17T09:21:09.025142Z",
   "feeds": {
     "Walla · Авто": 30,
     "Walla · Безопасность": 30,
@@ -27,9 +27,11 @@
     "Алексей Железнов · Telegram": 1,
     "NEWSru.co.il · Telegram": 4
   },
-  "new": 26,
+  "facebook": {},
+  "facebookState": "not_configured",
+  "new": 18,
   "retained": 108,
-  "imageCount": 100,
+  "imageCount": 108,
   "deletedImages": 0,
   "discardedGoogleLinks": 0,
   "errors": {
