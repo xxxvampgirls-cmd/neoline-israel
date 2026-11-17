@@ -325,9 +325,12 @@ jobs:
             await page.emulateMedia({reducedMotion:'reduce'});
             const reducedMotion=await last.locator('.ad-photo-stripes').first().evaluate(n=>({
               front:getComputedStyle(n,'::before').animationName,
-              back:getComputedStyle(n,'::after').animationName
+              back:getComputedStyle(n,'::after').animationName,
+              top:getComputedStyle(n.querySelector('.ad-photo-band')).animationName,
+              bottom:getComputedStyle(n.querySelector('.ad-photo-band:nth-child(2)')).animationName
             }));
-            if(reducedMotion.front!=='none'||reducedMotion.back!=='none')
+            if(reducedMotion.top!=='none'||reducedMotion.bottom!=='none'||
+               reducedMotion.front!=='none'||reducedMotion.back!=='none')
               throw Error('Reduced motion not respected '+JSON.stringify(reducedMotion));
             await page.emulateMedia({reducedMotion:'no-preference'});
             for(let i=0;i<5;i++){
@@ -335,12 +338,24 @@ jobs:
               await page.waitForFunction(n=>document.querySelectorAll('#showcaseSlides .featured-slide')[n]?.classList.contains('active'),i);
               const speed=await slides.nth(i).evaluate(el=>{
                 const stripes=el.querySelector('.ad-photo-stripes');
-                return {bands:stripes?.querySelectorAll('.ad-photo-band').length,
+                const bands=[...stripes.querySelectorAll('.ad-photo-band')];
+                const ribbons=bands.map(b=>({
+                  name:getComputedStyle(b).animationName,
+                  seconds:parseFloat(getComputedStyle(b).animationDuration),
+                  height:parseFloat(getComputedStyle(b).height)
+                }));
+                return {bands:bands.length,ribbons,
                         front:getComputedStyle(stripes,'::before').animationName,
-                        back:getComputedStyle(stripes,'::after').animationName};
+                        back:getComputedStyle(stripes,'::after').animationName,
+                        fastSeconds:parseFloat(getComputedStyle(stripes,'::before').animationDuration)};
               });
-              if(speed.bands!==2||speed.front!=='neolineRoadSweep'||speed.back!=='neolineRoadSweep')
-                throw Error('Slide '+(i+1)+' road speed not active '+JSON.stringify(speed));
+              if(speed.bands!==2||speed.front!=='neolineRoadSweep'||speed.back!=='neolineRoadSweep'||
+                speed.ribbons[0].name!=='neolineMainBandLeftToRight'||
+                speed.ribbons[1].name!=='neolineMainBandRightToLeft'||
+                speed.ribbons.some(b=>!(b.seconds>speed.fastSeconds&&b.seconds<18))||
+                speed.ribbons.some(b=>!(b.height>=8&&b.height<=16))||
+                speed.ribbons[0].height===speed.ribbons[1].height)
+                throw Error('Slide '+(i+1)+' needs two opposite slow ribbons and faster thin trails '+JSON.stringify(speed));
             }
             await page.locator('#showcaseDots .showcase-dot').last().click();
             await page.waitForFunction(()=>document.querySelector('#showcaseSlides .featured-slide--theory')?.classList.contains('active'));
