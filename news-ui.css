@@ -519,3 +519,88 @@ html[dir=rtl] .news-feature-credit{right:auto;left:12px}
  .news-cover-copy,.news-cover .news-language-bar{padding-inline:10px}
  .news-cover h1{font-size:24px}
 }
+
+/* NEOLINE Traffic: verified-source headlines, deliberately NOT a live closure map. */
+.traffic-panel{
+ margin:14px 0 20px;padding:13px 16px 11px;
+ border:1px solid #b9dbf0;border-radius:20px;
+ background:linear-gradient(116deg,#f8fdff,#e6f5ff 80%,#f5fcff);
+ box-shadow:0 8px 22px #1a6c9e12;
+}
+.traffic-panel-head{display:flex;align-items:center;gap:11px}
+.traffic-fire{
+ display:grid;place-items:center;flex:none;width:37px;height:37px;
+ background:linear-gradient(145deg,#e4f7ff,#d3f0ff);
+ border:1px solid #b8e2f5;border-radius:12px;font-size:21px;
+ box-shadow:0 3px 9px #2c85b125;
+}
+.traffic-panel-heading{min-width:0;display:flex;flex-direction:column;gap:2px;flex:1}
+.traffic-panel-heading strong{font-size:13px;line-height:1.3;font-weight:850;color:#153f65}
+.traffic-panel-heading small{font-size:10px;line-height:1.45;color:#517e9d}
+.traffic-refresh{flex:none;width:34px;height:34px;display:grid;place-items:center;border-radius:50%;border:1px solid #bfdeef;background:#fff;color:#0a79bb;cursor:pointer;font-size:21px;transition:transform .2s}
+.traffic-refresh:hover:not(:disabled){transform:rotate(50deg);background:#e1f5ff}
+.traffic-refresh:disabled{opacity:.4;cursor:wait}
+.traffic-list{display:grid;gap:8px;margin-top:10px}
+.traffic-list[hidden]{display:none!important}
+.traffic-report{border:1px solid #d2e7f5;border-radius:12px;background:#fff;overflow:hidden}
+.traffic-report summary{display:flex;align-items:center;gap:10px;cursor:pointer;padding:10px 12px;font-size:12px;color:#194a6d;font-weight:800;list-style:none}
+.traffic-report summary::-webkit-details-marker{display:none}
+.traffic-report summary:after{content:"⌄";font-size:17px;margin-inline-start:auto;color:#398db9;transition:transform .2s}
+.traffic-report[open] summary:after{transform:rotate(180deg)}
+.traffic-report summary:hover{background:#eef9ff}
+.traffic-report-type{font-size:9px;font-weight:900;color:#096c9f;background:#e3f5ff;border-radius:8px;padding:5px 7px;white-space:nowrap;flex:none}
+.traffic-report-title{min-width:0;overflow-wrap:anywhere;line-height:1.4}
+.traffic-report-age{font-size:10px;font-weight:750;color:#6391a9;white-space:nowrap}
+.traffic-report-body{padding:0 12px 12px;border-top:1px solid #edf5fa}
+.traffic-report-body p{padding:8px 0 0;margin:0 0 8px;font-size:12px;color:#355a74;line-height:1.55;unicode-bidi:plaintext}
+.traffic-report-body a{color:#0b78b7;font-size:11px;font-weight:850;text-decoration:underline}
+.traffic-panel-bottom{display:flex;flex-wrap:wrap;align-items:center;gap:5px 12px;padding-top:10px;font-size:10px;line-height:1.35;color:#64839a}
+.traffic-panel-bottom span{flex:1 1 260px}
+.traffic-panel-bottom a{font-weight:850;white-space:nowrap;color:#137ba9}
+.traffic-panel-bottom a:hover{text-decoration:underline}
+.traffic-refresh:focus-visible,.traffic-report summary:focus-visible,.traffic-panel-bottom a:focus-visible{
+ outline:3px solid #1698d5;outline-offset:2px;
+}
+.news-feature-story--traffic{
+ background:radial-gradient(ellipse at 75% 33%,#1f83ba 0%,transparent 48%),
+ linear-gradient(112deg,#052f53,#0b5b90 66%,#0b94b5);
+}
+.news-feature-story--traffic:before{
+ content:"";position:absolute;inset:0;z-index:1;
+ background:linear-gradient(0deg,#031e39df 0%,#083b6279 52%,transparent 100%);
+}
+.news-feature-traffic-glow{
+ position:absolute;right:-10%;top:-55%;width:66%;height:155%;border-radius:50%;
+ border:40px solid #84e0ff2a;box-shadow:0 0 0 44px #71bbef12,inset 0 0 90px #9bdeff19;
+ transform:rotate(-13deg);pointer-events:none;
+}
+.news-feature-traffic-symbol{
+ position:absolute;right:11%;top:13%;display:grid;place-items:center;
+ width:clamp(100px,23vw,190px);aspect-ratio:1;border:9px solid #7ad8ff99;
+ border-radius:28%;transform:rotate(-8deg);
+ background:linear-gradient(140deg,#d9f7ff,#72c4ed);
+ color:#0f4775;box-shadow:0 16px 38px #03172a7a,inset 0 3px 10px #ffffffad;
+}
+.news-feature-traffic-symbol svg{width:58%;height:58%}
+.news-feature-tag--traffic{background:#f5a933;color:#173c5e;border-color:#ffe3a7;box-shadow:0 3px 14px #030f1e38}
+.news-feature-story--traffic .news-feature-title{max-width:95%}
+.news-feature-story--traffic .news-feature-copy{z-index:4}
+.news-feature-story--traffic .news-feature-footer{color:#d5f3ff}
+@media(max-width:760px){
+ .traffic-panel{margin:10px 0 14px;padding:10px 11px;border-radius:16px}
+ .traffic-fire{width:33px;height:33px;font-size:18px;border-radius:10px}
+ .traffic-panel-heading strong{font-size:12px}
+ .traffic-panel-heading small{font-size:9.5px}
+ .traffic-list{gap:7px}
+ .traffic-report summary{gap:7px;padding:9px 8px;font-size:11px;flex-wrap:wrap}
+ .traffic-report-age{font-size:9px}
+ .traffic-report-type{font-size:8px;padding:4px 6px}
+ .traffic-report-body p{font-size:11px}
+ .traffic-panel-bottom{font-size:9px;gap:6px 11px}
+ .news-feature-traffic-symbol{right:8%;top:10%;width:112px;border-width:7px}
+ .news-feature-traffic-glow{right:-21%}
+ .news-feature-story--traffic .news-feature-title{font-size:clamp(17px,5.5vw,24px)}
+}
+@media(prefers-reduced-motion:reduce){
+ .traffic-refresh,.traffic-report summary:after{transition:none}
+}
