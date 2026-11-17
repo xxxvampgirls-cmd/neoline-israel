@@ -39,7 +39,7 @@ jobs:
             await page.locator('#openNewsMobile').click();
             await page.waitForTimeout(1600);
             console.log('NEWS AFTER CLICK URL='+page.url());
-            await page.waitForURL('**/news.html',{timeout:15000});
+            await page.waitForURL(url=>/\/news(?:\.html)?\/?$/.test(new URL(url).pathname),{timeout:15000});
             await page.waitForSelector('#newsGrid',{timeout:10000});
             const data=await page.evaluate(async()=>await (await fetch('./assets/news/news.json')).json());
             if(data.version!==1||data.retentionDays!==30)throw Error('Wrong archive configuration');
