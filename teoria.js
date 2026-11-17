@@ -77,6 +77,7 @@ function setCopy(){
   const el=$(id);if(el&&text(id))el.textContent=typeof text(id)==="function"?"":text(id)
  }
  updateTheoryNavigation();
+ if(state.mode && !$("gamePlaying").hidden)updateQuizHUD();
  $("heroTitle").innerHTML=text("heroTitle");
  $("sourceBank").href=sourceFor(state.lang);
  document.querySelectorAll("[data-lang]").forEach(b=>{b.classList.toggle("on",b.dataset.lang===state.lang);b.setAttribute("aria-pressed",String(b.dataset.lang===state.lang))});
@@ -271,6 +272,7 @@ function startMode(mode){
  document.body.classList.add("game-active");
  $("timerBox").hidden=mode!=="exam";
  $("currentMode").textContent=text({route:"modeRoute",signs:"modeSigns",exam:"modeExam",mistakes:"modeMistakes",marathon:"modeMarathon"}[mode]);
+ $("currentMode").title=$("currentMode").textContent;
  stopClock();
  if(mode==="exam"){
   state.deadline=Date.now()+40*60*1000;
@@ -286,22 +288,41 @@ function safeImage(url){
   return x.protocol==="https:"&&x.hostname==="www.gov.il"&&x.pathname.startsWith("/BlobFolder/")?x.href:null;
  }catch(e){return null}
 }
+function updateQuizHUD(){
+ const total=Math.max(1,state.questions.length);
+ const done=Math.min(total,state.answers.length);
+ const percent=done/total;
+ const progress=$("progress");
+ progress.style.setProperty("--quiz-angle",(percent*360).toFixed(2)+"deg");
+ progress.setAttribute("aria-valuemax",String(total));
+ progress.setAttribute("aria-valuenow",String(done));
+ const labels={
+  ru:{done:"ОТВЕЧЕНО",progress:"Отвечено",of:"из",lives:"Осталось жизней"},
+  en:{done:"ANSWERED",progress:"Answered",of:"of",lives:"Lives left"},
+  he:{done:"נענו",progress:"נענו",of:"מתוך",lives:"לבבות שנותרו"}
+ };
+ const copy=labels[state.lang]||labels.ru;
+ $("progressCaption").textContent=copy.done;
+ $("questionCounter").textContent=done+" / "+total;
+ progress.setAttribute("aria-label",copy.progress+" "+done+" "+copy.of+" "+total);
+ $("scoreMeta").textContent="+"+state.earned+" XP";
+ const lives=$("lifeMeta");
+ lives.hidden=state.mode==="exam";
+ lives.textContent=state.mode==="marathon"?"∞":Array.from({length:3},(_,i)=>i<state.lives?"♥":"♡").join(" ");
+ lives.setAttribute("aria-label",state.mode==="marathon"?"∞":copy.lives+": "+state.lives);
+}
 function renderQuestion(){
  const q=state.questions[state.index];
  if(!q){finishSession(false);return}
  state.selected=null;
  state.choices=shuffled([0,1,2,3]);
  const total=state.questions.length;
- $("questionCounter").textContent=(state.index+1)+" / "+total;
+ updateQuizHUD();
  $("questionId").textContent="№ "+q.id;
  $("questionTopic").textContent=text("topics")[q.topic]||text("topics").laws;
  $("questionText").textContent=q.q;
  $("questionText").dir=state.lang==="he"?"rtl":"auto";
- $("scoreMeta").textContent="+"+state.earned+" XP";
- $("lifeMeta").textContent=state.mode==="exam"?"":state.mode==="marathon"?"∞":Array.from({length:3},(_,i)=>i<state.lives?"♥":"♡").join(" ");
- const progress=state.index/total*100;
- $("progressFill").style.width=progress+"%";
- $("progress").setAttribute("aria-valuenow",String(Math.round(progress)));
+
  const img=safeImage(q.image);
  $("questionPicture").hidden=!img;
  $("signPicture").src=img||"";
@@ -336,7 +357,7 @@ function pickAnswer(chosen){
  state.correct+=Number(success);
  if(success)state.earned+=15;else if(hasLives())state.lives=Math.max(0,state.lives-1);
  $("nextQuestion").disabled=false;
- $("scoreMeta").textContent="+"+state.earned+" XP";
+ updateQuizHUD();
  const buttons=[...$("answers").querySelectorAll("button")];
  for(const b of buttons){
   b.disabled=true;
@@ -354,7 +375,7 @@ function pickAnswer(chosen){
   const feedback=$("feedback");
   feedback.hidden=false;feedback.classList.toggle("negative",!success);
   feedback.textContent=success?text("correct"):text("wrong");
-  $("lifeMeta").textContent=state.mode==="marathon"?"∞":Array.from({length:3},(_,i)=>i<state.lives?"♥":"♡").join(" ");
+  updateQuizHUD();
   if(!success && hasLives() && state.lives===0)showGameOver();
  }
 }
