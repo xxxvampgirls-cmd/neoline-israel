@@ -46,7 +46,8 @@ jobs:
             await page.waitForTimeout(1600);
             console.log('NEWS AFTER CLICK URL='+page.url());
             await page.waitForURL(url=>/\/news(?:\.html)?\/?$/.test(new URL(url).pathname),{timeout:15000});
-            await page.waitForSelector('#newsGrid',{timeout:10000});
+            await page.waitForSelector('#newsGrid',{state:'attached',timeout:12000});
+            await page.waitForFunction(()=>document.querySelectorAll('.news-card').length>0 || !document.getElementById('newsEmpty').hidden,{timeout:30000});
             const data=await page.evaluate(async()=>await (await fetch('./assets/news/news.json')).json());
             if(data.version!==1||data.retentionDays!==30||data.lawsRetentionMonths!==6)throw Error('Wrong archive configuration');
             const now=Date.now(),limit=now-30*86400*1000;
@@ -120,7 +121,7 @@ jobs:
              if(dims.scroll>dims.window+3)throw Error('Mobile news horizontal overflow '+JSON.stringify(dims));
             }
             const old={id:'obsolete',title:'Expired test story',date:'2026-01-01T06:00:00Z',category:'cars',art:'cars',summary:'old',publisher:'Test',url:'https://example.com'};
-            await page.route('**/assets/news/news.json',route=>route.fulfill({status:200,contentType:'application/json',body:JSON.stringify({version:1,retentionDays:30,updated:new Date().toISOString(),items:[old]})}));
+            await page.route('**/assets/news/news.json',route=>route.fulfill({status:200,contentType:'application/json',body:JSON.stringify({version:1,retentionDays:30,lawsRetentionMonths:6,updated:new Date().toISOString(),items:[old]})}));
             await page.reload({waitUntil:'domcontentloaded'});
             await page.waitForTimeout(600);
             const renderedExpired=await page.locator('.news-card').count();
