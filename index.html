@@ -1221,199 +1221,303 @@ html[dir=rtl] .theory-preview{text-align:right}
 
 
 
-/* Theory campaign: premium digital quiz display presented exactly like a
-   NEOLINE product photograph. No cartoon car, giant sign cluster, or doodles.
-   The upper/lower blue bands, white halo and ground shadow match product ads. */
-#showcaseSlides .featured-slide--theory.active{
- overflow:visible!important;
-}
+
+/* THEORY / LAST SLIDE · premium ticket composition.
+   Matches all other NEOLINE photo stages: icy blue banding, white orb,
+   volumetric shadows and a restrained, collectible 3D object treatment. */
+#showcaseSlides .featured-slide--theory.active{overflow:visible!important}
 #showcaseSlides .featured-slide--theory .theory-featured-image{
- position:relative!important;
- z-index:2;
- overflow:visible!important;
- isolation:isolate;
- border:0!important;
- background:transparent!important;
+ position:relative!important;isolation:isolate;z-index:2;
+ overflow:visible!important;border:0!important;
+ background:transparent!important;box-shadow:none!important;
  border-radius:20px!important;
- box-shadow:none!important;
 }
 #showcaseSlides .featured-slide--theory .theory-stage{
- position:relative;
- width:100%;
- height:100%;
- min-height:330px;
- border:1px solid #cbe6f7;
- border-radius:20px;
- background:radial-gradient(ellipse at 50% 44%,#ffffff 7%,#e9f7ff 62%,#dcedff 100%);
- box-shadow:0 8px 21px #1c6fa51a,inset 0 2px 21px #ffffff88;
- overflow:visible;
- isolation:isolate;
+ position:relative;width:100%;height:100%;min-height:330px;
+ border:1px solid #c5e3f8;border-radius:21px;
+ background:radial-gradient(ellipse at 51% 44%,#fff 8%,#f1faff 40%,#dcefff 100%);
+ box-shadow:0 11px 27px #1c6fa51a,inset 0 2px 22px #ffffffa5;
+ overflow:visible;isolation:isolate;
+ perspective:900px;
 }
 #showcaseSlides .featured-slide--theory .theory-stage .ad-photo-stripes{
- border-radius:inherit;overflow:hidden;
- z-index:0;opacity:.58;padding:24px 0;
+ z-index:0;opacity:.53;border-radius:inherit;overflow:hidden;padding:24px 0;
 }
 #showcaseSlides .featured-slide--theory .theory-stage .ad-photo-band{height:18px}
 #showcaseSlides .featured-slide--theory .theory-halo{
- position:absolute;left:22%;top:10%;width:63%;aspect-ratio:1;border-radius:50%;
- background:radial-gradient(circle at 37% 32%,#fff 22%,#f9fdff 53%,#dfedff 100%);
- border:1px solid #ffffffdd;
- box-shadow:0 9px 34px #287bb220,inset 0 1px 13px #fff;
- pointer-events:none;z-index:1;
+ position:absolute;z-index:0;left:14%;top:5%;width:76%;aspect-ratio:1;border-radius:50%;
+ border:1px solid #ffffffed;
+ background:radial-gradient(circle at 37% 28%,#fff 19%,#f7fdff 50%,#d7ebfc 100%);
+ box-shadow:0 12px 36px #237eb421, inset 0 1px 28px #fff;
+ pointer-events:none;
+}
+#showcaseSlides .featured-slide--theory .theory-ambient-light{
+ position:absolute;z-index:0;inset:8% 6%;pointer-events:none;
+ background:radial-gradient(ellipse at 76% 41%,#57c5ff46,transparent 44%),
+ radial-gradient(ellipse at 26% 78%,#2ea6fa20,transparent 48%);
+ filter:blur(12px);
 }
 #showcaseSlides .featured-slide--theory .theory-stage-floor{
- position:absolute;z-index:1;left:19%;bottom:7%;width:66%;height:11%;
- border-radius:50%;background:radial-gradient(ellipse,#1c4e7553,transparent 73%);
- filter:blur(12px);pointer-events:none;
+ position:absolute;z-index:1;left:17%;bottom:6%;width:73%;height:12%;
+ border-radius:50%;background:radial-gradient(ellipse,#123d685a,transparent 76%);
+ filter:blur(13px);pointer-events:none;
+}
+#showcaseSlides .featured-slide--theory .theory-track{
+ position:absolute;z-index:1;inset:17% 11% 10%;pointer-events:none;
+ transform:rotate(-13deg);opacity:.58;
+ border:1px solid transparent;
+ border-top:2px dashed #79c1ecbb;border-right:2px dashed #79c1ecbb;
+ border-radius:50%;
+}
+#showcaseSlides .featured-slide--theory .theory-track:before{
+ content:"";position:absolute;right:4%;top:25%;height:7px;width:7px;
+ border:2px solid #fff;border-radius:50%;background:#1689d2;
+ box-shadow:0 0 0 5px #a6e6ff69;
+}
+#showcaseSlides .featured-slide--theory .theory-back-card{
+ position:absolute;z-index:2;top:13%;left:33%;width:59%;height:75%;
+ border-radius:25px;
+ border:1px solid #5faff0;
+ background:linear-gradient(154deg,#9ddaff 2%,#288fd1 35%,#074574 100%);
+ box-shadow:16px 20px 25px #0d4c7c30,inset 0 1px 2px #e2fbff91;
+ transform:rotate(11deg) perspective(680px) rotateY(-8deg);
+ overflow:hidden;
+}
+#showcaseSlides .featured-slide--theory .theory-back-card:before{
+ content:"";position:absolute;inset:0;
+ background:linear-gradient(140deg,#ffffff69 0%,transparent 29%,transparent 65%,#ffffff1b 100%);
+}
+#showcaseSlides .featured-slide--theory .theory-back-brand{
+ position:absolute;right:13px;top:18px;font:900 11px/1.2 Manrope,Arial,sans-serif;
+ letter-spacing:.07em;color:#e0f5ff;
+ writing-mode:vertical-rl;
+}
+#showcaseSlides .featured-slide--theory .theory-back-map{
+ position:absolute;left:21%;top:10%;width:62%;height:72%;
+ border:2px solid #b7e7ff65;border-left-style:dashed;
+ border-bottom-style:dashed;border-radius:47% 55% 43% 38%;transform:rotate(17deg);
+ box-shadow:0 0 0 26px #b8eeff0e,0 0 0 47px #c9f3ff09;
+}
+#showcaseSlides .featured-slide--theory .theory-back-map:before{
+ content:"";position:absolute;bottom:-5px;left:15%;height:11px;width:11px;
+ border:3px solid #fff;background:#35dbb9;border-radius:50%;
+ box-shadow:0 0 0 8px #a9ffe837;
+}
+#showcaseSlides .featured-slide--theory .theory-back-map:after{
+ content:"";position:absolute;right:-6px;top:16%;height:11px;width:11px;
+ background:#fff;border:3px solid #80d8ff;border-radius:50%;
 }
 #showcaseSlides .featured-slide--theory .theory-device{
- position:absolute;z-index:3;
- width:61%;height:97%;
- top:-5%;left:21%;
- max-width:345px;
- border-radius:29px;
- padding:8px;
- border:1px solid #8da3b7;
- background:linear-gradient(129deg,#3b4859 0%,#091723 20%,#1b303d 56%,#64788a 88%,#102336 100%);
- box-shadow:inset 0 1px 2px #e6f4ff88,inset 0 -1px 4px #0006,
-  17px 25px 27px #25577b2e,4px 7px 8px #1a446536;
- transform:rotate(-7deg) perspective(620px) rotateY(-8deg);
- transform-origin:50% 75%;
+ position:absolute;z-index:4;
+ top:-4%;left:14%;width:61%;height:94%;max-width:350px;
+ border-radius:26px;padding:6px;
+ border:1px solid #bbdff5;
+ background:linear-gradient(130deg,#ffffff,#cce7f9 70%,#8fc6e7);
+ box-shadow:inset 0 2px 3px #fff,0 1px 1px #31678d30,15px 26px 28px #114a7a33,
+  2px 7px 9px #1557851b;
+ transform:rotate(-8deg) perspective(760px) rotateY(-6deg);
+ transform-origin:53% 72%;
  will-change:transform;
 }
-#showcaseSlides .featured-slide--theory .theory-device:before{
- content:"";position:absolute;z-index:-1;top:9px;left:98%;height:calc(100% - 19px);
- width:10px;border-radius:0 18px 16px 0;
- background:linear-gradient(90deg,#122a3c,#5b798f 48%,#112f45);
- transform:skewY(10deg);
- box-shadow:2px 3px 6px #1f4c7544;
+#showcaseSlides .featured-slide--theory .theory-device:after{
+ content:"";position:absolute;left:8%;top:1%;width:70%;height:1.5px;
+ background:#fff;box-shadow:0 1px 3px #fff;opacity:.96;border-radius:20px;
 }
 #showcaseSlides .featured-slide--theory .theory-device-screen{
+ width:100%;height:100%;box-sizing:border-box;overflow:hidden;
+ border:1px solid #ffffffeb;border-radius:19px;
  display:flex;flex-direction:column;
- width:100%;height:100%;min-height:0;min-width:0;
- box-sizing:border-box;overflow:hidden;
- border:1px solid #a7d4f1;border-radius:22px;
- background:linear-gradient(169deg,#fcffff 0%,#f1faff 55%,#dcf0ff 100%);
- box-shadow:inset 0 0 11px #a1c9e636;
+ background:linear-gradient(162deg,#fff 0%,#f5fbff 45%,#deeffb 100%);
+ box-shadow:inset 0 0 10px #aad8ef68;
 }
 #showcaseSlides .featured-slide--theory .theory-screen-header{
  display:flex;align-items:center;justify-content:space-between;gap:5px;
- padding:12px 13px 10px;
- border-bottom:1px solid #d8eaf8;
- background:linear-gradient(110deg,#f7fcff,#ebf8ff);
- font-size:10px;font-weight:900;color:#1876bc;
+ padding:12px 13px 10px;border-bottom:1px solid #e0edf7;
+ background:linear-gradient(110deg,#ffffffeb,#eaf7ffb8);
+ font:900 10px/1.25 Manrope,Arial,sans-serif;color:#156cae;
 }
 #showcaseSlides .featured-slide--theory .theory-screen-logo{
- display:inline-flex;align-items:center;gap:6px;letter-spacing:.1em;
- white-space:nowrap;
+ display:inline-flex;align-items:center;gap:7px;letter-spacing:.1em;white-space:nowrap;
 }
 #showcaseSlides .featured-slide--theory .theory-screen-logo:before{
- content:"";display:block;height:13px;width:5px;border-radius:3px;
- background:#06a5dd;box-shadow:5px 0 0 #80d4f6;
- transform:skew(-16deg);
+ content:"";width:5px;height:12px;border-radius:3px;background:#009fe3;
+ box-shadow:5px 0 0 #71ccf2;transform:skew(-16deg);
 }
 #showcaseSlides .featured-slide--theory .theory-screen-progress{
- color:#7293ac;font-size:9px;font-weight:800;white-space:nowrap;
+ font-size:9px;color:#7497b3;white-space:nowrap;
+}
+#showcaseSlides .featured-slide--theory .theory-progress-bar{
+ height:5px;width:calc(100% - 24px);margin:9px 12px 3px;
+ border-radius:5px;background:#ddecf6;overflow:hidden;
+}
+#showcaseSlides .featured-slide--theory .theory-progress-bar:after{
+ content:"";display:block;width:28%;height:100%;border-radius:5px;
+ background:linear-gradient(90deg,#0d85cd,#54c7fa);
 }
 #showcaseSlides .featured-slide--theory .theory-screen-body{
- flex:1;min-height:0;
- display:flex;flex-direction:column;align-items:center;justify-content:space-evenly;
- padding:8px 18px 11px;gap:8px;
+ display:flex;flex:1;min-height:0;flex-direction:column;
+ align-items:center;justify-content:space-evenly;gap:7px;
+ padding:7px 18px 13px;
 }
 #showcaseSlides .featured-slide--theory .theory-screen-sign{
- display:grid;place-items:center;aspect-ratio:1;
- width:clamp(64px,34%,106px);max-height:37%;
- border:clamp(7px,1.3vw,11px) solid #e34d58;border-radius:50%;
- background:#fff;color:#1e3143;
- font:900 clamp(25px,3vw,47px)/1 Manrope,Arial,sans-serif;
- box-shadow:0 8px 14px #1f629b1b,0 0 0 2px #ffffff;
+ display:grid;place-items:center;flex-shrink:1;
+ width:clamp(64px,35%,104px);aspect-ratio:1;
+ max-height:39%;
+ background:#fff;color:#1c2e44;
+ border:clamp(7px,1.2vw,11px) solid #e64d58;border-radius:50%;
+ font:900 clamp(25px,3vw,46px)/1 Manrope,Arial,sans-serif;
+ box-shadow:0 7px 15px #156ca621,0 0 0 2px #ffffff;
 }
 #showcaseSlides .featured-slide--theory .theory-screen-lines{
- width:95%;display:grid;gap:7px;
+ width:94%;display:grid;gap:8px;
 }
 #showcaseSlides .featured-slide--theory .theory-screen-lines i{
- display:block;border-radius:10px;height:10px;
- background:linear-gradient(90deg,#8fb9d5,#d7eaf7);
- opacity:.8;
+ display:block;height:8px;border-radius:7px;
+ background:linear-gradient(90deg,#85b4d3,#dbeefa);opacity:.86;
 }
-#showcaseSlides .featured-slide--theory .theory-screen-lines i:nth-child(1){width:96%}
-#showcaseSlides .featured-slide--theory .theory-screen-lines i:nth-child(2){width:80%}
-#showcaseSlides .featured-slide--theory .theory-screen-lines i:nth-child(3){width:60%}
+#showcaseSlides .featured-slide--theory .theory-screen-lines i:nth-child(1){width:98%}
+#showcaseSlides .featured-slide--theory .theory-screen-lines i:nth-child(2){width:82%}
+#showcaseSlides .featured-slide--theory .theory-screen-lines i:nth-child(3){width:61%}
 #showcaseSlides .featured-slide--theory .theory-screen-answer{
- width:100%;min-height:42px;padding:7px 11px;display:flex;align-items:center;gap:10px;
- border-radius:12px;background:#e7f8f2;
- border:1px solid #a7e4cf;
- box-shadow:0 4px 11px #1b9f7620;
+ display:flex;align-items:center;gap:10px;width:100%;min-height:42px;
+ padding:7px 10px;border-radius:12px;
+ border:1px solid #a6dfcc;background:linear-gradient(100deg,#eafbf4,#d8f6e9);
+ box-shadow:0 4px 11px #159b6c18;
 }
 #showcaseSlides .featured-slide--theory .theory-screen-answer b{
  display:grid;place-items:center;flex:0 0 30px;height:30px;
- border-radius:50%;background:#20b78a;color:white;
+ border-radius:50%;background:#16b58b;color:#fff;
  font:900 20px/1 Manrope,Arial,sans-serif;
 }
 #showcaseSlides .featured-slide--theory .theory-screen-answer i{
- width:54%;height:10px;border-radius:6px;background:#a1d9bf;
+ height:9px;width:54%;border-radius:8px;background:#9fd9c2;
 }
-#showcaseSlides .featured-slide--theory .theory-scene-tag{z-index:6;top:12px;left:13px}
+#showcaseSlides .featured-slide--theory .theory-glass-glint{
+ position:absolute;z-index:6;top:-1%;left:21%;width:11%;height:89%;
+ background:linear-gradient(90deg,transparent,#ffffff44,transparent);
+ transform:rotate(-8deg) skew(-11deg);border-radius:50%;
+ pointer-events:none;opacity:.37;mix-blend-mode:screen;
+}
+#showcaseSlides .featured-slide--theory .theory-floating-award{
+ position:absolute;z-index:7;right:4%;bottom:18%;
+ display:flex;align-items:center;gap:8px;
+ padding:9px 12px 9px 9px;border-radius:22px;
+ background:linear-gradient(115deg,#07538b,#119edc);
+ border:1px solid #a1e5ff;
+ box-shadow:0 8px 17px #0a559c3c,0 1px 1px #fff9 inset;
+ color:#fff;font:900 12px/1 Manrope,Arial,sans-serif;
+ transform:rotate(5deg);
+}
+#showcaseSlides .featured-slide--theory .theory-floating-award span{
+ display:grid;place-items:center;flex:0 0 23px;height:23px;border-radius:50%;
+ background:#32cdad;box-shadow:0 0 0 2px #ffffffab;
+ font-size:16px;
+}
+#showcaseSlides .featured-slide--theory .theory-scene-tag{
+ position:absolute;z-index:8;top:12px;left:13px;
+}
 #showcaseSlides .featured-slide--theory .theory-stage .feature-img-prev,
 #showcaseSlides .featured-slide--theory .theory-stage .feature-img-next{
- z-index:7;top:50%;
+ position:absolute;z-index:9;top:50%;
 }
 #showcaseSlides .featured-slide--theory.active:not(.ad-exiting) .theory-device{
- animation:neolineTheoryPremiumFloat 7.8s ease-in-out infinite alternate;
+ animation:neolineTheoryTicketFloat 8.1s cubic-bezier(.36,.08,.58,.96) infinite alternate;
+}
+#showcaseSlides .featured-slide--theory.active:not(.ad-exiting) .theory-back-card{
+ animation:neolineTheoryBackDrift 8.8s ease-in-out infinite alternate;
+}
+#showcaseSlides .featured-slide--theory.active:not(.ad-exiting) .theory-floating-award{
+ animation:neolineTheoryBadgeFloat 6.4s ease-in-out infinite alternate;
 }
 #showcaseSlides .featured-slide--theory.active:not(.ad-exiting) .theory-halo{
- animation:neolineTheoryHalo 8s ease-in-out infinite alternate;
+ animation:neolineTheoryHaloBreath 7.7s ease-in-out infinite alternate;
 }
-@keyframes neolineTheoryPremiumFloat{
- from{transform:translate3d(-3px,5px,0) rotate(-7deg) perspective(620px) rotateY(-8deg) scale(.985)}
- to{transform:translate3d(5px,-7px,0) rotate(-5.5deg) perspective(620px) rotateY(-6deg) scale(1.035)}
+@keyframes neolineTheoryTicketFloat{
+ from{transform:translate3d(-4px,5px,0) rotate(-8deg) perspective(760px) rotateY(-6deg) scale(.975)}
+ to{transform:translate3d(4px,-5px,0) rotate(-6deg) perspective(760px) rotateY(-3deg) scale(1.044)}
 }
-@keyframes neolineTheoryHalo{
- from{opacity:.86;transform:scale(.975)}
+@keyframes neolineTheoryBackDrift{
+ from{transform:translate3d(4px,2px,0) rotate(11deg) perspective(680px) rotateY(-8deg) scale(.99)}
+ to{transform:translate3d(-5px,-5px,0) rotate(13deg) perspective(680px) rotateY(-4deg) scale(1.02)}
+}
+@keyframes neolineTheoryBadgeFloat{
+ from{transform:translate3d(-2px,4px,0) rotate(4deg)}
+ to{transform:translate3d(2px,-5px,0) rotate(1deg)}
+}
+@keyframes neolineTheoryHaloBreath{
+ from{opacity:.83;transform:scale(.98)}
  to{opacity:1;transform:scale(1.035)}
 }
 @media(max-width:900px){
- #showcaseSlides .featured-slide--theory .theory-stage{min-height:290px}
- #showcaseSlides .featured-slide--theory .theory-device{width:60%;left:22%;max-width:none}
+ #showcaseSlides .featured-slide--theory .theory-stage{min-height:285px}
+ #showcaseSlides .featured-slide--theory .theory-device{width:61%;left:14%;max-width:none}
+ #showcaseSlides .featured-slide--theory .theory-back-card{left:32%;width:60%}
 }
 @media(max-width:720px){
  #showcaseSlides .featured-slide--theory .theory-featured-image{
-  height:clamp(224px,66vw,295px)!important;max-height:38vh!important;
-  overflow:visible!important;order:-1!important;margin:8px 0 9px;
+  height:clamp(226px,66vw,299px)!important;max-height:38vh!important;
+  margin:8px 0 10px;order:-1!important;overflow:visible!important;
  }
- #showcaseSlides .featured-slide--theory .theory-stage{
-  height:100%;min-height:0;border-radius:17px;
- }
+ #showcaseSlides .featured-slide--theory .theory-stage{height:100%;min-height:0;border-radius:17px}
  #showcaseSlides .featured-slide--theory .theory-stage .ad-photo-stripes{padding:19px 0}
  #showcaseSlides .featured-slide--theory .theory-stage .ad-photo-band{height:13px}
- #showcaseSlides .featured-slide--theory .theory-halo{left:22%;top:13%;width:65%}
- #showcaseSlides .featured-slide--theory .theory-device{
-  top:-5%;left:23%;width:59%;height:99%;
-  border-radius:20px;padding:6px;
+ #showcaseSlides .featured-slide--theory .theory-halo{top:11%;left:15%;width:74%}
+ #showcaseSlides .featured-slide--theory .theory-back-card{
+  top:13%;left:34%;width:59%;height:75%;border-radius:19px;
  }
- #showcaseSlides .featured-slide--theory .theory-device-screen{border-radius:15px}
- #showcaseSlides .featured-slide--theory .theory-screen-header{padding:9px 10px 7px;font-size:8px}
+ #showcaseSlides .featured-slide--theory .theory-device{
+  top:-5%;left:13%;width:63%;height:94%;border-radius:19px;padding:5px;
+ }
+ #showcaseSlides .featured-slide--theory .theory-device-screen{border-radius:14px}
+ #showcaseSlides .featured-slide--theory .theory-screen-header{padding:8px 10px 7px;font-size:8px}
  #showcaseSlides .featured-slide--theory .theory-screen-progress{font-size:8px}
- #showcaseSlides .featured-slide--theory .theory-screen-body{padding:5px 12px 9px;gap:5px}
+ #showcaseSlides .featured-slide--theory .theory-progress-bar{margin:6px 10px 3px;width:calc(100% - 20px);height:4px}
+ #showcaseSlides .featured-slide--theory .theory-screen-body{padding:5px 11px 9px;gap:5px}
  #showcaseSlides .featured-slide--theory .theory-screen-sign{width:37%;font-size:clamp(24px,6vw,34px);border-width:7px}
  #showcaseSlides .featured-slide--theory .theory-screen-lines{gap:5px}
  #showcaseSlides .featured-slide--theory .theory-screen-lines i{height:7px}
- #showcaseSlides .featured-slide--theory .theory-screen-answer{min-height:32px;padding:4px 8px;gap:7px}
- #showcaseSlides .featured-slide--theory .theory-screen-answer b{height:23px;flex-basis:23px;font-size:15px}
- #showcaseSlides .featured-slide--theory .theory-screen-answer i{height:8px}
+ #showcaseSlides .featured-slide--theory .theory-screen-answer{min-height:31px;padding:5px 8px;gap:6px}
+ #showcaseSlides .featured-slide--theory .theory-screen-answer b{height:22px;flex-basis:22px;font-size:14px}
+ #showcaseSlides .featured-slide--theory .theory-screen-answer i{height:7px}
+ #showcaseSlides .featured-slide--theory .theory-floating-award{
+  right:2%;bottom:17%;gap:5px;padding:6px 8px;font-size:10px;border-radius:18px;
+ }
+ #showcaseSlides .featured-slide--theory .theory-floating-award span{
+  height:19px;flex-basis:19px;font-size:13px;
+ }
+ #showcaseSlides .featured-slide--theory .theory-back-brand{font-size:8px;right:9px;top:11px}
  #showcaseSlides .featured-slide--theory .theory-scene-tag{top:8px;left:8px}
- #showcaseSlides .featured-slide--theory .theory-featured-image .feature-img-prev{left:5px}
- #showcaseSlides .featured-slide--theory .theory-featured-image .feature-img-next{right:5px}
+ #showcaseSlides .featured-slide--theory .theory-stage .feature-img-prev{left:5px}
+ #showcaseSlides .featured-slide--theory .theory-stage .feature-img-next{right:5px}
  #showcaseSlides .featured-slide--theory .feature-copy{position:relative;z-index:5}
 }
 @media(max-width:380px){
- #showcaseSlides .featured-slide--theory .theory-featured-image{height:clamp(205px,65vw,248px)!important}
- #showcaseSlides .featured-slide--theory .theory-device{width:58%;left:24%}
+ #showcaseSlides .featured-slide--theory .theory-featured-image{height:clamp(206px,65vw,255px)!important}
+ #showcaseSlides .featured-slide--theory .theory-device{left:14%;width:61%}
+ #showcaseSlides .featured-slide--theory .theory-back-card{left:33%;width:60%}
 }
 @media(prefers-reduced-motion:reduce){
  #showcaseSlides .featured-slide--theory .theory-device,
+ #showcaseSlides .featured-slide--theory .theory-back-card,
+ #showcaseSlides .featured-slide--theory .theory-floating-award,
  #showcaseSlides .featured-slide--theory .theory-halo{
-  animation:none!important;will-change:auto;transform:rotate(-6deg)!important;
+  animation:none!important;will-change:auto;
+ }
+}
+/* Bottom five-item navigation stays unchanged in function; polish only
+   provides tactile feedback, clear hit targets and a subtle active marker. */
+@media(max-width:720px){
+ .mobile-nav button,.mobile-nav>a{
+  -webkit-tap-highlight-color:transparent;
+  transition:background .2s ease,transform .2s ease,color .2s ease;
+  border-radius:13px;
+ }
+ .mobile-nav button:active,.mobile-nav>a:active{
+  transform:translateY(1px) scale(.96);
+  background:#e6f4ff;
+ }
+ .mobile-nav button:focus-visible,.mobile-nav>a:focus-visible{
+  outline:2px solid #1089dc;outline-offset:-2px;
  }
 }
 
@@ -1586,12 +1690,19 @@ const theoryPromo={
 function theoryScene(){
  return '<div class="theory-stage">'
   +'<div class="ad-photo-stripes" aria-hidden="true"><span class="ad-photo-band"></span><span class="ad-photo-band"></span></div>'
-  +'<span class="theory-halo" aria-hidden="true"></span><span class="theory-stage-floor" aria-hidden="true"></span>'
+  +'<span class="theory-halo" aria-hidden="true"></span>'
+  +'<span class="theory-ambient-light" aria-hidden="true"></span>'
+  +'<span class="theory-stage-floor" aria-hidden="true"></span>'
+  +'<span class="theory-track" aria-hidden="true"></span>'
+  +'<div class="theory-back-card" aria-hidden="true"><span class="theory-back-map"></span><span class="theory-back-brand">NEOLINE / QUEST</span></div>'
   +'<div class="theory-device" aria-hidden="true"><div class="theory-device-screen">'
   +'<div class="theory-screen-header"><span class="theory-screen-logo">NEOLINE</span><span class="theory-screen-progress">07 / 30</span></div>'
+  +'<div class="theory-progress-bar"></div>'
   +'<div class="theory-screen-body"><span class="theory-screen-sign">50</span>'
   +'<div class="theory-screen-lines"><i></i><i></i><i></i></div>'
   +'<div class="theory-screen-answer"><b>✓</b><i></i></div></div></div></div>'
+  +'<span class="theory-glass-glint" aria-hidden="true"></span>'
+  +'<div class="theory-floating-award" aria-hidden="true"><span>✓</span><b>+15 XP</b></div>'
   +'<span class="feature-img-tag theory-scene-tag">NEOLINE · THEORY GAME</span>'
   +'<button type="button" class="feature-img-prev" data-feature-prev aria-label="Previous slide">‹</button>'
   +'<button type="button" class="feature-img-next" data-feature-next aria-label="Next slide">›</button>'
