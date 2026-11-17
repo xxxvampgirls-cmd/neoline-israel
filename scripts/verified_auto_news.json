@@ -61,6 +61,96 @@
           "summary": "بحسب قناة 7، حاول سائق دراجة نارية يبلغ 30 عامًا من الناصرة الفرار من الشرطة. ساعدت مروحية الشرطة في البحث، وصودرت الدراجة للتحقيق."
         }
       }
+    },
+    {
+      "titleOriginal": "מצלמות תנועה חדשות: המשטרה מתכננת לפרוס כ-200 מצלמות ולהתחיל פיילוט של שליחת דוחות ב-SMS",
+      "sourceTitle": "המשטרה תפרוס כ-200 מצלמות תנועה חדשות: דו\"חות יישלחו לבעלי הרכב במסרונים",
+      "editorialHeadline": true,
+      "sourceLanguage": "he",
+      "date": "2026-11-02T11:01:00Z",
+      "url": "https://www.davar1.co.il/705215/",
+      "publisher": "Davar",
+      "category": "speed",
+      "art": "speed",
+      "official": false,
+      "translations": {
+        "ru": {
+          "title": "Полиция планирует установить около 200 дорожных камер; штрафы начнут отправлять по SMS",
+          "summary": "Davar сообщает о планах полиции развернуть примерно 200 новых камер. На 16 ноября был намечен пилот отправки уведомлений о штрафах владельцам машин по SMS; начало работы и масштабы внедрения требуют отдельного подтверждения."
+        },
+        "he": {
+          "title": "המשטרה מתכננת לפרוס כ-200 מצלמות תנועה; פיילוט הודעות SMS על דוחות",
+          "summary": "לפי דבר, אגף התנועה הודיע על תוכנית לפריסת כ-200 מצלמות. פיילוט משלוח הודעות SMS לבעלי רכב על דוחות תוכנן ל-16 בנובמבר; תחילת הפעילות וההיקף בפועל מחייבים אימות נוסף."
+        },
+        "en": {
+          "title": "Police plan around 200 new road cameras and an SMS traffic-fine pilot",
+          "summary": "Davar reported plans for approximately 200 traffic cameras. A pilot to notify vehicle owners of fines by SMS was scheduled for 16 November; whether and how widely it has started still needs confirmation."
+        },
+        "ar": {
+          "title": "الشرطة تخطط لنشر نحو 200 كاميرا مرورية وتجربة رسائل SMS للمخالفات",
+          "summary": "بحسب دافار، أعلنت شرطة المرور خطة لنشر نحو 200 كاميرا جديدة. كان من المقرر بدء تجربة إرسال إشعارات المخالفات إلى أصحاب السيارات في 16 نوفمبر، لكن بدءها الفعلي ونطاقها يحتاجان إلى تأكيد."
+        }
+      }
+    },
+    {
+      "titleOriginal": "תיקון תקנות התעבורה: משרד התחבורה הודיע על הרחבת היתרי נהיגה ברישיונות B ו-C1",
+      "sourceTitle": "בשורה לנהגים ולענף הרכב",
+      "editorialHeadline": true,
+      "sourceLanguage": "he",
+      "date": "2026-11-09T10:00:00Z",
+      "url": "https://www.gov.il/he/pages/news-9-11",
+      "publisher": "Министерство транспорта Израиля",
+      "category": "laws",
+      "art": "laws",
+      "official": true,
+      "translations": {
+        "ru": {
+          "title": "Минтранс подписал изменения для прав B и C1: электрофургоны до 4,25 тонны",
+          "summary": "Согласно сообщению Минтранса от 9 ноября, водителям с правами B не менее двух лет предусмотрена возможность управлять некоторыми разрешёнными электрическими коммерческими автомобилями до 4,25 т при соблюдении условий. Подписание документа не означает автоматического вступления всех положений в силу."
+        },
+        "he": {
+          "title": "משרד התחבורה: השרה חתמה על תיקון תקנות התעבורה לרישיונות B ו-C1",
+          "summary": "בהודעה מ-9 בנובמבר נמסר על תיקון המאפשר בתנאים מסוימים לבעלי רישיון B ותיק לנהוג ברכב מסחרי חשמלי מאושר עד 4.25 טון. יש לבדוק את פרסום התקנות ואת מועד תחולתן לפני הסתמכות עליהן."
+        },
+        "en": {
+          "title": "Israel's transport ministry signed amendments affecting B and C1 driving licences",
+          "summary": "A 9 November ministry statement describes conditional B-licence access to approved zero-emission commercial vehicles up to 4.25 tonnes for drivers holding that licence for at least two years. Verify official publication and effective dates before relying on the changes."
+        },
+        "ar": {
+          "title": "وزارة النقل الإسرائيلية وقعت تعديلات لرخص القيادة B وC1",
+          "summary": "أعلنت الوزارة في 9 نوفمبر تعديلات قد تسمح بشروط محددة لحاملي رخصة B منذ سنتين على الأقل بقيادة مركبات تجارية كهربائية معتمدة حتى 4.25 طن. يجب التحقق من النشر الرسمي وتاريخ دخول التعديل حيز التنفيذ."
+        }
+      }
+    },
+    {
+      "titleOriginal": "בדיקה חינמית לרכב, אופנוע וקטנוע לקראת החורף: מבצע הרלב״ד בנובמבר",
+      "sourceTitle": "בדיקה חינמית לרכב, אופנוע וקטנוע לקראת החורף: בחרו את המוסך הקרוב אליכם",
+      "editorialHeadline": true,
+      "sourceLanguage": "he",
+      "date": "2026-11-03T09:00:00Z",
+      "url": "https://www.gov.il/he/pages/202611_winter_check",
+      "publisher": "Национальное управление безопасности дорожного движения",
+      "category": "cars",
+      "art": "cars",
+      "official": true,
+      "translations": {
+        "ru": {
+          "title": "В Израиле проводят бесплатную проверку автомобилей и мотоциклов перед зимой",
+          "summary": "Национальное управление безопасности дорожного движения сообщает о бесплатных проверках тормозов, шин, света, дворников и рулевого управления в участвующих сервисах. Акция запланирована с 1 ноября 2026 до 1 января 2027 года; запись и наличие услуги необходимо уточнять у сервиса."
+        },
+        "he": {
+          "title": "בדיקת חורף חינמית לרכב, לאופנוע ולקטנוע במוסכים המשתתפים",
+          "summary": "הרלב״ד ואיגוד המוסכים מציעים בדיקה חינמית של בלמים, צמיגים, אורות, מגבים והיגוי במוסכים המשתתפים. המבצע מיועד ל-1 בנובמבר 2026 עד 1 בינואר 2027, ויש לתאם ולבדוק זמינות מראש."
+        },
+        "en": {
+          "title": "Free winter vehicle and motorcycle safety checks offered in Israel",
+          "summary": "Israel's Road Safety Authority and the garages association offer free checks of brakes, tyres, lights, wipers and steering at participating garages. The campaign runs from 1 November 2026 to 1 January 2027; confirm availability before visiting."
+        },
+        "ar": {
+          "title": "فحوصات شتوية مجانية للسيارات والدراجات النارية في إسرائيل",
+          "summary": "تعلن السلطة الوطنية لسلامة الطرق ونقابة الورش عن فحوصات مجانية للمكابح والإطارات والأضواء والمساحات والتوجيه في الورش المشاركة. تمتد الحملة من 1 نوفمبر 2026 حتى 1 يناير 2027، ويجب التأكد من المواعيد والتوفر مسبقًا."
+        }
+      }
     }
   ]
 }
