@@ -110,22 +110,15 @@ function render(append=false){
    item.imageType==="licensedPhoto"?({ru:"Фото · иллюстрация",en:"Photo · illustration",he:"צילום · המחשה",ar:"صورة توضيحية"}[state.lang]):tr("image");
   const photoCredit=item.imageCredit&&item.imageCredit.url?
    '<a class="news-photo-credit" href="'+safe(safeURL(item.imageCredit.url))+'" target="_blank" rel="noopener noreferrer">'+safe(item.imageCredit.text||"Wikimedia Commons")+'</a>':'';
-  const expanded=
-    '<details class="news-expand"><summary class="news-expand-toggle"><span>'+safe(tr("expand"))+'</span><span class="news-expand-arrow" aria-hidden="true">⌄</span></summary>'+
-    '<div class="news-expanded-content"><div class="news-expanded-meta">'+safe(displayDate(item.date))+' · '+safe(item.publisher||"")+'</div>'+
-    '<h3 dir="auto">'+safe(localized.title)+'</h3><p dir="auto">'+safe(localized.summary||"")+'</p>'+
-    (item.category==="laws"?'<p class="news-expanded-warning">'+safe(tr("warning"))+'</p>':'')+
-    '<div class="news-expanded-original"><b>'+safe(tr("original"))+':</b> <span dir="auto">'+safe(item.titleOriginal||"")+'</span></div>'+
-    '<a class="news-expanded-source" href="'+safe(url)+'" rel="noopener noreferrer nofollow" target="_blank">'+safe(tr("read"))+' ↗</a></div></details>';
   return '<article class="news-card '+(pos===0&&state.category==="all"&&!state.query?'news-card--lead':'')+'">'+
    '<div class="news-art news-art--'+safe(item.category)+'"><span class="news-art-type">'+safe(label)+'</span>'+image+
-   '<span class="news-art-source">'+safe(type)+'</span><button class="news-art-caption" type="button" data-open-story dir="auto" aria-label="'+safe(tr("expand"))+'">'+safe(localized.title)+'</button>'+photoCredit+'</div>'+
+   '<span class="news-art-source">'+safe(type)+'</span><a class="news-art-caption" href="'+safe(url)+'" target="_blank" rel="noopener noreferrer nofollow" dir="auto" aria-label="'+safe(tr("read"))+'">'+safe(localized.title)+'</a>'+photoCredit+'</div>'+
    '<div class="news-card-body"><div class="news-card-meta">'+safe(displayDate(item.date))+
    ' <b>· '+safe(item.publisher||"")+'</b>'+(item.official?' · gov.il':'')+'</div>'+
-   '<h2 dir="auto"><button type="button" class="news-title-button" data-open-story aria-label="'+safe(tr("expand"))+'">'+safe(localized.title)+'</button></h2>'+
+   '<h2 dir="auto"><a class="news-title-button" href="'+safe(url)+'" target="_blank" rel="noopener noreferrer nofollow" aria-label="'+safe(tr("read"))+'">'+safe(localized.title)+'</a></h2>'+
    '<p class="summary" dir="auto">'+safe(localized.summary||"")+'</p>'+
    (item.category==="laws"&&!item.official?'<p class="summary note">'+safe(tr("warning"))+'</p>':'')+
-   expanded+'<a class="news-link" href="'+safe(url)+'" target="_blank" rel="noopener noreferrer nofollow">'+safe(tr("read"))+' ↗</a></div></article>';
+   '<a class="news-link" href="'+safe(url)+'" target="_blank" rel="noopener noreferrer nofollow">'+safe(tr("read"))+' ↗</a></div></article>';
  }).join("");
  if(append)$("newsGrid").insertAdjacentHTML("beforeend",cards);
  else $("newsGrid").innerHTML=cards;
@@ -136,7 +129,7 @@ function render(append=false){
  const remaining=Math.max(0,matches.length-state.rendered);
  more.hidden=remaining===0;
  if(remaining){
-  $("newsMoreButton").textContent=({ru:"Показать ещё",he:"הצג עוד",en:"Show",ar:"عرض المزيد"}[state.lang])+" "+Math.min(PAGE_SIZE,remaining)+(state.lang==="en"?" more":"");
+  $("newsMoreButton").textContent=({ru:"Показать ещё новости",he:"עוד חדשות",en:"Show",ar:"عرض المزيد من الأخبار"}[state.lang])+" "+Math.min(PAGE_SIZE,remaining)+(state.lang==="en"?" more":"");
   $("newsVisibleCount").textContent=({ru:"Показано",he:"מוצגות",en:"Showing",ar:"عرض"}[state.lang])+" "+state.rendered+" / "+matches.length;
  }
 }
@@ -162,15 +155,6 @@ $("newsMoreButton").addEventListener("click",()=>{
  if($("newsLoadMore").hidden)return;
  state.visible+=PAGE_SIZE;
  render(true);
-});
-$("newsGrid").addEventListener("click",event=>{
- const trigger=event.target.closest("[data-open-story]");
- if(!trigger)return;
- const panel=trigger.closest(".news-card")?.querySelector("details.news-expand");
- if(panel){
-  panel.open=!panel.open;
-  if(panel.open)panel.scrollIntoView({behavior:"smooth",block:"nearest"});
- }
 });
 $("newsSearch").addEventListener("input",e=>{state.query=e.target.value;state.visible=PAGE_SIZE;render()});
 document.querySelectorAll('[data-news-lang]').forEach(el=>el.addEventListener('click',()=>{
