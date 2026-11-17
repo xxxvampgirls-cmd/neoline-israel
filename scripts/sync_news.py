@@ -48,6 +48,9 @@ FEEDS=[
  ("The Times of Israel","https://www.timesofisrael.com/feed/"),
  ("The Jerusalem Post","https://www.jpost.com/rss/rssfeedsfrontpage.aspx"),
  ("Arutz Sheva · Israel National News","https://www.inn.co.il/Rss.aspx"),
+ ("Wheel · Автоновости","https://wheel.co.il/feed/"),
+ ("TheCar · Автоновости","https://thecar.co.il/feed/"),
+ ("Мицу · Камеры скорости","https://www.mitsu.co.il/?feed=rss2&cat=50"),
  # Additional independent Israeli publications; failures are logged and skipped.
  ("Maariv · חדשות","https://www.maariv.co.il/rss/rsschadashot"),
  ("Maariv · מבזקים","https://www.maariv.co.il/rss/rssfeedsmivzakichadashot"),
