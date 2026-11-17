@@ -11,6 +11,7 @@ import datetime as dt
 import hashlib
 import html
 import json
+import os
 import math
 import random
 import re
@@ -20,6 +21,8 @@ from urllib.parse import urlparse
 import xml.etree.ElementTree as ET
 import feedparser
 import requests
+from collections import Counter, defaultdict
+from news_images import generate_thumbnail
 from bs4 import BeautifulSoup
 
 ROOT=Path("assets/news")
@@ -30,7 +33,10 @@ UTC=dt.timezone.utc
 NOW=dt.datetime.now(UTC)
 CUTOFF=NOW-dt.timedelta(days=30)
 MAX_ITEMS=300
-NEW_PER_RUN=80
+NEW_PER_RUN=100
+MAX_PER_SOURCE=65
+MAX_AI_PER_RUN=min(12,max(0,int(os.getenv('NEOLINE_IMAGE_RUN_LIMIT','6'))))
+MAX_AI_PER_DAY=min(24,max(0,int(os.getenv('NEOLINE_IMAGE_DAILY_LIMIT','15'))))
 S=requests.Session()
 S.headers.update({"User-Agent":"Mozilla/5.0 (compatible; NEOLINE-Israel-Headlines/2.0)","Accept-Language":"he-IL,he;q=.8,en;q=.5"})
 # Direct, public RSS feeds published by the outlets. Avoid Google News article
@@ -47,17 +53,21 @@ FEEDS=[
  ("Maariv · חדשות","https://www.maariv.co.il/rss/rsschadashot"),
  ("Maariv · מבזקים","https://www.maariv.co.il/rss/rssfeedsmivzakichadashot"),
  ("Maariv · כלכלה","https://www.maariv.co.il/rss/rssfeedskalkalabaarez"),
- ("Israel Hayom","https://www.israelhayom.co.il/rss"),
+ ("Israel Hayom","https://www.israelhayom.co.il/rss.xml"),
  ("Globes · צרכנות","https://www.globes.co.il/webservice/rss/rssfeeder.asmx/FeederNode?iID=821"),
  ("Autonews Israel","https://autonews.co.il/feed/"),
  ("Srugim","https://www.srugim.co.il/feed"),
+ ("Ynet · Новости","https://www.ynet.co.il/Integration/StoryRss2.xml"),
+ ("Ynet · Репортажи","https://www.ynet.co.il/Integration/StoryRss1854.xml"),
+ ("Haaretz","https://www.haaretz.com/srv/israel-news-rss"),
+ ("Israel Hayom · English","https://www.israelhayom.com/feed/"),
 ]
 CATEGORIES=("accidents","speed","laws","roads","cars")
 KEYWORDS={
- "accidents":["תאונ","התנגש","דרס","collision","crash","accident","road fatal","дтп","авари"],
- "speed":["מהירות","מכמונת","מצלמות","אכיפה","speed camera","speeding","speed limit","скорост","радар","штраф за скорость"],
+ "accidents":["תאונ","התנגש","דרס","נדרס","פגע וברח","התהפך הרכב","collision","crash","accident","road fatal","hit-and-run","road death","дтп","авари"],
+ "speed":["מהירות","מכמונת","מצלמות","אכיפה","speed camera","speeding","speed limit","speed trap","speed enforcement","скорост","радар","штраф за скорость"],
  "laws":["תקנות התעבורה","חוקי תנועה","חוק התעבורה","רישיון","רשיון","קנסות נהגים","נהיגה בשכרות","חובה להדליק אורות","driving law","traffic law","regulation","licens","правила дорожного движения"],
- "roads":["חסימות","סגירת כביש","כביש חסום","פקק","עומס תנועה","עומסי תנועה","מחלף","road closure","highway closure","traffic jam","дорог","шоссе","пробк"],
+ "roads":["חסימות","סגירת כביש","כביש חסום","כביש 6","כביש 1","נתיבי איילון","פקק","עומס תנועה","עומסי תנועה","מחלף","road closure","highway closure","traffic jam","highway traffic","дорог","шоссе","пробк"],
  "cars":["רכב","רכבי","רכב חדש","מכוני","מכונית","חשמליות","טעינה","car ","cars","automotive","vehicle","electric vehicle","tesla","автомобил","электромобил"],
 }
 EXCLUDE=("טיל","איראן","לבנון","מלחמה","טיסה","מטוס","אירוויזיון",
