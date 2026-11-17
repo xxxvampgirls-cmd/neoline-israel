@@ -44,6 +44,7 @@ $("search").addEventListener("submit",e=>{e.preventDefault();renderMap();});
 document.querySelectorAll("[data-city]").forEach(button=>button.addEventListener("click",()=>{$("city").value=button.dataset.city;renderMap();}));
 $("language").addEventListener("change",e=>{lang=e.target.value;try{localStorage.setItem("neoline-language",lang)}catch(_){}applyLanguage();});
 try{const saved=localStorage.getItem("neoline-language");if(copy[saved])lang=saved}catch(_){}
+const requested=new URLSearchParams(location.search).get("network");if(requested && providers[requested]){active=requested;document.querySelectorAll("[data-provider]").forEach(el=>{const on=el.dataset.provider===active;el.classList.toggle("active",on);el.setAttribute("aria-pressed",String(on));});}
 $("language").value=lang;applyLanguage();renderMap();
 })();
 </script></body></html>
