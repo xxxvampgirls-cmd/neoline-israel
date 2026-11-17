@@ -13,7 +13,16 @@ ar:{eyebrow:"NEOLINE · إسرائيل · أخبار السيارات",heading:"
 };
 const tr=k=>(i18n[state.lang]||i18n.ru)[k]||k;
 const safe=str=>String(str??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
-const safeURL=url=>{try{const x=new URL(url);return x.protocol==="https:"||x.protocol==="http:"?x.href:""}catch(e){return ""}};
+const safeURL=url=>{try{const x=new URL(url);return x.protocol==="https:"&&!/(^|\.)google\./.test(x.hostname)?x.href:""}catch(e){return ""}};
+const newsPicture=item=>typeof item.image==="string"&&/^\.\/assets\/news\/images\/[a-f0-9]{20}\.svg$/.test(item.image)?item.image:"";
+function localStory(item){
+ const t=item.translations||{}, row=t[state.lang]||{};
+ return {
+  title:typeof row.title==="string"&&row.title.trim()?row.title:(state.lang==="he"&&item.sourceLanguage==="he"?item.titleOriginal:(state.lang==="ru"?item.title:item.titleOriginal)),
+  summary:typeof row.summary==="string"&&row.summary.trim()?row.summary:(
+   state.lang==="ru"?item.summary:(i18n[state.lang][item.category==="cars"?"cars":"read"]+" · "+i18n[state.lang].read))
+ };
+}
 const artPaths={
 accidents:'<path d="M70 98 102 62l29 27 23-32 25 34" fill="none" stroke="#215b88" stroke-width="6" stroke-linejoin="round"/><path d="m153 57 8-9m-30 10-5-11" stroke="#0b8cd1" stroke-width="5" stroke-linecap="round"/><path d="M51 110h140" stroke="#287cb3" stroke-width="4" stroke-linecap="round"/><path d="m173 25 23 43h-46z" fill="#fff" stroke="#067cc4" stroke-width="4"/><path d="M173 39v13" stroke="#067cc4" stroke-width="4" stroke-linecap="round"/><circle cx="173" cy="60" r="2" fill="#067cc4"/>',
 speed:'<rect x="78" y="25" width="88" height="88" rx="18" fill="#fff" stroke="#3d8dbe" stroke-width="4"/><circle cx="122" cy="68" r="28" fill="#dcf3ff" stroke="#1281bb" stroke-width="3"/><path d="M122 68l18-19" stroke="#056bad" stroke-width="5" stroke-linecap="round"/><path d="M107 89h31" stroke="#82b8d7" stroke-width="3" stroke-linecap="round"/><path d="M160 91h25v18h-25" stroke="#247db0" stroke-width="5" fill="#bceaff"/><path d="M96 30h52" stroke="#7bbdeb" stroke-width="3"/>',
@@ -34,9 +43,14 @@ function displayDate(value){
 }
 function currentOnly(o){
  const t=Date.parse(o.date),now=Date.now();
- return Number.isFinite(t)&&t<=now+12*3600e3&&t>=now-30*86400e3&&safeURL(o.url)&&o.title&&o.category in artPaths;
+ return Number.isFinite(t)&&t<=now+12*3600e3&&t>=now-30*86400e3&&safeURL(o.url)&&o.titleOriginal&&o.category in artPaths;
 }
 function localize(){
+ document.querySelectorAll('[data-news-lang]').forEach(el=>{
+  const active=el.dataset.newsLang===state.lang;
+  el.classList.toggle('active',active);
+  el.setAttribute('aria-pressed',active?'true':'false');
+ });
  document.documentElement.lang=state.lang;
  document.documentElement.dir=["he","ar"].includes(state.lang)?"rtl":"ltr";
  $("newsEyebrow").textContent=tr("eyebrow");$("newsHeading").innerHTML=tr("heading");
@@ -60,21 +74,28 @@ function tabs(){
  $("newsCategories").querySelectorAll("button").forEach(el=>el.onclick=()=>{state.category=el.dataset.newsCategory;tabs();render()});
 }
 function render(){
- // Enforce expiration at every render, including after a tab or search click.
+ // Enforce strict source verification and 30-day expiration at every render.
  const recent=state.items.filter(currentOnly);
  const query=state.query.trim().toLocaleLowerCase();
- const list=recent.filter(x=>(state.category==="all"||x.category===state.category)
-  &&(!query||[x.title,x.titleOriginal,x.publisher,x.summary].join(" ").toLocaleLowerCase().includes(query)));
- $("newsGrid").innerHTML=list.map(item=>{
-  const label=tr(item.category),url=safeURL(item.url);
-  return '<article class="news-card">'+
-   '<div class="news-art"><span class="news-art-type">'+safe(label)+'</span>'+artwork(item.art||item.category)+
+ const list=recent.filter(x=>{
+  const local=localStory(x);
+  return (state.category==="all"||x.category===state.category)
+   &&(!query||[local.title,local.summary,x.titleOriginal,x.publisher].join(" ").toLocaleLowerCase().includes(query));
+ });
+ $("newsGrid").innerHTML=list.map((item,index)=>{
+  const label=tr(item.category),url=safeURL(item.url),localized=localStory(item);
+  const pic=newsPicture(item);
+  const image=pic?
+   '<img class="news-art-image" loading="'+(index===0?'eager':'lazy')+'" decoding="async" alt="'+safe(tr("image"))+'" src="'+safe(pic)+'">':
+   artwork(item.art||item.category);
+  return '<article class="news-card '+(index===0?'news-card--lead':'')+'">'+
+   '<div class="news-art"><span class="news-art-type">'+safe(label)+'</span>'+image+
    '<span class="news-art-source">'+safe(tr("image"))+'</span></div>'+
    '<div class="news-card-body"><div class="news-card-meta">'+safe(displayDate(item.date))+
    ' <b>· '+safe(item.publisher||"")+'</b>'+(item.official?' · gov.il':'')+'</div>'+
-   '<h2 dir="auto">'+safe(item.title)+'</h2>'+
-   '<p class="summary">'+safe(item.summary||"")+'</p>'+
-   (item.category==="laws"&&!item.official?'<p class="summary">'+safe(tr("warning"))+'</p>':'')+
+   '<h2 dir="auto">'+safe(localized.title)+'</h2>'+
+   '<p class="summary" dir="auto">'+safe(localized.summary||"")+'</p>'+
+   (item.category==="laws"&&!item.official?'<p class="summary note">'+safe(tr("warning"))+'</p>':'')+
    '<a class="news-link" href="'+safe(url)+'" target="_blank" rel="noopener noreferrer nofollow">'+safe(tr("read"))+' ↗</a></div></article>';
  }).join("");
  $("newsEmpty").hidden=list.length>0;
@@ -98,6 +119,11 @@ async function load(){
  tabs();render();
 }
 $("newsSearch").addEventListener("input",e=>{state.query=e.target.value;render()});
+document.querySelectorAll('[data-news-lang]').forEach(el=>el.addEventListener('click',()=>{
+ state.lang=el.dataset.newsLang;
+ try{localStorage.setItem("neoline-language",state.lang)}catch(e){}
+ localize();tabs();render();
+}));
 document.addEventListener("visibilitychange",()=>{if(!document.hidden)render()});
 localize();tabs();load();
 })();
