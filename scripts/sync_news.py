@@ -70,7 +70,7 @@ CATEGORIES=("accidents","speed","laws","roads","cars")
 # inside unrelated words like "מורכב", and "במהירות" means merely "quickly".
 KEYWORDS={
  "accidents":["תאונ","התנגש","דרס","נדרס","פגע וברח","פגיעת רכב","נפגע מרכב","התהפך הרכב","דריסת","collision","crash","accident","road fatal","hit-and-run","road death","дтп","авари"],
- "speed":["מהירות מופרזת","מצלמות מהירות","מצלמות המהירות","אכיפת המהירות","נהיגה במהירות","מכמונת","מצלמת מהירות","אכיפת מהירות","מהירות של","מד מהירות","מהירות ממוצעת","ממל\"ז","ממל״ז","הגבלת מהירות","מצלמות א-3","טס במהירות","speed camera","speeding","speed limit","speed trap","speed enforcement","скорост","дорожный радар","радар скорости","штраф за скорость"],
+ "speed":["מהירות מופרזת","מצלמות מהירות","מצלמות המהירות","מצלמות תנועה","אכיפת המהירות","נהיגה במהירות","מכמונת","מצלמת מהירות","אכיפת מהירות","מהירות של","מד מהירות","מהירות ממוצעת","ממל\"ז","ממל״ז","הגבלת מהירות","מצלמות א-3","טס במהירות","speed camera","speeding","speed limit","speed trap","speed enforcement","скорост","дорожный радар","радар скорости","штраф за скорость"],
  "laws":["תקנות התעבורה","חוקי תנועה","חוק התעבורה","רישיון נהיגה","רשיון נהיגה","רשיון b","רישיון b","קנסות נהגים","קנסות תנועה","נהיגה בשכרות","חובה להדליק אורות","driving law","traffic law","road regulation","driving licens","traffic fine","правила дорожного движения"],
  "roads":["חסימות כבישים","סגירת כביש","כביש חסום","כביש 6","כביש 1","נתיבי איילון","פקק","עומס תנועה","עומסי תנועה","מחלף","road closure","highway closure","traffic jam","highway traffic","дорог","шоссе","пробк"],
  "cars":["רכבי","רכבים","רכב חדש","מכונית","מכוניות","חשמליות","טעינה","כלי רכב","byd","טסלה","יונדאי","פולקסווגן","car ","cars","automotive","vehicle","electric vehicle","tesla","автомобил","электромобил"],
@@ -306,7 +306,7 @@ def main():
    item["id"]=uid
    if not valid(item):continue
    domain=urlparse(item["url"]).hostname or ""
-   if domain not in ("www.calcalist.co.il","www.inn.co.il"):continue
+   if domain not in ("www.calcalist.co.il","www.inn.co.il","www.davar1.co.il","www.gov.il"):continue
    item["title"]=item["translations"]["ru"]["title"]
    item["summary"]=item["translations"]["ru"]["summary"]
    item["translated"]=True
