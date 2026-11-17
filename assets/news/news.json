@@ -1,566 +1,762 @@
 {
   "version": 1,
-  "updated": "2026-11-17T07:37:44.125772Z",
   "retentionDays": 30,
+  "updated": "2026-11-17T07:56:48.893449Z",
   "items": [
     {
-      "id": "fbedab14b0869400399b",
-      "title": "Готовимся к Хайфскому марафону: блокпосты и изменения в правилах дорожного движения и парковки",
-      "titleOriginal": "נערכים למרתון חיפה: חסימות כבישים ושינויים בהסדרי התנועה והחנייה",
-      "summary": "Обновление о дорожной обстановке или ограничениях движения.",
-      "date": "2026-11-17T05:15:56Z",
-      "category": "roads",
-      "publisher": "רדיו חיפה",
-      "url": "https://news.google.com/rss/articles/CBMiRkFVX3lxTE1SNVlXMURMX2t5UXdXQzhUNXluS0tqNF9xMWJWRktCdzdPNktUUEVxeGkwQ1RtRTl6Q01pR0NwQ2VncjBxQVE?oc=5",
-      "translated": true,
+      "id": "499e555b517e65b92088",
+      "titleOriginal": "Epstein autopsy findings point to possible murder, forensic expert says",
+      "sourceLanguage": "en",
+      "date": "2026-11-17T01:57:33Z",
+      "url": "https://www.jpost.com/international/article-915108",
+      "publisher": "The Jerusalem Post",
+      "category": "cars",
+      "art": "cars",
+      "image": "./assets/news/images/499e555b517e65b92088.svg",
       "official": false,
-      "art": "roads"
+      "translations": {
+        "he": {
+          "title": "ממצאי נתיחה של אפשטיין מצביעים על רצח אפשרי, אומר מומחה לזיהוי פלילי",
+          "summary": "כתבה על מכוניות או שוק הרכב בישראל. פרטים באתר המקור."
+        },
+        "ru": {
+          "title": "Результаты вскрытия Эпштейна указывают на возможное убийство, говорит судмедэксперт",
+          "summary": "Материал об автомобиле или автомобильном рынке Израиля. Подробности — на сайте издания."
+        },
+        "en": {
+          "title": "Epstein autopsy findings point to possible murder, forensic expert says",
+          "summary": "An update about vehicles or Israel's car market. Details are available at the source."
+        },
+        "ar": {
+          "title": "يقول خبير الطب الشرعي إن نتائج تشريح جثة إبستين تشير إلى احتمال القتل",
+          "summary": "تحديث عن السيارات أو سوق المركبات في إسرائيل. التفاصيل في المصدر."
+        }
+      },
+      "title": "Результаты вскрытия Эпштейна указывают на возможное убийство, говорит судмедэксперт",
+      "summary": "Материал об автомобиле или автомобильном рынке Израиля. Подробности — на сайте издания.",
+      "translated": true
     },
     {
-      "id": "ac796522e5028c074433",
-      "title": "«Это правда, что вопросы безопасности важны, но в конечном итоге мы все стоим в пробках по дороге на работу»",
-      "titleOriginal": "\"נכון שהבעיות הביטחוניות חשובות, אבל בסוף כולנו עומדים בפקק בדרך לעבודה\"",
-      "summary": "Обновление о дорожной обстановке или ограничениях движения.",
-      "date": "2026-11-16T22:00:00Z",
-      "category": "roads",
-      "publisher": "YNET",
-      "url": "https://news.google.com/rss/articles/CBMiYkFVX3lxTE41Z2Y4bDd5eHNCYkpSa01SNkVobkxpenlGVVEzV1lrSmZvbGpjVF9YR2o4anJzYUxSYlhGcEJvREpvNndhVGt1R3BFUkZGeUpnYkw4QjNxN2d1cFlONXJEN0l3?oc=5",
-      "translated": true,
-      "official": false,
-      "art": "roads"
-    },
-    {
-      "id": "ed0b04a341d0d73588c9",
-      "title": "Верховный суд одобрил компромиссное решение: около 4,5 млн шекелей для пострадавшего в автокатастрофе на работе",
+      "id": "a5e57a1427aa280107ac",
       "titleOriginal": "העליון אישר פשרה: כ-4.5 מיליון שקל לנפגע תאונת דרכים בעבודה",
-      "summary": "Сообщение о дорожном происшествии в Израиле.",
-      "date": "2026-11-16T20:55:21Z",
+      "sourceLanguage": "he",
+      "date": "2026-11-16T20:52:35Z",
+      "url": "https://www.walla.co.il/news/israel/383961713",
+      "publisher": "Walla · Новости Израиля",
       "category": "accidents",
-      "publisher": "וואלה",
-      "url": "https://news.google.com/rss/articles/CBMiWEFVX3lxTE5EckhCdzBtRU8zanpfQ2NJazhnTERZbjhPWnM4b0hUWkQzRUpXSi1mUS1XMGFxeENxRnNjYVgtMU1zbm5qMHgwT1NoU1NBSjNtOGREYUhIUVk?oc=5",
-      "translated": true,
+      "art": "accidents",
+      "image": "./assets/news/images/a5e57a1427aa280107ac.svg",
       "official": false,
-      "art": "accidents"
+      "translations": {
+        "he": {
+          "title": "העליון אישר פשרה: כ-4.5 מיליון שקל לנפגע תאונת דרכים בעבודה",
+          "summary": "דיווח על תאונת דרכים בישראל. פרטים ועדכונים בכתבת המקור."
+        },
+        "ru": {
+          "title": "Верховный суд одобрил компромиссное решение: около 4,5 млн шекелей для пострадавшего в автокатастрофе на работе",
+          "summary": "Дорожное происшествие в Израиле. Обстоятельства и актуальные сведения — в материале источника."
+        },
+        "en": {
+          "title": "The supreme court approved a compromise: about NIS 4.5 million for the victim of a car accident at work",
+          "summary": "A reported road incident in Israel. Details and updates are in the original report."
+        },
+        "ar": {
+          "title": "وافقت المحكمة العليا على تسوية: حوالي 4.5 مليون شيكل لضحية حادث سيارة في العمل",
+          "summary": "تقرير عن حادث مروري في إسرائيل. التفاصيل والتحديثات في المصدر."
+        }
+      },
+      "title": "Верховный суд одобрил компромиссное решение: около 4,5 млн шекелей для пострадавшего в автокатастрофе на работе",
+      "summary": "Дорожное происшествие в Израиле. Обстоятельства и актуальные сведения — в материале источника.",
+      "translated": true
     },
     {
-      "id": "0d31724752387c88e4d0",
-      "title": "ДТП на трассе 531: две женщины в состоянии средней и легкой степени в результате ДТП",
-      "titleOriginal": "תאונה בכביש 531: שתי נשים במצב בינוני וקל כתוצאה מתאונה",
-      "summary": "Сообщение о дорожном происшествии в Израиле.",
-      "date": "2026-11-16T17:48:48Z",
+      "id": "0ac1b66b291cd8862f9e",
+      "titleOriginal": "אירוע חריג באזור השרון: חשוד איים בסכין - ונהרג מירי של שוטר",
+      "sourceLanguage": "he",
+      "date": "2026-11-15T21:24:37Z",
+      "url": "https://www.walla.co.il/news/israel/383961563",
+      "publisher": "Walla · Новости Израиля",
       "category": "accidents",
-      "publisher": "ניוזים",
-      "url": "https://news.google.com/rss/articles/CBMiTEFVX3lxTE5FYVpudmt0NnpKcGs4VTgwdnY1UjVPWlo0R0tPVlVMMnVpY3hYT0Itc0x3V0VqNVc0RmhwR1VoSG9VNkhaYkNySENuNlk?oc=5",
-      "translated": true,
+      "art": "accidents",
+      "image": "./assets/news/images/0ac1b66b291cd8862f9e.svg",
       "official": false,
-      "art": "accidents"
+      "translations": {
+        "he": {
+          "title": "אירוע חריג באזור השרון: חשוד איים בסכין - ונהרג מירי של שוטר",
+          "summary": "דיווח על תאונת דרכים בישראל. פרטים ועדכונים בכתבת המקור."
+        },
+        "ru": {
+          "title": "Необычный инцидент в регионе Шарон: подозреваемый угрожал ножом и был убит выстрелом полицейского",
+          "summary": "Дорожное происшествие в Израиле. Обстоятельства и актуальные сведения — в материале источника."
+        },
+        "en": {
+          "title": "An unusual incident in the Sharon region: a suspect threatened with a knife - and was killed by a policeman's gunfire",
+          "summary": "A reported road incident in Israel. Details and updates are in the original report."
+        },
+        "ar": {
+          "title": "حادثة غير عادية في منطقة شارون: مشتبه به هدد بسكين - وقُتل برصاص شرطي",
+          "summary": "تقرير عن حادث مروري في إسرائيل. التفاصيل والتحديثات في المصدر."
+        }
+      },
+      "title": "Необычный инцидент в регионе Шарон: подозреваемый угрожал ножом и был убит выстрелом полицейского",
+      "summary": "Дорожное происшествие в Израиле. Обстоятельства и актуальные сведения — в материале источника.",
+      "translated": true
     },
     {
-      "id": "da070400f9703c527e6e",
-      "title": "Не останавливаясь на обочине: скрытая технология, сканирующая автомобили на 6-м шоссе",
-      "titleOriginal": "בלי לעצור בצד: הטכנולוגיה הסמויה שסורקת רכבים בכביש 6",
-      "summary": "Обновление о дорожной обстановке или ограничениях движения.",
-      "date": "2026-11-16T17:15:34Z",
-      "category": "roads",
-      "publisher": "כיפה",
-      "url": "https://news.google.com/rss/articles/CBMiekFVX3lxTE94QloxVlQxYVlCdTlBQkYwbmdSRTRZY0w0UG5rZjJHcUR3SVR0ZkhWR3BpZjd5QWdQejVvYnpDbDNWNkpUYmthUVBPZTNRaVhwUlZvUmlMUU9uZUp3Rm4ySUlpeG1xeDNoYjdKejF5T0VMaU5DZXNjNEFn0gF6QVVfeXFMT3hCWjFWVDFhWUJ1OUFCRjBuZ1JFNFljTDRQbmtmMkdxRHdJVHRmSFZHcGlmN3lBZ1B6NW9iekNsM1Y2SlRia2FRUE9lM1FpWHBSVm9SaUxRT25lSndGbjJJSWl4bXF4M2hiN0p6MXlPRUxpTkNlc2M0QWc?oc=5",
-      "translated": true,
-      "official": false,
-      "art": "roads"
-    },
-    {
-      "id": "9c084f5d707c9a534898",
-      "title": "Новинка на 6-м маршруте: автоматическая система взвешивания, которая определит отклонения веса большегрузного автомобиля",
-      "titleOriginal": "חדש בכביש 6: מערכת שקילה אוטומטית שתזהה חריגות משקל של רכב כבד",
-      "summary": "Обновление о дорожной обстановке или ограничениях движения.",
-      "date": "2026-11-16T09:15:00Z",
-      "category": "roads",
-      "publisher": "Calcalist",
-      "url": "https://news.google.com/rss/articles/CBMibkFVX3lxTE5kbzhVMHdkZXAzTXVyd2RqanBGMXE4N0xFOXRnNzF3RDFFUnFJbWZIZURFVmhGTXhEcG85TUtzSEtzWDBfMlgwdU5xaFN1N0RiTnFJX25PZy05VGJndGg1VmpXN2dmZDFQcUE1M0Rn?oc=5",
-      "translated": true,
-      "official": false,
-      "art": "roads"
-    },
-    {
-      "id": "cee733729c5f76ef6fc0",
-      "title": "Два ДТП со смертельным исходом с участием полицейских машин: новые правила вождения",
-      "titleOriginal": "שתי תאונות קטלניות עם ניידות משטרה: הנחיות נהיגה חדשות",
-      "summary": "Сообщение о дорожном происшествии в Израиле.",
-      "date": "2026-11-15T21:04:58Z",
-      "category": "accidents",
-      "publisher": "אמס",
-      "url": "https://news.google.com/rss/articles/CBMiTkFVX3lxTE9jMXFmSUgxMTQtdWZ1TlJoWXl5OFhrcmlrcmpHWDk4RUtnYVB6S050RzUyTHFMWEk0dmtWa1hGX0dRY3pyMzc2ZlBOWE1nUQ?oc=5",
-      "translated": true,
-      "official": false,
-      "art": "accidents"
-    },
-    {
-      "id": "2b1cdc085157bf560545",
-      "title": "Китайский автомобильный гигант BAIC Baik приезжает в Израиль",
-      "titleOriginal": "ענקית הרכב הסינית BAIC באיק - מגיעה לישראל",
-      "summary": "Новости авторынка Израиля и автомобильных технологий.",
-      "date": "2026-11-15T16:16:58Z",
+      "id": "e175c45d0b39277c23d2",
+      "titleOriginal": "אילו מכוניות יקבלו הח\"כים החדשים?",
+      "sourceLanguage": "he",
+      "date": "2026-11-15T07:12:00Z",
+      "url": "https://cars.walla.co.il/item/3876227",
+      "publisher": "Walla · Авто",
       "category": "cars",
-      "publisher": "אתר השטח הישראלי 4X4",
-      "url": "https://news.google.com/rss/articles/CBMiS0FVX3lxTFBxOUtETERLZzNva3kwc182NkJISng3ZXg3TFZNbUJuT0FCZ3lqT0p5ZGZlTGQzMndvN0VLcGNwbGN5ZHdqZXB5TWZsRQ?oc=5",
-      "translated": true,
+      "art": "cars",
+      "image": "./assets/news/images/e175c45d0b39277c23d2.svg",
       "official": false,
-      "art": "cars"
+      "translations": {
+        "he": {
+          "title": "אילו מכוניות יקבלו הח\"כים החדשים?",
+          "summary": "כתבה על מכוניות או שוק הרכב בישראל. פרטים באתר המקור."
+        },
+        "ru": {
+          "title": "Какие автомобили получат новые МК?",
+          "summary": "Материал об автомобиле или автомобильном рынке Израиля. Подробности — на сайте издания."
+        },
+        "en": {
+          "title": "What cars will the new MKs get?",
+          "summary": "An update about vehicles or Israel's car market. Details are available at the source."
+        },
+        "ar": {
+          "title": "ما هي السيارات التي سيحصل عليها أعضاء الكنيست الجدد؟",
+          "summary": "تحديث عن السيارات أو سوق المركبات في إسرائيل. التفاصيل في المصدر."
+        }
+      },
+      "title": "Какие автомобили получат новые МК?",
+      "summary": "Материал об автомобиле или автомобильном рынке Израиля. Подробности — на сайте издания.",
+      "translated": true
     },
     {
-      "id": "9517856422cd23bcaa5e",
-      "title": "Автомобильные новости - Китайская тенденция наступила: Bike представляет мощный автомобиль для отдыха",
-      "titleOriginal": "חדשות רכב - הטרנד הסיני הגיע: באיק משיקה רכב פנאי במראה קשוח",
-      "summary": "Новости авторынка Израиля и автомобильных технологий.",
-      "date": "2026-11-15T13:03:39Z",
+      "id": "6446669c572f066940d3",
+      "titleOriginal": "אילו מכוניות יקבלו הח\"כים החדשים?",
+      "sourceLanguage": "he",
+      "date": "2026-11-15T07:12:00Z",
+      "url": "https://cars.walla.co.il/item/3876227",
+      "publisher": "Walla · Все автомобили",
       "category": "cars",
-      "publisher": "אתר הרכב של ישראל",
-      "url": "https://news.google.com/rss/articles/CBMiUEFVX3lxTFBaZHpYSDFDcm1zWWdDek5hTXA3V05YdlhJX3kzY1k1Y1d3RVNBUG5pZlJSRXg0QWJRbkRkLVhqYmtxSHJ6cXZXcG1XZU8yT0dY?oc=5",
-      "translated": true,
+      "art": "cars",
+      "image": "./assets/news/images/6446669c572f066940d3.svg",
       "official": false,
-      "art": "cars"
+      "translations": {
+        "he": {
+          "title": "אילו מכוניות יקבלו הח\"כים החדשים?",
+          "summary": "כתבה על מכוניות או שוק הרכב בישראל. פרטים באתר המקור."
+        },
+        "ru": {
+          "title": "Какие автомобили получат новые МК?",
+          "summary": "Материал об автомобиле или автомобильном рынке Израиля. Подробности — на сайте издания."
+        },
+        "en": {
+          "title": "What cars will the new MKs get?",
+          "summary": "An update about vehicles or Israel's car market. Details are available at the source."
+        },
+        "ar": {
+          "title": "ما هي السيارات التي سيحصل عليها أعضاء الكنيست الجدد؟",
+          "summary": "تحديث عن السيارات أو سوق المركبات في إسرائيل. التفاصيل في المصدر."
+        }
+      },
+      "title": "Какие автомобили получат новые МК?",
+      "summary": "Материал об автомобиле или автомобильном рынке Израиля. Подробности — на сайте издания.",
+      "translated": true
     },
     {
-      "id": "afb3d4d13c7bdcde4e70",
-      "title": "«Кровавая дорога» Израиля: опасность, которая не заканчивается даже спустя годы",
-      "titleOriginal": "\"כביש הדמים\" של ישראל: הסכנה שלא נגמרת גם אחרי שנים",
-      "summary": "Обновление о дорожной обстановке или ограничениях движения.",
-      "date": "2026-11-15T08:07:46Z",
+      "id": "67a908c6299e852cdec2",
+      "titleOriginal": "iCAUR V27: מפגש ראשון עם הכביש שטח החדש שמגיע לארץ",
+      "sourceLanguage": "he",
+      "date": "2026-11-11T15:27:00Z",
+      "url": "https://cars.walla.co.il/item/3875861",
+      "publisher": "Walla · Все автомобили",
       "category": "roads",
-      "publisher": "מעריב",
-      "url": "https://news.google.com/rss/articles/CBMiZEFVX3lxTE9yaVdYUFJRRFpzM3RVMHVQeHkwUmV4QmJUQmJkLXBqZWt3WFlkbFJkVFpBRlY5WU5ocG9ERV9RSkJpTjBDVFIyUTg5cXkwdE1RQVBMLTNWMjVZNGVFbnpsd2I2dWY?oc=5",
-      "translated": true,
+      "art": "roads",
+      "image": "./assets/news/images/67a908c6299e852cdec2.svg",
       "official": false,
-      "art": "roads"
+      "translations": {
+        "he": {
+          "title": "iCAUR V27: מפגש ראשון עם הכביש שטח החדש שמגיע לארץ",
+          "summary": "עדכון על מצב התנועה. לפני הנסיעה בדקו אם ההגבלות עדיין בתוקף."
+        },
+        "ru": {
+          "title": "iCAUR V27: Первая встреча с новой внедорожной дорогой, которая скоро появится в Израиле",
+          "summary": "Информация о дорожной ситуации. Перед поездкой проверьте, действуют ли ограничения сейчас."
+        },
+        "en": {
+          "title": "iCAUR V27: First meeting with the new off-road road that is coming to Israel",
+          "summary": "A road-conditions update. Check whether restrictions still apply before travelling."
+        },
+        "ar": {
+          "title": "iCAUR V27: الاجتماع الأول مع الطريق الوعرة الجديد القادم إلى إسرائيل",
+          "summary": "تحديث عن حالة الطرق. تحقق من استمرار القيود قبل السفر."
+        }
+      },
+      "title": "iCAUR V27: Первая встреча с новой внедорожной дорогой, которая скоро появится в Израиле",
+      "summary": "Информация о дорожной ситуации. Перед поездкой проверьте, действуют ли ограничения сейчас.",
+      "translated": true
     },
     {
-      "id": "59eb301bd9e7523ee369",
-      "title": "Молодой человек столкнулся с столбом на территории Галилеи – и погиб",
-      "titleOriginal": "צעיר התנגש בעמוד בנוף הגליל - ונהרג",
-      "summary": "Сообщение о дорожном происшествии в Израиле.",
-      "date": "2026-11-14T23:34:00Z",
-      "category": "accidents",
-      "publisher": "היום",
-      "url": "https://news.google.com/rss/articles/CBMiaEFVX3lxTE9td2E5NXRYZEtKc3RtNkRRR3QxVTRNeTcwRFo4OGhBRzAzY1pDbUhpa3hmb09rNlZBMVR0MjFfUFQzY3pEaTJLdUtfTkc3OUlWSHo3dzMzdGlOeUtzN2Q4WG5xQ3ZyYzhE?oc=5",
-      "translated": true,
-      "official": false,
-      "art": "accidents"
-    },
-    {
-      "id": "93bcaa6d7aea88c3d5b4",
-      "title": "Пересек красный свет и столкнулся: директора школы сбил полицейский джип",
-      "titleOriginal": "חצה באדום והתנגש: מנהלת בית ספר נהרגה מפגיעת ג'יפ משטרתי",
-      "summary": "Сообщение о дорожном происшествии в Израиле.",
-      "date": "2026-11-14T22:48:00Z",
-      "category": "accidents",
-      "publisher": "ערוץ 7",
-      "url": "https://news.google.com/rss/articles/CBMiSEFVX3lxTFAxRURBV2ZON1hWYjZ1UVBmcXcxTHo3S3FMZWFhZndCbTVYeE9Iajk5Y1VhMktmMTg0LS1pVUZNeXpxeTFmX01uNg?oc=5",
-      "translated": true,
-      "official": false,
-      "art": "accidents"
-    },
-    {
-      "id": "abc09ea12c1d41840fb6",
-      "title": "Документация: бронированный полицейский джип проехал на красном цвете — и столкнулся с автомобилем погибшего директора школы",
-      "titleOriginal": "תיעוד: ג'יפ משטרתי ממוגן נסע באדום - והתנגש ברכב מנהלת בית ספר שנהרגה",
-      "summary": "Сообщение о дорожном происшествии в Израиле.",
-      "date": "2026-11-14T16:29:34Z",
-      "category": "accidents",
-      "publisher": "YNET",
-      "url": "https://news.google.com/rss/articles/CBMiWkFVX3lxTE5PVDVBR09JZ0lOSzBnRkstUFZRam5rd0oxci1HOWRVZjdnTVR0U2hsSWpqQmc5UFJHNFpGcHZZM3RhdzRfWXh4STBhZ3IxdG1oaXJoVUV3d25vZw?oc=5",
-      "translated": true,
-      "official": false,
-      "art": "accidents"
-    },
-    {
-      "id": "81d26c6c220c4a9fd1e6",
-      "title": "Смертельная авария на перекрестке Акко: погибла женщина и пострадала ее дочь - замешана полицейская машина",
-      "titleOriginal": "תאונה קטלנית בצומת עכו: אישה נהרגה ובתה נפצעה - רכב מג\"ב מעורב",
-      "summary": "Сообщение о дорожном происшествии в Израиле.",
-      "date": "2026-11-14T15:30:18Z",
-      "category": "accidents",
-      "publisher": "היום",
-      "url": "https://news.google.com/rss/articles/CBMiaEFVX3lxTFA0VkU2d0E0UHBMMXlQTWRobG5PZV9xTUFuNFp1b2RKWFg3NVFpUExTZDVudUlMWGllRmYyNGpGWS1WY1BXZkk2bmJaUUwwZHhzNDhRNzlGNFcxMVpjR2NodzBfZDlZQUdl?oc=5",
-      "translated": true,
-      "official": false,
-      "art": "accidents"
-    },
-    {
-      "id": "7080668cb7b0a77bd03f",
-      "title": "Серьезная автокатастрофа в Далит-эль-Кармеле: двое пострадавших от мотоцикла доставлены в больницу - Чай Пе",
-      "titleOriginal": "תאונת דרכים קשה בדאלית אל כרמל: שני פצועים מאופנוע פונו לבית חולים - חי פה",
-      "summary": "Сообщение о дорожном происшествии в Израиле.",
-      "date": "2026-11-14T10:27:49Z",
-      "category": "accidents",
-      "publisher": "חי פה - חדשות חיפה",
-      "url": "https://news.google.com/rss/articles/CBMiRkFVX3lxTFBTUFhKNGNPUHo4dm81YklVTndmYWFUdTN5QmJsemc1cXZWSE1wM0dNbW05aFlQemZpdm9DdUJWeHF4TXFUVlE?oc=5",
-      "translated": true,
-      "official": false,
-      "art": "accidents"
-    },
-    {
-      "id": "25ecbcc6bfcf3073d15c",
-      "title": "Красный Назарет и калибровка в Германии: автомобиль угрожает таблице продаж в Израиле",
-      "titleOriginal": "הנצרה האדומה והכיול בגרמניה: הרכב שמאיים על טבלת המכירות בישראל",
-      "summary": "Новости авторынка Израиля и автомобильных технологий.",
-      "date": "2026-11-14T04:00:43Z",
+      "id": "1f31bd6417b9a5aedbad",
+      "titleOriginal": "יש לכם רשיון B? תוכלו לנהוג בחשמליות, כולל מסחריות, במשקל של עד 4.25 טון",
+      "sourceLanguage": "he",
+      "date": "2026-11-09T20:59:00Z",
+      "url": "https://cars.walla.co.il/item/3875628",
+      "publisher": "Walla · Авто",
       "category": "cars",
-      "publisher": "מעריב",
-      "url": "https://news.google.com/rss/articles/CBMiYkFVX3lxTFBMTUhNX1lrUkNxZHVkX0F3ZGMxZGt1b3dBTE1CLU5mODg1Rl9FTWs4SE85ZUtxMGFNS2RLX3dKTUlFT1ljTmduMkt6dzdfTkFKVDV4R21RNHl5ZjdxTEJCaTV3?oc=5",
-      "translated": true,
+      "art": "cars",
+      "image": "./assets/news/images/1f31bd6417b9a5aedbad.svg",
       "official": false,
-      "art": "cars"
+      "translations": {
+        "he": {
+          "title": "יש לכם רשיון B? תוכלו לנהוג בחשמליות, כולל מסחריות, במשקל של עד 4.25 טון",
+          "summary": "כתבה על מכוניות או שוק הרכב בישראל. פרטים באתר המקור."
+        },
+        "ru": {
+          "title": "У вас есть лицензия B? Можно управлять трамваями, в том числе коммерческими, массой до 4,25 тонн.",
+          "summary": "Материал об автомобиле или автомобильном рынке Израиля. Подробности — на сайте издания."
+        },
+        "en": {
+          "title": "Do you have a B license? You can drive trams, including commercial ones, weighing up to 4.25 tons",
+          "summary": "An update about vehicles or Israel's car market. Details are available at the source."
+        },
+        "ar": {
+          "title": "هل لديك رخصة B؟ يمكنك قيادة الترام، بما في ذلك التجاري، الذي يصل وزنه إلى 4.25 طن",
+          "summary": "تحديث عن السيارات أو سوق المركبات في إسرائيل. التفاصيل في المصدر."
+        }
+      },
+      "title": "У вас есть лицензия B? Можно управлять трамваями, в том числе коммерческими, массой до 4,25 тонн.",
+      "summary": "Материал об автомобиле или автомобильном рынке Израиля. Подробности — на сайте издания.",
+      "translated": true
     },
     {
-      "id": "2126682482994d6ca0cb",
-      "title": "Важная новость для водителей: блокпосты на подъездах к порту в субботу вечером",
-      "titleOriginal": "עדכון חשוב לנהגים: חסימות כבישים בדרכי הגישה לנמל במוצאי שבת",
-      "summary": "Обновление о дорожной обстановке или ограничениях движения.",
-      "date": "2026-11-13T11:26:40Z",
-      "category": "roads",
-      "publisher": "אשדוד אונליין",
-      "url": "https://news.google.com/rss/articles/CBMi0gJBVV95cUxNQkFFSjFGNklmeWU0Rk96dExDYlVBMVpwU3BEOUpsUHNoa2tCUHQ4bWdXdWVlWXpxME1jOHQ5aFlMNUhBVGJMT2s1U2h4bElSeWRaaUwzZ3JQMnBPNVJ6eVMzRVdFd3pFaFBLRnNNbzlQZXFEb0ZDRlVJYTJaTUdjdEU0Wm02VjR1Um8ydy1mNU14MWJIOUdiMzdDaHU4UEdYN0RjWWdJYmNURU9QWG9GUnZYeGVsZ1AwWmhOV3A5WlNfMEhUcEFDYVlXd0VfLXhIckQ0ODRPbVhhckx1MWxHWUR2c0hSZDNnUDRQN1dyNFBxOWxkdHV0aXdlS0w5Ul9qMDNJVzVBRGdRT2w2OU4xREdDNXJ2VXJOZ1dtUVh0QlhEc0tzdV9oUmNWV1h5ZDczSVktYVJ6N1NKUnJWQTFBMkpJcFR2V2dtRmF1b3J4N3I4UQ?oc=5",
-      "translated": true,
-      "official": false,
-      "art": "roads"
-    },
-    {
-      "id": "636a28b7ddc25ff0ca2e",
-      "title": "Засоры на подъездных дорогах к порту Ашдод в субботу вечером",
-      "titleOriginal": "חסימות בכבישי הגישה לנמל אשדוד במוצאי שבת",
-      "summary": "Обновление о дорожной обстановке или ограничениях движения.",
-      "date": "2026-11-13T09:48:32Z",
-      "category": "roads",
-      "publisher": "חרדים אשדוד",
-      "url": "https://news.google.com/rss/articles/CBMi0AJBVV95cUxQSTBWN09TNGNtOTJNRzRSOWpwVWJOTl91SG8wX05jV1RlNVpZVmZ6MjgtWHdQWU01VW4xNnV1eHdOWDd5dk1hQmtaTWgyUWxnU1J5ME5FZ090dXZ5NTF3Zjl1Tzd0UkJCangzNjBHa0habzlTSk1YdDRvM2s5by1ONTFYYmRkaFhfcTRTMWJXYXFfX0EzR0t4OGpiUjduVG5VZFFGaWJuMDI1LWFCU3k2MW1QTXJINm1ETHpDRGtoMVpKLUhEdWFqbHFMbDg4NDl3dGsxeFRNNGdLRTB4UFd5MGVpYkF4dWtLTjJfbGNUdFV6bndhTzA4QkstbXNhdGlaQUZicE5DSzlkV0NGWVBlLW5BZ2dHYlZ4RTNKRmw0LWMxSHFKdGN4Z3kxYnVfbUVwZDJpMjVvWjJ6U2FoOC10bTB4ZExQZDNyd244OE1yU0w?oc=5",
-      "translated": true,
-      "official": false,
-      "art": "roads"
-    },
-    {
-      "id": "2badbd8f9346cdbc40a8",
-      "title": "Автомобиль, который не пытается произвести впечатление, но за 183 000 шекелей выполняет свою задачу.",
-      "titleOriginal": "הרכב שלא מנסה להרשים אבל ב-183 אלף שקל ממלא את ייעודו",
-      "summary": "Новости авторынка Израиля и автомобильных технологий.",
-      "date": "2026-11-13T07:44:46Z",
+      "id": "cccbbdf09e7c1c8362a2",
+      "titleOriginal": "יש לכם רשיון B? תוכלו לנהוג בחשמליות, כולל מסחריות, במשקל של עד 4.25 טון",
+      "sourceLanguage": "he",
+      "date": "2026-11-09T20:59:00Z",
+      "url": "https://cars.walla.co.il/item/3875628",
+      "publisher": "Walla · Все автомобили",
       "category": "cars",
-      "publisher": "גלובס",
-      "url": "https://news.google.com/rss/articles/CBMiaEFVX3lxTE1KUXhXNFRiZGt5OWl2X0F6NTNXUlF1VWl2SnhpNjExby14X0lzUTFlcXVJbEQ4YlVqWW1YN24xWGRBdk1HaXNSbXVBaGlwcFBMaXo4Zm1JbHFnTDBVaFNkTXJvWDBFaUJa?oc=5",
-      "translated": true,
+      "art": "cars",
+      "image": "./assets/news/images/cccbbdf09e7c1c8362a2.svg",
       "official": false,
-      "art": "cars"
+      "translations": {
+        "he": {
+          "title": "יש לכם רשיון B? תוכלו לנהוג בחשמליות, כולל מסחריות, במשקל של עד 4.25 טון",
+          "summary": "כתבה על מכוניות או שוק הרכב בישראל. פרטים באתר המקור."
+        },
+        "ru": {
+          "title": "У вас есть лицензия B? Можно управлять трамваями, в том числе коммерческими, массой до 4,25 тонн.",
+          "summary": "Материал об автомобиле или автомобильном рынке Израиля. Подробности — на сайте издания."
+        },
+        "en": {
+          "title": "Do you have a B license? You can drive trams, including commercial ones, weighing up to 4.25 tons",
+          "summary": "An update about vehicles or Israel's car market. Details are available at the source."
+        },
+        "ar": {
+          "title": "هل لديك رخصة B؟ يمكنك قيادة الترام، بما في ذلك التجاري، الذي يصل وزنه إلى 4.25 طن",
+          "summary": "تحديث عن السيارات أو سوق المركبات في إسرائيل. التفاصيل في المصدر."
+        }
+      },
+      "title": "У вас есть лицензия B? Можно управлять трамваями, в том числе коммерческими, массой до 4,25 тонн.",
+      "summary": "Материал об автомобиле или автомобильном рынке Израиля. Подробности — на сайте издания.",
+      "translated": true
     },
     {
-      "id": "9bd969dbf5755dffa613",
-      "title": "Ришон ле-Цион: годовалый ребенок заперся в машине, и его благополучно спас волонтер Ядид",
-      "titleOriginal": "ראשון לציון: תינוק כבן שנה ננעל ברכב וחולץ בשלום על ידי מתנדב ידידים",
-      "summary": "Новости авторынка Израиля и автомобильных технологий.",
-      "date": "2026-11-13T07:11:58Z",
+      "id": "04cd682b8d7781501ab2",
+      "titleOriginal": "משומשות: הביקוש לבנזין בירידה, החשמליות וההיברידיות מזנקות",
+      "sourceLanguage": "he",
+      "date": "2026-11-09T14:12:00Z",
+      "url": "https://cars.walla.co.il/item/3875565",
+      "publisher": "Walla · Авто",
       "category": "cars",
-      "publisher": "ניוזים",
-      "url": "https://news.google.com/rss/articles/CBMiTEFVX3lxTE1fOWNndDZCV2Q4ZEp0TWFkbzRFWFRQMl84ZkZRdm5EMTFkNHdFaURhZXpsa2Y5UjgzZFk3QWcwUmNFN1NrU0RqU0tUZms?oc=5",
-      "translated": true,
+      "art": "cars",
+      "image": "./assets/news/images/04cd682b8d7781501ab2.svg",
       "official": false,
-      "art": "cars"
+      "translations": {
+        "he": {
+          "title": "משומשות: הביקוש לבנזין בירידה, החשמליות וההיברידיות מזנקות",
+          "summary": "כתבה על מכוניות או שוק הרכב בישראל. פרטים באתר המקור."
+        },
+        "ru": {
+          "title": "Б/у: спрос на бензин падает, электромобили и гибриды растут",
+          "summary": "Материал об автомобиле или автомобильном рынке Израиля. Подробности — на сайте издания."
+        },
+        "en": {
+          "title": "Used: demand for gasoline is decreasing, electric cars and hybrids are soaring",
+          "summary": "An update about vehicles or Israel's car market. Details are available at the source."
+        },
+        "ar": {
+          "title": "المستخدمة: الطلب على البنزين آخذ في التناقص، والسيارات الكهربائية والهجينة في ارتفاع",
+          "summary": "تحديث عن السيارات أو سوق المركبات في إسرائيل. التفاصيل في المصدر."
+        }
+      },
+      "title": "Б/у: спрос на бензин падает, электромобили и гибриды растут",
+      "summary": "Материал об автомобиле или автомобильном рынке Израиля. Подробности — на сайте издания.",
+      "translated": true
     },
     {
-      "id": "1c6fbd28bf66fa2f2089",
-      "title": "Смертельная авария на 471-м шоссе: мотоциклист поскользнулся и погиб на месте",
-      "titleOriginal": "תאונה קטלנית בכביש 471: רוכב אופנוע החליק ונהרג במקום",
-      "summary": "Сообщение о дорожном происшествии в Израиле.",
-      "date": "2026-11-13T05:36:01Z",
-      "category": "accidents",
-      "publisher": "כיכר השבת",
-      "url": "https://news.google.com/rss/articles/CBMijwFBVV95cUxOY1FEdGlKZWdVY0JZcHRvcDNtRVNYdGY1bFRvZ1UzNjI4UXNJNkpaYWhJUGIyRGNKbnN4dkNaUHZrYnB1cmJ5SE5aclo2dEVsTEJ4NGZLUm84VjhRdlhVNldlU1hla1hpTHVyd3BNZV9NSGVZdXBOTXo3VkZFZklONFJnUS1TRGJvVUZIVF9XWQ?oc=5",
-      "translated": true,
-      "official": false,
-      "art": "accidents"
-    },
-    {
-      "id": "a5c40cdcc7c64781d0aa",
-      "title": "Побоище на дорогах: мотоциклист погиб сегодня в ДТП возле развязки Гат-Римон",
-      "titleOriginal": "הקטל בכבישים: רוכב אופנוע נהרג בתאונה סמוך למחלף גת רימון | היום",
-      "summary": "Сообщение о дорожном происшествии в Израиле.",
-      "date": "2026-11-13T01:49:18Z",
-      "category": "accidents",
-      "publisher": "היום",
-      "url": "https://news.google.com/rss/articles/CBMiaEFVX3lxTE5mMC1mUFcxb1JaME9EOHd3aTYzM2g2RnkwY0NKc1c4a0k5WHlvRWs2eFNfc0FZXzQweXA2TzBIQzZvWlNKRnNDZFRld09WZGVkb1hGWUhGcHl0aEhQZERUR2hSdm5NMVpB?oc=5",
-      "translated": true,
-      "official": false,
-      "art": "accidents"
-    },
-    {
-      "id": "2a72ed918281e4cf3f0f",
-      "title": "Побоище на дорогах: мотоциклист погиб в ДТП возле развязки Гат-Римон",
-      "titleOriginal": "הקטל בכבישים: רוכב אופנוע נהרג בתאונה סמוך למחלף גת רימון",
-      "summary": "Сообщение о дорожном происшествии в Израиле.",
-      "date": "2026-11-13T01:49:18Z",
-      "category": "accidents",
-      "publisher": "היום",
-      "url": "https://news.google.com/rss/articles/CBMiaEFVX3lxTE5mMC1mUFcxb1JaME9EOHd3aTYzM2g2RnkwY0NKc1c4a0k5WHlvRWs2eFNfc0FZXzQweXA2TzBIQzZvWlNKRnNDZFRld09WZGVkb1hGWUhGcHl0aEhQZERUR2hSdm5NMVpB?oc=5",
-      "translated": true,
-      "official": false,
-      "art": "accidents"
-    },
-    {
-      "id": "35bbae17f49258040416",
-      "title": "Ни Toyota, ни Kia: это самый продаваемый автомобиль в Израиле",
-      "titleOriginal": "לא טויוטה ולא קיה: זה הרכב הנמכר ביותר בישראל",
-      "summary": "Новости авторынка Израиля и автомобильных технологий.",
-      "date": "2026-11-12T20:24:40Z",
+      "id": "2356d54478a8b9b3344c",
+      "titleOriginal": "למה באמת ירדו מחירי ביטוח הרכב בישראל, ומה הקשר להודו",
+      "sourceLanguage": "he",
+      "date": "2026-11-06T15:03:00Z",
+      "url": "https://cars.walla.co.il/item/3875222",
+      "publisher": "Walla · Авто",
       "category": "cars",
-      "publisher": "ice (אייס)",
-      "url": "https://news.google.com/rss/articles/CBMiW0FVX3lxTE1RbThsSzZMekFWaG1rM1VyaUEzSXhIT3ZYOTB5U2xpaHltbzZRelJ3dVQ0MkpPSUlwLUZfQkljZ0RPU3RVcnl0enM4dU1aQXpyUzc4MlVGeG9ZZDA?oc=5",
-      "translated": true,
+      "art": "cars",
+      "image": "./assets/news/images/2356d54478a8b9b3344c.svg",
       "official": false,
-      "art": "cars"
+      "translations": {
+        "he": {
+          "title": "למה באמת ירדו מחירי ביטוח הרכב בישראל, ומה הקשר להודו",
+          "summary": "כתבה על מכוניות או שוק הרכב בישראל. פרטים באתר המקור."
+        },
+        "ru": {
+          "title": "Почему в Израиле действительно снизились цены на автострахование и какое это имеет отношение к Индии?",
+          "summary": "Материал об автомобиле или автомобильном рынке Израиля. Подробности — на сайте издания."
+        },
+        "en": {
+          "title": "Why did car insurance prices really go down in Israel, and what does it have to do with India?",
+          "summary": "An update about vehicles or Israel's car market. Details are available at the source."
+        },
+        "ar": {
+          "title": "لماذا انخفضت أسعار التأمين على السيارات في إسرائيل فعلا، وما علاقتها بالهند؟",
+          "summary": "تحديث عن السيارات أو سوق المركبات في إسرائيل. التفاصيل في المصدر."
+        }
+      },
+      "title": "Почему в Израиле действительно снизились цены на автострахование и какое это имеет отношение к Индии?",
+      "summary": "Материал об автомобиле или автомобильном рынке Израиля. Подробности — на сайте издания.",
+      "translated": true
     },
     {
-      "id": "2bf647f57799bd36663c",
-      "title": "Конец дешевых китайских автомобилей? Импортеры уже предупреждают",
-      "titleOriginal": "הסוף למכוניות הסיניות הזולות? היבואנים כבר מתריעים",
-      "summary": "Новости авторынка Израиля и автомобильных технологий.",
-      "date": "2026-11-12T17:06:36Z",
+      "id": "f7e655cf7526bdc49dc4",
+      "titleOriginal": "למה באמת ירדו מחירי ביטוח הרכב בישראל, ומה הקשר להודו",
+      "sourceLanguage": "he",
+      "date": "2026-11-06T15:03:00Z",
+      "url": "https://cars.walla.co.il/item/3875222",
+      "publisher": "Walla · Все автомобили",
       "category": "cars",
-      "publisher": "גלובס",
-      "url": "https://news.google.com/rss/articles/CBMiaEFVX3lxTFBZTjlmU2lMVVkxNzNLMkhJaWNWMTdFbXBPdHVLT0c4NlVDeFJQanVyME5TRnFQb1pGdEoyMHdfMHB2UGh5LUpjRklndXlzUmJjX3pUamRzYjdQcy1ZSl85MFFBc0JhX1c5?oc=5",
-      "translated": true,
+      "art": "cars",
+      "image": "./assets/news/images/f7e655cf7526bdc49dc4.svg",
       "official": false,
-      "art": "cars"
+      "translations": {
+        "he": {
+          "title": "למה באמת ירדו מחירי ביטוח הרכב בישראל, ומה הקשר להודו",
+          "summary": "כתבה על מכוניות או שוק הרכב בישראל. פרטים באתר המקור."
+        },
+        "ru": {
+          "title": "Почему в Израиле действительно снизились цены на автострахование и какое это имеет отношение к Индии?",
+          "summary": "Материал об автомобиле или автомобильном рынке Израиля. Подробности — на сайте издания."
+        },
+        "en": {
+          "title": "Why did car insurance prices really go down in Israel, and what does it have to do with India?",
+          "summary": "An update about vehicles or Israel's car market. Details are available at the source."
+        },
+        "ar": {
+          "title": "لماذا انخفضت أسعار التأمين على السيارات في إسرائيل فعلا، وما علاقتها بالهند؟",
+          "summary": "تحديث عن السيارات أو سوق المركبات في إسرائيل. التفاصيل في المصدر."
+        }
+      },
+      "title": "Почему в Израиле действительно снизились цены на автострахование и какое это имеет отношение к Индии?",
+      "summary": "Материал об автомобиле или автомобильном рынке Израиля. Подробности — на сайте издания.",
+      "translated": true
     },
     {
-      "id": "cff865196233ee20d1a5",
-      "title": "Больше зон со скоростью 30 км/ч и полос замедления? Харлев'д предлагает изменить подход к скорости в городе",
-      "titleOriginal": "יותר אזורי 30 קמ״ש ופסי האטה? הרלב״ד מציעה שינוי בגישה למהירות בעיר",
-      "summary": "Информация о контроле скорости, дорожных камерах или штрафах.",
-      "date": "2026-11-12T08:32:24Z",
-      "category": "speed",
-      "publisher": "אוטו",
-      "url": "https://news.google.com/rss/articles/CBMie0FVX3lxTFAxUUlWV052cmVBTURoTGFzelpWeHlPTld2azlfMVhCUTUwRS1QSTFVX1JrTDlNLTRoZEVON0ZHZE1TZFN4Wk5iaUdYT2ZZei1mbEtVZkN0NVVwQ180YV9XVHp4OGUxc0V6MHFCUTZiMGVBa1ZUN09WeVhKVQ?oc=5",
-      "translated": true,
-      "official": false,
-      "art": "speed"
-    },
-    {
-      "id": "58efcca7e1bfcc4823a8",
-      "title": "Опасность на трех колесах: рикши оккупируют дороги Гуш-Дана – без принуждения",
-      "titleOriginal": "סכנה על שלושה גלגלים: הריקשות כובשות את כבישי גוש דן - ללא אכיפה",
-      "summary": "Обновление о дорожной обстановке или ограничениях движения.",
-      "date": "2026-11-11T20:48:48Z",
-      "category": "roads",
-      "publisher": "i24NEWS",
-      "url": "https://news.google.com/rss/articles/CBMie0FVX3lxTE5udmdmUTJGeklKYjFCNlhGUWg3OG1EbmJMVDdSQ3dUUUxTUVN4S1pwcm55Ukp5ekh4YUJWcUZKeGtlZXNWMDNxWFNjRzdrNFBMTEJ5Qm1MX2N5QkdoYjRtcFNpYzAtZHI4bWZ2aEkyaUNxTHhaNDdhMUxiRQ?oc=5",
-      "translated": true,
-      "official": false,
-      "art": "roads"
-    },
-    {
-      "id": "185a0ff7bc4fd49f5060",
-      "title": "Вопреки приказу раввинов: дорога Гаха была перекрыта после митинга в Бней-Браке |...",
-      "titleOriginal": "בניגוד להוראת הרבנים: כביש גהה נחסם לאחר העצרת בבני ברק |…",
-      "summary": "Обновление о дорожной обстановке или ограничениях движения.",
-      "date": "2026-11-11T20:14:18Z",
-      "category": "roads",
-      "publisher": "כיכר השבת",
-      "url": "https://news.google.com/rss/articles/CBMihAFBVV95cUxPT2NYTVZWRm5EUHdoM1ZOZ296ZDBiU0RxOFJDLURZUl9HMEVDXzhpTFZzRlUtVFpDaTdvbVFEc0RPbUx5cEYxNkdtMG5JN1l4M3JMWXNSUEJFdjl1clg3a0I1MlIwcGhUX0RaZUZHTEdQQnk3bklZS25sU3ExTzM2RTg3cnI?oc=5",
-      "translated": true,
-      "official": false,
-      "art": "roads"
-    },
-    {
-      "id": "b6b41e89e40332a67f03",
-      "title": "Смертельный вечер на дорогах: на 6-м шоссе погиб 28-летний мужчина; На 7-м шоссе погибла 80-летняя женщина.",
-      "titleOriginal": "ערב קטלני בכבישים: בן 28 נהרג בכביש 6; בת 80 נהרגה בכביש 7",
-      "summary": "Сообщение о дорожном происшествии в Израиле.",
-      "date": "2026-11-11T19:26:13Z",
-      "category": "accidents",
-      "publisher": "היום",
-      "url": "https://news.google.com/rss/articles/CBMiaEFVX3lxTE83LVUzRnlKdTg3dUxhZ0IzTjR3emxROGZEMWoyQzZvR1ZVVy1mR1FEamZVV1E0Vnh3bGwyRjRFc0tkSkJvYUFDOXB3cjJFaWkxRU9hNjlwQll3T215bXhVejBfYlpqai02?oc=5",
-      "translated": true,
-      "official": false,
-      "art": "accidents"
-    },
-    {
-      "id": "1acc8218baae7a0ae9fe",
-      "title": "Ультраортодоксы блокируют дороги в Иерусалиме и Бейт-Шемеше, полиция работает над их расчисткой Документация",
-      "titleOriginal": "חרדים קיצוניים חוסמים כבישים בירושלים ובבית שמש, המשטרה פועלת לפנות אותם | תיעוד",
-      "summary": "Обновление о дорожной обстановке или ограничениях движения.",
-      "date": "2026-11-11T19:00:00Z",
-      "category": "roads",
-      "publisher": "mako",
-      "url": "https://news.google.com/rss/articles/CBMigAFBVV95cUxOdUE2MEVVY0FvTXNOeERFTkNkM2l1TWFUUkpIWDc4MU9zYXNBV1ZsQWxnTE9oRFg3bkJUNUVBXzRlUGNQMUdiaGpNQTVEelBEOHRpUkY3aTlCV1doMVVDbFNnWGVHUlplNmRuTzFKZEJsYVlvUy1lRlhmMnFmMWkxUw?oc=5",
-      "translated": true,
-      "official": false,
-      "art": "roads"
-    },
-    {
-      "id": "85c65b76783dc88e95df",
-      "title": "Блокпосты в Иерусалиме и Бейт-Шемеше: беспорядки в двух местах, полиция готовится к эвакуации",
-      "titleOriginal": "חסימות כבישים בירושלים ובבית שמש: הפרות סדר בשני מוקדים, המשטרה נערכת לפינוי",
-      "summary": "Обновление о дорожной обстановке или ограничениях движения.",
-      "date": "2026-11-11T18:44:00Z",
-      "category": "roads",
-      "publisher": "PassportNews",
-      "url": "https://news.google.com/rss/articles/CBMiU0FVX3lxTE1yU3dKZm5mMkl4SW1ST1JzSmc5RVJLcU9YcHZCT3M2amJGUHowMm9BTlN6bG9ZOXo2bm4tR0g5NU9Qd3J6cFlSaTBVbVFVQ1E4Y2V3?oc=5",
-      "translated": true,
-      "official": false,
-      "art": "roads"
-    },
-    {
-      "id": "d4579eca1f82236b1406",
-      "title": "Харедим блокируют дороги в Бейт-Шемеше и Иерусалиме",
-      "titleOriginal": "חרדים חוסמים כבישים בבית שמש ובירושלים",
-      "summary": "Обновление о дорожной обстановке или ограничениях движения.",
-      "date": "2026-11-11T18:24:34Z",
-      "category": "roads",
-      "publisher": "סרוגים",
-      "url": "https://news.google.com/rss/articles/CBMi2gJBVV95cUxNUmR5bzR6Y0pFNDJsc3dFMGEtNjQ0VnRqcC1DbjBDNlcxRzBudUZ5RjQ0TGtnZW9VZGRab21CSkxVT0pqandzN3lSamFVSEtHZVJfandEYnB6eHVOQ2Q4OW1tUmRCRlZLTDRDRlRXVU5JTUJ5ME9SVzJrTjRFRDREd3VfVWIwak5POWdZZm1CX0ptY055SWVCa0pweGFsZzFWbDhaZnFGWGlrdnRldXhraW5NZXR2TXZiOUo3VXdLNWRWVXRIVlQzRjFEa1J2MlJmdFpSTzRWN2pWdk1wc2cwNUYtU3ctQU53NTJ2S2xBVnBIb1RyaTV3R2pYQVdoUFBLZmY1RWhONFM1TG5RdklSa1pGOXhHa3RmUkZXa1dWUU43X0F0bnRhcG0zbVVhakpxRURPOGlRaU1JWkVZNk90bXpSVk9lTlI1bVUxNmhKOWtKQW9FY0hxaGRn?oc=5",
-      "translated": true,
-      "official": false,
-      "art": "roads"
-    },
-    {
-      "id": "88387bdf3285dc2d9af6",
-      "title": "Второй отзыв за несколько недель: сотни автомобилей Ford сняты с дорог в Израиле",
-      "titleOriginal": "ריקול שני בתוך שבועות: מאות רכבי פורד יורדים מהכבישים בישראל",
-      "summary": "Обновление о дорожной обстановке или ограничениях движения.",
-      "date": "2026-11-11T14:14:13Z",
-      "category": "roads",
-      "publisher": "ice (אייס)",
-      "url": "https://news.google.com/rss/articles/CBMiW0FVX3lxTE1ZYkJibGpvaVl0aHpNVUFZaTNTcWJzbnJmdkd3ZTVRQnNOWFp3YVFFWkEwY252cDNpdGlhQzVCZTNoM2VZdnhvbzVpbVpSRlg5LUxSdUUzRnNnQzQ?oc=5",
-      "translated": true,
-      "official": false,
-      "art": "roads"
-    },
-    {
-      "id": "f7798f6cbd4c3bf1d2f2",
-      "title": "Тяжелая трагедия на севере: 4-летний мальчик погиб, когда во время семейной поездки перевернулся багги",
-      "titleOriginal": "טרגדיה קשה בצפון: ילד בן 4 נהרג בהתהפכות באגי בטיול המשפחתי",
-      "summary": "Сообщение о дорожном происшествии в Израиле.",
-      "date": "2026-11-11T12:16:09Z",
-      "category": "accidents",
-      "publisher": "כיכר השבת",
-      "url": "https://news.google.com/rss/articles/CBMiiAFBVV95cUxOc3ViSmdfWERrUW9sUmVxZzRCZEJnQS1fRFBVSnB2SlNEc1VRbG9XMmRYbTUxWW4wMXd0R1ZjZ3FuM0JKTXRKeDgzUk9qUVJKQlZxclJjUjMtdXo1ajA3TzBmcHpaenlnSjQwLWw5NjI0d2h4Tkk1RXZ3RTFlYjRGaC1xQlNsejF2?oc=5",
-      "translated": true,
-      "official": false,
-      "art": "accidents"
-    },
-    {
-      "id": "41ea80b5eb27634beb1c",
-      "title": "Опасные дороги Хайфы: четвёртое место в Израиле по серьёзным ДТП",
-      "titleOriginal": "הכבישים המסוכנים של חיפה: מקום רביעי בישראל בתאונות דרכים חמורות",
-      "summary": "Сообщение о дорожном происшествии в Израиле.",
-      "date": "2026-11-11T10:41:40Z",
-      "category": "accidents",
-      "publisher": "NWS חדשות חיפה והסביבה",
-      "url": "https://news.google.com/rss/articles/CBMiTEFVX3lxTFBVb3dkX1h0TlJKeHJvSzlYNWdfU2pEeURSUWhoQTRCVEdCY3hqdlJfejN6V1huZjRYUmRLQUpPQV9EZkgwM010OF9EaXY?oc=5",
-      "translated": true,
-      "official": false,
-      "art": "accidents"
-    },
-    {
-      "id": "de0146ef4d756cb8af06",
-      "title": "Трагедия на перекрестке Хабад: в смертельной аварии погиб 40-летний пешеход | водитель-нарушитель был расследован",
-      "titleOriginal": "טרגדיה בצומת חב\"ד: הולך רגל כבן 40 נהרג בתאונה קטלנית | הנהג הפוגע נחקר",
-      "summary": "Сообщение о дорожном происшествии в Израиле.",
-      "date": "2026-11-11T05:27:11Z",
-      "category": "accidents",
-      "publisher": "כיכר השבת",
-      "url": "https://news.google.com/rss/articles/CBMiVEFVX3lxTFBad1V4UmVpNWt1RGQxU3hYTXFyRVhKOE5VZ2pobFk2eWFLbjQ1NF82eGRyUWhDa2RfNmw3TjNGZHQ0Vkk2c3QxWlhJT0RwdWM3S01zRQ?oc=5",
-      "translated": true,
-      "official": false,
-      "art": "accidents"
-    },
-    {
-      "id": "74d97d6c074426c4e575",
-      "title": "Автомобильные новости – в любой комплектации и с любым типом привода: блиц моделей BMW в Израиле",
-      "titleOriginal": "חדשות רכב - בכל תצורה ועם כל סוג הנעה: בליץ הדגמים של ב.מ.וו בישראל",
-      "summary": "Новости авторынка Израиля и автомобильных технологий.",
-      "date": "2026-11-10T14:24:15Z",
+      "id": "41b2e19c1bdeec4e4dda",
+      "titleOriginal": "החסימות באיילון לנהגים ולרכבת בסוף השבוע: כל מה שצריך לדעת",
+      "sourceLanguage": "he",
+      "date": "2026-11-06T08:00:00Z",
+      "url": "https://cars.walla.co.il/item/3874839",
+      "publisher": "Walla · Авто",
       "category": "cars",
-      "publisher": "אתר הרכב של ישראל",
-      "url": "https://news.google.com/rss/articles/CBMiUEFVX3lxTE55N2RwOGYwZzZLZjVkTkNSa1dSTDU2bU54MTg4TXhCeUlBclZtbmVCZlBDWld1T2pnSDJudUFQX1lDTGI3QVdZX2l3NkIyaXJC?oc=5",
-      "translated": true,
+      "art": "cars",
+      "image": "./assets/news/images/41b2e19c1bdeec4e4dda.svg",
       "official": false,
-      "art": "cars"
+      "translations": {
+        "he": {
+          "title": "החסימות באיילון לנהגים ולרכבת בסוף השבוע: כל מה שצריך לדעת",
+          "summary": "כתבה על מכוניות או שוק הרכב בישראל. פרטים באתר המקור."
+        },
+        "en": {
+          "title": "The blockades in Ayalon for drivers and the train at the weekend: everything you need to know",
+          "summary": "An update about vehicles or Israel's car market. Details are available at the source."
+        },
+        "ar": {
+          "title": "الحصار في أيالون على السائقين والقطار في نهاية الأسبوع: كل ما تحتاج إلى معرفته",
+          "summary": "تحديث عن السيارات أو سوق المركبات في إسرائيل. التفاصيل في المصدر."
+        }
+      },
+      "title": "החסימות באיילון לנהגים ולרכבת בסוף השבוע: כל מה שצריך לדעת",
+      "summary": "Материал об автомобиле или автомобильном рынке Израиля. Подробности — на сайте издания.",
+      "translated": false
     },
     {
-      "id": "a3d22faeed2ac78f6a3a",
-      "title": "Поможет ли это предотвратить дорожно-транспортные происшествия? Первое в своем роде приложение WAZE для совместной работы",
-      "titleOriginal": "ימנע תאונות דרכים? אפליקציית WAZE בשיתוף פעולה ראשון מסוגו",
-      "summary": "Сообщение о дорожном происшествии в Израиле.",
-      "date": "2026-11-10T13:49:14Z",
-      "category": "accidents",
-      "publisher": "C14",
-      "url": "https://news.google.com/rss/articles/CBMiTkFVX3lxTFBfd0ZITTIzRDdPdlhUNlNUeFlDTy1IdnZsMGNSczBQMHlaMFBGSHk5anJaeHNOWnJWRUZXb0xkd1NvVDJ4b05QZVNKU3Bsdw?oc=5",
-      "translated": true,
-      "official": false,
-      "art": "accidents"
-    },
-    {
-      "id": "1801c5be1c156b55d19e",
-      "title": "Больше машин для пенсионеров, меньше экономии для государства: количество получателей госавтомобилей подскочило на 18%",
-      "titleOriginal": "יותר מכוניות לבכירים, פחות חיסכון למדינה: מספר מקבלי הרכב הממשלתי זינק ב-18%",
-      "summary": "Новости авторынка Израиля и автомобильных технологий.",
-      "date": "2026-11-10T10:32:00Z",
+      "id": "db4a6aa10f4662806241",
+      "titleOriginal": "החסימות באיילון לנהגים ולרכבת בסוף השבוע: כל מה שצריך לדעת",
+      "sourceLanguage": "he",
+      "date": "2026-11-06T08:00:00Z",
+      "url": "https://cars.walla.co.il/item/3874839",
+      "publisher": "Walla · Все автомобили",
       "category": "cars",
-      "publisher": "Calcalist",
-      "url": "https://news.google.com/rss/articles/CBMiaEFVX3lxTE5HM2JpaHpJYTQ0dUkzY2JtTzgyc0RNZ3Bmci1aZHowcnJjRzcwcnZWTWo4NjdnR3p2SmFSa1RiNUQyTE1BeEh0clVJMG4wdEFHUVdkdUZCd2Z4Q2cxX21PbzdiSGpuek1w?oc=5",
-      "translated": true,
+      "art": "cars",
+      "image": "./assets/news/images/db4a6aa10f4662806241.svg",
       "official": false,
-      "art": "cars"
+      "translations": {
+        "he": {
+          "title": "החסימות באיילון לנהגים ולרכבת בסוף השבוע: כל מה שצריך לדעת",
+          "summary": "כתבה על מכוניות או שוק הרכב בישראל. פרטים באתר המקור."
+        },
+        "ru": {
+          "title": "Блокады в Аялоне для машинистов и поезд на выходных: все, что нужно знать",
+          "summary": "Материал об автомобиле или автомобильном рынке Израиля. Подробности — на сайте издания."
+        },
+        "en": {
+          "title": "The blockades in Ayalon for drivers and the train at the weekend: everything you need to know",
+          "summary": "An update about vehicles or Israel's car market. Details are available at the source."
+        },
+        "ar": {
+          "title": "الحصار في أيالون على السائقين والقطار في نهاية الأسبوع: كل ما تحتاج إلى معرفته",
+          "summary": "تحديث عن السيارات أو سوق المركبات في إسرائيل. التفاصيل في المصدر."
+        }
+      },
+      "title": "Блокады в Аялоне для машинистов и поезд на выходных: все, что нужно знать",
+      "summary": "Материал об автомобиле или автомобильном рынке Израиля. Подробности — на сайте издания.",
+      "translated": true
     },
     {
-      "id": "9e01c71ebb46e46c01f2",
-      "title": "Рекорд десятилетия по количеству серьезных дорожно-транспортных происшествий в Израиле",
-      "titleOriginal": "שיא של עשור בתאונות הדרכים החמורות בישראל",
-      "summary": "Сообщение о дорожном происшествии в Израиле.",
-      "date": "2026-11-10T09:27:00Z",
-      "category": "accidents",
-      "publisher": "המחדש",
-      "url": "https://news.google.com/rss/articles/CBMiQ0FVX3lxTE14S1lEZUZMcFM2NHNJOGVCMHBacU1mdDdFS2JlOVhpb3ktZ0swMVkzSTBRV2dMSEIzRTV2b1V1bnVBVHM?oc=5",
-      "translated": true,
+      "id": "2d7246404c16d7067488",
+      "titleOriginal": "בלי כבל טעינה: ג'אקו 7 מקבל גרסה היברידית רגילה: מ-170 אלף שקל",
+      "sourceLanguage": "he",
+      "date": "2026-11-04T14:00:00Z",
+      "url": "https://cars.walla.co.il/item/3874968",
+      "publisher": "Walla · Авто",
+      "category": "cars",
+      "art": "cars",
+      "image": "./assets/news/images/2d7246404c16d7067488.svg",
       "official": false,
-      "art": "accidents"
+      "translations": {
+        "he": {
+          "title": "בלי כבל טעינה: ג'אקו 7 מקבל גרסה היברידית רגילה: מ-170 אלף שקל",
+          "summary": "כתבה על מכוניות או שוק הרכב בישראל. פרטים באתר המקור."
+        },
+        "ru": {
+          "title": "Без зарядного кабеля: Jaco 7 получает обычную гибридную версию: от 170 000 шекелей",
+          "summary": "Материал об автомобиле или автомобильном рынке Израиля. Подробности — на сайте издания."
+        },
+        "en": {
+          "title": "Without a charging cable: Jaco 7 gets a regular hybrid version: from NIS 170,000",
+          "summary": "An update about vehicles or Israel's car market. Details are available at the source."
+        },
+        "ar": {
+          "title": "بدون كابل شحن: يحصل Jaco 7 على نسخة هجينة عادية: بسعر يبدأ من 170,000 شيكل",
+          "summary": "تحديث عن السيارات أو سوق المركبات في إسرائيل. التفاصيل في المصدر."
+        }
+      },
+      "title": "Без зарядного кабеля: Jaco 7 получает обычную гибридную версию: от 170 000 шекелей",
+      "summary": "Материал об автомобиле или автомобильном рынке Израиля. Подробности — на сайте издания.",
+      "translated": true
     },
     {
-      "id": "a91d0ae12cb95e99c5c5",
-      "title": "Эйлат находится в осаде: все дороги, ведущие в город и из города, перекрыты",
-      "titleOriginal": "אילת נצורה: כל הכבישים המובילים אל העיר וממנה נחסמו",
-      "summary": "Обновление о дорожной обстановке или ограничениях движения.",
-      "date": "2026-10-27T07:00:00Z",
+      "id": "bbd3d459b14b493ea386",
+      "titleOriginal": "הקו לירושלים יוארך לחדרה, בקרוב ב-3 רכבות בשעה ברוב היממה",
+      "sourceLanguage": "he",
+      "date": "2026-11-02T18:13:00Z",
+      "url": "https://cars.walla.co.il/item/3874685",
+      "publisher": "Walla · Авто",
+      "category": "cars",
+      "art": "cars",
+      "image": "./assets/news/images/bbd3d459b14b493ea386.svg",
+      "official": false,
+      "translations": {
+        "he": {
+          "title": "הקו לירושלים יוארך לחדרה, בקרוב ב-3 רכבות בשעה ברוב היממה",
+          "summary": "כתבה על מכוניות או שוק הרכב בישראל. פרטים באתר המקור."
+        },
+        "ru": {
+          "title": "Линия на Иерусалим будет продлена до Хадеры, скоро большую часть дня будет ходить 3 поезда в час.",
+          "summary": "Материал об автомобиле или автомобильном рынке Израиля. Подробности — на сайте издания."
+        },
+        "en": {
+          "title": "The line to Jerusalem will be extended to Hadera, soon with 3 trains per hour most of the day",
+          "summary": "An update about vehicles or Israel's car market. Details are available at the source."
+        },
+        "ar": {
+          "title": "سيتم تمديد الخط المتجه إلى القدس إلى الخضيرة، قريبًا بثلاثة قطارات في الساعة معظم اليوم",
+          "summary": "تحديث عن السيارات أو سوق المركبات في إسرائيل. التفاصيل في المصدر."
+        }
+      },
+      "title": "Линия на Иерусалим будет продлена до Хадеры, скоро большую часть дня будет ходить 3 поезда в час.",
+      "summary": "Материал об автомобиле или автомобильном рынке Израиля. Подробности — на сайте издания.",
+      "translated": true
+    },
+    {
+      "id": "0711d5a866f63a5bcf4d",
+      "titleOriginal": "הקו לירושלים יוארך לחדרה, בקרוב ב-3 רכבות בשעה ברוב היממה",
+      "sourceLanguage": "he",
+      "date": "2026-11-02T18:13:00Z",
+      "url": "https://cars.walla.co.il/item/3874685",
+      "publisher": "Walla · Все автомобили",
+      "category": "cars",
+      "art": "cars",
+      "image": "./assets/news/images/0711d5a866f63a5bcf4d.svg",
+      "official": false,
+      "translations": {
+        "he": {
+          "title": "הקו לירושלים יוארך לחדרה, בקרוב ב-3 רכבות בשעה ברוב היממה",
+          "summary": "כתבה על מכוניות או שוק הרכב בישראל. פרטים באתר המקור."
+        },
+        "ru": {
+          "title": "Линия на Иерусалим будет продлена до Хадеры, скоро большую часть дня будет ходить 3 поезда в час.",
+          "summary": "Материал об автомобиле или автомобильном рынке Израиля. Подробности — на сайте издания."
+        },
+        "en": {
+          "title": "The line to Jerusalem will be extended to Hadera, soon with 3 trains per hour most of the day",
+          "summary": "An update about vehicles or Israel's car market. Details are available at the source."
+        },
+        "ar": {
+          "title": "سيتم تمديد الخط المتجه إلى القدس إلى الخضيرة، قريبًا بثلاثة قطارات في الساعة معظم اليوم",
+          "summary": "تحديث عن السيارات أو سوق المركبات في إسرائيل. التفاصيل في المصدر."
+        }
+      },
+      "title": "Линия на Иерусалим будет продлена до Хадеры, скоро большую часть дня будет ходить 3 поезда в час.",
+      "summary": "Материал об автомобиле или автомобильном рынке Израиля. Подробности — на сайте издания.",
+      "translated": true
+    },
+    {
+      "id": "3cc364a35b70387b9594",
+      "titleOriginal": "רמת גן משיקה רשת טעינה לחשמליות: מה המחיר?",
+      "sourceLanguage": "he",
+      "date": "2026-11-01T22:52:00Z",
+      "url": "https://cars.walla.co.il/item/3874559",
+      "publisher": "Walla · Все автомобили",
+      "category": "cars",
+      "art": "cars",
+      "image": "./assets/news/images/3cc364a35b70387b9594.svg",
+      "official": false,
+      "translations": {
+        "he": {
+          "title": "רמת גן משיקה רשת טעינה לחשמליות: מה המחיר?",
+          "summary": "כתבה על מכוניות או שוק הרכב בישראל. פרטים באתר המקור."
+        },
+        "ru": {
+          "title": "В Рамат-Гане запускается сеть зарядки для трамваев: какая цена?",
+          "summary": "Материал об автомобиле или автомобильном рынке Израиля. Подробности — на сайте издания."
+        },
+        "en": {
+          "title": "Ramat Gan launches a charging network for trams: what is the price?",
+          "summary": "An update about vehicles or Israel's car market. Details are available at the source."
+        },
+        "ar": {
+          "title": "رمات غان تطلق شبكة شحن للترام: ما هو السعر؟",
+          "summary": "تحديث عن السيارات أو سوق المركبات في إسرائيل. التفاصيل في المصدر."
+        }
+      },
+      "title": "В Рамат-Гане запускается сеть зарядки для трамваев: какая цена?",
+      "summary": "Материал об автомобиле или автомобильном рынке Израиля. Подробности — на сайте издания.",
+      "translated": true
+    },
+    {
+      "id": "d13ea9c1ee3d7c9be3af",
+      "titleOriginal": "לקחים מהטרגדיה: איך מכוונים רכב שטח במעבר מכשול",
+      "sourceLanguage": "he",
+      "date": "2026-11-01T21:17:00Z",
+      "url": "https://cars.walla.co.il/item/3874554",
+      "publisher": "Walla · Все автомобили",
+      "category": "cars",
+      "art": "cars",
+      "image": "./assets/news/images/d13ea9c1ee3d7c9be3af.svg",
+      "official": false,
+      "translations": {
+        "he": {
+          "title": "לקחים מהטרגדיה: איך מכוונים רכב שטח במעבר מכשול",
+          "summary": "כתבה על מכוניות או שוק הרכב בישראל. פרטים באתר המקור."
+        },
+        "ru": {
+          "title": "Уроки трагедии: как управлять внедорожником при преодолении препятствия",
+          "summary": "Материал об автомобиле или автомобильном рынке Израиля. Подробности — на сайте издания."
+        },
+        "en": {
+          "title": "Lessons from the tragedy: how to steer an SUV when crossing an obstacle",
+          "summary": "An update about vehicles or Israel's car market. Details are available at the source."
+        },
+        "ar": {
+          "title": "الدروس المستفادة من المأساة: كيفية توجيه سيارة الدفع الرباعي عند عبور عقبة",
+          "summary": "تحديث عن السيارات أو سوق المركبات في إسرائيل. التفاصيل في المصدر."
+        }
+      },
+      "title": "Уроки трагедии: как управлять внедорожником при преодолении препятствия",
+      "summary": "Материал об автомобиле или автомобильном рынке Израиля. Подробности — на сайте издания.",
+      "translated": true
+    },
+    {
+      "id": "3f72e23d8d27936d3198",
+      "titleOriginal": "מאות רכבים מכונס נכסים נמכרים בפחות עשרות אחוזים, אז מדוע הקונים הפוטנציאליים נשארים מחוץ למכרז?",
+      "sourceLanguage": "he",
+      "date": "2026-11-01T11:09:00Z",
+      "url": "https://cars.walla.co.il/item/3874448",
+      "publisher": "Walla · Все автомобили",
+      "category": "cars",
+      "art": "cars",
+      "image": "./assets/news/images/3f72e23d8d27936d3198.svg",
+      "official": false,
+      "translations": {
+        "he": {
+          "title": "מאות רכבים מכונס נכסים נמכרים בפחות עשרות אחוזים, אז מדוע הקונים הפוטנציאליים נשארים מחוץ למכרז?",
+          "summary": "כתבה על מכוניות או שוק הרכב בישראל. פרטים באתר המקור."
+        },
+        "ru": {
+          "title": "Сотни автомобилей-приемников продаются на десятки процентов дешевле, так почему же потенциальные покупатели остаются вне аукциона?",
+          "summary": "Материал об автомобиле или автомобильном рынке Израиля. Подробности — на сайте издания."
+        },
+        "en": {
+          "title": "Hundreds of receiver vehicles are sold for tens of percent less, so why are the potential buyers left out of the auction?",
+          "summary": "An update about vehicles or Israel's car market. Details are available at the source."
+        },
+        "ar": {
+          "title": "يتم بيع المئات من مركبات الاستقبال بعشرات بالمائة أقل، فلماذا يتم استبعاد المشترين المحتملين من المزاد؟",
+          "summary": "تحديث عن السيارات أو سوق المركبات في إسرائيل. التفاصيل في المصدر."
+        }
+      },
+      "title": "Сотни автомобилей-приемников продаются на десятки процентов дешевле, так почему же потенциальные покупатели остаются вне аукциона?",
+      "summary": "Материал об автомобиле или автомобильном рынке Израиля. Подробности — на сайте издания.",
+      "translated": true
+    },
+    {
+      "id": "e366196182b03a9ccee2",
+      "titleOriginal": "זכרתם? חובה להדליק אורות גם ביום בכבישים הבין־עירוניים",
+      "sourceLanguage": "he",
+      "date": "2026-11-01T07:07:00Z",
+      "url": "https://cars.walla.co.il/item/3873034",
+      "publisher": "Walla · Все автомобили",
       "category": "roads",
-      "publisher": "מקור ראשון",
-      "url": "https://news.google.com/rss/articles/CBMiZkFVX3lxTE9oWWFEdnBKbWpzZmh3b3RtaXBYSWtDclZiWlNWbTZaSHBPcWI2ZmhrTncxVnd2OExoT1VqcmFkemxHcFdGRVFjeFVqWTc2c2haenVBRm5udVdOTjRFbkY3V08wcnlMdw?oc=5",
-      "translated": true,
+      "art": "roads",
+      "image": "./assets/news/images/e366196182b03a9ccee2.svg",
       "official": false,
-      "art": "roads"
+      "translations": {
+        "he": {
+          "title": "זכרתם? חובה להדליק אורות גם ביום בכבישים הבין־עירוניים",
+          "summary": "עדכון על מצב התנועה. לפני הנסיעה בדקו אם ההגבלות עדיין בתוקף."
+        },
+        "ru": {
+          "title": "ты помнишь, что на междугородних дорогах свет нужно включать даже днём",
+          "summary": "Информация о дорожной ситуации. Перед поездкой проверьте, действуют ли ограничения сейчас."
+        },
+        "en": {
+          "title": "did you remember Lights must be turned on even during the day on intercity roads",
+          "summary": "A road-conditions update. Check whether restrictions still apply before travelling."
+        },
+        "ar": {
+          "title": "هل تتذكر أنه يجب تشغيل الأضواء حتى أثناء النهار على الطرق بين المدن",
+          "summary": "تحديث عن حالة الطرق. تحقق من استمرار القيود قبل السفر."
+        }
+      },
+      "title": "ты помнишь, что на междугородних дорогах свет нужно включать даже днём",
+      "summary": "Информация о дорожной ситуации. Перед поездкой проверьте, действуют ли ограничения сейчас.",
+      "translated": true
     },
     {
-      "id": "8ecb81ac5acb8ea808c9",
-      "title": "Блокпосты из-за погодных условий на юге",
-      "titleOriginal": "חסימות כבישים בעקבות מזג האוויר בדרום",
-      "summary": "Обновление о дорожной обстановке или ограничениях движения.",
-      "date": "2026-10-27T07:00:00Z",
-      "category": "roads",
-      "publisher": "יישובניק נט",
-      "url": "https://news.google.com/rss/articles/CBMiggNBVV95cUxOTnBWSEM5S1ZBc2s4cUs5UEdWeGl0MlVfWWp3TFUyRTN6OUlWZHlvQkJWeTAxX01EQksyV0x3QU5vU0I5Qnh5SndOaXlwM1p4MTFSWGlpTDVBMTN1YzM2NXJhRVBnZDZ2ZlRFTGU4dmttZTVpNmxjSGNra2ZVUkVuQjZWUEhiRkVXMTNiNjZLRm9ITUFlZzFOZWc3NlZKeEJ3U0RrRU9aVUg0V0tmbllLZHFlTVdKc0ZkNmlPM01hX2RoT3pjR2RBanNNUS1TWmFTbEE4THg4aE9md08zbm5kQTJDUFhmQ3hWTkx5dVdfa2x4VmpmbkllQ3dxanZ1Um4zY3pDR081OUR4dTM1NXR4dl8tVkp4SzQ4dlJRVzRWeE1kQ2p4b3BlT3NITTUzYVY2b3J5MUowWjNmajJ5dmMyb1dXaFJDWnhnZUtXOFUxSnBWQS1Tem01dHN4b3dwams1bFBTS2Rlb0pVWi1xM2VBMlVJY2c2N1Q0WkpZR3BVbkYtdw?oc=5",
-      "translated": true,
+      "id": "d947ea8b75e6e72e1d52",
+      "titleOriginal": "מדריך: כך תוכלו לנסוע היום בחינם ברכבת ובאוטובוס",
+      "sourceLanguage": "he",
+      "date": "2026-10-27T08:00:00Z",
+      "url": "https://cars.walla.co.il/item/3873385",
+      "publisher": "Walla · Все автомобили",
+      "category": "cars",
+      "art": "cars",
+      "image": "./assets/news/images/d947ea8b75e6e72e1d52.svg",
       "official": false,
-      "art": "roads"
+      "translations": {
+        "he": {
+          "title": "מדריך: כך תוכלו לנסוע היום בחינם ברכבת ובאוטובוס",
+          "summary": "כתבה על מכוניות או שוק הרכב בישראל. פרטים באתר המקור."
+        },
+        "ru": {
+          "title": "Путеводитель: Вот как сегодня можно путешествовать бесплатно на поезде и автобусе",
+          "summary": "Материал об автомобиле или автомобильном рынке Израиля. Подробности — на сайте издания."
+        },
+        "en": {
+          "title": "Guide: This is how you can travel today for free by train and bus",
+          "summary": "An update about vehicles or Israel's car market. Details are available at the source."
+        },
+        "ar": {
+          "title": "الدليل: هذه هي الطريقة التي يمكنك بها السفر اليوم مجانًا بالقطار والحافلة",
+          "summary": "تحديث عن السيارات أو سوق المركبات في إسرائيل. التفاصيل في المصدر."
+        }
+      },
+      "title": "Путеводитель: Вот как сегодня можно путешествовать бесплатно на поезде и автобусе",
+      "summary": "Материал об автомобиле или автомобильном рынке Израиля. Подробности — на сайте издания.",
+      "translated": true
     },
     {
-      "id": "c6714244494607a849fd",
-      "title": "Накануне выборов: в Эйлате ожидаются блокпосты",
-      "titleOriginal": "לקראת הבחירות: אלו השעות שבהן צפויות חסימות כבישים באילת",
-      "summary": "Обновление о дорожной обстановке или ограничениях движения.",
-      "date": "2026-10-26T07:00:00Z",
-      "category": "roads",
-      "publisher": "היום",
-      "url": "https://news.google.com/rss/articles/CBMiZEFVX3lxTFByRFp1dlJPb0VHLTNtS3FRQUgyMk1IYnkzUjBPOEJDYWFDV2FJdjUwN3hsQzVDMW5tY2NQMDQtS0hDb3dqVGE3RXRPRlNHRGlndXlQaFdwVFVxUnZqY004aW44RWs?oc=5",
-      "translated": true,
+      "id": "960a03247e64a8fa1d97",
+      "titleOriginal": "דירוג 2026: המכוניות הכי אמינות - ואלה שלא",
+      "sourceLanguage": "he",
+      "date": "2026-10-26T19:09:00Z",
+      "url": "https://cars.walla.co.il/item/3873849",
+      "publisher": "Walla · Все автомобили",
+      "category": "cars",
+      "art": "cars",
+      "image": "./assets/news/images/960a03247e64a8fa1d97.svg",
       "official": false,
-      "art": "roads"
+      "translations": {
+        "he": {
+          "title": "דירוג 2026: המכוניות הכי אמינות - ואלה שלא",
+          "summary": "כתבה על מכוניות או שוק הרכב בישראל. פרטים באתר המקור."
+        },
+        "ru": {
+          "title": "Рейтинг 2026: самые надежные автомобили — и те, которые таковыми не являются",
+          "summary": "Материал об автомобиле или автомобильном рынке Израиля. Подробности — на сайте издания."
+        },
+        "en": {
+          "title": "2026 ranking: the most reliable cars - and those that are not",
+          "summary": "An update about vehicles or Israel's car market. Details are available at the source."
+        },
+        "ar": {
+          "title": "تصنيف 2026: السيارات الأكثر موثوقية - وتلك التي ليست كذلك",
+          "summary": "تحديث عن السيارات أو سوق المركبات في إسرائيل. التفاصيل في المصدر."
+        }
+      },
+      "title": "Рейтинг 2026: самые надежные автомобили — и те, которые таковыми не являются",
+      "summary": "Материал об автомобиле или автомобильном рынке Израиля. Подробности — на сайте издания.",
+      "translated": true
+    },
+    {
+      "id": "3fc99d55b54ac002a16d",
+      "titleOriginal": "בוחרים רכב חדש: כל מבצעי הרכב וההנחות ביום הבחירות",
+      "sourceLanguage": "he",
+      "date": "2026-10-25T19:32:00Z",
+      "url": "https://cars.walla.co.il/item/3873697",
+      "publisher": "Walla · Все автомобили",
+      "category": "cars",
+      "art": "cars",
+      "image": "./assets/news/images/3fc99d55b54ac002a16d.svg",
+      "official": false,
+      "translations": {
+        "he": {
+          "title": "בוחרים רכב חדש: כל מבצעי הרכב וההנחות ביום הבחירות",
+          "summary": "כתבה על מכוניות או שוק הרכב בישראל. פרטים באתר המקור."
+        },
+        "ru": {
+          "title": "Выбери новую машину: все автомобильные предложения и скидки в день выборов",
+          "summary": "Материал об автомобиле или автомобильном рынке Израиля. Подробности — на сайте издания."
+        },
+        "en": {
+          "title": "Choose a new car: all car deals and discounts on election day",
+          "summary": "An update about vehicles or Israel's car market. Details are available at the source."
+        },
+        "ar": {
+          "title": "اختر سيارة جديدة: جميع عروض وخصومات السيارات في يوم الانتخابات",
+          "summary": "تحديث عن السيارات أو سوق المركبات في إسرائيل. التفاصيل في المصدر."
+        }
+      },
+      "title": "Выбери новую машину: все автомобильные предложения и скидки в день выборов",
+      "summary": "Материал об автомобиле или автомобильном рынке Израиля. Подробности — на сайте издания.",
+      "translated": true
     }
   ]
 }
