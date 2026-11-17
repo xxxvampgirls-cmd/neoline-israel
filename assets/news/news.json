@@ -1,7 +1,8 @@
 {
   "version": 1,
   "retentionDays": 30,
-  "updated": "2026-11-17T09:43:15.656172Z",
+  "lawsRetentionMonths": 6,
+  "updated": "2026-11-17T09:45:33.341094Z",
   "items": [
     {
       "id": "19e23c0c176ec1db1895",
@@ -2384,6 +2385,82 @@
       }
     },
     {
+      "id": "6c3d71cc18f7b1f147c6",
+      "titleOriginal": "חלם זה כאן: הוצאתם רישיון נהיגה בינלאומי לשלוש שנים? ב-26 מדינות הוא תקף רק לשנה אחת",
+      "sourceLanguage": "he",
+      "date": "2026-09-15T15:50:10Z",
+      "url": "https://thecar.co.il/%d7%97%d7%9c%d7%9d-%d7%96%d7%94-%d7%9b%d7%90%d7%9f-%d7%94%d7%95%d7%a6%d7%90%d7%aa%d7%9d-%d7%a8%d7%99%d7%a9%d7%99%d7%95%d7%9f-%d7%a0%d7%94%d7%99%d7%92%d7%94-%d7%91%d7%99%d7%a0%d7%9c%d7%90%d7%95%d7%9e/",
+      "publisher": "TheCar · Автоновости",
+      "category": "laws",
+      "art": "laws",
+      "image": "./assets/news/images/6c3d71cc18f7b1f147c6.webp",
+      "official": false,
+      "translations": {
+        "he": {
+          "title": "חלם זה כאן: הוצאתם רישיון נהיגה בינלאומי לשלוש שנים? ב-26 מדינות הוא תקף רק לשנה אחת",
+          "summary": "דיווח על תקנות נהיגה. יש לאמת את מעמד החוק ותאריך התחולה במקור רשמי."
+        },
+        "ru": {
+          "title": "Приснилось вот это: ты получил международные водительские права на три года? В 26 странах он действителен только один год.",
+          "summary": "Публикация о правилах для водителей. Статус закона и дату вступления в силу нужно сверять с официальными документами."
+        },
+        "en": {
+          "title": "Dreamed of it here: did you get an international driver's license for three years? In 26 countries it is only valid for one year",
+          "summary": "A report concerning driving rules. Verify legal status and effective dates with official documents."
+        },
+        "ar": {
+          "title": "حلمت هنا: هل حصلت على رخصة قيادة دولية لمدة ثلاث سنوات؟ وهي صالحة لمدة عام واحد فقط في 26 دولة",
+          "summary": "تقرير حول قواعد القيادة. تحقق من حالة القانون وتاريخ سريانه في المصادر الرسمية."
+        }
+      },
+      "title": "Приснилось вот это: ты получил международные водительские права на три года? В 26 странах он действителен только один год.",
+      "summary": "Публикация о правилах для водителей. Статус закона и дату вступления в силу нужно сверять с официальными документами.",
+      "translated": true,
+      "imageType": "licensedPhoto",
+      "imageCredit": {
+        "text": "Wikimedia Commons · CC BY 4.0",
+        "url": "https://commons.wikimedia.org/wiki/File:Close_up_of_Carmen_Rupe_pedestrian_crossing_light.jpg"
+      }
+    },
+    {
+      "id": "2c4584c5e877e25e077e",
+      "titleOriginal": "פולקסווגן גולף R בישראל: 333 כ\"ס, 310 אלף שקל",
+      "sourceLanguage": "he",
+      "date": "2026-10-27T20:12:00Z",
+      "url": "https://cars.walla.co.il/item/3873967",
+      "publisher": "Walla",
+      "category": "cars",
+      "art": "cars",
+      "image": "./assets/news/images/2c4584c5e877e25e077e.webp",
+      "official": false,
+      "translations": {
+        "he": {
+          "title": "פולקסווגן גולף R בישראל: 333 כ\"ס, 310 אלף שקל",
+          "summary": "כתבה על מכוניות או שוק הרכב בישראל. פרטים באתר המקור."
+        },
+        "ru": {
+          "title": "Volkswagen Golf R в Израиле: 333 л.с., 310 000 шекелей",
+          "summary": "Материал об автомобиле или автомобильном рынке Израиля. Подробности — на сайте издания."
+        },
+        "en": {
+          "title": "Volkswagen Golf R in Israel: 333 hp, NIS 310,000",
+          "summary": "An update about vehicles or Israel's car market. Details are available at the source."
+        },
+        "ar": {
+          "title": "فولكس فاجن جولف آر في إسرائيل: 333 حصاناً، 310 آلاف شيكل",
+          "summary": "تحديث عن السيارات أو سوق المركبات في إسرائيل. التفاصيل في المصدر."
+        }
+      },
+      "title": "Volkswagen Golf R в Израиле: 333 л.с., 310 000 шекелей",
+      "summary": "Материал об автомобиле или автомобильном рынке Израиля. Подробности — на сайте издания.",
+      "translated": true,
+      "imageType": "licensedPhoto",
+      "imageCredit": {
+        "text": "Ivan Radic · CC BY 2.0",
+        "url": "https://commons.wikimedia.org/wiki/File:Close-up_of_an_electric_car_charging._Traffic_lights_in_a_blurry_background.jpg"
+      }
+    },
+    {
       "id": "6db7cd2f45f17591dda9",
       "titleOriginal": "יפיע: הולך רגל נפגע מרכב - מצבו קשה",
       "sourceLanguage": "he",
@@ -2422,37 +2499,76 @@
       }
     },
     {
-      "id": "2c4584c5e877e25e077e",
-      "titleOriginal": "פולקסווגן גולף R בישראל: 333 כ\"ס, 310 אלף שקל",
+      "titleOriginal": "ועדת החינוך אישרה תקנות להרחבת היבוא של כלי תחרות ספורטיביים",
       "sourceLanguage": "he",
-      "date": "2026-10-27T20:12:00Z",
-      "url": "https://cars.walla.co.il/item/3873967",
-      "publisher": "Walla",
+      "date": "2026-07-07T12:30:00Z",
+      "url": "https://main.knesset.gov.il/News/PressReleases/pages/press07072026c.aspx",
+      "publisher": "Кнессет Израиля · Комитет по образованию",
+      "category": "laws",
+      "art": "laws",
+      "official": true,
+      "translations": {
+        "ru": {
+          "title": "Кнессет одобрил новые правила импорта техники для автоспорта",
+          "summary": "7 июля профильный комитет одобрил изменения правил ввоза спортивной соревновательной техники и запчастей для автоспорта. Изменения касаются специализированных соревнований, а не обычного использования автомобилей на дорогах."
+        },
+        "he": {
+          "title": "7 ביולי אושרו תקנות חדשות לייבוא כלי תחרות וחלקי חילוף לספורט מוטורי",
+          "summary": "ועדת החינוך אישרה עדכונים המסדירים יבוא ציוד תחרותי לספורט מוטורי במטרה להקל על הליכים. התקנות עוסקות בכלים תחרותיים, ולא בנהיגה רגילה בכביש."
+        },
+        "en": {
+          "title": "Knesset committee approved updated imports rules for motorsport vehicles",
+          "summary": "On 7 July, the committee approved changes easing imports of competitive motorsport vehicles and parts. The measures concern racing equipment, not ordinary road-driving rules."
+        },
+        "ar": {
+          "title": "الكنيست أقر تعديلات على استيراد مركبات ومعدات رياضة المحركات",
+          "summary": "في 7 يوليو وافقت اللجنة على تخفيف إجراءات استيراد معدات السباقات وقطع الغيار. يتعلق القرار برياضة المحركات، وليس بالقيادة العادية على الطرق."
+        }
+      },
+      "id": "9ce7f097f16e763c9cea",
+      "title": "Кнессет одобрил новые правила импорта техники для автоспорта",
+      "summary": "7 июля профильный комитет одобрил изменения правил ввоза спортивной соревновательной техники и запчастей для автоспорта. Изменения касаются специализированных соревнований, а не обычного использования автомобилей на дорогах.",
+      "translated": true,
+      "image": "./assets/news/images/9ce7f097f16e763c9cea.webp",
+      "imageType": "licensedPhoto",
+      "imageCredit": {
+        "text": "Wikimedia Commons · CC BY 4.0",
+        "url": "https://commons.wikimedia.org/wiki/File:Close_up_of_Carmen_Rupe_pedestrian_crossing_light.jpg"
+      }
+    },
+    {
+      "id": "8afa884f224efe65331b",
+      "titleOriginal": "דירוג 2026: המכוניות הכי אמינות - ואלה שלא",
+      "sourceLanguage": "he",
+      "date": "2026-10-26T19:09:00Z",
+      "url": "https://cars.walla.co.il/item/3873849",
+      "publisher": "Walla · Все автомобили",
       "category": "cars",
       "art": "cars",
-      "image": "./assets/news/images/2c4584c5e877e25e077e.webp",
+      "image": "./assets/news/images/8afa884f224efe65331b.webp",
       "official": false,
       "translations": {
         "he": {
-          "title": "פולקסווגן גולף R בישראל: 333 כ\"ס, 310 אלף שקל",
+          "title": "דירוג 2026: המכוניות הכי אמינות - ואלה שלא",
           "summary": "כתבה על מכוניות או שוק הרכב בישראל. פרטים באתר המקור."
         },
         "ru": {
-          "title": "Volkswagen Golf R в Израиле: 333 л.с., 310 000 шекелей",
+          "title": "Рейтинг 2026: самые надежные автомобили — и те, которые таковыми не являются",
           "summary": "Материал об автомобиле или автомобильном рынке Израиля. Подробности — на сайте издания."
         },
         "en": {
-          "title": "Volkswagen Golf R in Israel: 333 hp, NIS 310,000",
+          "title": "2026 ranking: the most reliable cars - and those that are not",
           "summary": "An update about vehicles or Israel's car market. Details are available at the source."
         },
         "ar": {
-          "title": "فولكس فاجن جولف آر في إسرائيل: 333 حصاناً، 310 آلاف شيكل",
+          "title": "تصنيف 2026: السيارات الأكثر موثوقية - وتلك التي ليست كذلك",
           "summary": "تحديث عن السيارات أو سوق المركبات في إسرائيل. التفاصيل في المصدر."
         }
       },
-      "title": "Volkswagen Golf R в Израиле: 333 л.с., 310 000 шекелей",
+      "title": "Рейтинг 2026: самые надежные автомобили — и те, которые таковыми не являются",
       "summary": "Материал об автомобиле или автомобильном рынке Израиля. Подробности — на сайте издания.",
       "translated": true,
+      "imageKind": "ai-generated",
       "imageType": "licensedPhoto",
       "imageCredit": {
         "text": "Ivan Radic · CC BY 2.0",
@@ -2498,6 +2614,83 @@
       }
     },
     {
+      "titleOriginal": "ועדת הכלכלה אישרה את התקנות המחילות את שיטת הניקוד גם על הפרות תעבורה מנהליות",
+      "sourceLanguage": "he",
+      "date": "2026-06-22T09:55:00Z",
+      "url": "https://main.knesset.gov.il/news/pressreleases/pages/press22062026x.aspx",
+      "publisher": "Кнессет Израиля · Комитет по экономике",
+      "category": "laws",
+      "art": "laws",
+      "official": true,
+      "translations": {
+        "ru": {
+          "title": "Кнессет одобрил изменения системы штрафных баллов за нарушения ПДД",
+          "summary": "22 июня экономический комитет Кнессета утвердил обновлённые правила начисления баллов за административные нарушения. Для менее серьёзных проступков предусмотрено смягчение, а за опасные нарушения, включая проезд на красный и телефон за рулём, — более строгие баллы. Позднее условия применения могли уточняться."
+        },
+        "he": {
+          "title": "ועדת הכלכלה אישרה ביוני 2026 שינוי בשיטת הניקוד בעבירות תעבורה",
+          "summary": "ב-22 ביוני אישרה ועדת הכלכלה התאמות לשיטת הניקוד על הפרות תעבורה מנהליות. אושרו הקלות לחלק מההפרות הקלות והחמרות בעבירות מסכנות חיים; יש לבדוק עדכונים מאוחרים יותר לפני הסתמכות."
+        },
+        "en": {
+          "title": "Knesset committee approved changes to traffic penalty-points rules in June",
+          "summary": "On 22 June, the Knesset Economic Affairs Committee approved changes to the points system for administrative road offences, easing some minor cases while increasing points for dangerous conduct. Check later updates before relying on the June version."
+        },
+        "ar": {
+          "title": "لجنة الكنيست وافقت في يونيو على تغييرات في نظام نقاط مخالفات المرور",
+          "summary": "في 22 يونيو وافقت اللجنة الاقتصادية على تعديلات لنقاط المخالفات الإدارية، مع تخفيف لبعض المخالفات البسيطة وتشديد على المخالفات الخطرة. يجب مراجعة التحديثات اللاحقة قبل الاعتماد على القواعد القديمة."
+        }
+      },
+      "id": "821987599de17e7c0751",
+      "title": "Кнессет одобрил изменения системы штрафных баллов за нарушения ПДД",
+      "summary": "22 июня экономический комитет Кнессета утвердил обновлённые правила начисления баллов за административные нарушения. Для менее серьёзных проступков предусмотрено смягчение, а за опасные нарушения, включая проезд на красный и телефон за рулём, — более строгие баллы. Позднее условия применения могли уточняться.",
+      "translated": true,
+      "image": "./assets/news/images/821987599de17e7c0751.webp",
+      "imageType": "licensedPhoto",
+      "imageCredit": {
+        "text": "Wikimedia Commons · CC BY 4.0",
+        "url": "https://commons.wikimedia.org/wiki/File:Close_up_of_Carmen_Rupe_pedestrian_crossing_light.jpg"
+      }
+    },
+    {
+      "id": "49f8482a0c05fbd3d62e",
+      "titleOriginal": "בוחרים רכב חדש: כל מבצעי הרכב וההנחות ביום הבחירות",
+      "sourceLanguage": "he",
+      "date": "2026-10-25T19:32:00Z",
+      "url": "https://cars.walla.co.il/item/3873697",
+      "publisher": "Walla · Все автомобили",
+      "category": "cars",
+      "art": "cars",
+      "image": "./assets/news/images/49f8482a0c05fbd3d62e.webp",
+      "official": false,
+      "translations": {
+        "he": {
+          "title": "בוחרים רכב חדש: כל מבצעי הרכב וההנחות ביום הבחירות",
+          "summary": "כתבה על מכוניות או שוק הרכב בישראל. פרטים באתר המקור."
+        },
+        "ru": {
+          "title": "Выбери новую машину: все автомобильные предложения и скидки в день выборов",
+          "summary": "Материал об автомобиле или автомобильном рынке Израиля. Подробности — на сайте издания."
+        },
+        "en": {
+          "title": "Choose a new car: all car deals and discounts on election day",
+          "summary": "An update about vehicles or Israel's car market. Details are available at the source."
+        },
+        "ar": {
+          "title": "اختر سيارة جديدة: جميع عروض وخصومات السيارات في يوم الانتخابات",
+          "summary": "تحديث عن السيارات أو سوق المركبات في إسرائيل. التفاصيل في المصدر."
+        }
+      },
+      "title": "Выбери новую машину: все автомобильные предложения и скидки в день выборов",
+      "summary": "Материал об автомобиле или автомобильном рынке Израиля. Подробности — на сайте издания.",
+      "translated": true,
+      "imageKind": "ai-generated",
+      "imageType": "licensedPhoto",
+      "imageCredit": {
+        "text": "Eric Friedebach · CC BY 2.0",
+        "url": "https://commons.wikimedia.org/wiki/File:1973_Ford_Mustang_Interior_Dashboard_(51838912069).jpg"
+      }
+    },
+    {
       "id": "7947c389e0bcbd1587e5",
       "titleOriginal": "צוותי הרפואה של איחוד הצלה הוזעקו לרחוב ד״ר ברויאר בבני ברק, עקב דיווח על הולך רגל שנפגע מרכב.",
       "sourceLanguage": "he",
@@ -2536,42 +2729,41 @@
       }
     },
     {
-      "id": "8afa884f224efe65331b",
-      "titleOriginal": "דירוג 2026: המכוניות הכי אמינות - ואלה שלא",
+      "titleOriginal": "ועדת הכלכלה סירבה לאשר את תיקון תקנות התעבורה המחילות את שיטת הניקוד על הפרות מנהליות",
       "sourceLanguage": "he",
-      "date": "2026-10-26T19:09:00Z",
-      "url": "https://cars.walla.co.il/item/3873849",
-      "publisher": "Walla · Все автомобили",
-      "category": "cars",
-      "art": "cars",
-      "image": "./assets/news/images/8afa884f224efe65331b.webp",
-      "official": false,
+      "date": "2026-06-03T08:25:00Z",
+      "url": "https://main.knesset.gov.il/News/PressReleases/pages/press03062026z.aspx",
+      "publisher": "Кнессет Израиля · Комитет по экономике",
+      "category": "laws",
+      "art": "laws",
+      "official": true,
       "translations": {
-        "he": {
-          "title": "דירוג 2026: המכוניות הכי אמינות - ואלה שלא",
-          "summary": "כתבה על מכוניות או שוק הרכב בישראל. פרטים באתר המקור."
-        },
         "ru": {
-          "title": "Рейтинг 2026: самые надежные автомобили — и те, которые таковыми не являются",
-          "summary": "Материал об автомобиле или автомобильном рынке Израиля. Подробности — на сайте издания."
+          "title": "3 июня комитет Кнессета отложил реформу штрафных баллов и потребовал послаблений",
+          "summary": "3 июня экономический комитет не утвердил предложенную редакцию правил начисления баллов и потребовал пересмотра в течение двух недель. Это исторический этап обсуждения: 22 июня комитет впоследствии одобрил изменённую редакцию."
+        },
+        "he": {
+          "title": "3 ביוני ועדת הכלכלה לא אישרה את תיקון שיטת הניקוד ודרשה תיקונים",
+          "summary": "ב-3 ביוני הוועדה סירבה לאשר את נוסח התקנות והורתה להכין תיקונים תוך שבועיים. מדובר בשלב היסטורי: ב-22 ביוני הוועדה אישרה נוסח מתוקן."
         },
         "en": {
-          "title": "2026 ranking: the most reliable cars - and those that are not",
-          "summary": "An update about vehicles or Israel's car market. Details are available at the source."
+          "title": "Knesset committee requested revisions to penalty-points reform on 3 June",
+          "summary": "On 3 June the committee declined to approve the initial changes and asked for a revised version. This was an earlier step: a revised text received committee approval on 22 June."
         },
         "ar": {
-          "title": "تصنيف 2026: السيارات الأكثر موثوقية - وتلك التي ليست كذلك",
-          "summary": "تحديث عن السيارات أو سوق المركبات في إسرائيل. التفاصيل في المصدر."
+          "title": "في 3 يونيو طلبت لجنة الكنيست تعديل إصلاح نظام نقاط المرور",
+          "summary": "رفضت اللجنة الصيغة الأولى في 3 يونيو وطلبت تعديلات خلال أسبوعين. هذه مرحلة سابقة، إذ أُقرت صيغة معدّلة في 22 يونيو."
         }
       },
-      "title": "Рейтинг 2026: самые надежные автомобили — и те, которые таковыми не являются",
-      "summary": "Материал об автомобиле или автомобильном рынке Израиля. Подробности — на сайте издания.",
+      "id": "84399e428bc60574368d",
+      "title": "3 июня комитет Кнессета отложил реформу штрафных баллов и потребовал послаблений",
+      "summary": "3 июня экономический комитет не утвердил предложенную редакцию правил начисления баллов и потребовал пересмотра в течение двух недель. Это исторический этап обсуждения: 22 июня комитет впоследствии одобрил изменённую редакцию.",
       "translated": true,
-      "imageKind": "ai-generated",
+      "image": "./assets/news/images/84399e428bc60574368d.webp",
       "imageType": "licensedPhoto",
       "imageCredit": {
-        "text": "Ivan Radic · CC BY 2.0",
-        "url": "https://commons.wikimedia.org/wiki/File:Close-up_of_an_electric_car_charging._Traffic_lights_in_a_blurry_background.jpg"
+        "text": "Wikimedia Commons · CC BY 4.0",
+        "url": "https://commons.wikimedia.org/wiki/File:Close_up_of_Carmen_Rupe_pedestrian_crossing_light.jpg"
       }
     },
     {
@@ -2648,45 +2840,6 @@
       "imageCredit": {
         "text": "Jeff Attaway from Abuja, Nigeria · CC BY 2.0",
         "url": "https://commons.wikimedia.org/wiki/File:Bad_one_-_auto_wreck_in_Dakar_Senegal,_2011.jpg"
-      }
-    },
-    {
-      "id": "49f8482a0c05fbd3d62e",
-      "titleOriginal": "בוחרים רכב חדש: כל מבצעי הרכב וההנחות ביום הבחירות",
-      "sourceLanguage": "he",
-      "date": "2026-10-25T19:32:00Z",
-      "url": "https://cars.walla.co.il/item/3873697",
-      "publisher": "Walla · Все автомобили",
-      "category": "cars",
-      "art": "cars",
-      "image": "./assets/news/images/49f8482a0c05fbd3d62e.webp",
-      "official": false,
-      "translations": {
-        "he": {
-          "title": "בוחרים רכב חדש: כל מבצעי הרכב וההנחות ביום הבחירות",
-          "summary": "כתבה על מכוניות או שוק הרכב בישראל. פרטים באתר המקור."
-        },
-        "ru": {
-          "title": "Выбери новую машину: все автомобильные предложения и скидки в день выборов",
-          "summary": "Материал об автомобиле или автомобильном рынке Израиля. Подробности — на сайте издания."
-        },
-        "en": {
-          "title": "Choose a new car: all car deals and discounts on election day",
-          "summary": "An update about vehicles or Israel's car market. Details are available at the source."
-        },
-        "ar": {
-          "title": "اختر سيارة جديدة: جميع عروض وخصومات السيارات في يوم الانتخابات",
-          "summary": "تحديث عن السيارات أو سوق المركبات في إسرائيل. التفاصيل في المصدر."
-        }
-      },
-      "title": "Выбери новую машину: все автомобильные предложения и скидки в день выборов",
-      "summary": "Материал об автомобиле или автомобильном рынке Израиля. Подробности — на сайте издания.",
-      "translated": true,
-      "imageKind": "ai-generated",
-      "imageType": "licensedPhoto",
-      "imageCredit": {
-        "text": "Eric Friedebach · CC BY 2.0",
-        "url": "https://commons.wikimedia.org/wiki/File:1973_Ford_Mustang_Interior_Dashboard_(51838912069).jpg"
       }
     },
     {
