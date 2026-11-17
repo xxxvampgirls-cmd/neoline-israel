@@ -173,9 +173,16 @@ def main():
   uid=item["id"]
   target=PHOTOS/(uid+".webp")
   # Do not re-generate a licensed photo from the same story every morning.
-  if target.exists() and target.stat().st_size<=MAX_BYTES:
+  # Reuse only thumbnails whose provenance can still be shown on the site.
+  valid_credit=item.get("imageType")=="ai" or (
+   item.get("imageType")=="licensedPhoto" and
+   isinstance(item.get("imageCredit"),dict) and
+   item["imageCredit"].get("url"))
+  if target.exists() and target.stat().st_size<=MAX_BYTES and valid_credit:
    item["image"]="./"+target.as_posix()
    continue
+  if target.exists():
+   target.unlink()
   photo=None
   license_meta=None
   if API_TOKEN and ai_used<MAX_AI_PER_RUN:
