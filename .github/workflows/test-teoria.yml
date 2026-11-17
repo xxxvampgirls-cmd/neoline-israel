@@ -148,6 +148,49 @@ jobs:
             const size=await page.evaluate(()=>({page:document.documentElement.scrollWidth,w:innerWidth}));
             if(size.page>size.w+3)throw Error('Game mobile overflow at 320px '+JSON.stringify(size));
             console.log('MOBILE GAME PASS 320px and 390px JSerrors=0');
+
+            // The compact game is a real NEOLINE page, not a detached app:
+            // four blue/white/ink game buttons, SVG icons and an identical
+            // five-link bottom dock that hides DOWN and reappears UP.
+            let redesigned=false;
+            for(let k=0;k<7;k++){
+              redesigned=await page.locator('#theoryBottomNav [data-theory-nav]').count()===5&&
+                await page.locator('#modeGrid .route-card .route-icon svg').count()===5;
+              if(redesigned)break;
+              await page.waitForTimeout(5500);
+              await page.reload({waitUntil:'domcontentloaded'});
+              await page.waitForFunction(()=>document.getElementById('bankStatus').classList.contains('loaded'),null,{timeout:40000});
+            }
+            if(!redesigned)throw Error('Theory premium modes or five-item bottom dock not deployed yet');
+            const navi=await page.evaluate(()=>{
+              const nav=document.querySelector('#theoryBottomNav');
+              const tiles=[...document.querySelectorAll('#modeGrid .route-card')];
+              return {
+                visible:getComputedStyle(nav).display!=='none',
+                position:getComputedStyle(nav).position,
+                links:[...nav.querySelectorAll('a')].map(x=>x.getAttribute('href')),
+                animated:nav.dataset.navScrollBehavior==='directional',
+                svgIcons:tiles.filter(t=>t.querySelector('.route-icon svg')).length,
+                darkCardColor:getComputedStyle(tiles[2].querySelector('strong')).color,
+                routes:tiles.map(t=>t.dataset.mode),
+                width:document.documentElement.scrollWidth,
+                viewport:innerWidth,
+              };
+            });
+            console.log('THEORY NEW DESIGN + 5-LINK NAV '+JSON.stringify(navi));
+            if(!navi.visible||navi.position!=='fixed'||!navi.animated||
+               navi.links.join('|')!=='./|./#catalog|./news.html|./delivery.html|./?panel=cart'||
+               navi.svgIcons!==5||navi.routes.join(',')!=='route,signs,exam,mistakes,marathon'||
+               navi.darkCardColor!=='rgb(255, 255, 255)')
+              throw Error('Brand palette, vector game modes or dock broken '+JSON.stringify(navi));
+            if(navi.width>navi.viewport+3)throw Error('Nav/design causes 320px horizontal scroll');
+            await page.evaluate(()=>window.scrollTo(0,document.body.scrollHeight));
+            await page.waitForFunction(()=>{const x=document.querySelector('#theoryBottomNav');return x.classList.contains('nav-scroll-hidden')&&getComputedStyle(x).visibility==='hidden';},null,{timeout:9000});
+            await page.evaluate(()=>window.scrollBy(0,-140));
+            await page.waitForFunction(()=>!document.getElementById('theoryBottomNav').classList.contains('nav-scroll-hidden'));
+            await page.evaluate(()=>window.scrollTo(0,0));
+            console.log('THEORY BOTTOM NAV DIRECTION PASS: 5 tabs, down hidden, up restored, no 320px overflow');
+
             // Theory promotion is the LAST carousel frame. It shares the
             // product-ad blue bands/halo but uses a single restrained 3D
             // digital quiz display, not the rejected cartoon driving scene.
