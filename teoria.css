@@ -30,3 +30,142 @@ html[dir=rtl] .brand img{object-position:right center}html[dir=rtl] .road-scene{
  .route-full>span:not(.route-top):not(.route-cta){flex:1 0 100%;font-size:10px}
  .route-full .route-cta{flex:1 0 100%}
 }
+
+
+/* ===== NEOLINE THEORY • QUICK PLAY, MOBILE FIRST (2026-11-17) =====
+   The first viewport is for choosing a game, not reading introductory copy.
+   The real official bank, progress and its attribution remain accessible. */
+.game-hero{
+ display:grid;grid-template-columns:minmax(0,1fr) 88px;align-items:center;
+ gap:14px;margin:12px 0 8px;padding:15px 19px;min-height:0;
+ border-radius:21px;overflow:hidden;
+ background:linear-gradient(116deg,#fff 2%,#f0faff 57%,#cdeeff 100%);
+}
+.game-hero .hero-copy{min-width:0}
+.game-hero .eyebrow{font-size:9px;letter-spacing:.13em;color:#2086be}
+.game-hero h1{font-size:clamp(26px,3vw,35px);line-height:1.15;letter-spacing:-.052em;margin:5px 0 1px}
+.hero-mini{
+ position:relative;isolation:isolate;width:86px;height:68px;overflow:hidden;
+ border-radius:16px;border:1px solid #a8dff8;
+ background:linear-gradient(145deg,#7ecaf2,#c9f1ff);
+ box-shadow:inset 0 0 0 2px #ffffff7d,0 5px 16px #1887c526;
+}
+.hero-mini-road{
+ position:absolute;left:31px;top:-34px;width:45px;height:144px;
+ background:linear-gradient(90deg,#3c94b8 0%,#176b9c 34%,#0f507e 72%,#61bce5 100%);
+ border:3px solid #d0f4ff;transform:rotate(25deg);border-radius:3px;
+}
+.hero-mini-road::before{
+ content:"";position:absolute;left:47%;top:0;width:3px;height:100%;
+ background:repeating-linear-gradient(to bottom,#dbf8ff 0 10px,transparent 10px 20px);transform:translateX(-50%);
+}
+.hero-mini-sign{
+ position:absolute;z-index:3;top:6px;right:5px;display:grid;place-items:center;
+ width:30px;height:30px;background:#fff;border:4px solid #df555c;border-radius:50%;
+ font-weight:900;font-size:10px;color:#174363;box-shadow:0 3px 9px #286e9345;
+}
+.hero-mini-car{position:absolute;z-index:2;left:5px;bottom:1px;font-size:29px;transform:rotate(-17deg);filter:drop-shadow(0 4px 4px #174b666e)}
+.hero-mini-check{position:absolute;z-index:4;right:2px;bottom:4px;display:grid;place-items:center;width:21px;height:21px;border-radius:50%;background:#16ac91;color:white;border:2px solid white;font-size:12px;font-weight:900}
+body.game-active .game-hero{display:none!important}
+#gameLobby{margin-top:8px;padding:20px}
+#gameLobby .panel-toolbar{align-items:center}
+#gameLobby .toolbar-title .tiny-label{font-size:9px}
+#gameLobby .toolbar-title h2{margin:4px 0;font-size:25px}
+#gameLobby .bank-status.loaded{display:none!important}
+#gameLobby .bank-status:not(.loaded){margin:10px 0 0;padding:9px 11px;font-size:10px}
+#gameLobby .route-card{min-height:158px}
+#gameLobby .route-full{min-height:102px}
+#gameLobby .routes{margin-top:15px}
+#gameLobby .progress-disclosure{
+ border:1px solid #d7eaf7;border-radius:15px;background:#f7fcff;
+ margin-top:14px;overflow:hidden;
+}
+#gameLobby .progress-disclosure>summary{
+ display:flex;align-items:center;gap:9px;cursor:pointer;user-select:none;
+ padding:10px 14px;font-size:11px;font-weight:800;color:#3c83a9;list-style:none;
+}
+#gameLobby .progress-disclosure>summary::after{content:"⌄";margin-inline-start:auto;color:#6599b4;font-size:17px;line-height:1;transition:transform .2s}
+#gameLobby .progress-disclosure[open]>summary::after{transform:rotate(180deg)}
+#gameLobby .progress-disclosure>summary::-webkit-details-marker{display:none}
+#gameLobby .progress-disclosure:focus-within{border-color:#8bc8ee}
+#gameLobby .progress-disclosure .stats-row{margin:0;padding:0 12px 12px}
+#gameLobby .progress-disclosure .stat{padding:10px 11px;border-radius:11px}
+#gameLobby .progress-disclosure .stat strong{font-size:20px}
+#gameLobby .source-note{margin-top:16px}
+
+@media(max-width:720px){
+ .shell{padding-inline:12px}
+ .top-inner{min-height:53px;gap:9px}
+ .brand img{width:149px;max-height:46px}
+ .back{padding:8px 10px;font-size:9px;border-radius:11px}
+ .game-hero{
+  grid-template-columns:minmax(0,1fr) 69px;gap:9px;
+  min-height:72px;margin:7px 0 6px;padding:9px 11px;border-radius:16px;
+ }
+ .game-hero .eyebrow{font-size:8px;letter-spacing:.10em}
+ .game-hero h1{font-size:25px!important;line-height:1.12;margin:4px 0 0;letter-spacing:-.045em}
+ .hero-mini{width:69px;height:54px;border-radius:12px}
+ .hero-mini-sign{top:2px;right:2px;width:26px;height:26px;border-width:3px;font-size:9px}
+ .hero-mini-car{font-size:23px}
+ .hero-mini-check{height:18px;width:18px;font-size:10px}
+ #gameLobby{margin:6px 0 14px;padding:12px;border-radius:18px}
+ #gameLobby .panel-toolbar{display:flex;flex-direction:column;gap:8px;align-items:stretch}
+ #gameLobby .toolbar-title .tiny-label{display:none}
+ #gameLobby .toolbar-title h2{font-size:18px;line-height:1.2;margin:0;letter-spacing:-.035em}
+ #gameLobby .settings{display:flex;flex-wrap:nowrap;gap:8px;align-items:center;justify-content:space-between}
+ #gameLobby .switch{flex:1 1 0;min-width:0;height:39px;padding:3px;border-radius:12px;gap:2px}
+ #gameLobby .switch button{flex:1 1 0;min-width:0;padding:4px 5px;font-size:10px;min-height:31px;border-radius:9px}
+ #gameLobby .class-select{flex:0 0 auto;gap:4px;font-size:9px;white-space:nowrap}
+ #gameLobby .class-select select{height:39px;padding:6px 8px;font-size:11px;max-width:116px}
+ #gameLobby .bank-status:not(.loaded){padding:7px 9px;margin:8px 0 0;font-size:9px}
+ #gameLobby .routes{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;margin-top:9px}
+ #gameLobby .route-card{
+  display:flex;flex-direction:column;min-width:0;min-height:111px;
+  padding:10px 11px;gap:4px;border-radius:14px;
+ }
+ #gameLobby .route-card .route-top{height:29px;align-items:center;justify-content:space-between;gap:6px}
+ #gameLobby .route-icon{height:29px;width:29px;flex:none;font-size:18px;border-radius:10px}
+ #gameLobby .route-length{font-size:9px;padding:4px 7px}
+ #gameLobby .route-card strong{font-size:clamp(12px,3.4vw,14px);line-height:1.14;min-height:28px;letter-spacing:-.025em}
+ #gameLobby .route-card>span:not(.route-top):not(.route-cta){
+  flex:0 0 auto;min-width:0;font-size:9px;line-height:1.25;
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+ }
+ #gameLobby .route-card .route-cta{font-size:10px;line-height:1.1;margin-top:auto}
+ #gameLobby .route-full{
+  grid-column:1/-1;display:grid;grid-template-columns:31px minmax(0,1fr) auto;
+  grid-template-rows:auto auto;align-items:center;gap:2px 10px;
+  min-height:65px;padding:9px 11px;
+ }
+ #gameLobby .route-full .route-top{grid-column:1;grid-row:1 / span 2;justify-content:center}
+ #gameLobby .route-full .route-length{display:none}
+ #gameLobby .route-full strong{grid-column:2;grid-row:1;font-size:13px;min-height:0}
+ #gameLobby .route-full>span:not(.route-top):not(.route-cta){grid-column:2;grid-row:2;font-size:9px;min-width:0;white-space:nowrap;overflow:hidden}
+ #gameLobby .route-full .route-cta{
+  grid-column:3;grid-row:1 / span 2;align-self:center;white-space:nowrap;
+  font-size:9px;margin:0;
+ }
+ #gameLobby .progress-disclosure{margin-top:9px;border-radius:12px}
+ #gameLobby .progress-disclosure>summary{font-size:10px;padding:8px 10px}
+ #gameLobby .progress-disclosure .stats-row{padding:0 8px 8px;gap:5px}
+ #gameLobby .progress-disclosure .stat{padding:8px 5px}
+ #gameLobby .progress-disclosure .stat strong{font-size:17px}
+ #gameLobby .progress-disclosure .stat span{font-size:8px}
+ #gameLobby .source-note{font-size:9px;margin-top:14px}
+ .playing{margin-top:8px}
+ .outcome{margin-top:8px}
+}
+@media(max-width:355px){
+ .brand img{width:139px}
+ .game-hero h1{font-size:22px!important}
+ #gameLobby{padding:10px}
+ #gameLobby .route-card{padding:9px 9px;min-height:110px}
+ #gameLobby .route-card strong{font-size:12px}
+ #gameLobby .route-full{min-height:63px}
+ #gameLobby .class-select select{max-width:101px;font-size:10px;padding:6px 5px}
+ #gameLobby .class-select span{display:none}
+}
+@media(prefers-reduced-motion:reduce){
+ #gameLobby .progress-disclosure>summary::after{transition:none}
+}
+
