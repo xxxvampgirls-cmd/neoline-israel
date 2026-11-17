@@ -82,12 +82,18 @@ jobs:
             if(lawCards<4)throw Error('Six-month laws backlog not displayed: '+lawCards);
             await page.locator('button[data-news-category="all"]').click();
             const cards=await page.locator('.news-card').count();
-            const expectedFirst=Math.min(9,data.items.length);
+            const expectedFirst=Math.min(8,data.items.length);
             if(cards!==expectedFirst)throw Error('Initial lazy batch wrong: cards='+cards+', first='+expectedFirst+', feed='+data.items.length);
-            if(data.items.length>9){
+            if(data.items.length>8){
+              // Scrolling must never append news automatically; only the button does.
+              await page.evaluate(()=>window.scrollTo(0,document.body.scrollHeight));
+              await page.waitForTimeout(700);
+              const stillEight=await page.locator('.news-card').count();
+              if(stillEight!==cards)throw Error('News auto-loaded without explicit click: '+cards+' -> '+stillEight);
               await page.locator('#newsMoreButton').click();
               const next=await page.locator('.news-card').count();
-              if(next<=cards||next>cards+9)throw Error('Lazy news pagination broken '+cards+' -> '+next);
+              if(next<=cards||next>cards+8)throw Error('Click-based news pagination broken '+cards+' -> '+next);
+              console.log('NEWS FIRST 8 AND BUTTON PASS '+cards+' -> '+next);
             }
             if(cards){
              const image=page.locator('.news-card .news-art img, .news-card .news-photo-placeholder').first();
@@ -128,6 +134,25 @@ jobs:
             if(renderedExpired!==0)throw Error('Old news was not filtered by client');
             if(errors.length)throw Error('JS page errors: '+errors.join(' | '));
             console.log('NEWS MOBILE PASS tabs='+tabs+' currentItems='+cards+' expiredRendered='+renderedExpired+' noHorizontalScroll=true JSerrors=0');
+            await page.goto('https://neoline-israel.pages.dev/delivery.html',{waitUntil:'domcontentloaded',timeout:40000});
+            await page.waitForSelector('.network[data-provider="boxit"]');
+            const colors=await page.evaluate(()=>({
+              scheme:getComputedStyle(document.documentElement).colorScheme,
+              card:getComputedStyle(document.querySelector('.side')).backgroundColor,
+              background:getComputedStyle(document.body).backgroundImage
+            }));
+            if(colors.scheme!=='light'||colors.card!=='rgb(255, 255, 255)'||!/245|255/.test(colors.background))
+              throw Error('Pickup locator must use light NEOLINE colors '+JSON.stringify(colors));
+            await page.locator('[data-provider="done"]').click();
+            if(await page.locator('[data-provider="done"]').getAttribute('aria-pressed')!=='true')
+              throw Error('Pickup network selection not working');
+            for(const width of [320,390]){
+              await page.setViewportSize({width,height:844});
+              const dims=await page.evaluate(()=>({scroll:document.documentElement.scrollWidth,width:innerWidth}));
+              if(dims.scroll>dims.width+3)throw Error('Pickup mobile overflow '+JSON.stringify(dims));
+            }
+            if(errors.length)throw Error('Delivery JS page errors: '+errors.join(' | '));
+            console.log('PICKUP LIGHT THEME PASS');
             await browser.close();
           })().catch(e=>{console.error(e);process.exit(1)});
           JS
