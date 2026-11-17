@@ -41,10 +41,19 @@ SEARCH_TERMS={
  "roads":["Israel highway road traffic","urban traffic road","Tel Aviv road"],
  "cars":["electric vehicle charging car","modern sedan highway","car interior dashboard"]
 }
-def date_ok(stamp):
+def date_ok(stamp,category):
  try:
-  age=dt.datetime.now(dt.timezone.utc)-dt.datetime.fromisoformat(stamp.replace("Z","+00:00"))
-  return dt.timedelta(hours=-12)<=age<=dt.timedelta(days=30)
+  now=dt.datetime.now(dt.timezone.utc)
+  published=dt.datetime.fromisoformat(stamp.replace("Z","+00:00"))
+  if published>now+dt.timedelta(hours=12):return False
+  if category=="laws":
+   import calendar
+   month_index=now.year*12+now.month-1-6
+   year,month=divmod(month_index,12)
+   month+=1
+   cutoff=now.replace(year=year,month=month,day=min(now.day,calendar.monthrange(year,month)[1]))
+  else:cutoff=now-dt.timedelta(days=30)
+  return cutoff<=published
  except (ValueError,TypeError,AttributeError):return False
 def image_convert(content, uid, shift=0):
  with Image.open(io.BytesIO(content)) as input_image:
@@ -166,7 +175,7 @@ def photo_fallback(item):
 
 def main():
  manifest=json.loads(MANIFEST.read_text(encoding="utf-8"))
- items=[x for x in manifest.get("items",[]) if date_ok(x.get("date"))]
+ items=[x for x in manifest.get("items",[]) if date_ok(x.get("date"),x.get("category"))]
  PHOTOS.mkdir(parents=True,exist_ok=True)
  ai_used=0;photos_used=0;unavailable=0;max_size=0
  for i,item in enumerate(items):
