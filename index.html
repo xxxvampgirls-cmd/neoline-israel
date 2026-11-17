@@ -1919,7 +1919,9 @@ const showcaseMotionEpoch=performance.now();
 function alignShowcaseMotion(slide){
  if(slide)slide.style.setProperty('--showcase-phase',(-((performance.now()-showcaseMotionEpoch)/1000)).toFixed(3)+'s');
 }
-const featuredIds=[0,1,2,7,'theory'];
+/* 12-slide editorial showroom: products → news promo → three verified stories → services → product → existing game. */
+const featuredIds=[0,1,2,'news-promo','news-0','news-1','news-2','delivery-promo','install-promo','catalog-promo',7,'theory'];
+let homepageNews=[];
 
 
 /* Use available photos of the SAME NEOLINE model before displaying a fallback.
@@ -2035,12 +2037,122 @@ function theorySlide(i){
  +'<div class="featured-image theory-featured-image">'+theoryScene()+'</div></article>';
 }
 
+
+/* Shared backdrop on promo scenes: same stationary icy-blue stage as products. */
+const homepagePromoStripes='<div class="ad-photo-stripes" aria-hidden="true"><span class="ad-photo-band"></span><span class="ad-photo-band"></span>'+
+ [1,2,3,4,5,6,7].map(n=>'<span class="ad-speed-trail ad-speed-trail--'+n+'"></span>').join('')+
+ '<span class="ad-photo-focus"></span></div>';
+const homepageCampaign={
+ ru:{
+  news:{eye:'NEOLINE · АВТОНОВОСТИ',title:'Израильские дороги.<br><em>Все новости в одном месте.</em>',lead:'ДТП, камеры, правила и дороги. Проверенные материалы с датами, краткими обзорами и первоисточниками.',cta:'Читать автоновости',mini:'НОВОСТИ • ИЗРАИЛЬ'},
+  delivery:{eye:'NEOLINE · ДОСТАВКА',title:'Доставка<br><em>по всему Израилю.</em>',lead:'Изучите карту постаматов и пунктов выдачи по стране. Подключение доставки заказов NEOLINE пока готовится.',cta:'Карта пунктов выдачи',mini:'ДОСТАВКА • ИЗРАИЛЬ'},
+  install:{eye:'NEOLINE · СЕРВИС',title:'Установка<br><em>без лишних хлопот.</em>',lead:'Подготовка к профессиональной установке и помощь с выбором подходящей камеры. Условия услуги уточняются.',cta:'Установка и доставка',mini:'КОМФОРТ В ДОРОГЕ'},
+  catalog:{eye:'NEOLINE · КАТАЛОГ',title:'Технологии,<br><em>которые рядом.</em>',lead:'Умные камеры, аксессуары и технические характеристики. Выбирайте и сравнивайте модели NEOLINE.',cta:'Смотреть каталог',mini:'NEOLINE • ТЕХНОЛОГИИ'},
+  latest:'СВЕЖИЕ АВТОНОВОСТИ',read:'Читать на нашем сайте',all:'Все новости',empty:'Сейчас обновляем ленту проверенных новостей',imageNote:'Иллюстрация',photoNote:'Фото первоисточника'
+ },
+ en:{
+  news:{eye:'NEOLINE · AUTO NEWS',title:'Israel’s roads.<br><em>All news in one place.</em>',lead:'Accidents, cameras, rules and highways. Verified updates, dates and original sources.',cta:'Explore auto news',mini:'NEWS • ISRAEL'},
+  delivery:{eye:'NEOLINE · DELIVERY',title:'Delivery<br><em>across Israel.</em>',lead:'Explore parcel lockers and pickup locations nationwide. NEOLINE order delivery is not yet active.',cta:'Pickup point map',mini:'DELIVERY • ISRAEL'},
+  install:{eye:'NEOLINE · SERVICE',title:'Installation<br><em>made simple.</em>',lead:'Planning for professional installation and help selecting a camera. Service availability is to be confirmed.',cta:'Installation and delivery',mini:'ON THE ROAD'},
+  catalog:{eye:'NEOLINE · CATALOG',title:'Technology<br><em>for every drive.</em>',lead:'Dash cameras, accessories and genuine technical specifications. Browse and compare NEOLINE models.',cta:'Browse the catalog',mini:'NEOLINE • TECHNOLOGY'},
+  latest:'LATEST AUTO NEWS',read:'Read on our site',all:'All news',empty:'Updating verified stories',imageNote:'Illustration',photoNote:'Publisher photo'
+ },
+ he:{
+  news:{eye:'NEOLINE · חדשות רכב',title:'הכבישים בישראל.<br><em>כל החדשות במקום אחד.</em>',lead:'תאונות, מצלמות, חוקים ודרכים. דיווחים מאומתים, תאריכים ומקורות.',cta:'לקריאת החדשות',mini:'חדשות • ישראל'},
+  delivery:{eye:'NEOLINE · משלוחים',title:'משלוחים<br><em>בכל רחבי ישראל.</em>',lead:'גלו מפה של לוקרים ונקודות איסוף בארץ. משלוח הזמנות NEOLINE טרם הופעל.',cta:'מפת נקודות איסוף',mini:'משלוחים • ישראל'},
+  install:{eye:'NEOLINE · שירות',title:'התקנה<br><em>פשוטה ונוחה.</em>',lead:'מתכננים שירות התקנה מקצועי ועזרה בבחירת מצלמה. זמינות השירות טרם אושרה.',cta:'התקנה ומשלוחים',mini:'נוחות בדרך'},
+  catalog:{eye:'NEOLINE · קטלוג',title:'טכנולוגיה<br><em>לכל נסיעה.</em>',lead:'מצלמות דרך, אביזרים ומפרטים טכניים אמיתיים. גלו והשוו דגמי NEOLINE.',cta:'לקטלוג',mini:'NEOLINE • טכנולוגיה'},
+  latest:'חדשות רכב עדכניות',read:'לקריאה באתר שלנו',all:'כל החדשות',empty:'מעדכנים ידיעות מאומתות',imageNote:'המחשה',photoNote:'צילום מהמקור'
+ },
+ ar:{
+  news:{eye:'NEOLINE · أخبار السيارات',title:'طرقات إسرائيل.<br><em>الأخبار في مكان واحد.</em>',lead:'حوادث وكاميرات وأنظمة وطرق، مع تواريخ وروابط لمصادر موثوقة.',cta:'اقرأ أخبار السيارات',mini:'الأخبار • إسرائيل'},
+  delivery:{eye:'NEOLINE · التوصيل',title:'التوصيل<br><em>إلى أنحاء إسرائيل.</em>',lead:'استكشف خريطة الخزائن ونقاط الاستلام. توصيل طلبات NEOLINE لم يبدأ بعد.',cta:'خريطة نقاط الاستلام',mini:'التوصيل • إسرائيل'},
+  install:{eye:'NEOLINE · خدمات',title:'تركيب<br><em>بسهولة وراحة.</em>',lead:'خطط لخدمة تركيب احترافي ومساعدة في اختيار الكاميرا؛ توفر الخدمة لم يؤكد بعد.',cta:'التركيب والتوصيل',mini:'راحة على الطريق'},
+  catalog:{eye:'NEOLINE · الكتالوج',title:'تقنية<br><em>لكل رحلة.</em>',lead:'كاميرات السيارات والإكسسوارات والمواصفات التقنية. استكشف وقارن موديلات NEOLINE.',cta:'الكتالوج',mini:'NEOLINE • تقنية'},
+  latest:'آخر أخبار السيارات',read:'اقرأ على موقعنا',all:'جميع الأخبار',empty:'نحدّث الأخبار الموثقة',imageNote:'صورة توضيحية',photoNote:'صورة من الناشر'
+ }
+};
+function homepageCampaignText(){return homepageCampaign[lang]||homepageCampaign.ru}
+const homepageServiceArt={
+ news:'<span class="promo-board promo-board--news" aria-hidden="true"><b>NEOLINE NEWS</b><i></i><i></i><i></i><span class="promo-board-chip">24 / 7</span></span><span class="promo-orbit promo-orbit--news" aria-hidden="true">◉</span>',
+ delivery:'<span class="promo-board promo-board--delivery" aria-hidden="true"><span class="promo-parcel">N</span><span class="promo-location-pin"><i></i></span><span class="promo-road-path"></span></span>',
+ install:'<span class="promo-board promo-board--install" aria-hidden="true"><span class="promo-windscreen"><i></i><i></i></span><span class="promo-install-check">✓</span></span>',
+ catalog:'<span class="promo-board promo-board--catalog" aria-hidden="true"><span class="promo-lens"></span><span class="promo-camera-body"></span><span class="promo-spec-lines"><i></i><i></i><i></i></span></span>'
+};
+function homepageSiteSlide(kind,i){
+ const words=homepageCampaignText()[kind];
+ const href={news:'./news.html',delivery:'./delivery.html',install:'./#installation',catalog:'./#catalog'}[kind];
+ const extra=kind==='catalog'?' data-feature-catalog="1"':'';
+ const action=kind==='catalog'?'<button type="button" class="primary"'+extra+'>'+words.cta+' ↗</button>':
+ '<a class="primary" href="'+href+'">'+words.cta+' ↗</a>';
+ return '<article class="featured-slide featured-slide--site-promo featured-slide--promo-'+kind+' '+(i===slideIndex?'active':'')+'" aria-label="'+words.eye+'">'+
+ '<div class="feature-copy"><div class="eyebrow">'+words.eye+'</div><h1>'+words.title+'</h1><p class="hero-lead">'+words.lead+'</p>'+
+ '<div class="featured-cta">'+action+'</div></div>'+
+ '<div class="featured-image featured-image--site-promo">'+homepagePromoStripes+
+ '<span class="ad-device-shadow" aria-hidden="true"></span>'+
+ '<span class="feature-img-tag">'+words.mini+'</span>'+
+ '<div class="promo-art-object">'+homepageServiceArt[kind]+'</div>'+
+ '<button class="feature-img-prev" type="button" data-feature-prev aria-label="Previous slide">‹</button>'+
+ '<button class="feature-img-next" type="button" data-feature-next aria-label="Next slide">›</button></div></article>';
+}
+function homepageNewsSlide(slot,i){
+ const words=homepageCampaignText(),item=homepageNews[slot],ready=!!item;
+ const row=ready?(item.translations?.[lang]||{}):{};
+ const title=ready?(row.title||((lang==='ru')?item.title:item.titleOriginal)||item.titleOriginal):words.empty;
+ const summary=ready?(row.summary||((lang==='ru')?item.summary:'')||''):'';
+ const category=ready?String(item.category).toUpperCase():'ISRAEL';
+ const url=ready&&/^[a-f0-9]{20}$/.test(item.id)?'./news.html?story='+item.id:'./news.html';
+ const photo=ready&&typeof item.image==='string'&&/^\.\/assets\/news\/images\/[a-f0-9]{20}\.(?:webp|png|jpe?g|svg)$/.test(item.image)?item.image:'';
+ const credit=ready&&item.imageType==='sourceLicensedPhoto'?words.photoNote:words.imageNote;
+ const timestamp=ready?new Intl.DateTimeFormat(({ru:'ru-RU',en:'en-GB',he:'he-IL',ar:'ar-IL'})[lang]||'ru-RU',{timeZone:'Asia/Jerusalem',day:'numeric',month:'short'}).format(new Date(item.date)):'';
+ return '<article class="featured-slide featured-slide--news-item '+(i===slideIndex?'active':'')+'" aria-label="'+words.latest+' '+(slot+1)+'">'+
+ '<div class="feature-copy"><div class="eyebrow">'+words.latest+' · '+(slot+1)+'/3</div>'+
+ '<h1 dir="auto">'+escapeDetailText(title)+'</h1><p class="hero-lead" dir="auto">'+escapeDetailText(summary)+'</p>'+
+ '<div class="featured-cta"><a class="primary" href="'+url+'">'+words.read+' ↗</a>'+
+ '<a class="secondary" href="./news.html">'+words.all+'</a></div></div>'+
+ '<div class="featured-image featured-image--news">'+homepagePromoStripes+
+ '<div class="news-showcase-cutout">'+
+ (photo?'<img src="'+escapeDetailText(photo)+'" alt="" decoding="async" loading="lazy">':
+ '<span class="news-showcase-placeholder" aria-hidden="true">NEOLINE<br>NEWS</span>')+
+ '<div class="news-showcase-coverline"><b>'+escapeDetailText(ready?(item.publisher||category):words.latest)+'</b>'+
+ '<span>'+escapeDetailText(timestamp)+' · '+credit+'</span></div></div>'+
+ '<button class="feature-img-prev" type="button" data-feature-prev aria-label="Previous slide">‹</button>'+
+ '<button class="feature-img-next" type="button" data-feature-next aria-label="Next slide">›</button></div></article>';
+}
+/* Only official local curated feed; never fabricate three stories or retain expired ones.
+   News promos remain visible when the feed is temporarily unreachable. */
+async function loadHomepageNews(){
+ try{
+  const response=await fetch('./assets/news/news.json',{cache:'no-store'});
+  if(!response.ok)throw Error('News feed unavailable');
+  const data=await response.json();
+  if(data.version!==1||!Array.isArray(data.items)||data.retentionDays!==30||data.lawsRetentionMonths!==6)
+   throw Error('Unexpected news schema');
+  const now=Date.now(),sixMonths=new Date(now);sixMonths.setUTCDate(1);sixMonths.setUTCMonth(sixMonths.getUTCMonth()-6);
+  homepageNews=data.items.filter(x=>{
+   const date=Date.parse(x.date),age=now-date;
+   return /^[a-f0-9]{20}$/.test(x.id||'')&&Number.isFinite(age)&&age>=-12*3600e3&&
+    (x.category==='laws'?date>=sixMonths.getTime():age<=30*86400e3)&&
+    typeof x.titleOriginal==='string'&&x.titleOriginal.trim()&&
+    typeof x.url==='string'&&/^https:\/\//.test(x.url);
+  }).sort((a,b)=>Date.parse(b.date)-Date.parse(a.date)).slice(0,3);
+  // Avoid breaking a halfway-complete cutout flight on slow connections.
+  const redraw=()=>{if(document.querySelector('#showcaseSlides .ad-exiting'))setTimeout(redraw,950);else renderShowcase()};
+  redraw();
+ }catch(e){/* Empty slots lead to /news.html rather than showing invented reports. */}
+}
+
 function renderShowcase(){
  const host=$('showcaseSlides');if(!host)return;
  clearTimeout(showcaseExitTimer);
  host.innerHTML=featuredIds.map((id,i)=>{
   if(id===0)return firstIsraelSlide();
-   if(id==='theory')return theorySlide(i);
+  if(id==='theory')return theorySlide(i);
+  if(id==='news-promo')return homepageSiteSlide('news',i);
+  if(id==='delivery-promo')return homepageSiteSlide('delivery',i);
+  if(id==='install-promo')return homepageSiteSlide('install',i);
+  if(id==='catalog-promo')return homepageSiteSlide('catalog',i);
+  if(typeof id==='string'&&/^news-[0-2]$/.test(id))return homepageNewsSlide(Number(id.at(-1)),i);
   const productIndex=[0,1,2,7].indexOf(id);
    const p=products.find(x=>x.id===id),source=(media[id]||[])[0]||'';
   return '<article class="featured-slide '+(i===slideIndex?'active':'')+'" aria-label="'+p.name+'">'
@@ -2213,7 +2325,7 @@ $('adShare').onclick=async()=>{
   else {window.prompt('Copy link',url.href)}
  }catch(e){if(e.name!=='AbortError')toast(({ru:'Не удалось поделиться',en:'Could not share',he:'השיתוף נכשל',ar:'تعذرت المشاركة'})[lang])}
 };
-let preferredLang='ru';try{const saved=localStorage.getItem('neoline-language');if(['ru','he','en','ar'].includes(saved))preferredLang=saved}catch(e){}changeLang(preferredLang);updateCounts();loadTransparentPhotos();
+let preferredLang='ru';try{const saved=localStorage.getItem('neoline-language');if(['ru','he','en','ar'].includes(saved))preferredLang=saved}catch(e){}changeLang(preferredLang);updateCounts();loadTransparentPhotos();loadHomepageNews();
 /* Verify that the official brand asset is reachable; otherwise use a readable
    text fallback. The page remains usable even when the image CDN is blocked. */
 
