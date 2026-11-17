@@ -42,7 +42,7 @@ jobs:
             let deployed=false;
             for(let n=0;n<8;n++){
               await page.goto(origin+'/news.html?traffic-ui-check='+n,{waitUntil:'domcontentloaded',timeout:30000});
-              if(await page.locator('script[src*="traffic-v1"]').count()&&await page.locator('#trafficPanel').count()){
+              if(await page.locator('script[src*="waze-map-v2"]').count()&&await page.locator('#trafficWaze').count()){
                 deployed=true;break;
               }
               await page.waitForTimeout(6500);
