@@ -57,8 +57,11 @@ jobs:
             cutoff.setUTCDate(1);cutoff.setUTCMonth(cutoff.getUTCMonth()-6);
             const lastDay=new Date(Date.UTC(cutoff.getUTCFullYear(),cutoff.getUTCMonth()+1,0)).getUTCDate();
             cutoff.setUTCDate(Math.min(day,lastDay));
-            if(data.items.some(x=>Date.parse(x.date)<(x.category==='laws'?cutoff.getTime():limit)))
-              throw Error('Expired news in published JSON for its category');
+            // The source file updates once a day. An item can expire between the
+            // daily build and this browser check; the client must filter it immediately.
+            const grace=86400*1000;
+            if(data.items.some(x=>Date.parse(x.date)<(x.category==='laws'?cutoff.getTime()-grace:limit-grace)))
+              throw Error('News file exceeds the one-day scheduled-refresh grace period');
             if(!data.items.some(x=>x.category==='laws'&&Date.parse(x.date)<limit))
               throw Error('No older verified six-month rules in archive');
             if(data.items.some(x=>/news\.google\.com|google\.com\/sorry/.test(x.url)))throw Error('Google redirects are not direct publisher links');
