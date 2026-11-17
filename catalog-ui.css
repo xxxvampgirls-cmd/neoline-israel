@@ -57,3 +57,21 @@
   .footer p{margin:5px 0 0!important}
   .footer a{margin:0!important}
 }
+
+/* Five-action mobile menu with news. Product content and cart remain unchanged. */
+@media(max-width:720px){
+  .mobile-nav{
+    grid-template-columns:repeat(5,minmax(0,1fr))!important;
+    padding-inline:3px!important;
+    gap:0!important;
+  }
+  .mobile-nav button{min-width:0!important;padding-inline:1px!important}
+  .mobile-nav .mobile-icon{height:30px!important}
+  .mobile-nav .mobile-icon svg{width:27px!important;height:27px!important}
+  .mobile-nav button > span:last-child{font-size:10px!important;max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  #openNewsMobile .mobile-icon svg{stroke:#137cc7}
+}
+@media(max-width:355px){
+  .mobile-nav .mobile-icon svg{width:25px!important;height:25px!important}
+  .mobile-nav button > span:last-child{font-size:9px!important}
+}
