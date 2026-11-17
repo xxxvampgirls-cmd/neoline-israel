@@ -1,7 +1,7 @@
 {
   "version": 1,
   "retentionDays": 30,
-  "updated": "2026-11-17T09:24:49.551326Z",
+  "updated": "2026-11-17T09:25:53.532297Z",
   "items": [
     {
       "id": "e891ac473e1765f97972",
@@ -80,79 +80,41 @@
       }
     },
     {
-      "id": "e283d7952ee634a4b4c1",
-      "titleOriginal": "פועל בשנות ה-40 לחייו נהרג בתאונת עבודה בבאר יעקב",
+      "id": "012d5943214e1c545480",
+      "titleOriginal": "כביש 334: הולך רגל בן 18 נפצע קשה מפגיעת רכב",
       "sourceLanguage": "he",
-      "date": "2026-11-17T07:42:31Z",
-      "url": "https://www.inn.co.il/flashes/1141262",
-      "publisher": "Arutz Sheva · Israel National News",
-      "category": "accidents",
-      "art": "accidents",
-      "image": "./assets/news/images/e283d7952ee634a4b4c1.webp",
-      "official": false,
-      "translations": {
-        "he": {
-          "title": "פועל בשנות ה-40 לחייו נהרג בתאונת עבודה בבאר יעקב",
-          "summary": "דיווח על תאונת דרכים בישראל. פרטים ועדכונים בכתבת המקור."
-        },
-        "ru": {
-          "title": "40-летний рабочий погиб в результате несчастного случая на производстве в Беэр-Яакове.",
-          "summary": "Дорожное происшествие в Израиле. Обстоятельства и актуальные сведения — в материале источника."
-        },
-        "en": {
-          "title": "A laborer in his 40s was killed in a work accident in Beer Ya'akov",
-          "summary": "A reported road incident in Israel. Details and updates are in the original report."
-        },
-        "ar": {
-          "title": "قُتل عامل في الأربعينيات من عمره بحادث عمل في بئر يعقوب",
-          "summary": "تقرير عن حادث مروري في إسرائيل. التفاصيل والتحديثات في المصدر."
-        }
-      },
-      "title": "40-летний рабочий погиб в результате несчастного случая на производстве в Беэр-Яакове.",
-      "summary": "Дорожное происшествие в Израиле. Обстоятельства и актуальные сведения — в материале источника.",
-      "translated": true,
-      "imageType": "licensedPhoto",
-      "imageCredit": {
-        "text": "Jeff Attaway from Abuja, Nigeria · CC BY 2.0",
-        "url": "https://commons.wikimedia.org/wiki/File:Bad_one_-_auto_wreck_in_Dakar_Senegal,_2011.jpg"
-      }
-    },
-    {
-      "id": "e3b6d4fa7f672ec693fa",
-      "titleOriginal": "באר יעקב: פועל כבן 40 נהרג בתאונת עבודה",
-      "sourceLanguage": "he",
-      "date": "2026-11-17T07:33:46Z",
-      "url": "https://t.me/uh1221/27428",
+      "date": "2026-11-17T06:33:52Z",
+      "url": "https://t.me/uh1221/27426",
       "publisher": "Ихуд Ацала · Telegram",
       "category": "accidents",
       "art": "accidents",
-      "image": "./assets/news/images/e3b6d4fa7f672ec693fa.webp",
+      "image": "./assets/news/images/012d5943214e1c545480.webp",
       "official": false,
       "translations": {
         "he": {
-          "title": "באר יעקב: פועל כבן 40 נהרג בתאונת עבודה",
+          "title": "כביש 334: הולך רגל בן 18 נפצע קשה מפגיעת רכב",
           "summary": "דיווח על תאונת דרכים בישראל. פרטים ועדכונים בכתבת המקור."
         },
         "ru": {
-          "title": "Беэр-Яаков: 40-летний рабочий погиб в результате несчастного случая на производстве",
+          "title": "Маршрут 334: 18-летний пешеход серьезно пострадал от автомобиля",
           "summary": "Дорожное происшествие в Израиле. Обстоятельства и актуальные сведения — в материале источника."
         },
         "en": {
-          "title": "Beer Ya'akov: A 40-year-old laborer was killed in a work accident",
+          "title": "Route 334: An 18-year-old pedestrian was seriously injured by a car",
           "summary": "A reported road incident in Israel. Details and updates are in the original report."
         },
         "ar": {
-          "title": "بئر يعقوب: قُتل عامل (40 عاماً) بحادث عمل",
+          "title": "طريق 334: أصيب أحد المشاة البالغ من العمر 18 عامًا بجروح خطيرة جراء اصطدام سيارة به",
           "summary": "تقرير عن حادث مروري في إسرائيل. التفاصيل والتحديثات في المصدر."
         }
       },
-      "title": "Беэр-Яаков: 40-летний рабочий погиб в результате несчастного случая на производстве",
+      "title": "Маршрут 334: 18-летний пешеход серьезно пострадал от автомобиля",
       "summary": "Дорожное происшествие в Израиле. Обстоятельства и актуальные сведения — в материале источника.",
       "translated": true,
       "imageType": "licensedPhoto",
       "imageCredit": {
-        "text": "Jeff Attaway from Abuja, Nigeria · CC BY 2.0",
-        "url": "https://commons.wikimedia.org/wiki/File:Bad_one_-_auto_wreck_in_Dakar_Senegal,_2011.jpg"
+        "text": "No machine-readable author provided. EPO assumed (based on copyright claims). · CC BY 2.5",
+        "url": "https://commons.wikimedia.org/wiki/File:Falck_sv_04.jpg"
       }
     },
     {
@@ -232,44 +194,6 @@
       }
     },
     {
-      "id": "012d5943214e1c545480",
-      "titleOriginal": "כביש 334: הולך רגל בן 18 נפצע קשה מפגיעת רכב",
-      "sourceLanguage": "he",
-      "date": "2026-11-17T06:33:52Z",
-      "url": "https://t.me/uh1221/27426",
-      "publisher": "Ихуд Ацала · Telegram",
-      "category": "accidents",
-      "art": "accidents",
-      "image": "./assets/news/images/012d5943214e1c545480.webp",
-      "official": false,
-      "translations": {
-        "he": {
-          "title": "כביש 334: הולך רגל בן 18 נפצע קשה מפגיעת רכב",
-          "summary": "דיווח על תאונת דרכים בישראל. פרטים ועדכונים בכתבת המקור."
-        },
-        "ru": {
-          "title": "Маршрут 334: 18-летний пешеход серьезно пострадал от автомобиля",
-          "summary": "Дорожное происшествие в Израиле. Обстоятельства и актуальные сведения — в материале источника."
-        },
-        "en": {
-          "title": "Route 334: An 18-year-old pedestrian was seriously injured by a car",
-          "summary": "A reported road incident in Israel. Details and updates are in the original report."
-        },
-        "ar": {
-          "title": "طريق 334: أصيب أحد المشاة البالغ من العمر 18 عامًا بجروح خطيرة جراء اصطدام سيارة به",
-          "summary": "تقرير عن حادث مروري في إسرائيل. التفاصيل والتحديثات في المصدر."
-        }
-      },
-      "title": "Маршрут 334: 18-летний пешеход серьезно пострадал от автомобиля",
-      "summary": "Дорожное происшествие в Израиле. Обстоятельства и актуальные сведения — в материале источника.",
-      "translated": true,
-      "imageType": "licensedPhoto",
-      "imageCredit": {
-        "text": "No machine-readable author provided. EPO assumed (based on copyright claims). · CC BY 2.5",
-        "url": "https://commons.wikimedia.org/wiki/File:Falck_sv_04.jpg"
-      }
-    },
-    {
       "id": "ce5de5cd824d3a5f58eb",
       "titleOriginal": "צעיר בן 20 נפצע קשה בעקבות פגיעת רכב בכביש 334",
       "sourceLanguage": "he",
@@ -305,44 +229,6 @@
       "imageCredit": {
         "text": "Jeff Attaway from Abuja, Nigeria · CC BY 2.0",
         "url": "https://commons.wikimedia.org/wiki/File:Bad_one_-_auto_wreck_in_Dakar_Senegal,_2011.jpg"
-      }
-    },
-    {
-      "id": "da2cf6ee9d982ca94bd6",
-      "titleOriginal": "Крымский мост почти все - обрушился пролет автомобильной части моста.",
-      "sourceLanguage": "en",
-      "date": "2026-11-17T05:39:47Z",
-      "url": "https://t.me/alexavni/165593",
-      "publisher": "Алексей Железнов · Telegram",
-      "category": "cars",
-      "art": "cars",
-      "image": "./assets/news/images/da2cf6ee9d982ca94bd6.webp",
-      "official": false,
-      "translations": {
-        "he": {
-          "title": "גשר קרים כמעט הושלם - הטווח של חלק הרכב של הגשר קרס.",
-          "summary": "כתבה על מכוניות או שוק הרכב בישראל. פרטים באתר המקור."
-        },
-        "ru": {
-          "title": "Крымский мост почти все - обрушился пролет автомобильной части моста.",
-          "summary": "Материал об автомобиле или автомобильном рынке Израиля. Подробности — на сайте издания."
-        },
-        "en": {
-          "title": "Крымский мост почти все - обрушился пролет автомобильной части моста.",
-          "summary": "An update about vehicles or Israel's car market. Details are available at the source."
-        },
-        "ar": {
-          "title": "اكتمل جسر القرم تقريبًا - لقد انهار امتداد جزء السيارة من الجسر.",
-          "summary": "تحديث عن السيارات أو سوق المركبات في إسرائيل. التفاصيل في المصدر."
-        }
-      },
-      "title": "Крымский мост почти все - обрушился пролет автомобильной части моста.",
-      "summary": "Материал об автомобиле или автомобильном рынке Израиля. Подробности — на сайте издания.",
-      "translated": true,
-      "imageType": "licensedPhoto",
-      "imageCredit": {
-        "text": "Eric Friedebach · CC BY 2.0",
-        "url": "https://commons.wikimedia.org/wiki/File:1973_Ford_Mustang_Interior_Dashboard_(51838912069).jpg"
       }
     },
     {
@@ -429,35 +315,35 @@
       "date": "2026-11-16T13:25:12Z",
       "url": "https://t.me/NEWSruIsrael/125929",
       "publisher": "NEWSru.co.il · Telegram",
-      "category": "cars",
-      "art": "cars",
+      "category": "accidents",
+      "art": "accidents",
       "image": "./assets/news/images/66091087e7ce60ac7523.webp",
       "official": false,
       "translations": {
         "he": {
           "title": "הולך רגל נפגע מרכב בקריית ביאליק, פצוע במצב קשה",
-          "summary": "כתבה על מכוניות או שוק הרכב בישראל. פרטים באתר המקור."
+          "summary": "דיווח על תאונת דרכים בישראל. פרטים ועדכונים בכתבת המקור."
         },
         "ru": {
           "title": "В Кирьят-Бялике автомобиль сбил пешехода, пострадавший в тяжелом состоянии",
-          "summary": "Материал об автомобиле или автомобильном рынке Израиля. Подробности — на сайте издания."
+          "summary": "Дорожное происшествие в Израиле. Обстоятельства и актуальные сведения — в материале источника."
         },
         "en": {
           "title": "В Кирьят-Бялике автомобиль сбил пешехода, пострадавший в тяжелом состоянии",
-          "summary": "An update about vehicles or Israel's car market. Details are available at the source."
+          "summary": "A reported road incident in Israel. Details and updates are in the original report."
         },
         "ar": {
           "title": "صدمت سيارة أحد المشاة في كريات بياليك، وأصيب في حالة خطيرة",
-          "summary": "تحديث عن السيارات أو سوق المركبات في إسرائيل. التفاصيل في المصدر."
+          "summary": "تقرير عن حادث مروري في إسرائيل. التفاصيل والتحديثات في المصدر."
         }
       },
       "title": "В Кирьят-Бялике автомобиль сбил пешехода, пострадавший в тяжелом состоянии",
-      "summary": "Материал об автомобиле или автомобильном рынке Израиля. Подробности — на сайте издания.",
+      "summary": "Дорожное происшествие в Израиле. Обстоятельства и актуальные сведения — в материале источника.",
       "translated": true,
       "imageType": "licensedPhoto",
       "imageCredit": {
-        "text": "Eric Friedebach · CC BY 2.0",
-        "url": "https://commons.wikimedia.org/wiki/File:1973_Ford_Mustang_Interior_Dashboard_(51838912069).jpg"
+        "text": "No machine-readable author provided. EPO assumed (based on copyright claims). · CC BY 2.5",
+        "url": "https://commons.wikimedia.org/wiki/File:Falck_sv_04.jpg"
       }
     },
     {
@@ -1731,41 +1617,41 @@
       }
     },
     {
-      "id": "c4c48915651e72f6614e",
-      "titleOriginal": "כפר סבא: פועל נפצע בינוני בתאונת עבודה",
+      "id": "3d8e62d00854ce1b351d",
+      "titleOriginal": "תאונה עם מעורבות שני כלי רכב אירעה בכביש 44 סמוך לצומת הכניסה לצלפון.",
       "sourceLanguage": "he",
-      "date": "2026-11-16T07:02:38Z",
-      "url": "https://t.me/uh1221/27400",
+      "date": "2026-11-16T00:13:50Z",
+      "url": "https://t.me/uh1221/27398",
       "publisher": "Ихуд Ацала · Telegram",
       "category": "accidents",
       "art": "accidents",
-      "image": "./assets/news/images/c4c48915651e72f6614e.webp",
+      "image": "./assets/news/images/3d8e62d00854ce1b351d.webp",
       "official": false,
       "translations": {
         "he": {
-          "title": "כפר סבא: פועל נפצע בינוני בתאונת עבודה",
+          "title": "תאונה עם מעורבות שני כלי רכב אירעה בכביש 44 סמוך לצומת הכניסה לצלפון.",
           "summary": "דיווח על תאונת דרכים בישראל. פרטים ועדכונים בכתבת המקור."
         },
         "ru": {
-          "title": "Кфар-Саба: Рабочий получил ранение средней степени тяжести в результате несчастного случая на производстве",
+          "title": "Авария с участием двух транспортных средств произошла на 44-м шоссе недалеко от въезда в Залфон.",
           "summary": "Дорожное происшествие в Израиле. Обстоятельства и актуальные сведения — в материале источника."
         },
         "en": {
-          "title": "Kfar Saba: A worker was moderately injured in a work accident",
+          "title": "An accident involving two vehicles happened on Route 44 near the entrance to Zalphon.",
           "summary": "A reported road incident in Israel. Details and updates are in the original report."
         },
         "ar": {
-          "title": "كفار سابا: إصابة عامل بجراح متوسطة في حادث عمل",
+          "title": "وقع حادث بين مركبتين على شارع 44 قرب مدخل زالفون.",
           "summary": "تقرير عن حادث مروري في إسرائيل. التفاصيل والتحديثات في المصدر."
         }
       },
-      "title": "Кфар-Саба: Рабочий получил ранение средней степени тяжести в результате несчастного случая на производстве",
+      "title": "Авария с участием двух транспортных средств произошла на 44-м шоссе недалеко от въезда в Залфон.",
       "summary": "Дорожное происшествие в Израиле. Обстоятельства и актуальные сведения — в материале источника.",
       "translated": true,
       "imageType": "licensedPhoto",
       "imageCredit": {
-        "text": "Wikimedia Commons · Public domain",
-        "url": "https://commons.wikimedia.org/wiki/File:Hurricane_Rita_Evacuation_ambulance_1.jpg"
+        "text": "No machine-readable author provided. EPO assumed (based on copyright claims). · CC BY 2.5",
+        "url": "https://commons.wikimedia.org/wiki/File:Falck_sv_04.jpg"
       }
     },
     {
@@ -1848,41 +1734,41 @@
       }
     },
     {
-      "id": "3d8e62d00854ce1b351d",
-      "titleOriginal": "תאונה עם מעורבות שני כלי רכב אירעה בכביש 44 סמוך לצומת הכניסה לצלפון.",
+      "id": "c7cc82e345b6b58d8a8e",
+      "titleOriginal": "ירושלים: הולך רגל כבן 10 נפגע מרכב - מצבו בינוני",
       "sourceLanguage": "he",
-      "date": "2026-11-16T00:13:50Z",
-      "url": "https://t.me/uh1221/27398",
+      "date": "2026-11-15T20:31:54Z",
+      "url": "https://t.me/uh1221/27397",
       "publisher": "Ихуд Ацала · Telegram",
       "category": "accidents",
       "art": "accidents",
-      "image": "./assets/news/images/3d8e62d00854ce1b351d.webp",
+      "image": "./assets/news/images/c7cc82e345b6b58d8a8e.webp",
       "official": false,
       "translations": {
         "he": {
-          "title": "תאונה עם מעורבות שני כלי רכב אירעה בכביש 44 סמוך לצומת הכניסה לצלפון.",
+          "title": "ירושלים: הולך רגל כבן 10 נפגע מרכב - מצבו בינוני",
           "summary": "דיווח על תאונת דרכים בישראל. פרטים ועדכונים בכתבת המקור."
         },
         "ru": {
-          "title": "Авария с участием двух транспортных средств произошла на 44-м шоссе недалеко от въезда в Залфон.",
+          "title": "Иерусалим: 10-летнего пешехода сбила машина - его состояние средней степени тяжести",
           "summary": "Дорожное происшествие в Израиле. Обстоятельства и актуальные сведения — в материале источника."
         },
         "en": {
-          "title": "An accident involving two vehicles happened on Route 44 near the entrance to Zalphon.",
+          "title": "Jerusalem: A 10-year-old pedestrian was hit by a car - his condition is moderate",
           "summary": "A reported road incident in Israel. Details and updates are in the original report."
         },
         "ar": {
-          "title": "وقع حادث بين مركبتين على شارع 44 قرب مدخل زالفون.",
+          "title": "القدس: أصيب طفل يبلغ من العمر 10 سنوات بحادث سير، وحالته متوسطة",
           "summary": "تقرير عن حادث مروري في إسرائيل. التفاصيل والتحديثات في المصدر."
         }
       },
-      "title": "Авария с участием двух транспортных средств произошла на 44-м шоссе недалеко от въезда в Залфон.",
+      "title": "Иерусалим: 10-летнего пешехода сбила машина - его состояние средней степени тяжести",
       "summary": "Дорожное происшествие в Израиле. Обстоятельства и актуальные сведения — в материале источника.",
       "translated": true,
       "imageType": "licensedPhoto",
       "imageCredit": {
-        "text": "No machine-readable author provided. EPO assumed (based on copyright claims). · CC BY 2.5",
-        "url": "https://commons.wikimedia.org/wiki/File:Falck_sv_04.jpg"
+        "text": "Jeff Attaway from Abuja, Nigeria · CC BY 2.0",
+        "url": "https://commons.wikimedia.org/wiki/File:Bad_one_-_auto_wreck_in_Dakar_Senegal,_2011.jpg"
       }
     },
     {
@@ -1962,41 +1848,41 @@
       }
     },
     {
-      "id": "c7cc82e345b6b58d8a8e",
-      "titleOriginal": "ירושלים: הולך רגל כבן 10 נפגע מרכב - מצבו בינוני",
+      "id": "b6b16f68cf9892ffd0e7",
+      "titleOriginal": "בני ברק: בן 7 רוכב קורקינט נפצע בתאונה - מצבו בינוני",
       "sourceLanguage": "he",
-      "date": "2026-11-15T20:31:54Z",
-      "url": "https://t.me/uh1221/27397",
+      "date": "2026-11-15T20:08:18Z",
+      "url": "https://t.me/uh1221/27396",
       "publisher": "Ихуд Ацала · Telegram",
       "category": "accidents",
       "art": "accidents",
-      "image": "./assets/news/images/c7cc82e345b6b58d8a8e.webp",
+      "image": "./assets/news/images/b6b16f68cf9892ffd0e7.webp",
       "official": false,
       "translations": {
         "he": {
-          "title": "ירושלים: הולך רגל כבן 10 נפגע מרכב - מצבו בינוני",
+          "title": "בני ברק: בן 7 רוכב קורקינט נפצע בתאונה - מצבו בינוני",
           "summary": "דיווח על תאונת דרכים בישראל. פרטים ועדכונים בכתבת המקור."
         },
         "ru": {
-          "title": "Иерусалим: 10-летнего пешехода сбила машина - его состояние средней степени тяжести",
+          "title": "Бней-Брак: В результате аварии пострадал 7-летний водитель самоката, его состояние средней степени тяжести",
           "summary": "Дорожное происшествие в Израиле. Обстоятельства и актуальные сведения — в материале источника."
         },
         "en": {
-          "title": "Jerusalem: A 10-year-old pedestrian was hit by a car - his condition is moderate",
+          "title": "Bnei Brak: A 7-year-old scooter rider was injured in an accident - his condition is moderate",
           "summary": "A reported road incident in Israel. Details and updates are in the original report."
         },
         "ar": {
-          "title": "القدس: أصيب طفل يبلغ من العمر 10 سنوات بحادث سير، وحالته متوسطة",
+          "title": "بني براك: أصيب سائق دراجة نارية يبلغ من العمر 7 سنوات في حادث - وحالته متوسطة",
           "summary": "تقرير عن حادث مروري في إسرائيل. التفاصيل والتحديثات في المصدر."
         }
       },
-      "title": "Иерусалим: 10-летнего пешехода сбила машина - его состояние средней степени тяжести",
+      "title": "Бней-Брак: В результате аварии пострадал 7-летний водитель самоката, его состояние средней степени тяжести",
       "summary": "Дорожное происшествие в Израиле. Обстоятельства и актуальные сведения — в материале источника.",
       "translated": true,
       "imageType": "licensedPhoto",
       "imageCredit": {
-        "text": "Jeff Attaway from Abuja, Nigeria · CC BY 2.0",
-        "url": "https://commons.wikimedia.org/wiki/File:Bad_one_-_auto_wreck_in_Dakar_Senegal,_2011.jpg"
+        "text": "Wikimedia Commons · Public domain",
+        "url": "https://commons.wikimedia.org/wiki/File:Hurricane_Rita_Evacuation_ambulance_1.jpg"
       }
     },
     {
@@ -2077,41 +1963,41 @@
       }
     },
     {
-      "id": "b6b16f68cf9892ffd0e7",
-      "titleOriginal": "בני ברק: בן 7 רוכב קורקינט נפצע בתאונה - מצבו בינוני",
+      "id": "2b9f8bb4a11fffd62c50",
+      "titleOriginal": "צוותי הרפואה של איחוד הצלה הוזעקו לרחוב רבי חייא באלעד עקב דיווח על הולך רגל שנפגע מאופניים חשמליות.",
       "sourceLanguage": "he",
-      "date": "2026-11-15T20:08:18Z",
-      "url": "https://t.me/uh1221/27396",
+      "date": "2026-11-15T19:59:21Z",
+      "url": "https://t.me/uh1221/27395",
       "publisher": "Ихуд Ацала · Telegram",
-      "category": "accidents",
-      "art": "accidents",
-      "image": "./assets/news/images/b6b16f68cf9892ffd0e7.webp",
+      "category": "cars",
+      "art": "cars",
+      "image": "./assets/news/images/2b9f8bb4a11fffd62c50.webp",
       "official": false,
       "translations": {
         "he": {
-          "title": "בני ברק: בן 7 רוכב קורקינט נפצע בתאונה - מצבו בינוני",
-          "summary": "דיווח על תאונת דרכים בישראל. פרטים ועדכונים בכתבת המקור."
+          "title": "צוותי הרפואה של איחוד הצלה הוזעקו לרחוב רבי חייא באלעד עקב דיווח על הולך רגל שנפגע מאופניים חשמליות.",
+          "summary": "כתבה על מכוניות או שוק הרכב בישראל. פרטים באתר המקור."
         },
         "ru": {
-          "title": "Бней-Брак: В результате аварии пострадал 7-летний водитель самоката, его состояние средней степени тяжести",
-          "summary": "Дорожное происшествие в Израиле. Обстоятельства и актуальные сведения — в материале источника."
+          "title": "Медицинские бригады Союза спасателей были вызваны на улицу Рабби Хайя в Эльаде из-за сообщения о пешеходе, пострадавшем от электровелосипеда.",
+          "summary": "Материал об автомобиле или автомобильном рынке Израиля. Подробности — на сайте издания."
         },
         "en": {
-          "title": "Bnei Brak: A 7-year-old scooter rider was injured in an accident - his condition is moderate",
-          "summary": "A reported road incident in Israel. Details and updates are in the original report."
+          "title": "The medical teams of the Rescue Union were called to Rabbi Haya Street in Elad due to a report of a pedestrian injured by an electric bicycle.",
+          "summary": "An update about vehicles or Israel's car market. Details are available at the source."
         },
         "ar": {
-          "title": "بني براك: أصيب سائق دراجة نارية يبلغ من العمر 7 سنوات في حادث - وحالته متوسطة",
-          "summary": "تقرير عن حادث مروري في إسرائيل. التفاصيل والتحديثات في المصدر."
+          "title": "تم استدعاء الطواقم الطبية التابعة لاتحاد الإنقاذ إلى شارع الحاخام هيا في العاد بسبب بلاغ عن إصابة أحد المارة بدراجة كهربائية.",
+          "summary": "تحديث عن السيارات أو سوق المركبات في إسرائيل. التفاصيل في المصدر."
         }
       },
-      "title": "Бней-Брак: В результате аварии пострадал 7-летний водитель самоката, его состояние средней степени тяжести",
-      "summary": "Дорожное происшествие в Израиле. Обстоятельства и актуальные сведения — в материале источника.",
+      "title": "Медицинские бригады Союза спасателей были вызваны на улицу Рабби Хайя в Эльаде из-за сообщения о пешеходе, пострадавшем от электровелосипеда.",
+      "summary": "Материал об автомобиле или автомобильном рынке Израиля. Подробности — на сайте издания.",
       "translated": true,
       "imageType": "licensedPhoto",
       "imageCredit": {
-        "text": "Wikimedia Commons · Public domain",
-        "url": "https://commons.wikimedia.org/wiki/File:Hurricane_Rita_Evacuation_ambulance_1.jpg"
+        "text": "Eric Friedebach · CC BY 2.0",
+        "url": "https://commons.wikimedia.org/wiki/File:1973_Ford_Mustang_Interior_Dashboard_(51838912069).jpg"
       }
     },
     {
@@ -2192,41 +2078,41 @@
       }
     },
     {
-      "id": "2b9f8bb4a11fffd62c50",
-      "titleOriginal": "צוותי הרפואה של איחוד הצלה הוזעקו לרחוב רבי חייא באלעד עקב דיווח על הולך רגל שנפגע מאופניים חשמליות.",
+      "id": "c0574ac9b24c0f469e34",
+      "titleOriginal": "צוותי הרפואה של איחוד הצלה העניקו סיוע רפואי ראשוני לנהג רכב (בן 60) שנפצע באורח קל כתוצאה מתאונה עצמית בשדרות הדקל בבית שמש.",
       "sourceLanguage": "he",
-      "date": "2026-11-15T19:59:21Z",
-      "url": "https://t.me/uh1221/27395",
+      "date": "2026-11-15T19:51:02Z",
+      "url": "https://t.me/uh1221/27394",
       "publisher": "Ихуд Ацала · Telegram",
-      "category": "cars",
-      "art": "cars",
-      "image": "./assets/news/images/2b9f8bb4a11fffd62c50.webp",
+      "category": "accidents",
+      "art": "accidents",
+      "image": "./assets/news/images/c0574ac9b24c0f469e34.webp",
       "official": false,
       "translations": {
         "he": {
-          "title": "צוותי הרפואה של איחוד הצלה הוזעקו לרחוב רבי חייא באלעד עקב דיווח על הולך רגל שנפגע מאופניים חשמליות.",
-          "summary": "כתבה על מכוניות או שוק הרכב בישראל. פרטים באתר המקור."
+          "title": "צוותי הרפואה של איחוד הצלה העניקו סיוע רפואי ראשוני לנהג רכב (בן 60) שנפצע באורח קל כתוצאה מתאונה עצמית בשדרות הדקל בבית שמש.",
+          "summary": "דיווח על תאונת דרכים בישראל. פרטים ועדכונים בכתבת המקור."
         },
         "ru": {
-          "title": "Медицинские бригады Союза спасателей были вызваны на улицу Рабби Хайя в Эльаде из-за сообщения о пешеходе, пострадавшем от электровелосипеда.",
-          "summary": "Материал об автомобиле или автомобильном рынке Израиля. Подробности — на сайте издания."
+          "title": "Медицинские бригады Союза спасателей оказали первую медицинскую помощь водителю автомобиля (60 лет), получившему легкие травмы в результате ДТП на бульваре Декаль в Бейт-Шемеше.",
+          "summary": "Дорожное происшествие в Израиле. Обстоятельства и актуальные сведения — в материале источника."
         },
         "en": {
-          "title": "The medical teams of the Rescue Union were called to Rabbi Haya Street in Elad due to a report of a pedestrian injured by an electric bicycle.",
-          "summary": "An update about vehicles or Israel's car market. Details are available at the source."
+          "title": "The medical teams of the Rescue Union provided initial medical aid to a car driver (age 60) who was slightly injured as a result of a self-inflicted accident on Dekal Boulevard in Beit Shemesh.",
+          "summary": "A reported road incident in Israel. Details and updates are in the original report."
         },
         "ar": {
-          "title": "تم استدعاء الطواقم الطبية التابعة لاتحاد الإنقاذ إلى شارع الحاخام هيا في العاد بسبب بلاغ عن إصابة أحد المارة بدراجة كهربائية.",
-          "summary": "تحديث عن السيارات أو سوق المركبات في إسرائيل. التفاصيل في المصدر."
+          "title": "قدمت الطواقم الطبية التابعة لاتحاد الإنقاذ الإسعافات الأولية لسائق سيارة (60 عاما) أصيب بجروح طفيفة نتيجة تعرضه لحادث سير في شارع ديكال في بيت شيمش.",
+          "summary": "تقرير عن حادث مروري في إسرائيل. التفاصيل والتحديثات في المصدر."
         }
       },
-      "title": "Медицинские бригады Союза спасателей были вызваны на улицу Рабби Хайя в Эльаде из-за сообщения о пешеходе, пострадавшем от электровелосипеда.",
-      "summary": "Материал об автомобиле или автомобильном рынке Израиля. Подробности — на сайте издания.",
+      "title": "Медицинские бригады Союза спасателей оказали первую медицинскую помощь водителю автомобиля (60 лет), получившему легкие травмы в результате ДТП на бульваре Декаль в Бейт-Шемеше.",
+      "summary": "Дорожное происшествие в Израиле. Обстоятельства и актуальные сведения — в материале источника.",
       "translated": true,
       "imageType": "licensedPhoto",
       "imageCredit": {
-        "text": "Eric Friedebach · CC BY 2.0",
-        "url": "https://commons.wikimedia.org/wiki/File:1973_Ford_Mustang_Interior_Dashboard_(51838912069).jpg"
+        "text": "Jeff Attaway from Abuja, Nigeria · CC BY 2.0",
+        "url": "https://commons.wikimedia.org/wiki/File:Bad_one_-_auto_wreck_in_Dakar_Senegal,_2011.jpg"
       }
     },
     {
@@ -2307,41 +2193,41 @@
       }
     },
     {
-      "id": "c0574ac9b24c0f469e34",
-      "titleOriginal": "צוותי הרפואה של איחוד הצלה העניקו סיוע רפואי ראשוני לנהג רכב (בן 60) שנפצע באורח קל כתוצאה מתאונה עצמית בשדרות הדקל בבית שמש.",
+      "id": "954c10633c24e3464fa2",
+      "titleOriginal": "בת ים: הולכת רגל נפגעה מרכב - מצבה בינוני",
       "sourceLanguage": "he",
-      "date": "2026-11-15T19:51:02Z",
-      "url": "https://t.me/uh1221/27394",
+      "date": "2026-11-15T18:12:51Z",
+      "url": "https://t.me/uh1221/27390",
       "publisher": "Ихуд Ацала · Telegram",
-      "category": "accidents",
-      "art": "accidents",
-      "image": "./assets/news/images/c0574ac9b24c0f469e34.webp",
+      "category": "cars",
+      "art": "cars",
+      "image": "./assets/news/images/954c10633c24e3464fa2.webp",
       "official": false,
       "translations": {
         "he": {
-          "title": "צוותי הרפואה של איחוד הצלה העניקו סיוע רפואי ראשוני לנהג רכב (בן 60) שנפצע באורח קל כתוצאה מתאונה עצמית בשדרות הדקל בבית שמש.",
-          "summary": "דיווח על תאונת דרכים בישראל. פרטים ועדכונים בכתבת המקור."
+          "title": "בת ים: הולכת רגל נפגעה מרכב - מצבה בינוני",
+          "summary": "כתבה על מכוניות או שוק הרכב בישראל. פרטים באתר המקור."
         },
         "ru": {
-          "title": "Медицинские бригады Союза спасателей оказали первую медицинскую помощь водителю автомобиля (60 лет), получившему легкие травмы в результате ДТП на бульваре Декаль в Бейт-Шемеше.",
-          "summary": "Дорожное происшествие в Израиле. Обстоятельства и актуальные сведения — в материале источника."
+          "title": "Бат-Ям: Пешехода сбила машина, ее состояние средней степени тяжести",
+          "summary": "Материал об автомобиле или автомобильном рынке Израиля. Подробности — на сайте издания."
         },
         "en": {
-          "title": "The medical teams of the Rescue Union provided initial medical aid to a car driver (age 60) who was slightly injured as a result of a self-inflicted accident on Dekal Boulevard in Beit Shemesh.",
-          "summary": "A reported road incident in Israel. Details and updates are in the original report."
+          "title": "Bat Yam: A pedestrian was hit by a vehicle - her condition is moderate",
+          "summary": "An update about vehicles or Israel's car market. Details are available at the source."
         },
         "ar": {
-          "title": "قدمت الطواقم الطبية التابعة لاتحاد الإنقاذ الإسعافات الأولية لسائق سيارة (60 عاما) أصيب بجروح طفيفة نتيجة تعرضه لحادث سير في شارع ديكال في بيت شيمش.",
-          "summary": "تقرير عن حادث مروري في إسرائيل. التفاصيل والتحديثات في المصدر."
+          "title": "بات يام: صدمت سيارة أحد المارة وحالتها متوسطة",
+          "summary": "تحديث عن السيارات أو سوق المركبات في إسرائيل. التفاصيل في المصدر."
         }
       },
-      "title": "Медицинские бригады Союза спасателей оказали первую медицинскую помощь водителю автомобиля (60 лет), получившему легкие травмы в результате ДТП на бульваре Декаль в Бейт-Шемеше.",
-      "summary": "Дорожное происшествие в Израиле. Обстоятельства и актуальные сведения — в материале источника.",
+      "title": "Бат-Ям: Пешехода сбила машина, ее состояние средней степени тяжести",
+      "summary": "Материал об автомобиле или автомобильном рынке Израиля. Подробности — на сайте издания.",
       "translated": true,
       "imageType": "licensedPhoto",
       "imageCredit": {
-        "text": "Jeff Attaway from Abuja, Nigeria · CC BY 2.0",
-        "url": "https://commons.wikimedia.org/wiki/File:Bad_one_-_auto_wreck_in_Dakar_Senegal,_2011.jpg"
+        "text": "Ivan Radic · CC BY 2.0",
+        "url": "https://commons.wikimedia.org/wiki/File:Close-up_of_an_electric_car_charging._Traffic_lights_in_a_blurry_background.jpg"
       }
     },
     {
@@ -2422,44 +2308,6 @@
       }
     },
     {
-      "id": "954c10633c24e3464fa2",
-      "titleOriginal": "בת ים: הולכת רגל נפגעה מרכב - מצבה בינוני",
-      "sourceLanguage": "he",
-      "date": "2026-11-15T18:12:51Z",
-      "url": "https://t.me/uh1221/27390",
-      "publisher": "Ихуд Ацала · Telegram",
-      "category": "cars",
-      "art": "cars",
-      "image": "./assets/news/images/954c10633c24e3464fa2.webp",
-      "official": false,
-      "translations": {
-        "he": {
-          "title": "בת ים: הולכת רגל נפגעה מרכב - מצבה בינוני",
-          "summary": "כתבה על מכוניות או שוק הרכב בישראל. פרטים באתר המקור."
-        },
-        "ru": {
-          "title": "Бат-Ям: Пешехода сбила машина, ее состояние средней степени тяжести",
-          "summary": "Материал об автомобиле или автомобильном рынке Израиля. Подробности — на сайте издания."
-        },
-        "en": {
-          "title": "Bat Yam: A pedestrian was hit by a vehicle - her condition is moderate",
-          "summary": "An update about vehicles or Israel's car market. Details are available at the source."
-        },
-        "ar": {
-          "title": "بات يام: صدمت سيارة أحد المارة وحالتها متوسطة",
-          "summary": "تحديث عن السيارات أو سوق المركبات في إسرائيل. التفاصيل في المصدر."
-        }
-      },
-      "title": "Бат-Ям: Пешехода сбила машина, ее состояние средней степени тяжести",
-      "summary": "Материал об автомобиле или автомобильном рынке Израиля. Подробности — на сайте издания.",
-      "translated": true,
-      "imageType": "licensedPhoto",
-      "imageCredit": {
-        "text": "Ivan Radic · CC BY 2.0",
-        "url": "https://commons.wikimedia.org/wiki/File:Close-up_of_an_electric_car_charging._Traffic_lights_in_a_blurry_background.jpg"
-      }
-    },
-    {
       "id": "fcb36b42a40b88282d55",
       "titleOriginal": "צוותי הרפואה של איחוד הצלה הוזעקו לרחוב אברבנאל בבני ברק, עקב דיווח על ילד הולך רגל שנפגע מרכב.",
       "sourceLanguage": "he",
@@ -2495,44 +2343,6 @@
       "imageCredit": {
         "text": "Jeff Attaway from Abuja, Nigeria · CC BY 2.0",
         "url": "https://commons.wikimedia.org/wiki/File:Bad_one_-_auto_wreck_in_Dakar_Senegal,_2011.jpg"
-      }
-    },
-    {
-      "id": "2c4584c5e877e25e077e",
-      "titleOriginal": "פולקסווגן גולף R בישראל: 333 כ\"ס, 310 אלף שקל",
-      "sourceLanguage": "he",
-      "date": "2026-10-27T20:12:00Z",
-      "url": "https://cars.walla.co.il/item/3873967",
-      "publisher": "Walla",
-      "category": "cars",
-      "art": "cars",
-      "image": "./assets/news/images/2c4584c5e877e25e077e.webp",
-      "official": false,
-      "translations": {
-        "he": {
-          "title": "פולקסווגן גולף R בישראל: 333 כ\"ס, 310 אלף שקל",
-          "summary": "כתבה על מכוניות או שוק הרכב בישראל. פרטים באתר המקור."
-        },
-        "ru": {
-          "title": "Volkswagen Golf R в Израиле: 333 л.с., 310 000 шекелей",
-          "summary": "Материал об автомобиле или автомобильном рынке Израиля. Подробности — на сайте издания."
-        },
-        "en": {
-          "title": "Volkswagen Golf R in Israel: 333 hp, NIS 310,000",
-          "summary": "An update about vehicles or Israel's car market. Details are available at the source."
-        },
-        "ar": {
-          "title": "فولكس فاجن جولف آر في إسرائيل: 333 حصاناً، 310 آلاف شيكل",
-          "summary": "تحديث عن السيارات أو سوق المركبات في إسرائيل. التفاصيل في المصدر."
-        }
-      },
-      "title": "Volkswagen Golf R в Израиле: 333 л.с., 310 000 шекелей",
-      "summary": "Материал об автомобиле или автомобильном рынке Израиля. Подробности — на сайте издания.",
-      "translated": true,
-      "imageType": "licensedPhoto",
-      "imageCredit": {
-        "text": "Ivan Radic · CC BY 2.0",
-        "url": "https://commons.wikimedia.org/wiki/File:Close-up_of_an_electric_car_charging._Traffic_lights_in_a_blurry_background.jpg"
       }
     },
     {
@@ -2574,76 +2384,37 @@
       }
     },
     {
-      "id": "b276560a16af8a38ce45",
-      "titleOriginal": "צוותי הרפואה של איחוד הצלה הוזעקו לרחוב חרמון בבני ברק, עקב דיווח על תאונת עבודה.",
+      "id": "2c4584c5e877e25e077e",
+      "titleOriginal": "פולקסווגן גולף R בישראל: 333 כ\"ס, 310 אלף שקל",
       "sourceLanguage": "he",
-      "date": "2026-11-15T17:31:32Z",
-      "url": "https://t.me/uh1221/27387",
-      "publisher": "Ихуд Ацала · Telegram",
-      "category": "accidents",
-      "art": "accidents",
-      "image": "./assets/news/images/b276560a16af8a38ce45.webp",
-      "official": false,
-      "translations": {
-        "he": {
-          "title": "צוותי הרפואה של איחוד הצלה הוזעקו לרחוב חרמון בבני ברק, עקב דיווח על תאונת עבודה.",
-          "summary": "דיווח על תאונת דרכים בישראל. פרטים ועדכונים בכתבת המקור."
-        },
-        "ru": {
-          "title": "Медицинские бригады Союза спасателей были вызваны на улицу Хермон в Бней-Браке в связи с сообщением о несчастном случае на производстве.",
-          "summary": "Дорожное происшествие в Израиле. Обстоятельства и актуальные сведения — в материале источника."
-        },
-        "en": {
-          "title": "The medical teams of the Rescue Union were called to Hermon Street in Bnei Brak, due to a report of a work accident.",
-          "summary": "A reported road incident in Israel. Details and updates are in the original report."
-        },
-        "ar": {
-          "title": "تم استدعاء الطواقم الطبية التابعة لاتحاد الإنقاذ إلى شارع الشيخ في بني براك، بسبب بلاغ عن حادث عمل.",
-          "summary": "تقرير عن حادث مروري في إسرائيل. التفاصيل والتحديثات في المصدر."
-        }
-      },
-      "title": "Медицинские бригады Союза спасателей были вызваны на улицу Хермон в Бней-Браке в связи с сообщением о несчастном случае на производстве.",
-      "summary": "Дорожное происшествие в Израиле. Обстоятельства и актуальные сведения — в материале источника.",
-      "translated": true,
-      "imageType": "licensedPhoto",
-      "imageCredit": {
-        "text": "Wikimedia Commons · Public domain",
-        "url": "https://commons.wikimedia.org/wiki/File:Hurricane_Rita_Evacuation_ambulance_1.jpg"
-      }
-    },
-    {
-      "id": "8afa884f224efe65331b",
-      "titleOriginal": "דירוג 2026: המכוניות הכי אמינות - ואלה שלא",
-      "sourceLanguage": "he",
-      "date": "2026-10-26T19:09:00Z",
-      "url": "https://cars.walla.co.il/item/3873849",
-      "publisher": "Walla · Все автомобили",
+      "date": "2026-10-27T20:12:00Z",
+      "url": "https://cars.walla.co.il/item/3873967",
+      "publisher": "Walla",
       "category": "cars",
       "art": "cars",
-      "image": "./assets/news/images/8afa884f224efe65331b.webp",
+      "image": "./assets/news/images/2c4584c5e877e25e077e.webp",
       "official": false,
       "translations": {
         "he": {
-          "title": "דירוג 2026: המכוניות הכי אמינות - ואלה שלא",
+          "title": "פולקסווגן גולף R בישראל: 333 כ\"ס, 310 אלף שקל",
           "summary": "כתבה על מכוניות או שוק הרכב בישראל. פרטים באתר המקור."
         },
         "ru": {
-          "title": "Рейтинг 2026: самые надежные автомобили — и те, которые таковыми не являются",
+          "title": "Volkswagen Golf R в Израиле: 333 л.с., 310 000 шекелей",
           "summary": "Материал об автомобиле или автомобильном рынке Израиля. Подробности — на сайте издания."
         },
         "en": {
-          "title": "2026 ranking: the most reliable cars - and those that are not",
+          "title": "Volkswagen Golf R in Israel: 333 hp, NIS 310,000",
           "summary": "An update about vehicles or Israel's car market. Details are available at the source."
         },
         "ar": {
-          "title": "تصنيف 2026: السيارات الأكثر موثوقية - وتلك التي ليست كذلك",
+          "title": "فولكس فاجن جولف آر في إسرائيل: 333 حصاناً، 310 آلاف شيكل",
           "summary": "تحديث عن السيارات أو سوق المركبات في إسرائيل. التفاصيل في المصدر."
         }
       },
-      "title": "Рейтинг 2026: самые надежные автомобили — и те, которые таковыми не являются",
+      "title": "Volkswagen Golf R в Израиле: 333 л.с., 310 000 шекелей",
       "summary": "Материал об автомобиле или автомобильном рынке Израиля. Подробности — на сайте издания.",
       "translated": true,
-      "imageKind": "ai-generated",
       "imageType": "licensedPhoto",
       "imageCredit": {
         "text": "Ivan Radic · CC BY 2.0",
@@ -2727,42 +2498,42 @@
       }
     },
     {
-      "id": "49f8482a0c05fbd3d62e",
-      "titleOriginal": "בוחרים רכב חדש: כל מבצעי הרכב וההנחות ביום הבחירות",
+      "id": "8afa884f224efe65331b",
+      "titleOriginal": "דירוג 2026: המכוניות הכי אמינות - ואלה שלא",
       "sourceLanguage": "he",
-      "date": "2026-10-25T19:32:00Z",
-      "url": "https://cars.walla.co.il/item/3873697",
+      "date": "2026-10-26T19:09:00Z",
+      "url": "https://cars.walla.co.il/item/3873849",
       "publisher": "Walla · Все автомобили",
       "category": "cars",
       "art": "cars",
-      "image": "./assets/news/images/49f8482a0c05fbd3d62e.webp",
+      "image": "./assets/news/images/8afa884f224efe65331b.webp",
       "official": false,
       "translations": {
         "he": {
-          "title": "בוחרים רכב חדש: כל מבצעי הרכב וההנחות ביום הבחירות",
+          "title": "דירוג 2026: המכוניות הכי אמינות - ואלה שלא",
           "summary": "כתבה על מכוניות או שוק הרכב בישראל. פרטים באתר המקור."
         },
         "ru": {
-          "title": "Выбери новую машину: все автомобильные предложения и скидки в день выборов",
+          "title": "Рейтинг 2026: самые надежные автомобили — и те, которые таковыми не являются",
           "summary": "Материал об автомобиле или автомобильном рынке Израиля. Подробности — на сайте издания."
         },
         "en": {
-          "title": "Choose a new car: all car deals and discounts on election day",
+          "title": "2026 ranking: the most reliable cars - and those that are not",
           "summary": "An update about vehicles or Israel's car market. Details are available at the source."
         },
         "ar": {
-          "title": "اختر سيارة جديدة: جميع عروض وخصومات السيارات في يوم الانتخابات",
+          "title": "تصنيف 2026: السيارات الأكثر موثوقية - وتلك التي ليست كذلك",
           "summary": "تحديث عن السيارات أو سوق المركبات في إسرائيل. التفاصيل في المصدر."
         }
       },
-      "title": "Выбери новую машину: все автомобильные предложения и скидки в день выборов",
+      "title": "Рейтинг 2026: самые надежные автомобили — и те, которые таковыми не являются",
       "summary": "Материал об автомобиле или автомобильном рынке Израиля. Подробности — на сайте издания.",
       "translated": true,
       "imageKind": "ai-generated",
       "imageType": "licensedPhoto",
       "imageCredit": {
-        "text": "Eric Friedebach · CC BY 2.0",
-        "url": "https://commons.wikimedia.org/wiki/File:1973_Ford_Mustang_Interior_Dashboard_(51838912069).jpg"
+        "text": "Ivan Radic · CC BY 2.0",
+        "url": "https://commons.wikimedia.org/wiki/File:Close-up_of_an_electric_car_charging._Traffic_lights_in_a_blurry_background.jpg"
       }
     },
     {
@@ -2839,6 +2610,45 @@
       "imageCredit": {
         "text": "Jeff Attaway from Abuja, Nigeria · CC BY 2.0",
         "url": "https://commons.wikimedia.org/wiki/File:Bad_one_-_auto_wreck_in_Dakar_Senegal,_2011.jpg"
+      }
+    },
+    {
+      "id": "49f8482a0c05fbd3d62e",
+      "titleOriginal": "בוחרים רכב חדש: כל מבצעי הרכב וההנחות ביום הבחירות",
+      "sourceLanguage": "he",
+      "date": "2026-10-25T19:32:00Z",
+      "url": "https://cars.walla.co.il/item/3873697",
+      "publisher": "Walla · Все автомобили",
+      "category": "cars",
+      "art": "cars",
+      "image": "./assets/news/images/49f8482a0c05fbd3d62e.webp",
+      "official": false,
+      "translations": {
+        "he": {
+          "title": "בוחרים רכב חדש: כל מבצעי הרכב וההנחות ביום הבחירות",
+          "summary": "כתבה על מכוניות או שוק הרכב בישראל. פרטים באתר המקור."
+        },
+        "ru": {
+          "title": "Выбери новую машину: все автомобильные предложения и скидки в день выборов",
+          "summary": "Материал об автомобиле или автомобильном рынке Израиля. Подробности — на сайте издания."
+        },
+        "en": {
+          "title": "Choose a new car: all car deals and discounts on election day",
+          "summary": "An update about vehicles or Israel's car market. Details are available at the source."
+        },
+        "ar": {
+          "title": "اختر سيارة جديدة: جميع عروض وخصومات السيارات في يوم الانتخابات",
+          "summary": "تحديث عن السيارات أو سوق المركبات في إسرائيل. التفاصيل في المصدر."
+        }
+      },
+      "title": "Выбери новую машину: все автомобильные предложения и скидки в день выборов",
+      "summary": "Материал об автомобиле или автомобильном рынке Израиля. Подробности — на сайте издания.",
+      "translated": true,
+      "imageKind": "ai-generated",
+      "imageType": "licensedPhoto",
+      "imageCredit": {
+        "text": "Eric Friedebach · CC BY 2.0",
+        "url": "https://commons.wikimedia.org/wiki/File:1973_Ford_Mustang_Interior_Dashboard_(51838912069).jpg"
       }
     },
     {
@@ -4239,6 +4049,120 @@
         }
       },
       "title": "Шоссе 7: В результате аварии возле развязки Гедара женщина получила серьезные ранения, другие получили ранения средней степени тяжести.",
+      "summary": "Дорожное происшествие в Израиле. Обстоятельства и актуальные сведения — в материале источника.",
+      "translated": true,
+      "imageType": "licensedPhoto",
+      "imageCredit": {
+        "text": "Wikimedia Commons · Public domain",
+        "url": "https://commons.wikimedia.org/wiki/File:Hurricane_Rita_Evacuation_ambulance_1.jpg"
+      }
+    },
+    {
+      "id": "6a9780903bb5bef32532",
+      "titleOriginal": "תאונה עם מעורבות שלושה כלי רכב אירעה ברחוב ביל\"ו באשדוד.",
+      "sourceLanguage": "he",
+      "date": "2026-11-11T17:49:58Z",
+      "url": "https://t.me/uh1221/27307",
+      "publisher": "Ихуд Ацала · Telegram",
+      "category": "accidents",
+      "art": "accidents",
+      "image": "./assets/news/images/6a9780903bb5bef32532.webp",
+      "official": false,
+      "translations": {
+        "he": {
+          "title": "תאונה עם מעורבות שלושה כלי רכב אירעה ברחוב ביל\"ו באשדוד.",
+          "summary": "דיווח על תאונת דרכים בישראל. פרטים ועדכונים בכתבת המקור."
+        },
+        "ru": {
+          "title": "Авария с участием трех транспортных средств произошла на улице Било в Ашдоде.",
+          "summary": "Дорожное происшествие в Израиле. Обстоятельства и актуальные сведения — в материале источника."
+        },
+        "en": {
+          "title": "An accident involving three vehicles happened on Bilo Street in Ashdod.",
+          "summary": "A reported road incident in Israel. Details and updates are in the original report."
+        },
+        "ar": {
+          "title": "وقع حادث سير بين ثلاث مركبات في شارع بيلو بمدينة أشدود.",
+          "summary": "تقرير عن حادث مروري في إسرائيل. التفاصيل والتحديثات في المصدر."
+        }
+      },
+      "title": "Авария с участием трех транспортных средств произошла на улице Било в Ашдоде.",
+      "summary": "Дорожное происшествие в Израиле. Обстоятельства и актуальные сведения — в материале источника.",
+      "translated": true,
+      "imageType": "licensedPhoto",
+      "imageCredit": {
+        "text": "No machine-readable author provided. EPO assumed (based on copyright claims). · CC BY 2.5",
+        "url": "https://commons.wikimedia.org/wiki/File:Falck_sv_04.jpg"
+      }
+    },
+    {
+      "id": "0989eed577e7c1705d62",
+      "titleOriginal": "תאונה עם מעורבות שני רכבים אירעה בשדרות הרצל פינת יצחק הנשיא באשדוד.",
+      "sourceLanguage": "he",
+      "date": "2026-11-11T15:58:44Z",
+      "url": "https://t.me/uh1221/27305",
+      "publisher": "Ихуд Ацала · Telegram",
+      "category": "accidents",
+      "art": "accidents",
+      "image": "./assets/news/images/0989eed577e7c1705d62.webp",
+      "official": false,
+      "translations": {
+        "he": {
+          "title": "תאונה עם מעורבות שני רכבים אירעה בשדרות הרצל פינת יצחק הנשיא באשדוד.",
+          "summary": "דיווח על תאונת דרכים בישראל. פרטים ועדכונים בכתבת המקור."
+        },
+        "ru": {
+          "title": "Авария с участием двух транспортных средств произошла на углу Сдерот Герцль Ицхак Ханаси в Ашдоде.",
+          "summary": "Дорожное происшествие в Израиле. Обстоятельства и актуальные сведения — в материале источника."
+        },
+        "en": {
+          "title": "An accident involving two vehicles happened on Sderot Herzl corner Yitzhak Hanasi in Ashdod.",
+          "summary": "A reported road incident in Israel. Details and updates are in the original report."
+        },
+        "ar": {
+          "title": "وقع حادث بين مركبتين في زاوية اسحق هناسي في سديروت هرتزل في أشدود.",
+          "summary": "تقرير عن حادث مروري في إسرائيل. التفاصيل والتحديثات في المصدر."
+        }
+      },
+      "title": "Авария с участием двух транспортных средств произошла на углу Сдерот Герцль Ицхак Ханаси в Ашдоде.",
+      "summary": "Дорожное происшествие в Израиле. Обстоятельства и актуальные сведения — в материале источника.",
+      "translated": true,
+      "imageType": "licensedPhoto",
+      "imageCredit": {
+        "text": "No machine-readable author provided. EPO assumed (based on copyright claims). · CC BY 2.5",
+        "url": "https://commons.wikimedia.org/wiki/File:Falck_sv_04.jpg"
+      }
+    },
+    {
+      "id": "72a02158e1bd266968cc",
+      "titleOriginal": "רוכב אופנוע נפצע בינוני בתאונה בכביש 4",
+      "sourceLanguage": "he",
+      "date": "2026-11-11T14:52:22Z",
+      "url": "https://t.me/uh1221/27298",
+      "publisher": "Ихуд Ацала · Telegram",
+      "category": "accidents",
+      "art": "accidents",
+      "image": "./assets/news/images/72a02158e1bd266968cc.webp",
+      "official": false,
+      "translations": {
+        "he": {
+          "title": "רוכב אופנוע נפצע בינוני בתאונה בכביש 4",
+          "summary": "דיווח על תאונת דרכים בישראל. פרטים ועדכונים בכתבת המקור."
+        },
+        "ru": {
+          "title": "Мотоциклист получил травмы средней степени тяжести в ДТП на 4-м маршруте",
+          "summary": "Дорожное происшествие в Израиле. Обстоятельства и актуальные сведения — в материале источника."
+        },
+        "en": {
+          "title": "A motorcyclist was moderately injured in an accident on Route 4",
+          "summary": "A reported road incident in Israel. Details and updates are in the original report."
+        },
+        "ar": {
+          "title": "أصيب سائق دراجة نارية بجروح متوسطة في حادث سير على طريق رقم 4",
+          "summary": "تقرير عن حادث مروري في إسرائيل. التفاصيل والتحديثات في المصدر."
+        }
+      },
+      "title": "Мотоциклист получил травмы средней степени тяжести в ДТП на 4-м маршруте",
       "summary": "Дорожное происшествие в Израиле. Обстоятельства и актуальные сведения — в материале источника.",
       "translated": true,
       "imageType": "licensedPhoto",

@@ -1,5 +1,5 @@
 {
-  "attempted": "2026-11-17T09:24:49.551326Z",
+  "attempted": "2026-11-17T09:25:53.532297Z",
   "feeds": {
     "Walla · Авто": 30,
     "Walla · Безопасность": 30,
@@ -29,10 +29,10 @@
   },
   "facebook": {},
   "facebookState": "not_configured",
-  "new": 18,
-  "retained": 111,
-  "imageCount": 108,
-  "deletedImages": 0,
+  "new": 19,
+  "retained": 109,
+  "imageCount": 106,
+  "deletedImages": 5,
   "discardedGoogleLinks": 0,
   "errors": {
     "The Times of Israel": "HTTPError: 403 Client Error: Forbidden for url: https://www.timesofisrael.com/feed/",
@@ -43,15 +43,13 @@
   },
   "directLinksOnly": true,
   "manuallyVerified": 5,
-  "sourceCount": 19,
+  "sourceCount": 17,
   "sources": {
     "NEWSru.co.il · Telegram": 3,
     "Wheel · Автоновости": 2,
-    "Arutz Sheva · Israel National News": 1,
     "Ихуд Ацала · Telegram": 65,
     "Ynet": 1,
     "Maariv": 1,
-    "Алексей Железнов · Telegram": 1,
     "Walla · Новости Израиля": 1,
     "Walla": 6,
     "Calcalist": 1,
