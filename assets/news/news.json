@@ -1,7 +1,7 @@
 {
   "version": 1,
   "retentionDays": 30,
-  "updated": "2026-11-17T07:59:36.655150Z",
+  "updated": "2026-11-17T08:00:47.816349Z",
   "items": [
     {
       "id": "1a65ff3993516263eca9",
@@ -33,39 +33,6 @@
         }
       },
       "title": "Верховный суд одобрил компромиссное решение: около 4,5 млн шекелей для пострадавшего в автокатастрофе на работе",
-      "summary": "Дорожное происшествие в Израиле. Обстоятельства и актуальные сведения — в материале источника.",
-      "translated": true
-    },
-    {
-      "id": "afb14ea0b36fa5c825e5",
-      "titleOriginal": "אירוע חריג באזור השרון: חשוד איים בסכין - ונהרג מירי של שוטר",
-      "sourceLanguage": "he",
-      "date": "2026-11-15T21:24:37Z",
-      "url": "https://www.walla.co.il/news/israel/383961563",
-      "publisher": "Walla · Новости Израиля",
-      "category": "accidents",
-      "art": "accidents",
-      "image": "./assets/news/images/afb14ea0b36fa5c825e5.svg",
-      "official": false,
-      "translations": {
-        "he": {
-          "title": "אירוע חריג באזור השרון: חשוד איים בסכין - ונהרג מירי של שוטר",
-          "summary": "דיווח על תאונת דרכים בישראל. פרטים ועדכונים בכתבת המקור."
-        },
-        "ru": {
-          "title": "Необычный инцидент в регионе Шарон: подозреваемый угрожал ножом и был убит выстрелом полицейского",
-          "summary": "Дорожное происшествие в Израиле. Обстоятельства и актуальные сведения — в материале источника."
-        },
-        "en": {
-          "title": "An unusual incident in the Sharon region: a suspect threatened with a knife - and was killed by a policeman's gunfire",
-          "summary": "A reported road incident in Israel. Details and updates are in the original report."
-        },
-        "ar": {
-          "title": "حادثة غير عادية في منطقة شارون: مشتبه به هدد بسكين - وقُتل برصاص شرطي",
-          "summary": "تقرير عن حادث مروري في إسرائيل. التفاصيل والتحديثات في المصدر."
-        }
-      },
-      "title": "Необычный инцидент в регионе Шарон: подозреваемый угрожал ножом и был убит выстрелом полицейского",
       "summary": "Дорожное происшествие в Израиле. Обстоятельства и актуальные сведения — в материале источника.",
       "translated": true
     },
@@ -103,69 +70,36 @@
       "translated": true
     },
     {
-      "id": "9861f108f168f3bc29a1",
-      "titleOriginal": "iCAUR V27: מפגש ראשון עם הכביש שטח החדש שמגיע לארץ",
-      "sourceLanguage": "he",
-      "date": "2026-11-11T15:27:00Z",
-      "url": "https://cars.walla.co.il/item/3875861",
-      "publisher": "Walla · Все автомобили",
-      "category": "roads",
-      "art": "roads",
-      "image": "./assets/news/images/9861f108f168f3bc29a1.svg",
-      "official": false,
-      "translations": {
-        "he": {
-          "title": "iCAUR V27: מפגש ראשון עם הכביש שטח החדש שמגיע לארץ",
-          "summary": "עדכון על מצב התנועה. לפני הנסיעה בדקו אם ההגבלות עדיין בתוקף."
-        },
-        "ru": {
-          "title": "iCAUR V27: Первая встреча с новой внедорожной дорогой, которая скоро появится в Израиле",
-          "summary": "Информация о дорожной ситуации. Перед поездкой проверьте, действуют ли ограничения сейчас."
-        },
-        "en": {
-          "title": "iCAUR V27: First meeting with the new off-road road that is coming to Israel",
-          "summary": "A road-conditions update. Check whether restrictions still apply before travelling."
-        },
-        "ar": {
-          "title": "iCAUR V27: الاجتماع الأول مع الطريق الوعرة الجديد القادم إلى إسرائيل",
-          "summary": "تحديث عن حالة الطرق. تحقق من استمرار القيود قبل السفر."
-        }
-      },
-      "title": "iCAUR V27: Первая встреча с новой внедорожной дорогой, которая скоро появится в Израиле",
-      "summary": "Информация о дорожной ситуации. Перед поездкой проверьте, действуют ли ограничения сейчас.",
-      "translated": true
-    },
-    {
       "id": "29eac7c61f2dbd8989e8",
       "titleOriginal": "יש לכם רשיון B? תוכלו לנהוג בחשמליות, כולל מסחריות, במשקל של עד 4.25 טון",
       "sourceLanguage": "he",
       "date": "2026-11-09T20:59:00Z",
       "url": "https://cars.walla.co.il/item/3875628",
       "publisher": "Walla · Авто",
-      "category": "cars",
-      "art": "cars",
+      "category": "laws",
+      "art": "laws",
       "image": "./assets/news/images/29eac7c61f2dbd8989e8.svg",
       "official": false,
       "translations": {
         "he": {
           "title": "יש לכם רשיון B? תוכלו לנהוג בחשמליות, כולל מסחריות, במשקל של עד 4.25 טון",
-          "summary": "כתבה על מכוניות או שוק הרכב בישראל. פרטים באתר המקור."
+          "summary": "דיווח על תקנות נהיגה. יש לאמת את מעמד החוק ותאריך התחולה במקור רשמי."
         },
         "ru": {
           "title": "У вас есть лицензия B? Можно управлять трамваями, в том числе коммерческими, массой до 4,25 тонн.",
-          "summary": "Материал об автомобиле или автомобильном рынке Израиля. Подробности — на сайте издания."
+          "summary": "Публикация о правилах для водителей. Статус закона и дату вступления в силу нужно сверять с официальными документами."
         },
         "en": {
           "title": "Do you have a B license? You can drive trams, including commercial ones, weighing up to 4.25 tons",
-          "summary": "An update about vehicles or Israel's car market. Details are available at the source."
+          "summary": "A report concerning driving rules. Verify legal status and effective dates with official documents."
         },
         "ar": {
           "title": "هل لديك رخصة B؟ يمكنك قيادة الترام، بما في ذلك التجاري، الذي يصل وزنه إلى 4.25 طن",
-          "summary": "تحديث عن السيارات أو سوق المركبات في إسرائيل. التفاصيل في المصدر."
+          "summary": "تقرير حول قواعد القيادة. تحقق من حالة القانون وتاريخ سريانه في المصادر الرسمية."
         }
       },
       "title": "У вас есть лицензия B? Можно управлять трамваями, в том числе коммерческими, массой до 4,25 тонн.",
-      "summary": "Материал об автомобиле или автомобильном рынке Израиля. Подробности — на сайте издания.",
+      "summary": "Публикация о правилах для водителей. Статус закона и дату вступления в силу нужно сверять с официальными документами.",
       "translated": true
     },
     {
@@ -264,39 +198,6 @@
         }
       },
       "title": "Без зарядного кабеля: Jaco 7 получает обычную гибридную версию: от 170 000 шекелей",
-      "summary": "Материал об автомобиле или автомобильном рынке Израиля. Подробности — на сайте издания.",
-      "translated": true
-    },
-    {
-      "id": "1945a100764a35af405b",
-      "titleOriginal": "הקו לירושלים יוארך לחדרה, בקרוב ב-3 רכבות בשעה ברוב היממה",
-      "sourceLanguage": "he",
-      "date": "2026-11-02T18:13:00Z",
-      "url": "https://cars.walla.co.il/item/3874685",
-      "publisher": "Walla · Авто",
-      "category": "cars",
-      "art": "cars",
-      "image": "./assets/news/images/1945a100764a35af405b.svg",
-      "official": false,
-      "translations": {
-        "he": {
-          "title": "הקו לירושלים יוארך לחדרה, בקרוב ב-3 רכבות בשעה ברוב היממה",
-          "summary": "כתבה על מכוניות או שוק הרכב בישראל. פרטים באתר המקור."
-        },
-        "ru": {
-          "title": "Линия на Иерусалим будет продлена до Хадеры, скоро большую часть дня будет ходить 3 поезда в час.",
-          "summary": "Материал об автомобиле или автомобильном рынке Израиля. Подробности — на сайте издания."
-        },
-        "en": {
-          "title": "The line to Jerusalem will be extended to Hadera, soon with 3 trains per hour most of the day",
-          "summary": "An update about vehicles or Israel's car market. Details are available at the source."
-        },
-        "ar": {
-          "title": "سيتم تمديد الخط المتجه إلى القدس إلى الخضيرة، قريبًا بثلاثة قطارات في الساعة معظم اليوم",
-          "summary": "تحديث عن السيارات أو سوق المركبات في إسرائيل. التفاصيل في المصدر."
-        }
-      },
-      "title": "Линия на Иерусалим будет продлена до Хадеры, скоро большую часть дня будет ходить 3 поезда в час.",
       "summary": "Материал об автомобиле или автомобильном рынке Израиля. Подробности — на сайте издания.",
       "translated": true
     },
@@ -406,30 +307,30 @@
       "date": "2026-11-01T07:07:00Z",
       "url": "https://cars.walla.co.il/item/3873034",
       "publisher": "Walla · Все автомобили",
-      "category": "roads",
-      "art": "roads",
+      "category": "laws",
+      "art": "laws",
       "image": "./assets/news/images/8da0d7e6aaf29974e4b9.svg",
       "official": false,
       "translations": {
         "he": {
           "title": "זכרתם? חובה להדליק אורות גם ביום בכבישים הבין־עירוניים",
-          "summary": "עדכון על מצב התנועה. לפני הנסיעה בדקו אם ההגבלות עדיין בתוקף."
+          "summary": "דיווח על תקנות נהיגה. יש לאמת את מעמד החוק ותאריך התחולה במקור רשמי."
         },
         "ru": {
           "title": "ты помнишь, что на междугородних дорогах свет нужно включать даже днём",
-          "summary": "Информация о дорожной ситуации. Перед поездкой проверьте, действуют ли ограничения сейчас."
+          "summary": "Публикация о правилах для водителей. Статус закона и дату вступления в силу нужно сверять с официальными документами."
         },
         "en": {
           "title": "did you remember Lights must be turned on even during the day on intercity roads",
-          "summary": "A road-conditions update. Check whether restrictions still apply before travelling."
+          "summary": "A report concerning driving rules. Verify legal status and effective dates with official documents."
         },
         "ar": {
           "title": "هل تتذكر أنه يجب تشغيل الأضواء حتى أثناء النهار على الطرق بين المدن",
-          "summary": "تحديث عن حالة الطرق. تحقق من استمرار القيود قبل السفر."
+          "summary": "تقرير حول قواعد القيادة. تحقق من حالة القانون وتاريخ سريانه في المصادر الرسمية."
         }
       },
       "title": "ты помнишь, что на междугородних дорогах свет нужно включать даже днём",
-      "summary": "Информация о дорожной ситуации. Перед поездкой проверьте, действуют ли ограничения сейчас.",
+      "summary": "Публикация о правилах для водителей. Статус закона и дату вступления в силу нужно сверять с официальными документами.",
       "translated": true
     },
     {
