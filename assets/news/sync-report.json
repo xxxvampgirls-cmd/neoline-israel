@@ -1,5 +1,5 @@
 {
-  "attempted": "2026-11-17T07:57:40.541381Z",
+  "attempted": "2026-11-17T07:59:36.655150Z",
   "feeds": {
     "Walla · Авто": 30,
     "Walla · Безопасность": 30,
@@ -9,9 +9,9 @@
     "The Jerusalem Post": 26
   },
   "new": 0,
-  "retained": 23,
-  "imageCount": 23,
-  "deletedImages": 0,
+  "retained": 15,
+  "imageCount": 15,
+  "deletedImages": 23,
   "discardedGoogleLinks": 0,
   "errors": {
     "The Times of Israel": "HTTPError: 403 Client Error: Forbidden for url: https://www.timesofisrael.com/feed/"

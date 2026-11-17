@@ -1,43 +1,10 @@
 {
   "version": 1,
   "retentionDays": 30,
-  "updated": "2026-11-17T07:57:40.541381Z",
+  "updated": "2026-11-17T07:59:36.655150Z",
   "items": [
     {
-      "id": "499e555b517e65b92088",
-      "titleOriginal": "Epstein autopsy findings point to possible murder, forensic expert says",
-      "sourceLanguage": "en",
-      "date": "2026-11-17T01:57:33Z",
-      "url": "https://www.jpost.com/international/article-915108",
-      "publisher": "The Jerusalem Post",
-      "category": "cars",
-      "art": "cars",
-      "image": "./assets/news/images/499e555b517e65b92088.svg",
-      "official": false,
-      "translations": {
-        "he": {
-          "title": "ממצאי נתיחה של אפשטיין מצביעים על רצח אפשרי, אומר מומחה לזיהוי פלילי",
-          "summary": "כתבה על מכוניות או שוק הרכב בישראל. פרטים באתר המקור."
-        },
-        "ru": {
-          "title": "Результаты вскрытия Эпштейна указывают на возможное убийство, говорит судмедэксперт",
-          "summary": "Материал об автомобиле или автомобильном рынке Израиля. Подробности — на сайте издания."
-        },
-        "en": {
-          "title": "Epstein autopsy findings point to possible murder, forensic expert says",
-          "summary": "An update about vehicles or Israel's car market. Details are available at the source."
-        },
-        "ar": {
-          "title": "يقول خبير الطب الشرعي إن نتائج تشريح جثة إبستين تشير إلى احتمال القتل",
-          "summary": "تحديث عن السيارات أو سوق المركبات في إسرائيل. التفاصيل في المصدر."
-        }
-      },
-      "title": "Результаты вскрытия Эпштейна указывают на возможное убийство, говорит судмедэксперт",
-      "summary": "Материал об автомобиле или автомобильном рынке Израиля. Подробности — на сайте издания.",
-      "translated": true
-    },
-    {
-      "id": "a5e57a1427aa280107ac",
+      "id": "1a65ff3993516263eca9",
       "titleOriginal": "העליון אישר פשרה: כ-4.5 מיליון שקל לנפגע תאונת דרכים בעבודה",
       "sourceLanguage": "he",
       "date": "2026-11-16T20:52:35Z",
@@ -45,7 +12,7 @@
       "publisher": "Walla · Новости Израиля",
       "category": "accidents",
       "art": "accidents",
-      "image": "./assets/news/images/a5e57a1427aa280107ac.svg",
+      "image": "./assets/news/images/1a65ff3993516263eca9.svg",
       "official": false,
       "translations": {
         "he": {
@@ -70,7 +37,7 @@
       "translated": true
     },
     {
-      "id": "0ac1b66b291cd8862f9e",
+      "id": "afb14ea0b36fa5c825e5",
       "titleOriginal": "אירוע חריג באזור השרון: חשוד איים בסכין - ונהרג מירי של שוטר",
       "sourceLanguage": "he",
       "date": "2026-11-15T21:24:37Z",
@@ -78,7 +45,7 @@
       "publisher": "Walla · Новости Израиля",
       "category": "accidents",
       "art": "accidents",
-      "image": "./assets/news/images/0ac1b66b291cd8862f9e.svg",
+      "image": "./assets/news/images/afb14ea0b36fa5c825e5.svg",
       "official": false,
       "translations": {
         "he": {
@@ -103,7 +70,7 @@
       "translated": true
     },
     {
-      "id": "e175c45d0b39277c23d2",
+      "id": "6cc126ef03218901938b",
       "titleOriginal": "אילו מכוניות יקבלו הח\"כים החדשים?",
       "sourceLanguage": "he",
       "date": "2026-11-15T07:12:00Z",
@@ -111,7 +78,7 @@
       "publisher": "Walla · Авто",
       "category": "cars",
       "art": "cars",
-      "image": "./assets/news/images/e175c45d0b39277c23d2.svg",
+      "image": "./assets/news/images/6cc126ef03218901938b.svg",
       "official": false,
       "translations": {
         "he": {
@@ -136,40 +103,7 @@
       "translated": true
     },
     {
-      "id": "6446669c572f066940d3",
-      "titleOriginal": "אילו מכוניות יקבלו הח\"כים החדשים?",
-      "sourceLanguage": "he",
-      "date": "2026-11-15T07:12:00Z",
-      "url": "https://cars.walla.co.il/item/3876227",
-      "publisher": "Walla · Все автомобили",
-      "category": "cars",
-      "art": "cars",
-      "image": "./assets/news/images/6446669c572f066940d3.svg",
-      "official": false,
-      "translations": {
-        "he": {
-          "title": "אילו מכוניות יקבלו הח\"כים החדשים?",
-          "summary": "כתבה על מכוניות או שוק הרכב בישראל. פרטים באתר המקור."
-        },
-        "ru": {
-          "title": "Какие автомобили получат новые МК?",
-          "summary": "Материал об автомобиле или автомобильном рынке Израиля. Подробности — на сайте издания."
-        },
-        "en": {
-          "title": "What cars will the new MKs get?",
-          "summary": "An update about vehicles or Israel's car market. Details are available at the source."
-        },
-        "ar": {
-          "title": "ما هي السيارات التي سيحصل عليها أعضاء الكنيست الجدد؟",
-          "summary": "تحديث عن السيارات أو سوق المركبات في إسرائيل. التفاصيل في المصدر."
-        }
-      },
-      "title": "Какие автомобили получат новые МК?",
-      "summary": "Материал об автомобиле или автомобильном рынке Израиля. Подробности — на сайте издания.",
-      "translated": true
-    },
-    {
-      "id": "67a908c6299e852cdec2",
+      "id": "9861f108f168f3bc29a1",
       "titleOriginal": "iCAUR V27: מפגש ראשון עם הכביש שטח החדש שמגיע לארץ",
       "sourceLanguage": "he",
       "date": "2026-11-11T15:27:00Z",
@@ -177,7 +111,7 @@
       "publisher": "Walla · Все автомобили",
       "category": "roads",
       "art": "roads",
-      "image": "./assets/news/images/67a908c6299e852cdec2.svg",
+      "image": "./assets/news/images/9861f108f168f3bc29a1.svg",
       "official": false,
       "translations": {
         "he": {
@@ -202,7 +136,7 @@
       "translated": true
     },
     {
-      "id": "1f31bd6417b9a5aedbad",
+      "id": "29eac7c61f2dbd8989e8",
       "titleOriginal": "יש לכם רשיון B? תוכלו לנהוג בחשמליות, כולל מסחריות, במשקל של עד 4.25 טון",
       "sourceLanguage": "he",
       "date": "2026-11-09T20:59:00Z",
@@ -210,7 +144,7 @@
       "publisher": "Walla · Авто",
       "category": "cars",
       "art": "cars",
-      "image": "./assets/news/images/1f31bd6417b9a5aedbad.svg",
+      "image": "./assets/news/images/29eac7c61f2dbd8989e8.svg",
       "official": false,
       "translations": {
         "he": {
@@ -235,40 +169,7 @@
       "translated": true
     },
     {
-      "id": "cccbbdf09e7c1c8362a2",
-      "titleOriginal": "יש לכם רשיון B? תוכלו לנהוג בחשמליות, כולל מסחריות, במשקל של עד 4.25 טון",
-      "sourceLanguage": "he",
-      "date": "2026-11-09T20:59:00Z",
-      "url": "https://cars.walla.co.il/item/3875628",
-      "publisher": "Walla · Все автомобили",
-      "category": "cars",
-      "art": "cars",
-      "image": "./assets/news/images/cccbbdf09e7c1c8362a2.svg",
-      "official": false,
-      "translations": {
-        "he": {
-          "title": "יש לכם רשיון B? תוכלו לנהוג בחשמליות, כולל מסחריות, במשקל של עד 4.25 טון",
-          "summary": "כתבה על מכוניות או שוק הרכב בישראל. פרטים באתר המקור."
-        },
-        "ru": {
-          "title": "У вас есть лицензия B? Можно управлять трамваями, в том числе коммерческими, массой до 4,25 тонн.",
-          "summary": "Материал об автомобиле или автомобильном рынке Израиля. Подробности — на сайте издания."
-        },
-        "en": {
-          "title": "Do you have a B license? You can drive trams, including commercial ones, weighing up to 4.25 tons",
-          "summary": "An update about vehicles or Israel's car market. Details are available at the source."
-        },
-        "ar": {
-          "title": "هل لديك رخصة B؟ يمكنك قيادة الترام، بما في ذلك التجاري، الذي يصل وزنه إلى 4.25 طن",
-          "summary": "تحديث عن السيارات أو سوق المركبات في إسرائيل. التفاصيل في المصدر."
-        }
-      },
-      "title": "У вас есть лицензия B? Можно управлять трамваями, в том числе коммерческими, массой до 4,25 тонн.",
-      "summary": "Материал об автомобиле или автомобильном рынке Израиля. Подробности — на сайте издания.",
-      "translated": true
-    },
-    {
-      "id": "04cd682b8d7781501ab2",
+      "id": "d142b35bf1342c908ea0",
       "titleOriginal": "משומשות: הביקוש לבנזין בירידה, החשמליות וההיברידיות מזנקות",
       "sourceLanguage": "he",
       "date": "2026-11-09T14:12:00Z",
@@ -276,7 +177,7 @@
       "publisher": "Walla · Авто",
       "category": "cars",
       "art": "cars",
-      "image": "./assets/news/images/04cd682b8d7781501ab2.svg",
+      "image": "./assets/news/images/d142b35bf1342c908ea0.svg",
       "official": false,
       "translations": {
         "he": {
@@ -301,7 +202,7 @@
       "translated": true
     },
     {
-      "id": "2356d54478a8b9b3344c",
+      "id": "e49311e8b46bc9e7c4ca",
       "titleOriginal": "למה באמת ירדו מחירי ביטוח הרכב בישראל, ומה הקשר להודו",
       "sourceLanguage": "he",
       "date": "2026-11-06T15:03:00Z",
@@ -309,7 +210,7 @@
       "publisher": "Walla · Авто",
       "category": "cars",
       "art": "cars",
-      "image": "./assets/news/images/2356d54478a8b9b3344c.svg",
+      "image": "./assets/news/images/e49311e8b46bc9e7c4ca.svg",
       "official": false,
       "translations": {
         "he": {
@@ -334,106 +235,7 @@
       "translated": true
     },
     {
-      "id": "f7e655cf7526bdc49dc4",
-      "titleOriginal": "למה באמת ירדו מחירי ביטוח הרכב בישראל, ומה הקשר להודו",
-      "sourceLanguage": "he",
-      "date": "2026-11-06T15:03:00Z",
-      "url": "https://cars.walla.co.il/item/3875222",
-      "publisher": "Walla · Все автомобили",
-      "category": "cars",
-      "art": "cars",
-      "image": "./assets/news/images/f7e655cf7526bdc49dc4.svg",
-      "official": false,
-      "translations": {
-        "he": {
-          "title": "למה באמת ירדו מחירי ביטוח הרכב בישראל, ומה הקשר להודו",
-          "summary": "כתבה על מכוניות או שוק הרכב בישראל. פרטים באתר המקור."
-        },
-        "ru": {
-          "title": "Почему в Израиле действительно снизились цены на автострахование и какое это имеет отношение к Индии?",
-          "summary": "Материал об автомобиле или автомобильном рынке Израиля. Подробности — на сайте издания."
-        },
-        "en": {
-          "title": "Why did car insurance prices really go down in Israel, and what does it have to do with India?",
-          "summary": "An update about vehicles or Israel's car market. Details are available at the source."
-        },
-        "ar": {
-          "title": "لماذا انخفضت أسعار التأمين على السيارات في إسرائيل فعلا، وما علاقتها بالهند؟",
-          "summary": "تحديث عن السيارات أو سوق المركبات في إسرائيل. التفاصيل في المصدر."
-        }
-      },
-      "title": "Почему в Израиле действительно снизились цены на автострахование и какое это имеет отношение к Индии?",
-      "summary": "Материал об автомобиле или автомобильном рынке Израиля. Подробности — на сайте издания.",
-      "translated": true
-    },
-    {
-      "id": "41b2e19c1bdeec4e4dda",
-      "titleOriginal": "החסימות באיילון לנהגים ולרכבת בסוף השבוע: כל מה שצריך לדעת",
-      "sourceLanguage": "he",
-      "date": "2026-11-06T08:00:00Z",
-      "url": "https://cars.walla.co.il/item/3874839",
-      "publisher": "Walla · Авто",
-      "category": "cars",
-      "art": "cars",
-      "image": "./assets/news/images/41b2e19c1bdeec4e4dda.svg",
-      "official": false,
-      "translations": {
-        "he": {
-          "title": "החסימות באיילון לנהגים ולרכבת בסוף השבוע: כל מה שצריך לדעת",
-          "summary": "כתבה על מכוניות או שוק הרכב בישראל. פרטים באתר המקור."
-        },
-        "en": {
-          "title": "The blockades in Ayalon for drivers and the train at the weekend: everything you need to know",
-          "summary": "An update about vehicles or Israel's car market. Details are available at the source."
-        },
-        "ar": {
-          "title": "الحصار في أيالون على السائقين والقطار في نهاية الأسبوع: كل ما تحتاج إلى معرفته",
-          "summary": "تحديث عن السيارات أو سوق المركبات في إسرائيل. التفاصيل في المصدر."
-        },
-        "ru": {
-          "title": "Блокады в Аялоне для машинистов и поезд на выходных: все, что нужно знать",
-          "summary": "Материал об автомобиле или автомобильном рынке Израиля. Подробности — на сайте издания."
-        }
-      },
-      "title": "Блокады в Аялоне для машинистов и поезд на выходных: все, что нужно знать",
-      "summary": "Материал об автомобиле или автомобильном рынке Израиля. Подробности — на сайте издания.",
-      "translated": true
-    },
-    {
-      "id": "db4a6aa10f4662806241",
-      "titleOriginal": "החסימות באיילון לנהגים ולרכבת בסוף השבוע: כל מה שצריך לדעת",
-      "sourceLanguage": "he",
-      "date": "2026-11-06T08:00:00Z",
-      "url": "https://cars.walla.co.il/item/3874839",
-      "publisher": "Walla · Все автомобили",
-      "category": "cars",
-      "art": "cars",
-      "image": "./assets/news/images/db4a6aa10f4662806241.svg",
-      "official": false,
-      "translations": {
-        "he": {
-          "title": "החסימות באיילון לנהגים ולרכבת בסוף השבוע: כל מה שצריך לדעת",
-          "summary": "כתבה על מכוניות או שוק הרכב בישראל. פרטים באתר המקור."
-        },
-        "ru": {
-          "title": "Блокады в Аялоне для машинистов и поезд на выходных: все, что нужно знать",
-          "summary": "Материал об автомобиле или автомобильном рынке Израиля. Подробности — на сайте издания."
-        },
-        "en": {
-          "title": "The blockades in Ayalon for drivers and the train at the weekend: everything you need to know",
-          "summary": "An update about vehicles or Israel's car market. Details are available at the source."
-        },
-        "ar": {
-          "title": "الحصار في أيالون على السائقين والقطار في نهاية الأسبوع: كل ما تحتاج إلى معرفته",
-          "summary": "تحديث عن السيارات أو سوق المركبات في إسرائيل. التفاصيل في المصدر."
-        }
-      },
-      "title": "Блокады в Аялоне для машинистов и поезд на выходных: все, что нужно знать",
-      "summary": "Материал об автомобиле или автомобильном рынке Израиля. Подробности — на сайте издания.",
-      "translated": true
-    },
-    {
-      "id": "2d7246404c16d7067488",
+      "id": "f6100d44247e4e75550d",
       "titleOriginal": "בלי כבל טעינה: ג'אקו 7 מקבל גרסה היברידית רגילה: מ-170 אלף שקל",
       "sourceLanguage": "he",
       "date": "2026-11-04T14:00:00Z",
@@ -441,7 +243,7 @@
       "publisher": "Walla · Авто",
       "category": "cars",
       "art": "cars",
-      "image": "./assets/news/images/2d7246404c16d7067488.svg",
+      "image": "./assets/news/images/f6100d44247e4e75550d.svg",
       "official": false,
       "translations": {
         "he": {
@@ -466,7 +268,7 @@
       "translated": true
     },
     {
-      "id": "bbd3d459b14b493ea386",
+      "id": "1945a100764a35af405b",
       "titleOriginal": "הקו לירושלים יוארך לחדרה, בקרוב ב-3 רכבות בשעה ברוב היממה",
       "sourceLanguage": "he",
       "date": "2026-11-02T18:13:00Z",
@@ -474,7 +276,7 @@
       "publisher": "Walla · Авто",
       "category": "cars",
       "art": "cars",
-      "image": "./assets/news/images/bbd3d459b14b493ea386.svg",
+      "image": "./assets/news/images/1945a100764a35af405b.svg",
       "official": false,
       "translations": {
         "he": {
@@ -499,40 +301,7 @@
       "translated": true
     },
     {
-      "id": "0711d5a866f63a5bcf4d",
-      "titleOriginal": "הקו לירושלים יוארך לחדרה, בקרוב ב-3 רכבות בשעה ברוב היממה",
-      "sourceLanguage": "he",
-      "date": "2026-11-02T18:13:00Z",
-      "url": "https://cars.walla.co.il/item/3874685",
-      "publisher": "Walla · Все автомобили",
-      "category": "cars",
-      "art": "cars",
-      "image": "./assets/news/images/0711d5a866f63a5bcf4d.svg",
-      "official": false,
-      "translations": {
-        "he": {
-          "title": "הקו לירושלים יוארך לחדרה, בקרוב ב-3 רכבות בשעה ברוב היממה",
-          "summary": "כתבה על מכוניות או שוק הרכב בישראל. פרטים באתר המקור."
-        },
-        "ru": {
-          "title": "Линия на Иерусалим будет продлена до Хадеры, скоро большую часть дня будет ходить 3 поезда в час.",
-          "summary": "Материал об автомобиле или автомобильном рынке Израиля. Подробности — на сайте издания."
-        },
-        "en": {
-          "title": "The line to Jerusalem will be extended to Hadera, soon with 3 trains per hour most of the day",
-          "summary": "An update about vehicles or Israel's car market. Details are available at the source."
-        },
-        "ar": {
-          "title": "سيتم تمديد الخط المتجه إلى القدس إلى الخضيرة، قريبًا بثلاثة قطارات في الساعة معظم اليوم",
-          "summary": "تحديث عن السيارات أو سوق المركبات في إسرائيل. التفاصيل في المصدر."
-        }
-      },
-      "title": "Линия на Иерусалим будет продлена до Хадеры, скоро большую часть дня будет ходить 3 поезда в час.",
-      "summary": "Материал об автомобиле или автомобильном рынке Израиля. Подробности — на сайте издания.",
-      "translated": true
-    },
-    {
-      "id": "3cc364a35b70387b9594",
+      "id": "79df53609138c1864198",
       "titleOriginal": "רמת גן משיקה רשת טעינה לחשמליות: מה המחיר?",
       "sourceLanguage": "he",
       "date": "2026-11-01T22:52:00Z",
@@ -540,7 +309,7 @@
       "publisher": "Walla · Все автомобили",
       "category": "cars",
       "art": "cars",
-      "image": "./assets/news/images/3cc364a35b70387b9594.svg",
+      "image": "./assets/news/images/79df53609138c1864198.svg",
       "official": false,
       "translations": {
         "he": {
@@ -565,7 +334,7 @@
       "translated": true
     },
     {
-      "id": "d13ea9c1ee3d7c9be3af",
+      "id": "f927a1c96bf616445fab",
       "titleOriginal": "לקחים מהטרגדיה: איך מכוונים רכב שטח במעבר מכשול",
       "sourceLanguage": "he",
       "date": "2026-11-01T21:17:00Z",
@@ -573,7 +342,7 @@
       "publisher": "Walla · Все автомобили",
       "category": "cars",
       "art": "cars",
-      "image": "./assets/news/images/d13ea9c1ee3d7c9be3af.svg",
+      "image": "./assets/news/images/f927a1c96bf616445fab.svg",
       "official": false,
       "translations": {
         "he": {
@@ -598,7 +367,7 @@
       "translated": true
     },
     {
-      "id": "3f72e23d8d27936d3198",
+      "id": "e41933ff7d130fb2bb9d",
       "titleOriginal": "מאות רכבים מכונס נכסים נמכרים בפחות עשרות אחוזים, אז מדוע הקונים הפוטנציאליים נשארים מחוץ למכרז?",
       "sourceLanguage": "he",
       "date": "2026-11-01T11:09:00Z",
@@ -606,7 +375,7 @@
       "publisher": "Walla · Все автомобили",
       "category": "cars",
       "art": "cars",
-      "image": "./assets/news/images/3f72e23d8d27936d3198.svg",
+      "image": "./assets/news/images/e41933ff7d130fb2bb9d.svg",
       "official": false,
       "translations": {
         "he": {
@@ -631,7 +400,7 @@
       "translated": true
     },
     {
-      "id": "e366196182b03a9ccee2",
+      "id": "8da0d7e6aaf29974e4b9",
       "titleOriginal": "זכרתם? חובה להדליק אורות גם ביום בכבישים הבין־עירוניים",
       "sourceLanguage": "he",
       "date": "2026-11-01T07:07:00Z",
@@ -639,7 +408,7 @@
       "publisher": "Walla · Все автомобили",
       "category": "roads",
       "art": "roads",
-      "image": "./assets/news/images/e366196182b03a9ccee2.svg",
+      "image": "./assets/news/images/8da0d7e6aaf29974e4b9.svg",
       "official": false,
       "translations": {
         "he": {
@@ -664,40 +433,7 @@
       "translated": true
     },
     {
-      "id": "d947ea8b75e6e72e1d52",
-      "titleOriginal": "מדריך: כך תוכלו לנסוע היום בחינם ברכבת ובאוטובוס",
-      "sourceLanguage": "he",
-      "date": "2026-10-27T08:00:00Z",
-      "url": "https://cars.walla.co.il/item/3873385",
-      "publisher": "Walla · Все автомобили",
-      "category": "cars",
-      "art": "cars",
-      "image": "./assets/news/images/d947ea8b75e6e72e1d52.svg",
-      "official": false,
-      "translations": {
-        "he": {
-          "title": "מדריך: כך תוכלו לנסוע היום בחינם ברכבת ובאוטובוס",
-          "summary": "כתבה על מכוניות או שוק הרכב בישראל. פרטים באתר המקור."
-        },
-        "ru": {
-          "title": "Путеводитель: Вот как сегодня можно путешествовать бесплатно на поезде и автобусе",
-          "summary": "Материал об автомобиле или автомобильном рынке Израиля. Подробности — на сайте издания."
-        },
-        "en": {
-          "title": "Guide: This is how you can travel today for free by train and bus",
-          "summary": "An update about vehicles or Israel's car market. Details are available at the source."
-        },
-        "ar": {
-          "title": "الدليل: هذه هي الطريقة التي يمكنك بها السفر اليوم مجانًا بالقطار والحافلة",
-          "summary": "تحديث عن السيارات أو سوق المركبات في إسرائيل. التفاصيل في المصدر."
-        }
-      },
-      "title": "Путеводитель: Вот как сегодня можно путешествовать бесплатно на поезде и автобусе",
-      "summary": "Материал об автомобиле или автомобильном рынке Израиля. Подробности — на сайте издания.",
-      "translated": true
-    },
-    {
-      "id": "960a03247e64a8fa1d97",
+      "id": "8afa884f224efe65331b",
       "titleOriginal": "דירוג 2026: המכוניות הכי אמינות - ואלה שלא",
       "sourceLanguage": "he",
       "date": "2026-10-26T19:09:00Z",
@@ -705,7 +441,7 @@
       "publisher": "Walla · Все автомобили",
       "category": "cars",
       "art": "cars",
-      "image": "./assets/news/images/960a03247e64a8fa1d97.svg",
+      "image": "./assets/news/images/8afa884f224efe65331b.svg",
       "official": false,
       "translations": {
         "he": {
@@ -730,7 +466,7 @@
       "translated": true
     },
     {
-      "id": "3fc99d55b54ac002a16d",
+      "id": "49f8482a0c05fbd3d62e",
       "titleOriginal": "בוחרים רכב חדש: כל מבצעי הרכב וההנחות ביום הבחירות",
       "sourceLanguage": "he",
       "date": "2026-10-25T19:32:00Z",
@@ -738,7 +474,7 @@
       "publisher": "Walla · Все автомобили",
       "category": "cars",
       "art": "cars",
-      "image": "./assets/news/images/3fc99d55b54ac002a16d.svg",
+      "image": "./assets/news/images/49f8482a0c05fbd3d62e.svg",
       "official": false,
       "translations": {
         "he": {
