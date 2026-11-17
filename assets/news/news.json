@@ -1,7 +1,7 @@
 {
   "version": 1,
   "retentionDays": 30,
-  "updated": "2026-11-17T08:30:21.647106Z",
+  "updated": "2026-11-17T08:31:12.998255Z",
   "items": [
     {
       "id": "06a5646c88d47e6666f5",
@@ -35,7 +35,7 @@
       "title": "Один сантиметр, который изменил ситуацию: сложная операция, спасшая трехнедельного ребенка",
       "summary": "Материал об автомобиле или автомобильном рынке Израиля. Подробности — на сайте издания.",
       "translated": true,
-      "imageKind": "vector-placeholder",
+      "imageKind": "ai-generated",
       "imageType": "licensedPhoto",
       "imageCredit": {
         "text": "Eric Friedebach · CC BY 2.0",
@@ -74,7 +74,7 @@
       "title": "В районе Сдерота 20-летнего пешехода сбила машина, его состояние тяжелое",
       "summary": "Материал об автомобиле или автомобильном рынке Израиля. Подробности — на сайте издания.",
       "translated": true,
-      "imageKind": "vector-placeholder",
+      "imageKind": "ai-generated",
       "imageType": "licensedPhoto",
       "imageCredit": {
         "text": "Eric Friedebach · CC BY 2.0",
@@ -113,7 +113,7 @@
       "title": "Атака под Иерихоном: террористы наехали на израильтян и напали на них с топорами",
       "summary": "Дорожное происшествие в Израиле. Обстоятельства и актуальные сведения — в материале источника.",
       "translated": true,
-      "imageKind": "vector-placeholder",
+      "imageKind": "ai-generated",
       "imageType": "licensedPhoto",
       "imageCredit": {
         "text": "No machine-readable author provided. EPO assumed (based on copyright claims). · CC BY 2.5",
@@ -152,7 +152,7 @@
       "title": "20-летний мужчина получил серьезные травмы в результате наезда автомобиля на 334-м шоссе.",
       "summary": "Материал об автомобиле или автомобильном рынке Израиля. Подробности — на сайте издания.",
       "translated": true,
-      "imageKind": "vector-placeholder",
+      "imageKind": "ai-generated",
       "imageType": "licensedPhoto",
       "imageCredit": {
         "text": "Eric Friedebach · CC BY 2.0",
@@ -191,7 +191,7 @@
       "title": "Документация: Израильский автомобиль, на который в Иерихоне напали с дубинками и топорами.",
       "summary": "Материал об автомобиле или автомобильном рынке Израиля. Подробности — на сайте издания.",
       "translated": true,
-      "imageKind": "vector-placeholder",
+      "imageKind": "ai-generated",
       "imageType": "licensedPhoto",
       "imageCredit": {
         "text": "Eric Friedebach · CC BY 2.0",
@@ -230,7 +230,7 @@
       "title": "Верховный суд одобрил компромиссное решение: около 4,5 млн шекелей для пострадавшего в автокатастрофе на работе",
       "summary": "Дорожное происшествие в Израиле. Обстоятельства и актуальные сведения — в материале источника.",
       "translated": true,
-      "imageKind": "vector-placeholder",
+      "imageKind": "ai-generated",
       "imageType": "licensedPhoto",
       "imageCredit": {
         "text": "Jeff Attaway from Abuja, Nigeria · CC BY 2.0",
@@ -269,7 +269,7 @@
       "title": "Комбинированная атака под Иерихоном: террористы протаранили автомобиль, в котором ехали израильтяне, и напали на его пассажиров",
       "summary": "Материал об автомобиле или автомобильном рынке Израиля. Подробности — на сайте издания.",
       "translated": true,
-      "imageKind": "vector-placeholder",
+      "imageKind": "ai-generated",
       "imageType": "licensedPhoto",
       "imageCredit": {
         "text": "Ivan Radic · CC BY 2.0",
@@ -308,7 +308,7 @@
       "title": "Подозрение на нападение в Иерихоне: палестинцы столкнулись с израильским автомобилем и напали на его пассажиров с топорами",
       "summary": "Дорожное происшествие в Израиле. Обстоятельства и актуальные сведения — в материале источника.",
       "translated": true,
-      "imageKind": "vector-placeholder",
+      "imageKind": "ai-generated",
       "imageType": "licensedPhoto",
       "imageCredit": {
         "text": "Jeff Attaway from Abuja, Nigeria · CC BY 2.0",
@@ -347,7 +347,7 @@
       "title": "Импорт 10/2026 / Резкий скачок импорта легковых автомобилей, долларовая стоимость продолжает расти",
       "summary": "Материал об автомобиле или автомобильном рынке Израиля. Подробности — на сайте издания.",
       "translated": true,
-      "imageKind": "vector-placeholder",
+      "imageKind": "ai-generated",
       "imageType": "licensedPhoto",
       "imageCredit": {
         "text": "Eric Friedebach · CC BY 2.0",
@@ -386,7 +386,7 @@
       "title": "Хаим Левинсон также вошел в число участников: сотни ответов пришли быстро.",
       "summary": "Сообщение о контроле скорости или дорожных камерах. Проверьте место и действующие правила в источнике.",
       "translated": true,
-      "imageKind": "vector-placeholder",
+      "imageKind": "ai-generated",
       "imageType": "licensedPhoto",
       "imageCredit": {
         "text": "Trougnouf (Benoit Brummer) · CC BY 4.0",
@@ -425,7 +425,7 @@
       "title": "Какие автомобили получат новые МК?",
       "summary": "Материал об автомобиле или автомобильном рынке Израиля. Подробности — на сайте издания.",
       "translated": true,
-      "imageKind": "vector-placeholder",
+      "imageKind": "ai-generated",
       "imageType": "licensedPhoto",
       "imageCredit": {
         "text": "Eric Friedebach · CC BY 2.0",
@@ -464,7 +464,7 @@
       "title": "Исследования / Общественность предпочитает взимать туристический налог со всех транспортных средств, а не только с электромобилей",
       "summary": "Материал об автомобиле или автомобильном рынке Израиля. Подробности — на сайте издания.",
       "translated": true,
-      "imageKind": "vector-placeholder",
+      "imageKind": "ai-generated",
       "imageType": "licensedPhoto",
       "imageCredit": {
         "text": "Ivan Radic · CC BY 2.0",
@@ -503,7 +503,7 @@
       "title": "Robotxim/May Mobilty вышла на сбор капитала в Спаке, объявила о покупке тысяч автомобилей Volkswagen",
       "summary": "Материал об автомобиле или автомобильном рынке Израиля. Подробности — на сайте издания.",
       "translated": true,
-      "imageKind": "vector-placeholder",
+      "imageKind": "ai-generated",
       "imageType": "licensedPhoto",
       "imageCredit": {
         "text": "Eric Friedebach · CC BY 2.0",
@@ -542,7 +542,7 @@
       "title": "У вас есть лицензия B? Можно управлять трамваями, в том числе коммерческими, массой до 4,25 тонн.",
       "summary": "Публикация о правилах для водителей. Статус закона и дату вступления в силу нужно сверять с официальными документами.",
       "translated": true,
-      "imageKind": "vector-placeholder",
+      "imageKind": "ai-generated",
       "imageType": "licensedPhoto",
       "imageCredit": {
         "text": "Wikimedia Commons · CC BY 4.0",
@@ -581,7 +581,7 @@
       "title": "Локальный запуск / Delek Automotive запускает промежуточные гибридные приводные системы Series 3, Generation 8",
       "summary": "Материал об автомобиле или автомобильном рынке Израиля. Подробности — на сайте издания.",
       "translated": true,
-      "imageKind": "vector-placeholder",
+      "imageKind": "ai-generated",
       "imageType": "licensedPhoto",
       "imageCredit": {
         "text": "Eric Friedebach · CC BY 2.0",
@@ -620,7 +620,7 @@
       "title": "Б/у: спрос на бензин падает, электромобили и гибриды растут",
       "summary": "Материал об автомобиле или автомобильном рынке Израиля. Подробности — на сайте издания.",
       "translated": true,
-      "imageKind": "vector-placeholder",
+      "imageKind": "ai-generated",
       "imageType": "licensedPhoto",
       "imageCredit": {
         "text": "Eric Friedebach · CC BY 2.0",
@@ -659,7 +659,7 @@
       "title": "Почему в Израиле действительно снизились цены на автострахование и какое это имеет отношение к Индии?",
       "summary": "Материал об автомобиле или автомобильном рынке Израиля. Подробности — на сайте издания.",
       "translated": true,
-      "imageKind": "vector-placeholder",
+      "imageKind": "ai-generated",
       "imageType": "licensedPhoto",
       "imageCredit": {
         "text": "Eric Friedebach · CC BY 2.0",
@@ -698,7 +698,7 @@
       "title": "Без зарядного кабеля: Jaco 7 получает обычную гибридную версию: от 170 000 шекелей",
       "summary": "Материал об автомобиле или автомобильном рынке Израиля. Подробности — на сайте издания.",
       "translated": true,
-      "imageKind": "vector-placeholder",
+      "imageKind": "ai-generated",
       "imageType": "licensedPhoto",
       "imageCredit": {
         "text": "Eric Friedebach · CC BY 2.0",
@@ -737,7 +737,7 @@
       "title": "В Рамат-Гане запускается сеть зарядки для трамваев: какая цена?",
       "summary": "Материал об автомобиле или автомобильном рынке Израиля. Подробности — на сайте издания.",
       "translated": true,
-      "imageKind": "vector-placeholder",
+      "imageKind": "ai-generated",
       "imageType": "licensedPhoto",
       "imageCredit": {
         "text": "Eric Friedebach · CC BY 2.0",
@@ -776,7 +776,7 @@
       "title": "Уроки трагедии: как управлять внедорожником при преодолении препятствия",
       "summary": "Материал об автомобиле или автомобильном рынке Израиля. Подробности — на сайте издания.",
       "translated": true,
-      "imageKind": "vector-placeholder",
+      "imageKind": "ai-generated",
       "imageType": "licensedPhoto",
       "imageCredit": {
         "text": "Ivan Radic · CC BY 2.0",
@@ -815,7 +815,7 @@
       "title": "Сотни автомобилей-приемников продаются на десятки процентов дешевле, так почему же потенциальные покупатели остаются вне аукциона?",
       "summary": "Материал об автомобиле или автомобильном рынке Израиля. Подробности — на сайте издания.",
       "translated": true,
-      "imageKind": "vector-placeholder",
+      "imageKind": "ai-generated",
       "imageType": "licensedPhoto",
       "imageCredit": {
         "text": "Eric Friedebach · CC BY 2.0",
@@ -854,7 +854,7 @@
       "title": "ты помнишь, что на междугородних дорогах свет нужно включать даже днём",
       "summary": "Публикация о правилах для водителей. Статус закона и дату вступления в силу нужно сверять с официальными документами.",
       "translated": true,
-      "imageKind": "vector-placeholder",
+      "imageKind": "ai-generated",
       "imageType": "licensedPhoto",
       "imageCredit": {
         "text": "CZmarlin — Christopher Ziemnowicz, a photo credit would be appreciated if this image is used anywher · CC BY 4.0",
@@ -893,7 +893,7 @@
       "title": "Рейтинг 2026: самые надежные автомобили — и те, которые таковыми не являются",
       "summary": "Материал об автомобиле или автомобильном рынке Израиля. Подробности — на сайте издания.",
       "translated": true,
-      "imageKind": "vector-placeholder",
+      "imageKind": "ai-generated",
       "imageType": "licensedPhoto",
       "imageCredit": {
         "text": "Ivan Radic · CC BY 2.0",
@@ -932,7 +932,7 @@
       "title": "Выбери новую машину: все автомобильные предложения и скидки в день выборов",
       "summary": "Материал об автомобиле или автомобильном рынке Израиля. Подробности — на сайте издания.",
       "translated": true,
-      "imageKind": "vector-placeholder",
+      "imageKind": "ai-generated",
       "imageType": "licensedPhoto",
       "imageCredit": {
         "text": "Eric Friedebach · CC BY 2.0",
