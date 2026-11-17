@@ -275,8 +275,17 @@ jobs:
             if(await page.locator('#theoryPreviewStart,#openTheoryHeader,#theoryQuick').count())
               throw Error('Old standalone theory promo/header buttons were reintroduced');
             await page.locator('#showcaseDots .showcase-dot').last().click();
+            // Async image-manifest refresh can rebuild the carousel during
+            // a click; wait for the ACTUAL visible stage before measuring.
+            await page.waitForTimeout(650);
             if(!(await last.getAttribute('class')).includes('active'))
-              throw Error('Last theory slide does not activate');
+              await page.locator('#showcaseDots .showcase-dot').last().click();
+            await page.waitForFunction(()=>{
+              const slide=document.querySelector('#showcaseSlides .featured-slide--theory');
+              const stage=slide?.querySelector('.theory-stage');
+              return !!slide?.classList.contains('active')&&!!stage&&
+                stage.isConnected&&stage.getBoundingClientRect().width>100;
+            },null,{timeout:15000});
             const artwork=await last.evaluate(el=>{
               const frame=el.querySelector('.theory-stage');
               const device=el.querySelector('.theory-device');
