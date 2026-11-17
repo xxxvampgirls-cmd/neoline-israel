@@ -49,6 +49,7 @@ FEEDS=[
  ("The Times of Israel","https://www.timesofisrael.com/feed/"),
  ("The Jerusalem Post","https://www.jpost.com/rss/rssfeedsfrontpage.aspx"),
  ("Arutz Sheva · Israel National News","https://www.inn.co.il/Rss.aspx"),
+ ("Davar · Национальные новости","https://www.davar1.co.il/feed/"),
  ("Wheel · Автоновости","https://wheel.co.il/feed/"),
  ("TheCar · Автоновости","https://thecar.co.il/feed/"),
  ("Мицу · Камеры скорости","https://www.mitsu.co.il/?feed=rss2&cat=50"),
