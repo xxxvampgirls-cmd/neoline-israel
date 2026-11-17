@@ -1,5 +1,5 @@
 {
-  "attempted": "2026-11-17T07:56:48.893449Z",
+  "attempted": "2026-11-17T07:57:40.541381Z",
   "feeds": {
     "Walla · Авто": 30,
     "Walla · Безопасность": 30,
@@ -8,7 +8,7 @@
     "Walla · Новости Израиля": 30,
     "The Jerusalem Post": 26
   },
-  "new": 23,
+  "new": 0,
   "retained": 23,
   "imageCount": 23,
   "deletedImages": 0,
