@@ -339,17 +339,27 @@ jobs:
               const speed=await slides.nth(i).evaluate(el=>{
                 const stripes=el.querySelector('.ad-photo-stripes');
                 const bands=[...stripes.querySelectorAll('.ad-photo-band')];
+                const focus=stripes.querySelector('.ad-photo-focus');
                 const ribbons=bands.map(b=>({
                   name:getComputedStyle(b).animationName,
                   seconds:parseFloat(getComputedStyle(b).animationDuration),
-                  height:parseFloat(getComputedStyle(b).height)
+                  height:parseFloat(getComputedStyle(b).height),
+                  z:parseInt(getComputedStyle(b).zIndex,10),
+                  width:parseFloat(getComputedStyle(b).width)
                 }));
+                const feather=focus?getComputedStyle(focus):null;
                 return {bands:bands.length,ribbons,
+                        focus:!!focus,
+                        focusZ:feather?parseInt(feather.zIndex,10):-1,
+                        focusGradient:feather?.backgroundImage.includes('radial-gradient')||false,
                         front:getComputedStyle(stripes,'::before').animationName,
                         back:getComputedStyle(stripes,'::after').animationName,
                         fastSeconds:parseFloat(getComputedStyle(stripes,'::before').animationDuration)};
               });
-              if(speed.bands!==2||speed.front!=='neolineRoadSweep'||speed.back!=='neolineRoadSweep'||
+              if(speed.bands!==2||!speed.focus||!speed.focusGradient||
+                 speed.ribbons.some(b=>b.z<=speed.focusZ)||
+                 speed.ribbons.some(b=>b.width<300)||
+                 speed.front!=='neolineRoadSweep'||speed.back!=='neolineRoadSweep'||
                 speed.ribbons[0].name!=='neolineMainBandLeftToRight'||
                 speed.ribbons[1].name!=='neolineMainBandRightToLeft'||
                 speed.ribbons.some(b=>!(b.seconds>speed.fastSeconds&&b.seconds<18))||
@@ -365,7 +375,7 @@ jobs:
             if(!(await slides.first().getAttribute('class')).includes('active'))
               throw Error('Arrow from LAST theory ad must wrap to first product slide');
             if(errors.length)throw Error('Homepage JS errors '+errors.join('|'));
-            console.log('HOMEPAGE PREMIUM THEORY AD PASS: last slide, 3D device, two blue bands, unified speed parallax on all five slides, reduced motion, wrap and mobile width');
+            console.log('HOMEPAGE PREMIUM THEORY AD PASS: white feathered center beneath two opposite moving bands on all five slides; fast streaks, reduced motion, mobile width and wrap');
             await browser.close();
           })().catch(e=>{console.error(e);process.exit(1)});
           JS
