@@ -115,6 +115,61 @@ jobs:
             await page.locator('#exitQuiz').click();
             if(!await page.locator('#gameLobby').isVisible())throw Error('Back to game modes broken');
             await page.locator('[data-mode="mistakes"]').count();
+            // Actual browser test for three wrong answers. Route and sign hunt
+            // must stop immediately: no fourth question, no Next click needed.
+            // Keep official 30-question exam and marathon rules unchanged.
+            const officialRu=await page.evaluate(async()=>{
+              const r=await fetch('./assets/teoria/ru.json');
+              return (await r.json()).questions.map(q=>({id:String(q.id),correct:q.correct}));
+            });
+            async function loseAllThreeLives(mode){
+              await page.locator('[data-mode="'+mode+'"]').click();
+              for(let i=0;i<3;i++){
+                await page.evaluate(bank=>{
+                  const questionId=document.getElementById('questionId').textContent.replace(/\D/g,'');
+                  const q=bank.find(x=>x.id===questionId);
+                  if(!q)throw Error('Question id missing from official bank: '+questionId);
+                  const wrong=[...document.querySelectorAll('#answers button')]
+                    .find(el=>Number(el.dataset.original)!==q.correct);
+                  if(!wrong)throw Error('No wrong answer choice');
+                  wrong.click();
+                },officialRu);
+                if(i<2){
+                  if(await page.locator('#gameOver').isVisible())
+                    throw Error('Game over too early, error '+(i+1));
+                  await page.locator('#nextQuestion').click();
+                }
+              }
+              if(!await page.locator('#gameOver').isVisible())
+                throw Error('Third mistake did NOT immediately show Game Over in '+mode);
+              if(await page.locator('#nextQuestion').isEnabled())
+                throw Error('Game continues despite 0 hearts in '+mode);
+              if((await page.locator('#gameOverTitle').innerText()).trim()!=='GAME OVER')
+                throw Error('Game Over heading absent');
+              if(!/не огорчайся/i.test(await page.locator('#gameOverMessage').innerText()))
+                throw Error('Encouraging message missing');
+              if(!await page.locator('body').evaluate(el=>el.classList.contains('game-over-open')))
+                throw Error('Game Over overlay not locking gameplay');
+              const score=await page.locator('#gameOverScore').innerText();
+              if(!score.includes('/ 3'))throw Error('Game Over attempt count wrong: '+score);
+              return score;
+            }
+            const firstLostScore=await loseAllThreeLives('route');
+            await page.locator('#gameOverRetry').click();
+            if(await page.locator('#gameOver').isVisible()||
+               !await page.locator('#gamePlaying').isVisible()||
+               await page.locator('#questionCounter').innerText()!=='1 / 10')
+              throw Error('Play again must start a fresh route with 3 lives');
+            await page.locator('#exitQuiz').click();
+            const signsLostScore=await loseAllThreeLives('signs');
+            await page.locator('#gameOverModes').click();
+            if(await page.locator('#gameOver').isVisible()||
+               !await page.locator('#gameLobby').isVisible())
+              throw Error('Back to game modes does not dismiss GAME OVER');
+            if(await page.locator('.hero-mini-svg').count()!==1)
+              throw Error('Hero must use new NEOLINE SVG car artwork rather than emojis');
+            console.log('THREE LIVES GAME OVER PASS: route '+firstLostScore+', signs '+signsLostScore+
+              ', immediate stop, replay, return to menu, official answers');
             await page.locator('[data-mode="signs"]').click();
             const signsTopic=await page.locator('#questionTopic').innerText();
             if(!/знаки/i.test(signsTopic))throw Error('Road sign mode not filtering signs: '+signsTopic);
