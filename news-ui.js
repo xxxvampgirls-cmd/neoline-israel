@@ -57,6 +57,133 @@ function currentOnly(o){
  return t>=now-30*86400e3;
 }
 
+
+/* Independent 10-minute GitHub Actions data stream: official timestamped police
+   posts, not a traffic-control API or proof a road remains blocked right now. */
+const TRAFFIC_DATA_URL="https://raw.githubusercontent.com/xxxvampgirls-cmd/neoline-israel/traffic-live/assets/traffic/live.json";
+const traffic={events:[],checkedAt:null,sourceStatus:"pending",lastFetch:0,busy:false};
+const trafficI18n={
+ ru:{title:"Дороги Израиля · сообщения полиции",loading:"Проверяем официальный источник…",
+  empty:"За последние 3 часа новых сообщений не найдено. Это не означает, что дороги свободны.",
+  unavailable:"Источник временно недоступен. Проверьте напрямую перед поездкой.",
+  stale:"Сведения не обновлялись достаточно давно. Проверяйте первоисточник.",
+  count:"Свежих сообщений",checked:"Проверено",source:"Дорожная полиция ↗",road6:"Шоссе № 6 ↗",
+  warning:"Сообщения могут устареть. Перед поездкой сверяйте ограничения с источником и навигатором.",
+  refresh:"Проверить дорожные сообщения",details:"Перейти к сообщению полиции ↗",
+  kinds:{closure:"Сообщение о перекрытии",reopened:"Сообщение об открытии движения",
+   congestion:"Сообщение о заторах",planned:"Планируемые ограничения",update:"Дорожное сообщение"},
+  road:"дорога №",roads:"дороги №",unspecified:"участок дороги",hot:"🔥 ДОРОЖНЫЕ СООБЩЕНИЯ",
+  posted:"Сообщение полиции от",verify:"Перед поездкой проверьте актуальность"},
+ en:{title:"Israel roads · police bulletins",loading:"Checking the official source…",
+  empty:"No new matching posts in the past 3 hours. This does not mean roads are clear.",
+  unavailable:"Official source unavailable. Check directly before travelling.",
+  stale:"Updates are old. Please check the official source.",
+  count:"Recent bulletins",checked:"Checked",source:"Traffic Police ↗",road6:"Route 6 ↗",
+  warning:"Reports may be outdated. Verify any restriction with the source and navigation before travelling.",
+  refresh:"Check traffic bulletins",details:"Open the official police message ↗",
+  kinds:{closure:"Road closure bulletin",reopened:"Road reopening bulletin",
+   congestion:"Traffic congestion bulletin",planned:"Planned traffic restrictions",update:"Road traffic update"},
+  road:"road ",roads:"roads ",unspecified:"road location",hot:"🔥 TRAFFIC BULLETIN",
+  posted:"Police bulletin posted",verify:"Check current road conditions before departure"},
+ he:{title:"כבישי ישראל · הודעות המשטרה",loading:"בודקים את המקור הרשמי…",
+  empty:"לא נמצאו עדכונים חדשים ב־3 השעות האחרונות. זה לא אומר שהכבישים פנויים.",
+  unavailable:"המקור הרשמי אינו זמין כרגע. יש לבדוק לפני הנסיעה.",
+  stale:"המידע לא עודכן לאחרונה. יש לבדוק במקור הרשמי.",
+  count:"עדכונים אחרונים",checked:"נבדק",source:"אגף התנועה ↗",road6:"כביש 6 ↗",
+  warning:"דיווחים עשויים להתיישן. לפני הנסיעה יש לוודא את מצב הכבישים מול המקור ואפליקציית ניווט.",
+  refresh:"בדיקת הודעות תנועה",details:"פתיחת הודעת המשטרה ↗",
+  kinds:{closure:"דיווח על חסימה",reopened:"דיווח על פתיחת הכביש",
+   congestion:"דיווח על עומסים",planned:"הגבלות תנועה מתוכננות",update:"עדכון תנועה"},
+  road:"כביש ",roads:"כבישים ",unspecified:"קטע כביש",hot:"🔥 עדכוני תנועה",
+  posted:"דיווח המשטרה",verify:"בדקו מידע מעודכן לפני הנסיעה"},
+ ar:{title:"طرق إسرائيل · بيانات الشرطة",loading:"جار التحقق من المصدر الرسمي…",
+  empty:"لا توجد بيانات جديدة خلال 3 ساعات. هذا لا يعني أن الطرق مفتوحة.",
+  unavailable:"المصدر الرسمي غير متاح الآن. تحقق مباشرة قبل السفر.",
+  stale:"البيانات قديمة. تحقق من المصدر الرسمي.",
+  count:"بيانات حديثة",checked:"تم التحقق",source:"شرطة المرور ↗",road6:"الطريق 6 ↗",
+  warning:"قد تصبح التقارير قديمة. تحقق من قيود الطريق مع المصدر والملاحة قبل السفر.",
+  refresh:"تحديث بيانات المرور",details:"فتح بيان الشرطة الرسمي ↗",
+  kinds:{closure:"بلاغ إغلاق طريق",reopened:"بلاغ فتح الطريق",
+   congestion:"بلاغ ازدحام",planned:"قيود مرورية مخططة",update:"تحديث مروري"},
+  road:"طريق ",roads:"طرق ",unspecified:"مقطع طريق",hot:"🔥 بلاغات الطرق",
+  posted:"بيان الشرطة",verify:"تحقق من حالة الطرق قبل الرحلة"}
+};
+function trafficTr(){return trafficI18n[state.lang]||trafficI18n.ru}
+function trafficTime(v){
+ const d=new Date(v);
+ if(!Number.isFinite(+d))return "";
+ return new Intl.DateTimeFormat({ru:"ru-RU",en:"en-GB",he:"he-IL",ar:"ar-IL"}[state.lang],{
+  timeZone:"Asia/Jerusalem",day:"numeric",month:"short",hour:"2-digit",minute:"2-digit"
+ }).format(d);
+}
+function trafficHeadline(item){
+ const t=trafficTr(),roads=Array.isArray(item.roads)?item.roads.filter(x=>/^\d{1,3}$/.test(x)).slice(0,4):[];
+ const name=roads.length?(roads.length>1?t.roads:t.road)+roads.join(", "):t.unspecified;
+ return (t.kinds[item.kind]||t.kinds.update)+" · "+name;
+}
+function trafficValid(event,now){
+ if(!event||typeof event!=="object"||!/^Atanpolice\/\d+$/.test(event.id||"")||
+    !/^https:\/\/t\.me\/Atanpolice\/\d+$/.test(event.url||"")||
+    !["closure","reopened","congestion","planned","update"].includes(event.kind)||
+    typeof event.original!=="string"||event.original.length>520)return false;
+ const age=now-Date.parse(event.publishedAt);
+ return Number.isFinite(age)&&age>=-5*60e3&&age<=180*60e3;
+}
+function renderTraffic(){
+ const t=trafficTr(),host=$("trafficList"),label=$("trafficStatus");
+ if(!host||!label)return;
+ $("trafficTitle").textContent=t.title;
+ $("trafficSourceLink").textContent=t.source;
+ $("trafficRoad6Link").textContent=t.road6;
+ $("trafficDisclaimer").textContent=t.warning;
+ $("trafficRefresh").setAttribute("aria-label",t.refresh);
+ $("trafficRefresh").title=t.refresh;
+ let message=t.loading;
+ if(traffic.sourceStatus==="unavailable")message=t.unavailable;
+ else if(traffic.sourceStatus==="stale")message=t.stale;
+ else if(traffic.sourceStatus==="ok"){
+  message=traffic.events.length?t.count+": "+traffic.events.length:t.empty;
+  if(traffic.checkedAt)message+=" · "+t.checked+": "+trafficTime(traffic.checkedAt);
+ }
+ label.textContent=message;
+ if(!traffic.events.length){host.hidden=true;host.innerHTML="";return}
+ host.hidden=false;
+ host.innerHTML=traffic.events.map(item=>{
+  const title=trafficHeadline(item),original=safe(item.original.slice(0,480)),url=safe(item.url);
+  return '<details class="traffic-report"><summary>'+
+   '<span class="traffic-report-type">🔥 '+safe(t.kinds[item.kind]||t.kinds.update)+'</span>'+
+   '<span class="traffic-report-title">'+safe(title)+'</span>'+
+   '<time class="traffic-report-age" datetime="'+safe(item.publishedAt)+'">'+safe(trafficTime(item.publishedAt))+'</time>'+
+   '</summary><div class="traffic-report-body">'+
+   '<p lang="he" dir="rtl">'+original+'</p>'+
+   '<a href="'+url+'" target="_blank" rel="noopener noreferrer nofollow">'+safe(t.details)+'</a>'+
+   '</div></details>';
+ }).join("");
+}
+async function loadTraffic(){
+ if(traffic.busy)return;
+ traffic.busy=true;$("trafficRefresh").disabled=true;
+ try{
+  // All site visitors share the same 10-minute cache key; no per-user query IDs.
+  const cacheKey=Math.floor(Date.now()/600000);
+  const response=await fetch(TRAFFIC_DATA_URL+"?v="+cacheKey,{cache:"no-store"});
+  if(!response.ok)throw Error("traffic source HTTP "+response.status);
+  const d=await response.json();
+  if(d.version!==1||!Array.isArray(d.events)||!["ok","unavailable","pending"].includes(d.sourceStatus))throw Error("invalid traffic feed");
+  const now=Date.now(),checkAge=now-Date.parse(d.checkedAt);
+  const sourceFresh=Number.isFinite(checkAge)&&checkAge>=-5*60e3&&checkAge<40*60e3;
+  traffic.sourceStatus=d.sourceStatus==="pending"?"unavailable":(sourceFresh?d.sourceStatus:"stale");
+  traffic.checkedAt=sourceFresh?d.checkedAt:null;
+  traffic.events=traffic.sourceStatus==="ok"?d.events.filter(e=>trafficValid(e,now)).slice(0,6):[];
+ }catch(e){
+  console.warn("Official traffic headlines unavailable:",e.message);
+  traffic.events=[];traffic.sourceStatus="unavailable";traffic.checkedAt=null;
+ }finally{
+  traffic.lastFetch=Date.now();traffic.busy=false;$("trafficRefresh").disabled=false;
+  renderTraffic();initializeFeatures(true);
+ }
+}
+
 /* Featured news header: only one slide image exists in the DOM at a time.
    It rotates the latest 10 valid stories independently of the 8-card list. */
 const feature={items:[],index:0,timer:null,touchX:null,touchY:null,paused:false,swipedUntil:0};
@@ -84,16 +211,28 @@ function drawFeature(){
  $("newsFeatureNext").setAttribute("aria-label",featureTr("next"));
  $("newsFeatureDots").setAttribute("aria-label",featureTr("pick"));
  if(!list.length){host.innerHTML='<p class="news-feature-loading">'+safe(featureTr("empty"))+'</p>';return}
- const item=list[feature.index],localized=localStory(item),url=safeURL(item.url),pic=newsPicture(item);
- const photo=pic?'<img src="'+safe(pic)+'" width="640" height="360" decoding="async" alt="" class="news-feature-img">':'';
- const creditURL=item.imageCredit&&safeURL(item.imageCredit.url);
- const attribution=creditURL?'<a class="news-feature-credit" href="'+safe(creditURL)+'" target="_blank" rel="noopener noreferrer" title="'+safe(item.imageCredit.text||"Photo credit")+'">'+safe(item.imageCredit.text||"Photo credit")+'</a>':'';
- host.innerHTML='<a class="news-feature-story" href="'+safe(url)+'" target="_blank" rel="noopener noreferrer nofollow" aria-label="'+safe(localized.title)+'">'+
-  '<span class="news-feature-photo">'+photo+'</span>'+
-  '<span class="news-feature-pattern" aria-hidden="true"></span><span class="news-feature-blueprint" aria-hidden="true"></span>'+
-  '<span class="news-feature-copy"><span class="news-feature-tag">'+safe(featureTr("latest"))+' <i>·</i> '+safe(tr(item.category))+'</span>'+
-  '<strong class="news-feature-title" dir="auto">'+safe(localized.title)+'</strong>'+
-  '<span class="news-feature-footer">'+safe(displayDate(item.date))+' · '+safe(item.publisher||"")+'<span class="news-feature-go">'+safe(featureTr("view"))+' ↗</span></span></span></a>'+attribution;
+ const item=list[feature.index],url=safeURL(item.url);
+ if(item.traffic){
+  const t=trafficTr(),headline=trafficHeadline(item);
+  host.innerHTML='<a class="news-feature-story news-feature-story--traffic" href="'+safe(url)+'" target="_blank" rel="noopener noreferrer nofollow" aria-label="'+safe(headline)+'">'+
+   '<span class="news-feature-traffic-glow" aria-hidden="true"></span>'+
+   '<span class="news-feature-traffic-symbol" aria-hidden="true"><svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><path d="M15 43 20 4h8l5 39M24 10v7m0 10v8"/></svg></span>'+
+   '<span class="news-feature-copy"><span class="news-feature-tag news-feature-tag--traffic">'+safe(t.hot)+'</span>'+
+   '<strong class="news-feature-title" dir="auto">'+safe(headline)+'</strong>'+
+   '<span class="news-feature-footer">'+safe(t.posted)+' · '+safe(trafficTime(item.publishedAt))+
+   '<span class="news-feature-go">'+safe(t.verify)+' ↗</span></span></span></a>';
+ }else{
+  const localized=localStory(item),pic=newsPicture(item);
+  const photo=pic?'<img src="'+safe(pic)+'" width="640" height="360" decoding="async" alt="" class="news-feature-img">':'';
+  const creditURL=item.imageCredit&&safeURL(item.imageCredit.url);
+  const attribution=creditURL?'<a class="news-feature-credit" href="'+safe(creditURL)+'" target="_blank" rel="noopener noreferrer" title="'+safe(item.imageCredit.text||"Photo credit")+'">'+safe(item.imageCredit.text||"Photo credit")+'</a>':'';
+  host.innerHTML='<a class="news-feature-story" href="'+safe(url)+'" target="_blank" rel="noopener noreferrer nofollow" aria-label="'+safe(localized.title)+'">'+
+   '<span class="news-feature-photo">'+photo+'</span>'+
+   '<span class="news-feature-pattern" aria-hidden="true"></span><span class="news-feature-blueprint" aria-hidden="true"></span>'+
+   '<span class="news-feature-copy"><span class="news-feature-tag">'+safe(featureTr("latest"))+' <i>·</i> '+safe(tr(item.category))+'</span>'+
+   '<strong class="news-feature-title" dir="auto">'+safe(localized.title)+'</strong>'+
+   '<span class="news-feature-footer">'+safe(displayDate(item.date))+' · '+safe(item.publisher||"")+'<span class="news-feature-go">'+safe(featureTr("view"))+' ↗</span></span></span></a>'+attribution;
+ }
  const dots=$("newsFeatureDots");
  if(dots.childElementCount!==list.length){
   dots.innerHTML=list.map((v,i)=>'<button type="button" data-feature-dot="'+i+'" class="news-feature-dot" aria-label="'+safe(featureTr("slide"))+' '+(i+1)+' '+safe(featureTr("of"))+' '+list.length+'"></button>').join("");
@@ -113,9 +252,14 @@ function setFeatureIndex(index,manual=true){
  if(manual)feature.paused=false;
  restartFeatureTimer();
 }
-function initializeFeatures(){
- feature.items=state.items.filter(currentOnly).slice(0,10);
- feature.index=0;
+function initializeFeatures(preserve=false){
+ const selected=preserve&&feature.items[feature.index]?.id;
+ const latest=state.items.filter(currentOnly);
+ // At most one featured police bulletin; the complete small set is below.
+ feature.items=(traffic.events.length?[{...traffic.events[0],traffic:true,date:traffic.events[0].publishedAt}]:[])
+  .concat(latest.slice(0,traffic.events.length?9:10));
+ const idx=feature.items.findIndex(item=>item.id===selected);
+ feature.index=idx>=0?idx:0;
  drawFeature();
  restartFeatureTimer();
 }
@@ -255,18 +399,21 @@ $("newsSearch").addEventListener("input",e=>{state.query=e.target.value;state.vi
 document.querySelectorAll('[data-news-lang]').forEach(el=>el.addEventListener('click',()=>{
  state.lang=el.dataset.newsLang;
  try{localStorage.setItem("neoline-language",state.lang)}catch(e){}
- localize();tabs();render();drawFeature();
+ localize();tabs();render();renderTraffic();initializeFeatures(true);
 }));
 document.addEventListener("visibilitychange",()=>{
  // Only recheck age limits after a long idle period; no needless DOM rebuilds.
  if(document.hidden){stopFeatureTimer();return}
+ if(Date.now()-traffic.lastFetch>10*60000)loadTraffic();
  restartFeatureTimer();
  if(Date.now()-lastExpiryCheck<3600000)return;
  lastExpiryCheck=Date.now();tabs();render();
  const count=feature.items.length;
- feature.items=state.items.filter(currentOnly).slice(0,10);
- if(feature.index>=feature.items.length)feature.index=0;
+ initializeFeatures(true);
  if(feature.items.length!==count)drawFeature();
 });
-localize();tabs();load();
+$("trafficRefresh").addEventListener("click",loadTraffic);
+// Keep a long-lived news tab reasonably fresh, but never poll per second.
+setInterval(()=>{if(!document.hidden&&Date.now()-traffic.lastFetch>=10*60000)loadTraffic()},60000);
+localize();tabs();renderTraffic();load();loadTraffic();
 })();
