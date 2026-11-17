@@ -1,5 +1,5 @@
 {
-  "attempted": "2026-11-17T09:23:48.866808Z",
+  "attempted": "2026-11-17T09:24:49.551326Z",
   "feeds": {
     "Walla · Авто": 30,
     "Walla · Безопасность": 30,
@@ -30,19 +30,20 @@
   "facebook": {},
   "facebookState": "not_configured",
   "new": 18,
-  "retained": 108,
+  "retained": 111,
   "imageCount": 108,
   "deletedImages": 0,
   "discardedGoogleLinks": 0,
   "errors": {
     "The Times of Israel": "HTTPError: 403 Client Error: Forbidden for url: https://www.timesofisrael.com/feed/",
+    "Davar · Национальные новости": "HTTPError: 403 Client Error: Forbidden for url: https://www.davar1.co.il/feed/",
     "Israel Hayom": "HTTPError: 403 Client Error: Forbidden for url: https://www.israelhayom.co.il/rss.xml",
     "Минтранс Израиля · Новости": "HTTPError: 403 Client Error: Forbidden for url: https://www.gov.il/he/api/NewsApi/rss/48eaee91-0c97-4ef3-b364-5",
     "Israel Hayom · English": "HTTPError: 403 Client Error: Forbidden for url: https://www.israelhayom.com/feed/"
   },
   "directLinksOnly": true,
-  "manuallyVerified": 2,
-  "sourceCount": 16,
+  "manuallyVerified": 5,
+  "sourceCount": 19,
   "sources": {
     "NEWSru.co.il · Telegram": 3,
     "Wheel · Автоновости": 2,
@@ -57,7 +58,10 @@
     "Autonews Israel": 6,
     "Walla · Авто": 5,
     "Mako · Израиль": 2,
+    "Министерство транспорта Израиля": 1,
     "TheCar · Автоновости": 6,
+    "Национальное управление безопасности дорожного движения": 1,
+    "Davar": 1,
     "Arutz Sheva": 1,
     "Walla · Все автомобили": 6
   }
