@@ -1564,41 +1564,61 @@ html[dir=rtl] .theory-preview{text-align:right}
   from{transform:translate3d(14%,0,0)}
   to{transform:translate3d(-14%,0,0)}
 }
-/* Thin strokes run faster in front of the background, then visually dissolve
-   at the disc's white feathered edge; keep varying width and opacity. */
+/* Seven independent fine optical trails. Each owns its own animation
+   phase, travel distance, duration, thickness and transparency: no bursts
+   where four lines enter at exactly the same instant. The soft white halo
+   sits ABOVE these lines (z=1), the two BLUE bands ABOVE it (z=2). */
 #showcaseSlides .featured-slide .ad-photo-stripes::before,
 #showcaseSlides .featured-slide .ad-photo-stripes::after{
-  content:"";
-  position:absolute;z-index:0;
-  inset:0 auto 0 -55%;
-  width:170%;
-  pointer-events:none;
-  opacity:0;
-  background:
-    linear-gradient(90deg,transparent,#178ed388 27%,#bcf0ffc5 55%,transparent) 10% 17% / 62% 2px no-repeat,
-    linear-gradient(90deg,transparent,#0786d3c2 30%,#e3f8ffef 59%,transparent) 28% 39% / 71% 4px no-repeat,
-    linear-gradient(90deg,transparent,#148bd073 25%,#a4e6ffb0 52%,transparent) 18% 67% / 78% 3px no-repeat,
-    linear-gradient(90deg,transparent,#2a9bd18a 31%,#e3faffbf 54%,transparent) 39% 85% / 47% 1.5px no-repeat;
+  content:none!important;
+  animation:none!important;
 }
-#showcaseSlides .featured-slide .ad-photo-stripes::after{
-  background:
-    linear-gradient(90deg,transparent,#0e83c991 26%,#d5f7ffb4 52%,transparent) 29% 27% / 67% 2.5px no-repeat,
-    linear-gradient(90deg,transparent,#0580cbdb 26%,#b9edffee 57%,transparent) 8% 57% / 81% 4px no-repeat,
-    linear-gradient(90deg,transparent,#218dcc7a 30%,#e4faffb1 55%,transparent) 40% 78% / 53% 2px no-repeat;
+#showcaseSlides .featured-slide .ad-photo-stripes .ad-speed-trail{
+  position:absolute;z-index:0;pointer-events:none;display:block;
+  left:101%;top:var(--trail-y);width:var(--trail-width);height:var(--trail-height);
+  border-radius:100px;opacity:0;
+  background:linear-gradient(90deg,transparent 0%,#1688cd6e 24%,#a9e4ffcc 57%,#40b0e663 76%,transparent 100%);
+  filter:blur(var(--trail-blur));
+  transform:translate3d(0,0,0);
 }
-#showcaseSlides .featured-slide.active:not(.ad-exiting) .ad-photo-stripes::before{
-  animation:neolineRoadSweep 3.8s linear infinite;
+#showcaseSlides .featured-slide .ad-photo-stripes .ad-speed-trail--1{
+  --trail-y:15%;--trail-width:67%;--trail-height:1.7px;--trail-blur:.45px;
+  --trail-peak:.52;--trail-end:-260%;--trail-duration:3.3s;--trail-delay:-1.14s;
+}
+#showcaseSlides .featured-slide .ad-photo-stripes .ad-speed-trail--2{
+  --trail-y:27%;--trail-width:43%;--trail-height:2.7px;--trail-blur:.85px;
+  --trail-peak:.68;--trail-end:-360%;--trail-duration:5.6s;--trail-delay:-4.35s;
+}
+#showcaseSlides .featured-slide .ad-photo-stripes .ad-speed-trail--3{
+  --trail-y:39%;--trail-width:78%;--trail-height:3.6px;--trail-blur:1.05px;
+  --trail-peak:.73;--trail-end:-235%;--trail-duration:4.2s;--trail-delay:-.53s;
+}
+#showcaseSlides .featured-slide .ad-photo-stripes .ad-speed-trail--4{
+  --trail-y:52%;--trail-width:56%;--trail-height:1.3px;--trail-blur:.55px;
+  --trail-peak:.39;--trail-end:-290%;--trail-duration:6.8s;--trail-delay:-3.77s;
+}
+#showcaseSlides .featured-slide .ad-photo-stripes .ad-speed-trail--5{
+  --trail-y:65%;--trail-width:65%;--trail-height:2.9px;--trail-blur:.7px;
+  --trail-peak:.61;--trail-end:-255%;--trail-duration:3.85s;--trail-delay:-2.33s;
+}
+#showcaseSlides .featured-slide .ad-photo-stripes .ad-speed-trail--6{
+  --trail-y:78%;--trail-width:51%;--trail-height:2.1px;--trail-blur:1.2px;
+  --trail-peak:.55;--trail-end:-310%;--trail-duration:5.05s;--trail-delay:-.87s;
+}
+#showcaseSlides .featured-slide .ad-photo-stripes .ad-speed-trail--7{
+  --trail-y:87%;--trail-width:73%;--trail-height:3.3px;--trail-blur:.9px;
+  --trail-peak:.47;--trail-end:-250%;--trail-duration:7.3s;--trail-delay:-5.91s;
+}
+#showcaseSlides .featured-slide.active:not(.ad-exiting) .ad-photo-stripes .ad-speed-trail{
+  animation:neolineIndependentRoadTrail var(--trail-duration) linear var(--trail-delay) infinite;
   will-change:transform,opacity;
 }
-#showcaseSlides .featured-slide.active:not(.ad-exiting) .ad-photo-stripes::after{
-  animation:neolineRoadSweep 5.1s linear -2.5s infinite;
-  will-change:transform,opacity;
-}
-@keyframes neolineRoadSweep{
-  0%{transform:translate3d(65%,0,0) scaleX(.8);opacity:0}
-  18%{opacity:.88}
-  74%{opacity:.78}
-  100%{transform:translate3d(-53%,0,0) scaleX(1.2);opacity:0}
+@keyframes neolineIndependentRoadTrail{
+  0%{transform:translate3d(0,0,0) scaleX(.74);opacity:0}
+  12%{opacity:var(--trail-peak)}
+  48%{opacity:var(--trail-peak)}
+  86%{opacity:calc(var(--trail-peak)*.6)}
+  100%{transform:translate3d(var(--trail-end),0,0) scaleX(1.05);opacity:0}
 }
 @media(max-width:720px){
   .ad-photo-stripes .ad-photo-focus{width:min(91%,330px)}
@@ -1606,8 +1626,8 @@ html[dir=rtl] .theory-preview{text-align:right}
   #showcaseSlides .featured-slide .ad-photo-stripes .ad-photo-band:nth-child(2){height:9px}
   #showcaseSlides .featured-slide.active:not(.ad-exiting) .ad-photo-stripes .ad-photo-band:first-child{animation-duration:10.4s}
   #showcaseSlides .featured-slide.active:not(.ad-exiting) .ad-photo-stripes .ad-photo-band:nth-child(2){animation-duration:11.9s}
-  #showcaseSlides .featured-slide.active:not(.ad-exiting) .ad-photo-stripes::before{animation-duration:4.5s}
-  #showcaseSlides .featured-slide.active:not(.ad-exiting) .ad-photo-stripes::after{animation-duration:5.8s}
+  /* One-pixel optical softness on small devices without a canvas or video. */
+  #showcaseSlides .featured-slide .ad-photo-stripes .ad-speed-trail{filter:blur(calc(var(--trail-blur)*.7))}
 }
 @media(prefers-reduced-motion:reduce){
   #showcaseSlides .featured-slide .ad-photo-stripes::before,
@@ -1616,6 +1636,9 @@ html[dir=rtl] .theory-preview{text-align:right}
   }
   #showcaseSlides .featured-slide .ad-photo-stripes .ad-photo-band{
     animation:none!important;transform:none!important;will-change:auto!important;
+  }
+  #showcaseSlides .featured-slide .ad-photo-stripes .ad-speed-trail{
+    animation:none!important;opacity:0!important;will-change:auto!important;
   }
 }
 
@@ -1675,7 +1698,7 @@ html[dir=rtl] .theory-preview{text-align:right}
 <p class="ad-lead" id="adLead">Чёткие детали каждой поездки. Откройте возможности NEOLINE Argus 4K Dual.</p>
 <div class="ad-actions"><button type="button" class="ad-button" id="adMore"><span id="adButtonText">Смотреть флагман</span><span aria-hidden="true">↗</span></button><button type="button" class="ad-share" id="adShare" aria-label="Поделиться ссылкой" title="Поделиться">↗ <span id="adShareLabel">Поделиться</span></button></div>
 <small class="ad-disclaimer" id="adDisclaimer">Концепт рекламы · продажи в Израиле пока не открыты</small>
-</div><div class="ad-photo-area"><div class="ad-photo-stripes" aria-hidden="true"><span class="ad-photo-band"></span><span class="ad-photo-band"></span><span class="ad-photo-focus" aria-hidden="true"></span></div><span class="ad-device-shadow" aria-hidden="true"></span>
+</div><div class="ad-photo-area"><div class="ad-photo-stripes" aria-hidden="true"><span class="ad-photo-band"></span><span class="ad-photo-band"></span><span class="ad-speed-trail ad-speed-trail--1"></span><span class="ad-speed-trail ad-speed-trail--2"></span><span class="ad-speed-trail ad-speed-trail--3"></span><span class="ad-speed-trail ad-speed-trail--4"></span><span class="ad-speed-trail ad-speed-trail--5"></span><span class="ad-speed-trail ad-speed-trail--6"></span><span class="ad-speed-trail ad-speed-trail--7"></span><span class="ad-photo-focus" aria-hidden="true"></span></div><span class="ad-device-shadow" aria-hidden="true"></span>
 <img src="https://neoline.ru/upload/iblock/18e/inssnto8g0d3gybtezvvy1hbmmj1vjje/016.jpg" loading="lazy" decoding="async" alt="NEOLINE Argus 4K Dual" onerror="this.hidden=true;this.nextElementSibling.hidden=false">
 <div class="ad-fallback" hidden>NEOLINE<br><strong>ARGUS 4K DUAL</strong></div>
 <div class="ad-image-label">NEOLINE ARGUS <b>4K DUAL</b></div></div></div></section>
@@ -1811,7 +1834,7 @@ function firstIsraelSlide(){
   +'<p class="hero-lead">'+a.lead+'</p>'
   +'<div class="israel-ad-note">'+a.note+'</div>'
   +'<div class="featured-cta"><button class="primary" type="button" data-feature-catalog>'+a.cta+' ↗</button><button class="secondary" type="button" data-open-feature="6">'+a.model+'</button></div></div>'
-  +'<div class="featured-image israel-featured-image"><div class="ad-photo-stripes" aria-hidden="true"><span class="ad-photo-band"></span><span class="ad-photo-band"></span><span class="ad-photo-focus" aria-hidden="true"></span></div><span class="ad-device-shadow" aria-hidden="true"></span>'
+  +'<div class="featured-image israel-featured-image"><div class="ad-photo-stripes" aria-hidden="true"><span class="ad-photo-band"></span><span class="ad-photo-band"></span><span class="ad-speed-trail ad-speed-trail--1"></span><span class="ad-speed-trail ad-speed-trail--2"></span><span class="ad-speed-trail ad-speed-trail--3"></span><span class="ad-speed-trail ad-speed-trail--4"></span><span class="ad-speed-trail ad-speed-trail--5"></span><span class="ad-speed-trail ad-speed-trail--6"></span><span class="ad-speed-trail ad-speed-trail--7"></span><span class="ad-photo-focus" aria-hidden="true"></span></div><span class="ad-device-shadow" aria-hidden="true"></span>'
   +'<div class="feature-img-tag">NEOLINE • ISRAEL</div>'
   +'<img src="'+media[6][0]+'" alt="'+a.imageAlt+'" decoding="async" fetchpriority="high" onerror="recoverPhoto(this,6)">'
   +'<span class="feature-img-fallback" hidden>'+deviceSvg('dualargus')+'</span>'
@@ -1832,7 +1855,7 @@ const theoryPromo={
    the light-blue image frame, while the CTA remains a real accessible link. */
 function theoryScene(){
  return '<div class="theory-stage">'
-  +'<div class="ad-photo-stripes" aria-hidden="true"><span class="ad-photo-band"></span><span class="ad-photo-band"></span><span class="ad-photo-focus" aria-hidden="true"></span>'
+  +'<div class="ad-photo-stripes" aria-hidden="true"><span class="ad-photo-band"></span><span class="ad-photo-band"></span><span class="ad-speed-trail ad-speed-trail--1"></span><span class="ad-speed-trail ad-speed-trail--2"></span><span class="ad-speed-trail ad-speed-trail--3"></span><span class="ad-speed-trail ad-speed-trail--4"></span><span class="ad-speed-trail ad-speed-trail--5"></span><span class="ad-speed-trail ad-speed-trail--6"></span><span class="ad-speed-trail ad-speed-trail--7"></span><span class="ad-photo-focus" aria-hidden="true"></span>'
    +'</div>'
   +'<span class="theory-halo" aria-hidden="true"></span>'
   +'<span class="theory-ambient-light" aria-hidden="true"></span>'
@@ -1874,7 +1897,7 @@ function renderShowcase(){
    +'<div class="featured-tags">'+datas[id].slice(0,2).map(x=>'<span>'+x+'</span>').join('')+'</div>'
    +'<div class="featured-price">₪'+p.price.toLocaleString('en-US')+'<small>'+t('estimated')+'</small></div>'
    +'<div class="featured-cta"><button class="primary" data-open-feature="'+id+'">'+label('more')+' ↗</button><button class="secondary" data-add-feature="'+id+'">+ '+label('buy')+'</button></div></div>'
-   +'<div class="featured-image"><div class="ad-photo-stripes" aria-hidden="true"><span class="ad-photo-band"></span><span class="ad-photo-band"></span><span class="ad-photo-focus" aria-hidden="true"></span></div><span class="ad-device-shadow" aria-hidden="true"></span><div class="feature-img-tag">NEOLINE • '+p.name.replace('NEOLINE ','')+'</div>'
+   +'<div class="featured-image"><div class="ad-photo-stripes" aria-hidden="true"><span class="ad-photo-band"></span><span class="ad-photo-band"></span><span class="ad-speed-trail ad-speed-trail--1"></span><span class="ad-speed-trail ad-speed-trail--2"></span><span class="ad-speed-trail ad-speed-trail--3"></span><span class="ad-speed-trail ad-speed-trail--4"></span><span class="ad-speed-trail ad-speed-trail--5"></span><span class="ad-speed-trail ad-speed-trail--6"></span><span class="ad-speed-trail ad-speed-trail--7"></span><span class="ad-photo-focus" aria-hidden="true"></span></div><span class="ad-device-shadow" aria-hidden="true"></span><div class="feature-img-tag">NEOLINE • '+p.name.replace('NEOLINE ','')+'</div>'
    +'<img src="'+source+'" alt="'+p.name+'" decoding="async" '+(i?'loading="lazy"':'fetchpriority="high"')+' onerror="recoverPhoto(this,'+id+')">'
    +'<span class="feature-img-fallback" hidden>'+deviceSvg(p.shape)+'</span>'
    +'<button class="feature-img-prev" type="button" data-feature-prev aria-label="Previous model">‹</button>'
