@@ -2216,6 +2216,54 @@ html[dir=rtl] .theory-preview{text-align:right}
  }
 }
 
+
+/* Premium cutout delivery: high-resolution van + boxes, crisp map and pin.
+   Photo/background are never flattened into a single screenshot. */
+#showcaseSlides .featured-slide--promo-delivery .promo-art-object{
+ inset:2% 3% 4%!important;display:block!important;
+ scale:1!important;transition:none!important;
+}
+#showcaseSlides .featured-slide--promo-delivery .delivery-scene-art{
+ position:absolute;inset:0;width:100%;height:100%;
+ overflow:visible;pointer-events:none;isolation:isolate;
+}
+#showcaseSlides .featured-slide--promo-delivery .delivery-route-map{
+ position:absolute;z-index:1;right:3.3%;top:6.2%;
+ width:60.1%;height:62%;overflow:visible;
+ filter:drop-shadow(0 9px 14px rgba(41,112,163,.09));
+}
+#showcaseSlides .featured-slide--promo-delivery .delivery-van-art{
+ display:block;position:absolute!important;z-index:3;
+ left:3.3%;right:auto;bottom:.6%;top:auto;
+ width:93.5%!important;height:74.6%!important;
+ max-height:none!important;max-width:none!important;
+ object-fit:contain!important;object-position:50% 100%;
+ filter:drop-shadow(0 8px 8px rgba(22,71,105,.14))!important;
+}
+#showcaseSlides .featured-slide--promo-delivery .delivery-van-art[hidden]{display:none!important}
+#showcaseSlides .featured-slide--promo-delivery .delivery-van-art,
+#showcaseSlides .featured-slide--promo-delivery .delivery-route-map{
+ scale:.965;transition:scale 7.6s cubic-bezier(.19,.25,.39,1);
+ transform-origin:center 60%;
+}
+#showcaseSlides .featured-slide--promo-delivery.ad-zooming .delivery-van-art{scale:1.065}
+#showcaseSlides .featured-slide--promo-delivery.ad-zooming .delivery-route-map{scale:1.035}
+#showcaseSlides .featured-slide--promo-delivery .ad-device-shadow{display:none!important}
+@media(max-width:720px){
+ #showcaseSlides .featured-slide--promo-delivery .delivery-van-art{
+  left:1.5%;width:97%!important;bottom:1%;
+ }
+ #showcaseSlides .featured-slide--promo-delivery .delivery-route-map{
+  right:2%;width:65%;top:4%;
+ }
+}
+@media(prefers-reduced-motion:reduce){
+ #showcaseSlides .featured-slide--promo-delivery .delivery-van-art,
+ #showcaseSlides .featured-slide--promo-delivery .delivery-route-map{
+  scale:1!important;transition:none!important;
+ }
+}
+
 </style><link rel="stylesheet" href="./catalog-ui.css"><link rel="stylesheet" href="./pickup-ui.css"><!-- Cloudflare Pages Git reconnection deployment probe: 2026-11-16 --></head><body>
 <div class="sticky"><div class="shell header"><a class="brand brand-original" href="#top" aria-label="NEOLINE"><span class="brand-lockup"><img class="brand-clean" src="assets/neoline-clean.svg?v=20261116-compact" alt="NEOLINE" width="501" height="108" decoding="async"></span></a><nav class="nav"><button data-scroll="catalog" class="active" data-i="navCatalog">Каталог</button><button type="button" id="openNewsHeader" aria-label="Автоновости Израиля"><span id="headerNewsLabel">Новости</span></button><button data-scroll="advantages" data-i="navBenefits">Преимущества</button><button data-scroll="installation" data-i="navInstall">Установка и доставка</button><button data-scroll="footer" data-i="navContact">Контакты</button></nav><div class="head-actions"><div class="flag-switcher" role="group" aria-label="Язык / Language / שפה / اللغة"><button class="flag-choice active" type="button" data-language="ru" title="Русский" aria-label="Русский язык" aria-pressed="true"><span class="flag-graphic" aria-hidden="true"><svg viewBox="0 0 36 24" xmlns="http://www.w3.org/2000/svg" focusable="false"><rect width="36" height="24" fill="#fff"/><path d="M0 8h36v8H0z" fill="#0039a6"/><path d="M0 16h36v8H0z" fill="#d52b1e"/></svg></span></button><button class="flag-choice" type="button" data-language="he" title="עברית" aria-label="עברית - Hebrew" aria-pressed="false"><span class="flag-graphic" aria-hidden="true"><svg viewBox="0 0 36 24" xmlns="http://www.w3.org/2000/svg" focusable="false"><rect width="36" height="24" fill="#fff"/><path d="M0 4h36v2.3H0zm0 13.7h36V20H0z" fill="#0038b8"/><g stroke="#0038b8" stroke-width="1.25" fill="none" stroke-linejoin="round" stroke-linecap="round"><path d="M18 7.6 23.4 16.4H12.6Z"/><path d="M18 16.4 12.6 7.6h10.8Z"/></g></svg></span></button><button class="flag-choice" type="button" data-language="en" title="English" aria-label="English language" aria-pressed="false"><span class="flag-graphic" aria-hidden="true"><svg viewBox="0 0 36 24" xmlns="http://www.w3.org/2000/svg" focusable="false"><rect width="36" height="24" fill="#012169"/><path d="M0 0l36 24M36 0L0 24" stroke="#fff" stroke-width="6"/><path d="M0 0l36 24M36 0L0 24" stroke="#c8102e" stroke-width="2.5"/><path d="M18 0v24M0 12h36" stroke="#fff" stroke-width="9"/><path d="M18 0v24M0 12h36" stroke="#c8102e" stroke-width="4.6"/></svg></span></button><button class="flag-choice flag-choice--text flag-choice--arabic" type="button" data-language="ar" title="العربية" aria-label="اللغة العربية" aria-pressed="false" lang="ar" dir="rtl">عربي</button></div><select class="language language-native" id="lang" aria-label="Language" tabindex="-1"><option value="ru">RU</option><option value="he">עברית</option><option value="en">ENG</option><option value="ar">العربية</option></select></div></div></div>
 <main id="top"><section class="showcase" aria-label="Featured products"><div class="hero-stage"><div id="showcaseSlides" aria-live="polite"></div><div class="showcase-controls"><button class="showcase-arrow" id="slidePrev" aria-label="Previous">‹</button><div id="showcaseDots" class="showcase-dots"></div><button class="showcase-arrow" id="slideNext" aria-label="Next">›</button></div><div class="sneak" aria-label="Highlights"><span>NEOLINE ISRAEL · CONCEPT</span><span>◉ 4K · 2K · Wi-Fi</span><span>🚙 Dash cams</span><span>₪ Estimated local pricing</span></div></div></section>
@@ -2456,9 +2504,37 @@ const homepageCampaign={
  }
 };
 function homepageCampaignText(){return homepageCampaign[lang]||homepageCampaign.ru}
+
+const deliveryRouteMap=`
+<svg class="delivery-route-map" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 460 300" aria-hidden="true" focusable="false">
+ <defs>
+  <linearGradient id="delivery-sheet" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#ffffff"/><stop offset="1" stop-color="#edf7ff"/></linearGradient>
+  <linearGradient id="delivery-pin" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#08a9f5"/><stop offset="1" stop-color="#1577d2"/></linearGradient>
+  <filter id="delivery-shadow" x="-30%" y="-30%" width="160%" height="170%"><feGaussianBlur stdDeviation="8"/></filter>
+ </defs>
+ <rect x="38" y="48" width="395" height="226" rx="29" transform="rotate(8 232 160)" fill="#478bbb" opacity=".12" filter="url(#delivery-shadow)"/>
+ <g transform="rotate(8 232 160)">
+  <rect x="34" y="32" width="394" height="226" rx="27" fill="url(#delivery-sheet)" stroke="#ffffff" stroke-width="7"/>
+  <g opacity=".74" stroke="#cfdfed" stroke-width="3" fill="none" stroke-linecap="round">
+   <path d="M57 99 Q156 131 242 106T401 121M57 153 Q160 132 258 160T401 153M60 207Q152 183 235 213T403 202"/>
+   <path d="M94 50Q125 121 108 232M177 44Q153 134 193 235M264 48Q249 147 294 238M360 53Q330 126 350 236"/>
+   <path d="M49 74L139 252M217 38L405 234M42 233L389 47" stroke="#e2edf7" stroke-width="2"/>
+  </g>
+  <path d="M107 207C139 189 152 162 184 163S235 201 268 169S314 147 343 156" stroke="#ffffff" stroke-width="16" stroke-linecap="round" fill="none"/>
+  <path d="M107 207C139 189 152 162 184 163S235 201 268 169S314 147 343 156" stroke="#178fe1" stroke-width="7" stroke-linecap="round" fill="none"/>
+  <circle cx="107" cy="207" r="9" fill="#178fe1" stroke="white" stroke-width="5"/>
+  <circle cx="184" cy="163" r="7" fill="#3eb6f8" stroke="white" stroke-width="4"/>
+  <circle cx="268" cy="169" r="7" fill="#3eb6f8" stroke="white" stroke-width="4"/>
+  <circle cx="343" cy="156" r="24" fill="#3bb3f4" opacity=".16"/>
+  <circle cx="343" cy="156" r="18" stroke="#30aff4" stroke-width="5" fill="none"/>
+ </g>
+ <ellipse cx="349" cy="161" rx="26" ry="10" fill="#0b7ac5" opacity=".22"/>
+ <path d="M350 48C319 48 298 69 298 98C298 127 332 159 350 180C368 159 402 127 402 98C402 69 381 48 350 48Z" fill="url(#delivery-pin)" stroke="#e3f6ff" stroke-width="4"/>
+ <circle cx="350" cy="97" r="20" fill="#ffffff"/>
+</svg>`;
 const homepageServiceArt={
  news:'<span class="promo-board promo-board--news" aria-hidden="true"><b>NEOLINE NEWS</b><i></i><i></i><i></i><span class="promo-board-chip">24 / 7</span></span><span class="promo-orbit promo-orbit--news" aria-hidden="true">◉</span>',
- delivery:'<img class="delivery-van-art" src="./assets/delivery-van-israel.svg" alt="" width="600" height="350" decoding="async" loading="lazy" onerror="this.hidden=true;this.parentElement.classList.add(\'delivery-art-error\')">',
+ delivery:'<div class="delivery-scene-art" aria-hidden="true">'+deliveryRouteMap+'<img class="delivery-van-art" src="./assets/delivery-van-israel.svg?v=20261117-clean02" alt="" width="1260" height="638" decoding="async" loading="eager" onerror="this.hidden=true"></div>',
  install:'<span class="promo-board promo-board--install" aria-hidden="true"><span class="promo-windscreen"><i></i><i></i></span><span class="promo-install-check">✓</span></span>',
  catalog:'<span class="promo-board promo-board--catalog" aria-hidden="true"><span class="promo-lens"></span><span class="promo-camera-body"></span><span class="promo-spec-lines"><i></i><i></i><i></i></span></span>'
 };
