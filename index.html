@@ -2121,6 +2121,35 @@ html[dir=rtl] .theory-preview{text-align:right}
  }
 }
 
+
+/* Real NEOLINE delivery concept: van, cardboard parcels and route pin.
+   This alpha-cutout sits ON the existing carousel backdrop; no flattened
+   screenshot, additional frame or background movement is introduced. */
+#showcaseSlides .featured-slide--promo-delivery .promo-art-object{
+  inset:5% 6% 5%;align-items:center;justify-items:center;
+  background:transparent!important;
+}
+#showcaseSlides .featured-slide--promo-delivery .delivery-van-art{
+  display:block;position:relative;z-index:3;
+  width:100%;height:100%;max-width:600px;max-height:100%;
+  object-fit:contain;object-position:50% 54%;
+  filter:drop-shadow(0 10px 10px rgba(25,86,126,.14));
+  pointer-events:none;
+}
+#showcaseSlides .featured-slide--promo-delivery .delivery-van-art[hidden]{display:none}
+#showcaseSlides .featured-slide--promo-delivery .delivery-art-error::after{
+  content:'NEOLINE';color:#187aba;font-weight:900;font-size:25px;
+}
+@media(max-width:720px){
+ #showcaseSlides .featured-slide--promo-delivery .promo-art-object{
+  inset:3% 4% 6%;
+ }
+ #showcaseSlides .featured-slide--promo-delivery .delivery-van-art{
+  width:100%;height:100%;max-width:none;
+  filter:drop-shadow(0 7px 8px rgba(25,86,126,.14));
+ }
+}
+
 </style><link rel="stylesheet" href="./catalog-ui.css"><link rel="stylesheet" href="./pickup-ui.css"><!-- Cloudflare Pages Git reconnection deployment probe: 2026-11-16 --></head><body>
 <div class="sticky"><div class="shell header"><a class="brand brand-original" href="#top" aria-label="NEOLINE"><span class="brand-lockup"><img class="brand-clean" src="assets/neoline-clean.svg?v=20261116-compact" alt="NEOLINE" width="501" height="108" decoding="async"></span></a><nav class="nav"><button data-scroll="catalog" class="active" data-i="navCatalog">Каталог</button><button type="button" id="openNewsHeader" aria-label="Автоновости Израиля"><span id="headerNewsLabel">Новости</span></button><button data-scroll="advantages" data-i="navBenefits">Преимущества</button><button data-scroll="installation" data-i="navInstall">Установка и доставка</button><button data-scroll="footer" data-i="navContact">Контакты</button></nav><div class="head-actions"><div class="flag-switcher" role="group" aria-label="Язык / Language / שפה / اللغة"><button class="flag-choice active" type="button" data-language="ru" title="Русский" aria-label="Русский язык" aria-pressed="true"><span class="flag-graphic" aria-hidden="true"><svg viewBox="0 0 36 24" xmlns="http://www.w3.org/2000/svg" focusable="false"><rect width="36" height="24" fill="#fff"/><path d="M0 8h36v8H0z" fill="#0039a6"/><path d="M0 16h36v8H0z" fill="#d52b1e"/></svg></span></button><button class="flag-choice" type="button" data-language="he" title="עברית" aria-label="עברית - Hebrew" aria-pressed="false"><span class="flag-graphic" aria-hidden="true"><svg viewBox="0 0 36 24" xmlns="http://www.w3.org/2000/svg" focusable="false"><rect width="36" height="24" fill="#fff"/><path d="M0 4h36v2.3H0zm0 13.7h36V20H0z" fill="#0038b8"/><g stroke="#0038b8" stroke-width="1.25" fill="none" stroke-linejoin="round" stroke-linecap="round"><path d="M18 7.6 23.4 16.4H12.6Z"/><path d="M18 16.4 12.6 7.6h10.8Z"/></g></svg></span></button><button class="flag-choice" type="button" data-language="en" title="English" aria-label="English language" aria-pressed="false"><span class="flag-graphic" aria-hidden="true"><svg viewBox="0 0 36 24" xmlns="http://www.w3.org/2000/svg" focusable="false"><rect width="36" height="24" fill="#012169"/><path d="M0 0l36 24M36 0L0 24" stroke="#fff" stroke-width="6"/><path d="M0 0l36 24M36 0L0 24" stroke="#c8102e" stroke-width="2.5"/><path d="M18 0v24M0 12h36" stroke="#fff" stroke-width="9"/><path d="M18 0v24M0 12h36" stroke="#c8102e" stroke-width="4.6"/></svg></span></button><button class="flag-choice flag-choice--text flag-choice--arabic" type="button" data-language="ar" title="العربية" aria-label="اللغة العربية" aria-pressed="false" lang="ar" dir="rtl">عربي</button></div><select class="language language-native" id="lang" aria-label="Language" tabindex="-1"><option value="ru">RU</option><option value="he">עברית</option><option value="en">ENG</option><option value="ar">العربية</option></select></div></div></div>
 <main id="top"><section class="showcase" aria-label="Featured products"><div class="hero-stage"><div id="showcaseSlides" aria-live="polite"></div><div class="showcase-controls"><button class="showcase-arrow" id="slidePrev" aria-label="Previous">‹</button><div id="showcaseDots" class="showcase-dots"></div><button class="showcase-arrow" id="slideNext" aria-label="Next">›</button></div><div class="sneak" aria-label="Highlights"><span>NEOLINE ISRAEL · CONCEPT</span><span>◉ 4K · 2K · Wi-Fi</span><span>🚙 Dash cams</span><span>₪ Estimated local pricing</span></div></div></section>
@@ -2363,7 +2392,7 @@ const homepageCampaign={
 function homepageCampaignText(){return homepageCampaign[lang]||homepageCampaign.ru}
 const homepageServiceArt={
  news:'<span class="promo-board promo-board--news" aria-hidden="true"><b>NEOLINE NEWS</b><i></i><i></i><i></i><span class="promo-board-chip">24 / 7</span></span><span class="promo-orbit promo-orbit--news" aria-hidden="true">◉</span>',
- delivery:'<span class="promo-board promo-board--delivery" aria-hidden="true"><span class="promo-parcel">N</span><span class="promo-location-pin"><i></i></span><span class="promo-road-path"></span></span>',
+ delivery:'<img class="delivery-van-art" src="./assets/delivery-van-israel.svg" alt="" width="600" height="350" decoding="async" loading="lazy" onerror="this.hidden=true;this.parentElement.classList.add(\'delivery-art-error\')">',
  install:'<span class="promo-board promo-board--install" aria-hidden="true"><span class="promo-windscreen"><i></i><i></i></span><span class="promo-install-check">✓</span></span>',
  catalog:'<span class="promo-board promo-board--catalog" aria-hidden="true"><span class="promo-lens"></span><span class="promo-camera-body"></span><span class="promo-spec-lines"><i></i><i></i><i></i></span></span>'
 };
