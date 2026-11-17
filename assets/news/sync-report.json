@@ -1,5 +1,5 @@
 {
-  "attempted": "2026-11-17T09:25:53.532297Z",
+  "attempted": "2026-11-17T09:43:15.656172Z",
   "feeds": {
     "Walla · Авто": 30,
     "Walla · Безопасность": 30,
@@ -25,14 +25,14 @@
     "Полиция Израиля · Telegram": 0,
     "Ихуд Ацала · Telegram": 84,
     "Алексей Железнов · Telegram": 1,
-    "NEWSru.co.il · Telegram": 4
+    "NEWSru.co.il · Telegram": 5
   },
   "facebook": {},
   "facebookState": "not_configured",
-  "new": 19,
-  "retained": 109,
-  "imageCount": 106,
-  "deletedImages": 5,
+  "new": 16,
+  "retained": 110,
+  "imageCount": 109,
+  "deletedImages": 0,
   "discardedGoogleLinks": 0,
   "errors": {
     "The Times of Israel": "HTTPError: 403 Client Error: Forbidden for url: https://www.timesofisrael.com/feed/",
@@ -45,7 +45,7 @@
   "manuallyVerified": 5,
   "sourceCount": 17,
   "sources": {
-    "NEWSru.co.il · Telegram": 3,
+    "NEWSru.co.il · Telegram": 4,
     "Wheel · Автоновости": 2,
     "Ихуд Ацала · Telegram": 65,
     "Ynet": 1,

@@ -1,44 +1,44 @@
 {
   "version": 1,
   "retentionDays": 30,
-  "updated": "2026-11-17T09:25:53.532297Z",
+  "updated": "2026-11-17T09:43:15.656172Z",
   "items": [
     {
-      "id": "e891ac473e1765f97972",
-      "titleOriginal": "На шоссе 6 появилась система взвешивания грузовиков на ходу",
+      "id": "19e23c0c176ec1db1895",
+      "titleOriginal": "Ночью будет перекрыт въезд в аэропорт \"Бен-Гурион\" с шоссе 40",
       "sourceLanguage": "en",
-      "date": "2026-11-17T09:05:41Z",
-      "url": "https://t.me/NEWSruIsrael/126011",
+      "date": "2026-11-17T09:41:30Z",
+      "url": "https://t.me/NEWSruIsrael/126016",
       "publisher": "NEWSru.co.il · Telegram",
       "category": "roads",
       "art": "roads",
-      "image": "./assets/news/images/e891ac473e1765f97972.webp",
+      "image": "./assets/news/images/19e23c0c176ec1db1895.webp",
       "official": false,
       "translations": {
         "he": {
-          "title": "לכביש 6 יש כעת מערכת שקילה של משאיות בדרכים",
+          "title": "הכניסה לנתב\"ג מכביש 40 תיסגר בלילה.",
           "summary": "עדכון על מצב התנועה. לפני הנסיעה בדקו אם ההגבלות עדיין בתוקף."
         },
         "ru": {
-          "title": "На шоссе 6 появилась система взвешивания грузовиков на ходу",
+          "title": "Ночью будет перекрыт въезд в аэропорт \"Бен-Гурион\" с шоссе 40",
           "summary": "Информация о дорожной ситуации. Перед поездкой проверьте, действуют ли ограничения сейчас."
         },
         "en": {
-          "title": "На шоссе 6 появилась система взвешивания грузовиков на ходу",
+          "title": "Ночью будет перекрыт въезд в аэропорт \"Бен-Гурион\" с шоссе 40",
           "summary": "A road-conditions update. Check whether restrictions still apply before travelling."
         },
         "ar": {
-          "title": "يحتوي الطريق السريع 6 الآن على نظام وزن الشاحنات أثناء التنقل",
+          "title": "سيتم إغلاق مدخل مطار بن غوريون من الطريق السريع 40 ليلاً.",
           "summary": "تحديث عن حالة الطرق. تحقق من استمرار القيود قبل السفر."
         }
       },
-      "title": "На шоссе 6 появилась система взвешивания грузовиков на ходу",
+      "title": "Ночью будет перекрыт въезд в аэропорт \"Бен-Гурион\" с шоссе 40",
       "summary": "Информация о дорожной ситуации. Перед поездкой проверьте, действуют ли ограничения сейчас.",
       "translated": true,
       "imageType": "licensedPhoto",
       "imageCredit": {
-        "text": "Grogan, Brian\nRelated names:\n\nAyers, Thomas\nRaymond, Israel W\nConness, John\nOlmsted, Frederick Law\nL · Public domain",
-        "url": "https://commons.wikimedia.org/wiki/File:AHWAHNEE_MEADOW._SOUTHSIDE_DRIVE_AT_BOTTOM_OF_MEADOW_AND_AHWAHNEE_ROAD_AT_TOP_OF_MEADOW._NOTE_OLD_ROAD_ALIGNMENT_AT_EAST_EDGE_OF_MEADOW._-_Yosemite_National_Park_Roads_and_HAER_CAL,22-YOSEM,5-18.tif"
+        "text": "Rakoon · CC0",
+        "url": "https://commons.wikimedia.org/wiki/File:20150812_August_2015_in_Tel_Aviv_03.jpg"
       }
     },
     {
@@ -118,41 +118,41 @@
       }
     },
     {
-      "id": "58a4e0cc6a00a94bb883",
-      "titleOriginal": "На шоссе 334 возле кибуца Дорот тяжело травмирован пешеход",
+      "id": "e891ac473e1765f97972",
+      "titleOriginal": "На шоссе 6 появилась система взвешивания грузовиков на ходу",
       "sourceLanguage": "en",
-      "date": "2026-11-17T06:34:56Z",
-      "url": "https://t.me/NEWSruIsrael/125987",
+      "date": "2026-11-17T09:05:41Z",
+      "url": "https://t.me/NEWSruIsrael/126011",
       "publisher": "NEWSru.co.il · Telegram",
       "category": "roads",
       "art": "roads",
-      "image": "./assets/news/images/58a4e0cc6a00a94bb883.webp",
+      "image": "./assets/news/images/e891ac473e1765f97972.webp",
       "official": false,
       "translations": {
         "he": {
-          "title": "הולך רגל נפצע באורח קשה בכביש 334 סמוך לקיבוץ דורות.",
+          "title": "לכביש 6 יש כעת מערכת שקילה של משאיות בדרכים",
           "summary": "עדכון על מצב התנועה. לפני הנסיעה בדקו אם ההגבלות עדיין בתוקף."
         },
         "ru": {
-          "title": "На шоссе 334 возле кибуца Дорот тяжело травмирован пешеход",
+          "title": "На шоссе 6 появилась система взвешивания грузовиков на ходу",
           "summary": "Информация о дорожной ситуации. Перед поездкой проверьте, действуют ли ограничения сейчас."
         },
         "en": {
-          "title": "На шоссе 334 возле кибуца Дорот тяжело травмирован пешеход",
+          "title": "На шоссе 6 появилась система взвешивания грузовиков на ходу",
           "summary": "A road-conditions update. Check whether restrictions still apply before travelling."
         },
         "ar": {
-          "title": "أصيب أحد المشاة بجروح خطيرة على الطريق السريع رقم 334 بالقرب من كيبوتس دوروت.",
+          "title": "يحتوي الطريق السريع 6 الآن على نظام وزن الشاحنات أثناء التنقل",
           "summary": "تحديث عن حالة الطرق. تحقق من استمرار القيود قبل السفر."
         }
       },
-      "title": "На шоссе 334 возле кибуца Дорот тяжело травмирован пешеход",
+      "title": "На шоссе 6 появилась система взвешивания грузовиков на ходу",
       "summary": "Информация о дорожной ситуации. Перед поездкой проверьте, действуют ли ограничения сейчас.",
       "translated": true,
       "imageType": "licensedPhoto",
       "imageCredit": {
-        "text": "Rakoon · CC0",
-        "url": "https://commons.wikimedia.org/wiki/File:20150812_August_2015_in_Tel_Aviv_03.jpg"
+        "text": "Grogan, Brian\nRelated names:\n\nAyers, Thomas\nRaymond, Israel W\nConness, John\nOlmsted, Frederick Law\nL · Public domain",
+        "url": "https://commons.wikimedia.org/wiki/File:AHWAHNEE_MEADOW._SOUTHSIDE_DRIVE_AT_BOTTOM_OF_MEADOW_AND_AHWAHNEE_ROAD_AT_TOP_OF_MEADOW._NOTE_OLD_ROAD_ALIGNMENT_AT_EAST_EDGE_OF_MEADOW._-_Yosemite_National_Park_Roads_and_HAER_CAL,22-YOSEM,5-18.tif"
       }
     },
     {
@@ -229,6 +229,44 @@
       "imageCredit": {
         "text": "Jeff Attaway from Abuja, Nigeria · CC BY 2.0",
         "url": "https://commons.wikimedia.org/wiki/File:Bad_one_-_auto_wreck_in_Dakar_Senegal,_2011.jpg"
+      }
+    },
+    {
+      "id": "58a4e0cc6a00a94bb883",
+      "titleOriginal": "На шоссе 334 возле кибуца Дорот тяжело травмирован пешеход",
+      "sourceLanguage": "en",
+      "date": "2026-11-17T06:34:56Z",
+      "url": "https://t.me/NEWSruIsrael/125987",
+      "publisher": "NEWSru.co.il · Telegram",
+      "category": "roads",
+      "art": "roads",
+      "image": "./assets/news/images/58a4e0cc6a00a94bb883.webp",
+      "official": false,
+      "translations": {
+        "he": {
+          "title": "הולך רגל נפצע באורח קשה בכביש 334 סמוך לקיבוץ דורות.",
+          "summary": "עדכון על מצב התנועה. לפני הנסיעה בדקו אם ההגבלות עדיין בתוקף."
+        },
+        "ru": {
+          "title": "На шоссе 334 возле кибуца Дорот тяжело травмирован пешеход",
+          "summary": "Информация о дорожной ситуации. Перед поездкой проверьте, действуют ли ограничения сейчас."
+        },
+        "en": {
+          "title": "На шоссе 334 возле кибуца Дорот тяжело травмирован пешеход",
+          "summary": "A road-conditions update. Check whether restrictions still apply before travelling."
+        },
+        "ar": {
+          "title": "أصيب أحد المشاة بجروح خطيرة على الطريق السريع رقم 334 بالقرب من كيبوتس دوروت.",
+          "summary": "تحديث عن حالة الطرق. تحقق من استمرار القيود قبل السفر."
+        }
+      },
+      "title": "На шоссе 334 возле кибуца Дорот тяжело травмирован пешеход",
+      "summary": "Информация о дорожной ситуации. Перед поездкой проверьте, действуют ли ограничения сейчас.",
+      "translated": true,
+      "imageType": "licensedPhoto",
+      "imageCredit": {
+        "text": "Rakoon · CC0",
+        "url": "https://commons.wikimedia.org/wiki/File:20150812_August_2015_in_Tel_Aviv_03.jpg"
       }
     },
     {
