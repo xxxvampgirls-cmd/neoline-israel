@@ -47,6 +47,7 @@ FEEDS=[
  ("Walla · Новости Израиля","https://www.walla.co.il/rss/feed/news/israel"),
  ("The Times of Israel","https://www.timesofisrael.com/feed/"),
  ("The Jerusalem Post","https://www.jpost.com/rss/rssfeedsfrontpage.aspx"),
+ ("Arutz Sheva · Israel National News","https://www.inn.co.il/Rss.aspx"),
  # Additional independent Israeli publications; failures are logged and skipped.
  ("Maariv · חדשות","https://www.maariv.co.il/rss/rsschadashot"),
  ("Maariv · מבזקים","https://www.maariv.co.il/rss/rssfeedsmivzakichadashot"),
@@ -65,10 +66,10 @@ CATEGORIES=("accidents","speed","laws","roads","cars")
 # inside unrelated words like "מורכב", and "במהירות" means merely "quickly".
 KEYWORDS={
  "accidents":["תאונ","התנגש","דרס","נדרס","פגע וברח","פגיעת רכב","נפגע מרכב","התהפך הרכב","דריסת","collision","crash","accident","road fatal","hit-and-run","road death","дтп","авари"],
- "speed":["מהירות מופרזת","מצלמות מהירות","נהיגה במהירות","מכמונת","מצלמת מהירות","אכיפת מהירות","מהירות של","מד מהירות","מהירות ממוצעת","ממל\"ז","ממל״ז","קמ\"ש","קמ״ש","הגבלת מהירות","מצלמות א-3","speed camera","speeding","speed limit","speed trap","speed enforcement","скорост","радар","штраф за скорость","км/ч"],
+ "speed":["מהירות מופרזת","מצלמות מהירות","נהיגה במהירות","מכמונת","מצלמת מהירות","אכיפת מהירות","מהירות של","מד מהירות","מהירות ממוצעת","ממל\"ז","ממל״ז","הגבלת מהירות","מצלמות א-3","טס במהירות","speed camera","speeding","speed limit","speed trap","speed enforcement","скорост","дорожный радар","радар скорости","штраф за скорость"],
  "laws":["תקנות התעבורה","חוקי תנועה","חוק התעבורה","רישיון נהיגה","רשיון נהיגה","רשיון b","רישיון b","קנסות נהגים","קנסות תנועה","נהיגה בשכרות","חובה להדליק אורות","driving law","traffic law","road regulation","driving licens","traffic fine","правила дорожного движения"],
  "roads":["חסימות כבישים","סגירת כביש","כביש חסום","כביש 6","כביש 1","נתיבי איילון","פקק","עומס תנועה","עומסי תנועה","מחלף","road closure","highway closure","traffic jam","highway traffic","дорог","шоссе","пробк"],
- "cars":["רכבי","רכבים","רכב חדש","מכונית","מכוניות","חשמליות","טעינה","כלי רכב","car ","cars","automotive","vehicle","electric vehicle","tesla","автомобил","электромобил"],
+ "cars":["רכבי","רכבים","רכב חדש","מכונית","מכוניות","חשמליות","טעינה","כלי רכב","byd","טסלה","יונדאי","פולקסווגן","car ","cars","automotive","vehicle","electric vehicle","tesla","автомобил","электромобил"],
 }
 EXCLUDE=("טיל","איראן","לבנון","מלחמה","טיסה","מטוס","אירוויזיון",
  "כדורגל","מכבי חיפה","הפועל באר שבע","וולט","wolt","aircraft","airline","missile","רכבת","רכבות","אוטובוס","train","autopsy",
@@ -103,6 +104,13 @@ def relevant(title):
  if any(x in low for x in EXCLUDE):return None
  if any(x in low for x in ("פיגוע","מחבלים","טרור","גרזנים","טרוריסט")):return None
  # Accidents are identified before the generic vehicle category.
+ # A military radar and a car manufacturer's speed record are NOT traffic
+ # speed-enforcement news. Only a clear police/road context qualifies.
+ if re.search(r'\d{2,3}\s*קמ["״׳]?ש',low) and (
+     "כביש" in low or "משטר" in low or "שוטר" in low or "אכיפ" in low):
+  return "speed"
+ if "км/ч" in low and any(x in low for x in ("полици","штраф","водител","дорог","шоссе","нарушен")):
+  return "speed"
  for section in ("speed","accidents","laws","roads"):
   if any(x in low for x in KEYWORDS[section]):return section
  if any(x in low for x in KEYWORDS["cars"]):return "cars"
