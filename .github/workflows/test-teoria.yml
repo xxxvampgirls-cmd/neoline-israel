@@ -1,0 +1,116 @@
+name: Browser-check NEOLINE Israel driving theory quest
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - 'teoria.html'
+      - 'teoria.css'
+      - 'teoria.js'
+      - 'index.html'
+      - 'assets/teoria/**'
+      - '.github/workflows/test-teoria.yml'
+permissions:
+  contents: read
+jobs:
+  game:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - name: Install Chromium
+        run: |
+          npm install --no-save playwright
+          npx playwright install chromium
+      - name: Verify public official bank, mobile gameplay, exam and progress
+        run: |
+          node <<'JS'
+          const {chromium}=require('playwright');
+          (async()=>{
+            const browser=await chromium.launch({headless:true});
+            const errors=[];
+            const page=await browser.newPage({viewport:{width:390,height:844},isMobile:true,hasTouch:true});
+            page.on('pageerror',e=>errors.push(e.message));
+            const origin='https://neoline-israel.pages.dev';
+            // Cloudflare Pages deploys asynchronously; allow an upcoming asset version.
+            for(let i=0;i<5;i++){
+              await page.goto(origin+'/teoria.html?ci='+i,{waitUntil:'domcontentloaded',timeout:40000});
+              const script=page.locator('script[src*="teoria.js"]'),css=page.locator('link[rel="stylesheet"][href*="teoria.css"]');
+              if(await script.count()&&await css.count()&&await page.locator('[data-mode="route"]').count())break;
+              await page.waitForTimeout(4000);
+            }
+            if(await page.locator('script[src*="teoria.js"]').count()!==1||
+                await page.locator('link[rel="stylesheet"][href*="teoria.css"]').count()!==1)throw Error('Theory page CSS/JS malformed');
+            await page.waitForFunction(()=>document.getElementById('bankStatus').classList.contains('loaded'),null,{timeout:60000});
+            const bank=await page.evaluate(async()=>{
+              const response=await fetch('./assets/teoria/ru.json');if(!response.ok)throw Error('bank response '+response.status);
+              const b=await response.json();
+              return {total:b.questions.length,forB:b.questions.filter(q=>q.classes.includes('B')).length,images:b.questions.filter(q=>q.image).length,
+                countSigns:b.questions.filter(q=>q.topic==='signs'&&q.classes.includes('B')).length,
+                bad:b.questions.filter(q=>q.a.length!==4||q.correct<0||q.correct>3||!q.id).length};
+            });
+            if(bank.total<1500||bank.forB<1000||bank.images<350||bank.countSigns<100||bank.bad)throw Error('Incomplete real question bank '+JSON.stringify(bank));
+            const font=await page.locator('body').evaluate(el=>getComputedStyle(el).fontFamily);
+            if(!font.includes('Manrope'))throw Error('Game stylesheet not applied: '+font);
+            const width=await page.evaluate(()=>({page:document.documentElement.scrollWidth,window:innerWidth}));
+            if(width.page>width.window+3)throw Error('Game overflows 390px '+JSON.stringify(width));
+            console.log('OFFICIAL BANK GAME PASS '+JSON.stringify(bank));
+            await page.locator('[data-mode="route"]').click();
+            if(!await page.locator('#gamePlaying').isVisible())throw Error('Route does not start');
+            let firstId=await page.locator('#questionId').textContent();
+            if(!/^№ \d+$/.test(firstId))throw Error('Official question number missing: '+firstId);
+            const firstAnswers=page.locator('#answers button');
+            if(await firstAnswers.count()!==4)throw Error('Not four official answer options');
+            await firstAnswers.first().click();
+            if(!await page.locator('#nextQuestion').isEnabled())throw Error('Next button disabled after answer');
+            if(!await page.locator('#feedback').isVisible())throw Error('Practice must reveal feedback');
+            await page.locator('#nextQuestion').click();
+            if(await page.locator('#questionCounter').textContent()!=='2 / 10')throw Error('Route progression broken');
+            await page.locator('#exitQuiz').click();
+            if(!await page.locator('#gameLobby').isVisible())throw Error('Back to game modes broken');
+            await page.locator('[data-mode="mistakes"]').count();
+            await page.locator('[data-mode="signs"]').click();
+            const signsTopic=await page.locator('#questionTopic').innerText();
+            if(!/знаки/i.test(signsTopic))throw Error('Road sign mode not filtering signs: '+signsTopic);
+            await page.locator('#exitQuiz').click();
+            await page.locator('[data-mode="exam"]').click();
+            if(await page.locator('#timerBox').isHidden())throw Error('Mock exam timer missing');
+            for(let i=0;i<30;i++){
+              const answer=page.locator('#answers button').first();
+              await answer.click();
+              if(await page.locator('#feedback').isVisible())throw Error('Mock exam leaked correct answers before finish');
+              await page.locator('#nextQuestion').click();
+            }
+            if(!await page.locator('#gameResult').isVisible())throw Error('30 question exam did not finish');
+            const result=await page.locator('#resultScore').textContent();
+            if(!/\/ 30/.test(result))throw Error('Wrong exam result '+result);
+            console.log('MOCK EXAM PASS 30 questions + timer + answer secrecy '+result);
+            await page.locator('#backToModes').click();
+            await page.locator('button[data-lang="he"]').click();
+            await page.waitForFunction(()=>document.getElementById('bankStatus').classList.contains('loaded'),null,{timeout:40000});
+            const hebrew=await page.locator('#modeExam').textContent();
+            if(!hebrew.includes('מבחן'))throw Error('Hebrew translation not working');
+            if(await page.locator('html').getAttribute('dir')!=='rtl')throw Error('Hebrew layout not RTL');
+            await page.locator('button[data-lang="en"]').click();
+            await page.waitForFunction(()=>document.getElementById('bankStatus').classList.contains('loaded'),null,{timeout:40000});
+            if(await page.locator('html').getAttribute('dir')!=='ltr')throw Error('English layout not LTR');
+            console.log('LANGUAGES PASS RU/HE/EN');
+            if(errors.length)throw Error('JS page errors '+errors.join('|'));
+            await page.setViewportSize({width:320,height:720});
+            await page.reload({waitUntil:'domcontentloaded'});
+            await page.waitForFunction(()=>document.getElementById('bankStatus').classList.contains('loaded'),null,{timeout:40000});
+            const size=await page.evaluate(()=>({page:document.documentElement.scrollWidth,w:innerWidth}));
+            if(size.page>size.w+3)throw Error('Game mobile overflow at 320px '+JSON.stringify(size));
+            console.log('MOBILE GAME PASS 320px and 390px JSerrors=0');
+            await page.goto(origin+'/');
+            await page.waitForFunction(()=>!!document.querySelector('#theoryPreviewStart'));
+            const link=page.locator('#theoryPreviewStart');
+            if(!await link.isVisible()||(await link.getAttribute('href'))!=='./teoria.html')throw Error('Homepage game entry missing');
+            if(await page.locator('#openTheoryHeader').count()!==1||await page.locator('#theoryQuick').count()!==1)
+              throw Error('Game catalog/header link missing');
+            const assets=await page.evaluate(()=>[...document.scripts].map(s=>s.src));
+            if(!assets.some(x=>x.includes('catalog-ui.js?v=20261117-delivery')))
+              throw Error('Homepage catalog loader missing / malformed');
+            console.log('HOMEPAGE GAME DISCOVERY PASS');
+            await browser.close();
+          })().catch(e=>{console.error(e);process.exit(1)});
+          JS
