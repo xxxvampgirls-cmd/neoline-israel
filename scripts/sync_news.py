@@ -77,15 +77,27 @@ def translate_ru(value):
   return text(out)[:480] if out else value
  except Exception:return value
 def read_feed(url):
- response=S.get(url,timeout=(10,25))
- response.raise_for_status()
- xml=feedparser.parse(response.content)
- if xml.bozo and not xml.entries:raise ValueError("Malformed/empty RSS")
- return xml.entries
+ last=None
+ for attempt in range(3):
+  try:
+   response=S.get(url,timeout=(10,25))
+   if response.status_code in (429,503):
+    last=RuntimeError(f"Feed temporarily rate limited ({response.status_code})")
+    if attempt<2:
+     time.sleep(2.5*(attempt+1))
+     continue
+   response.raise_for_status()
+   xml=feedparser.parse(response.content)
+   if xml.bozo and not xml.entries:raise ValueError("Malformed/empty RSS")
+   return xml.entries
+  except requests.RequestException as exc:
+   last=exc
+   if attempt<2:time.sleep(1.5*(attempt+1))
+ raise last or RuntimeError("Feed unavailable")
 def google_url(q,window):
  params={"q":q+f" when:{window}d","hl":"he","gl":"IL","ceid":"IL:he"}
  return "https://news.google.com/rss/search?"+urlencode(params)
-def new_entry(entry, source_type="news"):
+def new_entry(entry, source_type="news", existing=None):
  title=text(entry.get("title",""))
  if not title or len(title)<14 or len(title)>250:return None
  date=aware(entry.get("published_parsed") or entry.get("updated_parsed") or entry.get("published"))
@@ -103,6 +115,9 @@ def new_entry(entry, source_type="news"):
  if source_type!="official" and any(x in low for x in EXCLUDE):return None
  section=category(title)
  if section is None:return None
+ uid=hashlib.sha256((title.lower()+"|"+source_name.lower()).encode("utf-8")).hexdigest()[:20]
+ if existing and uid in existing and existing[uid].get("category")==section:
+  return existing[uid]
  # For Google News, outbound clicks go through Google News to the publisher.
  # We do not claim that this URL is the publisher URL.
  title_ru=translate_ru(title)
@@ -123,7 +138,6 @@ def new_entry(entry, source_type="news"):
           "cars":"Новости авторынка Израиля и автомобильных технологий."}
   snippet=detail[section]
  # This is NOT "law enacted" confirmation.
- uid=hashlib.sha256((title.lower()+"|"+source_name.lower()).encode("utf-8")).hexdigest()[:20]
  return {
   "id":uid,"title":title_ru[:200],"titleOriginal":title[:250],
   "summary":snippet[:250],"date":date.isoformat().replace("+00:00","Z"),
@@ -142,6 +156,8 @@ def clean_old(obj):
   date=aware(obj.get("date"))
   return (date is not None and CUTOFF<=date<=NOW+dt.timedelta(hours=12)
     and obj.get("category") in CATEGORIES and safe(obj.get("url",""))
+    and category(str(obj.get("titleOriginal","")))==obj.get("category")
+    and not any(x in str(obj.get("titleOriginal","")).lower() for x in EXCLUDE)
     and len(str(obj.get("title","")))>8)
  except Exception:return False
 def main():
@@ -150,7 +166,7 @@ def main():
  merged={obj["id"]:obj for obj in previous if clean_old(obj) and "id" in obj}
  count_by_source={}
  added=0;errors={}
- first_run=not DEST.exists()
+ first_run=not DEST.exists() or len(merged)<25
  feeds=[("Минтранс (официально)",MOT_RSS,"official")]
  for section,q in QUERIES.items():
   feeds.append((f"Израильские СМИ · {section}",google_url(q,30 if first_run else 7),"news"))
@@ -158,8 +174,8 @@ def main():
   try:
    items=read_feed(url)
    count_by_source[source_name]=len(items)
-   for entry in items:
-    article=new_entry(entry,kind)
+   for entry in items[:70]:
+    article=new_entry(entry,kind,merged)
     if article is None:continue
     if article["id"] not in merged:added+=1
     merged[article["id"]]=article
@@ -167,6 +183,7 @@ def main():
   except Exception as exc:
    errors[source_name]=str(exc)[:150]
    print(f"WARN source {source_name}: {type(exc).__name__}: {exc}",flush=True)
+  time.sleep(1.3)
  # If all sources fail, preserve previous CURRENT items and prune stale ones.
  items=sorted(merged.values(),key=lambda x:x["date"],reverse=True)
  used=set();retained=[]
