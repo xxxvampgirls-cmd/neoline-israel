@@ -5,6 +5,7 @@ on:
     branches: [main]
     paths:
       - '.github/workflows/test-mobile-catalog.yml'
+      - 'index.html'
 permissions:
   contents: read
 jobs:
@@ -30,6 +31,52 @@ jobs:
             await page.locator('#catalogShowMoreBtn').click();
             await page.waitForFunction(()=>document.querySelectorAll('#products .product').length===16,{timeout:10000});
             console.log('FIRST EIGHT PRODUCTS PASS: 8 visible, more displays 16');
+
+            // Verify the actual fixed five-button mobile dock. It should
+            // disappear only after a meaningful DOWN scroll, and reappear
+            // after a small, intentional UP scroll without flickering.
+            let navCodeReady=false;
+            for(let attempt=0;attempt<8;attempt++){
+              navCodeReady=await page.evaluate(()=>
+                document.querySelector('.mobile-nav')?.dataset.navScrollBehavior==='directional'
+              );
+              if(navCodeReady)break;
+              await page.waitForTimeout(6500);
+              await page.reload({waitUntil:'domcontentloaded'});
+            }
+            if(!navCodeReady)throw Error('New mobile nav scroll behavior not deployed yet');
+            for(const width of [320,390]){
+              await page.setViewportSize({width,height:844});
+              await page.evaluate(()=>window.scrollTo(0,0));
+              await page.waitForFunction(()=>!document.querySelector('.mobile-nav').classList.contains('nav-scroll-hidden'));
+              const bar=page.locator('.mobile-nav');
+              if(await bar.locator('button,a').count()!==5)
+                throw Error('Mobile dock must retain all five navigation items');
+              await page.evaluate(()=>window.scrollTo(0,520));
+              await page.waitForFunction(()=>document.querySelector('.mobile-nav').classList.contains('nav-scroll-hidden'));
+              const hidden=await bar.evaluate(el=>{
+                const c=getComputedStyle(el);
+                return {visibility:c.visibility,opacity:c.opacity,transform:c.transform};
+              });
+              if(hidden.visibility!=='hidden')
+                throw Error('Mobile dock did not visually hide after down-scroll at '+width+'px: '+JSON.stringify(hidden));
+              await page.evaluate(()=>window.scrollBy(0,-4));
+              await page.waitForTimeout(140);
+              if(!await bar.evaluate(el=>el.classList.contains('nav-scroll-hidden')))
+                throw Error('Mobile dock flickers on tiny upward motion at '+width+'px');
+              await page.evaluate(()=>window.scrollBy(0,-125));
+              await page.waitForFunction(()=>!document.querySelector('.mobile-nav').classList.contains('nav-scroll-hidden'));
+              const shown=await bar.evaluate(el=>getComputedStyle(el).visibility);
+              if(shown!=='visible')
+                throw Error('Mobile dock not revealed by UP scroll at '+width+'px');
+              await page.evaluate(()=>window.scrollTo(0,0));
+              const pageWidth=await page.evaluate(()=>document.documentElement.scrollWidth);
+              if(pageWidth>width+3)
+                throw Error('Dock animation adds horizontal overflow at '+width+'px');
+              console.log('MOBILE DOCK AUTO-HIDE PASS width='+width+' DOWN hidden, UP visible, tiny scroll ignored');
+            }
+            await page.setViewportSize({width:390,height:844});
+
             for(const width of [320,390]){
               await page.setViewportSize({width,height:844});
               await page.waitForFunction(()=>{const img=document.querySelector('.header .brand-clean');return img?.complete && img.naturalWidth>0;},{timeout:15000});
