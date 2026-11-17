@@ -169,3 +169,208 @@ body.game-active .game-hero{display:none!important}
  #gameLobby .progress-disclosure>summary::after{transition:none}
 }
 
+
+
+/* ===============================================================
+   NEOLINE THEORY / NAV AND MONOCHROME MODES · NOV 2026
+   Four distinct polished game tiles using ONLY identity colors:
+   signature sky blue, snow white, ink-black / navy. No emoji.
+   All modes retain their original data-mode bindings and heights.
+   =============================================================== */
+#gameLobby .route-card{
+ --card-ink:#143956;
+ --card-blue:#058bd5;
+ --card-ornament:#168bd323;
+ position:relative;
+ isolation:isolate;
+ overflow:hidden;
+ border:1px solid #b7ddf2;
+ color:var(--card-ink);
+ box-shadow:0 5px 0 #c2e2f03b,0 9px 23px #1c638e19;
+ background:linear-gradient(137deg,#fff,#e9f8ff);
+ transition:transform .25s cubic-bezier(.2,.68,.28,1),box-shadow .25s,border-color .25s;
+}
+#gameLobby .route-card:hover:not(:disabled),
+#gameLobby .route-card:focus-visible{
+ transform:translateY(-3px);
+ border-color:#64b7eb;
+ box-shadow:0 9px 0 #c2e2f022,0 15px 28px #0b6baf25;
+}
+#gameLobby .route-card:active:not(:disabled){transform:translateY(1px) scale(.987)}
+#gameLobby .route-card::before{
+ content:"";position:absolute;z-index:-1;pointer-events:none;
+ right:-35px;top:-43px;width:139px;height:139px;
+ border:27px solid var(--card-ornament);border-radius:50%;
+ transform:rotate(-17deg);
+}
+#gameLobby .route-card:not(.route-full)::after{
+ content:attr(data-card-index);
+ position:absolute;bottom:-16px;right:12px;
+ pointer-events:none;z-index:-1;
+ color:var(--card-blue);
+ font:900 69px/1 Manrope,Arial,sans-serif;
+ letter-spacing:-.12em;opacity:.085;
+}
+#gameLobby .route-card .route-top,
+#gameLobby .route-card strong,
+#gameLobby .route-card>span,
+#gameLobby .route-card .route-cta{position:relative;z-index:2}
+#gameLobby .route-card .route-icon{
+ position:relative;
+ background:linear-gradient(147deg,#fff,#ebf8ff);
+ border:1px solid #cae7f8;
+ box-shadow:0 4px 13px #145d9817,inset 0 1px 2px #fff;
+ border-radius:13px;
+ color:#0b76bc;
+ font-size:0;
+}
+#gameLobby .route-card .route-icon svg{
+ display:block;width:74%;height:74%;stroke:currentColor;
+ filter:drop-shadow(0 1px 0 #fff);
+}
+#gameLobby .route-card .route-length{
+ color:#086eab;background:#ffffffed;
+ border:1px solid #d9e9f6;
+ box-shadow:0 3px 12px #14598c10;
+ font-size:10px;font-variant-numeric:tabular-nums;
+}
+#gameLobby .route-card .route-cta{
+ display:inline-flex;align-items:center;gap:5px;
+ color:var(--card-blue);font-weight:850;
+ text-shadow:0 1px 0 #ffffff6a;
+}
+#gameLobby .route-blue{
+ --card-ornament:#0c9ce521;
+ background:linear-gradient(135deg,#fbfeff 0%,#e8f6ff 54%,#ceecff 100%);
+ border-color:#a9d8f2;
+}
+#gameLobby .route-mint{
+ --card-ornament:#1586bc14;
+ --card-blue:#0877b8;
+ background:linear-gradient(130deg,#ffffff 0%,#fcfeff 48%,#e6f4ff 100%);
+ border-color:#c9ddea;
+}
+#gameLobby .route-indigo{
+ --card-ink:#fff;--card-blue:#77dbff;--card-ornament:#5fbbef1b;
+ color:#fff;
+ background:linear-gradient(135deg,#162b3e 0%,#0b1c2f 50%,#125484 100%);
+ border-color:#1e749f;
+ box-shadow:0 5px 0 #10273f20,0 12px 26px #0a27443b;
+}
+#gameLobby .route-indigo::after{color:#9bdfff;opacity:.1}
+#gameLobby .route-indigo .route-icon{
+ background:linear-gradient(140deg,#258ebd,#0869a3);
+ color:#f7feff;
+ border-color:#63b9e3;
+ box-shadow:inset 0 1px 2px #e9fbff80,0 5px 17px #001c3f44;
+}
+#gameLobby .route-indigo .route-length{
+ color:#e9faff;background:#ffffff16;border-color:#ffffff47;
+}
+#gameLobby .route-indigo strong{color:#fff}
+#gameLobby .route-indigo>span:not(.route-top):not(.route-cta){color:#bdd8eb}
+#gameLobby .route-indigo .route-cta{color:#8cddff;text-shadow:none}
+#gameLobby .route-amber{
+ --card-ornament:#0b81ba20;--card-blue:#086da5;
+ background:linear-gradient(132deg,#e2f3ff 0%,#f7fcff 55%,#d7eafa 100%);
+ border-color:#b4d6e9;
+}
+#gameLobby .route-full{
+ --card-blue:#0b7db7;--card-ornament:#2194cb17;
+ background:linear-gradient(111deg,#f9fdff 0%,#e7f6ff 65%,#cfeaff 100%);
+ border-color:#afd8eb;
+ box-shadow:0 7px 22px #17658a15;
+}
+#gameLobby .route-full::after{
+ content:"";position:absolute;right:-35px;bottom:-48px;
+ width:180px;height:180px;border-radius:50%;pointer-events:none;
+ border:28px solid #5bbef114;z-index:-1;
+}
+#gameLobby .route-full .route-icon{color:#0777ba}
+#gameLobby .route-full .route-length{color:#0b6fa5}
+#gameLobby .route-card:disabled{filter:none;opacity:.54}
+/* Replace the heavy emoji thumbnail in the compact launcher with
+   the same blue/white/black NEOLINE motif; this is decorative only. */
+.game-hero .hero-mini{
+ background:linear-gradient(135deg,#d5f3ff,#f8fcff 54%,#afdff7);
+ border-color:#c0e4f6;
+}
+@media(max-width:720px){
+ #gameLobby .route-card:not(.route-full)::after{
+  font-size:56px;right:9px;bottom:-13px;opacity:.065;
+ }
+ #gameLobby .route-card::before{
+  width:98px;height:98px;right:-35px;top:-31px;border-width:19px;
+ }
+ #gameLobby .route-card .route-icon{border-radius:10px}
+ #gameLobby .route-card .route-icon svg{width:79%;height:79%}
+ #gameLobby .route-card strong{line-height:1.17}
+ #gameLobby .route-card .route-length{font-size:9px;padding:4px 7px}
+ #gameLobby .route-card>span:not(.route-top):not(.route-cta){overflow:hidden;text-overflow:ellipsis}
+ #gameLobby .route-indigo{box-shadow:0 6px 13px #0d2c4e33}
+ #gameLobby .route-card .route-cta{font-size:10px}
+}
+@media(max-width:355px){
+ #gameLobby .route-card:not(.route-full)::after{font-size:46px;opacity:.055}
+}
+
+/* Same five links as the NEOLINE homepage: native fixed dock on game page.
+   Safe-area padding, 44px touch targets and gentle direction-based movement. */
+.theory-bottom{display:none}
+@media(max-width:720px){
+ body{padding-bottom:calc(96px + env(safe-area-inset-bottom))}
+ .theory-bottom{
+  position:fixed;z-index:45;bottom:0;left:0;right:0;
+  display:grid;grid-template-columns:repeat(5,minmax(0,1fr));
+  width:100%;
+  padding:7px 2px max(9px,env(safe-area-inset-bottom));
+  border-top:1px solid #d1e6f6;
+  background:#fffffff0;
+  backdrop-filter:blur(18px);
+  -webkit-backdrop-filter:blur(18px);
+  box-shadow:0 -8px 24px #124f851c;
+  transform:translate3d(0,0,0);opacity:1;visibility:visible;
+  transition:transform .43s cubic-bezier(.2,.75,.24,1),opacity .3s ease,visibility .43s linear;
+  will-change:transform;
+ }
+ .theory-bottom.nav-scroll-hidden{
+  transform:translate3d(0,calc(100% + 22px),0);
+  opacity:0;visibility:hidden;pointer-events:none;
+ }
+ .theory-bottom:focus-within{
+  transform:translate3d(0,0,0)!important;
+  opacity:1!important;visibility:visible!important;
+ }
+ .theory-bottom a{
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  gap:5px;min-width:0;min-height:58px;
+  padding:6px 1px;
+  text-decoration:none;font-size:10px;font-weight:650;
+  color:#6b859e;
+  text-align:center;border-radius:11px;
+  -webkit-tap-highlight-color:transparent;
+  transition:background .2s,transform .2s,color .2s;
+ }
+ .theory-bottom a span{
+  display:block;max-width:100%;white-space:nowrap;overflow:hidden;
+  text-overflow:ellipsis;line-height:15px;
+ }
+ .theory-bottom svg{
+  flex:none;display:block;width:28px;height:28px;
+  stroke:#147ec0;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;
+  fill:none;
+ }
+ .theory-bottom a:hover,.theory-bottom a:focus-visible{
+  color:#066cb4;background:#eaf7ff;
+ }
+ .theory-bottom a:focus-visible{outline:2px solid #0a86d2;outline-offset:-2px}
+ .theory-bottom a:active{transform:translateY(1px) scale(.97)}
+ html[dir=rtl] .theory-bottom{direction:rtl}
+}
+@media(max-width:360px){
+ .theory-bottom a{font-size:9px}
+ .theory-bottom svg{width:26px;height:26px}
+}
+@media(prefers-reduced-motion:reduce){
+ .theory-bottom,.theory-bottom a{transition:none!important;will-change:auto}
+}
