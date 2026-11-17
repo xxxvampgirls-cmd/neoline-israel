@@ -32,7 +32,7 @@ jobs:
             page.on('pageerror',e=>errors.push(e.message));
             const origin='https://neoline-israel.pages.dev';
             // Cloudflare Pages deploys asynchronously; allow an upcoming asset version.
-            for(let i=0;i<5;i++){
+            for(let i=0;i<12;i++){
               await page.goto(origin+'/teoria.html?ci='+i,{waitUntil:'domcontentloaded',timeout:40000});
               const script=page.locator('script[src*="teoria.js"]'),css=page.locator('link[rel="stylesheet"][href*="teoria.css"]');
               if(await script.count()&&await css.count()&&await page.locator('[data-mode="route"]').count())break;
@@ -266,7 +266,15 @@ jobs:
             }
             if(!homepageReady)throw Error('New premium last-slide theory artwork not published');
             const slides=page.locator('#showcaseSlides .featured-slide');
-            if(await slides.count()!==5)throw Error('Expected five showroom slides');
+            if(await slides.count()!==12)throw Error('Expected 12 showroom and advertising slides');
+            const classes=await slides.evaluateAll(nodes=>nodes.map(n=>n.className));
+            if(classes.filter(x=>x.includes('featured-slide--news-item')).length!==3||
+               classes.filter(x=>x.includes('featured-slide--site-promo')).length!==4||
+               classes.filter(x=>x.includes('featured-slide--theory')).length!==1)
+              throw Error('Missing editorial / delivery / service ad slides '+JSON.stringify(classes));
+            const promoLinks=await page.locator('#showcaseSlides .featured-slide--site-promo a.primary').evaluateAll(ns=>ns.map(n=>n.getAttribute('href')));
+            if(!promoLinks.includes('./news.html')||!promoLinks.includes('./delivery.html')||!promoLinks.includes('./#installation'))
+              throw Error('Campaign ads need working local news, delivery and installation links '+JSON.stringify(promoLinks));
             const last=slides.last();
             if(!(await last.getAttribute('class')).includes('featured-slide--theory'))
               throw Error('Theory ad must be LAST (not second)');
@@ -274,6 +282,13 @@ jobs:
               throw Error('Last carousel slide lost its working game CTA');
             if(await page.locator('#theoryPreviewStart,#openTheoryHeader,#theoryQuick').count())
               throw Error('Old standalone theory promo/header buttons were reintroduced');
+            await page.waitForFunction(()=>document.querySelectorAll('#showcaseSlides .featured-slide--news-item .news-showcase-cutout img').length===3,null,{timeout:18000});
+            const threeNews=await page.locator('#showcaseSlides .featured-slide--news-item').evaluateAll(nodes=>nodes.map(n=>({
+              title:n.querySelector('h1')?.textContent?.trim(),url:n.querySelector('a.primary')?.getAttribute('href'),
+              image:n.querySelector('.news-showcase-cutout img')?.getAttribute('src')
+            })));
+            if(threeNews.length!==3||threeNews.some(n=>!n.title||!/^\.\/news\.html\?story=[a-f0-9]{20}$/.test(n.url)||!/^\.\/assets\/news\/images\/\w+\.(webp|svg|jpg|png)$/.test(n.image)))
+              throw Error('Three real news reports must open on this site with source-linked photo '+JSON.stringify(threeNews));
             await page.locator('#showcaseDots .showcase-dot').last().click();
             // Async image-manifest refresh can rebuild the carousel during
             // a click; wait for the ACTUAL visible stage before measuring.
@@ -482,7 +497,7 @@ jobs:
             if(!(await slides.first().getAttribute('class')).includes('active'))
               throw Error('Arrow from LAST theory ad must wrap to first product slide');
             if(errors.length)throw Error('Homepage JS errors '+errors.join('|'));
-            console.log('HOMEPAGE PREMIUM THEORY AD PASS: white feathered center beneath two opposite moving bands on all five slides; fast streaks, reduced motion, mobile width and wrap');
+            console.log('HOMEPAGE 12-SLIDE EDITORIAL + PREMIUM THEORY PASS: 3 fresh news, 4 campaigns and 5 original product/game frames, blue bands, mobile and wrap');
             await browser.close();
           })().catch(e=>{console.error(e);process.exit(1)});
           JS
