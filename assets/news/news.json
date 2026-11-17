@@ -1,7 +1,7 @@
 {
   "version": 1,
   "retentionDays": 30,
-  "updated": "2026-11-17T09:09:26.753899Z",
+  "updated": "2026-11-17T09:10:23.618787Z",
   "items": [
     {
       "id": "e891ac473e1765f97972",
@@ -499,42 +499,43 @@
       }
     },
     {
-      "id": "4b767b7917a133212e28",
-      "titleOriginal": "יבוא 10/2026 / קפיצה חדה ביבוא מכוניות נוסעים, העלות הדולרית ממשיכה לעלות",
+      "titleOriginal": "מצלמות המהירות הוותיקות החלו לחלק דוחות גם על חריגות קלות, ובכביש 6 הופעלה מערכת שקילה חדשה",
+      "sourceTitle": "חדש בכביש 6: מערכת שקילה אוטומטית שתזהה חריגות משקל של רכב כבד",
+      "editorialHeadline": true,
       "sourceLanguage": "he",
-      "date": "2026-11-16T00:40:54Z",
-      "url": "https://autonews.co.il/%d7%99%d7%91%d7%95%d7%90-10-2026-%d7%a7%d7%a4%d7%99%d7%a6%d7%94-%d7%97%d7%93%d7%94-%d7%91%d7%99%d7%91%d7%95%d7%90-%d7%9e%d7%9b%d7%95%d7%a0%d7%99%d7%95%d7%aa-%d7%a0%d7%95%d7%a1%d7%a2%d7%99%d7%9d/",
-      "publisher": "Autonews Israel",
-      "category": "cars",
-      "art": "cars",
-      "image": "./assets/news/images/4b767b7917a133212e28.webp",
+      "date": "2026-11-16T09:15:00Z",
+      "url": "https://www.calcalist.co.il/local_news/car/article/hy9clruazl",
+      "publisher": "Calcalist",
+      "category": "speed",
+      "art": "speed",
       "official": false,
       "translations": {
-        "he": {
-          "title": "יבוא 10/2026 / קפיצה חדה ביבוא מכוניות נוסעים, העלות הדולרית ממשיכה לעלות",
-          "summary": "כתבה על מכוניות או שוק הרכב בישראל. פרטים באתר המקור."
-        },
         "ru": {
-          "title": "Импорт 10/2026 / Резкий скачок импорта легковых автомобилей, долларовая стоимость продолжает расти",
-          "summary": "Материал об автомобиле или автомобильном рынке Израиля. Подробности — на сайте издания."
+          "title": "Камеры скорости штрафуют за небольшие превышения. На шоссе №6 появилось автоматическое взвешивание грузовиков",
+          "summary": "По сообщению Calcalist, часть стационарных камер уже фиксирует небольшое превышение скорости. Полиция также ввела на шоссе №6 систему проверки веса грузовиков без предварительной остановки."
+        },
+        "he": {
+          "title": "מצלמות מהירות אוכפות גם חריגות קלות; מערכת שקילה חדשה הופעלה בכביש 6",
+          "summary": "לפי כלכליסט, חלק מהמצלמות הוותיקות מפיקות דוחות גם על חריגות מהירות קלות. במקביל הופעלה בכביש 6 מערכת לשקילת משאיות תוך כדי נסיעה."
         },
         "en": {
-          "title": "Imports 10/2026 / Sharp jump in the import of passenger cars, the dollar cost continues to rise",
-          "summary": "An update about vehicles or Israel's car market. Details are available at the source."
+          "title": "Israeli speed cameras issue tickets for minor speeding; automated truck weighing starts on Highway 6",
+          "summary": "Calcalist reports that some older speed cameras are issuing tickets for small excesses. Police have also introduced a drive-through heavy-vehicle weighing system on Highway 6."
         },
         "ar": {
-          "title": "الواردات 2026/10/ قفزة حادة في واردات سيارات الركوب وتكلفة الدولار تواصل الارتفاع",
-          "summary": "تحديث عن السيارات أو سوق المركبات في إسرائيل. التفاصيل في المصدر."
+          "title": "كاميرات السرعة تحرّر مخالفات لتجاوزات طفيفة؛ نظام جديد لوزن الشاحنات على الطريق 6",
+          "summary": "وفقًا لكلכליסט، بدأت بعض كاميرات السرعة الثابتة بإصدار مخالفات لتجاوزات طفيفة، وبدأ تشغيل نظام لوزن الشاحنات أثناء السير على الطريق 6."
         }
       },
-      "title": "Импорт 10/2026 / Резкий скачок импорта легковых автомобилей, долларовая стоимость продолжает расти",
-      "summary": "Материал об автомобиле или автомобильном рынке Израиля. Подробности — на сайте издания.",
+      "id": "7cec5fc092180f21c267",
+      "title": "Камеры скорости штрафуют за небольшие превышения. На шоссе №6 появилось автоматическое взвешивание грузовиков",
+      "summary": "По сообщению Calcalist, часть стационарных камер уже фиксирует небольшое превышение скорости. Полиция также ввела на шоссе №6 систему проверки веса грузовиков без предварительной остановки.",
       "translated": true,
-      "imageKind": "ai-generated",
+      "image": "./assets/news/images/7cec5fc092180f21c267.webp",
       "imageType": "licensedPhoto",
       "imageCredit": {
-        "text": "Eric Friedebach · CC BY 2.0",
-        "url": "https://commons.wikimedia.org/wiki/File:1973_Ford_Mustang_Interior_Dashboard_(51838912069).jpg"
+        "text": "Erkki Voutilainen · CC BY 4.0",
+        "url": "https://commons.wikimedia.org/wiki/File:Police_patrolling_1950_(JOKAMT2Yh01-2).tif"
       }
     },
     {
@@ -576,6 +577,45 @@
       }
     },
     {
+      "id": "4b767b7917a133212e28",
+      "titleOriginal": "יבוא 10/2026 / קפיצה חדה ביבוא מכוניות נוסעים, העלות הדולרית ממשיכה לעלות",
+      "sourceLanguage": "he",
+      "date": "2026-11-16T00:40:54Z",
+      "url": "https://autonews.co.il/%d7%99%d7%91%d7%95%d7%90-10-2026-%d7%a7%d7%a4%d7%99%d7%a6%d7%94-%d7%97%d7%93%d7%94-%d7%91%d7%99%d7%91%d7%95%d7%90-%d7%9e%d7%9b%d7%95%d7%a0%d7%99%d7%95%d7%aa-%d7%a0%d7%95%d7%a1%d7%a2%d7%99%d7%9d/",
+      "publisher": "Autonews Israel",
+      "category": "cars",
+      "art": "cars",
+      "image": "./assets/news/images/4b767b7917a133212e28.webp",
+      "official": false,
+      "translations": {
+        "he": {
+          "title": "יבוא 10/2026 / קפיצה חדה ביבוא מכוניות נוסעים, העלות הדולרית ממשיכה לעלות",
+          "summary": "כתבה על מכוניות או שוק הרכב בישראל. פרטים באתר המקור."
+        },
+        "ru": {
+          "title": "Импорт 10/2026 / Резкий скачок импорта легковых автомобилей, долларовая стоимость продолжает расти",
+          "summary": "Материал об автомобиле или автомобильном рынке Израиля. Подробности — на сайте издания."
+        },
+        "en": {
+          "title": "Imports 10/2026 / Sharp jump in the import of passenger cars, the dollar cost continues to rise",
+          "summary": "An update about vehicles or Israel's car market. Details are available at the source."
+        },
+        "ar": {
+          "title": "الواردات 2026/10/ قفزة حادة في واردات سيارات الركوب وتكلفة الدولار تواصل الارتفاع",
+          "summary": "تحديث عن السيارات أو سوق المركبات في إسرائيل. التفاصيل في المصدر."
+        }
+      },
+      "title": "Импорт 10/2026 / Резкий скачок импорта легковых автомобилей, долларовая стоимость продолжает расти",
+      "summary": "Материал об автомобиле или автомобильном рынке Израиля. Подробности — на сайте издания.",
+      "translated": true,
+      "imageKind": "ai-generated",
+      "imageType": "licensedPhoto",
+      "imageCredit": {
+        "text": "Eric Friedebach · CC BY 2.0",
+        "url": "https://commons.wikimedia.org/wiki/File:1973_Ford_Mustang_Interior_Dashboard_(51838912069).jpg"
+      }
+    },
+    {
       "id": "6cc126ef03218901938b",
       "titleOriginal": "אילו מכוניות יקבלו הח\"כים החדשים?",
       "sourceLanguage": "he",
@@ -608,44 +648,6 @@
       "summary": "Материал об автомобиле или автомобильном рынке Израиля. Подробности — на сайте издания.",
       "translated": true,
       "imageKind": "ai-generated",
-      "imageType": "licensedPhoto",
-      "imageCredit": {
-        "text": "Eric Friedebach · CC BY 2.0",
-        "url": "https://commons.wikimedia.org/wiki/File:1973_Ford_Mustang_Interior_Dashboard_(51838912069).jpg"
-      }
-    },
-    {
-      "id": "60b9d4ece67c7f4667d4",
-      "titleOriginal": "טסלה / מתחילה לשווק את הסייברקאב ללקוחות פרטיים, מנוי חודשי יקר",
-      "sourceLanguage": "he",
-      "date": "2026-11-15T22:58:33Z",
-      "url": "https://autonews.co.il/%d7%98%d7%a1%d7%9c%d7%94-%d7%9e%d7%aa%d7%97%d7%99%d7%9c%d7%94-%d7%9c%d7%a9%d7%95%d7%95%d7%a7-%d7%90%d7%aa-%d7%94%d7%a1%d7%99%d7%99%d7%91%d7%a8%d7%a7%d7%90%d7%91-%d7%9c%d7%9c%d7%a7%d7%95%d7%97%d7%95/",
-      "publisher": "Autonews Israel",
-      "category": "cars",
-      "art": "cars",
-      "image": "./assets/news/images/60b9d4ece67c7f4667d4.webp",
-      "official": false,
-      "translations": {
-        "he": {
-          "title": "טסלה / מתחילה לשווק את הסייברקאב ללקוחות פרטיים, מנוי חודשי יקר",
-          "summary": "כתבה על מכוניות או שוק הרכב בישראל. פרטים באתר המקור."
-        },
-        "ru": {
-          "title": "Tesla / начинает продавать CyberCab частным клиентам, предлагая дорогую ежемесячную подписку",
-          "summary": "Материал об автомобиле или автомобильном рынке Израиля. Подробности — на сайте издания."
-        },
-        "en": {
-          "title": "Tesla / begins marketing the CyberCab to private customers, an expensive monthly subscription",
-          "summary": "An update about vehicles or Israel's car market. Details are available at the source."
-        },
-        "ar": {
-          "title": "تسلا/ تبدأ تسويق CyberCab لعملاء القطاع الخاص، باشتراك شهري باهظ الثمن",
-          "summary": "تحديث عن السيارات أو سوق المركبات في إسرائيل. التفاصيل في المصدر."
-        }
-      },
-      "title": "Tesla / начинает продавать CyberCab частным клиентам, предлагая дорогую ежемесячную подписку",
-      "summary": "Материал об автомобиле или автомобильном рынке Израиля. Подробности — на сайте издания.",
-      "translated": true,
       "imageType": "licensedPhoto",
       "imageCredit": {
         "text": "Eric Friedebach · CC BY 2.0",
@@ -691,6 +693,44 @@
       }
     },
     {
+      "id": "60b9d4ece67c7f4667d4",
+      "titleOriginal": "טסלה / מתחילה לשווק את הסייברקאב ללקוחות פרטיים, מנוי חודשי יקר",
+      "sourceLanguage": "he",
+      "date": "2026-11-15T22:58:33Z",
+      "url": "https://autonews.co.il/%d7%98%d7%a1%d7%9c%d7%94-%d7%9e%d7%aa%d7%97%d7%99%d7%9c%d7%94-%d7%9c%d7%a9%d7%95%d7%95%d7%a7-%d7%90%d7%aa-%d7%94%d7%a1%d7%99%d7%99%d7%91%d7%a8%d7%a7%d7%90%d7%91-%d7%9c%d7%9c%d7%a7%d7%95%d7%97%d7%95/",
+      "publisher": "Autonews Israel",
+      "category": "cars",
+      "art": "cars",
+      "image": "./assets/news/images/60b9d4ece67c7f4667d4.webp",
+      "official": false,
+      "translations": {
+        "he": {
+          "title": "טסלה / מתחילה לשווק את הסייברקאב ללקוחות פרטיים, מנוי חודשי יקר",
+          "summary": "כתבה על מכוניות או שוק הרכב בישראל. פרטים באתר המקור."
+        },
+        "ru": {
+          "title": "Tesla / начинает продавать CyberCab частным клиентам, предлагая дорогую ежемесячную подписку",
+          "summary": "Материал об автомобиле или автомобильном рынке Израиля. Подробности — на сайте издания."
+        },
+        "en": {
+          "title": "Tesla / begins marketing the CyberCab to private customers, an expensive monthly subscription",
+          "summary": "An update about vehicles or Israel's car market. Details are available at the source."
+        },
+        "ar": {
+          "title": "تسلا/ تبدأ تسويق CyberCab لعملاء القطاع الخاص، باشتراك شهري باهظ الثمن",
+          "summary": "تحديث عن السيارات أو سوق المركبات في إسرائيل. التفاصيل في المصدر."
+        }
+      },
+      "title": "Tesla / начинает продавать CyberCab частным клиентам, предлагая дорогую ежемесячную подписку",
+      "summary": "Материал об автомобиле или автомобильном рынке Израиля. Подробности — на сайте издания.",
+      "translated": true,
+      "imageType": "licensedPhoto",
+      "imageCredit": {
+        "text": "Eric Friedebach · CC BY 2.0",
+        "url": "https://commons.wikimedia.org/wiki/File:1973_Ford_Mustang_Interior_Dashboard_(51838912069).jpg"
+      }
+    },
+    {
       "id": "3d252cafd2173f2c43cd",
       "titleOriginal": "טסלה מתחילה למכור את הסייברקאב. אז למה אילון מאסק לא מרוצה?",
       "sourceLanguage": "he",
@@ -726,6 +766,44 @@
       "imageCredit": {
         "text": "Eric Friedebach · CC BY 2.0",
         "url": "https://commons.wikimedia.org/wiki/File:1973_Ford_Mustang_Interior_Dashboard_(51838912069).jpg"
+      }
+    },
+    {
+      "id": "6083502c7ac99fe25ed3",
+      "titleOriginal": "צוות אמבולנס של איחוד הצלה העניק סיוע רפואי ופינה לבית החולים וולפסון רוכבת אופניים (בת 25) שנפצע קל כתוצאה מתאונה עצמית בכביש 20 סמוך למחלף קוממיות.",
+      "sourceLanguage": "he",
+      "date": "2026-11-16T15:18:02Z",
+      "url": "https://t.me/uh1221/27411",
+      "publisher": "Ихуд Ацала · Telegram",
+      "category": "accidents",
+      "art": "accidents",
+      "image": "./assets/news/images/6083502c7ac99fe25ed3.webp",
+      "official": false,
+      "translations": {
+        "he": {
+          "title": "צוות אמבולנס של איחוד הצלה העניק סיוע רפואי ופינה לבית החולים וולפסון רוכבת אופניים (בת 25) שנפצע קל כתוצאה מתאונה עצמית בכביש 20 סמוך למחלף קוממיות.",
+          "summary": "דיווח על תאונת דרכים בישראל. פרטים ועדכונים בכתבת המקור."
+        },
+        "ru": {
+          "title": "Бригада скорой помощи Союза спасателей оказала медицинскую помощь и доставила в больницу «Вольфсон» велосипедиста (25 лет), получившего легкие травмы в результате ДТП на 20-м маршруте в районе развязки Коммиат.",
+          "summary": "Дорожное происшествие в Израиле. Обстоятельства и актуальные сведения — в материале источника."
+        },
+        "en": {
+          "title": "The ambulance team of the Rescue Union provided medical assistance and took to the Wolfson Hospital a cyclist (25 years old) who was slightly injured as a result of a self-inflicted accident on Route 20 near the Kommiat interchange.",
+          "summary": "A reported road incident in Israel. Details and updates are in the original report."
+        },
+        "ar": {
+          "title": "قدم فريق الإسعاف التابع لاتحاد الإنقاذ المساعدة الطبية ونقل إلى مستشفى وولفسون راكب دراجة (25 عامًا) أصيب بجروح طفيفة نتيجة حادث ألحق نفسه على طريق 20 بالقرب من تقاطع كوميات.",
+          "summary": "تقرير عن حادث مروري في إسرائيل. التفاصيل والتحديثات في المصدر."
+        }
+      },
+      "title": "Бригада скорой помощи Союза спасателей оказала медицинскую помощь и доставила в больницу «Вольфсон» велосипедиста (25 лет), получившего легкие травмы в результате ДТП на 20-м маршруте в районе развязки Коммиат.",
+      "summary": "Дорожное происшествие в Израиле. Обстоятельства и актуальные сведения — в материале источника.",
+      "translated": true,
+      "imageType": "licensedPhoto",
+      "imageCredit": {
+        "text": "Jeff Attaway from Abuja, Nigeria · CC BY 2.0",
+        "url": "https://commons.wikimedia.org/wiki/File:Bad_one_-_auto_wreck_in_Dakar_Senegal,_2011.jpg"
       }
     },
     {
@@ -768,44 +846,6 @@
       }
     },
     {
-      "id": "6083502c7ac99fe25ed3",
-      "titleOriginal": "צוות אמבולנס של איחוד הצלה העניק סיוע רפואי ופינה לבית החולים וולפסון רוכבת אופניים (בת 25) שנפצע קל כתוצאה מתאונה עצמית בכביש 20 סמוך למחלף קוממיות.",
-      "sourceLanguage": "he",
-      "date": "2026-11-16T15:18:02Z",
-      "url": "https://t.me/uh1221/27411",
-      "publisher": "Ихуд Ацала · Telegram",
-      "category": "accidents",
-      "art": "accidents",
-      "image": "./assets/news/images/6083502c7ac99fe25ed3.webp",
-      "official": false,
-      "translations": {
-        "he": {
-          "title": "צוות אמבולנס של איחוד הצלה העניק סיוע רפואי ופינה לבית החולים וולפסון רוכבת אופניים (בת 25) שנפצע קל כתוצאה מתאונה עצמית בכביש 20 סמוך למחלף קוממיות.",
-          "summary": "דיווח על תאונת דרכים בישראל. פרטים ועדכונים בכתבת המקור."
-        },
-        "ru": {
-          "title": "Бригада скорой помощи Союза спасателей оказала медицинскую помощь и доставила в больницу «Вольфсон» велосипедиста (25 лет), получившего легкие травмы в результате ДТП на 20-м маршруте в районе развязки Коммиат.",
-          "summary": "Дорожное происшествие в Израиле. Обстоятельства и актуальные сведения — в материале источника."
-        },
-        "en": {
-          "title": "The ambulance team of the Rescue Union provided medical assistance and took to the Wolfson Hospital a cyclist (25 years old) who was slightly injured as a result of a self-inflicted accident on Route 20 near the Kommiat interchange.",
-          "summary": "A reported road incident in Israel. Details and updates are in the original report."
-        },
-        "ar": {
-          "title": "قدم فريق الإسعاف التابع لاتحاد الإنقاذ المساعدة الطبية ونقل إلى مستشفى وولفسون راكب دراجة (25 عامًا) أصيب بجروح طفيفة نتيجة حادث ألحق نفسه على طريق 20 بالقرب من تقاطع كوميات.",
-          "summary": "تقرير عن حادث مروري في إسرائيل. التفاصيل والتحديثات في المصدر."
-        }
-      },
-      "title": "Бригада скорой помощи Союза спасателей оказала медицинскую помощь и доставила в больницу «Вольфсон» велосипедиста (25 лет), получившего легкие травмы в результате ДТП на 20-м маршруте в районе развязки Коммиат.",
-      "summary": "Дорожное происшествие в Израиле. Обстоятельства и актуальные сведения — в материале источника.",
-      "translated": true,
-      "imageType": "licensedPhoto",
-      "imageCredit": {
-        "text": "Jeff Attaway from Abuja, Nigeria · CC BY 2.0",
-        "url": "https://commons.wikimedia.org/wiki/File:Bad_one_-_auto_wreck_in_Dakar_Senegal,_2011.jpg"
-      }
-    },
-    {
       "id": "a41b423566b7aab7ce0a",
       "titleOriginal": "בהתנגשות עם רכב צבאי: הרוגה בתאונת דרכים קטלנית בעכו | תיעוד",
       "sourceLanguage": "he",
@@ -835,6 +875,44 @@
         }
       },
       "title": "При столкновении с военной машиной: погиб в ДТП со смертельным исходом в Акко Документация",
+      "summary": "Дорожное происшествие в Израиле. Обстоятельства и актуальные сведения — в материале источника.",
+      "translated": true,
+      "imageType": "licensedPhoto",
+      "imageCredit": {
+        "text": "Jeff Attaway from Abuja, Nigeria · CC BY 2.0",
+        "url": "https://commons.wikimedia.org/wiki/File:Bad_one_-_auto_wreck_in_Dakar_Senegal,_2011.jpg"
+      }
+    },
+    {
+      "id": "bb6bad09ec0c7850b897",
+      "titleOriginal": "תאונה עם מעורבות שני כלי רכב אירעה בכביש 471 בסמוך לנחשונים.",
+      "sourceLanguage": "he",
+      "date": "2026-11-16T14:59:06Z",
+      "url": "https://t.me/uh1221/27410",
+      "publisher": "Ихуд Ацала · Telegram",
+      "category": "accidents",
+      "art": "accidents",
+      "image": "./assets/news/images/bb6bad09ec0c7850b897.webp",
+      "official": false,
+      "translations": {
+        "he": {
+          "title": "תאונה עם מעורבות שני כלי רכב אירעה בכביש 471 בסמוך לנחשונים.",
+          "summary": "דיווח על תאונת דרכים בישראל. פרטים ועדכונים בכתבת המקור."
+        },
+        "ru": {
+          "title": "Авария с участием двух транспортных средств произошла на трассе 471 недалеко от Нахшонима.",
+          "summary": "Дорожное происшествие в Израиле. Обстоятельства и актуальные сведения — в материале источника."
+        },
+        "en": {
+          "title": "An accident involving two vehicles happened on Route 471 near Nachshonim.",
+          "summary": "A reported road incident in Israel. Details and updates are in the original report."
+        },
+        "ar": {
+          "title": "وقع حادث بين مركبتين على شارع 471 بالقرب من نحشونيم.",
+          "summary": "تقرير عن حادث مروري في إسرائيل. التفاصيل والتحديثات في المصدر."
+        }
+      },
+      "title": "Авария с участием двух транспортных средств произошла на трассе 471 недалеко от Нахшонима.",
       "summary": "Дорожное происшествие в Израиле. Обстоятельства и актуальные сведения — в материале источника.",
       "translated": true,
       "imageType": "licensedPhoto",
@@ -883,44 +961,6 @@
       }
     },
     {
-      "id": "bb6bad09ec0c7850b897",
-      "titleOriginal": "תאונה עם מעורבות שני כלי רכב אירעה בכביש 471 בסמוך לנחשונים.",
-      "sourceLanguage": "he",
-      "date": "2026-11-16T14:59:06Z",
-      "url": "https://t.me/uh1221/27410",
-      "publisher": "Ихуд Ацала · Telegram",
-      "category": "accidents",
-      "art": "accidents",
-      "image": "./assets/news/images/bb6bad09ec0c7850b897.webp",
-      "official": false,
-      "translations": {
-        "he": {
-          "title": "תאונה עם מעורבות שני כלי רכב אירעה בכביש 471 בסמוך לנחשונים.",
-          "summary": "דיווח על תאונת דרכים בישראל. פרטים ועדכונים בכתבת המקור."
-        },
-        "ru": {
-          "title": "Авария с участием двух транспортных средств произошла на трассе 471 недалеко от Нахшонима.",
-          "summary": "Дорожное происшествие в Израиле. Обстоятельства и актуальные сведения — в материале источника."
-        },
-        "en": {
-          "title": "An accident involving two vehicles happened on Route 471 near Nachshonim.",
-          "summary": "A reported road incident in Israel. Details and updates are in the original report."
-        },
-        "ar": {
-          "title": "وقع حادث بين مركبتين على شارع 471 بالقرب من نحشونيم.",
-          "summary": "تقرير عن حادث مروري في إسرائيل. التفاصيل والتحديثات في المصدر."
-        }
-      },
-      "title": "Авария с участием двух транспортных средств произошла на трассе 471 недалеко от Нахшонима.",
-      "summary": "Дорожное происшествие в Израиле. Обстоятельства и актуальные сведения — в материале источника.",
-      "translated": true,
-      "imageType": "licensedPhoto",
-      "imageCredit": {
-        "text": "Jeff Attaway from Abuja, Nigeria · CC BY 2.0",
-        "url": "https://commons.wikimedia.org/wiki/File:Bad_one_-_auto_wreck_in_Dakar_Senegal,_2011.jpg"
-      }
-    },
-    {
       "id": "825a9e9e7693453d9e1f",
       "titleOriginal": "בתוך פחות משעה: גבר נהרג בכביש 6, אישה נהרגה בכביש 7",
       "sourceLanguage": "he",
@@ -959,44 +999,6 @@
       }
     },
     {
-      "id": "1e8bae62077b81241504",
-      "titleOriginal": "רישומים שבוע 46/2026 / טסלה ממשיך בהיקף רישומי גבוה, מוביל את השבוע, החודש",
-      "sourceLanguage": "he",
-      "date": "2026-11-14T22:13:37Z",
-      "url": "https://autonews.co.il/%d7%a8%d7%99%d7%a9%d7%95%d7%9e%d7%99%d7%9d-%d7%a9%d7%91%d7%95%d7%a2-46-2026-%d7%98%d7%a1%d7%9c%d7%94-%d7%9e%d7%9e%d7%a9%d7%99%d7%9a-%d7%91%d7%94%d7%99%d7%a7%d7%a3-%d7%a8%d7%99%d7%a9%d7%95%d7%9e/",
-      "publisher": "Autonews Israel",
-      "category": "cars",
-      "art": "cars",
-      "image": "./assets/news/images/1e8bae62077b81241504.webp",
-      "official": false,
-      "translations": {
-        "he": {
-          "title": "רישומים שבוע 46/2026 / טסלה ממשיך בהיקף רישומי גבוה, מוביל את השבוע, החודש",
-          "summary": "כתבה על מכוניות או שוק הרכב בישראל. פרטים באתר המקור."
-        },
-        "ru": {
-          "title": "Неделя регистраций 46/2026 / Tesla продолжает с высоким объемом регистраций, лидирует неделю, месяц",
-          "summary": "Материал об автомобиле или автомобильном рынке Израиля. Подробности — на сайте издания."
-        },
-        "en": {
-          "title": "Registrations week 46/2026 / Tesla continues with a high volume of registrations, leads the week, the month",
-          "summary": "An update about vehicles or Israel's car market. Details are available at the source."
-        },
-        "ar": {
-          "title": "أسبوع التسجيلات 46/2026 / تسلا تواصل حجم التسجيلات المرتفع وتتصدر الأسبوع والشهر",
-          "summary": "تحديث عن السيارات أو سوق المركبات في إسرائيل. التفاصيل في المصدر."
-        }
-      },
-      "title": "Неделя регистраций 46/2026 / Tesla продолжает с высоким объемом регистраций, лидирует неделю, месяц",
-      "summary": "Материал об автомобиле или автомобильном рынке Израиля. Подробности — на сайте издания.",
-      "translated": true,
-      "imageType": "licensedPhoto",
-      "imageCredit": {
-        "text": "Eric Friedebach · CC BY 2.0",
-        "url": "https://commons.wikimedia.org/wiki/File:1973_Ford_Mustang_Interior_Dashboard_(51838912069).jpg"
-      }
-    },
-    {
       "id": "a06790d059facc2b99fd",
       "titleOriginal": "תאונה עם מעורבות שני כלי רכב שאחד מהם התהפך אירעה בכביש 4578 סמוך לכוכב יעקב.",
       "sourceLanguage": "he",
@@ -1032,6 +1034,44 @@
       "imageCredit": {
         "text": "Jeff Attaway from Abuja, Nigeria · CC BY 2.0",
         "url": "https://commons.wikimedia.org/wiki/File:Bad_one_-_auto_wreck_in_Dakar_Senegal,_2011.jpg"
+      }
+    },
+    {
+      "id": "1e8bae62077b81241504",
+      "titleOriginal": "רישומים שבוע 46/2026 / טסלה ממשיך בהיקף רישומי גבוה, מוביל את השבוע, החודש",
+      "sourceLanguage": "he",
+      "date": "2026-11-14T22:13:37Z",
+      "url": "https://autonews.co.il/%d7%a8%d7%99%d7%a9%d7%95%d7%9e%d7%99%d7%9d-%d7%a9%d7%91%d7%95%d7%a2-46-2026-%d7%98%d7%a1%d7%9c%d7%94-%d7%9e%d7%9e%d7%a9%d7%99%d7%9a-%d7%91%d7%94%d7%99%d7%a7%d7%a3-%d7%a8%d7%99%d7%a9%d7%95%d7%9e/",
+      "publisher": "Autonews Israel",
+      "category": "cars",
+      "art": "cars",
+      "image": "./assets/news/images/1e8bae62077b81241504.webp",
+      "official": false,
+      "translations": {
+        "he": {
+          "title": "רישומים שבוע 46/2026 / טסלה ממשיך בהיקף רישומי גבוה, מוביל את השבוע, החודש",
+          "summary": "כתבה על מכוניות או שוק הרכב בישראל. פרטים באתר המקור."
+        },
+        "ru": {
+          "title": "Неделя регистраций 46/2026 / Tesla продолжает с высоким объемом регистраций, лидирует неделю, месяц",
+          "summary": "Материал об автомобиле или автомобильном рынке Израиля. Подробности — на сайте издания."
+        },
+        "en": {
+          "title": "Registrations week 46/2026 / Tesla continues with a high volume of registrations, leads the week, the month",
+          "summary": "An update about vehicles or Israel's car market. Details are available at the source."
+        },
+        "ar": {
+          "title": "أسبوع التسجيلات 46/2026 / تسلا تواصل حجم التسجيلات المرتفع وتتصدر الأسبوع والشهر",
+          "summary": "تحديث عن السيارات أو سوق المركبات في إسرائيل. التفاصيل في المصدر."
+        }
+      },
+      "title": "Неделя регистраций 46/2026 / Tesla продолжает с высоким объемом регистраций, лидирует неделю, месяц",
+      "summary": "Материал об автомобиле или автомобильном рынке Израиля. Подробности — на сайте издания.",
+      "translated": true,
+      "imageType": "licensedPhoto",
+      "imageCredit": {
+        "text": "Eric Friedebach · CC BY 2.0",
+        "url": "https://commons.wikimedia.org/wiki/File:1973_Ford_Mustang_Interior_Dashboard_(51838912069).jpg"
       }
     },
     {
@@ -1074,6 +1114,44 @@
       }
     },
     {
+      "id": "500ae92367be020532b1",
+      "titleOriginal": "כביש 20: רוכב אופנוע נפצע בינוני בתאונה",
+      "sourceLanguage": "he",
+      "date": "2026-11-16T13:51:52Z",
+      "url": "https://t.me/uh1221/27408",
+      "publisher": "Ихуд Ацала · Telegram",
+      "category": "accidents",
+      "art": "accidents",
+      "image": "./assets/news/images/500ae92367be020532b1.webp",
+      "official": false,
+      "translations": {
+        "he": {
+          "title": "כביש 20: רוכב אופנוע נפצע בינוני בתאונה",
+          "summary": "דיווח על תאונת דרכים בישראל. פרטים ועדכונים בכתבת המקור."
+        },
+        "ru": {
+          "title": "Маршрут 20: В результате аварии мотоциклист получил травмы средней степени тяжести.",
+          "summary": "Дорожное происшествие в Израиле. Обстоятельства и актуальные сведения — в материале источника."
+        },
+        "en": {
+          "title": "Route 20: A motorcyclist was moderately injured in the accident",
+          "summary": "A reported road incident in Israel. Details and updates are in the original report."
+        },
+        "ar": {
+          "title": "طريق رقم 20: أصيب سائق دراجة نارية بجروح متوسطة في الحادث",
+          "summary": "تقرير عن حادث مروري في إسرائيل. التفاصيل والتحديثات في المصدر."
+        }
+      },
+      "title": "Маршрут 20: В результате аварии мотоциклист получил травмы средней степени тяжести.",
+      "summary": "Дорожное происшествие в Израиле. Обстоятельства и актуальные сведения — в материале источника.",
+      "translated": true,
+      "imageType": "licensedPhoto",
+      "imageCredit": {
+        "text": "Wikimedia Commons · Public domain",
+        "url": "https://commons.wikimedia.org/wiki/File:Hurricane_Rita_Evacuation_ambulance_1.jpg"
+      }
+    },
+    {
       "id": "ba19d32a9f258dc849a4",
       "titleOriginal": "השקה מקומית / דלק רכב משיקה סדרה 3, דור 8, מערכות הנעה הייבריד ביניים",
       "sourceLanguage": "he",
@@ -1110,44 +1188,6 @@
       "imageCredit": {
         "text": "Eric Friedebach · CC BY 2.0",
         "url": "https://commons.wikimedia.org/wiki/File:1973_Ford_Mustang_Interior_Dashboard_(51838912069).jpg"
-      }
-    },
-    {
-      "id": "500ae92367be020532b1",
-      "titleOriginal": "כביש 20: רוכב אופנוע נפצע בינוני בתאונה",
-      "sourceLanguage": "he",
-      "date": "2026-11-16T13:51:52Z",
-      "url": "https://t.me/uh1221/27408",
-      "publisher": "Ихуд Ацала · Telegram",
-      "category": "accidents",
-      "art": "accidents",
-      "image": "./assets/news/images/500ae92367be020532b1.webp",
-      "official": false,
-      "translations": {
-        "he": {
-          "title": "כביש 20: רוכב אופנוע נפצע בינוני בתאונה",
-          "summary": "דיווח על תאונת דרכים בישראל. פרטים ועדכונים בכתבת המקור."
-        },
-        "ru": {
-          "title": "Маршрут 20: В результате аварии мотоциклист получил травмы средней степени тяжести.",
-          "summary": "Дорожное происшествие в Израиле. Обстоятельства и актуальные сведения — в материале источника."
-        },
-        "en": {
-          "title": "Route 20: A motorcyclist was moderately injured in the accident",
-          "summary": "A reported road incident in Israel. Details and updates are in the original report."
-        },
-        "ar": {
-          "title": "طريق رقم 20: أصيب سائق دراجة نارية بجروح متوسطة في الحادث",
-          "summary": "تقرير عن حادث مروري في إسرائيل. التفاصيل والتحديثات في المصدر."
-        }
-      },
-      "title": "Маршрут 20: В результате аварии мотоциклист получил травмы средней степени тяжести.",
-      "summary": "Дорожное происшествие в Израиле. Обстоятельства и актуальные сведения — в материале источника.",
-      "translated": true,
-      "imageType": "licensedPhoto",
-      "imageCredit": {
-        "text": "Wikimedia Commons · Public domain",
-        "url": "https://commons.wikimedia.org/wiki/File:Hurricane_Rita_Evacuation_ambulance_1.jpg"
       }
     },
     {
@@ -1190,6 +1230,44 @@
       }
     },
     {
+      "id": "82f9297bada5770a8f24",
+      "titleOriginal": "בן 40 נפגע מרכב בקרית ביאליק - מצבו קשה",
+      "sourceLanguage": "he",
+      "date": "2026-11-16T13:31:26Z",
+      "url": "https://t.me/uh1221/27407",
+      "publisher": "Ихуд Ацала · Telegram",
+      "category": "accidents",
+      "art": "accidents",
+      "image": "./assets/news/images/82f9297bada5770a8f24.webp",
+      "official": false,
+      "translations": {
+        "he": {
+          "title": "בן 40 נפגע מרכב בקרית ביאליק - מצבו קשה",
+          "summary": "דיווח על תאונת דרכים בישראל. פרטים ועדכונים בכתבת המקור."
+        },
+        "ru": {
+          "title": "В Кирьят-Бялике 40-летнего мужчину сбила машина - его состояние тяжелое",
+          "summary": "Дорожное происшествие в Израиле. Обстоятельства и актуальные сведения — в материале источника."
+        },
+        "en": {
+          "title": "A 40-year-old man was hit by a car in Kiryat Bialik - his condition is serious",
+          "summary": "A reported road incident in Israel. Details and updates are in the original report."
+        },
+        "ar": {
+          "title": "صدمت سيارة رجلا يبلغ من العمر 40 عاما في كريات بياليك، وحالته خطيرة",
+          "summary": "تقرير عن حادث مروري في إسرائيل. التفاصيل والتحديثات في المصدر."
+        }
+      },
+      "title": "В Кирьят-Бялике 40-летнего мужчину сбила машина - его состояние тяжелое",
+      "summary": "Дорожное происшествие в Израиле. Обстоятельства и актуальные сведения — в материале источника.",
+      "translated": true,
+      "imageType": "licensedPhoto",
+      "imageCredit": {
+        "text": "Wikimedia Commons · Public domain",
+        "url": "https://commons.wikimedia.org/wiki/File:Hurricane_Rita_Evacuation_ambulance_1.jpg"
+      }
+    },
+    {
       "titleOriginal": "תיעוד | טס במהירות של 239 קמ״ש - ונעצר בתום מרדף",
       "sourceTitle": "תיעוד | טס במהירות של 239 קמ״ש - ונעצר בתום מרדף",
       "editorialHeadline": false,
@@ -1227,44 +1305,6 @@
       "imageCredit": {
         "text": "Marek Ślusarczyk (Tupungato) Photo portfolio · CC BY 3.0",
         "url": "https://commons.wikimedia.org/wiki/File:10_US_Highway_speed_limit_sign_55_MPH_-_Garfield_County,_Colorado.jpg"
-      }
-    },
-    {
-      "id": "82f9297bada5770a8f24",
-      "titleOriginal": "בן 40 נפגע מרכב בקרית ביאליק - מצבו קשה",
-      "sourceLanguage": "he",
-      "date": "2026-11-16T13:31:26Z",
-      "url": "https://t.me/uh1221/27407",
-      "publisher": "Ихуд Ацала · Telegram",
-      "category": "accidents",
-      "art": "accidents",
-      "image": "./assets/news/images/82f9297bada5770a8f24.webp",
-      "official": false,
-      "translations": {
-        "he": {
-          "title": "בן 40 נפגע מרכב בקרית ביאליק - מצבו קשה",
-          "summary": "דיווח על תאונת דרכים בישראל. פרטים ועדכונים בכתבת המקור."
-        },
-        "ru": {
-          "title": "В Кирьят-Бялике 40-летнего мужчину сбила машина - его состояние тяжелое",
-          "summary": "Дорожное происшествие в Израиле. Обстоятельства и актуальные сведения — в материале источника."
-        },
-        "en": {
-          "title": "A 40-year-old man was hit by a car in Kiryat Bialik - his condition is serious",
-          "summary": "A reported road incident in Israel. Details and updates are in the original report."
-        },
-        "ar": {
-          "title": "صدمت سيارة رجلا يبلغ من العمر 40 عاما في كريات بياليك، وحالته خطيرة",
-          "summary": "تقرير عن حادث مروري في إسرائيل. التفاصيل والتحديثات في المصدر."
-        }
-      },
-      "title": "В Кирьят-Бялике 40-летнего мужчину сбила машина - его состояние тяжелое",
-      "summary": "Дорожное происшествие в Израиле. Обстоятельства и актуальные сведения — в материале источника.",
-      "translated": true,
-      "imageType": "licensedPhoto",
-      "imageCredit": {
-        "text": "Wikimedia Commons · Public domain",
-        "url": "https://commons.wikimedia.org/wiki/File:Hurricane_Rita_Evacuation_ambulance_1.jpg"
       }
     },
     {
