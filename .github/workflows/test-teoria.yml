@@ -148,67 +148,65 @@ jobs:
             const size=await page.evaluate(()=>({page:document.documentElement.scrollWidth,w:innerWidth}));
             if(size.page>size.w+3)throw Error('Game mobile overflow at 320px '+JSON.stringify(size));
             console.log('MOBILE GAME PASS 320px and 390px JSerrors=0');
-            // Homepage discovery is now the SECOND showroom carousel slide:
-            // a full-featured animated art stage, NOT a duplicate menu card.
-            // Cloudflare may need a short delay for freshly deployed HTML.
+            // Theory promotion is the LAST carousel frame. It shares the
+            // product-ad blue bands/halo but uses a single restrained 3D
+            // digital quiz display, not the rejected cartoon driving scene.
             let homepageReady=false;
-            for(let tryNum=0;tryNum<8;tryNum++){
-              await page.goto(origin+'/?theory-ad-check='+tryNum,{waitUntil:'domcontentloaded',timeout:40000});
-              homepageReady=await page.locator('#showcaseSlides .featured-slide--theory .theory-scene-svg').count()===1;
+            for(let tryNum=0;tryNum<6;tryNum++){
+              await page.goto(origin+'/?theory-ad-last='+tryNum,{waitUntil:'domcontentloaded',timeout:40000});
+              homepageReady=await page.locator('#showcaseSlides .featured-slide--theory .theory-device').count()===1;
               if(homepageReady)break;
-              await page.waitForTimeout(7000);
+              await page.waitForTimeout(6000);
             }
-            if(!homepageReady)throw Error('New second-slide game artwork is not published');
+            if(!homepageReady)throw Error('New premium last-slide theory artwork not published');
             const slides=page.locator('#showcaseSlides .featured-slide');
-            const second=slides.nth(1);
-            if(await second.locator('a[href="./teoria.html"]').count()!==1)
-              throw Error('Homepage carousel second slide lost the game CTA');
+            if(await slides.count()!==5)throw Error('Expected five showroom slides');
+            const last=slides.last();
+            if(!(await last.getAttribute('class')).includes('featured-slide--theory'))
+              throw Error('Theory ad must be LAST (not second)');
+            if(await last.locator('a[href="./teoria.html"]').count()!==1)
+              throw Error('Last carousel slide lost its working game CTA');
             if(await page.locator('#theoryPreviewStart,#openTheoryHeader,#theoryQuick').count())
-              throw Error('Old standalone theory promo/header controls must remain removed');
-            await page.locator('#slideNext').click();
-            if(!await second.isVisible()||!(await second.getAttribute('class')).includes('active'))
-              throw Error('Theory must be the second carousel slide');
-            const artwork=await second.evaluate(el=>{
+              throw Error('Old standalone theory promo/header buttons were reintroduced');
+            await page.locator('#showcaseDots .showcase-dot').last().click();
+            if(!(await last.getAttribute('class')).includes('active'))
+              throw Error('Last theory slide does not activate');
+            const artwork=await last.evaluate(el=>{
               const frame=el.querySelector('.theory-stage');
-              const svg=el.querySelector('.theory-scene-svg');
+              const device=el.querySelector('.theory-device');
               const ring=el.querySelector('.theory-halo');
               const bands=el.querySelectorAll('.ad-photo-band');
-              const vehicle=el.querySelector('.theory-scene-car');
-              const card=el.querySelector('.theory-scene-quiz');
-              const rect=x=>{const r=x.getBoundingClientRect();return {top:r.top,left:r.left,width:r.width,height:r.height,right:r.right}};
+              const rect=x=>{const r=x.getBoundingClientRect();return {top:r.top,left:r.left,width:r.width,height:r.height,right:r.right,bottom:r.bottom}};
               return {
-                stage:rect(frame),foreground:rect(svg),halo:!!ring,
-                bands:bands.length,
+                stage:rect(frame),device:rect(device),
+                halo:!!ring,bands:bands.length,signs:el.querySelectorAll('.theory-screen-sign').length,
+                carDoodle:el.querySelectorAll('.theory-scene-car,.theory-art-car').length,
                 stageOverflow:getComputedStyle(frame).overflow,
                 photoOverflow:getComputedStyle(el.querySelector('.theory-featured-image')).overflow,
                 slideOverflow:getComputedStyle(el).overflow,
-                carAnimation:getComputedStyle(vehicle).animationName,
-                cardAnimation:getComputedStyle(card).animationName,
+                deviceAnimation:getComputedStyle(device).animationName,
                 hasPrev:!!el.querySelector('[data-feature-prev]'),
                 hasNext:!!el.querySelector('[data-feature-next]'),
                 pageWidth:document.documentElement.scrollWidth,viewport:innerWidth
               };
             });
-            console.log('THEORY AD BLUE STAGE '+JSON.stringify(artwork));
-            if(!artwork.halo||artwork.bands!==2||!artwork.hasPrev||!artwork.hasNext)
-              throw Error('Theory stage must match the product advertising blue-band treatment');
+            console.log('PREMIUM LAST THEORY AD '+JSON.stringify(artwork));
+            if(!artwork.halo||artwork.bands!==2||!artwork.hasPrev||!artwork.hasNext||artwork.signs!==1)
+              throw Error('Theory photo-like blue-band design incomplete');
+            if(artwork.carDoodle>0)throw Error('Rejected cartoon car is still present');
             if(artwork.stageOverflow==='hidden'||artwork.photoOverflow==='hidden'||artwork.slideOverflow==='hidden')
-              throw Error('Foreground illustration was clipped at the image border');
-            if(artwork.foreground.width<artwork.stage.width*1.1||
-               artwork.foreground.top>=artwork.stage.top)
-              throw Error('Game art must extend OUTSIDE the photo frame rather than hiding under it');
-            if(artwork.carAnimation==='none'||artwork.cardAnimation==='none')
-              throw Error('Subtle car/card motion missing from the active slide');
+              throw Error('Premium illustration must pop past the inner frame');
+            if(artwork.device.top>=artwork.stage.top)
+              throw Error('Device must subtly escape above photo frame');
+            if(artwork.deviceAnimation==='none')
+              throw Error('Gentle floating motion missing');
             if(artwork.pageWidth>artwork.viewport+3)
-              throw Error('Homepage art causes mobile horizontal overflow '+JSON.stringify(artwork));
-            await page.locator('#showcaseSlides .featured-slide--theory [data-feature-next]').click();
-            if(!(await slides.nth(2).getAttribute('class')).includes('active'))
-              throw Error('Theory image carousel arrow no longer works');
-            const assets=await page.evaluate(()=>[...document.scripts].map(s=>s.src));
-            if(!assets.some(x=>x.includes('catalog-ui.js?v=20261117-delivery')))
-              throw Error('Homepage catalog loader missing / malformed');
+              throw Error('The new ad creates mobile horizontal overflow '+JSON.stringify(artwork));
+            await last.locator('[data-feature-next]').click();
+            if(!(await slides.first().getAttribute('class')).includes('active'))
+              throw Error('Arrow from LAST theory ad must wrap to first product slide');
             if(errors.length)throw Error('Homepage JS errors '+errors.join('|'));
-            console.log('HOMEPAGE THEORY CAROUSEL PASS: second slide, blue bands, popping 3D graphic, moving car, controls, 320px');
+            console.log('HOMEPAGE PREMIUM THEORY AD PASS: last slide, one 3D device, blue bands, halo, gentle motion, wrap and mobile width');
             await browser.close();
           })().catch(e=>{console.error(e);process.exit(1)});
           JS
