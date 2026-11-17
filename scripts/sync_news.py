@@ -192,8 +192,15 @@ def main():
   if key in used:continue
   used.add(key);retained.append(obj)
  retained=retained[:MAX_ITEMS]
- payload={"version":1,"updated":NOW.isoformat().replace("+00:00","Z"),"retentionDays":30,"items":retained}
- report={"updated":payload["updated"],"sources":count_by_source,"new":added,
+ # Do not show "updated just now" when every upstream feed was blocked.
+ try:
+  previous_update=json.loads(DEST.read_text("utf-8")).get("updated","")
+ except (ValueError,OSError):
+  previous_update=""
+ last_success=NOW.isoformat().replace("+00:00","Z") if count_by_source else previous_update
+ payload={"version":1,"updated":last_success,"retentionDays":30,"items":retained}
+ report={"attempted":NOW.isoformat().replace("+00:00","Z"),
+         "lastSuccessfulFetch":last_success,"sources":count_by_source,"new":added,
          "retained":len(retained),"expiredOrDuplicate":len(previous)+added-len(retained),
          "errors":errors}
  # The file should never retain material older than 30 days.
