@@ -1,5 +1,5 @@
 {
-  "attempted": "2026-11-17T08:33:34.642953Z",
+  "attempted": "2026-11-17T08:34:28.525571Z",
   "feeds": {
     "Walla · Авто": 30,
     "Walla · Безопасность": 30,
@@ -13,14 +13,12 @@
     "Globes · צרכנות": 15,
     "Autonews Israel": 10,
     "Srugim": 50,
-    "Ynet · Новости": 30,
-    "Ynet · Репортажи": 30,
     "Haaretz": 20
   },
-  "new": 2,
+  "new": 0,
   "retained": 18,
   "imageCount": 18,
-  "deletedImages": 6,
+  "deletedImages": 0,
   "discardedGoogleLinks": 0,
   "errors": {
     "The Times of Israel": "HTTPError: 403 Client Error: Forbidden for url: https://www.timesofisrael.com/feed/",
