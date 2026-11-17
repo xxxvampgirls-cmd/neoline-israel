@@ -244,6 +244,22 @@ def enrich(item):
  item["summary"]=titles.get("ru",{}).get("summary") or BRIEFS[item["category"]]["ru"]
  item["translated"]=bool(titles.get("ru",{}).get("title"))
  return item
+def select_diverse(candidates):
+ groups=defaultdict(list)
+ for item in sorted(candidates,key=lambda x:x["date"],reverse=True):
+  groups[publisher_name(item["publisher"])].append(item)
+ chosen=[]
+ counts=Counter()
+ while len(chosen)<MAX_ITEMS:
+  eligible=[name for name,items in groups.items() if items and counts[name]<MAX_PER_SOURCE]
+  if not eligible:break
+  recently=[publisher_name(x["publisher"]) for x in chosen[-2:]]
+  options=[name for name in eligible if name not in recently] or eligible
+  name=max(options,key=lambda n:groups[n][0]["date"])
+  chosen.append(groups[name].pop(0))
+  counts[name]+=1
+ return chosen
+
 def main():
  ROOT.mkdir(parents=True,exist_ok=True)
  IMAGES.mkdir(parents=True,exist_ok=True)
@@ -254,7 +270,9 @@ def main():
   canonical_id=hashlib.sha256(x["url"].split("?")[0].encode("utf-8")).hexdigest()[:20]
   if canonical_id in keep:continue
   x["id"]=canonical_id
-  x["image"]=f"./assets/news/images/{canonical_id}.svg"
+  photo=IMAGES/(canonical_id+".webp")
+  x["image"]=(f"./assets/news/images/{canonical_id}.webp" if photo.is_file()
+              else f"./assets/news/images/{canonical_id}.svg")
   keep[canonical_id]=x
  # Prune the old broken Google News links instead of sending readers to 429 pages.
  existing_google=sum(1 for x in previous if "google." in urlparse(x.get("url","")).netloc)
@@ -274,9 +292,12 @@ def main():
    errors[provider]=f"{type(exc).__name__}: {str(exc)[:100]}"
    print(f"WARN {provider}: {errors[provider]}",flush=True)
   time.sleep(.5)
- recent=sorted((x for x in keep.values() if valid(x)),key=lambda x:x["date"],reverse=True)
- recent=recent[:MAX_ITEMS]
+ recent=select_diverse(x for x in keep.values() if valid(x))
  new_count=0
+ today=NOW.date().isoformat()
+ generated_today=sum(1 for x in previous if str(x.get("imageGeneratedAt","")).startswith(today))
+ image_quota=max(0,min(MAX_AI_PER_RUN,MAX_AI_PER_DAY-generated_today))
+ images_generated=0
  for x in recent:
   has_full=all(isinstance(x.get("translations",{}).get(lang),dict)
                and x["translations"][lang].get("title") for lang in LOCALES)
@@ -286,19 +307,37 @@ def main():
   else:
    x["title"]=x["titleOriginal"]
    x["summary"]=BRIEFS[x["category"]]["ru"]
-  image=IMAGES/(x["id"]+".svg")
-  if not image.exists():image.write_text(unique_svg(x),encoding="utf-8")
+  photo=IMAGES/(x["id"]+".webp")
+  if photo.is_file():
+   x["image"]="./assets/news/images/"+x["id"]+".webp"
+   x["imageKind"]="ai-generated"
+  elif images_generated<image_quota and os.getenv("OPENAI_API_KEY","").strip():
+   if generate_thumbnail(x,photo):
+    x["image"]="./assets/news/images/"+x["id"]+".webp"
+    x["imageKind"]="ai-generated"
+    x["imageGeneratedAt"]=NOW.isoformat().replace("+00:00","Z")
+    images_generated+=1
+  if x.get("imageKind")!="ai-generated":
+   image=IMAGES/(x["id"]+".svg")
+   x["image"]="./assets/news/images/"+x["id"]+".svg"
+   x["imageKind"]="vector-placeholder"
+   if not image.exists():image.write_text(unique_svg(x),encoding="utf-8")
  # Avoid accumulating stale image files beyond one month.
- live_names={x["id"]+".svg" for x in recent}
+ live_names={x["image"].rsplit("/",1)[-1] for x in recent}
  deleted=0
- for path in IMAGES.glob("*.svg"):
+ for path in list(IMAGES.glob("*.svg"))+list(IMAGES.glob("*.webp")):
   if path.name not in live_names:path.unlink();deleted+=1
  last=NOW.isoformat().replace("+00:00","Z") if feed_stats else ""
  payload={"version":1,"retentionDays":30,"updated":last,"items":recent}
  report={"attempted":NOW.isoformat().replace("+00:00","Z"),"feeds":feed_stats,
   "new":discovered,"retained":len(recent),"imageCount":len(live_names),
   "deletedImages":deleted,"discardedGoogleLinks":existing_google,"errors":errors,
-  "directLinksOnly":all(allowed(x["url"]) for x in recent)}
+  "directLinksOnly":all(allowed(x["url"]) for x in recent),
+  "sourceCount":len(set(x["publisher"] for x in recent)),
+  "sources":dict(Counter(x["publisher"] for x in recent)),
+  "generatedAIImages":images_generated,
+  "aiImagesTotal":sum(x.get("imageKind")=="ai-generated" for x in recent),
+  "imageGenerationEnabled":bool(os.getenv("OPENAI_API_KEY","").strip())}
  assert all(valid(x) for x in recent) and report["directLinksOnly"]
  DEST.write_text(json.dumps(payload,ensure_ascii=False,indent=2)+"\n",encoding="utf-8")
  REPORT.write_text(json.dumps(report,ensure_ascii=False,indent=2)+"\n",encoding="utf-8")
