@@ -32,6 +32,12 @@ jobs:
             page.on('pageerror',e=>errors.push(e.message));
             await page.goto('https://neoline-israel.pages.dev/',{waitUntil:'domcontentloaded',timeout:40000});
             await page.waitForTimeout(800);
+            await page.waitForFunction(()=>document.querySelectorAll('#products .product').length===8,{timeout:35000});
+            const productsInitially=await page.locator('#products .product').count();
+            if(productsInitially!==8)throw Error('Main catalog must show exactly 8 products initially, got '+productsInitially);
+            await page.locator('#catalogShowMoreBtn').click();
+            await page.waitForFunction(()=>document.querySelectorAll('#products .product').length===16,{timeout:10000});
+            console.log('PRODUCT FIRST 8 PASS: 8 -> 16');
             const tabs=await page.locator('.mobile-nav>button').count();
             if(tabs!==5)throw Error('Expected five mobile navigation buttons, got '+tabs);
             const target=await page.locator('#openNewsMobile').evaluate(el=>({html:el.outerHTML,disabled:el.disabled}));
@@ -42,9 +48,16 @@ jobs:
             await page.waitForURL(url=>/\/news(?:\.html)?\/?$/.test(new URL(url).pathname),{timeout:15000});
             await page.waitForSelector('#newsGrid',{timeout:10000});
             const data=await page.evaluate(async()=>await (await fetch('./assets/news/news.json')).json());
-            if(data.version!==1||data.retentionDays!==30)throw Error('Wrong archive configuration');
-            const limit=Date.now()-30*86400*1000;
-            if(data.items.some(x=>Date.parse(x.date)<limit))throw Error('Expired item in published news JSON');
+            if(data.version!==1||data.retentionDays!==30||data.lawsRetentionMonths!==6)throw Error('Wrong archive configuration');
+            const now=Date.now(),limit=now-30*86400*1000;
+            const cutoff=new Date(now),day=cutoff.getUTCDate();
+            cutoff.setUTCDate(1);cutoff.setUTCMonth(cutoff.getUTCMonth()-6);
+            const lastDay=new Date(Date.UTC(cutoff.getUTCFullYear(),cutoff.getUTCMonth()+1,0)).getUTCDate();
+            cutoff.setUTCDate(Math.min(day,lastDay));
+            if(data.items.some(x=>Date.parse(x.date)<(x.category==='laws'?cutoff.getTime():limit)))
+              throw Error('Expired news in published JSON for its category');
+            if(!data.items.some(x=>x.category==='laws'&&Date.parse(x.date)<limit))
+              throw Error('No older verified six-month rules in archive');
             if(data.items.some(x=>/news\.google\.com|google\.com\/sorry/.test(x.url)))throw Error('Google redirects are not direct publisher links');
             if(data.items.some(x=>!x.translations))throw Error('Missing language fields');
             for(const article of data.items){
@@ -59,6 +72,14 @@ jobs:
                   throw Error('Thumbnail exceeds 90 KB: '+article.image);
               }
             }
+            const firstOrder=await page.locator('#newsCategories button').evaluateAll(els=>els.map(el=>el.dataset.newsCategory));
+            if(firstOrder.indexOf('laws')>firstOrder.indexOf('speed'))throw Error('Rules and laws must precede Speed');
+            await page.locator('button[data-news-category="laws"]').click();
+            const lawsPeriod=await page.locator('#newsRetention').textContent();
+            if(!/6/.test(lawsPeriod))throw Error('Six-month laws archive badge missing: '+lawsPeriod);
+            const lawCards=await page.locator('.news-card').count();
+            if(lawCards<4)throw Error('Six-month laws backlog not displayed: '+lawCards);
+            await page.locator('button[data-news-category="all"]').click();
             const cards=await page.locator('.news-card').count();
             const expectedFirst=Math.min(9,data.items.length);
             if(cards!==expectedFirst)throw Error('Initial lazy batch wrong: cards='+cards+', first='+expectedFirst+', feed='+data.items.length);
@@ -78,6 +99,13 @@ jobs:
              const link=await page.locator('.news-card .news-link').first().getAttribute('href');
              if(!link||!link.startsWith('http'))throw Error('News item has no valid source link');
             }
+            await page.locator('.news-card [data-open-story]').first().click();
+            const opened=page.locator('.news-card').first().locator('details.news-expand');
+            if(!await opened.evaluate(el=>el.open))throw Error('News article did not expand');
+            if(!await opened.locator('.news-expanded-source').isVisible())throw Error('Expanded story has no original source');
+            await opened.locator('summary').click();
+            if(await opened.evaluate(el=>el.open))throw Error('News did not collapse');
+            console.log('NEWS EXPAND PASS');
             const languages=await page.locator('[data-news-lang]').count();
             if(languages!==4)throw Error('Four-language news selection missing');
             for(const code of ['he','en','ar','ru']){
