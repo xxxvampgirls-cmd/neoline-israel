@@ -3,7 +3,9 @@
 (()=>{
 "use strict";
 const $=id=>document.getElementById(id);
-const state={items:[],category:"all",query:"",lang:"ru"};
+const state={items:[],category:"all",query:"",lang:"ru",visible:9};
+const PAGE_SIZE=9;
+let scrollObserver=null;
 try{const saved=localStorage.getItem("neoline-language");if(["ru","he","en","ar"].includes(saved))state.lang=saved}catch(e){}
 const i18n={
 ru:{eyebrow:"NEOLINE · ИЗРАИЛЬ · АВТОНОВОСТИ",heading:"Что происходит <em>на дорогах Израиля</em>",intro:"Аварии, камеры контроля скорости, новые правила, дороги и автомобили. Коротко о главном — с датой публикации и ссылкой на первоисточник.",period:"Только последние 30 дней",search:"Найти новость…",all:"Все",accidents:"ДТП",speed:"Скорость",laws:"Правила и законы",roads:"Дороги",cars:"Автомобили",updated:"Обновлено",empty:"За последние 30 дней пока нет проверенных материалов в этой категории. Попробуйте другую тему.",noFeed:"Сейчас нет доступных новостей за последние 30 дней. Как только появятся новые проверенные публикации, они автоматически отобразятся здесь.",read:"Читать источник",image:"Иллюстрация",home:"Главная",catalog:"Каталог",news:"Новости",fav:"Избранное",cart:"Корзина",back:"← Каталог",warning:"Это информационная сводка, а не подтверждение вступления закона в силу.",legal:"Короткие справки, дата и ссылка на первоисточник. Тематические иллюстрации — собственное оформление NEOLINE Israel, не фотографии происшествий. Статус правил дорожного движения сверяйте с официальными публикациями Министерства транспорта Израиля."},
@@ -14,7 +16,7 @@ ar:{eyebrow:"NEOLINE · إسرائيل · أخبار السيارات",heading:"
 const tr=k=>(i18n[state.lang]||i18n.ru)[k]||k;
 const safe=str=>String(str??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
 const safeURL=url=>{try{const x=new URL(url);return x.protocol==="https:"&&!/(^|\.)google\./.test(x.hostname)?x.href:""}catch(e){return ""}};
-const newsPicture=item=>typeof item.image==="string"&&/^\.\/assets\/news\/images\/[a-f0-9]{20}\.svg$/.test(item.image)?item.image:"";
+const newsPicture=item=>typeof item.image==="string"&&/^\.\/assets\/news\/images\/[a-f0-9]{20}\.(?:svg|webp|jpe?g|png)$/.test(item.image)?item.image:"";
 function localStory(item){
  const t=item.translations||{}, row=t[state.lang]||{};
  return {
@@ -70,27 +72,32 @@ function localize(){
 }
 function tabs(){
  const cats=["all","accidents","speed","laws","roads","cars"];
- $("newsCategories").innerHTML=cats.map(k=>'<button class="news-chip '+(state.category===k?'active':'')+'" type="button" data-news-category="'+k+'">'+safe(tr(k))+'</button>').join("");
- $("newsCategories").querySelectorAll("button").forEach(el=>el.onclick=()=>{state.category=el.dataset.newsCategory;tabs();render()});
+ const items=state.items.filter(currentOnly);
+ $("newsCategories").innerHTML=cats.map(k=>{
+  const n=k==="all"?items.length:items.filter(x=>x.category===k).length;
+  return '<button class="news-chip '+(state.category===k?'active':'')+'" type="button" data-news-category="'+k+'" aria-pressed="'+(state.category===k?'true':'false')+'">'+safe(tr(k))+' <span class="news-count">'+n+'</span></button>';
+ }).join("");
+ $("newsCategories").querySelectorAll("button").forEach(el=>el.onclick=()=>{state.category=el.dataset.newsCategory;state.visible=PAGE_SIZE;tabs();render()});
 }
 function render(){
  // Enforce strict source verification and 30-day expiration at every render.
  const recent=state.items.filter(currentOnly);
  const query=state.query.trim().toLocaleLowerCase();
- const list=recent.filter(x=>{
+ const matches=recent.filter(x=>{
   const local=localStory(x);
   return (state.category==="all"||x.category===state.category)
    &&(!query||[local.title,local.summary,x.titleOriginal,x.publisher].join(" ").toLocaleLowerCase().includes(query));
  });
+ const list=matches.slice(0,state.visible);
  $("newsGrid").innerHTML=list.map((item,index)=>{
   const label=tr(item.category),url=safeURL(item.url),localized=localStory(item);
   const pic=newsPicture(item);
   const image=pic?
-   '<img class="news-art-image" loading="'+(index===0?'eager':'lazy')+'" decoding="async" alt="'+safe(tr("image"))+'" src="'+safe(pic)+'">':
+   '<img class="news-art-image" loading="'+(index===0?'eager':'lazy')+'" decoding="async" width="800" height="450" alt="'+safe(tr("image"))+'" src="'+safe(pic)+'">':
    artwork(item.art||item.category);
   return '<article class="news-card '+(index===0?'news-card--lead':'')+'">'+
    '<div class="news-art"><span class="news-art-type">'+safe(label)+'</span>'+image+
-   '<span class="news-art-source">'+safe(tr("image"))+'</span></div>'+
+   '<span class="news-art-source">'+safe(/\.webp$/.test(pic)?({ru:"AI · иллюстрация",en:"AI · illustration",he:"AI · הדמיה",ar:"AI · صورة توضيحية"}[state.lang]):tr("image"))+'</span></div>'+
    '<div class="news-card-body"><div class="news-card-meta">'+safe(displayDate(item.date))+
    ' <b>· '+safe(item.publisher||"")+'</b>'+(item.official?' · gov.il':'')+'</div>'+
    '<h2 dir="auto">'+safe(localized.title)+'</h2>'+
@@ -98,8 +105,15 @@ function render(){
    (item.category==="laws"&&!item.official?'<p class="summary note">'+safe(tr("warning"))+'</p>':'')+
    '<a class="news-link" href="'+safe(url)+'" target="_blank" rel="noopener noreferrer nofollow">'+safe(tr("read"))+' ↗</a></div></article>';
  }).join("");
- $("newsEmpty").hidden=list.length>0;
- if(!list.length)$("newsEmpty").textContent=recent.length?tr("empty"):tr("noFeed");
+ $("newsEmpty").hidden=matches.length>0;
+ if(!matches.length)$("newsEmpty").textContent=recent.length?tr("empty"):tr("noFeed");
+ const more=$("newsLoadMore");
+ const remaining=Math.max(0,matches.length-state.visible);
+ more.hidden=remaining===0;
+ if(remaining){
+  $("newsMoreButton").textContent=({ru:"Показать ещё",he:"הצג עוד",en:"Show more",ar:"عرض المزيد"}[state.lang])+" ("+remaining+")";
+  $("newsVisibleCount").textContent=({ru:"Показано",he:"מוצגות",en:"Showing",ar:"عرض"}[state.lang])+" "+list.length+" / "+matches.length;
+ }
 }
 async function load(){
  try{
@@ -118,7 +132,14 @@ async function load(){
  }
  tabs();render();
 }
-$("newsSearch").addEventListener("input",e=>{state.query=e.target.value;render()});
+$("newsMoreButton").addEventListener("click",()=>{state.visible+=PAGE_SIZE;render()});
+if("IntersectionObserver" in window){
+ scrollObserver=new IntersectionObserver(entries=>{
+  if(entries.some(x=>x.isIntersecting)&&!$("newsLoadMore").hidden){state.visible+=PAGE_SIZE;render()}
+ },{rootMargin:"160px 0px"});
+ scrollObserver.observe($("newsLoadMore"));
+}
+$("newsSearch").addEventListener("input",e=>{state.query=e.target.value;state.visible=PAGE_SIZE;render()});
 document.querySelectorAll('[data-news-lang]').forEach(el=>el.addEventListener('click',()=>{
  state.lang=el.dataset.newsLang;
  try{localStorage.setItem("neoline-language",state.lang)}catch(e){}
