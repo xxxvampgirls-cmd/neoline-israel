@@ -53,6 +53,8 @@ FEEDS=[
  ("Israel Hayom","https://www.israelhayom.co.il/rss.xml"),
  ("Globes · צרכנות","https://www.globes.co.il/webservice/rss/rssfeeder.asmx/FeederNode?iID=821"),
  ("Autonews Israel","https://autonews.co.il/feed/"),
+ ("Mako · Израиль","https://rcs.mako.co.il/rss/news-israel.xml"),
+ ("Минтранс Израиля · Новости","https://www.gov.il/he/api/NewsApi/rss/48eaee91-0c97-4ef3-b364-50ae52e3b56f"),
  ("Srugim","https://www.srugim.co.il/feed"),
  ("Haaretz","https://www.haaretz.com/srv/israel-news-rss"),
  ("Israel Hayom · English","https://www.israelhayom.com/feed/"),
