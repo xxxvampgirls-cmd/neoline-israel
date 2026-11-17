@@ -216,6 +216,43 @@ def specific_model_photo(item):
   print("WARN specific model photo",query,str(exc)[:75],flush=True)
  return None,None
 
+def specific_road_photo(item):
+ """For articles naming a highway, prefer a CC image of THAT Israeli route.
+
+ No illustrated road is ever labeled as a documentary photo of an incident.
+ """
+ if item.get("category")!="roads":return None,None
+ title=str(item.get("title",""))+" "+str(item.get("titleOriginal",""))
+ match=re.search(r"(?:шоссе|כביש|highway|route|road)\s*[№#-]?\s*(\d{1,3})\b",title,re.I)
+ if not match:return None,None
+ number=match.group(1)
+ key=hashlib.sha1(("israel-road:"+number).encode()).hexdigest()[:12]
+ cache=CACHE/(key+".jpg");meta_path=CACHE/(key+".json")
+ if cache.is_file() and meta_path.is_file():
+  try:return cache.read_bytes(),json.loads(meta_path.read_text(encoding="utf-8"))
+  except (OSError,ValueError):pass
+ try:
+  for photo in commons_candidates("Highway "+number+" Israel road"):
+   filename=photo["page"].lower().replace("_"," ").replace("%20"," ")
+   if not re.search(r"(?<!\d)"+re.escape(number)+r"(?!\d)",filename):continue
+   if not any(w in filename for w in ("israel","highway","road","route","kvish","כביש")):continue
+   response=SESSION.get(photo["url"],timeout=(7,16))
+   if not response.ok or len(response.content)>4_000_000:continue
+   with Image.open(io.BytesIO(response.content)) as im:
+    if im.width<640 or im.height<350 or im.format not in ("JPEG","PNG","WEBP"):continue
+   CACHE.mkdir(parents=True,exist_ok=True)
+   cache.write_bytes(response.content)
+   meta_path.write_text(json.dumps(photo,ensure_ascii=False),encoding="utf-8")
+   return response.content,photo
+ except (requests.RequestException,ValueError,KeyError,OSError) as exc:
+  print("WARN specific road photo",number,str(exc)[:75],flush=True)
+ return None,None
+
+def specific_subject_photo(item):
+ if item.get("category")=="cars":return specific_model_photo(item)
+ if item.get("category")=="roads":return specific_road_photo(item)
+ return None,None
+
 def photo_fallback(item):
  category=item["category"];uid=item["id"]
  terms=SEARCH_TERMS[category]
@@ -278,11 +315,11 @@ def main():
    # Upgrade a small number of glaringly unrelated generic car photos.
    # We only replace when Wikimedia has a correctly named, licensed model.
    if (not item.get("sourcePhoto") and item.get("imageType")=="licensedPhoto"
-       and item.get("category")=="cars" and not item.get("subjectPhotoChecked")
+       and item.get("category") in ("cars","roads") and not item.get("subjectPhotoChecked")
        and upgrade_attempts<8):
     upgrade_attempts+=1
     item["subjectPhotoChecked"]=True
-    exact_data,exact_credit=specific_model_photo(item)
+    exact_data,exact_credit=specific_subject_photo(item)
     if exact_data:
      try:
       target.write_bytes(image_convert(exact_data,uid))
@@ -304,7 +341,7 @@ def main():
    except (KeyError,ValueError,requests.RequestException) as e:
     print("WARN AI image",uid,type(e).__name__,str(e)[:140],flush=True)
   if photo is None:
-   photo,license_meta=specific_model_photo(item)
+   photo,license_meta=specific_subject_photo(item)
    if photo:
     subject_used+=1
     item["subjectPhotoMatched"]=True
