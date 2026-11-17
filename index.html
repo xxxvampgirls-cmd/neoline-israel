@@ -1172,6 +1172,54 @@ body{width:100%;max-width:100%;overflow-x:clip}
 }
 
 
+/* NEOLINE Israel hero: a quiet 3D impression of driving through the blue
+   windshield bands. CSS-only: no video, network assets or extra scripts. */
+#showcaseSlides .featured-slide--israel .israel-featured-image .ad-photo-stripes{
+  overflow:hidden;
+}
+#showcaseSlides .featured-slide--israel .israel-featured-image .ad-photo-stripes::before,
+#showcaseSlides .featured-slide--israel .israel-featured-image .ad-photo-stripes::after{
+  content:"";
+  position:absolute;
+  inset:-24% -24%;
+  z-index:0;
+  pointer-events:none;
+  opacity:0;
+  transform-origin:50% 50%;
+  background:
+    repeating-linear-gradient(108deg,transparent 0 57px,#1a93d62c 60px 62px,transparent 66px 124px),
+    repeating-linear-gradient(72deg,transparent 0 80px,#8dd9ff4d 82px 84px,transparent 87px 155px);
+  -webkit-mask-image:radial-gradient(ellipse at center,transparent 0%,#000 34%,#000 67%,transparent 95%);
+  mask-image:radial-gradient(ellipse at center,transparent 0%,#000 34%,#000 67%,transparent 95%);
+}
+#showcaseSlides .featured-slide--israel .israel-featured-image .ad-photo-band{
+  position:relative;
+  z-index:1;
+}
+#showcaseSlides .featured-slide--israel.active:not(.ad-exiting) .israel-featured-image .ad-photo-stripes::before,
+#showcaseSlides .featured-slide--israel.active:not(.ad-exiting) .israel-featured-image .ad-photo-stripes::after{
+  animation:neolineRoadSpeedDepth 5.4s linear infinite;
+  will-change:transform,opacity;
+}
+#showcaseSlides .featured-slide--israel.active:not(.ad-exiting) .israel-featured-image .ad-photo-stripes::after{
+  animation-delay:-2.7s;
+  animation-duration:6.1s;
+}
+@keyframes neolineRoadSpeedDepth{
+  0%{transform:perspective(480px) translateZ(-160px) scale(.75);opacity:0}
+  19%{opacity:.21}
+  64%{opacity:.29}
+  100%{transform:perspective(480px) translateZ(65px) scale(1.18);opacity:0}
+}
+@media(prefers-reduced-motion:reduce){
+  #showcaseSlides .featured-slide--israel .israel-featured-image .ad-photo-stripes::before,
+  #showcaseSlides .featured-slide--israel .israel-featured-image .ad-photo-stripes::after{
+    animation:none!important;
+    opacity:0!important;
+    will-change:auto;
+  }
+}
+
 /* Delivery replaces favorites in both navigation docks. */
 .desktop-dock a{position:relative;display:grid;place-items:center;width:43px;height:43px;border:1px solid #d6e8f8;border-radius:12px;color:#1378c8;background:#ecf7ff;text-decoration:none}
 .desktop-dock a:hover{border-color:#81c2ee;background:#ddf1ff}
