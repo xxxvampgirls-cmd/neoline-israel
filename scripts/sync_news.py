@@ -30,23 +30,23 @@ MAX_ITEMS=180
 S=requests.Session()
 S.headers.update({"User-Agent":"Mozilla/5.0 (compatible; NEOLINEIsraelNews/1.0; original outbound links)","Accept-Language":"he-IL,he;q=0.9,en;q=0.6"})
 QUERIES={
- "accidents":'("תאונת דרכים" OR "תאונה קטלנית" OR "תאונת שרשרת") ישראל',
- "speed":'("מצלמות מהירות" OR "אכיפת מהירות" OR "דוחות מהירות") ישראל',
- "laws":'("תקנות התעבורה" OR "חוקי תנועה" OR "קנסות נהגים") ישראל',
- "roads":'("חסימות כבישים" OR "עומסי תנועה" OR "כביש נסגר") ישראל',
- "cars":'("רכב חדש" OR "מכוניות חשמליות" OR "שוק הרכב") ישראל',
+ "accidents":'תאונת דרכים ישראל',
+ "speed":'מצלמות מהירות ישראל',
+ "laws":'תקנות תעבורה נהגים ישראל',
+ "roads":'חסימות כבישים ישראל',
+ "cars":'רכב חשמלי ישראל',
 }
 MOT_RSS="https://www.gov.il/he/api/NewsApi/rss/48eaee91-0c97-4ef3-b364-50ae52e3b56f"
 CATEGORIES=("accidents","speed","laws","roads","cars")
 KEYWORDS={
  "accidents":["תאונ","התנגש","נפגע","פצוע","הרוג","נהרג","collision","crash","accident","дтп","авари"],
- "speed":["מהירות","מצלמות","מכמונת","אכיפה","קנס","דוח","speed","radar","скорост","штраф","камер"],
- "laws":["חוק","תקנ","רישיו","משטרת","עבירה","רפורמ","גזיר","regulat","law","license","закон","правил"],
- "roads":["כביש","פקק","תנועה","סגור","סגיר","נתיב","מחלף","road","traffic","дорог","шоссе","пробк"],
- "cars":["רכב","מכוני","חשמלי","טעינה","יבוא","השק","vehicle","car","automotiv","электро","автомоб"],
+ "speed":["מהירות","מצלמת מהירות","מצלמות מהירות","מכמונת","speed camera","speed limit","скорост","штраф за скорость"],
+ "laws":["תקנות התעבורה","חוקי תנועה","חוק התעבורה","רישיון נהיגה","רישיון רכב","קנסות נהגים","traffic law","driving regulation","пдд","правила дорожного движения"],
+ "roads":["כביש","פקק","עומס תנועה","עומסי תנועה","נתיב","מחלף","road closure","traffic jam","дорог","шоссе","пробк"],
+ "cars":["רכב ","רכבי ","רכב חדש","שוק הרכב","מכוני","מכונית","חשמליות","מכוניות חשמליות","טעינת רכב","car market","electric car","automotiv","электромобил","автомобил"],
 }
 # Explicitly exclude irrelevant military, global politics and aviation results
-EXCLUDE=["טיל","איראן","לבנון","מלחמה","טיסה","מטוס","אירוויזיון","עזה","כדורגל","aircraft","airline"]
+EXCLUDE=["טיל","איראן","לבנון","מלחמה","טיסה","מטוס","אירוויזיון","עזה","כדורגל","aircraft","airline","וולט","wolt","מכבי חיפה","הפועל באר שבע"]
 def text(raw):
  return re.sub(r"\s+"," ",BeautifulSoup(html.unescape(raw or ""),"html.parser").get_text(" ",strip=True)).strip()
 def safe(url):
