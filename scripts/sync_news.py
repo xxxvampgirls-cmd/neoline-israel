@@ -60,15 +60,18 @@ FEEDS=[
  ("Israel Hayom · English","https://www.israelhayom.com/feed/"),
 ]
 CATEGORIES=("accidents","speed","laws","roads","cars")
+# Require explicit road/vehicle language: generic Hebrew "רכב" also occurs
+# inside unrelated words like "מורכב", and "במהירות" means merely "quickly".
 KEYWORDS={
- "accidents":["תאונ","התנגש","דרס","נדרס","פגע וברח","התהפך הרכב","collision","crash","accident","road fatal","hit-and-run","road death","дтп","авари"],
- "speed":["מהירות","מכמונת","מצלמות","אכיפה","speed camera","speeding","speed limit","speed trap","speed enforcement","скорост","радар","штраф за скорость"],
- "laws":["תקנות התעבורה","חוקי תנועה","חוק התעבורה","רישיון","רשיון","קנסות נהגים","נהיגה בשכרות","חובה להדליק אורות","driving law","traffic law","regulation","licens","правила дорожного движения"],
- "roads":["חסימות","סגירת כביש","כביש חסום","כביש 6","כביש 1","נתיבי איילון","פקק","עומס תנועה","עומסי תנועה","מחלף","road closure","highway closure","traffic jam","highway traffic","дорог","шоссе","пробк"],
- "cars":["רכב","רכבי","רכב חדש","מכוני","מכונית","חשמליות","טעינה","car ","cars","automotive","vehicle","electric vehicle","tesla","автомобил","электромобил"],
+ "accidents":["תאונ","התנגש","דרס","נדרס","פגע וברח","פגיעת רכב","נפגע מרכב","התהפך הרכב","דריסת","collision","crash","accident","road fatal","hit-and-run","road death","дтп","авари"],
+ "speed":["מהירות מופרזת","מצלמות מהירות","נהיגה במהירות","מכמונת","מצלמת מהירות","אכיפת מהירות","speed camera","speeding","speed limit","speed trap","speed enforcement","скорост","радар","штраф за скорость"],
+ "laws":["תקנות התעבורה","חוקי תנועה","חוק התעבורה","רישיון נהיגה","רשיון נהיגה","רשיון b","רישיון b","קנסות נהגים","קנסות תנועה","נהיגה בשכרות","חובה להדליק אורות","driving law","traffic law","road regulation","driving licens","traffic fine","правила дорожного движения"],
+ "roads":["חסימות כבישים","סגירת כביש","כביש חסום","כביש 6","כביש 1","נתיבי איילון","פקק","עומס תנועה","עומסי תנועה","מחלף","road closure","highway closure","traffic jam","highway traffic","дорог","шоссе","пробк"],
+ "cars":["רכבי","רכבים","רכב חדש","מכונית","מכוניות","חשמליות","טעינה","כלי רכב","car ","cars","automotive","vehicle","electric vehicle","tesla","автомобил","электромобил"],
 }
 EXCLUDE=("טיל","איראן","לבנון","מלחמה","טיסה","מטוס","אירוויזיון",
- "כדורגל","מכבי חיפה","הפועל באר שבע","וולט","wolt","aircraft","airline","missile","רכבת","רכבות","אוטובוס","train","autopsy")
+ "כדורגל","מכבי חיפה","הפועל באר שבע","וולט","wolt","aircraft","airline","missile","רכבת","רכבות","אוטובוס","train","autopsy",
+ "פיגוע","מחבל","טרור","גרזן","גרזנ","הותקף","תקפו","terror attack","terrorist","attackers","ניתוח","תינוק")
 LOCALES=("ru","he","en","ar")
 BRIEFS={
  "accidents":{"ru":"Дорожное происшествие в Израиле. Обстоятельства и актуальные сведения — в материале источника.","he":"דיווח על תאונת דרכים בישראל. פרטים ועדכונים בכתבת המקור.","en":"A reported road incident in Israel. Details and updates are in the original report.","ar":"تقرير عن حادث مروري في إسرائيل. التفاصيل والتحديثات في المصدر."},
@@ -97,9 +100,13 @@ def aware(value):
 def relevant(title):
  low=title.lower()
  if any(x in low for x in EXCLUDE):return None
- # Specific terms override generic "car" or "road".
- for section in ("accidents","speed","laws","roads","cars"):
+ # Accidents are identified before the generic vehicle category.
+ for section in ("accidents","speed","laws","roads"):
   if any(x in low for x in KEYWORDS[section]):return section
+ if any(x in low for x in KEYWORDS["cars"]):return "cars"
+ # Hebrew standalone vehicle nouns, optionally with common prepositions:
+ if re.search(r"(?<![א-ת])(?:רכב|הרכב|ברכב|לרכב|מרכב)(?![א-ת])",low):
+  return "cars"
  return None
 def feed(url):
  err=None
