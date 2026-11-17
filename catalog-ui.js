@@ -2,6 +2,7 @@
 (function(){
 "use strict";
 const imported=new Map();
+let visibleProducts=8; // Mobile and desktop: load first 8, then on demand.
 const originalRender=renderProducts,originalOpen=openProduct,originalAdd=add;
 const names={
  ru:{all:"Все",hybrid:"Гибриды",radar:"Радар-детекторы",accessories:"Аксессуары",audio:"Акустика",sale:"Уценка",price:"Цена в Израиле уточняется",details:"Описание и характеристики",origin:"Карточка производителя ↗",notYet:"Продажи и цены в Израиле пока не подтверждены.",description:"Описание",specs:"Технические характеристики",fallback:"Фото уточняется",total:"Товаров в каталоге",from:"Из каталога neoline.ru",noSpec:"Характеристики доступны по ссылке производителя."},
@@ -53,7 +54,8 @@ function renderExtendedProducts(){
   if(ia>=0||ib>=0)return (ia<0?999:ia)-(ib<0?999:ib);
   return a.name.localeCompare(b.name,"ru");
  });
- $('products').innerHTML=items.length?items.map(p=>{
+ const visibleItems=items.slice(0,visibleProducts);
+ $('products').innerHTML=visibleItems.length?visibleItems.map(p=>{
   const src=(media[p.id]||[])[0];
   let art;
   if(p.isImported)art=productImage(p);
@@ -64,16 +66,26 @@ function renderExtendedProducts(){
   const specs=(p.spec||[]).map(esc).join(' · ');
   return '<article class="product"><div class="product-art">'+art+'<span class="badge">'+badge+'</span><button class="heart '+(favs.has(p.id)?'active':'')+'" data-fav="'+p.id+'" aria-label="Favorite">'+(favs.has(p.id)?'♥':'♡')+'</button></div><div class="product-content"><div class="product-name">'+esc(p.name)+'</div><div class="spec">'+specs+'</div><div class="price-row">'+price+buy+'</div><button class="details-link" data-details="'+p.id+'">'+(p.isImported?esc(ui('details')):extraTranslations[lang].productDetails)+'</button></div></article>';
  }).join(''):'<div class="empty">'+esc(t('resultsEmpty'))+'</div>';
+ const more=$('catalogShowMore'),button=$('catalogShowMoreBtn'),count=$('catalogProductCount');
+ if(more&&button&&count){
+  const remaining=items.length-visibleItems.length;
+  more.hidden=remaining<=0;
+  count.textContent=(lang==='ru'?'Показано ':lang==='he'?'מוצגים ':lang==='ar'?'المعروض ': 'Showing ')+visibleItems.length+' / '+items.length;
+  button.textContent=(lang==='ru'?'Показать ещё товары':lang==='he'?'הצג עוד מוצרים':lang==='ar'?'عرض المزيد من المنتجات':'Show more products')+' ('+remaining+') ↓';
+  button.setAttribute('aria-expanded',visibleItems.length>8?'true':'false');
+ }
  document.querySelectorAll('[data-add]').forEach(e=>e.onclick=()=>add(Number(e.dataset.add)));
  document.querySelectorAll('[data-fav]').forEach(e=>e.onclick=()=>toggleFav(Number(e.dataset.fav)));
  document.querySelectorAll('[data-photo]').forEach(e=>e.onclick=()=>openProduct(Number(e.dataset.photo)));
  document.querySelectorAll('[data-details]').forEach(e=>e.onclick=()=>openProduct(Number(e.dataset.details)));
 }
+const moreButton=$('catalogShowMoreBtn');
+if(moreButton)moreButton.addEventListener('click',()=>{visibleProducts+=8;renderProducts()});
 function renderExtendedTabs(){
  const list=[['all','all'],['single','single'],['dual','dual'],['premium','premium'],['hybrid','hybrid'],['radar','radar'],['accessories','accessories'],['audio','audio'],['sale','sale']];
  const tabs=list.filter(([cat])=>cat==="all"||products.some(p=>p.category===cat));
  $('tabs').innerHTML=tabs.map(([code,key])=>'<button class="tab '+(cat===code?'active':'')+'" data-cat="'+code+'">'+esc(names[lang]?.[key]||t(key))+'</button>').join('');
- document.querySelectorAll('[data-cat]').forEach(e=>e.onclick=()=>{cat=e.dataset.cat;renderTabs();renderProducts()});
+ document.querySelectorAll('[data-cat]').forEach(e=>e.onclick=()=>{cat=e.dataset.cat;visibleProducts=8;renderTabs();renderProducts()});
 
 }
 function importedModal(id){
@@ -108,8 +120,8 @@ renderProducts=renderExtendedProducts;
 renderTabs=renderExtendedTabs;
 openProduct=function(id){return imported.has(id)?importedModal(id):originalOpen(id)};
 add=function(id){return imported.has(id)?importedModal(id):originalAdd(id)};
-$('search').oninput=renderProducts;
-$('sort').onchange=renderProducts;
+$('search').oninput=()=>{visibleProducts=8;renderProducts()};
+$('sort').onchange=()=>{visibleProducts=8;renderProducts()};
 async function load(){
  try{
   const response=await fetch('./assets/catalog/catalog.json',{cache:'no-cache'});
