@@ -54,6 +54,19 @@ jobs:
             const width=await page.evaluate(()=>({page:document.documentElement.scrollWidth,window:innerWidth}));
             if(width.page>width.window+3)throw Error('Game overflows 390px '+JSON.stringify(width));
             console.log('OFFICIAL BANK GAME PASS '+JSON.stringify(bank));
+            const officialLabel=await page.locator('#modeMarathon').innerText();
+            if(!/путешествие|билеты/i.test(officialLabel))
+              throw Error('All-ticket journey mode missing');
+            await page.locator('[data-mode="marathon"]').click();
+            if(!await page.locator('#gamePlaying').isVisible()||
+               await page.locator('#questionCounter').textContent()!=='1 / 20')
+              throw Error('All-question 20-step journey failed');
+            await page.locator('#answers button').first().click();
+            await page.locator('#nextQuestion').click();
+            if(await page.locator('#questionCounter').textContent()!=='2 / 20')
+              throw Error('Marathon 20-question progress broken');
+            await page.locator('#exitQuiz').click();
+            console.log('ALL-TICKETS JOURNEY PASS: full 1801-bank, 20-question stages, new questions prioritised');
             await page.locator('[data-mode="route"]').click();
             if(!await page.locator('#gamePlaying').isVisible())throw Error('Route does not start');
             let firstId=await page.locator('#questionId').textContent();
