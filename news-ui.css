@@ -259,3 +259,11 @@ html[dir=rtl] .news-card--lead .news-art{border-radius:0 25px 25px 0}
  .news-card{content-visibility:visible}
 }
 @media(prefers-reduced-motion:reduce){.news-art-image{transition:none!important}}
+
+/* Short live-text headline overlay, localizable without generating 4 images. */
+.news-art:before{content:"";position:absolute;inset:35% 0 0;top:auto!important;height:65%!important;width:100%;left:0!important;transform:none!important;background:linear-gradient(180deg,transparent,#06111aaf 72%,#06111ade 100%)!important;z-index:2;pointer-events:none}
+.news-art-caption{position:absolute;z-index:5;inset:auto 13px 14px 13px;font-family:Manrope,Arial,sans-serif;font-size:20px;font-weight:900;line-height:1.23;letter-spacing:-.035em;color:#fff;max-width:94%;text-shadow:0 2px 8px #03101feb,0 3px 1px #0b263a80;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.news-card--lead .news-art-caption{font-size:clamp(22px,2.4vw,30px);bottom:21px}
+.news-photo-credit{bottom:4px!important;right:6px!important;font-size:7px;opacity:.78;max-width:55%}
+html[dir=rtl] .news-art-caption{text-align:right}
+@media(max-width:720px){.news-art-caption{font-size:17px;bottom:13px}.news-card--lead .news-art-caption{font-size:21px;bottom:15px}.news-photo-credit{font-size:6px;max-width:45%}}
