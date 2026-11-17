@@ -1,0 +1,66 @@
+{
+  "version": 1,
+  "description": "Manually verified direct publisher URLs for narrowly defined recent speed-enforcement news missed by short RSS feeds. These entries are original short factual paraphrases, never copied articles; they expire automatically after 30 days.",
+  "items": [
+    {
+      "titleOriginal": "מצלמות המהירות הוותיקות החלו לחלק דוחות גם על חריגות קלות, ובכביש 6 הופעלה מערכת שקילה חדשה",
+      "sourceTitle": "חדש בכביש 6: מערכת שקילה אוטומטית שתזהה חריגות משקל של רכב כבד",
+      "editorialHeadline": true,
+      "sourceLanguage": "he",
+      "date": "2026-11-16T09:15:00Z",
+      "url": "https://www.calcalist.co.il/local_news/car/article/hy9clruazl",
+      "publisher": "Calcalist",
+      "category": "speed",
+      "art": "speed",
+      "official": false,
+      "translations": {
+        "ru": {
+          "title": "Камеры скорости штрафуют за небольшие превышения. На шоссе №6 появилось автоматическое взвешивание грузовиков",
+          "summary": "По сообщению Calcalist, часть стационарных камер уже фиксирует небольшое превышение скорости. Полиция также ввела на шоссе №6 систему проверки веса грузовиков без предварительной остановки."
+        },
+        "he": {
+          "title": "מצלמות מהירות אוכפות גם חריגות קלות; מערכת שקילה חדשה הופעלה בכביש 6",
+          "summary": "לפי כלכליסט, חלק מהמצלמות הוותיקות מפיקות דוחות גם על חריגות מהירות קלות. במקביל הופעלה בכביש 6 מערכת לשקילת משאיות תוך כדי נסיעה."
+        },
+        "en": {
+          "title": "Israeli speed cameras issue tickets for minor speeding; automated truck weighing starts on Highway 6",
+          "summary": "Calcalist reports that some older speed cameras are issuing tickets for small excesses. Police have also introduced a drive-through heavy-vehicle weighing system on Highway 6."
+        },
+        "ar": {
+          "title": "كاميرات السرعة تحرّر مخالفات لتجاوزات طفيفة؛ نظام جديد لوزن الشاحنات على الطريق 6",
+          "summary": "وفقًا لكلכליסט، بدأت بعض كاميرات السرعة الثابتة بإصدار مخالفات لتجاوزات طفيفة، وبدأ تشغيل نظام لوزن الشاحنات أثناء السير على الطريق 6."
+        }
+      }
+    },
+    {
+      "titleOriginal": "תיעוד | טס במהירות של 239 קמ״ש - ונעצר בתום מרדף",
+      "sourceTitle": "תיעוד | טס במהירות של 239 קמ״ש - ונעצר בתום מרדף",
+      "editorialHeadline": false,
+      "sourceLanguage": "he",
+      "date": "2026-11-02T08:08:00Z",
+      "url": "https://www.inn.co.il/news/709846",
+      "publisher": "Arutz Sheva",
+      "category": "speed",
+      "art": "speed",
+      "official": false,
+      "translations": {
+        "ru": {
+          "title": "Мотоциклиста задержали после погони: полиция зафиксировала 239 км/ч на шоссе №70",
+          "summary": "По данным Arutz Sheva, 30-летний мотоциклист из Назарета попытался скрыться от полиции. В поиске участвовал полицейский вертолёт; после задержания мотоцикл изъяли для расследования."
+        },
+        "he": {
+          "title": "רוכב אופנוע נעצר לאחר מרדף: תועד במהירות 239 קמ״ש בכביש 70",
+          "summary": "לפי ערוץ 7, רוכב בן 30 מנצרת ניסה להימלט מהשוטרים. מסוק משטרתי סייע בחיפושים והרוכב נעצר; האופנוע נתפס לצורך חקירה."
+        },
+        "en": {
+          "title": "Motorcyclist arrested after police chase at 239 km/h on Highway 70",
+          "summary": "Arutz Sheva reports that a 30-year-old rider from Nazareth attempted to evade police. A police helicopter assisted the search, and the motorcycle was seized for investigation."
+        },
+        "ar": {
+          "title": "توقيف سائق دراجة نارية بعد مطاردة بسرعة 239 كم/ساعة على الطريق 70",
+          "summary": "بحسب قناة 7، حاول سائق دراجة نارية يبلغ 30 عامًا من الناصرة الفرار من الشرطة. ساعدت مروحية الشرطة في البحث، وصودرت الدراجة للتحقيق."
+        }
+      }
+    }
+  ]
+}
