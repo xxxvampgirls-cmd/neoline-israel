@@ -88,7 +88,7 @@ function drawFeature(){
  const photo=pic?'<img src="'+safe(pic)+'" width="640" height="360" decoding="async" alt="" class="news-feature-img">':'';
  host.innerHTML='<a class="news-feature-story" href="'+safe(url)+'" target="_blank" rel="noopener noreferrer nofollow" aria-label="'+safe(localized.title)+'">'+
   '<span class="news-feature-photo">'+photo+'</span>'+
-  '<span class="news-feature-pattern" aria-hidden="true"></span>'+
+  '<span class="news-feature-pattern" aria-hidden="true"></span><span class="news-feature-blueprint" aria-hidden="true"></span>'+
   '<span class="news-feature-copy"><span class="news-feature-tag">'+safe(featureTr("latest"))+' <i>·</i> '+safe(tr(item.category))+'</span>'+
   '<strong class="news-feature-title" dir="auto">'+safe(localized.title)+'</strong>'+
   '<span class="news-feature-footer">'+safe(displayDate(item.date))+' · '+safe(item.publisher||"")+'<span class="news-feature-go">'+safe(featureTr("view"))+' ↗</span></span></span></a>';
@@ -203,7 +203,7 @@ function render(append=false){
    '<a class="news-photo-credit" href="'+safe(safeURL(item.imageCredit.url))+'" target="_blank" rel="noopener noreferrer">'+safe(item.imageCredit.text||"Wikimedia Commons")+'</a>':'';
   return '<article class="news-card '+(pos===0&&state.category==="all"&&!state.query?'news-card--lead':'')+'">'+
    '<div class="news-art news-art--'+safe(item.category)+'"><span class="news-art-type">'+safe(label)+'</span>'+image+
-   '<span class="news-art-source">'+safe(type)+'</span><a class="news-art-caption" href="'+safe(url)+'" target="_blank" rel="noopener noreferrer nofollow" dir="auto" aria-label="'+safe(tr("read"))+'">'+safe(localized.title)+'</a>'+photoCredit+'</div>'+
+   '<span class="news-art-decoration" aria-hidden="true"></span><span class="news-art-source">'+safe(type)+'</span><a class="news-art-caption" href="'+safe(url)+'" target="_blank" rel="noopener noreferrer nofollow" dir="auto" aria-label="'+safe(tr("read"))+'">'+safe(localized.title)+'</a>'+photoCredit+'</div>'+
    '<div class="news-card-body"><div class="news-card-meta">'+safe(displayDate(item.date))+
    ' <b>· '+safe(item.publisher||"")+'</b>'+(item.official?' · gov.il':'')+'</div>'+
    '<h2 dir="auto"><a class="news-title-button" href="'+safe(url)+'" target="_blank" rel="noopener noreferrer nofollow" aria-label="'+safe(tr("read"))+'">'+safe(localized.title)+'</a></h2>'+
