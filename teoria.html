@@ -5,38 +5,29 @@
 <title>Теория Израиля — игровая подготовка · NEOLINE</title>
 <meta name="description" content="Игровая подготовка к израильскому теоретическому экзамену на водительские права: настоящие вопросы Министерства транспорта, дорожные знаки, экзамен 30 вопросов и работа над ошибками.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="stylesheet" href="./teoria.css?v=20261117-v1">
+<link rel="stylesheet" href="./teoria.css?v=20261117-compact2">
 </head><body>
 <header class="topbar"><div class="shell top-inner">
   <a class="brand" href="./" aria-label="На главную NEOLINE"><img src="./assets/neoline-clean.svg?v=20261116-compact" width="501" height="108" alt="NEOLINE"></a>
   <a class="back" href="./" id="backHome">← На главную</a>
 </div></header>
 <main class="shell">
-<section class="game-hero">
+<section class="game-hero" aria-label="Теория вождения">
  <div class="hero-copy">
-  <span class="eyebrow" id="heroEyebrow">NEOLINE · ИЗРАИЛЬ · ИГРА</span>
-  <h1 id="heroTitle">Теория.<br><em>Твой путь к правам.</em></h1>
-  <p id="heroSubtitle">Реальные экзаменационные вопросы Израиля — теперь в формате игры. Освой знаки, правила и сложные ситуации на дорогах.</p>
-  <div class="hero-chips"><span id="badgeOfficial">✓ Государственный банк вопросов</span><span id="badgeFree">Без регистрации</span><span id="badgeB">Категория B</span></div>
+  <span class="eyebrow" id="heroEyebrow">NEOLINE · ИЗРАИЛЬ</span>
+  <h1 id="heroTitle">Теория вождения</h1>
  </div>
- <div class="road-scene" aria-hidden="true">
-  <div class="road-glow"></div><div class="scene-circle scene-one"></div><div class="scene-circle scene-two"></div>
-  <div class="scene-road"><div class="scene-lanes"></div></div>
-  <span class="road-sign">50</span><span class="scene-flag">🇮🇱</span>
-  <div class="scene-car"><span class="car-roof"></span><span class="car-windshield"></span><span class="car-wheel left"></span><span class="car-wheel right"></span></div>
-  <div class="scene-pulse"><span>✓</span></div>
- </div>
+ <div class="hero-mini" aria-hidden="true"><span class="hero-mini-road"></span><span class="hero-mini-sign">50</span><span class="hero-mini-car">🚙</span><span class="hero-mini-check">✓</span></div>
 </section>
 <section class="game-panel" id="gameLobby" aria-label="Выбор режима">
  <div class="panel-toolbar">
-  <div class="toolbar-title"><span class="tiny-label" id="selectLabel">НАСТРОЙКИ</span><h2 id="selectTitle">Выбери свой маршрут</h2></div>
+  <div class="toolbar-title"><span class="tiny-label" id="selectLabel">ВЫБЕРИ ИГРУ</span><h2 id="selectTitle">Выбери режим</h2></div>
   <div class="settings">
    <div class="switch" role="group" aria-label="Язык вопросов"><button type="button" data-lang="ru" class="on">RU</button><button type="button" data-lang="he" lang="he">עברית</button><button type="button" data-lang="en">EN</button></div>
    <label class="class-select"><span id="licenseLabel">Права</span><select id="licenseSelect"><option value="B">B · 🚙</option><option value="A">A · 🏍</option><option value="C1">C1 · 🚚</option><option value="C">C · 🚛</option><option value="D">D · 🚌</option><option value="1">1 · 🚜</option></select></label>
   </div>
  </div>
  <div class="bank-status" id="bankStatus" role="status" aria-live="polite"><span class="status-light"></span><span id="bankText">Проверяем официальный банк вопросов…</span></div>
- <div class="stats-row" id="statsRow"><div class="stat"><strong id="statSeen">0</strong><span id="statSeenLabel">Вопросов изучено</span></div><div class="stat"><strong id="statAccuracy">—</strong><span id="statAccuracyLabel">Точность</span></div><div class="stat"><strong id="statXP">0</strong><span>XP</span></div><div class="stat"><strong id="statMistakes">0</strong><span id="statMistakesLabel">Ошибок для повтора</span></div></div>
  <div class="routes" id="modeGrid">
   <button type="button" class="route-card route-blue" data-mode="route"><span class="route-top"><span class="route-icon">🚗</span><span class="route-length">10</span></span><strong id="modeRoute">Поездка по городу</strong><span id="descRoute">10 вопросов, три жизни и очки за правильные ответы.</span><span class="route-cta" id="ctaRoute">Начать маршрут ↗</span></button>
   <button type="button" class="route-card route-mint" data-mode="signs"><span class="route-top"><span class="route-icon">🚦</span><span class="route-length">12</span></span><strong id="modeSigns">Охота за знаками</strong><span id="descSigns">Тренировка настоящих израильских дорожных знаков.</span><span class="route-cta" id="ctaSigns">Учить знаки ↗</span></button>
@@ -44,6 +35,7 @@
   <button type="button" class="route-card route-amber" data-mode="mistakes"><span class="route-top"><span class="route-icon">🎯</span><span class="route-length" id="mistakesBadge">0</span></span><strong id="modeMistakes">Работа над ошибками</strong><span id="descMistakes">Повторяй вопросы, которые раньше вызвали затруднения.</span><span class="route-cta" id="ctaMistakes">Повторить ↗</span></button>
   <button type="button" class="route-card route-full" data-mode="marathon"><span class="route-top"><span class="route-icon">🗺️</span><span class="route-length">20</span></span><strong id="modeMarathon">Большое путешествие · все билеты</strong><span id="descMarathon">Проходи весь официальный банк по этапам из 20 новых вопросов. Прогресс сохраняется.</span><span class="route-cta" id="ctaMarathon">Продолжить путешествие ↗</span></button>
  </div>
+ <details class="progress-disclosure" id="progressDisclosure"><summary id="progressSummary">🏆 Мой прогресс</summary><div class="stats-row" id="statsRow"><div class="stat"><strong id="statSeen">0</strong><span id="statSeenLabel">Вопросов изучено</span></div><div class="stat"><strong id="statAccuracy">—</strong><span id="statAccuracyLabel">Точность</span></div><div class="stat"><strong id="statXP">0</strong><span>XP</span></div><div class="stat"><strong id="statMistakes">0</strong><span id="statMistakesLabel">Ошибок для повтора</span></div></div></details>
  <p class="source-note" id="sourceNotice">Данные: Министерство транспорта и безопасности дорожного движения Израиля, открытый банк вопросов (CC BY). Учебный проект NEOLINE, не официальный государственный экзамен.</p>
  <div class="source-links"><a href="https://data.gov.il/he/datasets/ministry_of_transport/tqru" target="_blank" rel="noopener noreferrer" id="sourceBank">Государственный банк вопросов ↗</a><a href="https://www.gov.il/en/service/apply_for_new_driver_drivers_license" target="_blank" rel="noopener noreferrer" id="sourceRules">Официальные условия экзамена ↗</a></div>
 </section>
@@ -60,5 +52,5 @@
 </section>
 </main>
 <footer class="footer shell"><span>NEOLINE ISRAEL · THEORY QUEST</span><a href="./" id="footerBack">На главную ↗</a></footer>
-<script src="./teoria.js?v=20261117-v1" defer></script>
+<script src="./teoria.js?v=20261117-compact2" defer></script>
 </body></html>
