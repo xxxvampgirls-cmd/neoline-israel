@@ -11,12 +11,25 @@
   <nav class="news-top-links"><a href="./#catalog" id="returnCatalog">← Каталог</a><a class="current" href="./news.html" aria-current="page">◫ Новости</a></nav>
 </div></header>
 <main class="shell">
-<section class="news-cover">
- <div class="news-eyebrow" id="newsEyebrow">NEOLINE · ИЗРАИЛЬ · АВТОНОВОСТИ</div>
- <h1 id="newsHeading">Что происходит <em>на дорогах Израиля</em></h1>
- <p id="newsIntro">Аварии, камеры контроля скорости, новые правила, дороги и автомобили. Коротко о главном — с датой публикации и ссылкой на первоисточник.</p>
- <div class="news-fresh-row"><span class="news-fresh-pill" id="newsRetention">Новости 30 дней · законы 6 месяцев</span><span class="news-updated" id="newsUpdated" aria-live="polite">Загружаем свежие публикации…</span></div>
-<div class="news-language-bar" id="newsLanguages" role="group" aria-label="Язык новостей / News language"><button type="button" data-news-lang="ru" class="active">RU</button><button type="button" data-news-lang="he" lang="he">עברית</button><button type="button" data-news-lang="en">EN</button><button type="button" data-news-lang="ar" lang="ar">عربي</button></div>
+<section class="news-cover" aria-label="Новости и главные события">
+ <div class="news-cover-copy">
+  <div class="news-eyebrow" id="newsEyebrow">NEOLINE · ИЗРАИЛЬ · АВТОНОВОСТИ</div>
+  <h1 id="newsHeading">Что происходит <em>на дорогах Израиля</em></h1>
+  <p id="newsIntro">Аварии, камеры контроля скорости, новые правила, дороги и автомобили. Коротко о главном — с датой публикации и ссылкой на первоисточник.</p>
+  <div class="news-fresh-row"><span class="news-fresh-pill" id="newsRetention">Новости 30 дней · законы 6 месяцев</span><span class="news-updated" id="newsUpdated" aria-live="polite">Загружаем свежие публикации…</span></div>
+  <div class="news-language-bar" id="newsLanguages" role="group" aria-label="Язык новостей / News language"><button type="button" data-news-lang="ru" class="active">RU</button><button type="button" data-news-lang="he" lang="he">עברית</button><button type="button" data-news-lang="en">EN</button><button type="button" data-news-lang="ar" lang="ar">عربي</button></div>
+ </div>
+ <div class="news-feature-carousel" id="newsFeatureCarousel" role="region" aria-roledescription="carousel" aria-label="Последние новости" tabindex="0">
+  <div id="newsFeatureSlide" class="news-feature-slide" aria-live="off">
+   <div class="news-feature-loading" id="newsFeatureLoading">Загружаем последние новости…</div>
+  </div>
+  <div class="news-feature-controls" id="newsFeatureControls" hidden>
+   <button type="button" class="news-feature-arrow" id="newsFeaturePrev" aria-label="Предыдущая новость">‹</button>
+   <div class="news-feature-dots" id="newsFeatureDots" role="group" aria-label="Выбор новости"></div>
+   <span class="news-feature-counter" id="newsFeatureCounter" aria-live="off">01 / 10</span>
+   <button type="button" class="news-feature-arrow" id="newsFeatureNext" aria-label="Следующая новость">›</button>
+  </div>
+ </div>
 </section>
 <div class="news-searchbar"><label class="news-search"><input id="newsSearch" type="search" aria-label="Поиск по новостям" placeholder="Найти новость…" autocomplete="off"></label></div>
 <div class="news-categories" id="newsCategories" aria-label="Темы новостей"></div>
