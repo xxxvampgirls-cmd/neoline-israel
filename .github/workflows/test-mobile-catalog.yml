@@ -53,7 +53,7 @@ jobs:
               if(await bar.locator('button,a').count()!==5)
                 throw Error('Mobile dock must retain all five navigation items');
               await page.evaluate(()=>window.scrollTo(0,520));
-              await page.waitForFunction(()=>document.querySelector('.mobile-nav').classList.contains('nav-scroll-hidden'));
+              await page.waitForFunction(()=>{const el=document.querySelector('.mobile-nav');return el.classList.contains('nav-scroll-hidden')&&getComputedStyle(el).visibility==='hidden';});
               const hidden=await bar.evaluate(el=>{
                 const c=getComputedStyle(el);
                 return {visibility:c.visibility,opacity:c.opacity,transform:c.transform};
