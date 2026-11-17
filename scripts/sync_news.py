@@ -290,6 +290,26 @@ def main():
   x["image"]=(f"./assets/news/images/{canonical_id}.webp" if photo.is_file()
               else f"./assets/news/images/{canonical_id}.svg")
   keep[canonical_id]=x
+ # A very small set of individually source-checked stories from outlets whose
+ # short feeds have already dropped the item. Never extend a dated report past
+ # 30 days; no original article bodies or publisher photographs are copied.
+ verified_count=0
+ try:
+  verified=json.loads(Path("scripts/verified_auto_news.json").read_text(encoding="utf-8"))
+  for entry in verified.get("items",[]):
+   if not valid(entry):continue
+   domain=urlparse(entry["url"]).hostname or ""
+   if domain not in ("www.calcalist.co.il","www.inn.co.il"):continue
+   item=dict(entry)
+   uid=hashlib.sha256(item["url"].split("?")[0].encode("utf-8")).hexdigest()[:20]
+   item["id"]=uid
+   item["title"]=item["translations"]["ru"]["title"]
+   item["summary"]=item["translations"]["ru"]["summary"]
+   item["translated"]=True
+   keep[uid]=item
+   verified_count+=1
+ except (OSError,ValueError,KeyError,TypeError) as exc:
+  print(f"WARN manually verified sources: {type(exc).__name__} {exc}",flush=True)
  # Prune the old broken Google News links instead of sending readers to 429 pages.
  existing_google=sum(1 for x in previous if "google." in urlparse(x.get("url","")).netloc)
  feed_stats={}
@@ -346,6 +366,7 @@ def main():
   "new":discovered,"retained":len(recent),"imageCount":sum(bool(x["image"]) for x in recent),
   "deletedImages":deleted,"discardedGoogleLinks":existing_google,"errors":errors,
   "directLinksOnly":all(allowed(x["url"]) for x in recent),
+  "manuallyVerified":verified_count,
   "sourceCount":len(set(x["publisher"] for x in recent)),
   "sources":dict(Counter(x["publisher"] for x in recent))}
  assert all(valid(x) for x in recent) and report["directLinksOnly"]
