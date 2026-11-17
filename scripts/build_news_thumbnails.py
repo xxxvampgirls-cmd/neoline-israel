@@ -176,6 +176,46 @@ def photo_from_licensed_source(item):
  except (OSError,ValueError,requests.RequestException):
   return None,None
 
+def specific_model_photo(item):
+ """Find a rights-cleared image of the ACTUAL named car model, not any car.
+
+ Returns None rather than disguising a wrong vehicle as the one in the news.
+ This is a model photo, not the publisher's original article photograph.
+ """
+ if item.get("category")!="cars":return None,None
+ headline=(str(item.get("title",""))+" "+str(item.get("titleOriginal",""))).lower()
+ brands=("byd","tesla","hyundai","kia","toyota","ford","nissan","volkswagen",
+         "bmw","mercedes","audi","volvo","zeekr","xpeng","geely","skoda")
+ brand=next((name for name in brands if re.search(r"(?<![a-z])"+name+r"(?![a-z])",headline)),None)
+ if not brand:return None,None
+ models=("cybercab","dolphin","semi","atto","seal","model y","model 3",
+         "ioniq","tucson","corolla","rav4","sportage","ev6","mustang")
+ model=next((name for name in models if name in headline),None)
+ if not model:return None,None
+ query=brand+" "+model+" car"
+ key=hashlib.sha1(("specific:"+query).encode()).hexdigest()[:12]
+ cache=CACHE/(key+".jpg")
+ meta_path=CACHE/(key+".json")
+ if cache.is_file() and meta_path.is_file():
+  try:return cache.read_bytes(),json.loads(meta_path.read_text(encoding="utf-8"))
+  except (OSError,ValueError):pass
+ try:
+  candidates=commons_candidates(query)
+  for photo in candidates:
+   filename=photo["page"].lower().replace("_"," ").replace("%20"," ")
+   if brand not in filename or model not in filename:continue
+   result=SESSION.get(photo["url"],timeout=(7,16))
+   if not result.ok or len(result.content)>4_000_000:continue
+   with Image.open(io.BytesIO(result.content)) as picture:
+    if picture.width<640 or picture.height<350 or picture.format not in ("JPEG","PNG","WEBP"):continue
+   CACHE.mkdir(parents=True,exist_ok=True)
+   cache.write_bytes(result.content)
+   meta_path.write_text(json.dumps(photo,ensure_ascii=False),encoding="utf-8")
+   return result.content,photo
+ except (requests.RequestException,ValueError,KeyError,OSError) as exc:
+  print("WARN specific model photo",query,str(exc)[:75],flush=True)
+ return None,None
+
 def photo_fallback(item):
  category=item["category"];uid=item["id"]
  terms=SEARCH_TERMS[category]
@@ -210,7 +250,7 @@ def main():
  manifest=json.loads(MANIFEST.read_text(encoding="utf-8"))
  items=[x for x in manifest.get("items",[]) if date_ok(x.get("date"),x.get("category"))]
  PHOTOS.mkdir(parents=True,exist_ok=True)
- ai_used=0;photos_used=0;original_used=0;unavailable=0;max_size=0
+ ai_used=0;photos_used=0;original_used=0;subject_used=0;upgrade_attempts=0;unavailable=0;max_size=0
  for i,item in enumerate(items):
   uid=item["id"]
   target=PHOTOS/(uid+".webp")
@@ -235,6 +275,23 @@ def main():
       original_used+=1
      except (ValueError,OSError):
       pass
+   # Upgrade a small number of glaringly unrelated generic car photos.
+   # We only replace when Wikimedia has a correctly named, licensed model.
+   if (not item.get("sourcePhoto") and item.get("imageType")=="licensedPhoto"
+       and item.get("category")=="cars" and not item.get("subjectPhotoChecked")
+       and upgrade_attempts<8):
+    upgrade_attempts+=1
+    item["subjectPhotoChecked"]=True
+    exact_data,exact_credit=specific_model_photo(item)
+    if exact_data:
+     try:
+      target.write_bytes(image_convert(exact_data,uid))
+      item["imageCredit"]={"text":exact_credit["credit"]+" · "+exact_credit["license"],
+                           "url":exact_credit["page"]}
+      item["subjectPhotoMatched"]=True
+      subject_used+=1
+     except (ValueError,OSError):
+      pass
    item["image"]="./"+target.as_posix()
    continue
   if target.exists():target.unlink()
@@ -246,6 +303,11 @@ def main():
     if photo:ai_used+=1
    except (KeyError,ValueError,requests.RequestException) as e:
     print("WARN AI image",uid,type(e).__name__,str(e)[:140],flush=True)
+  if photo is None:
+   photo,license_meta=specific_model_photo(item)
+   if photo:
+    subject_used+=1
+    item["subjectPhotoMatched"]=True
   if photo is None:
    photo,license_meta=photo_fallback(item)
    if photo:photos_used+=1
@@ -278,7 +340,7 @@ def main():
  manifest["items"]=items
  MANIFEST.write_text(json.dumps(manifest,ensure_ascii=False,indent=2)+"\n",encoding="utf-8")
  summary={"articles":len(items),"aiGenerated":ai_used,
-  "freeLicensedPhotoThumbsCreated":photos_used,"originalLicensedPhotosUsed":original_used,"notAvailable":unavailable,
+  "freeLicensedPhotoThumbsCreated":photos_used,"originalLicensedPhotosUsed":original_used,"exactModelPhotosUsed":subject_used,"notAvailable":unavailable,
   "existingImages":len(items)-ai_used-photos_used-unavailable,
   "maxNewImageKB":round(max_size/1024,1),"deletedExpiredImages":deleted,
   "aiKeyConfigured":bool(API_TOKEN)}
