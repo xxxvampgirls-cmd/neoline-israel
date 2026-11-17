@@ -64,7 +64,17 @@ jobs:
             if(await page.locator('.traffic-report').count())throw Error('Old alert displayed after upstream failure');
             if(await page.locator('.news-feature-story--traffic').count())throw Error('Stale urgent slide still showing');
             if(errors.length)throw Error('Page errors '+errors.join(' | '));
-            console.log('NEOLINE TRAFFIC UI PASS: official source, carousel, expandable detail, four-locale UI, stale fallback, mobile width.');
+            // A mocked response can mask an actual browser CORS failure.
+            // Confirm the public GitHub traffic branch is readable from Cloudflare Pages.
+            await page.unroute(u=>u.toString().startsWith(source));
+            const realFeed=await page.evaluate(async url=>{
+              const response=await fetch(url+'?cors-test='+Date.now(),{cache:'no-store'});
+              if(!response.ok)throw Error('Traffic feed HTTP '+response.status);
+              const data=await response.json();
+              return {version:data.version,status:data.sourceStatus,events:data.events?.length};
+            },source);
+            if(realFeed.version!==1||!Array.isArray(data.events))throw Error('Invalid real public feed '+JSON.stringify(realFeed));
+            console.log('NEOLINE TRAFFIC UI PASS: source, carousel, expand, languages, stale fallback, mobile width, real browser CORS '+JSON.stringify(realFeed));
             await browser.close();
           })().catch(e=>{console.error(e);process.exit(1)});
           JS
