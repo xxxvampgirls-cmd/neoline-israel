@@ -58,6 +58,81 @@ function currentOnly(o){
 }
 
 
+/* Official Waze Live Map is embedded only on user opt-in.
+   It is not a traffic-data API, and does not provide NEOLINE raw events. */
+const wazeAreas={
+ israel:{lat:31.53,lon:34.91,zoom:7},
+ center:{lat:32.06,lon:34.85,zoom:10},
+ north:{lat:32.84,lon:35.15,zoom:9},
+ south:{lat:30.77,lon:34.77,zoom:8}
+};
+const wazeLabels={
+ ru:{title:"Живая карта Waze",subtitle:"Пробки и перекрытия · открыть карту",
+  loading:"Карта загрузится только после открытия…",notice:"Карту и дорожную обстановку показывает Waze. Не все виды событий доступны на веб-карте.",
+  open:"Открыть в Waze ↗",areas:"Регион карты",area:["Весь Израиль","Центр","Север","Юг"]},
+ en:{title:"Waze Live Map",subtitle:"Traffic and closures · tap to view",
+  loading:"Map loads only when you open it…",notice:"Traffic data and map are provided by Waze. Some incident types may be unavailable on the web map.",
+  open:"Open in Waze ↗",areas:"Map region",area:["All Israel","Central","North","South"]},
+ he:{title:"מפת התנועה החיה של Waze",subtitle:"עומסים וחסימות · לפתיחת המפה",
+  loading:"המפה נטענת רק בעת פתיחה…",notice:"המפה ונתוני התנועה מוצגים על ידי Waze. חלק מסוגי הדיווחים אינם זמינים במפת האינטרנט.",
+  open:"פתיחה ב-Waze ↗",areas:"אזור המפה",area:["כל ישראל","מרכז","צפון","דרום"]},
+ ar:{title:"خريطة Waze المباشرة",subtitle:"ازدحام وإغلاق الطرق · افتح الخريطة",
+  loading:"لن تُحمَّل الخريطة إلا عند فتحها…",notice:"تعرض Waze الخريطة وبيانات المرور؛ بعض أنواع البلاغات غير متاحة على خريطة الويب.",
+  open:"افتح في Waze ↗",areas:"منطقة الخريطة",area:["كل إسرائيل","الوسط","الشمال","الجنوب"]}
+};
+let wazeArea="israel";
+function wazeLang(){return wazeLabels[state.lang]||wazeLabels.ru}
+function wazeURL(){
+ const place=wazeAreas[wazeArea]||wazeAreas.israel;
+ const lang=["ru","he","ar","en"].includes(state.lang)?state.lang:"en";
+ // Official Waze iFrame URL format, per https://developers.google.com/waze/iframe
+ return "https://embed.waze.com/"+lang+"/iframe?zoom="+place.zoom+
+  "&lat="+place.lat+"&lon="+place.lon;
+}
+function renderWazeCopy(){
+ const t=wazeLang();
+ $("trafficWazeTitle").textContent=t.title;
+ $("trafficWazeSubtitle").textContent=t.subtitle;
+ $("trafficWazeNotice").textContent=t.notice;
+ $("trafficWazeOpen").textContent=t.open;
+ $("trafficWazeAreas").setAttribute("aria-label",t.areas);
+ $("trafficWazeLoading").textContent=t.loading;
+ document.querySelectorAll("[data-waze-area]").forEach((button,index)=>{
+  button.textContent=t.area[index];
+  button.classList.toggle("active",button.dataset.wazeArea===wazeArea);
+  button.setAttribute("aria-pressed",String(button.dataset.wazeArea===wazeArea));
+ });
+ const iframe=$("trafficWazeFrame").querySelector("iframe");
+ if(iframe)iframe.title=t.title;
+}
+function refreshWazeFrame(){
+ const details=$("trafficWaze");
+ if(!details.open)return;
+ const frame=$("trafficWazeFrame");
+ const iframe=document.createElement("iframe");
+ iframe.title=wazeLang().title;
+ iframe.loading="lazy";
+ iframe.referrerPolicy="strict-origin-when-cross-origin";
+ iframe.src=wazeURL();
+ iframe.setAttribute("allowfullscreen","");
+ // Loading feedback is not a map image. The real map remains Waze-hosted.
+ frame.replaceChildren(iframe);
+ frame.dataset.loaded="true";
+}
+$("trafficWaze").addEventListener("toggle",()=>{
+ if($("trafficWaze").open){refreshWazeFrame();return}
+ // Stop Waze iframe processing/network whenever the map is collapsed.
+ $("trafficWazeFrame").replaceChildren($("trafficWazeLoading"));
+ $("trafficWazeFrame").dataset.loaded="false";
+});
+$("trafficWazeAreas").addEventListener("click",event=>{
+ const b=event.target.closest("[data-waze-area]");
+ if(!b||!wazeAreas[b.dataset.wazeArea]||b.dataset.wazeArea===wazeArea)return;
+ wazeArea=b.dataset.wazeArea;
+ renderWazeCopy();
+ refreshWazeFrame();
+});
+
 /* Independent 10-minute GitHub Actions data stream: official timestamped police
    posts, not a traffic-control API or proof a road remains blocked right now. */
 const TRAFFIC_DATA_URL="https://raw.githubusercontent.com/xxxvampgirls-cmd/neoline-israel/traffic-live/assets/traffic/live.json";
@@ -399,7 +474,7 @@ $("newsSearch").addEventListener("input",e=>{state.query=e.target.value;state.vi
 document.querySelectorAll('[data-news-lang]').forEach(el=>el.addEventListener('click',()=>{
  state.lang=el.dataset.newsLang;
  try{localStorage.setItem("neoline-language",state.lang)}catch(e){}
- localize();tabs();render();renderTraffic();initializeFeatures(true);
+ localize();tabs();render();renderTraffic();renderWazeCopy();initializeFeatures(true);
 }));
 document.addEventListener("visibilitychange",()=>{
  // Only recheck age limits after a long idle period; no needless DOM rebuilds.
@@ -415,5 +490,5 @@ document.addEventListener("visibilitychange",()=>{
 $("trafficRefresh").addEventListener("click",loadTraffic);
 // Keep a long-lived news tab reasonably fresh, but never poll per second.
 setInterval(()=>{if(!document.hidden&&Date.now()-traffic.lastFetch>=10*60000)loadTraffic()},60000);
-localize();tabs();renderTraffic();load();loadTraffic();
+localize();tabs();renderTraffic();renderWazeCopy();load();loadTraffic();
 })();
