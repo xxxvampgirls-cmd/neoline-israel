@@ -297,12 +297,12 @@ def main():
  try:
   verified=json.loads(Path("scripts/verified_auto_news.json").read_text(encoding="utf-8"))
   for entry in verified.get("items",[]):
-   if not valid(entry):continue
-   domain=urlparse(entry["url"]).hostname or ""
-   if domain not in ("www.calcalist.co.il","www.inn.co.il"):continue
    item=dict(entry)
-   uid=hashlib.sha256(item["url"].split("?")[0].encode("utf-8")).hexdigest()[:20]
+   uid=hashlib.sha256(item.get("url","").split("?")[0].encode("utf-8")).hexdigest()[:20]
    item["id"]=uid
+   if not valid(item):continue
+   domain=urlparse(item["url"]).hostname or ""
+   if domain not in ("www.calcalist.co.il","www.inn.co.il"):continue
    item["title"]=item["translations"]["ru"]["title"]
    item["summary"]=item["translations"]["ru"]["summary"]
    item["translated"]=True
