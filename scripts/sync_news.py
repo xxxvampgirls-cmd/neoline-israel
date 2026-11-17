@@ -230,6 +230,33 @@ def publisher_name(provider):
  if provider.startswith("Globes"):return "Globes"
  return provider
 
+def reusable_source_media(entry, article_url, provider):
+ """Use original publisher image only with an explicit reusable RSS license.
+
+ Merely displaying a news image in a feed is not permission to copy it.
+ """
+ rights=" ".join(str(entry.get(k,"") or "") for k in
+  ("rights","license","cc_license","media_license","copyright"))
+ for link in entry.get("links") or []:
+  if isinstance(link,dict) and link.get("rel")=="license":
+   rights+=" "+str(link.get("href",""))
+ cc0=bool(re.search(r"(?:\bCC0\b|creative\s+commons\s+zero|public\s+domain)",rights,re.I))
+ ccby=bool(re.search(r"\bCC[-\s]?BY[-\s]?(?:2\.0|3\.0|4\.0)\b|creativecommons\.org/licenses/by/(?:2\.0|3\.0|4\.0)",rights,re.I))
+ if not (cc0 or ccby):return None
+ if re.search(r"all rights reserved|כל הזכויות שמורות",rights,re.I):return None
+ license_name="CC0" if cc0 else "CC BY"
+ candidates=(entry.get("media_content") or [])+(entry.get("media_thumbnail") or [])+(entry.get("enclosures") or [])
+ for media in candidates:
+  if not isinstance(media,dict):continue
+  image=str(media.get("url","")).strip()
+  if not allowed(image) or len(image)>1000:continue
+  if not urlparse(image).path.lower().endswith((".jpg",".jpeg",".png",".webp")):continue
+  typ=str(media.get("type","")).lower()
+  if typ and not typ.startswith("image/"):continue
+  credit=tidy(entry.get("author") or provider)[:120]
+  return {"url":image,"license":license_name,"credit":credit,"sourceUrl":article_url}
+ return None
+
 def article(entry,provider):
  title=tidy(entry.get("title",""))
  pub=aware(entry.get("published_parsed") or entry.get("updated_parsed") or entry.get("published"))
@@ -241,10 +268,13 @@ def article(entry,provider):
  path=urlparse(url).path
  if path in ("/","/rss","/feed") or "/rss/" in path:return None
  id=hashlib.sha256(url.split("?")[0].encode("utf-8")).hexdigest()[:20]
- return {"id":id,"titleOriginal":title,"sourceLanguage":"he" if re.search(r"[\u0590-\u05ff]",title) else "en",
+ result={"id":id,"titleOriginal":title,"sourceLanguage":"he" if re.search(r"[\u0590-\u05ff]",title) else "en",
   "date":pub.isoformat().replace("+00:00","Z"),"url":url,"publisher":publisher_name(provider),
   "category":kind,"art":kind,"image":f"./assets/news/images/{id}.svg",
   "official":False,"translations":{}}
+ source_media=reusable_source_media(entry,url,provider)
+ if source_media:result["sourcePhoto"]=source_media
+ return result
 def valid(item):
  if not isinstance(item,dict):return False
  stamp=aware(item.get("date"))
@@ -338,7 +368,11 @@ def main():
    feed_stats[provider]=len(entries)
    for e in entries[:180]:
     item=article(e,provider)
-    if not item or item["id"] in keep:continue
+    if not item:continue
+    if item["id"] in keep:
+     if item.get("sourcePhoto") and not keep[item["id"]].get("sourcePhoto"):
+      keep[item["id"]]["sourcePhoto"]=item["sourcePhoto"]
+     continue
     keep[item["id"]]=item;discovered+=1
    print(f"FEED {provider}: {len(entries)} entries, collected {len(keep)}",flush=True)
   except Exception as exc:
