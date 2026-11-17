@@ -235,7 +235,8 @@ def specific_road_photo(item):
   for photo in commons_candidates("Highway "+number+" Israel road"):
    filename=photo["page"].lower().replace("_"," ").replace("%20"," ")
    if not re.search(r"(?<!\d)"+re.escape(number)+r"(?!\d)",filename):continue
-   if not any(w in filename for w in ("israel","highway","road","route","kvish","כביש")):continue
+   # A route number alone is not enough: Highway 40 also exists in Canada.
+   if not any(w in filename for w in ("israel","negev","tel aviv","tel-aviv","narbeta","meiser","mitzpe","כביש","ישראל")):continue
    response=SESSION.get(photo["url"],timeout=(7,16))
    if not response.ok or len(response.content)>4_000_000:continue
    with Image.open(io.BytesIO(response.content)) as im:
@@ -298,6 +299,22 @@ def main():
    isinstance(item.get("imageCredit"),dict) and
    item["imageCredit"].get("url"))
   if target.exists() and target.stat().st_size<=MAX_BYTES and valid_credit:
+   # Correct a previously accepted photograph of *Canadian* Highway 40.
+   # It is not permissible to imply that it depicts an Israeli highway.
+   source_page=str((item.get("imageCredit") or {}).get("url","")).lower()
+   if item.get("category")=="roads" and "bighorn_highway_40" in source_page:
+    replacement_photo,replacement_meta=specific_road_photo(item)
+    if replacement_photo is None:
+     replacement_photo,replacement_meta=photo_fallback(item)
+    if replacement_photo:
+     try:
+      target.write_bytes(image_convert(replacement_photo,uid))
+      item["imageCredit"]={"text":replacement_meta["credit"]+" · "+replacement_meta["license"],
+                           "url":replacement_meta["page"]}
+      item["subjectPhotoMatched"]=bool("israel" in replacement_meta["page"].lower())
+      item["subjectPhotoChecked"]=True
+     except (ValueError,OSError):
+      pass
    # Upgrade the existing illustrative thumbnail only when the original
    # article supplied an expressly licensed photograph.
    if item.get("sourcePhoto") and item.get("imageType")!="sourceLicensedPhoto":
