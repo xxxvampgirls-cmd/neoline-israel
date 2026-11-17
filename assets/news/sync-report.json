@@ -1,5 +1,5 @@
 {
-  "attempted": "2026-11-17T08:28:38.388260Z",
+  "attempted": "2026-11-17T08:30:21.647106Z",
   "feeds": {
     "Walla · Авто": 30,
     "Walla · Безопасность": 30,
@@ -12,16 +12,33 @@
     "Maariv · כלכלה": 20,
     "Globes · צרכנות": 15,
     "Autonews Israel": 10,
-    "Srugim": 50
+    "Srugim": 50,
+    "Ynet · Новости": 30,
+    "Ynet · Репортажи": 30,
+    "Haaretz": 20
   },
-  "new": 9,
-  "retained": 21,
-  "imageCount": 21,
+  "new": 3,
+  "retained": 24,
+  "imageCount": 24,
   "deletedImages": 0,
   "discardedGoogleLinks": 0,
   "errors": {
     "The Times of Israel": "HTTPError: 403 Client Error: Forbidden for url: https://www.timesofisrael.com/feed/",
-    "Israel Hayom": "HTTPError: 403 Client Error: Forbidden for url: https://www.israelhayom.co.il/rss"
+    "Israel Hayom": "HTTPError: 403 Client Error: Forbidden for url: https://www.israelhayom.co.il/rss.xml",
+    "Israel Hayom · English": "HTTPError: 403 Client Error: Forbidden for url: https://www.israelhayom.com/feed/"
   },
-  "directLinksOnly": true
+  "directLinksOnly": true,
+  "sourceCount": 7,
+  "sources": {
+    "Maariv": 4,
+    "Ynet · Репортажи": 3,
+    "Srugim": 1,
+    "Walla · Новости Израиля": 1,
+    "Autonews Israel": 4,
+    "Walla · Авто": 5,
+    "Walla · Все автомобили": 6
+  },
+  "generatedAIImages": 0,
+  "aiImagesTotal": 0,
+  "imageGenerationEnabled": false
 }
