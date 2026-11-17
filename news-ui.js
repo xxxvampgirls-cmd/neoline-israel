@@ -102,7 +102,7 @@ function render(append=false){
    '<a class="news-photo-credit" href="'+safe(safeURL(item.imageCredit.url))+'" target="_blank" rel="noopener noreferrer">'+safe(item.imageCredit.text||"Wikimedia Commons")+'</a>':'';
   return '<article class="news-card '+(pos===0&&state.category==="all"&&!state.query?'news-card--lead':'')+'">'+
    '<div class="news-art news-art--'+safe(item.category)+'"><span class="news-art-type">'+safe(label)+'</span>'+image+
-   '<span class="news-art-source">'+safe(type)+'</span>'+photoCredit+'</div>'+
+   '<span class="news-art-source">'+safe(type)+'</span><span class="news-art-caption" dir="auto">'+safe(localized.title)+'</span>'+photoCredit+'</div>'+
    '<div class="news-card-body"><div class="news-card-meta">'+safe(displayDate(item.date))+
    ' <b>· '+safe(item.publisher||"")+'</b>'+(item.official?' · gov.il':'')+'</div>'+
    '<h2 dir="auto">'+safe(localized.title)+'</h2>'+
