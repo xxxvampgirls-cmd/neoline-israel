@@ -1,7 +1,7 @@
 {
   "version": 1,
   "retentionDays": 30,
-  "updated": "2026-11-17T08:36:06.780114Z",
+  "updated": "2026-11-17T08:57:16.170177Z",
   "items": [
     {
       "id": "1b6d8f8a9c0f97c229b0",
@@ -172,11 +172,23 @@
         "he": {
           "title": "בהתנגשות עם רכב צבאי: הרוגה בתאונת דרכים קטלנית בעכו | תיעוד",
           "summary": "דיווח על תאונת דרכים בישראל. פרטים ועדכונים בכתבת המקור."
+        },
+        "ru": {
+          "title": "При столкновении с военной машиной: погиб в ДТП со смертельным исходом в Акко Документация",
+          "summary": "Дорожное происшествие в Израиле. Обстоятельства и актуальные сведения — в материале источника."
+        },
+        "en": {
+          "title": "In a collision with a military vehicle: killed in a fatal road accident in Acre Documentation",
+          "summary": "A reported road incident in Israel. Details and updates are in the original report."
+        },
+        "ar": {
+          "title": "في اصطدام بمركبة عسكرية: استشهد في حادث سير مميت في عكا توثيق",
+          "summary": "تقرير عن حادث مروري في إسرائيل. التفاصيل والتحديثات في المصدر."
         }
       },
-      "title": "בהתנגשות עם רכב צבאי: הרוגה בתאונת דרכים קטלנית בעכו | תיעוד",
+      "title": "При столкновении с военной машиной: погиб в ДТП со смертельным исходом в Акко Документация",
       "summary": "Дорожное происшествие в Израиле. Обстоятельства и актуальные сведения — в материале источника.",
-      "translated": false,
+      "translated": true,
       "imageType": "licensedPhoto",
       "imageCredit": {
         "text": "Jeff Attaway from Abuja, Nigeria · CC BY 2.0",
@@ -276,11 +288,23 @@
         "he": {
           "title": "בתוך פחות משעה: גבר נהרג בכביש 6, אישה נהרגה בכביש 7",
           "summary": "עדכון על מצב התנועה. לפני הנסיעה בדקו אם ההגבלות עדיין בתוקף."
+        },
+        "ru": {
+          "title": "Менее чем за час: на 6-м маршруте погиб мужчина, на 7-м - женщина",
+          "summary": "Информация о дорожной ситуации. Перед поездкой проверьте, действуют ли ограничения сейчас."
+        },
+        "en": {
+          "title": "In less than an hour: a man was killed on Route 6, a woman was killed on Route 7",
+          "summary": "A road-conditions update. Check whether restrictions still apply before travelling."
+        },
+        "ar": {
+          "title": "في أقل من ساعة: قُتل رجل على الطريق رقم 6، وقُتلت امرأة على الطريق رقم 7",
+          "summary": "تحديث عن حالة الطرق. تحقق من استمرار القيود قبل السفر."
         }
       },
-      "title": "בתוך פחות משעה: גבר נהרג בכביש 6, אישה נהרגה בכביש 7",
+      "title": "Менее чем за час: на 6-м маршруте погиб мужчина, на 7-м - женщина",
       "summary": "Информация о дорожной ситуации. Перед поездкой проверьте, действуют ли ограничения сейчас.",
-      "translated": false,
+      "translated": true,
       "imageType": "licensedPhoto",
       "imageCredit": {
         "text": "Judgefloro · Public domain",
