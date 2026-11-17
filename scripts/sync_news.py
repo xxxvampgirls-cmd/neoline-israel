@@ -246,9 +246,11 @@ def main():
  recent=recent[:MAX_ITEMS]
  new_count=0
  for x in recent:
-  if new_count<NEW_PER_RUN or x.get("translations"):
+  has_full=all(isinstance(x.get("translations",{}).get(lang),dict)
+               and x["translations"][lang].get("title") for lang in LOCALES)
+  if has_full or new_count<NEW_PER_RUN:
+   if not has_full:new_count+=1
    enrich(x)
-   if not x.get("translations"):new_count+=1
   else:
    x["title"]=x["titleOriginal"]
    x["summary"]=BRIEFS[x["category"]]["ru"]
