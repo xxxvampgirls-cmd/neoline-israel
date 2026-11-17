@@ -1,5 +1,5 @@
 {
-  "attempted": "2026-11-17T08:57:16.170177Z",
+  "attempted": "2026-11-17T09:00:00.745931Z",
   "feeds": {
     "Walla · Авто": 30,
     "Walla · Безопасность": 30,
@@ -11,31 +11,40 @@
     "Maariv · מבזקים": 20,
     "Maariv · כלכלה": 20,
     "Globes · צרכנות": 15,
+    "Autonews Israel": 10,
     "Mako · Израиль": 20,
     "Srugim": 50,
     "Haaretz": 20
   },
-  "new": 0,
-  "retained": 20,
+  "telegram": {
+    "Дорожная полиция Израиля · Telegram": 0,
+    "Полиция Израиля · Telegram": 0,
+    "Ихуд Ацала · Telegram": 90,
+    "Алексей Железнов · Telegram": 55
+  },
+  "new": 51,
+  "retained": 71,
   "imageCount": 20,
   "deletedImages": 0,
   "discardedGoogleLinks": 0,
   "errors": {
     "The Times of Israel": "HTTPError: 403 Client Error: Forbidden for url: https://www.timesofisrael.com/feed/",
     "Israel Hayom": "HTTPError: 403 Client Error: Forbidden for url: https://www.israelhayom.co.il/rss.xml",
-    "Autonews Israel": "ValueError: Feed has no entries",
     "Минтранс Израиля · Новости": "HTTPError: 403 Client Error: Forbidden for url: https://www.gov.il/he/api/NewsApi/rss/48eaee91-0c97-4ef3-b364-5",
     "Israel Hayom · English": "HTTPError: 403 Client Error: Forbidden for url: https://www.israelhayom.com/feed/"
   },
   "directLinksOnly": true,
-  "sourceCount": 7,
+  "sourceCount": 10,
   "sources": {
+    "Ихуд Ацала · Telegram": 49,
     "Ynet": 1,
     "Maariv": 1,
+    "Алексей Железнов · Telegram": 1,
     "Walla · Новости Израиля": 1,
     "Autonews Israel": 4,
-    "Mako · Израиль": 2,
     "Walla · Авто": 5,
+    "Mako · Израиль": 2,
+    "Walla": 1,
     "Walla · Все автомобили": 6
   }
 }
