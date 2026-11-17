@@ -397,7 +397,52 @@ jobs:
                  new Set(speed.trails.map(t=>t.thickness)).size<5)
                 throw Error('Slide '+(i+1)+' needs unsynchronized soft streaks and two opposing crisp ribbons '+JSON.stringify(speed));
             }
+            // The entire visible product / white glow / floor shadow must
+            // actually FLY past the screen, not merely fade out with the card.
+            await page.locator('#showcaseDots .showcase-dot').first().click();
+            await page.waitForTimeout(950);
+            await page.locator('#showcaseDots .showcase-dot').nth(1).click();
+            const forward=await page.evaluate(()=>{
+              const cards=document.querySelectorAll('#showcaseSlides .featured-slide');
+              const left=cards[0],right=cards[1];
+              const imgOut=left.querySelector('.featured-image');
+              const imgIn=right.querySelector('.featured-image');
+              return {out:left.className,arrive:right.className,
+                      outAnim:getComputedStyle(imgOut).animationName,
+                      inAnim:getComputedStyle(imgIn).animationName,
+                      outOpacity:getComputedStyle(left).opacity,
+                      hasHalo:!!imgOut.querySelector('.ad-photo-focus')&&!!imgIn.querySelector('.ad-photo-focus'),
+                      hasShadow:!!imgOut.querySelector('.ad-device-shadow')&&!!imgIn.querySelector('.ad-device-shadow')};
+            });
+            if(!forward.out.includes('ad-exiting')||!forward.arrive.includes('ad-arriving')||
+               forward.outAnim!=='neolineProductFlyLeft'||
+               forward.inAnim!=='neolineProductFlyFromRight'||forward.outOpacity!=='1'||
+               !forward.hasHalo||!forward.hasShadow)
+              throw Error('Products must fly to next ad with their halo/shadow, never fade '+JSON.stringify(forward));
+            await page.waitForTimeout(950);
+            await page.waitForFunction(()=>!document.querySelector('#showcaseSlides .featured-slide.ad-exiting'));
+            await page.locator('#showcaseDots .showcase-dot').first().click();
+            const backward=await page.evaluate(()=>{
+              const cards=document.querySelectorAll('#showcaseSlides .featured-slide');
+              return {out:getComputedStyle(cards[1].querySelector('.featured-image')).animationName,
+                      enter:getComputedStyle(cards[0].querySelector('.featured-image')).animationName};
+            });
+            if(backward.out!=='neolineProductFlyRight'||backward.enter!=='neolineProductFlyFromLeft')
+              throw Error('Reverse arrow must reverse product travel '+JSON.stringify(backward));
+            await page.waitForTimeout(950);
+            // Motion-reduction preferences must never leave a flying ghost.
+            await page.emulateMedia({reducedMotion:'reduce'});
+            await page.locator('#showcaseDots .showcase-dot').nth(1).click();
+            const quiet=await page.evaluate(()=>({
+              leftover:document.querySelectorAll('#showcaseSlides .featured-slide.ad-exiting').length,
+              arrived:document.querySelectorAll('#showcaseSlides .featured-slide.ad-arriving').length,
+              active:document.querySelectorAll('#showcaseSlides .featured-slide.active').length
+            }));
+            if(quiet.leftover||quiet.arrived||quiet.active!==1)
+              throw Error('Reduced-motion carousel must switch instantly '+JSON.stringify(quiet));
+            await page.emulateMedia({reducedMotion:'no-preference'});
             await page.locator('#showcaseDots .showcase-dot').last().click();
+            await page.waitForTimeout(950);
             await page.waitForFunction(()=>document.querySelector('#showcaseSlides .featured-slide--theory')?.classList.contains('active'));
             if(artwork.pageWidth>artwork.viewport+3)
               throw Error('The new ad creates mobile horizontal overflow '+JSON.stringify(artwork));
