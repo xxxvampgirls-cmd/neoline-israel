@@ -18,6 +18,7 @@ CHANNELS = [
     ("Полиция Израиля · Telegram", "israelpoliceforce"),
     ("Ихуд Ацала · Telegram", "uh1221"),
     ("Алексей Железнов · Telegram", "alexavni"),
+    ("NEWSru.co.il · Telegram", "NEWSruIsrael"),
 ]
 # Keep non-driving stories (including wartime vehicle mentions) out of the auto feed.
 UNRELATED = (
@@ -26,23 +27,35 @@ UNRELATED = (
     "צבא", "חמאס", "עזה", "איראן", "לבנון", "טילים", "מחבלים",
 )
 # A few channels post many entries a day, so paginate beyond the newest page.
-MAX_PAGES = 6
-MAX_PER_CHANNEL = 90
+MAX_PAGES = 8
+MAX_PER_CHANNEL = 150
 
+# Strong traffic signals: avoid broad references to cars in war/crime messages.
+TRAFFIC_PATTERNS=(
+    r"\bдтп\b", r"авари[яи]", r"пешеход", r"сбил[аои]?", r"дорожн.{0,15}происшеств",
+    r"превышен.{0,12}скорост", r"\bкм/ч\b", r"радар", r"камера.{0,15}скорост",
+    r"ограничен.{0,10}скорост", r"дорожн.{0,12}полици", r"штраф.{0,18}водител",
+    r"перекры[тл]",r"закры[тл].{0,10}трасс",r"\bшоссе\b",r"пробк",
+    r"электромобил", r"автомобил.{0,15}(рын|продаж|импорт|страхов|постав)",
+    r"תאונ", r"התנגש",r"נדרס",r"דרס",r"פגע וברח",r"נפגע מרכב",
+    r'קמ["״׳\']?ש',r"מהירות מופרזת",r"מצלמות מהירות",r"ממל",r"אכיפת מהירות",
+    r"חסימת כביש",r"כביש נחסם",r"כביש \d",r"פקק",r"עומסי תנועה",r"תקנות התעבורה",
+)
+TRAFFIC_RE=re.compile("|".join(TRAFFIC_PATTERNS),re.I)
+SKIP_LINES=re.compile(r"^(?:[-_=]{3,}|⚡|➡|подписаться|הצטרפו לערוץ|"
+                      r"ערוץ הטלגרם של|דוברות המשטרה:|דוברות איחוד הצלה|"
+                      r"канал алексея|источник:|вступайте в)",re.I)
 def _headline(text: str) -> str:
-    # Source descriptions and promotional footers are not part of a headline.
+    """Select the first meaningful *traffic-related* line, not an ad or intro."""
     rows = [re.sub(r"\s+", " ", row).strip() for row in text.splitlines()]
-    rows = [r for r in rows if r and not re.match(
-        r"^(?:[-_=]{3,}|⚡|➡|подписаться|הצטרפו לערוץ)", r, re.I)]
-    if not rows:
-        return ""
-    first = rows[0]
-    if len(first) < 14 and len(rows) > 1:
-        first += " — " + rows[1]
-    # Break at a sentence boundary where possible without inventing details.
-    if len(first) > 215:
-        first = first[:212].rsplit(" ", 1)[0] + "…"
-    return first.strip()
+    rows = [r for r in rows if r and not SKIP_LINES.match(r)]
+    if not rows: return ""
+    matching = [r for r in rows[:8] if TRAFFIC_RE.search(r)]
+    if not matching: return ""
+    line = matching[0]
+    if len(line)<14 and len(matching)>1:line += " — "+matching[1]
+    if len(line)>215:line=line[:212].rsplit(" ",1)[0]+"…"
+    return line.strip()
 
 def collect(session: requests.Session, cutoff: dt.datetime, now: dt.datetime):
     """Return (provider, RSS-like entry) pairs and per-channel diagnostics."""
