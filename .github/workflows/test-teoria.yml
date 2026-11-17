@@ -291,6 +291,8 @@ jobs:
                 photoOverflow:getComputedStyle(el.querySelector('.theory-featured-image')).overflow,
                 slideOverflow:getComputedStyle(el).overflow,
                 deviceAnimation:getComputedStyle(device).animationName,
+                parallaxCount:el.querySelectorAll('.theory-window-streak').length,
+                parallaxAnimations:[...el.querySelectorAll('.theory-window-streak')].map(n=>getComputedStyle(n).animationName),
                 hasPrev:!!el.querySelector('[data-feature-prev]'),
                 hasNext:!!el.querySelector('[data-feature-next]'),
                 pageWidth:document.documentElement.scrollWidth,viewport:innerWidth
@@ -306,13 +308,23 @@ jobs:
               throw Error('Device must subtly escape above photo frame');
             if(artwork.deviceAnimation==='none')
               throw Error('Gentle floating motion missing');
+            if(artwork.parallaxCount!==4||artwork.parallaxAnimations.some(x=>x!=='neolineTheoryDriveBy'))
+              throw Error('Subtle car-window 3D speed flow missing '+JSON.stringify(artwork.parallaxAnimations));
+            await page.emulateMedia({reducedMotion:'reduce'});
+            const reducedMotion=await last.locator('.theory-window-streak').first().evaluate(n=>({
+              animation:getComputedStyle(n).animationName,
+              opacity:getComputedStyle(n).opacity
+            }));
+            if(reducedMotion.animation!=='none'||reducedMotion.opacity!=='0')
+              throw Error('Reduced motion not respected '+JSON.stringify(reducedMotion));
+            await page.emulateMedia({reducedMotion:'no-preference'});
             if(artwork.pageWidth>artwork.viewport+3)
               throw Error('The new ad creates mobile horizontal overflow '+JSON.stringify(artwork));
             await last.locator('[data-feature-next]').click();
             if(!(await slides.first().getAttribute('class')).includes('active'))
               throw Error('Arrow from LAST theory ad must wrap to first product slide');
             if(errors.length)throw Error('Homepage JS errors '+errors.join('|'));
-            console.log('HOMEPAGE PREMIUM THEORY AD PASS: last slide, one 3D device, blue bands, halo, gentle motion, wrap and mobile width');
+            console.log('HOMEPAGE PREMIUM THEORY AD PASS: last slide, one 3D device, blue bands, halo, gentle motion, 3D speed parallax, reduced motion, wrap and mobile width');
             await browser.close();
           })().catch(e=>{console.error(e);process.exit(1)});
           JS
