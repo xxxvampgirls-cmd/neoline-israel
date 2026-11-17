@@ -53,6 +53,10 @@ jobs:
             if(!font.includes('Manrope'))throw Error('Game stylesheet not applied: '+font);
             const width=await page.evaluate(()=>({page:document.documentElement.scrollWidth,window:innerWidth}));
             if(width.page>width.window+3)throw Error('Game overflows 390px '+JSON.stringify(width));
+            const hud=await page.locator('#gamePlaying .quiz-hud').count();
+            if(hud!==1)throw Error('New compact circular quiz HUD missing');
+            const orbit=await page.locator('#progressFill').count();
+            if(orbit!==1)throw Error('Circular progress fill missing');
             console.log('OFFICIAL BANK GAME PASS '+JSON.stringify(bank));
             // Compact quick-play launcher: players should choose a mode immediately
             // on a real phone, with no huge welcome poster or information counters.
@@ -91,11 +95,11 @@ jobs:
             if(await page.locator('.game-hero').isVisible())
               throw Error('Welcome header should disappear when game begins');
             if(!await page.locator('#gamePlaying').isVisible()||
-               await page.locator('#questionCounter').textContent()!=='1 / 20')
+               await page.locator('#questionCounter').textContent()!=='0 / 20')
               throw Error('All-question 20-step journey failed');
             await page.locator('#answers button').first().click();
             await page.locator('#nextQuestion').click();
-            if(await page.locator('#questionCounter').textContent()!=='2 / 20')
+            if(await page.locator('#questionCounter').textContent()!=='1 / 20')
               throw Error('Marathon 20-question progress broken');
             await page.locator('#exitQuiz').click();
             if(!await page.locator('.game-hero').isVisible())
@@ -111,7 +115,7 @@ jobs:
             if(!await page.locator('#nextQuestion').isEnabled())throw Error('Next button disabled after answer');
             if(!await page.locator('#feedback').isVisible())throw Error('Practice must reveal feedback');
             await page.locator('#nextQuestion').click();
-            if(await page.locator('#questionCounter').textContent()!=='2 / 10')throw Error('Route progression broken');
+            if(await page.locator('#questionCounter').textContent()!=='1 / 10')throw Error('Route progression broken');
             await page.locator('#exitQuiz').click();
             if(!await page.locator('#gameLobby').isVisible())throw Error('Back to game modes broken');
             await page.locator('[data-mode="mistakes"]').count();
@@ -158,7 +162,7 @@ jobs:
             await page.locator('#gameOverRetry').click();
             if(await page.locator('#gameOver').isVisible()||
                !await page.locator('#gamePlaying').isVisible()||
-               await page.locator('#questionCounter').innerText()!=='1 / 10')
+               await page.locator('#questionCounter').innerText()!=='0 / 10')
               throw Error('Play again must start a fresh route with 3 lives');
             await page.locator('#exitQuiz').click();
             const signsLostScore=await loseAllThreeLives('signs');
