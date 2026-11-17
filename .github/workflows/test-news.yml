@@ -111,6 +111,10 @@ jobs:
              const link=await page.locator('.news-card .news-link').first().getAttribute('href');
              if(!link||!link.startsWith('http'))throw Error('News item has no valid source link');
             }
+            const openCount=await page.locator('.news-card [data-open-story]').count();
+            console.log('NEWS DEBUG openButtons='+openCount+' cards='+await page.locator('.news-card').count()+
+             ' firstCard='+JSON.stringify((await page.locator('.news-card').first().evaluate(el=>el.outerHTML.slice(0,1050)))));
+            if(!openCount)throw Error('News headline expand control was not rendered');
             await page.locator('.news-card [data-open-story]').first().click();
             const opened=page.locator('.news-card').first().locator('details.news-expand');
             if(!await opened.evaluate(el=>el.open))throw Error('News article did not expand');
