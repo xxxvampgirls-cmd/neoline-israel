@@ -425,7 +425,7 @@ function render(append=false){
    item.imageType==="licensedPhoto"?({ru:"Фото · иллюстрация",en:"Photo · illustration",he:"צילום · המחשה",ar:"صورة توضيحية"}[state.lang]):tr("image");
   const photoCredit=item.imageCredit&&item.imageCredit.url?
    '<a class="news-photo-credit" href="'+safe(safeURL(item.imageCredit.url))+'" target="_blank" rel="noopener noreferrer">'+safe(item.imageCredit.text||"Wikimedia Commons")+'</a>':'';
-  return '<article class="news-card '+(pos===0&&state.category==="all"&&!state.query?'news-card--lead':'')+'">'+
+  return '<article id="news-story-'+safe(item.id)+'" class="news-card '+(pos===0&&state.category==="all"&&!state.query?'news-card--lead':'')+'">'+
    '<div class="news-art news-art--'+safe(item.category)+'"><span class="news-art-type">'+safe(label)+'</span>'+image+
    '<span class="news-art-decoration" aria-hidden="true"></span><span class="news-art-source">'+safe(type)+'</span><a class="news-art-caption" href="'+safe(url)+'" target="_blank" rel="noopener noreferrer nofollow" dir="auto" aria-label="'+safe(tr("read"))+'">'+safe(localized.title)+'</a>'+photoCredit+'</div>'+
    '<div class="news-card-body"><div class="news-card-meta">'+safe(displayDate(item.date))+
@@ -463,7 +463,24 @@ async function load(){
   $("newsUpdated").textContent="";
   state.items=[];
  }
+ // Links from the 3 homepage story slides land on the same article here,
+ // not on an unrelated news homepage or an external source.
+ const deepId=new URLSearchParams(location.search).get("story");
+ const target=typeof deepId==="string"&&/^[a-f0-9]{20}$/.test(deepId)?
+  state.items.findIndex(x=>x.id===deepId):-1;
+ if(target>=0){
+  state.category="all";state.query="";
+  state.visible=Math.max(PAGE_SIZE,target+1);
+ }
  tabs();render();initializeFeatures();
+ if(target>=0)requestAnimationFrame(()=>{
+  const card=document.getElementById("news-story-"+deepId);
+  if(card){
+   card.classList.add("news-card--linked");
+   card.style.scrollMarginTop="105px";
+   card.scrollIntoView({behavior:"instant",block:"start"});
+  }
+ });
 }
 $("newsMoreButton").addEventListener("click",()=>{
  // Append just 8 more articles when the visitor explicitly requests them.
