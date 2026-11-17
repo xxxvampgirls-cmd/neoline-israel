@@ -142,7 +142,91 @@ function selectLicence(value){
  safeStorePut("neoline-teoria-licence",value);
  setCopy();loadBank();
 }
+
+// A practice run with heart icons ends immediately on the third wrong answer.
+// Marathon is intentionally unlimited; the 30-question exam has no lives.
+const hasLives=()=>["route","signs","mistakes"].includes(state.mode);
+const GAME_OVER_COPY={
+ ru:{
+  message:"Три жизни закончились.<br>Не огорчайся — попробуй ещё раз!",
+  retry:"Играть снова",modes:"К выбору режимов",
+  close:"Закрыть и вернуться к режимам"
+ },
+ he:{
+  message:"נגמרו שלושת הלבבות.<br>לא נורא — אפשר לנסות שוב!",
+  retry:"לשחק שוב",modes:"בחירת מצב משחק",
+  close:"סגירה וחזרה לבחירת מצב"
+ },
+ en:{
+  message:"Your three lives are gone.<br>Don't worry — give it another try!",
+  retry:"Play again",modes:"Choose a game mode",
+  close:"Close and go back to modes"
+ }
+};
+function hideGameOver(){
+ const overlay=$("gameOver");
+ overlay.hidden=true;
+ document.body.classList.remove("game-over-open");
+}
+function showGameOver(){
+ if(state.finished)return;
+ state.finished=true;
+ stopClock();
+ // Every answer (including the third miss) has already been recorded once.
+ stats=readStats();
+ stats.history.push({
+  mode:state.mode,lang:state.lang,licence:state.licence,
+  correct:state.correct,answered:state.answers.length,
+  total:state.questions.length,gameOver:true,
+  time:new Date().toISOString()
+ });
+ stats.history=stats.history.slice(-30);
+ saveStats();
+ const t=GAME_OVER_COPY[state.lang]||GAME_OVER_COPY.ru;
+ $("gameOverMessage").innerHTML=t.message;
+ $("gameOverRetryLabel").textContent=t.retry;
+ $("gameOverModesLabel").textContent=t.modes;
+ $("gameOverClose").setAttribute("aria-label",t.close);
+ $("gameOverScore").textContent=state.correct+" / "+state.answers.length+" · +"+state.earned+" XP";
+ $("nextQuestion").disabled=true;
+ $("gameResult").hidden=true;
+ $("gameOver").hidden=false;
+ document.body.classList.add("game-over-open");
+ requestAnimationFrame(()=>$("gameOverRetry").focus({preventScroll:true}));
+ refreshStats();
+}
+function gameOverToModes(){
+ const previousMode=state.mode;
+ hideGameOver();
+ quitSession();
+ const mode=document.querySelector('[data-mode="'+previousMode+'"]');
+ if(mode)mode.focus({preventScroll:true});
+}
+function initGameOverControls(){
+ $("gameOverRetry").addEventListener("click",()=>{
+  const replay=state.mode;
+  hideGameOver();
+  if(replay)startMode(replay);
+ });
+ $("gameOverModes").addEventListener("click",gameOverToModes);
+ $("gameOverClose").addEventListener("click",gameOverToModes);
+ $("gameOver").addEventListener("keydown",e=>{
+  if(e.key==="Escape"){
+   e.preventDefault();gameOverToModes();return;
+  }
+  if(e.key!=="Tab")return;
+  const controls=[$("gameOverClose"),$("gameOverRetry"),$("gameOverModes")];
+  const position=controls.indexOf(document.activeElement);
+  if(e.shiftKey && position<=0){
+   e.preventDefault();controls[controls.length-1].focus();
+  }else if(!e.shiftKey && position===controls.length-1){
+   e.preventDefault();controls[0].focus();
+  }
+ });
+}
+
 function quitSession(){
+ hideGameOver();
  stopClock();
  state.mode=null;
  state.finished=true;
@@ -163,6 +247,7 @@ function formatClock(){
 }
 function startMode(mode){
  if(!state.ready)return;
+ hideGameOver();
  stats=readStats();
  const available=classes();
  let selected=[];
@@ -247,7 +332,7 @@ function pickAnswer(chosen){
  const success=chosen===q.correct;
  state.answers.push({q,chosen,success});
  state.correct+=Number(success);
- if(success)state.earned+=15;else state.lives=Math.max(0,state.lives-1);
+ if(success)state.earned+=15;else if(hasLives())state.lives=Math.max(0,state.lives-1);
  $("nextQuestion").disabled=false;
  $("scoreMeta").textContent="+"+state.earned+" XP";
  const buttons=[...$("answers").querySelectorAll("button")];
@@ -268,11 +353,12 @@ function pickAnswer(chosen){
   feedback.hidden=false;feedback.classList.toggle("negative",!success);
   feedback.textContent=success?text("correct"):text("wrong");
   $("lifeMeta").textContent=state.mode==="marathon"?"∞":Array.from({length:3},(_,i)=>i<state.lives?"♥":"♡").join(" ");
+  if(!success && hasLives() && state.lives===0)showGameOver();
  }
 }
 function nextQuestion(){
  if(state.selected===null||state.finished)return;
- if(state.index>=state.questions.length-1||(state.mode==="route"&&state.lives===0)){
+ if(state.index>=state.questions.length-1){
   finishSession(false);return;
  }
  state.index+=1;
@@ -316,6 +402,7 @@ function finishSession(timedOut){
 }
 function init(){
  initTheoryNavAutoHide();
+ initGameOverControls();
  const saved=safeStoreGet("neoline-language");
  state.lang=DICTS[saved]?saved:"ru";
  const license=safeStoreGet("neoline-teoria-licence");
