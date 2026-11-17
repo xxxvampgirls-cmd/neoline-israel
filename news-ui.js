@@ -3,7 +3,7 @@
 (()=>{
 "use strict";
 const $=id=>document.getElementById(id);
-const state={items:[],category:"all",query:"",lang:"ru",visible:9};
+const state={items:[],category:"all",query:"",lang:"ru",visible:9,rendered:0};
 const PAGE_SIZE=9;
 let scrollObserver=null;
 try{const saved=localStorage.getItem("neoline-language");if(["ru","he","en","ar"].includes(saved))state.lang=saved}catch(e){}
@@ -79,8 +79,7 @@ function tabs(){
  }).join("");
  $("newsCategories").querySelectorAll("button").forEach(el=>el.onclick=()=>{state.category=el.dataset.newsCategory;state.visible=PAGE_SIZE;tabs();render()});
 }
-function render(){
- // Enforce strict source verification and 30-day expiration at every render.
+function render(append=false){
  const recent=state.items.filter(currentOnly);
  const query=state.query.trim().toLocaleLowerCase();
  const matches=recent.filter(x=>{
@@ -88,16 +87,22 @@ function render(){
   return (state.category==="all"||x.category===state.category)
    &&(!query||[local.title,local.summary,x.titleOriginal,x.publisher].join(" ").toLocaleLowerCase().includes(query));
  });
- const list=matches.slice(0,state.visible);
- $("newsGrid").innerHTML=list.map((item,index)=>{
+ const offset=append?state.rendered:0;
+ const list=matches.slice(offset,state.visible);
+ const cards=list.map((item,index)=>{
+  const pos=offset+index;
   const label=tr(item.category),url=safeURL(item.url),localized=localStory(item);
   const pic=newsPicture(item);
   const image=pic?
-   '<img class="news-art-image" loading="'+(index===0?'eager':'lazy')+'" decoding="async" width="800" height="450" alt="'+safe(tr("image"))+'" src="'+safe(pic)+'">':
-   artwork(item.art||item.category);
-  return '<article class="news-card '+(index===0?'news-card--lead':'')+'">'+
-   '<div class="news-art"><span class="news-art-type">'+safe(label)+'</span>'+image+
-   '<span class="news-art-source">'+safe(/\.webp$/.test(pic)?({ru:"AI · иллюстрация",en:"AI · illustration",he:"AI · הדמיה",ar:"AI · صورة توضيحية"}[state.lang]):tr("image"))+'</span></div>'+
+   '<img class="news-art-image" loading="'+(pos<2?'eager':'lazy')+'" decoding="async" width="640" height="360" alt="'+safe(tr("image"))+'" src="'+safe(pic)+'">':
+   '<div class="news-photo-placeholder" aria-hidden="true"></div>';
+  const type=item.imageType==="ai"?({ru:"AI · иллюстрация",en:"AI · illustration",he:"AI · הדמיה",ar:"AI · صورة توضيحية"}[state.lang]):
+   item.imageType==="licensedPhoto"?({ru:"Фото · иллюстрация",en:"Photo · illustration",he:"צילום · המחשה",ar:"صورة توضيحية"}[state.lang]):tr("image");
+  const photoCredit=item.imageCredit&&item.imageCredit.url?
+   '<a class="news-photo-credit" href="'+safe(safeURL(item.imageCredit.url))+'" target="_blank" rel="noopener noreferrer">'+safe(item.imageCredit.text||"Wikimedia Commons")+'</a>':'';
+  return '<article class="news-card '+(pos===0&&state.category==="all"&&!state.query?'news-card--lead':'')+'">'+
+   '<div class="news-art news-art--'+safe(item.category)+'"><span class="news-art-type">'+safe(label)+'</span>'+image+
+   '<span class="news-art-source">'+safe(type)+'</span>'+photoCredit+'</div>'+
    '<div class="news-card-body"><div class="news-card-meta">'+safe(displayDate(item.date))+
    ' <b>· '+safe(item.publisher||"")+'</b>'+(item.official?' · gov.il':'')+'</div>'+
    '<h2 dir="auto">'+safe(localized.title)+'</h2>'+
@@ -105,14 +110,17 @@ function render(){
    (item.category==="laws"&&!item.official?'<p class="summary note">'+safe(tr("warning"))+'</p>':'')+
    '<a class="news-link" href="'+safe(url)+'" target="_blank" rel="noopener noreferrer nofollow">'+safe(tr("read"))+' ↗</a></div></article>';
  }).join("");
+ if(append)$("newsGrid").insertAdjacentHTML("beforeend",cards);
+ else $("newsGrid").innerHTML=cards;
+ state.rendered=offset+list.length;
  $("newsEmpty").hidden=matches.length>0;
  if(!matches.length)$("newsEmpty").textContent=recent.length?tr("empty"):tr("noFeed");
  const more=$("newsLoadMore");
- const remaining=Math.max(0,matches.length-state.visible);
+ const remaining=Math.max(0,matches.length-state.rendered);
  more.hidden=remaining===0;
  if(remaining){
   $("newsMoreButton").textContent=({ru:"Показать ещё",he:"הצג עוד",en:"Show more",ar:"عرض المزيد"}[state.lang])+" ("+remaining+")";
-  $("newsVisibleCount").textContent=({ru:"Показано",he:"מוצגות",en:"Showing",ar:"عرض"}[state.lang])+" "+list.length+" / "+matches.length;
+  $("newsVisibleCount").textContent=({ru:"Показано",he:"מוצגות",en:"Showing",ar:"عرض"}[state.lang])+" "+state.rendered+" / "+matches.length;
  }
 }
 async function load(){
@@ -132,10 +140,10 @@ async function load(){
  }
  tabs();render();
 }
-$("newsMoreButton").addEventListener("click",()=>{state.visible+=PAGE_SIZE;render()});
+$("newsMoreButton").addEventListener("click",()=>{state.visible+=PAGE_SIZE;render(true)});
 if("IntersectionObserver" in window){
  scrollObserver=new IntersectionObserver(entries=>{
-  if(entries.some(x=>x.isIntersecting)&&!$("newsLoadMore").hidden){state.visible+=PAGE_SIZE;render()}
+  if(entries.some(x=>x.isIntersecting)&&!$("newsLoadMore").hidden){state.visible+=PAGE_SIZE;render(true)}
  },{rootMargin:"160px 0px"});
  scrollObserver.observe($("newsLoadMore"));
 }
