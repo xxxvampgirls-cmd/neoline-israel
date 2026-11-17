@@ -54,10 +54,42 @@ jobs:
             const width=await page.evaluate(()=>({page:document.documentElement.scrollWidth,window:innerWidth}));
             if(width.page>width.window+3)throw Error('Game overflows 390px '+JSON.stringify(width));
             console.log('OFFICIAL BANK GAME PASS '+JSON.stringify(bank));
+            // Compact quick-play launcher: players should choose a mode immediately
+            // on a real phone, with no huge welcome poster or information counters.
+            const quick=await page.evaluate(()=>{
+              const box=selector=>{const el=document.querySelector(selector);if(!el)return null;
+                const r=el.getBoundingClientRect();return {top:Math.round(r.top),bottom:Math.round(r.bottom),
+                  height:Math.round(r.height),width:Math.round(r.width),display:getComputedStyle(el).display}};
+              const cards=[...document.querySelectorAll('#modeGrid [data-mode]')].map(el=>{
+                const r=el.getBoundingClientRect();return {name:el.dataset.mode,top:Math.round(r.top),
+                bottom:Math.round(r.bottom),width:Math.round(r.width)}
+              });
+              return {hero:box('.game-hero'),lobby:box('#gameLobby'),bank:box('#bankStatus'),
+                progressOpen:document.querySelector('#progressDisclosure').open,
+                heroChips:!!document.querySelector('.hero-chips'),
+                roadScene:!!document.querySelector('.road-scene'),
+                intro:!!document.querySelector('#heroSubtitle'),cards};
+            });
+            console.log('QUICK PLAY FIRST FOLD '+JSON.stringify(quick));
+            if(quick.heroChips||quick.roadScene||quick.intro)
+              throw Error('Large introduction and information cloud must be removed');
+            if(quick.bank?.display!=='none'||quick.progressOpen)
+              throw Error('Loaded-bank info and progress numbers must not crowd game modes');
+            if(quick.hero.bottom>190||quick.cards[0].top>345||
+               Math.max(...quick.cards.slice(0,4).map(c=>c.bottom))>710||quick.cards[4].bottom>810)
+              throw Error('Game modes are not immediately tappable on first phone screen: '+JSON.stringify(quick));
+            if(quick.cards.length!==5||quick.cards.some(c=>c.width<118))
+              throw Error('Five easy-to-tap modes must be visible without horizontal clipping');
+            await page.locator('#progressSummary').click();
+            if(!await page.locator('#statsRow').isVisible())throw Error('Collapsible personal progress is inaccessible');
+            await page.locator('#progressSummary').click();
+            if(await page.locator('#statsRow').isVisible())throw Error('Progress should collapse again');
             const officialLabel=await page.locator('#modeMarathon').innerText();
             if(!/путешествие|билеты/i.test(officialLabel))
               throw Error('All-ticket journey mode missing');
             await page.locator('[data-mode="marathon"]').click();
+            if(await page.locator('.game-hero').isVisible())
+              throw Error('Welcome header should disappear when game begins');
             if(!await page.locator('#gamePlaying').isVisible()||
                await page.locator('#questionCounter').textContent()!=='1 / 20')
               throw Error('All-question 20-step journey failed');
@@ -66,6 +98,8 @@ jobs:
             if(await page.locator('#questionCounter').textContent()!=='2 / 20')
               throw Error('Marathon 20-question progress broken');
             await page.locator('#exitQuiz').click();
+            if(!await page.locator('.game-hero').isVisible())
+              throw Error('Compact game header not restored after leaving question view');
             console.log('ALL-TICKETS JOURNEY PASS: full 1801-bank, 20-question stages, new questions prioritised');
             await page.locator('[data-mode="route"]').click();
             if(!await page.locator('#gamePlaying').isVisible())throw Error('Route does not start');
