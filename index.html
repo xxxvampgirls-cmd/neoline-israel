@@ -2075,6 +2075,52 @@ html[dir=rtl] .theory-preview{text-align:right}
  :is(.news-showcase-cutout,.promo-art-object){animation:none!important;transform:none!important}
 }
 
+
+/* FINAL EIGHT-SLIDE SHOWROOM — keep silver-blue stage stationary.
+   The same backdrop, glowing focus and bands stay visually fixed while
+   only camera cutouts, game device and delivery artwork move sideways. */
+#showcaseSlides .featured-slide{
+ background:linear-gradient(115deg,#f6fbff 0%,#edf8ff 48%,#d7efff 100%)!important;
+ border-color:#c8e4f7!important;
+}
+#showcaseSlides .featured-slide .featured-image,
+#showcaseSlides .featured-slide--theory .theory-featured-image{
+ background:radial-gradient(ellipse at 50% 46%,#ffffff 10%,#ecf8ff 54%,#daefff 100%)!important;
+ border-color:#cbe6f7!important;
+}
+#showcaseSlides .featured-slide--israel .israel-featured-image>img{
+ mix-blend-mode:normal!important;
+}
+#showcaseSlides .featured-slide.ad-arriving .feature-copy{
+ animation:neolineCopyReveal .52s ease .10s both;
+}
+@keyframes neolineCopyReveal{from{opacity:0}to{opacity:1}}
+/* Non-product advertising slides participate in the same cutout transition. */
+#showcaseSlides .featured-slide--site-promo .promo-art-object{
+ --cutout-travel:calc(100% + 54px);
+}
+#showcaseSlides .featured-slide.ad-exiting.ad-move-forward .promo-art-object{
+ animation:neolineCutoutLeaveLeft .84s cubic-bezier(.43,.08,.3,1) both!important;
+}
+#showcaseSlides .featured-slide.ad-arriving.ad-move-forward .promo-art-object{
+ animation:neolineCutoutEnterRight .84s cubic-bezier(.43,.08,.3,1) both!important;
+}
+#showcaseSlides .featured-slide.ad-exiting.ad-move-backward .promo-art-object{
+ animation:neolineCutoutLeaveRight .84s cubic-bezier(.43,.08,.3,1) both!important;
+}
+#showcaseSlides .featured-slide.ad-arriving.ad-move-backward .promo-art-object{
+ animation:neolineCutoutEnterLeft .84s cubic-bezier(.43,.08,.3,1) both!important;
+}
+#showcaseSlides .featured-slide :is(.theory-device,.theory-back-card,.theory-floating-award){
+ --cutout-travel:min(95vw,560px);
+}
+@media(prefers-reduced-motion:reduce){
+ #showcaseSlides .featured-slide.ad-arriving .feature-copy,
+ #showcaseSlides .featured-slide:is(.ad-arriving,.ad-exiting) .promo-art-object{
+  animation:none!important;transform:none!important;
+ }
+}
+
 </style><link rel="stylesheet" href="./catalog-ui.css"><link rel="stylesheet" href="./pickup-ui.css"><!-- Cloudflare Pages Git reconnection deployment probe: 2026-11-16 --></head><body>
 <div class="sticky"><div class="shell header"><a class="brand brand-original" href="#top" aria-label="NEOLINE"><span class="brand-lockup"><img class="brand-clean" src="assets/neoline-clean.svg?v=20261116-compact" alt="NEOLINE" width="501" height="108" decoding="async"></span></a><nav class="nav"><button data-scroll="catalog" class="active" data-i="navCatalog">Каталог</button><button type="button" id="openNewsHeader" aria-label="Автоновости Израиля"><span id="headerNewsLabel">Новости</span></button><button data-scroll="advantages" data-i="navBenefits">Преимущества</button><button data-scroll="installation" data-i="navInstall">Установка и доставка</button><button data-scroll="footer" data-i="navContact">Контакты</button></nav><div class="head-actions"><div class="flag-switcher" role="group" aria-label="Язык / Language / שפה / اللغة"><button class="flag-choice active" type="button" data-language="ru" title="Русский" aria-label="Русский язык" aria-pressed="true"><span class="flag-graphic" aria-hidden="true"><svg viewBox="0 0 36 24" xmlns="http://www.w3.org/2000/svg" focusable="false"><rect width="36" height="24" fill="#fff"/><path d="M0 8h36v8H0z" fill="#0039a6"/><path d="M0 16h36v8H0z" fill="#d52b1e"/></svg></span></button><button class="flag-choice" type="button" data-language="he" title="עברית" aria-label="עברית - Hebrew" aria-pressed="false"><span class="flag-graphic" aria-hidden="true"><svg viewBox="0 0 36 24" xmlns="http://www.w3.org/2000/svg" focusable="false"><rect width="36" height="24" fill="#fff"/><path d="M0 4h36v2.3H0zm0 13.7h36V20H0z" fill="#0038b8"/><g stroke="#0038b8" stroke-width="1.25" fill="none" stroke-linejoin="round" stroke-linecap="round"><path d="M18 7.6 23.4 16.4H12.6Z"/><path d="M18 16.4 12.6 7.6h10.8Z"/></g></svg></span></button><button class="flag-choice" type="button" data-language="en" title="English" aria-label="English language" aria-pressed="false"><span class="flag-graphic" aria-hidden="true"><svg viewBox="0 0 36 24" xmlns="http://www.w3.org/2000/svg" focusable="false"><rect width="36" height="24" fill="#012169"/><path d="M0 0l36 24M36 0L0 24" stroke="#fff" stroke-width="6"/><path d="M0 0l36 24M36 0L0 24" stroke="#c8102e" stroke-width="2.5"/><path d="M18 0v24M0 12h36" stroke="#fff" stroke-width="9"/><path d="M18 0v24M0 12h36" stroke="#c8102e" stroke-width="4.6"/></svg></span></button><button class="flag-choice flag-choice--text flag-choice--arabic" type="button" data-language="ar" title="العربية" aria-label="اللغة العربية" aria-pressed="false" lang="ar" dir="rtl">عربي</button></div><select class="language language-native" id="lang" aria-label="Language" tabindex="-1"><option value="ru">RU</option><option value="he">עברית</option><option value="en">ENG</option><option value="ar">العربية</option></select></div></div></div>
 <main id="top"><section class="showcase" aria-label="Featured products"><div class="hero-stage"><div id="showcaseSlides" aria-live="polite"></div><div class="showcase-controls"><button class="showcase-arrow" id="slidePrev" aria-label="Previous">‹</button><div id="showcaseDots" class="showcase-dots"></div><button class="showcase-arrow" id="slideNext" aria-label="Next">›</button></div><div class="sneak" aria-label="Highlights"><span>NEOLINE ISRAEL · CONCEPT</span><span>◉ 4K · 2K · Wi-Fi</span><span>🚙 Dash cams</span><span>₪ Estimated local pricing</span></div></div></section>
@@ -2161,8 +2207,8 @@ const showcaseMotionEpoch=performance.now();
 function alignShowcaseMotion(slide){
  if(slide)slide.style.setProperty('--showcase-phase',(-((performance.now()-showcaseMotionEpoch)/1000)).toFixed(3)+'s');
 }
-/* 12-slide editorial showroom: products → news promo → three verified stories → services → product → existing game. */
-const featuredIds=[0,1,2,'news-promo','news-0','news-1','news-2','delivery-promo','install-promo','catalog-promo',7,'theory'];
+/* Exactly eight showroom slides: three original product ads, game, three more catalog products, delivery. No news in the hero. */
+const featuredIds=[0,1,2,'theory',3,4,5,'delivery-promo'];
 let homepageNews=[];
 
 
@@ -2384,6 +2430,32 @@ async function loadHomepageNews(){
  }catch(e){/* Empty slots lead to /news.html rather than showing invented reports. */}
 }
 
+
+/* Additional real catalog models use their own headlines, not the old
+   four-entry hero array. Keep the store's existing 4-language design. */
+const showcaseProductCopy={
+ ru:{
+  3:{title:'Две камеры.<br><em>Полный контроль дороги.</em>',lead:'NEOLINE Flash 2K Wi-Fi Dual: запись 2K впереди, Full HD сзади и удобное подключение по Wi-Fi.'},
+  4:{title:'Уверенный обзор.<br><em>Со всех сторон.</em>',lead:'NEOLINE EasyDrive 2K Wi-Fi Dual: видеорегистратор-зеркало с камерой заднего вида и записью 2K.'},
+  5:{title:'Детали важны.<br><em>Снимай в 4K.</em>',lead:'NEOLINE Argus 4K: чёткое видео Ultra HD, матрица Sony Starvis и Wi-Fi для управления со смартфона.'}
+ },
+ en:{
+  3:{title:'Two cameras.<br><em>More of the road.</em>',lead:'NEOLINE Flash 2K Wi-Fi Dual: 2K front recording, Full HD rear view and wireless connectivity.'},
+  4:{title:'See the road.<br><em>Front and back.</em>',lead:'NEOLINE EasyDrive 2K Wi-Fi Dual: a mirror-style dash camera with a rear camera and 2K video.'},
+  5:{title:'Every detail.<br><em>Captured in 4K.</em>',lead:'NEOLINE Argus 4K: Ultra HD recording, a Sony Starvis sensor and convenient Wi-Fi control.'}
+ },
+ he:{
+  3:{title:'שתי מצלמות.<br><em>יותר מהדרך.</em>',lead:'NEOLINE Flash 2K Wi-Fi Dual: צילום 2K מלפנים, Full HD מאחור וחיבור Wi-Fi נוח.'},
+  4:{title:'תמונה ברורה.<br><em>מלפנים ומאחור.</em>',lead:'NEOLINE EasyDrive 2K Wi-Fi Dual: מצלמת דרך בעיצוב מראה עם מצלמה אחורית וצילום 2K.'},
+  5:{title:'כל פרט חשוב.<br><em>בצילום 4K.</em>',lead:'NEOLINE Argus 4K: צילום Ultra HD, חיישן Sony Starvis ושליטה נוחה דרך Wi-Fi.'}
+ },
+ ar:{
+  3:{title:'كاميرتان.<br><em>رؤية أوسع للطريق.</em>',lead:'NEOLINE Flash 2K Wi-Fi Dual: تصوير 2K أمامي وFull HD خلفي واتصال Wi-Fi.'},
+  4:{title:'رؤية واضحة.<br><em>أمامك وخلفك.</em>',lead:'NEOLINE EasyDrive 2K Wi-Fi Dual: كاميرا مرآة مع كاميرا خلفية وتسجيل 2K.'},
+  5:{title:'كل التفاصيل.<br><em>بدقة 4K.</em>',lead:'NEOLINE Argus 4K: تسجيل Ultra HD ومستشعر Sony Starvis وتحكم مريح عبر Wi-Fi.'}
+ }
+};
+
 function renderShowcase(){
  const host=$('showcaseSlides');if(!host)return;
  clearTimeout(showcaseExitTimer);
@@ -2395,11 +2467,13 @@ function renderShowcase(){
   if(id==='install-promo')return homepageSiteSlide('install',i);
   if(id==='catalog-promo')return homepageSiteSlide('catalog',i);
   if(typeof id==='string'&&/^news-[0-2]$/.test(id))return homepageNewsSlide(Number(id.at(-1)),i);
-  const productIndex=[0,1,2,7].indexOf(id);
-   const p=products.find(x=>x.id===id),source=(media[id]||[])[0]||'';
+  const p=products.find(x=>x.id===id),source=(media[id]||[])[0]||'';
+  const productText=(showcaseProductCopy[lang]||showcaseProductCopy.ru)[id];
+  const title=productText?.title||label('hero'+id);
+  const lead=productText?.lead||label('heroText'+id);
   return '<article class="featured-slide '+(i===slideIndex?'active':'')+'" aria-label="'+p.name+'">'
-   +'<div class="feature-copy"><div class="eyebrow">'+p.name+'</div><h1>'+label('hero'+productIndex)+'</h1>'
-   +'<p class="hero-lead">'+label('heroText'+productIndex)+'</p>'
+   +'<div class="feature-copy"><div class="eyebrow">'+p.name+'</div><h1>'+title+'</h1>'
+   +'<p class="hero-lead">'+lead+'</p>'
    +'<div class="featured-tags">'+datas[id].slice(0,2).map(x=>'<span>'+x+'</span>').join('')+'</div>'
    +'<div class="featured-price">₪'+p.price.toLocaleString('en-US')+'<small>'+t('estimated')+'</small></div>'
    +'<div class="featured-cta"><button class="primary" data-open-feature="'+id+'">'+label('more')+' ↗</button><button class="secondary" data-add-feature="'+id+'">+ '+label('buy')+'</button></div></div>'
@@ -2567,7 +2641,7 @@ $('adShare').onclick=async()=>{
   else {window.prompt('Copy link',url.href)}
  }catch(e){if(e.name!=='AbortError')toast(({ru:'Не удалось поделиться',en:'Could not share',he:'השיתוף נכשל',ar:'تعذرت المشاركة'})[lang])}
 };
-let preferredLang='ru';try{const saved=localStorage.getItem('neoline-language');if(['ru','he','en','ar'].includes(saved))preferredLang=saved}catch(e){}changeLang(preferredLang);updateCounts();loadTransparentPhotos();loadHomepageNews();
+let preferredLang='ru';try{const saved=localStorage.getItem('neoline-language');if(['ru','he','en','ar'].includes(saved))preferredLang=saved}catch(e){}changeLang(preferredLang);updateCounts();loadTransparentPhotos();
 /* Verify that the official brand asset is reachable; otherwise use a readable
    text fallback. The page remains usable even when the image CDN is blocked. */
 
