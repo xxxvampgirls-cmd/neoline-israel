@@ -136,7 +136,7 @@ function render(append=false){
  const remaining=Math.max(0,matches.length-state.rendered);
  more.hidden=remaining===0;
  if(remaining){
-  $("newsMoreButton").textContent=({ru:"Показать ещё",he:"הצג עוד",en:"Show more",ar:"عرض المزيد"}[state.lang])+" ("+remaining+")";
+  $("newsMoreButton").textContent=({ru:"Показать ещё",he:"הצג עוד",en:"Show",ar:"عرض المزيد"}[state.lang])+" "+Math.min(PAGE_SIZE,remaining)+(state.lang==="en"?" more":"");
   $("newsVisibleCount").textContent=({ru:"Показано",he:"מוצגות",en:"Showing",ar:"عرض"}[state.lang])+" "+state.rendered+" / "+matches.length;
  }
 }
