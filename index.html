@@ -1686,11 +1686,11 @@ html[dir=rtl] .theory-preview{text-align:right}
     #117fcbd9 81%,#52b5e69b 93%,transparent 100%);
 }
 #showcaseSlides .featured-slide.active:not(.ad-exiting) .ad-photo-stripes .ad-photo-band:first-child{
-  animation:neolineMainBandLeftToRight 5.8s linear infinite alternate;
+  animation:neolineMainBandLeftToRight 5.8s linear var(--showcase-phase,0s) infinite alternate;
   will-change:transform;
 }
 #showcaseSlides .featured-slide.active:not(.ad-exiting) .ad-photo-stripes .ad-photo-band:nth-child(2){
-  animation:neolineMainBandRightToLeft 6.6s linear infinite alternate;
+  animation:neolineMainBandRightToLeft 6.6s linear var(--showcase-phase,0s) infinite alternate;
   will-change:transform;
 }
 /* 148% width + 24% overhang keep both ends covered at +/-14% translate. */
@@ -1748,7 +1748,7 @@ html[dir=rtl] .theory-preview{text-align:right}
   --trail-peak:.47;--trail-end:-250%;--trail-duration:7.3s;--trail-delay:-5.91s;
 }
 #showcaseSlides .featured-slide.active:not(.ad-exiting) .ad-photo-stripes .ad-speed-trail{
-  animation:neolineIndependentRoadTrail var(--trail-duration) linear var(--trail-delay) infinite;
+  animation:neolineIndependentRoadTrail var(--trail-duration) linear calc(var(--trail-delay) + var(--showcase-phase,0s)) infinite;
   will-change:transform,opacity;
 }
 @keyframes neolineIndependentRoadTrail{
@@ -1905,6 +1905,12 @@ ar:{"best":"طراز رئيسي · اختيار العرض","star":"منتج م�
 function label(k){return (ultra[lang]||ultra.ru)[k]||k}
 function productMedia(p){return '<img class="product-photo" loading="lazy" decoding="async" src="'+media[p.id][0]+'" alt="'+p.name.replace(/"/g,'&quot;')+'" onerror="this.onerror=null;this.style.opacity=.35" />'}
 let slideIndex=0,slideTimer=null,showcaseExitTimer=null;
+// One clock for all fixed backplates: speed streaks do not visibly restart
+// when a new model replaces the cutout on top of them.
+const showcaseMotionEpoch=performance.now();
+function alignShowcaseMotion(slide){
+ if(slide)slide.style.setProperty('--showcase-phase',(-((performance.now()-showcaseMotionEpoch)/1000)).toFixed(3)+'s');
+}
 const featuredIds=[0,1,2,7,'theory'];
 
 
@@ -2055,6 +2061,7 @@ function renderShowcase(){
   flight.append(copy,picture);
  });
  host.querySelectorAll('.featured-slide:not(.active)').forEach(el=>el.setAttribute('inert',''));
+ alignShowcaseMotion(host.querySelector('.featured-slide.active'));
  $('showcaseDots').innerHTML=featuredIds.map((v,i)=>'<button class="showcase-dot '+(i===slideIndex?'active':'')+'" data-dot="'+i+'" aria-label="Slide '+(i+1)+'"></button>').join('');
  host.querySelectorAll('[data-open-feature]').forEach(el=>el.onclick=()=>openProduct(Number(el.dataset.openFeature)));
  host.querySelectorAll('[data-feature-catalog]').forEach(el=>el.onclick=()=>document.getElementById('catalog').scrollIntoView({behavior:'smooth'}));
@@ -2087,6 +2094,7 @@ function revealShowcaseSlide(index){
   if(reduced)previous.classList.remove('active');
   else previous.classList.add('ad-exiting',direction);
  }
+ alignShowcaseMotion(incoming);
  incoming.classList.add('active');
  if(!reduced)incoming.classList.add('ad-arriving',direction);
  incoming.removeAttribute('inert');
