@@ -149,17 +149,17 @@ const hasLives=()=>["route","signs","mistakes"].includes(state.mode);
 const GAME_OVER_COPY={
  ru:{
   message:"Три жизни закончились.<br>Не огорчайся — попробуй ещё раз!",
-  retry:"Играть снова",modes:"К выбору режимов",
+  retry:"Играть снова",modes:"К выбору режимов",promoLabel:"Для твоих поездок",promoLink:"Посмотреть в магазине",
   close:"Закрыть и вернуться к режимам"
  },
  he:{
   message:"נגמרו שלושת הלבבות.<br>לא נורא — אפשר לנסות שוב!",
-  retry:"לשחק שוב",modes:"בחירת מצב משחק",
+  retry:"לשחק שוב",modes:"בחירת מצב משחק",promoLabel:"לנסיעה שלך",promoLink:"לצפייה בחנות",
   close:"סגירה וחזרה לבחירת מצב"
  },
  en:{
   message:"Your three lives are gone.<br>Don't worry — give it another try!",
-  retry:"Play again",modes:"Choose a game mode",
+  retry:"Play again",modes:"Choose a game mode",promoLabel:"For your next drive",promoLink:"View in store",
   close:"Close and go back to modes"
  }
 };
@@ -186,6 +186,8 @@ function showGameOver(){
  $("gameOverMessage").innerHTML=t.message;
  $("gameOverRetryLabel").textContent=t.retry;
  $("gameOverModesLabel").textContent=t.modes;
+ $("gameOverPromoLabel").textContent=t.promoLabel;
+ $("gameOverPromoLink").firstChild.textContent=t.promoLink+" ";
  $("gameOverClose").setAttribute("aria-label",t.close);
  $("gameOverScore").textContent=state.correct+" / "+state.answers.length+" · +"+state.earned+" XP";
  $("nextQuestion").disabled=true;
@@ -215,7 +217,7 @@ function initGameOverControls(){
    e.preventDefault();gameOverToModes();return;
   }
   if(e.key!=="Tab")return;
-  const controls=[$("gameOverClose"),$("gameOverRetry"),$("gameOverModes")];
+  const controls=[$("gameOverClose"),$("gameOverPromoLink"),$("gameOverRetry"),$("gameOverModes")];
   const position=controls.indexOf(document.activeElement);
   if(e.shiftKey && position<=0){
    e.preventDefault();controls[controls.length-1].focus();
