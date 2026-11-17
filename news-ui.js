@@ -81,6 +81,7 @@ const wazeLabels={
   open:"افتح في Waze ↗",areas:"منطقة الخريطة",area:["كل إسرائيل","الوسط","الشمال","الجنوب"]}
 };
 let wazeArea="israel";
+const wazeLoadingEl=$("trafficWazeLoading");
 function wazeLang(){return wazeLabels[state.lang]||wazeLabels.ru}
 function wazeURL(){
  const place=wazeAreas[wazeArea]||wazeAreas.israel;
@@ -96,7 +97,7 @@ function renderWazeCopy(){
  $("trafficWazeNotice").textContent=t.notice;
  $("trafficWazeOpen").textContent=t.open;
  $("trafficWazeAreas").setAttribute("aria-label",t.areas);
- $("trafficWazeLoading").textContent=t.loading;
+ wazeLoadingEl.textContent=t.loading;
  document.querySelectorAll("[data-waze-area]").forEach((button,index)=>{
   button.textContent=t.area[index];
   button.classList.toggle("active",button.dataset.wazeArea===wazeArea);
@@ -122,7 +123,7 @@ function refreshWazeFrame(){
 $("trafficWaze").addEventListener("toggle",()=>{
  if($("trafficWaze").open){refreshWazeFrame();return}
  // Stop Waze iframe processing/network whenever the map is collapsed.
- $("trafficWazeFrame").replaceChildren($("trafficWazeLoading"));
+ $("trafficWazeFrame").replaceChildren(wazeLoadingEl);
  $("trafficWazeFrame").dataset.loaded="false";
 });
 $("trafficWazeAreas").addEventListener("click",event=>{
@@ -474,7 +475,7 @@ $("newsSearch").addEventListener("input",e=>{state.query=e.target.value;state.vi
 document.querySelectorAll('[data-news-lang]').forEach(el=>el.addEventListener('click',()=>{
  state.lang=el.dataset.newsLang;
  try{localStorage.setItem("neoline-language",state.lang)}catch(e){}
- localize();tabs();render();renderTraffic();renderWazeCopy();initializeFeatures(true);
+ localize();tabs();render();renderTraffic();renderWazeCopy();refreshWazeFrame();initializeFeatures(true);
 }));
 document.addEventListener("visibilitychange",()=>{
  // Only recheck age limits after a long idle period; no needless DOM rebuilds.
