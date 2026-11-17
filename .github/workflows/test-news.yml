@@ -58,6 +58,25 @@ jobs:
             console.log('NEWS AFTER CLICK URL='+page.url());
             await page.waitForURL(url=>/\/news(?:\.html)?\/?$/.test(new URL(url).pathname),{timeout:15000});
             await page.waitForSelector('#newsGrid',{state:'attached',timeout:12000});
+            // Catch HTML regressions where one missing quote disables both
+            // the stylesheet and the news script on Android browsers.
+            const assetState=await page.evaluate(()=>{
+              const css=[...document.querySelectorAll('link[rel=stylesheet]')].find(e=>e.href.includes('news-ui.css'));
+              const js=[...document.scripts].find(e=>e.src.includes('news-ui.js'));
+              const style=getComputedStyle(document.body);
+              return {css:css?.href||'',js:js?.src||'',bodyFont:style.fontFamily,
+                bodyMargin:style.marginLeft,logoWidth:document.querySelector('.news-logo img')?.getBoundingClientRect().width,
+                activeCards:document.querySelectorAll('.news-card').length};
+            });
+            if(!assetState.css||!assetState.js||assetState.bodyMargin!=='0px'||assetState.logoWidth>250)
+              throw Error('News CSS or JavaScript did not load: '+JSON.stringify(assetState));
+            if(!/news-ui/.test(assetState.css)||!/news-ui/.test(assetState.js))
+              throw Error('News stylesheet/script tag malformed: '+JSON.stringify(assetState));
+            const cssFetch=await page.request.get(assetState.css),jsFetch=await page.request.get(assetState.js);
+            if(!cssFetch.ok()||!jsFetch.ok())throw Error('News assets are not available: '+cssFetch.status()+' / '+jsFetch.status());
+            if(!(await cssFetch.text()).includes('.news-cover')||!(await jsFetch.text()).includes('initializeFeatures'))
+              throw Error('News asset URLs returned incorrect content or HTML fallbacks');
+            console.log('NEWS ASSET LOAD PASS '+JSON.stringify(assetState));
             if(await page.locator('#newsFav').count()!==0||await page.locator('#newsDelivery').count()!==1)
               throw Error('News bottom nav should replace Favorites with Delivery');
             const compact=await page.evaluate(()=>{
