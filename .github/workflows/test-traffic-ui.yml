@@ -56,8 +56,26 @@ jobs:
             if(!await page.locator('.traffic-report-body p').first().isVisible())throw Error('Source detail not expandable');
             const dims=await page.evaluate(()=>({w:document.documentElement.scrollWidth,viewport:innerWidth}));
             if(dims.w>dims.viewport+3)throw Error('Traffic panel causes mobile overflow '+JSON.stringify(dims));
+            // The Waze iframe is intentionally absent until someone opens the map.
+            if(await page.locator('#trafficWazeFrame iframe').count())throw Error('Waze iframe is preloading');
+            await page.locator('#trafficWaze>summary').click();
+            await page.waitForFunction(()=>document.querySelector('#trafficWazeFrame iframe'),null,{timeout:5000});
+            let embedded=await page.locator('#trafficWazeFrame iframe').getAttribute('src');
+            if(!embedded.includes('https://embed.waze.com/ru/iframe?zoom=7&lat=31.53&lon=34.91'))
+              throw Error('Wrong official Waze iframe source '+embedded);
+            await page.locator('[data-waze-area="north"]').click();
+            embedded=await page.locator('#trafficWazeFrame iframe').getAttribute('src');
+            if(!embedded.includes('zoom=9&lat=32.84&lon=35.15'))
+              throw Error('North region did not update map '+embedded);
             await page.locator('[data-news-lang="he"]').click();
             if(!/כבישי ישראל/.test(await page.locator('#trafficTitle').innerText()))throw Error('Hebrew translation missing');
+            embedded=await page.locator('#trafficWazeFrame iframe').getAttribute('src');
+            if(!embedded.includes('https://embed.waze.com/he/iframe?'))
+              throw Error('Waze iframe language not updated '+embedded);
+            await page.locator('#trafficWaze>summary').click();
+            await page.waitForFunction(()=>!document.querySelector('#trafficWazeFrame iframe'),null,{timeout:5000});
+            if(!await page.locator('#trafficWazeLoading').count())
+              throw Error('Waze placeholder not restored on collapse');
             data={...data,sourceStatus:'unavailable',events:[]};
             await page.locator('#trafficRefresh').click();
             await page.waitForFunction(()=>/אינו זמין/.test(document.querySelector('#trafficStatus').textContent));
