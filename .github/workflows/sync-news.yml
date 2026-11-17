@@ -2,7 +2,7 @@ name: Refresh Israel automotive news (30-day archive)
 on:
   workflow_dispatch:
   schedule:
-    - cron: '17 5 * * *'  # daily, 30-day archive
+    - cron: '17 5,11,17 * * *'  # three daily refreshes; 30-day archive
   push:
     branches: [main]
     paths:
