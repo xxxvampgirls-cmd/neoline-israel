@@ -1184,6 +1184,91 @@ body{width:100%;max-width:100%;overflow-x:clip}
 }
 
 
+/* 3D carousel handoff — do not fade the outgoing product away.
+   Move the entire visual unit (cutout, contact shadow, white focus disc and
+   fine streaks) fully past the phone/desktop viewport. The headline changes
+   independently; the card's frame stays in place. No videos or scripting
+   per frame: two GPU-friendly transforms on the currently switching slides. */
+#showcaseSlides .featured-slide.ad-arriving.active:not(.ad-exiting){
+ animation:none!important;
+ z-index:2;
+ overflow:visible!important;
+}
+#showcaseSlides .featured-slide.ad-exiting{
+ animation:none!important;
+ z-index:3;
+ overflow:visible!important;
+ background:transparent!important;
+ border-color:transparent!important;
+ box-shadow:none!important;
+}
+#showcaseSlides .featured-slide.ad-exiting::before{
+ opacity:0;
+}
+#showcaseSlides .featured-slide:is(.ad-arriving,.ad-exiting) .featured-image{
+ will-change:transform;
+ overflow:visible!important;
+}
+#showcaseSlides .featured-slide.ad-exiting .featured-image{
+ background:transparent!important;
+ border-color:transparent!important;
+ box-shadow:none!important;
+}
+#showcaseSlides .featured-slide:is(.ad-arriving,.ad-exiting) .featured-image
+ :is(.feature-img-prev,.feature-img-next,.feature-img-zoom){
+ opacity:0;pointer-events:none;
+}
+/* Show the new title almost immediately; previous copy fades as its
+   physical product continues off-screen, rather than fading the product. */
+#showcaseSlides .featured-slide.ad-exiting .feature-copy{
+ animation:neolineFlightCopyOut .26s ease-in forwards;
+}
+#showcaseSlides .featured-slide.ad-arriving .feature-copy{
+ animation:neolineFlightCopyIn .44s .12s ease-out both;
+}
+@keyframes neolineFlightCopyOut{
+ from{opacity:1;transform:translate3d(0,0,0)}
+ to{opacity:0;transform:translate3d(-10px,0,0)}
+}
+@keyframes neolineFlightCopyIn{
+ from{opacity:0;transform:translate3d(10px,0,0)}
+ to{opacity:1;transform:translate3d(0,0,0)}
+}
+#showcaseSlides .featured-slide.ad-exiting.ad-move-forward .featured-image{
+ animation:neolineProductFlyLeft .88s cubic-bezier(.56,.03,.85,.4) both!important;
+}
+#showcaseSlides .featured-slide.ad-arriving.ad-move-forward .featured-image{
+ animation:neolineProductFlyFromRight .88s cubic-bezier(.19,.78,.26,1) both!important;
+}
+#showcaseSlides .featured-slide.ad-exiting.ad-move-backward .featured-image{
+ animation:neolineProductFlyRight .88s cubic-bezier(.56,.03,.85,.4) both!important;
+}
+#showcaseSlides .featured-slide.ad-arriving.ad-move-backward .featured-image{
+ animation:neolineProductFlyFromLeft .88s cubic-bezier(.19,.78,.26,1) both!important;
+}
+@keyframes neolineProductFlyLeft{
+ from{transform:translate3d(0,0,0) scale(1)}
+ to{transform:translate3d(calc(-100vw - 100%),0,0) rotate(-3deg) scale(.94)}
+}
+@keyframes neolineProductFlyFromRight{
+ from{transform:translate3d(calc(100vw + 100%),0,0) rotate(3deg) scale(.94)}
+ to{transform:translate3d(0,0,0) scale(1)}
+}
+@keyframes neolineProductFlyRight{
+ from{transform:translate3d(0,0,0) scale(1)}
+ to{transform:translate3d(calc(100vw + 100%),0,0) rotate(3deg) scale(.94)}
+}
+@keyframes neolineProductFlyFromLeft{
+ from{transform:translate3d(calc(-100vw - 100%),0,0) rotate(-3deg) scale(.94)}
+ to{transform:translate3d(0,0,0) scale(1)}
+}
+@media(prefers-reduced-motion:reduce){
+ #showcaseSlides .featured-slide:is(.ad-arriving,.ad-exiting) .featured-image,
+ #showcaseSlides .featured-slide:is(.ad-arriving,.ad-exiting) .feature-copy{
+  animation:none!important;transform:none!important;will-change:auto!important;
+ }
+}
+
 /* Delivery replaces favorites in both navigation docks. */
 .desktop-dock a{position:relative;display:grid;place-items:center;width:43px;height:43px;border:1px solid #d6e8f8;border-radius:12px;color:#1378c8;background:#ecf7ff;text-decoration:none}
 .desktop-dock a:hover{border-color:#81c2ee;background:#ddf1ff}
@@ -1929,8 +2014,8 @@ function renderShowcase(){
  host.querySelectorAll('[data-feature-next]').forEach(el=>el.onclick=()=>setSlide(slideIndex+1));
  $('showcaseDots').querySelectorAll('[data-dot]').forEach(el=>el.onclick=()=>setSlide(Number(el.dataset.dot)));
 }
-/* Keep the panels mounted so the old campaign can slide out while the
-   next zooming product moves in. Manual swipes and auto-rotation use one path. */
+/* Preserve the incoming/outgoing product, white light and natural shadow
+   as one visible flying object. Both manual and timed slides use this path. */
 function revealShowcaseSlide(index){
  const next=(index+featuredIds.length)%featuredIds.length;
  const host=$('showcaseSlides');
@@ -1938,18 +2023,32 @@ function revealShowcaseSlide(index){
  if(slides.length!==featuredIds.length){slideIndex=next;renderShowcase();return}
  if(next===slideIndex)return;
  clearTimeout(showcaseExitTimer);
- host.querySelectorAll('.ad-exiting').forEach(el=>{
-  el.classList.remove('ad-exiting','active');
-  el.setAttribute('inert','');
- });
  const previous=slides[slideIndex],incoming=slides[next];
- if(previous){previous.classList.add('ad-exiting');previous.setAttribute('inert','');}
- incoming.classList.remove('ad-exiting');
+ // A quick second tap cancels stale flights without leaving ghost cards.
+ for(const el of slides){
+  el.classList.remove('ad-exiting','ad-arriving','ad-move-forward','ad-move-backward');
+  if(el!==previous&&el.classList.contains('active')){
+   el.classList.remove('active');el.setAttribute('inert','');
+  }
+ }
+ const reduced=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+ const direction=index<slideIndex?'ad-move-backward':'ad-move-forward';
+ if(previous){
+  previous.setAttribute('inert','');
+  if(reduced){previous.classList.remove('active')}
+  else previous.classList.add('ad-exiting',direction);
+ }
  incoming.classList.add('active');
+ if(!reduced)incoming.classList.add('ad-arriving',direction);
  incoming.removeAttribute('inert');
  slideIndex=next;
  $('showcaseDots').querySelectorAll('.showcase-dot').forEach((dot,i)=>dot.classList.toggle('active',i===next));
- if(previous)showcaseExitTimer=setTimeout(()=>previous.classList.remove('active','ad-exiting'),740);
+ if(!reduced){
+  showcaseExitTimer=setTimeout(()=>{
+   previous?.classList.remove('active','ad-exiting','ad-move-forward','ad-move-backward');
+   incoming.classList.remove('ad-arriving','ad-move-forward','ad-move-backward');
+  },900);
+ }
 }
 function setSlide(i){revealShowcaseSlide(i);restartSlides()}
 function restartSlides(){
