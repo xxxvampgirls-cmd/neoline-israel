@@ -56,6 +56,97 @@ function currentOnly(o){
  }
  return t>=now-30*86400e3;
 }
+
+/* Featured news header: only one slide image exists in the DOM at a time.
+   It rotates the latest 10 valid stories independently of the 8-card list. */
+const feature={items:[],index:0,timer:null,touchX:null,touchY:null,paused:false,swipedUntil:0};
+const featureTerms={
+ ru:{latest:"10 СВЕЖИХ НОВОСТЕЙ",view:"Читать новость",slide:"Новость",of:"из",prev:"Предыдущая новость",next:"Следующая новость",pick:"Выбрать новость",loading:"Загружаем последние новости…",empty:"Пока нет проверенных новостей"},
+ en:{latest:"10 LATEST STORIES",view:"Read original",slide:"Story",of:"of",prev:"Previous story",next:"Next story",pick:"Choose story",loading:"Loading latest stories…",empty:"No verified news yet"},
+ he:{latest:"10 חדשות אחרונות",view:"לקריאת הידיעה",slide:"ידיעה",of:"מתוך",prev:"ידיעה קודמת",next:"הידיעה הבאה",pick:"בחירת ידיעה",loading:"טוען חדשות אחרונות…",empty:"אין כרגע חדשות מאומתות"},
+ ar:{latest:"آخر 10 أخبار",view:"اقرأ الخبر",slide:"خبر",of:"من",prev:"الخبر السابق",next:"الخبر التالي",pick:"اختر الخبر",loading:"جار تحميل آخر الأخبار…",empty:"لا توجد أخبار موثقة"}
+};
+const featureTr=k=>(featureTerms[state.lang]||featureTerms.ru)[k];
+function stopFeatureTimer(){clearTimeout(feature.timer);feature.timer=null}
+function featureReducedMotion(){return window.matchMedia&&window.matchMedia("(prefers-reduced-motion: reduce)").matches}
+function restartFeatureTimer(){
+ stopFeatureTimer();
+ if(feature.items.length<2||feature.paused||document.hidden||featureReducedMotion())return;
+ feature.timer=setTimeout(()=>setFeatureIndex(feature.index+1,false),7600);
+}
+function drawFeature(){
+ const host=$("newsFeatureSlide"),controls=$("newsFeatureControls");
+ if(!host||!controls)return;
+ const list=feature.items;
+ controls.hidden=list.length<2;
+ $("newsFeatureCarousel").setAttribute("aria-label",featureTr("latest"));
+ $("newsFeaturePrev").setAttribute("aria-label",featureTr("prev"));
+ $("newsFeatureNext").setAttribute("aria-label",featureTr("next"));
+ $("newsFeatureDots").setAttribute("aria-label",featureTr("pick"));
+ if(!list.length){host.innerHTML='<p class="news-feature-loading">'+safe(featureTr("empty"))+'</p>';return}
+ const item=list[feature.index],localized=localStory(item),url=safeURL(item.url),pic=newsPicture(item);
+ const photo=pic?'<img src="'+safe(pic)+'" width="640" height="360" decoding="async" alt="" class="news-feature-img">':'';
+ host.innerHTML='<a class="news-feature-story" href="'+safe(url)+'" target="_blank" rel="noopener noreferrer nofollow" aria-label="'+safe(localized.title)+'">'+
+  '<span class="news-feature-photo">'+photo+'</span>'+
+  '<span class="news-feature-pattern" aria-hidden="true"></span>'+
+  '<span class="news-feature-copy"><span class="news-feature-tag">'+safe(featureTr("latest"))+' <i>·</i> '+safe(tr(item.category))+'</span>'+
+  '<strong class="news-feature-title" dir="auto">'+safe(localized.title)+'</strong>'+
+  '<span class="news-feature-footer">'+safe(displayDate(item.date))+' · '+safe(item.publisher||"")+'<span class="news-feature-go">'+safe(featureTr("view"))+' ↗</span></span></span></a>';
+ const dots=$("newsFeatureDots");
+ if(dots.childElementCount!==list.length){
+  dots.innerHTML=list.map((v,i)=>'<button type="button" data-feature-dot="'+i+'" class="news-feature-dot" aria-label="'+safe(featureTr("slide"))+' '+(i+1)+' '+safe(featureTr("of"))+' '+list.length+'"></button>').join("");
+ }
+ dots.querySelectorAll("button").forEach((button,i)=>{
+  const active=i===feature.index;
+  button.classList.toggle("active",active);
+  button.setAttribute("aria-current",active?"true":"false");
+  button.setAttribute("aria-label",featureTr("slide")+" "+(i+1)+" "+featureTr("of")+" "+list.length);
+ });
+ $("newsFeatureCounter").textContent=String(feature.index+1).padStart(2,"0")+" / "+String(list.length).padStart(2,"0");
+}
+function setFeatureIndex(index,manual=true){
+ if(!feature.items.length)return;
+ feature.index=(index+feature.items.length)%feature.items.length;
+ drawFeature();
+ if(manual)feature.paused=false;
+ restartFeatureTimer();
+}
+function initializeFeatures(){
+ feature.items=state.items.filter(currentOnly).slice(0,10);
+ feature.index=0;
+ drawFeature();
+ restartFeatureTimer();
+}
+$("newsFeaturePrev").addEventListener("click",()=>setFeatureIndex(feature.index-1));
+$("newsFeatureNext").addEventListener("click",()=>setFeatureIndex(feature.index+1));
+$("newsFeatureDots").addEventListener("click",event=>{
+ const target=event.target.closest("[data-feature-dot]");
+ if(target)setFeatureIndex(Number(target.dataset.featureDot));
+});
+const featureNode=$("newsFeatureCarousel");
+featureNode.addEventListener("mouseenter",()=>{feature.paused=true;stopFeatureTimer()});
+featureNode.addEventListener("mouseleave",()=>{feature.paused=false;restartFeatureTimer()});
+featureNode.addEventListener("focusin",()=>{feature.paused=true;stopFeatureTimer()});
+featureNode.addEventListener("focusout",()=>{setTimeout(()=>{if(!featureNode.contains(document.activeElement)){feature.paused=false;restartFeatureTimer()}},20)});
+featureNode.addEventListener("keydown",event=>{
+ if(event.key==="ArrowRight"||event.key==="ArrowLeft"){event.preventDefault();setFeatureIndex(feature.index+(event.key==="ArrowRight"?1:-1))}
+});
+featureNode.addEventListener("touchstart",event=>{
+ if(event.touches.length===1){feature.touchX=event.touches[0].clientX;feature.touchY=event.touches[0].clientY}
+},{passive:true});
+featureNode.addEventListener("touchend",event=>{
+ if(feature.touchX===null)return;
+ const dx=event.changedTouches[0].clientX-feature.touchX,dy=event.changedTouches[0].clientY-feature.touchY;
+ feature.touchX=null;feature.touchY=null;
+ if(Math.abs(dx)>55&&Math.abs(dx)>Math.abs(dy)*1.2){
+  feature.swipedUntil=Date.now()+500;
+  setFeatureIndex(feature.index+(dx<0?1:-1));
+ }
+},{passive:true});
+featureNode.addEventListener("click",event=>{
+ if(event.target.closest(".news-feature-story")&&Date.now()<feature.swipedUntil){event.preventDefault();event.stopPropagation()}
+},true);
+
 function localize(){
  document.querySelectorAll('[data-news-lang]').forEach(el=>{
   const active=el.dataset.newsLang===state.lang;
@@ -148,7 +239,7 @@ async function load(){
   $("newsUpdated").textContent="";
   state.items=[];
  }
- tabs();render();
+ tabs();render();initializeFeatures();
 }
 $("newsMoreButton").addEventListener("click",()=>{
  // Append just 8 more articles when the visitor explicitly requests them.
@@ -160,12 +251,18 @@ $("newsSearch").addEventListener("input",e=>{state.query=e.target.value;state.vi
 document.querySelectorAll('[data-news-lang]').forEach(el=>el.addEventListener('click',()=>{
  state.lang=el.dataset.newsLang;
  try{localStorage.setItem("neoline-language",state.lang)}catch(e){}
- localize();tabs();render();
+ localize();tabs();render();drawFeature();
 }));
 document.addEventListener("visibilitychange",()=>{
  // Only recheck age limits after a long idle period; no needless DOM rebuilds.
- if(document.hidden||Date.now()-lastExpiryCheck<3600000)return;
+ if(document.hidden){stopFeatureTimer();return}
+ restartFeatureTimer();
+ if(Date.now()-lastExpiryCheck<3600000)return;
  lastExpiryCheck=Date.now();tabs();render();
+ const count=feature.items.length;
+ feature.items=state.items.filter(currentOnly).slice(0,10);
+ if(feature.index>=feature.items.length)feature.index=0;
+ if(feature.items.length!==count)drawFeature();
 });
 localize();tabs();load();
 })();
