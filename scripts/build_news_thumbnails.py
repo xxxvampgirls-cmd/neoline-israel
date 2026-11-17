@@ -23,12 +23,13 @@ from PIL import Image, ImageEnhance, ImageOps, ImageDraw
 
 OUT=Path("assets/news")
 PHOTOS=OUT/"images"
-CACHE=OUT/"photo-cache"
+CACHE=Path("/tmp/neoline-news-photo-cache")
 MANIFEST=OUT/"news.json"
 SESSION=requests.Session()
 SESSION.headers.update({"User-Agent":"NEOLINEIsrael/1.0 (editorial photo credit retained; contact GitHub project)","Accept":"application/json"})
 MAX_BYTES=90_000   # each image: <90 KB
 MAX_AI_PER_RUN=min(max(int(os.environ.get("MAX_AI_PER_RUN","2")),0),5)
+FAILED_SEARCHES=set()
 API_TOKEN=os.environ.get("OPENAI_API_KEY","").strip()
 AI_MODEL=os.environ.get("NEWS_IMAGE_MODEL","gpt-image-1-mini")
 # This makes an editorial photo illustration of the *topic*, never a fake
@@ -126,7 +127,7 @@ def commons_candidates(search):
   url=info.get("thumburl","")
   if not url.startswith("https://") or not urlparse(url).hostname.endswith("wikimedia.org"):continue
   # CC BY / SA require attribution; unmodified photograph crop is okay for CC BY.
-  if not re.search(r"CC0|Public domain|CC BY(?:-SA)?(?: \d|$)",lic,re.I):continue
+  if not re.search(r"CC0|Public domain|CC BY(?: \d|$)",lic,re.I):continue
   title=page.get("title","")
   author=re.sub(r"<[^>]+>","",(metadata.get("Artist") or {}).get("value","")).strip()[:100]
   description="https://commons.wikimedia.org/wiki/"+title.replace(" ","_")
@@ -145,6 +146,7 @@ def photo_fallback(item):
   meta=CACHE/(key+".json")
   if cached.is_file() and meta.is_file():
    return cached.read_bytes(),json.loads(meta.read_text(encoding="utf-8"))
+  if search in FAILED_SEARCHES:continue
   try:
    for photo in commons_candidates(search)[:6]:
     result=SESSION.get(photo["url"],timeout=(7,16))
@@ -158,6 +160,7 @@ def photo_fallback(item):
     meta.write_text(json.dumps(photo,ensure_ascii=False),encoding="utf-8")
     return result.content,photo
   except (requests.RequestException,ValueError,KeyError,OSError) as e:
+   FAILED_SEARCHES.add(search)
    print("WARN commons",search,type(e).__name__,str(e)[:80],flush=True)
  return None,None
 
