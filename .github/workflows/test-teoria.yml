@@ -438,7 +438,20 @@ jobs:
                forward.mainBands[0]!=='neolineMainBandLeftToRight'||
                forward.mainBands[1]!=='neolineMainBandRightToLeft')
               throw Error('Only PNG cutouts should slide over a fixed, continuously animated background '+JSON.stringify(forward));
-            await page.waitForTimeout(950);
+            await page.waitForTimeout(220);
+            const moving=await page.evaluate(()=>{
+              const cards=document.querySelectorAll('#showcaseSlides .featured-slide');
+              const oldProduct=cards[0].querySelector('.featured-image > img:not([hidden])');
+              const nextProduct=cards[1].querySelector('.featured-image > img:not([hidden])');
+              const background=cards[1].querySelector('.featured-image');
+              return {out:getComputedStyle(oldProduct).transform,
+                      next:getComputedStyle(nextProduct).transform,
+                      background:getComputedStyle(background).transform};
+            });
+            if(moving.out==='none'||moving.next==='none'||moving.out===moving.next||
+               moving.background!=='none')
+              throw Error('Only PNGs should actually move over stationary stage '+JSON.stringify(moving));
+            await page.waitForTimeout(730);
             await page.waitForFunction(()=>!document.querySelector('#showcaseSlides .featured-slide.ad-exiting'));
             await page.locator('#showcaseDots .showcase-dot').first().click();
             const backward=await page.evaluate(()=>{
