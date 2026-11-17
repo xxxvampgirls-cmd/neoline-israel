@@ -53,7 +53,7 @@ KEYWORDS={
  "cars":["רכב","רכבי","רכב חדש","מכוני","מכונית","חשמליות","טעינה","car ","cars","automotive","vehicle","electric vehicle","tesla","автомобил","электромобил"],
 }
 EXCLUDE=("טיל","איראן","לבנון","מלחמה","טיסה","מטוס","אירוויזיון",
- "כדורגל","מכבי חיפה","הפועל באר שבע","וולט","wolt","aircraft","airline","missile","רכבת","אוטובוס","train","autopsy")
+ "כדורגל","מכבי חיפה","הפועל באר שבע","וולט","wolt","aircraft","airline","missile","רכבת","רכבות","אוטובוס","train","autopsy")
 LOCALES=("ru","he","en","ar")
 BRIEFS={
  "accidents":{"ru":"Дорожное происшествие в Израиле. Обстоятельства и актуальные сведения — в материале источника.","he":"דיווח על תאונת דרכים בישראל. פרטים ועדכונים בכתבת המקור.","en":"A reported road incident in Israel. Details and updates are in the original report.","ar":"تقرير عن حادث مروري في إسرائيل. التفاصيل والتحديثات في المصدر."},
@@ -196,7 +196,8 @@ def valid(item):
  return (bool(stamp and CUTOFF<=stamp<=NOW+dt.timedelta(hours=6)) and allowed(item.get("url"))
   and item.get("category") in CATEGORIES and item.get("id")
   and item.get("titleOriginal") and
-  not any(s in item["titleOriginal"].lower() for s in EXCLUDE))
+  relevant(item.get("titleOriginal",""))==item.get("category")
+  and not any(x in item["titleOriginal"].lower() for x in EXCLUDE))
 def read_previous():
  try:
   p=json.loads(DEST.read_text(encoding="utf-8"))
