@@ -143,6 +143,39 @@ def commons_candidates(search):
   results.append({"url":url,"page":description,"credit":author or "Wikimedia Commons", "license":lic})
  return results
 
+def photo_from_licensed_source(item):
+ """Fetch original RSS photo only if the publisher explicitly grants CC reuse.
+
+ Ordinary article pictures and social-media photographs are not copied.
+ """
+ meta=item.get("sourcePhoto")
+ if not isinstance(meta,dict) or meta.get("sourceUrl")!=item.get("url"):return None,None
+ if meta.get("license") not in ("CC0","CC BY"):return None,None
+ url=str(meta.get("url",""))
+ host=(urlparse(url).hostname or "").lower()
+ if not url.startswith("https://") or not host or len(url)>1000:return None,None
+ if host in ("localhost","127.0.0.1","169.254.169.254") or host.startswith(("10.","192.168.","172.16.","172.17.","172.18.","172.19.","172.2")):return None,None
+ if not urlparse(url).path.lower().endswith((".jpg",".jpeg",".png",".webp")):return None,None
+ try:
+  response=SESSION.get(url,timeout=(7,16),allow_redirects=False,stream=True)
+  response.raise_for_status()
+  if "image/" not in response.headers.get("Content-Type",""):return None,None
+  if int(response.headers.get("Content-Length","0") or 0)>4_000_000:return None,None
+  chunks=[];size=0
+  for chunk in response.iter_content(65536):
+   size+=len(chunk)
+   if size>4_000_000:return None,None
+   chunks.append(chunk)
+  content=b"".join(chunks)
+  with Image.open(io.BytesIO(content)) as picture:
+   if picture.format not in ("JPEG","PNG","WEBP"):return None,None
+   if picture.width<640 or picture.height<350:return None,None
+  credit={"credit":str(meta.get("credit") or item.get("publisher") or "Source")[:120],
+   "license":meta["license"],"page":item["url"],"isSource":True}
+  return content,credit
+ except (OSError,ValueError,requests.RequestException):
+  return None,None
+
 def photo_fallback(item):
  category=item["category"];uid=item["id"]
  terms=SEARCH_TERMS[category]
@@ -177,24 +210,37 @@ def main():
  manifest=json.loads(MANIFEST.read_text(encoding="utf-8"))
  items=[x for x in manifest.get("items",[]) if date_ok(x.get("date"),x.get("category"))]
  PHOTOS.mkdir(parents=True,exist_ok=True)
- ai_used=0;photos_used=0;unavailable=0;max_size=0
+ ai_used=0;photos_used=0;original_used=0;unavailable=0;max_size=0
  for i,item in enumerate(items):
   uid=item["id"]
   target=PHOTOS/(uid+".webp")
   # Do not re-generate a licensed photo from the same story every morning.
   # Reuse only thumbnails whose provenance can still be shown on the site.
   valid_credit=item.get("imageType")=="ai" or (
-   item.get("imageType")=="licensedPhoto" and
+   item.get("imageType") in ("licensedPhoto","sourceLicensedPhoto") and
    isinstance(item.get("imageCredit"),dict) and
    item["imageCredit"].get("url"))
   if target.exists() and target.stat().st_size<=MAX_BYTES and valid_credit:
+   # Upgrade the existing illustrative thumbnail only when the original
+   # article supplied an expressly licensed photograph.
+   if item.get("sourcePhoto") and item.get("imageType")!="sourceLicensedPhoto":
+    source_data,source_credit=photo_from_licensed_source(item)
+    if source_data:
+     try:
+      replacement=image_convert(source_data,uid)
+      target.write_bytes(replacement)
+      item["imageType"]="sourceLicensedPhoto"
+      item["imageCredit"]={"text":source_credit["credit"]+" · "+source_credit["license"],
+                           "url":source_credit["page"]}
+      original_used+=1
+     except (ValueError,OSError):
+      pass
    item["image"]="./"+target.as_posix()
    continue
-  if target.exists():
-   target.unlink()
-  photo=None
-  license_meta=None
-  if API_TOKEN and ai_used<MAX_AI_PER_RUN:
+  if target.exists():target.unlink()
+  photo,license_meta=photo_from_licensed_source(item)
+  if photo:original_used+=1
+  if photo is None and API_TOKEN and ai_used<MAX_AI_PER_RUN:
    try:
     photo=ai_thumbnail(item)
     if photo:ai_used+=1
@@ -209,7 +255,8 @@ def main():
     target.write_bytes(content)
     max_size=max(max_size,len(content))
     item["image"]="./"+target.as_posix()
-    item["imageType"]="ai" if not license_meta else "licensedPhoto"
+    item["imageType"]=("sourceLicensedPhoto" if license_meta and license_meta.get("isSource") else
+      "licensedPhoto" if license_meta else "ai")
     if license_meta:
      item["imageCredit"]={"text":license_meta["credit"]+" · "+license_meta["license"],
        "url":license_meta["page"]}
@@ -231,7 +278,7 @@ def main():
  manifest["items"]=items
  MANIFEST.write_text(json.dumps(manifest,ensure_ascii=False,indent=2)+"\n",encoding="utf-8")
  summary={"articles":len(items),"aiGenerated":ai_used,
-  "freeLicensedPhotoThumbsCreated":photos_used,"notAvailable":unavailable,
+  "freeLicensedPhotoThumbsCreated":photos_used,"originalLicensedPhotosUsed":original_used,"notAvailable":unavailable,
   "existingImages":len(items)-ai_used-photos_used-unavailable,
   "maxNewImageKB":round(max_size/1024,1),"deletedExpiredImages":deleted,
   "aiKeyConfigured":bool(API_TOKEN)}
