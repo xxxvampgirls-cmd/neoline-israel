@@ -1505,44 +1505,67 @@ html[dir=rtl] .theory-preview{text-align:right}
  }
 }
 
-/* One lightweight windscreen speed effect for ALL five showcase slides.
-   Two compositor-animated CSS streak layers, no video/JS/blur/masks/animated gradients.
-   Only the active card moves; the existing two blue advertising bands remain. */
+/* A softly feathered white focus disc sits BEHIND the product and the two
+   original ribbons, but IN FRONT of the fine moving speed streaks.
+   One static radial gradient instead of animated filters, masks or images. */
 #showcaseSlides .featured-slide .ad-photo-stripes{
   overflow:hidden;
-  opacity:.9;
+  opacity:.95;
 }
-#showcaseSlides .featured-slide--theory .theory-stage .ad-photo-stripes{opacity:.9}
-/* Both original full-width blue ribbons glide in OPPOSITE directions.
-   Oversize the ribbons within their clipped stage to avoid exposed edges.
-   Only compositor-friendly transforms animate; no background repaint. */
+#showcaseSlides .featured-slide--theory .theory-stage .ad-photo-stripes{
+  z-index:1;opacity:.95;
+}
+.ad-photo-stripes .ad-photo-focus{
+  position:absolute;
+  z-index:1;
+  left:50%;top:50%;
+  width:min(88%,440px);aspect-ratio:1;
+  border-radius:50%;
+  transform:translate3d(-50%,-50%,0);
+  background:radial-gradient(circle at center,
+    #ffffff 0%,#ffffff 26%,#fffffffa 37%,#fffffff0 48%,
+    #ffffffba 59%,#ffffff53 69%,#ffffff00 82%);
+  pointer-events:none;
+}
+/* The TWO broad, original blue ribbons stay sharp over the white disc.
+   Large highlighted segments make their opposite movement easy to see
+   even on short 7.6-second slides; all movement is transform-only. */
 #showcaseSlides .featured-slide .ad-photo-stripes .ad-photo-band{
-  position:relative;z-index:1;flex:none;
-  width:126%;margin-left:-13%;
+  position:relative;z-index:2;flex:none;
+  width:148%;margin-left:-24%;
   height:15px;border-radius:999px;
-  background:linear-gradient(90deg,transparent 0%,#5ebdf1a6 11%,#168cdbdd 27%,#b5edffdb 42%,#0a7ec8d1 59%,#55baeead 78%,transparent 100%);
+  background:linear-gradient(90deg,
+    transparent 0%,#63bee883 8%,#1589d5d6 21%,
+    #e6f9ffeb 30%,#188bd1dc 39%,#348ed7b9 52%,
+    #bfebffec 64%,#127cc7df 72%,#5bbceda1 91%,transparent 100%);
   box-shadow:0 1px 3px #1886c51c;
 }
 #showcaseSlides .featured-slide .ad-photo-stripes .ad-photo-band:nth-child(2){
   height:12px;
-  background:linear-gradient(90deg,transparent 0%,#53b3e9a3 15%,#0d83cad3 34%,#379fdfb0 47%,#c8f3ffe8 68%,#1788cece 82%,transparent 100%);
+  background:linear-gradient(90deg,
+    transparent 0%,#60b9e47d 9%,#1389d4cb 22%,#a8e9ffe8 36%,
+    #0e81c9d3 42%,#4da3dcad 59%,#e8faffed 72%,
+    #117fcbd9 81%,#52b5e69b 93%,transparent 100%);
 }
 #showcaseSlides .featured-slide.active:not(.ad-exiting) .ad-photo-stripes .ad-photo-band:first-child{
-  animation:neolineMainBandLeftToRight 12.8s ease-in-out infinite alternate;
+  animation:neolineMainBandLeftToRight 9.8s linear infinite alternate;
   will-change:transform;
 }
 #showcaseSlides .featured-slide.active:not(.ad-exiting) .ad-photo-stripes .ad-photo-band:nth-child(2){
-  animation:neolineMainBandRightToLeft 15.4s ease-in-out infinite alternate;
+  animation:neolineMainBandRightToLeft 11.2s linear infinite alternate;
   will-change:transform;
 }
+/* 148% width + 24% overhang keep both ends covered at +/-14% translate. */
 @keyframes neolineMainBandLeftToRight{
-  from{transform:translate3d(-7%,0,0)}
-  to{transform:translate3d(7%,0,0)}
+  from{transform:translate3d(-14%,0,0)}
+  to{transform:translate3d(14%,0,0)}
 }
 @keyframes neolineMainBandRightToLeft{
-  from{transform:translate3d(7%,0,0)}
-  to{transform:translate3d(-7%,0,0)}
+  from{transform:translate3d(14%,0,0)}
+  to{transform:translate3d(-14%,0,0)}
 }
+/* Thin strokes run faster in front of the background, then visually dissolve
+   at the disc's white feathered edge; keep varying width and opacity. */
 #showcaseSlides .featured-slide .ad-photo-stripes::before,
 #showcaseSlides .featured-slide .ad-photo-stripes::after{
   content:"";
@@ -1578,10 +1601,11 @@ html[dir=rtl] .theory-preview{text-align:right}
   100%{transform:translate3d(-53%,0,0) scaleX(1.2);opacity:0}
 }
 @media(max-width:720px){
+  .ad-photo-stripes .ad-photo-focus{width:min(91%,330px)}
   #showcaseSlides .featured-slide .ad-photo-stripes .ad-photo-band:first-child{height:11px}
   #showcaseSlides .featured-slide .ad-photo-stripes .ad-photo-band:nth-child(2){height:9px}
-  #showcaseSlides .featured-slide.active:not(.ad-exiting) .ad-photo-stripes .ad-photo-band:first-child{animation-duration:13.8s}
-  #showcaseSlides .featured-slide.active:not(.ad-exiting) .ad-photo-stripes .ad-photo-band:nth-child(2){animation-duration:16.5s}
+  #showcaseSlides .featured-slide.active:not(.ad-exiting) .ad-photo-stripes .ad-photo-band:first-child{animation-duration:10.4s}
+  #showcaseSlides .featured-slide.active:not(.ad-exiting) .ad-photo-stripes .ad-photo-band:nth-child(2){animation-duration:11.9s}
   #showcaseSlides .featured-slide.active:not(.ad-exiting) .ad-photo-stripes::before{animation-duration:4.5s}
   #showcaseSlides .featured-slide.active:not(.ad-exiting) .ad-photo-stripes::after{animation-duration:5.8s}
 }
@@ -1651,7 +1675,7 @@ html[dir=rtl] .theory-preview{text-align:right}
 <p class="ad-lead" id="adLead">Чёткие детали каждой поездки. Откройте возможности NEOLINE Argus 4K Dual.</p>
 <div class="ad-actions"><button type="button" class="ad-button" id="adMore"><span id="adButtonText">Смотреть флагман</span><span aria-hidden="true">↗</span></button><button type="button" class="ad-share" id="adShare" aria-label="Поделиться ссылкой" title="Поделиться">↗ <span id="adShareLabel">Поделиться</span></button></div>
 <small class="ad-disclaimer" id="adDisclaimer">Концепт рекламы · продажи в Израиле пока не открыты</small>
-</div><div class="ad-photo-area"><div class="ad-photo-stripes" aria-hidden="true"><span class="ad-photo-band"></span><span class="ad-photo-band"></span></div><span class="ad-device-shadow" aria-hidden="true"></span>
+</div><div class="ad-photo-area"><div class="ad-photo-stripes" aria-hidden="true"><span class="ad-photo-band"></span><span class="ad-photo-band"></span><span class="ad-photo-focus" aria-hidden="true"></span></div><span class="ad-device-shadow" aria-hidden="true"></span>
 <img src="https://neoline.ru/upload/iblock/18e/inssnto8g0d3gybtezvvy1hbmmj1vjje/016.jpg" loading="lazy" decoding="async" alt="NEOLINE Argus 4K Dual" onerror="this.hidden=true;this.nextElementSibling.hidden=false">
 <div class="ad-fallback" hidden>NEOLINE<br><strong>ARGUS 4K DUAL</strong></div>
 <div class="ad-image-label">NEOLINE ARGUS <b>4K DUAL</b></div></div></div></section>
@@ -1787,7 +1811,7 @@ function firstIsraelSlide(){
   +'<p class="hero-lead">'+a.lead+'</p>'
   +'<div class="israel-ad-note">'+a.note+'</div>'
   +'<div class="featured-cta"><button class="primary" type="button" data-feature-catalog>'+a.cta+' ↗</button><button class="secondary" type="button" data-open-feature="6">'+a.model+'</button></div></div>'
-  +'<div class="featured-image israel-featured-image"><div class="ad-photo-stripes" aria-hidden="true"><span class="ad-photo-band"></span><span class="ad-photo-band"></span></div><span class="ad-device-shadow" aria-hidden="true"></span>'
+  +'<div class="featured-image israel-featured-image"><div class="ad-photo-stripes" aria-hidden="true"><span class="ad-photo-band"></span><span class="ad-photo-band"></span><span class="ad-photo-focus" aria-hidden="true"></span></div><span class="ad-device-shadow" aria-hidden="true"></span>'
   +'<div class="feature-img-tag">NEOLINE • ISRAEL</div>'
   +'<img src="'+media[6][0]+'" alt="'+a.imageAlt+'" decoding="async" fetchpriority="high" onerror="recoverPhoto(this,6)">'
   +'<span class="feature-img-fallback" hidden>'+deviceSvg('dualargus')+'</span>'
@@ -1808,7 +1832,7 @@ const theoryPromo={
    the light-blue image frame, while the CTA remains a real accessible link. */
 function theoryScene(){
  return '<div class="theory-stage">'
-  +'<div class="ad-photo-stripes" aria-hidden="true"><span class="ad-photo-band"></span><span class="ad-photo-band"></span>'
+  +'<div class="ad-photo-stripes" aria-hidden="true"><span class="ad-photo-band"></span><span class="ad-photo-band"></span><span class="ad-photo-focus" aria-hidden="true"></span>'
    +'</div>'
   +'<span class="theory-halo" aria-hidden="true"></span>'
   +'<span class="theory-ambient-light" aria-hidden="true"></span>'
@@ -1850,7 +1874,7 @@ function renderShowcase(){
    +'<div class="featured-tags">'+datas[id].slice(0,2).map(x=>'<span>'+x+'</span>').join('')+'</div>'
    +'<div class="featured-price">₪'+p.price.toLocaleString('en-US')+'<small>'+t('estimated')+'</small></div>'
    +'<div class="featured-cta"><button class="primary" data-open-feature="'+id+'">'+label('more')+' ↗</button><button class="secondary" data-add-feature="'+id+'">+ '+label('buy')+'</button></div></div>'
-   +'<div class="featured-image"><div class="ad-photo-stripes" aria-hidden="true"><span class="ad-photo-band"></span><span class="ad-photo-band"></span></div><span class="ad-device-shadow" aria-hidden="true"></span><div class="feature-img-tag">NEOLINE • '+p.name.replace('NEOLINE ','')+'</div>'
+   +'<div class="featured-image"><div class="ad-photo-stripes" aria-hidden="true"><span class="ad-photo-band"></span><span class="ad-photo-band"></span><span class="ad-photo-focus" aria-hidden="true"></span></div><span class="ad-device-shadow" aria-hidden="true"></span><div class="feature-img-tag">NEOLINE • '+p.name.replace('NEOLINE ','')+'</div>'
    +'<img src="'+source+'" alt="'+p.name+'" decoding="async" '+(i?'loading="lazy"':'fetchpriority="high"')+' onerror="recoverPhoto(this,'+id+')">'
    +'<span class="feature-img-fallback" hidden>'+deviceSvg(p.shape)+'</span>'
    +'<button class="feature-img-prev" type="button" data-feature-prev aria-label="Previous model">‹</button>'
