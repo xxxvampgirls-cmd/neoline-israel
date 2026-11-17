@@ -197,7 +197,8 @@ function render(append=false){
   const image=pic?
    '<img class="news-art-image" loading="'+(pos<2?'eager':'lazy')+'" decoding="async" width="640" height="360" alt="'+safe(tr("image"))+'" src="'+safe(pic)+'">':
    '<div class="news-photo-placeholder" aria-hidden="true"></div>';
-  const type=item.imageType==="ai"?({ru:"AI · иллюстрация",en:"AI · illustration",he:"AI · הדמיה",ar:"AI · صورة توضيحية"}[state.lang]):
+  const type=item.imageType==="sourceLicensedPhoto"?({ru:"Фото первоисточника",en:"Publisher photo",he:"צילום מהמקור",ar:"صورة المصدر"}[state.lang]):
+   item.imageType==="ai"?({ru:"AI · иллюстрация",en:"AI · illustration",he:"AI · הדמיה",ar:"AI · صورة توضيحية"}[state.lang]):
    item.imageType==="licensedPhoto"?({ru:"Фото · иллюстрация",en:"Photo · illustration",he:"צילום · המחשה",ar:"صورة توضيحية"}[state.lang]):tr("image");
   const photoCredit=item.imageCredit&&item.imageCredit.url?
    '<a class="news-photo-credit" href="'+safe(safeURL(item.imageCredit.url))+'" target="_blank" rel="noopener noreferrer">'+safe(item.imageCredit.text||"Wikimedia Commons")+'</a>':'';
