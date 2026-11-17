@@ -254,6 +254,22 @@ def specific_subject_photo(item):
  if item.get("category")=="roads":return specific_road_photo(item)
  return None,None
 
+def safe_israeli_road_fallback():
+ """Choose a geographically identifiable Israeli road, never another country."""
+ for query in ("20150812 August 2015 Tel Aviv 03","Tel Aviv highway traffic Israel"):
+  try:
+   for photo in commons_candidates(query):
+    name=photo["page"].lower()
+    if not any(word in name for word in ("israel","tel_aviv","jerusalem","negev","haifa")):continue
+    image=SESSION.get(photo["url"],timeout=(7,16))
+    if not image.ok or len(image.content)>4_000_000:continue
+    with Image.open(io.BytesIO(image.content)) as picture:
+     if picture.width<640 or picture.height<350 or picture.format not in ("JPEG","PNG","WEBP"):continue
+    return image.content,photo
+  except (requests.RequestException,ValueError,KeyError,OSError):
+   continue
+ return None,None
+
 def photo_fallback(item):
  category=item["category"];uid=item["id"]
  terms=SEARCH_TERMS[category]
@@ -305,7 +321,7 @@ def main():
    if item.get("category")=="roads" and "bighorn_highway_40" in source_page:
     replacement_photo,replacement_meta=specific_road_photo(item)
     if replacement_photo is None:
-     replacement_photo,replacement_meta=photo_fallback(item)
+     replacement_photo,replacement_meta=safe_israeli_road_fallback()
     if replacement_photo:
      try:
       target.write_bytes(image_convert(replacement_photo,uid))
@@ -315,6 +331,15 @@ def main():
       item["subjectPhotoChecked"]=True
      except (ValueError,OSError):
       pass
+    else:
+     # An honest no-photo state is better than showing a Canadian highway
+     # while claiming that the article describes Israel.
+     target.unlink(missing_ok=True)
+     item["image"]=None
+     item["imageType"]="none"
+     item.pop("imageCredit",None)
+     item["subjectPhotoChecked"]=True
+     continue
    # Upgrade the existing illustrative thumbnail only when the original
    # article supplied an expressly licensed photograph.
    if item.get("sourcePhoto") and item.get("imageType")!="sourceLicensedPhoto":
