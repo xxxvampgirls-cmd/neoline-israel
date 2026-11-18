@@ -1,0 +1,119 @@
+/* NEOLINE News mobile polish: useful daily trend immediately after title,
+   language chooser in the header, compact clean carousel navigation. */
+.news-header-inner{gap:12px}
+.news-header .news-language-bar{
+ margin:0 0 0 auto;flex:none;display:flex;flex-wrap:nowrap;gap:5px;
+ padding:0;align-items:center;align-self:center;
+}
+.news-header .news-language-bar button{
+ padding:7px 10px;border-radius:11px;min-width:39px;min-height:36px;
+ font-size:11px;font-weight:850;box-shadow:0 4px 13px #106da412;
+}
+.news-cover{
+ display:flex;flex-direction:column;gap:12px;
+ padding:17px 20px 16px;margin-top:10px;margin-bottom:12px;
+}
+.news-cover-copy{width:100%;align-self:stretch}
+.news-cover h1{max-width:none;margin:2px 0;line-height:1.13}
+.news-cover .accident-strip{order:1;margin:0;z-index:2;width:100%}
+.news-cover .news-cover-copy{order:0}
+.news-cover .news-feature-carousel{order:2;width:100%;max-width:100%}
+.news-cover .news-feature-dots{display:none!important}
+.news-cover .news-feature-controls{
+ display:flex;align-items:center;gap:12px;min-height:36px;
+ padding:5px 8px 0;justify-content:center;
+}
+.news-cover .news-feature-arrow{
+ width:34px;height:34px;flex:none;font-size:24px;box-shadow:0 3px 12px #177fb82d;
+}
+.news-cover .news-feature-counter{
+ font-size:11px;min-width:58px;font-weight:900;
+ padding:6px 11px;border:1px solid #bde1f4;border-radius:10px;
+ background:#f4fbff;
+}
+.news-cover .news-feature-slide{height:clamp(250px,40vw,420px)}
+/* A 30-day chart that fits as a whole, with visible bars and grid lines. */
+.accident-strip{
+ background:linear-gradient(116deg,#fff 0%,#f2fbff 100%);
+ border:1px solid #b6dbf1;
+ box-shadow:0 6px 18px #1a72b711;
+ padding:13px 16px 11px;border-radius:16px;
+}
+.accident-strip-ident strong{font-size:14px}
+.accident-strip-ident small{font-size:11px}
+.accident-chart-scroll{margin-top:12px;margin-bottom:4px;overflow-x:auto}
+.accident-chart{
+ min-width:0;height:138px;gap:3px;padding:2px 2px 1px;
+ background:repeating-linear-gradient(to top,
+  transparent 0,transparent 26px,#c8e6f5a6 27px,
+  transparent 28px,transparent 54px);
+ border-bottom:1px solid #b5d9eb;
+}
+.accident-day{gap:5px}
+.accident-day-rail{
+ background:none;height:113px;align-items:flex-end;
+}
+.accident-day-bar{
+ max-width:19px;border-radius:4px 4px 1px 1px;
+ background:linear-gradient(180deg,#22b8f1 0%,#0879c0 100%);
+ box-shadow:0 2px 5px #176d9a22;
+}
+.accident-day-bar.is-empty{
+ height:3px!important;min-height:3px;
+ background:#c0d9e9;
+ box-shadow:none;border-radius:3px;
+}
+.accident-day-tick{font-size:9px;line-height:13px;font-weight:750;color:#5386a4}
+.accident-day[aria-pressed=true] .accident-day-rail{background:#d5f1ff94}
+.accident-day[aria-pressed=true] .accident-day-tick{color:#055f9e}
+.accident-chart-bottom{font-size:11px;gap:9px}
+.accident-chart-disclaimer{font-size:10px;line-height:1.4;margin:6px 0}
+.accident-sources{margin-top:8px;border-top:1px solid #daeaf5;padding-top:8px}
+.accident-sources summary{
+ font-size:10px;color:#217aa9;font-weight:850;cursor:pointer;list-style:none;
+}
+.accident-sources summary::-webkit-details-marker{display:none}
+.accident-sources summary::after{content:" ⌄"}
+.accident-sources[open] summary::after{content:" ⌃"}
+.accident-sources p{margin:8px 0 6px;line-height:1.5;color:#6688a0;font-size:10px}
+.accident-sources-links{display:flex;gap:12px;flex-wrap:wrap}
+.accident-sources-links a{color:#147fb4;text-decoration:underline;text-underline-offset:2px;font-size:10px;font-weight:850}
+@media(max-width:760px){
+ .news-header-inner{gap:7px;padding-inline:12px;min-height:62px}
+ .news-logo{flex:0 0 auto}
+ .news-logo img{width:clamp(115px,32vw,148px)}
+ .news-header .news-language-bar{gap:3px;margin-inline-start:auto}
+ .news-header .news-language-bar button{
+  padding:6px 6px;font-size:9px;min-width:30px;min-height:33px;
+  border-radius:9px;
+ }
+ .news-header .news-language-bar button[lang=he]{min-width:44px}
+ .news-header .news-language-bar button[lang=ar]{min-width:40px}
+ .news-cover{padding:9px 11px 10px;gap:10px;margin-top:7px;margin-bottom:10px}
+ .news-cover .news-cover-copy{padding-inline:2px}
+ .news-cover h1{font-size:clamp(22px,5.8vw,29px);line-height:1.1}
+ .news-cover .accident-strip{border-radius:14px}
+ .accident-strip{padding:12px 10px 10px}
+ .accident-strip-ident strong{font-size:12px}
+ .accident-strip-ident small{font-size:10px}
+ .accident-chart{height:128px;gap:2px}
+ .accident-day-rail{height:104px}
+ .accident-day-tick{font-size:8px}
+ .accident-chart-bottom{font-size:10px}
+ .accident-chart-disclaimer{font-size:9.5px}
+ .news-cover .news-feature-slide{height:clamp(248px,64vw,340px)}
+ .news-cover .news-feature-controls{min-height:35px;padding:4px 0 0;gap:10px}
+ .news-cover .news-feature-arrow{width:32px;height:32px}
+ .news-cover .news-feature-counter{font-size:10px;min-width:52px}
+}
+@media(max-width:360px){
+ .news-header-inner{padding-inline:7px;gap:4px}
+ .news-logo img{width:111px}
+ .news-header .news-language-bar button{padding:5px 4px;min-width:28px}
+ .news-header .news-language-bar button[lang=he]{min-width:39px}
+ .news-header .news-language-bar button[lang=ar]{min-width:37px}
+ .news-cover{padding-inline:8px}
+ .accident-strip{padding:9px 7px}
+ .hot-events-link{font-size:9px;padding:6px}
+}
+@media(prefers-reduced-motion:reduce){.accident-day-bar{transition:none}}
