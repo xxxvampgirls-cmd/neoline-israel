@@ -5,7 +5,7 @@
  const $=id=>document.getElementById(id);
  const text={
   ru:{
-   search:"🔎 Город, сеть, магазин",networks:"Сети",details:"Подробнее",
+   search:"Город, сеть, магазин",networks:"Сети",details:"Подробнее",
    title:"Поиск и фильтры",subtitle:"Города, сети, магазины и статистика",
    city:"Город",network:"Сети",stores:"Магазины",stats:"Статистика",
    cityHeading:"Поиск города или района",cityHint:"Начните вводить город или выберите из списка. Карта откроет его окрестности.",
@@ -19,7 +19,7 @@
    networkSelected:"Выбрана сеть: ",shopSelected:"Выбран магазин: "
   },
   en:{
-   search:"🔎 City, network, store",networks:"Networks",details:"Details",
+   search:"City, network, store",networks:"Networks",details:"Details",
    title:"Search and filters",subtitle:"Cities, carriers, retailers and statistics",
    city:"City",network:"Networks",stores:"Stores",stats:"Statistics",
    cityHeading:"Find a city or district",cityHint:"Enter a city or select one from the list to zoom the map.",
@@ -33,7 +33,7 @@
    networkSelected:"Network: ",shopSelected:"Store: "
   },
   he:{
-   search:"🔎 עיר, רשת או חנות",networks:"רשתות",details:"פרטים",
+   search:"עיר, רשת או חנות",networks:"רשתות",details:"פרטים",
    title:"חיפוש וסינון",subtitle:"ערים, רשתות, חנויות ונתונים",
    city:"עיר",network:"רשתות",stores:"חנויות",stats:"נתונים",
    cityHeading:"חיפוש יישוב או אזור",cityHint:"הקלידו שם יישוב או בחרו מהרשימה למיקוד המפה.",
@@ -47,7 +47,7 @@
    networkSelected:"רשת: ",shopSelected:"חנות: "
   },
   ar:{
-   search:"🔎 مدينة، شبكة أو متجر",networks:"الشبكات",details:"التفاصيل",
+   search:"مدينة، شبكة أو متجر",networks:"الشبكات",details:"التفاصيل",
    title:"البحث والتصفية",subtitle:"المدن وشبكات التوصيل والمتاجر والإحصاءات",
    city:"مدينة",network:"الشبكات",stores:"المتاجر",stats:"الإحصاءات",
    cityHeading:"البحث عن مدينة أو منطقة",cityHint:"أدخل اسم المدينة أو اختر من القائمة لتكبير الخريطة.",
