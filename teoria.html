@@ -14,6 +14,7 @@
 <link rel="stylesheet" href="./teoria-reference-art.css?v=20261119-progress-dock-v3">
 <link rel="stylesheet" href="./teoria-medal-ecg.css?v=20261119-medal-only-v2">
 <link rel="stylesheet" href="./teoria-licence-dialog.css?v=20261119-custom-v1">
+<link rel="stylesheet" href="./teoria-traffic-signs.css?v=20261119-signs-motion-v1">
 </head><body>
 <header class="topbar neoline-site-header"><div class="neoline-site-header__inner">
 <a class="neoline-site-header__logo" href="./" aria-label="NEOLINE — главная страница"><img src="./assets/neoline-clean.svg?v=20261116-compact" width="501" height="108" alt="NEOLINE"></a>
@@ -32,7 +33,84 @@
     <span id="gameGiftTriggerLabel">Подарки</span><span class="gift-trigger-spark" aria-hidden="true">✦</span>
   </button>
  </div>
- <div class="hero-art" aria-hidden="true"></div>
+ <div class="hero-art hero-art--signs" aria-hidden="true">
+  <svg class="hero-traffic-svg" viewBox="0 0 720 360" preserveAspectRatio="xMidYMid slice" focusable="false" aria-hidden="true">
+   <defs>
+    <linearGradient id="neolineSignsSky" x1="0" y1="0" x2=".5" y2="1">
+     <stop offset="0" stop-color="#5ac7f4"/><stop offset=".58" stop-color="#d8f5ff"/><stop offset="1" stop-color="#f2fcff"/>
+    </linearGradient>
+    <linearGradient id="neolineSignsMountain" x1="0" y1="0" x2=".6" y2="1">
+     <stop offset="0" stop-color="#aaddec"/><stop offset="1" stop-color="#57b2d7"/>
+    </linearGradient>
+    <linearGradient id="neolineSignsRoad" x1="0" y1="0" x2=".2" y2="1">
+     <stop offset="0" stop-color="#80b3cc"/><stop offset="1" stop-color="#396e95"/>
+    </linearGradient>
+    <linearGradient id="neolineSignsMetal" x1="0" y1="0" x2="1" y2="0">
+     <stop offset="0" stop-color="#647e92"/><stop offset=".45" stop-color="#d5e6ee"/><stop offset="1" stop-color="#64798f"/>
+    </linearGradient>
+    <radialGradient id="neolineSignsBlue" cx=".32" cy=".24">
+     <stop offset="0" stop-color="#22bfff"/><stop offset=".72" stop-color="#087fc8"/><stop offset="1" stop-color="#035b9e"/>
+    </radialGradient>
+    <filter id="neolineSignsShadow" x="-50%" y="-50%" width="200%" height="200%">
+     <feDropShadow dx="0" dy="6" stdDeviation="7" flood-color="#063e67" flood-opacity=".3"/>
+    </filter>
+   </defs>
+   <rect width="720" height="360" fill="url(#neolineSignsSky)"/>
+   <circle cx="572" cy="45" r="110" fill="#fff" opacity=".25"/>
+   <g fill="#fff" opacity=".42">
+    <ellipse cx="116" cy="41" rx="100" ry="17"/><ellipse cx="115" cy="32" rx="49" ry="21"/>
+    <ellipse cx="627" cy="89" rx="68" ry="12"/><ellipse cx="629" cy="80" rx="35" ry="17"/>
+   </g>
+   <path d="M0 243 102 154 169 211 244 138 349 224 456 139 550 202 629 160 720 223V360H0Z" fill="url(#neolineSignsMountain)" opacity=".64"/>
+   <path d="M0 283 138 225 238 261 352 214 477 272 603 207 720 247V360H0Z" fill="#7fc1dc" opacity=".65"/>
+   <path d="M0 321 212 274 414 263 720 321V360H0Z" fill="#dbf4fb"/>
+   <path d="M123 360 335 265 440 266 654 360Z" fill="url(#neolineSignsRoad)" opacity=".8"/>
+   <path d="M311 360 371 267" fill="none" stroke="#e6f7fd" stroke-width="6" stroke-dasharray="25 25" class="traffic-road-dashes" opacity=".84"/>
+   <path d="M492 360 404 267" fill="none" stroke="#fcfeff" stroke-width="5" opacity=".63"/>
+   <!-- Warning: bend ahead -->
+   <g class="traffic-sign traffic-sign--warning" transform="translate(48 30)">
+    <path d="M78 148V318" stroke="url(#neolineSignsMetal)" stroke-width="13" stroke-linecap="round"/>
+    <g class="traffic-sign-float" filter="url(#neolineSignsShadow)">
+     <path d="M78 3 151 136H5Z" fill="#fff" stroke="#e93436" stroke-width="12" stroke-linejoin="round"/>
+     <path d="M45 113Q42 67 80 60Q115 55 112 94" fill="none" stroke="#193f61" stroke-width="13" stroke-linecap="round"/>
+     <path d="m89 86 25 24 16-29" fill="none" stroke="#193f61" stroke-width="12" stroke-linecap="round" stroke-linejoin="round"/>
+    </g>
+   </g>
+   <!-- Main mandatory turning direction -->
+   <g class="traffic-sign traffic-sign--turn" transform="translate(240 18)">
+    <path d="M90 174V331" stroke="url(#neolineSignsMetal)" stroke-width="16" stroke-linecap="round"/>
+    <g class="traffic-sign-float" filter="url(#neolineSignsShadow)">
+     <circle cx="90" cy="91" r="87" fill="#f6fdff" stroke="#8ac9e7" stroke-width="3"/>
+     <circle cx="90" cy="91" r="77" fill="url(#neolineSignsBlue)" stroke="#0a72b2" stroke-width="5"/>
+     <path d="M46 83H90V54L134 94 90 134V108H46Z" fill="#fff" stroke="#e5faff" stroke-width="3" stroke-linejoin="round"/>
+     <path class="traffic-turn-shine" d="M31 59Q64 18 118 31" stroke="#fff" stroke-width="10" fill="none" stroke-linecap="round" opacity=".2"/>
+    </g>
+   </g>
+   <!-- Speed limit -->
+   <g class="traffic-sign traffic-sign--speed" transform="translate(481 18)">
+    <path d="M78 149V319" stroke="url(#neolineSignsMetal)" stroke-width="13" stroke-linecap="round"/>
+    <g class="traffic-sign-float" filter="url(#neolineSignsShadow)">
+     <circle cx="78" cy="80" r="69" fill="#fff" stroke="#e72931" stroke-width="16"/>
+     <circle cx="78" cy="80" r="53" fill="#fff"/>
+     <text x="78" y="101" text-anchor="middle" font-size="63" font-family="Arial, sans-serif" font-weight="900" fill="#1b2f45">50</text>
+    </g>
+   </g>
+   <!-- Pedestrian crossing -->
+   <g class="traffic-sign traffic-sign--pedestrian" transform="translate(539 185)">
+    <path d="M62 114V178" stroke="url(#neolineSignsMetal)" stroke-width="12" stroke-linecap="round"/>
+    <g class="traffic-sign-float" filter="url(#neolineSignsShadow)">
+     <rect x="5" y="0" width="114" height="114" rx="9" fill="#effbff" stroke="#116cb5" stroke-width="7"/>
+     <rect x="12" y="7" width="100" height="100" rx="5" fill="#0f81cb"/>
+     <path d="M61 15 109 96H13Z" fill="#fff"/>
+     <circle cx="61" cy="41" r="8" fill="#123d67"/>
+     <path d="m60 51-9 19 16 7m-7-24 10 17-6 18m-2-25-19 3m17 18-16 13" stroke="#123d67" stroke-width="7" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+     <path d="M28 91h66" stroke="#0c74ad" stroke-width="6" stroke-dasharray="8 5"/>
+    </g>
+   </g>
+   <!-- Small reflective route markers -->
+   <g opacity=".72"><path d="M448 255v45M679 275v40" stroke="#87adc5" stroke-width="9"/><rect x="431" y="241" width="34" height="23" rx="4" fill="#e9f9ff"/><path d="m439 252h18" stroke="#14a5cf" stroke-width="4"/><rect x="662" y="259" width="34" height="23" rx="4" fill="#e9f9ff"/><path d="m670 270h18" stroke="#14a5cf" stroke-width="4"/></g>
+  </svg>
+ </div>
  <div class="hero-orbs" role="group" aria-label="Мой игровой прогресс">
   <svg class="hero-signal" viewBox="0 0 900 100" preserveAspectRatio="none" aria-hidden="true" focusable="false"><path d="M0 51H585 L601 51 L612 38 L623 67 L637 42 L647 51 H900"/></svg>
   <div class="hero-orb hero-orb--seen">
