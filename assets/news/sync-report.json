@@ -1,5 +1,5 @@
 {
-  "attempted": "2026-11-17T10:54:39.753267Z",
+  "attempted": "2026-11-18T06:04:53.472472Z",
   "feeds": {
     "Walla · Авто": 30,
     "Walla · Безопасность": 30,
@@ -23,16 +23,16 @@
   "telegram": {
     "Дорожная полиция Израиля · Telegram": 0,
     "Полиция Израиля · Telegram": 0,
-    "Ихуд Ацала · Telegram": 83,
+    "Ихуд Ацала · Telegram": 82,
     "Алексей Железнов · Telegram": 1,
-    "NEWSru.co.il · Telegram": 5
+    "NEWSru.co.il · Telegram": 9
   },
   "facebook": {},
   "facebookState": "not_configured",
-  "new": 14,
-  "retained": 114,
-  "imageCount": 114,
-  "deletedImages": 0,
+  "new": 19,
+  "retained": 117,
+  "imageCount": 101,
+  "deletedImages": 13,
   "discardedGoogleLinks": 0,
   "errors": {
     "The Times of Israel": "HTTPError: 403 Client Error: Forbidden for url: https://www.timesofisrael.com/feed/",
@@ -48,18 +48,18 @@
   "sourceCount": 19,
   "sources": {
     "Ихуд Ацала · Telegram": 65,
+    "Walla": 8,
+    "NEWSru.co.il · Telegram": 6,
     "Maariv": 2,
-    "NEWSru.co.il · Telegram": 4,
     "Wheel · Автоновости": 2,
     "Ynet": 1,
     "Walla · Новости Израиля": 1,
-    "Walla": 6,
     "Calcalist": 1,
     "Autonews Israel": 6,
     "Walla · Авто": 5,
     "Mako · Израиль": 2,
     "Министерство транспорта Израиля": 1,
-    "TheCar · Автоновости": 6,
+    "TheCar · Автоновости": 5,
     "Национальное управление безопасности дорожного движения": 1,
     "Davar": 1,
     "Arutz Sheva": 1,
