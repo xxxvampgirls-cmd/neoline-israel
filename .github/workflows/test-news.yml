@@ -236,8 +236,11 @@ jobs:
             await page.route('**/assets/news/news.json',route=>route.fulfill({status:200,contentType:'application/json',body:JSON.stringify({version:1,retentionDays:30,lawsRetentionMonths:6,updated:new Date().toISOString(),items:[old]})}));
             await page.reload({waitUntil:'domcontentloaded'});
             await page.waitForTimeout(600);
-            const renderedExpired=await page.locator('.news-card').count();
-            if(renderedExpired!==0)throw Error('Old news was not filtered by client');
+            // The page intentionally falls back to a fresher GitHub feed when the
+            // Pages source is missing or stale. Therefore current stories may
+            // still be visible; only the injected expired story must be absent.
+            const renderedExpired=await page.locator('.news-card').filter({hasText:'Expired test story'}).count();
+            if(renderedExpired!==0)throw Error('Expired article leaked into news feed');
             if(errors.length)throw Error('JS page errors: '+errors.join(' | '));
             console.log('NEWS MOBILE PASS tabs='+tabs+' currentItems='+cards+' expiredRendered='+renderedExpired+' noHorizontalScroll=true JSerrors=0');
             await page.locator('#newsDelivery').click();
