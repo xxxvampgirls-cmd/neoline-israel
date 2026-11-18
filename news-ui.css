@@ -8,13 +8,6 @@ button{cursor:pointer}
 a{text-decoration:none;color:inherit}
 .shell{max-width:1130px;margin:0 auto;padding:0 25px}
 .news-header{position:sticky;top:0;z-index:50;background:#ffffffed;backdrop-filter:blur(17px);border-bottom:1px solid #dceaf6;box-shadow:0 5px 25px #00529e13}
-.news-header-inner{min-height:74px;display:flex;align-items:center;gap:20px}
-.news-logo{display:flex;align-items:center;min-width:0;flex-shrink:0}
-.news-logo img{width:173px;max-width:100%;height:auto;display:block}
-.news-top-links{margin-left:auto;display:flex;gap:10px;align-items:center}
-.news-top-links a{display:flex;gap:8px;align-items:center;border:1px solid #d0e5f5;background:#f6fbff;border-radius:12px;padding:9px 14px;font-size:12px;font-weight:800}
-.news-top-links a:hover{border-color:#72bbe9}
-.news-top-links .current{color:white;background:#087bca;border-color:#087bca}
 .news-cover{padding-top:42px;padding-bottom:23px}
 .news-eyebrow{color:#1989d1;font-weight:900;font-size:11px;letter-spacing:.14em;display:flex;gap:9px;align-items:center}
 .news-eyebrow:before{content:"";display:block;width:25px;height:2px;background:#2ca9ed}
@@ -56,11 +49,6 @@ a{text-decoration:none;color:inherit}
 @media(max-width:720px){
  body{padding-bottom:90px}
  .shell{padding:0 17px}
- .news-header-inner{min-height:60px}
- .news-logo img{width:145px}
- .news-top-links{gap:6px}
- .news-top-links a{font-size:10px;padding:8px 9px}
- .news-top-links .current{display:none}
  .news-cover{padding-top:26px;padding-bottom:14px}
  .news-cover h1{font-size:32px}
  .news-cover p{font-size:12px;line-height:1.6}
@@ -114,14 +102,6 @@ a{text-decoration:none;color:inherit}
 .news-cover h1{max-width:850px}
 .news-cover p{max-width:770px}
 .news-fresh-row{margin-top:18px}
-.news-language-bar{display:flex;align-items:center;flex-wrap:wrap;gap:6px;margin-top:16px}
-.news-language-bar button{
- border:1px solid #bfdff2;background:#ffffffd9;color:#36799c;
- padding:7px 13px;border-radius:12px;font-size:11px;
- font-weight:800;box-shadow:0 4px 12px #0a6cb310;
- min-width:43px;
-}
-.news-language-bar button.active{background:#057fce;border-color:#057fce;color:#fff}
 .news-searchbar{margin-top:21px}
 .news-grid{grid-template-columns:repeat(3,minmax(0,1fr));gap:19px}
 .news-card{
@@ -176,8 +156,6 @@ html[dir=rtl] .news-card--lead .news-art{border-radius:0 25px 25px 0}
  .news-cover p{max-width:100%;font-size:12px}
  .news-cover:after{width:88px}
  .news-fresh-row{margin-top:13px}
- .news-language-bar{margin-top:10px}
- .news-language-bar button{font-size:10px;padding:8px 10px;min-width:42px}
  .news-searchbar{margin-top:14px;margin-bottom:12px}
  .news-categories{padding-bottom:9px;margin-bottom:12px}
  .news-grid{grid-template-columns:1fr;gap:13px}
@@ -373,7 +351,6 @@ html[dir=rtl] .news-art:after{right:auto;left:0!important;transform:scaleX(-1)!i
  .news-cover h1{font-size:clamp(28px,6.3vw,36px);margin:10px 0}
  .news-cover p{font-size:12px;line-height:1.6}
  .news-fresh-row{margin-top:12px}
- .news-language-bar{margin-top:10px}
  .news-feature-carousel{border-radius:19px;padding:6px}
  .news-feature-slide{height:clamp(245px,59vw,330px);border-radius:14px}
  .news-feature-copy{padding:31px 16px 17px;gap:9px}
@@ -503,7 +480,6 @@ html[dir=rtl] .news-feature-credit{right:auto;left:12px}
 .news-cover{margin-top:6px;padding-top:15px;padding-bottom:13px;row-gap:12px}
 .news-cover #newsIntro,.news-cover .news-fresh-row{display:none!important}
 .news-cover-copy{align-self:center}
-.news-cover .news-language-bar{grid-column:1/-1;margin:0;align-items:center;gap:7px}
 .news-cover .news-eyebrow{font-size:10px}
 .news-cover h1{margin:7px 0 3px}
 @media(max-width:760px){
@@ -511,12 +487,9 @@ html[dir=rtl] .news-feature-credit{right:auto;left:12px}
  .news-cover .news-eyebrow{display:none}
  .news-cover-copy{padding-inline:12px}
  .news-cover h1{font-size:clamp(24px,6vw,30px);line-height:1.12;margin:0 0 2px}
- .news-cover .news-language-bar{order:3;align-self:flex-start;padding-inline:12px;padding-bottom:4px;margin-top:0}
- .news-cover .news-language-bar button{padding:6px 10px;min-height:31px}
  .news-feature-carousel{order:2}
 }
-@media(max-width:360px){
- .news-cover-copy,.news-cover .news-language-bar{padding-inline:10px}
+@media(max-width:360px){.news-cover-copy{padding-inline:10px}
  .news-cover h1{font-size:24px}
 }
 
