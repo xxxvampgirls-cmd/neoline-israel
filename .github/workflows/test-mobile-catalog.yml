@@ -6,6 +6,9 @@ on:
     paths:
       - '.github/workflows/test-mobile-catalog.yml'
       - 'index.html'
+      - 'site-header.css'
+      - 'site-header.js'
+      - 'assets/flag-israel.svg'
 permissions:
   contents: read
 jobs:
@@ -81,14 +84,17 @@ jobs:
               await page.setViewportSize({width,height:844});
               await page.waitForFunction(()=>{const img=document.querySelector('.header .brand-clean');return img?.complete && img.naturalWidth>0;},{timeout:15000});
               const mark=await page.locator('.header .brand-clean').boundingBox();
-              const languages=await page.locator('.header .flag-switcher').boundingBox();
+              const languages=await page.locator('.neoline-site-header__flags').boundingBox();
               if(!mark||!languages||mark.x+mark.width>languages.x+2)throw Error('Header logo overlaps languages at '+width+'px: '+JSON.stringify({mark,languages}));
               const logoSrc=await page.locator('.header .brand-clean').getAttribute('src');
               if(!logoSrc.includes('v=20261116-compact'))throw Error('Old logo still published');
               const imageXml=await page.evaluate(async src=>(await (await fetch(src)).text()),logoSrc);
               if(!imageXml.includes('scale(.82 .68)'))throw Error('Slim wordmark missing from SVG');
-              const flag=await page.locator('[data-language="he"] svg').evaluate(el=>el.outerHTML);
-              if(!flag.includes('M18 7.6 23.4 16.4'))throw Error('Israel flag was not updated');
+              const flag=page.locator('.neoline-site-header__flag[data-language="he"] img[src*="flag-israel.svg"]');
+              if(await flag.count()!==1)throw Error('Corrected vector Israel flag asset missing');
+              const flagSrc=await flag.getAttribute('src');
+              const flagXml=await page.evaluate(async src=>(await (await fetch(src)).text()),flagSrc);
+              if(!flagXml.includes('M18 7.1 23 15.8H13z')||!flagXml.includes('M13 9.1h10L18 17z'))throw Error('Israel six-point star mismatch');
               console.log('BRAND PASS mobileWidth='+width+' cleanLogo='+mark.width+' languageStart='+languages.x+' actualFlag=true');
             }
             await page.setViewportSize({width:390,height:844});
