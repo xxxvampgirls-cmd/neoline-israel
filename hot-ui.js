@@ -48,12 +48,13 @@ function setCopy(){
  trafficTitle:"police",trafficDisclaimer:"sources",trafficSourceLink:"policeLink",trafficRoad6Link:"road6",
  trafficWazeTitle:"waze",trafficWazeSubtitle:"wazeSub",trafficWazeNotice:"wazeNotice",trafficWazeOpen:"wazeOpen",
  hotArticlesTitle:"newsTitle",hotArticlesNote:"newsNote",hotAllNews:"all",hotFootnote:"footer",
- newsHome:"home",newsCatalog:"catalog",newsNews:"news",newsDelivery:"delivery",newsCart:"cart"};
+ newsHome:"home",newsCatalog:"catalog",newsNews:"news",newsDelivery:"delivery"};
  for(const [id,key] of Object.entries(names)){
   const el=$(id);if(!el)continue;
   if(el.matches(".news-bottom a"))el.querySelector("span").textContent=t[key];
   else el.textContent=t[key];
  }
+ const game=$("newsGame")?.querySelector("span");if(game)game.textContent=({ru:"Игра",he:"משחק",en:"Game",ar:"لعبة"})[language];
  $("trafficRefresh").title=t.refresh;$("trafficRefresh").setAttribute("aria-label",t.refresh);
  document.querySelectorAll("[data-hot-lang]").forEach(btn=>{
   const on=btn.dataset.hotLang===language;btn.classList.toggle("active",on);btn.setAttribute("aria-pressed",String(on));
