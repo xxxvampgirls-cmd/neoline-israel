@@ -24,7 +24,7 @@ PREVIOUS = Path(os.getenv("FINES_PREVIOUS", "assets/fines/operations.json"))
 COUNT_RE = re.compile(r"(?<!\d)(\d{1,3}(?:,\d{3})+|\d{2,6})\s*(?:דוחות(?:\s+תנועה)?|דוחת)(?!\w)")
 CONTEXT_RE = re.compile(r"אכיפה|שוטרי|משטרת\s*התנועה|אגף\s*התנועה")
 REPORT_RE = re.compile(r"נרשמ|רשמ[וו]?|חולקו|ניתנו|הוציאו")
-APPROX_RE = re.compile(r"(?:יותר\s*מ|מעל|למעלה\s*מ|כ-|כ\s*$|לפחות|כמעט)\s*$")
+APPROX_RE = re.compile(r"(?:יותר\s*מ|מעל|למעלה\s*מ|כ-|כ\s*$|לפחות|כמעט)\s*-?\s*$")
 MAX_REPORTS = 130
 
 
@@ -52,6 +52,10 @@ def exact_total(body: str) -> int | None:
         if not REPORT_RE.search(prefix):
             continue
         if re.search(r"(?:מתוכם|מהם|בגין|עבירות\s+מהירות|טלפון|רמזור)\s*$", prefix):
+            continue
+        # Sub-categories like '838 tickets for speeding' are not operation totals.
+        suffix = clean[match.end():match.end() + 75]
+        if re.match(r"\s*(?:נרשמו\s+)?(?:בגין|על\s+עבירות|בשל|עקב)\b", suffix):
             continue
         total = int(match.group(1).replace(",", ""))
         if 20 <= total <= 150000:
