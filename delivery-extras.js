@@ -146,6 +146,7 @@
   }
  });
  window.addEventListener("neoline:delivery-provider",exitRetail);
+ window.addEventListener("neoline:city-changed",()=>{if(currentShop)renderRetailMap(currentShop,false)});
  window.addEventListener("neoline:delivery-language",()=>{
   render();
   if(currentShop)renderRetailMap(currentShop,false);
