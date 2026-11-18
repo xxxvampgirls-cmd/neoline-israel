@@ -8,6 +8,7 @@
 <link rel="stylesheet" href="./teoria.css?v=20261118-license-right-v10"><link rel="stylesheet" href="./teoria-dashboard.css?v=20261118-slim-v2">
 <link rel="stylesheet" href="./nav-current.css?v=20261118-active-nav-v1"><link rel="stylesheet" href="./site-header.css?v=20261118-flag-fix-v3">
 <link rel="stylesheet" href="./teoria-redesign.css?v=20261118-full-arcade-v1">
+<link rel="stylesheet" href="./teoria-gifts.css?v=20261118-gifts-preview-v1">
 </head><body>
 <header class="topbar neoline-site-header"><div class="neoline-site-header__inner">
 <a class="neoline-site-header__logo" href="./" aria-label="NEOLINE — главная страница"><img src="./assets/neoline-clean.svg?v=20261116-compact" width="501" height="108" alt="NEOLINE"></a>
@@ -19,6 +20,11 @@
   <span class="eyebrow" id="heroEyebrow">NEOLINE · ИЗРАИЛЬ · ИГРА</span>
   <h1 id="heroTitle">Теория вождения</h1>
   <span class="hero-stroke" aria-hidden="true"></span>
+  <button type="button" class="game-gift-trigger" id="gameGiftTrigger"
+    data-gift-preview aria-haspopup="dialog" aria-controls="gameGiftDialog" aria-label="Подарки за игру">
+    <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M3 10h18v11H3zM2 7h20v4H2zM12 7v14M12 7C4 7 4 2 7.2 2c2.5 0 4.8 3 4.8 5Zm0 0c0-2 2.3-5 4.8-5C20 2 20 7 12 7Z"/></svg>
+    <span id="gameGiftTriggerLabel">Подарки</span><span class="gift-trigger-spark" aria-hidden="true">✦</span>
+  </button>
  </div>
  <div class="hero-orbs" role="group" aria-label="Мой игровой прогресс">
   <svg class="hero-signal" viewBox="0 0 900 100" preserveAspectRatio="none" aria-hidden="true" focusable="false"><path d="M0 51H585 L601 51 L612 38 L623 67 L637 42 L647 51 H900"/></svg>
@@ -80,10 +86,44 @@
 </section>
 <section class="game-panel outcome" id="gameResult" hidden aria-live="polite">
  <div class="result-badge" id="resultBadge">🏁</div><div class="tiny-label" id="resultKicker">МАРШРУТ ЗАВЕРШЁН</div><h2 id="resultTitle">Отличная поездка!</h2><p id="resultSubtitle">Ты всё ближе к настоящему экзамену.</p><div class="result-score" id="resultScore">0 / 10</div><div class="result-details"><div><strong id="resultPercent">0%</strong><span id="resultPercentLabel">Верных ответов</span></div><div><strong id="resultXP">+0 XP</strong><span id="resultXPLabel">Заработано</span></div></div>
+ <button type="button" class="game-gift-result-trigger" id="gameGiftResultTrigger" data-gift-preview
+ aria-haspopup="dialog" aria-controls="gameGiftDialog" aria-label="Какие подарки можно получить">
+ <span aria-hidden="true">🎁</span><span id="gameGiftResultLabel">Какие подарки?</span><span aria-hidden="true">↗</span>
+ </button>
  <div id="resultMistakes" class="result-mistakes" hidden></div>
  <div class="result-buttons"><button type="button" class="primary" id="restartMode">↻ <span id="restartLabel">Ещё раз</span></button><button type="button" class="secondary" id="backToModes"><span id="backModesLabel">Другие режимы</span> →</button></div>
 </section>
 </main>
+
+<dialog id="gameGiftDialog" class="game-gift-dialog" aria-labelledby="gameGiftTitle" aria-describedby="gameGiftIntro">
+  <div class="game-gift-dialog__content">
+    <button type="button" id="gameGiftClose" class="game-gift-dialog__close" aria-label="Закрыть информацию о подарках">×</button>
+    <div class="game-gift-dialog__hero">
+      <div class="game-gift-dialog__icon" aria-hidden="true">
+        <svg viewBox="0 0 36 36" focusable="false"><path d="M5 16h26v16H5zM3 11h30v7H3zM18 11v21M18 11C8 11 8 4 12 4c3 0 6 4 6 7Zm0 0c0-3 3-7 6-7 4 0 4 7-6 7Z"/></svg>
+      </div>
+      <div><span class="game-gift-dialog__eyebrow" id="gameGiftEyebrow">NEOLINE · ИГРОВЫЕ НАГРАДЫ</span><h2 id="gameGiftTitle">Подарки за игру 🎁</h2></div>
+    </div>
+    <p class="game-gift-dialog__intro" id="gameGiftIntro">Играйте, учитесь и собирайте достижения. Мы рассматриваем будущие бонусы к заказам NEOLINE.</p>
+    <h3 class="game-gift-dialog__section-title" id="gameGiftOptionsTitle">Что можно будет получить</h3>
+    <div class="game-gift-dialog__options">
+      <article class="game-gift-dialog__option">
+        <span class="game-gift-dialog__option-icon" aria-hidden="true">%</span>
+        <div><strong id="gameGiftDiscountTitle">Дополнительная скидка</strong><p id="gameGiftDiscountDescription">Возможный бонус к покупке товаров NEOLINE.</p></div>
+      </article>
+      <article class="game-gift-dialog__option">
+        <span class="game-gift-dialog__option-icon" aria-hidden="true">🎁</span>
+        <div><strong id="gameGiftAccessoryTitle">Автоаксессуар в подарок</strong><p id="gameGiftAccessoryDescription">Полезная вещь для автомобиля вместе с заказом.</p></div>
+      </article>
+      <article class="game-gift-dialog__option">
+        <span class="game-gift-dialog__option-icon" aria-hidden="true">✦</span>
+        <div><strong id="gameGiftSurpriseTitle">Специальный бонус</strong><p id="gameGiftSurpriseDescription">Дополнительная выгода или сюрприз при покупке.</p></div>
+      </article>
+    </div>
+    <p class="game-gift-dialog__notice" id="gameGiftNotice">Пока это только примеры. Какие подарки появятся, сколько будет нужно очков и за что их начислять — решим позже. Сейчас XP остаются игровыми очками: подарки не выдаются и в корзину не отправляются.</p>
+    <button type="button" class="game-gift-dialog__ok" id="gameGiftOK">Понятно</button>
+  </div>
+</dialog>
 
 <section class="gameover-overlay" id="gameOver" role="dialog" aria-modal="true" aria-labelledby="gameOverTitle" aria-describedby="gameOverMessage" hidden>
  <div class="gameover-backdrop" aria-hidden="true"></div>
@@ -123,5 +163,6 @@
 </nav>
 <script src="./teoria-dashboard.js?v=20261118-animated-v1" defer></script>
 <script src="./teoria.js?v=20261118-full-arcade-v12" defer></script>
+<script src="./teoria-gifts.js?v=20261118-gifts-preview-v1" defer></script>
 <script src="./nav-current.js?v=20261118-game-v3" defer></script><script src="./site-header.js?v=20261118-unified-v2" defer></script>
 </body></html>
