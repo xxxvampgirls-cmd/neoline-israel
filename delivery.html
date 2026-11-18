@@ -637,6 +637,11 @@ function renderMap(){
 function chooseProvider(id,fromTap=false){
  if(id!=="all"&&!providers[id])return;
  active=id;
+ // Network selection changes the active map layer even when the compact
+ // toolbar prevents ordinary city changes from resetting the layer.
+ if(document.body.classList.contains("locator-ui-active")){
+  window.NeolineMap?.setProvider(id);
+ }
  window.dispatchEvent(new CustomEvent("neoline:delivery-provider",{detail:{id}}));
  if(fromTap&&id==="all"){
   // Explicit "All networks" always restores the whole-country overview.
