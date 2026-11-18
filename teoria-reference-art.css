@@ -68,3 +68,68 @@
 @media(prefers-reduced-motion:reduce){
  #gameLobby .route-card .game-mode-photo{transition:none!important}
 }
+
+/* The only entry to My Progress on the lobby is this medal in the dashboard.
+   Position indicated on the annotated mobile screenshots (to the right of XP). */
+.game-hero.theory-dashboard .hero-orbs{
+ grid-template-columns:repeat(3,minmax(0,1fr)) 48px!important;
+ gap:3px!important;
+ padding-inline:7px 5px!important;
+}
+.theory-dashboard .hero-progress-open{
+ position:relative;z-index:4;
+ display:grid;place-items:center;flex:0 0 auto;
+ justify-self:center;align-self:center;
+ width:45px;height:45px;min-width:45px;min-height:45px;
+ padding:0;margin:0 0 9px;
+ border:1px solid #a8dcef;border-radius:50%;
+ color:#0f83b9;
+ background:linear-gradient(145deg,#fff,#dff6ff);
+ box-shadow:0 0 0 3px #ffffff9c,0 4px 11px #0b6b9d2b,inset 0 1px #fff;
+ cursor:pointer;touch-action:manipulation;
+ -webkit-tap-highlight-color:transparent;
+ transition:transform .2s,border-color .2s,box-shadow .2s;
+}
+.theory-dashboard .hero-progress-open:hover,
+.theory-dashboard .hero-progress-open:focus-visible{
+ outline:2px solid #24b5e5;outline-offset:3px;
+ border-color:#2cafd9;
+ box-shadow:0 0 0 3px #e7f8ff,0 6px 15px #0b6b9d3a;
+}
+.theory-dashboard .hero-progress-open:active{transform:scale(.95)}
+.theory-dashboard .hero-progress-icon{
+ display:block;font-size:23px;line-height:1;
+ filter:drop-shadow(0 1px 3px #cdab474a);
+}
+.theory-dashboard .hero-progress-sr{
+ position:absolute!important;width:1px;height:1px;
+ padding:0;margin:-1px;border:0;overflow:hidden;
+ clip-path:inset(50%);white-space:nowrap;
+}
+@media(max-width:720px){
+ .game-hero.theory-dashboard .hero-orbs{
+  grid-template-columns:repeat(3,minmax(0,1fr)) 43px!important;
+  gap:1px!important;padding:5px 3px 3px!important;
+ }
+ .theory-dashboard .hero-progress-open{
+  width:39px;height:39px;min-width:39px;min-height:39px;
+  margin:0 0 8px;
+  box-shadow:0 0 0 2px #ffffffba,0 3px 7px #0b6b9d29;
+ }
+ .theory-dashboard .hero-progress-icon{font-size:21px}
+ .theory-dashboard .hero-orb-ring{width:50px!important;max-width:50px!important}
+}
+@media(max-width:360px){
+ .game-hero.theory-dashboard .hero-orbs{
+  grid-template-columns:repeat(3,minmax(0,1fr)) 38px!important;
+  gap:0!important;padding-inline:2px!important;
+ }
+ .theory-dashboard .hero-progress-open{
+  width:36px;height:36px;min-width:36px;min-height:36px;
+ }
+ .theory-dashboard .hero-orb-ring{width:46px!important;max-width:46px!important}
+ .theory-dashboard .hero-orb-caption{font-size:7px!important}
+}
+@media(prefers-reduced-motion:reduce){
+ .theory-dashboard .hero-progress-open{transition:none!important}
+}
