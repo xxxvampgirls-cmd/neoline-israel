@@ -81,6 +81,10 @@
  .accident-day-tick{font-size:8px}
  .accident-chart-bottom{font-size:10px}
  .accident-chart-disclaimer{font-size:9.5px}
+ .news-cover .news-feature-carousel{
+  width:calc(100% + 24px);max-width:none;
+  margin-inline:-12px;
+ }
  .news-cover .news-feature-slide{height:clamp(248px,64vw,340px)}
  .news-cover .news-feature-controls{min-height:35px;padding:4px 0 0;gap:10px}
  .news-cover .news-feature-arrow{width:32px;height:32px}
@@ -88,6 +92,7 @@
 }
 @media(max-width:360px){
  .news-cover{padding-inline:8px}
+ .news-cover .news-feature-carousel{width:calc(100% + 16px);margin-inline:-8px}
  .accident-strip{padding:9px 7px}
  .hot-events-link{font-size:9px;padding:6px}
 }
