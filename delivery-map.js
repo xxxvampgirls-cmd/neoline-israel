@@ -9,7 +9,7 @@
  /* Daily snapshot is fetched by GitHub Actions. Visitors no longer make
     slow mass Overpass requests from every phone / browser session. */
  const snapshotURL="./assets/pickup/points.json";
- const cacheKey="neoline-pickup-osm-v2",cacheMs=24*60*60*1000;
+ const cacheKey="neoline-pickup-osm-v3",cacheMs=24*60*60*1000;
  const brands={
   boxit:{title:"BOXIT",mark:"B",color:"#087ebf",rx:/box\s*[- ]?\s*it|בוקסיט|בוקס.?איט/i},
   done:{title:"DONE",mark:"D",color:"#0084cd",rx:/\bdone\b|דאן|דון לוקרים/i},
@@ -241,7 +241,7 @@
    // Only user-triggered searches; no autocomplete and no bulk geocoding.
    try{
     status(language().loading);
-    const url="https://nominatim.openstreetmap.org/search?format=jsonv2&countrycodes=il&limit=1&q="+encodeURIComponent(text);
+    const url="https://nominatim.openstreetmap.org/search?format=jsonv2&bounded=1&viewbox=34.20,33.42,35.91,29.42&limit=1&q="+encodeURIComponent(text);
     const response=await fetch(url,{headers:{"Accept":"application/json"}});
     if(!response.ok)throw Error("Geocoder "+response.status);
     const data=await response.json();
@@ -256,8 +256,11 @@
     map.flyTo(coords,Math.max(map.getZoom(),12),{duration:.7});
     if(loaded)showPoints();
    }else showFallback();
-  }else if(!fallbackVisible)status(language().noCity,"error");
-  else showFallback();
+  }else{
+   // If public geocoding is unavailable, search this city with the
+   // selected operator in Google Maps rather than leaving a blank view.
+   showFallback();
+  }
  }
  function setFallback(queryText){
   fallbackQuery=queryText||fallbackQuery;
