@@ -29,7 +29,7 @@
     stroke: #0b7dbb !important;
   }
   .mobile-nav > .neoline-current > span[data-i],
-  .mobile-nav > .neoline-current > span:last-of-type {
+  .mobile-nav > .neoline-current > #newsNavLabel {
     color: #196eaa !important;
     font-weight: 850 !important;
   }
