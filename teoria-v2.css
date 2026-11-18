@@ -176,6 +176,18 @@ main.shell{padding-bottom:calc(100px + env(safe-area-inset-bottom))}
 #gameLobby .progress-disclosure{margin-top:14px}
 #gameLobby .progress-disclosure>summary{font-weight:900;cursor:pointer}
 #gameLobby .source-note{margin-top:13px}
+/* Legacy mode-description selectors also match a new illustrative span.
+   Override specifically so pictures never inherit flexible text sizing or
+   the full-width card's description grid-cell. */
+#gameLobby .route-card>span.game-mode-photo:not(.route-top):not(.route-cta){
+ display:block;flex:0 0 auto;min-width:0;overflow:hidden;
+ color:inherit;font-size:inherit;line-height:normal;
+}
+#gameLobby .route-full>span.game-mode-photo:not(.route-top):not(.route-cta){
+ grid-column:1;grid-row:1/4;align-self:stretch;
+ height:100%;min-height:146px;margin:0;flex:none;
+}
+
 /* QUIZ: compact informative HUD, road map, large official question. */
 #gamePlaying{
  width:min(910px,100%);padding:14px;
@@ -400,6 +412,10 @@ main.shell{padding-bottom:calc(100px + env(safe-area-inset-bottom))}
 .game-progress-empty{font-size:11px;color:#6d8ba3;padding:13px;border-radius:12px;background:#fff;border:1px dashed #c9e3f1}
 .game-progress-footnote{font-size:10px;color:#7f99ad;line-height:1.5;margin:17px 0 0}
 @media(max-width:720px){
+ #gameLobby .route-full>span.game-mode-photo:not(.route-top):not(.route-cta){
+  height:100%;min-height:124px;grid-column:1;grid-row:1/4;
+ }
+
  main.shell{padding-inline:12px}
  .game-hero.theory-dashboard{grid-template-columns:43% minmax(0,57%);grid-template-rows:113px auto;gap:6px;margin:9px 0;padding:7px;border-radius:18px}
  .theory-dashboard .hero-copy{padding:5px 0 5px 7px}
