@@ -9,7 +9,7 @@
  /* Daily snapshot is fetched by GitHub Actions. Visitors no longer make
     slow mass Overpass requests from every phone / browser session. */
  const snapshotURL="./assets/pickup/points.json";
- const cacheKey="neoline-pickup-osm-v3",cacheMs=24*60*60*1000;
+ const cacheKey="neoline-pickup-osm-v4",cacheMs=24*60*60*1000;
  const brands={
   boxit:{title:"BOXIT",mark:"B",color:"#087ebf",rx:/box\s*[- ]?\s*it|בוקסיט|בוקס.?איט/i},
   done:{title:"DONE",mark:"D",color:"#0084cd",rx:/\bdone\b|דאן|דון לוקרים/i},
