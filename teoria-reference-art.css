@@ -11,3 +11,60 @@
 #gameLobby .route-card .game-mode-photo::after{content:"";position:absolute;inset:0;background:linear-gradient(0deg,#e7f6ff 0%,#e7f6ff55 11%,transparent 38%)!important;pointer-events:none}
 #gameLobby .route-indigo .game-mode-photo::after{background:linear-gradient(0deg,#0a65b44a,transparent 45%)!important}
 #gameLobby .route-full .game-mode-photo::after{background:linear-gradient(90deg,transparent 70%,#dfebff 100%)!important}
+
+/* Bring the artwork into the same pastel-glass card design as the selected screenshot. */
+.theory-dashboard .hero-art::after{
+ content:"";position:absolute;inset:0;pointer-events:none;
+ background:linear-gradient(90deg,#d7f1ffdb 0%,#d7f1ff45 10%,transparent 23%),
+            linear-gradient(0deg,#e6f9ff13,transparent 33%)!important;
+}
+#gameLobby .route-card:not(.route-full){
+ background:linear-gradient(135deg,#f4fcff 0%,#e5f7ff 100%)!important;
+ border-color:#a8d9f1!important;
+ box-shadow:0 4px 12px #197eb022,inset 0 1px 1px #fff!important;
+}
+#gameLobby .route-mint:not(.route-full){background:linear-gradient(135deg,#f7ffff,#e1f9fe)!important}
+#gameLobby .route-amber:not(.route-full){background:linear-gradient(135deg,#f7fbff,#e4efff)!important}
+#gameLobby .route-indigo:not(.route-full){
+ background:linear-gradient(120deg,#0f4d88,#084679)!important;
+ border-color:#1973ab!important;
+}
+#gameLobby .route-card:not(.route-full) .game-mode-photo::after{
+ content:"";position:absolute;inset:0;pointer-events:none;
+ background:linear-gradient(0deg,#e5f7ff 0 12%,#e5f7ffe0 25%,#e5f7ff24 41%,transparent 57%)!important;
+}
+#gameLobby .route-mint .game-mode-photo::after{
+ background:linear-gradient(0deg,#e1f9fe 0 12%,#e1f9fee0 25%,#e1f9fe24 41%,transparent 57%)!important;
+}
+#gameLobby .route-indigo .game-mode-photo::after{
+ background:linear-gradient(0deg,#10538c 0 12%,#10538ce0 25%,#10538c33 44%,transparent 59%)!important;
+}
+#gameLobby .route-amber .game-mode-photo::after{
+ background:linear-gradient(0deg,#e4efff 0 12%,#e4efffe0 25%,#e4efff24 41%,transparent 57%)!important;
+}
+#gameLobby .route-card.route-indigo strong{color:#fff!important}
+#gameLobby .route-indigo>span:not(.route-top):not(.route-cta):not(.game-mode-photo){color:#caeaff!important}
+#gameLobby .route-card.route-full{
+ background:linear-gradient(115deg,#eaf5ff,#d6dcff 70%,#f4e7ff)!important;
+ border-color:#b5bde8!important;
+}
+#gameLobby .route-card.route-full .game-mode-photo::after{
+ background:linear-gradient(90deg,transparent 0 45%,#e7e2fa 100%)!important;
+}
+/* Keep the two-by-two modes compact, without truncating their names or disabling. */
+@media(max-width:720px){
+ #gameLobby .route-card:not(.route-full){
+  min-height:0!important;padding-bottom:9px!important;gap:3px!important;
+ }
+ #gameLobby .route-card:not(.route-full) .game-mode-photo{height:72px!important}
+ #gameLobby .route-card:not(.route-full) strong{margin-top:2px!important;line-height:1.15!important}
+ #gameLobby .route-card:not(.route-full)>span:not(.route-top):not(.route-cta):not(.game-mode-photo){
+  flex:0 0 auto!important;margin-top:3px!important;
+ }
+ #gameLobby .routes{gap:8px!important}
+ #gameLobby .game-lobby-section{margin-bottom:0!important}
+ #gameLobby .panel-toolbar{padding-bottom:4px!important}
+}
+@media(prefers-reduced-motion:reduce){
+ #gameLobby .route-card .game-mode-photo{transition:none!important}
+}
