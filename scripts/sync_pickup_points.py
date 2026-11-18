@@ -148,6 +148,18 @@ def normalize(data: dict) -> list[dict]:
         street = " ".join(str(tags.get(k) or "") for k in ("addr:street", "addr:housenumber")).strip()
         city = str(tags.get("addr:city") or tags.get("addr:suburb") or "").strip()
         addr = ", ".join(x for x in (street, city) if x)
+        # Explicit OSM feature classification. Don't infer lockers from
+        # a courier's brand name or invent a type for ambiguous records.
+        if tags.get("amenity") == "post_office":
+            kind = "post"
+        elif tags.get("amenity") == "parcel_locker":
+            kind = "locker"
+        elif (tags.get("shop") == "parcel_pickup"
+              or tags.get("parcel_pickup") == "yes"
+              or tags.get("post_office") == "post_partner"):
+            kind = "pickup"
+        else:
+            kind = "unknown"
         points.append({
             "key": key,
             "lat": lat,
@@ -155,7 +167,8 @@ def normalize(data: dict) -> list[dict]:
             "id": provider(tags),
             "title": str(tags.get("name") or tags.get("name:en") or "")[:140],
             "address": addr[:200],
-            "post": tags.get("amenity") == "post_office",
+            "post": kind == "post",
+            "kind": kind,
         })
     points.sort(key=lambda p: (p["lat"], p["lon"], p["key"]))
     return points
