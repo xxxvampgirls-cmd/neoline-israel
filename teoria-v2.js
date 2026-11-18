@@ -219,6 +219,8 @@ window.addEventListener("neoline:theory-progress",event=>{
   wrong:Number(d.wrong)||0,
   language:d.language||locale(),licence:d.licence||$("licenseSelect")?.value||"B"
  };
+ // Persist earned badges immediately after every saved answer/completed game.
+ earnedAchievements(current,validGames(current.history));
  if(dialog?.open)drawProgress();
 });
 window.addEventListener("neoline:theory-quiz",event=>{
