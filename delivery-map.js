@@ -14,7 +14,7 @@
   boxit:{title:"BOXIT",mark:"B",color:"#087ebf",rx:/box\s*[- ]?\s*it|בוקסיט|בוקס.?איט/i},
   done:{title:"DONE",mark:"D",color:"#0084cd",rx:/\bdone\b|דאן|דון לוקרים/i},
   doar:{title:"Israel Post",mark:"24",color:"#16759e",rx:/israel\s*post|דואר\s*ישראל|doar\s*israel/i},
-  epost:{title:"E-POST · HFD",mark:"E",color:"#7758c8",rx:/e[\s.-]?post|hfd|אי.?פוסט|איפוסט/i},
+  epost:{title:"E-POST · HFD",mark:"E",color:"#7758c8",rx:/\be[-\s.]?post\b|\bhfd\b|אי.?פוסט|איפוסט/i},
   pickup:{title:"PickUP",mark:"P",color:"#3283b1",rx:/pick\s*[- ]?\s*up|פיקאפ/i},
   cheetah:{title:"Cheetah Shops",mark:"C",color:"#d18b37",rx:/cheetah|chita|צ.?יטה/i},
   zigzag:{title:"ZigZag BOX",mark:"Z",color:"#c065a6",rx:/zig.?zag|זיג.?זג/i},
