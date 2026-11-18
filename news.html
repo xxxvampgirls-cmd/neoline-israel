@@ -6,6 +6,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="./news-ui.css?v=20261118-css-clean-v2">
 <link rel="stylesheet" href="./news-accidents.css?v=20261118-news-chart-v2">
+<link rel="stylesheet" href="./road-annual.css?v=20261118-annual-v1">
 <link rel="stylesheet" href="./news-layout-polish.css?v=20261118-carousel-height-v2">
 <link rel="stylesheet" href="./nav-current.css?v=20261118-active-nav-v1"><link rel="stylesheet" href="./site-header.css?v=20261118-flag-fix-v3">
 </head><body>
@@ -44,6 +45,35 @@
     <a href="https://www.gov.il/he/pages/crash_map" target="_blank" rel="noopener noreferrer" id="accidentMapSource">Карта ДТП ↗</a>
    </div>
   </details>
+  <details class="accident-annual" id="accidentAnnual">
+   <summary><span class="accident-annual-title" id="accidentAnnualTitle">Годовая статистика ДТП</span><span class="accident-annual-more"><span id="accidentAnnualSubtitle">Официальные данные · раскрыть</span><span class="accident-annual-caret" aria-hidden="true">⌄</span></span></summary>
+   <div class="accident-annual-body">
+    <h2 id="accidentAnnualHeading">Аварийность на дорогах Израиля</h2>
+    <p class="accident-annual-intro" id="accidentAnnualIntro">Помесячные данные ЦСБ Израиля без прибавления публикаций и страховых сообщений.</p>
+    <div class="accident-annual-switch">
+     <div class="accident-annual-group" id="accidentAnnualYears" role="group" aria-label="Выбор года"></div>
+     <div class="accident-annual-group" id="accidentAnnualMetrics" role="group" aria-label="Выбор показателя"></div>
+    </div>
+    <p class="accident-annual-period" id="accidentAnnualPeriod">2026 · предварительные данные, январь–сентябрь</p>
+    <div class="accident-annual-cards" id="accidentAnnualCards"></div>
+    <p class="accident-annual-comparison" id="accidentAnnualComparison" aria-live="polite"></p>
+    <p class="accident-annual-peak" id="accidentAnnualPeak"></p>
+    <div class="accident-annual-chart-scroll"><div class="accident-annual-chart" id="accidentAnnualChart" role="group" aria-label="Данные ДТП по месяцам"></div></div>
+    <p class="accident-annual-detail" id="accidentAnnualDetail" aria-live="polite">Нажмите на столбец, чтобы узнать число за месяц.</p>
+    <h3 class="accident-annual-history-heading" id="accidentAnnualHistoryTitle">Погибшие по годам · завершённые годы</h3>
+    <div class="accident-annual-history" id="accidentAnnualHistory" role="img" aria-label="Погибшие на дорогах по итогам 2022–2025"></div>
+    <p class="accident-annual-secondary" id="accidentAnnualSecondary">В одной смертельной аварии могут погибнуть несколько человек.</p>
+    <div class="accident-annual-sources"><strong id="accidentAnnualSourcesTitle">Первоисточники:</strong>
+     <div class="accident-annual-sources-links">
+      <a href="https://www.cbs.gov.il/he/mediarelease/DocLib/2026/176/27_26_176b.pdf" target="_blank" rel="noopener noreferrer" id="annualSource2025">Годовой отчёт ЦСБ · 2025 ↗</a>
+      <a href="https://www.cbs.gov.il/he/mediarelease/DocLib/2026/337/27_26_337b.pdf" target="_blank" rel="noopener noreferrer" id="annualSource2026">Месячный отчёт ЦСБ · сентябрь 2026 ↗</a>
+      <a href="https://www.cbs.gov.il/he/publications/DocLib/2026/rt0326/h_print.pdf" target="_blank" rel="noopener noreferrer" id="annualSourceQuarter">Транспортный сборник ЦСБ ↗</a>
+      <a href="https://www.gov.il/he/pages/crash_map" target="_blank" rel="noopener noreferrer" id="annualSourceMap">Карта ДТП ↗</a>
+     </div>
+    </div>
+    <p class="accident-annual-note" id="accidentAnnualNote"></p>
+   </div>
+  </details>
  </section>
  <div class="news-feature-carousel" id="newsFeatureCarousel" role="region" aria-roledescription="carousel" aria-label="Последние новости" tabindex="0">
   <div id="newsFeatureSlide" class="news-feature-slide" aria-live="off">
@@ -74,5 +104,6 @@
 </nav>
 <script src="./news-ui.js?v=20261118-news-game-v6" defer></script>
 <script src="./news-accidents.js?v=20261118-news-chart-v4" defer></script>
+<script src="./road-annual.js?v=20261118-annual-v1" defer></script>
 <script src="./nav-current.js?v=20261118-game-v3" defer></script><script src="./site-header.js?v=20261118-unified-v2" defer></script>
 </body></html>
