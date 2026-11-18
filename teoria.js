@@ -55,6 +55,9 @@ const NAV_LABELS={
  en:{home:"Home",catalog:"Catalog",news:"News",delivery:"Delivery",cart:"Cart"}
 };
 function updateTheoryNavigation(){
+ // Fifth dock item: Theory game (all supported locales).
+ const gameCaption=document.querySelector('[data-theory-nav="game"] span');
+ if(gameCaption)gameCaption.textContent=({ru:"Игра",he:"משחק",en:"Game",ar:"لعبة"})[state.lang]||"Game";
  const labels=NAV_LABELS[state.lang]||NAV_LABELS.ru;
  document.querySelectorAll("[data-theory-nav]").forEach(link=>{
   const translated=labels[link.dataset.theoryNav];
