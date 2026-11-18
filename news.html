@@ -7,6 +7,7 @@
 <link rel="stylesheet" href="./news-ui.css?v=20261118-css-clean-v2">
 <link rel="stylesheet" href="./news-accidents.css?v=20261118-news-chart-v2">
 <link rel="stylesheet" href="./road-annual.css?v=20261118-annual-v1">
+<link rel="stylesheet" href="./road-fines.css?v=20261118-fines-v1">
 <link rel="stylesheet" href="./news-layout-polish.css?v=20261118-carousel-height-v2">
 <link rel="stylesheet" href="./nav-current.css?v=20261118-active-nav-v1"><link rel="stylesheet" href="./site-header.css?v=20261118-flag-fix-v3">
 </head><body>
@@ -74,6 +75,29 @@
     <p class="accident-annual-note" id="accidentAnnualNote"></p>
    </div>
   </details>
+  <details class="road-fines" id="roadFines">
+   <summary><span class="road-fines-summary" id="roadFinesTitle">Штрафы · официальные данные</span><span class="road-fines-subtitle" id="roadFinesSubtitle">2024–2026 · раскрыть</span></summary>
+   <div class="road-fines-body">
+    <h2 id="finesHeading">Штрафы и дорожные нарушения</h2>
+    <p class="road-fines-intro" id="finesIntro">Данные полиции Израиля: штрафные уведомления, предупреждения и вызовы в суд.</p>
+    <div class="fines-years" id="finesYears" role="group" aria-label="Год отчёта"></div>
+    <p class="fines-period" id="finesPeriod">Официальная сводка · 2024</p>
+    <div class="fines-cards" id="finesCards" aria-live="polite"></div>
+    <p class="fines-status" id="finesStatus" aria-live="polite"></p>
+    <h3 class="fines-section-heading" id="finesHistoryTitle">Число оформленных документов по годам</h3>
+    <div class="fines-history-chart" id="finesHistoryChart" role="group" aria-label="Статистика штрафов по годам"></div>
+    <p class="fines-history-note" id="finesHistoryNote"></p>
+    <h3 class="fines-section-heading" id="finesDistributionTitle">Виды нарушений · 2024</h3>
+    <div class="fines-offences" id="finesOffences" role="img" aria-label="Доли нарушений по официальному отчёту"></div>
+    <p class="fines-share-note" id="finesShareNote"></p>
+    <div class="fines-sources">
+     <a id="finesSource" href="https://www.gov.il/BlobFolder/reports/police_statistical_2024/he/%D7%A9%D7%A0%D7%AA%D7%95%D7%9F%20%D7%A1%D7%98%D7%98%D7%99%D7%A1%D7%98%D7%99%202024%20%D7%9E%D7%A9%D7%98%D7%A8%D7%AA%20%D7%99%D7%A9%D7%A8%D7%90%D7%9C%20%D7%9E%D7%95%D7%A0%D7%92%D7%A9.pdf" target="_blank" rel="noopener noreferrer">Полиция Израиля · отчёт 2024, стр. 104 ↗</a>
+     <a id="finesPolicePortal" href="https://www.gov.il/he/service/police_data" target="_blank" rel="noopener noreferrer">Статистика полиции ↗</a>
+    </div>
+    <p class="fines-definition" id="finesDefinition"></p>
+    <p class="fines-notice" id="finesNotice"></p>
+   </div>
+  </details>
  </section>
  <div class="news-feature-carousel" id="newsFeatureCarousel" role="region" aria-roledescription="carousel" aria-label="Последние новости" tabindex="0">
   <div id="newsFeatureSlide" class="news-feature-slide" aria-live="off">
@@ -105,5 +129,6 @@
 <script src="./news-ui.js?v=20261118-news-game-v6" defer></script>
 <script src="./news-accidents.js?v=20261118-news-chart-v4" defer></script>
 <script src="./road-annual.js?v=20261118-annual-v1" defer></script>
+<script src="./road-fines.js?v=20261118-fines-v1" defer></script>
 <script src="./nav-current.js?v=20261118-game-v3" defer></script><script src="./site-header.js?v=20261118-unified-v2" defer></script>
 </body></html>
