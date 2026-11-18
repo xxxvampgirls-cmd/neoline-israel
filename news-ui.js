@@ -185,11 +185,13 @@ function localize(){
  official.target="_blank";official.rel="noopener noreferrer";
  official.textContent=state.lang==="ru"?"Официальный сайт Минтранса ↗":state.lang==="he"?"אתר משרד התחבורה ↗":state.lang==="ar"?"وزارة النقل ↗":"Ministry of Transport ↗";
  note.appendChild(official);
- $("returnCatalog").textContent=tr("back");
+
  if($("newsTheoryLink"))$("newsTheoryLink").textContent=({ru:"🎮 Теория",he:"🎮 תיאוריה",en:"🎮 Theory",ar:"🎮 النظري"})[state.lang];
- for(const [id,k] of [["newsHome","home"],["newsCatalog","catalog"],["newsNews","news"],["newsDelivery","delivery"],["newsCart","cart"]]){
-  const label=$(id).querySelector("span");if(label)label.textContent=tr(k);
+ for(const [id,k] of [["newsHome","home"],["newsCatalog","catalog"],["newsNews","news"],["newsDelivery","delivery"]]){
+  const label=$(id)?.querySelector("span");if(label)label.textContent=tr(k);
  }
+ const gameLabel=$("newsGame")?.querySelector("span");
+ if(gameLabel)gameLabel.textContent=({ru:"Игра",he:"משחק",en:"Game",ar:"لعبة"})[state.lang];
 }
 function tabs(){
  const cats=["all","accidents","laws","speed","roads","cars"];
