@@ -189,6 +189,8 @@ function updateCopy(){
   gameResultGaugeLabel:"right"
  };
  for(const [id,key] of Object.entries(map))set(id,c[key]);
+ $("gameProgressOpen")?.setAttribute("aria-label",c.progress);
+ $("gameProgressOpen")?.setAttribute("title",c.progress);
  $("gameProgressClose")?.setAttribute("aria-label",c.close);
  $("gameProgressGift")?.setAttribute("aria-label",c.gift);
  if(dialog){dialog.lang=locale();dialog.dir=locale()==="he"?"rtl":"ltr"}
