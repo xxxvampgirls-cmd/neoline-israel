@@ -9,7 +9,7 @@
   position:relative;isolation:isolate;overflow:hidden;
   display:grid;grid-template-columns:minmax(0,.94fr) minmax(0,1.32fr);
   align-items:center;gap:14px;
-  min-height:186px;margin:12px 0 10px;padding:19px 25px;
+  min-height:158px;margin:10px 0 8px;padding:15px 20px;
   border-radius:26px;border:1px solid #a8d9f5;
   background:
     linear-gradient(141deg,transparent 0 43%,#b9e7ff80 43.2%,transparent 68%),
@@ -17,11 +17,7 @@
     linear-gradient(120deg,#fff 3%,#f4fbff 34%,#b7e9ff 100%);
   box-shadow:0 7px 22px #185b891a,inset 0 0 0 2px #ffffff8a;
 }
-.theory-dashboard::after{
-  content:"";position:absolute;z-index:-1;right:-9%;bottom:-36%;width:54%;height:125%;
-  border:29px solid #63c5f325;border-radius:50%;transform:rotate(-28deg);
-  pointer-events:none;
-}
+.theory-dashboard::after{display:none}
 .theory-dashboard .hero-copy{position:relative;z-index:2;min-width:0}
 .theory-dashboard .eyebrow{color:#1b87bd;font-size:10px;letter-spacing:.14em;line-height:1.35}
 .theory-dashboard h1{
@@ -111,29 +107,69 @@
 .theory-dashboard .hero-orb--accuracy .hero-orb-caption{border-color:#a4e4cf}
 .theory-dashboard .hero-orb--xp .hero-orb-ring{animation:theoryXPTwinkle 7s ease-in-out infinite}
 @keyframes theoryXPTwinkle{0%,78%,100%{filter:brightness(1)}81%,88%{filter:brightness(1.14)}}
+/* Slim mobile version: title on the left, three rings on the right.
+   Keep the animated ECG and the same real statistics, without extra vertical rows. */
 @media(max-width:720px){
   .game-hero.theory-dashboard{
-    display:flex;flex-direction:column;align-items:stretch;gap:13px;
-    padding:13px 15px 15px;min-height:0;margin:8px 0 7px;
-    border-radius:18px;
+    display:grid;grid-template-columns:minmax(0, .74fr) minmax(0, 1.44fr);
+    align-items:center;justify-content:space-between;column-gap:5px;
+    min-height:0;padding:9px 10px 8px;margin:7px 0 6px;
+    border-radius:16px;
+    background:linear-gradient(112deg,#ffffff 0%,#f5fbff 39%,#d3edff 100%);
   }
-  .theory-dashboard .hero-copy{display:block}
-  .theory-dashboard .eyebrow{font-size:8px;letter-spacing:.12em}
-  .theory-dashboard h1{font-size:clamp(22px,6vw,30px)!important;line-height:1.07;margin:4px 0 5px}
-  .theory-dashboard .hero-stroke{height:3px;width:55%}
-  .theory-dashboard .hero-orbs{gap:5px}
-  .theory-dashboard .hero-signal{inset:10px 0 auto;height:86px}
-  .theory-dashboard .hero-orb{gap:6px}
-  .theory-dashboard .hero-orb-ring{width:clamp(66px,22vw,88px);padding:5px}
-  .theory-dashboard .hero-orb-icon{height:15px;width:15px;stroke-width:2}
-  .theory-dashboard .hero-orb-number{font-size:clamp(18px,5.2vw,25px)}
-  .theory-dashboard .hero-orb-denominator{font-size:8px}
-  .theory-dashboard .hero-orb-caption{font-size:9px;padding:4px 7px;white-space:normal;max-width:100%}
+  .theory-dashboard .hero-copy{min-width:0;align-self:center}
+  .theory-dashboard .eyebrow{
+    display:block;font-size:6.8px;letter-spacing:.035em;
+    line-height:1.32;font-weight:850;
+  }
+  .theory-dashboard h1{
+    font-size:clamp(17px,5.2vw,21px)!important;
+    font-weight:900;line-height:1.1;letter-spacing:-.043em;
+    margin:5px 0 6px;overflow-wrap:normal;
+  }
+  .theory-dashboard .hero-stroke{height:2.5px;width:94%}
+  .theory-dashboard .hero-orbs{
+    display:flex;align-items:center;gap:3px;justify-content:space-between;
+    align-self:center;min-width:0;
+  }
+  .theory-dashboard .hero-signal{
+    inset:0 0 auto;width:100%;height:66px;
+  }
+  .theory-dashboard .hero-orb{gap:4px;min-width:0}
+  .theory-dashboard .hero-orb-ring{
+    width:clamp(47px,16.8vw,66px);max-width:100%;
+    padding:3px;border-width:1px;
+    box-shadow:0 0 0 1px #e3f6ff,0 3px 8px #005c9c26,0 0 9px #1ab5ff1c;
+  }
+  .theory-dashboard .hero-orb--accuracy .hero-orb-ring{
+    box-shadow:0 0 0 1px #e2fff1,0 3px 8px #0a987527,0 0 9px #1bff711f
+  }
+  .theory-dashboard .hero-orb--xp .hero-orb-ring{
+    box-shadow:0 0 0 1px #fff2cd,0 3px 8px #b5832827,0 0 9px #ffc53e1f
+  }
+  .theory-dashboard .hero-orb-icon{height:12px;width:12px;stroke-width:2.1}
+  .theory-dashboard .hero-orb-number{
+    font-size:clamp(14px,4.8vw,19px);line-height:1.04;
+  }
+  .theory-dashboard .hero-orb-denominator{font-size:7px;line-height:1.1}
+  .theory-dashboard .hero-orb-caption{
+    display:block;font-size:8px;line-height:1.15;
+    padding:3px 4px;white-space:normal;max-width:100%;min-width:0;
+    border-radius:12px;
+  }
 }
 @media(max-width:370px){
-  .game-hero.theory-dashboard{gap:10px;padding:11px 10px 13px}
-  .theory-dashboard .hero-orb-ring{width:64px}
-  .theory-dashboard .hero-orb-caption{font-size:8px;padding:4px 5px}
+  .game-hero.theory-dashboard{
+    grid-template-columns:minmax(0,.76fr) minmax(0,1.52fr);
+    padding:8px 8px 7px;gap:3px;
+  }
+  .theory-dashboard .eyebrow{font-size:6px}
+  .theory-dashboard h1{font-size:17px!important}
+  .theory-dashboard .hero-orb-ring{width:clamp(44px,16vw,57px)}
+  .theory-dashboard .hero-orb-icon{width:11px;height:11px}
+  .theory-dashboard .hero-orb-number{font-size:14px}
+  .theory-dashboard .hero-orb-denominator{font-size:6.5px}
+  .theory-dashboard .hero-orb-caption{font-size:7px;padding:3px 2px}
 }
 @media(prefers-reduced-motion:reduce){
   .theory-dashboard .hero-signal path,
