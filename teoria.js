@@ -50,9 +50,9 @@ function classes(){return state.pool.filter(q=>q.classes.includes(state.licence)
 function sourceFor(lang){return "https://data.gov.il/he/datasets/ministry_of_transport/"+({ru:"tqru",he:"tqhe",en:"tqen"}[lang]||"tqru")}
 
 const NAV_LABELS={
- ru:{home:"Главная",catalog:"Каталог",news:"Новости",delivery:"Доставка",cart:"Корзина"},
- he:{home:"ראשי",catalog:"קטלוג",news:"חדשות",delivery:"משלוח",cart:"סל"},
- en:{home:"Home",catalog:"Catalog",news:"News",delivery:"Delivery",cart:"Cart"}
+ ru:{home:"Главная",catalog:"Каталог",news:"Новости",delivery:"Доставка",cart:"Корзина",game:"Игра"},
+ he:{home:"ראשי",catalog:"קטלוג",news:"חדשות",delivery:"משלוח",cart:"סל",game:"משחק"},
+ en:{home:"Home",catalog:"Catalog",news:"News",delivery:"Delivery",cart:"Cart",game:"Game"}
 };
 function updateTheoryNavigation(){
  // Fifth dock item: Theory game (all supported locales).
