@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#f5fbff">
+<meta name="description" content="NEOLINE Israel — срочные дорожные сообщения, ДТП, перекрытия, официальные источники и Waze.">
+<title>Горячие события на дорогах Израиля — NEOLINE Israel</title>
+<link rel="stylesheet" href="./news-ui.css?v=20261118-chart-v1">
+<link rel="stylesheet" href="./hot-ui.css?v=20261118-hot-v1">
+<link rel="stylesheet" href="./nav-current.css?v=20261118-active-nav-v1">
+</head><body>
+<header class="news-header"><div class="shell news-header-inner">
+ <a class="news-logo" href="./" aria-label="NEOLINE Israel"><img src="./assets/neoline-clean.svg?v=20261116-compact" alt="NEOLINE" width="501" height="108"></a>
+ <nav class="news-top-links"><a href="./news.html" id="hotBackLink">← Новости</a><a href="./teoria.html" id="hotTheoryLink">🎮 Теория</a></nav>
+</div></header>
+<main class="shell hot-main">
+ <div class="hot-page-heading">
+  <span class="hot-eyebrow" id="hotEyebrow">NEOLINE · ДОРОГИ ИЗРАИЛЯ</span>
+  <h1 id="hotHeading">Горячие события <span>на дорогах Израиля</span></h1>
+  <p id="hotIntro">Срочные сообщения дорожной полиции, последние новости о происшествиях и карта Waze. Проверяйте ограничения в первоисточнике.</p>
+ </div>
+ <div class="news-language-bar hot-languages" role="group" aria-label="Язык страницы">
+  <button type="button" data-hot-lang="ru" class="active" aria-pressed="true">RU</button>
+  <button type="button" data-hot-lang="he" lang="he" aria-pressed="false">עברית</button>
+  <button type="button" data-hot-lang="en" lang="en" aria-pressed="false">EN</button>
+  <button type="button" data-hot-lang="ar" lang="ar" aria-pressed="false">عربي</button>
+ </div>
+ <section class="traffic-panel hot-traffic" aria-labelledby="trafficTitle">
+  <div class="traffic-panel-head">
+   <span class="traffic-fire" aria-hidden="true">🔥</span>
+   <div class="traffic-panel-heading"><strong id="trafficTitle">Срочные сообщения дорожной полиции</strong><small id="trafficStatus" role="status" aria-live="polite">Проверяем официальный источник…</small></div>
+   <button type="button" id="trafficRefresh" class="traffic-refresh" title="Проверить" aria-label="Проверить">↻</button>
+  </div>
+  <div id="trafficList" class="traffic-list" hidden></div>
+  <div class="traffic-panel-bottom">
+   <span id="trafficDisclaimer">Проверяйте актуальность ограничений непосредственно перед поездкой.</span>
+   <a href="https://t.me/s/Atanpolice" target="_blank" rel="noopener noreferrer" id="trafficSourceLink">Дорожная полиция ↗</a>
+   <a href="https://www.kvish6.co.il/Messages.aspx" target="_blank" rel="noopener noreferrer" id="trafficRoad6Link">Шоссе № 6 ↗</a>
+  </div>
+  <details class="traffic-waze" id="trafficWaze">
+   <summary><span class="traffic-waze-icon" aria-hidden="true">⌾</span><span class="traffic-waze-heading"><strong id="trafficWazeTitle">Карта Waze</strong><small id="trafficWazeSubtitle">Пробки и перекрытия · открыть карту</small></span><span class="traffic-waze-chevron" aria-hidden="true">⌄</span></summary>
+   <div class="traffic-waze-content">
+    <div class="traffic-waze-areas" id="trafficWazeAreas" role="group" aria-label="Регион карты">
+     <button type="button" data-waze-area="israel" class="active" aria-pressed="true">Весь Израиль</button>
+     <button type="button" data-waze-area="center" aria-pressed="false">Центр</button>
+     <button type="button" data-waze-area="north" aria-pressed="false">Север</button>
+     <button type="button" data-waze-area="south" aria-pressed="false">Юг</button>
+    </div>
+    <div id="trafficWazeFrame" class="traffic-waze-frame"><div id="trafficWazeLoading" class="traffic-waze-loading">Карта загрузится после открытия…</div></div>
+    <div class="traffic-waze-foot"><span id="trafficWazeNotice">Информация предоставляется Waze.</span><a href="https://www.waze.com/live-map/" target="_blank" rel="noopener noreferrer" id="trafficWazeOpen">Открыть Waze ↗</a></div>
+   </div>
+  </details>
+ </section>
+ <section class="hot-articles" aria-labelledby="hotArticlesTitle">
+  <div class="hot-articles-head"><div><h2 id="hotArticlesTitle">Последние происшествия и дороги</h2><p id="hotArticlesNote">Новости о ДТП и дорожной ситуации за последние 72 часа. Это сообщения СМИ, а не официальный реестр всех происшествий.</p></div>
+   <a href="./news.html" id="hotAllNews">Все новости ↗</a>
+  </div>
+  <p id="hotArticlesStatus" class="hot-articles-status" aria-live="polite">Загружаем последние публикации…</p>
+  <div class="hot-articles-grid" id="hotArticlesGrid"></div>
+ </section>
+ <p class="hot-footnote" id="hotFootnote">Информация может запаздывать или меняться. NEOLINE не управляет дорожным движением и не гарантирует полноту данных. Для принятия решений сверяйтесь с официальными источниками.</p>
+</main>
+<nav class="news-bottom" aria-label="Главное меню NEOLINE">
+<a href="./" id="newsHome"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m3 10 9-7 9 7v10a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V10Z"/><path d="M9 21v-8h6v8"/></svg><span>Главная</span></a>
+<a href="./#catalog" id="newsCatalog"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></svg><span>Каталог</span></a>
+<a href="./news.html" id="newsNews" class="active" aria-current="page"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M7 8h4v4H7zM14 8h4M14 11h4M7 16h11"/></svg><span>Новости</span></a>
+<a href="./delivery.html" id="newsDelivery"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 7h12v10H3z"/><path d="M15 10h3l3 4v3h-6"/><circle cx="7" cy="19" r="2"/><circle cx="17" cy="19" r="2"/></svg><span>Доставка</span></a>
+<a href="./?panel=cart" id="newsCart"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 8h14l1.2 13H3.8L5 8Z"/><path d="M9 9V6a3 3 0 0 1 6 0v3"/></svg><span>Корзина</span></a>
+</nav>
+<script src="./hot-ui.js?v=20261118-hot-v1" defer></script>
+<script src="./nav-current.js?v=20261118-active-nav-v2" defer></script>
+</body></html>
