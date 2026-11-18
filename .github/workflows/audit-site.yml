@@ -1,0 +1,42 @@
+name: Audit NEOLINE site integrity
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - 'index.html'
+      - 'news.html'
+      - 'hot.html'
+      - 'delivery.html'
+      - 'teoria.html'
+      - '*.js'
+      - '*.css'
+      - 'assets/**'
+      - 'scripts/audit_site.py'
+      - '.github/workflows/audit-site.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - name: Check all five pages and referenced media
+        run: python3 scripts/audit_site.py
+      - name: Check frontend JavaScript syntax
+        run: |
+          for file in ./*.js; do
+            echo "Checking $file"
+            node --check "$file"
+          done
+      - name: Check the page-generated JSON files
+        run: |
+          python3 -m json.tool assets/catalog/catalog.json >/dev/null
+          python3 -m json.tool assets/news/news.json >/dev/null
+          python3 -m json.tool assets/pickup/points.json >/dev/null
+          python3 -m json.tool assets/retail/points.json >/dev/null
+          python3 -m json.tool assets/transparent/manifest.json >/dev/null
