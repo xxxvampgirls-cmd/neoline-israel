@@ -125,6 +125,23 @@
 html[dir="rtl"] .game-gift-dialog__hero{padding-right:0;padding-left:38px}
 html[dir="rtl"] .game-gift-dialog__close{right:auto;left:12px}
 html[dir="rtl"] .game-gift-dialog__content::before{right:auto;left:-94px}
+
+/* Secondary entry point after each completed game. */
+#gameResult .game-gift-result-trigger{
+ display:inline-flex;align-items:center;justify-content:center;gap:8px;
+ margin:11px auto 5px;padding:8px 14px;
+ border:1px solid #a0d9ef;border-radius:999px;
+ background:linear-gradient(110deg,#f5fbff,#d9f3ff);color:#1776a5;
+ box-shadow:0 4px 11px #1783a519,inset 0 1px #fff;
+ font:850 11px/1.4 Manrope,Arial,sans-serif;
+ cursor:pointer;
+}
+#gameResult .game-gift-result-trigger:hover,
+#gameResult .game-gift-result-trigger:focus-visible{
+ border-color:#21b1e3;outline:2px solid #71d5ef66;outline-offset:2px;
+}
+#gameResult .game-gift-result-trigger:active{transform:scale(.98)}
+
 @media(max-width:720px){
  .game-gift-trigger{margin-top:5px;padding:3px 7px 3px 6px;gap:4px;font-size:8px}
  .game-gift-trigger svg{width:12px;height:12px}
