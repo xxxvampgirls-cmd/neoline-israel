@@ -1,0 +1,152 @@
+
+/* Compact delivery map controls and expandable filter sheet.
+   Applied only after JS relocates long lists into the dialog. */
+.locator-toolbar[hidden]{display:none!important}
+.locator-ui-active .layout{display:block;grid-template-columns:none;gap:0;padding-bottom:9px}
+.locator-ui-active .side{box-shadow:none;background:transparent;border:0;padding:0}
+.locator-ui-active .map-panel{width:100%;overflow:hidden}
+.locator-ui-active .map-panel>.map-top{display:none!important}
+.locator-ui-active .map-panel>.searchbox,
+.locator-ui-active .map-panel>.city-choices{display:none!important}
+.locator-ui-active .hero{padding:11px 0 9px}
+.locator-ui-active .hero h1{font-size:clamp(22px,3vw,30px);line-height:1.14}
+.locator-toolbar{
+ border:1px solid #cbe2f3;
+ background:linear-gradient(125deg,#fff,#eef8ff);
+ border-radius:17px;box-shadow:0 8px 25px #1a629113;
+ padding:10px 12px 8px;margin-bottom:10px;
+}
+.locator-action-row{display:grid;grid-template-columns:minmax(0,1fr) auto auto;gap:7px}
+.locator-action-row>button{
+ display:inline-flex;align-items:center;justify-content:center;gap:7px;
+ min-height:43px;border:1px solid #bfdcf0;background:#fff;
+ padding:8px 13px;border-radius:12px;color:#17648d;
+ font-size:12px;font-weight:850;white-space:nowrap;
+}
+.locator-action-row>button:hover{background:#eaf6ff;border-color:#7dbde8}
+.locator-action-row .locator-loupe{
+ justify-content:flex-start;background:#eff8ff;
+ border-color:#91cbee;min-width:0;text-align:start;
+ padding-inline:13px;overflow:hidden;
+}
+.locator-loupe svg{width:21px;height:21px;stroke:#117dbb;stroke-width:2.3;fill:none;flex:none}
+.locator-loupe span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.locator-filter-strip{display:flex;align-items:center;gap:6px;overflow-x:auto;scrollbar-width:none;
+ -webkit-overflow-scrolling:touch;padding:9px 1px 3px;white-space:nowrap}
+.locator-filter-strip::-webkit-scrollbar{display:none}
+.locator-filter-strip button{
+ border:1px solid #d0e5f3;border-radius:999px;background:#fff;color:#427994;
+ padding:8px 13px;min-height:35px;font-size:11px;font-weight:800;
+ line-height:1.15;flex:none;transition:background .15s,color .15s,border .15s;
+}
+.locator-filter-strip button[aria-pressed=true]{
+ border-color:#0e88d3;color:#fff;background:linear-gradient(115deg,#1579bc,#1699df);
+ box-shadow:0 4px 11px #177eb62a;
+}
+.locator-filter-strip button:active{transform:scale(.97)}
+.locator-summary{font-size:10px;font-weight:700;color:#728b9e;margin:5px 4px 0;line-height:1.4;min-height:14px}
+.locator-dialog{
+ border:1px solid #cfe3f0;box-shadow:0 16px 70px #0e395073;
+ border-radius:20px;padding:0;max-height:min(89dvh,820px);height:min(89dvh,820px);
+ width:min(690px,calc(100% - 26px));max-width:none;
+ background:#fff;color:#163e60;overflow:hidden;
+ position:fixed;inset:auto 0 0;margin:0 auto;
+}
+.locator-dialog::backdrop{background:rgba(9,27,48,.57);backdrop-filter:blur(4px)}
+.locator-dialog[open]{display:flex;flex-direction:column}
+.locator-dialog-head{
+ flex:none;display:flex;align-items:center;justify-content:space-between;
+ gap:14px;padding:15px 16px 12px;background:linear-gradient(110deg,#eef8ff,#fff);
+ border-bottom:1px solid #d4e8f5;
+}
+.locator-dialog-head h2{font-size:18px;line-height:1.25;margin:0;font-weight:900}
+.locator-dialog-head p{margin:4px 0 0;color:#6b8aa2;font-size:11px}
+.locator-close{
+ border:1px solid #d2e7f5;border-radius:50%;width:38px;height:38px;
+ display:grid;place-items:center;background:#fff;color:#2d79a4;
+ font-size:23px;line-height:1;flex:none;
+}
+.locator-dialog-tabs{
+ flex:none;display:flex;gap:6px;padding:10px 13px;
+ border-bottom:1px solid #e0edf5;overflow-x:auto;scrollbar-width:none;background:#fff;
+}
+.locator-dialog-tabs::-webkit-scrollbar{display:none}
+.locator-dialog-tabs button{
+ border-radius:10px;border:1px solid #d2e5f2;background:#f8fcff;
+ color:#4b7b98;font-size:11px;font-weight:850;padding:9px 13px;min-width:75px;flex:1;
+}
+.locator-dialog-tabs button[aria-selected=true]{
+ color:#fff;border-color:#147ec5;background:linear-gradient(100deg,#1376ba,#249ee7);
+}
+.locator-dialog-content{flex:1;min-height:0;overflow:auto;overscroll-behavior:contain;padding:13px 13px 25px}
+.locator-pane[hidden]{display:none!important}
+.locator-pane .side{display:block;width:100%}
+.locator-pane .networks{grid-template-columns:repeat(2,minmax(0,1fr));gap:7px}
+.locator-pane .network--all{grid-column:1/-1}
+.locator-pane .network{min-height:50px;padding:8px 9px;gap:8px}
+.locator-pane .network strong{font-size:12px}
+.locator-pane .network-more-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:7px}
+.locator-pane .network-more>summary{margin-top:9px}
+.locator-pane .searchbox{display:flex!important;padding:0 0 14px!important}
+.locator-pane .searchbox input{font-size:14px;min-height:45px}
+.locator-pane .searchbox button{min-height:45px}
+.locator-pane .city-choices{display:block!important;padding:0!important}
+.locator-pane .city-choices>summary{
+ display:flex;justify-content:space-between;background:#f2f9ff;border:1px solid #d4e9f5;
+ padding:10px 12px;min-height:40px;
+}
+.locator-pane .cities{display:flex!important;padding:10px 0 7px!important}
+.locator-pane .cities button{padding:8px 11px;font-size:11px}
+.locator-pane #cityDirectory{font-size:13px}
+.locator-pane .retail-partners{width:100%!important;margin:0!important;box-shadow:none;border:none;border-radius:0}
+.locator-pane .retail-partners-title{display:none!important}
+.locator-pane .retail-partners-body{padding:4px 0!important;border:0!important}
+.locator-pane .retail-partners-body>p{font-size:11px;line-height:1.55}
+.locator-pane .retail-partners-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+.locator-pane .network-insights,.locator-pane .official-directory{
+ margin:0 0 11px!important;border-radius:13px!important
+}
+.locator-pane .network-insights-grid,.locator-pane .official-directory-grid{
+ grid-template-columns:repeat(2,minmax(0,1fr))
+}
+.locator-pane .network-insights-hint{font-size:11px}
+.locator-pane .network-insights>summary,.locator-pane .official-directory>summary{
+ min-height:44px;
+}
+.locator-pane-heading{color:#1b6795;font-size:13px;font-weight:900;margin:2px 0 11px}
+.locator-pane-help{font-size:11px;color:#6d8799;line-height:1.55;margin:6px 2px 13px}
+.locator-pane .partner-card-stats span{font-size:10px}
+.locator-ui-active .map-panel>.map-wrap{border-top:0}
+@media(max-width:760px){
+ .locator-ui-active .hero{padding:9px 0 8px}
+ .locator-ui-active .hero h1{font-size:23px}
+ .locator-toolbar{padding:8px 9px 7px;border-radius:14px;margin-bottom:8px}
+ .locator-action-row{gap:6px}
+ .locator-action-row>button{padding:7px 10px;min-height:41px;font-size:11px}
+ .locator-filter-strip{padding-top:7px;gap:6px}
+ .locator-filter-strip button{min-height:33px;padding:7px 10px;font-size:10.5px}
+ .locator-summary{font-size:10px;margin-top:3px}
+ .locator-dialog{width:100%;max-height:90dvh;height:90dvh;border-radius:22px 22px 0 0;border-bottom:0}
+ .locator-dialog-head{padding:13px 14px 11px}
+ .locator-dialog-head h2{font-size:16px}
+ .locator-dialog-tabs{padding:8px 9px;gap:5px}
+ .locator-dialog-tabs button{font-size:10.5px;padding:9px 8px;min-width:65px}
+ .locator-dialog-content{padding:10px 10px max(22px,env(safe-area-inset-bottom))}
+ .locator-pane .network{min-height:46px;padding:7px;gap:6px}
+ .locator-pane .network strong{font-size:11px}
+ .locator-pane .network small{font-size:9px}
+ .locator-pane .retail-partners-grid,.locator-pane .network-insights-grid,.locator-pane .official-directory-grid{
+  grid-template-columns:repeat(2,minmax(0,1fr))
+ }
+ .locator-pane .map-panel{width:100%}
+}
+@media(max-width:355px){
+ .locator-action-row>button{font-size:10px;padding:6px 8px}
+ .locator-loupe span{font-size:10px}
+ .locator-pane .network strong{font-size:10px}
+ .locator-dialog-tabs button{font-size:9.5px;padding:8px 6px}
+}
+@media(prefers-reduced-motion:reduce){
+ .locator-filter-strip button{transition:none}
+ .locator-dialog::backdrop{backdrop-filter:none}
+}
