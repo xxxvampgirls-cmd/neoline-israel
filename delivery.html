@@ -603,6 +603,8 @@ function applyLanguage(){
  ["deliveryNavHome","deliveryNavCatalog","deliveryNavNews","deliveryNavDelivery"].forEach((id,i)=>{
   $(id).querySelector("span").textContent=extra.nav[i];
  });
+ const gameCaption=$("deliveryNavGame")?.querySelector("span");
+ if(gameCaption)gameCaption.textContent=({ru:"Игра",he:"משחק",en:"Game",ar:"لعبة"})[lang]||"Игра";
  document.querySelectorAll("[data-city]").forEach((b,i)=>b.textContent=t.cities[i]);
  $("map").title=t.mapSub;
  renderMap();
