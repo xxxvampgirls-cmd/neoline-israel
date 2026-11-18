@@ -595,7 +595,7 @@ function applyLanguage(){
  document.documentElement.lang=lang;
  document.documentElement.dir=["he","ar"].includes(lang)?"rtl":"ltr";
 
- ["back","title","choose","find","fullMap","foot","home"].forEach(k=>$(k).textContent=t[k]);
+ ["title","choose","find","fullMap","foot","home"].forEach(k=>$(k).textContent=t[k]);
  $("city").placeholder=t.placeholder;
  ["boxit","done","doar","epost","pickup"].forEach((id,i)=>$("caption-"+id).textContent=t.labels[i]);
  extraProviderOrder.forEach((id,i)=>$("caption-"+id).textContent=extra.labels[i]);
