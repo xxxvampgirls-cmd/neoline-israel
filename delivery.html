@@ -340,6 +340,7 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible{ou
 @media(max-width:760px){.retail-show-all{min-height:36px;font-size:11px}}
 
 </style>
+<link rel="stylesheet" href="./delivery-filter-ui.css?v=20261118-map-filter-v1">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/leaflet.css">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet.markercluster@1.5.3/dist/MarkerCluster.css">
 <link rel="stylesheet" href="./delivery-map.css?v=20261118-israel-map-v1">
@@ -407,6 +408,7 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible{ou
  <a href="./delivery.html" id="deliveryNavDelivery" aria-current="page" class="active"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 7h12v10H3z"/><path d="M15 10h3l3 4v3h-6"/><circle cx="7" cy="19" r="2"/><circle cx="17" cy="19" r="2"/></svg><span>Доставка</span></a>
 </nav>
 <script defer src="./delivery-extras.js?v=20261118-partners-v1"></script>
+<script defer src="./delivery-filter-ui.js?v=20261118-map-filter-v1"></script>
 <script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/leaflet.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/leaflet.markercluster@1.5.3/dist/leaflet.markercluster.js"></script>
 <script src="./delivery-map.js?v=20261118-israel-map-v4"></script>
@@ -621,7 +623,11 @@ function renderMap(){
  $("networkNotice").textContent=all?extra.genericNotice:t.networkNotice;
  if(window.NeolineMap){
   window.NeolineMap.setFallback(q);
-  window.NeolineMap.setProvider(active);
+  // The compact filter bar owns the map mode. City searches and language
+  // changes must never force a switch back to delivery-only pins.
+  if(!document.body.classList.contains("locator-ui-active")){
+   window.NeolineMap.setProvider(active);
+  }
  }else{
   $("map").hidden=false;
   $("map").src="https://www.google.com/maps?q="+encodeURIComponent(q)+"&output=embed";
