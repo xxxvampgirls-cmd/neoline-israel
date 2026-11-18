@@ -55,6 +55,9 @@
 .neoline-site-header .neoline-site-header__flag .flag-graphic svg{
  display:block;width:32px;height:22px;max-width:none;flex:0 0 auto;
 }
+.neoline-site-header .neoline-site-header__flag .flag-graphic img{
+ display:block;width:32px;height:22px;max-width:none;object-fit:contain;flex:0 0 auto;
+}
 .neoline-site-header .neoline-site-header__flag:is(.active,.on,[aria-pressed="true"]){
  background:#fff!important;border-color:#bad7ea!important;
  box-shadow:0 3px 12px #176aa421,inset 0 0 0 1px #f5fbff!important;
@@ -118,7 +121,8 @@
   flex-basis:49px;width:49px;font-size:11px!important;
  }
  .neoline-site-header .neoline-site-header__flag .flag-graphic,
- .neoline-site-header .neoline-site-header__flag .flag-graphic svg{
+ .neoline-site-header .neoline-site-header__flag .flag-graphic svg,
+ .neoline-site-header .neoline-site-header__flag .flag-graphic img{
   width:28px;height:20px;
  }
  .neoline-site-header .neoline-site-header__actions{gap:6px}
