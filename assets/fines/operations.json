@@ -1,0 +1,55 @@
+{
+  "version": 1,
+  "checkedAt": null,
+  "sourceStatus": "pending",
+  "source": "Police Traffic Division, Israel",
+  "sourceUrl": "https://t.me/s/Atanpolice",
+  "reports": [
+    {
+      "id": "media-2026-09-09-operation",
+      "date": "2026-09-09",
+      "period": "operation",
+      "scope": "national-operation",
+      "count": 4269,
+      "sourceType": "media-police-report",
+      "sourceUrl": "https://www.globes.co.il/news/article.aspx?did=1001555319",
+      "sourceLabel": "Globes · данные об операции дорожной полиции",
+      "categories": {
+        "speed": 421,
+        "phone": 485
+      },
+      "note": "Национальная операция 9 сентября; это не количество всех штрафов за сутки."
+    },
+    {
+      "id": "police-2025-09-21-weekend",
+      "date": "2025-09-21",
+      "period": "weekend",
+      "scope": "traffic-police-operation",
+      "count": null,
+      "minimum": 4000,
+      "sourceType": "police-government",
+      "sourceUrl": "https://www.gov.il/he/departments/topics/police_traffic_department/govil-landing-page",
+      "sourceLabel": "Полиция Израиля · официальная сводка 21.09.2025",
+      "categories": {},
+      "note": "В полицейском сообщении указано «более 4 000»; точное число не опубликовано."
+    },
+    {
+      "id": "atan-467",
+      "date": "2024-04-06",
+      "period": "week",
+      "periodStart": "2024-03-31",
+      "periodEnd": "2024-04-06",
+      "scope": "traffic-police",
+      "count": 7804,
+      "sourceType": "police-telegram",
+      "sourceUrl": "https://t.me/Atanpolice/467",
+      "sourceLabel": "Дорожная полиция Израиля · официальный канал",
+      "categories": {
+        "phone": 1845,
+        "speed": 838,
+        "redLight": 351
+      },
+      "note": "Недельная сводка подразделения полиции. Категории входят в общий показатель, а не прибавляются к нему."
+    }
+  ]
+}
