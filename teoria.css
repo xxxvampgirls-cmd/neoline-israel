@@ -107,10 +107,11 @@ body.game-active .game-hero{display:none!important}
  .hero-mini-car{font-size:23px}
  .hero-mini-check{height:18px;width:18px;font-size:10px}
  #gameLobby{margin:6px 0 14px;padding:12px;border-radius:18px}
- #gameLobby .panel-toolbar{display:flex;flex-direction:column;gap:8px;align-items:stretch}
+ #gameLobby .panel-toolbar{display:flex;flex-direction:row;gap:8px;align-items:center;justify-content:space-between;min-width:0}
+ #gameLobby .toolbar-title{flex:1 1 auto;min-width:0}
  #gameLobby .toolbar-title .tiny-label{display:none}
  #gameLobby .toolbar-title h2{font-size:18px;line-height:1.2;margin:0;letter-spacing:-.035em}
- #gameLobby .settings{display:flex;flex-wrap:nowrap;gap:8px;align-items:center;justify-content:space-between}
+ #gameLobby .settings{display:flex;flex:0 0 auto;flex-wrap:nowrap;gap:8px;align-items:center;justify-content:flex-end;margin-inline-start:auto}
  #gameLobby .class-select{flex:0 0 auto;gap:4px;font-size:9px;white-space:nowrap}
  #gameLobby .class-select select{height:39px;padding:6px 8px;font-size:11px;max-width:116px}
  #gameLobby .bank-status:not(.loaded){padding:7px 9px;margin:8px 0 0;font-size:9px}
