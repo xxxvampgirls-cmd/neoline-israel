@@ -186,7 +186,7 @@ function localize(){
  official.textContent=state.lang==="ru"?"Официальный сайт Минтранса ↗":state.lang==="he"?"אתר משרד התחבורה ↗":state.lang==="ar"?"وزارة النقل ↗":"Ministry of Transport ↗";
  note.appendChild(official);
 
- if($("newsTheoryLink"))$("newsTheoryLink").textContent=({ru:"🎮 Теория",he:"🎮 תיאוריה",en:"🎮 Theory",ar:"🎮 النظري"})[state.lang];
+
  for(const [id,k] of [["newsHome","home"],["newsCatalog","catalog"],["newsNews","news"],["newsDelivery","delivery"]]){
   const label=$(id)?.querySelector("span");if(label)label.textContent=tr(k);
  }
