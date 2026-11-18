@@ -12,6 +12,7 @@
 <link rel="stylesheet" href="./teoria-v2.css?v=20261118-approved-v3">
 <link rel="stylesheet" href="./teoria-compact-v3.css?v=20261118-corrective-v3">
 <link rel="stylesheet" href="./teoria-reference-art.css?v=20261119-progress-dock-v3">
+<link rel="stylesheet" href="./teoria-medal-ecg.css?v=20261119-gold-ecg-v1">
 </head><body>
 <header class="topbar neoline-site-header"><div class="neoline-site-header__inner">
 <a class="neoline-site-header__logo" href="./" aria-label="NEOLINE — главная страница"><img src="./assets/neoline-clean.svg?v=20261116-compact" width="501" height="108" alt="NEOLINE"></a>
@@ -53,11 +54,14 @@
     <small class="hero-orb-denominator">XP</small>
    </div></div><span class="hero-orb-caption" id="heroXPLabel">Опыт (XP)</span>
   </div>
-  <button type="button" class="game-progress-open hero-progress-open" id="gameProgressOpen"
-    aria-haspopup="dialog" aria-controls="gameProgressDialog" aria-label="Мой прогресс" title="Мой прогресс">
-   <span class="hero-progress-icon" aria-hidden="true">🏅</span>
-   <span class="hero-progress-sr" id="gameProgressOpenLabel">Мой прогресс</span>
-  </button>
+  <div class="hero-progress-cell">
+   <button type="button" class="game-progress-open hero-progress-open" id="gameProgressOpen"
+      aria-haspopup="dialog" aria-controls="gameProgressDialog" aria-label="Мой прогресс" title="Мой прогресс">
+    <span class="hero-progress-icon" aria-hidden="true">🏅</span>
+    <span class="hero-progress-sr" id="gameProgressOpenLabel">Мой прогресс</span>
+   </button>
+   <span class="hero-progress-caption" id="gameProgressCaption">Прогресс</span>
+  </div>
  </div>
 </section>
 <section class="game-panel" id="gameLobby" aria-label="Выбор режима">
@@ -107,6 +111,19 @@
  <div id="resultMistakes" class="result-mistakes" hidden></div>
  <div class="result-buttons"><button type="button" class="primary" id="restartMode">↻ <span id="restartLabel">Ещё раз</span></button><button type="button" class="secondary" id="backToModes"><span id="backModesLabel">Другие режимы</span> →</button></div>
 </section>
+<div class="game-ecg" aria-hidden="true">
+ <svg viewBox="0 0 1000 120" preserveAspectRatio="none" focusable="false">
+  <defs>
+   <linearGradient id="gameEcgInk" x1="0" x2="1" y1="0" y2="0">
+    <stop offset="0" stop-color="#0b91d4"/>
+    <stop offset=".52" stop-color="#15c9e9"/>
+    <stop offset="1" stop-color="#49d8be"/>
+   </linearGradient>
+  </defs>
+  <path class="game-ecg-guide" d="M0 64 H125 L160 30 L198 92 L248 18 L295 100 L345 60 L415 64 L474 13 L510 104 L556 48 L619 79 L678 64 L716 17 L741 99 L779 45 L822 72 L858 62 L895 67 H1000"/>
+  <path class="game-ecg-pulse" pathLength="1400" d="M0 64 H125 L160 30 L198 92 L248 18 L295 100 L345 60 L415 64 L474 13 L510 104 L556 48 L619 79 L678 64 L716 17 L741 99 L779 45 L822 72 L858 62 L895 67 H1000"/>
+ </svg>
+</div>
 </main>
 
 <dialog id="gameProgressDialog" class="game-progress-dialog" aria-labelledby="gameProgressTitle">
