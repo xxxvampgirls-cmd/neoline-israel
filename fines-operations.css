@@ -1,0 +1,37 @@
+/* Independent police enforcement reports; use pure primary red (#FF0000), no burgundy. */
+.fines-operations{margin-top:19px;border-top:1px solid #e6edf3;padding-top:16px}
+.fines-ops-header{display:flex;justify-content:space-between;gap:12px;align-items:flex-start}
+.fines-ops-heading{font-size:15px!important;color:#FF0000!important;font-weight:900!important;margin:0 0 6px!important}
+.fines-ops-total{display:inline-flex;justify-content:center;align-items:center;min-width:34px;height:28px;padding:0 7px;font-weight:900;color:#FF0000;border:1px solid #ffbaba;background:#fff;border-radius:9px;font-size:12px;line-height:1}
+.fines-ops-intro{color:#536f84!important;font-size:11px!important;line-height:1.5!important;margin:0 0 8px!important}
+.fines-ops-status{margin:0 0 4px;color:#58768b;font-size:10px;line-height:1.4;font-weight:800}
+.fines-ops-hint{margin:0 0 11px;color:#7993a5;font-size:10px;line-height:1.4}
+.fines-ops-filters{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:12px}
+.fines-ops-tab{font:inherit;font-size:10px;font-weight:850;line-height:1.15;color:#43657a;padding:8px 11px;border:1px solid #dae5ed;border-radius:9px;background:#fff;cursor:pointer}
+.fines-ops-tab[aria-pressed=true]{color:#fff;background:#FF0000;border-color:#FF0000}
+.fines-ops-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}
+.fines-ops-entry{background:#fff;border:1px solid #e0e8ee;border-radius:12px;min-width:0;padding:12px 11px;display:flex;flex-direction:column;gap:8px}
+.fines-ops-meta{display:flex;align-items:center;flex-wrap:wrap;gap:5px 9px;color:#587e98;font-size:10px;line-height:1.3;font-weight:750}
+.fines-ops-tag{padding:4px 6px;background:#f4f7fa;color:#466b85;border-radius:6px}
+.fines-ops-type{margin-inline-start:auto;color:#698ba1;font-weight:600}
+.fines-ops-stat{display:flex;align-items:baseline;flex-wrap:wrap;gap:3px 7px}
+.fines-ops-value{font-size:clamp(20px,2.6vw,26px);font-weight:900;color:#FF0000;line-height:1.1;font-variant-numeric:tabular-nums}
+.fines-ops-unit{font-size:10px;color:#52758c;font-weight:800}
+.fines-ops-meter{height:7px;background:#edf2f6;border-radius:9px;overflow:hidden}
+.fines-ops-fill{height:100%;display:block;border-radius:8px;background:#FF0000}
+.fines-ops-meter--unknown .fines-ops-fill{width:0}
+.fines-ops-sub{color:#66839a;font-size:10px;line-height:1.5}
+.fines-ops-categories{display:flex;flex-wrap:wrap;gap:4px;margin-top:6px}
+.fines-ops-category{font-size:10px;color:#43667f;padding:3px 6px;border:1px solid #e0e8ee;border-radius:6px}
+.fines-ops-source{margin-top:auto;align-self:flex-start;color:#097cb2;text-decoration:underline;text-underline-offset:2px;font-weight:850;font-size:10px}
+.fines-ops-notice{color:#7a92a4;font-size:10px;line-height:1.55;margin:10px 0 0}
+.fines-ops-empty{grid-column:1/-1;border:1px dashed #d2e2ee;background:#f8fbfe;border-radius:11px;padding:12px;color:#65859a;font-size:11px}
+.fines-ops-tab:focus-visible,.fines-ops-source:focus-visible{outline:2px solid #FF0000;outline-offset:3px}
+@media(max-width:760px){
+ .fines-operations{padding-top:12px;margin-top:13px}
+ .fines-ops-heading{font-size:13px!important}
+ .fines-ops-list{grid-template-columns:1fr;gap:7px}
+ .fines-ops-entry{padding:9px 10px;gap:7px}
+ .fines-ops-value{font-size:21px}
+ .fines-ops-tab{padding:7px 9px}
+}
