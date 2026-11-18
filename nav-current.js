@@ -1,7 +1,6 @@
 /* Keep the same active blue navigation tile on every NEOLINE section.
- * Landing page changes between Home/Catalog and the Cart drawer.
- * News and Delivery highlight their route. Theory is a Home subpage
- * because the existing dock has no standalone "Game" tab.
+ * Landing page changes between Home and Catalog by scroll position.
+ * The fifth tab is Game / Theory, and basket stays available in header.
  */
 (function () {
   "use strict";
@@ -22,14 +21,14 @@
     catalog: '[data-scroll="catalog"]',
     news: "#openNewsMobile",
     delivery: "#mobileDelivery",
-    cart: "#mobileCart"
+    game: "#mobileGame"
   } : nav.classList.contains("news-bottom") ? {
-    home:"#newsHome",catalog:"#newsCatalog",news:"#newsNews",delivery:"#newsDelivery",cart:"#newsCart"
+    home:"#newsHome",catalog:"#newsCatalog",news:"#newsNews",delivery:"#newsDelivery",game:"#newsGame"
   } : nav.classList.contains("delivery-nav") ? {
-    home:"#deliveryNavHome",catalog:"#deliveryNavCatalog",news:"#deliveryNavNews",delivery:"#deliveryNavDelivery"
+    home:"#deliveryNavHome",catalog:"#deliveryNavCatalog",news:"#deliveryNavNews",delivery:"#deliveryNavDelivery",game:"#deliveryNavGame"
   } : {
     home:"#theoryNavHome",catalog:"#theoryNavCatalog",news:"#theoryNavNews",
-    delivery:"#theoryNavDelivery",cart:"#theoryNavCart"
+    delivery:"#theoryNavDelivery",game:"#theoryNavGame"
   };
   const items={};
   for (const [name,selector] of Object.entries(selectors)) {
@@ -48,13 +47,11 @@
       item.classList.toggle("active",selected);
       if (selected) item.setAttribute("aria-current",
         ((mainPage && name==="home") || (newsPage&&name==="news") ||
-         (deliveryPage&&name==="delivery"))?"page":"location");
+         (deliveryPage&&name==="delivery")||(theoryPage&&name==="game"))?"page":"location");
       else item.removeAttribute("aria-current");
     }
   }
   function activeOnLanding() {
-    const drawer=document.getElementById("drawer");
-    if (drawer?.classList.contains("open")) return "cart";
     const catalog=document.getElementById("catalog");
     const viewportMarker=Math.min(155,window.innerHeight*.28);
     if (catalog) {
@@ -66,12 +63,12 @@
   function refresh() {
     if (mainPage) {
       if (preferred && Date.now()-lastClick<1050) {
-        const drawerOpen=document.getElementById("drawer")?.classList.contains("open");
-        if(preferred!=="cart"||drawerOpen){activate(preferred);return}
+        activate(preferred);
+        return;
       }
       preferred=null;
       activate(activeOnLanding());
-    } else activate(newsPage?"news":deliveryPage?"delivery":theoryPage?"home":"home");
+    } else activate(newsPage?"news":deliveryPage?"delivery":theoryPage?"game":"home");
   }
   nav.addEventListener("click",event=>{
     const target=event.target.closest("a,button");
