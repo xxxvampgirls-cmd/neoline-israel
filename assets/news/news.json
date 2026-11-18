@@ -2,44 +2,196 @@
   "version": 1,
   "retentionDays": 30,
   "lawsRetentionMonths": 6,
-  "updated": "2026-11-18T06:04:53.472472Z",
+  "updated": "2026-11-18T11:36:44.416539Z",
   "items": [
     {
-      "id": "6cb7178ad362b80a1c33",
-      "titleOriginal": "תאונה עם מעורבות שני כלי רכב אירעה בכביש 3 צומת הכניסה לשפיר.",
+      "id": "85d6f48444d3595784cc",
+      "titleOriginal": "העיר לו על נהיגה פרועה ונדרס: חשוד בפציעתו הקשה של מנהל תחנת דלק בכפר קאסם נעצר",
       "sourceLanguage": "he",
-      "date": "2026-11-18T04:47:23Z",
-      "url": "https://t.me/uh1221/27458",
-      "publisher": "Ихуд Ацала · Telegram",
+      "date": "2026-11-18T10:44:12Z",
+      "url": "https://www.maariv.co.il/breaking-news/article-1389817",
+      "publisher": "Maariv",
       "category": "accidents",
       "art": "accidents",
-      "image": "./assets/news/images/6cb7178ad362b80a1c33.webp",
+      "image": "./assets/news/images/85d6f48444d3595784cc.webp",
       "official": false,
       "translations": {
         "he": {
-          "title": "תאונה עם מעורבות שני כלי רכב אירעה בכביש 3 צומת הכניסה לשפיר.",
+          "title": "העיר לו על נהיגה פרועה ונדרס: חשוד בפציעתו הקשה של מנהל תחנת דלק בכפר קאסם נעצר",
           "summary": "דיווח על תאונת דרכים בישראל. פרטים ועדכונים בכתבת המקור."
         },
         "ru": {
-          "title": "Авария с участием двух транспортных средств произошла на дороге №3 при въезде в Шафир.",
+          "title": "Он предупредил его о дикой езде и наехал: арестован подозреваемый в серьезном ранении менеджера заправки в Кфар-Касиме",
           "summary": "Дорожное происшествие в Израиле. Обстоятельства и актуальные сведения — в материале источника."
         },
         "en": {
-          "title": "An accident involving two vehicles happened on road 3 at the entrance to Shafir.",
+          "title": "He warned him about wild driving and ran over: a suspect in the serious injury of a gas station manager in Kfar Qasim was arrested",
           "summary": "A reported road incident in Israel. Details and updates are in the original report."
         },
         "ar": {
-          "title": "وقع حادث بين مركبتين على طريق رقم 3 عند مدخل الشفير.",
+          "title": "حذره من القيادة المتهورة ودهسه: اعتقال مشتبه به في إصابة مدير محطة وقود بإصابة خطيرة في كفر قاسم",
           "summary": "تقرير عن حادث مروري في إسرائيل. التفاصيل والتحديثات في المصدر."
         }
       },
-      "title": "Авария с участием двух транспортных средств произошла на дороге №3 при въезде в Шафир.",
+      "title": "Он предупредил его о дикой езде и наехал: арестован подозреваемый в серьезном ранении менеджера заправки в Кфар-Касиме",
       "summary": "Дорожное происшествие в Израиле. Обстоятельства и актуальные сведения — в материале источника.",
       "translated": true,
       "imageType": "licensedPhoto",
       "imageCredit": {
         "text": "Wikimedia Commons · Public domain",
         "url": "https://commons.wikimedia.org/wiki/File:Hurricane_Rita_Evacuation_ambulance_1.jpg"
+      }
+    },
+    {
+      "id": "5d30c785c5930c158409",
+      "titleOriginal": "הכנסת אישרה בטרומית את ביטול שינוי הרכב הוועדה לבחירת שופטים",
+      "sourceLanguage": "he",
+      "date": "2026-11-18T09:53:50Z",
+      "url": "https://www.srugim.co.il/101016514-הכנסת-אישרה-בטרומית-ביטול-שינוי-הרכב",
+      "publisher": "Srugim",
+      "category": "cars",
+      "art": "cars",
+      "image": "./assets/news/images/5d30c785c5930c158409.webp",
+      "official": false,
+      "translations": {
+        "he": {
+          "title": "הכנסת אישרה בטרומית את ביטול שינוי הרכב הוועדה לבחירת שופטים",
+          "summary": "כתבה על מכוניות או שוק הרכב בישראל. פרטים באתר המקור."
+        },
+        "ru": {
+          "title": "Кнессет предварительно одобрил отмену изменения в составе Комиссии по отбору судей",
+          "summary": "Материал об автомобиле или автомобильном рынке Израиля. Подробности — на сайте издания."
+        },
+        "en": {
+          "title": "The Knesset preliminarily approved the cancellation of the change in the composition of the Committee for the Selection of Judges",
+          "summary": "An update about vehicles or Israel's car market. Details are available at the source."
+        },
+        "ar": {
+          "title": "الكنيست يصادق بشكل مبدئي على إلغاء التغيير في تشكيلة لجنة اختيار القضاة",
+          "summary": "تحديث عن السيارات أو سوق المركبات في إسرائيل. التفاصيل في المصدر."
+        }
+      },
+      "title": "Кнессет предварительно одобрил отмену изменения в составе Комиссии по отбору судей",
+      "summary": "Материал об автомобиле или автомобильном рынке Израиля. Подробности — на сайте издания.",
+      "translated": true,
+      "imageType": "licensedPhoto",
+      "imageCredit": {
+        "text": "Ivan Radic · CC BY 2.0",
+        "url": "https://commons.wikimedia.org/wiki/File:Close-up_of_an_electric_car_charging._Traffic_lights_in_a_blurry_background.jpg"
+      }
+    },
+    {
+      "id": "f7cbb043949c23277d44",
+      "titleOriginal": "כאוס באיילון: רכב עלה באש, נהגים נתקעו בפקקי ענק",
+      "sourceLanguage": "he",
+      "date": "2026-11-18T09:10:08Z",
+      "url": "https://www.walla.co.il/news/israel/383961938",
+      "publisher": "Walla",
+      "category": "roads",
+      "art": "roads",
+      "image": "./assets/news/images/f7cbb043949c23277d44.webp",
+      "official": false,
+      "translations": {
+        "he": {
+          "title": "כאוס באיילון: רכב עלה באש, נהגים נתקעו בפקקי ענק",
+          "summary": "עדכון על מצב התנועה. לפני הנסיעה בדקו אם ההגבלות עדיין בתוקף."
+        },
+        "ru": {
+          "title": "В Аялоне хаос: загорелся автомобиль, водители застряли в огромных пробках",
+          "summary": "Информация о дорожной ситуации. Перед поездкой проверьте, действуют ли ограничения сейчас."
+        },
+        "en": {
+          "title": "Chaos in Ayalon: a car caught fire, drivers got stuck in huge traffic jams",
+          "summary": "A road-conditions update. Check whether restrictions still apply before travelling."
+        },
+        "ar": {
+          "title": "فوضى في أيالون: اشتعلت النيران في سيارة، وعلق السائقون في ازدحام مروري كبير",
+          "summary": "تحديث عن حالة الطرق. تحقق من استمرار القيود قبل السفر."
+        }
+      },
+      "title": "В Аялоне хаос: загорелся автомобиль, водители застряли в огромных пробках",
+      "summary": "Информация о дорожной ситуации. Перед поездкой проверьте, действуют ли ограничения сейчас.",
+      "translated": true,
+      "imageType": "licensedPhoto",
+      "imageCredit": {
+        "text": "Rakoon · CC0",
+        "url": "https://commons.wikimedia.org/wiki/File:20150812_August_2015_in_Tel_Aviv_05.jpg"
+      }
+    },
+    {
+      "id": "93cbe9e9288c832f344a",
+      "titleOriginal": "תאונה עם מעורבות שלושה כלי רכב אירעה בכביש 75 סמוך למחלף יגור.",
+      "sourceLanguage": "he",
+      "date": "2026-11-18T08:40:23Z",
+      "url": "https://t.me/uh1221/27462",
+      "publisher": "Ихуд Ацала · Telegram",
+      "category": "accidents",
+      "art": "accidents",
+      "image": "./assets/news/images/93cbe9e9288c832f344a.webp",
+      "official": false,
+      "translations": {
+        "he": {
+          "title": "תאונה עם מעורבות שלושה כלי רכב אירעה בכביש 75 סמוך למחלף יגור.",
+          "summary": "דיווח על תאונת דרכים בישראל. פרטים ועדכונים בכתבת המקור."
+        },
+        "ru": {
+          "title": "Авария с участием трех автомобилей произошла на 75-м маршруте в районе развязки Ягур.",
+          "summary": "Дорожное происшествие в Израиле. Обстоятельства и актуальные сведения — в материале источника."
+        },
+        "en": {
+          "title": "An accident involving three vehicles happened on Route 75 near the Yagur interchange.",
+          "summary": "A reported road incident in Israel. Details and updates are in the original report."
+        },
+        "ar": {
+          "title": "وقع حادث بين ثلاث مركبات على شارع 75 قرب تقاطع الياغور.",
+          "summary": "تقرير عن حادث مروري في إسرائيل. التفاصيل والتحديثات في المصدر."
+        }
+      },
+      "title": "Авария с участием трех автомобилей произошла на 75-м маршруте в районе развязки Ягур.",
+      "summary": "Дорожное происшествие в Израиле. Обстоятельства и актуальные сведения — в материале источника.",
+      "translated": true,
+      "imageType": "licensedPhoto",
+      "imageCredit": {
+        "text": "No machine-readable author provided. EPO assumed (based on copyright claims). · CC BY 2.5",
+        "url": "https://commons.wikimedia.org/wiki/File:Falck_sv_04.jpg"
+      }
+    },
+    {
+      "id": "a5fbd10af529a2c74519",
+      "titleOriginal": "התנגשות או פשרה? מפקד כוח קודס מנסה לכבות את השריפה בעיראק",
+      "sourceLanguage": "he",
+      "date": "2026-11-18T08:30:26Z",
+      "url": "https://www.maariv.co.il/breaking-news/article-1389750",
+      "publisher": "Maariv",
+      "category": "accidents",
+      "art": "accidents",
+      "image": "./assets/news/images/a5fbd10af529a2c74519.webp",
+      "official": false,
+      "translations": {
+        "he": {
+          "title": "התנגשות או פשרה? מפקד כוח קודס מנסה לכבות את השריפה בעיראק",
+          "summary": "דיווח על תאונת דרכים בישראל. פרטים ועדכונים בכתבת המקור."
+        },
+        "ru": {
+          "title": "Конфликт или компромисс? Командующий силами «Кудс» пытается потушить пожар в Ираке",
+          "summary": "Дорожное происшествие в Израиле. Обстоятельства и актуальные сведения — в материале источника."
+        },
+        "en": {
+          "title": "Conflict or compromise? A Quds Force commander tries to put out the fire in Iraq",
+          "summary": "A reported road incident in Israel. Details and updates are in the original report."
+        },
+        "ar": {
+          "title": "صراع أم تسوية؟ قائد فيلق القدس يحاول إخماد النيران في العراق",
+          "summary": "تقرير عن حادث مروري في إسرائيل. التفاصيل والتحديثات في المصدر."
+        }
+      },
+      "title": "Конфликт или компромисс? Командующий силами «Кудс» пытается потушить пожар в Ираке",
+      "summary": "Дорожное происшествие в Израиле. Обстоятельства и актуальные сведения — в материале источника.",
+      "translated": true,
+      "imageType": "licensedPhoto",
+      "imageCredit": {
+        "text": "Jeff Attaway from Abuja, Nigeria · CC BY 2.0",
+        "url": "https://commons.wikimedia.org/wiki/File:Bad_one_-_auto_wreck_in_Dakar_Senegal,_2011.jpg"
       }
     },
     {
@@ -79,6 +231,45 @@
       "imageCredit": {
         "text": "MoCars · CC0",
         "url": "https://commons.wikimedia.org/wiki/File:2024_BYD_Dolphin_Premium_Standard_Range_in_Coral_Pink_01.jpg"
+      },
+      "subjectPhotoChecked": true
+    },
+    {
+      "id": "3b66811b2d1adab160a5",
+      "titleOriginal": "אופקים: רוכב קורקינט חשמלי נפצע קשה בתאונה עצמית",
+      "sourceLanguage": "he",
+      "date": "2026-11-18T07:17:34Z",
+      "url": "https://t.me/uh1221/27461",
+      "publisher": "Ихуд Ацала · Telegram",
+      "category": "accidents",
+      "art": "accidents",
+      "image": "./assets/news/images/3b66811b2d1adab160a5.webp",
+      "official": false,
+      "translations": {
+        "he": {
+          "title": "אופקים: רוכב קורקינט חשמלי נפצע קשה בתאונה עצמית",
+          "summary": "דיווח על תאונת דרכים בישראל. פרטים ועדכונים בכתבת המקור."
+        },
+        "ru": {
+          "title": "Офаким: Водитель электросамоката серьезно пострадал в результате ДТП",
+          "summary": "Дорожное происшествие в Израиле. Обстоятельства и актуальные сведения — в материале источника."
+        },
+        "en": {
+          "title": "Ofakim: An electric scooter rider was seriously injured in a self-inflicted accident",
+          "summary": "A reported road incident in Israel. Details and updates are in the original report."
+        },
+        "ar": {
+          "title": "أوفاكيم: أصيب راكب سكوتر كهربائي بجروح خطيرة في حادث ألحق نفسه",
+          "summary": "تقرير عن حادث مروري في إسرائيل. التفاصيل والتحديثات في المصدر."
+        }
+      },
+      "title": "Офаким: Водитель электросамоката серьезно пострадал в результате ДТП",
+      "summary": "Дорожное происшествие в Израиле. Обстоятельства и актуальные сведения — в материале источника.",
+      "translated": true,
+      "imageType": "licensedPhoto",
+      "imageCredit": {
+        "text": "Wikimedia Commons · Public domain",
+        "url": "https://commons.wikimedia.org/wiki/File:Hurricane_Rita_Evacuation_ambulance_1.jpg"
       }
     },
     {
@@ -120,44 +311,6 @@
       }
     },
     {
-      "id": "56f5c93a2543fdb70cfe",
-      "titleOriginal": "רהט: פצועים בינוני וקל בתאונה",
-      "sourceLanguage": "he",
-      "date": "2026-11-17T19:52:54Z",
-      "url": "https://t.me/uh1221/27453",
-      "publisher": "Ихуд Ацала · Telegram",
-      "category": "accidents",
-      "art": "accidents",
-      "image": "./assets/news/images/56f5c93a2543fdb70cfe.webp",
-      "official": false,
-      "translations": {
-        "he": {
-          "title": "רהט: פצועים בינוני וקל בתאונה",
-          "summary": "דיווח על תאונת דרכים בישראל. פרטים ועדכונים בכתבת המקור."
-        },
-        "ru": {
-          "title": "Рахат: В результате аварии получил ранения средней и легкой степени тяжести.",
-          "summary": "Дорожное происшествие в Израиле. Обстоятельства и актуальные сведения — в материале источника."
-        },
-        "en": {
-          "title": "Rahat: Moderately and lightly injured in the accident",
-          "summary": "A reported road incident in Israel. Details and updates are in the original report."
-        },
-        "ar": {
-          "title": "رهط: اصابته متوسطة وخفيفة في الحادث",
-          "summary": "تقرير عن حادث مروري في إسرائيل. التفاصيل والتحديثات في المصدر."
-        }
-      },
-      "title": "Рахат: В результате аварии получил ранения средней и легкой степени тяжести.",
-      "summary": "Дорожное происшествие в Израиле. Обстоятельства и актуальные сведения — в материале источника.",
-      "translated": true,
-      "imageType": "licensedPhoto",
-      "imageCredit": {
-        "text": "No machine-readable author provided. EPO assumed (based on copyright claims). · CC BY 2.5",
-        "url": "https://commons.wikimedia.org/wiki/File:Falck_sv_04.jpg"
-      }
-    },
-    {
       "id": "432570ee55101caafce5",
       "titleOriginal": "6 מיליון שקל פיצוי לאלמנת בעל הפרארי שנהרג בתאונה ליד ים המלח",
       "sourceLanguage": "he",
@@ -196,6 +349,44 @@
       }
     },
     {
+      "id": "29a57bc0c211c53a0bcd",
+      "titleOriginal": "פצוע בינוני ו-3 קל בתאונה בכביש 40",
+      "sourceLanguage": "he",
+      "date": "2026-11-18T07:17:14Z",
+      "url": "https://t.me/uh1221/27460",
+      "publisher": "Ихуд Ацала · Telegram",
+      "category": "accidents",
+      "art": "accidents",
+      "image": "./assets/news/images/29a57bc0c211c53a0bcd.webp",
+      "official": false,
+      "translations": {
+        "he": {
+          "title": "פצוע בינוני ו-3 קל בתאונה בכביש 40",
+          "summary": "דיווח על תאונת דרכים בישראל. פרטים ועדכונים בכתבת המקור."
+        },
+        "ru": {
+          "title": "В результате аварии на 40-м шоссе получили ранения средней степени тяжести и трое легко раненых",
+          "summary": "Дорожное происшествие в Израиле. Обстоятельства и актуальные сведения — в материале источника."
+        },
+        "en": {
+          "title": "Moderately and 3 lightly injured in the accident on Route 40",
+          "summary": "A reported road incident in Israel. Details and updates are in the original report."
+        },
+        "ar": {
+          "title": "إصابة متوسطة و3 إصابات طفيفة في حادث سير على طريق 40",
+          "summary": "تقرير عن حادث مروري في إسرائيل. التفاصيل والتحديثات في المصدر."
+        }
+      },
+      "title": "В результате аварии на 40-м шоссе получили ранения средней степени тяжести и трое легко раненых",
+      "summary": "Дорожное происшествие в Израиле. Обстоятельства и актуальные сведения — в материале источника.",
+      "translated": true,
+      "imageType": "licensedPhoto",
+      "imageCredit": {
+        "text": "Jeff Attaway from Abuja, Nigeria · CC BY 2.0",
+        "url": "https://commons.wikimedia.org/wiki/File:Bad_one_-_auto_wreck_in_Dakar_Senegal,_2011.jpg"
+      }
+    },
+    {
       "id": "a6f8b747cec2aef293d4",
       "titleOriginal": "ДТП возле Земера, тяжело травмирован мужчина",
       "sourceLanguage": "en",
@@ -225,44 +416,6 @@
         }
       },
       "title": "ДТП возле Земера, тяжело травмирован мужчина",
-      "summary": "Дорожное происшествие в Израиле. Обстоятельства и актуальные сведения — в материале источника.",
-      "translated": true,
-      "imageType": "licensedPhoto",
-      "imageCredit": {
-        "text": "No machine-readable author provided. EPO assumed (based on copyright claims). · CC BY 2.5",
-        "url": "https://commons.wikimedia.org/wiki/File:Falck_sv_04.jpg"
-      }
-    },
-    {
-      "id": "a483732711ce68b1e31a",
-      "titleOriginal": "״נמסר לנו בזירה כי הולכת הרגל נפגעה מאופניים חשמליים. הענקנו סיוע רפואי ראשוני בזירת התאונה להולכת הרגל שנפצעה בינוני. בנוסף אמבולנס של איחוד הצלה פינה לבית החולים מעיני הישועה בבני ברק את רוכב האופנים חשמליים…",
-      "sourceLanguage": "he",
-      "date": "2026-11-17T18:51:09Z",
-      "url": "https://t.me/uh1221/27452",
-      "publisher": "Ихуд Ацала · Telegram",
-      "category": "accidents",
-      "art": "accidents",
-      "image": "./assets/news/images/a483732711ce68b1e31a.webp",
-      "official": false,
-      "translations": {
-        "he": {
-          "title": "״נמסר לנו בזירה כי הולכת הרגל נפגעה מאופניים חשמליים. הענקנו סיוע רפואי ראשוני בזירת התאונה להולכת הרגל שנפצעה בינוני. בנוסף אמבולנס של איחוד הצלה פינה לבית החולים מעיני הישועה בבני ברק את רוכב האופנים חשמליים…",
-          "summary": "דיווח על תאונת דרכים בישראל. פרטים ועדכונים בכתבת המקור."
-        },
-        "ru": {
-          "title": "\"На месте происшествия нам сообщили, что пешехода сбил электровелосипед. На месте происшествия мы оказали первую помощь пешеходу, который получил травмы средней степени тяжести. Кроме того, машина скорой помощи \"Ихуд Хацла\" эвакуировала электровелоси",
-          "summary": "Дорожное происшествие в Израиле. Обстоятельства и актуальные сведения — в материале источника."
-        },
-        "en": {
-          "title": "\"We were told at the scene that the pedestrian was hit by an electric bicycle. We provided first aid at the scene of the accident to the pedestrian who was moderately injured. In addition, an Ihud Hatzla ambulance evacuated the electric cyclist to th",
-          "summary": "A reported road incident in Israel. Details and updates are in the original report."
-        },
-        "ar": {
-          "title": "\"أبلغنا في مكان الحادث أن دراجة كهربائية صدمت المشاة. وقدمنا ​​الإسعافات الأولية في مكان الحادث للمشاة الذي أصيب بجروح متوسطة. بالإضافة إلى ذلك، قامت سيارة إسعاف إيهود هاتسلا بنقل راكب الدراجة الكهربائية إلى مستشفى معاني هيشعوا في بني براك...",
-          "summary": "تقرير عن حادث مروري في إسرائيل. التفاصيل والتحديثات في المصدر."
-        }
-      },
-      "title": "\"На месте происшествия нам сообщили, что пешехода сбил электровелосипед. На месте происшествия мы оказали первую помощь пешеходу, который получил травмы средней степени тяжести. Кроме того, машина скорой помощи \"Ихуд Хацла\" эвакуировала электровелоси",
       "summary": "Дорожное происшествие в Израиле. Обстоятельства и актуальные сведения — в материале источника.",
       "translated": true,
       "imageType": "licensedPhoto",
@@ -311,6 +464,44 @@
       "subjectPhotoChecked": true
     },
     {
+      "id": "6cb7178ad362b80a1c33",
+      "titleOriginal": "תאונה עם מעורבות שני כלי רכב אירעה בכביש 3 צומת הכניסה לשפיר.",
+      "sourceLanguage": "he",
+      "date": "2026-11-18T04:47:23Z",
+      "url": "https://t.me/uh1221/27458",
+      "publisher": "Ихуд Ацала · Telegram",
+      "category": "accidents",
+      "art": "accidents",
+      "image": "./assets/news/images/6cb7178ad362b80a1c33.webp",
+      "official": false,
+      "translations": {
+        "he": {
+          "title": "תאונה עם מעורבות שני כלי רכב אירעה בכביש 3 צומת הכניסה לשפיר.",
+          "summary": "דיווח על תאונת דרכים בישראל. פרטים ועדכונים בכתבת המקור."
+        },
+        "ru": {
+          "title": "Авария с участием двух транспортных средств произошла на дороге №3 при въезде в Шафир.",
+          "summary": "Дорожное происшествие в Израиле. Обстоятельства и актуальные сведения — в материале источника."
+        },
+        "en": {
+          "title": "An accident involving two vehicles happened on road 3 at the entrance to Shafir.",
+          "summary": "A reported road incident in Israel. Details and updates are in the original report."
+        },
+        "ar": {
+          "title": "وقع حادث بين مركبتين على طريق رقم 3 عند مدخل الشفير.",
+          "summary": "تقرير عن حادث مروري في إسرائيل. التفاصيل والتحديثات في المصدر."
+        }
+      },
+      "title": "Авария с участием двух транспортных средств произошла на дороге №3 при въезде в Шафир.",
+      "summary": "Дорожное происшествие в Израиле. Обстоятельства и актуальные сведения — в материале источника.",
+      "translated": true,
+      "imageType": "licensedPhoto",
+      "imageCredit": {
+        "text": "Wikimedia Commons · Public domain",
+        "url": "https://commons.wikimedia.org/wiki/File:Hurricane_Rita_Evacuation_ambulance_1.jpg"
+      }
+    },
+    {
       "id": "19e23c0c176ec1db1895",
       "titleOriginal": "Ночью будет перекрыт въезд в аэропорт \"Бен-Гурион\" с шоссе 40",
       "sourceLanguage": "en",
@@ -349,44 +540,6 @@
       },
       "subjectPhotoChecked": true,
       "subjectPhotoMatched": false
-    },
-    {
-      "id": "3a7ee9e0ffb4c5349a0d",
-      "titleOriginal": "צוותי הרפואה של איחוד הצלה העניקו טיפול רפואי ראשוני לנהג רכב (כבן 20) במצב קל לאחר שרכבו התהפך כתוצאה מתאונה עצמית בכביש 38 סמוך למחלף מסילת צין.",
-      "sourceLanguage": "he",
-      "date": "2026-11-17T18:35:12Z",
-      "url": "https://t.me/uh1221/27451",
-      "publisher": "Ихуд Ацала · Telegram",
-      "category": "accidents",
-      "art": "accidents",
-      "image": "./assets/news/images/3a7ee9e0ffb4c5349a0d.webp",
-      "official": false,
-      "translations": {
-        "he": {
-          "title": "צוותי הרפואה של איחוד הצלה העניקו טיפול רפואי ראשוני לנהג רכב (כבן 20) במצב קל לאחר שרכבו התהפך כתוצאה מתאונה עצמית בכביש 38 סמוך למחלף מסילת צין.",
-          "summary": "דיווח על תאונת דרכים בישראל. פרטים ועדכונים בכתבת המקור."
-        },
-        "ru": {
-          "title": "Медицинские бригады Союза спасателей оказали первую медицинскую помощь водителю легкового автомобиля (около 20 лет) в тяжелом состоянии после того, как его машина перевернулась в результате ДТП на 38-м маршруте в районе железнодорожной развязки Зин.",
-          "summary": "Дорожное происшествие в Израиле. Обстоятельства и актуальные сведения — в материале источника."
-        },
-        "en": {
-          "title": "The medical teams of the Rescue Union provided initial medical treatment to a car driver (about 20 years old) in a minor condition after his car overturned as a result of a self-inflicted accident on Route 38 near the Zin railway interchange.",
-          "summary": "A reported road incident in Israel. Details and updates are in the original report."
-        },
-        "ar": {
-          "title": "قدمت الطواقم الطبية التابعة لاتحاد الإنقاذ العلاج الطبي الأولي لسائق سيارة (نحو 20 عاما) في حالة طفيفة بعد انقلاب سيارته نتيجة تعرضه لحادث سير على طريق 38 بالقرب من تقاطع سكة ​​حديد الزين.",
-          "summary": "تقرير عن حادث مروري في إسرائيل. التفاصيل والتحديثات في المصدر."
-        }
-      },
-      "title": "Медицинские бригады Союза спасателей оказали первую медицинскую помощь водителю легкового автомобиля (около 20 лет) в тяжелом состоянии после того, как его машина перевернулась в результате ДТП на 38-м маршруте в районе железнодорожной развязки Зин.",
-      "summary": "Дорожное происшествие в Израиле. Обстоятельства и актуальные сведения — в материале источника.",
-      "translated": true,
-      "imageType": "licensedPhoto",
-      "imageCredit": {
-        "text": "Jeff Attaway from Abuja, Nigeria · CC BY 2.0",
-        "url": "https://commons.wikimedia.org/wiki/File:Bad_one_-_auto_wreck_in_Dakar_Senegal,_2011.jpg"
-      }
     },
     {
       "id": "9543fb4ded3dfa1aabbc",
@@ -429,6 +582,44 @@
       "subjectPhotoMatched": true
     },
     {
+      "id": "56f5c93a2543fdb70cfe",
+      "titleOriginal": "רהט: פצועים בינוני וקל בתאונה",
+      "sourceLanguage": "he",
+      "date": "2026-11-17T19:52:54Z",
+      "url": "https://t.me/uh1221/27453",
+      "publisher": "Ихуд Ацала · Telegram",
+      "category": "accidents",
+      "art": "accidents",
+      "image": "./assets/news/images/56f5c93a2543fdb70cfe.webp",
+      "official": false,
+      "translations": {
+        "he": {
+          "title": "רהט: פצועים בינוני וקל בתאונה",
+          "summary": "דיווח על תאונת דרכים בישראל. פרטים ועדכונים בכתבת המקור."
+        },
+        "ru": {
+          "title": "Рахат: В результате аварии получил ранения средней и легкой степени тяжести.",
+          "summary": "Дорожное происшествие в Израиле. Обстоятельства и актуальные сведения — в материале источника."
+        },
+        "en": {
+          "title": "Rahat: Moderately and lightly injured in the accident",
+          "summary": "A reported road incident in Israel. Details and updates are in the original report."
+        },
+        "ar": {
+          "title": "رهط: اصابته متوسطة وخفيفة في الحادث",
+          "summary": "تقرير عن حادث مروري في إسرائيل. التفاصيل والتحديثات في المصدر."
+        }
+      },
+      "title": "Рахат: В результате аварии получил ранения средней и легкой степени тяжести.",
+      "summary": "Дорожное происшествие в Израиле. Обстоятельства и актуальные сведения — в материале источника.",
+      "translated": true,
+      "imageType": "licensedPhoto",
+      "imageCredit": {
+        "text": "No machine-readable author provided. EPO assumed (based on copyright claims). · CC BY 2.5",
+        "url": "https://commons.wikimedia.org/wiki/File:Falck_sv_04.jpg"
+      }
+    },
+    {
       "id": "e891ac473e1765f97972",
       "titleOriginal": "На шоссе 6 появилась система взвешивания грузовиков на ходу",
       "sourceLanguage": "en",
@@ -469,44 +660,6 @@
       "subjectPhotoMatched": true
     },
     {
-      "id": "eda4643321d6822c21c6",
-      "titleOriginal": "תאונה עם מעורבות רכב ורוכב קורקינט חשמלי אירעה ברחוב דרום אפריקה באשקלון.",
-      "sourceLanguage": "he",
-      "date": "2026-11-17T18:27:09Z",
-      "url": "https://t.me/uh1221/27450",
-      "publisher": "Ихуд Ацала · Telegram",
-      "category": "accidents",
-      "art": "accidents",
-      "image": "./assets/news/images/eda4643321d6822c21c6.webp",
-      "official": false,
-      "translations": {
-        "he": {
-          "title": "תאונה עם מעורבות רכב ורוכב קורקינט חשמלי אירעה ברחוב דרום אפריקה באשקלון.",
-          "summary": "דיווח על תאונת דרכים בישראל. פרטים ועדכונים בכתבת המקור."
-        },
-        "ru": {
-          "title": "Авария с участием автомобиля и водителя электросамоката произошла на улице ЮАР в Ашкелоне.",
-          "summary": "Дорожное происшествие в Израиле. Обстоятельства и актуальные сведения — в материале источника."
-        },
-        "en": {
-          "title": "An accident involving a car and an electric scooter rider happened on South Africa Street in Ashkelon.",
-          "summary": "A reported road incident in Israel. Details and updates are in the original report."
-        },
-        "ar": {
-          "title": "وقع حادث بين سيارة وراكب سكوتر كهربائي في شارع جنوب أفريقيا في عسقلان.",
-          "summary": "تقرير عن حادث مروري في إسرائيل. التفاصيل والتحديثات في المصدر."
-        }
-      },
-      "title": "Авария с участием автомобиля и водителя электросамоката произошла на улице ЮАР в Ашкелоне.",
-      "summary": "Дорожное происшествие в Израиле. Обстоятельства и актуальные сведения — в материале источника.",
-      "translated": true,
-      "imageType": "licensedPhoto",
-      "imageCredit": {
-        "text": "Wikimedia Commons · Public domain",
-        "url": "https://commons.wikimedia.org/wiki/File:Hurricane_Rita_Evacuation_ambulance_1.jpg"
-      }
-    },
-    {
       "id": "1b6d8f8a9c0f97c229b0",
       "titleOriginal": "הולך רגל בן 20 נפגע מרכב באזור שדרות, מצבו קשה",
       "sourceLanguage": "he",
@@ -536,6 +689,44 @@
         }
       },
       "title": "В районе Сдерота 20-летнего пешехода сбила машина, его состояние тяжелое",
+      "summary": "Дорожное происшествие в Израиле. Обстоятельства и актуальные сведения — в материале источника.",
+      "translated": true,
+      "imageType": "licensedPhoto",
+      "imageCredit": {
+        "text": "No machine-readable author provided. EPO assumed (based on copyright claims). · CC BY 2.5",
+        "url": "https://commons.wikimedia.org/wiki/File:Falck_sv_04.jpg"
+      }
+    },
+    {
+      "id": "a483732711ce68b1e31a",
+      "titleOriginal": "״נמסר לנו בזירה כי הולכת הרגל נפגעה מאופניים חשמליים. הענקנו סיוע רפואי ראשוני בזירת התאונה להולכת הרגל שנפצעה בינוני. בנוסף אמבולנס של איחוד הצלה פינה לבית החולים מעיני הישועה בבני ברק את רוכב האופנים חשמליים…",
+      "sourceLanguage": "he",
+      "date": "2026-11-17T18:51:09Z",
+      "url": "https://t.me/uh1221/27452",
+      "publisher": "Ихуд Ацала · Telegram",
+      "category": "accidents",
+      "art": "accidents",
+      "image": "./assets/news/images/a483732711ce68b1e31a.webp",
+      "official": false,
+      "translations": {
+        "he": {
+          "title": "״נמסר לנו בזירה כי הולכת הרגל נפגעה מאופניים חשמליים. הענקנו סיוע רפואי ראשוני בזירת התאונה להולכת הרגל שנפצעה בינוני. בנוסף אמבולנס של איחוד הצלה פינה לבית החולים מעיני הישועה בבני ברק את רוכב האופנים חשמליים…",
+          "summary": "דיווח על תאונת דרכים בישראל. פרטים ועדכונים בכתבת המקור."
+        },
+        "ru": {
+          "title": "\"На месте происшествия нам сообщили, что пешехода сбил электровелосипед. На месте происшествия мы оказали первую помощь пешеходу, который получил травмы средней степени тяжести. Кроме того, машина скорой помощи \"Ихуд Хацла\" эвакуировала электровелоси",
+          "summary": "Дорожное происшествие в Израиле. Обстоятельства и актуальные сведения — в материале источника."
+        },
+        "en": {
+          "title": "\"We were told at the scene that the pedestrian was hit by an electric bicycle. We provided first aid at the scene of the accident to the pedestrian who was moderately injured. In addition, an Ihud Hatzla ambulance evacuated the electric cyclist to th",
+          "summary": "A reported road incident in Israel. Details and updates are in the original report."
+        },
+        "ar": {
+          "title": "\"أبلغنا في مكان الحادث أن دراجة كهربائية صدمت المشاة. وقدمنا ​​الإسعافات الأولية في مكان الحادث للمشاة الذي أصيب بجروح متوسطة. بالإضافة إلى ذلك، قامت سيارة إسعاف إيهود هاتسلا بنقل راكب الدراجة الكهربائية إلى مستشفى معاني هيشعوا في بني براك...",
+          "summary": "تقرير عن حادث مروري في إسرائيل. التفاصيل والتحديثات في المصدر."
+        }
+      },
+      "title": "\"На месте происшествия нам сообщили, что пешехода сбил электровелосипед. На месте происшествия мы оказали первую помощь пешеходу, который получил травмы средней степени тяжести. Кроме того, машина скорой помощи \"Ихуд Хацла\" эвакуировала электровелоси",
       "summary": "Дорожное происшествие в Израиле. Обстоятельства и актуальные сведения — в материале источника.",
       "translated": true,
       "imageType": "licensedPhoto",
@@ -584,44 +775,6 @@
       "subjectPhotoChecked": true
     },
     {
-      "id": "ea45b3fcdeeaf64559c3",
-      "titleOriginal": "תאונה עם מעורבות שני כלי רכב אירעה בכניסה לאור יהודה.",
-      "sourceLanguage": "he",
-      "date": "2026-11-17T17:59:55Z",
-      "url": "https://t.me/uh1221/27449",
-      "publisher": "Ихуд Ацала · Telegram",
-      "category": "accidents",
-      "art": "accidents",
-      "image": "./assets/news/images/ea45b3fcdeeaf64559c3.webp",
-      "official": false,
-      "translations": {
-        "he": {
-          "title": "תאונה עם מעורבות שני כלי רכב אירעה בכניסה לאור יהודה.",
-          "summary": "דיווח על תאונת דרכים בישראל. פרטים ועדכונים בכתבת המקור."
-        },
-        "ru": {
-          "title": "На въезде в Ор-Йехуда произошло ДТП с участием двух транспортных средств.",
-          "summary": "Дорожное происшествие в Израиле. Обстоятельства и актуальные сведения — в материале источника."
-        },
-        "en": {
-          "title": "An accident involving two vehicles happened at the entrance to Or Yehuda.",
-          "summary": "A reported road incident in Israel. Details and updates are in the original report."
-        },
-        "ar": {
-          "title": "وقع حادث بين مركبتين عند مدخل أور يهودا.",
-          "summary": "تقرير عن حادث مروري في إسرائيل. التفاصيل والتحديثات في المصدر."
-        }
-      },
-      "title": "На въезде в Ор-Йехуда произошло ДТП с участием двух транспортных средств.",
-      "summary": "Дорожное происшествие в Израиле. Обстоятельства и актуальные сведения — в материале источника.",
-      "translated": true,
-      "imageType": "licensedPhoto",
-      "imageCredit": {
-        "text": "Wikimedia Commons · Public domain",
-        "url": "https://commons.wikimedia.org/wiki/File:Hurricane_Rita_Evacuation_ambulance_1.jpg"
-      }
-    },
-    {
       "id": "ce5de5cd824d3a5f58eb",
       "titleOriginal": "צעיר בן 20 נפצע קשה בעקבות פגיעת רכב בכביש 334",
       "sourceLanguage": "he",
@@ -651,6 +804,44 @@
         }
       },
       "title": "20-летний мужчина получил серьезные травмы в результате наезда автомобиля на 334-м шоссе.",
+      "summary": "Дорожное происшествие в Израиле. Обстоятельства и актуальные сведения — в материале источника.",
+      "translated": true,
+      "imageType": "licensedPhoto",
+      "imageCredit": {
+        "text": "Jeff Attaway from Abuja, Nigeria · CC BY 2.0",
+        "url": "https://commons.wikimedia.org/wiki/File:Bad_one_-_auto_wreck_in_Dakar_Senegal,_2011.jpg"
+      }
+    },
+    {
+      "id": "3a7ee9e0ffb4c5349a0d",
+      "titleOriginal": "צוותי הרפואה של איחוד הצלה העניקו טיפול רפואי ראשוני לנהג רכב (כבן 20) במצב קל לאחר שרכבו התהפך כתוצאה מתאונה עצמית בכביש 38 סמוך למחלף מסילת צין.",
+      "sourceLanguage": "he",
+      "date": "2026-11-17T18:35:12Z",
+      "url": "https://t.me/uh1221/27451",
+      "publisher": "Ихуд Ацала · Telegram",
+      "category": "accidents",
+      "art": "accidents",
+      "image": "./assets/news/images/3a7ee9e0ffb4c5349a0d.webp",
+      "official": false,
+      "translations": {
+        "he": {
+          "title": "צוותי הרפואה של איחוד הצלה העניקו טיפול רפואי ראשוני לנהג רכב (כבן 20) במצב קל לאחר שרכבו התהפך כתוצאה מתאונה עצמית בכביש 38 סמוך למחלף מסילת צין.",
+          "summary": "דיווח על תאונת דרכים בישראל. פרטים ועדכונים בכתבת המקור."
+        },
+        "ru": {
+          "title": "Медицинские бригады Союза спасателей оказали первую медицинскую помощь водителю легкового автомобиля (около 20 лет) в тяжелом состоянии после того, как его машина перевернулась в результате ДТП на 38-м маршруте в районе железнодорожной развязки Зин.",
+          "summary": "Дорожное происшествие в Израиле. Обстоятельства и актуальные сведения — в материале источника."
+        },
+        "en": {
+          "title": "The medical teams of the Rescue Union provided initial medical treatment to a car driver (about 20 years old) in a minor condition after his car overturned as a result of a self-inflicted accident on Route 38 near the Zin railway interchange.",
+          "summary": "A reported road incident in Israel. Details and updates are in the original report."
+        },
+        "ar": {
+          "title": "قدمت الطواقم الطبية التابعة لاتحاد الإنقاذ العلاج الطبي الأولي لسائق سيارة (نحو 20 عاما) في حالة طفيفة بعد انقلاب سيارته نتيجة تعرضه لحادث سير على طريق 38 بالقرب من تقاطع سكة ​​حديد الزين.",
+          "summary": "تقرير عن حادث مروري في إسرائيل. التفاصيل والتحديثات في المصدر."
+        }
+      },
+      "title": "Медицинские бригады Союза спасателей оказали первую медицинскую помощь водителю легкового автомобиля (около 20 лет) в тяжелом состоянии после того, как его машина перевернулась в результате ДТП на 38-м маршруте в районе железнодорожной развязки Зин.",
       "summary": "Дорожное происшествие в Израиле. Обстоятельства и актуальные сведения — в материале источника.",
       "translated": true,
       "imageType": "licensedPhoto",
@@ -699,44 +890,6 @@
       }
     },
     {
-      "id": "69b2308b30c9f6dc846d",
-      "titleOriginal": ": \"הילדה נחבלה בראשה ובפלג גופה העליון כתוצאה מפגיעת רכב. הענקנו לה סיוע רפואי ראשוני בזירת התאונה ולאחר מכן היא פונתה באמבולנס של איחוד הצלה לבית החולים שיבא תל השומר. בשלב זה מצבה מוגדר בינוני\".",
-      "sourceLanguage": "he",
-      "date": "2026-11-17T17:58:25Z",
-      "url": "https://t.me/uh1221/27448",
-      "publisher": "Ихуд Ацала · Telegram",
-      "category": "accidents",
-      "art": "accidents",
-      "image": "./assets/news/images/69b2308b30c9f6dc846d.webp",
-      "official": false,
-      "translations": {
-        "he": {
-          "title": ": \"הילדה נחבלה בראשה ובפלג גופה העליון כתוצאה מפגיעת רכב. הענקנו לה סיוע רפואי ראשוני בזירת התאונה ולאחר מכן היא פונתה באמבולנס של איחוד הצלה לבית החולים שיבא תל השומר. בשלב זה מצבה מוגדר בינוני\".",
-          "summary": "דיווח על תאונת דרכים בישראל. פרטים ועדכונים בכתבת המקור."
-        },
-        "ru": {
-          "title": ": \"В результате наезда автомобиля девочка получила травмы головы и верхней части тела. Мы оказали ей первую медицинскую помощь на месте происшествия, а затем на машине скорой помощи \"Ихуд Хацла\" ее отвезли в больницу \"Шиба Тель ха-Шомер\". На данном э",
-          "summary": "Дорожное происшествие в Израиле. Обстоятельства и актуальные сведения — в материале источника."
-        },
-        "en": {
-          "title": ": \"The girl was injured on her head and upper body as a result of being hit by a car. We gave her first medical aid at the scene of the accident and then she was taken by an Ihud Hatzla ambulance to Sheba Tel Hashomer Hospital. At this stage her cond",
-          "summary": "A reported road incident in Israel. Details and updates are in the original report."
-        },
-        "ar": {
-          "title": ": \"أصيبت الفتاة في رأسها والجزء العلوي من جسدها نتيجة اصطدامها بسيارة، وقدمنا ​​لها الإسعافات الأولية في مكان الحادث، ومن ثم تم نقلها بسيارة إسعاف إيهود هتسلا إلى مستشفى شيبا تل هشومير، وحالتها في هذه المرحلة تصنف بالمتوسطة\".",
-          "summary": "تقرير عن حادث مروري في إسرائيل. التفاصيل والتحديثات في المصدر."
-        }
-      },
-      "title": ": \"В результате наезда автомобиля девочка получила травмы головы и верхней части тела. Мы оказали ей первую медицинскую помощь на месте происшествия, а затем на машине скорой помощи \"Ихуд Хацла\" ее отвезли в больницу \"Шиба Тель ха-Шомер\". На данном э",
-      "summary": "Дорожное происшествие в Израиле. Обстоятельства и актуальные сведения — в материале источника.",
-      "translated": true,
-      "imageType": "licensedPhoto",
-      "imageCredit": {
-        "text": "Jeff Attaway from Abuja, Nigeria · CC BY 2.0",
-        "url": "https://commons.wikimedia.org/wiki/File:Bad_one_-_auto_wreck_in_Dakar_Senegal,_2011.jpg"
-      }
-    },
-    {
       "id": "66091087e7ce60ac7523",
       "titleOriginal": "В Кирьят-Бялике автомобиль сбил пешехода, пострадавший в тяжелом состоянии",
       "sourceLanguage": "en",
@@ -772,6 +925,44 @@
       "imageCredit": {
         "text": "No machine-readable author provided. EPO assumed (based on copyright claims). · CC BY 2.5",
         "url": "https://commons.wikimedia.org/wiki/File:Falck_sv_04.jpg"
+      }
+    },
+    {
+      "id": "eda4643321d6822c21c6",
+      "titleOriginal": "תאונה עם מעורבות רכב ורוכב קורקינט חשמלי אירעה ברחוב דרום אפריקה באשקלון.",
+      "sourceLanguage": "he",
+      "date": "2026-11-17T18:27:09Z",
+      "url": "https://t.me/uh1221/27450",
+      "publisher": "Ихуд Ацала · Telegram",
+      "category": "accidents",
+      "art": "accidents",
+      "image": "./assets/news/images/eda4643321d6822c21c6.webp",
+      "official": false,
+      "translations": {
+        "he": {
+          "title": "תאונה עם מעורבות רכב ורוכב קורקינט חשמלי אירעה ברחוב דרום אפריקה באשקלון.",
+          "summary": "דיווח על תאונת דרכים בישראל. פרטים ועדכונים בכתבת המקור."
+        },
+        "ru": {
+          "title": "Авария с участием автомобиля и водителя электросамоката произошла на улице ЮАР в Ашкелоне.",
+          "summary": "Дорожное происшествие в Израиле. Обстоятельства и актуальные сведения — в материале источника."
+        },
+        "en": {
+          "title": "An accident involving a car and an electric scooter rider happened on South Africa Street in Ashkelon.",
+          "summary": "A reported road incident in Israel. Details and updates are in the original report."
+        },
+        "ar": {
+          "title": "وقع حادث بين سيارة وراكب سكوتر كهربائي في شارع جنوب أفريقيا في عسقلان.",
+          "summary": "تقرير عن حادث مروري في إسرائيل. التفاصيل والتحديثات في المصدر."
+        }
+      },
+      "title": "Авария с участием автомобиля и водителя электросамоката произошла на улице ЮАР в Ашкелоне.",
+      "summary": "Дорожное происшествие в Израиле. Обстоятельства и актуальные сведения — в материале источника.",
+      "translated": true,
+      "imageType": "licensedPhoto",
+      "imageCredit": {
+        "text": "Wikimedia Commons · Public domain",
+        "url": "https://commons.wikimedia.org/wiki/File:Hurricane_Rita_Evacuation_ambulance_1.jpg"
       }
     },
     {
@@ -814,44 +1005,6 @@
       "subjectPhotoChecked": true
     },
     {
-      "id": "78b19cbb734553ded217",
-      "titleOriginal": "תאונה עם מעורבות רכב וקטנוע אירעה ברחוב אהרונוביץ׳ בבני ברק.",
-      "sourceLanguage": "he",
-      "date": "2026-11-17T16:36:34Z",
-      "url": "https://t.me/uh1221/27447",
-      "publisher": "Ихуд Ацала · Telegram",
-      "category": "accidents",
-      "art": "accidents",
-      "image": "./assets/news/images/78b19cbb734553ded217.webp",
-      "official": false,
-      "translations": {
-        "he": {
-          "title": "תאונה עם מעורבות רכב וקטנוע אירעה ברחוב אהרונוביץ׳ בבני ברק.",
-          "summary": "דיווח על תאונת דרכים בישראל. פרטים ועדכונים בכתבת המקור."
-        },
-        "ru": {
-          "title": "Авария с участием автомобиля и скутера произошла на улице Агароновича в Бней-Браке.",
-          "summary": "Дорожное происшествие в Израиле. Обстоятельства и актуальные сведения — в материале источника."
-        },
-        "en": {
-          "title": "An accident involving a car and a scooter happened on Aharonovich Street in Bnei Brak.",
-          "summary": "A reported road incident in Israel. Details and updates are in the original report."
-        },
-        "ar": {
-          "title": "وقع حادث بين سيارة ودراجة نارية في شارع أهارونوفيتش في بني براك.",
-          "summary": "تقرير عن حادث مروري في إسرائيل. التفاصيل والتحديثات في المصدر."
-        }
-      },
-      "title": "Авария с участием автомобиля и скутера произошла на улице Агароновича в Бней-Браке.",
-      "summary": "Дорожное происшествие в Израиле. Обстоятельства и актуальные сведения — в материале источника.",
-      "translated": true,
-      "imageType": "licensedPhoto",
-      "imageCredit": {
-        "text": "No machine-readable author provided. EPO assumed (based on copyright claims). · CC BY 2.5",
-        "url": "https://commons.wikimedia.org/wiki/File:Falck_sv_04.jpg"
-      }
-    },
-    {
       "titleOriginal": "מצלמות המהירות הוותיקות החלו לחלק דוחות גם על חריגות קלות, ובכביש 6 הופעלה מערכת שקילה חדשה",
       "sourceTitle": "חדש בכביש 6: מערכת שקילה אוטומטית שתזהה חריגות משקל של רכב כבד",
       "editorialHeadline": true,
@@ -884,11 +1037,45 @@
       "title": "Камеры скорости штрафуют за небольшие превышения. На шоссе №6 появилось автоматическое взвешивание грузовиков",
       "summary": "По сообщению Calcalist, часть стационарных камер уже фиксирует небольшое превышение скорости. Полиция также ввела на шоссе №6 систему проверки веса грузовиков без предварительной остановки.",
       "translated": true,
-      "image": "./assets/news/images/7cec5fc092180f21c267.webp",
+      "image": null,
+      "imageType": "none"
+    },
+    {
+      "id": "ea45b3fcdeeaf64559c3",
+      "titleOriginal": "תאונה עם מעורבות שני כלי רכב אירעה בכניסה לאור יהודה.",
+      "sourceLanguage": "he",
+      "date": "2026-11-17T17:59:55Z",
+      "url": "https://t.me/uh1221/27449",
+      "publisher": "Ихуд Ацала · Telegram",
+      "category": "accidents",
+      "art": "accidents",
+      "image": "./assets/news/images/ea45b3fcdeeaf64559c3.webp",
+      "official": false,
+      "translations": {
+        "he": {
+          "title": "תאונה עם מעורבות שני כלי רכב אירעה בכניסה לאור יהודה.",
+          "summary": "דיווח על תאונת דרכים בישראל. פרטים ועדכונים בכתבת המקור."
+        },
+        "ru": {
+          "title": "На въезде в Ор-Йехуда произошло ДТП с участием двух транспортных средств.",
+          "summary": "Дорожное происшествие в Израиле. Обстоятельства и актуальные сведения — в материале источника."
+        },
+        "en": {
+          "title": "An accident involving two vehicles happened at the entrance to Or Yehuda.",
+          "summary": "A reported road incident in Israel. Details and updates are in the original report."
+        },
+        "ar": {
+          "title": "وقع حادث بين مركبتين عند مدخل أور يهودا.",
+          "summary": "تقرير عن حادث مروري في إسرائيل. التفاصيل والتحديثات في المصدر."
+        }
+      },
+      "title": "На въезде в Ор-Йехуда произошло ДТП с участием двух транспортных средств.",
+      "summary": "Дорожное происшествие в Израиле. Обстоятельства и актуальные сведения — в материале источника.",
+      "translated": true,
       "imageType": "licensedPhoto",
       "imageCredit": {
-        "text": "Erkki Voutilainen · CC BY 4.0",
-        "url": "https://commons.wikimedia.org/wiki/File:Police_patrolling_1950_(JOKAMT2Yh01-2).tif"
+        "text": "Wikimedia Commons · Public domain",
+        "url": "https://commons.wikimedia.org/wiki/File:Hurricane_Rita_Evacuation_ambulance_1.jpg"
       }
     },
     {
@@ -932,44 +1119,6 @@
       "subjectPhotoChecked": true
     },
     {
-      "id": "2b2a22a934282fa991e2",
-      "titleOriginal": "ברכיה: רוכב אופנוע שטח בן 23 נפצע קשה בתאונה",
-      "sourceLanguage": "he",
-      "date": "2026-11-17T16:30:18Z",
-      "url": "https://t.me/uh1221/27446",
-      "publisher": "Ихуд Ацала · Telegram",
-      "category": "accidents",
-      "art": "accidents",
-      "image": "./assets/news/images/2b2a22a934282fa991e2.webp",
-      "official": false,
-      "translations": {
-        "he": {
-          "title": "ברכיה: רוכב אופנוע שטח בן 23 נפצע קשה בתאונה",
-          "summary": "דיווח על תאונת דרכים בישראל. פרטים ועדכונים בכתבת המקור."
-        },
-        "ru": {
-          "title": "Колени: 23-летний мотоциклист по бездорожью серьезно пострадал в результате аварии",
-          "summary": "Дорожное происшествие в Израиле. Обстоятельства и актуальные сведения — в материале источника."
-        },
-        "en": {
-          "title": "Knees: A 23-year-old off-road motorcycle rider was seriously injured in an accident",
-          "summary": "A reported road incident in Israel. Details and updates are in the original report."
-        },
-        "ar": {
-          "title": "الركبتين: أصيب سائق دراجة نارية على الطرق الوعرة يبلغ من العمر 23 عامًا بجروح خطيرة في حادث",
-          "summary": "تقرير عن حادث مروري في إسرائيل. التفاصيل والتحديثات في المصدر."
-        }
-      },
-      "title": "Колени: 23-летний мотоциклист по бездорожью серьезно пострадал в результате аварии",
-      "summary": "Дорожное происшествие в Израиле. Обстоятельства и актуальные сведения — в материале источника.",
-      "translated": true,
-      "imageType": "licensedPhoto",
-      "imageCredit": {
-        "text": "Jeff Attaway from Abuja, Nigeria · CC BY 2.0",
-        "url": "https://commons.wikimedia.org/wiki/File:Bad_one_-_auto_wreck_in_Dakar_Senegal,_2011.jpg"
-      }
-    },
-    {
       "id": "6cc126ef03218901938b",
       "titleOriginal": "אילו מכוניות יקבלו הח\"כים החדשים?",
       "sourceLanguage": "he",
@@ -1008,6 +1157,44 @@
         "url": "https://commons.wikimedia.org/wiki/File:1973_Ford_Mustang_Interior_Dashboard_(51838912069).jpg"
       },
       "subjectPhotoChecked": true
+    },
+    {
+      "id": "69b2308b30c9f6dc846d",
+      "titleOriginal": ": \"הילדה נחבלה בראשה ובפלג גופה העליון כתוצאה מפגיעת רכב. הענקנו לה סיוע רפואי ראשוני בזירת התאונה ולאחר מכן היא פונתה באמבולנס של איחוד הצלה לבית החולים שיבא תל השומר. בשלב זה מצבה מוגדר בינוני\".",
+      "sourceLanguage": "he",
+      "date": "2026-11-17T17:58:25Z",
+      "url": "https://t.me/uh1221/27448",
+      "publisher": "Ихуд Ацала · Telegram",
+      "category": "accidents",
+      "art": "accidents",
+      "image": "./assets/news/images/69b2308b30c9f6dc846d.webp",
+      "official": false,
+      "translations": {
+        "he": {
+          "title": ": \"הילדה נחבלה בראשה ובפלג גופה העליון כתוצאה מפגיעת רכב. הענקנו לה סיוע רפואי ראשוני בזירת התאונה ולאחר מכן היא פונתה באמבולנס של איחוד הצלה לבית החולים שיבא תל השומר. בשלב זה מצבה מוגדר בינוני\".",
+          "summary": "דיווח על תאונת דרכים בישראל. פרטים ועדכונים בכתבת המקור."
+        },
+        "ru": {
+          "title": ": \"В результате наезда автомобиля девочка получила травмы головы и верхней части тела. Мы оказали ей первую медицинскую помощь на месте происшествия, а затем на машине скорой помощи \"Ихуд Хацла\" ее отвезли в больницу \"Шиба Тель ха-Шомер\". На данном э",
+          "summary": "Дорожное происшествие в Израиле. Обстоятельства и актуальные сведения — в материале источника."
+        },
+        "en": {
+          "title": ": \"The girl was injured on her head and upper body as a result of being hit by a car. We gave her first medical aid at the scene of the accident and then she was taken by an Ihud Hatzla ambulance to Sheba Tel Hashomer Hospital. At this stage her cond",
+          "summary": "A reported road incident in Israel. Details and updates are in the original report."
+        },
+        "ar": {
+          "title": ": \"أصيبت الفتاة في رأسها والجزء العلوي من جسدها نتيجة اصطدامها بسيارة، وقدمنا ​​لها الإسعافات الأولية في مكان الحادث، ومن ثم تم نقلها بسيارة إسعاف إيهود هتسلا إلى مستشفى شيبا تل هشومير، وحالتها في هذه المرحلة تصنف بالمتوسطة\".",
+          "summary": "تقرير عن حادث مروري في إسرائيل. التفاصيل والتحديثات في المصدر."
+        }
+      },
+      "title": ": \"В результате наезда автомобиля девочка получила травмы головы и верхней части тела. Мы оказали ей первую медицинскую помощь на месте происшествия, а затем на машине скорой помощи \"Ихуд Хацла\" ее отвезли в больницу \"Шиба Тель ха-Шомер\". На данном э",
+      "summary": "Дорожное происшествие в Израиле. Обстоятельства и актуальные сведения — в материале источника.",
+      "translated": true,
+      "imageType": "licensedPhoto",
+      "imageCredit": {
+        "text": "Jeff Attaway from Abuja, Nigeria · CC BY 2.0",
+        "url": "https://commons.wikimedia.org/wiki/File:Bad_one_-_auto_wreck_in_Dakar_Senegal,_2011.jpg"
+      }
     },
     {
       "id": "60b9d4ece67c7f4667d4",
@@ -1050,44 +1237,6 @@
       "subjectPhotoMatched": true
     },
     {
-      "id": "d134e111e18ecdf94cb8",
-      "titleOriginal": "תאונה עם מעורבות שני כלי רכב אירעה ברחוב נחל תנינים באשקלון.",
-      "sourceLanguage": "he",
-      "date": "2026-11-17T12:57:59Z",
-      "url": "https://t.me/uh1221/27441",
-      "publisher": "Ихуд Ацала · Telegram",
-      "category": "accidents",
-      "art": "accidents",
-      "image": "./assets/news/images/d134e111e18ecdf94cb8.webp",
-      "official": false,
-      "translations": {
-        "he": {
-          "title": "תאונה עם מעורבות שני כלי רכב אירעה ברחוב נחל תנינים באשקלון.",
-          "summary": "דיווח על תאונת דרכים בישראל. פרטים ועדכונים בכתבת המקור."
-        },
-        "ru": {
-          "title": "Авария с участием двух транспортных средств произошла на улице Нахаль Таниним в Ашкелоне.",
-          "summary": "Дорожное происшествие в Израиле. Обстоятельства и актуальные сведения — в материале источника."
-        },
-        "en": {
-          "title": "An accident involving two vehicles happened on Nahal Taninim Street in Ashkelon.",
-          "summary": "A reported road incident in Israel. Details and updates are in the original report."
-        },
-        "ar": {
-          "title": "وقع حادث بين مركبتين في شارع ناحال تنينيم في عسقلان.",
-          "summary": "تقرير عن حادث مروري في إسرائيل. التفاصيل والتحديثات في المصدر."
-        }
-      },
-      "title": "Авария с участием двух транспортных средств произошла на улице Нахаль Таниним в Ашкелоне.",
-      "summary": "Дорожное происшествие в Израиле. Обстоятельства и актуальные сведения — в материале источника.",
-      "translated": true,
-      "imageType": "licensedPhoto",
-      "imageCredit": {
-        "text": "Jeff Attaway from Abuja, Nigeria · CC BY 2.0",
-        "url": "https://commons.wikimedia.org/wiki/File:Bad_one_-_auto_wreck_in_Dakar_Senegal,_2011.jpg"
-      }
-    },
-    {
       "id": "3d252cafd2173f2c43cd",
       "titleOriginal": "טסלה מתחילה למכור את הסייברקאב. אז למה אילון מאסק לא מרוצה?",
       "sourceLanguage": "he",
@@ -1126,6 +1275,44 @@
       },
       "subjectPhotoChecked": true,
       "subjectPhotoMatched": true
+    },
+    {
+      "id": "78b19cbb734553ded217",
+      "titleOriginal": "תאונה עם מעורבות רכב וקטנוע אירעה ברחוב אהרונוביץ׳ בבני ברק.",
+      "sourceLanguage": "he",
+      "date": "2026-11-17T16:36:34Z",
+      "url": "https://t.me/uh1221/27447",
+      "publisher": "Ихуд Ацала · Telegram",
+      "category": "accidents",
+      "art": "accidents",
+      "image": "./assets/news/images/78b19cbb734553ded217.webp",
+      "official": false,
+      "translations": {
+        "he": {
+          "title": "תאונה עם מעורבות רכב וקטנוע אירעה ברחוב אהרונוביץ׳ בבני ברק.",
+          "summary": "דיווח על תאונת דרכים בישראל. פרטים ועדכונים בכתבת המקור."
+        },
+        "ru": {
+          "title": "Авария с участием автомобиля и скутера произошла на улице Агароновича в Бней-Браке.",
+          "summary": "Дорожное происшествие в Израиле. Обстоятельства и актуальные сведения — в материале источника."
+        },
+        "en": {
+          "title": "An accident involving a car and a scooter happened on Aharonovich Street in Bnei Brak.",
+          "summary": "A reported road incident in Israel. Details and updates are in the original report."
+        },
+        "ar": {
+          "title": "وقع حادث بين سيارة ودراجة نارية في شارع أهارونوفيتش في بني براك.",
+          "summary": "تقرير عن حادث مروري في إسرائيل. التفاصيل والتحديثات في المصدر."
+        }
+      },
+      "title": "Авария с участием автомобиля и скутера произошла на улице Агароновича в Бней-Браке.",
+      "summary": "Дорожное происшествие в Израиле. Обстоятельства и актуальные сведения — в материале источника.",
+      "translated": true,
+      "imageType": "licensedPhoto",
+      "imageCredit": {
+        "text": "No machine-readable author provided. EPO assumed (based on copyright claims). · CC BY 2.5",
+        "url": "https://commons.wikimedia.org/wiki/File:Falck_sv_04.jpg"
+      }
     },
     {
       "id": "419690fed163182a806c",
@@ -1168,44 +1355,6 @@
       "subjectPhotoChecked": true
     },
     {
-      "id": "2b56dbeda1bc5c32dd01",
-      "titleOriginal": "תאונה עם מעורבות שתי משאיות אירעה בכביש 60 סמוך לשער בנימין.",
-      "sourceLanguage": "he",
-      "date": "2026-11-17T11:58:33Z",
-      "url": "https://t.me/uh1221/27439",
-      "publisher": "Ихуд Ацала · Telegram",
-      "category": "accidents",
-      "art": "accidents",
-      "image": "./assets/news/images/2b56dbeda1bc5c32dd01.webp",
-      "official": false,
-      "translations": {
-        "he": {
-          "title": "תאונה עם מעורבות שתי משאיות אירעה בכביש 60 סמוך לשער בנימין.",
-          "summary": "דיווח על תאונת דרכים בישראל. פרטים ועדכונים בכתבת המקור."
-        },
-        "ru": {
-          "title": "Авария с участием двух грузовиков произошла на шоссе 60 недалеко от Шаар-Биньямина.",
-          "summary": "Дорожное происшествие в Израиле. Обстоятельства и актуальные сведения — в материале источника."
-        },
-        "en": {
-          "title": "An accident involving two trucks happened on Route 60 near Shaar Binyamin.",
-          "summary": "A reported road incident in Israel. Details and updates are in the original report."
-        },
-        "ar": {
-          "title": "وقع حادث بين شاحنتين على شارع 60 بالقرب من شعار بنيامين.",
-          "summary": "تقرير عن حادث مروري في إسرائيل. التفاصيل والتحديثات في المصدر."
-        }
-      },
-      "title": "Авария с участием двух грузовиков произошла на шоссе 60 недалеко от Шаар-Биньямина.",
-      "summary": "Дорожное происшествие в Израиле. Обстоятельства и актуальные сведения — в материале источника.",
-      "translated": true,
-      "imageType": "licensedPhoto",
-      "imageCredit": {
-        "text": "Jeff Attaway from Abuja, Nigeria · CC BY 2.0",
-        "url": "https://commons.wikimedia.org/wiki/File:Bad_one_-_auto_wreck_in_Dakar_Senegal,_2011.jpg"
-      }
-    },
-    {
       "id": "a41b423566b7aab7ce0a",
       "titleOriginal": "בהתנגשות עם רכב צבאי: הרוגה בתאונת דרכים קטלנית בעכו | תיעוד",
       "sourceLanguage": "he",
@@ -1235,6 +1384,44 @@
         }
       },
       "title": "При столкновении с военной машиной: погиб в ДТП со смертельным исходом в Акко Документация",
+      "summary": "Дорожное происшествие в Израиле. Обстоятельства и актуальные сведения — в материале источника.",
+      "translated": true,
+      "imageType": "licensedPhoto",
+      "imageCredit": {
+        "text": "Jeff Attaway from Abuja, Nigeria · CC BY 2.0",
+        "url": "https://commons.wikimedia.org/wiki/File:Bad_one_-_auto_wreck_in_Dakar_Senegal,_2011.jpg"
+      }
+    },
+    {
+      "id": "2b2a22a934282fa991e2",
+      "titleOriginal": "ברכיה: רוכב אופנוע שטח בן 23 נפצע קשה בתאונה",
+      "sourceLanguage": "he",
+      "date": "2026-11-17T16:30:18Z",
+      "url": "https://t.me/uh1221/27446",
+      "publisher": "Ихуд Ацала · Telegram",
+      "category": "accidents",
+      "art": "accidents",
+      "image": "./assets/news/images/2b2a22a934282fa991e2.webp",
+      "official": false,
+      "translations": {
+        "he": {
+          "title": "ברכיה: רוכב אופנוע שטח בן 23 נפצע קשה בתאונה",
+          "summary": "דיווח על תאונת דרכים בישראל. פרטים ועדכונים בכתבת המקור."
+        },
+        "ru": {
+          "title": "Колени: 23-летний мотоциклист по бездорожью серьезно пострадал в результате аварии",
+          "summary": "Дорожное происшествие в Израиле. Обстоятельства и актуальные сведения — в материале источника."
+        },
+        "en": {
+          "title": "Knees: A 23-year-old off-road motorcycle rider was seriously injured in an accident",
+          "summary": "A reported road incident in Israel. Details and updates are in the original report."
+        },
+        "ar": {
+          "title": "الركبتين: أصيب سائق دراجة نارية على الطرق الوعرة يبلغ من العمر 23 عامًا بجروح خطيرة في حادث",
+          "summary": "تقرير عن حادث مروري في إسرائيل. التفاصيل والتحديثات في المصدر."
+        }
+      },
+      "title": "Колени: 23-летний мотоциклист по бездорожью серьезно пострадал в результате аварии",
       "summary": "Дорожное происшествие в Израиле. Обстоятельства и актуальные сведения — в материале источника.",
       "translated": true,
       "imageType": "licensedPhoto",
@@ -1284,44 +1471,6 @@
       "subjectPhotoChecked": true
     },
     {
-      "id": "d9c80b0889efe007e549",
-      "titleOriginal": "תאונה עם מעורבות משאית ורכב פרטי אירעה בכביש 2 סמוך למחלף חוף השרון לכוון צפון.",
-      "sourceLanguage": "he",
-      "date": "2026-11-17T11:23:18Z",
-      "url": "https://t.me/uh1221/27433",
-      "publisher": "Ихуд Ацала · Telegram",
-      "category": "accidents",
-      "art": "accidents",
-      "image": "./assets/news/images/d9c80b0889efe007e549.webp",
-      "official": false,
-      "translations": {
-        "he": {
-          "title": "תאונה עם מעורבות משאית ורכב פרטי אירעה בכביש 2 סמוך למחלף חוף השרון לכוון צפון.",
-          "summary": "דיווח על תאונת דרכים בישראל. פרטים ועדכונים בכתבת המקור."
-        },
-        "ru": {
-          "title": "Авария с участием грузовика и легкового автомобиля произошла на шоссе №2 возле развязки Хоф ха-Шарон в северном направлении.",
-          "summary": "Дорожное происшествие в Израиле. Обстоятельства и актуальные сведения — в материале источника."
-        },
-        "en": {
-          "title": "An accident involving a truck and a private car happened on Highway 2 near the Hoof Hasharon interchange heading north.",
-          "summary": "A reported road incident in Israel. Details and updates are in the original report."
-        },
-        "ar": {
-          "title": "وقع حادث بين شاحنة وسيارة خاصة على الطريق السريع رقم 2 بالقرب من مفرق حوف هشارون باتجاه الشمال.",
-          "summary": "تقرير عن حادث مروري في إسرائيل. التفاصيل والتحديثات في المصدر."
-        }
-      },
-      "title": "Авария с участием грузовика и легкового автомобиля произошла на шоссе №2 возле развязки Хоф ха-Шарон в северном направлении.",
-      "summary": "Дорожное происшествие в Израиле. Обстоятельства и актуальные сведения — в материале источника.",
-      "translated": true,
-      "imageType": "licensedPhoto",
-      "imageCredit": {
-        "text": "Jeff Attaway from Abuja, Nigeria · CC BY 2.0",
-        "url": "https://commons.wikimedia.org/wiki/File:Bad_one_-_auto_wreck_in_Dakar_Senegal,_2011.jpg"
-      }
-    },
-    {
       "id": "825a9e9e7693453d9e1f",
       "titleOriginal": "בתוך פחות משעה: גבר נהרג בכביש 6, אישה נהרגה בכביש 7",
       "sourceLanguage": "he",
@@ -1362,6 +1511,44 @@
       "subjectPhotoMatched": true
     },
     {
+      "id": "d134e111e18ecdf94cb8",
+      "titleOriginal": "תאונה עם מעורבות שני כלי רכב אירעה ברחוב נחל תנינים באשקלון.",
+      "sourceLanguage": "he",
+      "date": "2026-11-17T12:57:59Z",
+      "url": "https://t.me/uh1221/27441",
+      "publisher": "Ихуд Ацала · Telegram",
+      "category": "accidents",
+      "art": "accidents",
+      "image": "./assets/news/images/d134e111e18ecdf94cb8.webp",
+      "official": false,
+      "translations": {
+        "he": {
+          "title": "תאונה עם מעורבות שני כלי רכב אירעה ברחוב נחל תנינים באשקלון.",
+          "summary": "דיווח על תאונת דרכים בישראל. פרטים ועדכונים בכתבת המקור."
+        },
+        "ru": {
+          "title": "Авария с участием двух транспортных средств произошла на улице Нахаль Таниним в Ашкелоне.",
+          "summary": "Дорожное происшествие в Израиле. Обстоятельства и актуальные сведения — в материале источника."
+        },
+        "en": {
+          "title": "An accident involving two vehicles happened on Nahal Taninim Street in Ashkelon.",
+          "summary": "A reported road incident in Israel. Details and updates are in the original report."
+        },
+        "ar": {
+          "title": "وقع حادث بين مركبتين في شارع ناحال تنينيم في عسقلان.",
+          "summary": "تقرير عن حادث مروري في إسرائيل. التفاصيل والتحديثات في المصدر."
+        }
+      },
+      "title": "Авария с участием двух транспортных средств произошла на улице Нахаль Таниним в Ашкелоне.",
+      "summary": "Дорожное происшествие в Израиле. Обстоятельства и актуальные сведения — в материале источника.",
+      "translated": true,
+      "imageType": "licensedPhoto",
+      "imageCredit": {
+        "text": "Jeff Attaway from Abuja, Nigeria · CC BY 2.0",
+        "url": "https://commons.wikimedia.org/wiki/File:Bad_one_-_auto_wreck_in_Dakar_Senegal,_2011.jpg"
+      }
+    },
+    {
       "id": "1e8bae62077b81241504",
       "titleOriginal": "רישומים שבוע 46/2026 / טסלה ממשיך בהיקף רישומי גבוה, מוביל את השבוע, החודש",
       "sourceLanguage": "he",
@@ -1393,6 +1580,276 @@
       "title": "Неделя регистраций 46/2026 / Tesla продолжает с высоким объемом регистраций, лидирует неделю, месяц",
       "summary": "Материал об автомобиле или автомобильном рынке Израиля. Подробности — на сайте издания.",
       "translated": true,
+      "imageType": "licensedPhoto",
+      "imageCredit": {
+        "text": "Eric Friedebach · CC BY 2.0",
+        "url": "https://commons.wikimedia.org/wiki/File:1973_Ford_Mustang_Interior_Dashboard_(51838912069).jpg"
+      },
+      "subjectPhotoChecked": true
+    },
+    {
+      "id": "e4e9dc9a17eaceb834b7",
+      "titleOriginal": "משה קארס: מה עושים עם רכב ישן שכבר לא שווה תיקון",
+      "sourceLanguage": "he",
+      "date": "2026-11-11T16:30:43Z",
+      "url": "https://wheel.co.il/%d7%9e%d7%a9%d7%94-%d7%a7%d7%90%d7%a8%d7%a1-%d7%9e%d7%94-%d7%a2%d7%95%d7%a9%d7%99%d7%9d-%d7%a2%d7%9d-%d7%a8%d7%9b%d7%91-%d7%99%d7%a9%d7%9f-%d7%a9%d7%9b%d7%91%d7%a8-%d7%9c%d7%90-%d7%a9%d7%95%d7%95/",
+      "publisher": "Wheel · Автоновости",
+      "category": "cars",
+      "art": "cars",
+      "image": "./assets/news/images/e4e9dc9a17eaceb834b7.webp",
+      "official": false,
+      "translations": {
+        "he": {
+          "title": "משה קארס: מה עושים עם רכב ישן שכבר לא שווה תיקון",
+          "summary": "כתבה על מכוניות או שוק הרכב בישראל. פרטים באתר המקור."
+        },
+        "ru": {
+          "title": "Моше Карс: Что вы делаете со старой машиной, которую уже не стоит ремонтировать?",
+          "summary": "Материал об автомобиле или автомобильном рынке Израиля. Подробности — на сайте издания."
+        },
+        "en": {
+          "title": "Moshe Kars: What do you do with an old car that is no longer worth repairing?",
+          "summary": "An update about vehicles or Israel's car market. Details are available at the source."
+        },
+        "ar": {
+          "title": "موشيه كارس: ماذا تفعل بسيارة قديمة لم تعد تستحق الإصلاح؟",
+          "summary": "تحديث عن السيارات أو سوق المركبات في إسرائيل. التفاصيل في المصدر."
+        }
+      },
+      "title": "Моше Карс: Что вы делаете со старой машиной, которую уже не стоит ремонтировать?",
+      "summary": "Материал об автомобиле или автомобильном рынке Израиля. Подробности — на сайте издания.",
+      "translated": true,
+      "imageType": "licensedPhoto",
+      "imageCredit": {
+        "text": "Ivan Radic · CC BY 2.0",
+        "url": "https://commons.wikimedia.org/wiki/File:Close-up_of_an_electric_car_charging._Traffic_lights_in_a_blurry_background.jpg"
+      },
+      "subjectPhotoChecked": true
+    },
+    {
+      "id": "2b56dbeda1bc5c32dd01",
+      "titleOriginal": "תאונה עם מעורבות שתי משאיות אירעה בכביש 60 סמוך לשער בנימין.",
+      "sourceLanguage": "he",
+      "date": "2026-11-17T11:58:33Z",
+      "url": "https://t.me/uh1221/27439",
+      "publisher": "Ихуд Ацала · Telegram",
+      "category": "accidents",
+      "art": "accidents",
+      "image": "./assets/news/images/2b56dbeda1bc5c32dd01.webp",
+      "official": false,
+      "translations": {
+        "he": {
+          "title": "תאונה עם מעורבות שתי משאיות אירעה בכביש 60 סמוך לשער בנימין.",
+          "summary": "דיווח על תאונת דרכים בישראל. פרטים ועדכונים בכתבת המקור."
+        },
+        "ru": {
+          "title": "Авария с участием двух грузовиков произошла на шоссе 60 недалеко от Шаар-Биньямина.",
+          "summary": "Дорожное происшествие в Израиле. Обстоятельства и актуальные сведения — в материале источника."
+        },
+        "en": {
+          "title": "An accident involving two trucks happened on Route 60 near Shaar Binyamin.",
+          "summary": "A reported road incident in Israel. Details and updates are in the original report."
+        },
+        "ar": {
+          "title": "وقع حادث بين شاحنتين على شارع 60 بالقرب من شعار بنيامين.",
+          "summary": "تقرير عن حادث مروري في إسرائيل. التفاصيل والتحديثات في المصدر."
+        }
+      },
+      "title": "Авария с участием двух грузовиков произошла на шоссе 60 недалеко от Шаар-Биньямина.",
+      "summary": "Дорожное происшествие в Израиле. Обстоятельства и актуальные сведения — в материале источника.",
+      "translated": true,
+      "imageType": "licensedPhoto",
+      "imageCredit": {
+        "text": "Jeff Attaway from Abuja, Nigeria · CC BY 2.0",
+        "url": "https://commons.wikimedia.org/wiki/File:Bad_one_-_auto_wreck_in_Dakar_Senegal,_2011.jpg"
+      }
+    },
+    {
+      "id": "ba19d32a9f258dc849a4",
+      "titleOriginal": "השקה מקומית / דלק רכב משיקה סדרה 3, דור 8, מערכות הנעה הייבריד ביניים",
+      "sourceLanguage": "he",
+      "date": "2026-11-14T10:10:23Z",
+      "url": "https://autonews.co.il/%d7%94%d7%a9%d7%a7%d7%94-%d7%9e%d7%a7%d7%95%d7%9e%d7%99%d7%aa-%d7%93%d7%9c%d7%a7-%d7%a8%d7%9b%d7%91-%d7%9e%d7%a9%d7%99%d7%a7%d7%94-%d7%a1%d7%93%d7%a8%d7%94-3-%d7%93%d7%95%d7%a8-8-%d7%9e%d7%a2/",
+      "publisher": "Autonews Israel",
+      "category": "cars",
+      "art": "cars",
+      "image": "./assets/news/images/ba19d32a9f258dc849a4.webp",
+      "official": false,
+      "translations": {
+        "he": {
+          "title": "השקה מקומית / דלק רכב משיקה סדרה 3, דור 8, מערכות הנעה הייבריד ביניים",
+          "summary": "כתבה על מכוניות או שוק הרכב בישראל. פרטים באתר המקור."
+        },
+        "ru": {
+          "title": "Локальный запуск / Delek Automotive запускает промежуточные гибридные приводные системы Series 3, Generation 8",
+          "summary": "Материал об автомобиле или автомобильном рынке Израиля. Подробности — на сайте издания."
+        },
+        "en": {
+          "title": "Local launch / Delek Automotive launches Series 3, Generation 8, intermediate hybrid drive systems",
+          "summary": "An update about vehicles or Israel's car market. Details are available at the source."
+        },
+        "ar": {
+          "title": "الإطلاق المحلي / تطلق شركة Delek Automotive الجيل الثالث من أنظمة الدفع الهجين المتوسطة من الجيل الثامن",
+          "summary": "تحديث عن السيارات أو سوق المركبات في إسرائيل. التفاصيل في المصدر."
+        }
+      },
+      "title": "Локальный запуск / Delek Automotive запускает промежуточные гибридные приводные системы Series 3, Generation 8",
+      "summary": "Материал об автомобиле или автомобильном рынке Израиля. Подробности — на сайте издания.",
+      "translated": true,
+      "imageKind": "ai-generated",
+      "imageType": "licensedPhoto",
+      "imageCredit": {
+        "text": "Eric Friedebach · CC BY 2.0",
+        "url": "https://commons.wikimedia.org/wiki/File:1973_Ford_Mustang_Interior_Dashboard_(51838912069).jpg"
+      },
+      "subjectPhotoChecked": true
+    },
+    {
+      "id": "29eac7c61f2dbd8989e8",
+      "titleOriginal": "יש לכם רשיון B? תוכלו לנהוג בחשמליות, כולל מסחריות, במשקל של עד 4.25 טון",
+      "sourceLanguage": "he",
+      "date": "2026-11-09T20:59:00Z",
+      "url": "https://cars.walla.co.il/item/3875628",
+      "publisher": "Walla · Авто",
+      "category": "laws",
+      "art": "laws",
+      "image": "./assets/news/images/29eac7c61f2dbd8989e8.webp",
+      "official": false,
+      "translations": {
+        "he": {
+          "title": "יש לכם רשיון B? תוכלו לנהוג בחשמליות, כולל מסחריות, במשקל של עד 4.25 טון",
+          "summary": "דיווח על תקנות נהיגה. יש לאמת את מעמד החוק ותאריך התחולה במקור רשמי."
+        },
+        "ru": {
+          "title": "У вас есть лицензия B? Можно управлять трамваями, в том числе коммерческими, массой до 4,25 тонн.",
+          "summary": "Публикация о правилах для водителей. Статус закона и дату вступления в силу нужно сверять с официальными документами."
+        },
+        "en": {
+          "title": "Do you have a B license? You can drive trams, including commercial ones, weighing up to 4.25 tons",
+          "summary": "A report concerning driving rules. Verify legal status and effective dates with official documents."
+        },
+        "ar": {
+          "title": "هل لديك رخصة B؟ يمكنك قيادة الترام، بما في ذلك التجاري، الذي يصل وزنه إلى 4.25 طن",
+          "summary": "تقرير حول قواعد القيادة. تحقق من حالة القانون وتاريخ سريانه في المصادر الرسمية."
+        }
+      },
+      "title": "У вас есть лицензия B? Можно управлять трамваями, в том числе коммерческими, массой до 4,25 тонн.",
+      "summary": "Публикация о правилах для водителей. Статус закона и дату вступления в силу нужно сверять с официальными документами.",
+      "translated": true,
+      "imageKind": "ai-generated",
+      "imageType": "licensedPhoto",
+      "imageCredit": {
+        "text": "Wikimedia Commons · CC BY 4.0",
+        "url": "https://commons.wikimedia.org/wiki/File:Close_up_of_Carmen_Rupe_pedestrian_crossing_light.jpg"
+      }
+    },
+    {
+      "id": "d9c80b0889efe007e549",
+      "titleOriginal": "תאונה עם מעורבות משאית ורכב פרטי אירעה בכביש 2 סמוך למחלף חוף השרון לכוון צפון.",
+      "sourceLanguage": "he",
+      "date": "2026-11-17T11:23:18Z",
+      "url": "https://t.me/uh1221/27433",
+      "publisher": "Ихуд Ацала · Telegram",
+      "category": "accidents",
+      "art": "accidents",
+      "image": "./assets/news/images/d9c80b0889efe007e549.webp",
+      "official": false,
+      "translations": {
+        "he": {
+          "title": "תאונה עם מעורבות משאית ורכב פרטי אירעה בכביש 2 סמוך למחלף חוף השרון לכוון צפון.",
+          "summary": "דיווח על תאונת דרכים בישראל. פרטים ועדכונים בכתבת המקור."
+        },
+        "ru": {
+          "title": "Авария с участием грузовика и легкового автомобиля произошла на шоссе №2 возле развязки Хоф ха-Шарон в северном направлении.",
+          "summary": "Дорожное происшествие в Израиле. Обстоятельства и актуальные сведения — в материале источника."
+        },
+        "en": {
+          "title": "An accident involving a truck and a private car happened on Highway 2 near the Hoof Hasharon interchange heading north.",
+          "summary": "A reported road incident in Israel. Details and updates are in the original report."
+        },
+        "ar": {
+          "title": "وقع حادث بين شاحنة وسيارة خاصة على الطريق السريع رقم 2 بالقرب من مفرق حوف هشارون باتجاه الشمال.",
+          "summary": "تقرير عن حادث مروري في إسرائيل. التفاصيل والتحديثات في المصدر."
+        }
+      },
+      "title": "Авария с участием грузовика и легкового автомобиля произошла на шоссе №2 возле развязки Хоф ха-Шарон в северном направлении.",
+      "summary": "Дорожное происшествие в Израиле. Обстоятельства и актуальные сведения — в материале источника.",
+      "translated": true,
+      "imageType": "licensedPhoto",
+      "imageCredit": {
+        "text": "Jeff Attaway from Abuja, Nigeria · CC BY 2.0",
+        "url": "https://commons.wikimedia.org/wiki/File:Bad_one_-_auto_wreck_in_Dakar_Senegal,_2011.jpg"
+      }
+    },
+    {
+      "titleOriginal": "תיקון תקנות התעבורה: משרד התחבורה הודיע על הרחבת היתרי נהיגה ברישיונות B ו-C1",
+      "sourceTitle": "בשורה לנהגים ולענף הרכב",
+      "editorialHeadline": true,
+      "sourceLanguage": "he",
+      "date": "2026-11-09T10:00:00Z",
+      "url": "https://www.gov.il/he/pages/news-9-11",
+      "publisher": "Министерство транспорта Израиля",
+      "category": "laws",
+      "art": "laws",
+      "official": true,
+      "translations": {
+        "ru": {
+          "title": "Минтранс подписал изменения для прав B и C1: электрофургоны до 4,25 тонны",
+          "summary": "Согласно сообщению Минтранса от 9 ноября, водителям с правами B не менее двух лет предусмотрена возможность управлять некоторыми разрешёнными электрическими коммерческими автомобилями до 4,25 т при соблюдении условий. Подписание документа не означает автоматического вступления всех положений в силу."
+        },
+        "he": {
+          "title": "משרד התחבורה: השרה חתמה על תיקון תקנות התעבורה לרישיונות B ו-C1",
+          "summary": "בהודעה מ-9 בנובמבר נמסר על תיקון המאפשר בתנאים מסוימים לבעלי רישיון B ותיק לנהוג ברכב מסחרי חשמלי מאושר עד 4.25 טון. יש לבדוק את פרסום התקנות ואת מועד תחולתן לפני הסתמכות עליהן."
+        },
+        "en": {
+          "title": "Israel's transport ministry signed amendments affecting B and C1 driving licences",
+          "summary": "A 9 November ministry statement describes conditional B-licence access to approved zero-emission commercial vehicles up to 4.25 tonnes for drivers holding that licence for at least two years. Verify official publication and effective dates before relying on the changes."
+        },
+        "ar": {
+          "title": "وزارة النقل الإسرائيلية وقعت تعديلات لرخص القيادة B وC1",
+          "summary": "أعلنت الوزارة في 9 نوفمبر تعديلات قد تسمح بشروط محددة لحاملي رخصة B منذ سنتين على الأقل بقيادة مركبات تجارية كهربائية معتمدة حتى 4.25 طن. يجب التحقق من النشر الرسمي وتاريخ دخول التعديل حيز التنفيذ."
+        }
+      },
+      "id": "405054d69e7896d1263c",
+      "title": "Минтранс подписал изменения для прав B и C1: электрофургоны до 4,25 тонны",
+      "summary": "Согласно сообщению Минтранса от 9 ноября, водителям с правами B не менее двух лет предусмотрена возможность управлять некоторыми разрешёнными электрическими коммерческими автомобилями до 4,25 т при соблюдении условий. Подписание документа не означает автоматического вступления всех положений в силу.",
+      "translated": true,
+      "image": null,
+      "imageType": "none"
+    },
+    {
+      "id": "d142b35bf1342c908ea0",
+      "titleOriginal": "משומשות: הביקוש לבנזין בירידה, החשמליות וההיברידיות מזנקות",
+      "sourceLanguage": "he",
+      "date": "2026-11-09T14:12:00Z",
+      "url": "https://cars.walla.co.il/item/3875565",
+      "publisher": "Walla · Авто",
+      "category": "cars",
+      "art": "cars",
+      "image": "./assets/news/images/d142b35bf1342c908ea0.webp",
+      "official": false,
+      "translations": {
+        "he": {
+          "title": "משומשות: הביקוש לבנזין בירידה, החשמליות וההיברידיות מזנקות",
+          "summary": "כתבה על מכוניות או שוק הרכב בישראל. פרטים באתר המקור."
+        },
+        "ru": {
+          "title": "Б/у: спрос на бензин падает, электромобили и гибриды растут",
+          "summary": "Материал об автомобиле или автомобильном рынке Израиля. Подробности — на сайте издания."
+        },
+        "en": {
+          "title": "Used: demand for gasoline is decreasing, electric cars and hybrids are soaring",
+          "summary": "An update about vehicles or Israel's car market. Details are available at the source."
+        },
+        "ar": {
+          "title": "المستخدمة: الطلب على البنزين آخذ في التناقص، والسيارات الكهربائية والهجينة في ارتفاع",
+          "summary": "تحديث عن السيارات أو سوق المركبات في إسرائيل. التفاصيل في المصدر."
+        }
+      },
+      "title": "Б/у: спрос на бензин падает, электромобили и гибриды растут",
+      "summary": "Материал об автомобиле или автомобильном рынке Израиля. Подробности — на сайте издания.",
+      "translated": true,
+      "imageKind": "ai-generated",
       "imageType": "licensedPhoto",
       "imageCredit": {
         "text": "Eric Friedebach · CC BY 2.0",
@@ -1439,77 +1896,76 @@
       }
     },
     {
-      "id": "e4e9dc9a17eaceb834b7",
-      "titleOriginal": "משה קארס: מה עושים עם רכב ישן שכבר לא שווה תיקון",
+      "id": "7880d874e3362c62b8c8",
+      "titleOriginal": "אמבטיה לכפות הרגליים במכונית: קבלו את אליפות הגימיק המופרך ביותר בתעשיית הרכב",
       "sourceLanguage": "he",
-      "date": "2026-11-11T16:30:43Z",
-      "url": "https://wheel.co.il/%d7%9e%d7%a9%d7%94-%d7%a7%d7%90%d7%a8%d7%a1-%d7%9e%d7%94-%d7%a2%d7%95%d7%a9%d7%99%d7%9d-%d7%a2%d7%9d-%d7%a8%d7%9b%d7%91-%d7%99%d7%a9%d7%9f-%d7%a9%d7%9b%d7%91%d7%a8-%d7%9c%d7%90-%d7%a9%d7%95%d7%95/",
-      "publisher": "Wheel · Автоновости",
+      "date": "2026-11-05T09:10:32Z",
+      "url": "https://thecar.co.il/%d7%90%d7%9e%d7%91%d7%98%d7%99%d7%94-%d7%9c%d7%a8%d7%92%d7%9c%d7%99%d7%99%d7%9d-%d7%90%d7%9c%d7%99%d7%a4%d7%95%d7%aa-%d7%92%d7%99%d7%9e%d7%99%d7%a7%d7%99%d7%9d-%d7%91%d7%a8%d7%9b%d7%91/",
+      "publisher": "TheCar · Автоновости",
       "category": "cars",
       "art": "cars",
-      "image": "./assets/news/images/e4e9dc9a17eaceb834b7.webp",
+      "image": "./assets/news/images/7880d874e3362c62b8c8.webp",
       "official": false,
       "translations": {
         "he": {
-          "title": "משה קארס: מה עושים עם רכב ישן שכבר לא שווה תיקון",
+          "title": "אמבטיה לכפות הרגליים במכונית: קבלו את אליפות הגימיק המופרך ביותר בתעשיית הרכב",
           "summary": "כתבה על מכוניות או שוק הרכב בישראל. פרטים באתר המקור."
         },
         "ru": {
-          "title": "Моше Карс: Что вы делаете со старой машиной, которую уже не стоит ремонтировать?",
+          "title": "Ванночка для ног в машине: получи чемпионат, самый абсурдный трюк в автоиндустрии",
           "summary": "Материал об автомобиле или автомобильном рынке Израиля. Подробности — на сайте издания."
         },
         "en": {
-          "title": "Moshe Kars: What do you do with an old car that is no longer worth repairing?",
+          "title": "Foot bath in the car: get the championship of the most absurd gimmick in the car industry",
           "summary": "An update about vehicles or Israel's car market. Details are available at the source."
         },
         "ar": {
-          "title": "موشيه كارس: ماذا تفعل بسيارة قديمة لم تعد تستحق الإصلاح؟",
+          "title": "حمام القدم في السيارة: احصل على بطولة أكثر وسيلة للتحايل سخافة في صناعة السيارات",
           "summary": "تحديث عن السيارات أو سوق المركبات في إسرائيل. التفاصيل في المصدر."
         }
       },
-      "title": "Моше Карс: Что вы делаете со старой машиной, которую уже не стоит ремонтировать?",
+      "title": "Ванночка для ног в машине: получи чемпионат, самый абсурдный трюк в автоиндустрии",
       "summary": "Материал об автомобиле или автомобильном рынке Израиля. Подробности — на сайте издания.",
       "translated": true,
       "imageType": "licensedPhoto",
       "imageCredit": {
-        "text": "Ivan Radic · CC BY 2.0",
-        "url": "https://commons.wikimedia.org/wiki/File:Close-up_of_an_electric_car_charging._Traffic_lights_in_a_blurry_background.jpg"
+        "text": "Eric Friedebach · CC BY 2.0",
+        "url": "https://commons.wikimedia.org/wiki/File:1973_Ford_Mustang_Interior_Dashboard_(51838912069).jpg"
       },
       "subjectPhotoChecked": true
     },
     {
-      "id": "ba19d32a9f258dc849a4",
-      "titleOriginal": "השקה מקומית / דלק רכב משיקה סדרה 3, דור 8, מערכות הנעה הייבריד ביניים",
+      "id": "86fdba46bbbaa58e49ef",
+      "titleOriginal": "ללנד רובר נמאס שהסינים מעתיקים אותה: תובעת את BYD",
       "sourceLanguage": "he",
-      "date": "2026-11-14T10:10:23Z",
-      "url": "https://autonews.co.il/%d7%94%d7%a9%d7%a7%d7%94-%d7%9e%d7%a7%d7%95%d7%9e%d7%99%d7%aa-%d7%93%d7%9c%d7%a7-%d7%a8%d7%9b%d7%91-%d7%9e%d7%a9%d7%99%d7%a7%d7%94-%d7%a1%d7%93%d7%a8%d7%94-3-%d7%93%d7%95%d7%a8-8-%d7%9e%d7%a2/",
-      "publisher": "Autonews Israel",
+      "date": "2026-11-09T10:35:00Z",
+      "url": "https://cars.walla.co.il/item/3875526",
+      "publisher": "Walla",
       "category": "cars",
       "art": "cars",
-      "image": "./assets/news/images/ba19d32a9f258dc849a4.webp",
+      "image": "./assets/news/images/86fdba46bbbaa58e49ef.webp",
       "official": false,
       "translations": {
         "he": {
-          "title": "השקה מקומית / דלק רכב משיקה סדרה 3, דור 8, מערכות הנעה הייבריד ביניים",
+          "title": "ללנד רובר נמאס שהסינים מעתיקים אותה: תובעת את BYD",
           "summary": "כתבה על מכוניות או שוק הרכב בישראל. פרטים באתר המקור."
         },
         "ru": {
-          "title": "Локальный запуск / Delek Automotive запускает промежуточные гибридные приводные системы Series 3, Generation 8",
+          "title": "Land Rover устал от того, что его копируют китайцы: подает в суд на BYD",
           "summary": "Материал об автомобиле или автомобильном рынке Израиля. Подробности — на сайте издания."
         },
         "en": {
-          "title": "Local launch / Delek Automotive launches Series 3, Generation 8, intermediate hybrid drive systems",
+          "title": "Land Rover is tired of the Chinese copying it: sues BYD",
           "summary": "An update about vehicles or Israel's car market. Details are available at the source."
         },
         "ar": {
-          "title": "الإطلاق المحلي / تطلق شركة Delek Automotive الجيل الثالث من أنظمة الدفع الهجين المتوسطة من الجيل الثامن",
+          "title": "لقد سئمت لاند روفر من تقليد الصينيين لها: رفعت دعوى قضائية ضد شركة BYD",
           "summary": "تحديث عن السيارات أو سوق المركبات في إسرائيل. التفاصيل في المصدر."
         }
       },
-      "title": "Локальный запуск / Delek Automotive запускает промежуточные гибридные приводные системы Series 3, Generation 8",
+      "title": "Land Rover устал от того, что его копируют китайцы: подает в суд на BYD",
       "summary": "Материал об автомобиле или автомобильном рынке Израиля. Подробности — на сайте издания.",
       "translated": true,
-      "imageKind": "ai-generated",
       "imageType": "licensedPhoto",
       "imageCredit": {
         "text": "Eric Friedebach · CC BY 2.0",
@@ -1556,83 +2012,83 @@
       }
     },
     {
-      "id": "29eac7c61f2dbd8989e8",
-      "titleOriginal": "יש לכם רשיון B? תוכלו לנהוג בחשמליות, כולל מסחריות, במשקל של עד 4.25 טון",
-      "sourceLanguage": "he",
-      "date": "2026-11-09T20:59:00Z",
-      "url": "https://cars.walla.co.il/item/3875628",
-      "publisher": "Walla · Авто",
-      "category": "laws",
-      "art": "laws",
-      "image": "./assets/news/images/29eac7c61f2dbd8989e8.webp",
-      "official": false,
-      "translations": {
-        "he": {
-          "title": "יש לכם רשיון B? תוכלו לנהוג בחשמליות, כולל מסחריות, במשקל של עד 4.25 טון",
-          "summary": "דיווח על תקנות נהיגה. יש לאמת את מעמד החוק ותאריך התחולה במקור רשמי."
-        },
-        "ru": {
-          "title": "У вас есть лицензия B? Можно управлять трамваями, в том числе коммерческими, массой до 4,25 тонн.",
-          "summary": "Публикация о правилах для водителей. Статус закона и дату вступления в силу нужно сверять с официальными документами."
-        },
-        "en": {
-          "title": "Do you have a B license? You can drive trams, including commercial ones, weighing up to 4.25 tons",
-          "summary": "A report concerning driving rules. Verify legal status and effective dates with official documents."
-        },
-        "ar": {
-          "title": "هل لديك رخصة B؟ يمكنك قيادة الترام، بما في ذلك التجاري، الذي يصل وزنه إلى 4.25 طن",
-          "summary": "تقرير حول قواعد القيادة. تحقق من حالة القانون وتاريخ سريانه في المصادر الرسمية."
-        }
-      },
-      "title": "У вас есть лицензия B? Можно управлять трамваями, в том числе коммерческими, массой до 4,25 тонн.",
-      "summary": "Публикация о правилах для водителей. Статус закона и дату вступления в силу нужно сверять с официальными документами.",
-      "translated": true,
-      "imageKind": "ai-generated",
-      "imageType": "licensedPhoto",
-      "imageCredit": {
-        "text": "Wikimedia Commons · CC BY 4.0",
-        "url": "https://commons.wikimedia.org/wiki/File:Close_up_of_Carmen_Rupe_pedestrian_crossing_light.jpg"
-      }
-    },
-    {
-      "titleOriginal": "תיקון תקנות התעבורה: משרד התחבורה הודיע על הרחבת היתרי נהיגה ברישיונות B ו-C1",
-      "sourceTitle": "בשורה לנהגים ולענף הרכב",
+      "titleOriginal": "בדיקה חינמית לרכב, אופנוע וקטנוע לקראת החורף: מבצע הרלב״ד בנובמבר",
+      "sourceTitle": "בדיקה חינמית לרכב, אופנוע וקטנוע לקראת החורף: בחרו את המוסך הקרוב אליכם",
       "editorialHeadline": true,
       "sourceLanguage": "he",
-      "date": "2026-11-09T10:00:00Z",
-      "url": "https://www.gov.il/he/pages/news-9-11",
-      "publisher": "Министерство транспорта Израиля",
-      "category": "laws",
-      "art": "laws",
+      "date": "2026-11-03T09:00:00Z",
+      "url": "https://www.gov.il/he/pages/202611_winter_check",
+      "publisher": "Национальное управление безопасности дорожного движения",
+      "category": "cars",
+      "art": "cars",
       "official": true,
       "translations": {
         "ru": {
-          "title": "Минтранс подписал изменения для прав B и C1: электрофургоны до 4,25 тонны",
-          "summary": "Согласно сообщению Минтранса от 9 ноября, водителям с правами B не менее двух лет предусмотрена возможность управлять некоторыми разрешёнными электрическими коммерческими автомобилями до 4,25 т при соблюдении условий. Подписание документа не означает автоматического вступления всех положений в силу."
+          "title": "В Израиле проводят бесплатную проверку автомобилей и мотоциклов перед зимой",
+          "summary": "Национальное управление безопасности дорожного движения сообщает о бесплатных проверках тормозов, шин, света, дворников и рулевого управления в участвующих сервисах. Акция запланирована с 1 ноября 2026 до 1 января 2027 года; запись и наличие услуги необходимо уточнять у сервиса."
         },
         "he": {
-          "title": "משרד התחבורה: השרה חתמה על תיקון תקנות התעבורה לרישיונות B ו-C1",
-          "summary": "בהודעה מ-9 בנובמבר נמסר על תיקון המאפשר בתנאים מסוימים לבעלי רישיון B ותיק לנהוג ברכב מסחרי חשמלי מאושר עד 4.25 טון. יש לבדוק את פרסום התקנות ואת מועד תחולתן לפני הסתמכות עליהן."
+          "title": "בדיקת חורף חינמית לרכב, לאופנוע ולקטנוע במוסכים המשתתפים",
+          "summary": "הרלב״ד ואיגוד המוסכים מציעים בדיקה חינמית של בלמים, צמיגים, אורות, מגבים והיגוי במוסכים המשתתפים. המבצע מיועד ל-1 בנובמבר 2026 עד 1 בינואר 2027, ויש לתאם ולבדוק זמינות מראש."
         },
         "en": {
-          "title": "Israel's transport ministry signed amendments affecting B and C1 driving licences",
-          "summary": "A 9 November ministry statement describes conditional B-licence access to approved zero-emission commercial vehicles up to 4.25 tonnes for drivers holding that licence for at least two years. Verify official publication and effective dates before relying on the changes."
+          "title": "Free winter vehicle and motorcycle safety checks offered in Israel",
+          "summary": "Israel's Road Safety Authority and the garages association offer free checks of brakes, tyres, lights, wipers and steering at participating garages. The campaign runs from 1 November 2026 to 1 January 2027; confirm availability before visiting."
         },
         "ar": {
-          "title": "وزارة النقل الإسرائيلية وقعت تعديلات لرخص القيادة B وC1",
-          "summary": "أعلنت الوزارة في 9 نوفمبر تعديلات قد تسمح بشروط محددة لحاملي رخصة B منذ سنتين على الأقل بقيادة مركبات تجارية كهربائية معتمدة حتى 4.25 طن. يجب التحقق من النشر الرسمي وتاريخ دخول التعديل حيز التنفيذ."
+          "title": "فحوصات شتوية مجانية للسيارات والدراجات النارية في إسرائيل",
+          "summary": "تعلن السلطة الوطنية لسلامة الطرق ونقابة الورش عن فحوصات مجانية للمكابح والإطارات والأضواء والمساحات والتوجيه في الورش المشاركة. تمتد الحملة من 1 نوفمبر 2026 حتى 1 يناير 2027، ويجب التأكد من المواعيد والتوفر مسبقًا."
         }
       },
-      "id": "405054d69e7896d1263c",
-      "title": "Минтранс подписал изменения для прав B и C1: электрофургоны до 4,25 тонны",
-      "summary": "Согласно сообщению Минтранса от 9 ноября, водителям с правами B не менее двух лет предусмотрена возможность управлять некоторыми разрешёнными электрическими коммерческими автомобилями до 4,25 т при соблюдении условий. Подписание документа не означает автоматического вступления всех положений в силу.",
+      "id": "043c07748b86319ae3ba",
+      "title": "В Израиле проводят бесплатную проверку автомобилей и мотоциклов перед зимой",
+      "summary": "Национальное управление безопасности дорожного движения сообщает о бесплатных проверках тормозов, шин, света, дворников и рулевого управления в участвующих сервисах. Акция запланирована с 1 ноября 2026 до 1 января 2027 года; запись и наличие услуги необходимо уточнять у сервиса.",
       "translated": true,
-      "image": "./assets/news/images/405054d69e7896d1263c.webp",
+      "image": "./assets/news/images/043c07748b86319ae3ba.webp",
       "imageType": "licensedPhoto",
       "imageCredit": {
-        "text": "Wikimedia Commons · CC BY 4.0",
-        "url": "https://commons.wikimedia.org/wiki/File:Close_up_of_Carmen_Rupe_pedestrian_crossing_light.jpg"
+        "text": "Ivan Radic · CC BY 2.0",
+        "url": "https://commons.wikimedia.org/wiki/File:Close-up_of_an_electric_car_charging._Traffic_lights_in_a_blurry_background.jpg"
       }
+    },
+    {
+      "id": "27c8bc4518bd9c38e651",
+      "titleOriginal": "BYD חושפת \"רולס רויס סינית\" ושוברת שיא של 500 קמ\"ש",
+      "sourceLanguage": "he",
+      "date": "2026-11-08T20:49:00Z",
+      "url": "https://cars.walla.co.il/item/3875476",
+      "publisher": "Walla",
+      "category": "cars",
+      "art": "cars",
+      "image": "./assets/news/images/27c8bc4518bd9c38e651.webp",
+      "official": false,
+      "translations": {
+        "he": {
+          "title": "BYD חושפת \"רולס רויס סינית\" ושוברת שיא של 500 קמ\"ש",
+          "summary": "כתבה על מכוניות או שוק הרכב בישראל. פרטים באתר המקור."
+        },
+        "ru": {
+          "title": "BYD представил «китайский Rolls-Royce» и побил рекорд скорости в 500 км/ч",
+          "summary": "Материал об автомобиле или автомобильном рынке Израиля. Подробности — на сайте издания."
+        },
+        "en": {
+          "title": "BYD unveils a \"Chinese Rolls-Royce\" and breaks a record of 500 km/h",
+          "summary": "An update about vehicles or Israel's car market. Details are available at the source."
+        },
+        "ar": {
+          "title": "BYD تكشف عن \"رولز رويس الصينية\" وتحطم الرقم القياسي لسرعة 500 كلم/ساعة",
+          "summary": "تحديث عن السيارات أو سوق المركبات في إسرائيل. التفاصيل في المصدر."
+        }
+      },
+      "title": "BYD представил «китайский Rolls-Royce» и побил рекорд скорости в 500 км/ч",
+      "summary": "Материал об автомобиле или автомобильном рынке Израиля. Подробности — на сайте издания.",
+      "translated": true,
+      "imageType": "licensedPhoto",
+      "imageCredit": {
+        "text": "Ivan Radic · CC BY 2.0",
+        "url": "https://commons.wikimedia.org/wiki/File:Close-up_of_an_electric_car_charging._Traffic_lights_in_a_blurry_background.jpg"
+      },
+      "subjectPhotoChecked": true
     },
     {
       "id": "057ca10ba17a49970e92",
@@ -1673,77 +2129,74 @@
       }
     },
     {
-      "id": "d142b35bf1342c908ea0",
-      "titleOriginal": "משומשות: הביקוש לבנזין בירידה, החשמליות וההיברידיות מזנקות",
+      "titleOriginal": "מצלמות תנועה חדשות: המשטרה מתכננת לפרוס כ-200 מצלמות ולהתחיל פיילוט של שליחת דוחות ב-SMS",
+      "sourceTitle": "המשטרה תפרוס כ-200 מצלמות תנועה חדשות: דו\"חות יישלחו לבעלי הרכב במסרונים",
+      "editorialHeadline": true,
       "sourceLanguage": "he",
-      "date": "2026-11-09T14:12:00Z",
-      "url": "https://cars.walla.co.il/item/3875565",
+      "date": "2026-11-02T11:01:00Z",
+      "url": "https://www.davar1.co.il/705215/",
+      "publisher": "Davar",
+      "category": "speed",
+      "art": "speed",
+      "official": false,
+      "translations": {
+        "ru": {
+          "title": "Полиция планирует установить около 200 дорожных камер; штрафы начнут отправлять по SMS",
+          "summary": "Davar сообщает о планах полиции развернуть примерно 200 новых камер. На 16 ноября был намечен пилот отправки уведомлений о штрафах владельцам машин по SMS; начало работы и масштабы внедрения требуют отдельного подтверждения."
+        },
+        "he": {
+          "title": "המשטרה מתכננת לפרוס כ-200 מצלמות תנועה; פיילוט הודעות SMS על דוחות",
+          "summary": "לפי דבר, אגף התנועה הודיע על תוכנית לפריסת כ-200 מצלמות. פיילוט משלוח הודעות SMS לבעלי רכב על דוחות תוכנן ל-16 בנובמבר; תחילת הפעילות וההיקף בפועל מחייבים אימות נוסף."
+        },
+        "en": {
+          "title": "Police plan around 200 new road cameras and an SMS traffic-fine pilot",
+          "summary": "Davar reported plans for approximately 200 traffic cameras. A pilot to notify vehicle owners of fines by SMS was scheduled for 16 November; whether and how widely it has started still needs confirmation."
+        },
+        "ar": {
+          "title": "الشرطة تخطط لنشر نحو 200 كاميرا مرورية وتجربة رسائل SMS للمخالفات",
+          "summary": "بحسب دافار، أعلنت شرطة المرور خطة لنشر نحو 200 كاميرا جديدة. كان من المقرر بدء تجربة إرسال إشعارات المخالفات إلى أصحاب السيارات في 16 نوفمبر، لكن بدءها الفعلي ونطاقها يحتاجان إلى تأكيد."
+        }
+      },
+      "id": "494a55a00ec511c28008",
+      "title": "Полиция планирует установить около 200 дорожных камер; штрафы начнут отправлять по SMS",
+      "summary": "Davar сообщает о планах полиции развернуть примерно 200 новых камер. На 16 ноября был намечен пилот отправки уведомлений о штрафах владельцам машин по SMS; начало работы и масштабы внедрения требуют отдельного подтверждения.",
+      "translated": true,
+      "image": null,
+      "imageType": "none"
+    },
+    {
+      "id": "e49311e8b46bc9e7c4ca",
+      "titleOriginal": "למה באמת ירדו מחירי ביטוח הרכב בישראל, ומה הקשר להודו",
+      "sourceLanguage": "he",
+      "date": "2026-11-06T15:03:00Z",
+      "url": "https://cars.walla.co.il/item/3875222",
       "publisher": "Walla · Авто",
       "category": "cars",
       "art": "cars",
-      "image": "./assets/news/images/d142b35bf1342c908ea0.webp",
+      "image": "./assets/news/images/e49311e8b46bc9e7c4ca.webp",
       "official": false,
       "translations": {
         "he": {
-          "title": "משומשות: הביקוש לבנזין בירידה, החשמליות וההיברידיות מזנקות",
+          "title": "למה באמת ירדו מחירי ביטוח הרכב בישראל, ומה הקשר להודו",
           "summary": "כתבה על מכוניות או שוק הרכב בישראל. פרטים באתר המקור."
         },
         "ru": {
-          "title": "Б/у: спрос на бензин падает, электромобили и гибриды растут",
+          "title": "Почему в Израиле действительно снизились цены на автострахование и какое это имеет отношение к Индии?",
           "summary": "Материал об автомобиле или автомобильном рынке Израиля. Подробности — на сайте издания."
         },
         "en": {
-          "title": "Used: demand for gasoline is decreasing, electric cars and hybrids are soaring",
+          "title": "Why did car insurance prices really go down in Israel, and what does it have to do with India?",
           "summary": "An update about vehicles or Israel's car market. Details are available at the source."
         },
         "ar": {
-          "title": "المستخدمة: الطلب على البنزين آخذ في التناقص، والسيارات الكهربائية والهجينة في ارتفاع",
+          "title": "لماذا انخفضت أسعار التأمين على السيارات في إسرائيل فعلا، وما علاقتها بالهند؟",
           "summary": "تحديث عن السيارات أو سوق المركبات في إسرائيل. التفاصيل في المصدر."
         }
       },
-      "title": "Б/у: спрос на бензин падает, электромобили и гибриды растут",
+      "title": "Почему в Израиле действительно снизились цены на автострахование и какое это имеет отношение к Индии?",
       "summary": "Материал об автомобиле или автомобильном рынке Израиля. Подробности — на сайте издания.",
       "translated": true,
       "imageKind": "ai-generated",
-      "imageType": "licensedPhoto",
-      "imageCredit": {
-        "text": "Eric Friedebach · CC BY 2.0",
-        "url": "https://commons.wikimedia.org/wiki/File:1973_Ford_Mustang_Interior_Dashboard_(51838912069).jpg"
-      },
-      "subjectPhotoChecked": true
-    },
-    {
-      "id": "7880d874e3362c62b8c8",
-      "titleOriginal": "אמבטיה לכפות הרגליים במכונית: קבלו את אליפות הגימיק המופרך ביותר בתעשיית הרכב",
-      "sourceLanguage": "he",
-      "date": "2026-11-05T09:10:32Z",
-      "url": "https://thecar.co.il/%d7%90%d7%9e%d7%91%d7%98%d7%99%d7%94-%d7%9c%d7%a8%d7%92%d7%9c%d7%99%d7%99%d7%9d-%d7%90%d7%9c%d7%99%d7%a4%d7%95%d7%aa-%d7%92%d7%99%d7%9e%d7%99%d7%a7%d7%99%d7%9d-%d7%91%d7%a8%d7%9b%d7%91/",
-      "publisher": "TheCar · Автоновости",
-      "category": "cars",
-      "art": "cars",
-      "image": "./assets/news/images/7880d874e3362c62b8c8.webp",
-      "official": false,
-      "translations": {
-        "he": {
-          "title": "אמבטיה לכפות הרגליים במכונית: קבלו את אליפות הגימיק המופרך ביותר בתעשיית הרכב",
-          "summary": "כתבה על מכוניות או שוק הרכב בישראל. פרטים באתר המקור."
-        },
-        "ru": {
-          "title": "Ванночка для ног в машине: получи чемпионат, самый абсурдный трюк в автоиндустрии",
-          "summary": "Материал об автомобиле или автомобильном рынке Израиля. Подробности — на сайте издания."
-        },
-        "en": {
-          "title": "Foot bath in the car: get the championship of the most absurd gimmick in the car industry",
-          "summary": "An update about vehicles or Israel's car market. Details are available at the source."
-        },
-        "ar": {
-          "title": "حمام القدم في السيارة: احصل على بطولة أكثر وسيلة للتحايل سخافة في صناعة السيارات",
-          "summary": "تحديث عن السيارات أو سوق المركبات في إسرائيل. التفاصيل في المصدر."
-        }
-      },
-      "title": "Ванночка для ног в машине: получи чемпионат, самый абсурдный трюк в автоиндустрии",
-      "summary": "Материал об автомобиле или автомобильном рынке Израиля. Подробности — на сайте издания.",
-      "translated": true,
       "imageType": "licensedPhoto",
       "imageCredit": {
         "text": "Eric Friedebach · CC BY 2.0",
@@ -1790,281 +2243,6 @@
       }
     },
     {
-      "id": "86fdba46bbbaa58e49ef",
-      "titleOriginal": "ללנד רובר נמאס שהסינים מעתיקים אותה: תובעת את BYD",
-      "sourceLanguage": "he",
-      "date": "2026-11-09T10:35:00Z",
-      "url": "https://cars.walla.co.il/item/3875526",
-      "publisher": "Walla",
-      "category": "cars",
-      "art": "cars",
-      "image": "./assets/news/images/86fdba46bbbaa58e49ef.webp",
-      "official": false,
-      "translations": {
-        "he": {
-          "title": "ללנד רובר נמאס שהסינים מעתיקים אותה: תובעת את BYD",
-          "summary": "כתבה על מכוניות או שוק הרכב בישראל. פרטים באתר המקור."
-        },
-        "ru": {
-          "title": "Land Rover устал от того, что его копируют китайцы: подает в суд на BYD",
-          "summary": "Материал об автомобиле или автомобильном рынке Израиля. Подробности — на сайте издания."
-        },
-        "en": {
-          "title": "Land Rover is tired of the Chinese copying it: sues BYD",
-          "summary": "An update about vehicles or Israel's car market. Details are available at the source."
-        },
-        "ar": {
-          "title": "لقد سئمت لاند روفر من تقليد الصينيين لها: رفعت دعوى قضائية ضد شركة BYD",
-          "summary": "تحديث عن السيارات أو سوق المركبات في إسرائيل. التفاصيل في المصدر."
-        }
-      },
-      "title": "Land Rover устал от того, что его копируют китайцы: подает в суд на BYD",
-      "summary": "Материал об автомобиле или автомобильном рынке Израиля. Подробности — на сайте издания.",
-      "translated": true,
-      "imageType": "licensedPhoto",
-      "imageCredit": {
-        "text": "Eric Friedebach · CC BY 2.0",
-        "url": "https://commons.wikimedia.org/wiki/File:1973_Ford_Mustang_Interior_Dashboard_(51838912069).jpg"
-      },
-      "subjectPhotoChecked": true
-    },
-    {
-      "titleOriginal": "בדיקה חינמית לרכב, אופנוע וקטנוע לקראת החורף: מבצע הרלב״ד בנובמבר",
-      "sourceTitle": "בדיקה חינמית לרכב, אופנוע וקטנוע לקראת החורף: בחרו את המוסך הקרוב אליכם",
-      "editorialHeadline": true,
-      "sourceLanguage": "he",
-      "date": "2026-11-03T09:00:00Z",
-      "url": "https://www.gov.il/he/pages/202611_winter_check",
-      "publisher": "Национальное управление безопасности дорожного движения",
-      "category": "cars",
-      "art": "cars",
-      "official": true,
-      "translations": {
-        "ru": {
-          "title": "В Израиле проводят бесплатную проверку автомобилей и мотоциклов перед зимой",
-          "summary": "Национальное управление безопасности дорожного движения сообщает о бесплатных проверках тормозов, шин, света, дворников и рулевого управления в участвующих сервисах. Акция запланирована с 1 ноября 2026 до 1 января 2027 года; запись и наличие услуги необходимо уточнять у сервиса."
-        },
-        "he": {
-          "title": "בדיקת חורף חינמית לרכב, לאופנוע ולקטנוע במוסכים המשתתפים",
-          "summary": "הרלב״ד ואיגוד המוסכים מציעים בדיקה חינמית של בלמים, צמיגים, אורות, מגבים והיגוי במוסכים המשתתפים. המבצע מיועד ל-1 בנובמבר 2026 עד 1 בינואר 2027, ויש לתאם ולבדוק זמינות מראש."
-        },
-        "en": {
-          "title": "Free winter vehicle and motorcycle safety checks offered in Israel",
-          "summary": "Israel's Road Safety Authority and the garages association offer free checks of brakes, tyres, lights, wipers and steering at participating garages. The campaign runs from 1 November 2026 to 1 January 2027; confirm availability before visiting."
-        },
-        "ar": {
-          "title": "فحوصات شتوية مجانية للسيارات والدراجات النارية في إسرائيل",
-          "summary": "تعلن السلطة الوطنية لسلامة الطرق ونقابة الورش عن فحوصات مجانية للمكابح والإطارات والأضواء والمساحات والتوجيه في الورش المشاركة. تمتد الحملة من 1 نوفمبر 2026 حتى 1 يناير 2027، ويجب التأكد من المواعيد والتوفر مسبقًا."
-        }
-      },
-      "id": "043c07748b86319ae3ba",
-      "title": "В Израиле проводят бесплатную проверку автомобилей и мотоциклов перед зимой",
-      "summary": "Национальное управление безопасности дорожного движения сообщает о бесплатных проверках тормозов, шин, света, дворников и рулевого управления в участвующих сервисах. Акция запланирована с 1 ноября 2026 до 1 января 2027 года; запись и наличие услуги необходимо уточнять у сервиса.",
-      "translated": true,
-      "image": "./assets/news/images/043c07748b86319ae3ba.webp",
-      "imageType": "licensedPhoto",
-      "imageCredit": {
-        "text": "Ivan Radic · CC BY 2.0",
-        "url": "https://commons.wikimedia.org/wiki/File:Close-up_of_an_electric_car_charging._Traffic_lights_in_a_blurry_background.jpg"
-      }
-    },
-    {
-      "id": "88780d995d87f46db13a",
-      "titleOriginal": "ערד: נהג רכב נפצע בינוני בתאונה עם מעורבות שני כלי רכב",
-      "sourceLanguage": "he",
-      "date": "2026-11-16T16:11:03Z",
-      "url": "https://t.me/uh1221/27414",
-      "publisher": "Ихуд Ацала · Telegram",
-      "category": "accidents",
-      "art": "accidents",
-      "image": "./assets/news/images/88780d995d87f46db13a.webp",
-      "official": false,
-      "translations": {
-        "he": {
-          "title": "ערד: נהג רכב נפצע בינוני בתאונה עם מעורבות שני כלי רכב",
-          "summary": "דיווח על תאונת דרכים בישראל. פרטים ועדכונים בכתבת המקור."
-        },
-        "ru": {
-          "title": "Арад: В результате ДТП с участием двух транспортных средств водитель легкового автомобиля получил травмы средней степени тяжести",
-          "summary": "Дорожное происшествие в Израиле. Обстоятельства и актуальные сведения — в материале источника."
-        },
-        "en": {
-          "title": "Arad: A car driver was moderately injured in an accident involving two vehicles",
-          "summary": "A reported road incident in Israel. Details and updates are in the original report."
-        },
-        "ar": {
-          "title": "عراد: أصيب سائق سيارة بجروح متوسطة في حادث تصادم بين مركبتين",
-          "summary": "تقرير عن حادث مروري في إسرائيل. التفاصيل والتحديثات في المصدر."
-        }
-      },
-      "title": "Арад: В результате ДТП с участием двух транспортных средств водитель легкового автомобиля получил травмы средней степени тяжести",
-      "summary": "Дорожное происшествие в Израиле. Обстоятельства и актуальные сведения — в материале источника.",
-      "translated": true,
-      "imageType": "licensedPhoto",
-      "imageCredit": {
-        "text": "Jeff Attaway from Abuja, Nigeria · CC BY 2.0",
-        "url": "https://commons.wikimedia.org/wiki/File:Bad_one_-_auto_wreck_in_Dakar_Senegal,_2011.jpg"
-      }
-    },
-    {
-      "id": "27c8bc4518bd9c38e651",
-      "titleOriginal": "BYD חושפת \"רולס רויס סינית\" ושוברת שיא של 500 קמ\"ש",
-      "sourceLanguage": "he",
-      "date": "2026-11-08T20:49:00Z",
-      "url": "https://cars.walla.co.il/item/3875476",
-      "publisher": "Walla",
-      "category": "cars",
-      "art": "cars",
-      "image": "./assets/news/images/27c8bc4518bd9c38e651.webp",
-      "official": false,
-      "translations": {
-        "he": {
-          "title": "BYD חושפת \"רולס רויס סינית\" ושוברת שיא של 500 קמ\"ש",
-          "summary": "כתבה על מכוניות או שוק הרכב בישראל. פרטים באתר המקור."
-        },
-        "ru": {
-          "title": "BYD представил «китайский Rolls-Royce» и побил рекорд скорости в 500 км/ч",
-          "summary": "Материал об автомобиле или автомобильном рынке Израиля. Подробности — на сайте издания."
-        },
-        "en": {
-          "title": "BYD unveils a \"Chinese Rolls-Royce\" and breaks a record of 500 km/h",
-          "summary": "An update about vehicles or Israel's car market. Details are available at the source."
-        },
-        "ar": {
-          "title": "BYD تكشف عن \"رولز رويس الصينية\" وتحطم الرقم القياسي لسرعة 500 كلم/ساعة",
-          "summary": "تحديث عن السيارات أو سوق المركبات في إسرائيل. التفاصيل في المصدر."
-        }
-      },
-      "title": "BYD представил «китайский Rolls-Royce» и побил рекорд скорости в 500 км/ч",
-      "summary": "Материал об автомобиле или автомобильном рынке Израиля. Подробности — на сайте издания.",
-      "translated": true,
-      "imageType": "licensedPhoto",
-      "imageCredit": {
-        "text": "Ivan Radic · CC BY 2.0",
-        "url": "https://commons.wikimedia.org/wiki/File:Close-up_of_an_electric_car_charging._Traffic_lights_in_a_blurry_background.jpg"
-      },
-      "subjectPhotoChecked": true
-    },
-    {
-      "titleOriginal": "מצלמות תנועה חדשות: המשטרה מתכננת לפרוס כ-200 מצלמות ולהתחיל פיילוט של שליחת דוחות ב-SMS",
-      "sourceTitle": "המשטרה תפרוס כ-200 מצלמות תנועה חדשות: דו\"חות יישלחו לבעלי הרכב במסרונים",
-      "editorialHeadline": true,
-      "sourceLanguage": "he",
-      "date": "2026-11-02T11:01:00Z",
-      "url": "https://www.davar1.co.il/705215/",
-      "publisher": "Davar",
-      "category": "speed",
-      "art": "speed",
-      "official": false,
-      "translations": {
-        "ru": {
-          "title": "Полиция планирует установить около 200 дорожных камер; штрафы начнут отправлять по SMS",
-          "summary": "Davar сообщает о планах полиции развернуть примерно 200 новых камер. На 16 ноября был намечен пилот отправки уведомлений о штрафах владельцам машин по SMS; начало работы и масштабы внедрения требуют отдельного подтверждения."
-        },
-        "he": {
-          "title": "המשטרה מתכננת לפרוס כ-200 מצלמות תנועה; פיילוט הודעות SMS על דוחות",
-          "summary": "לפי דבר, אגף התנועה הודיע על תוכנית לפריסת כ-200 מצלמות. פיילוט משלוח הודעות SMS לבעלי רכב על דוחות תוכנן ל-16 בנובמבר; תחילת הפעילות וההיקף בפועל מחייבים אימות נוסף."
-        },
-        "en": {
-          "title": "Police plan around 200 new road cameras and an SMS traffic-fine pilot",
-          "summary": "Davar reported plans for approximately 200 traffic cameras. A pilot to notify vehicle owners of fines by SMS was scheduled for 16 November; whether and how widely it has started still needs confirmation."
-        },
-        "ar": {
-          "title": "الشرطة تخطط لنشر نحو 200 كاميرا مرورية وتجربة رسائل SMS للمخالفات",
-          "summary": "بحسب دافار، أعلنت شرطة المرور خطة لنشر نحو 200 كاميرا جديدة. كان من المقرر بدء تجربة إرسال إشعارات المخالفات إلى أصحاب السيارات في 16 نوفمبر، لكن بدءها الفعلي ونطاقها يحتاجان إلى تأكيد."
-        }
-      },
-      "id": "494a55a00ec511c28008",
-      "title": "Полиция планирует установить около 200 дорожных камер; штрафы начнут отправлять по SMS",
-      "summary": "Davar сообщает о планах полиции развернуть примерно 200 новых камер. На 16 ноября был намечен пилот отправки уведомлений о штрафах владельцам машин по SMS; начало работы и масштабы внедрения требуют отдельного подтверждения.",
-      "translated": true,
-      "image": "./assets/news/images/494a55a00ec511c28008.webp",
-      "imageType": "licensedPhoto",
-      "imageCredit": {
-        "text": "Marek Ślusarczyk (Tupungato) Photo portfolio · CC BY 3.0",
-        "url": "https://commons.wikimedia.org/wiki/File:10_US_Highway_speed_limit_sign_55_MPH_-_Garfield_County,_Colorado.jpg"
-      }
-    },
-    {
-      "id": "396aed84edd8d0a23969",
-      "titleOriginal": "צוותי הרפואה של איחוד הצלה הוזעקו לשדרות אבני החושן בקריית גת עקב דיווח על שתי הולכות רגל שנפגעו מרכב.",
-      "sourceLanguage": "he",
-      "date": "2026-11-16T16:04:38Z",
-      "url": "https://t.me/uh1221/27413",
-      "publisher": "Ихуд Ацала · Telegram",
-      "category": "cars",
-      "art": "cars",
-      "image": "./assets/news/images/396aed84edd8d0a23969.webp",
-      "official": false,
-      "translations": {
-        "he": {
-          "title": "צוותי הרפואה של איחוד הצלה הוזעקו לשדרות אבני החושן בקריית גת עקב דיווח על שתי הולכות רגל שנפגעו מרכב.",
-          "summary": "כתבה על מכוניות או שוק הרכב בישראל. פרטים באתר המקור."
-        },
-        "ru": {
-          "title": "Медицинские бригады Союза спасателей были вызваны на бульвар Авни Хошен в Кирьят-Гате в связи с сообщением о двух пешеходах, которых сбила машина.",
-          "summary": "Материал об автомобиле или автомобильном рынке Израиля. Подробности — на сайте издания."
-        },
-        "en": {
-          "title": "The medical teams of the Rescue Union were called to Avni Hoshen Boulevard in Kiryat Gat due to a report of two pedestrians who had been hit by a vehicle.",
-          "summary": "An update about vehicles or Israel's car market. Details are available at the source."
-        },
-        "ar": {
-          "title": "تم استدعاء الفرق الطبية التابعة لاتحاد الإنقاذ إلى شارع أفني هوشن في كريات جات بسبب بلاغ عن إصابة اثنين من المارة بمركبة.",
-          "summary": "تحديث عن السيارات أو سوق المركبات في إسرائيل. التفاصيل في المصدر."
-        }
-      },
-      "title": "Медицинские бригады Союза спасателей были вызваны на бульвар Авни Хошен в Кирьят-Гате в связи с сообщением о двух пешеходах, которых сбила машина.",
-      "summary": "Материал об автомобиле или автомобильном рынке Израиля. Подробности — на сайте издания.",
-      "translated": true,
-      "imageType": "licensedPhoto",
-      "imageCredit": {
-        "text": "Ivan Radic · CC BY 2.0",
-        "url": "https://commons.wikimedia.org/wiki/File:Close-up_of_an_electric_car_charging._Traffic_lights_in_a_blurry_background.jpg"
-      },
-      "subjectPhotoChecked": true
-    },
-    {
-      "id": "e49311e8b46bc9e7c4ca",
-      "titleOriginal": "למה באמת ירדו מחירי ביטוח הרכב בישראל, ומה הקשר להודו",
-      "sourceLanguage": "he",
-      "date": "2026-11-06T15:03:00Z",
-      "url": "https://cars.walla.co.il/item/3875222",
-      "publisher": "Walla · Авто",
-      "category": "cars",
-      "art": "cars",
-      "image": "./assets/news/images/e49311e8b46bc9e7c4ca.webp",
-      "official": false,
-      "translations": {
-        "he": {
-          "title": "למה באמת ירדו מחירי ביטוח הרכב בישראל, ומה הקשר להודו",
-          "summary": "כתבה על מכוניות או שוק הרכב בישראל. פרטים באתר המקור."
-        },
-        "ru": {
-          "title": "Почему в Израиле действительно снизились цены на автострахование и какое это имеет отношение к Индии?",
-          "summary": "Материал об автомобиле или автомобильном рынке Израиля. Подробности — на сайте издания."
-        },
-        "en": {
-          "title": "Why did car insurance prices really go down in Israel, and what does it have to do with India?",
-          "summary": "An update about vehicles or Israel's car market. Details are available at the source."
-        },
-        "ar": {
-          "title": "لماذا انخفضت أسعار التأمين على السيارات في إسرائيل فعلا، وما علاقتها بالهند؟",
-          "summary": "تحديث عن السيارات أو سوق المركبات في إسرائيل. التفاصيل في المصدر."
-        }
-      },
-      "title": "Почему в Израиле действительно снизились цены на автострахование и какое это имеет отношение к Индии?",
-      "summary": "Материал об автомобиле или автомобильном рынке Израиля. Подробности — на сайте издания.",
-      "translated": true,
-      "imageKind": "ai-generated",
-      "imageType": "licensedPhoto",
-      "imageCredit": {
-        "text": "Eric Friedebach · CC BY 2.0",
-        "url": "https://commons.wikimedia.org/wiki/File:1973_Ford_Mustang_Interior_Dashboard_(51838912069).jpg"
-      },
-      "subjectPhotoChecked": true
-    },
-    {
       "titleOriginal": "תיעוד | טס במהירות של 239 קמ״ש - ונעצר בתום מרדף",
       "sourceTitle": "תיעוד | טס במהירות של 239 קמ״ש - ונעצר בתום מרדף",
       "editorialHeadline": false,
@@ -2097,50 +2275,8 @@
       "title": "Мотоциклиста задержали после погони: полиция зафиксировала 239 км/ч на шоссе №70",
       "summary": "По данным Arutz Sheva, 30-летний мотоциклист из Назарета попытался скрыться от полиции. В поиске участвовал полицейский вертолёт; после задержания мотоцикл изъяли для расследования.",
       "translated": true,
-      "image": "./assets/news/images/c0cd2d5f07618f67dc83.webp",
-      "imageType": "licensedPhoto",
-      "imageCredit": {
-        "text": "Marek Ślusarczyk (Tupungato) Photo portfolio · CC BY 3.0",
-        "url": "https://commons.wikimedia.org/wiki/File:10_US_Highway_speed_limit_sign_55_MPH_-_Garfield_County,_Colorado.jpg"
-      }
-    },
-    {
-      "id": "6083502c7ac99fe25ed3",
-      "titleOriginal": "צוות אמבולנס של איחוד הצלה העניק סיוע רפואי ופינה לבית החולים וולפסון רוכבת אופניים (בת 25) שנפצע קל כתוצאה מתאונה עצמית בכביש 20 סמוך למחלף קוממיות.",
-      "sourceLanguage": "he",
-      "date": "2026-11-16T15:18:02Z",
-      "url": "https://t.me/uh1221/27411",
-      "publisher": "Ихуд Ацала · Telegram",
-      "category": "accidents",
-      "art": "accidents",
-      "image": "./assets/news/images/6083502c7ac99fe25ed3.webp",
-      "official": false,
-      "translations": {
-        "he": {
-          "title": "צוות אמבולנס של איחוד הצלה העניק סיוע רפואי ופינה לבית החולים וולפסון רוכבת אופניים (בת 25) שנפצע קל כתוצאה מתאונה עצמית בכביש 20 סמוך למחלף קוממיות.",
-          "summary": "דיווח על תאונת דרכים בישראל. פרטים ועדכונים בכתבת המקור."
-        },
-        "ru": {
-          "title": "Бригада скорой помощи Союза спасателей оказала медицинскую помощь и доставила в больницу «Вольфсон» велосипедиста (25 лет), получившего легкие травмы в результате ДТП на 20-м маршруте в районе развязки Коммиат.",
-          "summary": "Дорожное происшествие в Израиле. Обстоятельства и актуальные сведения — в материале источника."
-        },
-        "en": {
-          "title": "The ambulance team of the Rescue Union provided medical assistance and took to the Wolfson Hospital a cyclist (25 years old) who was slightly injured as a result of a self-inflicted accident on Route 20 near the Kommiat interchange.",
-          "summary": "A reported road incident in Israel. Details and updates are in the original report."
-        },
-        "ar": {
-          "title": "قدم فريق الإسعاف التابع لاتحاد الإنقاذ المساعدة الطبية ونقل إلى مستشفى وولفسون راكب دراجة (25 عامًا) أصيب بجروح طفيفة نتيجة حادث ألحق نفسه على طريق 20 بالقرب من تقاطع كوميات.",
-          "summary": "تقرير عن حادث مروري في إسرائيل. التفاصيل والتحديثات في المصدر."
-        }
-      },
-      "title": "Бригада скорой помощи Союза спасателей оказала медицинскую помощь и доставила в больницу «Вольфсон» велосипедиста (25 лет), получившего легкие травмы в результате ДТП на 20-м маршруте в районе развязки Коммиат.",
-      "summary": "Дорожное происшествие в Израиле. Обстоятельства и актуальные сведения — в материале источника.",
-      "translated": true,
-      "imageType": "licensedPhoto",
-      "imageCredit": {
-        "text": "Jeff Attaway from Abuja, Nigeria · CC BY 2.0",
-        "url": "https://commons.wikimedia.org/wiki/File:Bad_one_-_auto_wreck_in_Dakar_Senegal,_2011.jpg"
-      }
+      "image": null,
+      "imageType": "none"
     },
     {
       "id": "f6100d44247e4e75550d",
@@ -2183,6 +2319,44 @@
       "subjectPhotoChecked": true
     },
     {
+      "id": "88780d995d87f46db13a",
+      "titleOriginal": "ערד: נהג רכב נפצע בינוני בתאונה עם מעורבות שני כלי רכב",
+      "sourceLanguage": "he",
+      "date": "2026-11-16T16:11:03Z",
+      "url": "https://t.me/uh1221/27414",
+      "publisher": "Ихуд Ацала · Telegram",
+      "category": "accidents",
+      "art": "accidents",
+      "image": "./assets/news/images/88780d995d87f46db13a.webp",
+      "official": false,
+      "translations": {
+        "he": {
+          "title": "ערד: נהג רכב נפצע בינוני בתאונה עם מעורבות שני כלי רכב",
+          "summary": "דיווח על תאונת דרכים בישראל. פרטים ועדכונים בכתבת המקור."
+        },
+        "ru": {
+          "title": "Арад: В результате ДТП с участием двух транспортных средств водитель легкового автомобиля получил травмы средней степени тяжести",
+          "summary": "Дорожное происшествие в Израиле. Обстоятельства и актуальные сведения — в материале источника."
+        },
+        "en": {
+          "title": "Arad: A car driver was moderately injured in an accident involving two vehicles",
+          "summary": "A reported road incident in Israel. Details and updates are in the original report."
+        },
+        "ar": {
+          "title": "عراد: أصيب سائق سيارة بجروح متوسطة في حادث تصادم بين مركبتين",
+          "summary": "تقرير عن حادث مروري في إسرائيل. التفاصيل والتحديثات في المصدر."
+        }
+      },
+      "title": "Арад: В результате ДТП с участием двух транспортных средств водитель легкового автомобиля получил травмы средней степени тяжести",
+      "summary": "Дорожное происшествие в Израиле. Обстоятельства и актуальные сведения — в материале источника.",
+      "translated": true,
+      "imageType": "licensedPhoto",
+      "imageCredit": {
+        "text": "Jeff Attaway from Abuja, Nigeria · CC BY 2.0",
+        "url": "https://commons.wikimedia.org/wiki/File:Bad_one_-_auto_wreck_in_Dakar_Senegal,_2011.jpg"
+      }
+    },
+    {
       "id": "c035b434587066ec16b9",
       "titleOriginal": "הפתרון לטעינת רכב חשמלי בלי חניה פרטית: רשת החשמל העירונית",
       "sourceLanguage": "he",
@@ -2222,44 +2396,6 @@
       "subjectPhotoChecked": true
     },
     {
-      "id": "bb6bad09ec0c7850b897",
-      "titleOriginal": "תאונה עם מעורבות שני כלי רכב אירעה בכביש 471 בסמוך לנחשונים.",
-      "sourceLanguage": "he",
-      "date": "2026-11-16T14:59:06Z",
-      "url": "https://t.me/uh1221/27410",
-      "publisher": "Ихуд Ацала · Telegram",
-      "category": "accidents",
-      "art": "accidents",
-      "image": "./assets/news/images/bb6bad09ec0c7850b897.webp",
-      "official": false,
-      "translations": {
-        "he": {
-          "title": "תאונה עם מעורבות שני כלי רכב אירעה בכביש 471 בסמוך לנחשונים.",
-          "summary": "דיווח על תאונת דרכים בישראל. פרטים ועדכונים בכתבת המקור."
-        },
-        "ru": {
-          "title": "Авария с участием двух транспортных средств произошла на трассе 471 недалеко от Нахшонима.",
-          "summary": "Дорожное происшествие в Израиле. Обстоятельства и актуальные сведения — в материале источника."
-        },
-        "en": {
-          "title": "An accident involving two vehicles happened on Route 471 near Nachshonim.",
-          "summary": "A reported road incident in Israel. Details and updates are in the original report."
-        },
-        "ar": {
-          "title": "وقع حادث بين مركبتين على شارع 471 بالقرب من نحشونيم.",
-          "summary": "تقرير عن حادث مروري في إسرائيل. التفاصيل والتحديثات في المصدر."
-        }
-      },
-      "title": "Авария с участием двух транспортных средств произошла на трассе 471 недалеко от Нахшонима.",
-      "summary": "Дорожное происшествие в Израиле. Обстоятельства и актуальные сведения — в материале источника.",
-      "translated": true,
-      "imageType": "licensedPhoto",
-      "imageCredit": {
-        "text": "Jeff Attaway from Abuja, Nigeria · CC BY 2.0",
-        "url": "https://commons.wikimedia.org/wiki/File:Bad_one_-_auto_wreck_in_Dakar_Senegal,_2011.jpg"
-      }
-    },
-    {
       "id": "bbdab420f7fa9d538488",
       "titleOriginal": "הוזלות במקסוס, דגמי בסיס חדשים בפולקסווגן",
       "sourceLanguage": "he",
@@ -2295,6 +2431,45 @@
       "imageCredit": {
         "text": "Eric Friedebach · CC BY 2.0",
         "url": "https://commons.wikimedia.org/wiki/File:1973_Ford_Mustang_Interior_Dashboard_(51838912069).jpg"
+      },
+      "subjectPhotoChecked": true
+    },
+    {
+      "id": "396aed84edd8d0a23969",
+      "titleOriginal": "צוותי הרפואה של איחוד הצלה הוזעקו לשדרות אבני החושן בקריית גת עקב דיווח על שתי הולכות רגל שנפגעו מרכב.",
+      "sourceLanguage": "he",
+      "date": "2026-11-16T16:04:38Z",
+      "url": "https://t.me/uh1221/27413",
+      "publisher": "Ихуд Ацала · Telegram",
+      "category": "cars",
+      "art": "cars",
+      "image": "./assets/news/images/396aed84edd8d0a23969.webp",
+      "official": false,
+      "translations": {
+        "he": {
+          "title": "צוותי הרפואה של איחוד הצלה הוזעקו לשדרות אבני החושן בקריית גת עקב דיווח על שתי הולכות רגל שנפגעו מרכב.",
+          "summary": "כתבה על מכוניות או שוק הרכב בישראל. פרטים באתר המקור."
+        },
+        "ru": {
+          "title": "Медицинские бригады Союза спасателей были вызваны на бульвар Авни Хошен в Кирьят-Гате в связи с сообщением о двух пешеходах, которых сбила машина.",
+          "summary": "Материал об автомобиле или автомобильном рынке Израиля. Подробности — на сайте издания."
+        },
+        "en": {
+          "title": "The medical teams of the Rescue Union were called to Avni Hoshen Boulevard in Kiryat Gat due to a report of two pedestrians who had been hit by a vehicle.",
+          "summary": "An update about vehicles or Israel's car market. Details are available at the source."
+        },
+        "ar": {
+          "title": "تم استدعاء الفرق الطبية التابعة لاتحاد الإنقاذ إلى شارع أفني هوشن في كريات جات بسبب بلاغ عن إصابة اثنين من المارة بمركبة.",
+          "summary": "تحديث عن السيارات أو سوق المركبات في إسرائيل. التفاصيل في المصدر."
+        }
+      },
+      "title": "Медицинские бригады Союза спасателей были вызваны на бульвар Авни Хошен в Кирьят-Гате в связи с сообщением о двух пешеходах, которых сбила машина.",
+      "summary": "Материал об автомобиле или автомобильном рынке Израиля. Подробности — на сайте издания.",
+      "translated": true,
+      "imageType": "licensedPhoto",
+      "imageCredit": {
+        "text": "Ivan Radic · CC BY 2.0",
+        "url": "https://commons.wikimedia.org/wiki/File:Close-up_of_an_electric_car_charging._Traffic_lights_in_a_blurry_background.jpg"
       },
       "subjectPhotoChecked": true
     },
@@ -2338,44 +2513,6 @@
       "subjectPhotoChecked": true
     },
     {
-      "id": "a06790d059facc2b99fd",
-      "titleOriginal": "תאונה עם מעורבות שני כלי רכב שאחד מהם התהפך אירעה בכביש 4578 סמוך לכוכב יעקב.",
-      "sourceLanguage": "he",
-      "date": "2026-11-16T14:51:43Z",
-      "url": "https://t.me/uh1221/27409",
-      "publisher": "Ихуд Ацала · Telegram",
-      "category": "accidents",
-      "art": "accidents",
-      "image": "./assets/news/images/a06790d059facc2b99fd.webp",
-      "official": false,
-      "translations": {
-        "he": {
-          "title": "תאונה עם מעורבות שני כלי רכב שאחד מהם התהפך אירעה בכביש 4578 סמוך לכוכב יעקב.",
-          "summary": "דיווח על תאונת דרכים בישראל. פרטים ועדכונים בכתבת המקור."
-        },
-        "ru": {
-          "title": "Авария с участием двух транспортных средств, одна из которых перевернулась, произошла на шоссе 4578 недалеко от Кохав-Яакова.",
-          "summary": "Дорожное происшествие в Израиле. Обстоятельства и актуальные сведения — в материале источника."
-        },
-        "en": {
-          "title": "An accident involving two vehicles, one of which overturned, occurred on Highway 4578 near Kochav Ya'akov.",
-          "summary": "A reported road incident in Israel. Details and updates are in the original report."
-        },
-        "ar": {
-          "title": "وقع حادث بين مركبتين، انقلبت إحداهما، على شارع 4578 بالقرب من كوخاف يعقوب.",
-          "summary": "تقرير عن حادث مروري في إسرائيل. التفاصيل والتحديثات في المصدر."
-        }
-      },
-      "title": "Авария с участием двух транспортных средств, одна из которых перевернулась, произошла на шоссе 4578 недалеко от Кохав-Яакова.",
-      "summary": "Дорожное происшествие в Израиле. Обстоятельства и актуальные сведения — в материале источника.",
-      "translated": true,
-      "imageType": "licensedPhoto",
-      "imageCredit": {
-        "text": "Jeff Attaway from Abuja, Nigeria · CC BY 2.0",
-        "url": "https://commons.wikimedia.org/wiki/File:Bad_one_-_auto_wreck_in_Dakar_Senegal,_2011.jpg"
-      }
-    },
-    {
       "id": "79df53609138c1864198",
       "titleOriginal": "רמת גן משיקה רשת טעינה לחשמליות: מה המחיר?",
       "sourceLanguage": "he",
@@ -2416,6 +2553,44 @@
       "subjectPhotoChecked": true
     },
     {
+      "id": "6083502c7ac99fe25ed3",
+      "titleOriginal": "צוות אמבולנס של איחוד הצלה העניק סיוע רפואי ופינה לבית החולים וולפסון רוכבת אופניים (בת 25) שנפצע קל כתוצאה מתאונה עצמית בכביש 20 סמוך למחלף קוממיות.",
+      "sourceLanguage": "he",
+      "date": "2026-11-16T15:18:02Z",
+      "url": "https://t.me/uh1221/27411",
+      "publisher": "Ихуд Ацала · Telegram",
+      "category": "accidents",
+      "art": "accidents",
+      "image": "./assets/news/images/6083502c7ac99fe25ed3.webp",
+      "official": false,
+      "translations": {
+        "he": {
+          "title": "צוות אמבולנס של איחוד הצלה העניק סיוע רפואי ופינה לבית החולים וולפסון רוכבת אופניים (בת 25) שנפצע קל כתוצאה מתאונה עצמית בכביש 20 סמוך למחלף קוממיות.",
+          "summary": "דיווח על תאונת דרכים בישראל. פרטים ועדכונים בכתבת המקור."
+        },
+        "ru": {
+          "title": "Бригада скорой помощи Союза спасателей оказала медицинскую помощь и доставила в больницу «Вольфсон» велосипедиста (25 лет), получившего легкие травмы в результате ДТП на 20-м маршруте в районе развязки Коммиат.",
+          "summary": "Дорожное происшествие в Израиле. Обстоятельства и актуальные сведения — в материале источника."
+        },
+        "en": {
+          "title": "The ambulance team of the Rescue Union provided medical assistance and took to the Wolfson Hospital a cyclist (25 years old) who was slightly injured as a result of a self-inflicted accident on Route 20 near the Kommiat interchange.",
+          "summary": "A reported road incident in Israel. Details and updates are in the original report."
+        },
+        "ar": {
+          "title": "قدم فريق الإسعاف التابع لاتحاد الإنقاذ المساعدة الطبية ونقل إلى مستشفى وولفسون راكب دراجة (25 عامًا) أصيب بجروح طفيفة نتيجة حادث ألحق نفسه على طريق 20 بالقرب من تقاطع كوميات.",
+          "summary": "تقرير عن حادث مروري في إسرائيل. التفاصيل والتحديثات في المصدر."
+        }
+      },
+      "title": "Бригада скорой помощи Союза спасателей оказала медицинскую помощь и доставила в больницу «Вольфсон» велосипедиста (25 лет), получившего легкие травмы в результате ДТП на 20-м маршруте в районе развязки Коммиат.",
+      "summary": "Дорожное происшествие в Израиле. Обстоятельства и актуальные сведения — в материале источника.",
+      "translated": true,
+      "imageType": "licensedPhoto",
+      "imageCredit": {
+        "text": "Jeff Attaway from Abuja, Nigeria · CC BY 2.0",
+        "url": "https://commons.wikimedia.org/wiki/File:Bad_one_-_auto_wreck_in_Dakar_Senegal,_2011.jpg"
+      }
+    },
+    {
       "id": "7c193e0d09f585831fa0",
       "titleOriginal": "יחד נתקן: כך נעצור את גניבות הרכב",
       "sourceLanguage": "he",
@@ -2453,44 +2628,6 @@
         "url": "https://commons.wikimedia.org/wiki/File:1973_Ford_Mustang_Interior_Dashboard_(51838912069).jpg"
       },
       "subjectPhotoChecked": true
-    },
-    {
-      "id": "500ae92367be020532b1",
-      "titleOriginal": "כביש 20: רוכב אופנוע נפצע בינוני בתאונה",
-      "sourceLanguage": "he",
-      "date": "2026-11-16T13:51:52Z",
-      "url": "https://t.me/uh1221/27408",
-      "publisher": "Ихуд Ацала · Telegram",
-      "category": "accidents",
-      "art": "accidents",
-      "image": "./assets/news/images/500ae92367be020532b1.webp",
-      "official": false,
-      "translations": {
-        "he": {
-          "title": "כביש 20: רוכב אופנוע נפצע בינוני בתאונה",
-          "summary": "דיווח על תאונת דרכים בישראל. פרטים ועדכונים בכתבת המקור."
-        },
-        "ru": {
-          "title": "Маршрут 20: В результате аварии мотоциклист получил травмы средней степени тяжести.",
-          "summary": "Дорожное происшествие в Израиле. Обстоятельства и актуальные сведения — в материале источника."
-        },
-        "en": {
-          "title": "Route 20: A motorcyclist was moderately injured in the accident",
-          "summary": "A reported road incident in Israel. Details and updates are in the original report."
-        },
-        "ar": {
-          "title": "طريق رقم 20: أصيب سائق دراجة نارية بجروح متوسطة في الحادث",
-          "summary": "تقرير عن حادث مروري في إسرائيل. التفاصيل والتحديثات في المصدر."
-        }
-      },
-      "title": "Маршрут 20: В результате аварии мотоциклист получил травмы средней степени тяжести.",
-      "summary": "Дорожное происшествие в Израиле. Обстоятельства и актуальные сведения — в материале источника.",
-      "translated": true,
-      "imageType": "licensedPhoto",
-      "imageCredit": {
-        "text": "Wikimedia Commons · Public domain",
-        "url": "https://commons.wikimedia.org/wiki/File:Hurricane_Rita_Evacuation_ambulance_1.jpg"
-      }
     },
     {
       "id": "f927a1c96bf616445fab",
@@ -2533,6 +2670,44 @@
       "subjectPhotoChecked": true
     },
     {
+      "id": "bb6bad09ec0c7850b897",
+      "titleOriginal": "תאונה עם מעורבות שני כלי רכב אירעה בכביש 471 בסמוך לנחשונים.",
+      "sourceLanguage": "he",
+      "date": "2026-11-16T14:59:06Z",
+      "url": "https://t.me/uh1221/27410",
+      "publisher": "Ихуд Ацала · Telegram",
+      "category": "accidents",
+      "art": "accidents",
+      "image": "./assets/news/images/bb6bad09ec0c7850b897.webp",
+      "official": false,
+      "translations": {
+        "he": {
+          "title": "תאונה עם מעורבות שני כלי רכב אירעה בכביש 471 בסמוך לנחשונים.",
+          "summary": "דיווח על תאונת דרכים בישראל. פרטים ועדכונים בכתבת המקור."
+        },
+        "ru": {
+          "title": "Авария с участием двух транспортных средств произошла на трассе 471 недалеко от Нахшонима.",
+          "summary": "Дорожное происшествие в Израиле. Обстоятельства и актуальные сведения — в материале источника."
+        },
+        "en": {
+          "title": "An accident involving two vehicles happened on Route 471 near Nachshonim.",
+          "summary": "A reported road incident in Israel. Details and updates are in the original report."
+        },
+        "ar": {
+          "title": "وقع حادث بين مركبتين على شارع 471 بالقرب من نحشونيم.",
+          "summary": "تقرير عن حادث مروري في إسرائيل. التفاصيل والتحديثات في المصدر."
+        }
+      },
+      "title": "Авария с участием двух транспортных средств произошла на трассе 471 недалеко от Нахшонима.",
+      "summary": "Дорожное происшествие в Израиле. Обстоятельства и актуальные сведения — в материале источника.",
+      "translated": true,
+      "imageType": "licensedPhoto",
+      "imageCredit": {
+        "text": "Jeff Attaway from Abuja, Nigeria · CC BY 2.0",
+        "url": "https://commons.wikimedia.org/wiki/File:Bad_one_-_auto_wreck_in_Dakar_Senegal,_2011.jpg"
+      }
+    },
+    {
       "id": "6c3d71cc18f7b1f147c6",
       "titleOriginal": "חלם זה כאן: הוצאתם רישיון נהיגה בינלאומי לשלוש שנים? ב-26 מדינות הוא תקף רק לשנה אחת",
       "sourceLanguage": "he",
@@ -2568,44 +2743,6 @@
       "imageCredit": {
         "text": "Wikimedia Commons · CC BY 4.0",
         "url": "https://commons.wikimedia.org/wiki/File:Close_up_of_Carmen_Rupe_pedestrian_crossing_light.jpg"
-      }
-    },
-    {
-      "id": "82f9297bada5770a8f24",
-      "titleOriginal": "בן 40 נפגע מרכב בקרית ביאליק - מצבו קשה",
-      "sourceLanguage": "he",
-      "date": "2026-11-16T13:31:26Z",
-      "url": "https://t.me/uh1221/27407",
-      "publisher": "Ихуд Ацала · Telegram",
-      "category": "accidents",
-      "art": "accidents",
-      "image": "./assets/news/images/82f9297bada5770a8f24.webp",
-      "official": false,
-      "translations": {
-        "he": {
-          "title": "בן 40 נפגע מרכב בקרית ביאליק - מצבו קשה",
-          "summary": "דיווח על תאונת דרכים בישראל. פרטים ועדכונים בכתבת המקור."
-        },
-        "ru": {
-          "title": "В Кирьят-Бялике 40-летнего мужчину сбила машина - его состояние тяжелое",
-          "summary": "Дорожное происшествие в Израиле. Обстоятельства и актуальные сведения — в материале источника."
-        },
-        "en": {
-          "title": "A 40-year-old man was hit by a car in Kiryat Bialik - his condition is serious",
-          "summary": "A reported road incident in Israel. Details and updates are in the original report."
-        },
-        "ar": {
-          "title": "صدمت سيارة رجلا يبلغ من العمر 40 عاما في كريات بياليك، وحالته خطيرة",
-          "summary": "تقرير عن حادث مروري في إسرائيل. التفاصيل والتحديثات في المصدر."
-        }
-      },
-      "title": "В Кирьят-Бялике 40-летнего мужчину сбила машина - его состояние тяжелое",
-      "summary": "Дорожное происшествие в Израиле. Обстоятельства и актуальные сведения — в материале источника.",
-      "translated": true,
-      "imageType": "licensedPhoto",
-      "imageCredit": {
-        "text": "Wikimedia Commons · Public domain",
-        "url": "https://commons.wikimedia.org/wiki/File:Hurricane_Rita_Evacuation_ambulance_1.jpg"
       }
     },
     {
@@ -2649,6 +2786,44 @@
       "subjectPhotoChecked": true
     },
     {
+      "id": "a06790d059facc2b99fd",
+      "titleOriginal": "תאונה עם מעורבות שני כלי רכב שאחד מהם התהפך אירעה בכביש 4578 סמוך לכוכב יעקב.",
+      "sourceLanguage": "he",
+      "date": "2026-11-16T14:51:43Z",
+      "url": "https://t.me/uh1221/27409",
+      "publisher": "Ихуд Ацала · Telegram",
+      "category": "accidents",
+      "art": "accidents",
+      "image": "./assets/news/images/a06790d059facc2b99fd.webp",
+      "official": false,
+      "translations": {
+        "he": {
+          "title": "תאונה עם מעורבות שני כלי רכב שאחד מהם התהפך אירעה בכביש 4578 סמוך לכוכב יעקב.",
+          "summary": "דיווח על תאונת דרכים בישראל. פרטים ועדכונים בכתבת המקור."
+        },
+        "ru": {
+          "title": "Авария с участием двух транспортных средств, одна из которых перевернулась, произошла на шоссе 4578 недалеко от Кохав-Яакова.",
+          "summary": "Дорожное происшествие в Израиле. Обстоятельства и актуальные сведения — в материале источника."
+        },
+        "en": {
+          "title": "An accident involving two vehicles, one of which overturned, occurred on Highway 4578 near Kochav Ya'akov.",
+          "summary": "A reported road incident in Israel. Details and updates are in the original report."
+        },
+        "ar": {
+          "title": "وقع حادث بين مركبتين، انقلبت إحداهما، على شارع 4578 بالقرب من كوخاف يعقوب.",
+          "summary": "تقرير عن حادث مروري في إسرائيل. التفاصيل والتحديثات في المصدر."
+        }
+      },
+      "title": "Авария с участием двух транспортных средств, одна из которых перевернулась, произошла на шоссе 4578 недалеко от Кохав-Яакова.",
+      "summary": "Дорожное происшествие в Израиле. Обстоятельства и актуальные сведения — в материале источника.",
+      "translated": true,
+      "imageType": "licensedPhoto",
+      "imageCredit": {
+        "text": "Jeff Attaway from Abuja, Nigeria · CC BY 2.0",
+        "url": "https://commons.wikimedia.org/wiki/File:Bad_one_-_auto_wreck_in_Dakar_Senegal,_2011.jpg"
+      }
+    },
+    {
       "titleOriginal": "ועדת החינוך אישרה תקנות להרחבת היבוא של כלי תחרות ספורטיביים",
       "sourceLanguage": "he",
       "date": "2026-07-07T12:30:00Z",
@@ -2679,50 +2854,8 @@
       "title": "Кнессет одобрил новые правила импорта техники для автоспорта",
       "summary": "7 июля профильный комитет одобрил изменения правил ввоза спортивной соревновательной техники и запчастей для автоспорта. Изменения касаются специализированных соревнований, а не обычного использования автомобилей на дорогах.",
       "translated": true,
-      "image": "./assets/news/images/9ce7f097f16e763c9cea.webp",
-      "imageType": "licensedPhoto",
-      "imageCredit": {
-        "text": "Wikimedia Commons · CC BY 4.0",
-        "url": "https://commons.wikimedia.org/wiki/File:Close_up_of_Carmen_Rupe_pedestrian_crossing_light.jpg"
-      }
-    },
-    {
-      "id": "9fa2f4ba586eee65d885",
-      "titleOriginal": "תאונה בכביש 531: שתי נשים במצב בינוני וקל כתוצאה מתאונה",
-      "sourceLanguage": "he",
-      "date": "2026-11-16T11:28:25Z",
-      "url": "https://t.me/uh1221/27404",
-      "publisher": "Ихуд Ацала · Telegram",
-      "category": "accidents",
-      "art": "accidents",
-      "image": "./assets/news/images/9fa2f4ba586eee65d885.webp",
-      "official": false,
-      "translations": {
-        "he": {
-          "title": "תאונה בכביש 531: שתי נשים במצב בינוני וקל כתוצאה מתאונה",
-          "summary": "דיווח על תאונת דרכים בישראל. פרטים ועדכונים בכתבת המקור."
-        },
-        "ru": {
-          "title": "ДТП на трассе 531: две женщины в состоянии средней и легкой степени в результате ДТП",
-          "summary": "Дорожное происшествие в Израиле. Обстоятельства и актуальные сведения — в материале источника."
-        },
-        "en": {
-          "title": "Accident on road 531: two women in moderate and light condition as a result of an accident",
-          "summary": "A reported road incident in Israel. Details and updates are in the original report."
-        },
-        "ar": {
-          "title": "حادث على طريق 531: سيدتان بحالة متوسطة وخفيفة نتيجة حادث",
-          "summary": "تقرير عن حادث مروري في إسرائيل. التفاصيل والتحديثات في المصدر."
-        }
-      },
-      "title": "ДТП на трассе 531: две женщины в состоянии средней и легкой степени в результате ДТП",
-      "summary": "Дорожное происшествие в Израиле. Обстоятельства и актуальные сведения — в материале источника.",
-      "translated": true,
-      "imageType": "licensedPhoto",
-      "imageCredit": {
-        "text": "Jeff Attaway from Abuja, Nigeria · CC BY 2.0",
-        "url": "https://commons.wikimedia.org/wiki/File:Bad_one_-_auto_wreck_in_Dakar_Senegal,_2011.jpg"
-      }
+      "image": null,
+      "imageType": "none"
     },
     {
       "id": "8da0d7e6aaf29974e4b9",
@@ -2764,6 +2897,44 @@
       }
     },
     {
+      "id": "500ae92367be020532b1",
+      "titleOriginal": "כביש 20: רוכב אופנוע נפצע בינוני בתאונה",
+      "sourceLanguage": "he",
+      "date": "2026-11-16T13:51:52Z",
+      "url": "https://t.me/uh1221/27408",
+      "publisher": "Ихуд Ацала · Telegram",
+      "category": "accidents",
+      "art": "accidents",
+      "image": "./assets/news/images/500ae92367be020532b1.webp",
+      "official": false,
+      "translations": {
+        "he": {
+          "title": "כביש 20: רוכב אופנוע נפצע בינוני בתאונה",
+          "summary": "דיווח על תאונת דרכים בישראל. פרטים ועדכונים בכתבת המקור."
+        },
+        "ru": {
+          "title": "Маршрут 20: В результате аварии мотоциклист получил травмы средней степени тяжести.",
+          "summary": "Дорожное происшествие в Израиле. Обстоятельства и актуальные сведения — в материале источника."
+        },
+        "en": {
+          "title": "Route 20: A motorcyclist was moderately injured in the accident",
+          "summary": "A reported road incident in Israel. Details and updates are in the original report."
+        },
+        "ar": {
+          "title": "طريق رقم 20: أصيب سائق دراجة نارية بجروح متوسطة في الحادث",
+          "summary": "تقرير عن حادث مروري في إسرائيل. التفاصيل والتحديثات في المصدر."
+        }
+      },
+      "title": "Маршрут 20: В результате аварии мотоциклист получил травмы средней степени тяжести.",
+      "summary": "Дорожное происшествие в Израиле. Обстоятельства и актуальные сведения — в материале источника.",
+      "translated": true,
+      "imageType": "licensedPhoto",
+      "imageCredit": {
+        "text": "Wikimedia Commons · Public domain",
+        "url": "https://commons.wikimedia.org/wiki/File:Hurricane_Rita_Evacuation_ambulance_1.jpg"
+      }
+    },
+    {
       "titleOriginal": "ועדת הכלכלה אישרה את התקנות המחילות את שיטת הניקוד גם על הפרות תעבורה מנהליות",
       "sourceLanguage": "he",
       "date": "2026-06-22T09:55:00Z",
@@ -2794,50 +2965,8 @@
       "title": "Кнессет одобрил изменения системы штрафных баллов за нарушения ПДД",
       "summary": "22 июня экономический комитет Кнессета утвердил обновлённые правила начисления баллов за административные нарушения. Для менее серьёзных проступков предусмотрено смягчение, а за опасные нарушения, включая проезд на красный и телефон за рулём, — более строгие баллы. Позднее условия применения могли уточняться.",
       "translated": true,
-      "image": "./assets/news/images/821987599de17e7c0751.webp",
-      "imageType": "licensedPhoto",
-      "imageCredit": {
-        "text": "Wikimedia Commons · CC BY 4.0",
-        "url": "https://commons.wikimedia.org/wiki/File:Close_up_of_Carmen_Rupe_pedestrian_crossing_light.jpg"
-      }
-    },
-    {
-      "id": "388236aae3431109d2d9",
-      "titleOriginal": "תאונה עם מעורבות שני כלי רכב אירעה בכביש 356 בסמוך למיצד.",
-      "sourceLanguage": "he",
-      "date": "2026-11-16T07:42:46Z",
-      "url": "https://t.me/uh1221/27402",
-      "publisher": "Ихуд Ацала · Telegram",
-      "category": "accidents",
-      "art": "accidents",
-      "image": "./assets/news/images/388236aae3431109d2d9.webp",
-      "official": false,
-      "translations": {
-        "he": {
-          "title": "תאונה עם מעורבות שני כלי רכב אירעה בכביש 356 בסמוך למיצד.",
-          "summary": "דיווח על תאונת דרכים בישראל. פרטים ועדכונים בכתבת המקור."
-        },
-        "ru": {
-          "title": "Авария с участием двух транспортных средств произошла на трассе 356 возле Мисада.",
-          "summary": "Дорожное происшествие в Израиле. Обстоятельства и актуальные сведения — в материале источника."
-        },
-        "en": {
-          "title": "An accident involving two vehicles happened on road 356 near Misad.",
-          "summary": "A reported road incident in Israel. Details and updates are in the original report."
-        },
-        "ar": {
-          "title": "وقع حادث بين مركبتين على طريق 356 بالقرب من مساد.",
-          "summary": "تقرير عن حادث مروري في إسرائيل. التفاصيل والتحديثات في المصدر."
-        }
-      },
-      "title": "Авария с участием двух транспортных средств произошла на трассе 356 возле Мисада.",
-      "summary": "Дорожное происшествие в Израиле. Обстоятельства и актуальные сведения — в материале источника.",
-      "translated": true,
-      "imageType": "licensedPhoto",
-      "imageCredit": {
-        "text": "Jeff Attaway from Abuja, Nigeria · CC BY 2.0",
-        "url": "https://commons.wikimedia.org/wiki/File:Bad_one_-_auto_wreck_in_Dakar_Senegal,_2011.jpg"
-      }
+      "image": null,
+      "imageType": "none"
     },
     {
       "id": "2c4584c5e877e25e077e",
@@ -2879,6 +3008,44 @@
       "subjectPhotoChecked": true
     },
     {
+      "id": "82f9297bada5770a8f24",
+      "titleOriginal": "בן 40 נפגע מרכב בקרית ביאליק - מצבו קשה",
+      "sourceLanguage": "he",
+      "date": "2026-11-16T13:31:26Z",
+      "url": "https://t.me/uh1221/27407",
+      "publisher": "Ихуд Ацала · Telegram",
+      "category": "accidents",
+      "art": "accidents",
+      "image": "./assets/news/images/82f9297bada5770a8f24.webp",
+      "official": false,
+      "translations": {
+        "he": {
+          "title": "בן 40 נפגע מרכב בקרית ביאליק - מצבו קשה",
+          "summary": "דיווח על תאונת דרכים בישראל. פרטים ועדכונים בכתבת המקור."
+        },
+        "ru": {
+          "title": "В Кирьят-Бялике 40-летнего мужчину сбила машина - его состояние тяжелое",
+          "summary": "Дорожное происшествие в Израиле. Обстоятельства и актуальные сведения — в материале источника."
+        },
+        "en": {
+          "title": "A 40-year-old man was hit by a car in Kiryat Bialik - his condition is serious",
+          "summary": "A reported road incident in Israel. Details and updates are in the original report."
+        },
+        "ar": {
+          "title": "صدمت سيارة رجلا يبلغ من العمر 40 عاما في كريات بياليك، وحالته خطيرة",
+          "summary": "تقرير عن حادث مروري في إسرائيل. التفاصيل والتحديثات في المصدر."
+        }
+      },
+      "title": "В Кирьят-Бялике 40-летнего мужчину сбила машина - его состояние тяжелое",
+      "summary": "Дорожное происшествие в Израиле. Обстоятельства и актуальные сведения — в материале источника.",
+      "translated": true,
+      "imageType": "licensedPhoto",
+      "imageCredit": {
+        "text": "Wikimedia Commons · Public domain",
+        "url": "https://commons.wikimedia.org/wiki/File:Hurricane_Rita_Evacuation_ambulance_1.jpg"
+      }
+    },
+    {
       "titleOriginal": "ועדת הכלכלה סירבה לאשר את תיקון תקנות התעבורה המחילות את שיטת הניקוד על הפרות מנהליות",
       "sourceLanguage": "he",
       "date": "2026-06-03T08:25:00Z",
@@ -2909,50 +3076,8 @@
       "title": "3 июня комитет Кнессета отложил реформу штрафных баллов и потребовал послаблений",
       "summary": "3 июня экономический комитет не утвердил предложенную редакцию правил начисления баллов и потребовал пересмотра в течение двух недель. Это исторический этап обсуждения: 22 июня комитет впоследствии одобрил изменённую редакцию.",
       "translated": true,
-      "image": "./assets/news/images/84399e428bc60574368d.webp",
-      "imageType": "licensedPhoto",
-      "imageCredit": {
-        "text": "Wikimedia Commons · CC BY 4.0",
-        "url": "https://commons.wikimedia.org/wiki/File:Close_up_of_Carmen_Rupe_pedestrian_crossing_light.jpg"
-      }
-    },
-    {
-      "id": "a0467e98ee5ed2dbfe29",
-      "titleOriginal": "תאונה עם מעורבות אופניים חשמליים ומשאית אירעה ברחוב פרידלנדר בחדרה.",
-      "sourceLanguage": "he",
-      "date": "2026-11-16T07:17:48Z",
-      "url": "https://t.me/uh1221/27401",
-      "publisher": "Ихуд Ацала · Telegram",
-      "category": "accidents",
-      "art": "accidents",
-      "image": "./assets/news/images/a0467e98ee5ed2dbfe29.webp",
-      "official": false,
-      "translations": {
-        "he": {
-          "title": "תאונה עם מעורבות אופניים חשמליים ומשאית אירעה ברחוב פרידלנדר בחדרה.",
-          "summary": "דיווח על תאונת דרכים בישראל. פרטים ועדכונים בכתבת המקור."
-        },
-        "ru": {
-          "title": "Авария с участием электровелосипеда и грузовика произошла на улице Фридлендер в Хадере.",
-          "summary": "Дорожное происшествие в Израиле. Обстоятельства и актуальные сведения — в материале источника."
-        },
-        "en": {
-          "title": "An accident involving an electric bicycle and a truck happened on Friedlander Street in Hadera.",
-          "summary": "A reported road incident in Israel. Details and updates are in the original report."
-        },
-        "ar": {
-          "title": "وقع حادث بين دراجة كهربائية وشاحنة في شارع فريدلاندر في الخضيرة.",
-          "summary": "تقرير عن حادث مروري في إسرائيل. التفاصيل والتحديثات في المصدر."
-        }
-      },
-      "title": "Авария с участием электровелосипеда и грузовика произошла на улице Фридлендер в Хадере.",
-      "summary": "Дорожное происшествие в Израиле. Обстоятельства и актуальные сведения — в материале источника.",
-      "translated": true,
-      "imageType": "licensedPhoto",
-      "imageCredit": {
-        "text": "No machine-readable author provided. EPO assumed (based on copyright claims). · CC BY 2.5",
-        "url": "https://commons.wikimedia.org/wiki/File:Falck_sv_04.jpg"
-      }
+      "image": null,
+      "imageType": "none"
     },
     {
       "id": "8afa884f224efe65331b",
@@ -2993,6 +3118,160 @@
         "url": "https://commons.wikimedia.org/wiki/File:Close-up_of_an_electric_car_charging._Traffic_lights_in_a_blurry_background.jpg"
       },
       "subjectPhotoChecked": true
+    },
+    {
+      "id": "9fa2f4ba586eee65d885",
+      "titleOriginal": "תאונה בכביש 531: שתי נשים במצב בינוני וקל כתוצאה מתאונה",
+      "sourceLanguage": "he",
+      "date": "2026-11-16T11:28:25Z",
+      "url": "https://t.me/uh1221/27404",
+      "publisher": "Ихуд Ацала · Telegram",
+      "category": "accidents",
+      "art": "accidents",
+      "image": "./assets/news/images/9fa2f4ba586eee65d885.webp",
+      "official": false,
+      "translations": {
+        "he": {
+          "title": "תאונה בכביש 531: שתי נשים במצב בינוני וקל כתוצאה מתאונה",
+          "summary": "דיווח על תאונת דרכים בישראל. פרטים ועדכונים בכתבת המקור."
+        },
+        "ru": {
+          "title": "ДТП на трассе 531: две женщины в состоянии средней и легкой степени в результате ДТП",
+          "summary": "Дорожное происшествие в Израиле. Обстоятельства и актуальные сведения — в материале источника."
+        },
+        "en": {
+          "title": "Accident on road 531: two women in moderate and light condition as a result of an accident",
+          "summary": "A reported road incident in Israel. Details and updates are in the original report."
+        },
+        "ar": {
+          "title": "حادث على طريق 531: سيدتان بحالة متوسطة وخفيفة نتيجة حادث",
+          "summary": "تقرير عن حادث مروري في إسرائيل. التفاصيل والتحديثات في المصدر."
+        }
+      },
+      "title": "ДТП на трассе 531: две женщины в состоянии средней и легкой степени в результате ДТП",
+      "summary": "Дорожное происшествие в Израиле. Обстоятельства и актуальные сведения — в материале источника.",
+      "translated": true,
+      "imageType": "licensedPhoto",
+      "imageCredit": {
+        "text": "Jeff Attaway from Abuja, Nigeria · CC BY 2.0",
+        "url": "https://commons.wikimedia.org/wiki/File:Bad_one_-_auto_wreck_in_Dakar_Senegal,_2011.jpg"
+      }
+    },
+    {
+      "id": "388236aae3431109d2d9",
+      "titleOriginal": "תאונה עם מעורבות שני כלי רכב אירעה בכביש 356 בסמוך למיצד.",
+      "sourceLanguage": "he",
+      "date": "2026-11-16T07:42:46Z",
+      "url": "https://t.me/uh1221/27402",
+      "publisher": "Ихуд Ацала · Telegram",
+      "category": "accidents",
+      "art": "accidents",
+      "image": "./assets/news/images/388236aae3431109d2d9.webp",
+      "official": false,
+      "translations": {
+        "he": {
+          "title": "תאונה עם מעורבות שני כלי רכב אירעה בכביש 356 בסמוך למיצד.",
+          "summary": "דיווח על תאונת דרכים בישראל. פרטים ועדכונים בכתבת המקור."
+        },
+        "ru": {
+          "title": "Авария с участием двух транспортных средств произошла на трассе 356 возле Мисада.",
+          "summary": "Дорожное происшествие в Израиле. Обстоятельства и актуальные сведения — в материале источника."
+        },
+        "en": {
+          "title": "An accident involving two vehicles happened on road 356 near Misad.",
+          "summary": "A reported road incident in Israel. Details and updates are in the original report."
+        },
+        "ar": {
+          "title": "وقع حادث بين مركبتين على طريق 356 بالقرب من مساد.",
+          "summary": "تقرير عن حادث مروري في إسرائيل. التفاصيل والتحديثات في المصدر."
+        }
+      },
+      "title": "Авария с участием двух транспортных средств произошла на трассе 356 возле Мисада.",
+      "summary": "Дорожное происшествие в Израиле. Обстоятельства и актуальные сведения — в материале источника.",
+      "translated": true,
+      "imageType": "licensedPhoto",
+      "imageCredit": {
+        "text": "Jeff Attaway from Abuja, Nigeria · CC BY 2.0",
+        "url": "https://commons.wikimedia.org/wiki/File:Bad_one_-_auto_wreck_in_Dakar_Senegal,_2011.jpg"
+      }
+    },
+    {
+      "id": "49f8482a0c05fbd3d62e",
+      "titleOriginal": "בוחרים רכב חדש: כל מבצעי הרכב וההנחות ביום הבחירות",
+      "sourceLanguage": "he",
+      "date": "2026-10-25T19:32:00Z",
+      "url": "https://cars.walla.co.il/item/3873697",
+      "publisher": "Walla · Все автомобили",
+      "category": "cars",
+      "art": "cars",
+      "image": "./assets/news/images/49f8482a0c05fbd3d62e.webp",
+      "official": false,
+      "translations": {
+        "he": {
+          "title": "בוחרים רכב חדש: כל מבצעי הרכב וההנחות ביום הבחירות",
+          "summary": "כתבה על מכוניות או שוק הרכב בישראל. פרטים באתר המקור."
+        },
+        "ru": {
+          "title": "Выбери новую машину: все автомобильные предложения и скидки в день выборов",
+          "summary": "Материал об автомобиле или автомобильном рынке Израиля. Подробности — на сайте издания."
+        },
+        "en": {
+          "title": "Choose a new car: all car deals and discounts on election day",
+          "summary": "An update about vehicles or Israel's car market. Details are available at the source."
+        },
+        "ar": {
+          "title": "اختر سيارة جديدة: جميع عروض وخصومات السيارات في يوم الانتخابات",
+          "summary": "تحديث عن السيارات أو سوق المركبات في إسرائيل. التفاصيل في المصدر."
+        }
+      },
+      "title": "Выбери новую машину: все автомобильные предложения и скидки в день выборов",
+      "summary": "Материал об автомобиле или автомобильном рынке Израиля. Подробности — на сайте издания.",
+      "translated": true,
+      "imageKind": "ai-generated",
+      "imageType": "licensedPhoto",
+      "imageCredit": {
+        "text": "Eric Friedebach · CC BY 2.0",
+        "url": "https://commons.wikimedia.org/wiki/File:1973_Ford_Mustang_Interior_Dashboard_(51838912069).jpg"
+      },
+      "subjectPhotoChecked": true
+    },
+    {
+      "id": "a0467e98ee5ed2dbfe29",
+      "titleOriginal": "תאונה עם מעורבות אופניים חשמליים ומשאית אירעה ברחוב פרידלנדר בחדרה.",
+      "sourceLanguage": "he",
+      "date": "2026-11-16T07:17:48Z",
+      "url": "https://t.me/uh1221/27401",
+      "publisher": "Ихуд Ацала · Telegram",
+      "category": "accidents",
+      "art": "accidents",
+      "image": "./assets/news/images/a0467e98ee5ed2dbfe29.webp",
+      "official": false,
+      "translations": {
+        "he": {
+          "title": "תאונה עם מעורבות אופניים חשמליים ומשאית אירעה ברחוב פרידלנדר בחדרה.",
+          "summary": "דיווח על תאונת דרכים בישראל. פרטים ועדכונים בכתבת המקור."
+        },
+        "ru": {
+          "title": "Авария с участием электровелосипеда и грузовика произошла на улице Фридлендер в Хадере.",
+          "summary": "Дорожное происшествие в Израиле. Обстоятельства и актуальные сведения — в материале источника."
+        },
+        "en": {
+          "title": "An accident involving an electric bicycle and a truck happened on Friedlander Street in Hadera.",
+          "summary": "A reported road incident in Israel. Details and updates are in the original report."
+        },
+        "ar": {
+          "title": "وقع حادث بين دراجة كهربائية وشاحنة في شارع فريدلاندر في الخضيرة.",
+          "summary": "تقرير عن حادث مروري في إسرائيل. التفاصيل والتحديثات في المصدر."
+        }
+      },
+      "title": "Авария с участием электровелосипеда и грузовика произошла на улице Фридлендер в Хадере.",
+      "summary": "Дорожное происшествие в Израиле. Обстоятельства и актуальные сведения — в материале источника.",
+      "translated": true,
+      "imageType": "licensedPhoto",
+      "imageCredit": {
+        "text": "No machine-readable author provided. EPO assumed (based on copyright claims). · CC BY 2.5",
+        "url": "https://commons.wikimedia.org/wiki/File:Falck_sv_04.jpg"
+      }
     },
     {
       "id": "3d8e62d00854ce1b351d",
@@ -3069,46 +3348,6 @@
         "text": "Jeff Attaway from Abuja, Nigeria · CC BY 2.0",
         "url": "https://commons.wikimedia.org/wiki/File:Bad_one_-_auto_wreck_in_Dakar_Senegal,_2011.jpg"
       }
-    },
-    {
-      "id": "49f8482a0c05fbd3d62e",
-      "titleOriginal": "בוחרים רכב חדש: כל מבצעי הרכב וההנחות ביום הבחירות",
-      "sourceLanguage": "he",
-      "date": "2026-10-25T19:32:00Z",
-      "url": "https://cars.walla.co.il/item/3873697",
-      "publisher": "Walla · Все автомобили",
-      "category": "cars",
-      "art": "cars",
-      "image": "./assets/news/images/49f8482a0c05fbd3d62e.webp",
-      "official": false,
-      "translations": {
-        "he": {
-          "title": "בוחרים רכב חדש: כל מבצעי הרכב וההנחות ביום הבחירות",
-          "summary": "כתבה על מכוניות או שוק הרכב בישראל. פרטים באתר המקור."
-        },
-        "ru": {
-          "title": "Выбери новую машину: все автомобильные предложения и скидки в день выборов",
-          "summary": "Материал об автомобиле или автомобильном рынке Израиля. Подробности — на сайте издания."
-        },
-        "en": {
-          "title": "Choose a new car: all car deals and discounts on election day",
-          "summary": "An update about vehicles or Israel's car market. Details are available at the source."
-        },
-        "ar": {
-          "title": "اختر سيارة جديدة: جميع عروض وخصومات السيارات في يوم الانتخابات",
-          "summary": "تحديث عن السيارات أو سوق المركبات في إسرائيل. التفاصيل في المصدر."
-        }
-      },
-      "title": "Выбери новую машину: все автомобильные предложения и скидки в день выборов",
-      "summary": "Материал об автомобиле или автомобильном рынке Израиля. Подробности — на сайте издания.",
-      "translated": true,
-      "imageKind": "ai-generated",
-      "imageType": "licensedPhoto",
-      "imageCredit": {
-        "text": "Eric Friedebach · CC BY 2.0",
-        "url": "https://commons.wikimedia.org/wiki/File:1973_Ford_Mustang_Interior_Dashboard_(51838912069).jpg"
-      },
-      "subjectPhotoChecked": true
     },
     {
       "id": "b6b16f68cf9892ffd0e7",
@@ -4403,120 +4642,6 @@
       "imageCredit": {
         "text": "No machine-readable author provided. EPO assumed (based on copyright claims). · CC BY 2.5",
         "url": "https://commons.wikimedia.org/wiki/File:Falck_sv_04.jpg"
-      }
-    },
-    {
-      "id": "773b8cdf6098657863ae",
-      "titleOriginal": "תאונה עם מעורבות שני כלי רכב אירעה ברחוב שמואל סלנט בפתח תקווה.",
-      "sourceLanguage": "he",
-      "date": "2026-11-12T21:37:49Z",
-      "url": "https://t.me/uh1221/27333",
-      "publisher": "Ихуд Ацала · Telegram",
-      "category": "accidents",
-      "art": "accidents",
-      "image": "./assets/news/images/773b8cdf6098657863ae.webp",
-      "official": false,
-      "translations": {
-        "he": {
-          "title": "תאונה עם מעורבות שני כלי רכב אירעה ברחוב שמואל סלנט בפתח תקווה.",
-          "summary": "דיווח על תאונת דרכים בישראל. פרטים ועדכונים בכתבת המקור."
-        },
-        "ru": {
-          "title": "Авария с участием двух транспортных средств произошла на улице Шмуэля Селанта в Петах-Тикве.",
-          "summary": "Дорожное происшествие в Израиле. Обстоятельства и актуальные сведения — в материале источника."
-        },
-        "en": {
-          "title": "An accident involving two vehicles happened on Shmuel Selant Street in Petah Tikva.",
-          "summary": "A reported road incident in Israel. Details and updates are in the original report."
-        },
-        "ar": {
-          "title": "وقع حادث سير بين مركبتين في شارع شموئيل سلانت في مدينة بيتح تكفا.",
-          "summary": "تقرير عن حادث مروري في إسرائيل. التفاصيل والتحديثات في المصدر."
-        }
-      },
-      "title": "Авария с участием двух транспортных средств произошла на улице Шмуэля Селанта в Петах-Тикве.",
-      "summary": "Дорожное происшествие в Израиле. Обстоятельства и актуальные сведения — в материале источника.",
-      "translated": true,
-      "imageType": "licensedPhoto",
-      "imageCredit": {
-        "text": "Wikimedia Commons · Public domain",
-        "url": "https://commons.wikimedia.org/wiki/File:Hurricane_Rita_Evacuation_ambulance_1.jpg"
-      }
-    },
-    {
-      "id": "fea4f55325cd8a3961aa",
-      "titleOriginal": "בית שמש: נהג רכב נפצע בינוני כתוצאה מתאונה עצמית",
-      "sourceLanguage": "he",
-      "date": "2026-11-12T20:30:36Z",
-      "url": "https://t.me/uh1221/27332",
-      "publisher": "Ихуд Ацала · Telegram",
-      "category": "accidents",
-      "art": "accidents",
-      "image": "./assets/news/images/fea4f55325cd8a3961aa.webp",
-      "official": false,
-      "translations": {
-        "he": {
-          "title": "בית שמש: נהג רכב נפצע בינוני כתוצאה מתאונה עצמית",
-          "summary": "דיווח על תאונת דרכים בישראל. פרטים ועדכונים בכתבת המקור."
-        },
-        "ru": {
-          "title": "Бейт-Шемеш: Водитель автомобиля получил травмы средней степени тяжести в результате ДТП",
-          "summary": "Дорожное происшествие в Израиле. Обстоятельства и актуальные сведения — в материале источника."
-        },
-        "en": {
-          "title": "Beit Shemesh: A car driver was moderately injured as a result of a self-inflicted accident",
-          "summary": "A reported road incident in Israel. Details and updates are in the original report."
-        },
-        "ar": {
-          "title": "بيت شيمش: أصيب سائق سيارة بجروح متوسطة نتيجة تعرضه لحادث سير",
-          "summary": "تقرير عن حادث مروري في إسرائيل. التفاصيل والتحديثات في المصدر."
-        }
-      },
-      "title": "Бейт-Шемеш: Водитель автомобиля получил травмы средней степени тяжести в результате ДТП",
-      "summary": "Дорожное происшествие в Израиле. Обстоятельства и актуальные сведения — в материале источника.",
-      "translated": true,
-      "imageType": "licensedPhoto",
-      "imageCredit": {
-        "text": "No machine-readable author provided. EPO assumed (based on copyright claims). · CC BY 2.5",
-        "url": "https://commons.wikimedia.org/wiki/File:Falck_sv_04.jpg"
-      }
-    },
-    {
-      "id": "2cdcdac9fa890f91d7ab",
-      "titleOriginal": "צוותי הרפואה של איחוד הצלה הוזעקו לרחוב רבי פנחס בן יאיר באלעד עקב דיווח על ילד הולך רגל שנפגע מרכב.",
-      "sourceLanguage": "he",
-      "date": "2026-11-12T18:00:47Z",
-      "url": "https://t.me/uh1221/27329",
-      "publisher": "Ихуд Ацала · Telegram",
-      "category": "accidents",
-      "art": "accidents",
-      "image": "./assets/news/images/2cdcdac9fa890f91d7ab.webp",
-      "official": false,
-      "translations": {
-        "he": {
-          "title": "צוותי הרפואה של איחוד הצלה הוזעקו לרחוב רבי פנחס בן יאיר באלעד עקב דיווח על ילד הולך רגל שנפגע מרכב.",
-          "summary": "דיווח על תאונת דרכים בישראל. פרטים ועדכונים בכתבת המקור."
-        },
-        "ru": {
-          "title": "Медицинские бригады Союза спасателей были вызваны на улицу раввина Пинхаса Бен Яира в Эльаде в связи с сообщением о ребенке-пешеходе, которого сбила машина.",
-          "summary": "Дорожное происшествие в Израиле. Обстоятельства и актуальные сведения — в материале источника."
-        },
-        "en": {
-          "title": "The medical teams of the Rescue Union were called to Rabbi Pinchas Ben Yair Street in Elad due to a report of a child pedestrian who had been hit by a vehicle.",
-          "summary": "A reported road incident in Israel. Details and updates are in the original report."
-        },
-        "ar": {
-          "title": "تم استدعاء الطواقم الطبية التابعة لاتحاد الإنقاذ إلى شارع الحاخام بنحاس بن يائير في إلعاد بسبب بلاغ عن إصابة طفل من المشاة بمركبة.",
-          "summary": "تقرير عن حادث مروري في إسرائيل. التفاصيل والتحديثات في المصدر."
-        }
-      },
-      "title": "Медицинские бригады Союза спасателей были вызваны на улицу раввина Пинхаса Бен Яира в Эльаде в связи с сообщением о ребенке-пешеходе, которого сбила машина.",
-      "summary": "Дорожное происшествие в Израиле. Обстоятельства и актуальные сведения — в материале источника.",
-      "translated": true,
-      "imageType": "licensedPhoto",
-      "imageCredit": {
-        "text": "Wikimedia Commons · Public domain",
-        "url": "https://commons.wikimedia.org/wiki/File:Hurricane_Rita_Evacuation_ambulance_1.jpg"
       }
     }
   ]
