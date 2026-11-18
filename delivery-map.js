@@ -6,11 +6,10 @@
 (function(){
  "use strict";
  const bounds=[[29.48,34.20],[33.32,35.86]];
- const sources=[
-  "https://overpass.private.coffee/api/interpreter",
-  "https://overpass-api.de/api/interpreter"
- ];
- const cacheKey="neoline-pickup-osm-v1",cacheMs=24*60*60*1000;
+ /* Daily snapshot is fetched by GitHub Actions. Visitors no longer make
+    slow mass Overpass requests from every phone / browser session. */
+ const snapshotURL="./assets/pickup/points.json";
+ const cacheKey="neoline-pickup-osm-v2",cacheMs=24*60*60*1000;
  const brands={
   boxit:{title:"BOXIT",mark:"B",color:"#087ebf",rx:/box\s*[- ]?\s*it|בוקסיט|בוקס.?איט/i},
   done:{title:"DONE",mark:"D",color:"#0084cd",rx:/\bdone\b|דאן|דון לוקרים/i},
@@ -43,7 +42,7 @@
  };
  const searchCache={};
  let map=null,group=null,points=[],ready=false,loaded=false,loading=false,
-     active="all",fallbackQuery="parcel lockers in Israel";
+     active="all",fallbackQuery="parcel lockers Israel",fallbackVisible=false;
  const el=id=>document.getElementById(id);
  const language=()=>words[document.documentElement.lang]||words.ru;
  function html(v){
@@ -111,7 +110,16 @@
    const mark=L.marker([point.lat,point.lon],{icon:markerIcon(point.id),title:name});
    mark.bindPopup(popup,{maxWidth:260});group.addLayer(mark);count++;
   }
-  if(loaded)status(count?language().done+count+" · "+language().partial:language().none,"ready");
+  // Missing OSM brand tags must not produce a blank empty map. Use an
+  // explicitly marked Google search as fallback for that operator.
+  if(loaded&&count===0){
+   showFallback(true);
+   return;
+  }
+  if(loaded){
+   hideFallback();
+   status(language().done+count+" · "+language().partial,"ready");
+  }
  }
  function fitNation(){
   if(!map)return;
@@ -120,10 +128,10 @@
  }
  function setProvider(id){
   active=id;
-  // Keep the country overview control in the selected UI language.
   const reset=el("resetCountry");
   if(reset)reset.textContent="🇮🇱 "+language().country;
   if(loaded)showPoints();
+  else if(fallbackVisible)showFallback(true);
  }
  function init(){
   if(!window.L){
@@ -159,70 +167,69 @@
    showFallback();
   }
  }
- function showFallback(){
-  const frame=el("map"),container=el("pickupMap");
-  if(container)container.style.display="none";
-  if(frame){
-   frame.hidden=false;
-   frame.src="https://www.google.com/maps?q="+encodeURIComponent(fallbackQuery)+"&output=embed";
-  }
-  status(language().failed,"error");
- }
- const query='[out:json][timeout:30];'+
-  'area["ISO3166-1"="IL"]["admin_level"="2"]->.israel;'+
-  '(nwr["amenity"~"^(post_office|parcel_locker)$"](area.israel);'+
-  'nwr["shop"="parcel_pickup"](area.israel);'+
-  'nwr["parcel_pickup"="yes"](area.israel);'+
-  ');out center;';
+ // Returns real coordinates only, never synthetic/guessed pins.
  function cacheRead(){
   try{
-   const value=JSON.parse(localStorage.getItem(cacheKey)||"null");
-   if(value&&Number.isFinite(value.at)&&Date.now()-value.at<cacheMs&&
-    Array.isArray(value.points)&&value.points.length>0)return value.points;
+   const saved=JSON.parse(localStorage.getItem(cacheKey)||"null");
+   if(saved&&Number.isFinite(saved.at)&&Date.now()-saved.at<cacheMs&&
+    Array.isArray(saved.points)&&saved.points.length>=25)return saved.points;
   }catch(e){}
   return null;
  }
  function cacheSave(list){
   try{localStorage.setItem(cacheKey,JSON.stringify({at:Date.now(),points:list}))}catch(e){}
  }
- async function fetchOverpass(endpoint){
-  const controller=new AbortController(),timer=setTimeout(()=>controller.abort(),35000);
-  try{
-   const response=await fetch(endpoint,{method:"POST",
-    headers:{"Content-Type":"application/x-www-form-urlencoded;charset=UTF-8"},
-    body:"data="+encodeURIComponent(query),signal:controller.signal});
-   if(!response.ok){
-    const error=new Error("Overpass HTTP "+response.status);
-    error.code=response.status;throw error;
-   }
-   const result=await response.json();
-   if(result.remark&&(!result.elements||!result.elements.length))throw Error(result.remark);
-   return parseOSM(result);
-  }finally{clearTimeout(timer)}
+ function showFallback(noResults=false){
+  const frame=el("map"),container=el("pickupMap");
+  fallbackVisible=true;
+  if(container)container.style.visibility="hidden";
+  if(frame){
+   frame.hidden=false;
+   const src="https://www.google.com/maps?q="+encodeURIComponent(fallbackQuery)+"&output=embed";
+   if(frame.src!==src)frame.src=src;
+  }
+  const lang=document.documentElement.lang||"ru";
+  const hint={
+   ru:noResults?"В OSM нет подтверждённых точек этой сети. Показываем поиск Google Maps — проверьте официальный справочник.":"Карта Google Maps: результаты поиска, не полный реестр пунктов. Официальные карты сетей доступны ниже.",
+   en:noResults?"No verified OSM points for this network. Showing Google search — verify in the operator directory.":"Google Maps search, not a complete official location register. Operator directories are below.",
+   he:noResults?"אין נקודות OSM מאומתות לרשת זו. מוצג חיפוש Google — בדקו באתר המפעיל.":"תוצאות חיפוש ב-Google Maps, לא רשימה מלאה. קישורים רשמיים מופיעים למטה.",
+   ar:noResults?"لا توجد نقاط OSM موثقة لهذه الشبكة. نعرض بحث Google — تحقق من موقع المشغل.":"نتائج بحث خرائط Google وليست قائمة كاملة. الروابط الرسمية أدناه."
+  };
+  status(hint[lang]||hint.ru,"error");
+ }
+ function hideFallback(){
+  fallbackVisible=false;
+  const frame=el("map"),container=el("pickupMap");
+  if(frame)frame.hidden=true;
+  if(container)container.style.visibility="visible";
+  setTimeout(()=>map?.invalidateSize(),80);
  }
  async function loadPoints(){
   if(loading)return;
   loading=true;
   const cached=cacheRead();
-  if(cached){
-   points=cached;loaded=true;showPoints();loading=false;return;
-  }
+  if(cached){points=cached;loaded=true;showPoints();loading=false;return;}
+  // Existing page should never stay at "Loading..." for 70 seconds.
+  // The static verified snapshot is built daily by GitHub, outside browsers.
+  const controller=new AbortController();
+  const timeout=setTimeout(()=>controller.abort(),6500);
   try{
-   let lastError=null;
-   for(const endpoint of sources){
-    try{
-     const rows=await fetchOverpass(endpoint);
-     if(rows.length===0)throw Error("No OSM points returned");
-     points=rows;loaded=true;cacheSave(rows);showPoints();lastError=null;break;
-    }catch(e){
-     lastError=e;console.warn("OpenStreetMap pickup data:",e.message);
-     if(e.code===429)break;
-    }
-   }
-   if(lastError){
-    status(language().failed,"error");
-   }
-  }finally{loading=false}
+   const day=Math.floor(Date.now()/86400000);
+   const response=await fetch(snapshotURL+"?v="+day,{
+    signal:controller.signal,cache:"no-store"
+   });
+   if(!response.ok)throw Error("Static OSM map archive HTTP "+response.status);
+   const data=await response.json();
+   if(!Array.isArray(data.points)||data.points.length<25||
+      data.version!==1)throw Error("No verified OSM locations in snapshot");
+   const valid=data.points.filter(p=>Number.isFinite(p.lat)&&Number.isFinite(p.lon)&&
+     p.lat>=29.3&&p.lat<=33.5&&p.lon>=34.1&&p.lon<=36.1);
+   if(valid.length<25)throw Error("Invalid location data");
+   points=valid;loaded=true;cacheSave(points);showPoints();
+  }catch(e){
+   console.warn("Countrywide OSM archive unavailable:",e.message);
+   showFallback();
+  }finally{clearTimeout(timeout);loading=false}
  }
  async function searchCity(name){
   if(!ready)return;
@@ -245,15 +252,24 @@
    }catch(e){console.warn("City search:",e.message)}
   }
   if(coords){
-   map.flyTo(coords,Math.max(map.getZoom(),12),{duration:.7});
-   if(loaded)showPoints();
-   else status(language().loading);
-  }else status(language().noCity,"error");
+   if(!fallbackVisible){
+    map.flyTo(coords,Math.max(map.getZoom(),12),{duration:.7});
+    if(loaded)showPoints();
+   }else showFallback();
+  }else if(!fallbackVisible)status(language().noCity,"error");
+  else showFallback();
  }
- function setFallback(queryText){fallbackQuery=queryText||fallbackQuery}
+ function setFallback(queryText){
+  fallbackQuery=queryText||fallbackQuery;
+  if(fallbackVisible)showFallback(!loaded);
+ }
  function subtitle(){return language().title}
  function hint(){return language().hint}
- function resetCountry(){el("city").value="";fitNation()}
+ function resetCountry(){
+  el("city").value="";
+  fitNation();
+  if(fallbackVisible)showFallback();
+ }
  window.NeolineMap={setProvider,searchCity,resetCountry,setFallback,subtitle,hint,available:()=>ready};
  init();
 })();
