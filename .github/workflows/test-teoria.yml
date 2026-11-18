@@ -260,7 +260,7 @@ jobs:
             });
             console.log('THEORY NEW DESIGN + 5-LINK NAV '+JSON.stringify(navi));
             if(!navi.visible||navi.position!=='fixed'||!navi.animated||
-               navi.links.join('|')!=='./|./#catalog|./news.html|./delivery.html|./?panel=cart'||
+               navi.links.join('|')!=='./|./#catalog|./news.html|./delivery.html|./teoria.html'||
                navi.svgIcons!==5||navi.routes.join(',')!=='route,signs,exam,mistakes,marathon'||
                navi.darkCardColor!=='rgb(255, 255, 255)')
               throw Error('Brand palette, vector game modes or dock broken '+JSON.stringify(navi));
