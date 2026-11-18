@@ -152,3 +152,39 @@
 @media(prefers-reduced-motion:reduce){
  .neoline-site-header .neoline-site-header__flag{transition:none}
 }
+
+/* Homepage adaptation: retain desktop catalogue/news navigation above
+   1150px, but show exactly the same three header elements on phones. */
+@media(max-width:1150px){
+ .neoline-site-header .header .nav{display:none!important}
+}
+.neoline-site-header #mobileCart.neoline-site-header__cart{
+ width:46px!important;height:49px!important;min-width:46px!important;
+ display:flex!important;padding:8px!important;
+ background:linear-gradient(115deg,#f1f9ff,#e5f3fd)!important;
+ border:1px solid #c6dff0!important;border-radius:16px!important;
+ box-shadow:inset 0 0 0 1px #ffffffa0,0 3px 12px #176aa413!important;
+}
+@media(max-width:900px){
+ .neoline-site-header #mobileCart.neoline-site-header__cart{
+  width:39px!important;height:43px!important;min-width:39px!important;
+  padding:6px!important;border-radius:14px!important;
+ }
+}
+@media(max-width:400px){
+ .neoline-site-header .header .brand-original img.brand-clean{
+  width:clamp(108px,31.5vw,136px)!important;
+ }
+ .neoline-site-header #mobileCart.neoline-site-header__cart{
+  width:35px!important;height:40px!important;min-width:35px!important;
+  padding:5px!important;
+ }
+}
+@media(max-width:345px){
+ .neoline-site-header .header .brand-original img.brand-clean{width:105px!important}
+ .neoline-site-header #mobileCart.neoline-site-header__cart{
+  width:32px!important;min-width:32px!important;
+ }
+}
+/* Uniform order even when a section uses dir=rtl internally. */
+.neoline-site-header .neoline-site-header__actions{direction:ltr!important}
