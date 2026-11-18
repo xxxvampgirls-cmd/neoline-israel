@@ -119,6 +119,13 @@
   if(!modes.includes(mode))return;
   window.dispatchEvent(new CustomEvent("neoline:delivery-provider",{detail:{id:"all"}}));
   highlight(mode);
+  // The network panel must not claim a single carrier is selected after
+  // a global type filter replaces that carrier's map.
+  document.querySelectorAll("[data-provider]").forEach(button=>{
+   const on=mode==="all"&&button.dataset.provider==="all";
+   button.classList.toggle("active",on);
+   button.setAttribute("aria-pressed",String(on));
+  });
   const t=dict(),city=field("city")?.value.trim()||"";
   const queries={
    all:"parcel lockers courier pickup electronic retail stores",
