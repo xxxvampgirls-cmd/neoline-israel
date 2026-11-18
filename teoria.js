@@ -13,6 +13,33 @@ he:{backHome:"→ חזרה לראשי",heroEyebrow:"NEOLINE · ישראל · מ�
 const text=(k)=>(DICTS[state.lang]||DICTS.ru)[k];
 const state={lang:"ru",licence:"B",banks:{},pool:[],mode:null,questions:[],index:0,choices:[],selected:null,answers:[],correct:0,earned:0,lives:3,ticker:null,deadline:0,loadSeq:0,ready:false,finished:false};
 let stats={answered:{},wrong:[],xp:0,history:[]};
+let answerAdvanceTimer=null,questionExitTimer=null,sessionVersion=0;
+const quietMotion=()=>Boolean(window.matchMedia&&window.matchMedia("(prefers-reduced-motion: reduce)").matches);
+function cancelAutoAdvance(){
+ clearTimeout(answerAdvanceTimer);clearTimeout(questionExitTimer);
+ answerAdvanceTimer=null;questionExitTimer=null;
+ const card=document.querySelector("#gamePlaying .question-card");
+ if(card)card.classList.remove("question-out","question-in");
+}
+function animateHUD(id,animation){
+ const node=$(id);if(!node||quietMotion())return;
+ node.classList.remove("hud-pop","hud-heart-pulse");
+ void node.offsetWidth;node.classList.add(animation);
+}
+function scheduleAnswerAdvance(success,gameOverAfter=false){
+ const version=sessionVersion,index=state.index,chosen=state.selected;
+ const stillCurrent=()=>version===sessionVersion&&!state.finished&&state.index===index&&state.selected===chosen;
+ const delay=quietMotion()?450:state.mode==="exam"?850:success?1140:1550;
+ answerAdvanceTimer=setTimeout(()=>{
+  answerAdvanceTimer=null;if(!stillCurrent())return;
+  if(!quietMotion())document.querySelector("#gamePlaying .question-card")?.classList.add("question-out");
+  questionExitTimer=setTimeout(()=>{
+   questionExitTimer=null;if(!stillCurrent())return;
+   if(gameOverAfter)showGameOver();else nextQuestion();
+  },quietMotion()?0:220);
+ },delay);
+}
+
 function safeStoreGet(key){try{return localStorage.getItem(key)}catch(e){return null}}
 function safeStorePut(key,value){try{localStorage.setItem(key,value)}catch(e){}}
 const statsKey=()=> "neoline-teoria:v1:"+state.lang+":"+state.licence;
@@ -171,6 +198,7 @@ function hideGameOver(){
 }
 function showGameOver(){
  if(state.finished)return;
+ cancelAutoAdvance();sessionVersion++;
  state.finished=true;
  stopClock();
  // Every answer (including the third miss) has already been recorded once.
@@ -229,6 +257,7 @@ function initGameOverControls(){
 }
 
 function quitSession(){
+ cancelAutoAdvance();sessionVersion++;
  hideGameOver();
  stopClock();
  state.mode=null;
@@ -250,6 +279,7 @@ function formatClock(){
 }
 function startMode(mode){
  if(!state.ready)return;
+ cancelAutoAdvance();sessionVersion++;
  hideGameOver();
  stats=readStats();
  const available=classes();
@@ -312,6 +342,8 @@ function updateQuizHUD(){
  lives.setAttribute("aria-label",state.mode==="marathon"?"∞":copy.lives+": "+state.lives);
 }
 function renderQuestion(){
+ const card=document.querySelector("#gamePlaying .question-card");
+ if(card){card.classList.remove("question-out","question-in");if(!quietMotion()){void card.offsetWidth;card.classList.add("question-in")}}
  const q=state.questions[state.index];
  if(!q){finishSession(false);return}
  state.selected=null;
@@ -331,7 +363,7 @@ function renderQuestion(){
  $("feedback").hidden=true;$("feedback").textContent="";$("feedback").classList.remove("negative");
  $("questionTip").textContent=text("questionTip");
  $("nextQuestion").disabled=true;
- $("nextQuestion").textContent=state.index===total-1?text("done"):text("next");
+ $("nextQuestion").hidden=true;
  $("answers").innerHTML=state.choices.map((original,i)=>
   '<button type="button" class="answer" data-original="'+original+'"><span class="letter">'+String.fromCharCode(65+i)+'</span><span dir="auto">'+esc(q.a[original])+'</span></button>'
  ).join("");
@@ -350,22 +382,24 @@ function recordProgress(q,selected,wasCorrect){
 }
 function pickAnswer(chosen){
  if(state.selected!==null||state.finished)return;
- const q=state.questions[state.index];
+ const q=state.questions[state.index];if(!q)return;
  state.selected=chosen;
  const success=chosen===q.correct;
  state.answers.push({q,chosen,success});
  state.correct+=Number(success);
  if(success)state.earned+=15;else if(hasLives())state.lives=Math.max(0,state.lives-1);
- $("nextQuestion").disabled=false;
+ $("nextQuestion").disabled=true;
  updateQuizHUD();
  const buttons=[...$("answers").querySelectorAll("button")];
  for(const b of buttons){
   b.disabled=true;
   const n=Number(b.dataset.original);
-  if(state.mode==="exam"){if(n===chosen)b.classList.add("selected")}
-  else{
-   if(n===q.correct)b.classList.add("correct");
-   if(n===chosen&&!success)b.classList.add("wrong");
+  if(state.mode==="exam"){
+   // Preserve mock-exam secrecy: no green/red reveal until results.
+   if(n===chosen)b.classList.add("selected","answer-confirmed");
+  }else{
+   if(n===q.correct)b.classList.add("correct",success?"answer-celebrate":"answer-reveal");
+   if(n===chosen&&!success)b.classList.add("wrong","answer-shake");
   }
  }
  if(state.mode==="exam"){
@@ -375,12 +409,17 @@ function pickAnswer(chosen){
   const feedback=$("feedback");
   feedback.hidden=false;feedback.classList.toggle("negative",!success);
   feedback.textContent=success?text("correct"):text("wrong");
+  if(success)animateHUD("scoreMeta","hud-pop");
+  else if(hasLives())animateHUD("lifeMeta","hud-heart-pulse");
   updateQuizHUD();
-  if(!success && hasLives() && state.lives===0)showGameOver();
  }
+ // Third wrong answer ends the game AFTER its feedback animation.
+ scheduleAnswerAdvance(success,!success&&hasLives()&&state.lives===0);
 }
 function nextQuestion(){
  if(state.selected===null||state.finished)return;
+ clearTimeout(answerAdvanceTimer);clearTimeout(questionExitTimer);
+ answerAdvanceTimer=null;questionExitTimer=null;
  if(state.index>=state.questions.length-1){
   finishSession(false);return;
  }
@@ -389,6 +428,7 @@ function nextQuestion(){
 }
 function finishSession(timedOut){
  if(state.finished)return;
+ cancelAutoAdvance();sessionVersion++;
  state.finished=true;
  stopClock();
  const n=state.questions.length;
@@ -435,7 +475,6 @@ function init(){
  $("licenseSelect").addEventListener("change",e=>selectLicence(e.target.value));
  document.querySelectorAll("[data-mode]").forEach(b=>b.addEventListener("click",()=>startMode(b.dataset.mode)));
  $("exitQuiz").addEventListener("click",quitSession);
- $("nextQuestion").addEventListener("click",nextQuestion);
  $("backToModes").addEventListener("click",quitSession);
  $("restartMode").addEventListener("click",()=>startMode(state.mode));
  document.addEventListener("visibilitychange",()=>{if(state.mode==="exam"&&!document.hidden&&!state.finished)formatClock()});
