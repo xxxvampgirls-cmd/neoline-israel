@@ -7,12 +7,16 @@
   "use strict";
   const nav = document.querySelector(".mobile-nav,.news-bottom,.delivery-nav,.theory-bottom");
   if (!nav) return;
+  // Cloudflare Pages serves clean URLs (/delivery, /news) as well as
+  // their .html counterparts. Compare the normalized route, not just .html.
   const pathname = location.pathname.replace(/\/+$/,"").toLowerCase();
-  const filename = pathname.split("/").pop() || "index.html";
-  const mainPage = filename === "index.html";
-  const newsPage = filename === "news.html";
-  const deliveryPage = filename === "delivery.html";
-  const theoryPage = filename === "teoria.html" || filename === "teoria";
+  const filename = pathname.split("/").pop() || "index";
+  const page = filename.replace(/\.html?$/,"");
+  // Nav structure is a safe fallback when a page uses a clean/rewrite URL.
+  const mainPage = page === "index" || nav.classList.contains("mobile-nav");
+  const newsPage = page === "news" || nav.classList.contains("news-bottom");
+  const deliveryPage = page === "delivery" || nav.classList.contains("delivery-nav");
+  const theoryPage = page === "teoria" || nav.classList.contains("theory-bottom");
   const selectors = nav.classList.contains("mobile-nav") ? {
     home: '[data-scroll="top"]',
     catalog: '[data-scroll="catalog"]',
