@@ -131,7 +131,9 @@ function refreshStats(){
   total:state.ready?classes().length:0,
   accuracy:total?Math.round(correct/total*100):null,
   xp:stats.xp,
-  language:state.lang
+  language:state.lang,
+  history:stats.history.slice(-30),wrong:stats.wrong.length,
+  attempts:total,correct,licence:state.licence
  }}));
  document.querySelector('[data-mode="mistakes"]').disabled=!stats.wrong.length || !state.ready;
 }
@@ -236,6 +238,9 @@ function showGameOver(){
  document.body.classList.add("game-over-open");
  requestAnimationFrame(()=>$("gameOverRetry").focus({preventScroll:true}));
  refreshStats();
+ window.dispatchEvent(new CustomEvent("neoline:theory-finish",{detail:{
+  gameOver:true,correct:state.correct,total:state.answers.length,earned:state.earned,mode:state.mode,language:state.lang
+ }}));
 }
 function gameOverToModes(){
  const previousMode=state.mode;
@@ -354,6 +359,9 @@ function updateQuizHUD(){
  lives.hidden=state.mode==="exam";
  lives.textContent=state.mode==="marathon"?"∞":Array.from({length:3},(_,i)=>i<state.lives?"♥":"♡").join(" ");
  lives.setAttribute("aria-label",state.mode==="marathon"?"∞":copy.lives+": "+state.lives);
+ window.dispatchEvent(new CustomEvent("neoline:theory-quiz",{detail:{
+  done,total,lives:state.lives,mode:state.mode,earned:state.earned,language:state.lang
+ }}));
 }
 function renderQuestion(){
  const card=document.querySelector("#gamePlaying .question-card");
@@ -381,6 +389,7 @@ function renderQuestion(){
  $("answers").innerHTML=state.choices.map((original,i)=>
   '<button type="button" class="answer" data-original="'+original+'"><span class="letter">'+String.fromCharCode(65+i)+'</span><span dir="auto">'+esc(q.a[original])+'</span></button>'
  ).join("");
+ $("answers").classList.toggle("game-answers-short",state.choices.every(i=>String(q.a[i]||"").length<=23));
  $("answers").querySelectorAll("button").forEach(button=>button.addEventListener("click",()=>pickAnswer(Number(button.dataset.original))));
 }
 function recordProgress(q,selected,wasCorrect){
@@ -427,6 +436,10 @@ function pickAnswer(chosen){
   else if(hasLives())animateHUD("lifeMeta","hud-heart-pulse");
   updateQuizHUD();
  }
+ // Visual animation only; exam answers remain concealed.
+ window.dispatchEvent(new CustomEvent("neoline:theory-answer",{detail:{
+  correct:success,mode:state.mode,earned:state.earned,language:state.lang,delta:success?15:0
+ }}));
  // Third wrong answer ends the game AFTER its feedback animation.
  scheduleAnswerAdvance(success,!success&&hasLives()&&state.lives===0);
 }
@@ -476,6 +489,9 @@ function finishSession(timedOut){
  }
  $("gameResult").scrollIntoView({behavior:"smooth",block:"start"});
  refreshStats();
+ window.dispatchEvent(new CustomEvent("neoline:theory-finish",{detail:{
+  gameOver:false,correct:state.correct,total:n,earned:state.earned,mode:state.mode,language:state.lang
+ }}));
 }
 function init(){
  initTheoryNavAutoHide();
