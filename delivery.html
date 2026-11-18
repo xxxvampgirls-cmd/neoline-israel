@@ -218,7 +218,11 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible{ou
  .network-more>summary span,.city-choices>summary span{transition:none}
 }
 
-</style></head><body>
+</style>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/leaflet.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet.markercluster@1.5.3/dist/MarkerCluster.css">
+<link rel="stylesheet" href="./delivery-map.css?v=20261118-israel-map-v1">
+</head><body>
 <header class="head"><div class="wrap head-inner"><a href="./index.html" class="brand" aria-label="NEOLINE"><img src="./assets/neoline-clean.svg" alt="NEOLINE" onerror="this.outerHTML='NEOLINE'"></a><div class="head-actions"><select class="lang" id="language" aria-label="Language"><option value="ru">RU</option><option value="he">HE</option><option value="en">EN</option><option value="ar">AR</option></select><a href="./index.html#installation" class="back" id="back">← На сайт</a></div></div></header>
 <main class="wrap"><div class="hero"><h1 id="title">Где забрать товар</h1></div>
 <div class="layout"><aside class="side"><div class="label" id="choose">ВЫБЕРИТЕ СЕТЬ</div><div class="networks" id="networks">
@@ -239,9 +243,15 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible{ou
 <button class="network" type="button" data-provider="fedex" aria-pressed="false"><span class="badge">FX</span><span><strong>FedEx</strong><small id="caption-fedex">Пункты отправки и выдачи</small></span></button>
 </div><div class="separate"><a class="shoplink" id="ksp" target="_blank" rel="noopener noreferrer" href="https://ksp.co.il/"><strong>KSP ↗</strong><small id="kspDesc">Отдельная сеть магазинов: самовывоз только для заказов KSP, когда он доступен.</small></a></div></details></aside>
 <section class="map-panel" aria-label="Pickup map"><div class="map-top"><div><div class="map-heading" id="mapTitle">Все сети — пункты выдачи</div><div class="map-sub" id="mapSub">Поиск точек на карте Google, справочно</div></div><span aria-hidden="true">⌖</span></div>
-<form id="search" class="searchbox"><input id="city" placeholder="Введите город или район" enterkeyhint="search" autocomplete="address-level2" value="תל אביב" aria-label="City"><button type="submit" id="find">Найти</button></form>
+<form id="search" class="searchbox"><input id="city" placeholder="Введите город или район" enterkeyhint="search" autocomplete="address-level2" value="" aria-label="City"><button type="submit" id="find">Найти</button></form>
 <details class="city-choices" id="cityChoices"><summary id="cityChoicesSummary">Быстрый выбор города <span aria-hidden="true">⌄</span></summary><div class="cities" id="cities"><button type="button" data-city="אריאל">Ариэль</button><button type="button" data-city="תל אביב">Тель-Авив</button><button type="button" data-city="פתח תקווה">Петах-Тиква</button><button type="button" data-city="ירושלים">Иерусалим</button><button type="button" data-city="חיפה">Хайфа</button><button type="button" data-city="באר שבע">Беэр-Шева</button><button type="button" data-city="אילת">Эйлат</button></div></details>
-<div class="map-wrap"><iframe id="map" title="Поиск пунктов выдачи на Google Maps" loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe><div class="map-hint" id="mapHint">Метки Google могут быть неполными. Полный актуальный список, часы работы и доступность проверяйте на сайте выбранной сети.</div></div>
+<div class="map-wrap">
+<div id="pickupMap" role="region" aria-label="Карта пунктов выдачи Израиля"></div>
+<iframe id="map" hidden title="Запасная карта Google Maps" loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe>
+<div class="map-progress" id="mapProgress" role="status" aria-live="polite">Загружаем точки выдачи…</div>
+<button class="map-reset" type="button" id="resetCountry">🇮🇱 Весь Израиль</button>
+<div class="map-hint" id="mapHint">Показаны только точки с координатами OpenStreetMap. Для проверки полного списка используйте официальные карты операторов.</div>
+</div>
 <div class="bottom"><a class="official" id="official" href="https://boxit.co.il/" target="_blank" rel="noopener noreferrer">Официальные точки сети ↗</a><a class="maps" id="fullMap" target="_blank" rel="noopener noreferrer">Открыть Google Maps ↗</a><small id="networkNotice">Условия работы и часы доступа зависят от конкретного пункта. Наличие локера не означает, что в него можно доставить заказ NEOLINE.</small></div>
 </section></div></main><footer class="foot"><div class="wrap"><span id="foot">NEOLINE Israel · демонстрационный проект. Карты и адреса принадлежат соответствующим операторам; сведения о точках могут меняться.</span> · <a href="./index.html" id="home">На главную</a></div></footer>
 <nav class="delivery-nav" id="deliveryBottomNav" aria-label="Главное меню NEOLINE">
@@ -250,6 +260,9 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible{ou
  <a href="./news.html" id="deliveryNavNews"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M7 8h4v4H7zM14 8h4M14 11h4M7 16h11"/></svg><span>Новости</span></a>
  <a href="./delivery.html" id="deliveryNavDelivery" aria-current="page" class="active"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 7h12v10H3z"/><path d="M15 10h3l3 4v3h-6"/><circle cx="7" cy="19" r="2"/><circle cx="17" cy="19" r="2"/></svg><span>Доставка</span></a>
 </nav>
+<script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/leaflet.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/leaflet.markercluster@1.5.3/dist/leaflet.markercluster.js"></script>
+<script src="./delivery-map.js?v=20261118-israel-map-v1"></script>
 <script>
 (function(){
 "use strict";
@@ -331,18 +344,26 @@ function applyLanguage(){
 }
 function renderMap(){
  const t=copy[lang]||copy.ru,extra=moreCopy[lang]||moreCopy.ru;
- const city=$("city").value.trim()||"תל אביב",all=active==="all";
+ const city=$("city").value.trim(),all=active==="all";
  const provider=all?null:providers[active];
- const q=(all?"נקודות איסוף חבילות לוקרים":provider.query)+" "+city+" Israel";
- $("map").src="https://www.google.com/maps?q="+encodeURIComponent(q)+"&output=embed";
+ // Live map markers come from real OSM features, not Google searches.
+ const q=(all?"parcel lockers parcel pickup points":provider.query)+" "+city+" Israel";
  $("fullMap").href="https://www.google.com/maps/search/?api=1&query="+encodeURIComponent(q);
  $("official").hidden=all;
  if(!all)$("official").href=provider.official;
  $("official").textContent=t.official;
  $("mapTitle").textContent=(all?extra.all:provider.name)+t.mapTitle;
- $("mapSub").textContent=all?extra.genericSub:t.mapSub;
- $("mapHint").textContent=all?extra.genericHint:t.mapHint;
+ $("mapSub").textContent=window.NeolineMap?window.NeolineMap.subtitle():extra.genericSub;
+ $("mapHint").textContent=window.NeolineMap?window.NeolineMap.hint():extra.genericHint;
  $("networkNotice").textContent=all?extra.genericNotice:t.networkNotice;
+ if(window.NeolineMap){
+  window.NeolineMap.setFallback(q);
+  window.NeolineMap.setProvider(active);
+ }else{
+  $("map").hidden=false;
+  $("map").src="https://www.google.com/maps?q="+encodeURIComponent(q)+"&output=embed";
+  $("mapProgress").textContent=extra.genericHint;
+ }
 }
 function chooseProvider(id,fromTap=false){
  if(id!=="all"&&!providers[id])return;
@@ -365,8 +386,16 @@ function chooseProvider(id,fromTap=false){
 }
 document.querySelectorAll("[data-provider]").forEach(button=>button.addEventListener("click",()=>chooseProvider(button.dataset.provider,true)));
 
-$("search").addEventListener("submit",e=>{e.preventDefault();renderMap();});
-document.querySelectorAll("[data-city]").forEach(button=>button.addEventListener("click",()=>{$("city").value=button.dataset.city;renderMap();}));
+$("search").addEventListener("submit",e=>{
+ e.preventDefault();renderMap();
+ if(window.NeolineMap)window.NeolineMap.searchCity($("city").value);
+});
+document.querySelectorAll("[data-city]").forEach(button=>button.addEventListener("click",()=>{
+ $("city").value=button.dataset.city;renderMap();
+ if(window.NeolineMap)window.NeolineMap.searchCity(button.dataset.city);
+ $("cityChoices").open=false;
+}));
+$("resetCountry").addEventListener("click",()=>{$("city").value="";renderMap();});
 $("language").addEventListener("change",e=>{lang=e.target.value;try{localStorage.setItem("neoline-language",lang)}catch(_){}applyLanguage();});
 try{const saved=localStorage.getItem("neoline-language");if(copy[saved])lang=saved}catch(_){}
 const requested=new URLSearchParams(location.search).get("network");
