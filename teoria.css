@@ -734,3 +734,89 @@ html[dir=rtl] #gamePlaying .hud-back svg{transform:scaleX(-1)}
  #gamePlaying .hud-xp{font-size:9px}
 }
 @media(prefers-reduced-motion:reduce){#gamePlaying .hud-progress-orbit{transition:none}}
+
+/* Symmetric HUD: identical side columns anchor the circle in the exact center. */
+#gamePlaying .quiz-hud{
+ display:grid;grid-template-columns:minmax(0,1fr) 80px minmax(0,1fr);
+ align-items:center;justify-items:stretch;gap:10px;width:100%;min-width:0;
+}
+#gamePlaying .hud-back{justify-self:start;max-width:100%;min-width:0;font-weight:800}
+#gamePlaying .hud-progress{grid-column:2;justify-self:center}
+#gamePlaying .hud-info{
+ grid-column:3;justify-self:end;align-items:flex-end;
+ width:100%;max-width:100%;min-width:0;gap:5px;
+}
+#gamePlaying .mode-pill{
+ display:block;width:max-content;max-width:100%;
+ white-space:normal;overflow-wrap:anywhere;text-overflow:clip;
+ text-align:end;line-height:1.25;border-radius:13px;padding:6px 9px;
+}
+#gamePlaying .hud-metrics{width:100%;min-width:0;max-width:100%;justify-content:flex-end;gap:4px 7px}
+#gamePlaying .hud-lives{font-size:17px;letter-spacing:0}
+#gamePlaying .hud-xp{font-size:11px}
+@media(max-width:720px){
+ #gamePlaying .quiz-hud{grid-template-columns:minmax(0,1fr) 66px minmax(0,1fr);gap:7px}
+ #gamePlaying .hud-back{font-size:10px;padding:8px 7px}
+ #gamePlaying .hud-progress{width:66px;height:66px}
+ #gamePlaying .mode-pill{font-size:10px;padding:5px 7px}
+ #gamePlaying .hud-metrics{gap:3px 5px}
+ #gamePlaying .hud-lives{font-size:15px}
+ #gamePlaying .hud-xp{font-size:10px;padding:3px 6px}
+}
+@media(max-width:355px){
+ #gamePlaying .quiz-hud{grid-template-columns:minmax(0,1fr) 56px minmax(0,1fr);gap:5px}
+ #gamePlaying .hud-progress{width:56px;height:56px}
+ #gamePlaying .hud-back{font-size:9px;padding:6px 5px;gap:2px}
+ #gamePlaying .mode-pill{font-size:9px;padding:4px 6px}
+ #gamePlaying .hud-lives{font-size:14px}
+ #gamePlaying .hud-xp{font-size:9px;padding:3px 5px}
+}
+html[dir=rtl] #gamePlaying .quiz-hud{direction:rtl}
+
+/* Selected answer motion, feedback, and hands-free question crossfade. */
+#gamePlaying .question-card{will-change:opacity,transform}
+#gamePlaying .answer{
+ position:relative;overflow:hidden;
+ transition:background-color .22s ease,border-color .22s ease,box-shadow .22s ease,transform .22s ease;
+}
+#gamePlaying .answer:not(:disabled):active{transform:scale(.985)}
+#gamePlaying .answer.answer-celebrate{
+ box-shadow:0 0 0 2px #25b98930,0 11px 22px #22a67a28;
+ animation:theoryAnswerSuccess .85s cubic-bezier(.2,.7,.2,1) both;
+ padding-inline-end:46px;
+}
+#gamePlaying .answer.answer-celebrate::after,#gamePlaying .answer.answer-shake::after{
+ position:absolute;inset-inline-end:15px;top:50%;transform:translateY(-50%);
+ font-size:19px;line-height:1;font-weight:900;pointer-events:none;
+}
+#gamePlaying .answer.answer-celebrate::after{content:"✓";color:#118968}
+#gamePlaying .answer.answer-shake::after{content:"×";color:#b84242}
+#gamePlaying .answer.answer-shake{
+ padding-inline-end:46px;box-shadow:0 0 0 2px #d661612e;
+ animation:theoryAnswerError .44s ease-in-out both;
+}
+#gamePlaying .answer.answer-reveal{animation:theoryAnswerReveal .85s ease-out both}
+#gamePlaying .answer.answer-confirmed{
+ border-color:#228fd6;background:#e8f6ff;
+ animation:theoryAnswerConfirmed .65s ease-out both;
+}
+#gamePlaying .question-card.question-in{animation:theoryQuestionIn .32s cubic-bezier(.15,.73,.24,1) both}
+#gamePlaying .question-card.question-out{animation:theoryQuestionOut .22s ease-in both;pointer-events:none}
+#gamePlaying .feedback:not([hidden]){animation:theoryFeedbackIn .36s ease-out both}
+#gamePlaying .hud-xp.hud-pop{animation:theoryHudPop .58s ease-out both}
+#gamePlaying .hud-lives.hud-heart-pulse{animation:theoryLivesPulse .58s ease-out both}
+#gamePlaying #nextQuestion{display:none!important}
+@keyframes theoryAnswerSuccess{0%{transform:scale(1)}33%{transform:scale(1.019)}64%{transform:scale(.998)}100%{transform:scale(1)}}
+@keyframes theoryAnswerError{0%,100%{transform:translateX(0)}22%{transform:translateX(-5px)}45%{transform:translateX(5px)}70%{transform:translateX(-3px)}}
+@keyframes theoryAnswerReveal{0%{box-shadow:0 0 0 0 #2cbd8d50}55%{box-shadow:0 0 0 6px #2cbd8d24}100%{box-shadow:0 0 0 2px #2cbd8d1c}}
+@keyframes theoryAnswerConfirmed{0%{transform:scale(1);box-shadow:0 0 0 0 #2192df36}48%{transform:scale(1.008);box-shadow:0 0 0 5px #2192df24}100%{transform:scale(1);box-shadow:none}}
+@keyframes theoryQuestionIn{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+@keyframes theoryQuestionOut{from{opacity:1;transform:translateY(0)}to{opacity:0;transform:translateY(-10px)}}
+@keyframes theoryFeedbackIn{from{opacity:0;transform:translateY(7px)}to{opacity:1;transform:translateY(0)}}
+@keyframes theoryHudPop{0%,100%{transform:scale(1)}45%{transform:scale(1.13)}}
+@keyframes theoryLivesPulse{0%,100%{transform:scale(1)}30%{transform:scale(1.2)}60%{transform:scale(.94)}}
+@media(prefers-reduced-motion:reduce){
+ #gamePlaying :is(.answer.answer-celebrate,.answer.answer-shake,.answer.answer-reveal,.answer.answer-confirmed,.question-card.question-in,.question-card.question-out,.feedback:not([hidden]),.hud-xp.hud-pop,.hud-lives.hud-heart-pulse){
+  animation:none!important;transform:none!important;
+ }
+}
