@@ -103,7 +103,7 @@ function initTheoryNavAutoHide(){
 function setCopy(){
  document.documentElement.lang=state.lang;
  document.documentElement.dir=state.lang==="he"?"rtl":"ltr";
- for(const id of ["backHome","heroEyebrow","heroSubtitle","badgeOfficial","badgeFree","badgeB","selectLabel","selectTitle","progressSummary","licenseLabel","statSeenLabel","statAccuracyLabel","statMistakesLabel","modeRoute","descRoute","ctaRoute","modeSigns","descSigns","ctaSigns","modeExam","descExam","ctaExam","modeMistakes","descMistakes","ctaMistakes","modeMarathon","descMarathon","ctaMarathon","sourceNotice","sourceBank","sourceRules","exitLabel","questionTip","resultKicker","resultPercentLabel","resultXPLabel","restartLabel","backModesLabel","footerBack"]){
+ for(const id of ["heroEyebrow","heroSubtitle","badgeOfficial","badgeFree","badgeB","selectLabel","selectTitle","progressSummary","licenseLabel","statSeenLabel","statAccuracyLabel","statMistakesLabel","modeRoute","descRoute","ctaRoute","modeSigns","descSigns","ctaSigns","modeExam","descExam","ctaExam","modeMistakes","descMistakes","ctaMistakes","modeMarathon","descMarathon","ctaMarathon","sourceNotice","sourceBank","sourceRules","exitLabel","questionTip","resultKicker","resultPercentLabel","resultXPLabel","restartLabel","backModesLabel","footerBack"]){
   const el=$(id);if(el&&text(id))el.textContent=typeof text(id)==="function"?"":text(id)
  }
  updateTheoryNavigation();
