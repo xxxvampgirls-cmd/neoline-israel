@@ -120,6 +120,9 @@
  }
  function setProvider(id){
   active=id;
+  // Keep the country overview control in the selected UI language.
+  const reset=el("resetCountry");
+  if(reset)reset.textContent="🇮🇱 "+language().country;
   if(loaded)showPoints();
  }
  function init(){
