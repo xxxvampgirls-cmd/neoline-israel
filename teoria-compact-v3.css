@@ -274,3 +274,22 @@ html[dir="rtl"] #gameLobby .route-card.route-full>span.game-mode-photo:not(.rout
 @media(prefers-reduced-motion:reduce){
  #gameLobby .route-card .game-mode-photo img{transition:none}
 }
+/* Offline/cross-origin photo fallback: abstract branded panels, no broken image glyph. */
+.theory-dashboard .hero-art.game-photo-failed,
+#gameLobby .game-mode-photo.game-photo-failed{
+ background:
+  radial-gradient(circle at 78% 26%,#b6eeff 0 13%,transparent 14%),
+  linear-gradient(135deg,#c8f0ff,#61bce8 70%,#3f9ecd);
+}
+.theory-dashboard .hero-art.game-photo-failed img,
+#gameLobby .game-mode-photo.game-photo-failed img{visibility:hidden}
+.theory-dashboard .hero-art.game-photo-failed::before,
+#gameLobby .game-mode-photo.game-photo-failed::before{
+ content:"🚙";position:absolute;z-index:1;
+ top:50%;left:50%;transform:translate(-50%,-50%);
+ font-size:36px;line-height:1;filter:drop-shadow(0 5px 6px #0c618a55);
+}
+#gameLobby .route-mint .game-mode-photo.game-photo-failed::before{content:"🚦"}
+#gameLobby .route-indigo .game-mode-photo.game-photo-failed::before{content:"📋"}
+#gameLobby .route-amber .game-mode-photo.game-photo-failed::before{content:"🎯"}
+#gameLobby .route-full .game-mode-photo.game-photo-failed::before{content:"🏆"}
