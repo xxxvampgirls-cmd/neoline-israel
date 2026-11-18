@@ -9,7 +9,7 @@ const locale=()=>["ru","he","en"].includes(document.documentElement.lang)?docume
 const L={
  ru:{
   hero:"ИЗРАИЛЬ · ИГРА",route:"ТВОЙ МАРШРУТ",
-  lead:"Выбирай приключение — изучай реальные правила.",progress:"Мой прогресс",
+  lead:"Выбирай приключение — изучай реальные правила.",progress:"Мой прогресс",shortProgress:"Прогресс",
   quizWarning:"Соблюдай правила — береги жизни ❤️",badge:"МОЯ ИГРА",achKicker:"ТВОИ ДОСТИЖЕНИЯ",
   intro:"Здесь только реальные результаты твоих игр.",
   questions:"Вопросов",accuracy:"Точность",xp:"XP",games:"В истории",
@@ -32,7 +32,7 @@ const L={
  },
  en:{
   hero:"ISRAEL · GAME",route:"YOUR JOURNEY",lead:"Choose a game and learn real road rules.",
-  progress:"My progress",quizWarning:"Stay safe and follow the rules ❤️",
+  progress:"My progress",shortProgress:"Progress",quizWarning:"Stay safe and follow the rules ❤️",
   badge:"MY GAME",achKicker:"YOUR ACHIEVEMENTS",intro:"Only your actual game results are shown.",
   questions:"Questions",accuracy:"Accuracy",xp:"XP",games:"Recorded",
   achievements:"Achievements",week:"Last 7 days",weekHelp:"Accuracy from completed games. Gaps mean no data.",
@@ -52,7 +52,7 @@ const L={
  },
  he:{
   hero:"ישראל · משחק",route:"המסלול שלך",lead:"בחרו משחק ולמדו את חוקי הדרך.",
-  progress:"ההתקדמות שלי",quizWarning:"סעו בזהירות ❤️",
+  progress:"ההתקדמות שלי",shortProgress:"התקדמות",quizWarning:"סעו בזהירות ❤️",
   badge:"המשחק שלי",achKicker:"ההישגים שלך",intro:"מוצגות רק תוצאות המשחקים האמיתיות שלך.",
   questions:"שאלות",accuracy:"דיוק",xp:"XP",games:"ברשימה",
   achievements:"הישגים",week:"7 הימים האחרונים",weekHelp:"אחוז הצלחה במשחקים שהושלמו. יום ריק פירושו שאין נתונים.",
@@ -177,7 +177,7 @@ function drawProgress(){
 function updateCopy(){
  const c=L[locale()]||L.ru;
  const map={
-  gameHeroMini:"hero",gameLobbyOverline:"route",gameLobbyLead:"lead",gameProgressOpenLabel:"progress",
+  gameHeroMini:"hero",gameLobbyOverline:"route",gameLobbyLead:"lead",gameProgressOpenLabel:"progress",gameProgressCaption:"shortProgress",
   gameQuizLabel:"route",gameQuizWarning:"quizWarning",
   gameProgressHeaderLabel:"badge",gameProgressKicker:"achKicker",
   gameProgressTitle:"progress",gameProgressSubtitle:"intro",gameProgressSeenText:"questions",
