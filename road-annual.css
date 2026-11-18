@@ -2,7 +2,8 @@
 .accident-annual{margin-top:13px;padding:0;border:1px solid #c7e4f5;border-radius:15px;background:linear-gradient(145deg,#ffffff,#eaf7ff);box-shadow:0 6px 20px #175c8d10;overflow:hidden}
 .accident-annual>summary{list-style:none;display:flex;justify-content:space-between;align-items:center;gap:10px;padding:12px 14px;cursor:pointer;color:#1a608c}
 .accident-annual>summary::-webkit-details-marker{display:none}
-.accident-annual-title{font-size:12px;font-weight:900;letter-spacing:.015em}
+.accident-annual-title{font-size:12px;font-weight:900;letter-spacing:.015em;display:inline-flex;align-items:center;gap:8px}
+.accident-annual-title::before{content:"";display:inline-block;width:10px;height:10px;flex:none;border-radius:50%;background:#1689d3;box-shadow:0 0 0 2px #d8efff}
 .accident-annual-more{display:flex;align-items:center;gap:6px;white-space:nowrap;font-size:10px;font-weight:750;color:#338fbe}
 .accident-annual-caret{display:inline-block;font-size:15px;transition:transform .2s}
 .accident-annual[open] .accident-annual-caret{transform:rotate(180deg)}
@@ -28,8 +29,8 @@
 .accident-annual-month-num{font-size:9px;font-weight:850;font-variant-numeric:tabular-nums;color:#397ba0;line-height:13px}
 .accident-annual-month-rail{height:138px;width:100%;display:flex;align-items:flex-end;justify-content:center;background:linear-gradient(180deg,transparent,#dfecf773);border-radius:7px 7px 2px 2px}
 .accident-annual-month-bar{display:block;width:min(75%,26px);background:linear-gradient(#4bb6ea,#167cbe);border-radius:6px 6px 0 0;min-height:0;transition:height .25s ease}
-.accident-annual-month.is-peak .accident-annual-month-bar{background:linear-gradient(#ff9c6d,#d65c65)}
-.accident-annual-month.is-peak .accident-annual-month-num{color:#c7535b}
+.accident-annual-month.is-peak .accident-annual-month-bar{background:linear-gradient(#2cd3ef,#087dbf)}
+.accident-annual-month.is-peak .accident-annual-month-num{color:#0876ad}
 .accident-annual-month[aria-pressed=true] .accident-annual-month-rail{background:#d0ecfd}
 .accident-annual-month[aria-pressed=true] .accident-annual-month-bar{box-shadow:0 0 0 2px #38a5dc80}
 .accident-annual-month-label{font-size:9px;line-height:14px;color:#7095ae}
