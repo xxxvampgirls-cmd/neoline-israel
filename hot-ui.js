@@ -32,7 +32,7 @@ const labels={
 };
 const areas={israel:[31.53,34.91,7],center:[32.06,34.85,10],north:[32.84,35.15,9],south:[30.77,34.77,8]};
 const locale={ru:"ru-RU",he:"he-IL",en:"en-GB",ar:"ar"};
-let language="ru",bulletins=[],policeState="pending",newsData=[],newsOk=false,lastPolice=0,lastNews=0,area="israel",loadingPolice=false,loadingNews=false;
+let language="ru",bulletins=[],policeState="pending",newsData=[],newsOk=false,newsError=false,lastPolice=0,lastNews=0,area="israel",loadingPolice=false,loadingNews=false;
 try{const saved=localStorage.getItem("neoline-language");if(labels[saved])language=saved}catch(e){}
 const tr=()=>labels[language];
 function stamp(value){
@@ -92,7 +92,10 @@ async function loadPolice(){
  loadingPolice=true;policeState="loading";renderPolice();$("trafficRefresh").disabled=true;
  try{
   const key=Math.floor(Date.now()/600000);
-  const res=await fetch(URLS.traffic+"?v="+key,{cache:"no-store"});
+  const controller=new AbortController(),timer=setTimeout(()=>controller.abort(),8500);
+  let res;
+  try{res=await fetch(URLS.traffic+"?v="+key,{cache:"no-store",signal:controller.signal})}
+  finally{clearTimeout(timer)}
   if(!res.ok)throw Error("HTTP "+res.status);
   const obj=await res.json();
   if(obj.version!==1||!Array.isArray(obj.events)||!["ok","pending","unavailable"].includes(obj.sourceStatus))throw Error("invalid data");
@@ -115,7 +118,7 @@ function getText(item){
 }
 function renderNews(){
  const t=tr(),host=$("hotArticlesGrid");host.replaceChildren();
- if(!newsOk){$("hotArticlesStatus").hidden=false;$("hotArticlesStatus").textContent=t.newsWait;return}
+ if(!newsOk){$("hotArticlesStatus").hidden=false;$("hotArticlesStatus").textContent=newsError?t.newsFail:t.newsWait;return}
  const now=Date.now();
  const articles=newsData.filter(e=>e&&["accidents","roads","speed"].includes(e.category)&&
   Number.isFinite(Date.parse(e.date))&&now-Date.parse(e.date)>=-3600000&&
@@ -141,13 +144,17 @@ async function loadNews(){
  let best=null,bestAt=0;
  await Promise.all(endpoints.map(async url=>{
   try{
-   const res=await fetch(url,{cache:"no-store"});if(!res.ok)return;
+   const controller=new AbortController(),timer=setTimeout(()=>controller.abort(),8500);
+   let res;
+   try{res=await fetch(url,{cache:"no-store",signal:controller.signal})}
+   finally{clearTimeout(timer)}
+   if(!res.ok)return;
    const d=await res.json();const at=Date.parse(d.updated);
    if(d.version===1&&Array.isArray(d.items)&&Number.isFinite(at)&&at>bestAt&&at<Date.now()+12*3600000){best=d;bestAt=at}
   }catch(e){console.warn("Recent news:",e.message)}
  }));
- if(best){newsData=best.items;newsOk=true}
- else {newsData=[];newsOk=false;$("hotArticlesStatus").textContent=tr().newsFail}
+ if(best){newsData=best.items;newsOk=true;newsError=false}
+ else {newsData=[];newsOk=false;newsError=true}
  lastNews=Date.now();loadingNews=false;renderNews();
 }
 function renderWaze(){
