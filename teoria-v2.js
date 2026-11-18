@@ -8,7 +8,7 @@ const buttons=[$("gameProgressOpen"),$("gameResultsProgress")].filter(Boolean);
 const locale=()=>["ru","he","en"].includes(document.documentElement.lang)?document.documentElement.lang:"ru";
 const L={
  ru:{
-  hero:"ОБУЧЕНИЕ · ИГРА · ЭКЗАМЕН",route:"ТВОЙ МАРШРУТ",
+  hero:"ИЗРАИЛЬ · ИГРА",route:"ТВОЙ МАРШРУТ",
   lead:"Выбирай приключение — изучай реальные правила.",progress:"Мой прогресс",
   quizWarning:"Соблюдай правила — береги жизни ❤️",badge:"МОЯ ИГРА",achKicker:"ТВОИ ДОСТИЖЕНИЯ",
   intro:"Здесь только реальные результаты твоих игр.",
@@ -31,7 +31,7 @@ const L={
   days:["Вс","Пн","Вт","Ср","Чт","Пт","Сб"]
  },
  en:{
-  hero:"LEARN · PLAY · EXAM",route:"YOUR JOURNEY",lead:"Choose a game and learn real road rules.",
+  hero:"ISRAEL · GAME",route:"YOUR JOURNEY",lead:"Choose a game and learn real road rules.",
   progress:"My progress",quizWarning:"Stay safe and follow the rules ❤️",
   badge:"MY GAME",achKicker:"YOUR ACHIEVEMENTS",intro:"Only your actual game results are shown.",
   questions:"Questions",accuracy:"Accuracy",xp:"XP",games:"Recorded",
@@ -51,7 +51,7 @@ const L={
   days:["Sun","Mon","Tue","Wed","Thu","Fri","Sat"]
  },
  he:{
-  hero:"לימוד · משחק · מבחן",route:"המסלול שלך",lead:"בחרו משחק ולמדו את חוקי הדרך.",
+  hero:"ישראל · משחק",route:"המסלול שלך",lead:"בחרו משחק ולמדו את חוקי הדרך.",
   progress:"ההתקדמות שלי",quizWarning:"סעו בזהירות ❤️",
   badge:"המשחק שלי",achKicker:"ההישגים שלך",intro:"מוצגות רק תוצאות המשחקים האמיתיות שלך.",
   questions:"שאלות",accuracy:"דיוק",xp:"XP",games:"ברשימה",
