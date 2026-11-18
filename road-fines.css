@@ -1,45 +1,45 @@
 /* Expandable Israeli Police fine-report statistics, opt-in rendering */
-.road-fines{margin-top:11px;padding:0;border:1px solid #d9ccfb;background:linear-gradient(120deg,#fff,#f8f5ff);border-radius:15px;box-shadow:0 7px 22px #53309b12;overflow:hidden;color:#514373}
+.road-fines{margin-top:11px;padding:0;border:1px solid #dfe0ef;background:linear-gradient(120deg,#fff,#f9fafd);border-radius:15px;box-shadow:0 7px 22px #3342660b;overflow:hidden;color:#58617c}
 .road-fines>summary{cursor:pointer;display:flex;align-items:center;justify-content:space-between;gap:10px;list-style:none;padding:12px 14px}
 .road-fines>summary::-webkit-details-marker{display:none}
-.road-fines-summary{font-size:12px;font-weight:900;color:#6539a7;display:inline-flex;align-items:center;gap:8px}
-.road-fines-summary::before{content:"";display:inline-block;width:10px;height:10px;flex:none;border-radius:50%;background:#8655df;box-shadow:0 0 0 2px #ede5ff}
-.road-fines-subtitle{font-size:10px;color:#7f61ae;font-weight:780;white-space:nowrap}
+.road-fines-summary{font-size:12px;font-weight:900;color:#62688d;display:inline-flex;align-items:center;gap:8px}
+.road-fines-summary::before{content:"";display:inline-block;width:10px;height:10px;flex:none;border-radius:50%;background:#8b91ba;box-shadow:0 0 0 2px #eff0f8}
+.road-fines-subtitle{font-size:10px;color:#8085a2;font-weight:780;white-space:nowrap}
 .road-fines-subtitle:after{content:"⌄";margin-inline-start:7px;font-weight:900;font-size:15px;display:inline-block;transition:transform .2s}
 .road-fines[open] .road-fines-subtitle:after{transform:rotate(180deg)}
-.road-fines-body{padding:14px;border-top:1px solid #e4dcfb}
-.road-fines-body h2{margin:0 0 6px;color:#6539a7;font-size:19px;font-weight:900}
+.road-fines-body{padding:14px;border-top:1px solid #e8eaf4}
+.road-fines-body h2{margin:0 0 6px;color:#62688d;font-size:19px;font-weight:900}
 .road-fines-intro{margin:0 0 13px!important;color:#5b7b93!important;font-size:11px!important;line-height:1.6!important}
 .fines-years{display:flex;gap:7px;flex-wrap:wrap;margin:0 0 9px}
-.fines-year{border:1px solid #cdb8f4;background:#faf8ff;color:#6943ab;border-radius:10px;padding:8px 13px;font:inherit;font-size:12px;font-weight:800;cursor:pointer}
-.fines-year[aria-pressed=true]{background:linear-gradient(125deg,#7343c7,#a475eb);border-color:#7343c7;color:#fff;box-shadow:0 3px 10px #7945c540}
+.fines-year{border:1px solid #d4d7e9;background:#fafbff;color:#696f96;border-radius:10px;padding:8px 13px;font:inherit;font-size:12px;font-weight:800;cursor:pointer}
+.fines-year[aria-pressed=true]{background:linear-gradient(125deg,#747eaf,#939ac5);border-color:#747eaf;color:#fff;box-shadow:0 3px 10px #66719c28}
 .fines-period{font-size:11px;color:#6a8ca5;margin:7px 0}
 .fines-cards{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:7px}
-.fines-stat-card{background:#fff;border:1px solid #e5def6;padding:10px 8px;border-radius:12px;min-width:0;display:flex;flex-direction:column;gap:5px}
-.fines-stat-card:first-child{background:#f1eaff;border-color:#c6b2f0}
-.fines-stat-card strong{font-weight:900;font-size:clamp(14px,2.1vw,22px);color:#7244b9;letter-spacing:-.035em;overflow-wrap:anywhere;font-variant-numeric:tabular-nums}
+.fines-stat-card{background:#fff;border:1px solid #e7e9f3;padding:10px 8px;border-radius:12px;min-width:0;display:flex;flex-direction:column;gap:5px}
+.fines-stat-card:first-child{background:#f2f3fa;border-color:#d6d9e9}
+.fines-stat-card strong{font-weight:900;font-size:clamp(14px,2.1vw,22px);color:#6d78a7;letter-spacing:-.035em;overflow-wrap:anywhere;font-variant-numeric:tabular-nums}
 .fines-stat-card span{color:#48728b;line-height:1.4;font-size:10px;font-weight:700}
 .fines-missing-notice{grid-column:1/-1;padding:13px;background:#f5fbff;border:1px dashed #a9cde2;border-radius:11px;color:#557c97;font-size:11px;line-height:1.55;margin:0}
-.fines-status{font-weight:850;color:#7448b5;font-size:11px;line-height:1.5;min-height:16px;margin:8px 0 16px}
-.fines-section-heading{font-size:13px!important;margin:12px 0 10px!important;font-weight:900;color:#6941a3}
+.fines-status{font-weight:850;color:#6e789d;font-size:11px;line-height:1.5;min-height:16px;margin:8px 0 16px}
+.fines-section-heading{font-size:13px!important;margin:12px 0 10px!important;font-weight:900;color:#6b7397}
 .fines-history-chart{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:9px;max-width:650px;height:171px;align-items:end}
 .fines-history-column{display:flex;flex-direction:column;align-items:center;justify-content:end;gap:4px;min-width:0;font-variant-numeric:tabular-nums}
-.fines-history-column strong{font-size:11px;line-height:1.2;color:#7650b2;max-width:100%;overflow-wrap:anywhere}
-.fines-history-rail{width:100%;height:132px;max-width:95px;background:linear-gradient(#faf8ff,#eee5ff);border-radius:7px 7px 2px 2px;display:flex;align-items:end;justify-content:center}
-.fines-history-bar{width:58%;border-radius:6px 6px 0 0;background:linear-gradient(#b892f3,#8655d6)}
-.fines-history-column.is-selected .fines-history-bar{background:linear-gradient(#aa7beb,#6332b6)}
+.fines-history-column strong{font-size:11px;line-height:1.2;color:#747ca0;max-width:100%;overflow-wrap:anywhere}
+.fines-history-rail{width:100%;height:132px;max-width:95px;background:linear-gradient(#fafbff,#eff0f7);border-radius:7px 7px 2px 2px;display:flex;align-items:end;justify-content:center}
+.fines-history-bar{width:58%;border-radius:6px 6px 0 0;background:linear-gradient(#abb3d7,#858fba)}
+.fines-history-column.is-selected .fines-history-bar{background:linear-gradient(#9ca6cb,#707da9)}
 .fines-history-column.is-missing{opacity:.53}
-.fines-history-column.is-missing .fines-history-rail{background:repeating-linear-gradient(45deg,#eee9f8,#eee9f8 5px,#f9f7fd 5px,#f9f7fd 10px)}
+.fines-history-column.is-missing .fines-history-rail{background:repeating-linear-gradient(45deg,#eff0f5,#eff0f5 5px,#f9fafd 5px,#f9fafd 10px)}
 .fines-history-column[role=button]{cursor:pointer}
 .fines-history-column small{font-size:10px;font-weight:850;color:#6792ad}
 .fines-history-note{font-size:10px;color:#728fa6;line-height:1.5;margin:9px 0 18px}
 .fines-offences{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px 18px}
 .fines-offence-row{display:grid;grid-template-columns:minmax(88px,1fr) minmax(50px,1fr) 38px;gap:8px;align-items:center;min-width:0}
 .fines-offence-label{color:#45718a;font-size:10px;font-weight:700;line-height:1.4}
-.fines-offence-track{display:block;height:10px;border-radius:10px;background:#e9def9;overflow:hidden}
-.fines-offence-fill{display:block;height:100%;border-radius:9px;background:linear-gradient(90deg,#b38bf2,#8151ce)}
-.fines-offence-row:first-child .fines-offence-fill{background:linear-gradient(90deg,#bd93f8,#6b36bd)}
-.fines-offence-row strong{font-size:11px;font-weight:900;color:#7046b0;text-align:end}
+.fines-offence-track{display:block;height:10px;border-radius:10px;background:#e8eaf4;overflow:hidden}
+.fines-offence-fill{display:block;height:100%;border-radius:9px;background:linear-gradient(90deg,#a6b0d2,#8794bf)}
+.fines-offence-row:first-child .fines-offence-fill{background:linear-gradient(90deg,#a6b0d3,#7888b6)}
+.fines-offence-row strong{font-size:11px;font-weight:900;color:#747fa8;text-align:end}
 .fines-share-note,.fines-definition,.fines-notice{color:#6b879b;font-size:10px;line-height:1.6;margin:11px 0 0}
 .fines-sources{display:flex;flex-wrap:wrap;gap:8px 17px;margin:11px 0 0;padding-top:11px;border-top:1px solid #d8e8f3}
 .fines-sources a{color:#0d77af;font-size:10px;font-weight:800;text-decoration:underline;text-underline-offset:2px}
