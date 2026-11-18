@@ -125,6 +125,14 @@ function refreshStats(){
  $("statXP").textContent=stats.xp;
  $("statMistakes").textContent=stats.wrong.length;
  $("mistakesBadge").textContent=stats.wrong.length;
+ // The hero rings reflect the player's real local statistics (never mockup values).
+ window.dispatchEvent(new CustomEvent("neoline:theory-progress",{detail:{
+  seen:records.length,
+  total:state.ready?classes().length:0,
+  accuracy:total?Math.round(correct/total*100):null,
+  xp:stats.xp,
+  language:state.lang
+ }}));
  document.querySelector('[data-mode="mistakes"]').disabled=!stats.wrong.length || !state.ready;
 }
 async function loadBank(){
