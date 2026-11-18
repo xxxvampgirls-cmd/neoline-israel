@@ -529,6 +529,12 @@ function renderMap(){
 function chooseProvider(id,fromTap=false){
  if(id!=="all"&&!providers[id])return;
  active=id;
+ if(fromTap&&id==="all"){
+  // Explicit "All networks" always restores the whole-country overview.
+  $("city").value="";
+  $("cityDirectory").value="";
+  window.NeolineMap?.resetCountry();
+ }
  const withinMore=$("networkMore").querySelector('[data-provider="'+id+'"]')!==null;
  if(withinMore&&!fromTap)$("networkMore").open=true;
  document.querySelectorAll("[data-provider]").forEach(el=>{
@@ -552,7 +558,9 @@ $("search").addEventListener("submit",e=>{
  if(window.NeolineMap)window.NeolineMap.searchCity($("city").value);
 });
 document.querySelectorAll("[data-city]").forEach(button=>button.addEventListener("click",()=>{
- $("city").value=button.dataset.city;renderMap();
+ $("city").value=button.dataset.city;
+ $("cityDirectory").value=button.dataset.city;
+ renderMap();
  if(window.NeolineMap)window.NeolineMap.searchCity(button.dataset.city);
  $("cityChoices").open=false;
 }));
