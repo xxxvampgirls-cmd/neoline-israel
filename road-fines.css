@@ -1,5 +1,5 @@
-/* Expandable Israeli Police fine-report statistics; NEOLINE saturated red for fines */
-.road-fines{--fines-red:#FF0000;margin-top:11px;padding:0;border:1px solid #e4e9ee;background:#fff;border-radius:15px;box-shadow:0 7px 22px #19446b0a;overflow:hidden;color:#35546b}
+/* Expandable Israeli Police fine-report statistics; NEOLINE Russian-flag red #D52B1E for fines */
+.road-fines{--fines-red:#D52B1E;margin-top:11px;padding:0;border:1px solid #e4e9ee;background:#fff;border-radius:15px;box-shadow:0 7px 22px #19446b0a;overflow:hidden;color:#35546b}
 .road-fines>summary{cursor:pointer;display:flex;align-items:center;justify-content:space-between;gap:10px;list-style:none;padding:12px 14px}
 .road-fines>summary::-webkit-details-marker{display:none}
 .road-fines-summary{font-size:12px;font-weight:900;color:var(--fines-red);display:inline-flex;align-items:center;gap:8px}
@@ -12,7 +12,7 @@
 .road-fines-intro{margin:0 0 13px!important;color:#5b7b93!important;font-size:11px!important;line-height:1.6!important}
 .fines-years{display:flex;gap:7px;flex-wrap:wrap;margin:0 0 9px}
 .fines-year{border:1px solid #e2e7ed;background:#FFFFFF;color:var(--fines-red);border-radius:10px;padding:8px 13px;font:inherit;font-size:12px;font-weight:800;cursor:pointer}
-.fines-year[aria-pressed=true]{background:var(--fines-red);border-color:var(--fines-red);color:#fff;box-shadow:0 3px 10px #FF000025}
+.fines-year[aria-pressed=true]{background:var(--fines-red);border-color:var(--fines-red);color:#fff;box-shadow:0 3px 10px #D52B1E25}
 .fines-period{font-size:11px;color:#6a8ca5;margin:7px 0}
 .fines-cards{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:7px}
 .fines-stat-card{background:#fff;border:1px solid #e4e9ee;padding:10px 8px;border-radius:12px;min-width:0;display:flex;flex-direction:column;gap:5px}
@@ -43,7 +43,7 @@
 .fines-share-note,.fines-definition,.fines-notice{color:#6b879b;font-size:10px;line-height:1.6;margin:11px 0 0}
 .fines-sources{display:flex;flex-wrap:wrap;gap:8px 17px;margin:11px 0 0;padding-top:11px;border-top:1px solid #d8e8f3}
 .fines-sources a{color:#0d77af;font-size:10px;font-weight:800;text-decoration:underline;text-underline-offset:2px}
-.road-fines>summary:focus-visible,.fines-year:focus-visible,.fines-history-column:focus-visible{outline:3px solid #FF0000;outline-offset:2px}
+.road-fines>summary:focus-visible,.fines-year:focus-visible,.fines-history-column:focus-visible{outline:3px solid #D52B1E;outline-offset:2px}
 html[dir=rtl] .road-fines-body{text-align:right}
 @media(max-width:760px){
  .road-fines{margin-top:8px;border-radius:12px}
