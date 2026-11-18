@@ -1,0 +1,9 @@
+{
+  "schema_version": 1,
+  "source": "Waze for Cities (authorized partner data only)",
+  "region": "IL",
+  "status": "awaiting_authorized_data",
+  "updated_at": null,
+  "days": [],
+  "methodology": "Counts are distinct Waze ACCIDENT alert UUIDs first seen by the authorized collector on each Asia/Jerusalem calendar day. They are not verified physical crashes. A day is complete only if collection coverage is confirmed; missing days are null, never zero. Do not add these numbers to CBS or news statistics."
+}
