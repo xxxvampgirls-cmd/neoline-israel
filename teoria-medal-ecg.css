@@ -51,34 +51,8 @@
 .theory-dashboard .hero-progress-cell .hero-progress-open:active{
   transform:scale(.96);
 }
-/* Single faint line decorates the blank space after lobby and questions. */
-main.shell{padding-bottom:8px!important}
-main.shell .game-ecg{
-  width:100%;height:88px;min-height:0;
-  margin:5px auto 1px;padding:0 12px;
-  overflow:hidden;pointer-events:none;
-  opacity:.95;
-}
-.game-ecg svg{
-  display:block;width:100%;height:100%;overflow:visible;
-  fill:none;stroke-linejoin:round;stroke-linecap:round;
-}
-.game-ecg .game-ecg-guide{
-  stroke:#96d8ee;stroke-width:3;opacity:.25;
-  vector-effect:non-scaling-stroke;
-}
-.game-ecg .game-ecg-pulse{
-  stroke:url(#gameEcgInk);stroke-width:3.2;
-  vector-effect:non-scaling-stroke;
-  stroke-dasharray:220 1180;stroke-dashoffset:0;
-  filter:drop-shadow(0 0 5px #1cbde96b);
-  animation:gameEcgTravel 8s linear infinite;
-}
-@keyframes gameEcgTravel{
-  from{stroke-dashoffset:1400}
-  to{stroke-dashoffset:0}
-}
-body.game-over-open .game-ecg{visibility:hidden}
+/* Gold medal only — no footer animation or reserved whitespace. */
+main.shell{padding-bottom:5px!important}
 @media(max-width:720px){
  .game-hero.theory-dashboard .hero-orbs{
    grid-template-columns:repeat(4,minmax(0,1fr))!important;
@@ -94,9 +68,6 @@ body.game-over-open .game-ecg{visibility:hidden}
  .theory-dashboard .hero-progress-cell .hero-progress-icon{font-size:33px!important}
  .theory-dashboard .hero-progress-caption{font-size:8px}
  .theory-dashboard .hero-orb-ring{width:50px!important;max-width:50px!important}
- main.shell .game-ecg{height:69px;margin:3px auto 0;padding:0 6px}
- .game-ecg .game-ecg-guide{stroke-width:2}
- .game-ecg .game-ecg-pulse{stroke-width:2.8}
 }
 @media(max-width:360px){
  .game-hero.theory-dashboard .hero-orbs{
@@ -109,12 +80,7 @@ body.game-over-open .game-ecg{visibility:hidden}
  .theory-dashboard .hero-progress-cell .hero-progress-icon{font-size:29px!important}
  .theory-dashboard .hero-progress-caption{font-size:7px}
  .theory-dashboard .hero-orb-ring{width:46px!important;max-width:46px!important}
- main.shell .game-ecg{height:60px}
 }
 @media(prefers-reduced-motion:reduce){
- .game-ecg .game-ecg-pulse{
-   stroke-dasharray:none;stroke-dashoffset:0;
-   animation:none!important;opacity:.44;
- }
  .theory-dashboard .hero-progress-cell .hero-progress-open{transition:none}
 }
