@@ -12,7 +12,7 @@ const L={
   lead:"Выбирай приключение — изучай реальные правила.",progress:"Мой прогресс",
   quizWarning:"Соблюдай правила — береги жизни ❤️",badge:"МОЯ ИГРА",achKicker:"ТВОИ ДОСТИЖЕНИЯ",
   intro:"Здесь только реальные результаты твоих игр.",
-  questions:"Вопросов",accuracy:"Точность",xp:"XP",games:"Игр",
+  questions:"Вопросов",accuracy:"Точность",xp:"XP",games:"В истории",
   achievements:"Достижения",week:"Последние 7 дней",
   weekHelp:"Точность по завершённым играм. Пропуски — нет данных.",
   history:"Последние игры",footnote:"Прогресс хранится на этом устройстве для выбранного языка и категории прав.",
@@ -34,7 +34,7 @@ const L={
   hero:"LEARN · PLAY · EXAM",route:"YOUR JOURNEY",lead:"Choose a game and learn real road rules.",
   progress:"My progress",quizWarning:"Stay safe and follow the rules ❤️",
   badge:"MY GAME",achKicker:"YOUR ACHIEVEMENTS",intro:"Only your actual game results are shown.",
-  questions:"Questions",accuracy:"Accuracy",xp:"XP",games:"Games",
+  questions:"Questions",accuracy:"Accuracy",xp:"XP",games:"Recorded",
   achievements:"Achievements",week:"Last 7 days",weekHelp:"Accuracy from completed games. Gaps mean no data.",
   history:"Recent games",footnote:"Progress is stored on this device for the selected language and licence class.",
   noGames:"No completed games yet. Choose a mode to begin!",noHistory:"No game results for these days.",
@@ -54,7 +54,7 @@ const L={
   hero:"לימוד · משחק · מבחן",route:"המסלול שלך",lead:"בחרו משחק ולמדו את חוקי הדרך.",
   progress:"ההתקדמות שלי",quizWarning:"סעו בזהירות ❤️",
   badge:"המשחק שלי",achKicker:"ההישגים שלך",intro:"מוצגות רק תוצאות המשחקים האמיתיות שלך.",
-  questions:"שאלות",accuracy:"דיוק",xp:"XP",games:"משחקים",
+  questions:"שאלות",accuracy:"דיוק",xp:"XP",games:"ברשימה",
   achievements:"הישגים",week:"7 הימים האחרונים",weekHelp:"אחוז הצלחה במשחקים שהושלמו. יום ריק פירושו שאין נתונים.",
   history:"משחקים אחרונים",footnote:"ההתקדמות נשמרת במכשיר זה עבור השפה ודרגת הרישיון שנבחרו.",
   noGames:"עדיין אין משחקים שהושלמו. בחרו מצב משחק!",noHistory:"אין תוצאות לימים האלה.",
@@ -110,6 +110,20 @@ function badgeState(key,d,history){
   default:return false;
  }
 }
+/* Unlocked achievement icons persist even after the 30-entry history rolls over.
+   This remains an on-device recognition, never proof of a redeemable prize. */
+function earnedAchievements(data,history){
+ const key="neoline-teoria-achievements:v1:"+data.language+":"+data.licence;
+ const allowed=["first","ten","signs","exam","marathon"];
+ let previous=[];
+ try{const saved=JSON.parse(localStorage.getItem(key)||"[]");if(Array.isArray(saved))previous=saved.filter(id=>allowed.includes(id))}catch(e){}
+ const earned=new Set(previous);
+ for(const id of allowed){if(badgeState(id,data,history))earned.add(id)}
+ if(earned.size!==previous.length){
+  try{localStorage.setItem(key,JSON.stringify([...earned]))}catch(e){}
+ }
+ return earned;
+}
 function formatDay(x){
  const lang=locale()==="ru"?"ru-RU":locale()==="he"?"he-IL":"en-GB";
  return new Intl.DateTimeFormat(lang,{day:"2-digit",month:"short"}).format(x);
@@ -121,8 +135,9 @@ function drawProgress(){
  set("gameProgressSeen",num(data.seen));set("gameProgressAccuracy",data.accuracy===null?"—":num(data.accuracy)+"%");
  set("gameProgressXP",num(data.xp));set("gameProgressGames",num(history.length));
  const grid=$("gameAchievementGrid");grid.replaceChildren();
+ const earned=earnedAchievements(data,history);
  for(const badge of copy.badges){
-  const isOn=badgeState(badge.id,data,history);
+  const isOn=earned.has(badge.id);
   const card=dom("div","game-achievement"+(isOn?"":" is-locked"));
   card.setAttribute("aria-label",badge.name+" · "+(isOn?copy.completed:copy.locked));
   card.append(dom("span","game-achievement__icon",isOn?badge.emoji:"🔒"));
