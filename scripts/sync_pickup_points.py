@@ -34,6 +34,67 @@ QUERY = (
     f'nwr["post_office"="post_partner"]({BOX});'
     ");out center;"
 )
+# Conservative geographic service envelope for Israel and nearby localities
+# included in nationwide delivery searches. This is used ONLY to reject
+# accidentally returned points in neighbouring countries; it is not a
+# presentation of borders or an assertion of service availability.
+# Coarse geographic coordinates are factual WGS84 reference values.
+ISRAEL_AREA = [
+    (35.719918, 32.709192),
+    (35.545665, 32.393992),
+    (35.18393, 32.532511),
+    (34.974641, 31.866582),
+    (35.225892, 31.754341),
+    (34.970507, 31.616778),
+    (34.927408, 31.353435),
+    (35.397561, 31.489086),
+    (35.420918, 31.100066),
+    (34.922603, 29.501326),
+    (34.265433, 31.219361),
+    (34.556372, 31.548824),
+    (34.488107, 31.605539),
+    (34.752587, 32.072926),
+    (34.955417, 32.827376),
+    (35.098457, 33.080539),
+    (35.126053, 33.0909),
+    (35.460709, 33.08904),
+    (35.552797, 33.264275),
+    (35.821101, 33.277426),
+    (35.836397, 32.868123),
+    (35.700798, 32.716014),
+    (35.719918, 32.709192),
+]
+WEST_BANK_AREA = [
+    (35.545665, 32.393992),
+    (35.545252, 31.782505),
+    (35.397561, 31.489086),
+    (34.927408, 31.353435),
+    (34.970507, 31.616778),
+    (35.225892, 31.754341),
+    (34.974641, 31.866582),
+    (35.18393, 32.532511),
+    (35.545665, 32.393992),
+]
+
+
+def _inside_ring(latitude: float, longitude: float, ring: list) -> bool:
+    inside = False
+    prev = ring[-1]
+    for point in ring:
+        x1, y1 = point
+        x2, y2 = prev
+        if (y1 > latitude) != (y2 > latitude):
+            cross_lon = (x2 - x1) * (latitude - y1) / (y2 - y1) + x1
+            if longitude < cross_lon:
+                inside = not inside
+        prev = point
+    return inside
+
+
+def within_service_envelope(lat: float, lon: float) -> bool:
+    return _inside_ring(lat, lon, ISRAEL_AREA) or _inside_ring(lat, lon, WEST_BANK_AREA)
+
+
 PATTERNS = {
     "boxit": r"box\s*[- ]?\s*it|בוקסיט|בוקס.?איט",
     "done": r"\bdone\b|דאן|דון לוקרים",
@@ -76,6 +137,8 @@ def normalize(data: dict) -> list[dict]:
             continue
         lat, lon = float(lat), float(lon)
         if not (29.42 <= lat <= 33.42 and 34.20 <= lon <= 35.91):
+            continue
+        if not within_service_envelope(lat, lon):
             continue
         key = f"{item.get('type', 'unknown')}:{item.get('id', 'unknown')}"
         if key in seen:
