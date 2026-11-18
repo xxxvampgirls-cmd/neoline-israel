@@ -99,7 +99,7 @@ PATTERNS = {
     "boxit": r"box\s*[- ]?\s*it|בוקסיט|בוקס.?איט",
     "done": r"\bdone\b|דאן|דון לוקרים",
     "doar": r"israel\s*post|דואר\s*ישראל|doar\s*israel",
-    "epost": r"e[\s.-]?post|hfd|אי.?פוסט|איפוסט",
+    "epost": r"(?<![A-Za-z])e[-\s.]?post\b|\bhfd\b|אי.?פוסט|איפוסט",
     "pickup": r"pick\s*[- ]?\s*up|פיקאפ",
     "cheetah": r"cheetah|chita|צ.?יטה",
     "zigzag": r"zig.?zag|זיג.?זג",
