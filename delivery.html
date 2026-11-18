@@ -258,6 +258,74 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible{ou
  .official-directory>summary{font-size:11px}
 }
 
+
+/* 2026-11-18: compact real-location directory and potential retail partners. */
+.networks>.network--all{min-height:40px}
+@media(max-width:760px){
+ .networks>.network:not(.network--all){min-height:39px}
+ .network-more>summary{min-height:29px}
+ .hero h1{font-size:21px}
+ .hero{padding-top:8px}
+ .map-panel{scroll-margin-top:72px}
+}
+.network-insights{margin:0 14px 14px;border:1px solid #d0e4f2;border-radius:13px;background:#f7fcff}
+.network-insights>summary{display:flex;align-items:center;justify-content:space-between;list-style:none;cursor:pointer;color:#237eab;font-size:12px;font-weight:850;padding:12px 14px;gap:8px}
+.network-insights>summary::-webkit-details-marker{display:none}
+.network-insights[open]>summary>span:last-child{transform:rotate(180deg)}
+.network-insights-hint{font-size:11px;color:#64829b;margin:0 12px 11px;line-height:1.55}
+.network-insights-grid,.retail-partners-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px;padding:0 12px 13px}
+.partner-card{
+ display:flex;flex-direction:column;gap:6px;
+ min-width:0;border:1px solid #d1e6f5;border-radius:13px;
+ background:#fff;padding:11px 12px;color:#1f5070;box-shadow:0 3px 9px #1f64900b;
+}
+.partner-card strong{font-size:13px;color:#153e60;overflow-wrap:anywhere}
+.partner-card small{font-size:10px;color:#70899d;line-height:1.4}
+.partner-card-stats{display:flex;gap:7px;flex-wrap:wrap}
+.partner-card-stats span{display:inline-flex;gap:4px;align-items:center;border-radius:8px;padding:5px 7px;background:#eff8ff;font-size:10px;color:#386b91}
+.partner-card-stats b{font-size:11px;color:#14598c}
+.partner-actions{display:flex;flex-wrap:wrap;gap:6px;margin-top:auto;padding-top:4px}
+.partner-actions a,.partner-actions button{
+ display:inline-flex;justify-content:center;align-items:center;
+ border-radius:9px;padding:8px 10px;font-size:11px;font-weight:800;
+ border:1px solid #b8dcf1;background:#f1faff;color:#1875ab;
+ text-decoration:none;line-height:1.2;min-height:35px;cursor:pointer;
+}
+.partner-actions a:hover,.partner-actions button:hover{background:#e2f4ff}
+.partner-actions .phone-action{background:#eaf9ee;border-color:#b5e1c2;color:#197044}
+.partner-actions .shop-map-action{background:linear-gradient(120deg,#b6509d,#dc75ac);color:white;border:0}
+.retail-partners{border:1px solid #d6e1f2;border-radius:19px;background:linear-gradient(130deg,#fefaff 0%,#f3f9ff 78%);box-shadow:0 9px 25px #265e900d;margin-top:11px;margin-bottom:24px;overflow:hidden}
+.retail-partners-title{display:flex;gap:13px;align-items:center;padding:16px 18px;list-style:none;cursor:pointer}
+.retail-partners-title::-webkit-details-marker{display:none}
+.retail-partners-icon{display:grid;place-items:center;font-size:25px;font-weight:900;color:#b25194;background:#fae7f5;border-radius:13px;width:45px;height:45px;flex:none}
+.retail-partners-label{display:flex;flex-direction:column;gap:4px;flex:1;min-width:0}
+.retail-partners-label strong{font-size:17px;color:#224568}
+.retail-partners-label small{font-size:11px;color:#906c95;line-height:1.4}
+.retail-partners-chevron{color:#94639a;font-size:18px}
+.retail-partners[open] .retail-partners-chevron{transform:rotate(180deg)}
+.retail-partners-body{border-top:1px solid #e6e2f1;padding:12px 9px 10px}
+.retail-partners-body>p{margin:0 11px 13px;font-size:11px;color:#647f96;line-height:1.65}
+.retail-partners-grid{grid-template-columns:repeat(3,minmax(0,1fr));padding:0 9px 12px;gap:9px}
+.retail-partners .partner-card{border-color:#e4d9ed}
+.retail-partners .partner-card-stats span{background:#f9effa;color:#906396}
+.retail-partners .partner-card-stats b{color:#95427b}
+@media(max-width:760px){
+ .network-insights{margin:0 10px 10px}
+ .network-insights-grid,.retail-partners-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:7px;padding:0 8px 10px}
+ .partner-card{padding:9px;gap:6px}
+ .partner-card strong{font-size:11.5px}
+ .partner-actions a,.partner-actions button{font-size:10px;padding:7px 8px;min-height:32px}
+ .retail-partners{margin:9px auto 15px}
+ .retail-partners-title{padding:12px;gap:10px}
+ .retail-partners-label strong{font-size:14px}
+ .retail-partners-label small{font-size:10px}
+ .retail-partners-icon{width:37px;height:37px;font-size:22px}
+}
+@media(max-width:390px){
+ .partner-card-stats span{font-size:9px;padding:4px 6px}
+ .partner-actions a,.partner-actions button{font-size:9px}
+}
+
 </style>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/leaflet.css">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet.markercluster@1.5.3/dist/MarkerCluster.css">
@@ -281,7 +349,7 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible{ou
 <button class="network" type="button" data-provider="cargo" aria-pressed="false"><span class="badge">C</span><span><strong>Cargo</strong><small id="caption-cargo">Пункты выдачи Cargo</small></span></button>
 <button class="network" type="button" data-provider="dhl" aria-pressed="false"><span class="badge">DHL</span><span><strong>DHL Express</strong><small id="caption-dhl">Сервисные пункты DHL</small></span></button>
 <button class="network" type="button" data-provider="fedex" aria-pressed="false"><span class="badge">FX</span><span><strong>FedEx</strong><small id="caption-fedex">Пункты отправки и выдачи</small></span></button>
-</div><div class="separate"><a class="shoplink" id="ksp" target="_blank" rel="noopener noreferrer" href="https://ksp.co.il/"><strong>KSP ↗</strong><small id="kspDesc">Отдельная сеть магазинов: самовывоз только для заказов KSP, когда он доступен.</small></a></div></details></aside>
+</div></details></aside>
 <section class="map-panel" aria-label="Pickup map"><div class="map-top"><div><div class="map-heading" id="mapTitle">Все сети — пункты выдачи</div><div class="map-sub" id="mapSub">Поиск точек на карте Google, справочно</div></div><span aria-hidden="true">⌖</span></div>
 <form id="search" class="searchbox"><input id="city" placeholder="Введите город или район" enterkeyhint="search" autocomplete="address-level2" value="" aria-label="City"><button type="submit" id="find">Найти</button></form>
 <details class="city-choices" id="cityChoices"><summary id="cityChoicesSummary">Быстрый выбор города <span aria-hidden="true">⌄</span></summary><div class="cities" id="cities"><button type="button" data-city="אריאל">Ариэль</button><button type="button" data-city="תל אביב">Тель-Авив</button><button type="button" data-city="פתח תקווה">Петах-Тиква</button><button type="button" data-city="ירושלים">Иерусалим</button><button type="button" data-city="חיפה">Хайфа</button><button type="button" data-city="באר שבע">Беэр-Шева</button><button type="button" data-city="אילת">Эйлат</button></div><div class="city-directory-row">
@@ -299,14 +367,33 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible{ou
 <details class="official-directory" id="officialDirectory">
 <summary id="officialDirectorySummary">Официальные карты и сайты 12 сетей <span aria-hidden="true">⌄</span></summary>
 <p id="officialDirectoryNote">Список на общей карте может быть неполным. Сверяйте пункты на сайтах операторов: их карты и адреса наиболее актуальны.</p>
-<div class="official-directory-grid" id="officialDirectoryGrid"></div>
-</details></section></div></main><footer class="foot"><div class="wrap"><span id="foot">NEOLINE Israel · демонстрационный проект. Карты и адреса принадлежат соответствующим операторам; сведения о точках могут меняться.</span> · <a href="./index.html" id="home">На главную</a></div></footer>
+<div class="official-directory-grid" id="officialDirectoryGrid">
+<details class="network-insights" id="networkInsights">
+ <summary><span id="networkInsightsTitle">📊 Сети: количество пунктов и телефоны</span><span aria-hidden="true">⌄</span></summary>
+ <div class="network-insights-hint" id="networkInsightsHint">На карте — только подтверждённые координаты OSM. Данные самих сетей приведены отдельно.</div>
+ <div class="network-insights-grid" id="networkInsightsGrid"></div>
+</details>
+</div>
+</details></section></div></main>
+<details class="retail-partners wrap" id="retailPartners">
+ <summary class="retail-partners-title">
+  <span aria-hidden="true" class="retail-partners-icon">▦</span>
+  <span class="retail-partners-label"><strong id="retailTitle">Крупные магазины Израиля</strong><small id="retailSubtitle">Потенциальные партнёры NEOLINE · отдельный каталог</small></span>
+  <span aria-hidden="true" class="retail-partners-chevron">⌄</span>
+ </summary>
+ <div class="retail-partners-body">
+  <p id="retailNotice">Справочник для поиска торговых сетей, которым можно предложить NEOLINE. Эти магазины не заявлены как партнёры или продавцы продукции NEOLINE.</p>
+  <div class="retail-partners-grid" id="retailCards"></div>
+  <p id="retailDisclaimer">Число филиалов «по данным сети» отличается от количества координат, доступных на OpenStreetMap. Проверяйте официальную карту каждого магазина.</p>
+ </div>
+</details><footer class="foot"><div class="wrap"><span id="foot">NEOLINE Israel · демонстрационный проект. Карты и адреса принадлежат соответствующим операторам; сведения о точках могут меняться.</span> · <a href="./index.html" id="home">На главную</a></div></footer>
 <nav class="delivery-nav" id="deliveryBottomNav" aria-label="Главное меню NEOLINE">
  <a href="./" id="deliveryNavHome"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m3 10 9-7 9 7v10a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V10Z"/><path d="M9 21v-8h6v8"/></svg><span>Главная</span></a>
  <a href="./#catalog" id="deliveryNavCatalog"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></svg><span>Каталог</span></a>
  <a href="./news.html" id="deliveryNavNews"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M7 8h4v4H7zM14 8h4M14 11h4M7 16h11"/></svg><span>Новости</span></a>
  <a href="./delivery.html" id="deliveryNavDelivery" aria-current="page" class="active"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 7h12v10H3z"/><path d="M15 10h3l3 4v3h-6"/><circle cx="7" cy="19" r="2"/><circle cx="17" cy="19" r="2"/></svg><span>Доставка</span></a>
 </nav>
+<script defer src="./delivery-extras.js?v=20261118-partners-v1"></script>
 <script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/leaflet.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/leaflet.markercluster@1.5.3/dist/leaflet.markercluster.js"></script>
 <script src="./delivery-map.js?v=20261118-israel-map-v4"></script>
@@ -487,7 +574,8 @@ function applyLanguage(){
  const t=copy[lang]||copy.ru,extra=moreCopy[lang]||moreCopy.ru;
  document.documentElement.lang=lang;
  document.documentElement.dir=["he","ar"].includes(lang)?"rtl":"ltr";
- ["back","title","choose","kspDesc","find","fullMap","foot","home"].forEach(k=>$(k).textContent=t[k]);
+
+ ["back","title","choose","find","fullMap","foot","home"].forEach(k=>$(k).textContent=t[k]);
  $("city").placeholder=t.placeholder;
  ["boxit","done","doar","epost","pickup"].forEach((id,i)=>$("caption-"+id).textContent=t.labels[i]);
  extraProviderOrder.forEach((id,i)=>$("caption-"+id).textContent=extra.labels[i]);
@@ -502,6 +590,7 @@ function applyLanguage(){
  document.querySelectorAll("[data-city]").forEach((b,i)=>b.textContent=t.cities[i]);
  $("map").title=t.mapSub;
  renderMap();
+ window.dispatchEvent(new CustomEvent("neoline:delivery-language",{detail:{lang}}));
 }
 function renderMap(){
  const t=copy[lang]||copy.ru,extra=moreCopy[lang]||moreCopy.ru;
@@ -529,6 +618,7 @@ function renderMap(){
 function chooseProvider(id,fromTap=false){
  if(id!=="all"&&!providers[id])return;
  active=id;
+ window.dispatchEvent(new CustomEvent("neoline:delivery-provider",{detail:{id}}));
  if(fromTap&&id==="all"){
   // Explicit "All networks" always restores the whole-country overview.
   $("city").value="";
