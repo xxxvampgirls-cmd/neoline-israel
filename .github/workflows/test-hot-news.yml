@@ -1,0 +1,61 @@
+name: Validate daily crash-news chart and dedicated hot events
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - 'news.html'
+      - 'news-ui.js'
+      - 'news-ui.css'
+      - 'news-accidents.js'
+      - 'news-accidents.css'
+      - 'hot.html'
+      - 'hot-ui.js'
+      - 'hot-ui.css'
+      - 'assets/news/news.json'
+      - '.github/workflows/test-hot-news.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  smoke:
+    runs-on: ubuntu-latest
+    timeout-minutes: 6
+    steps:
+      - uses: actions/checkout@v4
+      - name: Check JavaScript syntax
+        run: |
+          node --check news-ui.js
+          node --check news-accidents.js
+          node --check hot-ui.js
+      - name: Check no fabricated crash statistics and separate live-events route
+        run: |
+          node <<'JS'
+          const fs=require('fs');
+          const read=x=>fs.readFileSync(x,'utf8');
+          const main=read('news.html');
+          const hot=read('hot.html');
+          const mainJs=read('news-ui.js');
+          const chart=read('news-accidents.js');
+          const hotJs=read('hot-ui.js');
+          const archive=JSON.parse(read('assets/news/news.json'));
+          const check=(ok,message)=>{if(!ok)throw new Error(message)};
+          check(archive.version===1 && archive.retentionDays===30,'News archive changed format');
+          check(Array.isArray(archive.items),'News items unavailable');
+          check(main.includes('id="accidentChart"'),'30 day chart missing from news');
+          check(main.includes('href="./hot.html"'),'Hot events link missing');
+          check(!main.includes('class="traffic-panel"'),'Old fire/police panel still on news page');
+          check(main.includes('news-accidents.js')&&main.includes('news-accidents.css'),'Chart assets missing');
+          check(hot.includes('id="trafficPanel"')&&hot.includes('id="trafficWaze"'),'Hot page missing police or Waze');
+          check(hot.includes('hot-ui.js')&&hot.includes('hot-ui.css'),'Hot assets missing');
+          check(mainJs.includes('neoline:news-archive'),'Daily news-to-chart update hook missing');
+          check(chart.includes('length:30')&&chart.includes('category!=="accidents"'),'Not a daily chart of actual news categories');
+          check(chart.includes('Asia/Jerusalem'),'Wrong chart timezone');
+          check(chart.includes('NOT actual traffic crashes'),'Missing chart disclosure');
+          check(hotJs.includes('traffic-live/assets/traffic/live.json'),'Official police feed disconnected');
+          check(hotJs.includes('news.json'),'Recent stories feed disconnected');
+          check(read('.github/workflows/sync-news.yml').includes("17 3 * * *"),'Daily news sync missing');
+          console.log('PASS: chart, official source disclaimers, 30-day feed, standalone hot page and Waze');
+          JS
