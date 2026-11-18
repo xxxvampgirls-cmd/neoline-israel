@@ -1,0 +1,120 @@
+/* NEOLINE Theory — chosen gold reward orb + subtle ECG under game screens.
+   Decor only; no change to XP, modes, question data or rewards. */
+.game-hero.theory-dashboard .hero-orbs{
+  grid-template-columns:repeat(4,minmax(0,1fr))!important;
+  gap:4px!important;
+  padding-inline:7px!important;
+}
+.theory-dashboard .hero-progress-cell{
+  display:flex;flex-direction:column;align-items:center;
+  justify-content:center;gap:3px;min-width:0;align-self:stretch;
+}
+.theory-dashboard .hero-progress-cell .hero-progress-open{
+  position:relative;isolation:isolate;
+  display:grid;place-items:center;
+  width:65px;height:65px;min-width:65px;min-height:65px;
+  padding:5px!important;margin:0!important;
+  border:1px solid #fff6d7!important;border-radius:50%!important;
+  color:#fff!important;
+  background:conic-gradient(from 200deg,#e4a825,#fff4ab 18%,#f3bb39 35%,#ffdb72 58%,#bd7e12 76%,#ffed9c 90%,#dda126 100%)!important;
+  box-shadow:0 0 0 2px #fff,0 0 0 4px #f8db7891,0 4px 13px #aa801d3a!important;
+  cursor:pointer;touch-action:manipulation;
+  transition:transform .25s ease,box-shadow .25s ease;
+}
+.theory-dashboard .hero-progress-cell .hero-progress-open::before{
+  content:"";position:absolute;inset:5px;
+  z-index:-1;border-radius:50%;
+  background:radial-gradient(circle at 28% 20%,#3488ba 0%,#155581 45%,#092c52 95%);
+  box-shadow:inset 0 1px 5px #c5eaff64,inset 0 -3px 8px #00182c7d;
+}
+.theory-dashboard .hero-progress-cell .hero-progress-open::after{
+  content:"";position:absolute;inset:9px;
+  border-radius:50%;pointer-events:none;z-index:1;
+  border:1px solid #c2ebff21;
+}
+.theory-dashboard .hero-progress-cell .hero-progress-icon{
+  position:relative;z-index:2;font-size:36px!important;line-height:1!important;
+  transform:translateY(-1px);
+  filter:drop-shadow(0 2px 3px #031f3a8c);
+}
+.theory-dashboard .hero-progress-caption{
+  display:block;max-width:100%;min-width:0;text-align:center;
+  font-weight:850;font-size:10px;line-height:1.2;white-space:nowrap;
+  color:#236083;
+}
+.theory-dashboard .hero-progress-cell .hero-progress-open:hover,
+.theory-dashboard .hero-progress-cell .hero-progress-open:focus-visible{
+  transform:translateY(-2px) scale(1.03);
+  outline:2px solid #f4bf35;outline-offset:4px;
+  box-shadow:0 0 0 2px #fff,0 0 0 4px #f8db7891,0 7px 19px #ad7f225c!important;
+}
+.theory-dashboard .hero-progress-cell .hero-progress-open:active{
+  transform:scale(.96);
+}
+/* Single faint line decorates the blank space after lobby and questions. */
+main.shell{padding-bottom:8px!important}
+main.shell .game-ecg{
+  width:100%;height:88px;min-height:0;
+  margin:5px auto 1px;padding:0 12px;
+  overflow:hidden;pointer-events:none;
+  opacity:.95;
+}
+.game-ecg svg{
+  display:block;width:100%;height:100%;overflow:visible;
+  fill:none;stroke-linejoin:round;stroke-linecap:round;
+}
+.game-ecg .game-ecg-guide{
+  stroke:#96d8ee;stroke-width:3;opacity:.25;
+  vector-effect:non-scaling-stroke;
+}
+.game-ecg .game-ecg-pulse{
+  stroke:url(#gameEcgInk);stroke-width:3.2;
+  vector-effect:non-scaling-stroke;
+  stroke-dasharray:220 1180;stroke-dashoffset:0;
+  filter:drop-shadow(0 0 5px #1cbde96b);
+  animation:gameEcgTravel 8s linear infinite;
+}
+@keyframes gameEcgTravel{
+  from{stroke-dashoffset:1400}
+  to{stroke-dashoffset:0}
+}
+body.game-over-open .game-ecg{visibility:hidden}
+@media(max-width:720px){
+ .game-hero.theory-dashboard .hero-orbs{
+   grid-template-columns:repeat(4,minmax(0,1fr))!important;
+   gap:1px!important;
+   padding:5px 3px 3px!important;
+ }
+ .theory-dashboard .hero-progress-cell{gap:2px}
+ .theory-dashboard .hero-progress-cell .hero-progress-open{
+   width:54px;height:54px;min-width:54px;min-height:54px;
+   padding:4px!important;
+ }
+ .theory-dashboard .hero-progress-cell .hero-progress-open::before{inset:4px}
+ .theory-dashboard .hero-progress-cell .hero-progress-icon{font-size:33px!important}
+ .theory-dashboard .hero-progress-caption{font-size:8px}
+ .theory-dashboard .hero-orb-ring{width:50px!important;max-width:50px!important}
+ main.shell .game-ecg{height:69px;margin:3px auto 0;padding:0 6px}
+ .game-ecg .game-ecg-guide{stroke-width:2}
+ .game-ecg .game-ecg-pulse{stroke-width:2.8}
+}
+@media(max-width:360px){
+ .game-hero.theory-dashboard .hero-orbs{
+   grid-template-columns:repeat(4,minmax(0,1fr))!important;
+   gap:0!important;padding:4px 2px 2px!important;
+ }
+ .theory-dashboard .hero-progress-cell .hero-progress-open{
+   width:49px;height:49px;min-width:49px;min-height:49px;
+ }
+ .theory-dashboard .hero-progress-cell .hero-progress-icon{font-size:29px!important}
+ .theory-dashboard .hero-progress-caption{font-size:7px}
+ .theory-dashboard .hero-orb-ring{width:46px!important;max-width:46px!important}
+ main.shell .game-ecg{height:60px}
+}
+@media(prefers-reduced-motion:reduce){
+ .game-ecg .game-ecg-pulse{
+   stroke-dasharray:none;stroke-dashoffset:0;
+   animation:none!important;opacity:.44;
+ }
+ .theory-dashboard .hero-progress-cell .hero-progress-open{transition:none}
+}
