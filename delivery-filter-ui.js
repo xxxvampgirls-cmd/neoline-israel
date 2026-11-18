@@ -140,6 +140,7 @@
   closeSheet();
  }
  function reapplyAfterLocation(){
+  window.dispatchEvent(new Event("neoline:city-changed"));
   // The old city form updates Google fallback query and the old heading.
   // Restore our selected filter label without replacing a brand selection.
   const t=dict();
