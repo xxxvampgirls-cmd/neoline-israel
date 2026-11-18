@@ -35,7 +35,9 @@ jobs:
             for(let i=0;i<12;i++){
               await page.goto(origin+'/teoria.html?ci='+i,{waitUntil:'domcontentloaded',timeout:40000});
               const script=page.locator('script[src*="teoria.js"]'),css=page.locator('link[rel="stylesheet"][href*="teoria.css"]');
-              if(await script.count()&&await css.count()&&await page.locator('[data-mode="route"]').count())break;
+              if(await script.count()&&await css.count()&&
+                 (await script.getAttribute("src")||"").includes("20261118-answer-motion-v7")&&
+                 await page.locator('[data-mode="route"]').count())break;
               await page.waitForTimeout(4000);
             }
             if(await page.locator('script[src*="teoria.js"]').count()!==1||
@@ -98,9 +100,11 @@ jobs:
                await page.locator('#questionCounter').textContent()!=='0 / 20')
               throw Error('All-question 20-step journey failed');
             await page.locator('#answers button').first().click();
-            await page.locator('#nextQuestion').click();
+            if(!await page.locator('#nextQuestion').isHidden())throw Error('Manual Next should be hidden');
+            await page.waitForFunction(()=>document.querySelector('#questionCounter')?.textContent==='1 / 20'&&
+              document.querySelector('#answers button')&&!document.querySelector('#answers button').disabled,null,{timeout:6500});
             if(await page.locator('#questionCounter').textContent()!=='1 / 20')
-              throw Error('Marathon 20-question progress broken');
+              throw Error('Marathon auto-next failed');
             await page.locator('#exitQuiz').click();
             if(!await page.locator('.game-hero').isVisible())
               throw Error('Compact game header not restored after leaving question view');
@@ -111,10 +115,18 @@ jobs:
             if(!/^№ \d+$/.test(firstId))throw Error('Official question number missing: '+firstId);
             const firstAnswers=page.locator('#answers button');
             if(await firstAnswers.count()!==4)throw Error('Not four official answer options');
+            const position=await page.evaluate(()=>{
+              const a=document.querySelector('#gamePlaying .quiz-hud').getBoundingClientRect();
+              const p=document.getElementById('progress').getBoundingClientRect();
+              return {cardCenter:a.left+a.width/2,circleCenter:p.left+p.width/2};
+            });
+            if(Math.abs(position.cardCenter-position.circleCenter)>3)
+              throw Error('HUD progress is not centered: '+JSON.stringify(position));
             await firstAnswers.first().click();
-            if(!await page.locator('#nextQuestion').isEnabled())throw Error('Next button disabled after answer');
+            if(!await page.locator('#nextQuestion').isHidden())throw Error('Next button should not display');
             if(!await page.locator('#feedback').isVisible())throw Error('Practice must reveal feedback');
-            await page.locator('#nextQuestion').click();
+            await page.waitForFunction(()=>document.querySelector('#questionCounter')?.textContent==='1 / 10'&&
+              document.querySelector('#answers button')&&!document.querySelector('#answers button').disabled,null,{timeout:6500});
             if(await page.locator('#questionCounter').textContent()!=='1 / 10')throw Error('Route progression broken');
             await page.locator('#exitQuiz').click();
             if(!await page.locator('#gameLobby').isVisible())throw Error('Back to game modes broken');
@@ -141,13 +153,16 @@ jobs:
                 if(i<2){
                   if(await page.locator('#gameOver').isVisible())
                     throw Error('Game over too early, error '+(i+1));
-                  await page.locator('#nextQuestion').click();
+                  await page.waitForFunction(expected=>document.querySelector('#questionCounter')?.textContent===expected&&
+                    document.querySelector('#answers button')&&!document.querySelector('#answers button').disabled,
+                    (i+1)+' / '+(mode==='signs'?12:10),{timeout:6500});
                 }
               }
+              await page.locator('#gameOver').waitFor({state:'visible',timeout:6500});
               if(!await page.locator('#gameOver').isVisible())
-                throw Error('Third mistake did NOT immediately show Game Over in '+mode);
-              if(await page.locator('#nextQuestion').isEnabled())
-                throw Error('Game continues despite 0 hearts in '+mode);
+                throw Error('Third mistake did not show GAME OVER after feedback in '+mode);
+              if(!await page.locator('#nextQuestion').isHidden())
+                throw Error('Manual Next reappeared despite 0 hearts in '+mode);
               if((await page.locator('#gameOverTitle').innerText()).trim()!=='GAME OVER')
                 throw Error('Game Over heading absent');
               if(!/не огорчайся/i.test(await page.locator('#gameOverMessage').innerText()))
@@ -184,7 +199,10 @@ jobs:
               const answer=page.locator('#answers button').first();
               await answer.click();
               if(await page.locator('#feedback').isVisible())throw Error('Mock exam leaked correct answers before finish');
-              await page.locator('#nextQuestion').click();
+              if(i<29)await page.waitForFunction(expected=>document.querySelector('#questionCounter')?.textContent===expected&&
+                document.querySelector('#answers button')&&!document.querySelector('#answers button').disabled,
+                (i+1)+' / 30',{timeout:6500});
+              else await page.locator('#gameResult').waitFor({state:'visible',timeout:6500});
             }
             if(!await page.locator('#gameResult').isVisible())throw Error('30 question exam did not finish');
             const result=await page.locator('#resultScore').textContent();
