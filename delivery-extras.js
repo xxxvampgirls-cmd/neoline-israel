@@ -93,7 +93,7 @@
   const stats=byId("networkInsightsGrid"),retail=byId("retailCards");
   stats.replaceChildren(...delivery.map(item=>createCard(item,false)));
   retail.replaceChildren(...shops.map(item=>createCard(item,true)));
-  if(currentShop)renderRetailMap(currentShop,false);
+  if(currentShop)document.querySelectorAll("[data-retailer]").forEach(el=>el.classList.toggle("is-active",el.dataset.retailer===currentShop));
  }
  function applyCounts(kind,list){
   const target=kind==="retail"?shopCounts:pickupCounts;
@@ -144,7 +144,10 @@
   }
  });
  window.addEventListener("neoline:delivery-provider",exitRetail);
- window.addEventListener("neoline:delivery-language",render);
+ window.addEventListener("neoline:delivery-language",()=>{
+  render();
+  if(currentShop)renderRetailMap(currentShop,false);
+ });
  window.addEventListener("neoline:map-stats",e=>{
   if(Array.isArray(e.detail?.pickup))applyCounts("delivery",e.detail.pickup);
   if(e.detail?.retailLoaded&&Array.isArray(e.detail.retail))applyCounts("retail",e.detail.retail);
