@@ -68,208 +68,6 @@ function currentOnly(o){
 }
 
 
-/* Official Waze Live Map is embedded only on user opt-in.
-   It is not a traffic-data API, and does not provide NEOLINE raw events. */
-const wazeAreas={
- israel:{lat:31.53,lon:34.91,zoom:7},
- center:{lat:32.06,lon:34.85,zoom:10},
- north:{lat:32.84,lon:35.15,zoom:9},
- south:{lat:30.77,lon:34.77,zoom:8}
-};
-const wazeLabels={
- ru:{title:"Живая карта Waze",subtitle:"Пробки и перекрытия · открыть карту",
-  loading:"Карта загрузится только после открытия…",notice:"Карту и дорожную обстановку показывает Waze. Не все виды событий доступны на веб-карте.",
-  open:"Открыть в Waze ↗",areas:"Регион карты",area:["Весь Израиль","Центр","Север","Юг"]},
- en:{title:"Waze Live Map",subtitle:"Traffic and closures · tap to view",
-  loading:"Map loads only when you open it…",notice:"Traffic data and map are provided by Waze. Some incident types may be unavailable on the web map.",
-  open:"Open in Waze ↗",areas:"Map region",area:["All Israel","Central","North","South"]},
- he:{title:"מפת התנועה החיה של Waze",subtitle:"עומסים וחסימות · לפתיחת המפה",
-  loading:"המפה נטענת רק בעת פתיחה…",notice:"המפה ונתוני התנועה מוצגים על ידי Waze. חלק מסוגי הדיווחים אינם זמינים במפת האינטרנט.",
-  open:"פתיחה ב-Waze ↗",areas:"אזור המפה",area:["כל ישראל","מרכז","צפון","דרום"]},
- ar:{title:"خريطة Waze المباشرة",subtitle:"ازدحام وإغلاق الطرق · افتح الخريطة",
-  loading:"لن تُحمَّل الخريطة إلا عند فتحها…",notice:"تعرض Waze الخريطة وبيانات المرور؛ بعض أنواع البلاغات غير متاحة على خريطة الويب.",
-  open:"افتح في Waze ↗",areas:"منطقة الخريطة",area:["كل إسرائيل","الوسط","الشمال","الجنوب"]}
-};
-let wazeArea="israel";
-const wazeLoadingEl=$("trafficWazeLoading");
-function wazeLang(){return wazeLabels[state.lang]||wazeLabels.ru}
-function wazeURL(){
- const place=wazeAreas[wazeArea]||wazeAreas.israel;
- const lang=["ru","he","ar","en"].includes(state.lang)?state.lang:"en";
- // Official Waze iFrame URL format, per https://developers.google.com/waze/iframe
- return "https://embed.waze.com/"+lang+"/iframe?zoom="+place.zoom+
-  "&lat="+place.lat+"&lon="+place.lon;
-}
-function renderWazeCopy(){
- const t=wazeLang();
- $("trafficWazeTitle").textContent=t.title;
- $("trafficWazeSubtitle").textContent=t.subtitle;
- $("trafficWazeNotice").textContent=t.notice;
- $("trafficWazeOpen").textContent=t.open;
- $("trafficWazeAreas").setAttribute("aria-label",t.areas);
- wazeLoadingEl.textContent=t.loading;
- document.querySelectorAll("[data-waze-area]").forEach((button,index)=>{
-  button.textContent=t.area[index];
-  button.classList.toggle("active",button.dataset.wazeArea===wazeArea);
-  button.setAttribute("aria-pressed",String(button.dataset.wazeArea===wazeArea));
- });
- const iframe=$("trafficWazeFrame").querySelector("iframe");
- if(iframe)iframe.title=t.title;
-}
-function refreshWazeFrame(){
- const details=$("trafficWaze");
- if(!details.open)return;
- const frame=$("trafficWazeFrame");
- const iframe=document.createElement("iframe");
- iframe.title=wazeLang().title;
- iframe.loading="lazy";
- iframe.referrerPolicy="strict-origin-when-cross-origin";
- iframe.src=wazeURL();
- iframe.setAttribute("allowfullscreen","");
- // Loading feedback is not a map image. The real map remains Waze-hosted.
- frame.replaceChildren(iframe);
- frame.dataset.loaded="true";
-}
-$("trafficWaze").addEventListener("toggle",()=>{
- if($("trafficWaze").open){refreshWazeFrame();return}
- // Stop Waze iframe processing/network whenever the map is collapsed.
- $("trafficWazeFrame").replaceChildren(wazeLoadingEl);
- $("trafficWazeFrame").dataset.loaded="false";
-});
-$("trafficWazeAreas").addEventListener("click",event=>{
- const b=event.target.closest("[data-waze-area]");
- if(!b||!wazeAreas[b.dataset.wazeArea]||b.dataset.wazeArea===wazeArea)return;
- wazeArea=b.dataset.wazeArea;
- renderWazeCopy();
- refreshWazeFrame();
-});
-
-/* Independent 10-minute GitHub Actions data stream: official timestamped police
-   posts, not a traffic-control API or proof a road remains blocked right now. */
-const TRAFFIC_DATA_URL="https://raw.githubusercontent.com/xxxvampgirls-cmd/neoline-israel/traffic-live/assets/traffic/live.json";
-const traffic={events:[],checkedAt:null,sourceStatus:"pending",lastFetch:0,busy:false};
-const trafficI18n={
- ru:{title:"Дороги Израиля · сообщения полиции",loading:"Проверяем официальный источник…",
-  empty:"За последние 3 часа новых сообщений не найдено. Это не означает, что дороги свободны.",
-  unavailable:"Источник временно недоступен. Проверьте напрямую перед поездкой.",
-  stale:"Сведения не обновлялись достаточно давно. Проверяйте первоисточник.",
-  count:"Свежих сообщений",checked:"Проверено",source:"Дорожная полиция ↗",road6:"Шоссе № 6 ↗",
-  warning:"Сообщения могут устареть. Перед поездкой сверяйте ограничения с источником и навигатором.",
-  refresh:"Проверить дорожные сообщения",details:"Перейти к сообщению полиции ↗",
-  kinds:{closure:"Сообщение о перекрытии",reopened:"Сообщение об открытии движения",
-   congestion:"Сообщение о заторах",planned:"Планируемые ограничения",update:"Дорожное сообщение"},
-  road:"дорога №",roads:"дороги №",unspecified:"участок дороги",hot:"🔥 ДОРОЖНЫЕ СООБЩЕНИЯ",
-  posted:"Сообщение полиции от",verify:"Перед поездкой проверьте актуальность"},
- en:{title:"Israel roads · police bulletins",loading:"Checking the official source…",
-  empty:"No new matching posts in the past 3 hours. This does not mean roads are clear.",
-  unavailable:"Official source unavailable. Check directly before travelling.",
-  stale:"Updates are old. Please check the official source.",
-  count:"Recent bulletins",checked:"Checked",source:"Traffic Police ↗",road6:"Route 6 ↗",
-  warning:"Reports may be outdated. Verify any restriction with the source and navigation before travelling.",
-  refresh:"Check traffic bulletins",details:"Open the official police message ↗",
-  kinds:{closure:"Road closure bulletin",reopened:"Road reopening bulletin",
-   congestion:"Traffic congestion bulletin",planned:"Planned traffic restrictions",update:"Road traffic update"},
-  road:"road ",roads:"roads ",unspecified:"road location",hot:"🔥 TRAFFIC BULLETIN",
-  posted:"Police bulletin posted",verify:"Check current road conditions before departure"},
- he:{title:"כבישי ישראל · הודעות המשטרה",loading:"בודקים את המקור הרשמי…",
-  empty:"לא נמצאו עדכונים חדשים ב־3 השעות האחרונות. זה לא אומר שהכבישים פנויים.",
-  unavailable:"המקור הרשמי אינו זמין כרגע. יש לבדוק לפני הנסיעה.",
-  stale:"המידע לא עודכן לאחרונה. יש לבדוק במקור הרשמי.",
-  count:"עדכונים אחרונים",checked:"נבדק",source:"אגף התנועה ↗",road6:"כביש 6 ↗",
-  warning:"דיווחים עשויים להתיישן. לפני הנסיעה יש לוודא את מצב הכבישים מול המקור ואפליקציית ניווט.",
-  refresh:"בדיקת הודעות תנועה",details:"פתיחת הודעת המשטרה ↗",
-  kinds:{closure:"דיווח על חסימה",reopened:"דיווח על פתיחת הכביש",
-   congestion:"דיווח על עומסים",planned:"הגבלות תנועה מתוכננות",update:"עדכון תנועה"},
-  road:"כביש ",roads:"כבישים ",unspecified:"קטע כביש",hot:"🔥 עדכוני תנועה",
-  posted:"דיווח המשטרה",verify:"בדקו מידע מעודכן לפני הנסיעה"},
- ar:{title:"طرق إسرائيل · بيانات الشرطة",loading:"جار التحقق من المصدر الرسمي…",
-  empty:"لا توجد بيانات جديدة خلال 3 ساعات. هذا لا يعني أن الطرق مفتوحة.",
-  unavailable:"المصدر الرسمي غير متاح الآن. تحقق مباشرة قبل السفر.",
-  stale:"البيانات قديمة. تحقق من المصدر الرسمي.",
-  count:"بيانات حديثة",checked:"تم التحقق",source:"شرطة المرور ↗",road6:"الطريق 6 ↗",
-  warning:"قد تصبح التقارير قديمة. تحقق من قيود الطريق مع المصدر والملاحة قبل السفر.",
-  refresh:"تحديث بيانات المرور",details:"فتح بيان الشرطة الرسمي ↗",
-  kinds:{closure:"بلاغ إغلاق طريق",reopened:"بلاغ فتح الطريق",
-   congestion:"بلاغ ازدحام",planned:"قيود مرورية مخططة",update:"تحديث مروري"},
-  road:"طريق ",roads:"طرق ",unspecified:"مقطع طريق",hot:"🔥 بلاغات الطرق",
-  posted:"بيان الشرطة",verify:"تحقق من حالة الطرق قبل الرحلة"}
-};
-function trafficTr(){return trafficI18n[state.lang]||trafficI18n.ru}
-function trafficTime(v){
- const d=new Date(v);
- if(!Number.isFinite(+d))return "";
- return new Intl.DateTimeFormat({ru:"ru-RU",en:"en-GB",he:"he-IL",ar:"ar-IL"}[state.lang],{
-  timeZone:"Asia/Jerusalem",day:"numeric",month:"short",hour:"2-digit",minute:"2-digit"
- }).format(d);
-}
-function trafficHeadline(item){
- const t=trafficTr(),roads=Array.isArray(item.roads)?item.roads.filter(x=>/^\d{1,3}$/.test(x)).slice(0,4):[];
- const name=roads.length?(roads.length>1?t.roads:t.road)+roads.join(", "):t.unspecified;
- return (t.kinds[item.kind]||t.kinds.update)+" · "+name;
-}
-function trafficValid(event,now){
- if(!event||typeof event!=="object"||!/^Atanpolice\/\d+$/.test(event.id||"")||
-    !/^https:\/\/t\.me\/Atanpolice\/\d+$/.test(event.url||"")||
-    !["closure","reopened","congestion","planned","update"].includes(event.kind)||
-    typeof event.original!=="string"||event.original.length>520)return false;
- const age=now-Date.parse(event.publishedAt);
- return Number.isFinite(age)&&age>=-5*60e3&&age<=180*60e3;
-}
-function renderTraffic(){
- const t=trafficTr(),host=$("trafficList"),label=$("trafficStatus");
- if(!host||!label)return;
- $("trafficTitle").textContent=t.title;
- $("trafficSourceLink").textContent=t.source;
- $("trafficRoad6Link").textContent=t.road6;
- $("trafficDisclaimer").textContent=t.warning;
- $("trafficRefresh").setAttribute("aria-label",t.refresh);
- $("trafficRefresh").title=t.refresh;
- let message=t.loading;
- if(traffic.sourceStatus==="unavailable")message=t.unavailable;
- else if(traffic.sourceStatus==="stale")message=t.stale;
- else if(traffic.sourceStatus==="ok"){
-  message=traffic.events.length?t.count+": "+traffic.events.length:t.empty;
-  if(traffic.checkedAt)message+=" · "+t.checked+": "+trafficTime(traffic.checkedAt);
- }
- label.textContent=message;
- if(!traffic.events.length){host.hidden=true;host.innerHTML="";return}
- host.hidden=false;
- host.innerHTML=traffic.events.map(item=>{
-  const title=trafficHeadline(item),original=safe(item.original.slice(0,480)),url=safe(item.url);
-  return '<details class="traffic-report"><summary>'+
-   '<span class="traffic-report-type">🔥 '+safe(t.kinds[item.kind]||t.kinds.update)+'</span>'+
-   '<span class="traffic-report-title">'+safe(title)+'</span>'+
-   '<time class="traffic-report-age" datetime="'+safe(item.publishedAt)+'">'+safe(trafficTime(item.publishedAt))+'</time>'+
-   '</summary><div class="traffic-report-body">'+
-   '<p lang="he" dir="rtl">'+original+'</p>'+
-   '<a href="'+url+'" target="_blank" rel="noopener noreferrer nofollow">'+safe(t.details)+'</a>'+
-   '</div></details>';
- }).join("");
-}
-async function loadTraffic(){
- if(traffic.busy)return;
- traffic.busy=true;$("trafficRefresh").disabled=true;
- try{
-  // All site visitors share the same 10-minute cache key; no per-user query IDs.
-  const cacheKey=Math.floor(Date.now()/600000);
-  const response=await fetch(TRAFFIC_DATA_URL+"?v="+cacheKey,{cache:"no-store"});
-  if(!response.ok)throw Error("traffic source HTTP "+response.status);
-  const d=await response.json();
-  if(d.version!==1||!Array.isArray(d.events)||!["ok","unavailable","pending"].includes(d.sourceStatus))throw Error("invalid traffic feed");
-  const now=Date.now(),checkAge=now-Date.parse(d.checkedAt);
-  const sourceFresh=Number.isFinite(checkAge)&&checkAge>=-5*60e3&&checkAge<40*60e3;
-  traffic.sourceStatus=d.sourceStatus==="pending"?"unavailable":(sourceFresh?d.sourceStatus:"stale");
-  traffic.checkedAt=sourceFresh?d.checkedAt:null;
-  traffic.events=traffic.sourceStatus==="ok"?d.events.filter(e=>trafficValid(e,now)).slice(0,6):[];
- }catch(e){
-  console.warn("Official traffic headlines unavailable:",e.message);
-  traffic.events=[];traffic.sourceStatus="unavailable";traffic.checkedAt=null;
- }finally{
-  traffic.lastFetch=Date.now();traffic.busy=false;$("trafficRefresh").disabled=false;
-  renderTraffic();initializeFeatures(true);
- }
-}
-
 /* Featured news header: only one slide image exists in the DOM at a time.
    It rotates the latest 10 valid stories independently of the 8-card list. */
 const feature={items:[],index:0,timer:null,touchX:null,touchY:null,paused:false,swipedUntil:0};
@@ -298,16 +96,7 @@ function drawFeature(){
  $("newsFeatureDots").setAttribute("aria-label",featureTr("pick"));
  if(!list.length){host.innerHTML='<p class="news-feature-loading">'+safe(featureTr("empty"))+'</p>';return}
  const item=list[feature.index],url=safeURL(item.url);
- if(item.traffic){
-  const t=trafficTr(),headline=trafficHeadline(item);
-  host.innerHTML='<a class="news-feature-story news-feature-story--traffic" href="'+safe(url)+'" target="_blank" rel="noopener noreferrer nofollow" aria-label="'+safe(headline)+'">'+
-   '<span class="news-feature-traffic-glow" aria-hidden="true"></span>'+
-   '<span class="news-feature-traffic-symbol" aria-hidden="true"><svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><path d="M15 43 20 4h8l5 39M24 10v7m0 10v8"/></svg></span>'+
-   '<span class="news-feature-copy"><span class="news-feature-tag news-feature-tag--traffic">'+safe(t.hot)+'</span>'+
-   '<strong class="news-feature-title" dir="auto">'+safe(headline)+'</strong>'+
-   '<span class="news-feature-footer">'+safe(t.posted)+' · '+safe(trafficTime(item.publishedAt))+
-   '<span class="news-feature-go">'+safe(t.verify)+' ↗</span></span></span></a>';
- }else{
+ {
   const localized=localStory(item),pic=newsPicture(item);
   const photo=pic?'<img src="'+safe(pic)+'" width="640" height="360" decoding="async" alt="" class="news-feature-img">':'';
   const creditURL=item.imageCredit&&safeURL(item.imageCredit.url);
@@ -341,9 +130,8 @@ function setFeatureIndex(index,manual=true){
 function initializeFeatures(preserve=false){
  const selected=preserve&&feature.items[feature.index]?.id;
  const latest=state.items.filter(currentOnly);
- // At most one featured police bulletin; the complete small set is below.
- feature.items=(traffic.events.length?[{...traffic.events[0],traffic:true,date:traffic.events[0].publishedAt}]:[])
-  .concat(latest.slice(0,traffic.events.length?9:10));
+ // Featured carousel remains news-only; emergency bulletins live on /hot.
+ feature.items=latest.slice(0,10);
  const idx=feature.items.findIndex(item=>item.id===selected);
  feature.index=idx>=0?idx:0;
  drawFeature();
@@ -473,6 +261,10 @@ function applyNewsPayload(data,origin){
  const fresh=data.items.filter(currentOnly).sort((a,b)=>Date.parse(b.date)-Date.parse(a.date));
  newsFeedReady=true;newsFeedDate=stamp;newsFeedOrigin=origin;
  state.items=fresh;
+ // Chart uses the same verified rolling archive; no separate scraped data.
+ window.dispatchEvent(new CustomEvent("neoline:news-archive",{
+  detail:{items:state.items,updated:data.updated,origin}
+ }));
  document.documentElement.dataset.newsSource=origin;
  document.documentElement.dataset.newsUpdated=data.updated;
  $("newsUpdated").textContent=tr("updated")+": "+displayDate(data.updated);
@@ -535,12 +327,12 @@ $("newsSearch").addEventListener("input",e=>{state.query=e.target.value;state.vi
 document.querySelectorAll('[data-news-lang]').forEach(el=>el.addEventListener('click',()=>{
  state.lang=el.dataset.newsLang;
  try{localStorage.setItem("neoline-language",state.lang)}catch(e){}
- localize();tabs();render();renderTraffic();renderWazeCopy();refreshWazeFrame();initializeFeatures(true);
+ localize();tabs();render();initializeFeatures(true);
+ window.dispatchEvent(new CustomEvent("neoline:news-language",{detail:{lang:state.lang}}));
 }));
 document.addEventListener("visibilitychange",()=>{
  // Only recheck age limits after a long idle period; no needless DOM rebuilds.
  if(document.hidden){stopFeatureTimer();return}
- if(Date.now()-traffic.lastFetch>10*60000)loadTraffic();
  if(Date.now()-newsFetchAt>15*60000)load();
  restartFeatureTimer();
  if(Date.now()-lastExpiryCheck<3600000)return;
@@ -549,13 +341,11 @@ document.addEventListener("visibilitychange",()=>{
  initializeFeatures(true);
  if(feature.items.length!==count)drawFeature();
 });
-$("trafficRefresh").addEventListener("click",loadTraffic);
 // Keep long-lived tabs up to date without increasing the daily publisher crawl.
 setInterval(()=>{
  if(document.hidden)return;
- if(Date.now()-traffic.lastFetch>=10*60000)loadTraffic();
  if(Date.now()-newsFetchAt>=30*60000)load();
 },60000);
 window.addEventListener("online",()=>{if(!document.hidden&&Date.now()-newsFetchAt>5*60000)load()});
-localize();tabs();renderTraffic();renderWazeCopy();load();loadTraffic();
+localize();tabs();load();
 })();
