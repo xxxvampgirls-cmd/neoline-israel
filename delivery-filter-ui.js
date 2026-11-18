@@ -205,7 +205,72 @@
   field("networkInsights").open=true;
   field("officialDirectory").open=true;
  }
+ function installControls(){
+  if(field("locatorToolbar"))return;
+  const main=document.querySelector("main.wrap"),hero=main?.querySelector(".hero");
+  if(!main||!hero)return;
+  const toolbar=document.createElement("section");
+  toolbar.id="locatorToolbar";toolbar.className="locator-toolbar";toolbar.hidden=true;
+  toolbar.setAttribute("aria-label","Фильтры карты");
+  toolbar.innerHTML=`
+  <div class="locator-action-row">
+   <button id="locatorSearchButton" type="button" class="locator-loupe">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10" cy="10" r="7"/><path d="m15.5 15.5 5.5 5.5"/></svg>
+    <span id="locatorSearchText">Город, сеть, магазин</span>
+   </button>
+   <button id="locatorNetworksButton" type="button"><span id="locatorNetworksText">Сети</span>⌄</button>
+   <button id="locatorDetailsButton" type="button"><span id="locatorDetailsText">Подробнее</span>⌄</button>
+  </div>
+  <div id="locatorModeFilters" class="locator-filter-strip" role="group" aria-label="Быстрые фильтры">
+   <button type="button" data-map-mode="all" aria-pressed="true">Все</button>
+   <button type="button" data-map-mode="stores" aria-pressed="false">Магазины</button>
+   <button type="button" data-map-mode="lockers" aria-pressed="false">Постаматы</button>
+   <button type="button" data-map-mode="pickup" aria-pressed="false">Пункты выдачи</button>
+   <button type="button" data-map-mode="post" aria-pressed="false">Почта</button>
+   <button type="button" data-map-mode="couriers" aria-pressed="false">Курьеры</button>
+  </div>
+  <div class="locator-summary" id="locatorSummary" aria-live="polite"></div>`;
+  hero.after(toolbar);
+  const dlg=document.createElement("dialog");
+  dlg.id="locatorDialog";dlg.className="locator-dialog";
+  dlg.setAttribute("aria-labelledby","locatorDialogTitle");
+  dlg.innerHTML=`
+  <header class="locator-dialog-head">
+   <div><h2 id="locatorDialogTitle">Поиск и фильтры</h2>
+   <p id="locatorDialogSubtitle">Города, сети, магазины и статистика</p></div>
+   <button type="button" id="locatorDialogClose" class="locator-close" aria-label="Закрыть">×</button>
+  </header>
+  <nav class="locator-dialog-tabs" id="locatorDialogTabs" role="tablist" aria-label="Разделы справочника">
+   <button type="button" id="locatorTabCity" data-locator-tab="city" role="tab" aria-selected="true" aria-controls="locatorPanelCity">Город</button>
+   <button type="button" id="locatorTabNetwork" data-locator-tab="network" role="tab" aria-selected="false" aria-controls="locatorPanelNetwork">Сети</button>
+   <button type="button" id="locatorTabStores" data-locator-tab="stores" role="tab" aria-selected="false" aria-controls="locatorPanelStores">Магазины</button>
+   <button type="button" id="locatorTabStats" data-locator-tab="stats" role="tab" aria-selected="false" aria-controls="locatorPanelStats">Статистика</button>
+  </nav>
+  <div class="locator-dialog-content" id="locatorDialogContent">
+   <section id="locatorPanelCity" class="locator-pane" role="tabpanel" aria-labelledby="locatorTabCity">
+    <h3 class="locator-pane-heading" id="locatorPaneCityHeading">Поиск города или района</h3>
+    <p class="locator-pane-help" id="locatorPaneCityHelp">Введите город или выберите из списка.</p>
+    <div id="locatorCityHost"></div>
+   </section>
+   <section id="locatorPanelNetwork" class="locator-pane" role="tabpanel" aria-labelledby="locatorTabNetwork" hidden>
+    <h3 class="locator-pane-heading" id="locatorPaneNetworkHeading">Выберите сеть доставки</h3>
+    <p class="locator-pane-help" id="locatorPaneNetworkHelp">Только подтверждённые координаты.</p>
+    <div id="locatorNetworksHost"></div>
+   </section>
+   <section id="locatorPanelStores" class="locator-pane" role="tabpanel" aria-labelledby="locatorTabStores" hidden>
+    <h3 class="locator-pane-heading" id="locatorPaneStoresHeading">Магазины · возможные партнёры</h3>
+    <p class="locator-pane-help" id="locatorPaneStoresHelp">Ассортимент NEOLINE не подтверждён.</p>
+    <div id="locatorStoresHost"></div>
+   </section>
+   <section id="locatorPanelStats" class="locator-pane" role="tabpanel" aria-labelledby="locatorTabStats" hidden>
+    <h3 class="locator-pane-heading" id="locatorPaneStatsHeading">Точки, контакты и официальные сайты</h3>
+    <div id="locatorStatsHost"></div>
+   </section>
+  </div>`;
+  main.after(dlg);
+ }
  function init(){
+  installControls();
   const toolbar=field("locatorToolbar"),dialog=field("locatorDialog");
   if(!toolbar||!dialog||!window.NeolineMap?.setViewMode)return;
   try{
