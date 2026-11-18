@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 940 360" role="img" aria-label="Иллюстрация голубого автомобиля на дороге"><defs><linearGradient id="sky" x2="0" y2="1"><stop stop-color="#6bd4ff"/><stop offset="1" stop-color="#e5faff"/></linearGradient><linearGradient id="road" x2="0" y2="1"><stop stop-color="#8dcbe7"/><stop offset="1" stop-color="#276b99"/></linearGradient><linearGradient id="car" x2=".2" y2="1"><stop stop-color="#44e1ff"/><stop offset=".48" stop-color="#1394d7"/><stop offset="1" stop-color="#096298"/></linearGradient><linearGradient id="glass" x2=".1" y2="1"><stop stop-color="#e3fdff"/><stop offset="1" stop-color="#2d8fcb"/></linearGradient><filter id="glow"><feGaussianBlur stdDeviation="13"/></filter></defs>
+<rect width="940" height="360" fill="url(#sky)"/>
+<path d="M0 237 102 163l100 57 129-126 132 140 160-77 104 56 213-71v160H0Z" fill="#92d3ec" opacity=".48"/>
+<path d="M0 273 174 222l154 27 160-40 146 27 171-65 135 66v123H0Z" fill="#58b4da" opacity=".5"/>
+<g opacity=".57" fill="#fff"><ellipse cx="107" cy="70" rx="85" ry="16"/><ellipse cx="125" cy="57" rx="43" ry="22"/><ellipse cx="584" cy="75" rx="80" ry="13"/><ellipse cx="599" cy="62" rx="41" ry="20"/></g>
+<g opacity=".27" fill="#007eb9"><rect x="48" y="167" width="37" height="76" rx="3"/><rect x="95" y="153" width="33" height="89" rx="2"/><rect x="135" y="185" width="49" height="63" rx="2"/><rect x="195" y="159" width="35" height="75" rx="3"/><rect x="249" y="180" width="35" height="57" rx="3"/></g>
+<path d="M0 360V300L560 258 940 300v60Z" fill="#fbffff" opacity=".72"/>
+<path d="M204 360 611 241 787 241 940 360Z" fill="url(#road)"/>
+<path d="m492 360 157-118 15 0-88 118" fill="#fff" opacity=".83"/><path d="m760 360-76-118 9 0 132 118" fill="#fff" opacity=".77"/>
+<path d="M331 326q280-35 560 0" stroke="#fff" opacity=".7" stroke-width="4" fill="none"/>
+<ellipse cx="663" cy="311" rx="235" ry="30" fill="#00568b" opacity=".22" filter="url(#glow)"/>
+<!-- car body with clean automotive geometry -->
+<g transform="translate(376 110)"><path d="M99 110 160 60Q181 36 246 37l95 3q39 3 59 36l45 55 30 9q25 7 35 30l14 47q7 22-16 28H71q-22-3-15-24l15-62q9-30 28-49Z" fill="url(#car)" stroke="#e3fbff" stroke-width="6"/>
+<path d="M164 65q17-24 85-24l86 3q35 3 51 29l28 40-250-4Z" fill="url(#glass)" stroke="#a6f4ff" stroke-width="4"/>
+<path d="m248 43-4 66" stroke="#aae9ff" stroke-width="4"/><path d="M153 116 414 119" stroke="#006aab" stroke-width="6" opacity=".6"/>
+<path d="M83 169q-11 29-9 46h438q-2-18-11-45" stroke="#075d96" stroke-width="13" fill="none"/>
+<path d="M69 156q39-10 96-1l-17 24-87 7Z" fill="#e1fdff"/><path d="M407 155q56-11 96 4l6 29-89-9Z" fill="#e9fdff"/>
+<path d="M182 178q107 20 211 0" stroke="#b4f8ff" stroke-width="4" fill="none"/>
+<path d="M205 198h150" stroke="#075b91" stroke-width="9" stroke-linecap="round"/><path d="M210 197h140" stroke="#87dfff" stroke-width="3" stroke-linecap="round"/>
+<g><circle cx="152" cy="219" r="34" fill="#0a385b" stroke="#0f86be" stroke-width="8"/><circle cx="152" cy="219" r="17" fill="#a4e7fa"/><circle cx="417" cy="219" r="34" fill="#0a385b" stroke="#0f86be" stroke-width="8"/><circle cx="417" cy="219" r="17" fill="#a4e7fa"/></g>
+<path d="M78 146 57 167m457-17 17 17" stroke="#69e3ff" stroke-width="6" stroke-linecap="round"/></g>
+<path d="M60 312 258 264" stroke="#1de0ff" stroke-width="7" stroke-linecap="round" opacity=".7"/></svg>
