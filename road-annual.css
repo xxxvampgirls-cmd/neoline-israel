@@ -1,0 +1,67 @@
+/* Expanded official CBS dashboard. Stays collapsed below the 30-day NEWS chart. */
+.accident-annual{margin-top:13px;padding:0;border:1px solid #c7e4f5;border-radius:15px;background:linear-gradient(145deg,#ffffff,#eaf7ff);box-shadow:0 6px 20px #175c8d10;overflow:hidden}
+.accident-annual>summary{list-style:none;display:flex;justify-content:space-between;align-items:center;gap:10px;padding:12px 14px;cursor:pointer;color:#1a608c}
+.accident-annual>summary::-webkit-details-marker{display:none}
+.accident-annual-title{font-size:12px;font-weight:900;letter-spacing:.015em}
+.accident-annual-more{display:flex;align-items:center;gap:6px;white-space:nowrap;font-size:10px;font-weight:750;color:#338fbe}
+.accident-annual-caret{display:inline-block;font-size:15px;transition:transform .2s}
+.accident-annual[open] .accident-annual-caret{transform:rotate(180deg)}
+.accident-annual-body{border-top:1px solid #d5eaf6;padding:14px}
+.accident-annual-body h2{font-size:18px;color:#144f7d;margin:0 0 6px;font-weight:900}
+.accident-annual-intro{color:#607f96!important;font-size:11.5px!important;line-height:1.55!important;margin:0 0 13px!important}
+.accident-annual-switch{display:flex;gap:10px;justify-content:space-between;flex-wrap:wrap}
+.accident-annual-group{display:flex;flex-wrap:wrap;gap:5px}
+.accident-annual-toggle{font:inherit;font-size:10px;font-weight:800;line-height:1.3;padding:8px 10px;color:#1e719e;background:#f2faff;border:1px solid #cae2f2;border-radius:10px;cursor:pointer}
+.accident-annual-toggle[aria-pressed=true]{background:linear-gradient(135deg,#007bc6,#2d9ddc);color:#fff;border-color:#037bbd;box-shadow:0 3px 9px #108dce30}
+.accident-annual-period{margin:12px 0 9px;font-size:10px;color:#6a8ba5;letter-spacing:.01em}
+.accident-annual-cards{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+.accident-annual-card{display:flex;flex-direction:column;gap:3px;min-width:0;padding:11px 10px;border:1px solid #d4e8f6;background:#fff;border-radius:12px}
+.accident-annual-card.is-current{border-color:#69b8e6;background:#e5f5ff}
+.accident-annual-card strong{font-variant-numeric:tabular-nums;font-size:clamp(18px,2.7vw,28px);font-weight:900;color:#0a75b6;line-height:1.15}
+.accident-annual-card span{font-size:10px;font-weight:820;line-height:1.35;color:#315e7f}
+.accident-annual-card small{color:#80a0b5;font-size:8px}
+.accident-annual-comparison{font-size:11px;font-weight:800;color:#287caa;margin:9px 0 1px}
+.accident-annual-peak{margin:13px 0 8px;font-size:12px;font-weight:850;color:#175476}
+.accident-annual-chart-scroll{overflow-x:auto;scrollbar-width:thin}
+.accident-annual-chart{display:grid;grid-template-columns:repeat(12,minmax(26px,1fr));gap:6px;min-width:390px;height:181px;align-items:end}
+.accident-annual-month{display:flex;flex-direction:column;align-items:center;gap:4px;min-width:0;padding:0;background:transparent;border:0;border-radius:7px;cursor:pointer;min-height:0}
+.accident-annual-month-num{font-size:9px;font-weight:850;font-variant-numeric:tabular-nums;color:#397ba0;line-height:13px}
+.accident-annual-month-rail{height:138px;width:100%;display:flex;align-items:flex-end;justify-content:center;background:linear-gradient(180deg,transparent,#dfecf773);border-radius:7px 7px 2px 2px}
+.accident-annual-month-bar{display:block;width:min(75%,26px);background:linear-gradient(#4bb6ea,#167cbe);border-radius:6px 6px 0 0;min-height:0;transition:height .25s ease}
+.accident-annual-month.is-peak .accident-annual-month-bar{background:linear-gradient(#ff9c6d,#d65c65)}
+.accident-annual-month.is-peak .accident-annual-month-num{color:#c7535b}
+.accident-annual-month[aria-pressed=true] .accident-annual-month-rail{background:#d0ecfd}
+.accident-annual-month[aria-pressed=true] .accident-annual-month-bar{box-shadow:0 0 0 2px #38a5dc80}
+.accident-annual-month-label{font-size:9px;line-height:14px;color:#7095ae}
+.accident-annual-month.is-missing{cursor:default;opacity:.48}
+.accident-annual-month.is-missing .accident-annual-month-rail{background:repeating-linear-gradient(45deg,#edf4f8,#edf4f8 5px,#f7fbfd 5px,#f7fbfd 10px)}
+.accident-annual-detail{min-height:18px;margin:8px 0 12px;font-size:10px;color:#5f83a1}
+.accident-annual-history-heading{font-size:12px;margin:14px 0 8px;color:#185b88;font-weight:900}
+.accident-annual-history{max-width:500px;display:grid;grid-template-columns:repeat(4,1fr);gap:10px;height:105px}
+.accident-annual-history-col{display:flex;flex-direction:column;gap:3px;align-items:center;justify-content:end;color:#225f8b}
+.accident-annual-history-col strong{font-size:11px}
+.accident-annual-history-rail{height:70px;width:100%;display:flex;align-items:flex-end;justify-content:center;background:#e8f3fc;border-radius:6px 6px 2px 2px}
+.accident-annual-history-bar{display:block;width:48%;background:linear-gradient(#63c6ed,#087bbb);border-radius:5px 5px 0 0}
+.accident-annual-history-col small{font-size:9px;color:#7695a7}
+.accident-annual-secondary,.accident-annual-note{color:#6f8b9f;font-size:10px;line-height:1.55;margin:8px 0}
+.accident-annual-sources{border-top:1px solid #d7e7f1;margin-top:13px;padding-top:9px}
+.accident-annual-sources strong{font-size:10px;color:#356580;display:block;margin-bottom:6px}
+.accident-annual-sources-links{display:flex;flex-wrap:wrap;gap:7px 15px}
+.accident-annual-sources-links a{color:#1383ba;text-decoration:underline;text-underline-offset:2px;font-size:10px;font-weight:770}
+.accident-annual-toggle:focus-visible,.accident-annual-month:focus-visible,.accident-annual>summary:focus-visible{outline:3px solid #36b1e3;outline-offset:2px}
+html[dir=rtl] .accident-annual-body{text-align:right}
+@media(max-width:760px){
+ .accident-annual{margin-top:10px;border-radius:12px}
+ .accident-annual>summary{padding:11px 9px;gap:5px}
+ .accident-annual-title{font-size:11px}
+ .accident-annual-more{font-size:9px}
+ .accident-annual-body{padding:11px 9px}
+ .accident-annual-switch{gap:9px}
+ .accident-annual-toggle{font-size:9px;padding:7px 8px}
+ .accident-annual-card{padding:9px 6px}
+ .accident-annual-card strong{font-size:20px}
+ .accident-annual-card span{font-size:9px}
+ .accident-annual-cards{gap:5px}
+ .accident-annual-chart{gap:5px}
+}
+@media(prefers-reduced-motion:reduce){.accident-annual-month-bar,.accident-annual-caret{transition:none}}
