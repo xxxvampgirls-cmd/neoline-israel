@@ -1,0 +1,45 @@
+/* NEOLINE Israel — common active tab treatment on every mobile dock.
+   Same pale-blue rounded tile used by the delivery page screenshot.
+   Only the current item is highlighted, without changing dock items. */
+@media (max-width: 760px) {
+  :is(.mobile-nav,.news-bottom,.theory-bottom,.delivery-nav) > :is(a,button) {
+    position: relative;
+    min-width: 0;
+    border-radius: 17px !important;
+    -webkit-tap-highlight-color: transparent;
+    transition: background-color .2s ease, color .2s ease, box-shadow .2s ease;
+  }
+  :is(.mobile-nav,.news-bottom,.theory-bottom,.delivery-nav) > :is(a,button).neoline-current,
+  :is(.mobile-nav,.news-bottom,.theory-bottom,.delivery-nav) > :is(a,button)[aria-current],
+  :is(.mobile-nav,.news-bottom,.theory-bottom,.delivery-nav) > :is(a,button).active {
+    background: #e7f5ff !important;
+    color: #196eaa !important;
+    font-weight: 850 !important;
+    box-shadow: inset 0 0 0 1px #c9e9fb55 !important;
+  }
+  :is(.mobile-nav,.news-bottom,.theory-bottom,.delivery-nav) > :is(a,button).neoline-current svg,
+  :is(.mobile-nav,.news-bottom,.theory-bottom,.delivery-nav) > :is(a,button)[aria-current] svg,
+  :is(.mobile-nav,.news-bottom,.theory-bottom,.delivery-nav) > :is(a,button).active svg {
+    stroke: #0b7dbb !important;
+    color: #0b7dbb !important;
+  }
+  .mobile-nav > .neoline-current .mobile-icon,
+  .mobile-nav > .neoline-current .mobile-icon svg {
+    color: #0b7dbb !important;
+    stroke: #0b7dbb !important;
+  }
+  .mobile-nav > .neoline-current > span[data-i],
+  .mobile-nav > .neoline-current > span:last-of-type {
+    color: #196eaa !important;
+    font-weight: 850 !important;
+  }
+  :is(.mobile-nav,.news-bottom,.theory-bottom,.delivery-nav) > :is(a,button):focus-visible {
+    outline: 2px solid #168bd3 !important;
+    outline-offset: -3px !important;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  :is(.mobile-nav,.news-bottom,.theory-bottom,.delivery-nav) > :is(a,button) {
+    transition: none !important;
+  }
+}
