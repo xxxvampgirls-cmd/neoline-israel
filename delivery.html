@@ -218,6 +218,46 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible{ou
  .network-more>summary span,.city-choices>summary span{transition:none}
 }
 
+
+/* Countrywide directory: compact city picker and authoritative source links. */
+.city-directory-row{padding:10px 0 3px;display:flex;flex-direction:column;gap:6px}
+.city-directory-row label{font-size:11px;color:#4b7795;font-weight:800}
+#cityDirectory{
+ width:100%;min-height:42px;padding:9px 12px;background:#fff;
+ border:1px solid #badcf2;border-radius:11px;font-size:12px;color:#154d76;
+ cursor:pointer;outline-offset:2px
+}
+.official-directory{
+ padding:12px 17px 17px;margin:0 14px 14px;
+ border:1px solid #c9e1f1;background:#f6fbff;
+ border-radius:14px;
+}
+.official-directory>summary{
+ display:flex;justify-content:space-between;gap:9px;
+ align-items:center;font-size:12px;font-weight:850;
+ color:#176da4;cursor:pointer;list-style:none;
+}
+.official-directory>summary::-webkit-details-marker{display:none}
+.official-directory[open]>summary span{transform:rotate(180deg)}
+.official-directory>p{font-size:11px;color:#62839c;line-height:1.6;margin:12px 0}
+.official-directory-grid{
+ display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;
+}
+.official-directory-grid a{
+ min-width:0;display:flex;flex-direction:column;gap:3px;
+ text-decoration:none;color:#145f91;padding:12px;border-radius:10px;
+ background:#fff;border:1px solid #d4e7f3
+}
+.official-directory-grid strong{font-size:11px;overflow-wrap:anywhere}
+.official-directory-grid small{font-size:10px;color:#3486b8}
+.official-directory-grid a:hover{background:#e7f5ff;border-color:#92c7e6}
+@media(max-width:760px){
+ .official-directory{margin:0 10px 10px;padding:10px}
+ .official-directory-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:6px}
+ .official-directory-grid a{padding:9px}
+ .official-directory>summary{font-size:11px}
+}
+
 </style>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/leaflet.css">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet.markercluster@1.5.3/dist/MarkerCluster.css">
@@ -244,7 +284,10 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible{ou
 </div><div class="separate"><a class="shoplink" id="ksp" target="_blank" rel="noopener noreferrer" href="https://ksp.co.il/"><strong>KSP ↗</strong><small id="kspDesc">Отдельная сеть магазинов: самовывоз только для заказов KSP, когда он доступен.</small></a></div></details></aside>
 <section class="map-panel" aria-label="Pickup map"><div class="map-top"><div><div class="map-heading" id="mapTitle">Все сети — пункты выдачи</div><div class="map-sub" id="mapSub">Поиск точек на карте Google, справочно</div></div><span aria-hidden="true">⌖</span></div>
 <form id="search" class="searchbox"><input id="city" placeholder="Введите город или район" enterkeyhint="search" autocomplete="address-level2" value="" aria-label="City"><button type="submit" id="find">Найти</button></form>
-<details class="city-choices" id="cityChoices"><summary id="cityChoicesSummary">Быстрый выбор города <span aria-hidden="true">⌄</span></summary><div class="cities" id="cities"><button type="button" data-city="אריאל">Ариэль</button><button type="button" data-city="תל אביב">Тель-Авив</button><button type="button" data-city="פתח תקווה">Петах-Тиква</button><button type="button" data-city="ירושלים">Иерусалим</button><button type="button" data-city="חיפה">Хайфа</button><button type="button" data-city="באר שבע">Беэр-Шева</button><button type="button" data-city="אילת">Эйлат</button></div></details>
+<details class="city-choices" id="cityChoices"><summary id="cityChoicesSummary">Быстрый выбор города <span aria-hidden="true">⌄</span></summary><div class="cities" id="cities"><button type="button" data-city="אריאל">Ариэль</button><button type="button" data-city="תל אביב">Тель-Авив</button><button type="button" data-city="פתח תקווה">Петах-Тиква</button><button type="button" data-city="ירושלים">Иерусалим</button><button type="button" data-city="חיפה">Хайфа</button><button type="button" data-city="באר שבע">Беэр-Шева</button><button type="button" data-city="אילת">Эйлат</button></div><div class="city-directory-row">
+ <label for="cityDirectory" id="cityDirectoryLabel">Другие города и населённые пункты</label>
+ <select id="cityDirectory" aria-label="Выберите город из списка"><option value="">Выберите город…</option></select>
+ </div></details>
 <div class="map-wrap">
 <div id="pickupMap" role="region" aria-label="Карта пунктов выдачи Израиля"></div>
 <iframe id="map" hidden title="Запасная карта Google Maps" loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe>
@@ -253,7 +296,11 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible{ou
 <div class="map-hint" id="mapHint">Показаны только точки с координатами OpenStreetMap. Для проверки полного списка используйте официальные карты операторов.</div>
 </div>
 <div class="bottom"><a class="official" id="official" href="https://boxit.co.il/" target="_blank" rel="noopener noreferrer">Официальные точки сети ↗</a><a class="maps" id="fullMap" target="_blank" rel="noopener noreferrer">Открыть Google Maps ↗</a><small id="networkNotice">Условия работы и часы доступа зависят от конкретного пункта. Наличие локера не означает, что в него можно доставить заказ NEOLINE.</small></div>
-</section></div></main><footer class="foot"><div class="wrap"><span id="foot">NEOLINE Israel · демонстрационный проект. Карты и адреса принадлежат соответствующим операторам; сведения о точках могут меняться.</span> · <a href="./index.html" id="home">На главную</a></div></footer>
+<details class="official-directory" id="officialDirectory">
+<summary id="officialDirectorySummary">Официальные карты и сайты 12 сетей <span aria-hidden="true">⌄</span></summary>
+<p id="officialDirectoryNote">Список на общей карте может быть неполным. Сверяйте пункты на сайтах операторов: их карты и адреса наиболее актуальны.</p>
+<div class="official-directory-grid" id="officialDirectoryGrid"></div>
+</details></section></div></main><footer class="foot"><div class="wrap"><span id="foot">NEOLINE Israel · демонстрационный проект. Карты и адреса принадлежат соответствующим операторам; сведения о точках могут меняться.</span> · <a href="./index.html" id="home">На главную</a></div></footer>
 <nav class="delivery-nav" id="deliveryBottomNav" aria-label="Главное меню NEOLINE">
  <a href="./" id="deliveryNavHome"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m3 10 9-7 9 7v10a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V10Z"/><path d="M9 21v-8h6v8"/></svg><span>Главная</span></a>
  <a href="./#catalog" id="deliveryNavCatalog"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></svg><span>Каталог</span></a>
@@ -268,16 +315,16 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible{ou
 "use strict";
 const providers={
  boxit:{name:"BOXIT",query:"BOXIT parcel locker",official:"https://boxit.co.il/"},
- done:{name:"DONE",query:"DONE smart lockers",official:"https://done.co.il/en/maps-english/"},
+ done:{name:"DONE",query:"DONE smart lockers",official:"https://done.co.il/maps-english/"},
  doar:{name:"Israel Post",query:"דואר ישראל סניף דואר לוקר",official:"https://doar.israelpost.co.il/he/locatebranch"},
- epost:{name:"E-POST · HFD",query:"EPOST HFD נקודת איסוף",official:"https://www.hfd.co.il/נקודות-איסוף/"},
+ epost:{name:"E-POST · HFD",query:"EPOST HFD נקודת איסוף",official:"https://www.hfd.co.il/en/pick-up-points/"},
  pickup:{name:"PickUP",query:"PickUP נקודת איסוף חבילות",official:"https://www.pickuppoint.co.il/?page_id=14"},
- cheetah:{name:"Cheetah Shops",query:"ציטה שופס נקודת חלוקת חבילות",official:"https://chitadelivery.co.il/branches/"},
+ cheetah:{name:"Cheetah Shops",query:"ציטה שופס נקודת חלוקת חבילות",official:"https://chitadelivery.co.il/en/branches/"},
  zigzag:{name:"ZigZag BOX",query:"זיגזג נקודת חלוקה לוקר",official:"https://zig-zag.co.il/help/stores"},
  shlager:{name:"Shlager",query:"שלאגר לוקרים איסוף חבילות",official:"https://www.shlager.com/"},
- easypoint:{name:"Easy Point",query:"איזי פוינט נקודת חלוקה",official:"https://easypoint.co.il/"},
+ easypoint:{name:"Easy Point",query:"איזי פוינט נקודת חלוקה",official:"https://easypoint.co.il/נקודות-חלוקה/"},
  cargo:{name:"Cargo",query:"Cargo נקודות איסוף חבילות",official:"https://dashboard.cargo.co.il/pickup-points-map"},
- dhl:{name:"DHL Express",query:"DHL Express ServicePoint",official:"https://www.dhl.com/il-en/home/express/shipping-and-tracking/shipping.html"},
+ dhl:{name:"DHL Express",query:"DHL Express ServicePoint",official:"https://fspa.dhl.com/locatorweb"},
  fedex:{name:"FedEx",query:"FedEx pickup dropoff locations",official:"https://local.fedex.com/en-il"}
 };
 const copy={
@@ -289,7 +336,7 @@ ar:{back:"العودة للموقع ←",eyebrow:"NEOLINE · التوصيل في
 
 const moreCopy={
  ru:{
-  all:"Все сети",allCaption:"12 сетей · поиск пунктов выдачи",more:"Ещё 9 сетей",cityChoice:"Выбрать город",
+  all:"Все сети",allCaption:"12 сетей · поиск пунктов выдачи",more:"Ещё 9 сетей",cityChoice:"Выбрать город",cityDirectory:"Другие города и населённые пункты",cityPlaceholder:"Выберите город…",regionNames:["Север","Центр","Иерусалим и окрестности","Юг"],officialTitle:"Официальные карты и сайты 12 сетей",officialNote:"Точки на общей карте могут быть неполными. Самые актуальные адреса проверяйте у операторов.",officialOpen:"Открыть ↗",
   labels:["Точки выдачи и магазины","Локеры и пункты выдачи","Умные постаматы","Пункты выдачи","Пункты выдачи Cargo","Пункты DHL Express","Пункты отправки и выдачи"],
   genericSub:"Общий поиск по Google Maps — не полный список сетей",
   genericHint:"Общая карта — ориентировочный поиск разных операторов. Для точных адресов выберите сеть и откройте её официальный справочник.",
@@ -297,7 +344,7 @@ const moreCopy={
   nav:["Главная","Каталог","Новости","Доставка"]
  },
  en:{
-  all:"All networks",allCaption:"12 networks · pickup point search",more:"9 more networks",cityChoice:"Choose a city",
+  all:"All networks",allCaption:"12 networks · pickup point search",more:"9 more networks",cityChoice:"Choose a city",cityDirectory:"More towns and cities",cityPlaceholder:"Select a town…",regionNames:["North","Central","Jerusalem area","South"],officialTitle:"Official directories of 12 networks",officialNote:"The combined map may be incomplete. Always verify the latest locations with the provider.",officialOpen:"Open ↗",
   labels:["Pickup shops and locations","Lockers and pickup points","Smart parcel lockers","Pickup points","Cargo collection points","DHL Express ServicePoints","Drop-off and pickup sites"],
   genericSub:"Broad Google Maps search — not a complete operator directory",
   genericHint:"The combined map is an indicative search across operators. For accurate addresses choose a specific network and use its official locator.",
@@ -305,7 +352,7 @@ const moreCopy={
   nav:["Home","Catalog","News","Delivery"]
  },
  he:{
-  all:"כל הרשתות",allCaption:"12 רשתות · חיפוש נקודות איסוף",more:"עוד 9 רשתות",cityChoice:"בחירת עיר",
+  all:"כל הרשתות",allCaption:"12 רשתות · חיפוש נקודות איסוף",more:"עוד 9 רשתות",cityChoice:"בחירת עיר",cityDirectory:"ערים ויישובים נוספים",cityPlaceholder:"בחירת יישוב…",regionNames:["צפון","מרכז","ירושלים והסביבה","דרום"],officialTitle:"מפות ואתרים רשמיים של 12 רשתות",officialNote:"ייתכן שחסרות נקודות במפה הכללית. בדקו מיקומים עדכניים באתר הרשת.",officialOpen:"פתיחה ↗",
   labels:["חנויות ונקודות מסירה","לוקרים ונקודות מסירה","לוקרים חכמים","נקודות איסוף","נקודות איסוף Cargo","נקודות שירות DHL","נקודות מסירה ואיסוף"],
   genericSub:"חיפוש כללי ב-Google Maps — לא רשימה מלאה",
   genericHint:"המפה הכללית מציגה תוצאות חיפוש משוערות בלבד. לכתובות מדויקות בחרו רשת ובדקו באתר הרשמי שלה.",
@@ -313,7 +360,7 @@ const moreCopy={
   nav:["בית","קטלוג","חדשות","משלוחים"]
  },
  ar:{
-  all:"جميع الشبكات",allCaption:"12 شبكة · البحث عن نقاط الاستلام",more:"9 شبكات أخرى",cityChoice:"اختيار المدينة",
+  all:"جميع الشبكات",allCaption:"12 شبكة · البحث عن نقاط الاستلام",more:"9 شبكات أخرى",cityChoice:"اختيار المدينة",cityDirectory:"مدن وبلدات إضافية",cityPlaceholder:"اختر مدينة…",regionNames:["الشمال","الوسط","القدس وضواحيها","الجنوب"],officialTitle:"الخرائط والمواقع الرسمية لـ 12 شبكة",officialNote:"قد تكون الخريطة العامة غير مكتملة. تأكد من العناوين من موقع الشبكة الرسمي.",officialOpen:"افتح ↗",
   labels:["متاجر ونقاط استلام","خزائن ونقاط استلام","خزائن طرود ذكية","نقاط الاستلام","نقاط استلام Cargo","نقاط DHL Express","مواقع التسليم والاستلام"],
   genericSub:"بحث عام في خرائط Google — ليس دليلاً شاملاً",
   genericHint:"الخريطة العامة تعرض نتائج بحث تقريبية. للعناوين الدقيقة اختر شبكة واستخدم دليلها الرسمي.",
@@ -322,6 +369,119 @@ const moreCopy={
  }
 };
 const extraProviderOrder=["cheetah","zigzag","shlager","easypoint","cargo","dhl","fedex"];
+
+const cityGroups={
+ north:[
+ ["חיפה","Хайфа","Haifa","حيفا"],
+ ["נצרת","Назарет","Nazareth","الناصرة"],
+ ["נוף הגליל","Ноф-ха-Галиль","Nof HaGalil","نوف هجليل"],
+ ["עכו","Акко","Acre","عكا"],
+ ["נהריה","Нагария","Nahariya","نهاريا"],
+ ["כרמיאל","Кармиэль","Karmiel","كرميئيل"],
+ ["צפת","Цфат","Safed","صفد"],
+ ["טבריה","Тверия","Tiberias","طبريا"],
+ ["עפולה","Афула","Afula","العفولة"],
+ ["קריית שמונה","Кирьят-Шмона","Kiryat Shmona","كريات شمونة"],
+ ["מעלות תרשיחא","Маалот-Таршиха","Ma'alot-Tarshiha","معلوت ترشيحا"],
+ ["מגדל העמק","Мигдаль-ха-Эмек","Migdal HaEmek","مجدال هعيمق"],
+ ["יוקנעם עילית","Йокнеам-Илит","Yokneam Illit","يوكنعام عيليت"],
+ ["נשר","Нешер","Nesher","نيشر"],
+ ["קריית אתא","Кирьят-Ата","Kiryat Ata","كريات آتا"],
+ ["קריית ביאליק","Кирьят-Бялик","Kiryat Bialik","كريات بياليك"],
+ ["קריית מוצקין","Кирьят-Моцкин","Kiryat Motzkin","كريات موتسكين"],
+ ["חדרה","Хадера","Hadera","الخضيرة"],
+ ["זכרון יעקב","Зихрон-Яаков","Zichron Yaakov","زخرون يعقوب"],
+ ["קצרין","Кацрин","Katzrin","كتسرين"],
+ ["שפרעם","Шфарам","Shefa-Amr","شفا عمرو"],
+ ["סח'נין","Сахнин","Sakhnin","سخنين"]
+ ],
+ central:[
+ ["תל אביב","Тель-Авив","Tel Aviv","تل أبيب"],
+ ["נתניה","Нетания","Netanya","نتانيا"],
+ ["רמת גן","Рамат-Ган","Ramat Gan","رمات غان"],
+ ["גבעתיים","Гиватаим","Givatayim","جفعتايم"],
+ ["בני ברק","Бней-Брак","Bnei Brak","بني براك"],
+ ["הרצליה","Герцлия","Herzliya","هرتسليا"],
+ ["רעננה","Раанана","Ra'anana","رعنانا"],
+ ["כפר סבא","Кфар-Саба","Kfar Saba","كفار سابا"],
+ ["הוד השרון","Ход-ха-Шарон","Hod HaSharon","هود هشارون"],
+ ["פתח תקווה","Петах-Тиква","Petah Tikva","بيتاح تكفا"],
+ ["ראש העין","Рош-ха-Аин","Rosh HaAyin","روش هعاين"],
+ ["אריאל","Ариэль","Ariel","أريئيل"],
+ ["כפר יונה","Кфар-Йона","Kfar Yona","كفار يونا"],
+ ["קריית אונו","Кирьят-Оно","Kiryat Ono","كريات أونو"],
+ ["אור יהודה","Ор-Йехуда","Or Yehuda","أور يهودا"],
+ ["יהוד","Йехуд","Yehud","يهود"],
+ ["לוד","Лод","Lod","اللد"],
+ ["רמלה","Рамле","Ramla","الرملة"],
+ ["מודיעין מכבים רעות","Модиин","Modiin-Maccabim-Reut","موديعين"],
+ ["רחובות","Реховот","Rehovot","رحوفوت"],
+ ["נס ציונה","Нес-Циона","Ness Ziona","نيس تسيونا"],
+ ["ראשון לציון","Ришон-ле-Цион","Rishon LeZion","ريشون لتسيون"],
+ ["חולון","Холон","Holon","حولون"],
+ ["בת ים","Бат-Ям","Bat Yam","بات يام"],
+ ["יבנה","Явне","Yavne","يفنه"],
+ ["שוהם","Шохам","Shoham","شوهم"],
+ ["גבעת שמואל","Гиват-Шмуэль","Givat Shmuel","جفعات شموئيل"],
+ ["אור עקיבא","Ор-Акива","Or Akiva","أور عكيفا"],
+ ["פרדס חנה כרכור","Пардес-Хана-Каркур","Pardes Hanna-Karkur","برديس حنا كركور"],
+ ["אלעד","Эльад","El'ad","إلعاد"]
+ ],
+ jerusalem:[
+ ["ירושלים","Иерусалим","Jerusalem","القدس"],
+ ["בית שמש","Бейт-Шемеш","Beit Shemesh","بيت شيمش"],
+ ["מבשרת ציון","Мевасерет-Цион","Mevaseret Zion","ميفاسيرت تسيون"],
+ ["מעלה אדומים","Маале-Адумим","Ma'ale Adumim","معاليه أدوميم"],
+ ["ביתר עילית","Бейтар-Илит","Beitar Illit","بيتار عيليت"],
+ ["אבו גוש","Абу-Гош","Abu Ghosh","أبو غوش"]
+ ],
+ south:[
+ ["אשדוד","Ашдод","Ashdod","أشدود"],
+ ["אשקלון","Ашкелон","Ashkelon","عسقلان"],
+ ["באר שבע","Беэр-Шева","Be'er Sheva","بئر السبع"],
+ ["קריית גת","Кирьят-Гат","Kiryat Gat","كريات جات"],
+ ["קריית מלאכי","Кирьят-Малахи","Kiryat Malakhi","كريات ملاخي"],
+ ["שדרות","Сдерот","Sderot","سديروت"],
+ ["נתיבות","Нетивот","Netivot","نتيفوت"],
+ ["אופקים","Офаким","Ofakim","أوفاكيم"],
+ ["דימונה","Димона","Dimona","ديمونا"],
+ ["ערד","Арад","Arad","عراد"],
+ ["אילת","Эйлат","Eilat","إيلات"],
+ ["מצפה רמון","Мицпе-Рамон","Mitzpe Ramon","متسبيه رامون"],
+ ["רהט","Рахат","Rahat","رهط"],
+ ["עומר","Омер","Omer","عومر"],
+ ["להבים","Лехавим","Lehavim","لهفيم"]
+ ]
+};
+function populateCities(){
+ const langIndex={he:0,ru:1,en:2,ar:3}[lang]??1;
+ const t=moreCopy[lang]||moreCopy.ru,select=$("cityDirectory");
+ select.replaceChildren(new Option(t.cityPlaceholder,""));
+ ["north","central","jerusalem","south"].forEach((region,i)=>{
+  const group=document.createElement("optgroup");group.label=t.regionNames[i];
+  for(const row of cityGroups[region]){
+   group.appendChild(new Option(row[langIndex],row[0]));
+  }
+  select.appendChild(group);
+ });
+ $("cityDirectoryLabel").textContent=t.cityDirectory;
+ const match=Array.from(select.options).find(o=>o.value===$("city").value);
+ select.value=match?match.value:"";
+}
+function fillOfficialDirectory(){
+ const t=moreCopy[lang]||moreCopy.ru;
+ $("officialDirectorySummary").firstChild.textContent=t.officialTitle+" ";
+ $("officialDirectoryNote").textContent=t.officialNote;
+ const grid=$("officialDirectoryGrid");grid.replaceChildren();
+ for(const p of Object.values(providers)){
+  if(!/^https:\/\//.test(p.official))continue;
+  const link=document.createElement("a");link.href=p.official;
+  link.target="_blank";link.rel="noopener noreferrer";
+  const title=document.createElement("strong");title.textContent=p.name;
+  const caption=document.createElement("small");caption.textContent=t.officialOpen;
+  link.append(title,caption);grid.appendChild(link);
+ }
+}
 const $=id=>document.getElementById(id);let active="all";let lang="ru";
 function applyLanguage(){
  const t=copy[lang]||copy.ru,extra=moreCopy[lang]||moreCopy.ru;
@@ -333,6 +493,7 @@ function applyLanguage(){
  extraProviderOrder.forEach((id,i)=>$("caption-"+id).textContent=extra.labels[i]);
  $("allLabel").textContent=extra.all;
  $("allCaption").textContent=extra.allCaption;
+ populateCities();fillOfficialDirectory();
  $("networkMoreSummary").firstChild.textContent=extra.more+" ";
  $("cityChoicesSummary").firstChild.textContent=extra.cityChoice+" ";
  ["deliveryNavHome","deliveryNavCatalog","deliveryNavNews","deliveryNavDelivery"].forEach((id,i)=>{
@@ -395,7 +556,16 @@ document.querySelectorAll("[data-city]").forEach(button=>button.addEventListener
  if(window.NeolineMap)window.NeolineMap.searchCity(button.dataset.city);
  $("cityChoices").open=false;
 }));
-$("resetCountry").addEventListener("click",()=>{$("city").value="";renderMap();});
+$("resetCountry").addEventListener("click",()=>{
+ $("city").value="";$("cityDirectory").value="";renderMap();
+});
+$("cityDirectory").addEventListener("change",e=>{
+ if(!e.target.value)return;
+ $("city").value=e.target.value;
+ renderMap();
+ window.NeolineMap?.searchCity(e.target.value);
+ $("cityChoices").open=false;
+});
 $("language").addEventListener("change",e=>{lang=e.target.value;try{localStorage.setItem("neoline-language",lang)}catch(_){}applyLanguage();});
 try{const saved=localStorage.getItem("neoline-language");if(copy[saved])lang=saved}catch(_){}
 const requested=new URLSearchParams(location.search).get("network");
