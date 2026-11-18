@@ -313,6 +313,7 @@ async function load(){
    $("newsUpdated").textContent="";
    state.items=[];
    tabs();render();initializeFeatures(true);
+   window.dispatchEvent(new Event("neoline:news-archive-unavailable"));
   }
  }finally{newsLoading=false}
 }
