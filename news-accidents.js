@@ -12,6 +12,7 @@ const copy={
  ar:{title:"الحوادث والمخالفات",kind:"الحوادث · بلاغات الأخبار اليومية",hot:"الأحداث العاجلة ↗",wait:"نراجع أخبار آخر 30 يوماً…",error:"بيانات الشهر غير متاحة حالياً",total:n=>"30 يوماً: "+n+" تقريراً عن الحوادث",day:(d,n)=>d+": "+n+" تقريراً عن الحوادث",select:"اضغط على عمود لمعرفة عدد الأخبار في ذلك اليوم.",official:"إحصاءات رسمية ↗",disclaimer:"يحسب الرسم المنشورات الإخبارية عن الحوادث، وليس عدد الحوادث الفعلي في إسرائيل. قد يتكرر خبر عن الحادث ذاته؛ عدم وجود أخبار لا يعني عدم وجود حوادث.",sources:"المصادر وشمول البيانات",explain:"نحسب منشورات إخبارية فريدة فقط. لا توفر تقارير شركات التأمين سجلاً يومياً عاماً للحوادث الفردية، وقد تتأخر البيانات الرسمية. لا ندمج الأرقام دون التحقق من تطابق الحوادث.",cbs:"الإحصاء المركزي ↗",police:"إحصاءات الشرطة ↗",map:"خريطة الحوادث ↗",updated:" · تحديث "}
 };
 const locale={ru:"ru-RU",he:"he-IL",en:"en-GB",ar:"ar"};
+const setDayDetail=(text,isVisible)=>{const e=$("accidentDayDetail");e.hidden=!isVisible;e.textContent=isVisible?text:""};
 const words=()=>copy[document.documentElement.lang]||copy.ru;
 const dateKey=d=>{
  const p=new Intl.DateTimeFormat("en-GB",{timeZone:"Asia/Jerusalem",year:"numeric",month:"2-digit",day:"2-digit"}).formatToParts(d);
@@ -24,7 +25,7 @@ function draw(){
  const c=$("accidentChart"),t=words();
  if(!articles){
   $("accidentStripStatus").textContent=unavailable?t.error:t.wait;
-  $("accidentDayDetail").textContent=t.select;
+  setDayDetail("",false);
   return;
  }
  const today=dateKey(new Date()),end=Date.parse(today+"T12:00:00Z");
@@ -58,9 +59,23 @@ function draw(){
   if(key&&seenLinks.has(key))continue;
   seen.add(article.id);if(key)seenLinks.add(key);row.count++;
  }
- const peak=Math.max(1,...days.map(d=>d.count));
+ // Fill the chart only from the first day represented in the current
+ // rolling news archive through today; do not spread 7 days over 30 empty slots.
+ // Calendar gaps inside that observed window mean zero news posts, not zero crashes.
+ const firstObserved=days.findIndex(d=>d.count>0);
+ const visibleDays=firstObserved<0?[]:days.slice(firstObserved);
+ const peak=Math.max(1,...visibleDays.map(d=>d.count));
  c.replaceChildren();
- for(const [index,row] of days.entries()){
+ c.style.setProperty("--visible-days",String(Math.max(1,visibleDays.length)));
+ c.classList.toggle("is-empty",visibleDays.length===0);
+ if(visibleDays.length===0){
+  selected=null;
+  setDayDetail("",false);
+  $("accidentStripStatus").textContent=t.total(0);
+  dayShown=today;
+  return;
+ }
+ for(const [index,row] of visibleDays.entries()){
   const b=document.createElement("button");b.type="button";b.className="accident-day";b.dataset.day=row.key;
   const label=t.day(display(row.date),row.count);
   b.title=label;b.setAttribute("aria-label",label);
@@ -71,12 +86,12 @@ function draw(){
   if(!row.count)bar.classList.add("is-empty");
   rail.append(bar);
   const tick=document.createElement("span");tick.className="accident-day-tick";
-  tick.textContent=(index===0||index===29||row.date.getUTCDate()===1||row.date.getUTCDate()%5===0)?row.date.getUTCDate():"·";
+  tick.textContent=(visibleDays.length<=14||index===0||index===visibleDays.length-1||row.date.getUTCDate()===1||row.date.getUTCDate()%5===0)?row.date.getUTCDate():"·";
   b.append(rail,tick);
   b.addEventListener("click",()=>{
    selected=row.key;
    c.querySelectorAll("button").forEach(x=>x.setAttribute("aria-pressed",String(x===b)));
-   $("accidentDayDetail").textContent=label;
+   setDayDetail(label,true);
   });
   c.append(b);
  }
@@ -84,8 +99,8 @@ function draw(){
  const upd=new Date(updated);
  const updLabel=Number.isFinite(upd.getTime())?new Intl.DateTimeFormat(locale[document.documentElement.lang]||"ru-RU",{timeZone:"Asia/Jerusalem",day:"numeric",month:"short",hour:"2-digit",minute:"2-digit"}).format(upd):"";
  $("accidentStripStatus").textContent=t.total(sum)+(updLabel?t.updated+updLabel:"");
- const chosen=table.get(selected);
- $("accidentDayDetail").textContent=chosen?t.day(display(chosen.date),chosen.count):t.select;
+ const chosen=visibleDays.find(day=>day.key===selected);
+ setDayDetail(chosen?t.day(display(chosen.date),chosen.count):"",Boolean(chosen));
  dayShown=today;
 }
 function relabel(){
@@ -96,7 +111,7 @@ function relabel(){
  $("accidentOfficial").textContent=t.official;
  $("accidentChartDisclaimer").textContent=t.disclaimer;
  const extra=[["accidentSourcesTitle","sources"],["accidentSourcesInfo","explain"],
- ["accidentCBS","cbs"],["accidentPolice","police"],["accidentMapSource","map"]];
+ ["accidentCBS","cbs"],["accidentPolice","police"],["accidentMapSource","map"],["accidentChartHelp","select"]];
  for(const [id,key] of extra){const el=$(id);if(el)el.textContent=t[key]}
  draw();
 }
