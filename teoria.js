@@ -337,6 +337,9 @@ function updateQuizHUD(){
  progress.style.setProperty("--quiz-angle",(percent*360).toFixed(2)+"deg");
  progress.setAttribute("aria-valuemax",String(total));
  progress.setAttribute("aria-valuenow",String(done));
+ // Live 0–100% route line along the question card; same value as the central gauge.
+ const card=document.querySelector("#gamePlaying .question-card");
+ if(card)card.style.setProperty("--quest-progress",(percent*100).toFixed(1)+"%");
  const labels={
   ru:{done:"ОТВЕЧЕНО",progress:"Отвечено",of:"из",lives:"Осталось жизней"},
   en:{done:"ANSWERED",progress:"Answered",of:"of",lives:"Lives left"},
