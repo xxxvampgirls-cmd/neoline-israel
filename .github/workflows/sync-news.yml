@@ -2,7 +2,7 @@ name: Refresh Israel automotive news (general + six-month law archive)
 on:
   workflow_dispatch:
   schedule:
-    - cron: '17 5 * * *'  # ONCE daily (07:17 Israel winter / 08:17 summer)
+    - cron: '17 3 * * *'  # ONCE daily (05:17 Israel winter / 06:17 summer), earlier to finish before morning
   push:
     branches: [main]
     paths:
