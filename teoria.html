@@ -12,7 +12,8 @@
 <link rel="stylesheet" href="./teoria-v2.css?v=20261118-approved-v3">
 <link rel="stylesheet" href="./teoria-compact-v3.css?v=20261118-corrective-v3">
 <link rel="stylesheet" href="./teoria-reference-art.css?v=20261119-progress-dock-v3">
-<link rel="stylesheet" href="./teoria-medal-ecg.css?v=20261119-gold-ecg-v1">
+<link rel="stylesheet" href="./teoria-medal-ecg.css?v=20261119-medal-only-v2">
+<link rel="stylesheet" href="./teoria-licence-dialog.css?v=20261119-custom-v1">
 </head><body>
 <header class="topbar neoline-site-header"><div class="neoline-site-header__inner">
 <a class="neoline-site-header__logo" href="./" aria-label="NEOLINE — главная страница"><img src="./assets/neoline-clean.svg?v=20261116-compact" width="501" height="108" alt="NEOLINE"></a>
@@ -69,7 +70,14 @@
   <div class="toolbar-title"><span class="tiny-label" id="selectLabel">ВЫБЕРИ ИГРУ</span><h2 id="selectTitle">Выбери режим</h2></div>
   <div class="settings">
    
-   <label class="class-select"><span id="licenseLabel">Права</span><select id="licenseSelect"><option value="B">B · 🚙</option><option value="A">A · 🏍</option><option value="C1">C1 · 🚚</option><option value="C">C · 🚛</option><option value="D">D · 🚌</option><option value="1">1 · 🚜</option></select></label>
+   <div class="class-select theory-licence-control">
+    <span id="licenseLabel">Права</span>
+    <select id="licenseSelect" hidden aria-hidden="true" tabindex="-1"><option value="B">B · 🚙</option><option value="A">A · 🏍</option><option value="C1">C1 · 🚚</option><option value="C">C · 🚛</option><option value="D">D · 🚌</option><option value="1">1 · 🚜</option></select>
+    <button type="button" id="theoryLicenceOpen" class="theory-licence-open" aria-haspopup="dialog" aria-controls="theoryLicenceDialog" aria-expanded="false" aria-label="Категория прав: B">
+      <span class="theory-licence-current" id="theoryLicenceCurrent">B · 🚙</span>
+      <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="m5 9 7 7 7-7"/></svg>
+    </button>
+   </div>
   </div>
  </div>
  <div class="bank-status" id="bankStatus" role="status" aria-live="polite"><span class="status-light"></span><span id="bankText">Проверяем официальный банк вопросов…</span></div>
@@ -111,20 +119,22 @@
  <div id="resultMistakes" class="result-mistakes" hidden></div>
  <div class="result-buttons"><button type="button" class="primary" id="restartMode">↻ <span id="restartLabel">Ещё раз</span></button><button type="button" class="secondary" id="backToModes"><span id="backModesLabel">Другие режимы</span> →</button></div>
 </section>
-<div class="game-ecg" aria-hidden="true">
- <svg viewBox="0 0 1000 120" preserveAspectRatio="none" focusable="false">
-  <defs>
-   <linearGradient id="gameEcgInk" x1="0" x2="1" y1="0" y2="0">
-    <stop offset="0" stop-color="#0b91d4"/>
-    <stop offset=".52" stop-color="#15c9e9"/>
-    <stop offset="1" stop-color="#49d8be"/>
-   </linearGradient>
-  </defs>
-  <path class="game-ecg-guide" d="M0 64 H125 L160 30 L198 92 L248 18 L295 100 L345 60 L415 64 L474 13 L510 104 L556 48 L619 79 L678 64 L716 17 L741 99 L779 45 L822 72 L858 62 L895 67 H1000"/>
-  <path class="game-ecg-pulse" pathLength="1400" d="M0 64 H125 L160 30 L198 92 L248 18 L295 100 L345 60 L415 64 L474 13 L510 104 L556 48 L619 79 L678 64 L716 17 L741 99 L779 45 L822 72 L858 62 L895 67 H1000"/>
- </svg>
-</div>
 </main>
+
+<dialog id="theoryLicenceDialog" class="theory-licence-dialog" aria-labelledby="theoryLicenceDialogTitle" aria-describedby="theoryLicenceDialogDescription">
+ <div class="theory-licence-dialog__body">
+  <div class="theory-licence-dialog__header">
+   <span class="theory-licence-dialog__symbol" aria-hidden="true">🚘</span>
+   <div class="theory-licence-dialog__heading">
+    <span class="theory-licence-dialog__eyebrow">NEOLINE · ИГРА</span>
+    <h2 id="theoryLicenceDialogTitle">Категория прав</h2>
+   </div>
+   <button type="button" class="theory-licence-dialog__close" id="theoryLicenceClose" aria-label="Закрыть">×</button>
+  </div>
+  <p id="theoryLicenceDialogDescription" class="theory-licence-dialog__description">Выберите категорию транспорта — вопросы и игровой прогресс переключатся автоматически.</p>
+  <div class="theory-licence-dialog__options" id="theoryLicenceOptions" role="group" aria-label="Выбор категории прав"></div>
+ </div>
+</dialog>
 
 <dialog id="gameProgressDialog" class="game-progress-dialog" aria-labelledby="gameProgressTitle">
  <div class="game-progress-panel">
@@ -215,5 +225,6 @@
 <script src="./teoria.js?v=20261118-approved-v13" defer></script>
 <script src="./teoria-v2.js?v=20261119-gold-medal-v7" defer></script>
 <script src="./teoria-gifts.js?v=20261118-gifts-preview-v1" defer></script>
+<script src="./teoria-licence-dialog.js?v=20261119-custom-v1" defer></script>
 <script src="./nav-current.js?v=20261118-game-v3" defer></script><script src="./site-header.js?v=20261118-unified-v2" defer></script>
 </body></html>
