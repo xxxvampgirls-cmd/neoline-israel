@@ -1,0 +1,141 @@
+/* NEOLINE Theory: gift-program preview only.
+ * No XP thresholds, coupons, cart writes, eligibility or reward redemption.
+ * Matches current white/cyan/blue site colors. */
+.game-hero.theory-dashboard .hero-stroke{display:none}
+.game-gift-trigger{
+ position:relative;isolation:isolate;display:inline-flex;align-items:center;justify-content:center;
+ gap:7px;margin:8px 0 0;padding:5px 11px 5px 9px;
+ font:850 11px/1.3 Manrope,Arial,sans-serif;
+ color:#156e9b;background:linear-gradient(115deg,#ffffffeb,#e5f7ffef);
+ border:1px solid #9fd6f1;border-radius:999px;
+ box-shadow:0 3px 11px #1879a222,inset 0 1px #fff;
+ cursor:pointer;-webkit-tap-highlight-color:transparent;
+ transition:border-color .2s,box-shadow .2s,transform .2s;
+}
+.game-gift-trigger svg{
+ width:17px;height:17px;flex:none;fill:none;stroke:#009ddd;stroke-width:1.9;
+ stroke-linecap:round;stroke-linejoin:round;filter:drop-shadow(0 1px 1px #00a0d422);
+}
+.game-gift-trigger .gift-trigger-spark{color:#e5a623;font-size:12px;line-height:1;transform-origin:50% 85%}
+.game-gift-trigger:hover,.game-gift-trigger:focus-visible{
+ outline:0;border-color:#20addd;box-shadow:0 0 0 3px #32b6e52b,0 6px 12px #1879a22b;
+}
+.game-gift-trigger:active{transform:scale(.96)}
+.game-gift-trigger .gift-trigger-spark{animation:neolineGiftSpark 8s ease-in-out infinite}
+@keyframes neolineGiftSpark{
+ 0%,66%,91%,100%{transform:rotate(0) scale(1);opacity:.7}
+ 73%{transform:rotate(-15deg) scale(1.3);opacity:1}
+ 78%{transform:rotate(12deg) scale(1.06)}
+ 83%{transform:rotate(0deg) scale(1)}
+}
+.game-gift-dialog{
+ position:fixed;inset:0;z-index:250;margin:auto;
+ width:min(440px,calc(100vw - 28px));max-width:440px;
+ max-height:min(680px,calc(100dvh - 34px));overflow-y:auto;
+ padding:0;border:1px solid #b4def2;border-radius:23px;
+ color:#153b56;
+ background:linear-gradient(150deg,#ffffff 1%,#f4fcff 60%,#e2f5ff 100%);
+ box-shadow:0 25px 80px #032c5599,0 0 0 2px #ffffff9e inset;
+ overscroll-behavior:contain;
+}
+.game-gift-dialog::backdrop{background:#071e3c92;backdrop-filter:blur(5px);-webkit-backdrop-filter:blur(5px)}
+.game-gift-dialog[open]{animation:neolineGiftAppear .26s cubic-bezier(.15,.75,.18,1) both}
+@keyframes neolineGiftAppear{
+ from{opacity:0;transform:translateY(15px) scale(.985)}
+ to{opacity:1;transform:translateY(0) scale(1)}
+}
+.game-gift-dialog__content{padding:23px 22px 20px;position:relative;overflow:hidden}
+.game-gift-dialog__content::before{
+ content:"";pointer-events:none;position:absolute;right:-94px;top:-106px;
+ width:210px;height:210px;border:27px solid #46cbeb20;border-radius:50%;
+}
+.game-gift-dialog__close{
+ position:absolute;z-index:2;top:12px;right:12px;
+ display:grid;place-items:center;width:33px;height:33px;padding:0;
+ border:1px solid #b4d9e8;border-radius:50%;
+ background:#ffffffc8;color:#22617f;
+ font:700 23px/1 Arial,sans-serif;cursor:pointer;
+}
+.game-gift-dialog__close:hover,.game-gift-dialog__close:focus-visible{
+ border-color:#00a7dc;outline:2px solid #28b5e849;outline-offset:1px;
+}
+.game-gift-dialog__hero{display:flex;align-items:center;gap:12px;padding-right:38px;position:relative;z-index:1}
+.game-gift-dialog__icon{
+ display:grid;place-items:center;flex:none;width:58px;height:58px;border-radius:18px;
+ background:linear-gradient(135deg,#def7ff,#b8ebfd);border:1px solid #8ed4ec;
+ box-shadow:0 6px 15px #137da328,inset 0 1px #fff;
+}
+.game-gift-dialog__icon svg{
+ width:35px;height:35px;fill:none;stroke:#128bbb;stroke-width:1.8;
+ stroke-linecap:round;stroke-linejoin:round;
+}
+.game-gift-dialog__eyebrow{
+ color:#2188b4;font-size:9px;letter-spacing:.12em;font-weight:900;line-height:1.5;
+}
+.game-gift-dialog h2{
+ margin:2px 0 0;color:#0b3b5c;font-size:clamp(21px,5vw,25px);
+ font-weight:900;letter-spacing:-.04em;line-height:1.14;
+}
+.game-gift-dialog__intro{
+ position:relative;z-index:1;margin:17px 0 13px;
+ font-size:12px;line-height:1.65;color:#4b7089;
+}
+.game-gift-dialog__section-title{
+ margin:15px 0 9px;font-size:13px;line-height:1.4;
+ font-weight:900;color:#206e99;
+}
+.game-gift-dialog__options{display:grid;grid-template-columns:1fr;gap:8px;position:relative}
+.game-gift-dialog__option{
+ display:flex;align-items:center;gap:12px;
+ padding:11px 12px;border:1px solid #d2e9f5;border-radius:14px;
+ background:#ffffffdd;box-shadow:0 3px 9px #095b8a0d;
+}
+.game-gift-dialog__option-icon{
+ display:grid;place-items:center;flex:0 0 38px;width:38px;height:38px;border-radius:13px;
+ font-size:23px;color:#1398c9;background:#e7f8ff;border:1px solid #cae9f6;
+}
+.game-gift-dialog__option:nth-child(2) .game-gift-dialog__option-icon{
+ color:#b78c2c;background:#fff9e9;border-color:#f1e4bc;
+}
+.game-gift-dialog__option strong{
+ display:block;color:#173d59;font-size:12px;line-height:1.3;font-weight:900;
+}
+.game-gift-dialog__option p{margin:3px 0 0;color:#6a8496;font-size:10px;line-height:1.45}
+.game-gift-dialog__notice{
+ display:flex;align-items:flex-start;gap:8px;
+ margin:13px 0 0;padding:11px;border-radius:12px;
+ border:1px solid #c8e2ef;background:#eaf7ff;
+ font-size:11px;line-height:1.6;color:#416b86;
+}
+.game-gift-dialog__notice::before{
+ content:"i";display:grid;place-items:center;flex:none;
+ width:17px;height:17px;border:1px solid #78bdde;border-radius:50%;
+ color:#1985b1;font:900 11px/1 Arial,sans-serif;
+}
+.game-gift-dialog__ok{
+ display:block;width:100%;margin:15px 0 0;padding:12px 16px;
+ border:1px solid #0f8eca;border-radius:13px;cursor:pointer;
+ font:900 13px/1.3 Manrope,Arial,sans-serif;color:white;
+ background:linear-gradient(110deg,#15bfe7,#077cbb);
+ box-shadow:0 5px 13px #0a89c43c;
+}
+.game-gift-dialog__ok:hover,.game-gift-dialog__ok:focus-visible{
+ outline:2px solid #8cdbf6;outline-offset:2px;
+}
+html[dir="rtl"] .game-gift-dialog__hero{padding-right:0;padding-left:38px}
+html[dir="rtl"] .game-gift-dialog__close{right:auto;left:12px}
+html[dir="rtl"] .game-gift-dialog__content::before{right:auto;left:-94px}
+@media(max-width:720px){
+ .game-gift-trigger{margin-top:5px;padding:3px 7px 3px 6px;gap:4px;font-size:8px}
+ .game-gift-trigger svg{width:12px;height:12px}
+ .game-gift-trigger .gift-trigger-spark{font-size:9px}
+ .game-gift-dialog{width:calc(100vw - 28px);border-radius:18px}
+ .game-gift-dialog__content{padding:21px 16px 17px}
+ .game-gift-dialog__icon{width:48px;height:48px;border-radius:14px}
+ .game-gift-dialog__icon svg{height:30px;width:30px}
+ .game-gift-dialog__intro{margin:15px 0 10px}
+}
+@media(prefers-reduced-motion:reduce){
+ .game-gift-dialog[open],.game-gift-trigger .gift-trigger-spark{animation:none!important}
+ .game-gift-trigger{transition:none}
+}
