@@ -36,12 +36,16 @@ jobs:
               await page.goto(origin+'/teoria.html?ci='+i,{waitUntil:'domcontentloaded',timeout:40000});
               const script=page.locator('script[src*="teoria.js"]'),css=page.locator('link[rel="stylesheet"][href*="teoria.css"]');
               if(await script.count()&&await css.count()&&
-                 (await script.getAttribute("src")||"").includes("20261118-answer-motion-v7")&&
+                 (await script.getAttribute("src")||"").includes("20261118-no-footer-v8")&&
                  await page.locator('[data-mode="route"]').count())break;
               await page.waitForTimeout(4000);
             }
             if(await page.locator('script[src*="teoria.js"]').count()!==1||
                 await page.locator('link[rel="stylesheet"][href*="teoria.css"]').count()!==1)throw Error('Theory page CSS/JS malformed');
+            if(await page.locator('footer.footer, #footerBack').count())
+              throw Error('Obsolete Theory footer must be removed entirely');
+            if(!await page.locator('#theoryBottomNav').count())
+              throw Error('Essential five-button bottom menu must remain');
             await page.waitForFunction(()=>document.getElementById('bankStatus').classList.contains('loaded'),null,{timeout:60000});
             const bank=await page.evaluate(async()=>{
               const response=await fetch('./assets/teoria/ru.json');if(!response.ok)throw Error('bank response '+response.status);
