@@ -58,7 +58,7 @@ function setCopy(){
  document.querySelectorAll("[data-hot-lang]").forEach(btn=>{
   const on=btn.dataset.hotLang===language;btn.classList.toggle("active",on);btn.setAttribute("aria-pressed",String(on));
  });
- $("trafficWazeLoading").textContent=t.wazeLoading;
+ if($("trafficWazeLoading"))$("trafficWazeLoading").textContent=t.wazeLoading;
  document.querySelectorAll("[data-waze-area]").forEach((btn,i)=>{
   btn.textContent=t.areas[i];const on=btn.dataset.wazeArea===area;
   btn.classList.toggle("active",on);btn.setAttribute("aria-pressed",String(on));
