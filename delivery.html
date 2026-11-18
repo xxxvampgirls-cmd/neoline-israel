@@ -326,6 +326,19 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible{ou
  .partner-actions a,.partner-actions button{font-size:9px}
 }
 
+
+.retail-show-all{
+ display:flex;align-items:center;justify-content:center;gap:8px;
+ width:calc(100% - 20px);min-height:40px;margin:0 10px 13px;
+ border-radius:12px;border:1px solid #bf8fc1;
+ background:linear-gradient(110deg,#f5e5f4,#eaf5ff);
+ color:#8b3a80;font-size:12px;font-weight:850;cursor:pointer;
+}
+.retail-show-all:hover,.retail-show-all.is-active{background:#edcfed;border-color:#ab64aa}
+.partner-actions button.is-active{outline:2px solid #9a5ab4;outline-offset:2px}
+.partner-source{font-size:9px;color:#6993aa;text-decoration:underline;text-underline-offset:2px;overflow-wrap:anywhere}
+@media(max-width:760px){.retail-show-all{min-height:36px;font-size:11px}}
+
 </style>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/leaflet.css">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet.markercluster@1.5.3/dist/MarkerCluster.css">
@@ -382,6 +395,7 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible{ou
  </summary>
  <div class="retail-partners-body">
   <p id="retailNotice">Справочник для поиска торговых сетей, которым можно предложить NEOLINE. Эти магазины не заявлены как партнёры или продавцы продукции NEOLINE.</p>
+  <button type="button" id="retailAllMap" class="retail-show-all" data-retailer="all">📍 Все магазины на карте</button>
   <div class="retail-partners-grid" id="retailCards"></div>
   <p id="retailDisclaimer">Число филиалов «по данным сети» отличается от количества координат, доступных на OpenStreetMap. Проверяйте официальную карту каждого магазина.</p>
  </div>
