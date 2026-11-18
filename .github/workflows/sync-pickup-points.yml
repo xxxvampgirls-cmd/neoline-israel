@@ -1,0 +1,58 @@
+name: Update nationwide parcel pickup map (OpenStreetMap)
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '41 2 * * *' # Once daily, ahead of morning traffic in Israel
+  push:
+    branches: [main]
+    paths:
+      - 'scripts/sync_pickup_points.py'
+      - '.github/workflows/sync-pickup-points.yml'
+permissions:
+  contents: write
+concurrency:
+  group: israel-pickup-points-daily
+  cancel-in-progress: false
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          persist-credentials: true
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install requests
+        run: python -m pip install --disable-pip-version-check 'requests>=2.31,<3'
+      - name: Fetch verified public OSM postal and parcel locations
+        run: python scripts/sync_pickup_points.py
+      - name: Verify map payload
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          path=Path('assets/pickup/points.json')
+          if not path.exists():
+            raise SystemExit('No map data snapshot')
+          data=json.loads(path.read_text(encoding='utf-8'))
+          points=data.get('points',[])
+          assert data.get('version')==1 and len(points)>=25
+          assert all(29.42<=p['lat']<=33.42 and 34.20<=p['lon']<=35.91 for p in points)
+          assert len({p['key'] for p in points})==len(points)
+          print('Verified OSM pickup points:',len(points))
+          PY
+      - name: Commit latest verified map
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add assets/pickup/points.json
+          if git diff --cached --quiet; then
+            echo "No map changes"
+            exit 0
+          fi
+          git commit -m "Update nationwide OSM pickup points snapshot"
+          git pull --rebase origin main
+          git push origin HEAD:main
