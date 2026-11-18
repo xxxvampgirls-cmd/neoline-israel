@@ -7,6 +7,12 @@ on:
       - "news.html"
       - "news-ui.js"
       - "news-ui.css"
+      - "news-accidents.js"
+      - "news-accidents.css"
+      - "news-layout-polish.css"
+      - "nav-current.js"
+      - "hot.html"
+      - "teoria.html"
       - "catalog-ui.css"
       - "catalog-ui.js"
       - "index.html"
@@ -87,22 +93,21 @@ jobs:
             if(await page.locator('#newsFav').count()!==0||await page.locator('#newsDelivery').count()!==1)
               throw Error('News bottom nav should replace Favorites with Delivery');
             const compact=await page.evaluate(()=>{
-              const carousel=document.getElementById('newsFeatureCarousel');
-              const title=document.getElementById('newsHeading');
-              return {top:carousel.getBoundingClientRect().top,
-               titleBottom:title.getBoundingClientRect().bottom,
+              const bounds=id=>document.getElementById(id).getBoundingClientRect();
+              return {titleBottom:bounds('newsHeading').bottom,chartTop:bounds('accidentStrip').top,
+               chartBottom:bounds('accidentStrip').bottom,carouselTop:bounds('newsFeatureCarousel').top,
+               languageTop:bounds('newsLanguages').top,headerBottom:document.querySelector('.news-header').getBoundingClientRect().bottom,
                intro:getComputedStyle(document.getElementById('newsIntro')).display,
                stats:getComputedStyle(document.querySelector('.news-fresh-row')).display,
-               langTop:document.getElementById('newsLanguages').getBoundingClientRect().top,
-               imageBottom:carousel.getBoundingClientRect().bottom};
+               gameTab:!!document.getElementById('newsGame')};
             });
             if(compact.intro!=='none'||compact.stats!=='none')
-              throw Error('Reader-unnecessary news information remains visible: '+JSON.stringify(compact));
-            if(compact.langTop<compact.imageBottom-1)
-              throw Error('Languages still take space above carousel: '+JSON.stringify(compact));
-            if(compact.top>225||compact.top-compact.titleBottom>25)
-              throw Error('Carousel must sit high, immediately under headline: '+JSON.stringify(compact));
-            console.log('COMPACT NEWS HERO PASS '+JSON.stringify(compact));
+              throw Error('Old news intro remains visible: '+JSON.stringify(compact));
+            if(compact.languageTop>=compact.headerBottom||!compact.gameTab)
+              throw Error('Header language tabs or fifth game icon missing: '+JSON.stringify(compact));
+            if(compact.chartTop<compact.titleBottom-4||compact.carouselTop<compact.chartBottom-4)
+              throw Error('30-day news chart must be visible between title and carousel: '+JSON.stringify(compact));
+            console.log('CHART-FIRST NEWS HERO PASS '+JSON.stringify(compact));
             await page.waitForFunction(()=>document.querySelectorAll('.news-card').length>0 || !document.getElementById('newsEmpty').hidden,{timeout:30000});
             const data=await page.evaluate(async()=>await (await fetch('./assets/news/news.json')).json());
             if(data.version!==1||data.retentionDays!==30||data.lawsRetentionMonths!==6)throw Error('Wrong archive configuration');
