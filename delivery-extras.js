@@ -29,10 +29,10 @@
   {id:"alm",name:"ALM",count:"54",source:"https://www.alm.co.il/store-locator",official:"https://www.alm.co.il/store-locator",query:"א.ל.מ חנות חשמל"}
  ];
  const strings={
-  ru:{stats:"Статистика сетей и телефоны",statsNote:"«На карте» — сколько координат есть в OpenStreetMap. «По данным сети» — заявленное оператором количество, не число наших точек.",retailTitle:"Крупные магазины Израиля",retailSubtitle:"8 торговых сетей · потенциальные партнёры",retailNotice:"Отдельный каталог магазинов, которым можно предложить продукцию NEOLINE. Партнёрство, ассортимент и наличие товаров НЕ подтверждены.",retailDisclaimer:"Карта показывает только магазины с открытыми координатами. Полный список филиалов — на официальном сайте каждой сети.",mapped:"На карте",reported:"По данным сети",unknown:"не опубликовано",phone:"Позвонить",whatsapp:"WhatsApp",contact:"Контакты",official:"Сайт / филиалы ↗",map:"На карту",retailMap:"Магазины",retailMapNote:"Возможные партнёры · фактические точки OSM, не продавцы NEOLINE",noNetwork:"Пунктов этой сети в OSM нет — смотрите официальный список",status:"Открытые координаты OSM · данные могут быть неполными"},
-  en:{stats:"Networks: points and contacts",statsNote:"Mapped = OpenStreetMap coordinates. Operator figure = network's own published estimate, not the number we map.",retailTitle:"Major Israel retail stores",retailSubtitle:"8 retail chains · potential partners",retailNotice:"Separate catalog of retailers that could be approached about NEOLINE. No partnership, stock or availability is confirmed.",retailDisclaimer:"Only stores with public coordinates appear on the map. For all branches, use the retailer's official locator.",mapped:"Mapped",reported:"Operator says",unknown:"not published",phone:"Call",whatsapp:"WhatsApp",contact:"Contacts",official:"Branches ↗",map:"Show on map",retailMap:"Retail stores",retailMapNote:"Prospective partners · real OSM points, not confirmed NEOLINE stockists",noNetwork:"No OSM points are available for this operator. Use its official locator.",status:"OpenStreetMap coordinates · coverage may be incomplete"},
-  he:{stats:"רשתות: נקודות וקשר",statsNote:"במפה = נקודות עם קואורדינטות ב-OSM. לפי הרשת = מספר שפרסם המפעיל, לא הכיסוי במפה.",retailTitle:"רשתות קמעונאיות בישראל",retailSubtitle:"8 רשתות · שותפות פוטנציאלית",retailNotice:"מדריך נפרד לרשתות שאפשר להציע להן את NEOLINE. אין אישור לשותפות, למלאי או למכירת המוצרים.",retailDisclaimer:"במפה מופיעות רק חנויות עם מיקום פומבי. לכל הסניפים יש לעיין באתר הרשמי.",mapped:"במפה",reported:"לפי הרשת",unknown:"לא פורסם",phone:"התקשרו",whatsapp:"WhatsApp",contact:"יצירת קשר",official:"אתר וסניפים ↗",map:"הצג במפה",retailMap:"חנויות",retailMapNote:"שותפים פוטנציאליים · נקודות OSM אמיתיות, לא משווקים מאושרים",noNetwork:"אין נקודות OSM לרשת זו. בדקו את אתר המפעיל.",status:"מיקומים מ-OpenStreetMap · הכיסוי עשוי להיות חלקי"},
-  ar:{stats:"الشبكات: المواقع والاتصال",statsNote:"في الخريطة = مواقع بإحداثيات OSM. رقم الشبكة = تقدير منشور من المشغل، وليس عدد النقاط المعروضة.",retailTitle:"سلاسل المتاجر الكبرى في إسرائيل",retailSubtitle:"8 سلاسل · شركاء محتملون",retailNotice:"دليل منفصل لمتاجر يمكن عرض منتجات NEOLINE عليها. لا توجد شراكة أو مخزونات أو مبيعات مؤكدة.",retailDisclaimer:"تظهر المتاجر ذات الإحداثيات العامة فقط. تحقق من القائمة الرسمية للفروع.",mapped:"على الخريطة",reported:"حسب الشبكة",unknown:"غير منشور",phone:"اتصال",whatsapp:"WhatsApp",contact:"التواصل",official:"الموقع والفروع ↗",map:"عرض على الخريطة",retailMap:"المتاجر",retailMapNote:"شركاء محتملون · نقاط حقيقية من OSM، ليسوا بائعين معتمدين",noNetwork:"لا توجد نقاط لهذه الشبكة في OSM. تحقق من الموقع الرسمي.",status:"إحداثيات OpenStreetMap · التغطية قد تكون غير مكتملة"}
+  ru:{stats:"Статистика сетей и телефоны",statsNote:"«На карте» — сколько координат есть в OpenStreetMap. «По данным сети» — заявленное оператором количество, не число наших точек.",retailTitle:"Крупные магазины Израиля",retailSubtitle:"8 торговых сетей · потенциальные партнёры",retailNotice:"Отдельный каталог магазинов, которым можно предложить продукцию NEOLINE. Партнёрство, ассортимент и наличие товаров НЕ подтверждены.",retailDisclaimer:"Карта показывает только магазины с открытыми координатами. Полный список филиалов — на официальном сайте каждой сети.",mapped:"На карте",reported:"По данным сети",unknown:"не опубликовано",phone:"Позвонить",whatsapp:"WhatsApp",contact:"Контакты",official:"Сайт / филиалы ↗",map:"На карту",retailMap:"Магазины",allShops:"Все магазины на карте",retailMapNote:"Возможные партнёры · фактические точки OSM, не продавцы NEOLINE",noNetwork:"Пунктов этой сети в OSM нет — смотрите официальный список",status:"Открытые координаты OSM · данные могут быть неполными"},
+  en:{stats:"Networks: points and contacts",statsNote:"Mapped = OpenStreetMap coordinates. Operator figure = network's own published estimate, not the number we map.",retailTitle:"Major Israel retail stores",retailSubtitle:"8 retail chains · potential partners",retailNotice:"Separate catalog of retailers that could be approached about NEOLINE. No partnership, stock or availability is confirmed.",retailDisclaimer:"Only stores with public coordinates appear on the map. For all branches, use the retailer's official locator.",mapped:"Mapped",reported:"Operator says",unknown:"not published",phone:"Call",whatsapp:"WhatsApp",contact:"Contacts",official:"Branches ↗",map:"Show on map",retailMap:"Retail stores",allShops:"Show all stores on map",retailMapNote:"Prospective partners · real OSM points, not confirmed NEOLINE stockists",noNetwork:"No OSM points are available for this operator. Use its official locator.",status:"OpenStreetMap coordinates · coverage may be incomplete"},
+  he:{stats:"רשתות: נקודות וקשר",statsNote:"במפה = נקודות עם קואורדינטות ב-OSM. לפי הרשת = מספר שפרסם המפעיל, לא הכיסוי במפה.",retailTitle:"רשתות קמעונאיות בישראל",retailSubtitle:"8 רשתות · שותפות פוטנציאלית",retailNotice:"מדריך נפרד לרשתות שאפשר להציע להן את NEOLINE. אין אישור לשותפות, למלאי או למכירת המוצרים.",retailDisclaimer:"במפה מופיעות רק חנויות עם מיקום פומבי. לכל הסניפים יש לעיין באתר הרשמי.",mapped:"במפה",reported:"לפי הרשת",unknown:"לא פורסם",phone:"התקשרו",whatsapp:"WhatsApp",contact:"יצירת קשר",official:"אתר וסניפים ↗",map:"הצג במפה",retailMap:"חנויות",allShops:"כל החנויות במפה",retailMapNote:"שותפים פוטנציאליים · נקודות OSM אמיתיות, לא משווקים מאושרים",noNetwork:"אין נקודות OSM לרשת זו. בדקו את אתר המפעיל.",status:"מיקומים מ-OpenStreetMap · הכיסוי עשוי להיות חלקי"},
+  ar:{stats:"الشبكات: المواقع والاتصال",statsNote:"في الخريطة = مواقع بإحداثيات OSM. رقم الشبكة = تقدير منشور من المشغل، وليس عدد النقاط المعروضة.",retailTitle:"سلاسل المتاجر الكبرى في إسرائيل",retailSubtitle:"8 سلاسل · شركاء محتملون",retailNotice:"دليل منفصل لمتاجر يمكن عرض منتجات NEOLINE عليها. لا توجد شراكة أو مخزونات أو مبيعات مؤكدة.",retailDisclaimer:"تظهر المتاجر ذات الإحداثيات العامة فقط. تحقق من القائمة الرسمية للفروع.",mapped:"على الخريطة",reported:"حسب الشبكة",unknown:"غير منشور",phone:"اتصال",whatsapp:"WhatsApp",contact:"التواصل",official:"الموقع والفروع ↗",map:"عرض على الخريطة",retailMap:"المتاجر",allShops:"عرض جميع المتاجر على الخريطة",retailMapNote:"شركاء محتملون · نقاط حقيقية من OSM، ليسوا بائعين معتمدين",noNetwork:"لا توجد نقاط لهذه الشبكة في OSM. تحقق من الموقع الرسمي.",status:"إحداثيات OpenStreetMap · التغطية قد تكون غير مكتملة"}
  };
  const byId=id=>document.getElementById(id);
  const lang=()=>strings[document.documentElement.lang]||strings.ru;
@@ -89,6 +89,7 @@
   byId("retailTitle").textContent=t.retailTitle;
   byId("retailSubtitle").textContent=t.retailSubtitle;
   byId("retailNotice").textContent=t.retailNotice;
+  byId("retailAllMap").textContent="📍 "+t.allShops;
   byId("retailDisclaimer").textContent=t.retailDisclaimer;
   const stats=byId("networkInsightsGrid"),retail=byId("retailCards");
   stats.replaceChildren(...delivery.map(item=>createCard(item,false)));
@@ -105,8 +106,9 @@
   render();
  }
  function renderRetailMap(id,scroll){
-  const item=shops.find(x=>x.id===id);if(!item)return;
   const t=lang();
+  const item=id==="all"?{id:"all",name:t.allShops,query:"major electronics and auto accessories stores",official:null}:shops.find(x=>x.id===id);
+  if(!item)return;
   currentShop=id;
   const city=byId("city").value.trim();
   const q=item.query+" "+city+" Israel";
@@ -114,8 +116,8 @@
   byId("mapSub").textContent=t.retailMapNote;
   byId("mapHint").textContent=t.retailDisclaimer;
   byId("networkNotice").textContent=t.retailNotice;
-  byId("official").hidden=false;
-  byId("official").href=item.official;
+  byId("official").hidden=!item.official;
+  if(item.official)byId("official").href=item.official;
   byId("official").textContent=t.official;
   byId("fullMap").href="https://www.google.com/maps/search/?api=1&query="+encodeURIComponent(q);
   document.querySelectorAll("[data-retailer]").forEach(button=>{
