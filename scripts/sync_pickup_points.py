@@ -32,7 +32,7 @@ QUERY = (
     f'nwr["shop"="parcel_pickup"]({BOX});'
     f'nwr["parcel_pickup"="yes"]({BOX});'
     f'nwr["post_office"="post_partner"]({BOX});'
-    ");out center tags;"
+    ");out center;"
 )
 PATTERNS = {
     "boxit": r"box\s*[- ]?\s*it|בוקסיט|בוקס.?איט",
