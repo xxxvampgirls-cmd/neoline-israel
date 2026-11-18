@@ -126,14 +126,107 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible{ou
   .delivery-nav a{transition:none}
 }
 
+
+/* Compact locator: remove the promotional preamble, foreground the actual map. */
+.hero{padding:16px 0 10px}
+.hero h1{font-size:clamp(23px,3vw,31px);line-height:1.12;letter-spacing:-.04em;margin:0}
+.layout{gap:13px;align-items:start}
+.side{padding:12px}
+.label{margin:2px 2px 9px}
+.networks{gap:7px}
+.network{min-height:52px;padding:8px;gap:8px;border-radius:13px}
+.network .badge{width:33px;height:33px;border-radius:10px}
+.network strong{font-size:12px;line-height:1.23}
+.network small{font-size:10px;line-height:1.3;margin-top:3px}
+.network--all{min-height:49px}
+.network--all small{font-size:10px}
+.network-more{margin-top:7px}
+.network-more>summary,.city-choices>summary{
+ display:flex;align-items:center;justify-content:center;gap:9px;
+ border:1px solid #bcdff5;background:#f5fbff;color:#217bb3;
+ border-radius:11px;min-height:37px;padding:8px 12px;
+ cursor:pointer;font-size:11px;font-weight:850;list-style:none;
+ -webkit-tap-highlight-color:transparent;
+}
+.network-more>summary::-webkit-details-marker,.city-choices>summary::-webkit-details-marker{display:none}
+.network-more>summary span,.city-choices>summary span{transition:transform .2s}
+.network-more[open]>summary span,.city-choices[open]>summary span{transform:rotate(180deg)}
+.network-more-grid{display:grid;gap:7px;margin-top:9px}
+.network-more .separate{margin-top:10px;padding-top:10px}
+.network-more .shoplink{padding:9px 11px}
+.map-panel{scroll-margin-top:85px}
+.map-heading{font-size:20px}
+.map-top{padding:14px 16px 11px}
+.map-sub{font-size:11px;margin-top:3px}
+.searchbox{padding:0 14px 8px}
+.searchbox input{min-height:43px;padding:9px 12px}
+.searchbox button{min-height:43px;padding:10px 15px}
+.city-choices{padding:0 14px 10px}
+.city-choices>summary{min-height:29px;background:transparent;border:0;padding:4px 9px;font-size:10px}
+.city-choices .cities{padding:8px 0 0;gap:6px}
+.city-choices .cities button{padding:7px 11px}
+@media(max-width:760px){
+ .hero{padding:11px 0 7px}
+ .hero h1{font-size:23px}
+ .layout{gap:9px}
+ .side{padding:10px}
+ .label{font-size:10px;margin:1px 2px 7px}
+ .networks{grid-template-columns:repeat(3,minmax(0,1fr));gap:6px}
+ .networks>.network--all{grid-column:1/-1;min-height:42px;padding:6px 10px;gap:9px}
+ .network--all .badge{width:29px;height:29px}
+ .network--all .badge svg{width:21px;height:21px}
+ .networks>.network:not(.network--all){
+  min-height:42px;padding:6px 5px;gap:5px;align-items:center;
+  justify-content:center;overflow:hidden;
+ }
+ .networks>.network:not(.network--all) .badge{
+  width:25px;height:25px;font-size:9px;flex:none;border-radius:8px
+ }
+ .networks>.network:not(.network--all) strong{
+  display:block;font-size:10px;line-height:1.2;overflow-wrap:anywhere
+ }
+ .networks>.network:not(.network--all) small{display:none}
+ .network-more{margin-top:6px}
+ .network-more>summary{min-height:31px;padding:6px}
+ .network-more-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:6px}
+ .network-more-grid .network{
+  padding:7px;min-height:47px;gap:6px
+ }
+ .network-more-grid .network .badge{width:27px;height:27px;font-size:9px}
+ .network-more-grid .network strong{font-size:10.5px}
+ .network-more-grid .network small{font-size:9px}
+ .network-more .separate{margin-top:8px}
+ .map-heading{font-size:18px}
+ .map-top{padding:12px 12px 8px;gap:8px}
+ .map-top>span{font-size:20px}
+ .map-sub{font-size:10px}
+ .searchbox{padding:0 10px 6px;gap:7px}
+ .searchbox input{min-height:39px;padding:8px 10px;font-size:12px}
+ .searchbox button{min-height:39px;padding:8px 12px;font-size:11px}
+ .city-choices{padding:0 10px 7px}
+ .city-choices>summary{min-height:25px}
+ .map-wrap{height:46vh;min-height:290px}
+ .map-hint{font-size:10px;bottom:8px;left:8px;right:8px;padding:8px}
+ .layout{padding-bottom:8px}
+}
+@media(max-width:390px){
+ .networks>.network:not(.network--all){gap:3px;padding:5px 4px}
+ .networks>.network:not(.network--all) strong{font-size:9px}
+ .networks>.network:not(.network--all) .badge{width:22px;height:22px;font-size:8px}
+}
+@media(prefers-reduced-motion:reduce){
+ .network-more>summary span,.city-choices>summary span{transition:none}
+}
+
 </style></head><body>
 <header class="head"><div class="wrap head-inner"><a href="./index.html" class="brand" aria-label="NEOLINE"><img src="./assets/neoline-clean.svg" alt="NEOLINE" onerror="this.outerHTML='NEOLINE'"></a><div class="head-actions"><select class="lang" id="language" aria-label="Language"><option value="ru">RU</option><option value="he">HE</option><option value="en">EN</option><option value="ar">AR</option></select><a href="./index.html#installation" class="back" id="back">← На сайт</a></div></div></header>
-<main class="wrap"><div class="hero"><span class="eyebrow" id="eyebrow">NEOLINE · ДОСТАВКА ПО ИЗРАИЛЮ</span><h1 id="title">Где забрать товар</h1><p id="intro">Найдите ближайший постамат или пункт выдачи. Выберите сеть и город: на карте откроется поиск адресов, а по ссылке — официальная карта оператора.</p><div class="alert"><span aria-hidden="true">ⓘ</span><span id="alert"><b>Демонстрация.</b> NEOLINE Israel пока не принимает реальные заказы и не объявлял договоры с этими сетями. Показанные адреса — справочная информация, а не подтверждённые точки получения заказов NEOLINE.</span></div></div>
+<main class="wrap"><div class="hero"><h1 id="title">Где забрать товар</h1></div>
 <div class="layout"><aside class="side"><div class="label" id="choose">ВЫБЕРИТЕ СЕТЬ</div><div class="networks" id="networks">
 <button class="network network--all active" type="button" data-provider="all" aria-pressed="true"><span class="badge" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1.6"/><rect x="14" y="3" width="7" height="7" rx="1.6"/><rect x="3" y="14" width="7" height="7" rx="1.6"/><rect x="14" y="14" width="7" height="7" rx="1.6"/></svg></span><span class="network-all-text"><strong id="allLabel">Все сети</strong><small id="allCaption">12 сетей · поиск пунктов выдачи</small></span></button>
 <button class="network" type="button" data-provider="boxit" aria-pressed="false"><span class="badge">B</span><span><strong>BOXIT</strong><small id="caption-boxit">Постаматы и пункты выдачи</small></span></button>
 <button class="network" type="button" data-provider="done" aria-pressed="false"><span class="badge">D</span><span><strong>DONE</strong><small id="caption-done">Умные локеры</small></span></button>
 <button class="network" type="button" data-provider="doar" aria-pressed="false"><span class="badge">24</span><span><strong>Doar / Israel Post</strong><small id="caption-doar">Почтовые отделения и локеры</small></span></button>
+</div><details class="network-more" id="networkMore"><summary id="networkMoreSummary">Ещё 9 сетей <span aria-hidden="true">⌄</span></summary><div class="network-more-grid">
 <button class="network" type="button" data-provider="epost" aria-pressed="false"><span class="badge">E</span><span><strong>E-POST · HFD</strong><small id="caption-epost">Локеры и магазины</small></span></button>
 <button class="network" type="button" data-provider="pickup" aria-pressed="false"><span class="badge">P</span><span><strong>PickUP</strong><small id="caption-pickup">Пункты UPS и партнёров</small></span></button>
 
@@ -144,10 +237,10 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible{ou
 <button class="network" type="button" data-provider="cargo" aria-pressed="false"><span class="badge">C</span><span><strong>Cargo</strong><small id="caption-cargo">Пункты выдачи Cargo</small></span></button>
 <button class="network" type="button" data-provider="dhl" aria-pressed="false"><span class="badge">DHL</span><span><strong>DHL Express</strong><small id="caption-dhl">Сервисные пункты DHL</small></span></button>
 <button class="network" type="button" data-provider="fedex" aria-pressed="false"><span class="badge">FX</span><span><strong>FedEx</strong><small id="caption-fedex">Пункты отправки и выдачи</small></span></button>
-</div><div class="separate"><a class="shoplink" id="ksp" target="_blank" rel="noopener noreferrer" href="https://ksp.co.il/"><strong>KSP ↗</strong><small id="kspDesc">Отдельная сеть магазинов: самовывоз только для заказов KSP, когда он доступен.</small></a></div></aside>
+</div><div class="separate"><a class="shoplink" id="ksp" target="_blank" rel="noopener noreferrer" href="https://ksp.co.il/"><strong>KSP ↗</strong><small id="kspDesc">Отдельная сеть магазинов: самовывоз только для заказов KSP, когда он доступен.</small></a></div></details></aside>
 <section class="map-panel" aria-label="Pickup map"><div class="map-top"><div><div class="map-heading" id="mapTitle">Все сети — пункты выдачи</div><div class="map-sub" id="mapSub">Поиск точек на карте Google, справочно</div></div><span aria-hidden="true">⌖</span></div>
 <form id="search" class="searchbox"><input id="city" placeholder="Введите город или район" enterkeyhint="search" autocomplete="address-level2" value="תל אביב" aria-label="City"><button type="submit" id="find">Найти</button></form>
-<div class="cities" id="cities"><button type="button" data-city="אריאל">Ариэль</button><button type="button" data-city="תל אביב">Тель-Авив</button><button type="button" data-city="פתח תקווה">Петах-Тиква</button><button type="button" data-city="ירושלים">Иерусалим</button><button type="button" data-city="חיפה">Хайфа</button><button type="button" data-city="באר שבע">Беэр-Шева</button><button type="button" data-city="אילת">Эйлат</button></div>
+<details class="city-choices" id="cityChoices"><summary id="cityChoicesSummary">Быстрый выбор города <span aria-hidden="true">⌄</span></summary><div class="cities" id="cities"><button type="button" data-city="אריאל">Ариэль</button><button type="button" data-city="תל אביב">Тель-Авив</button><button type="button" data-city="פתח תקווה">Петах-Тиква</button><button type="button" data-city="ירושלים">Иерусалим</button><button type="button" data-city="חיפה">Хайфа</button><button type="button" data-city="באר שבע">Беэр-Шева</button><button type="button" data-city="אילת">Эйлат</button></div></details>
 <div class="map-wrap"><iframe id="map" title="Поиск пунктов выдачи на Google Maps" loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe><div class="map-hint" id="mapHint">Метки Google могут быть неполными. Полный актуальный список, часы работы и доступность проверяйте на сайте выбранной сети.</div></div>
 <div class="bottom"><a class="official" id="official" href="https://boxit.co.il/" target="_blank" rel="noopener noreferrer">Официальные точки сети ↗</a><a class="maps" id="fullMap" target="_blank" rel="noopener noreferrer">Открыть Google Maps ↗</a><small id="networkNotice">Условия работы и часы доступа зависят от конкретного пункта. Наличие локера не означает, что в него можно доставить заказ NEOLINE.</small></div>
 </section></div></main><footer class="foot"><div class="wrap"><span id="foot">NEOLINE Israel · демонстрационный проект. Карты и адреса принадлежат соответствующим операторам; сведения о точках могут меняться.</span> · <a href="./index.html" id="home">На главную</a></div></footer>
@@ -183,7 +276,7 @@ ar:{back:"العودة للموقع ←",eyebrow:"NEOLINE · التوصيل في
 
 const moreCopy={
  ru:{
-  all:"Все сети",allCaption:"12 сетей · поиск пунктов выдачи",
+  all:"Все сети",allCaption:"12 сетей · поиск пунктов выдачи",more:"Ещё 9 сетей",cityChoice:"Выбрать город",
   labels:["Точки выдачи и магазины","Локеры и пункты выдачи","Умные постаматы","Пункты выдачи","Пункты выдачи Cargo","Пункты DHL Express","Пункты отправки и выдачи"],
   genericSub:"Общий поиск по Google Maps — не полный список сетей",
   genericHint:"Общая карта — ориентировочный поиск разных операторов. Для точных адресов выберите сеть и откройте её официальный справочник.",
@@ -191,7 +284,7 @@ const moreCopy={
   nav:["Главная","Каталог","Новости","Доставка"]
  },
  en:{
-  all:"All networks",allCaption:"12 networks · pickup point search",
+  all:"All networks",allCaption:"12 networks · pickup point search",more:"9 more networks",cityChoice:"Choose a city",
   labels:["Pickup shops and locations","Lockers and pickup points","Smart parcel lockers","Pickup points","Cargo collection points","DHL Express ServicePoints","Drop-off and pickup sites"],
   genericSub:"Broad Google Maps search — not a complete operator directory",
   genericHint:"The combined map is an indicative search across operators. For accurate addresses choose a specific network and use its official locator.",
@@ -199,7 +292,7 @@ const moreCopy={
   nav:["Home","Catalog","News","Delivery"]
  },
  he:{
-  all:"כל הרשתות",allCaption:"12 רשתות · חיפוש נקודות איסוף",
+  all:"כל הרשתות",allCaption:"12 רשתות · חיפוש נקודות איסוף",more:"עוד 9 רשתות",cityChoice:"בחירת עיר",
   labels:["חנויות ונקודות מסירה","לוקרים ונקודות מסירה","לוקרים חכמים","נקודות איסוף","נקודות איסוף Cargo","נקודות שירות DHL","נקודות מסירה ואיסוף"],
   genericSub:"חיפוש כללי ב-Google Maps — לא רשימה מלאה",
   genericHint:"המפה הכללית מציגה תוצאות חיפוש משוערות בלבד. לכתובות מדויקות בחרו רשת ובדקו באתר הרשמי שלה.",
@@ -207,7 +300,7 @@ const moreCopy={
   nav:["בית","קטלוג","חדשות","משלוחים"]
  },
  ar:{
-  all:"جميع الشبكات",allCaption:"12 شبكة · البحث عن نقاط الاستلام",
+  all:"جميع الشبكات",allCaption:"12 شبكة · البحث عن نقاط الاستلام",more:"9 شبكات أخرى",cityChoice:"اختيار المدينة",
   labels:["متاجر ونقاط استلام","خزائن ونقاط استلام","خزائن طرود ذكية","نقاط الاستلام","نقاط استلام Cargo","نقاط DHL Express","مواقع التسليم والاستلام"],
   genericSub:"بحث عام في خرائط Google — ليس دليلاً شاملاً",
   genericHint:"الخريطة العامة تعرض نتائج بحث تقريبية. للعناوين الدقيقة اختر شبكة واستخدم دليلها الرسمي.",
@@ -221,13 +314,14 @@ function applyLanguage(){
  const t=copy[lang]||copy.ru,extra=moreCopy[lang]||moreCopy.ru;
  document.documentElement.lang=lang;
  document.documentElement.dir=["he","ar"].includes(lang)?"rtl":"ltr";
- ["back","eyebrow","title","intro","choose","kspDesc","find","fullMap","foot","home"].forEach(k=>$(k).textContent=t[k]);
- $("alert").innerHTML=t.alert;
+ ["back","title","choose","kspDesc","find","fullMap","foot","home"].forEach(k=>$(k).textContent=t[k]);
  $("city").placeholder=t.placeholder;
  ["boxit","done","doar","epost","pickup"].forEach((id,i)=>$("caption-"+id).textContent=t.labels[i]);
  extraProviderOrder.forEach((id,i)=>$("caption-"+id).textContent=extra.labels[i]);
  $("allLabel").textContent=extra.all;
  $("allCaption").textContent=extra.allCaption;
+ $("networkMoreSummary").firstChild.textContent=extra.more+" ";
+ $("cityChoicesSummary").firstChild.textContent=extra.cityChoice+" ";
  ["deliveryNavHome","deliveryNavCatalog","deliveryNavNews","deliveryNavDelivery"].forEach((id,i)=>{
   $(id).querySelector("span").textContent=extra.nav[i];
  });
@@ -250,17 +344,26 @@ function renderMap(){
  $("mapHint").textContent=all?extra.genericHint:t.mapHint;
  $("networkNotice").textContent=all?extra.genericNotice:t.networkNotice;
 }
-function chooseProvider(id){
+function chooseProvider(id,fromTap=false){
  if(id!=="all"&&!providers[id])return;
  active=id;
+ const withinMore=$("networkMore").querySelector('[data-provider="'+id+'"]')!==null;
+ if(withinMore&&!fromTap)$("networkMore").open=true;
  document.querySelectorAll("[data-provider]").forEach(el=>{
   const on=el.dataset.provider===id;
   el.classList.toggle("active",on);
   el.setAttribute("aria-pressed",String(on));
  });
  renderMap();
+ if(fromTap&&window.matchMedia("(max-width:760px)").matches){
+  if(withinMore)$("networkMore").open=false;
+  const reduce=window.matchMedia("(prefers-reduced-motion:reduce)").matches;
+  requestAnimationFrame(()=>document.querySelector(".map-panel").scrollIntoView({
+   behavior:reduce?"instant":"smooth",block:"start"
+  }));
+ }
 }
-document.querySelectorAll("[data-provider]").forEach(button=>button.addEventListener("click",()=>chooseProvider(button.dataset.provider)));
+document.querySelectorAll("[data-provider]").forEach(button=>button.addEventListener("click",()=>chooseProvider(button.dataset.provider,true)));
 
 $("search").addEventListener("submit",e=>{e.preventDefault();renderMap();});
 document.querySelectorAll("[data-city]").forEach(button=>button.addEventListener("click",()=>{$("city").value=button.dataset.city;renderMap();}));
