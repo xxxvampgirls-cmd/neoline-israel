@@ -85,7 +85,7 @@
   width:calc(100% + 24px);max-width:none;
   margin-inline:-12px;
  }
- .news-cover .news-feature-slide{height:clamp(248px,64vw,340px)}
+ .news-cover .news-feature-slide{height:245px}
  .news-cover .news-feature-controls{min-height:35px;padding:4px 0 0;gap:10px}
  .news-cover .news-feature-arrow{width:32px;height:32px}
  .news-cover .news-feature-counter{font-size:10px;min-width:52px}
