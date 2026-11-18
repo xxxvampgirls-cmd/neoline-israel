@@ -1,0 +1,122 @@
+/* NEOLINE Theory — animated driving-sign collection (decorative only).
+   Real exam illustrations remain supplied solely by the official question bank. */
+.game-hero.theory-dashboard .hero-art.hero-art--signs{
+  display:block;position:relative;isolation:isolate;
+  overflow:hidden;min-width:0;
+  background-image:none!important;
+  background:linear-gradient(140deg,#b6edff,#e9fbff 60%,#8edbfb)!important;
+  border:1px solid #b9e7f9;
+  box-shadow:inset 0 1px #fff,0 6px 16px #1376ab23;
+}
+.theory-dashboard .hero-art.hero-art--signs::before{
+  content:"";position:absolute;inset:0;z-index:2;pointer-events:none;
+  background:linear-gradient(104deg,transparent 18%,#ffffff00 43%,#ffffff6e 51%,#ffffff00 60%,transparent 75%);
+  background-size:235% 100%;
+  animation:neolineSignsGlow 12s ease-in-out infinite;
+}
+.theory-dashboard .hero-art.hero-art--signs::after{
+  content:"";position:absolute;inset:0;z-index:1;pointer-events:none;
+  background:linear-gradient(0deg,#c5f2ff08,#ffffff20 84%,#ffffff28)!important;
+}
+.theory-dashboard .hero-traffic-svg{
+  display:block;width:100%;height:100%;object-fit:cover;
+  filter:saturate(1.09) contrast(1.025);
+}
+.theory-dashboard .traffic-sign-float{
+  transform-box:fill-box;transform-origin:center;
+  animation:neolineSignFloat 6.8s ease-in-out infinite;
+  will-change:transform;
+}
+.theory-dashboard .traffic-sign--turn .traffic-sign-float{
+  animation-duration:6.2s;animation-delay:-2.1s;
+}
+.theory-dashboard .traffic-sign--speed .traffic-sign-float{
+  animation-duration:8.1s;animation-delay:-4.6s;
+}
+.theory-dashboard .traffic-sign--warning .traffic-sign-float{
+  animation-duration:7.4s;animation-delay:-3.3s;
+}
+.theory-dashboard .traffic-sign--pedestrian .traffic-sign-float{
+  animation-duration:7.7s;animation-delay:-6.2s;
+}
+.theory-dashboard .traffic-road-dashes{
+  stroke-dasharray:25 25;stroke-dashoffset:0;
+  animation:neolineRoadMove 8s linear infinite;
+}
+.theory-dashboard .traffic-turn-shine{
+  transform-box:fill-box;transform-origin:center;
+  animation:neolineTurnGlow 6.2s ease-in-out infinite;
+}
+@keyframes neolineSignFloat{
+  0%,100%{transform:translateY(0) rotate(0deg)}
+  50%{transform:translateY(-6px) rotate(1.15deg)}
+}
+@keyframes neolineTurnGlow{
+  0%,68%,100%{opacity:.15}
+  76%{opacity:.65}
+  85%{opacity:.20}
+}
+@keyframes neolineRoadMove{
+  to{stroke-dashoffset:-100}
+}
+@keyframes neolineSignsGlow{
+  0%,24%,100%{background-position:150% 0}
+  65%{background-position:-180% 0}
+}
+/* Larger, richly blue title, without clipping long Hebrew/English labels. */
+.game-hero.theory-dashboard .hero-copy h1#heroTitle{
+  color:#0877c4!important;
+  font-size:clamp(32px,3.8vw,46px)!important;
+  line-height:1.025!important;
+  letter-spacing:-.052em!important;
+  font-weight:900!important;
+  text-shadow:0 2px 9px #62b5e319;
+  overflow-wrap:normal;
+  word-break:normal;
+}
+@media(max-width:940px){
+  .game-hero.theory-dashboard .hero-copy h1#heroTitle{
+    font-size:clamp(26px,4.3vw,37px)!important;
+  }
+}
+@media(max-width:720px){
+  .game-hero.theory-dashboard{
+    grid-template-columns:45% minmax(0,55%)!important;
+    grid-template-rows:110px 76px!important;
+  }
+  .game-hero.theory-dashboard .hero-copy{
+    padding:4px 0 3px 7px!important;
+    justify-content:center;
+    min-width:0;
+  }
+  .game-hero.theory-dashboard .hero-copy h1#heroTitle{
+    font-size:clamp(24px,6.55vw,30px)!important;
+    letter-spacing:-.055em!important;
+    line-height:1.02!important;
+    margin:5px 0 8px!important;
+  }
+  .theory-dashboard .hero-art.hero-art--signs{border-radius:13px}
+}
+@media(max-width:390px){
+  .game-hero.theory-dashboard .hero-copy h1#heroTitle{
+    font-size:clamp(23px,6.45vw,26px)!important;
+  }
+}
+@media(max-width:350px){
+  .game-hero.theory-dashboard{
+    grid-template-columns:46% minmax(0,54%)!important;
+    grid-template-rows:104px 76px!important;
+  }
+  .game-hero.theory-dashboard .hero-copy h1#heroTitle{
+    font-size:22px!important;
+  }
+}
+@media(prefers-reduced-motion:reduce){
+  .theory-dashboard .hero-art.hero-art--signs::before,
+  .theory-dashboard .traffic-sign-float,
+  .theory-dashboard .traffic-road-dashes,
+  .theory-dashboard .traffic-turn-shine{
+    animation:none!important;
+    will-change:auto;
+  }
+}
