@@ -1,6 +1,6 @@
 <!doctype html>
 <html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="theme-color" content="#f6fbff">
-<meta name="description" content="NEOLINE Israel — обзор карт пунктов выдачи Boxit, DONE, Почты Израиля, E-Post / HFD и PickUP.">
+<meta name="description" content="NEOLINE Israel — справочник пунктов выдачи и локеров Израиля: Boxit, DONE, Почта Израиля, HFD, PickUP, Cheetah, ZigZag, Shlager, Easy Point, Cargo, DHL и FedEx.">
 <title>NEOLINE — Карта пунктов выдачи в Израиле</title>
 <style>
 
@@ -68,22 +68,95 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible{ou
 @media(max-width:430px){.wrap{width:calc(100% - 26px)}.head-inner{min-height:64px}.brand img{width:136px;max-height:43px}.head-actions{gap:6px}.back{font-size:11px;padding:9px}.lang{font-size:11px;padding:9px}.hero h1{font-size:32px}.hero p{font-size:13px}.map-heading{font-size:19px}.map-top{padding:16px 13px 12px}.searchbox{padding:0 12px 12px}.searchbox button{padding:12px}.cities{padding:0 12px 13px}.bottom{padding:13px 12px}.network{padding:9px;gap:7px}.badge{width:33px;height:33px}.network strong{font-size:12px}.map-wrap{min-height:320px}}
 @media(prefers-reduced-motion:reduce){*,*:before,*:after{transition:none!important;scroll-behavior:auto!important}}
 
+
+/* Delivery 2026-11-18: compact all-network selector + shared four-item dock. */
+.networks{align-items:stretch}
+.network--all{
+  border:1px solid #91c9ec;
+  background:linear-gradient(115deg,#eef9ff,#fff);
+  grid-column:1/-1;
+  min-height:63px;
+}
+.network--all .badge svg{width:24px;height:24px;stroke:currentColor;stroke-width:1.8;fill:none;stroke-linecap:round;stroke-linejoin:round}
+.network--all .badge{background:#dff2ff}
+.network--all .network-all-text{min-width:0}
+.network--all strong{font-weight:900}
+.network--all small{font-size:11px}
+.network:focus-visible{outline:3px solid #128bda;outline-offset:2px}
+.official[hidden]{display:none!important}
+.delivery-nav{display:none}
+@media(max-width:760px){
+  body{padding-bottom:calc(90px + env(safe-area-inset-bottom))}
+  .layout{padding-bottom:12px}
+  .side{padding:13px}
+  .network--all{min-height:64px}
+  .foot{padding:14px 0 19px}
+  .delivery-nav{
+    position:fixed;z-index:50;bottom:0;left:0;right:0;
+    display:grid;grid-template-columns:repeat(4,minmax(0,1fr));
+    align-items:stretch;padding:6px 5px max(8px,env(safe-area-inset-bottom));
+    background:rgba(255,255,255,.96);border-top:1px solid #d0e5f5;
+    box-shadow:0 -8px 22px #1e6ca51a;
+    -webkit-backdrop-filter:blur(16px);backdrop-filter:blur(16px);
+  }
+  .delivery-nav a{
+    min-width:0;min-height:61px;display:flex;flex-direction:column;
+    align-items:center;justify-content:center;gap:5px;
+    text-align:center;text-decoration:none;border-radius:13px;
+    font-size:11px;line-height:1.2;font-weight:700;color:#68879d;
+    padding:7px 2px;transition:background .18s,color .18s;
+    -webkit-tap-highlight-color:transparent;
+  }
+  .delivery-nav a svg{
+    width:29px;height:29px;fill:none;stroke:#2186bf;
+    stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;
+  }
+  .delivery-nav a.active{color:#086fb6;background:#e9f6ff}
+  .delivery-nav a.active svg{stroke:#087ac8}
+  .delivery-nav a:active{background:#dff2ff}
+  [dir=rtl] .delivery-nav{direction:rtl}
+}
+@media(max-width:385px){
+  .network strong{font-size:11px}
+  .network--all strong{font-size:13px}
+  .network small{font-size:9px}
+  .delivery-nav a{font-size:10px}
+}
+@media(prefers-reduced-motion:reduce){
+  .delivery-nav a{transition:none}
+}
+
 </style></head><body>
 <header class="head"><div class="wrap head-inner"><a href="./index.html" class="brand" aria-label="NEOLINE"><img src="./assets/neoline-clean.svg" alt="NEOLINE" onerror="this.outerHTML='NEOLINE'"></a><div class="head-actions"><select class="lang" id="language" aria-label="Language"><option value="ru">RU</option><option value="he">HE</option><option value="en">EN</option><option value="ar">AR</option></select><a href="./index.html#installation" class="back" id="back">← На сайт</a></div></div></header>
 <main class="wrap"><div class="hero"><span class="eyebrow" id="eyebrow">NEOLINE · ДОСТАВКА ПО ИЗРАИЛЮ</span><h1 id="title">Где забрать товар</h1><p id="intro">Найдите ближайший постамат или пункт выдачи. Выберите сеть и город: на карте откроется поиск адресов, а по ссылке — официальная карта оператора.</p><div class="alert"><span aria-hidden="true">ⓘ</span><span id="alert"><b>Демонстрация.</b> NEOLINE Israel пока не принимает реальные заказы и не объявлял договоры с этими сетями. Показанные адреса — справочная информация, а не подтверждённые точки получения заказов NEOLINE.</span></div></div>
 <div class="layout"><aside class="side"><div class="label" id="choose">ВЫБЕРИТЕ СЕТЬ</div><div class="networks" id="networks">
-<button class="network active" type="button" data-provider="boxit" aria-pressed="true"><span class="badge">B</span><span><strong>BOXIT</strong><small id="caption-boxit">Постаматы и пункты выдачи</small></span></button>
+<button class="network network--all active" type="button" data-provider="all" aria-pressed="true"><span class="badge" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1.6"/><rect x="14" y="3" width="7" height="7" rx="1.6"/><rect x="3" y="14" width="7" height="7" rx="1.6"/><rect x="14" y="14" width="7" height="7" rx="1.6"/></svg></span><span class="network-all-text"><strong id="allLabel">Все сети</strong><small id="allCaption">12 сетей · поиск пунктов выдачи</small></span></button>
+<button class="network" type="button" data-provider="boxit" aria-pressed="false"><span class="badge">B</span><span><strong>BOXIT</strong><small id="caption-boxit">Постаматы и пункты выдачи</small></span></button>
 <button class="network" type="button" data-provider="done" aria-pressed="false"><span class="badge">D</span><span><strong>DONE</strong><small id="caption-done">Умные локеры</small></span></button>
 <button class="network" type="button" data-provider="doar" aria-pressed="false"><span class="badge">24</span><span><strong>Doar / Israel Post</strong><small id="caption-doar">Почтовые отделения и локеры</small></span></button>
 <button class="network" type="button" data-provider="epost" aria-pressed="false"><span class="badge">E</span><span><strong>E-POST · HFD</strong><small id="caption-epost">Локеры и магазины</small></span></button>
 <button class="network" type="button" data-provider="pickup" aria-pressed="false"><span class="badge">P</span><span><strong>PickUP</strong><small id="caption-pickup">Пункты UPS и партнёров</small></span></button>
+
+<button class="network" type="button" data-provider="cheetah" aria-pressed="false"><span class="badge">Ч</span><span><strong>Cheetah Shops</strong><small id="caption-cheetah">Пункты выдачи и магазины</small></span></button>
+<button class="network" type="button" data-provider="zigzag" aria-pressed="false"><span class="badge">Z</span><span><strong>ZigZag BOX</strong><small id="caption-zigzag">Локеры и пункты выдачи</small></span></button>
+<button class="network" type="button" data-provider="shlager" aria-pressed="false"><span class="badge">S</span><span><strong>Shlager</strong><small id="caption-shlager">Умные постаматы</small></span></button>
+<button class="network" type="button" data-provider="easypoint" aria-pressed="false"><span class="badge">EP</span><span><strong>Easy Point</strong><small id="caption-easypoint">Пункты выдачи</small></span></button>
+<button class="network" type="button" data-provider="cargo" aria-pressed="false"><span class="badge">C</span><span><strong>Cargo</strong><small id="caption-cargo">Пункты выдачи Cargo</small></span></button>
+<button class="network" type="button" data-provider="dhl" aria-pressed="false"><span class="badge">DHL</span><span><strong>DHL Express</strong><small id="caption-dhl">Сервисные пункты DHL</small></span></button>
+<button class="network" type="button" data-provider="fedex" aria-pressed="false"><span class="badge">FX</span><span><strong>FedEx</strong><small id="caption-fedex">Пункты отправки и выдачи</small></span></button>
 </div><div class="separate"><a class="shoplink" id="ksp" target="_blank" rel="noopener noreferrer" href="https://ksp.co.il/"><strong>KSP ↗</strong><small id="kspDesc">Отдельная сеть магазинов: самовывоз только для заказов KSP, когда он доступен.</small></a></div></aside>
-<section class="map-panel" aria-label="Pickup map"><div class="map-top"><div><div class="map-heading" id="mapTitle">BOXIT — пункты выдачи</div><div class="map-sub" id="mapSub">Поиск точек на карте Google, справочно</div></div><span aria-hidden="true">⌖</span></div>
+<section class="map-panel" aria-label="Pickup map"><div class="map-top"><div><div class="map-heading" id="mapTitle">Все сети — пункты выдачи</div><div class="map-sub" id="mapSub">Поиск точек на карте Google, справочно</div></div><span aria-hidden="true">⌖</span></div>
 <form id="search" class="searchbox"><input id="city" placeholder="Введите город или район" enterkeyhint="search" autocomplete="address-level2" value="תל אביב" aria-label="City"><button type="submit" id="find">Найти</button></form>
 <div class="cities" id="cities"><button type="button" data-city="אריאל">Ариэль</button><button type="button" data-city="תל אביב">Тель-Авив</button><button type="button" data-city="פתח תקווה">Петах-Тиква</button><button type="button" data-city="ירושלים">Иерусалим</button><button type="button" data-city="חיפה">Хайфа</button><button type="button" data-city="באר שבע">Беэр-Шева</button><button type="button" data-city="אילת">Эйлат</button></div>
 <div class="map-wrap"><iframe id="map" title="Поиск пунктов выдачи на Google Maps" loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe><div class="map-hint" id="mapHint">Метки Google могут быть неполными. Полный актуальный список, часы работы и доступность проверяйте на сайте выбранной сети.</div></div>
 <div class="bottom"><a class="official" id="official" href="https://boxit.co.il/" target="_blank" rel="noopener noreferrer">Официальные точки сети ↗</a><a class="maps" id="fullMap" target="_blank" rel="noopener noreferrer">Открыть Google Maps ↗</a><small id="networkNotice">Условия работы и часы доступа зависят от конкретного пункта. Наличие локера не означает, что в него можно доставить заказ NEOLINE.</small></div>
 </section></div></main><footer class="foot"><div class="wrap"><span id="foot">NEOLINE Israel · демонстрационный проект. Карты и адреса принадлежат соответствующим операторам; сведения о точках могут меняться.</span> · <a href="./index.html" id="home">На главную</a></div></footer>
+<nav class="delivery-nav" id="deliveryBottomNav" aria-label="Главное меню NEOLINE">
+ <a href="./" id="deliveryNavHome"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m3 10 9-7 9 7v10a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V10Z"/><path d="M9 21v-8h6v8"/></svg><span>Главная</span></a>
+ <a href="./#catalog" id="deliveryNavCatalog"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></svg><span>Каталог</span></a>
+ <a href="./news.html" id="deliveryNavNews"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M7 8h4v4H7zM14 8h4M14 11h4M7 16h11"/></svg><span>Новости</span></a>
+ <a href="./delivery.html" id="deliveryNavDelivery" aria-current="page" class="active"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 7h12v10H3z"/><path d="M15 10h3l3 4v3h-6"/><circle cx="7" cy="19" r="2"/><circle cx="17" cy="19" r="2"/></svg><span>Доставка</span></a>
+</nav>
 <script>
 (function(){
 "use strict";
@@ -92,7 +165,14 @@ const providers={
  done:{name:"DONE",query:"DONE smart lockers",official:"https://done.co.il/en/maps-english/"},
  doar:{name:"Israel Post",query:"דואר ישראל סניף דואר לוקר",official:"https://doar.israelpost.co.il/he/locatebranch"},
  epost:{name:"E-POST · HFD",query:"EPOST HFD נקודת איסוף",official:"https://www.hfd.co.il/נקודות-איסוף/"},
- pickup:{name:"PickUP",query:"PickUP נקודת איסוף חבילות",official:"https://www.pickuppoint.co.il/?page_id=14"}
+ pickup:{name:"PickUP",query:"PickUP נקודת איסוף חבילות",official:"https://www.pickuppoint.co.il/?page_id=14"},
+ cheetah:{name:"Cheetah Shops",query:"ציטה שופס נקודת חלוקת חבילות",official:"https://chitadelivery.co.il/branches/"},
+ zigzag:{name:"ZigZag BOX",query:"זיגזג נקודת חלוקה לוקר",official:"https://zig-zag.co.il/help/stores"},
+ shlager:{name:"Shlager",query:"שלאגר לוקרים איסוף חבילות",official:"https://www.shlager.com/"},
+ easypoint:{name:"Easy Point",query:"איזי פוינט נקודת חלוקה",official:"https://easypoint.co.il/"},
+ cargo:{name:"Cargo",query:"Cargo נקודות איסוף חבילות",official:"https://dashboard.cargo.co.il/pickup-points-map"},
+ dhl:{name:"DHL Express",query:"DHL Express ServicePoint",official:"https://www.dhl.com/il-en/home/express/shipping-and-tracking/shipping.html"},
+ fedex:{name:"FedEx",query:"FedEx pickup dropoff locations",official:"https://local.fedex.com/en-il"}
 };
 const copy={
 ru:{back:"← На сайт",eyebrow:"NEOLINE · ДОСТАВКА ПО ИЗРАИЛЮ",title:"Где забрать товар",intro:"Найдите ближайший постамат или пункт выдачи. Выберите сеть и город: на карте откроется поиск адресов, а по ссылке — официальная карта оператора.",alert:"<b>Демонстрация.</b> NEOLINE Israel пока не принимает реальные заказы и не объявлял договоры с этими сетями. Показанные адреса — справочная информация, а не подтверждённые точки получения заказов NEOLINE.",choose:"ВЫБЕРИТЕ СЕТЬ",labels:["Постаматы и пункты выдачи","Умные локеры","Почтовые отделения и локеры","Локеры и магазины","Пункты UPS и партнёров"],kspDesc:"Отдельная сеть магазинов: самовывоз только для заказов KSP, когда он доступен.",mapSub:"Поиск точек на карте Google, справочно",find:"Найти",placeholder:"Введите город или район",mapHint:"Метки Google могут быть неполными. Полный актуальный список, часы работы и доступность проверяйте на сайте выбранной сети.",official:"Официальные точки сети ↗",fullMap:"Открыть Google Maps ↗",networkNotice:"Условия работы и часы доступа зависят от конкретного пункта. Наличие локера не означает, что в него можно доставить заказ NEOLINE.",foot:"NEOLINE Israel · демонстрационный проект. Карты и адреса принадлежат соответствующим операторам; сведения о точках могут меняться.",home:"На главную",cities:["Ариэль","Тель-Авив","Петах-Тиква","Иерусалим","Хайфа","Беэр-Шева","Эйлат"],mapTitle:" — пункты выдачи"},
@@ -100,15 +180,95 @@ en:{back:"← Back to site",eyebrow:"NEOLINE · DELIVERY IN ISRAEL",title:"Find 
 he:{back:"חזרה לאתר ←",eyebrow:"NEOLINE · משלוחים בישראל",title:"איפה אוספים חבילה",intro:"מוצאים לוקר או נקודת איסוף קרובה. בחרו רשת ועיר כדי לראות תוצאות חיפוש במפה, או עברו למפת הנקודות הרשמית של הרשת.",alert:"<b>להמחשה בלבד.</b> NEOLINE Israel עדיין אינה מקבלת הזמנות אמיתיות ולא הודיעה על הסכמי שילוח עם הרשתות. אלו נקודות מידע בלבד, לא נקודות איסוף מאושרות להזמנות NEOLINE.",choose:"בחרו רשת",labels:["לוקרים ונקודות איסוף","לוקרים חכמים","סניפי דואר ולוקרים","לוקרים וחנויות","נקודות UPS ושותפים"],kspDesc:"רשת חנויות נפרדת: איסוף רק להזמנות KSP הזכאיות לכך.",mapSub:"חיפוש נקודות במפות Google – לידיעה בלבד",find:"חיפוש",placeholder:"הקלידו עיר או שכונה",mapHint:"ייתכן שמיקומים מסוימים חסרים ב-Google. לרשימה העדכנית, שעות הגישה והזמינות בדקו באתר הרשמי של הרשת.",official:"למפת הנקודות הרשמית ↗",fullMap:"פתיחה ב-Google Maps ↗",networkNotice:"שעות הפתיחה והנגישות תלויות בנקודה. קיום לוקר אינו אישור שניתן לקבל בו הזמנת NEOLINE.",foot:"NEOLINE Israel · אתר קונספט. מפות ומיקומי איסוף שייכים למפעילים ועשויים להשתנות.",home:"לדף הבית",cities:["אריאל","תל אביב","פתח תקווה","ירושלים","חיפה","באר שבע","אילת"],mapTitle:" — נקודות איסוף"},
 ar:{back:"العودة للموقع ←",eyebrow:"NEOLINE · التوصيل في إسرائيل",title:"أين تستلم طلبك",intro:"ابحث عن خزانة طرود أو نقطة استلام قريبة. اختر الشبكة والمدينة لمشاهدة نتائج البحث على الخريطة أو افتح دليل المواقع الرسمي.",alert:"<b>عرض تجريبي فقط.</b> لا يقبل NEOLINE Israel طلبات فعلية بعد ولم يعلن عن اتفاقات توصيل مع هذه الشبكات. المواقع للمرجعية فقط وليست نقاط استلام مؤكدة لطلبات NEOLINE.",choose:"اختر الشبكة",labels:["خزائن ونقاط استلام","خزائن ذكية","فروع البريد والخزائن","خزائن ومحلات","نقاط UPS والشركاء"],kspDesc:"سلسلة متاجر منفصلة: الاستلام للطلبات المؤهلة من KSP فقط.",mapSub:"نتائج بحث تقريبية في خرائط Google",find:"بحث",placeholder:"أدخل المدينة أو الحي",mapHint:"قد تكون نتائج Google غير مكتملة. تحقق من دليل الشبكة الرسمي للعناوين وساعات العمل والتوافر.",official:"دليل النقاط الرسمي ↗",fullMap:"افتح خرائط Google ↗",networkNotice:"تختلف ساعات العمل وإمكانية الوصول. ظهور خزانة لا يعني أن طلبات NEOLINE يمكن إرسالها إليها.",foot:"NEOLINE Israel · مشروع توضيحي. الخرائط ومواقع التسليم تابعة للشبكات وقد تتغير.",home:"الرئيسية",cities:["أريئيل","تل أبيب","بيتح تكفا","القدس","حيفا","بئر السبع","إيلات"],mapTitle:" — نقاط الاستلام"}
 };
-const $=id=>document.getElementById(id);let active="boxit";let lang="ru";
-function applyLanguage(){const t=copy[lang]||copy.ru;document.documentElement.lang=lang;document.documentElement.dir=["he","ar"].includes(lang)?"rtl":"ltr";["back","eyebrow","title","intro","choose","kspDesc","mapSub","find","mapHint","official","fullMap","networkNotice","foot","home"].forEach(k=>$(k).textContent=t[k]);$("alert").innerHTML=t.alert;$("city").placeholder=t.placeholder;["boxit","done","doar","epost","pickup"].forEach((id,i)=>$("caption-"+id).textContent=t.labels[i]);document.querySelectorAll("[data-city]").forEach((b,i)=>b.textContent=t.cities[i]);$("mapTitle").textContent=providers[active].name+t.mapTitle;$("map").title=t.mapSub;}
-function renderMap(){const name=$("city").value.trim()||"תל אביב";const q=providers[active].query+" "+name+" Israel";const url="https://www.google.com/maps?q="+encodeURIComponent(q)+"&output=embed";$("map").src=url;$("fullMap").href="https://www.google.com/maps/search/?api=1&query="+encodeURIComponent(q);$("official").href=providers[active].official;$("mapTitle").textContent=providers[active].name+copy[lang].mapTitle;}
-document.querySelectorAll("[data-provider]").forEach(button=>button.addEventListener("click",()=>{active=button.dataset.provider;document.querySelectorAll("[data-provider]").forEach(el=>{const on=el===button;el.classList.toggle("active",on);el.setAttribute("aria-pressed",String(on));});renderMap();}));
+
+const moreCopy={
+ ru:{
+  all:"Все сети",allCaption:"12 сетей · поиск пунктов выдачи",
+  labels:["Точки выдачи и магазины","Локеры и пункты выдачи","Умные постаматы","Пункты выдачи","Пункты выдачи Cargo","Пункты DHL Express","Пункты отправки и выдачи"],
+  genericSub:"Общий поиск по Google Maps — не полный список сетей",
+  genericHint:"Общая карта — ориентировочный поиск разных операторов. Для точных адресов выберите сеть и откройте её официальный справочник.",
+  genericNotice:"Здесь представлены независимые операторы. NEOLINE пока не объявлял сотрудничество с ними. Общий поиск не гарантирует полноту точек.",
+  nav:["Главная","Каталог","Новости","Доставка"]
+ },
+ en:{
+  all:"All networks",allCaption:"12 networks · pickup point search",
+  labels:["Pickup shops and locations","Lockers and pickup points","Smart parcel lockers","Pickup points","Cargo collection points","DHL Express ServicePoints","Drop-off and pickup sites"],
+  genericSub:"Broad Google Maps search — not a complete operator directory",
+  genericHint:"The combined map is an indicative search across operators. For accurate addresses choose a specific network and use its official locator.",
+  genericNotice:"These are independent providers. NEOLINE has not announced partnerships. The combined search is not an exhaustive list.",
+  nav:["Home","Catalog","News","Delivery"]
+ },
+ he:{
+  all:"כל הרשתות",allCaption:"12 רשתות · חיפוש נקודות איסוף",
+  labels:["חנויות ונקודות מסירה","לוקרים ונקודות מסירה","לוקרים חכמים","נקודות איסוף","נקודות איסוף Cargo","נקודות שירות DHL","נקודות מסירה ואיסוף"],
+  genericSub:"חיפוש כללי ב-Google Maps — לא רשימה מלאה",
+  genericHint:"המפה הכללית מציגה תוצאות חיפוש משוערות בלבד. לכתובות מדויקות בחרו רשת ובדקו באתר הרשמי שלה.",
+  genericNotice:"אלה מפעילים עצמאיים. NEOLINE לא הודיעה על הסכם משלוחים איתם. החיפוש הכללי אינו כולל בהכרח את כל הנקודות.",
+  nav:["בית","קטלוג","חדשות","משלוחים"]
+ },
+ ar:{
+  all:"جميع الشبكات",allCaption:"12 شبكة · البحث عن نقاط الاستلام",
+  labels:["متاجر ونقاط استلام","خزائن ونقاط استلام","خزائن طرود ذكية","نقاط الاستلام","نقاط استلام Cargo","نقاط DHL Express","مواقع التسليم والاستلام"],
+  genericSub:"بحث عام في خرائط Google — ليس دليلاً شاملاً",
+  genericHint:"الخريطة العامة تعرض نتائج بحث تقريبية. للعناوين الدقيقة اختر شبكة واستخدم دليلها الرسمي.",
+  genericNotice:"هذه شبكات مستقلة. لم تعلن NEOLINE عن شراكات معها. البحث العام قد لا يشمل جميع النقاط.",
+  nav:["الرئيسية","الكتالوج","الأخبار","التوصيل"]
+ }
+};
+const extraProviderOrder=["cheetah","zigzag","shlager","easypoint","cargo","dhl","fedex"];
+const $=id=>document.getElementById(id);let active="all";let lang="ru";
+function applyLanguage(){
+ const t=copy[lang]||copy.ru,extra=moreCopy[lang]||moreCopy.ru;
+ document.documentElement.lang=lang;
+ document.documentElement.dir=["he","ar"].includes(lang)?"rtl":"ltr";
+ ["back","eyebrow","title","intro","choose","kspDesc","find","fullMap","foot","home"].forEach(k=>$(k).textContent=t[k]);
+ $("alert").innerHTML=t.alert;
+ $("city").placeholder=t.placeholder;
+ ["boxit","done","doar","epost","pickup"].forEach((id,i)=>$("caption-"+id).textContent=t.labels[i]);
+ extraProviderOrder.forEach((id,i)=>$("caption-"+id).textContent=extra.labels[i]);
+ $("allLabel").textContent=extra.all;
+ $("allCaption").textContent=extra.allCaption;
+ ["deliveryNavHome","deliveryNavCatalog","deliveryNavNews","deliveryNavDelivery"].forEach((id,i)=>{
+  $(id).querySelector("span").textContent=extra.nav[i];
+ });
+ document.querySelectorAll("[data-city]").forEach((b,i)=>b.textContent=t.cities[i]);
+ $("map").title=t.mapSub;
+ renderMap();
+}
+function renderMap(){
+ const t=copy[lang]||copy.ru,extra=moreCopy[lang]||moreCopy.ru;
+ const city=$("city").value.trim()||"תל אביב",all=active==="all";
+ const provider=all?null:providers[active];
+ const q=(all?"נקודות איסוף חבילות לוקרים":provider.query)+" "+city+" Israel";
+ $("map").src="https://www.google.com/maps?q="+encodeURIComponent(q)+"&output=embed";
+ $("fullMap").href="https://www.google.com/maps/search/?api=1&query="+encodeURIComponent(q);
+ $("official").hidden=all;
+ if(!all)$("official").href=provider.official;
+ $("official").textContent=t.official;
+ $("mapTitle").textContent=(all?extra.all:provider.name)+t.mapTitle;
+ $("mapSub").textContent=all?extra.genericSub:t.mapSub;
+ $("mapHint").textContent=all?extra.genericHint:t.mapHint;
+ $("networkNotice").textContent=all?extra.genericNotice:t.networkNotice;
+}
+function chooseProvider(id){
+ if(id!=="all"&&!providers[id])return;
+ active=id;
+ document.querySelectorAll("[data-provider]").forEach(el=>{
+  const on=el.dataset.provider===id;
+  el.classList.toggle("active",on);
+  el.setAttribute("aria-pressed",String(on));
+ });
+ renderMap();
+}
+document.querySelectorAll("[data-provider]").forEach(button=>button.addEventListener("click",()=>chooseProvider(button.dataset.provider)));
+
 $("search").addEventListener("submit",e=>{e.preventDefault();renderMap();});
 document.querySelectorAll("[data-city]").forEach(button=>button.addEventListener("click",()=>{$("city").value=button.dataset.city;renderMap();}));
 $("language").addEventListener("change",e=>{lang=e.target.value;try{localStorage.setItem("neoline-language",lang)}catch(_){}applyLanguage();});
 try{const saved=localStorage.getItem("neoline-language");if(copy[saved])lang=saved}catch(_){}
-const requested=new URLSearchParams(location.search).get("network");if(requested && providers[requested]){active=requested;document.querySelectorAll("[data-provider]").forEach(el=>{const on=el.dataset.provider===active;el.classList.toggle("active",on);el.setAttribute("aria-pressed",String(on));});}
-$("language").value=lang;applyLanguage();renderMap();
+const requested=new URLSearchParams(location.search).get("network");
+if(requested==="all"||providers[requested])active=requested;
+$("language").value=lang;applyLanguage();
+chooseProvider(active);
 })();
 </script></body></html>
