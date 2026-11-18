@@ -250,5 +250,11 @@ window.addEventListener("neoline:theory-finish",event=>{
 $("licenseSelect")?.addEventListener("change",()=>{current=null;if(dialog?.open)drawProgress()});
 new MutationObserver(()=>{current=null;updateCopy();if(dialog?.open){current=localStats();drawProgress()}})
  .observe(document.documentElement,{attributes:true,attributeFilter:["lang"]});
+// Decorative remote photos degrade to branded gradients, never broken-image icons.
+for(const picture of document.querySelectorAll(".theory-dashboard .hero-art img, #gameLobby .game-mode-photo img")){
+ const failed=()=>picture.parentElement?.classList.add("game-photo-failed");
+ picture.addEventListener("error",failed,{once:true});
+ if(picture.complete&&!picture.naturalWidth)failed();
+}
 updateCopy();
 })();
