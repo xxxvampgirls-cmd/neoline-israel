@@ -5,7 +5,7 @@
 <title>Автоновости Израиля — NEOLINE Israel</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="./news-ui.css?v=20261118-css-clean-v2">
-<link rel="stylesheet" href="./news-accidents.css?v=20261118-news-chart-v2">
+<link rel="stylesheet" href="./news-accidents.css?v=20261118-adaptive-chart-v5">
 <link rel="stylesheet" href="./road-annual.css?v=20261118-annual-v1">
 <link rel="stylesheet" href="./road-fines.css?v=20261118-fines-v1">
 <link rel="stylesheet" href="./news-layout-polish.css?v=20261118-carousel-height-v2">
@@ -35,11 +35,12 @@
   <div class="accident-chart-scroll" id="accidentChartScroll">
    <div id="accidentChart" class="accident-chart" role="group" aria-label="Количество публикаций о ДТП по дням"></div>
   </div>
-  <div class="accident-chart-bottom"><span id="accidentDayDetail" aria-live="polite">Нажмите на столбец, чтобы увидеть количество сообщений за день.</span>
+  <div class="accident-chart-bottom"><span id="accidentDayDetail" aria-live="polite" hidden></span>
     <a id="accidentOfficial" href="https://www.gov.il/he/pages/crash_map" target="_blank" rel="noopener noreferrer">Официальные данные ↗</a></div>
-  <p class="accident-chart-disclaimer" id="accidentChartDisclaimer">Подсчитаны публикации о ДТП из нашей ленты, а не все аварии Израиля. Один инцидент может упоминаться несколько раз; отсутствие публикаций не означает отсутствия ДТП.</p>
   <details class="accident-sources" id="accidentSources">
    <summary id="accidentSourcesTitle">Источники и полнота статистики</summary>
+   <p id="accidentChartHelp">Нажмите на столбец, чтобы увидеть количество сообщений за день.</p>
+   <p class="accident-chart-disclaimer" id="accidentChartDisclaimer">Подсчитаны публикации о ДТП из нашей ленты, а не все аварии Израиля. Один инцидент может упоминаться несколько раз; отсутствие публикаций не означает отсутствия ДТП.</p>
    <p id="accidentSourcesInfo">В ежедневном графике только уникальные публикации из ленты. Данные страховых компаний о выплатах не дают открытого ежедневного списка конкретных ДТП, поэтому их нельзя прибавлять без риска повторного счёта. Государственные данные публикуются отдельно.</p>
    <div class="accident-sources-links">
     <a href="https://www.cbs.gov.il/he/Pages/SubjectPublications.aspx?CbsSubject=%D7%AA%D7%90%D7%95%D7%A0%D7%95%D7%AA+%D7%93%D7%A8%D7%9B%D7%99%D7%9D+%D7%A2%D7%9D+%D7%A0%D7%A4%D7%92%D7%A2%D7%99%D7%9D" target="_blank" rel="noopener noreferrer" id="accidentCBS">ЦСБ Израиля ↗</a>
@@ -128,7 +129,7 @@
 <a href="./teoria.html" id="newsGame" aria-label="Игра · Теория вождения"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M7.5 8h9a4.5 4.5 0 0 1 4.3 3.3l1 5.2c.5 2.8-2.3 4.3-4.1 2.6L15 17H9l-2.7 2.1c-1.8 1.7-4.6.2-4.1-2.6l1-5.2A4.5 4.5 0 0 1 7.5 8Z"/><path d="M7 12v4M5 14h4"/><circle cx="16" cy="12.5" r=".8" fill="currentColor" stroke="none"/><circle cx="18" cy="14.5" r=".8" fill="currentColor" stroke="none"/></svg><span>Игра</span></a>
 </nav>
 <script src="./news-ui.js?v=20261118-news-game-v6" defer></script>
-<script src="./news-accidents.js?v=20261118-news-chart-v4" defer></script>
+<script src="./news-accidents.js?v=20261118-adaptive-chart-v5" defer></script>
 <script src="./road-annual.js?v=20261118-annual-v1" defer></script>
 <script src="./road-fines.js?v=20261118-fines-v1" defer></script>
 <script src="./nav-current.js?v=20261118-game-v3" defer></script><script src="./site-header.js?v=20261118-unified-v2" defer></script>
