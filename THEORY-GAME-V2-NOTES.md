@@ -4,7 +4,7 @@
 - `teoria.html`: approved scenic banner, 5 visual game modes, on-screen road-progress strip, a richer results screen, and a full-screen on-device progress dialog.
 - `teoria-v2.css`: responsive white / sky-blue NEOLINE styling for the lobby, quiz, results, Game Over and progress screens; respects reduced motion and RTL.
 - `teoria-v2.js`: presents **actual** user statistics, history (up to the 30 sessions available from the existing store), achievements, a seven-day chart with missing days left empty, a quiz-road progress animation, and earned-XP visual feedback.
-- `assets/teoria/game-hero.svg` and `mode-{city,signs,exam,mistakes,marathon}.svg`: original lightweight illustrative artwork. Official question images are unchanged; we do not invent or replace missing official diagrams.
+- `teoria-reference-art.css`: now uses lightweight cropped artwork from the **user-approved** game mockup for the hero and five mode tiles, rather than unrelated stock photos; it is embedded in CSS for offline use. The original generated SVGs remain in the repository as unused fallbacks. Official question images are unchanged; we do not invent or replace missing official diagrams.
 - `teoria.js`: publishes only presentation events; existing scoring and question handling are preserved.
 - `teoria-gifts.js` / `teoria-gifts.css`: informational preview; not a promotion or fulfilled prize.
 
@@ -26,3 +26,7 @@
 
 ## Backup
 `backup-before-approved-game-v2-20261118`
+
+## 2026-11-18 design correction
+The user specifically rejected the random stock images, particularly the unrelated blue Subaru and real-world STOP sign, as inconsistent with the approved concept. Those stock photo URLs have been removed from `teoria.html`. The hero and mode illustrations are now the actual decorative crops from the user's preferred 6-screen reference. These crops are a lower-resolution **visual approximation** to the chosen mockup, not original high-resolution generated assets. Main page mechanics and official government question images are not affected.
+Backup: `backup-before-ref-image-match-20261118`.
