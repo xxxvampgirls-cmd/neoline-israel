@@ -119,7 +119,7 @@
   const list=isRetail?retailPoints:points;
   let count=0;
   for(const point of list){
-   if(isRetail?point.id!==retailCurrent:(active!=="all"&&point.id!==active))continue;
+   if(isRetail?(retailCurrent!=="all"&&point.id!==retailCurrent):(active!=="all"&&point.id!==active))continue;
    const br=(isRetail?retailers:brands)[point.id]||brands.other,t=language();
    const name=point.title||(isRetail?br.title:(point.post?t.typePost:t.typeLocker));
    const provider=isRetail?br.title:(point.id==="other"?t.other:br.title);
@@ -197,7 +197,7 @@
   }finally{retailLoading=false;clearTimeout(deadline)}
  }
  function setRetailer(id){
-  if(!retailers[id])return;
+  if(id!=="all"&&!retailers[id])return;
   retailCurrent=id;
   if(retailLoaded)showPoints();
   else{
