@@ -1,0 +1,34 @@
+.hot-main{padding-top:22px;padding-bottom:40px}
+.hot-page-heading{margin:0 0 15px}
+.hot-eyebrow{font-weight:900;font-size:10px;letter-spacing:.14em;color:#187ab5}
+.hot-page-heading h1{font-size:clamp(26px,5vw,44px);line-height:1.15;margin:9px 0;color:#123c61;letter-spacing:-.04em}
+.hot-page-heading h1 span{color:#1689d1}
+.hot-page-heading p{color:#6f899f;font-size:13px;max-width:690px;line-height:1.55;margin:0}
+.hot-languages{margin:0 0 14px;justify-content:flex-start}
+.hot-traffic{margin-bottom:24px}
+.hot-articles{background:linear-gradient(125deg,#fff,#edf8ff);border:1px solid #d6e9f4;border-radius:18px;padding:17px;box-shadow:0 6px 25px #1d6ca711}
+.hot-articles-head{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:13px}
+.hot-articles-head h2{font-size:19px;color:#194a72;margin:0 0 6px}
+.hot-articles-head p{font-size:11px;color:#6e8ba2;line-height:1.55;margin:0;max-width:680px}
+.hot-articles-head a{display:inline-flex;padding:9px 12px;background:#e2f2fd;border:1px solid #bee2f5;border-radius:12px;color:#187aae;font-size:11px;font-weight:850;white-space:nowrap}
+.hot-articles-status{font-size:12px;color:#6d8ba3;line-height:1.5}
+.hot-articles-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:11px}
+.hot-report{display:flex;flex-direction:column;gap:6px;padding:12px 14px;background:white;border:1px solid #d8e9f5;border-radius:13px;color:#1e4d71;min-width:0;transition:box-shadow .2s,transform .2s}
+.hot-report:hover{box-shadow:0 8px 20px #225c941d;transform:translateY(-2px)}
+.hot-report-tag{font-size:10px;color:#1983be;font-weight:850}
+.hot-report-title{font-size:13px;font-weight:850;line-height:1.5;overflow-wrap:anywhere}
+.hot-report-meta{font-size:10px;color:#8097aa;margin-top:auto}
+.hot-report-link{font-size:11px;color:#157cb3;font-weight:850}
+.hot-footnote{margin:15px 2px;color:#8ba1b1;font-size:10px;line-height:1.6}
+@media(max-width:760px){
+ .hot-main{padding-top:17px}
+ .hot-page-heading h1{font-size:27px}
+ .hot-page-heading p{font-size:12px}
+ .hot-articles{padding:11px;border-radius:13px}
+ .hot-articles-head h2{font-size:16px}
+ .hot-articles-head a{padding:7px 8px;font-size:10px}
+ .hot-articles-grid{grid-template-columns:1fr;gap:8px}
+ .hot-report{padding:11px}
+ .hot-report-title{font-size:12px}
+}
+@media(prefers-reduced-motion:reduce){.hot-report{transition:none}}
