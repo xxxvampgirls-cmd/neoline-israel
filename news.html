@@ -5,11 +5,11 @@
 <title>Автоновости Израиля — NEOLINE Israel</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="./news-ui.css?v=20261118-chart-v1">
-<link rel="stylesheet" href="./news-accidents.css?v=20261118-daily-chart-v1">
+<link rel="stylesheet" href="./news-accidents.css?v=20261118-news-chart-v2">
 <link rel="stylesheet" href="./nav-current.css?v=20261118-active-nav-v1"></head><body>
 <header class="news-header"><div class="shell news-header-inner">
   <a class="news-logo" href="./" aria-label="NEOLINE Israel — главная"><img src="assets/neoline-clean.svg?v=20261116-compact" alt="NEOLINE" width="501" height="108"></a>
-  <nav class="news-top-links"><a href="./#catalog" id="returnCatalog">← Каталог</a><a class="current" href="./news.html" aria-current="page">◫ Новости</a><a href="./teoria.html" id="newsTheoryLink">🎮 Теория</a></nav>
+  <div class="news-language-bar" id="newsLanguages" role="group" aria-label="Язык новостей / News language"><button type="button" data-news-lang="ru" class="active">RU</button><button type="button" data-news-lang="he" lang="he">עברית</button><button type="button" data-news-lang="en">EN</button><button type="button" data-news-lang="ar" lang="ar">عربي</button></div>
 </div></header>
 <main class="shell">
 <section class="news-cover" aria-label="Новости и главные события">
@@ -20,19 +20,6 @@
   <div class="news-fresh-row" hidden aria-hidden="true"><span class="news-fresh-pill" id="newsRetention">Новости 30 дней · законы 6 месяцев</span><span class="news-updated" id="newsUpdated" aria-live="polite">Загружаем свежие публикации…</span></div>
 
  </div>
- <div class="news-feature-carousel" id="newsFeatureCarousel" role="region" aria-roledescription="carousel" aria-label="Последние новости" tabindex="0">
-  <div id="newsFeatureSlide" class="news-feature-slide" aria-live="off">
-   <div class="news-feature-loading" id="newsFeatureLoading">Загружаем последние новости…</div>
-  </div>
-  <div class="news-feature-controls" id="newsFeatureControls" hidden>
-   <button type="button" class="news-feature-arrow" id="newsFeaturePrev" aria-label="Предыдущая новость">‹</button>
-   <div class="news-feature-dots" id="newsFeatureDots" role="group" aria-label="Выбор новости"></div>
-   <span class="news-feature-counter" id="newsFeatureCounter" aria-live="off">01 / 10</span>
-   <button type="button" class="news-feature-arrow" id="newsFeatureNext" aria-label="Следующая новость">›</button>
-  </div>
- </div>
-  <div class="news-language-bar" id="newsLanguages" role="group" aria-label="Язык новостей / News language"><button type="button" data-news-lang="ru" class="active">RU</button><button type="button" data-news-lang="he" lang="he">עברית</button><button type="button" data-news-lang="en">EN</button><button type="button" data-news-lang="ar" lang="ar">عربي</button></div>
-</section>
 <section class="accident-strip" id="accidentStrip" aria-labelledby="accidentStripTitle">
   <div class="accident-strip-head">
    <div class="accident-strip-ident"><span class="accident-strip-symbol" aria-hidden="true">▥</span>
@@ -47,6 +34,19 @@
     <a id="accidentOfficial" href="https://www.gov.il/he/pages/crash_map" target="_blank" rel="noopener noreferrer">Официальные данные ↗</a></div>
   <p class="accident-chart-disclaimer" id="accidentChartDisclaimer">Подсчитаны публикации о ДТП из нашей ленты, а не все аварии Израиля. Один инцидент может упоминаться несколько раз; отсутствие публикаций не означает отсутствия ДТП.</p>
  </section>
+ <div class="news-feature-carousel" id="newsFeatureCarousel" role="region" aria-roledescription="carousel" aria-label="Последние новости" tabindex="0">
+  <div id="newsFeatureSlide" class="news-feature-slide" aria-live="off">
+   <div class="news-feature-loading" id="newsFeatureLoading">Загружаем последние новости…</div>
+  </div>
+  <div class="news-feature-controls" id="newsFeatureControls" hidden>
+   <button type="button" class="news-feature-arrow" id="newsFeaturePrev" aria-label="Предыдущая новость">‹</button>
+   <div class="news-feature-dots" id="newsFeatureDots" role="group" aria-label="Выбор новости" hidden></div>
+   <span class="news-feature-counter" id="newsFeatureCounter" aria-live="off">01 / 10</span>
+   <button type="button" class="news-feature-arrow" id="newsFeatureNext" aria-label="Следующая новость">›</button>
+  </div>
+ </div>
+  
+</section>
 <div class="news-searchbar"><label class="news-search"><input id="newsSearch" type="search" aria-label="Поиск по новостям" placeholder="Найти новость…" autocomplete="off"></label></div>
 <div class="news-categories" id="newsCategories" aria-label="Темы новостей"></div>
 <div id="newsGrid" class="news-grid" aria-live="polite"></div>
