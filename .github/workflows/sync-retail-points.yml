@@ -1,0 +1,53 @@
+name: Update candidate retailers map (verified OpenStreetMap shops)
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '57 2 * * *' # Israel daily retail map snapshot
+  push:
+    branches: [main]
+    paths:
+      - 'scripts/sync_retail_points.py'
+      - '.github/workflows/sync-retail-points.yml'
+permissions:
+  contents: write
+concurrency:
+  group: israel-retail-map-daily
+  cancel-in-progress: false
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    timeout-minutes: 14
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          persist-credentials: true
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install data client
+        run: python -m pip install --disable-pip-version-check 'requests>=2.31,<3'
+      - name: Collect existing real retail shop locations
+        run: python scripts/sync_retail_points.py
+      - name: Verify retailer coordinates and source
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          p=json.loads(Path('assets/retail/points.json').read_text(encoding='utf-8'))
+          assert p['version']==1 and p['count']==len(p['points'])>=8
+          assert all(29.3<=x['lat']<=33.5 and 34.1<=x['lon']<=36.1 for x in p['points'])
+          assert len({x['key'] for x in p['points']})==len(p['points'])
+          print('Verified candidate-retailer map points:',len(p['points']))
+          PY
+      - name: Save current retail locations to Pages
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add assets/retail/points.json
+          if git diff --cached --quiet; then
+            exit 0
+          fi
+          git commit -m "Refresh OSM retailer branch point snapshot"
+          git pull --rebase origin main
+          git push origin HEAD:main
