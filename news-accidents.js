@@ -5,10 +5,10 @@
 const $=id=>document.getElementById(id);
 if(!$("accidentChart"))return;
 const copy={
- ru:{title:"ДТП · публикации по дням",hot:"Горячие события ↗",wait:"Проверяем новости за 30 дней…",total:n=>"За 30 дней: "+n+" публикаций о ДТП",day:(d,n)=>d+": "+n+" публикаций о ДТП",select:"Нажмите столбец, чтобы увидеть число сообщений за день.",official:"Официальная статистика ↗",disclaimer:"График показывает публикации о ДТП в нашей ленте, НЕ все аварии Израиля. Несколько сообщений могут относиться к одной аварии. Отсутствие сообщений не означает отсутствие ДТП.",updated:" · обновлено "},
- he:{title:"תאונות · ידיעות לפי יום",hot:"אירועים חמים ↗",wait:"בודקים חדשות ל־30 ימים…",total:n=>"30 ימים: "+n+" ידיעות על תאונות",day:(d,n)=>d+": "+n+" ידיעות על תאונות",select:"לחצו על עמודה להצגת מספר הידיעות ביום.",official:"נתונים רשמיים ↗",disclaimer:"הגרף מציג ידיעות חדשותיות על תאונות, ולא את כל התאונות בישראל. כמה ידיעות עשויות לתאר תאונה אחת. אפס ידיעות אינו אומר אפס תאונות.",updated:" · עודכן "},
- en:{title:"Crashes · daily news reports",hot:"Breaking road events ↗",wait:"Checking 30 days of news…",total:n=>"30 days: "+n+" crash news reports",day:(d,n)=>d+": "+n+" news reports",select:"Tap a bar to see that day's news count.",official:"Official statistics ↗",disclaimer:"This chart counts articles tagged as crashes, NOT actual traffic crashes across Israel. One crash may appear in multiple stories. No stories does not mean no crashes.",updated:" · updated "},
- ar:{title:"حوادث الطرق · التقارير اليومية",hot:"الأحداث العاجلة ↗",wait:"نراجع أخبار آخر 30 يوماً…",total:n=>"30 يوماً: "+n+" تقريراً عن الحوادث",day:(d,n)=>d+": "+n+" تقريراً عن الحوادث",select:"اضغط على عمود لمعرفة عدد الأخبار في ذلك اليوم.",official:"إحصاءات رسمية ↗",disclaimer:"يحسب الرسم المنشورات الإخبارية عن الحوادث، وليس عدد الحوادث الفعلي في إسرائيل. قد يتكرر خبر عن الحادث ذاته؛ عدم وجود أخبار لا يعني عدم وجود حوادث.",updated:" · تحديث "}
+ ru:{title:"ДТП · публикации по дням",hot:"Горячие события ↗",wait:"Проверяем новости за 30 дней…",error:"Данные за месяц временно недоступны",total:n=>"За 30 дней: "+n+" публикаций о ДТП",day:(d,n)=>d+": "+n+" публикаций о ДТП",select:"Нажмите столбец, чтобы увидеть число сообщений за день.",official:"Официальная статистика ↗",disclaimer:"График показывает публикации о ДТП в нашей ленте, НЕ все аварии Израиля. Несколько сообщений могут относиться к одной аварии. Отсутствие сообщений не означает отсутствие ДТП.",updated:" · обновлено "},
+ he:{title:"תאונות · ידיעות לפי יום",hot:"אירועים חמים ↗",wait:"בודקים חדשות ל־30 ימים…",error:"נתוני החודש אינם זמינים כעת",total:n=>"30 ימים: "+n+" ידיעות על תאונות",day:(d,n)=>d+": "+n+" ידיעות על תאונות",select:"לחצו על עמודה להצגת מספר הידיעות ביום.",official:"נתונים רשמיים ↗",disclaimer:"הגרף מציג ידיעות חדשותיות על תאונות, ולא את כל התאונות בישראל. כמה ידיעות עשויות לתאר תאונה אחת. אפס ידיעות אינו אומר אפס תאונות.",updated:" · עודכן "},
+ en:{title:"Crashes · daily news reports",hot:"Breaking road events ↗",wait:"Checking 30 days of news…",error:"Monthly feed temporarily unavailable",total:n=>"30 days: "+n+" crash news reports",day:(d,n)=>d+": "+n+" news reports",select:"Tap a bar to see that day's news count.",official:"Official statistics ↗",disclaimer:"This chart counts articles tagged as crashes, NOT actual traffic crashes across Israel. One crash may appear in multiple stories. No stories does not mean no crashes.",updated:" · updated "},
+ ar:{title:"حوادث الطرق · التقارير اليومية",hot:"الأحداث العاجلة ↗",wait:"نراجع أخبار آخر 30 يوماً…",error:"بيانات الشهر غير متاحة حالياً",total:n=>"30 يوماً: "+n+" تقريراً عن الحوادث",day:(d,n)=>d+": "+n+" تقريراً عن الحوادث",select:"اضغط على عمود لمعرفة عدد الأخبار في ذلك اليوم.",official:"إحصاءات رسمية ↗",disclaimer:"يحسب الرسم المنشورات الإخبارية عن الحوادث، وليس عدد الحوادث الفعلي في إسرائيل. قد يتكرر خبر عن الحادث ذاته؛ عدم وجود أخبار لا يعني عدم وجود حوادث.",updated:" · تحديث "}
 };
 const locale={ru:"ru-RU",he:"he-IL",en:"en-GB",ar:"ar"};
 const words=()=>copy[document.documentElement.lang]||copy.ru;
@@ -18,11 +18,11 @@ const dateKey=d=>{
  return x.year+"-"+x.month+"-"+x.day;
 };
 const display=(d)=>new Intl.DateTimeFormat(locale[document.documentElement.lang]||"ru-RU",{timeZone:"UTC",day:"numeric",month:"short"}).format(d);
-let articles=null,updated="",selected=null,dayShown="";
+let articles=null,updated="",selected=null,dayShown="",unavailable=false;
 function draw(){
  const c=$("accidentChart"),t=words();
  if(!articles){
-  $("accidentStripStatus").textContent=t.wait;
+  $("accidentStripStatus").textContent=unavailable?t.error:t.wait;
   $("accidentDayDetail").textContent=t.select;
   return;
  }
@@ -80,9 +80,10 @@ function relabel(){
 }
 window.addEventListener("neoline:news-archive",e=>{
  if(!Array.isArray(e.detail?.items))return;
- articles=e.detail.items;updated=e.detail.updated||"";draw();
+ articles=e.detail.items;updated=e.detail.updated||"";unavailable=false;draw();
 });
 window.addEventListener("neoline:news-language",relabel);
+window.addEventListener("neoline:news-archive-unavailable",()=>{if(!articles){unavailable=true;draw()}});
 document.addEventListener("visibilitychange",()=>{if(!document.hidden&&dayShown!==dateKey(new Date()))draw()});
 setInterval(()=>{if(!document.hidden&&dayShown!==dateKey(new Date()))draw()},600000);
 relabel();
