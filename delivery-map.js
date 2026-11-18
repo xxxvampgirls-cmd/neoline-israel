@@ -23,6 +23,8 @@
  const retailSource="./assets/retail/points.json";
  const retailCacheKey="neoline-real-stores-v1";
  let retailPoints=[],retailLoaded=false,retailLoading=false,retailCurrent=null;
+ let viewMode="delivery"; // legacy screen until compact filters initialize
+ const courierIds=new Set(["cheetah","zigzag","easypoint","cargo","dhl","fedex","epost","pickup"]);
  function emitStats(){
   window.dispatchEvent(new CustomEvent("neoline:map-stats",{
    detail:{pickup:points,retail:retailPoints,retailLoaded}
@@ -104,46 +106,66 @@
   }
   return items.slice(0,5000);
  }
- function markerIcon(id){
-  const brand=retailCurrent?(retailers[id]||brands.other):(brands[id]||brands.other);
+ function markerIcon(id,isShop=false){
+  const brand=isShop?(retailers[id]||brands.other):(brands[id]||brands.other);
   return L.divIcon({
    className:"pickup-pin"+(id==="other"?" pickup-pin--other":""),
    html:'<span style="--pin-color:'+brand.color+'"><span>'+html(brand.mark)+'</span></span>',
    iconSize:[36,37],iconAnchor:[17,36],popupAnchor:[0,-31]
   });
  }
+ function includePickup(point){
+  if(active!=="all"&&viewMode==="delivery")return point.id===active;
+  const kind=point.kind||(point.post?"post":"unknown");
+  switch(viewMode){
+   case "all":case "delivery":return active==="all"||point.id===active;
+   case "lockers":return kind==="locker";
+   case "pickup":return kind==="pickup"||kind==="unknown";
+   case "post":return kind==="post";
+   case "couriers":return courierIds.has(point.id);
+   default:return false;
+  }
+ }
  function showPoints(){
   if(!map||!group)return;
   group.clearLayers();
-  const isRetail=retailCurrent!==null;
-  const list=isRetail?retailPoints:points;
-  let count=0;
-  for(const point of list){
-   if(isRetail?(retailCurrent!=="all"&&point.id!==retailCurrent):(active!=="all"&&point.id!==active))continue;
-   const br=(isRetail?retailers:brands)[point.id]||brands.other,t=language();
-   const name=point.title||(isRetail?br.title:(point.post?t.typePost:t.typeLocker));
-   const provider=isRetail?br.title:(point.id==="other"?t.other:br.title);
+  const list=[];
+  if(viewMode!=="stores")for(const p of points)if(includePickup(p))list.push({point:p,shop:false});
+  if(viewMode==="all"||viewMode==="stores")for(const p of retailPoints){
+   if(viewMode==="stores"&&retailCurrent&&retailCurrent!=="all"&&p.id!==retailCurrent)continue;
+   list.push({point:p,shop:true});
+  }
+  const t=language();
+  for(const {point,shop} of list){
+   const br=(shop?retailers:brands)[point.id]||brands.other;
+   const name=point.title||(shop?br.title:(point.post?t.typePost:t.typeLocker));
+   const operator=shop?br.title:(point.id==="other"?t.other:br.title);
    const mapsUrl="https://www.google.com/maps/dir/?api=1&destination="+encodeURIComponent(point.lat+","+point.lon);
    const popup='<div class="pickup-popup"><strong>'+html(name)+'</strong>'+
-    '<div class="pickup-popup-type">'+html(provider)+'</div>'+
+    '<div class="pickup-popup-type">'+html(operator)+'</div>'+
     '<div class="pickup-popup-address">'+html(point.address||t.noAddress)+'</div>'+
     '<a href="'+mapsUrl+'" target="_blank" rel="noopener noreferrer">'+html(t.directions)+'</a></div>';
-   const mark=L.marker([point.lat,point.lon],{icon:markerIcon(point.id),title:name});
-   mark.bindPopup(popup,{maxWidth:260});group.addLayer(mark);count++;
+   const mark=L.marker([point.lat,point.lon],{icon:markerIcon(point.id,shop),title:name});
+   mark.bindPopup(popup,{maxWidth:260});group.addLayer(mark);
   }
-  const dataReady=isRetail?retailLoaded:loaded;
-  if(dataReady&&count===0){
-   showFallback(true);
-   return;
-  }
-  if(dataReady){
+  const waiting=(!loaded&&viewMode!=="stores")||
+    (!retailLoaded&&(viewMode==="all"||viewMode==="stores"));
+  if(list.length){
    hideFallback();
-   status(language().done+count+" · "+language().partial,"ready");
+   status(t.done+list.length+" · "+t.partial,"ready");
+  }else if(waiting){
+   hideFallback();
+   status(t.loading);
   }else{
-   // No old results can remain visible after switching to a retailer layer.
-   status(language().loading);
+   showFallback(true);
   }
   emitStats();
+ }
+ function setViewMode(mode){
+  if(!["all","delivery","stores","lockers","pickup","post","couriers"].includes(mode))return;
+  viewMode=mode;active="all";retailCurrent=null;
+  if((mode==="all"||mode==="stores")&&!retailLoaded)loadRetail();
+  showPoints();
  }
  function fitNation(){
   if(!map)return;
@@ -153,6 +175,7 @@
  function setProvider(id){
   active=id;
   retailCurrent=null;
+  viewMode="delivery";
   const reset=el("resetCountry");
   if(reset)reset.textContent="🇮🇱 "+language().country;
   if(loaded)showPoints();
@@ -172,8 +195,8 @@
   const cache=retailCacheRead();
   if(cache){
    retailPoints=cache;retailLoaded=true;retailLoading=false;
-   if(retailCurrent)showPoints();
-   emitStats();return;
+   if(viewMode==="stores"||viewMode==="all")showPoints();
+   else emitStats();return;
   }
   const controller=new AbortController(),deadline=setTimeout(()=>controller.abort(),7500);
   try{
@@ -189,8 +212,8 @@
    if(retailPoints.length<8)throw Error("No verified retailer points");
    retailLoaded=true;
    try{localStorage.setItem(retailCacheKey,JSON.stringify({at:Date.now(),points:retailPoints}))}catch(e){}
-   if(retailCurrent)showPoints();
-   emitStats();
+   if(viewMode==="stores"||viewMode==="all")showPoints();
+   else emitStats();
   }catch(e){
    console.warn("Retail OSM snapshot unavailable:",e.message);
    if(retailCurrent)showFallback();
@@ -199,6 +222,7 @@
  function setRetailer(id){
   if(id!=="all"&&!retailers[id])return;
   retailCurrent=id;
+  viewMode="stores";
   if(retailLoaded)showPoints();
   else{
    group?.clearLayers();
@@ -292,7 +316,7 @@
   if(loading)return;
   loading=true;
   const cached=cacheRead();
-  if(cached){points=cached;loaded=true;showPoints();emitStats();loading=false;return;}
+  if(cached){points=cached;loaded=true;showPoints();loading=false;return;}
   // Existing page should never stay at "Loading..." for 70 seconds.
   // The static verified snapshot is built daily by GitHub, outside browsers.
   const controller=new AbortController();
@@ -309,7 +333,7 @@
    const valid=data.points.filter(p=>Number.isFinite(p.lat)&&Number.isFinite(p.lon)&&
      p.lat>=29.3&&p.lat<=33.5&&p.lon>=34.1&&p.lon<=36.1);
    if(valid.length<25)throw Error("Invalid location data");
-   points=valid;loaded=true;cacheSave(points);showPoints();emitStats();
+   points=valid;loaded=true;cacheSave(points);showPoints();
   }catch(e){
    console.warn("Countrywide OSM archive unavailable:",e.message);
    showFallback();
@@ -357,6 +381,6 @@
   fitNation();
   if(fallbackVisible)showFallback();
  }
- window.NeolineMap={setProvider,setRetailer,searchCity,resetCountry,setFallback,subtitle,hint,retailStats,pickupStats,available:()=>ready};
+ window.NeolineMap={setProvider,setRetailer,setViewMode,searchCity,resetCountry,setFallback,subtitle,hint,retailStats,pickupStats,available:()=>ready};
  init();
 })();
