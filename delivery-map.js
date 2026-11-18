@@ -10,6 +10,25 @@
     slow mass Overpass requests from every phone / browser session. */
  const snapshotURL="./assets/pickup/points.json";
  const cacheKey="neoline-pickup-osm-v4",cacheMs=24*60*60*1000;
+ const retailers={
+  ksp:{title:"KSP",mark:"K",color:"#d44a86"},
+  ivory:{title:"Ivory",mark:"I",color:"#b942a8"},
+  bug:{title:"BUG",mark:"B",color:"#b63b88"},
+  autodepot:{title:"AutoDepot",mark:"A",color:"#b43879"},
+  ace:{title:"ACE",mark:"A",color:"#9355a8"},
+  payngo:{title:"מחסני חשמל",mark:"M",color:"#ca5591"},
+  shekem:{title:"Shekem Electric",mark:"S",color:"#b56cb5"},
+  alm:{title:"ALM",mark:"ALM",color:"#ae5c9f"}
+ };
+ const retailSource="./assets/retail/points.json";
+ const retailCacheKey="neoline-real-stores-v1";
+ let retailPoints=[],retailLoaded=false,retailLoading=false,retailCurrent=null;
+ function emitStats(){
+  window.dispatchEvent(new CustomEvent("neoline:map-stats",{
+   detail:{pickup:points,retail:retailPoints,retailLoaded}
+  }));
+ }
+
  const brands={
   boxit:{title:"BOXIT",mark:"B",color:"#087ebf",rx:/box\s*[- ]?\s*it|בוקסיט|בוקס.?איט/i},
   done:{title:"DONE",mark:"D",color:"#0084cd",rx:/\bdone\b|דאן|דון לוקרים/i},
@@ -86,7 +105,7 @@
   return items.slice(0,5000);
  }
  function markerIcon(id){
-  const brand=brands[id]||brands.other;
+  const brand=retailCurrent?(retailers[id]||brands.other):(brands[id]||brands.other);
   return L.divIcon({
    className:"pickup-pin"+(id==="other"?" pickup-pin--other":""),
    html:'<span style="--pin-color:'+brand.color+'"><span>'+html(brand.mark)+'</span></span>',
@@ -96,12 +115,14 @@
  function showPoints(){
   if(!map||!group)return;
   group.clearLayers();
+  const isRetail=retailCurrent!==null;
+  const list=isRetail?retailPoints:points;
   let count=0;
-  for(const point of points){
-   if(active!=="all"&&point.id!==active)continue;
-   const br=brands[point.id]||brands.other,t=language();
-   const name=point.title||(point.post?t.typePost:t.typeLocker);
-   const provider=point.id==="other"?t.other:br.title;
+  for(const point of list){
+   if(isRetail?point.id!==retailCurrent:(active!=="all"&&point.id!==active))continue;
+   const br=(isRetail?retailers:brands)[point.id]||brands.other,t=language();
+   const name=point.title||(isRetail?br.title:(point.post?t.typePost:t.typeLocker));
+   const provider=isRetail?br.title:(point.id==="other"?t.other:br.title);
    const mapsUrl="https://www.google.com/maps/dir/?api=1&destination="+encodeURIComponent(point.lat+","+point.lon);
    const popup='<div class="pickup-popup"><strong>'+html(name)+'</strong>'+
     '<div class="pickup-popup-type">'+html(provider)+'</div>'+
@@ -110,16 +131,19 @@
    const mark=L.marker([point.lat,point.lon],{icon:markerIcon(point.id),title:name});
    mark.bindPopup(popup,{maxWidth:260});group.addLayer(mark);count++;
   }
-  // Missing OSM brand tags must not produce a blank empty map. Use an
-  // explicitly marked Google search as fallback for that operator.
-  if(loaded&&count===0){
+  const dataReady=isRetail?retailLoaded:loaded;
+  if(dataReady&&count===0){
    showFallback(true);
    return;
   }
-  if(loaded){
+  if(dataReady){
    hideFallback();
    status(language().done+count+" · "+language().partial,"ready");
+  }else{
+   // No old results can remain visible after switching to a retailer layer.
+   status(language().loading);
   }
+  emitStats();
  }
  function fitNation(){
   if(!map)return;
@@ -128,10 +152,70 @@
  }
  function setProvider(id){
   active=id;
+  retailCurrent=null;
   const reset=el("resetCountry");
   if(reset)reset.textContent="🇮🇱 "+language().country;
   if(loaded)showPoints();
-  else if(fallbackVisible)showFallback(true);
+  else if(fallbackVisible)showFallback();
+ }
+ function retailCacheRead(){
+  try{
+   const saved=JSON.parse(localStorage.getItem(retailCacheKey)||"null");
+   if(saved&&Date.now()-saved.at<cacheMs&&Array.isArray(saved.points)&&saved.points.length>=8)
+    return saved.points;
+  }catch(e){}
+  return null;
+ }
+ async function loadRetail(){
+  if(retailLoading||retailLoaded)return;
+  retailLoading=true;
+  const cache=retailCacheRead();
+  if(cache){
+   retailPoints=cache;retailLoaded=true;retailLoading=false;
+   if(retailCurrent)showPoints();
+   emitStats();return;
+  }
+  const controller=new AbortController(),deadline=setTimeout(()=>controller.abort(),7500);
+  try{
+   const response=await fetch(retailSource+"?v="+Math.floor(Date.now()/86400000),{
+    cache:"no-store",signal:controller.signal
+   });
+   if(!response.ok)throw Error("Retail snapshot HTTP "+response.status);
+   const data=await response.json();
+   if(data.version!==1||!Array.isArray(data.points)||data.points.length<8)
+    throw Error("Unverified retail snapshot");
+   retailPoints=data.points.filter(p=>retailers[p.id]&&Number.isFinite(p.lat)&&Number.isFinite(p.lon)&&
+    p.lat>=29.3&&p.lat<=33.5&&p.lon>=34.1&&p.lon<=36.1);
+   if(retailPoints.length<8)throw Error("No verified retailer points");
+   retailLoaded=true;
+   try{localStorage.setItem(retailCacheKey,JSON.stringify({at:Date.now(),points:retailPoints}))}catch(e){}
+   if(retailCurrent)showPoints();
+   emitStats();
+  }catch(e){
+   console.warn("Retail OSM snapshot unavailable:",e.message);
+   if(retailCurrent)showFallback();
+  }finally{retailLoading=false;clearTimeout(deadline)}
+ }
+ function setRetailer(id){
+  if(!retailers[id])return;
+  retailCurrent=id;
+  if(retailLoaded)showPoints();
+  else{
+   group?.clearLayers();
+   status(language().loading);
+   if(fallbackVisible)showFallback();
+   loadRetail();
+  }
+ }
+ function retailStats(){
+  const counts={};
+  retailPoints.forEach(p=>counts[p.id]=(counts[p.id]||0)+1);
+  return {loaded:retailLoaded,count:retailPoints.length,byRetailer:counts};
+ }
+ function pickupStats(){
+  const counts={};
+  points.forEach(p=>counts[p.id]=(counts[p.id]||0)+1);
+  return {loaded,count:points.length,byProvider:counts};
  }
  function init(){
   if(!window.L){
@@ -208,7 +292,7 @@
   if(loading)return;
   loading=true;
   const cached=cacheRead();
-  if(cached){points=cached;loaded=true;showPoints();loading=false;return;}
+  if(cached){points=cached;loaded=true;showPoints();emitStats();loading=false;return;}
   // Existing page should never stay at "Loading..." for 70 seconds.
   // The static verified snapshot is built daily by GitHub, outside browsers.
   const controller=new AbortController();
@@ -225,7 +309,7 @@
    const valid=data.points.filter(p=>Number.isFinite(p.lat)&&Number.isFinite(p.lon)&&
      p.lat>=29.3&&p.lat<=33.5&&p.lon>=34.1&&p.lon<=36.1);
    if(valid.length<25)throw Error("Invalid location data");
-   points=valid;loaded=true;cacheSave(points);showPoints();
+   points=valid;loaded=true;cacheSave(points);showPoints();emitStats();
   }catch(e){
    console.warn("Countrywide OSM archive unavailable:",e.message);
    showFallback();
@@ -273,6 +357,6 @@
   fitNation();
   if(fallbackVisible)showFallback();
  }
- window.NeolineMap={setProvider,searchCity,resetCountry,setFallback,subtitle,hint,available:()=>ready};
+ window.NeolineMap={setProvider,setRetailer,searchCity,resetCountry,setFallback,subtitle,hint,retailStats,pickupStats,available:()=>ready};
  init();
 })();
