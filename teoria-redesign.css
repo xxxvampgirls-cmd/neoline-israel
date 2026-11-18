@@ -209,6 +209,18 @@ main.shell{max-width:1120px}
 }
 #gameLobby .source-links{gap:8px 17px}
 #gameLobby .source-links a{font-size:10px;font-weight:800;color:#177db4;text-decoration:underline;text-underline-offset:2px}
+/* Small one-time reveal on entering the mode menu. No continuous tile motion. */
+@keyframes theoryTileArrive{
+ from{opacity:.45;transform:translateY(12px)}
+ to{opacity:1;transform:translateY(0)}
+}
+#gameLobby:not([hidden]) .route-card{
+ animation:theoryTileArrive .44s cubic-bezier(.18,.75,.22,1) backwards;
+}
+#gameLobby .route-card:nth-child(2){animation-delay:.055s}
+#gameLobby .route-card:nth-child(3){animation-delay:.10s}
+#gameLobby .route-card:nth-child(4){animation-delay:.15s}
+#gameLobby .route-card:nth-child(5){animation-delay:.20s}
 /* THE QUESTION SCREEN — road dashboard, not a text form */
 #gamePlaying{
  width:min(890px,100%);max-width:890px;
@@ -488,5 +500,6 @@ html[dir="rtl"] #gameLobby .route-card::after{right:auto;left:10px}
 html[dir="rtl"] #gamePlaying .question-card::before{left:auto;right:0}
 @media(prefers-reduced-motion:reduce){
  #gameLobby .route-card,#gamePlaying .question-card::before{transition:none!important}
+ #gameLobby:not([hidden]) .route-card{animation:none!important}
  #gameResult .result-badge{animation:none!important}
 }
