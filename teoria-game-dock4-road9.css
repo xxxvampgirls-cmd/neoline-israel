@@ -265,3 +265,126 @@ body.game-over-open .theory-game-dock{display:none!important}
 @media(prefers-reduced-motion:reduce){
  .road9-car,.road9-progress-fill,.road9-checkpoint{transition:none!important}
 }
+
+
+/* NEOLINE fixed combined HUD — Nov 19
+   Keep the back button and scenic progress road in ONE compact top bar.
+   Fixed positioning is intentional: questions alone scroll underneath it. */
+body.theory-in-session #gamePlaying{
+ padding-top:77px!important;
+}
+body.theory-in-session #gamePlaying .quiz-hud{
+ position:fixed!important;
+ z-index:110;
+ top:max(7px,env(safe-area-inset-top,0px));
+ left:50%;right:auto;
+ transform:translateX(-50%);
+ width:min(870px,calc(100vw - 20px));
+ height:58px;min-height:58px!important;
+ display:grid!important;
+ grid-template-columns:48px minmax(0,1fr) auto!important;
+ align-items:center!important;gap:8px!important;
+ padding:5px 8px!important;
+ margin:0!important;
+ border:1px solid #afd8ed;
+ border-radius:17px;
+ background:linear-gradient(115deg,#fff 0%,#e8f8ff 64%,#dbf0ff 100%);
+ box-shadow:0 5px 19px #0a5a8a39,0 0 0 2px #ffffff91,inset 0 1px #fff;
+ isolation:isolate;
+}
+body.theory-in-session #gamePlaying .hud-back{
+ grid-column:1!important;grid-row:1!important;
+ justify-self:center;align-self:center;
+ width:44px;height:45px;min-width:44px;min-height:44px;
+ margin:0;padding:5px!important;
+ border-radius:12px;
+}
+body.theory-in-session #gamePlaying .quiz-hud .game-quiz-route.road9{
+ grid-column:2!important;grid-row:1!important;
+ justify-self:stretch;align-self:center;
+ position:relative;
+ width:100%;max-width:none;min-width:0;
+ height:44px!important;min-height:0!important;
+ margin:0!important;padding:0!important;
+ border-radius:11px;
+ border:1px solid #bfe7f7;
+ background:linear-gradient(115deg,#e7f9ff,#c8efff 56%,#e8faff);
+ box-shadow:inset 0 1px #fff;
+}
+body.theory-in-session #gamePlaying .quiz-hud .road9-landscape{opacity:.48}
+body.theory-in-session #gamePlaying .quiz-hud .road9-track{
+ top:64%;left:23px;right:24px;height:10px;
+}
+body.theory-in-session #gamePlaying .quiz-hud .road9-track::before{inset:2px 5px}
+body.theory-in-session #gamePlaying .quiz-hud .road9-checkpoint{
+ width:12px;height:12px;border-width:2px;
+}
+body.theory-in-session #gamePlaying .quiz-hud .road9-car{
+ width:36px;height:25px;
+}
+body.theory-in-session #gamePlaying .quiz-hud .road9-finish{
+ width:24px;height:32px;right:-12px;bottom:-3px;
+}
+body.theory-in-session #gamePlaying .hud-info{
+ grid-column:3!important;grid-row:1!important;
+ justify-self:end!important;align-self:center;
+ width:auto!important;max-width:136px;
+ min-width:0;
+}
+body.theory-in-session #gamePlaying .mode-pill{
+ max-width:132px;
+ overflow:hidden;text-overflow:ellipsis;white-space:nowrap;
+}
+html[dir="rtl"] body.theory-in-session #gamePlaying .quiz-hud .road9-track{
+ left:24px;right:23px;
+}
+html[dir="rtl"] body.theory-in-session #gamePlaying .quiz-hud .road9-finish{
+ left:-12px;right:auto;
+}
+@media(max-width:720px){
+ body.theory-in-session #gamePlaying{padding-top:68px!important}
+ body.theory-in-session #gamePlaying .quiz-hud{
+  width:calc(100vw - 16px);
+  height:53px;min-height:53px!important;
+  grid-template-columns:41px minmax(0,1fr) auto!important;
+  gap:5px!important;padding:4px 6px!important;
+  border-radius:15px;
+ }
+ body.theory-in-session #gamePlaying .hud-back{
+  width:39px;height:41px;min-width:39px;min-height:41px;
+ }
+ body.theory-in-session #gamePlaying .hud-back #exitLabel{display:none!important}
+ body.theory-in-session #gamePlaying .quiz-hud .game-quiz-route.road9{
+  height:41px!important;margin:0!important;
+ }
+ body.theory-in-session #gamePlaying .quiz-hud .road9-track{
+  left:20px;right:21px;top:65%;height:9px;
+ }
+ body.theory-in-session #gamePlaying .quiz-hud .road9-car{width:32px;height:23px}
+ body.theory-in-session #gamePlaying .quiz-hud .road9-finish{
+  width:22px;height:30px;right:-11px;
+ }
+ body.theory-in-session #gamePlaying .quiz-hud .road9-checkpoint{
+  width:11px;height:11px;border-width:2px;
+ }
+ body.theory-in-session #gamePlaying .mode-pill{display:none!important}
+ body.theory-in-session #gamePlaying .hud-info:has(#timerBox[hidden]){display:none!important}
+ body.theory-in-session #gamePlaying .hud-info{max-width:63px}
+ body.theory-in-session #gamePlaying #timerBox:not([hidden]){
+  font-size:10px!important;padding:4px!important;
+ }
+ html[dir="rtl"] body.theory-in-session #gamePlaying .quiz-hud .road9-track{
+  left:21px;right:20px;
+ }
+ html[dir="rtl"] body.theory-in-session #gamePlaying .quiz-hud .road9-finish{
+  left:-11px;right:auto;
+ }
+}
+@media(max-width:360px){
+ body.theory-in-session #gamePlaying .quiz-hud{
+  grid-template-columns:39px minmax(0,1fr) auto!important;gap:3px!important;
+ }
+ body.theory-in-session #gamePlaying .quiz-hud .road9-checkpoint{
+  width:10px;height:10px;
+ }
+}
