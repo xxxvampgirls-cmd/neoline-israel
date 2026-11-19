@@ -15,6 +15,7 @@
 <link rel="stylesheet" href="./teoria-medal-ecg.css?v=20261119-medal-only-v2">
 <link rel="stylesheet" href="./teoria-licence-dialog.css?v=20261119-custom-v1">
 <link rel="stylesheet" href="./teoria-sign-studio.css?v=20261119-studio-v1">
+<link rel="stylesheet" href="./teoria-game-dock4-road9.css?v=20261119-v1">
 </head><body>
 <header class="topbar neoline-site-header"><div class="neoline-site-header__inner">
 <a class="neoline-site-header__logo" href="./" aria-label="NEOLINE — главная страница"><img src="./assets/neoline-clean.svg?v=20261116-compact" width="501" height="108" alt="NEOLINE"></a>
@@ -168,7 +169,39 @@
    <div class="hud-metrics"><span class="hud-lives" id="lifeMeta" aria-label="Осталось 3 жизни">♥ ♥ ♥</span><span class="hud-xp" id="scoreMeta">+0 XP</span><span class="timer" id="timerBox" hidden><span aria-hidden="true">◷</span> <time id="timer">40:00</time></span></div>
   </div>
  </div>
- <div class="game-quiz-route" aria-hidden="true"><span class="game-quiz-route-base"><span class="game-quiz-route-fill" id="gameQuizRouteFill"></span><span class="game-quiz-route-car" id="gameQuizRouteCar">🚙</span><span class="game-quiz-route-end">⚑</span></span></div>
+ <div class="game-quiz-route road9" aria-hidden="true">
+  <svg class="road9-landscape" viewBox="0 0 900 92" preserveAspectRatio="none" focusable="false" aria-hidden="true">
+   <defs>
+    <linearGradient id="road9LandscapeBlue" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#caeeff"/><stop offset="1" stop-color="#72c4e8"/></linearGradient>
+   </defs>
+   <path d="M0 91V61L65 32 125 65 192 8 272 66 340 36 409 79 495 15 574 71 675 23 757 70 831 19 900 62V91Z" fill="url(#road9LandscapeBlue)" opacity=".67"/>
+   <path d="M0 91V76L88 58 150 84 234 41 311 85 382 65 467 86 552 52 618 84 732 55 831 86 900 71V91Z" fill="#69bce2" opacity=".35"/>
+  </svg>
+  <span class="road9-track">
+    <span class="road9-progress-fill" id="gameQuizRouteFill"></span>
+    <span class="road9-checkpoint" data-checkpoint="1"></span>
+    <span class="road9-checkpoint" data-checkpoint="2"></span>
+    <span class="road9-checkpoint" data-checkpoint="3"></span>
+    <span class="road9-checkpoint" data-checkpoint="4"></span>
+    <span class="road9-checkpoint" data-checkpoint="5"></span>
+    <span class="road9-car" id="gameQuizRouteCar">
+      <svg viewBox="0 0 64 37" aria-hidden="true" focusable="false">
+       <defs>
+        <linearGradient id="road9CarPaint" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#79e7ff"/><stop offset=".35" stop-color="#129ede"/><stop offset="1" stop-color="#07629c"/></linearGradient>
+       </defs>
+       <path d="M6 16h7l9-11q3-3 10-3h10q5 1 8 5l7 9 4 3v11H2V21l4-5Z" fill="url(#road9CarPaint)" stroke="#c6f6ff" stroke-width="1.6"/>
+       <path d="M23 7h11v9H16Zm14 0h6l8 9H37Z" fill="#c0effe" stroke="#0a70b0" stroke-width=".9"/>
+       <path d="M4 23h56" stroke="#074d85" stroke-width="2"/>
+       <path d="M3 20h10l-3 4H2Z" fill="#f3ffff"/><path d="M53 19h8v5h-6Z" fill="#ffda65"/>
+       <circle cx="17" cy="29" r="7" fill="#1e3a54" stroke="#d6f5ff" stroke-width="2.4"/><circle cx="48" cy="29" r="7" fill="#1e3a54" stroke="#d6f5ff" stroke-width="2.4"/>
+       <circle cx="17" cy="29" r="2.6" fill="#8bdcf3"/><circle cx="48" cy="29" r="2.6" fill="#8bdcf3"/>
+      </svg>
+    </span>
+    <span class="road9-finish" aria-hidden="true">
+      <svg viewBox="0 0 38 48" focusable="false"><path d="M6 3v42" stroke="#0b5586" stroke-width="3" stroke-linecap="round"/><path d="M7 6Q18 3 31 9v24Q19 27 7 30Z" fill="#fff" stroke="#1b6aa6" stroke-width="1.2"/><path d="M7 6h12v7H7zm12 7h12v7H19zM7 20h12v7H7z" fill="#125c98"/><path d="M19 6h12v7H19zM7 13h12v7H7zm12 14h12v6H19z" fill="#fff"/></svg>
+    </span>
+  </span>
+</div>
  <article class="question-card"><div class="question-eyebrow"><span id="questionTopic">Правила дорожного движения</span><span class="question-id" id="questionId">№ 0000</span></div><h2 id="questionText" dir="auto">Загрузка вопроса…</h2><div class="question-picture" id="questionPicture" hidden><img id="signPicture" alt="" decoding="async"></div><div class="answer-list" id="answers" role="group" aria-label="Варианты ответа"></div><div class="feedback" id="feedback" hidden aria-live="polite"></div><span id="gameXPFloat" class="game-xp-float" hidden aria-hidden="true">+15 XP</span><div class="question-bottom"><span id="questionTip">Выбери один правильный ответ.</span><button type="button" id="nextQuestion" class="primary" disabled hidden aria-hidden="true" tabindex="-1">Далее →</button></div></article>
 </section>
 <section class="game-panel outcome" id="gameResult" hidden aria-live="polite">
@@ -277,6 +310,29 @@
   </div>
  </div>
 </section>
+<nav id="theoryGameDock" class="theory-game-dock" aria-label="Игровая панель NEOLINE" hidden>
+ <button type="button" class="dock4-modes" id="dock4Modes" aria-label="Вернуться к режимам">
+  <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect x="3.2" y="3.2" width="7.1" height="7.1" rx="1.5"/><rect x="13.7" y="3.2" width="7.1" height="7.1" rx="1.5"/><rect x="3.2" y="13.7" width="7.1" height="7.1" rx="1.5"/><rect x="13.7" y="13.7" width="7.1" height="7.1" rx="1.5"/></svg>
+  <span id="dock4ModesText">Режимы</span>
+ </button>
+ <div class="dock4-count" id="dock4Progress" role="progressbar" aria-valuemin="0" aria-valuemax="10" aria-valuenow="0" aria-label="Пройдено вопросов">
+   <strong id="dock4Count">0/10</strong>
+ </div>
+ <span class="dock4-separator" aria-hidden="true"></span>
+ <div class="dock4-hearts" id="dock4Hearts" aria-label="Три жизни">
+  <span aria-hidden="true">♥♥♥</span>
+ </div>
+ <span class="dock4-separator" aria-hidden="true"></span>
+ <div class="dock4-xp" aria-label="Игровые очки XP"><span aria-hidden="true">★</span><strong id="dock4XP">+0 XP</strong></div>
+ <span class="dock4-separator dock4-separator--last" aria-hidden="true"></span>
+ <button type="button" class="dock4-action" id="dock4Hint" aria-label="Подсказка, осталось три">
+   <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 18h6m-5 3h4m-7-8c-1.4-1.3-2.3-3-2.3-5a7.3 7.3 0 1 1 14.6 0c0 2-.9 3.7-2.3 5-1.2 1.2-1.5 2.2-1.5 3.4h-7c0-1.2-.3-2.2-1.5-3.4Z"/></svg>
+   <span class="dock4-hint-count" id="dock4HintCount">3</span>
+ </button>
+ <button type="button" class="dock4-action dock4-stats" id="dock4Stats" aria-label="Мой прогресс">
+   <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20V12h3v8zm6 0V8h3v12zm6 0V3h3v17Z"/></svg>
+ </button>
+</nav>
 <nav class="theory-bottom" id="theoryBottomNav" aria-label="Основная навигация NEOLINE">
   <a href="./" data-theory-nav="home" id="theoryNavHome" aria-label="Главная"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m3 10 9-7 9 7v10a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V10Z"/><path d="M9 21v-8h6v8"/></svg><span>Главная</span></a>
   <a href="./#catalog" data-theory-nav="catalog" id="theoryNavCatalog" aria-label="Каталог"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></svg><span>Каталог</span></a>
@@ -289,5 +345,6 @@
 <script src="./teoria-v2.js?v=20261119-gold-medal-v7" defer></script>
 <script src="./teoria-gifts.js?v=20261118-gifts-preview-v1" defer></script>
 <script src="./teoria-licence-dialog.js?v=20261119-custom-v1" defer></script>
+<script src="./teoria-game-dock4-road9.js?v=20261119-v1" defer></script>
 <script src="./nav-current.js?v=20261118-game-v3" defer></script><script src="./site-header.js?v=20261118-unified-v2" defer></script>
 </body></html>
