@@ -1,0 +1,257 @@
+/* NEOLINE / Driving Theory — approved combination: dock #4 + road strip #9.
+   Mobile-first, no stock art, uses native SVG elements, low GPU cost.
+   Enabled only during active questions, not on mode selection or results. */
+.theory-game-dock[hidden]{display:none!important}
+.theory-game-dock{
+ --dock-ink:#185578;--dock-accent:#06a7df;
+ display:grid;grid-template-columns:minmax(48px,1fr) 51px 1px minmax(53px,.9fr) 1px minmax(58px,.85fr) 1px 43px 43px;
+ align-items:center;justify-items:center;gap:5px;
+ position:fixed;z-index:120;bottom:max(4px,env(safe-area-inset-bottom));left:50%;
+ transform:translateX(-50%);
+ width:min(760px,calc(100% - 16px));
+ height:69px;padding:7px 10px;
+ border:1px solid #afd6ee;border-radius:28px;
+ background:linear-gradient(165deg,#fff,#e8f8ff 68%,#d5efff);
+ box-shadow:0 0 0 3px #ffffff73,0 8px 26px #053b6b4a,inset 0 1px #fff;
+ color:var(--dock-ink);
+ -webkit-tap-highlight-color:transparent;
+ isolation:isolate;
+}
+.theory-game-dock::before{
+ content:"";position:absolute;pointer-events:none;inset:3px;border-radius:25px;
+ border:1px solid #ffffffb4;
+}
+.theory-game-dock button{
+ position:relative;z-index:1;
+ display:flex;align-items:center;justify-content:center;flex-direction:column;
+ gap:2px;min-width:0;min-height:44px;
+ padding:4px;border:0;border-radius:14px;
+ background:transparent;color:#136d9e;font:850 10px/1.1 Manrope,Arial,sans-serif;
+ cursor:pointer;touch-action:manipulation;
+}
+.theory-game-dock button:focus-visible{outline:2px solid #08a8d9;outline-offset:2px}
+.theory-game-dock button:active{transform:scale(.95)}
+.theory-game-dock svg{display:block;width:24px;height:24px;stroke:currentColor;fill:none;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round}
+.theory-game-dock .dock4-modes{width:100%;color:#145b83}
+.theory-game-dock .dock4-modes svg{width:21px;height:21px}
+.theory-game-dock .dock4-count{
+ --dock-progress:0deg;
+ display:flex;align-items:center;justify-content:center;flex:none;
+ width:49px;height:49px;padding:4px;aspect-ratio:1;
+ border-radius:50%;
+ border:1px solid #8acbed;
+ background:conic-gradient(from -90deg,#15b8ed 0deg var(--dock-progress),#d4effe var(--dock-progress) 360deg);
+ box-shadow:0 0 0 2px #fff,0 3px 9px #167dbb27;
+}
+.theory-game-dock .dock4-count strong{
+ display:grid;place-items:center;width:100%;height:100%;border-radius:50%;
+ background:linear-gradient(140deg,#fff,#f4fcff);
+ color:#154c75;letter-spacing:-.055em;font-weight:900;font-size:12px;white-space:nowrap;
+}
+.theory-game-dock .dock4-hearts{
+ display:flex;justify-content:center;align-items:center;min-width:0;
+ color:#ee405c;font-weight:900;white-space:nowrap;
+ font-size:22px;letter-spacing:-1.5px;
+ text-shadow:0 2px 2px #d52b1e24;line-height:1;
+}
+.theory-game-dock .dock4-hearts[data-exam="true"]{color:#1682b4;font-size:11px;letter-spacing:0;font-weight:900}
+.theory-game-dock .dock4-hearts[data-unlimited="true"]{color:#14a6ba;font-size:26px;letter-spacing:0}
+.theory-game-dock .dock4-xp{
+ display:flex;align-items:center;justify-content:center;gap:3px;
+ font-size:11px;white-space:nowrap;
+}
+.theory-game-dock .dock4-xp>span{font-size:22px;color:#e9aa17;text-shadow:0 1px #fff,0 2px 3px #b77e3740}
+.theory-game-dock .dock4-xp strong{font-size:11px;font-weight:900;color:#185482}
+.theory-game-dock .dock4-separator{width:1px;height:31px;background:linear-gradient(transparent,#9bcae6,transparent)}
+.theory-game-dock .dock4-action{
+ width:43px;height:44px;
+ border:1px solid #c1dff2;border-radius:13px;
+ background:linear-gradient(145deg,#fff,#e1f4ff);
+ box-shadow:0 3px 8px #1275a728,inset 0 1px #fff;
+}
+.theory-game-dock .dock4-action svg{width:25px;height:25px;stroke:#1285b7}
+.theory-game-dock .dock4-stats svg{fill:#138dcd;stroke:#075e91;stroke-width:1}
+.theory-game-dock .dock4-action:disabled{opacity:.42;filter:grayscale(.35);cursor:not-allowed}
+.theory-game-dock .dock4-action:disabled:active{transform:none}
+.theory-game-dock .dock4-hint-count{
+ position:absolute;top:-6px;right:-5px;
+ display:grid;place-items:center;min-width:19px;height:19px;padding-inline:3px;
+ border-radius:50%;color:#fff;background:#0aa5d2;border:1px solid #fff;
+ box-shadow:0 2px 4px #12608e50;font-size:10px;font-weight:900;
+}
+/* During the actual test, the site chrome is replaced by this game dock. */
+body.theory-in-session .theory-bottom{display:none!important}
+body.theory-in-session > .topbar{display:none!important}
+body.theory-in-session{padding-bottom:calc(81px + env(safe-area-inset-bottom))!important}
+body.theory-in-session main.shell{padding-top:2px;padding-bottom:8px!important}
+/* Header compact: all essential current-mode and timer information preserved. */
+body.theory-in-session #gamePlaying .game-quiz-topline{display:none!important}
+body.theory-in-session #gamePlaying{
+ width:min(900px,100%);margin:3px auto 7px!important;
+ padding:9px 10px 12px!important;border-radius:17px!important;
+}
+body.theory-in-session #gamePlaying .quiz-hud{
+ display:grid;grid-template-columns:auto minmax(0,1fr);
+ min-height:43px;height:auto;padding:4px 6px;gap:6px;
+ border-radius:12px;
+ background:linear-gradient(105deg,#f4fcff,#e0f4ff);
+}
+body.theory-in-session #gamePlaying .hud-back{
+ grid-column:1;grid-row:1;align-self:center;justify-self:start;
+ padding:8px 9px;min-height:37px;min-width:42px;border-radius:10px;
+ font-size:10px;line-height:1.1;
+}
+body.theory-in-session #gamePlaying .hud-progress{display:none!important}
+body.theory-in-session #gamePlaying .hud-info{
+ display:flex;flex-direction:row;align-items:center;justify-content:space-between;
+ grid-column:2;grid-row:1;justify-self:stretch;gap:6px;
+ min-width:0;width:100%;max-width:none;
+}
+body.theory-in-session #gamePlaying .mode-pill{
+ padding:6px 8px;margin:0;
+ font-weight:850;font-size:10px;text-align:start;
+ min-width:0;max-width:100%;
+ white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+}
+body.theory-in-session #gamePlaying .hud-metrics{gap:0;flex:0 0 auto}
+body.theory-in-session #gamePlaying #lifeMeta,
+body.theory-in-session #gamePlaying #scoreMeta{display:none!important}
+body.theory-in-session #gamePlaying #timerBox:not([hidden]){display:inline-flex!important;margin:0;font-size:11px}
+body.theory-in-session #gamePlaying .question-card{
+ margin-top:4px;padding:13px;border-radius:16px;
+}
+body.theory-in-session #gamePlaying .question-card h2{margin:9px 0 11px}
+body.theory-in-session #gamePlaying .question-picture{margin:4px 0 10px}
+body.theory-in-session #gamePlaying .question-bottom{margin-top:10px;padding-top:9px}
+/* Selected #9: tiny scenic roadway + electric-blue route + lime checkpoints.
+   No full-card gradients/animated swaying objects/long blank strips. */
+#gamePlaying .game-quiz-route.road9{
+ position:relative;height:58px;min-height:0;overflow:hidden;
+ margin:4px 0 5px;padding:0 8px!important;
+ border:1px solid #b6e4f8;border-radius:15px;
+ background:linear-gradient(110deg,#effcff,#c7efff 55%,#e8faff);
+ box-shadow:inset 0 1px #fff,0 3px 9px #117eb511;
+}
+#gamePlaying .road9 .road9-landscape{
+ display:block;position:absolute;inset:0;
+ width:100%;height:100%;opacity:.72;
+}
+#gamePlaying .road9 .road9-track{
+ position:absolute;display:block;
+ top:57%;left:34px;right:37px;height:13px;
+ transform:translateY(-50%);
+ border:2px solid #fff;border-radius:999px;
+ background:linear-gradient(180deg,#208ac0,#4d9dcb 45%,#265a91 100%);
+ box-shadow:0 2px 5px #113f6466,0 0 0 2px #91d7fb77,inset 0 -2px #073c6682;
+}
+#gamePlaying .road9 .road9-track::before{
+ content:"";position:absolute;inset:4px 7px;
+ border-top:1.5px dashed #d0f0ffba;
+}
+#gamePlaying .road9 .road9-progress-fill{
+ position:absolute;top:-1px;bottom:-1px;left:0;
+ width:0;max-width:100%;z-index:1;
+ border-radius:999px;
+ background:linear-gradient(90deg,#1ad793,#28caca 40%,#16b5f0);
+ box-shadow:0 0 8px #12f0d7bf,inset 0 1px #ffffff82;
+ transition:width .55s cubic-bezier(.17,.75,.22,1);
+}
+#gamePlaying .road9 .road9-checkpoint{
+ position:absolute;z-index:2;top:50%;transform:translate(-50%,-50%);
+ width:16px;height:16px;border-radius:50%;border:3px solid #fff;
+ background:linear-gradient(135deg,#8cc4e7,#d8f4ff);
+ box-shadow:0 2px 7px #0d5d8e5c;
+ transition:background .3s,box-shadow .3s,transform .3s;
+}
+#gamePlaying .road9 .road9-checkpoint:nth-of-type(2){left:17%}
+#gamePlaying .road9 .road9-checkpoint:nth-of-type(3){left:34%}
+#gamePlaying .road9 .road9-checkpoint:nth-of-type(4){left:51%}
+#gamePlaying .road9 .road9-checkpoint:nth-of-type(5){left:68%}
+#gamePlaying .road9 .road9-checkpoint:nth-of-type(6){left:85%}
+#gamePlaying .road9 .road9-checkpoint.is-done{
+ background:linear-gradient(145deg,#72f6a0,#11c86e);
+ box-shadow:0 0 0 2px #44e99b45,0 0 9px #09cc70a4;
+}
+#gamePlaying .road9 .road9-checkpoint.is-done::after{
+ content:"✓";position:absolute;inset:-4px;display:grid;place-items:center;
+ color:#fff;font:bold 11px/1 Arial,sans-serif;
+ text-shadow:0 1px 1px #0a6440;
+}
+#gamePlaying .road9 .road9-car{
+ position:absolute;z-index:5;top:50%;left:0;
+ width:46px;height:32px;
+ transform:translate(-50%,-80%);
+ transition:left .55s cubic-bezier(.17,.75,.22,1);
+ filter:drop-shadow(0 3px 3px #064f8370);
+}
+#gamePlaying .road9 .road9-car svg{display:block;width:100%;height:100%}
+#gamePlaying .road9 .road9-finish{
+ position:absolute;z-index:4;right:-16px;bottom:-3px;
+ width:32px;height:45px;
+ filter:drop-shadow(0 3px 3px #07558152);
+}
+#gamePlaying .road9 .road9-finish svg{display:block;width:100%;height:100%}
+html[dir="rtl"] #gamePlaying .road9 .road9-track{left:37px;right:34px}
+html[dir="rtl"] #gamePlaying .road9 .road9-progress-fill{left:auto;right:0}
+html[dir="rtl"] #gamePlaying .road9 .road9-checkpoint{transform:translate(50%,-50%)}
+html[dir="rtl"] #gamePlaying .road9 .road9-checkpoint:nth-of-type(2){left:auto;right:17%}
+html[dir="rtl"] #gamePlaying .road9 .road9-checkpoint:nth-of-type(3){left:auto;right:34%}
+html[dir="rtl"] #gamePlaying .road9 .road9-checkpoint:nth-of-type(4){left:auto;right:51%}
+html[dir="rtl"] #gamePlaying .road9 .road9-checkpoint:nth-of-type(5){left:auto;right:68%}
+html[dir="rtl"] #gamePlaying .road9 .road9-checkpoint:nth-of-type(6){left:auto;right:85%}
+html[dir="rtl"] #gamePlaying .road9 .road9-car{
+ left:auto;right:0;transform:translate(50%,-80%) scaleX(-1);
+ transition:right .55s cubic-bezier(.17,.75,.22,1);
+}
+html[dir="rtl"] #gamePlaying .road9 .road9-finish{right:auto;left:-16px;transform:scaleX(-1)}
+/* Obey the existing game-over overlay and avoid dock focus behind it. */
+body.game-over-open .theory-game-dock{display:none!important}
+@media(max-width:720px){
+ .theory-game-dock{
+  width:calc(100% - 12px);height:65px;
+  grid-template-columns:minmax(43px,1fr) 46px 1px minmax(51px,.9fr) 1px minmax(51px,.8fr) 1px 40px 40px;
+  gap:3px;padding:5px 7px;
+  bottom:max(4px,env(safe-area-inset-bottom));border-radius:23px;
+ }
+ .theory-game-dock::before{border-radius:21px}
+ .theory-game-dock .dock4-count{width:44px;height:44px}
+ .theory-game-dock .dock4-count strong{font-size:11px}
+ .theory-game-dock .dock4-hearts{font-size:19px}
+ .theory-game-dock .dock4-xp>span{font-size:19px}
+ .theory-game-dock .dock4-xp strong{font-size:10px}
+ .theory-game-dock .dock4-action{width:39px;height:42px;min-height:42px}
+ .theory-game-dock .dock4-action svg{width:24px;height:24px}
+ .theory-game-dock .dock4-modes{font-size:9px}
+ .theory-game-dock .dock4-modes svg{width:20px;height:20px}
+ body.theory-in-session{padding-bottom:calc(74px + env(safe-area-inset-bottom))!important}
+ body.theory-in-session #gamePlaying{padding:7px!important;margin:2px auto 4px!important}
+ body.theory-in-session #gamePlaying .quiz-hud{min-height:41px;padding:4px 5px}
+ body.theory-in-session #gamePlaying .hud-back{min-height:34px;padding:7px 8px}
+ body.theory-in-session #gamePlaying .hud-back #exitLabel{display:none!important}
+ body.theory-in-session #gamePlaying .question-card{padding:11px;border-radius:15px}
+ #gamePlaying .game-quiz-route.road9{height:51px;margin:4px 0;padding:0 4px!important}
+ #gamePlaying .road9 .road9-track{left:28px;right:30px;height:12px}
+ #gamePlaying .road9 .road9-checkpoint{width:14px;height:14px;border-width:2.5px}
+ #gamePlaying .road9 .road9-car{width:42px;height:28px}
+ #gamePlaying .road9 .road9-finish{width:29px;height:39px;right:-15px}
+}
+@media(max-width:360px){
+ .theory-game-dock{
+  width:calc(100% - 8px);
+  grid-template-columns:42px 41px 0 minmax(45px,1fr) 0 50px 0 37px 37px;
+  gap:2px;padding:4px 5px;height:60px;
+ }
+ .theory-game-dock .dock4-separator{opacity:0}
+ .theory-game-dock .dock4-count{width:40px;height:40px;padding:3px}
+ .theory-game-dock .dock4-count strong{font-size:10px}
+ .theory-game-dock .dock4-hearts{font-size:17px}
+ .theory-game-dock .dock4-xp strong{font-size:9px}
+ .theory-game-dock .dock4-xp>span{font-size:17px}
+ .theory-game-dock .dock4-action{width:36px;height:39px;min-height:39px}
+ .theory-game-dock .dock4-action svg{width:22px;height:22px}
+ .theory-game-dock .dock4-modes{font-size:8px}
+ body.theory-in-session{padding-bottom:calc(70px + env(safe-area-inset-bottom))!important}
+}
+@media(prefers-reduced-motion:reduce){
+ .road9-car,.road9-progress-fill,.road9-checkpoint{transition:none!important}
+}
