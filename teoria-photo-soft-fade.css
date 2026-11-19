@@ -1,69 +1,106 @@
-/* NEOLINE / driving game mode cards — airy, seamless image transitions.
-   Blends artwork into each card's actual background, without hard white bars.
-   Applied after the current layout and sprite styles. */
+/* NEOLINE / Theory driving game, 19 Nov 2026.
+   Separate high-resolution WebP illustrations from the source artwork, each 500 x 282 px.
+   No sprite background-size 200% 300%: that used to stretch the photos.
+   User requested: target on Sign Hunt, trophy on Journey, gentle fade nearly to titles. */
+
+/* Real image per game card, not a forced 2x3 atlas.
+   The individual images retain their intrinsic proportions and cover the canvas. */
 #gameLobby .route-card .game-mode-photo{
+  display:block;
+  position:relative;
   isolation:isolate;
   background-repeat:no-repeat!important;
+  background-size:cover!important;
+  background-position:center center!important;
   image-rendering:auto;
 }
-/* Long milky fade instead of the old abrupt 12% opaque color strip.
-   A mask is used so each card's light-blue/white surface shows through. */
+#gameLobby .route-card.route-blue .game-mode-photo{
+  background-image:url("./assets/teoria/game-mode-city.webp")!important;
+  background-position:58% 48%!important;
+}
+#gameLobby .route-card.route-mint .game-mode-photo{
+  /* Moved the bullseye image here: Sign Hunt */
+  background-image:url("./assets/teoria/game-mode-signs.webp")!important;
+  background-position:58% 47%!important;
+}
+#gameLobby .route-card.route-indigo .game-mode-photo{
+  background-image:url("./assets/teoria/game-mode-exam.webp")!important;
+  background-position:61% 42%!important;
+}
+#gameLobby .route-card.route-amber .game-mode-photo{
+  background-image:url("./assets/teoria/game-mode-mistakes.webp")!important;
+  background-position:61% 44%!important;
+}
+#gameLobby .route-card.route-full > span.game-mode-photo:not(.route-top):not(.route-cta){
+  /* Moved the gold trophy image here: Grand Journey */
+  background-image:url("./assets/teoria/game-mode-marathon.webp")!important;
+  background-position:62% 50%!important;
+  background-size:cover!important;
+}
+
+/* Give illustrations enough vertical room to display naturally. */
 #gameLobby .route-card:not(.route-full) .game-mode-photo{
+  height:122px!important;
+  border-radius:17px 17px 7px 7px;
   -webkit-mask-image:linear-gradient(to bottom,
-    #000 0%,#000 33%,
-    rgba(0,0,0,.94) 44%,
-    rgba(0,0,0,.74) 56%,
-    rgba(0,0,0,.43) 72%,
-    rgba(0,0,0,.16) 87%,
-    transparent 100%);
+    black 0%,black 16%,rgba(0,0,0,.98) 29%,
+    rgba(0,0,0,.90) 42%,rgba(0,0,0,.72) 55%,
+    rgba(0,0,0,.46) 70%,rgba(0,0,0,.20) 84%,
+    rgba(0,0,0,.07) 94%,transparent 100%);
   mask-image:linear-gradient(to bottom,
-    #000 0%,#000 33%,
-    rgba(0,0,0,.94) 44%,
-    rgba(0,0,0,.74) 56%,
-    rgba(0,0,0,.43) 72%,
-    rgba(0,0,0,.16) 87%,
-    transparent 100%);
-  -webkit-mask-size:100% 100%;mask-size:100% 100%;
+    black 0%,black 16%,rgba(0,0,0,.98) 29%,
+    rgba(0,0,0,.90) 42%,rgba(0,0,0,.72) 55%,
+    rgba(0,0,0,.46) 70%,rgba(0,0,0,.20) 84%,
+    rgba(0,0,0,.07) 94%,transparent 100%);
 }
-/* Do not stack the previous blocky gradient over the new mask. */
-#gameLobby .route-card:not(.route-full) .game-mode-photo::after{
+/* Avoid stacking older opaque gradient bars on top of the fade. */
+#gameLobby .route-card .game-mode-photo::after{
   content:none!important;display:none!important;
 }
-/* The wide journey card fades to the text side, rather than downward. */
-#gameLobby .route-card.route-full .game-mode-photo{
+/* Wide journey card fades horizontally into the text panel. */
+#gameLobby .route-card.route-full{
+  min-height:126px;
+}
+#gameLobby .route-card.route-full > span.game-mode-photo:not(.route-top):not(.route-cta){
+  min-height:126px!important;
   -webkit-mask-image:linear-gradient(to right,
-    #000 0%,#000 38%,
-    rgba(0,0,0,.9) 52%,
-    rgba(0,0,0,.58) 69%,
-    rgba(0,0,0,.2) 85%,
-    transparent 100%);
+    black 0%,black 17%,rgba(0,0,0,.96) 35%,
+    rgba(0,0,0,.79) 53%,rgba(0,0,0,.50) 71%,
+    rgba(0,0,0,.20) 87%,transparent 100%);
   mask-image:linear-gradient(to right,
-    #000 0%,#000 38%,
-    rgba(0,0,0,.9) 52%,
-    rgba(0,0,0,.58) 69%,
-    rgba(0,0,0,.2) 85%,
-    transparent 100%);
-  -webkit-mask-size:100% 100%;mask-size:100% 100%;
+    black 0%,black 17%,rgba(0,0,0,.96) 35%,
+    rgba(0,0,0,.79) 53%,rgba(0,0,0,.50) 71%,
+    rgba(0,0,0,.20) 87%,transparent 100%);
 }
-#gameLobby .route-card.route-full .game-mode-photo::after{
-  content:none!important;display:none!important;
-}
-html[dir="rtl"] #gameLobby .route-card.route-full .game-mode-photo{
+html[dir="rtl"] #gameLobby .route-card.route-full > span.game-mode-photo:not(.route-top):not(.route-cta){
   -webkit-mask-image:linear-gradient(to left,
-    #000 0%,#000 38%,rgba(0,0,0,.9) 52%,
-    rgba(0,0,0,.58) 69%,rgba(0,0,0,.2) 85%,transparent 100%);
+    black 0%,black 17%,rgba(0,0,0,.96) 35%,
+    rgba(0,0,0,.79) 53%,rgba(0,0,0,.50) 71%,
+    rgba(0,0,0,.20) 87%,transparent 100%);
   mask-image:linear-gradient(to left,
-    #000 0%,#000 38%,rgba(0,0,0,.9) 52%,
-    rgba(0,0,0,.58) 69%,rgba(0,0,0,.2) 85%,transparent 100%);
+    black 0%,black 17%,rgba(0,0,0,.96) 35%,
+    rgba(0,0,0,.79) 53%,rgba(0,0,0,.50) 71%,
+    rgba(0,0,0,.20) 87%,transparent 100%);
 }
-/* On narrow phones keep more of each illustration visible at the top. */
 @media(max-width:720px){
- #gameLobby .route-card:not(.route-full) .game-mode-photo{
-   -webkit-mask-image:linear-gradient(to bottom,
-    #000 0%,#000 39%,rgba(0,0,0,.9) 51%,
-    rgba(0,0,0,.6) 68%,rgba(0,0,0,.2) 86%,transparent 100%);
-   mask-image:linear-gradient(to bottom,
-    #000 0%,#000 39%,rgba(0,0,0,.9) 51%,
-    rgba(0,0,0,.6) 68%,rgba(0,0,0,.2) 86%,transparent 100%);
- }
+  #gameLobby .route-card:not(.route-full) .game-mode-photo{
+    height:89px!important;
+    margin:0 -8px;
+    border-radius:14px 14px 6px 6px;
+    -webkit-mask-image:linear-gradient(to bottom,
+      black 0%,black 16%,rgba(0,0,0,.97) 29%,
+      rgba(0,0,0,.85) 43%,rgba(0,0,0,.65) 56%,
+      rgba(0,0,0,.39) 70%,rgba(0,0,0,.15) 85%,transparent 100%);
+    mask-image:linear-gradient(to bottom,
+      black 0%,black 16%,rgba(0,0,0,.97) 29%,
+      rgba(0,0,0,.85) 43%,rgba(0,0,0,.65) 56%,
+      rgba(0,0,0,.39) 70%,rgba(0,0,0,.15) 85%,transparent 100%);
+  }
+  #gameLobby .route-card.route-full{min-height:110px}
+  #gameLobby .route-card.route-full > span.game-mode-photo:not(.route-top):not(.route-cta){
+    min-height:110px!important;
+  }
+}
+@media(prefers-reduced-motion:reduce){
+  #gameLobby .route-card .game-mode-photo{transition:none!important}
 }
