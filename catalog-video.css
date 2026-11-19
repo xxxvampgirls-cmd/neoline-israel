@@ -706,3 +706,107 @@ html[dir="rtl"] .product-video-search-arrow{right:auto;left:9px}
 @media(prefers-reduced-motion:reduce){
  .product-video-search-grid>a{transition:none}
 }
+
+
+/* Verified social-platform videos — compact disclosure below four source actions.
+   RUTUBE iframes are created only on click; VK opens the original page. */
+.product-video-social{
+ margin-top:10px;
+ border:1px solid #b9e0ef;
+ border-radius:15px;
+ overflow:hidden;
+ background:linear-gradient(136deg,#ffffff,#e9f8ff);
+ box-shadow:0 4px 12px rgba(22,111,153,.09);
+}
+.product-video-social>summary{
+ display:flex;align-items:center;justify-content:flex-start;gap:9px;
+ min-height:42px;padding:9px 12px;
+ list-style:none;
+ font:850 12px/1.3 Manrope,Arial,sans-serif;color:#1a5678;
+ cursor:pointer;touch-action:manipulation;
+}
+.product-video-social>summary::-webkit-details-marker{display:none}
+.product-video-social>summary::marker{content:""}
+.product-video-social>summary:focus-visible{outline:3px solid #23a7d4;outline-offset:-3px}
+.product-video-social-symbol{
+ display:grid;place-items:center;flex:none;
+ width:27px;height:27px;border-radius:9px;
+ background:linear-gradient(140deg,#e4faff,#bce8fa);
+ border:1px solid #a9d8e9;
+ color:#1588b1;font-size:13px;
+}
+.product-video-social-label{flex:1;min-width:0;overflow-wrap:anywhere}
+.product-video-social-label small{color:#4789a5;font-size:11px}
+.product-video-social[open]>summary{
+ border-bottom:1px solid #c6e6f2;
+ background:linear-gradient(110deg,#f6fdff,#e4f5fd);
+}
+.product-video-social[open]>summary .product-video-chevron{
+ transform:rotate(225deg);margin-bottom:-4px;
+}
+.product-video-social-list{padding:10px;display:grid;gap:9px}
+.product-video-social-item{
+ min-width:0;padding:11px 12px;
+ background:#fff;border:1px solid #d3e9f3;border-radius:13px;
+ box-shadow:0 2px 9px rgba(30,105,148,.06);
+}
+.product-video-social-heading{
+ display:flex;align-items:center;gap:8px;
+ margin:0 0 7px;
+}
+.product-video-social-mark{
+ display:grid;place-items:center;flex:none;
+ min-width:25px;height:22px;padding:0 4px;border-radius:6px;
+ color:#117ba9;background:#e1f4fd;
+ border:1px solid #bedfea;
+ font:900 9px/1 Arial,sans-serif;letter-spacing:.02em;
+}
+.product-video-social-origin{
+ color:#5c859a;font:750 10px/1.3 Manrope,Arial,sans-serif;
+}
+.product-video-social-title{
+ display:block;color:#194969;
+ font:850 12px/1.4 Manrope,Arial,sans-serif;
+ overflow-wrap:anywhere;
+}
+.product-video-social-actions{
+ display:flex;flex-wrap:wrap;gap:7px;margin:10px 0 0;
+}
+.product-video-social-actions>a,
+.product-video-social-play{
+ display:inline-flex;align-items:center;justify-content:center;
+ min-height:37px;padding:7px 11px;border-radius:10px;
+ border:1px solid #b4ddeb;
+ background:#edf9ff;color:#146b94;
+ font:800 11px/1.3 Manrope,Arial,sans-serif;
+ text-decoration:none;cursor:pointer;touch-action:manipulation;
+}
+.product-video-social-play{
+ color:#fff;border-color:#149bc6;
+ background:linear-gradient(115deg,#26c4de,#0989bf);
+}
+.product-video-social-actions>:focus-visible{
+ outline:3px solid #25b2df;outline-offset:2px;
+}
+.product-video-social-note{
+ margin:2px 1px 0;
+ color:#7899a8;
+ font:600 10px/1.45 Manrope,Arial,sans-serif;
+}
+.product-video-social .product-video-embed:has(iframe){
+ padding-top:10px;
+}
+.product-video-social .product-video-embed iframe{
+ display:block;width:100%;height:auto;aspect-ratio:16/9;
+ min-height:160px;border:0;border-radius:10px;
+ background:#143951;
+}
+@media(max-width:650px){
+ .product-video-social{margin-top:8px;border-radius:13px}
+ .product-video-social>summary{min-height:40px;padding:8px 10px;font-size:11.5px}
+ .product-video-social-list{padding:7px}
+ .product-video-social-item{padding:9px 10px}
+ .product-video-social-title{font-size:11.5px}
+ .product-video-social-actions>a,
+ .product-video-social-play{min-height:38px;font-size:10.5px}
+}
