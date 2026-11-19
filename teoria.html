@@ -15,7 +15,7 @@
 <link rel="stylesheet" href="./teoria-medal-ecg.css?v=20261119-medal-only-v2">
 <link rel="stylesheet" href="./teoria-licence-dialog.css?v=20261119-custom-v1">
 <link rel="stylesheet" href="./teoria-sign-studio.css?v=20261119-studio-v1">
-<link rel="stylesheet" href="./teoria-game-dock4-road9.css?v=20261119-nav-pulse-center-xp-v5">
+<link rel="stylesheet" href="./teoria-game-dock4-road9.css?v=20261119-random-routes-padding-v6">
 </head><body>
 <header class="topbar neoline-site-header"><div class="neoline-site-header__inner">
 <a class="neoline-site-header__logo" href="./" aria-label="NEOLINE — главная страница"><img src="./assets/neoline-clean.svg?v=20261116-compact" width="501" height="108" alt="NEOLINE"></a>
@@ -162,18 +162,18 @@
   <button type="button" class="small-back hud-back" id="exitQuiz" aria-label="Вернуться к выбору режима" title="К выбору режима"><svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 5 7 12l7 7"/></svg><span id="exitLabel">Режимы</span></button>
  <div class="game-quiz-route road9 nav9" aria-hidden="true">
   <svg class="nav9-route-svg" viewBox="0 0 1000 100" preserveAspectRatio="none" focusable="false" aria-hidden="true">
-   <path class="nav9-route-casing" d="M 37 67 H 168 Q 185 67 185 48 V 45 Q 185 28 204 28 H 416 Q 435 28 435 47 V 51 Q 435 70 455 70 H 685 Q 705 70 705 51 V 46 Q 705 28 723 28 H 964"/>
-   <path class="nav9-route-guide" id="gameQuizRouteBase" d="M 37 67 H 168 Q 185 67 185 48 V 45 Q 185 28 204 28 H 416 Q 435 28 435 47 V 51 Q 435 70 455 70 H 685 Q 705 70 705 51 V 46 Q 705 28 723 28 H 964"/>
-   <path class="nav9-route-active" id="gameQuizRouteFill" d="M 37 67 H 168 Q 185 67 185 48 V 45 Q 185 28 204 28 H 416 Q 435 28 435 47 V 51 Q 435 70 455 70 H 685 Q 705 70 705 51 V 46 Q 705 28 723 28 H 964"/>
+   <path class="nav9-route-casing" d="M 37 31 H 280 Q 300 31 300 50 V 67 Q 300 78 318 78 H 563 Q 579 78 579 62 V 32 Q 579 22 600 22 H 965"/>
+   <path class="nav9-route-guide" id="gameQuizRouteBase" d="M 37 31 H 280 Q 300 31 300 50 V 67 Q 300 78 318 78 H 563 Q 579 78 579 62 V 32 Q 579 22 600 22 H 965"/>
+   <path class="nav9-route-active" id="gameQuizRouteFill" d="M 37 31 H 280 Q 300 31 300 50 V 67 Q 300 78 318 78 H 563 Q 579 78 579 62 V 32 Q 579 22 600 22 H 965"/>
   </svg>
-  <span class="nav9-start" aria-hidden="true"></span>
+  <span class="nav9-start" id="gameQuizRouteStart" aria-hidden="true"></span>
   <span class="road9-checkpoint nav9-checkpoint" data-checkpoint="1"></span>
   <span class="road9-checkpoint nav9-checkpoint" data-checkpoint="2"></span>
   <span class="road9-checkpoint nav9-checkpoint" data-checkpoint="3"></span>
   <span class="road9-checkpoint nav9-checkpoint" data-checkpoint="4"></span>
   <span class="road9-checkpoint nav9-checkpoint" data-checkpoint="5"></span>
   <span class="nav9-current-marker" id="gameQuizRouteCar" aria-hidden="true"></span>
-  <span class="nav9-target" aria-hidden="true"></span>
+  <span class="nav9-target" id="gameQuizRouteTarget" aria-hidden="true"></span>
  </div>
   <div class="hud-progress" role="progressbar" aria-valuemin="0" aria-valuemax="10" aria-valuenow="0" aria-label="Отвечено вопросов" id="progress">
    <span class="hud-progress-orbit" id="progressFill" aria-hidden="true"></span>
@@ -319,6 +319,6 @@
 <script src="./teoria-v2.js?v=20261119-dock4-stats-v8" defer></script>
 <script src="./teoria-gifts.js?v=20261118-gifts-preview-v1" defer></script>
 <script src="./teoria-licence-dialog.js?v=20261119-custom-v1" defer></script>
-<script src="./teoria-game-dock4-road9.js?v=20261119-nav-pulse-center-xp-v4" defer></script>
+<script src="./teoria-game-dock4-road9.js?v=20261119-random-routes-padding-v5" defer></script>
 <script src="./nav-current.js?v=20261118-game-v3" defer></script><script src="./site-header.js?v=20261118-unified-v2" defer></script>
 </body></html>
