@@ -1,0 +1,174 @@
+/* NEOLINE · compact video icon and real model-linked video reviews.
+   Shared with original 8 products and imported Russian catalog rows. */
+.product-art{position:relative}
+.catalog-product-video-button{
+ position:absolute;top:11px;left:12px;z-index:12;
+ display:grid;place-items:center;
+ width:40px;height:40px;
+ border:1px solid #a8d7ed;border-radius:14px;
+ background:linear-gradient(140deg,#fff,#e4f6ff);
+ color:#1279ac;box-shadow:0 5px 15px rgba(15,90,138,.14),inset 0 1px white;
+ cursor:pointer;touch-action:manipulation;
+}
+.catalog-product-video-button svg{display:block;pointer-events:none}
+.catalog-product-video-button:hover{background:#daf4ff;transform:translateY(-1px)}
+.product-panel .modal-media{position:relative}
+.product-video-open-button{
+ position:absolute;top:18px;left:18px;z-index:9;
+ display:inline-flex;align-items:center;justify-content:center;
+ gap:8px;min-height:42px;
+ padding:7px 13px;
+ border:1px solid #b6dbef;border-radius:16px;
+ background:linear-gradient(132deg,#fff,#e5f7ff);
+ box-shadow:0 5px 16px #197fbc21,inset 0 1px 0 #fff;
+ color:#126d9b;font-size:12px;font-weight:850;
+ cursor:pointer;touch-action:manipulation;
+}
+.product-video-open-button svg{flex:none}
+.product-video-open-button:hover{background:#d8f3ff}
+html[dir="rtl"] .catalog-product-video-button{left:auto;right:12px}
+html[dir="rtl"] .product-video-open-button{left:auto;right:18px}
+.product-video-catalog[hidden]{display:none!important}
+.product-video-catalog{
+ position:fixed;inset:0;
+ z-index:210;
+ display:flex;justify-content:center;align-items:center;
+ padding:clamp(10px,2vw,22px);
+ box-sizing:border-box;isolation:isolate;
+}
+.product-video-backdrop{
+ position:absolute;inset:0;z-index:-1;
+ background:rgba(7,41,77,.70);
+ backdrop-filter:blur(9px) saturate(1.2);
+ -webkit-backdrop-filter:blur(9px) saturate(1.2);
+}
+.product-video-panel{
+ width:min(780px,100%);max-height:min(89dvh,880px);
+ display:flex;flex-direction:column;
+ border:1px solid #c7e6f5;border-radius:26px;
+ background:linear-gradient(140deg,#fff,#f7fdff 55%,#e9f7fe);
+ box-shadow:0 22px 65px #062f5480;
+ overflow:hidden;
+ outline:none;color:#194865;
+}
+.product-video-header{
+ flex:none;display:flex;align-items:flex-start;justify-content:space-between;
+ gap:16px;padding:23px 22px 15px;
+ border-bottom:1px solid #d5e9f6;
+}
+.product-video-kicker{
+ color:#1680ae;font:900 10px/1.5 Manrope,Arial,sans-serif;
+ letter-spacing:.14em;
+}
+.product-video-header h2{
+ margin:4px 0 3px;font-size:clamp(20px,4.5vw,28px);
+ color:#153f60;font-weight:900;
+}
+.product-video-model{
+ margin:0;font-size:13px;line-height:1.5;color:#69899c;
+ overflow-wrap:anywhere;
+}
+.product-video-close{
+ display:grid;place-items:center;flex:none;
+ width:44px;height:44px;
+ padding:0;border:1px solid #b5deef;border-radius:15px;
+ background:#e8f7ff;color:#176891;
+ font-size:29px;cursor:pointer;
+}
+.product-video-scroll{
+ min-height:0;overflow:auto;overscroll-behavior:contain;
+ padding:18px 22px 28px;scrollbar-width:thin;
+}
+.product-video-curated>h3,.product-video-searches>h3{
+ margin:2px 0 14px;color:#184d72;
+ font-size:14px;font-weight:900;
+}
+.product-video-tiles{
+ display:grid;grid-template-columns:repeat(auto-fit,minmax(235px,1fr));
+ gap:13px;
+}
+.product-video-tile{
+ min-width:0;padding:10px;border:1px solid #cbe3ef;border-radius:18px;
+ background:#fff;box-shadow:0 5px 15px #16679512;
+ overflow:hidden;
+}
+.product-video-tile>img{
+ display:block;width:100%;aspect-ratio:16/9;object-fit:cover;
+ border-radius:12px;background:#e6f4fa;
+}
+.product-video-tile-copy{padding:10px 4px 4px}
+.product-video-tag{
+ display:block;font-size:10px;font-weight:900;color:#158bc2;
+ margin:0 0 5px;
+}
+.product-video-tile-copy>strong{
+ display:block;font-size:13px;line-height:1.4;color:#174564;
+ min-height:2.8em;overflow-wrap:anywhere;
+}
+.product-video-tile-actions{
+ display:flex;flex-wrap:wrap;gap:8px;margin:12px 0 0;
+}
+.product-video-tile-actions>*{
+ display:grid;place-items:center;
+ flex:1 1 auto;min-height:38px;padding:7px 10px;
+ border:1px solid #b6dbe9;border-radius:11px;
+ background:#effaff;color:#136e9a;
+ text-decoration:none;text-align:center;
+ font-size:11px;font-weight:850;
+ cursor:pointer;touch-action:manipulation;
+}
+.product-video-tile-actions button{
+ background:linear-gradient(120deg,#20bddc,#0e8fc6);
+ border-color:#0da0d2;color:#fff;
+}
+.product-video-embed:has(iframe){padding-top:9px}
+.product-video-embed iframe{
+ display:block;width:100%;aspect-ratio:16/9;height:auto;min-height:180px;
+ border:0;border-radius:12px;background:#12314f;
+}
+.product-video-empty{
+ font-size:13px;line-height:1.6;color:#63859b;
+ margin:0 0 16px;padding:14px;
+ background:#edf9ff;border:1px dashed #baddec;border-radius:13px;
+}
+.product-video-searches{margin-top:23px}
+.product-video-search-grid{
+ display:grid;grid-template-columns:repeat(2,minmax(0,1fr));
+ gap:10px;
+}
+.product-video-search-grid>a{
+ display:flex;align-items:center;gap:11px;
+ min-height:62px;min-width:0;
+ padding:10px 13px;border:1px solid #c8e5f3;border-radius:14px;
+ text-decoration:none;background:linear-gradient(145deg,#fff,#eaf8ff);
+ color:#155d86;font-size:12px;line-height:1.4;font-weight:850;
+ box-shadow:0 3px 9px #1779a111;
+}
+.product-video-search-icon{font-size:24px;flex:none}
+.product-video-search-grid>a>span:last-child{
+ margin-inline-start:auto;font-size:20px;color:#4ba6ca;
+}
+.product-video-note{
+ margin:15px 0 0;font-size:11px;line-height:1.6;color:#7c95a5;
+}
+.product-video-open .product-panel{overflow:hidden!important}
+@media(max-width:650px){
+ .catalog-product-video-button{left:7px;top:7px;width:34px;height:34px;border-radius:12px}
+ .catalog-product-video-button svg{width:17px;height:17px}
+ .product-video-open-button{left:15px;top:13px;min-height:40px;padding:7px 11px}
+ .product-video-catalog{padding:7px}
+ .product-video-panel{
+  max-height:calc(100dvh - 14px);border-radius:21px;
+ }
+ .product-video-header{padding:18px 15px 12px}
+ .product-video-header h2{font-size:21px}
+ .product-video-model{font-size:12px}
+ .product-video-scroll{padding:13px 14px 20px}
+ .product-video-tiles{grid-template-columns:1fr}
+ .product-video-search-grid{grid-template-columns:1fr;gap:8px}
+ .product-video-search-grid>a{min-height:53px}
+ .product-video-close{width:39px;height:39px;border-radius:12px}
+}
+@media(prefers-reduced-motion:reduce){
+ .catalog-product-video-button{transition:none!important}
+}
