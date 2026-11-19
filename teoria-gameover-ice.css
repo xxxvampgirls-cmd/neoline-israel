@@ -17,12 +17,11 @@
  isolation:isolate;
  position:relative;
  width:min(502px,100%);
- max-height:calc(100dvh - 28px);
- overflow-x:hidden;
- overflow-y:auto;
- overscroll-behavior:contain;
- scrollbar-width:thin;
- scrollbar-color:#aed9ed transparent;
+ max-height:calc(100dvh - 16px);
+ overflow:hidden!important;
+ overscroll-behavior:none;
+ scrollbar-width:none;
+ touch-action:none;
  padding:26px clamp(18px,5vw,29px) 23px;
  border:1.5px solid rgba(255,255,255,.95);
  border-radius:29px;
@@ -41,33 +40,13 @@
  pointer-events:none;
 }
 .gameover-overlay .gameover-card::before{
- width:230px;height:230px;
- top:-158px;left:-128px;
- background:radial-gradient(circle,rgba(151,222,249,.30) 0 45%,rgba(140,213,246,.08) 46% 63%,transparent 64%);
- box-shadow:0 0 0 18px rgba(218,245,255,.15);
+ inset:0;width:100%;height:100%;
+ border:0;border-radius:inherit;box-shadow:none;
+ background:url("./assets/teoria/gameover-map.svg") center center/cover no-repeat;
+ opacity:.26;pointer-events:none;
 }
-.gameover-overlay .gameover-card::after{
- width:260px;height:260px;
- right:-174px;bottom:-165px;
- background:radial-gradient(circle,rgba(109,203,241,.19) 0 48%,rgba(116,213,244,.06) 49% 62%,transparent 63%);
- box-shadow:0 0 0 18px rgba(171,228,250,.11);
-}
+.gameover-overlay .gameover-card::after{display:none}
 .gameover-overlay .gameover-corner{display:none}
-.gameover-overlay .gameover-route-art{
- position:absolute;inset:0;z-index:0;
- width:100%;height:100%;
- pointer-events:none;opacity:.56;
-}
-.gameover-overlay .gameover-route-art path{
- fill:none;stroke:#79c7e9;stroke-width:2.5;
- stroke-linecap:round;stroke-linejoin:round;
-}
-.gameover-overlay .gameover-route-art .route-dash{
- stroke:#c3e9f8;stroke-width:7;opacity:.57;stroke-dasharray:7 13;
-}
-.gameover-overlay .gameover-route-art circle{
- fill:#b5e6f8;stroke:#fff;stroke-width:3;
-}
 .gameover-overlay .gameover-close{
  top:14px;right:14px;
  width:41px;height:41px;min-width:41px;
@@ -98,28 +77,6 @@ html[dir="rtl"] .gameover-overlay .gameover-close{right:auto;left:14px}
  letter-spacing:-.064em;
  color:#15587f;
  text-shadow:0 2px 0 #fff,0 5px 15px rgba(46,154,203,.12);
-}
-.gameover-overlay .gameover-underline{
- position:relative;z-index:2;
- width:126px;height:6px;
- margin:8px auto 17px;
- border-radius:999px;
- transform:none;
- background:linear-gradient(90deg,#81c7e7,#16b3e7 42%,#14d4cc 88%);
- box-shadow:0 2px 7px rgba(20,160,210,.20);
-}
-.gameover-overlay .gameover-underline::after{
- content:"";
- position:absolute;top:-4px;left:0;
- width:14px;height:14px;border-radius:50%;
- background:#0aa5d2;border:3px solid #fff;
- box-sizing:border-box;
- box-shadow:0 0 0 2px #6fd3ed,0 2px 6px rgba(18,141,196,.20);
- animation:goRouteGlow 3.2s ease-in-out infinite alternate;
-}
-@keyframes goRouteGlow{
- 0%{left:0}
- 100%{left:calc(100% - 14px)}
 }
 .gameover-overlay .gameover-card .gameover-message{
  position:relative;z-index:2;
@@ -218,7 +175,6 @@ html[dir="rtl"] .gameover-overlay .gameover-close{right:auto;left:14px}
  .gameover-overlay .gameover-card .gameover-title{
   font-size:clamp(34px,9.6vw,44px);
  }
- .gameover-overlay .gameover-underline{margin:7px auto 13px}
  .gameover-overlay .gameover-card .gameover-message{font-size:clamp(13px,3.8vw,16px);line-height:1.4}
  .gameover-overlay .gameover-card .gameover-score{margin:11px auto 13px;padding:7px 13px}
  .gameover-overlay .gameover-card .gameover-promo{gap:6px;padding:8px;margin-bottom:11px}
@@ -242,7 +198,6 @@ html[dir="rtl"] .gameover-overlay .gameover-close{right:auto;left:14px}
  .gameover-overlay .gameover-card{max-height:calc(100dvh - 12px);padding-top:12px;padding-bottom:12px}
  .gameover-overlay .gameover-hearts{margin:0 auto 3px}
  .gameover-overlay .gameover-card .gameover-title{font-size:31px}
- .gameover-overlay .gameover-underline{margin:5px auto 8px}
  .gameover-overlay .gameover-card .gameover-score{margin:6px auto}
  .gameover-overlay .gameover-card .gameover-promo{margin-bottom:6px}
  .gameover-overlay .gameover-actions{gap:6px}
@@ -250,7 +205,49 @@ html[dir="rtl"] .gameover-overlay .gameover-close{right:auto;left:14px}
  .gameover-overlay .gameover-modes{min-height:44px;padding:7px}
 }
 @media(prefers-reduced-motion:reduce){
- .gameover-overlay .gameover-underline::after{animation:none;left:calc(50% - 7px)}
  .gameover-overlay .gameover-hearts svg,
  .gameover-overlay .gameover-card{animation:none!important}
+}
+
+/* The Game Over dialog is a static, non-scrollable panel. This only
+   applies while the overlay is open; the quiz and navigator remain unchanged. */
+html:has(body.game-over-open),
+body.game-over-open{overscroll-behavior:none!important;overflow:hidden!important}
+.gameover-overlay{
+ position:fixed!important;
+ inset:0!important;
+ overflow:hidden!important;
+ overscroll-behavior:none!important;
+ touch-action:none;
+}
+.gameover-overlay .gameover-card{
+ overflow:hidden!important;
+ touch-action:none;
+ scrollbar-width:none;
+}
+.gameover-overlay .gameover-card::-webkit-scrollbar{display:none!important}
+.gameover-overlay button,
+.gameover-overlay a{touch-action:manipulation}
+@media(max-height:740px){
+ .gameover-overlay .gameover-card{padding-top:14px;padding-bottom:13px}
+ .gameover-overlay .gameover-hearts{margin:2px 0 6px}
+ .gameover-overlay .gameover-card .gameover-title{font-size:clamp(28px,6.5vh,42px);margin:0 0 6px}
+ .gameover-overlay .gameover-card .gameover-message{font-size:clamp(12px,2.5vh,15px);line-height:1.32}
+ .gameover-overlay .gameover-card .gameover-score{margin:7px auto 9px;padding:6px 12px}
+ .gameover-overlay .gameover-card .gameover-promo{margin:0 0 8px;padding:6px}
+ .gameover-overlay .gameover-actions{gap:6px}
+ .gameover-overlay .gameover-retry,
+ .gameover-overlay .gameover-modes{min-height:43px;padding:6px 10px}
+}
+@media(max-height:540px){
+ .gameover-overlay{padding:6px!important}
+ .gameover-overlay .gameover-card{max-height:calc(100dvh - 12px);padding:8px 11px}
+ .gameover-overlay .gameover-hearts svg{width:25px;height:25px}
+ .gameover-overlay .gameover-card .gameover-title{font-size:27px}
+ .gameover-overlay .gameover-card .gameover-message{font-size:12px;line-height:1.2}
+ .gameover-overlay .gameover-card .gameover-score{margin:5px auto}
+ .gameover-overlay .gameover-promo img{width:37px;height:37px;min-width:37px}
+ .gameover-overlay .gameover-card .gameover-promo{margin-bottom:5px}
+ .gameover-overlay .gameover-retry,
+ .gameover-overlay .gameover-modes{min-height:38px}
 }
