@@ -14,10 +14,15 @@
  /* YouTube IDs verified against model-specific public video pages.
     Most verified clips are in Russian; English search is prioritized. */
  const verified={
-  1:[{id:"fIaU3RCV2c4",type:"review",lang:"RU",title:"NEOLINE WowCam Wi-Fi — user review"}],
+  1:[{id:"fIaU3RCV2c4",type:"review",lang:"RU",title:"NEOLINE WowCam Wi-Fi — owner review"}],
   2:[{id:"ezMfOK-1EPo",type:"review",lang:"RU",title:"NEOLINE Flash 2K Wi-Fi — owner review"}],
+  3:[{id:"A6wInMV9Iww",type:"review",lang:"RU",title:"NEOLINE Flash 2K Wi-Fi Dual — day & night test"}],
+  4:[{id:"lwgyCJPBXF4",type:"review",lang:"RU",title:"NEOLINE EasyDrive 2K Wi-Fi Dual — detailed review"}],
+  5:[{id:"tKzgL69ELD4",type:"review",lang:"RU",title:"NEOLINE Argus 4K — detailed review"}],
   6:[{id:"2qQBchWAr9E",type:"review",lang:"RU",title:"NEOLINE Argus 4K Dual — detailed review"},
-     {id:"QCTWrtoIQUI",type:"comparison",lang:"RU",title:"NEOLINE Argus 4K Dual — dashcam comparison"}]
+     {id:"QCTWrtoIQUI",type:"comparison",lang:"RU",title:"NEOLINE Argus 4K Dual — dashcam comparison"}],
+  7:[{id:"HMu_cLiDllI",type:"review",lang:"RU",title:"NEOLINE SmartWay — detailed review"}],
+  8:[{id:"FnmYWNNKT6M",type:"review",lang:"RU",title:"NEOLINE G-Tech X54 Dual — unboxing"}]
  };
  const currentLocale=()=>copy[typeof lang==="string"?lang:document.documentElement.lang]||copy.ru;
  let currentId=null;
