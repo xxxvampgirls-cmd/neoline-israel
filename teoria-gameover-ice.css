@@ -1,0 +1,256 @@
+/* NEOLINE ISRAEL · Theory / Game Over
+   Light ice-glass redesign, 19 Nov 2026.
+   Keep all existing gameplay actions, product link and localized text intact. */
+.gameover-overlay[hidden]{display:none!important}
+.gameover-overlay{
+ padding:clamp(10px,2.5vh,20px);
+}
+.gameover-overlay .gameover-backdrop{
+ background:linear-gradient(150deg,rgba(20,67,105,.26),rgba(55,141,186,.22));
+ backdrop-filter:blur(9px) saturate(1.15);
+ -webkit-backdrop-filter:blur(9px) saturate(1.15);
+}
+.gameover-overlay .gameover-card{
+ --go-ink:#174968;
+ --go-accent:#0a94c8;
+ box-sizing:border-box;
+ isolation:isolate;
+ position:relative;
+ width:min(502px,100%);
+ max-height:calc(100dvh - 28px);
+ overflow-x:hidden;
+ overflow-y:auto;
+ overscroll-behavior:contain;
+ scrollbar-width:thin;
+ scrollbar-color:#aed9ed transparent;
+ padding:26px clamp(18px,5vw,29px) 23px;
+ border:1.5px solid rgba(255,255,255,.95);
+ border-radius:29px;
+ background:
+  radial-gradient(ellipse 78% 38% at 100% 0%,rgba(172,231,252,.53),transparent 72%),
+  radial-gradient(ellipse 70% 40% at 0% 100%,rgba(200,238,255,.66),transparent 70%),
+  linear-gradient(158deg,#fff 0%,#f7fcff 41%,#e5f6ff 100%);
+ box-shadow:0 0 0 2px rgba(149,214,243,.38),0 24px 58px rgba(12,70,108,.28),inset 0 2px 0 #fff;
+ color:var(--go-ink);
+}
+.gameover-overlay .gameover-card::before,
+.gameover-overlay .gameover-card::after{
+ z-index:0;
+ border:0;
+ border-radius:50%;
+ pointer-events:none;
+}
+.gameover-overlay .gameover-card::before{
+ width:230px;height:230px;
+ top:-158px;left:-128px;
+ background:radial-gradient(circle,rgba(151,222,249,.30) 0 45%,rgba(140,213,246,.08) 46% 63%,transparent 64%);
+ box-shadow:0 0 0 18px rgba(218,245,255,.15);
+}
+.gameover-overlay .gameover-card::after{
+ width:260px;height:260px;
+ right:-174px;bottom:-165px;
+ background:radial-gradient(circle,rgba(109,203,241,.19) 0 48%,rgba(116,213,244,.06) 49% 62%,transparent 63%);
+ box-shadow:0 0 0 18px rgba(171,228,250,.11);
+}
+.gameover-overlay .gameover-corner{display:none}
+.gameover-overlay .gameover-route-art{
+ position:absolute;inset:0;z-index:0;
+ width:100%;height:100%;
+ pointer-events:none;opacity:.56;
+}
+.gameover-overlay .gameover-route-art path{
+ fill:none;stroke:#79c7e9;stroke-width:2.5;
+ stroke-linecap:round;stroke-linejoin:round;
+}
+.gameover-overlay .gameover-route-art .route-dash{
+ stroke:#c3e9f8;stroke-width:7;opacity:.57;stroke-dasharray:7 13;
+}
+.gameover-overlay .gameover-route-art circle{
+ fill:#b5e6f8;stroke:#fff;stroke-width:3;
+}
+.gameover-overlay .gameover-close{
+ top:14px;right:14px;
+ width:41px;height:41px;min-width:41px;
+ border:1px solid #c3e4f3;
+ border-radius:14px;
+ background:linear-gradient(148deg,#fff,#e4f5ff);
+ color:#225e80;font-size:29px;
+ box-shadow:0 3px 9px rgba(28,115,162,.12),inset 0 1px 0 #fff;
+}
+html[dir="rtl"] .gameover-overlay .gameover-close{right:auto;left:14px}
+.gameover-overlay .gameover-hearts{
+ position:relative;z-index:2;
+ gap:12px;
+ margin:7px auto 11px;
+ color:#f66b88;
+ filter:drop-shadow(0 4px 6px rgba(222,66,113,.20));
+}
+.gameover-overlay .gameover-hearts svg{
+ width:clamp(30px,8.7vw,40px);
+ height:clamp(30px,8.7vw,40px);
+}
+.gameover-overlay .gameover-hearts svg:nth-child(2){color:#fb7a94}
+.gameover-overlay .gameover-hearts svg:nth-child(3){color:#f989a1}
+.gameover-overlay .gameover-card .gameover-title{
+ position:relative;z-index:2;
+ margin:1px 0 7px;
+ font:900 clamp(36px,9vw,52px)/1.06 Manrope,Arial,sans-serif;
+ letter-spacing:-.064em;
+ color:#15587f;
+ text-shadow:0 2px 0 #fff,0 5px 15px rgba(46,154,203,.12);
+}
+.gameover-overlay .gameover-underline{
+ position:relative;z-index:2;
+ width:126px;height:6px;
+ margin:8px auto 17px;
+ border-radius:999px;
+ transform:none;
+ background:linear-gradient(90deg,#81c7e7,#16b3e7 42%,#14d4cc 88%);
+ box-shadow:0 2px 7px rgba(20,160,210,.20);
+}
+.gameover-overlay .gameover-underline::after{
+ content:"";
+ position:absolute;top:-4px;left:0;
+ width:14px;height:14px;border-radius:50%;
+ background:#0aa5d2;border:3px solid #fff;
+ box-sizing:border-box;
+ box-shadow:0 0 0 2px #6fd3ed,0 2px 6px rgba(18,141,196,.20);
+ animation:goRouteGlow 3.2s ease-in-out infinite alternate;
+}
+@keyframes goRouteGlow{
+ 0%{left:0}
+ 100%{left:calc(100% - 14px)}
+}
+.gameover-overlay .gameover-card .gameover-message{
+ position:relative;z-index:2;
+ margin:0 auto;
+ max-width:420px;
+ color:#315a73;
+ font-size:clamp(14px,3.7vw,17px);
+ font-weight:750;
+ line-height:1.43;
+ text-shadow:none;
+}
+.gameover-overlay .gameover-card .gameover-score{
+ position:relative;z-index:2;
+ margin:13px auto 16px;
+ padding:9px 16px;
+ font-size:13px;font-weight:900;
+ color:#17688e;
+ background:linear-gradient(145deg,#fff,#e0f4ff);
+ border:1px solid #b5dfee;
+ border-radius:15px;
+ box-shadow:0 4px 12px rgba(12,118,171,.11),inset 0 1px 0 #fff;
+}
+.gameover-overlay .gameover-score::before{
+ content:"✦";
+ color:#e7a526;
+ font-size:14px;
+ margin-inline-end:7px;
+}
+.gameover-overlay .gameover-card .gameover-promo{
+ position:relative;z-index:2;
+ width:100%;min-width:0;
+ gap:10px;
+ margin:1px 0 14px;
+ padding:9px 10px;
+ border:1px solid #c2e4f4;
+ border-radius:17px;
+ background:rgba(255,255,255,.89);
+ box-shadow:0 6px 16px rgba(19,105,151,.10),inset 0 1px 0 #fff;
+ color:#174968;
+}
+.gameover-overlay .gameover-promo img{
+ border-radius:11px;
+ background:linear-gradient(145deg,#f8fdff,#ebf7ff);
+ filter:drop-shadow(0 3px 4px rgba(15,103,154,.19));
+}
+.gameover-overlay .gameover-promo-copy>span{color:#4883a1}
+.gameover-overlay .gameover-promo-copy strong{color:#174568}
+.gameover-overlay .gameover-promo-copy small{color:#7198ad}
+.gameover-overlay .gameover-promo-link{
+ display:grid;place-items:center;
+ border:1px solid #a9daef;
+ background:linear-gradient(150deg,#fff,#f0faff);
+ border-radius:12px;
+ color:#146c98;
+ font-weight:850;
+ box-shadow:0 1px 5px rgba(18,100,150,.07);
+}
+.gameover-overlay .gameover-promo-link:hover{background:#def5ff}
+.gameover-overlay .gameover-actions{
+ position:relative;z-index:2;
+ width:100%;gap:10px;
+}
+.gameover-overlay .gameover-retry,
+.gameover-overlay .gameover-modes{
+ min-height:52px;
+ padding:11px 14px;
+ border-radius:16px;
+ font-size:clamp(14px,3.9vw,16px);
+ letter-spacing:0;
+}
+.gameover-overlay .gameover-card .gameover-retry{
+ color:#fff;
+ border:1px solid #079cc5;
+ background:linear-gradient(110deg,#12c1e4,#099ed4 60%,#057dbb);
+ box-shadow:0 7px 15px rgba(7,136,180,.22),inset 0 1px 0 rgba(255,255,255,.58);
+}
+.gameover-overlay .gameover-retry .gameover-button-icon{
+ color:#fff;font-size:17px;
+}
+.gameover-overlay .gameover-card .gameover-modes{
+ color:#195e82;
+ border:1.5px solid #a4d8ed;
+ background:linear-gradient(145deg,#fff,#e5f7ff);
+ box-shadow:0 4px 11px rgba(16,111,159,.09),inset 0 1px 0 #fff;
+}
+.gameover-overlay .gameover-retry:hover,
+.gameover-overlay .gameover-modes:hover{
+ box-shadow:0 9px 20px rgba(7,121,171,.22);
+}
+@media(max-width:720px){
+ .gameover-overlay .gameover-card{
+  padding:21px clamp(12px,3.5vw,18px) 18px;
+  border-radius:27px;
+ }
+ .gameover-overlay .gameover-hearts{gap:9px;margin:8px 0 9px}
+ .gameover-overlay .gameover-card .gameover-title{
+  font-size:clamp(34px,9.6vw,44px);
+ }
+ .gameover-overlay .gameover-underline{margin:7px auto 13px}
+ .gameover-overlay .gameover-card .gameover-message{font-size:clamp(13px,3.8vw,16px);line-height:1.4}
+ .gameover-overlay .gameover-card .gameover-score{margin:11px auto 13px;padding:7px 13px}
+ .gameover-overlay .gameover-card .gameover-promo{gap:6px;padding:8px;margin-bottom:11px}
+ .gameover-overlay .gameover-promo img{width:49px;height:49px;min-width:49px}
+ .gameover-overlay .gameover-promo-copy strong{font-size:11px}
+ .gameover-overlay .gameover-promo-link{max-width:111px;font-size:10px;min-height:42px;padding:7px}
+ .gameover-overlay .gameover-actions{gap:8px}
+ .gameover-overlay .gameover-retry,
+ .gameover-overlay .gameover-modes{min-height:50px}
+}
+@media(max-width:370px){
+ .gameover-overlay .gameover-card{padding:17px 11px 15px}
+ .gameover-overlay .gameover-close{top:10px;right:10px;width:37px;height:37px;min-width:37px}
+ .gameover-overlay .gameover-card .gameover-title{font-size:33px}
+ .gameover-overlay .gameover-card .gameover-message{font-size:13px}
+ .gameover-overlay .gameover-promo-copy>span,.gameover-overlay .gameover-promo-copy small{font-size:9px}
+ .gameover-overlay .gameover-promo-link{max-width:103px;font-size:9px}
+ .gameover-overlay .gameover-promo img{width:43px;height:43px;min-width:43px}
+}
+@media(max-height:550px){
+ .gameover-overlay .gameover-card{max-height:calc(100dvh - 12px);padding-top:12px;padding-bottom:12px}
+ .gameover-overlay .gameover-hearts{margin:0 auto 3px}
+ .gameover-overlay .gameover-card .gameover-title{font-size:31px}
+ .gameover-overlay .gameover-underline{margin:5px auto 8px}
+ .gameover-overlay .gameover-card .gameover-score{margin:6px auto}
+ .gameover-overlay .gameover-card .gameover-promo{margin-bottom:6px}
+ .gameover-overlay .gameover-actions{gap:6px}
+ .gameover-overlay .gameover-retry,
+ .gameover-overlay .gameover-modes{min-height:44px;padding:7px}
+}
+@media(prefers-reduced-motion:reduce){
+ .gameover-overlay .gameover-underline::after{animation:none;left:calc(50% - 7px)}
+ .gameover-overlay .gameover-hearts svg,
+ .gameover-overlay .gameover-card{animation:none!important}
+}
