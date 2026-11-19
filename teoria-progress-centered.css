@@ -1,0 +1,116 @@
+/* NEOLINE / Theory progress — centered compact overview */
+.game-progress-dialog{box-sizing:border-box}
+.game-progress-dialog .game-progress-panel{
+ box-sizing:border-box;width:min(100%,660px);margin-inline:auto;
+}
+.game-progress-dialog .game-progress-achievements{
+ max-width:600px;margin:20px auto 0;text-align:center;
+}
+.game-progress-dialog .game-progress-section-heading{
+ display:flex;justify-content:center;align-items:center;gap:10px;margin:0 auto 12px;
+}
+.game-progress-dialog .game-progress-section-heading h3{
+ margin:0;font-size:16px;font-weight:900;color:#174e72;
+}
+.game-progress-dialog .game-progress-badges-count{
+ display:inline-flex;align-items:center;justify-content:center;
+ min-width:39px;height:25px;padding:1px 8px;
+ color:#1379a9;background:#e0f6ff;border:1px solid #b2daeb;
+ border-radius:99px;font-size:11px;font-weight:900;
+}
+.game-progress-dialog .game-achievement-grid{
+ display:grid;grid-template-columns:repeat(2,minmax(0,1fr));
+ width:100%;max-width:580px;margin-inline:auto;
+ gap:8px;text-align:start;
+}
+.game-progress-dialog .game-achievement{min-width:0}
+.game-progress-dialog .game-achievement-grid:not(.is-expanded) .game-achievement:nth-child(n+3){
+ display:none!important;
+}
+.game-progress-dialog .game-progress-more{
+ display:flex;align-items:center;justify-content:center;gap:10px;
+ min-height:43px;width:min(100%,355px);margin:13px auto 0;padding:8px 14px;
+ background:linear-gradient(135deg,#fff,#e7f7ff);
+ border:1px solid #addbeb;border-radius:14px;
+ box-shadow:0 3px 10px #136f9a1c;color:#156d97;
+ font:850 12px/1.2 Manrope,Arial,sans-serif;
+ cursor:pointer;touch-action:manipulation;
+}
+.game-progress-dialog .game-progress-more[hidden]{display:none!important}
+.game-progress-dialog .game-progress-more::after{
+ content:"⌄";font:900 20px/1 Arial,sans-serif;
+ transition:transform .2s;
+}
+.game-progress-dialog .game-progress-more[aria-expanded="true"]::after{transform:rotate(180deg)}
+.game-progress-dialog .game-progress-fold{
+ display:block;width:100%;max-width:600px;
+ margin:13px auto 0;border:1px solid #b8ddea;
+ border-radius:16px;
+ background:linear-gradient(155deg,#fff,#eaf8ff);
+ box-shadow:0 4px 12px #1669a119;overflow:hidden;
+}
+.game-progress-dialog .game-progress-fold-heading{
+ display:flex;justify-content:center;align-items:center;gap:10px;
+ min-height:48px;padding:12px 14px;list-style:none;
+ color:#19587a;font-size:14px;font-weight:900;
+ cursor:pointer;touch-action:manipulation;
+}
+.game-progress-dialog .game-progress-fold-heading::-webkit-details-marker{display:none}
+.game-progress-dialog .game-progress-fold-heading::marker{content:""}
+.game-progress-dialog .game-progress-fold-chevron{
+ flex:none;width:8px;height:8px;
+ border-bottom:2px solid #1684ad;border-right:2px solid #1684ad;
+ transform:translateY(-2px) rotate(45deg);transition:transform .2s;
+}
+.game-progress-dialog .game-progress-fold[open] .game-progress-fold-chevron{
+ transform:translateY(2px) rotate(225deg);
+}
+.game-progress-dialog .game-progress-fold[open] .game-progress-fold-heading{
+ border-bottom:1px solid #c9e7f5;background:#f0faff;
+}
+.game-progress-dialog .game-progress-fold-content{
+ padding:13px 14px 18px;text-align:center;
+}
+.game-progress-dialog .game-progress-fold-content>p{
+ margin:0 auto 12px;color:#69899e;font-size:11px;line-height:1.5;
+}
+.game-progress-dialog .game-progress-chart{max-width:520px;margin-inline:auto}
+.game-progress-dialog .game-progress-history{
+ max-width:555px;margin-inline:auto;text-align:start;
+}
+.game-progress-dialog .game-progress-footnote{
+ max-width:555px;margin:18px auto 0;text-align:center;
+}
+.game-progress-dialog .game-progress-more:focus-visible,
+.game-progress-dialog .game-progress-fold-heading:focus-visible{
+ outline:3px solid #12a4d2;outline-offset:2px;
+}
+@media(max-width:720px){
+ .game-progress-dialog{
+  box-sizing:border-box!important;
+  position:fixed!important;inset:0!important;
+  width:100vw!important;max-width:100vw!important;
+  height:100dvh!important;max-height:100dvh!important;
+  margin:0!important;padding:0!important;border:0!important;
+  border-radius:0!important;overflow-x:hidden!important;
+  overflow-y:auto!important;overscroll-behavior:contain;
+ }
+ .game-progress-dialog .game-progress-panel{
+  width:min(100%,610px);margin-inline:auto;
+  padding:12px max(12px,env(safe-area-inset-left)) calc(32px + env(safe-area-inset-bottom)) max(12px,env(safe-area-inset-right));
+ }
+ .game-progress-dialog .game-progress-achievements{margin-top:17px}
+ .game-progress-dialog .game-achievement-grid{gap:7px}
+ .game-progress-dialog .game-achievement{padding:8px;gap:8px}
+ .game-progress-dialog .game-progress-fold{margin-top:12px}
+ .game-progress-dialog .game-progress-fold-content{padding:12px 10px 15px}
+ .game-progress-dialog .game-progress-chart .day__bar{height:85px}
+}
+@media(max-width:360px){
+ .game-progress-dialog .game-achievement__icon{width:29px;height:29px;flex-basis:29px;font-size:17px}
+ .game-progress-dialog .game-achievement__text strong{font-size:9.5px}
+}
+@media(prefers-reduced-motion:reduce){
+ .game-progress-dialog .game-progress-more::after,
+ .game-progress-dialog .game-progress-fold-chevron{transition:none!important}
+}
