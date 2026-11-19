@@ -83,8 +83,14 @@
   get("productVideoModel").textContent=name;
   const matched=(verified[id]||[]).filter(v=>v.lang===pref.tag);
   const foreign=(verified[id]||[]).filter(v=>v.lang!==pref.tag);
+  /* On mobile the language-specific searches stay visible first.
+     Real review videos are available in a compact disclosure below. */
   const localClips=matched.length?
-   '<section class="product-video-curated"><h3>▶ '+secureText(t.verified)+'</h3>'+renderClips(matched,t)+'</section>':
+   '<details class="product-video-curated product-video-featured"><summary>'+
+    '<span class="product-video-featured-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="5" width="18" height="14" rx="3"/><path d="m10 9 5 3-5 3z"/></svg></span>'+
+    '<span class="product-video-featured-title">'+secureText(t.verified)+' ('+matched.length+')</span>'+
+    '<span class="product-video-chevron" aria-hidden="true"></span></summary>'+
+    '<div class="product-video-featured-body">'+renderClips(matched,t)+'</div></details>':
    '<p class="product-video-empty">'+secureText(pref.none)+'</p>';
   // Four coherent outline icons replace OS-dependent emojis and oversized logos.
   // Review: play/check; comparison: two panels; promo: screen/spark; samples: aperture/REC.
@@ -107,7 +113,7 @@
     ).join('')+'</div><p class="product-video-note">'+secureText(pref.note)+'</p></section>';
   const other=foreign.length?
    '<details class="product-video-other"><summary><span class="product-video-other-symbol">'+worldSvg+'</span><span class="product-video-other-label">'+secureText(pref.other)+' ('+foreign.length+')</span><span class="product-video-chevron" aria-hidden="true"></span></summary><div class="product-video-other-body">'+renderClips(foreign,t)+'</div></details>':"";
-  get("productVideoResults").innerHTML=localClips+searches+other;
+  get("productVideoResults").innerHTML=searches+localClips+other;
  }
 
  function openVideos(id){
