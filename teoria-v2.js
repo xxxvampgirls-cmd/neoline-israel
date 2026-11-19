@@ -208,6 +208,7 @@ function closeProgress(){
  else dialog.removeAttribute("open");
 }
 for(const b of buttons)b?.addEventListener("click",()=>openProgress(b));
+window.addEventListener("neoline:open-progress",event=>openProgress(event.detail?.trigger||buttons[0]));
 $("gameProgressClose")?.addEventListener("click",closeProgress);
 dialog?.addEventListener("click",event=>{if(event.target===dialog)closeProgress()});
 dialog?.addEventListener("close",()=>{if(openedBy?.isConnected)openedBy.focus({preventScroll:true});openedBy=null});
