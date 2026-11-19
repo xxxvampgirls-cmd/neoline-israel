@@ -559,3 +559,16 @@ html[dir="rtl"] #gamePlaying .nav9 .nav9-target{left:3.6%}
  .theory-game-dock .dock4-center .dock4-hearts{font-size:17px}
  .theory-game-dock .dock4-action{width:40px;height:42px;min-height:42px}
 }
+
+/* Keep the central XP / questions / hearts trio exactly centered;
+   tuck both outer buttons inward without shrinking their tap targets. */
+.theory-game-dock .dock4-modes{
+ margin-inline-start:clamp(9px,2.5vw,18px)!important;
+}
+.theory-game-dock .dock4-action{
+ margin-inline-end:clamp(9px,2.5vw,18px)!important;
+}
+@media(max-width:360px){
+ .theory-game-dock .dock4-modes{margin-inline-start:7px!important}
+ .theory-game-dock .dock4-action{margin-inline-end:7px!important}
+}
