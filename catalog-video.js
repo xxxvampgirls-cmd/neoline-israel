@@ -25,6 +25,70 @@
   8:[{id:"FnmYWNNKT6M",type:"review",lang:"RU",title:"NEOLINE G-Tech X54 Dual — unboxing"}]
  };
 
+/* Public model-specific clips from RUTUBE and VK Video.
+   Only curated direct links are shown; no automatic or unverified results. */
+ const socialVideos={
+  1:[{platform:"rutube",id:"e431d540cbd10ec2bc7613f2ee2576b3",lang:"RU",kind:"review",title:"Обзор Neoline WowCam Wi-Fi"}],
+  2:[{platform:"rutube",id:"9a4e4f1738e7690340c6b718c90a9916",lang:"RU",kind:"review",title:"Neoline Flash 2K Wi-Fi — обзор"}],
+  3:[{platform:"rutube",id:"480c28ada6963c66f93dc282e7739e11",lang:"RU",kind:"samples",title:"Neoline Flash 2K Wi-Fi Dual — пример съёмки"}],
+  4:[{platform:"rutube",id:"708f23de95e67e09c37098c812b95be8",lang:"RU",kind:"review",title:"Neoline EasyDrive 2K Wi-Fi Dual — обзор"}],
+  5:[{platform:"rutube",id:"62ab0f250a34a92da079c1abd136377f",lang:"RU",kind:"review",title:"NEOLINE Argus 4K — отзыв"},
+     {platform:"vk",id:"-229158013_456239143",lang:"RU",kind:"samples",title:"Neoline Argus 4K — ночная и дневная съёмка"}],
+  6:[{platform:"rutube",id:"bafadc656c03fa15f37340f26e3e5d41",lang:"RU",kind:"review",title:"Neoline Argus 4K Dual — обзор"},
+     {platform:"rutube",id:"3361320a631057a0587de49a49882eda",lang:"RU",kind:"comparison",title:"Neoline Argus 4K Dual — сравнение видеорегистраторов"}]
+ };
+ const socialCopy={
+  ru:{title:"Видео из соцсетей",kind:{review:"Обзор",comparison:"Сравнение",samples:"Пример записи"},watch:"Смотреть здесь",external:"Открыть источник ↗",language:"Язык",other:"На русском языке",none:"Для этой модели подтверждённых видео из соцсетей пока нет.",help:"Подборка проверенных ссылок — не автоматическая лента."},
+  en:{title:"Social video reviews",kind:{review:"Review",comparison:"Comparison",samples:"Recording sample"},watch:"Watch here",external:"Open original ↗",language:"Language",other:"Russian-language videos",none:"No verified social videos for this exact model yet.",help:"Curated direct links, not a live social feed."},
+  he:{title:"סרטונים מהרשתות",kind:{review:"סקירה",comparison:"השוואה",samples:"דוגמת צילום"},watch:"צפייה כאן",external:"פתיחת המקור ↗",language:"שפה",other:"סרטונים ברוסית",none:"אין עדיין סרטונים מאומתים לדגם הזה.",help:"קישורים שנבדקו, לא עדכון אוטומטי."},
+  ar:{title:"فيديوهات الشبكات",kind:{review:"مراجعة",comparison:"مقارنة",samples:"نموذج تصوير"},watch:"شاهد هنا",external:"فتح المصدر ↗",language:"اللغة",other:"مقاطع باللغة الروسية",none:"لا توجد مقاطع موثقة لهذا الطراز بعد.",help:"روابط مختارة وليست بثاً تلقائياً."}
+ };
+ function socialSourceUrl(video){
+  if(video.platform==="rutube" && /^[a-f0-9]{32}$/.test(video.id))
+   return "https://rutube.ru/video/"+video.id+"/";
+  if(video.platform==="vk" && /^-\d+_\d+$/.test(video.id))
+   return "https://vk.com/video"+video.id;
+  return null;
+ }
+ function socialCards(videos,language){
+  const tr=socialCopy[language]||socialCopy.ru;
+  return videos.map(v=>{
+   const url=socialSourceUrl(v);
+   if(!url)return "";
+   const type=tr.kind[v.kind]||tr.kind.review;
+   const provider=v.platform==="rutube"?"RUTUBE":"VK Видео";
+   const providerMark=v.platform==="rutube"?"RT":"VK";
+   const play=v.platform==="rutube"?
+     '<button type="button" class="product-video-social-play" data-play-social="'+secureText(v.id)+'">▶ '+secureText(tr.watch)+'</button>':"";
+   return '<article class="product-video-social-item">'+
+    '<div class="product-video-social-heading"><span class="product-video-social-mark" aria-hidden="true">'+providerMark+'</span>'+
+    '<span class="product-video-social-origin">'+secureText(provider)+' · '+secureText(v.lang)+' · '+secureText(type)+'</span></div>'+
+    '<strong class="product-video-social-title">'+secureText(v.title)+'</strong>'+
+    '<div class="product-video-social-actions">'+play+
+    '<a href="'+url+'" target="_blank" rel="noopener noreferrer">'+secureText(tr.external)+'</a></div>'+
+    '<div class="product-video-embed" data-social-embed="'+secureText(v.id)+'"></div></article>';
+  }).join("");
+ }
+ function renderSocial(id,selectedLang){
+  const videos=(socialVideos[id]||[]).filter(v=>socialSourceUrl(v));
+  if(!videos.length)return "";
+  const lc=socialCopy[selectedLang]||socialCopy.ru;
+  const pref=localVideo[selectedLang]||localVideo.ru;
+  const available=videos.filter(v=>v.lang===pref.tag);
+  const foreign=videos.filter(v=>v.lang!==pref.tag);
+  const items=available.concat(foreign);
+  // Russian videos are available to English/Hebrew/Arabic visitors, but
+  // remain tucked away under this accordion rather than being primary.
+  const label=selectedLang!=="ru"&&available.length===0
+   ?lc.title+" · "+lc.other:lc.title;
+  return '<details class="product-video-social"><summary>'+
+   '<span class="product-video-social-symbol" aria-hidden="true">▶</span>'+
+   '<span class="product-video-social-label">'+secureText(label)+' <small>('+items.length+')</small></span>'+
+   '<span class="product-video-chevron" aria-hidden="true"></span></summary>'+
+   '<div class="product-video-social-list">'+socialCards(items,selectedLang)+
+   '<p class="product-video-social-note">'+secureText(lc.help)+'</p></div></details>';
+ }
+
  const localVideo={
  ru:{hl:"ru",gl:"RU",tag:"RU",flag:"🇷🇺",region:"Россия",title:"Обзоры на русском",items:["Обзоры","Сравнения","Презентации и реклама","Примеры съёмки"],terms:["обзор отзыв тест","сравнение видеорегистраторов","официальная презентация реклама","пример записи день ночь"],other:"Видео на других языках",none:"Проверенных русскоязычных роликов для этой модели пока нет. Начните с подборок ниже.",note:"YouTube открывается на русском языке с регионом Россия. Язык видео не гарантирован."},
  en:{hl:"en-GB",gl:"GB",tag:"EN",flag:"🇬🇧",region:"United Kingdom",title:"English reviews first",items:["English reviews","Comparisons","Ads and presentations","Video samples"],terms:["review hands on English","comparison dashcam English","official promo presentation English","sample footage day night English"],other:"Videos in other languages",none:"No verified English review for this exact model yet. English searches below take priority over Russian videos.",note:"Search opens YouTube in English with the United Kingdom region. Results and spoken language depend on YouTube."},
@@ -113,7 +177,7 @@
     ).join('')+'</div><p class="product-video-note">'+secureText(pref.note)+'</p></section>';
   const other=foreign.length?
    '<details class="product-video-other"><summary><span class="product-video-other-symbol">'+worldSvg+'</span><span class="product-video-other-label">'+secureText(pref.other)+' ('+foreign.length+')</span><span class="product-video-chevron" aria-hidden="true"></span></summary><div class="product-video-other-body">'+renderClips(foreign,t)+'</div></details>':"";
-  get("productVideoResults").innerHTML=searches+localClips+other;
+  get("productVideoResults").innerHTML=searches+renderSocial(id,typeof lang==="string"?lang:document.documentElement.lang)+localClips+other;
  }
 
  function openVideos(id){
@@ -125,18 +189,25 @@
  }
  overlay.addEventListener("click",event=>{
   if(event.target.closest("[data-close-video]")){closeVideos();return}
+  const social=event.target.closest("[data-play-social]");
   const play=event.target.closest("[data-play-yt]");
-  if(!play)return;
-  const id=play.dataset.playYt;
-  if(!/^[A-Za-z0-9_-]{11}$/.test(id))return;
+  if(!social&&!play)return;
+  const id=social?social.dataset.playSocial:play.dataset.playYt;
+  const isRutube=Boolean(social);
+  if(isRutube){
+   // The identifier must belong to the *current model's* reviewed links.
+   const listed=(socialVideos[currentId]||[]).some(v=>v.platform==="rutube"&&v.id===id);
+   if(!listed||!(/^[a-f0-9]{32}$/.test(id)))return;
+  }else if(!/^[A-Za-z0-9_-]{11}$/.test(id))return;
   stopPlayback();
-  const container=overlay.querySelector('[data-embed-for="'+id+'"]');
+  const container=overlay.querySelector(isRutube?'[data-social-embed="'+id+'"]':'[data-embed-for="'+id+'"]');
   if(!container)return;
   const frame=document.createElement("iframe");
-  frame.src="https://www.youtube-nocookie.com/embed/"+id+"?autoplay=1&rel=0";
-  frame.title="NEOLINE YouTube video";
+  frame.src=isRutube?"https://rutube.ru/play/embed/"+id+"/":
+    "https://www.youtube-nocookie.com/embed/"+id+"?autoplay=1&rel=0";
+  frame.title=isRutube?"NEOLINE RUTUBE video":"NEOLINE YouTube video";
   frame.loading="lazy";
-  frame.allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share";
+  frame.allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; fullscreen";
   frame.referrerPolicy="strict-origin-when-cross-origin";
   frame.allowFullscreen=true;
   container.append(frame);
