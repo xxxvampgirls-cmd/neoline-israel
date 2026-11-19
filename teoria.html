@@ -17,6 +17,7 @@
 <link rel="stylesheet" href="./teoria-sign-studio.css?v=20261119-studio-v1">
 <link rel="stylesheet" href="./teoria-game-dock4-road9.css?v=20261119-random-routes-padding-v6">
 <link rel="stylesheet" href="./teoria-gameover-ice.css?v=20261119-map-no-scroll-v2">
+<link rel="stylesheet" href="./teoria-progress-centered.css?v=20261119-folds-center-v1">
 </head><body>
 <header class="topbar neoline-site-header"><div class="neoline-site-header__inner">
 <a class="neoline-site-header__logo" href="./" aria-label="NEOLINE — главная страница"><img src="./assets/neoline-clean.svg?v=20261116-compact" width="501" height="108" alt="NEOLINE"></a>
@@ -227,9 +228,19 @@
    <div><span class="game-progress-stat-icon">⭐</span><strong id="gameProgressXP">0</strong><span id="gameProgressXPText">XP</span></div>
    <div><span class="game-progress-stat-icon">🏆</span><strong id="gameProgressGames">0</strong><span id="gameProgressGamesText">Игр</span></div>
   </div>
-  <section class="game-progress-section"><h3 id="gameProgressAchievementsTitle">Достижения</h3><div class="game-achievement-grid" id="gameAchievementGrid"></div></section>
-  <section class="game-progress-section"><h3 id="gameProgressChartTitle">Последние 7 дней</h3><p id="gameProgressChartNote">Точность по завершённым играм. Пропуски — нет данных.</p><div class="game-progress-chart" id="gameProgressChart" role="img" aria-label="Результаты по дням"></div></section>
-  <section class="game-progress-section"><h3 id="gameProgressHistoryTitle">Последние игры</h3><div class="game-progress-history" id="gameProgressHistory"></div></section>
+  <section class="game-progress-section game-progress-achievements" aria-labelledby="gameProgressAchievementsTitle">
+   <div class="game-progress-section-heading"><h3 id="gameProgressAchievementsTitle">Достижения</h3><span id="gameProgressBadgeCount" class="game-progress-badges-count" aria-label="Получено достижений">0/5</span></div>
+   <div class="game-achievement-grid" id="gameAchievementGrid"></div>
+   <button type="button" class="game-progress-more" id="gameAchievementToggle" aria-controls="gameAchievementGrid" aria-expanded="false">Показать все достижения</button>
+  </section>
+  <details class="game-progress-fold" id="gameProgressWeekFold">
+   <summary class="game-progress-fold-heading"><span aria-hidden="true">📊</span><span id="gameProgressChartTitle">Последние 7 дней</span><span class="game-progress-fold-chevron" aria-hidden="true"></span></summary>
+   <div class="game-progress-fold-content"><p id="gameProgressChartNote">Точность по завершённым играм. Пропуски — нет данных.</p><div class="game-progress-chart" id="gameProgressChart" role="img" aria-label="Результаты по дням"></div></div>
+  </details>
+  <details class="game-progress-fold" id="gameProgressHistoryFold">
+   <summary class="game-progress-fold-heading"><span aria-hidden="true">🕘</span><span id="gameProgressHistoryTitle">Последние игры</span><span class="game-progress-fold-chevron" aria-hidden="true"></span></summary>
+   <div class="game-progress-fold-content"><div class="game-progress-history" id="gameProgressHistory"></div></div>
+  </details>
   <p class="game-progress-footnote" id="gameProgressFootnote">Прогресс хранится на этом устройстве и для выбранного языка и категории прав.</p>
  </div>
 </dialog>
@@ -317,7 +328,7 @@
 </nav>
 <script src="./teoria-dashboard.js?v=20261118-animated-v1" defer></script>
 <script src="./teoria.js?v=20261119-hint-fixed-v15" defer></script>
-<script src="./teoria-v2.js?v=20261119-dock4-stats-v8" defer></script>
+<script src="./teoria-v2.js?v=20261119-progress-folds-v9" defer></script>
 <script src="./teoria-gifts.js?v=20261118-gifts-preview-v1" defer></script>
 <script src="./teoria-licence-dialog.js?v=20261119-custom-v1" defer></script>
 <script src="./teoria-game-dock4-road9.js?v=20261119-random-routes-padding-v5" defer></script>
