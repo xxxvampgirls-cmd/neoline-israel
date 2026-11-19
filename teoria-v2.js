@@ -13,7 +13,7 @@ const L={
   quizWarning:"Соблюдай правила — береги жизни ❤️",badge:"МОЯ ИГРА",achKicker:"ТВОИ ДОСТИЖЕНИЯ",
   intro:"Здесь только реальные результаты твоих игр.",
   questions:"Вопросов",accuracy:"Точность",xp:"XP",games:"В истории",
-  achievements:"Достижения",week:"Последние 7 дней",
+  achievements:"Достижения",week:"Последние 7 дней",moreBadges:"Показать все достижения",lessBadges:"Свернуть достижения",badgeCount:"Получено достижений",
   weekHelp:"Точность по завершённым играм. Пропуски — нет данных.",
   history:"Последние игры",footnote:"Прогресс хранится на этом устройстве для выбранного языка и категории прав.",
   noGames:"Пока нет завершённых игр. Выбери режим и начни играть!",
@@ -35,7 +35,7 @@ const L={
   progress:"My progress",shortProgress:"Progress",quizWarning:"Stay safe and follow the rules ❤️",
   badge:"MY GAME",achKicker:"YOUR ACHIEVEMENTS",intro:"Only your actual game results are shown.",
   questions:"Questions",accuracy:"Accuracy",xp:"XP",games:"Recorded",
-  achievements:"Achievements",week:"Last 7 days",weekHelp:"Accuracy from completed games. Gaps mean no data.",
+  achievements:"Achievements",week:"Last 7 days",moreBadges:"Show all achievements",lessBadges:"Show fewer achievements",badgeCount:"Achievements unlocked",weekHelp:"Accuracy from completed games. Gaps mean no data.",
   history:"Recent games",footnote:"Progress is stored on this device for the selected language and licence class.",
   noGames:"No completed games yet. Choose a mode to begin!",noHistory:"No game results for these days.",
   correct:"Correct",errors:"Mistakes",right:"correct",completed:"Unlocked",locked:"Locked",
@@ -55,7 +55,7 @@ const L={
   progress:"ההתקדמות שלי",shortProgress:"התקדמות",quizWarning:"סעו בזהירות ❤️",
   badge:"המשחק שלי",achKicker:"ההישגים שלך",intro:"מוצגות רק תוצאות המשחקים האמיתיות שלך.",
   questions:"שאלות",accuracy:"דיוק",xp:"XP",games:"ברשימה",
-  achievements:"הישגים",week:"7 הימים האחרונים",weekHelp:"אחוז הצלחה במשחקים שהושלמו. יום ריק פירושו שאין נתונים.",
+  achievements:"הישגים",week:"7 הימים האחרונים",moreBadges:"הצגת כל ההישגים",lessBadges:"הצגה מצומצמת",badgeCount:"הישגים שנפתחו",weekHelp:"אחוז הצלחה במשחקים שהושלמו. יום ריק פירושו שאין נתונים.",
   history:"משחקים אחרונים",footnote:"ההתקדמות נשמרת במכשיר זה עבור השפה ודרגת הרישיון שנבחרו.",
   noGames:"עדיין אין משחקים שהושלמו. בחרו מצב משחק!",noHistory:"אין תוצאות לימים האלה.",
   correct:"תשובות נכונות",errors:"טעויות",right:"נכון",completed:"נפתח",locked:"נעול",
@@ -71,7 +71,7 @@ const L={
   days:["א","ב","ג","ד","ה","ו","ש"]
  }
 };
-let current=null,openedBy=null,toastTimer=null;
+let current=null,openedBy=null,toastTimer=null,achievementsExpanded=false;
 function set(id,value){const e=$(id);if(e)e.textContent=value}
 function localStats(){
  const lang=locale(),license=$("licenseSelect")?.value||"B";
@@ -129,6 +129,15 @@ function formatDay(x){
  return new Intl.DateTimeFormat(lang,{day:"2-digit",month:"short"}).format(x);
 }
 function dayKey(d){return d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0")+"-"+String(d.getDate()).padStart(2,"0")}
+function updateAchievementFold(){
+ const grid=$("gameAchievementGrid"),button=$("gameAchievementToggle");
+ if(!grid||!button)return;
+ const c=L[locale()]||L.ru;
+ button.hidden=grid.children.length<=2;
+ grid.classList.toggle("is-expanded",achievementsExpanded);
+ button.setAttribute("aria-expanded",String(achievementsExpanded));
+ button.textContent=achievementsExpanded?c.lessBadges:c.moreBadges;
+}
 function drawProgress(){
  const copy=L[locale()]||L.ru;
  const data=current||localStats();const history=validGames(data.history);
@@ -136,7 +145,10 @@ function drawProgress(){
  set("gameProgressXP",num(data.xp));set("gameProgressGames",num(history.length));
  const grid=$("gameAchievementGrid");grid.replaceChildren();
  const earned=earnedAchievements(data,history);
- for(const badge of copy.badges){
+ set("gameProgressBadgeCount",num(earned.size)+"/"+num(copy.badges.length));
+ $("gameProgressBadgeCount")?.setAttribute("aria-label",copy.badgeCount+": "+num(earned.size)+"/"+num(copy.badges.length));
+ const badges=[...copy.badges].sort((a,b)=>Number(earned.has(b.id))-Number(earned.has(a.id)));
+ for(const badge of badges){
   const isOn=earned.has(badge.id);
   const card=dom("div","game-achievement"+(isOn?"":" is-locked"));
   card.setAttribute("aria-label",badge.name+" · "+(isOn?copy.completed:copy.locked));
@@ -145,6 +157,7 @@ function drawProgress(){
   title.append(dom("strong","",badge.name),dom("span","",isOn?copy.completed:badge.help));
   card.append(title);grid.append(card);
  }
+ updateAchievementFold();
  const chart=$("gameProgressChart");chart.replaceChildren();
  const today=new Date(),start=new Date(today.getFullYear(),today.getMonth(),today.getDate());
  start.setDate(start.getDate()-6);
@@ -197,7 +210,10 @@ function updateCopy(){
 }
 function openProgress(trigger){
  if(!dialog)return;
- openedBy=trigger;current=localStats();updateCopy();drawProgress();
+ openedBy=trigger;current=localStats();achievementsExpanded=false;
+ $("gameProgressWeekFold")?.removeAttribute("open");
+ $("gameProgressHistoryFold")?.removeAttribute("open");
+ updateCopy();drawProgress();
  if(typeof dialog.showModal==="function"){if(!dialog.open)dialog.showModal()}
  else dialog.setAttribute("open","");
  $("gameProgressClose")?.focus({preventScroll:true});
@@ -207,6 +223,10 @@ function closeProgress(){
  if(typeof dialog.close==="function"&&dialog.open)dialog.close();
  else dialog.removeAttribute("open");
 }
+$("gameAchievementToggle")?.addEventListener("click",()=>{
+ achievementsExpanded=!achievementsExpanded;
+ updateAchievementFold();
+});
 for(const b of buttons)b?.addEventListener("click",()=>openProgress(b));
 window.addEventListener("neoline:open-progress",event=>openProgress(event.detail?.trigger||buttons[0]));
 $("gameProgressClose")?.addEventListener("click",closeProgress);
