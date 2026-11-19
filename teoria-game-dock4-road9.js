@@ -21,6 +21,41 @@ const labels={
 };
 let game={done:0,total:10,lives:3,earned:0,mode:null,hintsLeft:3,hintUsed:false,answered:false};
 function current(){return labels[lang()]||labels.ru}
+
+let routeVisibleRatio=null,routeGoal=null,routeFrame=0;
+function drawRouteAt(ratio){
+ const path=$("gameQuizRouteBase"),fill=$("gameQuizRouteFill"),dot=$("gameQuizRouteCar");
+ if(!path||!fill||!dot||typeof path.getTotalLength!=="function")return;
+ const length=path.getTotalLength();
+ if(!length)return;
+ const p=Math.max(0,Math.min(1,ratio));
+ fill.style.strokeDasharray=length+" "+length;
+ fill.style.strokeDashoffset=(length*(1-p)).toFixed(3);
+ const point=path.getPointAtLength(length*p);
+ const rtl=document.documentElement.dir==="rtl";
+ dot.style.left=(rtl?100-point.x/10:point.x/10).toFixed(3)+"%";
+ dot.style.top=point.y.toFixed(3)+"%";
+}
+function moveRouteMarker(goal){
+ const target=Math.max(0,Math.min(1,goal));
+ if(routeGoal===target && routeFrame)return;
+ routeGoal=target;
+ if(routeFrame){cancelAnimationFrame(routeFrame);routeFrame=0}
+ const from=routeVisibleRatio===null?target:routeVisibleRatio;
+ const noMotion=window.matchMedia&&window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+ if(noMotion||Math.abs(from-target)<.00001){
+  routeVisibleRatio=target;drawRouteAt(target);return;
+ }
+ const start=performance.now(),duration=580;
+ const frame=now=>{
+  const t=Math.min(1,Math.max(0,(now-start)/duration));
+  const eased=1-Math.pow(1-t,3);
+  routeVisibleRatio=from+(target-from)*eased;
+  drawRouteAt(routeVisibleRatio);
+  routeFrame=t<1?requestAnimationFrame(frame):0;
+ };
+ routeFrame=requestAnimationFrame(frame);
+}
 function syncStage(){
  const active=!playing.hidden&&!document.body.classList.contains("game-over-open");
  dock.hidden=!active;
@@ -63,21 +98,20 @@ function updateUI(){
  $("dock4HintCount").textContent=String(remaining);
  hint.setAttribute("aria-label",exam?c.examNoHint:remaining===0?c.hintNone:game.hintUsed?c.hintUsed:c.hint+", "+remaining);
  hint.title=hint.getAttribute("aria-label");
- const checkpoints=[...document.querySelectorAll("#gamePlaying .road9-checkpoint")];
- for(const [i,node] of checkpoints.entries()){
-  node.classList.toggle("is-done",ratio>=(i+1)/(checkpoints.length+1)-0.0001);
- }
- const route=$("gameQuizRouteFill");
- const car=$("gameQuizRouteCar");
- // In addition to legacy UI updates, keep RTL transitions deterministic.
- if(route)route.style.width=(ratio*100).toFixed(2)+"%";
- if(car){
-  if(document.documentElement.dir==="rtl"){
-   car.style.left="auto";car.style.right=(ratio*100).toFixed(2)+"%";
-  }else{
-   car.style.right="auto";car.style.left=(ratio*100).toFixed(2)+"%";
+ const basePath=$("gameQuizRouteBase");
+ const checkpoints=[...document.querySelectorAll("#gamePlaying .nav9-checkpoint")];
+ if(basePath && typeof basePath.getTotalLength==="function"){
+  const length=basePath.getTotalLength();
+  const rtl=document.documentElement.dir==="rtl";
+  for(const [i,node] of checkpoints.entries()){
+   const step=(i+1)/(checkpoints.length+1);
+   const point=basePath.getPointAtLength(length*step);
+   node.style.left=((rtl?100-point.x/10:point.x/10).toFixed(3))+"%";
+   node.style.top=point.y.toFixed(3)+"%";
+   node.classList.toggle("is-done",ratio>=step-.0001);
   }
  }
+ moveRouteMarker(ratio);
 }
 window.addEventListener("neoline:theory-quiz",event=>{
  const d=event.detail||{};
@@ -103,6 +137,6 @@ const observer=new MutationObserver(syncStage);
 observer.observe(playing,{attributes:true,attributeFilter:["hidden"]});
 const gameOver=$("gameOver");if(gameOver)observer.observe(gameOver,{attributes:true,attributeFilter:["hidden"]});
 // Language swap should not reset scores and checkpoints.
-new MutationObserver(updateUI).observe(document.documentElement,{attributes:true,attributeFilter:["lang","dir"]});
+new MutationObserver(()=>{updateUI();drawRouteAt(routeVisibleRatio??0)}).observe(document.documentElement,{attributes:true,attributeFilter:["lang","dir"]});
 updateUI();syncStage();
 })();
