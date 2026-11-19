@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 840" aria-hidden="true">
+<defs>
+ <pattern id="blocks" width="88" height="74" patternUnits="userSpaceOnUse" patternTransform="rotate(11)">
+  <rect x="8" y="5" width="26" height="18" rx="2" fill="#89b5cc" opacity=".28"/>
+  <rect x="42" y="7" width="31" height="21" rx="3" fill="#9cc7d8" opacity=".25"/>
+  <rect x="9" y="32" width="21" height="30" rx="2" fill="#a8baca" opacity=".25"/>
+  <rect x="36" y="39" width="37" height="20" rx="2" fill="#8abed1" opacity=".25"/>
+ </pattern>
+ <pattern id="sideStreets" width="126" height="137" patternUnits="userSpaceOnUse" patternTransform="rotate(14)">
+  <path d="M0 33H126 M0 109H126 M30 0V137 M95 0V137" fill="none" stroke="#fff" stroke-width="7"/>
+  <path d="M0 33H126 M0 109H126 M30 0V137 M95 0V137" fill="none" stroke="#85b8d2" stroke-width="1.6"/>
+ </pattern>
+</defs>
+<rect width="720" height="840" fill="#eaf6fb"/>
+<path d="M-10 240 110 190 180 225 184 328 84 398 -12 355Z" fill="#b2dfbf"/>
+<path d="M521 62 664 12 732 107 694 256 600 290 532 229Z" fill="#bfe3c5"/>
+<path d="M405 592 555 539 655 592 616 768 478 788 397 688Z" fill="#b8dfc0"/>
+<path d="M92 604 207 581 271 649 239 780 117 808 39 721Z" fill="#c0e7cf"/>
+<path d="M-42 681 C 112 590 143 569 213 470 S 364 364 411 340 S 585 281 747 183" fill="none" stroke="#91d1e9" stroke-width="64" opacity=".62"/>
+<path d="M-42 681 C 112 590 143 569 213 470 S 364 364 411 340 S 585 281 747 183" fill="none" stroke="#d6eff9" stroke-width="31" opacity=".9"/>
+<rect width="720" height="840" fill="url(#blocks)"/>
+<rect width="720" height="840" fill="url(#sideStreets)"/>
+<g fill="none" stroke="#e7f6ff" stroke-width="19" stroke-linejoin="round" stroke-linecap="round">
+<path d="M-25 90C163 117 182 70 343 114 S602 177 738 107"/>
+<path d="M-42 505C99 459 185 392 291 430 S484 505 753 435"/>
+<path d="M100 -40 C139 129 250 209 213 350 S 213 564 303 873"/>
+<path d="M530 -50 C477 160 531 253 514 422 S 461 659 594 866"/>
+<path d="M-25 760 C208 685 316 763 475 703 S658 662 741 694"/>
+</g>
+<g fill="none" stroke="#80b3d1" stroke-width="2.9" opacity=".9" stroke-linejoin="round" stroke-linecap="round">
+<path d="M-25 90C163 117 182 70 343 114 S602 177 738 107"/>
+<path d="M-42 505C99 459 185 392 291 430 S484 505 753 435"/>
+<path d="M100 -40 C139 129 250 209 213 350 S 213 564 303 873"/>
+<path d="M530 -50 C477 160 531 253 514 422 S 461 659 594 866"/>
+<path d="M-25 760 C208 685 316 763 475 703 S658 662 741 694"/>
+</g>
+<g fill="#eef8fe" stroke="#96c2d9" stroke-width="2">
+<circle cx="213" cy="350" r="17"/><circle cx="510" cy="423" r="19"/>
+<circle cx="290" cy="430" r="13"/><circle cx="474" cy="703" r="17"/>
+</g>
+<g fill="#b1d7e7" font-family="Arial,sans-serif" font-size="22" font-weight="700" opacity=".70">
+ <text x="612" y="359">P</text><text x="63" y="548">P</text>
+</g>
+</svg>
