@@ -1,12 +1,12 @@
 {
-  "articles": 132,
+  "articles": 133,
   "aiGenerated": 0,
-  "freeLicensedPhotoThumbsCreated": 25,
+  "freeLicensedPhotoThumbsCreated": 10,
   "originalLicensedPhotosUsed": 0,
   "exactModelPhotosUsed": 0,
-  "notAvailable": 4,
-  "existingImages": 103,
-  "maxNewImageKB": 52.5,
+  "notAvailable": 0,
+  "existingImages": 123,
+  "maxNewImageKB": 43.5,
   "deletedExpiredImages": 0,
   "aiKeyConfigured": false
 }
