@@ -404,6 +404,7 @@ html[dir="rtl"] .product-video-open-button{left:auto;right:18px}
  font-size:0;
 }
 .product-video-search-arrow svg{width:16px;height:16px}
+.product-video-search-grid>a>.product-video-search-arrow{font-size:0;margin-inline-start:0;color:#1785b3}
 html[dir="rtl"] .product-video-search-arrow{right:auto;left:13px}
 .product-video-note{
  position:relative;
