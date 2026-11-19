@@ -175,7 +175,7 @@ def image_candidates(soup, data, title):
    raw=img.get(attr,"")
    if attr.endswith("srcset") and isinstance(raw,str):raw=raw.split(",")[0].strip().split(" ")[0]
    add(raw,score)
- return [url for url,score in sorted(options.items(),key=lambda p:p[1],reverse=True)][:12]
+ return [url for url,score in sorted(options.items(),key=lambda p:p[1],reverse=True)][:24]
 
 
 def canonical_image(raw):
@@ -308,34 +308,74 @@ def clean_image(img):
  return base,"original"
 
 
-def download_image(url,path):
+def image_fingerprint(img):
+ """Perceptual dHash (64-bit) for excluding the same picture at different URLs."""
+ gray=ImageOps.exif_transpose(img).convert("L").resize((9,8),Image.Resampling.LANCZOS)
+ px=list(gray.getdata())
+ bits=0
+ for y in range(8):
+  for x in range(8):
+   bits=(bits<<1)|int(px[y*9+x]>px[y*9+x+1])
+ return bits
+
+
+def near_duplicate(value,known):
+ return any((value^other).bit_count()<=4 for other in known)
+
+
+def download_unique_image(url,path,known):
  response=get(url,timeout=24)
  if len(response.content)>MAX_IMAGE_BYTES:raise ValueError("image too large")
  img=Image.open(io.BytesIO(response.content));img.load()
  if img.width<180 or img.height<140 or img.width*img.height>20_000_000:
   raise ValueError("bad dimensions")
+ fingerprint=image_fingerprint(img)
+ if near_duplicate(fingerprint,known):return None
  output,mode=clean_image(img)
  path.parent.mkdir(parents=True,exist_ok=True)
- output.save(path,format="WEBP",quality=87,method=5)
- return mode
+ output.save(path,format="WEBP",quality=89,method=5)
+ return mode,fingerprint
 
 
 def attach_photos(item):
+ """Keep up to 6 authentic, distinct images (not 6 copies of one product view)."""
  if not item:return None
  slug=str(item["id"])
- for i,url in enumerate(item.pop("imageSources",[])[:8]):
-  if len(item["images"])>=3:break
-  path=OUT/"images"/f"{slug}-{len(item['images'])+1}.webp"
-  if path.exists() and path.stat().st_size>3000:
-   item["images"].append("./"+path.as_posix())
-   continue
+ directory=OUT/"images"
+ directory.mkdir(parents=True,exist_ok=True)
+ seen=[]
+ previous=[]
+ for i in range(1,11):
+  path=directory/f"{slug}-{i}.webp"
+  if not path.is_file() or path.stat().st_size<3000:continue
   try:
-   mode=download_image(url,path)
-   item["images"].append("./"+path.as_posix())
-   print(f"photo {item['id']} {mode}: {path.name}",flush=True)
+   with Image.open(path) as img:
+    img.load()
+    fingerprint=image_fingerprint(img)
+   if near_duplicate(fingerprint,seen):continue
+   previous.append((path.read_bytes(),fingerprint))
+   seen.append(fingerprint)
+  except (ValueError,OSError,UnidentifiedImageError):continue
+ images=[]
+ for index,(binary,fingerprint) in enumerate(previous[:6],start=1):
+  path=directory/f"{slug}-{index}.webp"
+  if not path.exists() or path.read_bytes()!=binary:
+   path.write_bytes(binary)
+  images.append("./"+path.as_posix())
+ for url in item.pop("imageSources",[])[:22]:
+  if len(images)>=6:break
+  target=directory/f"{slug}-{len(images)+1}.webp"
+  try:
+   found=download_unique_image(url,target,seen)
+   if not found:continue
+   mode,fingerprint=found
+   seen.append(fingerprint)
+   images.append("./"+target.as_posix())
+   print(f"unique photo {slug} {mode}: {target.name}",flush=True)
   except (requests.RequestException,ValueError,OSError,UnidentifiedImageError) as exc:
-   print(f"SKIP image {item['id']}: {type(exc).__name__} {str(exc)[:90]}",flush=True)
- item["spec"]= [s["value"] for s in item["specs"][:3]]
+   print(f"SKIP photo {slug}: {type(exc).__name__} {str(exc)[:80]}",flush=True)
+ item["images"]=images
+ item["spec"]=[entry["value"] for entry in item["specs"][:3]]
  return item
 
 
@@ -361,13 +401,14 @@ def main():
   report["parsed"]=len(entries)
   (OUT/"sync-report.json").write_text(json.dumps(report,ensure_ascii=False,indent=2)+"\n")
   return 3
- # Cap download count to avoid oversized Git commits. More photos are added
- # on subsequent runs if the importer is expanded.
+ # Prefer 5–6 unique official product photos when actually available.
  entries.sort(key=lambda p:(p["category"],p["name"].casefold(),p["source"]))
- for item in entries:
-  attach_photos(item)
+ with ThreadPoolExecutor(max_workers=3) as pool:
+  list(pool.map(attach_photos,entries))
  report["parsed"]=len(entries)
  report["photos"]=sum(len(p["images"]) for p in entries)
+ report["uniquePhotosPerProduct"]={p["name"]:len(p["images"]) for p in entries}
+ report["fewerThanFive"]=[p["name"] for p in entries if len(p["images"])<5]
  report["withoutPhotos"]=[p["name"] for p in entries if not p["images"]]
  payload={"version":1,"source":"https://neoline.ru/shop/",
           "updated":report["timestamp"],"products":entries}
