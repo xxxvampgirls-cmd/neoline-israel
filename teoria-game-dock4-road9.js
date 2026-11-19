@@ -57,7 +57,6 @@ function updateUI(){
  }
  $("dock4ModesText").textContent=c.modes;
  $("dock4Modes").setAttribute("aria-label",c.back);
- $("dock4Stats").setAttribute("aria-label",c.stats);
  const hint=$("dock4Hint"),remaining=Math.max(0,Number(game.hintsLeft)||0);
  const unavailable=exam||remaining===0||game.hintUsed||game.answered;
  hint.disabled=!!unavailable;
@@ -97,7 +96,6 @@ window.addEventListener("neoline:theory-finish",()=>{
  syncStage();
 });
 $("dock4Modes").addEventListener("click",()=>{$("exitQuiz")?.click()});
-$("dock4Stats").addEventListener("click",()=>window.dispatchEvent(new CustomEvent("neoline:open-progress",{detail:{trigger:$("dock4Stats")}})));
 $("dock4Hint").addEventListener("click",()=>{
  if(!$("dock4Hint").disabled)window.dispatchEvent(new CustomEvent("neoline:theory-use-hint"));
 });
