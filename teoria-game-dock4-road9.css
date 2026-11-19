@@ -125,12 +125,17 @@ body.theory-in-session #gamePlaying .question-picture{margin:4px 0 10px}
 body.theory-in-session #gamePlaying .question-bottom{margin-top:10px;padding-top:9px}
 /* Practice hint excludes a single wrong answer, without changing the scoring. */
 body.theory-in-session #gamePlaying .answer.hint-eliminated{
- opacity:.42;filter:grayscale(.45);text-decoration:line-through;
- border-style:dashed;cursor:not-allowed;
+ opacity:.24!important;
+ background:linear-gradient(115deg,#a6ddff,#d7f1ff)!important;
+ border:1px solid #138cda!important;
+ color:#086cb1!important;
+ filter:none!important;text-decoration:none!important;
+ box-shadow:none!important;pointer-events:none!important;
+ cursor:not-allowed;transform:none!important;
 }
 body.theory-in-session #gamePlaying .answer.hint-eliminated::after{
  content:"×";position:absolute;right:11px;top:50%;transform:translateY(-50%);
- font-size:24px;line-height:1;color:#b1b3bf;
+ font-size:24px;line-height:1;color:#067ec8;
 }
 html[dir="rtl"] body.theory-in-session #gamePlaying .answer.hint-eliminated::after{right:auto;left:11px}
 /* Selected #9: tiny scenic roadway + electric-blue route + lime checkpoints.
@@ -387,4 +392,48 @@ html[dir="rtl"] body.theory-in-session #gamePlaying .quiz-hud .road9-finish{
  body.theory-in-session #gamePlaying .quiz-hud .road9-checkpoint{
   width:10px;height:10px;
  }
+}
+
+/* NEOLINE · compact game dock (19 Nov): remove the duplicate stats button.
+   Only the five gameplay essentials remain: modes, questions, lives, XP, hint. */
+.theory-game-dock{
+ grid-template-columns:minmax(45px,1fr) 47px minmax(62px,.85fr) minmax(70px,.9fr) 46px;
+ justify-items:center;align-items:center;
+ gap:5px;width:min(540px,calc(100% - 24px));
+ height:60px;padding:5px 10px;border-radius:23px;
+}
+.theory-game-dock::before{border-radius:20px}
+.theory-game-dock .dock4-separator,.theory-game-dock .dock4-stats{display:none!important}
+.theory-game-dock .dock4-modes{min-height:44px;padding:3px 4px}
+.theory-game-dock .dock4-modes svg{width:22px;height:22px}
+.theory-game-dock .dock4-count{width:44px;height:44px;padding:3px}
+.theory-game-dock .dock4-count strong{font-size:11px}
+.theory-game-dock .dock4-hearts{font-size:21px;letter-spacing:-1px}
+.theory-game-dock .dock4-xp>span{font-size:21px}
+.theory-game-dock .dock4-xp strong{font-size:10px}
+.theory-game-dock .dock4-action{width:44px;height:44px;min-height:44px}
+.theory-game-dock .dock4-action svg{width:24px;height:24px}
+@media(max-width:720px){
+ .theory-game-dock{
+  grid-template-columns:42px 43px minmax(56px,1fr) minmax(61px,1fr) 44px;
+  width:min(480px,calc(100% - 16px));
+  height:57px;gap:4px;padding:4px 8px;border-radius:21px;
+ }
+ .theory-game-dock::before{border-radius:18px}
+ .theory-game-dock .dock4-modes{font-size:9px}
+ .theory-game-dock .dock4-count{width:42px;height:42px}
+ .theory-game-dock .dock4-hearts{font-size:21px}
+ .theory-game-dock .dock4-xp>span{font-size:20px}
+ .theory-game-dock .dock4-xp strong{font-size:10px}
+ .theory-game-dock .dock4-action{width:44px;height:44px;min-height:44px}
+}
+@media(max-width:360px){
+ .theory-game-dock{
+  grid-template-columns:39px 39px minmax(51px,1fr) minmax(57px,1fr) 42px;
+  gap:3px;padding:3px 7px;height:55px;
+ }
+ .theory-game-dock .dock4-count{width:39px;height:39px}
+ .theory-game-dock .dock4-hearts{font-size:19px}
+ .theory-game-dock .dock4-action{width:42px;height:44px;min-height:44px}
+ .theory-game-dock .dock4-modes svg{width:21px;height:21px}
 }
