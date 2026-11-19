@@ -104,8 +104,6 @@ $("dock4Hint").addEventListener("click",()=>{
 const observer=new MutationObserver(syncStage);
 observer.observe(playing,{attributes:true,attributeFilter:["hidden"]});
 const gameOver=$("gameOver");if(gameOver)observer.observe(gameOver,{attributes:true,attributeFilter:["hidden"]});
-const bodyObserver=new MutationObserver(syncStage);
-bodyObserver.observe(document.body,{attributes:true,attributeFilter:["class"]});
 // Language swap should not reset scores and checkpoints.
 new MutationObserver(updateUI).observe(document.documentElement,{attributes:true,attributeFilter:["lang","dir"]});
 updateUI();syncStage();
