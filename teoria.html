@@ -15,7 +15,7 @@
 <link rel="stylesheet" href="./teoria-medal-ecg.css?v=20261119-medal-only-v2">
 <link rel="stylesheet" href="./teoria-licence-dialog.css?v=20261119-custom-v1">
 <link rel="stylesheet" href="./teoria-sign-studio.css?v=20261119-studio-v1">
-<link rel="stylesheet" href="./teoria-game-dock4-road9.css?v=20261119-v2">
+<link rel="stylesheet" href="./teoria-game-dock4-road9.css?v=20261119-road-in-fixed-hud-v3">
 </head><body>
 <header class="topbar neoline-site-header"><div class="neoline-site-header__inner">
 <a class="neoline-site-header__logo" href="./" aria-label="NEOLINE — главная страница"><img src="./assets/neoline-clean.svg?v=20261116-compact" width="501" height="108" alt="NEOLINE"></a>
@@ -160,15 +160,6 @@
  <div class="game-quiz-topline"><span class="game-quiz-label" id="gameQuizLabel">ТВОЙ МАРШРУТ</span><span class="game-quiz-warning" id="gameQuizWarning" aria-live="off">Соблюдай правила — береги жизни ❤️</span></div>
  <div class="quiz-hud" aria-label="Информация о прохождении">
   <button type="button" class="small-back hud-back" id="exitQuiz" aria-label="Вернуться к выбору режима" title="К выбору режима"><svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 5 7 12l7 7"/></svg><span id="exitLabel">Режимы</span></button>
-  <div class="hud-progress" role="progressbar" aria-valuemin="0" aria-valuemax="10" aria-valuenow="0" aria-label="Отвечено вопросов" id="progress">
-   <span class="hud-progress-orbit" id="progressFill" aria-hidden="true"></span>
-   <span class="hud-progress-inner"><strong id="questionCounter">0 / 10</strong><small id="progressCaption">ОТВЕЧЕНО</small></span>
-  </div>
-  <div class="hud-info">
-   <span class="mode-pill" id="currentMode">Игра</span>
-   <div class="hud-metrics"><span class="hud-lives" id="lifeMeta" aria-label="Осталось 3 жизни">♥ ♥ ♥</span><span class="hud-xp" id="scoreMeta">+0 XP</span><span class="timer" id="timerBox" hidden><span aria-hidden="true">◷</span> <time id="timer">40:00</time></span></div>
-  </div>
- </div>
  <div class="game-quiz-route road9" aria-hidden="true">
   <svg class="road9-landscape" viewBox="0 0 900 92" preserveAspectRatio="none" focusable="false" aria-hidden="true">
    <defs>
@@ -202,6 +193,15 @@
     </span>
   </span>
 </div>
+  <div class="hud-progress" role="progressbar" aria-valuemin="0" aria-valuemax="10" aria-valuenow="0" aria-label="Отвечено вопросов" id="progress">
+   <span class="hud-progress-orbit" id="progressFill" aria-hidden="true"></span>
+   <span class="hud-progress-inner"><strong id="questionCounter">0 / 10</strong><small id="progressCaption">ОТВЕЧЕНО</small></span>
+  </div>
+  <div class="hud-info">
+   <span class="mode-pill" id="currentMode">Игра</span>
+   <div class="hud-metrics"><span class="hud-lives" id="lifeMeta" aria-label="Осталось 3 жизни">♥ ♥ ♥</span><span class="hud-xp" id="scoreMeta">+0 XP</span><span class="timer" id="timerBox" hidden><span aria-hidden="true">◷</span> <time id="timer">40:00</time></span></div>
+  </div>
+ </div>
  <article class="question-card"><div class="question-eyebrow"><span id="questionTopic">Правила дорожного движения</span><span class="question-id" id="questionId">№ 0000</span></div><h2 id="questionText" dir="auto">Загрузка вопроса…</h2><div class="question-picture" id="questionPicture" hidden><img id="signPicture" alt="" decoding="async"></div><div class="answer-list" id="answers" role="group" aria-label="Варианты ответа"></div><div class="feedback" id="feedback" hidden aria-live="polite"></div><span id="gameXPFloat" class="game-xp-float" hidden aria-hidden="true">+15 XP</span><div class="question-bottom"><span id="questionTip">Выбери один правильный ответ.</span><button type="button" id="nextQuestion" class="primary" disabled hidden aria-hidden="true" tabindex="-1">Далее →</button></div></article>
 </section>
 <section class="game-panel outcome" id="gameResult" hidden aria-live="polite">
