@@ -511,7 +511,7 @@ body.theory-in-session #gamePlaying .quiz-hud .game-quiz-route.nav9{
  70%,100%{opacity:0;transform:scale(1.85)}
 }
 html[dir="rtl"] #gamePlaying .nav9 .nav9-route-svg{transform:scaleX(-1)}
-html[dir="rtl"] #gamePlaying .nav9 .nav9-checkpoint{transform:translate(-50%,-50%)!important}
+html[dir="rtl"] #gamePlaying .nav9 .nav9-checkpoint{right:auto!important;transform:translate(-50%,-50%)!important}
 html[dir="rtl"] #gamePlaying .nav9 .nav9-start{left:96.3%}
 html[dir="rtl"] #gamePlaying .nav9 .nav9-target{left:3.6%}
 @media(prefers-reduced-motion:reduce){
