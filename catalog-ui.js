@@ -134,7 +134,7 @@ async function load(){
    if(!source)continue;
    const row={id:item.id,name:item.name,category:inferCategory(item),badge:"demo",price:0,shape:"compact",isImported:true,
      spec:Array.isArray(item.spec)?item.spec.filter(x=>typeof x==="string").slice(0,3):[]};
-   const pics=Array.isArray(item.images)?item.images.map(securePhoto).filter(Boolean).slice(0,3):[];
+   const pics=Array.isArray(item.images)?[...new Set(item.images.map(securePhoto).filter(Boolean))].slice(0,6):[];
    const specs=Array.isArray(item.specs)?item.specs.filter(x=>x&&typeof x.label==="string"&&typeof x.value==="string").slice(0,38):[];
    imported.set(row.id,{description:typeof item.description==="string"?item.description.slice(0,900):"",specs,source,group:item.group||""});
    products.push(row);media[row.id]=pics;datas[row.id]=row.spec;productUrls[row.id]=source;
