@@ -24,6 +24,18 @@
   7:[{id:"HMu_cLiDllI",type:"review",lang:"RU",title:"NEOLINE SmartWay — detailed review"}],
   8:[{id:"FnmYWNNKT6M",type:"review",lang:"RU",title:"NEOLINE G-Tech X54 Dual — unboxing"}]
  };
+
+ const localVideo={
+ ru:{hl:"ru",gl:"RU",tag:"RU",flag:"🇷🇺",region:"Россия",title:"Обзоры на русском",items:["Обзоры","Сравнения","Презентации и реклама","Примеры съёмки"],terms:["обзор отзыв тест","сравнение видеорегистраторов","официальная презентация реклама","пример записи день ночь"],other:"Видео на других языках",none:"Проверенных русскоязычных роликов для этой модели пока нет. Начните с подборок ниже.",note:"YouTube открывается на русском языке с регионом Россия. Язык видео не гарантирован."},
+ en:{hl:"en-GB",gl:"GB",tag:"EN",flag:"🇬🇧",region:"United Kingdom",title:"English reviews first",items:["English reviews","Comparisons","Ads and presentations","Video samples"],terms:["review hands on English","comparison dashcam English","official promo presentation English","sample footage day night English"],other:"Videos in other languages",none:"No verified English review for this exact model yet. English searches below take priority over Russian videos.",note:"Search opens YouTube in English with the United Kingdom region. Results and spoken language depend on YouTube."},
+ he:{hl:"iw",gl:"IL",tag:"HE",flag:"🇮🇱",region:"ישראל",title:"סקירות בעברית",items:["סקירות בעברית","השוואות","פרסומות ומצגות","דוגמאות צילום"],terms:["סקירה ביקורת בדיקה","השוואה מצלמת רכב","פרסומת מצגת רשמית","צילום דוגמה יום לילה"],other:"סרטונים בשפות אחרות",none:"אין כרגע סקירה מאומתת בעברית. חיפוש בעברית מקבל קדימות.",note:"חיפוש ביוטיוב בעברית באזור ישראל. שפת הסרטונים אינה מובטחת."},
+ ar:{hl:"ar",gl:"AE",tag:"AR",flag:"🇦🇪",region:"الإمارات",title:"مراجعات باللغة العربية",items:["مراجعات عربية","مقارنات","إعلانات وعروض","تجارب التصوير"],terms:["مراجعة وتجربة كاميرا سيارة","مقارنة أجهزة تسجيل القيادة","إعلان عرض رسمي","تجربة تصوير نهار ليل"],other:"فيديوهات بلغات أخرى",none:"لا توجد مراجعات عربية موثقة حالياً. البحث باللغة العربية يظهر أولاً.",note:"يفتح البحث في يوتيوب بالعربية والإمارات. اللغة ليست مضمونة."}
+ };
+ function videoPreference(){
+  const l=typeof lang==="string"?lang:document.documentElement.lang;
+  return localVideo[l]||localVideo.ru;
+ }
+
  const currentLocale=()=>copy[typeof lang==="string"?lang:document.documentElement.lang]||copy.ru;
  let currentId=null;
  const overlay=document.createElement("div");
@@ -42,7 +54,11 @@
   const item=typeof products!=="undefined"?products.find(p=>p.id===id):null;
   return item?.name||"NEOLINE";
  }
- function youtubeSearch(value){return "https://www.youtube.com/results?search_query="+encodeURIComponent(value)}
+
+ function youtubeSearch(query,pref){
+  return "https://www.youtube.com/results?search_query="+encodeURIComponent(query)+
+    "&hl="+encodeURIComponent(pref.hl)+"&gl="+encodeURIComponent(pref.gl);
+ }
  function stopPlayback(){
   overlay.querySelectorAll("iframe").forEach(frame=>frame.remove());
   overlay.querySelectorAll(".product-video-embed").forEach(el=>el.replaceChildren());
@@ -53,30 +69,34 @@
   document.body.classList.remove("product-video-open");
   get("productVideoOpen")?.focus({preventScroll:true});
  }
+ function renderClips(clips,t){
+  return '<div class="product-video-tiles">'+clips.map(v=>
+   '<article class="product-video-tile"><img loading="lazy" decoding="async" src="https://i.ytimg.com/vi/'+v.id+'/hqdefault.jpg" alt="">'+
+   '<div class="product-video-tile-copy"><span class="product-video-tag">'+secureText(t[v.type]||t.review)+' · '+secureText(v.lang)+'</span><strong>'+secureText(v.title)+'</strong>'+
+   '<div class="product-video-tile-actions"><button type="button" data-play-yt="'+v.id+'">▶ '+secureText(t.watch)+'</button>'+
+   '<a href="https://www.youtube.com/watch?v='+v.id+'" target="_blank" rel="noopener noreferrer">'+secureText(t.youtube)+'</a></div>'+
+   '</div><div class="product-video-embed" data-embed-for="'+v.id+'"></div></article>').join('')+'</div>';
+ }
  function renderVideoList(id){
-  const t=currentLocale(),name=modelName(id);
+  const t=currentLocale(),pref=videoPreference(),name=modelName(id);
   get("productVideoTitle").textContent=t.header;
   get("productVideoModel").textContent=name;
-  const existing=verified[id]||[];
-  const clips=existing.length
-   ?'<div class="product-video-curated"><h3>▶ '+secureText(t.verified)+'</h3><div class="product-video-tiles">'+existing.map(v=>
-     '<article class="product-video-tile"><img loading="lazy" decoding="async" src="https://i.ytimg.com/vi/'+v.id+'/hqdefault.jpg" alt="">'+
-     '<div class="product-video-tile-copy"><span class="product-video-tag">'+secureText(t[v.type]||t.review)+' · '+v.lang+'</span><strong>'+secureText(v.title)+'</strong>'+
-     '<div class="product-video-tile-actions"><button type="button" data-play-yt="'+v.id+'">▶ '+secureText(t.watch)+'</button>'+
-     '<a href="https://www.youtube.com/watch?v='+v.id+'" target="_blank" rel="noopener noreferrer">'+secureText(t.youtube)+'</a></div>'+
-     '</div><div class="product-video-embed" data-embed-for="'+v.id+'"></div></article>').join('')+'</div></div>'
-   :'<p class="product-video-empty">'+secureText(t.missing)+'</p>';
-  const searches=[
-   {label:t.english,query:'"'+name+'" dash cam review English',icon:"🇬🇧"},
-   {label:t.brand,query:'"'+name+'" NEOLINE official promo commercial',icon:"📣"},
-   {label:t.test,query:'"'+name+'" test sample footage',icon:"🎬"},
-   {label:t.russian,query:'"'+name+'" обзор тест',icon:"🔎"}
-  ];
-  get("productVideoResults").innerHTML=clips+
-   '<div class="product-video-searches"><h3>YouTube · '+secureText(t.find)+'</h3><div class="product-video-search-grid">'+
-   searches.map(row=>'<a target="_blank" rel="noopener noreferrer" href="'+youtubeSearch(row.query)+'"><span class="product-video-search-icon">'+row.icon+'</span><span>'+secureText(row.label)+'</span><span aria-hidden="true">↗</span></a>').join('')+
-   '</div><p class="product-video-note">'+secureText(t.note)+'</p></div>';
+  const matched=(verified[id]||[]).filter(v=>v.lang===pref.tag);
+  const foreign=(verified[id]||[]).filter(v=>v.lang!==pref.tag);
+  const localClips=matched.length?
+   '<section class="product-video-curated"><h3>▶ '+secureText(t.verified)+'</h3>'+renderClips(matched,t)+'</section>':
+   '<p class="product-video-empty">'+secureText(pref.none)+'</p>';
+  const icons=["🔎","🎯","📣","🎬"];
+  const searches='<section class="product-video-searches product-video-localized">'+
+   '<h3>'+secureText(pref.flag+" "+pref.title)+'</h3><p class="product-video-region">'+secureText(pref.region)+' · YouTube</p>'+
+   '<div class="product-video-search-grid">'+pref.items.map((label,i)=>
+     '<a target="_blank" rel="noopener noreferrer" href="'+youtubeSearch('"'+name+'" '+pref.terms[i],pref)+'"><span class="product-video-search-icon">'+icons[i]+'</span><span>'+secureText(label)+'</span><span aria-hidden="true">↗</span></a>'
+    ).join('')+'</div><p class="product-video-note">'+secureText(pref.note)+'</p></section>';
+  const other=foreign.length?
+   '<details class="product-video-other"><summary>🌐 '+secureText(pref.other)+' ('+foreign.length+') <span aria-hidden="true">⌄</span></summary><div class="product-video-other-body">'+renderClips(foreign,t)+'</div></details>':"";
+  get("productVideoResults").innerHTML=localClips+searches+other;
  }
+
  function openVideos(id){
   if(!Number.isFinite(id))return;
   stopPlayback();currentId=id;
