@@ -46,7 +46,7 @@
  overlay.setAttribute("aria-modal","true");
  overlay.setAttribute("aria-labelledby","productVideoTitle");
  overlay.innerHTML='<div class="product-video-backdrop" data-close-video></div><section class="product-video-panel" tabindex="-1">'+
-  '<header class="product-video-header"><div><span class="product-video-kicker">NEOLINE · YouTube</span><h2 id="productVideoTitle"></h2><p class="product-video-model" id="productVideoModel"></p></div>'+
+  '<header class="product-video-header"><div><span class="product-video-kicker">NEOLINE</span><h2 id="productVideoTitle"></h2><p class="product-video-model" id="productVideoModel"></p></div>'+
   '<button type="button" class="product-video-close" data-close-video aria-label="Close">×</button></header>'+
   '<div class="product-video-scroll" id="productVideoResults"></div></section>';
  document.body.append(overlay);
@@ -86,14 +86,27 @@
   const localClips=matched.length?
    '<section class="product-video-curated"><h3>▶ '+secureText(t.verified)+'</h3>'+renderClips(matched,t)+'</section>':
    '<p class="product-video-empty">'+secureText(pref.none)+'</p>';
-  const icons=["🔎","🎯","📣","🎬"];
+  // Four coherent outline icons replace OS-dependent emojis and oversized logos.
+  // Review: play/check; comparison: two panels; promo: screen/spark; samples: aperture/REC.
+  const iconPaths=[
+   '<rect x="3.5" y="5" width="17" height="14" rx="3"/><path d="m10 9 5 3-5 3z"/><path d="m5.5 19 2 2 3.5-4"/>',
+   '<rect x="2.5" y="5" width="8" height="12" rx="2"/><rect x="13.5" y="5" width="8" height="12" rx="2"/><path d="M7 20h10m-3-2 3 2-3 2"/>',
+   '<rect x="3" y="5.5" width="18" height="13" rx="3"/><path d="m10 10 5 2.2-5 2.3z"/><path d="m18 2 .6 2.3L21 5l-2.4.6L18 8l-.6-2.4L15 5l2.4-.7z"/>',
+   '<circle cx="12" cy="12" r="8.2"/><circle cx="12" cy="12" r="3"/><path d="M12 4 8.5 9M20 11l-5.5 1.5M12 20l3.5-5M4 13l5.5-1.5"/><circle cx="19.5" cy="4.5" r="1.4" fill="currentColor" stroke="none"/>'
+  ];
+  const iconSvg=i=>'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.65" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">'+iconPaths[i]+'</svg>';
+  const arrowSvg='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 19 19 5M9 5h10v10"/></svg>';
+  const worldSvg='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c-5 5-5 13 0 18M12 3c5 5 5 13 0 18"/></svg>';
   const searches='<section class="product-video-searches product-video-localized">'+
-   '<h3>'+secureText(pref.flag+" "+pref.title)+'</h3><p class="product-video-region">'+secureText(pref.region)+' · YouTube</p>'+
+   '<div class="product-video-section-heading"><h3><span class="product-video-lang-code" aria-hidden="true">'+secureText(pref.tag)+'</span>'+secureText(pref.title)+'</h3>'+
+   '<span class="product-video-region">'+secureText(pref.region)+' · YouTube</span></div>'+
    '<div class="product-video-search-grid">'+pref.items.map((label,i)=>
-     '<a target="_blank" rel="noopener noreferrer" href="'+youtubeSearch('"'+name+'" '+pref.terms[i],pref)+'"><span class="product-video-search-icon">'+icons[i]+'</span><span>'+secureText(label)+'</span><span aria-hidden="true">↗</span></a>'
+     '<a target="_blank" rel="noopener noreferrer" href="'+youtubeSearch('"'+name+'" '+pref.terms[i],pref)+'" aria-label="'+secureText(label)+' — YouTube">'+
+      '<span class="product-video-search-icon">'+iconSvg(i)+'</span><span class="product-video-search-label">'+secureText(label)+'</span>'+
+      '<span class="product-video-search-arrow" aria-hidden="true">'+arrowSvg+'</span></a>'
     ).join('')+'</div><p class="product-video-note">'+secureText(pref.note)+'</p></section>';
   const other=foreign.length?
-   '<details class="product-video-other"><summary>🌐 '+secureText(pref.other)+' ('+foreign.length+') <span aria-hidden="true">⌄</span></summary><div class="product-video-other-body">'+renderClips(foreign,t)+'</div></details>':"";
+   '<details class="product-video-other"><summary><span class="product-video-other-symbol">'+worldSvg+'</span><span class="product-video-other-label">'+secureText(pref.other)+' ('+foreign.length+')</span><span class="product-video-chevron" aria-hidden="true"></span></summary><div class="product-video-other-body">'+renderClips(foreign,t)+'</div></details>':"";
   get("productVideoResults").innerHTML=localClips+searches+other;
  }
 
