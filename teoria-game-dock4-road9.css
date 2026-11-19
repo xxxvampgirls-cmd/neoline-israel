@@ -123,6 +123,16 @@ body.theory-in-session #gamePlaying .question-card{
 body.theory-in-session #gamePlaying .question-card h2{margin:9px 0 11px}
 body.theory-in-session #gamePlaying .question-picture{margin:4px 0 10px}
 body.theory-in-session #gamePlaying .question-bottom{margin-top:10px;padding-top:9px}
+/* Practice hint excludes a single wrong answer, without changing the scoring. */
+body.theory-in-session #gamePlaying .answer.hint-eliminated{
+ opacity:.42;filter:grayscale(.45);text-decoration:line-through;
+ border-style:dashed;cursor:not-allowed;
+}
+body.theory-in-session #gamePlaying .answer.hint-eliminated::after{
+ content:"×";position:absolute;right:11px;top:50%;transform:translateY(-50%);
+ font-size:24px;line-height:1;color:#b1b3bf;
+}
+html[dir="rtl"] body.theory-in-session #gamePlaying .answer.hint-eliminated::after{right:auto;left:11px}
 /* Selected #9: tiny scenic roadway + electric-blue route + lime checkpoints.
    No full-card gradients/animated swaying objects/long blank strips. */
 #gamePlaying .game-quiz-route.road9{
