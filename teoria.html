@@ -16,7 +16,7 @@
 <link rel="stylesheet" href="./teoria-licence-dialog.css?v=20261119-custom-v1">
 <link rel="stylesheet" href="./teoria-sign-studio.css?v=20261119-studio-v1">
 <link rel="stylesheet" href="./teoria-game-dock4-road9.css?v=20261119-random-routes-padding-v6">
-<link rel="stylesheet" href="./teoria-gameover-ice.css?v=20261119-ice-light-v1">
+<link rel="stylesheet" href="./teoria-gameover-ice.css?v=20261119-map-no-scroll-v2">
 </head><body>
 <header class="topbar neoline-site-header"><div class="neoline-site-header__inner">
 <a class="neoline-site-header__logo" href="./" aria-label="NEOLINE — главная страница"><img src="./assets/neoline-clean.svg?v=20261116-compact" width="501" height="108" alt="NEOLINE"></a>
@@ -269,20 +269,12 @@
  <div class="gameover-card">
   <span class="gameover-corner gameover-corner-top" aria-hidden="true"></span>
   <span class="gameover-corner gameover-corner-bottom" aria-hidden="true"></span>
-   <svg class="gameover-route-art" viewBox="0 0 500 650" preserveAspectRatio="none" focusable="false" aria-hidden="true">
-    <path class="route-dash" d="M -28 185 C 32 150 52 106 104 110 H 123 Q 148 110 148 84 V 48 Q 148 31 168 31 H 256"/>
-    <path d="M -28 185 C 32 150 52 106 104 110 H 123 Q 148 110 148 84 V 48 Q 148 31 168 31 H 256"/>
-    <circle cx="148" cy="84" r="6"/>
-    <path class="route-dash" d="M 523 304 C 474 302 460 328 460 366 V 400 Q 460 423 438 423 H 405"/>
-    <path d="M 523 304 C 474 302 460 328 460 366 V 400 Q 460 423 438 423 H 405"/>
-    <circle cx="460" cy="366" r="6"/>
-   </svg>
+
   <button type="button" class="gameover-close" id="gameOverClose" aria-label="Закрыть и вернуться к режимам">×</button>
   <div class="gameover-hearts" aria-hidden="true">
    <svg viewBox="0 0 64 64" aria-hidden="true"><path fill="currentColor" d="M32 56 11 36C-1 24 6 7 20 7c5.7 0 9.5 2.7 12 6.2C34.5 9.7 38.3 7 44 7c14 0 21 17 9 29Z"/><path d="M35 10 28 25 36 30 28 42 34 53" fill="none" stroke="#effbff" stroke-width="4.7" stroke-linecap="round" stroke-linejoin="round"/></svg><svg viewBox="0 0 64 64" aria-hidden="true"><path fill="currentColor" d="M32 56 11 36C-1 24 6 7 20 7c5.7 0 9.5 2.7 12 6.2C34.5 9.7 38.3 7 44 7c14 0 21 17 9 29Z"/><path d="M35 10 28 25 36 30 28 42 34 53" fill="none" stroke="#effbff" stroke-width="4.7" stroke-linecap="round" stroke-linejoin="round"/></svg><svg viewBox="0 0 64 64" aria-hidden="true"><path fill="currentColor" d="M32 56 11 36C-1 24 6 7 20 7c5.7 0 9.5 2.7 12 6.2C34.5 9.7 38.3 7 44 7c14 0 21 17 9 29Z"/><path d="M35 10 28 25 36 30 28 42 34 53" fill="none" stroke="#effbff" stroke-width="4.7" stroke-linecap="round" stroke-linejoin="round"/></svg>
   </div>
   <h2 class="gameover-title" id="gameOverTitle">GAME OVER</h2>
-  <span class="gameover-underline" aria-hidden="true"></span>
   <p class="gameover-message" id="gameOverMessage">Три жизни закончились.<br>Не огорчайся — попробуй ещё раз!</p>
   <p class="gameover-score" id="gameOverScore" aria-live="polite">0 / 3 · +0 XP</p>
   <div class="gameover-promo" aria-label="NEOLINE">
