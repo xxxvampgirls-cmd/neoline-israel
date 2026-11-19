@@ -406,18 +406,19 @@ function recordProgress(q,selected,wasCorrect){
  stats.xp+=wasCorrect?15:0;
  saveStats();
 }
-/* Three optional 50/50-style hints for practice runs only.
+/* Three one-answer elimination hints for practice runs only.
  * Never disclose a mock-exam answer; XP and exam scoring remain unchanged. */
 function useGameHint(){
  if(state.finished||state.selected!==null||state.mode==="exam"||!state.mode||
-    !$("#gamePlaying")||$("#gamePlaying").hidden||state.hintUsed||(state.hintsLeft??0)<=0)return;
+    !$("gamePlaying")||$("gamePlaying").hidden||state.hintUsed||(state.hintsLeft??0)<=0)return;
  const q=state.questions[state.index];if(!q)return;
- const wrong=[...$("#answers").querySelectorAll("button[data-original]")]
+ const wrong=[...$("answers").querySelectorAll("button[data-original]")]
    .filter(button=>!button.disabled&&Number(button.dataset.original)!==q.correct);
  if(!wrong.length)return;
  const picked=wrong[Math.floor(Math.random()*wrong.length)];
  picked.disabled=true;picked.classList.add("hint-eliminated");
- picked.setAttribute("aria-label",picked.textContent+" — неверный вариант исключён подсказкой");
+ const removedCopy=state.lang==="he"?"אפשרות שגויה שהוסרה ברמז":state.lang==="en"?"Incorrect option eliminated by hint":"Неверный вариант исключён подсказкой";
+ picked.setAttribute("aria-label",picked.textContent+" — "+removedCopy);
  state.hintUsed=true;state.hintsLeft-=1;
  window.dispatchEvent(new CustomEvent("neoline:theory-hint",{detail:{
   hintsLeft:state.hintsLeft,mode:state.mode,language:state.lang
