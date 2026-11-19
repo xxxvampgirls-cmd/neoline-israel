@@ -312,6 +312,7 @@ function startMode(mode){
  state.questions=candidates.slice(0,need);
  state.mode=mode;
  state.index=0;state.selected=null;state.answers=[];state.correct=0;state.earned=0;state.lives=3;state.finished=false;
+ state.hintsLeft=3;state.hintUsed=false;
  $("gameLobby").hidden=true;
  $("gameResult").hidden=true;
  $("gamePlaying").hidden=false;
@@ -360,7 +361,8 @@ function updateQuizHUD(){
  lives.textContent=state.mode==="marathon"?"∞":Array.from({length:3},(_,i)=>i<state.lives?"♥":"♡").join(" ");
  lives.setAttribute("aria-label",state.mode==="marathon"?"∞":copy.lives+": "+state.lives);
  window.dispatchEvent(new CustomEvent("neoline:theory-quiz",{detail:{
-  done,total,lives:state.lives,mode:state.mode,earned:state.earned,language:state.lang
+  done,total,lives:state.lives,mode:state.mode,earned:state.earned,language:state.lang,
+  hintsLeft:state.hintsLeft??3,hintUsed:!!state.hintUsed,answered:state.selected!==null
  }}));
 }
 function renderQuestion(){
@@ -369,6 +371,7 @@ function renderQuestion(){
  const q=state.questions[state.index];
  if(!q){finishSession(false);return}
  state.selected=null;
+ state.hintUsed=false;
  state.choices=shuffled([0,1,2,3]);
  const total=state.questions.length;
  updateQuizHUD();
@@ -402,6 +405,24 @@ function recordProgress(q,selected,wasCorrect){
  stats.wrong=[...set].slice(-1200);
  stats.xp+=wasCorrect?15:0;
  saveStats();
+}
+/* Three optional 50/50-style hints for practice runs only.
+ * Never disclose a mock-exam answer; XP and exam scoring remain unchanged. */
+function useGameHint(){
+ if(state.finished||state.selected!==null||state.mode==="exam"||!state.mode||
+    !$("#gamePlaying")||$("#gamePlaying").hidden||state.hintUsed||(state.hintsLeft??0)<=0)return;
+ const q=state.questions[state.index];if(!q)return;
+ const wrong=[...$("#answers").querySelectorAll("button[data-original]")]
+   .filter(button=>!button.disabled&&Number(button.dataset.original)!==q.correct);
+ if(!wrong.length)return;
+ const picked=wrong[Math.floor(Math.random()*wrong.length)];
+ picked.disabled=true;picked.classList.add("hint-eliminated");
+ picked.setAttribute("aria-label",picked.textContent+" — неверный вариант исключён подсказкой");
+ state.hintUsed=true;state.hintsLeft-=1;
+ window.dispatchEvent(new CustomEvent("neoline:theory-hint",{detail:{
+  hintsLeft:state.hintsLeft,mode:state.mode,language:state.lang
+ }}));
+ updateQuizHUD();
 }
 function pickAnswer(chosen){
  if(state.selected!==null||state.finished)return;
@@ -505,6 +526,7 @@ function init(){
  $("licenseSelect").addEventListener("change",e=>selectLicence(e.target.value));
  document.querySelectorAll("[data-mode]").forEach(b=>b.addEventListener("click",()=>startMode(b.dataset.mode)));
  $("exitQuiz").addEventListener("click",quitSession);
+ window.addEventListener("neoline:theory-use-hint",useGameHint);
  $("backToModes").addEventListener("click",quitSession);
  $("restartMode").addEventListener("click",()=>startMode(state.mode));
  document.addEventListener("visibilitychange",()=>{if(state.mode==="exam"&&!document.hidden&&!state.finished)formatClock()});
