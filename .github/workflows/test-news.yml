@@ -118,6 +118,19 @@ jobs:
               if(Math.abs(height-baseHeight)>1)
                 throw Error('Mode '+stage+' shifted fixed demo frame: '+height+' vs '+baseHeight);
             }
+            await road.locator('[data-road-step="1"]').click();
+            if(await road.getAttribute('data-road-stage')!=='1' ||
+               !await road.evaluate(el=>el.classList.contains('is-overspeed')) ||
+               await road.locator('[data-road-speed]').innerText()!=='72' ||
+               await road.locator('[data-road-limit]').innerText()!=='60' ||
+               !(await road.locator('[data-road-excess]').innerText()).includes('+12'))
+              throw Error('GPS speed warning must show illustrative 72 km/h vs 60 km/h (+12)');
+            const alert=road.locator('.road-demo-speed-warning');
+            if(await alert.getAttribute('aria-hidden')!=='false')
+              throw Error('GPS overspeed warning must be visible and accessible');
+            await road.locator('[data-road-step="0"]').click();
+            if(await road.evaluate(el=>el.classList.contains('is-overspeed')))
+              throw Error('GPS-only overspeed alert leaked into plain record mode');
             await road.locator('[data-road-step="2"]').click();
             const split=await road.locator('.road-demo-rear-feed').evaluate(el=>getComputedStyle(el).visibility);
             if(split!=='visible')throw Error('Dual-camera mode must open inset rear view');
