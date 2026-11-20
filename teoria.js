@@ -6,9 +6,9 @@
 const $=id=>document.getElementById(id);
 const esc=s=>String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
 const DICTS={
-ru:{backHome:"← На главную",heroEyebrow:"NEOLINE · ИЗРАИЛЬ · ИГРА",heroTitle:"Теория вождения",heroSubtitle:"Реальные экзаменационные вопросы Израиля — теперь в формате игры. Освой знаки, правила и сложные ситуации на дорогах.",badgeOfficial:"✓ Государственный банк вопросов",badgeFree:"Без регистрации",badgeB:"Категория B",selectLabel:"ВЫБОР ИГРЫ",selectTitle:"Выбери режим",progressSummary:"🏆 Мой прогресс",licenseLabel:"Права",statSeenLabel:"Вопросов изучено",statAccuracyLabel:"Точность",statMistakesLabel:"Ошибок для повтора",modeRoute:"Поездка по городу",descRoute:"10 вопросов · 3 жизни",ctaRoute:"Начать маршрут ↗",modeSigns:"Охота за знаками",descSigns:"12 вопросов · знаки",ctaSigns:"Учить знаки ↗",modeExam:"Как на экзамене",descExam:"30 вопросов · 40 минут",ctaExam:"Пробный экзамен ↗",modeMistakes:"Работа над ошибками",descMistakes:"Разбор сложных вопросов",ctaMistakes:"Повторить ↗",modeMarathon:"Большое путешествие · все билеты",descMarathon:"20 новых вопросов за этап",ctaMarathon:"Продолжить путешествие ↗",sourceNotice:"Источник: Министерство транспорта и безопасности дорожного движения Израиля (государственные данные, CC BY). NEOLINE — независимый учебный проект, не официальный экзамен. Проверяйте актуальность правил.",sourceBank:"Государственный банк вопросов ↗",sourceRules:"Официальные условия экзамена ↗",exitLabel:"Режимы",questionTip:"Выбери один правильный ответ.",next:"Далее →",done:"Завершить →",resultKicker:"МАРШРУТ ЗАВЕРШЁН",resultPercentLabel:"Верных ответов",resultXPLabel:"Заработано",restartLabel:"Ещё раз",backModesLabel:"Другие режимы",footerBack:"На главную ↗",loading:"Загружаем официальные вопросы…",bankReady:(count,b)=>"✓ Загружено "+count+" официальных вопросов · для прав "+b+" доступно "+countB,bankBroken:"Банк официальных вопросов временно недоступен. Попробуй обновить страницу.",bankShort:"Для этого режима вопросов недостаточно в официальном банке.",noMistakes:"Пока нет ошибок для повторения — сначала пройди игру!",correct:"Верно! Отличная реакция! +15 XP",wrong:"Не совсем. Правильный ответ выделен зелёным.",examSelected:"Ответ принят. В режиме экзамена правильность покажем в конце.",heart:"Жизни",topics:{signs:"Дорожные знаки",laws:"Правила движения",vehicle:"Устройство автомобиля",safety:"Безопасность на дороге"},resultPass:"Экзамен сдан! 🎉",resultFail:"Экзамен пока не сдан",resultGreat:"Отличный маршрут!",resultGood:"Хорошая тренировка!",resultKeep:"Повторим сложные вопросы?",examResult:(n)=>"Для сдачи требуется 26 из 30. Ты ответил правильно на "+n+".",practiceResult:"Продолжай тренироваться — каждый верный ответ приближает к водительским правам.",zeroMistakes:"Все ответы верные — ошибок нет!",errorsList:"Вопросы для повторения",timeOut:"Время вышло. Неотвеченные вопросы считаются ошибками.",retry:"Повторить"},
-en:{backHome:"← Home",heroEyebrow:"NEOLINE · ISRAEL · GAME",heroTitle:"Driving theory",heroSubtitle:"Israel's actual driving theory questions, turned into a game. Master signs, regulations and real road scenarios.",badgeOfficial:"✓ Government question bank",badgeFree:"No registration",badgeB:"Licence B",selectLabel:"GAME MODES",selectTitle:"Pick a game",progressSummary:"🏆 My progress",licenseLabel:"Licence",statSeenLabel:"Questions studied",statAccuracyLabel:"Accuracy",statMistakesLabel:"Mistakes to review",modeRoute:"City drive",descRoute:"10 questions · 3 lives",ctaRoute:"Start driving ↗",modeSigns:"Road sign hunt",descSigns:"12 questions · signs",ctaSigns:"Learn signs ↗",modeExam:"Real exam practice",descExam:"30 questions · 40 min",ctaExam:"Mock exam ↗",modeMistakes:"Retry mistakes",descMistakes:"Review tricky questions",ctaMistakes:"Review ↗",modeMarathon:"Grand road trip · all questions",descMarathon:"20 new questions per stage",ctaMarathon:"Continue the road trip ↗",sourceNotice:"Source: Israel Ministry of Transport and Road Safety (open government data, CC BY). NEOLINE is an independent learning tool, not a government exam. Always check current rules.",sourceBank:"Official question bank ↗",sourceRules:"Government exam rules ↗",exitLabel:"Modes",questionTip:"Select one correct answer.",next:"Next →",done:"Finish →",resultKicker:"ROUTE COMPLETED",resultPercentLabel:"Correct answers",resultXPLabel:"Earned",restartLabel:"Play again",backModesLabel:"Other modes",footerBack:"Home ↗",loading:"Loading official questions…",bankReady:(count,b)=>"✓ "+count+" official questions · "+countB+" for licence "+b,bankBroken:"The official question bank is temporarily unavailable. Please reload.",bankShort:"Not enough licensed questions are available for this mode.",noMistakes:"No mistakes to review yet. Play another route first!",correct:"Correct! Great reaction! +15 XP",wrong:"Not quite. The correct answer is highlighted in green.",examSelected:"Answer saved. Correct answers are revealed after the mock exam.",heart:"Lives",topics:{signs:"Road signs",laws:"Traffic rules",vehicle:"Vehicle knowledge",safety:"Road safety"},resultPass:"Mock exam passed! 🎉",resultFail:"Mock exam not passed yet",resultGreat:"Amazing drive!",resultGood:"Nice practice!",resultKeep:"Let's review the tricky ones",examResult:(n)=>"26 out of 30 are needed to pass. You got "+n+" correct.",practiceResult:"Keep learning — each correct answer brings you closer to your driving licence.",zeroMistakes:"Perfect run — no mistakes!",errorsList:"Questions to review",timeOut:"Time's up. Unanswered questions count as incorrect.",retry:"Try again"},
-he:{backHome:"→ חזרה לראשי",heroEyebrow:"NEOLINE · ישראל · משחק",heroTitle:"תיאוריה בנהיגה",heroSubtitle:"השאלות האמיתיות של מבחן התיאוריה בישראל, עכשיו במשחק. תרגלו תמרורים, חוקים ובטיחות בדרכים.",badgeOfficial:"✓ מאגר השאלות הממשלתי",badgeFree:"בלי הרשמה",badgeB:"דרגה B",selectLabel:"מצבי משחק",selectTitle:"בחרו משחק",progressSummary:"🏆 ההתקדמות שלי",licenseLabel:"רישיון",statSeenLabel:"שאלות שנלמדו",statAccuracyLabel:"דיוק",statMistakesLabel:"טעויות לחזרה",modeRoute:"נסיעה בעיר",descRoute:"10 שאלות · 3 לבבות",ctaRoute:"לדרך ↗",modeSigns:"ציד תמרורים",descSigns:"12 שאלות · תמרורים",ctaSigns:"ללמוד תמרורים ↗",modeExam:"הדמיית מבחן",descExam:"30 שאלות · 40 דקות",ctaExam:"מבחן לדוגמה ↗",modeMistakes:"לומדים מטעויות",descMistakes:"חוזרים לשאלות קשות",ctaMistakes:"חזרה ↗",modeMarathon:"מסע גדול · כל השאלות",descMarathon:"20 שאלות חדשות בכל שלב",ctaMarathon:"ממשיכים במסע ↗",sourceNotice:"מקור: משרד התחבורה והבטיחות בדרכים (מידע ממשלתי פתוח, CC BY). כלי הלימוד של NEOLINE אינו מבחן ממשלתי רשמי. יש לבדוק את הכללים העדכניים.",sourceBank:"מאגר השאלות הרשמי ↗",sourceRules:"כללי הבחינה באתר הממשלה ↗",exitLabel:"מסלולים",questionTip:"בחרו תשובה אחת נכונה.",next:"הבא ←",done:"סיום ←",resultKicker:"המסלול הושלם",resultPercentLabel:"תשובות נכונות",resultXPLabel:"נקודות",restartLabel:"לשחק שוב",backModesLabel:"מסלולים נוספים",footerBack:"לראשי ↗",loading:"טוענים שאלות רשמיות…",bankReady:(count,b)=>"✓ "+count+" שאלות רשמיות · "+countB+" לרישיון "+b,bankBroken:"מאגר השאלות אינו זמין כרגע. נא לטעון מחדש.",bankShort:"אין מספיק שאלות למצב משחק זה.",noMistakes:"אין כרגע טעויות לחזור עליהן. שחקו במסלול אחר!",correct:"נכון! כל הכבוד! ‎+15 XP",wrong:"לא בדיוק. התשובה הנכונה מסומנת בירוק.",examSelected:"התשובה נשמרה. התוצאות יוצגו בסיום המבחן.",heart:"לבבות",topics:{signs:"תמרורים",laws:"חוקי התנועה",vehicle:"הכרת הרכב",safety:"בטיחות בדרכים"},resultPass:"עברתם את הבחינה! 🎉",resultFail:"עוד לא עברתם את הבחינה",resultGreat:"נסיעה מצוינת!",resultGood:"תרגול מוצלח!",resultKeep:"בואו נחזור לשאלות הקשות",examResult:(n)=>"כדי לעבור צריך 26 מתוך 30. השבתם נכון על "+n+" שאלות.",practiceResult:"המשיכו לתרגל — כל תשובה נכונה מקדמת אתכם לרישיון.",zeroMistakes:"כל הכבוד! לא היו טעויות.",errorsList:"שאלות לחזרה",timeOut:"הזמן נגמר. שאלות ללא תשובה נחשבות שגויות.",retry:"לנסות שוב"}
+ru:{backHome:"← На главную",heroEyebrow:"NEOLINE · ИЗРАИЛЬ · ИГРА",heroTitle:"Теория вождения",heroSubtitle:"Реальные экзаменационные вопросы Израиля — теперь в формате игры. Освой знаки, правила и сложные ситуации на дорогах.",badgeOfficial:"✓ Государственный банк вопросов",badgeFree:"Без регистрации",badgeB:"Категория B",selectLabel:"ВЫБОР ИГРЫ",selectTitle:"Выбери режим",progressSummary:"🏆 Мой прогресс",licenseLabel:"Права",statSeenLabel:"Вопросов изучено",statAccuracyLabel:"Точность",statMistakesLabel:"Ошибок для повтора",modeRoute:"Поездка по городу",descRoute:"10 вопросов · 3 жизни",ctaRoute:"Начать маршрут ↗",modeSigns:"Охота за знаками",descSigns:"12 вопросов · знаки",ctaSigns:"Учить знаки ↗",modeExam:"Как на экзамене",descExam:"30 вопросов · 40 минут",ctaExam:"Пробный экзамен ↗",modeMistakes:"Работа над ошибками",descMistakes:"Разбор сложных вопросов",ctaMistakes:"Повторить ↗",modeMarathon:"Большое путешествие · все билеты",descMarathon:"20 новых вопросов за этап",ctaMarathon:"Продолжить путешествие ↗",modeDaily:"Задание дня",descDaily:"5 официальных вопросов · 3 жизни · новый набор каждый день",ctaDaily:"Начать вызов ↗",dailyDone:"✓ Сегодня выполнено",dailyStreak:"🔥 {days} дн. подряд",dailyResult:"Задание дня выполнено! Серия: {days} дн.",sourceNotice:"Источник: Министерство транспорта и безопасности дорожного движения Израиля (государственные данные, CC BY). NEOLINE — независимый учебный проект, не официальный экзамен. Проверяйте актуальность правил.",sourceBank:"Государственный банк вопросов ↗",sourceRules:"Официальные условия экзамена ↗",exitLabel:"Режимы",questionTip:"Выбери один правильный ответ.",next:"Далее →",done:"Завершить →",resultKicker:"МАРШРУТ ЗАВЕРШЁН",resultPercentLabel:"Верных ответов",resultXPLabel:"Заработано",restartLabel:"Ещё раз",backModesLabel:"Другие режимы",footerBack:"На главную ↗",loading:"Загружаем официальные вопросы…",bankReady:(count,b)=>"✓ Загружено "+count+" официальных вопросов · для прав "+b+" доступно "+countB,bankBroken:"Банк официальных вопросов временно недоступен. Попробуй обновить страницу.",bankShort:"Для этого режима вопросов недостаточно в официальном банке.",noMistakes:"Пока нет ошибок для повторения — сначала пройди игру!",correct:"Верно! Отличная реакция! +15 XP",wrong:"Не совсем. Правильный ответ выделен зелёным.",examSelected:"Ответ принят. В режиме экзамена правильность покажем в конце.",heart:"Жизни",topics:{signs:"Дорожные знаки",laws:"Правила движения",vehicle:"Устройство автомобиля",safety:"Безопасность на дороге"},resultPass:"Экзамен сдан! 🎉",resultFail:"Экзамен пока не сдан",resultGreat:"Отличный маршрут!",resultGood:"Хорошая тренировка!",resultKeep:"Повторим сложные вопросы?",examResult:(n)=>"Для сдачи требуется 26 из 30. Ты ответил правильно на "+n+".",practiceResult:"Продолжай тренироваться — каждый верный ответ приближает к водительским правам.",zeroMistakes:"Все ответы верные — ошибок нет!",errorsList:"Вопросы для повторения",timeOut:"Время вышло. Неотвеченные вопросы считаются ошибками.",retry:"Повторить"},
+en:{backHome:"← Home",heroEyebrow:"NEOLINE · ISRAEL · GAME",heroTitle:"Driving theory",heroSubtitle:"Israel's actual driving theory questions, turned into a game. Master signs, regulations and real road scenarios.",badgeOfficial:"✓ Government question bank",badgeFree:"No registration",badgeB:"Licence B",selectLabel:"GAME MODES",selectTitle:"Pick a game",progressSummary:"🏆 My progress",licenseLabel:"Licence",statSeenLabel:"Questions studied",statAccuracyLabel:"Accuracy",statMistakesLabel:"Mistakes to review",modeRoute:"City drive",descRoute:"10 questions · 3 lives",ctaRoute:"Start driving ↗",modeSigns:"Road sign hunt",descSigns:"12 questions · signs",ctaSigns:"Learn signs ↗",modeExam:"Real exam practice",descExam:"30 questions · 40 min",ctaExam:"Mock exam ↗",modeMistakes:"Retry mistakes",descMistakes:"Review tricky questions",ctaMistakes:"Review ↗",modeMarathon:"Grand road trip · all questions",descMarathon:"20 new questions per stage",ctaMarathon:"Continue the road trip ↗",modeDaily:"Daily challenge",descDaily:"5 official questions · 3 lives · refreshed each day",ctaDaily:"Start challenge ↗",dailyDone:"✓ Done today",dailyStreak:"🔥 {days}-day streak",dailyResult:"Daily challenge complete! {days}-day streak.",sourceNotice:"Source: Israel Ministry of Transport and Road Safety (open government data, CC BY). NEOLINE is an independent learning tool, not a government exam. Always check current rules.",sourceBank:"Official question bank ↗",sourceRules:"Government exam rules ↗",exitLabel:"Modes",questionTip:"Select one correct answer.",next:"Next →",done:"Finish →",resultKicker:"ROUTE COMPLETED",resultPercentLabel:"Correct answers",resultXPLabel:"Earned",restartLabel:"Play again",backModesLabel:"Other modes",footerBack:"Home ↗",loading:"Loading official questions…",bankReady:(count,b)=>"✓ "+count+" official questions · "+countB+" for licence "+b,bankBroken:"The official question bank is temporarily unavailable. Please reload.",bankShort:"Not enough licensed questions are available for this mode.",noMistakes:"No mistakes to review yet. Play another route first!",correct:"Correct! Great reaction! +15 XP",wrong:"Not quite. The correct answer is highlighted in green.",examSelected:"Answer saved. Correct answers are revealed after the mock exam.",heart:"Lives",topics:{signs:"Road signs",laws:"Traffic rules",vehicle:"Vehicle knowledge",safety:"Road safety"},resultPass:"Mock exam passed! 🎉",resultFail:"Mock exam not passed yet",resultGreat:"Amazing drive!",resultGood:"Nice practice!",resultKeep:"Let's review the tricky ones",examResult:(n)=>"26 out of 30 are needed to pass. You got "+n+" correct.",practiceResult:"Keep learning — each correct answer brings you closer to your driving licence.",zeroMistakes:"Perfect run — no mistakes!",errorsList:"Questions to review",timeOut:"Time's up. Unanswered questions count as incorrect.",retry:"Try again"},
+he:{backHome:"→ חזרה לראשי",heroEyebrow:"NEOLINE · ישראל · משחק",heroTitle:"תיאוריה בנהיגה",heroSubtitle:"השאלות האמיתיות של מבחן התיאוריה בישראל, עכשיו במשחק. תרגלו תמרורים, חוקים ובטיחות בדרכים.",badgeOfficial:"✓ מאגר השאלות הממשלתי",badgeFree:"בלי הרשמה",badgeB:"דרגה B",selectLabel:"מצבי משחק",selectTitle:"בחרו משחק",progressSummary:"🏆 ההתקדמות שלי",licenseLabel:"רישיון",statSeenLabel:"שאלות שנלמדו",statAccuracyLabel:"דיוק",statMistakesLabel:"טעויות לחזרה",modeRoute:"נסיעה בעיר",descRoute:"10 שאלות · 3 לבבות",ctaRoute:"לדרך ↗",modeSigns:"ציד תמרורים",descSigns:"12 שאלות · תמרורים",ctaSigns:"ללמוד תמרורים ↗",modeExam:"הדמיית מבחן",descExam:"30 שאלות · 40 דקות",ctaExam:"מבחן לדוגמה ↗",modeMistakes:"לומדים מטעויות",descMistakes:"חוזרים לשאלות קשות",ctaMistakes:"חזרה ↗",modeMarathon:"מסע גדול · כל השאלות",descMarathon:"20 שאלות חדשות בכל שלב",ctaMarathon:"ממשיכים במסע ↗",modeDaily:"אתגר יומי",descDaily:"5 שאלות רשמיות · 3 לבבות · מתחדש בכל יום",ctaDaily:"מתחילים ↗",dailyDone:"✓ הושלם היום",dailyStreak:"🔥 רצף: {days} ימים",dailyResult:"האתגר היומי הושלם! רצף: {days} ימים.",sourceNotice:"מקור: משרד התחבורה והבטיחות בדרכים (מידע ממשלתי פתוח, CC BY). כלי הלימוד של NEOLINE אינו מבחן ממשלתי רשמי. יש לבדוק את הכללים העדכניים.",sourceBank:"מאגר השאלות הרשמי ↗",sourceRules:"כללי הבחינה באתר הממשלה ↗",exitLabel:"מסלולים",questionTip:"בחרו תשובה אחת נכונה.",next:"הבא ←",done:"סיום ←",resultKicker:"המסלול הושלם",resultPercentLabel:"תשובות נכונות",resultXPLabel:"נקודות",restartLabel:"לשחק שוב",backModesLabel:"מסלולים נוספים",footerBack:"לראשי ↗",loading:"טוענים שאלות רשמיות…",bankReady:(count,b)=>"✓ "+count+" שאלות רשמיות · "+countB+" לרישיון "+b,bankBroken:"מאגר השאלות אינו זמין כרגע. נא לטעון מחדש.",bankShort:"אין מספיק שאלות למצב משחק זה.",noMistakes:"אין כרגע טעויות לחזור עליהן. שחקו במסלול אחר!",correct:"נכון! כל הכבוד! ‎+15 XP",wrong:"לא בדיוק. התשובה הנכונה מסומנת בירוק.",examSelected:"התשובה נשמרה. התוצאות יוצגו בסיום המבחן.",heart:"לבבות",topics:{signs:"תמרורים",laws:"חוקי התנועה",vehicle:"הכרת הרכב",safety:"בטיחות בדרכים"},resultPass:"עברתם את הבחינה! 🎉",resultFail:"עוד לא עברתם את הבחינה",resultGreat:"נסיעה מצוינת!",resultGood:"תרגול מוצלח!",resultKeep:"בואו נחזור לשאלות הקשות",examResult:(n)=>"כדי לעבור צריך 26 מתוך 30. השבתם נכון על "+n+" שאלות.",practiceResult:"המשיכו לתרגל — כל תשובה נכונה מקדמת אתכם לרישיון.",zeroMistakes:"כל הכבוד! לא היו טעויות.",errorsList:"שאלות לחזרה",timeOut:"הזמן נגמר. שאלות ללא תשובה נחשבות שגויות.",retry:"לנסות שוב"}
 };
 DICTS.ar=window.NEOLINE_THEORY_AR?.ui||DICTS.ru;
 const text=(k)=>(DICTS[state.lang]||DICTS.ru)[k];
@@ -43,6 +43,57 @@ function scheduleAnswerAdvance(success,gameOverAfter=false){
 
 function safeStoreGet(key){try{return localStorage.getItem(key)}catch(e){return null}}
 function safeStorePut(key,value){try{localStorage.setItem(key,value)}catch(e){}}
+// Daily challenge uses Israel's calendar date, regardless of visitor device timezone.
+const israelDay=()=>{
+ try{
+  const parts=Object.fromEntries(new Intl.DateTimeFormat("en-GB",{
+   timeZone:"Asia/Jerusalem",year:"numeric",month:"2-digit",day:"2-digit"
+  }).formatToParts(new Date()).map(part=>[part.type,part.value]));
+  return parts.year+"-"+parts.month+"-"+parts.day;
+ }catch(_){return new Date().toISOString().slice(0,10)}
+};
+const dayBefore=day=>new Date(Date.parse(day+"T00:00:00Z")-86400000).toISOString().slice(0,10);
+const dailyRecordKey=()=> "neoline-teoria:daily:v1:"+state.licence;
+function readDaily(){
+ try{
+  const value=JSON.parse(safeStoreGet(dailyRecordKey())||"{}");
+  return {date:/^\d{4}-\d{2}-\d{2}$/.test(value.date)?value.date:null,
+    streak:Number.isInteger(value.streak)?Math.min(3650,Math.max(0,value.streak)):0};
+ }catch(_){return {date:null,streak:0}}
+}
+function recordDaily(){
+ const day=state.dailyDay||israelDay();
+ const previous=readDaily();
+ if(previous.date===day)return previous.streak;
+ const streak=previous.date===dayBefore(day)?previous.streak+1:1;
+ safeStorePut(dailyRecordKey(),JSON.stringify({
+  date:day,streak,score:state.correct,total:state.questions.length,
+  completedAt:new Date().toISOString()
+ }));
+ return streak;
+}
+function dailySelection(available,day){
+ // A stable five-question set per day, licence and language; no random redraw on retry.
+ const questions=available.slice().sort((a,b)=>String(a.id).localeCompare(String(b.id)));
+ let seed=2166136261;
+ const source=day+"|"+state.licence+"|"+state.lang;
+ for(let i=0;i<source.length;i++)seed=Math.imul(seed^source.charCodeAt(i),16777619);
+ for(let i=questions.length-1;i>0;i--){
+  seed^=seed<<13;seed^=seed>>>17;seed^=seed<<5;
+  const j=(seed>>>0)%(i+1);
+  [questions[i],questions[j]]=[questions[j],questions[i]];
+ }
+ return questions;
+}
+function refreshDaily(){
+ const button=$("dailyStart"),streakBadge=$("dailyStreak");
+ if(!button||!streakBadge)return;
+ const record=readDaily(),today=israelDay(),completed=record.date===today;
+ const streak=(completed||record.date===dayBefore(today))?record.streak:0;
+ button.textContent=completed?text("dailyDone"):text("ctaDaily");
+ button.disabled=!state.ready||completed;
+ streakBadge.textContent=String(text("dailyStreak")).replace("{days}",String(streak));
+}
 const statsKey=()=> "neoline-teoria:v1:"+state.lang+":"+state.licence;
 function readStats(){try{const data=JSON.parse(safeStoreGet(statsKey())||"{}");return {answered:data.answered&&typeof data.answered==="object"?data.answered:{},wrong:Array.isArray(data.wrong)?data.wrong:[],xp:Number(data.xp)||0,history:Array.isArray(data.history)?data.history.slice(-30):[]}}catch(e){return {answered:{},wrong:[],xp:0,history:[]}}}
 function saveStats(){safeStorePut(statsKey(),JSON.stringify(stats))}
@@ -105,7 +156,7 @@ function initTheoryNavAutoHide(){
 function setCopy(){
  document.documentElement.lang=state.lang;
  document.documentElement.dir=["he","ar"].includes(state.lang)?"rtl":"ltr";
- for(const id of ["heroEyebrow","heroSubtitle","badgeOfficial","badgeFree","badgeB","selectLabel","selectTitle","progressSummary","licenseLabel","statSeenLabel","statAccuracyLabel","statMistakesLabel","modeRoute","descRoute","ctaRoute","modeSigns","descSigns","ctaSigns","modeExam","descExam","ctaExam","modeMistakes","descMistakes","ctaMistakes","modeMarathon","descMarathon","ctaMarathon","sourceNotice","sourceBank","sourceRules","exitLabel","questionTip","resultKicker","resultPercentLabel","resultXPLabel","restartLabel","backModesLabel","footerBack"]){
+ for(const id of ["heroEyebrow","heroSubtitle","badgeOfficial","badgeFree","badgeB","selectLabel","selectTitle","progressSummary","licenseLabel","statSeenLabel","statAccuracyLabel","statMistakesLabel","modeRoute","descRoute","ctaRoute","modeSigns","descSigns","ctaSigns","modeExam","descExam","ctaExam","modeMistakes","descMistakes","ctaMistakes","modeMarathon","descMarathon","ctaMarathon","modeDaily","descDaily","sourceNotice","sourceBank","sourceRules","exitLabel","questionTip","resultKicker","resultPercentLabel","resultXPLabel","restartLabel","backModesLabel","footerBack"]){
   const el=$(id);if(el&&text(id))el.textContent=typeof text(id)==="function"?"":text(id)
  }
  updateTheoryNavigation();
@@ -138,6 +189,7 @@ function refreshStats(){
   attempts:total,correct,licence:state.licence
  }}));
  document.querySelector('[data-mode="mistakes"]').disabled=!stats.wrong.length || !state.ready;
+ refreshDaily();
 }
 async function loadBank(){
  const seq=++state.loadSeq;
@@ -191,7 +243,7 @@ function selectLicence(value){
 
 // A practice run with heart icons ends immediately on the third wrong answer.
 // Marathon is intentionally unlimited; the 30-question exam has no lives.
-const hasLives=()=>["route","signs","mistakes"].includes(state.mode);
+const hasLives=()=>["route","signs","mistakes","daily"].includes(state.mode);
 const GAME_OVER_COPY={
  ru:{
   message:"Три жизни закончились.<br>Не огорчайся — попробуй ещё раз!",
@@ -310,12 +362,14 @@ function startMode(mode){
  else if(mode==="mistakes"){const failed=new Set(stats.wrong);selected=available.filter(q=>failed.has(q.id));}
  else selected=available;
  if(mode==="mistakes"&&!selected.length){$("bankText").textContent=text("noMistakes");return}
- const need=mode==="exam"?30:mode==="signs"?12:mode==="marathon"?20:mode==="mistakes"?Math.min(20,selected.length):10;
+ const need=mode==="exam"?30:mode==="signs"?12:mode==="marathon"?20:mode==="mistakes"?Math.min(20,selected.length):mode==="daily"?5:10;
  if(selected.length<need){$("bankText").textContent=text("bankShort");return}
  const unseen=selected.filter(q=>!stats.answered[q.id]);
  const seen=selected.filter(q=>!!stats.answered[q.id]);
- const candidates=(mode==="exam"?shuffled(selected):shuffled(unseen).concat(shuffled(seen)));
+ const day=mode==="daily"?israelDay():null;
+ const candidates=mode==="daily"?dailySelection(selected,day):(mode==="exam"?shuffled(selected):shuffled(unseen).concat(shuffled(seen)));
  state.questions=candidates.slice(0,need);
+ state.dailyDay=day;
  state.mode=mode;
  state.index=0;state.selected=null;state.answers=[];state.correct=0;state.earned=0;state.lives=3;state.finished=false;
  state.hintsLeft=3;state.hintUsed=false;
@@ -324,7 +378,7 @@ function startMode(mode){
  $("gamePlaying").hidden=false;
  document.body.classList.add("game-active");
  $("timerBox").hidden=mode!=="exam";
- $("currentMode").textContent=text({route:"modeRoute",signs:"modeSigns",exam:"modeExam",mistakes:"modeMistakes",marathon:"modeMarathon"}[mode]);
+ $("currentMode").textContent=text({route:"modeRoute",signs:"modeSigns",exam:"modeExam",mistakes:"modeMistakes",marathon:"modeMarathon",daily:"modeDaily"}[mode]);
  $("currentMode").title=$("currentMode").textContent;
  stopClock();
  if(mode==="exam"){
@@ -496,6 +550,7 @@ function finishSession(timedOut){
    state.answers.push({q,chosen:null,success:false});
   }
  }
+ const dailyStreak=state.mode==="daily"?recordDaily():null;
  stats=readStats();
  stats.history.push({mode:state.mode,lang:state.lang,licence:state.licence,
      correct:state.correct,total:n,time:new Date().toISOString()});
@@ -504,7 +559,7 @@ function finishSession(timedOut){
  const passed=state.mode==="exam"&&state.correct>=26,percent=Math.round(100*state.correct/n);
  $("resultBadge").textContent=passed?"🏆":percent>=80?"🌟":percent>=60?"🚙":"🛣️";
  $("resultTitle").textContent=state.mode==="exam"?(passed?text("resultPass"):text("resultFail")):percent>=90?text("resultGreat"):percent>=60?text("resultGood"):text("resultKeep");
- $("resultSubtitle").textContent=timedOut?text("timeOut"):state.mode==="exam"?text("examResult")(state.correct):text("practiceResult");
+ $("resultSubtitle").textContent=timedOut?text("timeOut"):state.mode==="daily"?String(text("dailyResult")).replace("{days}",String(dailyStreak)):state.mode==="exam"?text("examResult")(state.correct):text("practiceResult");
  $("resultScore").textContent=state.correct+" / "+n;
  $("resultPercent").textContent=percent+"%";
  $("resultXP").textContent="+"+state.earned+" XP";
@@ -533,6 +588,8 @@ function init(){
  document.querySelectorAll("[data-lang]").forEach(b=>b.addEventListener("click",()=>selectLanguage(b.dataset.lang)));
  $("licenseSelect").addEventListener("change",e=>selectLicence(e.target.value));
  document.querySelectorAll("[data-mode]").forEach(b=>b.addEventListener("click",()=>startMode(b.dataset.mode)));
+ $("dailyStart")?.addEventListener("click",()=>startMode("daily"));
+ window.setInterval(()=>{if(!document.hidden)refreshDaily()},60000);
  $("exitQuiz").addEventListener("click",quitSession);
  window.addEventListener("neoline:theory-use-hint",useGameHint);
  $("backToModes").addEventListener("click",quitSession);
