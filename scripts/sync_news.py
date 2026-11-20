@@ -133,13 +133,13 @@ def relevant(title):
   return "speed"
  # Brief flashes may report a road user injured without naming an 'accident'.
  # Require both a road-user term and an incident term, either order.
- road_user=r"(?:רוכב(?:ת)?|הולך\\s+רגל|הולכת\\s+רגל|קורקינט|אופנוע|קטנוע|אופניים\\s+חשמליים|רכב|אוטובוס)"
- injury=r"(?:נפצע\\w*|נפגע\\w*|נהרג\\w*|נדרס\\w*|פונה\\w*|התהפכ\\w*|באורח\\s+(?:קשה|בינוני))"
+ road_user=r"(?:רוכב(?:ת)?|הולך\s+רגל|הולכת\s+רגל|קורקינט|אופנוע|קטנוע|אופניים\s+חשמליים|רכב|אוטובוס)"
+ injury=r"(?:נפצע\w*|נפגע\w*|נהרג\w*|נדרס\w*|פונה\w*|התהפכ\w*|באורח\s+(?:קשה|בינוני))"
  if re.search(road_user+r".{0,90}"+injury,low) or re.search(injury+r".{0,90}"+road_user,low):
   return "accidents"
  # Closure and congestion bulletins often refer to a numbered highway only.
- road_place=r"(?:כביש\\s*\\d{1,3}|צומת|מחלף|נתיב(?:י)?\\s+איילון)"
- disruption=r"(?:נחסם\\w*|ייחסמ\\w*|נסגר\\w*|סגיר\\w*|עומס\\w*|פקק\\w*|שיבוש\\w*|עבודות\\s+כביש)"
+ road_place=r"(?:כביש\s*\d{1,3}|צומת|מחלף|נתיב(?:י)?\s+איילון)"
+ disruption=r"(?:נחסם\w*|ייחסמ\w*|נסגר\w*|סגיר\w*|עומס\w*|פקק\w*|שיבוש\w*|עבודות\s+כביש)"
  if re.search(road_place+r".{0,75}"+disruption,low) or re.search(disruption+r".{0,75}"+road_place,low):
   return "roads"
  for section in ("speed","accidents","laws","roads"):
