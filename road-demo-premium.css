@@ -50,6 +50,20 @@
 #installation .road-demo[data-road-stage="1"] .road-demo-gps,
 #installation .road-demo[data-road-stage="2"] .road-demo-rear,
 #installation .road-demo[data-road-stage="3"] .road-demo-parking{opacity:1}
+/* Dedicated navigation and parking sensing overlays. */
+#installation .road-demo-route,
+#installation .road-demo-parking-zones{
+ opacity:0;transition:opacity .55s ease;pointer-events:none;
+}
+#installation .road-demo[data-road-stage="1"] .road-demo-route{opacity:1}
+#installation .road-demo[data-road-stage="3"] .road-demo-parking-zones{opacity:1}
+#installation .road-demo.is-playing[data-road-stage="1"] .road-demo-route-beam{
+ animation:premiumRoadRoute 2.7s linear infinite;
+}
+@keyframes premiumRoadRoute{
+ from{stroke-dashoffset:150}
+ to{stroke-dashoffset:-150}
+}
 #installation .road-demo[data-road-stage="3"] .road-demo-roadflow{opacity:.06}
 #installation .road-demo[data-road-stage="3"] .road-demo-scan{opacity:.12}
 /* Background energy only. The headline and mode buttons never move. */
