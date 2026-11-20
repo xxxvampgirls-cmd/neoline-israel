@@ -1,0 +1,252 @@
+/* NEOLINE: cinematic three-round, purely illustrative gift-opening promo.
+   Replaces static list. No actual prizes, discounts, XP spending, or cart changes. */
+#gameGiftDialog .gift-reveal{
+ --gift-ink:#164565;--gift-cyan:#19bde8;
+ position:relative;isolation:isolate;
+ border-radius:18px;border:1px solid #b8e2f4;
+ background:linear-gradient(155deg,#e6f9ff,#d5efff 54%,#effaff);
+ box-shadow:inset 0 1px #fff,0 8px 19px #1488bd16;
+ overflow:hidden;
+}
+#gameGiftDialog .gift-reveal-scene{
+ height:196px;position:relative;overflow:hidden;
+ background:
+  radial-gradient(ellipse at 49% 67%,#efffffee 0 9%,transparent 61%),
+  radial-gradient(circle at 50% 13%,#ffffffc7 0,transparent 67%),
+  linear-gradient(155deg,#c2ecff,#e4faff 50%,#b5e4fa);
+ perspective:600px;
+}
+#gameGiftDialog .gift-reveal-scene::before{
+ content:"";position:absolute;inset:-30%;
+ pointer-events:none;opacity:.37;
+ background:repeating-conic-gradient(from 8deg at 50% 75%,#6bd4f636 0deg 12deg,transparent 12deg 29deg);
+}
+#gameGiftDialog .gift-reveal-scene::after{
+ content:"";position:absolute;inset:auto 5% 0;
+ height:2px;background:linear-gradient(90deg,transparent,#65bddf,transparent);opacity:.5;
+}
+#gameGiftDialog .gift-reveal-halo{
+ position:absolute;z-index:0;left:50%;bottom:16px;
+ width:250px;height:58px;border:2px solid #85def9b0;
+ border-radius:50%;transform:translateX(-50%) rotateX(50deg);
+ box-shadow:0 0 0 13px #9ae9ff27,0 0 25px #53cbea6c;
+}
+#gameGiftDialog .gift-reveal-platform{
+ position:absolute;z-index:1;bottom:20px;left:50%;transform:translateX(-50%);
+ width:174px;height:25px;border-radius:50%;
+ background:radial-gradient(ellipse,#1687be7a,transparent 72%);
+ filter:blur(7px);
+}
+#gameGiftDialog .gift-reveal-beam{
+ position:absolute;z-index:1;left:50%;bottom:57px;
+ width:170px;height:164px;transform:translateX(-50%) scaleY(.12);
+ transform-origin:bottom center;opacity:0;
+ background:conic-gradient(from 225deg at 50% 100%,transparent 0deg,#a6eeff9c 16deg,transparent 27deg,#fffbbb9d 47deg,transparent 56deg,#abf9ffcb 78deg,transparent 90deg);
+ filter:blur(7px);
+}
+#gameGiftDialog .gift-reveal-number{
+ position:absolute;right:12px;top:10px;z-index:8;
+ padding:4px 8px;border:1px solid #b8e4f7;border-radius:999px;
+ background:#ffffffb8;color:#1776a1;
+ font:850 10px/1.2 Manrope,Arial,sans-serif;letter-spacing:.08em;
+}
+#gameGiftDialog .gift-reveal-box{
+ position:absolute;z-index:3;bottom:24px;left:50%;
+ width:162px;height:122px;transform:translateX(-50%);
+ transform-origin:50% 83%;
+ filter:drop-shadow(0 11px 9px #0b6a9652);
+}
+#gameGiftDialog .gift-reveal-crate{
+ position:absolute;bottom:0;left:9px;width:144px;height:85px;
+ border:2px solid #dcfaff;border-radius:13px 13px 17px 17px;
+ background:
+  linear-gradient(90deg,#45c3f8 0,#e8fdff 15%,#b3edff 32%,#78d0f2 63%,#2497d8 96%);
+ box-shadow:inset 0 3px 7px #ffffffcb,inset 0 -7px 13px #0072b05e,0 4px 0 #067ab0;
+ overflow:hidden;
+}
+#gameGiftDialog .gift-reveal-crate::before{
+ content:"";position:absolute;inset:7px 9px 10px;
+ border:1px solid #b9eeff;border-radius:9px;box-shadow:inset 0 1px 12px #ffffff94;
+}
+#gameGiftDialog .gift-reveal-crate-ribbon{
+ position:absolute;z-index:1;left:50%;top:0;bottom:0;width:22px;
+ transform:translateX(-50%);
+ background:linear-gradient(90deg,#087faf,#dcfaff 46%,#0bb0db 90%);
+ box-shadow:0 0 9px #4de7ffae;
+}
+#gameGiftDialog .gift-reveal-crate-logo{
+ position:absolute;z-index:2;bottom:13px;left:50%;transform:translateX(-50%);
+ border-radius:999px;padding:3px 7px;background:#f4fdffed;
+ color:#0875aa;font:1000 13px/1 Manrope,Arial,sans-serif;letter-spacing:.02em;
+ box-shadow:0 1px 5px #1c8dc542;
+}
+#gameGiftDialog .gift-reveal-crate-glint{
+ position:absolute;right:12px;top:13px;width:22px;height:5px;border-radius:12px;
+ background:#fff;box-shadow:0 0 13px 3px #fff;
+}
+#gameGiftDialog .gift-reveal-lid{
+ position:absolute;z-index:4;left:0;bottom:81px;width:162px;height:39px;
+ border:2px solid #e7fcff;border-radius:11px;
+ background:linear-gradient(160deg,#ffffff 3%,#79d1f3 34%,#f2fcff 54%,#218ecc 93%);
+ box-shadow:0 3px 0 #128cbf,0 7px 8px #0d68973d,inset 0 2px #fff;
+ transform:rotate(0deg) translateY(0);
+ transform-origin:12% 86%;
+ transition:transform .42s cubic-bezier(.16,.83,.24,1.12);
+}
+#gameGiftDialog .gift-reveal-lid::after{
+ content:"";position:absolute;inset:5px 9px;border:1px solid #ceefff;border-radius:7px;
+}
+#gameGiftDialog .gift-reveal-lid-ribbon{
+ position:absolute;z-index:1;left:50%;top:0;bottom:0;width:26px;
+ transform:translateX(-50%);
+ background:linear-gradient(90deg,#078ebc,#e7fdff 48%,#27beec);
+ box-shadow:0 0 7px #17c3f6a9;
+}
+#gameGiftDialog .gift-reveal-stars{
+ position:absolute;left:50%;top:55%;width:0;height:0;z-index:5;pointer-events:none;
+}
+#gameGiftDialog .gift-reveal-stars i{
+ display:block;position:absolute;left:0;top:0;
+ color:#ffe79b;font:900 21px/1 Arial,sans-serif;
+ text-shadow:0 0 7px #fff,0 0 12px #46cfff;
+ opacity:0;transform:translate(-50%,-50%) scale(.2);will-change:transform,opacity;
+}
+#gameGiftDialog .gift-reveal-stars i:nth-child(3n){color:#fff}
+#gameGiftDialog .gift-reveal-stars i:nth-child(4n){color:#53d7f9}
+#gameGiftDialog .gift-reveal-float{
+ position:absolute;z-index:6;top:24px;left:50%;width:min(82%,240px);
+ padding:4px 11px 7px;display:flex;align-items:center;justify-content:center;gap:7px;
+ border:1px solid #b2eaf7;border-radius:15px;
+ background:linear-gradient(115deg,#fffffff7,#ebfbfffa);
+ box-shadow:0 7px 18px #147eae36,0 0 23px #ffffffd5;
+ opacity:0;transform:translate(-50%,42px) scale(.3);
+ pointer-events:none;
+}
+#gameGiftDialog .gift-reveal-float-icon{
+ flex:none;display:grid;place-items:center;
+ width:31px;height:31px;border-radius:10px;background:#def8ff;color:#0794ca;
+ font:1000 22px/1 Manrope,Arial,sans-serif;
+}
+#gameGiftDialog .gift-reveal-float strong{
+ text-align:center;font-size:12px;line-height:1.2;color:#115778;font-weight:900;
+}
+#gameGiftDialog .gift-reveal[data-phase="shake"] .gift-reveal-box{
+ animation:neolineLootShake .7s ease-in-out 2;
+}
+#gameGiftDialog .gift-reveal[data-phase="burst"] .gift-reveal-lid,
+#gameGiftDialog .gift-reveal[data-phase="revealed"] .gift-reveal-lid{
+ transform:translate(-9px,-47px) rotate(-26deg);
+}
+#gameGiftDialog .gift-reveal[data-phase="burst"] .gift-reveal-beam{
+ opacity:1;transform:translateX(-50%) scaleY(1.1);
+ transition:transform .38s ease-out,opacity .22s;
+}
+#gameGiftDialog .gift-reveal[data-phase="revealed"] .gift-reveal-beam{
+ opacity:.78;transform:translateX(-50%) scaleY(1);
+}
+#gameGiftDialog .gift-reveal[data-phase="burst"] .gift-reveal-stars i{
+ animation:neolineLootStarFlight .95s cubic-bezier(.2,.75,.15,1) var(--delay) both;
+}
+#gameGiftDialog .gift-reveal[data-phase="revealed"] .gift-reveal-float{
+ animation:neolineLootReveal .48s cubic-bezier(.14,.78,.18,1.1) both;
+}
+#gameGiftDialog .gift-reveal[data-phase="revealed"] .gift-reveal-halo{
+ animation:neolineLootHalo 1.7s ease-in-out infinite;
+}
+@keyframes neolineLootShake{
+ 0%,100%{transform:translateX(-50%) rotate(0)}
+ 10%,30%,50%,70%,90%{transform:translateX(calc(-50% - 7px)) rotate(-5deg)}
+ 20%,40%,60%,80%{transform:translateX(calc(-50% + 7px)) rotate(5deg)}
+}
+@keyframes neolineLootStarFlight{
+ 0%{opacity:0;transform:translate(-50%,-50%) scale(.15) rotate(0)}
+ 14%{opacity:1}
+ 70%{opacity:1}
+ 100%{opacity:0;transform:translate(calc(-50% + var(--x)),calc(-50% + var(--y))) scale(1.25) rotate(var(--r))}
+}
+@keyframes neolineLootReveal{
+ 0%{opacity:0;transform:translate(-50%,44px) scale(.3)}
+ 63%{opacity:1;transform:translate(-50%,-5px) scale(1.09)}
+ 100%{opacity:1;transform:translate(-50%,0) scale(1)}
+}
+@keyframes neolineLootHalo{
+ 50%{box-shadow:0 0 0 18px #9ae9ff18,0 0 30px #53cbeaab}
+}
+#gameGiftDialog .gift-reveal-slots{
+ display:grid;grid-template-columns:repeat(3,minmax(0,1fr));
+ gap:6px;padding:9px 8px 7px;background:#e8f8ff9e;
+}
+#gameGiftDialog .gift-reveal-slot{
+ min-width:0;position:relative;
+ display:flex;flex-direction:column;align-items:center;justify-content:center;
+ gap:4px;min-height:76px;padding:7px 4px;
+ border:1px solid #c4e5f2;border-radius:13px;
+ background:linear-gradient(145deg,#fff,#e3f5fc);
+ box-shadow:0 2px 6px #1177a010;
+ text-align:center;
+ transition:background .22s,border-color .22s,box-shadow .22s,transform .24s;
+}
+#gameGiftDialog .gift-reveal-slot-icon{
+ display:grid;place-items:center;flex:none;
+ width:32px;height:32px;border-radius:10px;
+ background:linear-gradient(135deg,#c0efff,#edfaff);
+ color:#159bcc;font:900 22px/1 Arial,sans-serif;
+}
+#gameGiftDialog .gift-reveal-slot:nth-child(2) .gift-reveal-slot-icon{background:#fff4d8}
+#gameGiftDialog .gift-reveal-slot strong{
+ color:#1b4d68;font-size:9.5px;font-weight:850;line-height:1.2;
+ text-wrap:balance;overflow-wrap:break-word;
+}
+#gameGiftDialog .gift-reveal-slot p{
+ position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;
+ clip-path:inset(50%);white-space:nowrap;border:0;
+}
+#gameGiftDialog .gift-reveal-slot:not(.unlocked) .gift-reveal-slot-icon,
+#gameGiftDialog .gift-reveal-slot:not(.unlocked) strong{
+ opacity:.16;filter:blur(3px);
+}
+#gameGiftDialog .gift-reveal-slot:not(.unlocked)::after{
+ content:"?";position:absolute;inset:0;display:grid;place-items:center;
+ font:900 28px/1 Arial,sans-serif;color:#8fc3df;
+ text-shadow:0 1px #fff;
+}
+#gameGiftDialog .gift-reveal-slot.unlocked{
+ background:linear-gradient(140deg,#fff,#d5f6ff);
+ border-color:#67caeb;box-shadow:0 0 0 1px #c1efff inset,0 4px 9px #1684b628;
+}
+#gameGiftDialog .gift-reveal-slot.is-current{animation:neolineLootCardPop .5s ease-out both}
+@keyframes neolineLootCardPop{
+ 0%{transform:scale(.84)}65%{transform:scale(1.08)}100%{transform:scale(1)}
+}
+#gameGiftDialog .gift-reveal-footer{
+ display:flex;align-items:center;justify-content:center;gap:8px;
+ min-height:38px;padding:7px 8px 9px;background:#e8f8ff9e;
+}
+#gameGiftDialog .gift-reveal-status{
+ flex:1;min-width:0;text-align:center;
+ color:#357c9e;font:750 10px/1.35 Manrope,Arial,sans-serif;
+}
+#gameGiftDialog .gift-reveal-replay{
+ flex:none;min-height:30px;padding:5px 11px;border:1px solid #78c7e8;
+ border-radius:999px;background:#f6fdff;color:#107fae;
+ font:850 10px/1.2 Manrope,Arial,sans-serif;
+ cursor:pointer;
+}
+#gameGiftDialog .gift-reveal-replay[hidden]{display:none}
+#gameGiftDialog .gift-reveal-replay:focus-visible{outline:2px solid #1184c4;outline-offset:2px}
+html[dir="rtl"] #gameGiftDialog .gift-reveal-number{right:auto;left:12px}
+@media(max-width:385px){
+ #gameGiftDialog .gift-reveal-scene{height:178px}
+ #gameGiftDialog .gift-reveal-box{scale:.9;transform-origin:center bottom}
+ #gameGiftDialog .gift-reveal-slot{min-height:73px;padding-inline:3px}
+ #gameGiftDialog .gift-reveal-slot strong{font-size:9px}
+}
+@media(prefers-reduced-motion:reduce){
+ #gameGiftDialog .gift-reveal-box,
+ #gameGiftDialog .gift-reveal-stars i,
+ #gameGiftDialog .gift-reveal-float,
+ #gameGiftDialog .gift-reveal-halo,
+ #gameGiftDialog .gift-reveal-slot{animation:none!important;transition:none!important}
+ #gameGiftDialog .gift-reveal-lid{transition:none!important}
+ #gameGiftDialog .gift-reveal[data-phase="revealed"] .gift-reveal-float{opacity:1;transform:translate(-50%,0) scale(1)}
+}
