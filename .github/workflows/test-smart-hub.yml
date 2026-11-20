@@ -105,6 +105,24 @@ jobs:
             if(!card||!card.sameRow||card.icon>52)throw Error('Compare icon not inline or compact: '+JSON.stringify(card));
             if(!card.footerGradient||card.footerLeft>4||card.footerRight>4||card.footerBottom>4)
               throw Error('Product actions are not a full-width colored footer: '+JSON.stringify(card));
+
+            // Catalog names and gray subtitles must sit closely together,
+            // without legacy min-height spacers. Verify actual mobile geometry.
+            const cardText=await page.locator('#catalog .products .product').evaluateAll(cards=>
+              cards.slice(0,8).map(node=>{
+                const name=node.querySelector('.product-name'),spec=node.querySelector('.spec');
+                if(!name||!spec)return null;
+                const n=name.getBoundingClientRect(),x=spec.getBoundingClientRect();
+                return {
+                  name:name.textContent.slice(0,35),
+                  gap:x.top-n.bottom,
+                  titleFits:name.scrollHeight<=name.clientHeight+2,
+                  specFits:spec.scrollHeight<=spec.clientHeight+2
+                };
+              })
+            );
+            if(cardText.length<4||cardText.some(x=>!x||x.gap>9||x.gap<0||!x.titleFits||!x.specFits))
+              throw Error('Catalog title and subtitle are still too far apart or clipped: '+JSON.stringify(cardText));
             await page.locator('[data-hub-compare="2"]').selectOption('1');
             if(await page.locator('.hub-compare thead th').count()!==4)
               throw Error('Third model comparison failed');
