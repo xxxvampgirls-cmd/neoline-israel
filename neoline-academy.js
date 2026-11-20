@@ -271,7 +271,7 @@ root.addEventListener("click",event=>{
  }
  if(b.hasAttribute("data-academy-done")){markReviewed();return}
  if(b.hasAttribute("data-academy-video")){
-  window.NEOLINE_PRODUCT_VIDEOS?.open?.(model);return;
+  window.NEOLINE_PRODUCT_VIDEOS?.open?.(model,{topic});return;
  }
  if(b.hasAttribute("data-academy-details")){
   window.openProduct?.(model);return;
