@@ -100,7 +100,7 @@ jobs:
             // The video archive is built from actual YouTube IDs and the same
             // 30-day period as the road news (never placeholder stock imagery).
             const videos=page.locator('#newsVideoLibrary');
-            if(!await videos.isVisible()||await page.locator('#newsVideoFilters .news-video-chip').count()!==5)
+            if(!await videos.isVisible()||await page.locator('#newsVideoFilters .news-video-chip').count()!==7)
               throw Error('30-day official road-video library missing');
             const sourceLinks=await page.locator('.news-video-sources a').count();
             if(sourceLinks!==3)throw Error('Expected verified sources: 13 News, KAN News and Israel Police');
@@ -111,6 +111,10 @@ jobs:
             },null,{timeout:16000});
             // Radar reports are their own monthly category, with verified
             // News 13 older clips presented in a SEPARATE labeled archive.
+            for(const cat of ['dashcam','funny']){
+              if(!await page.locator('#newsVideoFilters [data-video-cat="'+cat+'"]').isVisible())
+                throw Error('YouTube community videos missing filter '+cat);
+            }
             const radarFilter=page.locator('#newsVideoFilters [data-video-cat="radars"]');
             if(!await radarFilter.isVisible())throw Error('Radars/speed cameras filter missing');
             if(await page.locator('#newsVideoArchiveGrid .news-video-card').count()!==2)
