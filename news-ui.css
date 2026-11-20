@@ -849,3 +849,134 @@ html[dir=rtl] .news-feature-credit{right:auto;left:12px}
  .news-feature-backdrop--enter-prev,.news-feature-backdrop--exit-prev,
  .news-feature-backdrop .news-feature-pattern{animation:none!important}
 }
+
+/* 2026-11-20 — real broadcast scene masks instead of colored-layer motion.
+   Full frames (text + gradients + graphic accents) transition through five
+   different TV-news-inspired geometric wipes. CSS only, no added assets. */
+#newsFeatureSlide{isolation:isolate}
+#newsFeatureSlide .news-scene{
+ position:absolute;inset:0;width:100%;height:100%;
+ animation:none;overflow:hidden;
+ background:transparent;
+}
+#newsFeatureSlide .news-scene--current{z-index:3}
+#newsFeatureSlide .news-scene--leaving{z-index:1;pointer-events:none}
+#newsFeatureSlide .news-scene--queued{z-index:2;visibility:hidden;pointer-events:none}
+#newsFeatureSlide .news-scene--fragment{
+ z-index:4;pointer-events:none;will-change:transform;
+ animation-duration:.66s;animation-timing-function:cubic-bezier(.25,.8,.26,1);
+ animation-delay:var(--news-mask-delay,0ms);animation-fill-mode:both;
+}
+#newsFeatureSlide .news-scene>.news-feature-backdrop{
+ position:absolute;inset:0;z-index:0;display:block;
+ transform:none;animation:none;
+}
+#newsFeatureSlide .news-scene .news-feature-pattern{
+ animation:neolineNewsDots 16s ease-in-out infinite alternate;
+}
+#newsFeatureSlide .news-scene .news-feature-copy{
+ z-index:4;transform:none;animation:none;
+}
+#newsFeatureSlide .news-scene--wipe{
+ z-index:4;will-change:clip-path;
+ animation-duration:.76s;animation-timing-function:cubic-bezier(.32,.02,.22,1);
+ animation-fill-mode:both;
+}
+#newsFeatureSlide .news-scene--wipe-diagonal.news-scene--from-next{animation-name:neolineMaskDiagonalRight}
+#newsFeatureSlide .news-scene--wipe-diagonal.news-scene--from-prev{animation-name:neolineMaskDiagonalLeft}
+#newsFeatureSlide .news-scene--wipe-chevron.news-scene--from-next{animation-name:neolineMaskChevronRight}
+#newsFeatureSlide .news-scene--wipe-chevron.news-scene--from-prev{animation-name:neolineMaskChevronLeft}
+#newsFeatureSlide .news-scene--wipe-diamond{animation-name:neolineMaskDiamond;animation-duration:.8s}
+/* Diagonal blade wipes the entire outgoing scene, including the headline. */
+@keyframes neolineMaskDiagonalRight{
+ 0%{clip-path:polygon(125% 0,150% 0,150% 100%,150% 100%)}
+ 46%{clip-path:polygon(39% 0,120% 0,120% 100%,79% 100%)}
+ 100%{clip-path:polygon(-44% 0,120% 0,120% 100%,-6% 100%)}
+}
+@keyframes neolineMaskDiagonalLeft{
+ 0%{clip-path:polygon(-50% 0,-25% 0,-50% 100%,-50% 100%)}
+ 46%{clip-path:polygon(-20% 0,61% 0,21% 100%,-20% 100%)}
+ 100%{clip-path:polygon(-20% 0,144% 0,106% 100%,-20% 100%)}
+}
+/* The chevron keeps a pointed reveal edge, rather than a flat sliding panel. */
+@keyframes neolineMaskChevronRight{
+ 0%{clip-path:polygon(125% 0,145% 0,160% 50%,145% 100%,125% 100%)}
+ 54%{clip-path:polygon(30% 0,120% 0,136% 50%,120% 100%,30% 100%)}
+ 100%{clip-path:polygon(-28% 0,120% 0,140% 50%,120% 100%,-28% 100%)}
+}
+@keyframes neolineMaskChevronLeft{
+ 0%{clip-path:polygon(-45% 0,-25% 0,-40% 50%,-25% 100%,-45% 100%)}
+ 54%{clip-path:polygon(-20% 0,70% 0,54% 50%,70% 100%,-20% 100%)}
+ 100%{clip-path:polygon(-20% 0,128% 0,112% 50%,128% 100%,-20% 100%)}
+}
+/* Center-to-corners iris, like a camera vision-mixer diamond matte. */
+@keyframes neolineMaskDiamond{
+ 0%{clip-path:polygon(50% 50%,50% 50%,50% 50%,50% 50%)}
+ 48%{clip-path:polygon(50% -9%,116% 50%,50% 109%,-16% 50%)}
+ 100%{clip-path:polygon(50% -115%,205% 50%,50% 215%,-105% 50%)}
+}
+/* Angled fragments reconstruct the entire second frame in five staggered
+   diagonal strips. They are not decorative bands over the old frame. */
+#newsFeatureSlide .news-scene--fragment-ribbons.news-scene--part-0{
+ clip-path:polygon(-25% 0,0 0,25% 100%,0 100%)
+}
+#newsFeatureSlide .news-scene--fragment-ribbons.news-scene--part-1{
+ clip-path:polygon(0 0,25% 0,50% 100%,25% 100%)
+}
+#newsFeatureSlide .news-scene--fragment-ribbons.news-scene--part-2{
+ clip-path:polygon(25% 0,50% 0,75% 100%,50% 100%)
+}
+#newsFeatureSlide .news-scene--fragment-ribbons.news-scene--part-3{
+ clip-path:polygon(50% 0,75% 0,100% 100%,75% 100%)
+}
+#newsFeatureSlide .news-scene--fragment-ribbons.news-scene--part-4{
+ clip-path:polygon(75% 0,100% 0,125% 100%,100% 100%)
+}
+#newsFeatureSlide .news-scene--fragment-shutters.news-scene--part-0{
+ clip-path:polygon(0 0,100% 0,100% 20%,0 20%)
+}
+#newsFeatureSlide .news-scene--fragment-shutters.news-scene--part-1{
+ clip-path:polygon(0 20%,100% 20%,100% 40%,0 40%)
+}
+#newsFeatureSlide .news-scene--fragment-shutters.news-scene--part-2{
+ clip-path:polygon(0 40%,100% 40%,100% 60%,0 60%)
+}
+#newsFeatureSlide .news-scene--fragment-shutters.news-scene--part-3{
+ clip-path:polygon(0 60%,100% 60%,100% 80%,0 80%)
+}
+#newsFeatureSlide .news-scene--fragment-shutters.news-scene--part-4{
+ clip-path:polygon(0 80%,100% 80%,100% 100%,0 100%)
+}
+#newsFeatureSlide .news-scene--fragment-ribbons.news-scene--from-next{animation-name:neolineMaskStripFromRight}
+#newsFeatureSlide .news-scene--fragment-ribbons.news-scene--from-prev{animation-name:neolineMaskStripFromLeft}
+#newsFeatureSlide .news-scene--fragment-shutters.news-scene--from-next{animation-name:neolineMaskStripFromRight}
+#newsFeatureSlide .news-scene--fragment-shutters.news-scene--from-prev{animation-name:neolineMaskStripFromLeft}
+#newsFeatureSlide .news-scene--fragment-shutters.news-scene--part-1,
+#newsFeatureSlide .news-scene--fragment-shutters.news-scene--part-3{
+ animation-name:neolineMaskStripFromLeft
+}
+#newsFeatureSlide .news-scene--fragment-shutters.news-scene--from-prev.news-scene--part-1,
+#newsFeatureSlide .news-scene--fragment-shutters.news-scene--from-prev.news-scene--part-3{
+ animation-name:neolineMaskStripFromRight
+}
+@keyframes neolineMaskStripFromRight{
+ from{transform:translate3d(112%,0,0)}
+ to{transform:translate3d(0,0,0)}
+}
+@keyframes neolineMaskStripFromLeft{
+ from{transform:translate3d(-112%,0,0)}
+ to{transform:translate3d(0,0,0)}
+}
+/* Keep neutral frame geometry and category palettes exactly as before. */
+#newsFeatureSlide .news-scene--current .news-feature-tag{
+ background:#0e82c7df
+}
+@media(max-width:720px){
+ #newsFeatureSlide .news-scene--fragment{animation-duration:.6s}
+ #newsFeatureSlide .news-scene--wipe{animation-duration:.7s}
+}
+@media(prefers-reduced-motion:reduce){
+ #newsFeatureSlide .news-scene--wipe,
+ #newsFeatureSlide .news-scene--fragment{animation:none!important;clip-path:none!important}
+ #newsFeatureSlide .news-scene .news-feature-pattern{animation:none!important}
+}
