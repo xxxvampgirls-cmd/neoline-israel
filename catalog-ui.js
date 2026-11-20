@@ -125,7 +125,7 @@ function importedModal(id){
  const translation=local?.copy(lang);
  const rows=sourceSpecs(info);
  const specs=rows.map(kv=>'<div class="catalog-import-property"><strong'+(kv.isOriginal?' lang="ru" dir="auto"':'')+'>'+esc(kv.label)+(kv.isOriginal?' <span class="catalog-ru-mark">RU</span>':'')+'</strong><span'+(/[А-Яа-яЁё]/.test(kv.value)?' lang="ru" dir="auto"':'')+'>'+esc(kv.value)+'</span></div>').join('');
- const shortDescription=local?local.overview({name:p.name,category:p.category,specs:info.specs,description:info.description},lang):(info.description||p.name);
+ const shortDescription=local?local.overview({id:p.id,name:p.name,category:p.category,specs:info.specs,description:info.description},lang):(info.description||p.name);
  const originalRows=info.specs.map(kv=>'<div class="catalog-import-original-row"><strong>'+esc(kv.label)+'</strong><span>'+esc(kv.value)+'</span></div>').join('');
  const extra=manufacturerFeatures.get(id);
  const artwork=extra&&extra.source===info.source?extra.items:[];
