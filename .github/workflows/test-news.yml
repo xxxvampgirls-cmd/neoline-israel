@@ -247,7 +247,12 @@ jobs:
             await page.waitForURL(url=>/\/delivery(?:\.html)?\/?$/.test(new URL(url).pathname),{timeout:15000});
             console.log('NEWS DELIVERY LINK PASS');
             await page.goto('https://neoline-israel.pages.dev/delivery.html',{waitUntil:'domcontentloaded',timeout:40000});
-            await page.waitForSelector('.network[data-provider="boxit"]');
+            // The compact locator keeps networks in a modal sheet, not the
+            // formerly visible desktop sidebar. Open the real control first.
+            await page.locator('#locatorNetworksButton').waitFor({state:'visible',timeout:15000});
+            await page.locator('#locatorNetworksButton').click();
+            await page.locator('#locatorDialog').waitFor({state:'visible'});
+            await page.locator('.network[data-provider="boxit"]').waitFor({state:'visible'});
             const colors=await page.evaluate(()=>({
               scheme:getComputedStyle(document.documentElement).colorScheme,
               card:getComputedStyle(document.querySelector('.side')).backgroundColor,
@@ -255,9 +260,11 @@ jobs:
             }));
             if(colors.scheme!=='light'||colors.card!=='rgb(255, 255, 255)'||!/245|255/.test(colors.background))
               throw Error('Pickup locator must use light NEOLINE colors '+JSON.stringify(colors));
-            await page.locator('[data-provider="done"]').click();
-            if(await page.locator('[data-provider="done"]').getAttribute('aria-pressed')!=='true')
+            await page.locator('.network[data-provider="done"]').click();
+            if(await page.locator('.network[data-provider="done"]').getAttribute('aria-pressed')!=='true')
               throw Error('Pickup network selection not working');
+            if(await page.locator('#locatorDialog').isVisible())
+              throw Error('Network selection should close the locator sheet');
             for(const width of [320,390]){
               await page.setViewportSize({width,height:844});
               const dims=await page.evaluate(()=>({scroll:document.documentElement.scrollWidth,width:innerWidth}));
