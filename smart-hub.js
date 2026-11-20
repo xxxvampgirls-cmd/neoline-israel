@@ -178,15 +178,26 @@ function decorateProducts(){
   const id=Number(target?.dataset.details);
   if(!ids.includes(id))continue;
   const area=card.querySelector(".product-content");
-  if(!area)continue;
-  let btn=area.querySelector(".hub-compact-compare");
+  const details=area?.querySelector(".details-link");
+  if(!area||!details)continue;
+  let actions=area.querySelector(".hub-card-actions");
+  if(!actions){
+   actions=document.createElement("div");
+   actions.className="hub-card-actions";
+   details.before(actions);
+   actions.append(details);
+  }
+  let btn=actions.querySelector(".hub-compact-compare");
   if(!btn){
    btn=document.createElement("button");
-   btn.type="button";btn.className="hub-compact-compare";
+   btn.type="button";
+   btn.className="hub-compact-compare";
    btn.dataset.hubCardCompare=String(id);
-   area.append(btn);
+   actions.append(btn);
   }
-  btn.textContent="⚖ "+labels[locale()];
+  btn.innerHTML='<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 3v17M5 6h14M5 6 2 12h6L5 6Zm14 0-3 6h6l-3-6ZM8 12c0 2-1 3-3 3s-3-1-3-3M22 12c0 2-1 3-3 3s-3-1-3-3M7 21h10"/></svg><span class="hub-compare-text">'+esc(labels[locale()])+'</span>';
+  btn.setAttribute("aria-label",labels[locale()]+" · "+names[id]);
+  btn.title=labels[locale()]+" · "+names[id];
  }
 }
 root.addEventListener("change",event=>{
