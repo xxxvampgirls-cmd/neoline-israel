@@ -11,7 +11,7 @@ on:
       - 'scripts/audit_catalog_photos.py'
       - '.github/workflows/audit-catalog-images.yml'
 permissions:
-  contents: read
+  contents: write
 concurrency:
   group: neoline-gallery-audit
   cancel-in-progress: true
@@ -21,6 +21,9 @@ jobs:
     timeout-minutes: 10
     steps:
       - uses: actions/checkout@v4
+        with:
+          ref: main
+          persist-credentials: true
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
@@ -36,3 +39,16 @@ jobs:
           path: assets/catalog/gallery-quality.json
           if-no-files-found: warn
           retention-days: 21
+      - name: Commit current photo quality counts after successful audit
+        if: success()
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add assets/catalog/gallery-quality.json
+          if git diff --cached --quiet; then
+            echo 'Photo quality report already current'
+            exit 0
+          fi
+          git commit -m 'Refresh verified gallery quality after new source photo sync'
+          git pull --rebase origin main
+          git push origin HEAD:main
