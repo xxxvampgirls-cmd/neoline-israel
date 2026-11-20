@@ -505,21 +505,24 @@
   const mc=mainCopy[selectedLang]||mainCopy.en;
   const main=featuredMarkup(id,selectedLang);
   const additions=renderEducationAddons(id,selectedLang);
-  const extra='<details class="product-video-extras"><summary>'+
+  const realGuides=renderTutorials(id,selectedLang);
+  const extra='<details class="product-video-extras"'+(featuredItems.length?'':' open')+'><summary>'+
    '<span class="product-video-extras-icon" aria-hidden="true">☷</span>'+
    '<span>'+secureText(mc.extras)+'</span>'+
    '<span class="product-video-chevron" aria-hidden="true"></span></summary>'+
    '<div class="product-video-extras-body">'+searches+renderSocial(id,selectedLang)+
    (featuredItems.length?"":localClips)+
    (featuredItems.length?"":other)+'</div></details>';
-  get("productVideoResults").innerHTML=main+additions+extra;
+  get("productVideoResults").innerHTML=main+realGuides+additions+extra;
   if(featuredItems.length)showFeaturedVideo(0);
  }
 
- function openVideos(id){
+ function openVideos(id,options={}){
   if(!Number.isFinite(id))return;
   stopPlayback();currentId=id;
+  tutorialFilter=["connect","review"].includes(options?.topic)?options.topic:"all";
   renderVideoList(id);
+  loadTutorialCatalog();
   overlay.hidden=false;document.body.classList.add("product-video-open");
   overlay.querySelector(".product-video-panel").focus({preventScroll:true});
  }
@@ -530,7 +533,7 @@
    const index=Number(featuredButton.dataset.featuredIndex);
    if(Number.isSafeInteger(index)&&index>=0&&index<featuredItems.length){
     stopPlayback();
-    showFeaturedVideo(index);
+    showFeaturedVideo(index,true);
     if(featuredButton.closest(".product-video-addon")){
      get("productVideoMainFrame")?.scrollIntoView({behavior:"smooth",block:"nearest"});
     }
