@@ -14,6 +14,7 @@
    rec:"ЗАПИСЬ",gps:"GPS",dual:"2 КАМЕРЫ",parking:"ПАРКОВКА",
    unit:"КМ/Ч",satellites:"12 спутников",lane:"Полоса",laneStatus:"распознана ✓",
    recording:"Запись",rear:"Камера сзади",parkingStatus:"Контроль парковки",
+   speedLimit:"Ограничение",overspeed:"Превышение скорости",
    stages:[
     {title:"Контроль дороги",sub:"Широкоугольная запись",hud:"REC · FRONT"},
     {title:"GPS-предупреждения",sub:"Поддержка зависит от модели",hud:"GPS · ALERT"},
@@ -27,6 +28,7 @@
    rec:"RECORD",gps:"GPS",dual:"DUAL CAM",parking:"PARKING",
    unit:"KM/H",satellites:"12 satellites",lane:"Lane",laneStatus:"recognized ✓",
    recording:"Recording",rear:"Rear camera",parkingStatus:"Parking monitoring",
+   speedLimit:"Speed limit",overspeed:"Speeding warning",
    stages:[
     {title:"Road awareness",sub:"Wide-angle recording",hud:"REC · FRONT"},
     {title:"GPS alerts",sub:"On compatible devices",hud:"GPS · ALERT"},
@@ -40,6 +42,7 @@
    rec:"צילום",gps:"GPS",dual:"2 מצלמות",parking:"חניה",
    unit:'קמ"ש',satellites:"12 לוויינים",lane:"נתיב",laneStatus:"זוהה ✓",
    recording:"הקלטה",rear:"מצלמה אחורית",parkingStatus:"ניטור חניה",
+   speedLimit:"מהירות מותרת",overspeed:"חריגה מהמהירות",
    stages:[
     {title:"שליטה בכביש",sub:"צילום בזווית רחבה",hud:"REC · FRONT"},
     {title:"התראות GPS",sub:"לפי דגם המצלמה",hud:"GPS · ALERT"},
@@ -53,6 +56,7 @@
    rec:"تسجيل",gps:"GPS",dual:"كاميرتان",parking:"وقوف",
    unit:"كم/س",satellites:"12 قمراً صناعياً",lane:"المسار",laneStatus:"تم التعرف ✓",
    recording:"التسجيل",rear:"الكاميرا الخلفية",parkingStatus:"مراقبة الوقوف",
+   speedLimit:"السرعة المسموحة",overspeed:"تجاوز السرعة",
    stages:[
     {title:"مراقبة الطريق",sub:"تسجيل واسع الزاوية",hud:"REC · FRONT"},
     {title:"تنبيهات GPS",sub:"حسب الطراز",hud:"GPS · ALERT"},
@@ -70,7 +74,9 @@
   satellites:query("[data-road-gps]"),lane:query("[data-road-lane]"),
   laneStatus:query("[data-road-lane-status]"),record:query("[data-road-record]"),
   elapsed:query("[data-road-elapsed]"),rear:query("[data-road-rear]"),
-  parking:query("[data-road-parking]")
+  parking:query("[data-road-parking]"),
+  limit:query("[data-road-limit]"),overspeed:query("[data-road-overspeed]"),
+  excess:query("[data-road-excess]")
  };
  const buttons=[...root.querySelectorAll("[data-road-step]")];
  const media=window.matchMedia("(prefers-reduced-motion: reduce)");
@@ -92,7 +98,20 @@
   fields.note.textContent=tr.note;
   fields.demo.textContent=tr.demo;
   if(fields.tag)fields.tag.textContent=tr.tag;
-  fields.speed.textContent=stage===3?"0":stage===2?"64":stage===1?"68":"72";
+  // Illustrative speeds only. In GPS mode a 60 km/h section is simulated:
+  // 72 km/h triggers +12 km/h red warning. Never claim live radar sensing.
+  const demoSpeed=stage===3?0:stage===2?64:72;
+  const speedLimit=60;
+  const over=stage===1&&demoSpeed>speedLimit;
+  root.classList.toggle("is-overspeed",over);
+  fields.speed.textContent=String(demoSpeed);
+  fields.limit.textContent=String(speedLimit);
+  fields.overspeed.textContent=tr.overspeed;
+  fields.excess.textContent="+"+String(Math.max(0,demoSpeed-speedLimit))+" "+tr.unit.toLowerCase();
+  const warning=query(".road-demo-speed-warning");
+  warning.setAttribute("aria-label",tr.speedLimit+": "+speedLimit+"; "+tr.overspeed+": "+
+    (demoSpeed-speedLimit)+" "+tr.unit);
+  warning.setAttribute("aria-hidden",String(!over));
   fields.unit.textContent=tr.unit;
   fields.satellites.textContent=tr.satellites;
   fields.lane.textContent=tr.lane;
