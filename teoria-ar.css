@@ -1,0 +1,44 @@
+/* Arabic fourth-language support. Matches Hebrew RTL layout without
+   changing existing game dimensions or translations in other languages. */
+html[lang="ar"] body{
+ font-family:Manrope,"Noto Sans Arabic","Noto Naskh Arabic",Tahoma,Arial,sans-serif;
+}
+html[lang="ar"] .game-panel,
+html[lang="ar"] .game-hero,
+html[lang="ar"] .game-progress-dialog,
+html[lang="ar"] .game-gift-dialog,
+html[lang="ar"] .gameover-card,
+html[lang="ar"] .theory-licence-dialog{direction:rtl;text-align:start}
+html[lang="ar"] .question-card h2,
+html[lang="ar"] .question-card .answer,
+html[lang="ar"] .route-card,
+html[lang="ar"] .gameover-message{
+ text-align:start;
+ overflow-wrap:anywhere;
+ line-height:1.65;
+}
+html[lang="ar"] .question-card h2{unicode-bidi:plaintext}
+html[lang="ar"] #answers .answer>span[dir="auto"]{
+ display:block;unicode-bidi:plaintext;min-width:0;
+}
+html[lang="ar"] #answers .answer .letter{
+ direction:ltr;unicode-bidi:isolate;
+}
+html[lang="ar"] .hero-orb-number,
+html[lang="ar"] .quiz-hud strong,
+html[lang="ar"] .game-progress-stat strong,
+html[lang="ar"] .gameover-score,
+html[lang="ar"] .game-result-gauge strong{
+ direction:ltr;unicode-bidi:isolate;
+}
+html[lang="ar"] .source-links,
+html[lang="ar"] .source-note{overflow-wrap:anywhere}
+html[lang="ar"] #modeGrid .route-card strong{line-height:1.4}
+html[lang="ar"] .neoline-site-header__flag--ar{
+ font-family:"Noto Sans Arabic",Tahoma,Arial,sans-serif;
+}
+@media(max-width:720px){
+ html[lang="ar"] #modeGrid .route-card strong{font-size:clamp(13px,3.3vw,16px)}
+ html[lang="ar"] #gamePlaying .question-card h2{font-size:clamp(17px,4.6vw,22px)}
+ html[lang="ar"] #answers .answer{min-height:56px}
+}
