@@ -5,7 +5,7 @@
 const $=id=>document.getElementById(id);
 const dialog=$("gameProgressDialog");
 const buttons=[$("gameProgressOpen"),$("gameResultsProgress")].filter(Boolean);
-const locale=()=>["ru","he","en"].includes(document.documentElement.lang)?document.documentElement.lang:"ru";
+const locale=()=>["ru","he","en","ar"].includes(document.documentElement.lang)?document.documentElement.lang:"ru";
 const L={
  ru:{
   hero:"ИЗРАИЛЬ · ИГРА",route:"ТВОЙ МАРШРУТ",
@@ -71,6 +71,7 @@ const L={
   days:["א","ב","ג","ד","ה","ו","ש"]
  }
 };
+L.ar=window.NEOLINE_THEORY_AR?.progress||L.ru;
 let current=null,openedBy=null,toastTimer=null,achievementsExpanded=false;
 function set(id,value){const e=$(id);if(e)e.textContent=value}
 function localStats(){
@@ -88,7 +89,7 @@ function localStats(){
   licence:license,language:lang
  };
 }
-const num=n=>new Intl.NumberFormat(locale()==="ru"?"ru-RU":locale()==="he"?"he-IL":"en-GB").format(n);
+const num=n=>new Intl.NumberFormat(locale()==="ru"?"ru-RU":locale()==="he"?"he-IL":locale()==="ar"?"ar-IL":"en-GB").format(n);
 function dom(tag,className,content){
  const e=document.createElement(tag);if(className)e.className=className;
  if(content!==undefined)e.textContent=String(content);
@@ -125,7 +126,7 @@ function earnedAchievements(data,history){
  return earned;
 }
 function formatDay(x){
- const lang=locale()==="ru"?"ru-RU":locale()==="he"?"he-IL":"en-GB";
+ const lang=locale()==="ru"?"ru-RU":locale()==="he"?"he-IL":locale()==="ar"?"ar-IL":"en-GB";
  return new Intl.DateTimeFormat(lang,{day:"2-digit",month:"short"}).format(x);
 }
 function dayKey(d){return d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0")+"-"+String(d.getDate()).padStart(2,"0")}
@@ -183,7 +184,7 @@ function drawProgress(){
   const mode=dom("span","",copy.routes[h.mode]||h.mode);
   const denominator=Math.max(1,Number(h.gameOver?h.answered:h.total)||1);
   const score=dom("strong","",num(Number(h.correct)||0)+" / "+num(denominator));
-  const time=dom("time","",new Intl.DateTimeFormat(locale()==="ru"?"ru-RU":locale()==="he"?"he-IL":"en-GB",{day:"2-digit",month:"short",year:"numeric"}).format(new Date(h.time)));
+  const time=dom("time","",new Intl.DateTimeFormat(locale()==="ru"?"ru-RU":locale()==="he"?"he-IL":locale()==="ar"?"ar-IL":"en-GB",{day:"2-digit",month:"short",year:"numeric"}).format(new Date(h.time)));
   item.append(mode,score,time);list.append(item);
  }
 }
@@ -206,7 +207,7 @@ function updateCopy(){
  $("gameProgressOpen")?.setAttribute("title",c.progress);
  $("gameProgressClose")?.setAttribute("aria-label",c.close);
  $("gameProgressGift")?.setAttribute("aria-label",c.gift);
- if(dialog){dialog.lang=locale();dialog.dir=locale()==="he"?"rtl":"ltr"}
+ if(dialog){dialog.lang=locale();dialog.dir=["he","ar"].includes(locale())?"rtl":"ltr"}
 }
 function openProgress(trigger){
  if(!dialog)return;
