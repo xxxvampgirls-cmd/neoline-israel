@@ -22,6 +22,8 @@ on:
       - "road-demo.js"
       - "road-demo.css"
       - "road-demo-premium.css"
+      - "road-demo-entry.css"
+      - "pickup-ui.js"
       - "delivery.html"
       - "pickup-ui.css"
       - ".github/workflows/test-news.yml"
@@ -112,7 +114,7 @@ jobs:
                await how.locator('.how-promo-satellite').count()!==1)
               throw Error('How promo is not using the same ribbon backdrop with SVG road device');
             const demoLink=how.locator('[data-how-demo-link]');
-            if(await demoLink.getAttribute('href')!=='#installation')
+            if(await demoLink.getAttribute('href')!=='#neolineRoadDemo')
               throw Error('How it works CTA must navigate to actual four-mode demo');
             // Four languages use exactly the same art/layout and a localized CTA.
             const ruLabel=await demoLink.innerText();
@@ -142,9 +144,45 @@ jobs:
             }
             await page.setViewportSize({width:390,height:844});
             await carousel.locator('.featured-slide--promo-how [data-how-demo-link]').click();
-            if(await page.evaluate(()=>location.hash)!=='#installation')
-              throw Error('Promo CTA must open the actual how-it-works section');
-            console.log('HOW IT WORKS SHOWCASE PASS: position #3, 9 dots, matching art, 4 languages, mobile, CTA');
+            if(await page.evaluate(()=>location.hash)!=='#neolineRoadDemo')
+              throw Error('Promo CTA must jump directly to the interactive display, not the intro');
+            // One-row mobile actions save a full button height. The hero
+            // advertisement must jump to the FULL display below the intro.
+            const actionBar=page.locator('#installation .road-entry-actions');
+            const entryButtons=actionBar.locator(':scope > button, :scope > a');
+            if(await entryButtons.count()!==2)
+              throw Error('Installation must show exactly two actions');
+            if(await entryButtons.nth(1).getAttribute('href')!=='./delivery.html')
+              throw Error('Compact pickup action lost the delivery-map link');
+            if(await entryButtons.nth(0).getAttribute('data-scroll')!=='catalog')
+              throw Error('Select camera must still open catalog');
+            for(const width of [320,390]){
+              await page.setViewportSize({width,height:844});
+              const row=await actionBar.evaluate(el=>{
+                const b=el.querySelector('button').getBoundingClientRect();
+                const a=el.querySelector('a').getBoundingClientRect();
+                const e=el.getBoundingClientRect();
+                return {y1:b.top,y2:a.top,right1:b.right,right2:a.right,
+                  widths:[b.width,a.width],outerRight:e.right,screen:document.documentElement.clientWidth,
+                  height:Math.max(a.bottom,b.bottom)-Math.min(a.top,b.top),
+                  mapText:el.querySelector('[data-pickup-short-text]')?.textContent?.trim()};
+              });
+              if(Math.abs(row.y1-row.y2)>1||row.height>58||row.widths.some(w=>w<110)||
+                 row.outerRight>row.screen+1||!row.mapText)
+                throw Error('Two compact buttons must stay in ONE row at '+width+'px: '+JSON.stringify(row));
+            }
+            await page.setViewportSize({width:390,height:844});
+            const roadAtAnchor=await page.locator('#neolineRoadDemo').evaluate(el=>{
+              const r=el.getBoundingClientRect(),
+               hdr=document.querySelector('.neoline-site-header')?.getBoundingClientRect(),
+               nav=document.querySelector('.mobile-nav')?.getBoundingClientRect();
+              return {top:r.top,bottom:r.bottom,headBottom:hdr?.bottom||0,
+                bottomNavTop:nav?.top||innerHeight,viewport:innerHeight};
+            });
+            if(roadAtAnchor.top<roadAtAnchor.headBottom-5||
+               roadAtAnchor.bottom>roadAtAnchor.bottomNavTop+2)
+              throw Error('Ad should land with entire interactive HUD visible: '+JSON.stringify(roadAtAnchor));
+            console.log('HOW IT WORKS SHOWCASE PASS: position #3, 9 dots, 4 languages, 2-button row and fully visible HUD');
 
             // Premium car demo: genuinely layered SVG/CSS, 4 interactive modes,
             // the entire frame MUST remain fixed height while text or HUD changes.
