@@ -1,0 +1,25 @@
+{
+  "version": 1,
+  "retentionDays": 30,
+  "updated": null,
+  "status": "waiting_first_sync",
+  "sourceCount": 0,
+  "sources": [
+    {
+      "id": "news13",
+      "name": "חדשות 13",
+      "channel": "https://www.youtube.com/channel/UCvQmPpU20hw1Trss_CVwaew"
+    },
+    {
+      "id": "kan11",
+      "name": "כאן חדשות",
+      "channel": "https://www.youtube.com/channel/UC_HwfTAcjBESKZRJq6BTCpg"
+    },
+    {
+      "id": "police",
+      "name": "משטרת ישראל",
+      "channel": "https://www.youtube.com/channel/UCrwyHUb4iIrpknhP6MTvnww"
+    }
+  ],
+  "items": []
+}
