@@ -102,14 +102,32 @@ jobs:
               await page.locator('#closeProduct').click();
               await page.setViewportSize({width:390,height:844});
             }
+            // A second scarce-photo product, Dela-S, has four real
+            // product views plus FOUR different official feature panels.
+            // The two image types must remain visually separate.
             await page.locator('[data-language="ru"]').click();
+            await page.waitForFunction(()=>document.documentElement.lang==='ru');
+            await page.locator('#search').fill('Dela-S');
+            await page.waitForFunction(()=>document.querySelectorAll('#products .product').length===1);
+            await page.locator('#products [data-details]').click();
+            if(await page.locator('#productModalBody .modal-thumbs [data-import-photo]').count()!==4)
+              throw Error('Dela-S source gallery must retain its four original angles');
+            const delaS=page.locator('#productModalBody .catalog-official-art');
+            if(await delaS.count()!==1)
+              throw Error('Dela-S official feature section not loaded');
+            await delaS.locator('summary').click();
+            if(await delaS.locator('.catalog-feature-preview').count()!==4)
+              throw Error('Dela-S four official illustrations missing');
+            if(!(await delaS.locator('summary').innerText()).includes('4 иллюстрации'))
+              throw Error('Localized four-item label is not grammatically correct');
+            await page.locator('#closeProduct').click();
             await page.locator('#search').fill('CPL 93');
             await page.waitForFunction(()=>document.querySelectorAll('#products .product').length===1);
             await page.locator('#products [data-details]').click();
             if(await page.locator('#productModalBody .catalog-official-art').count())
               throw Error('Product without verified extra illustrations gained fabricated gallery');
             if(errors.length)throw Error('Runtime script errors: '+errors.join(' | '));
-            console.log('PASS: original one-photo Dela-B, six separate authentic illustrated features, 4 locale captions, zoom, strict mobile/RTL, other product unmodified.');
+            console.log('PASS: Dela-B 1 authentic view + 6 illustrations, Dela-S 4 authentic views + 4 illustrations; 4 languages, mobile/RTL, zoom and source isolation.');
             await browser.close();
           })().catch(e=>{console.error(e);process.exit(1)});
           JS
