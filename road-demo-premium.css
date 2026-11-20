@@ -527,3 +527,21 @@
 @media(prefers-reduced-motion:reduce){
  #installation .road-demo-speed-warning{animation:none!important;transition:none!important}
 }
+/* Refined vehicle optics: headlights belong on the front bumper AHEAD of
+   the windscreen. Rear-camera view depicts an actual approaching sedan with
+   angled slim headlamps and grille, instead of the old smiley-face symbol. */
+#installation .road-demo-front-headlights{
+ filter:drop-shadow(0 0 2.6px #8bf7ffb8);
+}
+#installation .road-demo-headlamp-cones{
+ opacity:.23;mix-blend-mode:screen;
+}
+#installation .road-demo-rear-feed .road-demo-rear-car{
+ filter:drop-shadow(0 2px 2px #001427a8);
+}
+#installation .road-demo-rear-feed svg{
+ background:#0c3454;
+}
+@media(prefers-reduced-motion:reduce){
+ #installation .road-demo-headlamp-cones{opacity:.23}
+}
