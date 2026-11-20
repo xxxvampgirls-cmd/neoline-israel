@@ -1,0 +1,137 @@
+
+/* Real verified NEOLINE tutorials — clean small video cards.
+   Thumbnails load lazily; iframe created only after visitor presses Play. */
+.product-video-real-guides{
+ margin:12px 0 16px;padding:12px;
+ border:1px solid #c4e4f2;border-radius:16px;
+ background:linear-gradient(148deg,#f7fcff,#e7f6fe);
+}
+.product-video-real-heading{
+ display:flex;justify-content:space-between;align-items:center;
+ gap:10px;margin-bottom:10px;
+}
+.product-video-real-heading h3{margin:0;font-size:13px;color:#15567c;font-weight:900;line-height:1.4}
+.product-video-real-heading>span{
+ min-width:27px;height:25px;display:grid;place-items:center;
+ padding:0 6px;box-sizing:border-box;border-radius:8px;
+ border:1px solid #bfdeef;background:#fff;
+ color:#1183b6;font-size:11px;font-weight:900;
+}
+.product-video-real-filters{display:flex;flex-wrap:wrap;gap:6px;margin:0 0 10px}
+.product-video-real-filters button{
+ min-height:33px;padding:7px 12px;border:1px solid #c8e2ef;
+ border-radius:10px;background:#fff;color:#417c99;
+ font-size:11px;font-weight:850;cursor:pointer;
+}
+.product-video-real-filters button[aria-pressed="true"]{
+ background:#157fb6;border-color:#1385bf;color:#fff;
+}
+.product-video-real-list{display:grid;gap:9px}
+.product-video-real-guide{
+ display:grid;grid-template-columns:minmax(100px,145px) minmax(0,1fr);
+ gap:10px;align-items:start;
+ padding:9px;border:1px solid #d1e6f2;
+ border-radius:13px;background:#fff;
+ min-width:0;box-shadow:0 3px 9px #226f9711;
+}
+.product-video-real-thumb{
+ position:relative;overflow:hidden;
+ border-radius:10px;aspect-ratio:16/9;
+ background:linear-gradient(145deg,#1a5279,#0c344f);
+}
+.product-video-real-thumb img{
+ width:100%;height:100%;display:block;object-fit:cover;
+}
+.product-video-real-badge{
+ position:absolute;top:6px;inset-inline-start:6px;
+ display:inline-flex;align-items:center;justify-content:center;
+ min-height:22px;min-width:28px;padding:3px 6px;
+ border-radius:7px;border:1px solid #c9f4ff63;
+ background:#0b3559e8;color:#e7fbff;font-size:10px;font-weight:900;
+}
+.product-video-real-body{display:flex;flex-direction:column;gap:7px;min-width:0}
+.product-video-real-meta{display:flex;flex-wrap:wrap;gap:5px 10px;color:#3982a4;font-size:9px;font-weight:850}
+.product-video-real-meta span:last-child{color:#809aa9}
+.product-video-real-body strong{
+ display:block;color:#184c6e;font-size:11px;line-height:1.5;
+ font-weight:850;overflow-wrap:anywhere;
+}
+.product-video-real-actions{display:flex;flex-wrap:wrap;gap:7px;margin-top:auto}
+.product-video-real-actions>*{
+ min-height:35px;box-sizing:border-box;padding:8px 12px;
+ display:inline-flex;align-items:center;justify-content:center;
+ border-radius:10px;border:1px solid #b8ddec;
+ font-size:11px;font-weight:900;line-height:1.2;text-decoration:none;
+ cursor:pointer;text-align:center;
+}
+.product-video-real-actions>button{
+ background:linear-gradient(130deg,#138dd3,#1075ad);
+ color:#fff;border-color:#0d7ab7;
+}
+.product-video-real-actions>a{background:#f2faff;color:#237ba5}
+.product-video-real-embed{grid-column:1/-1;min-width:0}
+.product-video-real-embed:has(iframe){padding-top:6px}
+.product-video-real-embed iframe{
+ display:block;width:100%;aspect-ratio:16/9;height:auto;
+ border:0;border-radius:10px;background:#0c263f;
+}
+.product-video-real-note{
+ font-size:10px;line-height:1.6;color:#748fa3;
+ margin:9px 0 0;
+}
+.product-video-real-empty{
+ margin:0;padding:11px;border-radius:10px;
+ border:1px solid #cce5f2;background:#fff;
+ color:#577f9a;font-size:11px;line-height:1.5;
+}
+.product-video-main-start{
+ position:relative;display:grid;place-items:center;
+ width:100%;height:100%;min-height:0;
+ padding:0;border:0;background:#0a314c;
+ color:#fff;overflow:hidden;cursor:pointer;
+}
+.product-video-main-start img{
+ position:absolute;inset:0;width:100%;height:100%;
+ object-fit:cover;display:block;
+}
+.product-video-main-start::after{
+ content:"";position:absolute;inset:0;
+ background:linear-gradient(180deg,#07274211,#051a377a);
+ pointer-events:none;
+}
+.product-video-main-start-icon{
+ position:relative;z-index:2;
+ display:grid;place-items:center;
+ width:58px;height:58px;padding-inline-start:3px;
+ border:1px solid #b6f2ff85;border-radius:50%;
+ background:#157cafed;color:#fff;
+ box-shadow:0 8px 27px #021c3d6b;
+ font-size:24px;font-family:Arial,sans-serif;
+ transition:transform .2s;
+}
+.product-video-main-start:hover .product-video-main-start-icon{transform:scale(1.05)}
+.product-video-main-fb-preview{
+ position:absolute;z-index:1;display:grid;place-items:center;
+ width:80px;height:80px;border-radius:20px;
+ background:#1877f2;color:#fff;font:900 58px Arial,sans-serif;
+}
+.product-video-real-filters button:focus-visible,
+.product-video-real-actions>*:focus-visible,
+.product-video-main-start:focus-visible{
+ outline:3px solid #30b3e8;outline-offset:2px;
+}
+@media(max-width:650px){
+ .product-video-real-guides{margin:9px 0 13px;padding:9px;border-radius:13px}
+ .product-video-real-guide{grid-template-columns:100px minmax(0,1fr);gap:8px;padding:7px}
+ .product-video-real-body strong{font-size:10px;line-height:1.4}
+ .product-video-real-actions>*{font-size:10px;padding:7px 9px;min-height:31px}
+ .product-video-real-filters button{font-size:10px;padding:6px 9px}
+ .product-video-real-meta{font-size:9px}
+ .product-video-main-start-icon{width:50px;height:50px;font-size:20px}
+}
+@media(max-width:365px){
+ .product-video-real-guide{grid-template-columns:1fr}
+ .product-video-real-thumb{max-height:145px}
+ .product-video-real-actions>*{flex:1}
+}
+@media(prefers-reduced-motion:reduce){.product-video-main-start-icon{transition:none}}
