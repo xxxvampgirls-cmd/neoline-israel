@@ -128,8 +128,15 @@ def main():
     for lang,dataset in LANGS.items():
         meta=package(dataset)
         name=meta.get("name") or dataset
-        if (meta.get("license_id") or "").lower() not in ("cc-by","cc-by-4.0","cc-by-3.0"):
-            raise RuntimeError(dataset+" is not marked CC BY: "+str(meta.get("license_id")))
+        license_id=(meta.get("license_id") or "").lower()
+        if license_id in ("cc-by","cc-by-4.0","cc-by-3.0"):
+            license_label=LICENSE
+        elif lang=="ar" and license_id=="other-open":
+            # tqar is explicitly labeled Other (Open), not CC BY.
+            # Respect its dataset designation and the data.gov.il portal use terms.
+            license_label="Other (Open) — per data.gov.il dataset and portal usage terms"
+        else:
+            raise RuntimeError(dataset+" license not verified for reuse: "+str(license_id))
         rows,rid=resource_rows(meta)
         items={}
         for row in rows:
@@ -140,7 +147,7 @@ def main():
         ordered=sorted(items.values(),key=lambda q:int(q["id"]))
         result={"version":1,"language":lang,"fetched":dt.datetime.now(dt.timezone.utc).isoformat(),
                 "source":BASE+"/he/datasets/ministry_of_transport/"+dataset,
-                "resourceId":rid,"license":LICENSE,"publisher":"Israel Ministry of Transport and Road Safety",
+                "resourceId":rid,"license":license_label,"publisher":"Israel Ministry of Transport and Road Safety",
                 "total":len(ordered),"questions":ordered}
         results[lang]=result
         print("VALIDATED",lang,len(ordered),"B",sum("B" in x["classes"] for x in ordered),
@@ -168,6 +175,7 @@ def main():
                            "imageCount":sum(bool(q["image"]) for q in item["questions"])}
                      for lang,item in results.items()},
         "source":"https://data.gov.il/he/datasets/ministry_of_transport/tqar",
+        "licenseByLanguage":{lang:item["license"] for lang,item in results.items()},
         "license":LICENSE,"publisher":"Israel Ministry of Transport and Road Safety"
     },ensure_ascii=False,indent=2)+"\n",encoding="utf8")
     print("TEORIA OFFICIAL DATASET SYNC COMPLETE",flush=True)
