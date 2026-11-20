@@ -114,7 +114,8 @@ function importedModal(id){
   '<div class="kicker">'+esc((lang==='ru'?info.group:translation?.category[p.category])||info.group)+'</div><h2>'+esc(localTitle(p))+'</h2><p class="catalog-price-pending">'+esc(ui("price"))+'</p>'+
   '<p class="modal-help">'+esc(ui("notYet"))+'</p>'+
   '<a class="secondary catalog-origin" href="'+esc(info.source)+'" target="_blank" rel="noopener noreferrer">'+esc(ui("origin"))+'</a></div></div>'+
-  '<section class="catalog-import-detail"><h3>'+esc(translation?.description||ui("description"))+'</h3><p>'+esc(shortDescription)+'</p>'+
+  '<section class="catalog-import-detail"><h3>'+esc(translation?.description||ui("description"))+'</h3>'+
+  String(shortDescription).split(/\\n+/).filter(Boolean).map(part=>'<p class="catalog-localized-paragraph">'+esc(part)+'</p>').join('')+
   (lang==="ru"?"":'<p class="catalog-import-caution">'+esc(translation?.notes||"")+'</p>')+
   '<h3>'+esc(translation?.short||ui("specs"))+'</h3><div class="catalog-import-grid">'+(specs||'<p>'+esc(translation?.empty||ui("noSpec"))+'</p>')+'</div>'+
   raw+'</section>';
