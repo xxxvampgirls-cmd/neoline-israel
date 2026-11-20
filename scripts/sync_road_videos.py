@@ -38,8 +38,11 @@ ROAD = re.compile(
     r"אופנוע|קטנוע|קורקינט|אופניים|רמזור|מהירות|"
     r"פקק|חניה|תמרור|נתיב|איילון|בכבישים|"
     r"תנועה|שוטרי התנועה|אכיפת תנועה|"
+    r"רדאר|רדארים|מכמונת|מכמונות|ממל.ז|לייזר|מצלמות?|מהירות מותרת|"
+    r"אכיפת מהירות|אקדח מהירות|א-3|א3|"
     r"traffic|driv(?:ing|er|ers)|road|highway|crash|accident|"
-    r"speed(?:ing)?|dashcam|collision|motorcycl|police car|"
+    r"speed(?:ing)?|speed gun|laser gun|radar|speed camera|dashcam|"
+    r"collision|motorcycl|police car|"
     r"дтп|авари|дорожн|водител|штраф|камера скорости",
     re.IGNORECASE)
 EXCLUDE = re.compile(
@@ -50,6 +53,12 @@ EXCLUDE = re.compile(
 CRASH = re.compile(
     r"תאונ|התנגשות|התנגש|דריס|נדרס|התהפכ|"
     r"crash|accident|collision|дтп|авари",
+    re.IGNORECASE)
+RADARS = re.compile(
+    r"רדאר|רדארים|מכמונ|ממל.ז|מד מהירות|מצלמ(?:ת|ות)? מהירות|"
+    r"אקדח מהירות|אקדח לייזר|א-3|א3|"
+    r"radar|speed camera|speed gun|laser gun|"
+    r"камера скорости|радар|лазерн.{0,12}измер",
     re.IGNORECASE)
 ENFORCEMENT = re.compile(
     r"משטר|שוטר|אכיפ|קנס|דו\x22ח|דוח|דו״ח|מהירות|מצלמ|"
@@ -75,6 +84,8 @@ def relevant(title: str) -> bool:
 def category(title: str, source: str = "") -> str:
     if CRASH.search(title):
         return "accidents"
+    if RADARS.search(title):
+        return "radars"
     # Videos from the verified Police channel are traffic enforcement or
     # road-safety explainers even when the headline does not say "police".
     if source == "police" or ENFORCEMENT.search(title):
@@ -204,6 +215,11 @@ def self_test() -> None:
     assert found[0]["url"].endswith("/watch?v=AbC123_def0")
     assert relevant("תיעוד האכיפה בכביש 4")
     assert category("שוטרי התנועה בדוחות נהגים") == "police"
+    assert relevant("החידוש באגף התנועה: מצלמות המהירות משנות את כללי האכיפה")
+    assert relevant("משטרת התנועה: רדאר חדש למדידת מהירות")
+    assert category("המדריך למצלמות מהירות והרדאר החדש") == "radars"
+    assert category("חידושים ברדאר בכבישים", "police") == "radars"
+    assert category("תאונה בגלל מצלמת מהירות", "news13") == "accidents"
     assert category("העיניים בטלפון ולא בכביש = סכנה", "police") == "police"
     assert not relevant("פיגוע דריסה בכביש")
     print("Road video source filtering and 30-day expiry self-test passed")
