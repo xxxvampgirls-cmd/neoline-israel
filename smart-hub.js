@@ -97,8 +97,8 @@ const ranks=(count="any",priority="quality")=>ids.map(id=>{
 }).sort((a,b)=>b.score-a.score||a.id-b.id);
 const values=["front","rear","cameras","GPS","wireless","screen","parking","app","storage"];
 const labels={ru:"Сравнить",en:"Compare",he:"השוואה",ar:"مقارنة"};
-let tab="finder",count="any",priority="quality",chosen=[5,6,0],device=0,showUpdates=false;
-try{const saved=Number(localStorage.getItem(savedKey));if(ids.includes(saved))device=saved}catch(_){}
+let tab="finder",count="any",priority="quality",chosen=[5,6,0],device=0,savedDevice=0,showUpdates=false;
+try{const saved=Number(localStorage.getItem(savedKey));if(ids.includes(saved)){device=saved;savedDevice=saved}}catch(_){}
 const optionModel=(selected,includeEmpty=false,emptyLabel="")=>(includeEmpty?'<option value="0">'+esc(emptyLabel)+'</option>':"")+
  ids.map(id=>'<option value="'+id+'"'+(id===Number(selected)?' selected':'')+'>'+esc(names[id])+'</option>').join("");
 function openModel(id){
@@ -154,7 +154,7 @@ function ownerPanel(){
  '<div class="hub-owner-actions">'+link(p.source,t.source)+(p.manual?link(p.manual,t.manual):'<span class="hub-inline-note">'+esc(t.noManual)+'</span>')+
  '<button type="button" class="hub-link" data-hub-updates>'+esc(showUpdates?t.updateHide:t.updates)+'</button>'+
  '<button type="button" class="hub-link" data-hub-open="'+(id||1)+'">'+esc(t.details)+'</button></div>'+
- (id?'<p class="hub-inline-note">'+esc(t.saved)+'</p>':"")+
+ (id===savedDevice?'<p class="hub-inline-note">'+esc(t.saved)+'</p>':"")+
  (showUpdates&&window.NEOLINE_DEVICE_UPDATES?.render?'<div class="hub-update-details">'+window.NEOLINE_DEVICE_UPDATES.render(id||1,locale())+'</div>':"")+
  '</div>';
  return '<section class="hub-panel" id="hubPanel" role="tabpanel" aria-labelledby="hubTab-owner">'+
@@ -223,7 +223,7 @@ root.addEventListener("click",event=>{
   const current=Number(root.querySelector("[data-hub-device]")?.value)||device||1;
   if(!ids.includes(current))return;
   device=current;
-  try{localStorage.setItem(savedKey,String(device))}catch(_){}
+  try{localStorage.setItem(savedKey,String(device));savedDevice=device}catch(_){}
   render();return;
  }
  if(button.matches("[data-hub-updates]")){showUpdates=!showUpdates;render();return}
