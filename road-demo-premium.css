@@ -1,0 +1,438 @@
+/* NEOLINE Israel · Premium Telemetry HUD (2026-11-20).
+   Variant selected: glass telemetry above an SVG roadway, NOT a video.
+   Fixed-height shell, 4 distinct stage states, real controls, low GPU cost.
+   All animation is compositor-friendly opacity/transform, besides light
+   SVG stroke dashes. The dot ornaments themselves remain motionless. */
+#installation .road-demo{
+ --hud-cyan:#55e7ff;--hud-blue:#148aca;--hud-night:#061e36;
+ --hud-outline:rgba(129,226,255,.55);
+ box-sizing:border-box;isolation:isolate;
+ height:480px;min-height:480px;max-height:480px;
+ border:1px solid #62c5eead;border-radius:25px;
+ background:#06213b;
+ box-shadow:0 18px 37px rgba(6,66,105,.22),0 5px 12px rgba(3,95,156,.09),
+            inset 0 1px rgba(231,250,255,.43);
+}
+#installation .road-demo::after{
+ content:"";pointer-events:none;
+ position:absolute;inset:0;z-index:7;border-radius:inherit;
+ border:1px solid rgba(149,231,255,.27);
+ box-shadow:inset 0 2px 2px rgba(200,247,255,.11),
+            inset 0 -2px 0 rgba(91,230,255,.25);
+}
+#installation .road-demo-visual{
+ flex:1 1 0;min-height:0;isolation:isolate;
+ background:radial-gradient(ellipse 82% 90% at 51% 45%,#125c8c 0%,#0a3458 54%,#071e36 100%);
+}
+#installation .road-demo-visual>svg{
+ position:absolute;inset:0;z-index:0;
+ width:100%;height:100%;min-height:0!important;max-height:none;
+ display:block;object-fit:cover;aspect-ratio:auto;
+}
+#installation .road-demo-visual>svg #nr-sky stop:first-child{stop-color:#061d36}
+#installation .road-demo-visual>svg .road-demo-roadflow{pointer-events:none}
+#installation .road-demo-visual>svg .road-demo-range-rings{pointer-events:none}
+#installation .road-demo-visual>svg .road-demo-range-ring{
+ opacity:.32;transform-origin:280px 271px;
+}
+#installation .road-demo-visual>svg .road-demo-range-ring--two{opacity:.27}
+#installation .road-demo-visual>svg .road-demo-range-ring--three{opacity:.18}
+#installation .road-demo-visual>svg .road-demo-car{
+ transform-origin:280px 256px;
+}
+#installation .road-demo-visual>svg .road-demo-scan{opacity:.80}
+#installation .road-demo-visual>svg .road-demo-sweep{opacity:.24}
+#installation .road-demo-visual>svg .road-demo-rear,
+#installation .road-demo-visual>svg .road-demo-gps,
+#installation .road-demo-visual>svg .road-demo-parking{
+ transition:opacity .48s cubic-bezier(.2,.7,.2,1);
+}
+#installation .road-demo[data-road-stage="1"] .road-demo-gps,
+#installation .road-demo[data-road-stage="2"] .road-demo-rear,
+#installation .road-demo[data-road-stage="3"] .road-demo-parking{opacity:1}
+#installation .road-demo[data-road-stage="3"] .road-demo-roadflow{opacity:.06}
+#installation .road-demo[data-road-stage="3"] .road-demo-scan{opacity:.12}
+/* Background energy only. The headline and mode buttons never move. */
+#installation .road-demo-ambience{
+ position:absolute;inset:0;z-index:1;overflow:hidden;
+ pointer-events:none;isolation:isolate;
+}
+#installation .road-demo-ambient-orb{
+ position:absolute;inset:-45%;opacity:.55;transform:translate3d(0,0,0);
+ background:radial-gradient(ellipse 27% 24% at 50% 42%,#c6faff80 0%,#42cafa31 39%,transparent 76%);
+ mix-blend-mode:screen;will-change:transform,opacity;
+}
+#installation .road-demo-halo{
+ position:absolute;left:50%;top:58%;
+ width:56%;aspect-ratio:1;border-radius:50%;
+ transform:translate(-50%,-50%) scale(.88);
+ border:1px solid #62e7ff48;
+ box-shadow:0 0 0 18px #34d2ff0c,0 0 0 37px #37c9ef09,
+   inset 0 0 29px #54e8ff10,0 0 31px #51d9ff25;
+ opacity:.47;will-change:transform,opacity;
+}
+#installation .road-demo-diagonal{
+ position:absolute;inset:-28%;
+ background:linear-gradient(133deg,
+  transparent 25%,rgba(67,167,235,.09) 32%,rgba(18,113,176,.20) 36%,
+  transparent 41%,transparent 65%,rgba(64,192,251,.09) 71%,
+  rgba(205,253,255,.075) 74%,transparent 77%);
+ transform:translate3d(-3%,3%,0);
+ opacity:.92;will-change:transform;
+}
+#installation .road-demo-halftone{
+ position:absolute;width:43%;height:47%;pointer-events:none;opacity:.48;
+ background-image:radial-gradient(circle,rgba(121,226,255,.85) .95px,transparent 1.6px);
+ background-size:11px 11px;
+ -webkit-mask-image:radial-gradient(ellipse at 12% 12%,#000 0%,#0008 28%,transparent 77%);
+ mask-image:radial-gradient(ellipse at 12% 12%,#000 0%,#0008 28%,transparent 77%);
+}
+#installation .road-demo-halftone--tl{top:-1%;left:-1%}
+#installation .road-demo-halftone--br{
+ right:-1%;bottom:-4%;transform:rotate(180deg);
+}
+#installation .road-demo-top{
+ z-index:5;top:12px;inset-inline:14px;gap:8px;
+}
+#installation .road-demo-tag,
+#installation .road-demo-rec,
+#installation .road-demo-hud{
+ border:1px solid rgba(161,229,255,.39);
+ border-radius:22px;
+ background:linear-gradient(140deg,rgba(10,51,84,.91),rgba(19,68,106,.72));
+ box-shadow:0 4px 14px rgba(1,15,35,.24),inset 0 1px rgba(255,255,255,.17);
+ color:#edfaff;
+ -webkit-backdrop-filter:blur(6px);
+ backdrop-filter:blur(6px);
+}
+#installation .road-demo-tag,
+#installation .road-demo-rec{
+ padding:8px 12px;min-height:32px;
+ font-size:10px;line-height:1.25;font-weight:850;letter-spacing:.015em;
+}
+#installation .road-demo-tag::before{
+ width:9px;height:9px;background:#48e2fa;
+ box-shadow:0 0 0 4px rgba(25,185,220,.14),0 0 10px rgba(53,231,255,.72);
+ margin-inline-end:8px;
+}
+#installation .road-demo-rec>i{
+ width:9px;height:9px;
+ background:#ff576b;box-shadow:0 0 0 4px rgba(255,55,92,.11),0 0 14px #ff576a88;
+}
+#installation .road-demo-hud{
+ z-index:5;top:53px;inset-inline-end:14px;
+ min-height:31px;padding:5px 11px;border-radius:19px;
+ font-size:10px;letter-spacing:.018em;
+}
+#installation .road-demo-hud>span:first-child{
+ color:#a5f8ff;border-radius:50%;
+ background:#0a7892ab;
+ box-shadow:inset 0 0 0 1px #9deafa55;
+}
+/* Decorative, not interactive telemetry cards; never reflow the main layout. */
+#installation .road-demo-telemetry{
+ position:absolute;z-index:4;inset:0;pointer-events:none;
+}
+#installation .road-telemetry-card{
+ position:absolute;display:flex;align-items:center;gap:7px;
+ box-sizing:border-box;min-width:0;
+ border:1px solid rgba(130,219,255,.24);
+ border-radius:13px;
+ background:linear-gradient(137deg,rgba(5,48,82,.79),rgba(22,98,141,.46));
+ color:#e6faff;box-shadow:0 5px 22px #061a3040,inset 0 1px #ffffff1a;
+ padding:8px 9px;backdrop-filter:blur(5px);
+ -webkit-backdrop-filter:blur(5px);
+ transition:opacity .4s ease,background .4s ease,box-shadow .4s ease;
+}
+#installation .road-telemetry-card strong{
+ display:block;font-family:inherit;font-size:10px;font-weight:850;
+ line-height:1.32;white-space:nowrap;
+}
+#installation .road-telemetry-card small{
+ display:block;font-size:9px;line-height:1.35;
+ color:#badbed;white-space:nowrap;
+}
+#installation .road-telemetry-speed{
+ top:36%;left:8%;flex-direction:column;gap:0;
+ min-width:74px;padding:6px 8px;
+}
+#installation .road-telemetry-speed small{font-size:8px;letter-spacing:.07em}
+#installation .road-telemetry-gauge{
+ display:block;position:relative;width:47px;height:34px;flex:none;
+}
+#installation .road-telemetry-gauge svg{display:block;width:47px;height:34px}
+#installation .road-telemetry-gauge path{
+ fill:none;stroke-width:4.4;stroke-linecap:round;
+}
+#installation .road-speed-track{stroke:#6fbbde52}
+#installation .road-speed-fill{
+ stroke:#58f1ff;stroke-dasharray:72 140;
+ filter:drop-shadow(0 0 3px #47e3ff87);
+}
+#installation .road-telemetry-gauge strong{
+ position:absolute;left:0;right:0;bottom:0;text-align:center;
+ font-size:18px;line-height:20px;color:#fff;
+ text-shadow:0 1px 6px #42d8ff5b;
+}
+#installation .road-telemetry-gps{top:37%;right:7%}
+#installation .road-telemetry-lane{top:69%;left:6%}
+#installation .road-telemetry-record{top:70%;right:6%}
+#installation .road-telemetry-icon{
+ display:grid;place-items:center;width:23px;height:23px;flex:none;
+ color:#a0f5ff;background:#117eaa70;border-radius:8px;
+ font-weight:900;font-size:18px;line-height:1;
+}
+#installation .road-telemetry-lane-icon{
+ display:grid;place-items:center;font-size:19px;flex:none;
+ color:#6cf5ff;letter-spacing:-3px;width:23px;
+}
+#installation .road-telemetry-bars{
+ display:flex;align-items:flex-end;gap:2px;height:20px;
+ margin-inline-start:3px;
+}
+#installation .road-telemetry-bars i{
+ display:block;width:3px;border-radius:2px;
+ background:#7ef9dc;box-shadow:0 0 5px #61ffe277;
+}
+#installation .road-telemetry-bars i:nth-child(1){height:8px}
+#installation .road-telemetry-bars i:nth-child(2){height:14px}
+#installation .road-telemetry-bars i:nth-child(3){height:19px}
+#installation .road-telemetry-live-dot{
+ width:7px;height:7px;border-radius:50%;flex:none;
+ background:#ff6175;box-shadow:0 0 8px #ff6b7c86;margin-inline-start:2px;
+}
+#installation .road-demo-rear-feed{
+ position:absolute;z-index:5;top:44%;right:4%;
+ width:40%;max-width:194px;aspect-ratio:180/107;
+ padding:4px;background:linear-gradient(135deg,#0b4a70,#052a46);
+ border:1px solid #67e5ff9c;border-radius:13px;
+ overflow:hidden;box-shadow:0 9px 25px #00192cc2;
+ opacity:0;transform:translate3d(22px,0,0) scale(.94);
+ visibility:hidden;pointer-events:none;
+ transition:transform .6s cubic-bezier(.2,.8,.2,1),opacity .45s ease,visibility .45s;
+}
+#installation .road-demo-rear-feed svg{
+ display:block;width:100%;height:80%;
+ border-radius:9px 9px 4px 4px;
+}
+#installation .road-demo-rear-feed small{
+ display:block;text-align:center;font-size:9px;line-height:1.4;
+ color:#dafaff;font-weight:800;padding:2px;
+}
+#installation .road-demo[data-road-stage="2"] .road-demo-rear-feed{
+ visibility:visible;opacity:1;transform:translate3d(0,0,0) scale(1);
+}
+#installation .road-demo[data-road-stage="2"] .road-telemetry-record{opacity:0}
+#installation .road-demo-parking-badge{
+ position:absolute;z-index:5;left:50%;top:24%;display:flex;
+ align-items:center;gap:7px;padding:6px 10px;
+ border:1px solid #8de9f893;border-radius:22px;
+ background:#074066dc;color:#edfbff;font-size:10px;font-weight:800;
+ box-shadow:0 3px 13px #01192c84;
+ transform:translate(-50%,-9px);opacity:0;
+ visibility:hidden;pointer-events:none;
+ transition:opacity .45s,transform .45s,visibility .45s;
+}
+#installation .road-demo-parking-badge b{
+ display:grid;place-items:center;width:20px;height:20px;
+ border-radius:6px;border:1px solid #90f4ff;
+ color:#b7fbff;
+}
+#installation .road-demo[data-road-stage="3"] .road-demo-parking-badge{
+ visibility:visible;opacity:1;transform:translate(-50%,0);
+}
+#installation .road-demo[data-road-stage="3"] .road-telemetry-speed{opacity:.58}
+#installation .road-demo[data-road-stage="1"] .road-telemetry-gps{
+ border-color:#73f1ffc0;
+ box-shadow:0 0 16px #41dbff52,inset 0 1px #ffffff22;
+}
+#installation .road-demo[data-road-stage="2"] .road-telemetry-lane{opacity:.55}
+#installation .road-demo-bottom{
+ z-index:4;
+ flex:0 0 154px;height:154px;min-height:154px;max-height:154px;
+ grid-template-rows:43px 45px minmax(0,1fr);
+ gap:8px;padding:13px 15px 11px;
+ border-top:1px solid #73deff7e;
+ background:linear-gradient(141deg,#0c375c 0%,#0a2d4e 57%,#102740 100%);
+ box-shadow:inset 0 3px 14px rgba(24,157,226,.08);
+}
+#installation .road-demo-bottom::before{
+ content:"";position:absolute;inset:0;pointer-events:none;
+ background:linear-gradient(133deg,transparent 32%,#18b6ec0c 50%,transparent 63%);
+}
+#installation .road-demo-caption{
+ position:relative;z-index:1;
+ grid-template-rows:23px 17px;height:43px;max-height:43px;gap:2px;
+}
+#installation .road-demo-caption strong{
+ font-size:18px;line-height:23px;font-weight:850;
+ letter-spacing:-.025em;color:#f6fcff;
+ text-shadow:0 1px 8px rgba(80,200,255,.12);
+}
+#installation .road-demo-caption small{
+ font-size:11px;line-height:16px;color:#b5d7ec;
+}
+#installation .road-demo-steps{position:relative;z-index:1;height:45px;max-height:45px;gap:7px}
+#installation .road-demo-step{
+ min-height:45px;max-height:45px;
+ padding:7px 5px;font-size:10px;
+ border:1px solid #a4dcfa59;border-radius:12px;
+ background:linear-gradient(155deg,#194869e8,#1b4465);
+ color:#d8f1ff;
+ box-shadow:inset 0 1px 0 #ffffff13;
+ transition:background .3s,box-shadow .3s,border-color .3s,color .3s;
+}
+#installation .road-demo-step[aria-pressed="true"]{
+ color:#fff;background:linear-gradient(127deg,#1198d0,#16b3e2);
+ border-color:#8bf4ff;
+ box-shadow:inset 0 1px #ffffff48,0 0 0 1px #2bdcff43,
+   0 2px 13px #00c6fb6d;
+}
+#installation .road-demo-step:focus-visible{
+ outline:2px solid #a9faff;outline-offset:2px;
+}
+#installation .road-demo-note{
+ position:relative;z-index:1;
+ font-size:9.2px;line-height:1.4;color:#adcee3;
+}
+/* Animated only while the component is actually visible. */
+#installation .road-demo.is-playing .road-demo-ambient-orb{
+ animation:premiumRoadFloat 13s ease-in-out infinite;
+}
+#installation .road-demo.is-playing .road-demo-diagonal{
+ animation:premiumRoadDiagonal 15s ease-in-out infinite alternate;
+}
+#installation .road-demo.is-playing .road-demo-halo{
+ animation:premiumRoadHalo 5.4s ease-in-out infinite;
+}
+#installation .road-demo.is-playing .road-demo-range-ring--one{
+ animation:premiumRoadRings 3.5s ease-out infinite;
+}
+#installation .road-demo.is-playing .road-demo-range-ring--two{
+ animation:premiumRoadRings 3.5s ease-out -1.15s infinite;
+}
+#installation .road-demo.is-playing .road-demo-range-ring--three{
+ animation:premiumRoadRings 3.5s ease-out -2.3s infinite;
+}
+#installation .road-demo.is-playing .road-demo-car{
+ animation:premiumRoadCarHover 3.4s ease-in-out infinite;
+}
+#installation .road-demo.is-playing .road-demo-flow-line{
+ animation:premiumRoadFlow 2.8s linear infinite;
+}
+#installation .road-demo.is-playing .road-demo-flow-line--late{
+ animation-delay:-1.1s;
+}
+#installation .road-demo.is-playing .road-telemetry-live-dot,
+#installation .road-demo.is-playing .road-demo-rec>i{
+ animation:premiumRoadRec 1.9s ease-in-out infinite;
+}
+#installation .road-demo.is-playing .road-telemetry-bars i{
+ animation:premiumRoadSignal 2.1s ease-in-out infinite;
+}
+#installation .road-demo.is-playing .road-telemetry-bars i:nth-child(2){animation-delay:.25s}
+#installation .road-demo.is-playing .road-telemetry-bars i:nth-child(3){animation-delay:.5s}
+@keyframes premiumRoadFloat{
+ 0%,100%{transform:translate3d(-5%,5%,0) scale(1);opacity:.43}
+ 27%{transform:translate3d(4%,-5%,0) scale(1.055);opacity:.74}
+ 54%{transform:translate3d(8%,4%,0) scale(1.02);opacity:.58}
+ 80%{transform:translate3d(-2%,8%,0) scale(1.07);opacity:.65}
+}
+@keyframes premiumRoadDiagonal{
+ from{transform:translate3d(-5%,2%,0);opacity:.53}
+ to{transform:translate3d(6%,-3%,0);opacity:.86}
+}
+@keyframes premiumRoadHalo{
+ 0%,100%{transform:translate(-50%,-50%) scale(.85);opacity:.20}
+ 50%{transform:translate(-50%,-50%) scale(1.09);opacity:.59}
+}
+@keyframes premiumRoadRings{
+ 0%{transform:scale(.77);opacity:0}
+ 15%{opacity:.59}
+ 75%{opacity:.26}
+ 100%{transform:scale(1.33);opacity:0}
+}
+@keyframes premiumRoadCarHover{
+ 0%,100%{transform:translateY(0)}
+ 50%{transform:translateY(-1.5px)}
+}
+@keyframes premiumRoadFlow{
+ from{stroke-dashoffset:170}
+ to{stroke-dashoffset:-170}
+}
+@keyframes premiumRoadRec{
+ 0%,100%{opacity:.48}
+ 45%{opacity:1}
+}
+@keyframes premiumRoadSignal{
+ 0%,100%{opacity:.53;transform:scaleY(.78);transform-origin:bottom}
+ 45%{opacity:1;transform:scaleY(1)}
+}
+@media(max-width:1020px){
+ #installation .road-demo{
+  height:450px;min-height:450px;max-height:450px;
+ }
+}
+@media(max-width:650px){
+ #installation .road-demo{
+  height:clamp(384px,111vw,431px);
+  min-height:clamp(384px,111vw,431px);
+  max-height:clamp(384px,111vw,431px);
+  border-radius:20px;
+ }
+ #installation .road-demo-top{top:10px;inset-inline:10px}
+ #installation .road-demo-tag,#installation .road-demo-rec{
+  min-height:29px;padding:6px 8px;font-size:9px;
+ }
+ #installation .road-demo-hud{top:46px;inset-inline-end:10px;font-size:9px;padding:5px 8px}
+ #installation .road-telemetry-card{padding:6px 7px;gap:5px;border-radius:11px}
+ #installation .road-telemetry-card strong{font-size:9px}
+ #installation .road-telemetry-card small{font-size:8px}
+ #installation .road-telemetry-speed{top:34%;left:6%;min-width:60px;padding:4px 5px}
+ #installation .road-telemetry-gauge{width:42px;height:30px}
+ #installation .road-telemetry-gauge svg{width:42px;height:30px}
+ #installation .road-telemetry-gauge strong{font-size:16px}
+ #installation .road-telemetry-gps{top:36%;right:4%}
+ #installation .road-telemetry-lane{top:72%;left:4%}
+ #installation .road-telemetry-record{top:73%;right:4%}
+ #installation .road-telemetry-icon{width:19px;height:19px;font-size:15px}
+ #installation .road-telemetry-lane-icon{width:17px;font-size:16px}
+ #installation .road-telemetry-bars{gap:2px;height:16px}
+ #installation .road-telemetry-bars i{width:2px}
+ #installation .road-telemetry-bars i:nth-child(3){height:16px}
+ #installation .road-demo-halftone{background-size:10px 10px}
+ #installation .road-demo-bottom{
+  flex:0 0 145px;height:145px;min-height:145px;max-height:145px;
+  grid-template-rows:39px 42px minmax(0,1fr);
+  gap:7px;padding:11px 12px 10px;
+ }
+ #installation .road-demo-caption{
+  height:39px;max-height:39px;grid-template-rows:21px 16px;gap:2px;
+ }
+ #installation .road-demo-caption strong{font-size:16px;line-height:21px}
+ #installation .road-demo-caption small{font-size:10px;line-height:16px}
+ #installation .road-demo-steps{height:42px;max-height:42px;gap:5px}
+ #installation .road-demo-step{
+  min-height:42px;max-height:42px;font-size:9px;
+  padding:5px 3px;border-radius:10px;
+ }
+ #installation .road-demo-note{font-size:8.8px}
+}
+@media(max-width:375px){
+ #installation .road-telemetry-gps{right:3%}
+ #installation .road-telemetry-lane{left:3%}
+ #installation .road-telemetry-record{right:3%}
+ #installation .road-demo-tag,#installation .road-demo-rec{font-size:8px}
+ #installation .road-telemetry-bars{display:none}
+ #installation .road-telemetry-record .road-telemetry-icon{display:none}
+ #installation .road-demo-step{font-size:8px}
+ #installation .road-demo-bottom{padding-inline:10px}
+}
+@media(prefers-reduced-motion:reduce){
+ #installation .road-demo *,
+ #installation .road-demo *::before,
+ #installation .road-demo *::after{
+  animation:none!important;transition:none!important;will-change:auto!important;
+ }
+ #installation .road-demo-range-ring{opacity:.3!important}
+}
