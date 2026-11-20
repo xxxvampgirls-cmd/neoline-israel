@@ -168,6 +168,7 @@ function render(){
  '<div class="hub-layout"><div class="hub-tabs" role="tablist" aria-label="'+esc(t.title)+'">'+
  ["finder","compare","owner"].map((k,i)=>'<button type="button" id="hubTab-'+k+'" class="hub-tab" role="tab" aria-controls="hubPanel" aria-selected="'+(tab===k)+'" data-hub-tab="'+k+'"><span aria-hidden="true">'+["◎","⚖","▣"][i]+'</span><span>'+esc(t.tabs[i])+'</span></button>').join("")+
  '</div>'+(tab==="finder"?findPanel():tab==="compare"?comparisonPanel():ownerPanel())+'</div>';
+ updateShortcuts();
  decorateProducts();
 }
 function decorateProducts(){
@@ -238,6 +239,30 @@ document.getElementById("products")?.addEventListener("click",event=>{
  if(chosen.filter(Boolean).length===1)chosen[1]=chosen[0]===5?6:5;
  tab="compare";render();root.scrollIntoView({behavior:"smooth",block:"start"});
 });
+/* Primary catalog shortcuts keep the new features discoverable before the
+   long product listing. They are buttons, not fake sales CTAs. */
+const tools=document.querySelector("#catalog .catalog-tools");
+let shortcuts=null;
+if(tools){
+ shortcuts=document.createElement("div");
+ shortcuts.className="hub-quick-link-row";
+ tools.insertAdjacentElement("afterend",shortcuts);
+ shortcuts.addEventListener("click",event=>{
+  const b=event.target.closest("[data-hub-jump]");
+  if(!b)return;
+  tab=b.dataset.hubJump;
+  render();
+  root.scrollIntoView({behavior:"smooth",block:"start"});
+  root.querySelector('[data-hub-tab="'+tab+'"]')?.focus({preventScroll:true});
+ });
+}
+function updateShortcuts(){
+ if(!shortcuts)return;
+ const t=tx();
+ shortcuts.innerHTML='<button type="button" data-hub-jump="finder"><span aria-hidden="true">◎</span>'+esc(t.tabs[0])+'</button>'+
+  '<button type="button" data-hub-jump="compare"><span aria-hidden="true">⚖</span>'+esc(t.tabs[1])+'</button>'+
+  '<button type="button" data-hub-jump="owner"><span aria-hidden="true">▣</span>'+esc(t.tabs[2])+'</button>';
+}
 const products=document.getElementById("products");
 if(products)new MutationObserver(decorateProducts).observe(products,{childList:true});
 new MutationObserver(records=>{if(records.some(x=>x.attributeName==="lang"))render();}).observe(document.documentElement,{attributes:true,attributeFilter:["lang"]});
