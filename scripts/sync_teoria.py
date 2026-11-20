@@ -176,7 +176,8 @@ def main():
                      for lang,item in results.items()},
         "source":"https://data.gov.il/he/datasets/ministry_of_transport/tqar",
         "licenseByLanguage":{lang:item["license"] for lang,item in results.items()},
-        "license":LICENSE,"publisher":"Israel Ministry of Transport and Road Safety"
+        "license":"Varies by language — see licenseByLanguage",
+        "publisher":"Israel Ministry of Transport and Road Safety"
     },ensure_ascii=False,indent=2)+"\n",encoding="utf8")
     print("TEORIA OFFICIAL DATASET SYNC COMPLETE",flush=True)
 if __name__=="__main__":main()
