@@ -126,14 +126,15 @@ jobs:
             const corners=carousel.locator('#newsFeatureSlide .news-studio-corners');
             if(await corners.count()!==1)
               throw Error('Static cyan news corners must always be present');
-            const fixedCorners=await corners.evaluate(el=>({
-              upper:getComputedStyle(el,'::before'),
-              lower:getComputedStyle(el,'::after')
-            }).then(x=>({
-              topClip:x.upper.clipPath,lowerClip:x.lower.clipPath,
-              upperAnimation:x.upper.animationName,lowerAnimation:x.lower.animationName,
-              upperColor:x.upper.backgroundImage,lowerColor:x.lower.backgroundImage
-            })));
+            const fixedCorners=await corners.evaluate(el=>{
+              const upper=getComputedStyle(el,'::before');
+              const lower=getComputedStyle(el,'::after');
+              return {
+                topClip:upper.clipPath,lowerClip:lower.clipPath,
+                upperAnimation:upper.animationName,lowerAnimation:lower.animationName,
+                upperColor:upper.backgroundImage,lowerColor:lower.backgroundImage
+              };
+            });
             if(!fixedCorners.topClip.includes('polygon')||!fixedCorners.lowerClip.includes('polygon')||
                fixedCorners.upperAnimation!=='none'||fixedCorners.lowerAnimation!=='none'||
                !fixedCorners.upperColor.includes('linear-gradient')||!fixedCorners.lowerColor.includes('linear-gradient'))
