@@ -1,0 +1,30 @@
+name: Verify source-only photo recovery and unchanged manufacturer facts
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - 'scripts/sync_catalog.py'
+      - 'scripts/catalog_photo_quality.py'
+      - 'scripts/test_catalog_source_recovery.py'
+      - '.github/workflows/test-catalog-source-recovery.yml'
+permissions:
+  contents: read
+concurrency:
+  group: source-gallery-regression-main
+  cancel-in-progress: true
+jobs:
+  recover:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install catalog parser and image decoder
+        run: pip install --disable-pip-version-check 'Pillow>=11,<13' 'beautifulsoup4>=4.12,<5' 'requests>=2.31,<3'
+      - name: Syntax, trusted sources and staged photo-reuse tests
+        run: |
+          python -m py_compile scripts/sync_catalog.py scripts/catalog_photo_quality.py scripts/test_catalog_source_recovery.py
+          python scripts/test_catalog_source_recovery.py
