@@ -30,8 +30,9 @@ jobs:
           python-version: '3.12'
       - name: Install image decoder
         run: python -m pip install --disable-pip-version-check 'Pillow>=11,<13'
-      - name: Remove confirmed pickup, delivery and sale banners from every product gallery
+      - name: Reconcile any concurrent catalog updates and strip product advertisements
         run: |
+          git pull --ff-only origin main
           python -m py_compile scripts/catalog_promo_filter.py scripts/remove_catalog_promo_images.py
           python scripts/remove_catalog_promo_images.py --apply
       - name: Audit genuine remaining images without changing the photos
@@ -57,15 +58,27 @@ jobs:
             assets/catalog/gallery-quality.json
           if-no-files-found: warn
           retention-days: 21
-      - name: Commit filtered product galleries and audit, preserving original files
+      - name: Publish cleanup without overwriting a concurrent catalog sync
         run: |
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git add assets/catalog/catalog.json assets/catalog/promo-image-cleanup.json assets/catalog/gallery-quality.json
-          if git diff --cached --quiet; then
-            echo 'No additional promotional images identified'
-            exit 0
-          fi
-          git commit -m 'Remove shipping and marketing banners from real product photo galleries'
-          git pull --rebase origin main
-          git push origin HEAD:main
+          for attempt in 1 2 3; do
+            git fetch origin main
+            if [ "$(git rev-parse HEAD)" != "$(git rev-parse origin/main)" ]; then
+              # Discard only this runner's work and re-scan NEW main. Never
+              # try to merge two independently regenerated catalog.json files.
+              git reset --hard origin/main
+              python scripts/remove_catalog_promo_images.py --apply
+              python scripts/audit_catalog_photos.py
+            fi
+            git add assets/catalog/catalog.json assets/catalog/promo-image-cleanup.json assets/catalog/gallery-quality.json
+            if git diff --cached --quiet; then
+              echo 'Product gallery is free of confirmed advertisements'
+              exit 0
+            fi
+            git commit -m 'Exclude shipping promotions and banners from product photo galleries'
+            if git push origin HEAD:main; then exit 0; fi
+            echo "Catalog moved during cleanup; restarting from current main"
+          done
+          echo 'Could not safely publish after three concurrent updates'
+          exit 1
