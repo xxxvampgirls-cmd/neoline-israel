@@ -255,7 +255,7 @@ jobs:
             await page.locator('.network[data-provider="boxit"]').waitFor({state:'visible'});
             const colors=await page.evaluate(()=>({
               scheme:getComputedStyle(document.documentElement).colorScheme,
-              card:getComputedStyle(document.querySelector('.side')).backgroundColor,
+              card:getComputedStyle(document.querySelector('#locatorDialog')).backgroundColor,
               background:getComputedStyle(document.body).backgroundImage
             }));
             if(colors.scheme!=='light'||colors.card!=='rgb(255, 255, 255)'||!/245|255/.test(colors.background))
