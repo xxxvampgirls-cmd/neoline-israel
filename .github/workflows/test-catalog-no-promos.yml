@@ -83,7 +83,7 @@ jobs:
            await page.locator('#products [data-details]').click();
            if(await page.locator('#modalBig').count())
              throw Error('Marketing banner must not be used as Dela-B main photo');
-           if(!await page.locator('.catalog-image-empty').isVisible())
+           if(!await page.locator('#productModalBody .catalog-image-empty').isVisible())
              throw Error('Source-photo fallback missing when product has no real photo');
            if(await page.locator('.catalog-official-art').count()!==1)
              throw Error('Genuine feature illustrations should remain in their separate panel');
