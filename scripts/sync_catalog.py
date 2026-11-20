@@ -167,12 +167,10 @@ def image_candidates(soup, data, title):
   url=canonical_image(raw)
   if not url:return
   options[url]=max(score,options.get(url,0))
- def variants(raw):
+ def variants(raw,is_srcset=False):
   if not isinstance(raw,str):return []
-  # Capture ALL srcset variants, not only its first low-resolution thumbnail.
-  if "," in raw and re.search(r"\\s[0-9.]+[wx](?:,|$)",raw):
-   return [p.strip().split(" ")[0] for p in raw.split(",") if p.strip()]
-  return [raw]
+  # Bitrix may omit 1x/2x descriptors; parse all candidates conservatively.
+  return [x.strip().split()[0] for x in raw.split(",") if x.strip()] if is_srcset else [raw]
  for meta in soup.select('meta[property="og:image"],meta[name="twitter:image"]'):
   add(meta.get("content"),80)
  for item in (data.get("image",[]) if isinstance(data.get("image",[]),list) else [data.get("image")]):
@@ -202,7 +200,7 @@ def image_candidates(soup, data, title):
                "data-fancybox-href","data-src","data-lazyload","data-srcset",
                "srcset","src","href"):
    if attr=="href" and not element.has_attr("data-fancybox"):continue
-   for raw in variants(element.get(attr,"")):
+   for raw in variants(element.get(attr,""),attr.endswith("srcset")):
     add(raw,score+12 if attr.startswith("data-") else score)
  for node in soup.select('[style*="background-image"],[style*="background:"]'):
   classes=" ".join(node.get("class",[]))+" "+str(node.get("id",""))
@@ -382,14 +380,19 @@ def attach_photos(item,previous_by_id):
   if not isinstance(relative,str) or not re.fullmatch(
       r"\\./assets/catalog/images/[0-9]+-[0-9]+\\.webp",relative):continue
   path=Path(relative)
-  if not path.is_file():continue
+  if not path.is_file():
+   print(f"approved picture unavailable: {path}",flush=True)
+   continue
   try:
    signature=photo_signature(path)
    if any(duplicate_kind(signature,old)[0] in ("identical","perceptual")
           for old in signatures):continue
    retained.append(path.read_bytes())
    signatures.append(signature)
-  except (ValueError,OSError,UnidentifiedImageError):continue
+  except (ValueError,OSError,UnidentifiedImageError) as exc:
+   print(f"approved picture decode failed {path}: {exc}",flush=True)
+   continue
+ print(f"approved distinct pictures retained {slug}: {len(retained)}",flush=True)
  # Retained images are written to contiguous stable numbered slots. Preserve
  # bytes first; overwriting a target cannot destroy a yet-to-be-read old photo.
  images=[]
