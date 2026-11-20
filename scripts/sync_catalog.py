@@ -21,6 +21,9 @@ import requests
 from bs4 import BeautifulSoup
 from PIL import Image, ImageOps, UnidentifiedImageError
 from catalog_photo_quality import photo_signature, duplicate_kind
+from catalog_promo_filter import (
+  promotional_url, banned_reference, banner_diagnosis, classify_file
+)
 
 HOST = "https://neoline.ru"
 SECTIONS = {
@@ -165,7 +168,7 @@ def image_candidates(soup, data, title):
   if isinstance(raw,dict):raw=raw.get("url") or raw.get("contentUrl")
   if not isinstance(raw,str):return
   url=canonical_image(raw)
-  if not url:return
+  if not url or promotional_url(url):return
   options[url]=max(score,options.get(url,0))
  def variants(raw,is_srcset=False):
   if not isinstance(raw,str):return []
@@ -362,12 +365,19 @@ def clean_image(img):
 
 
 def download_unique_image(url,path,known):
- """Save a real manufacturer picture only when distinct from approved ones."""
+ """Save genuine product shots only, not shipping/sale banners."""
+ if promotional_url(url):
+  print(f"SKIP advertising URL: {url[:150]}",flush=True)
+  return None
  response=get(url,timeout=24)
  if len(response.content)>MAX_IMAGE_BYTES:raise ValueError("image too large")
  img=Image.open(io.BytesIO(response.content));img.load()
  if img.width<180 or img.height<140 or img.width*img.height>20_000_000:
   raise ValueError("bad dimensions")
+ promo_reason,_=banner_diagnosis(img)
+ if promo_reason:
+  print(f"SKIP manufacturer promo banner: {url[:150]} ({promo_reason})",flush=True)
+  return None
  output,mode=clean_image(img)
  pending=path.with_name(path.stem+".pending.webp")
  try:
@@ -398,11 +408,18 @@ def attach_photos(item,previous_by_id):
  for relative in approved:
   if not isinstance(relative,str) or not re.fullmatch(
       r"\./assets/catalog/images/[0-9]+-[0-9]+\.webp",relative):continue
+  if banned_reference(relative):
+   print(f"SKIP user-confirmed gallery advertisement {relative}",flush=True)
+   continue
   path=Path(relative)
   if not path.is_file():
    print(f"approved picture unavailable: {path}",flush=True)
    continue
   try:
+   rejected,_=classify_file(path)
+   if rejected:
+    print(f"SKIP existing gallery promo: {relative} ({rejected})",flush=True)
+    continue
    signature=photo_signature(path)
    if any(duplicate_kind(signature,old)[0] in ("identical","perceptual")
           for old in signatures):continue
