@@ -26,7 +26,7 @@ const copy={
   choose:"Выберите модель",progress:"Изучено разделов",sections:"Шаги обучения",
   steps:"Что проверить",complete:"Отметить как изучено",completed:"✓ Изучено",
   video:"▶ Видеообзоры и инструкции",manual:"Руководство (PDF, русский) ↗",
-  product:"Описание производителя ↗",eu:"Поддержка модели · Европа ↗",
+  product:"Описание производителя ↗",eu:"Поддержка модели · Европа ↗",euDirectory:"Каталог обновлений NEOLINE Europe ↗",noFirmware:"Прямой файл прошивки для этой модификации не подтверждён. Проверьте каталог производителя или свяжитесь с поддержкой.",
   app:"Приложение",support:"Помощь NEOLINE Europe ↗",
   official:"Официальные источники",intro:"Выберите раздел слева, затем изучите три шага.",
   details:"Характеристики и фотографии",moreUpdates:"Показать ссылки на обновления",lessUpdates:"Скрыть обновления",
@@ -65,7 +65,7 @@ const copy={
   choose:"Choose a model",progress:"Topics reviewed",sections:"Learning topics",
   steps:"What to check",complete:"Mark as reviewed",completed:"✓ Reviewed",
   video:"▶ Video reviews & tutorials",manual:"User manual (PDF, Russian) ↗",
-  product:"Manufacturer product page ↗",eu:"EU model support ↗",
+  product:"Manufacturer product page ↗",eu:"EU model support ↗",euDirectory:"NEOLINE Europe updates directory ↗",noFirmware:"No direct firmware package is verified for this variant. Check the official update directory or contact support.",
   app:"Mobile app",support:"NEOLINE Europe support ↗",
   official:"Official resources",intro:"Pick a topic and follow the three steps.",
   details:"Specifications & photos",moreUpdates:"Show update links",lessUpdates:"Hide update links",
@@ -104,7 +104,7 @@ const copy={
   choose:"בחירת דגם",progress:"נושאים שנלמדו",sections:"נושאי לימוד",
   steps:"מה צריך לבדוק",complete:"סימון כנלמד",completed:"✓ נלמד",
   video:"▶ סרטוני סקירה והדרכה",manual:"מדריך (PDF, ברוסית) ↗",
-  product:"דף המוצר של היצרן ↗",eu:"תמיכה אירופית לדגם ↗",
+  product:"דף המוצר של היצרן ↗",eu:"תמיכה אירופית לדגם ↗",euDirectory:"קטלוג עדכוני NEOLINE אירופה ↗",noFirmware:"אין קובץ קושחה ישיר ומאומת לגרסה זו. בדקו בקטלוג היצרן או פנו לתמיכה.",
   app:"אפליקציה",support:"תמיכת NEOLINE אירופה ↗",
   official:"מקורות רשמיים",intro:"בחרו נושא ובצעו את שלושת השלבים.",
   details:"מפרט ותמונות",moreUpdates:"הצגת קישורים לעדכונים",lessUpdates:"הסתרת קישורי עדכון",
@@ -143,7 +143,7 @@ const copy={
   choose:"اختر الطراز",progress:"موضوعات تمت مراجعتها",sections:"موضوعات التدريب",
   steps:"الخطوات",complete:"وضع علامة تمت المراجعة",completed:"✓ تمت المراجعة",
   video:"▶ مراجعات ودروس فيديو",manual:"الدليل (PDF بالروسية) ↗",
-  product:"صفحة المنتج لدى الشركة ↗",eu:"دعم الطراز الأوروبي ↗",
+  product:"صفحة المنتج لدى الشركة ↗",eu:"دعم الطراز الأوروبي ↗",euDirectory:"دليل تحديثات NEOLINE أوروبا ↗",noFirmware:"لم يتم التحقق من ملف برنامج ثابت مباشر لهذا الإصدار. راجع دليل الشركة الرسمي أو الدعم.",
   app:"تطبيق الهاتف",support:"دعم NEOLINE أوروبا ↗",
   official:"مصادر رسمية",intro:"اختر الموضوع واتبع الخطوات الثلاث.",
   details:"المواصفات والصور",moreUpdates:"إظهار روابط التحديث",lessUpdates:"إخفاء روابط التحديث",
@@ -228,13 +228,14 @@ function render(){
     '<p class="academy-safety'+(topic==="update"?' academy-safety-strong':'')+'"><span aria-hidden="true">ⓘ</span>'+esc(lesson.note)+'</p>'+
     (topic==="connect"?'<p class="academy-wifi-caution">'+esc(t.wifiCaution)+'</p>':"")+
     (s.variant?'<p class="academy-variant-warning">'+esc(t.variant)+'</p>':"")+
+    (topic==='update'&&s.noPackage?'<p class="academy-variant-warning">'+esc(t.noFirmware)+'</p>':"")+
     '<div class="academy-lesson-actions"><button type="button" class="academy-mark'+(done?' is-completed':'')+'" data-academy-done aria-pressed="'+String(done)+'">'+esc(done?t.completed:t.complete)+'</button>'+
     '<button type="button" class="academy-video-button" data-academy-video>'+esc(t.video)+'</button></div>'+
     '<p class="academy-video-note">'+esc(t.videoNotice)+'</p>'+
    '</div>'+
    '<aside class="academy-resources"><h3>'+esc(t.official)+'</h3>'+
     '<div class="academy-resource-links">'+
-     officialLink(s.euPage,t.eu)+
+     officialLink(s.euPage,s.euPage==='https://neoline.com/update/'?t.euDirectory:t.eu)+
      (s.manual?officialLink(s.manual,t.manual):"")+
      (s.app?officialLink(s.app,t.app+(s.appName?" · "+s.appName:"")+" ↗"):"")+
      (p?.source?officialLink(p.source,t.product):"")+
