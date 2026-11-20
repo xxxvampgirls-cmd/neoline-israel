@@ -1,0 +1,81 @@
+/* NEOLINE Theory — four compact, animated promo artworks in the existing header image.
+   The game title, progress rings, daily challenge and navigation remain untouched. */
+.game-hero.theory-dashboard .hero-art.hero-art--studio.theory-promo-host{
+  position:relative;
+  isolation:isolate;
+  overflow:hidden!important;
+  background-image:none!important;
+  touch-action:pan-y;
+}
+.theory-promo-host .hero-studio-svg,
+.theory-promo-host .theory-promo-slide{
+  position:absolute!important;
+  inset:0;
+  width:100%!important;
+  height:100%!important;
+  display:block;
+  transform:translateX(105%);
+  opacity:0;
+  visibility:hidden;
+  pointer-events:none;
+  transition:transform .64s cubic-bezier(.24,.82,.25,1),opacity .43s ease,visibility 0s linear .64s;
+  will-change:transform;
+}
+.theory-promo-host .hero-studio-svg.is-active,
+.theory-promo-host .theory-promo-slide.is-active{
+  transform:translateX(0);
+  opacity:1;
+  visibility:visible;
+  transition:transform .64s cubic-bezier(.24,.82,.25,1),opacity .43s ease,visibility 0s;
+}
+.theory-promo-host .hero-studio-svg.is-left,
+.theory-promo-host .theory-promo-slide.is-left{transform:translateX(-105%)}
+.theory-promo-host .hero-studio-svg.is-right,
+.theory-promo-host .theory-promo-slide.is-right{transform:translateX(105%)}
+.theory-promo-host .theory-promo-slide svg{width:100%;height:100%;display:block}
+.theory-promo-host .theory-promo-caption{
+  position:absolute;z-index:4;top:8px;left:9px;max-width:77%;
+  padding:4px 8px;border-radius:999px;
+  background:rgba(249,253,255,.88);
+  border:1px solid rgba(255,255,255,.97);
+  box-shadow:0 2px 9px rgba(11,90,144,.08);
+  color:#176998;font-size:9px;font-weight:850;letter-spacing:.015em;line-height:1.18;
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+  pointer-events:none;
+}
+.theory-promo-host .theory-promo-click{
+  position:absolute;inset:0;z-index:5;width:100%;height:100%;
+  border:0;border-radius:inherit;background:transparent;cursor:pointer;
+  -webkit-tap-highlight-color:transparent;
+}
+.theory-promo-host .theory-promo-click:focus-visible{
+  outline:3px solid #0879d1;outline-offset:-4px;
+}
+.theory-promo-host .theory-promo-dots{
+  position:absolute;z-index:6;bottom:7px;left:50%;transform:translateX(-50%);
+  display:flex;align-items:center;gap:2px;padding:2px 5px;border-radius:22px;
+  background:rgba(255,255,255,.83);box-shadow:0 1px 9px #19608d24;
+}
+.theory-promo-host .theory-promo-dot{
+  display:grid;place-items:center;min-width:19px;height:15px;padding:0;
+  border:0;border-radius:10px;background:transparent;cursor:pointer;
+  -webkit-tap-highlight-color:transparent;
+}
+.theory-promo-host .theory-promo-dot::before{
+  content:"";display:block;width:5px;height:5px;border-radius:8px;
+  background:#9ac9e0;transition:background .23s,width .23s,box-shadow .23s;
+}
+.theory-promo-host .theory-promo-dot[aria-current="true"]::before{
+  width:12px;background:#128bcf;box-shadow:0 0 0 1px #b2e5fb;
+}
+.theory-promo-host .theory-promo-dot:focus-visible{outline:2px solid #0879d1;outline-offset:1px}
+.theory-promo-host .theory-promo-slide{background:#c4edfd}
+@media(max-width:720px){
+ .theory-promo-host .theory-promo-caption{font-size:8px;top:5px;left:6px;padding:3px 6px}
+ .theory-promo-host .theory-promo-dots{bottom:3px;padding:1px 3px;gap:0}
+ .theory-promo-host .theory-promo-dot{height:13px;min-width:17px}
+}
+@media(prefers-reduced-motion:reduce){
+ .theory-promo-host .hero-studio-svg,
+ .theory-promo-host .theory-promo-slide{transition:none!important;animation:none!important;will-change:auto!important}
+}
