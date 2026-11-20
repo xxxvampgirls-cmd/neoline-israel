@@ -186,7 +186,8 @@ def refresh(now: dt.datetime | None = None) -> dict:
             if (not isinstance(channel_id, str)
                 or not discovery.CHANNEL_ID.fullmatch(channel_id)
                 or not isinstance(publisher, str) or not publisher.strip()
-                or not discovery.is_local(title, row.get("description", ""), publisher)):
+                or not (row.get("localVerified") is True
+                        or discovery.is_local(title, row.get("description", ""), publisher))):
                 continue
         else:
             continue
@@ -194,6 +195,7 @@ def refresh(now: dt.datetime | None = None) -> dict:
         merged[vid] = {
             "id": vid, "title": title[:220], "source": source,
             "publisher": publisher[:100], "channelId": channel_id,
+            "localVerified": source == "youtube" and row.get("localVerified") is True,
             "category": discovery.primary_category(title, source),
             "tags": tags, "date": when.isoformat(timespec="seconds").replace("+00:00", "Z"),
             "url": "https://www.youtube.com/watch?v=" + vid,
