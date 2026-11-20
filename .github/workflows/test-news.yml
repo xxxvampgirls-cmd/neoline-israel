@@ -123,11 +123,22 @@ jobs:
             const firstFeature=await carousel.locator('.news-feature-title').innerText();
             if(await carousel.locator('img,picture').count())
               throw Error('No news story photos in broadcast slider');
-            const corner=await carousel.locator('#newsFeatureSlide .news-broadcast-foreground').evaluate(el=>({
-              corner:getComputedStyle(el,'::after').content
-            }));
-            if(corner.corner!=='none')
-              throw Error('Legacy bright top-left news corner is still visible');
+            const corners=carousel.locator('#newsFeatureSlide .news-studio-corners');
+            if(await corners.count()!==1)
+              throw Error('Static cyan news corners must always be present');
+            const fixedCorners=await corners.evaluate(el=>({
+              upper:getComputedStyle(el,'::before'),
+              lower:getComputedStyle(el,'::after')
+            }).then(x=>({
+              topClip:x.upper.clipPath,lowerClip:x.lower.clipPath,
+              upperAnimation:x.upper.animationName,lowerAnimation:x.lower.animationName,
+              upperColor:x.upper.backgroundImage,lowerColor:x.lower.backgroundImage
+            })));
+            if(!fixedCorners.topClip.includes('polygon')||!fixedCorners.lowerClip.includes('polygon')||
+               fixedCorners.upperAnimation!=='none'||fixedCorners.lowerAnimation!=='none'||
+               !fixedCorners.upperColor.includes('linear-gradient')||!fixedCorners.lowerColor.includes('linear-gradient'))
+              throw Error('The original corners must stay colored and motionless: '+JSON.stringify(fixedCorners));
+            await corners.evaluate(el=>{el.dataset.fixedCorners='original'});
             const pearl=await carousel.locator('.news-broadcast-stage').evaluate(el=>({
               glows:getComputedStyle(el,'::before').animationName,
               sweep:getComputedStyle(el,'::after').animationName,
@@ -150,6 +161,8 @@ jobs:
                 throw Error(effect+' background transition contains duplicate text');
               if(await foreground.count()!==1)
                 throw Error('Foreground link was remounted during '+effect);
+              if(await corners.count()!==1||await corners.getAttribute('data-fixed-corners')!=='original')
+                throw Error('Stationary corner decorations were replaced during '+effect);
               if(await carousel.locator('.news-copy-enter').count()!==1)
                 throw Error('New title should fade in separately during '+effect);
               const accents=carousel.locator('.news-mask-accent');
