@@ -85,6 +85,17 @@ RADAR = re.compile(
     r"מד מהירות|אכיפת מהירות|"
     r"speed camera|speed gun|radar|laser speed|"
     r"камера скорости|радар|превышени.{0,16}скорост", re.I)
+ROAD_BEHAVIOUR = re.compile(
+    r"כביש|צומת|רמזור|נהיגה מסוכנת|נהג פרוע|עבירת תנועה|"
+    r"פקק|תמרור|סטייה מנתיב|עקיפה מסוכנת|"
+    r"driving fails|road rage|reckless driving|wrong way driving|"
+    r"опасн.{0,12}вожден|дорожн.{0,12}наруш",
+    re.I)
+PRODUCT_ONLY = re.compile(
+    r"מבחן רכב|רכב חדש|רכב חשמלי חדש|מחיר הרכב|"
+    r"לקנות רכב|השוואת רכבים|ליסינג|"
+    r"car review|vehicle review|new suv|test drive|"
+    r"обзор автомобиля|тест[ -]?драйв", re.I)
 POLICE = re.compile(
     r"משטר|שוטר|דוח|דו.ח|אכיפ|קנס|"
     r"police|traffic enforc|fine|speeding ticket|"
@@ -99,6 +110,13 @@ def is_local(title: str, description: str = "", channel: str = "",
              known_official: bool = False) -> bool:
     """Prefer precision to labeling foreign driving as an event in Israel."""
     if not isinstance(title, str) or not ROAD.search(title) or EXCLUDE.search(title):
+        return False
+    # A general Israeli car review is not footage of driving incidents.
+    if PRODUCT_ONLY.search(title) and not (INCIDENT.search(title) or
+                                          DASHCAM.search(title) or RADAR.search(title)):
+        return False
+    if not any(p.search(title) for p in
+               (INCIDENT, DASHCAM, FUNNY, RADAR, POLICE, ROAD_BEHAVIOUR)):
         return False
     text = title + " " + (description or "")[:600]
     if FOREIGN.search(title) and not ISRAEL.search(title):
@@ -214,7 +232,7 @@ def _http_json(endpoint: str, params: dict[str, str | int], api_key: str) -> dic
 
 
 def via_data_api(now: dt.datetime, official_ids: dict[str, str],
-                 max_queries: int = 12) -> list[dict]:
+                 max_queries: int = 16) -> list[dict]:
     """Use real video publish dates and embeddability from videos.list."""
     key = os.environ.get("YOUTUBE_API_KEY", "").strip()
     if not key:
@@ -248,6 +266,8 @@ def via_data_api(now: dt.datetime, official_ids: dict[str, str],
                     continue
                 if "IL" in restrictions.get("blocked", []):
                     continue
+                if "allowed" in restrictions and "IL" not in restrictions["allowed"]:
+                    continue
                 snippet = vid.get("snippet", {})
                 published = _dt(snippet.get("publishedAt"))
                 if published is None:
@@ -267,7 +287,7 @@ def via_data_api(now: dt.datetime, official_ids: dict[str, str],
 
 
 def via_ytdlp(now: dt.datetime, official_ids: dict[str, str],
-              max_queries: int = 12, per_query: int = 10) -> list[dict]:
+              max_queries: int = 16, per_query: int = 8) -> list[dict]:
     """Best-effort search when the API key isn't configured.
 
     A search result is accepted only when YouTube's actual video extractor
@@ -334,6 +354,9 @@ def self_test() -> None:
     assert primary_category("רדאר מצלמת מהירות בישראל") == "radars"
     assert "dashcam" in tags_for("dashcam accident in Israel")
     assert not is_local("מצלמת רכב מצחיקה בברזיל")
+    assert not is_local("מבחן רכב חדש בישראל")
+    assert is_local("נהיגה הזויה בכבישי ישראל")
+    assert is_local("תאונה בכביש 6 מצלמת רכב")
     assert _published_date_from_ytdlp({"upload_date": "20261118"}) == (
         dt.datetime(2026, 11, 18, tzinfo=UTC))
     print("Community YouTube video geography, 30-day, IDs and category checks passed")
