@@ -10,15 +10,18 @@ Ambiguous images remain untouched for human review.
 """
 from __future__ import annotations
 
+import hashlib
 import re
 from pathlib import Path
 from urllib.parse import unquote, urlsplit
 
 from PIL import Image, ImageOps
 
-# Specifically confirmed by the NEOLINE user on 2026-11-20.
-CONFIRMED_BAD_REFERENCES = {
-    "951833046070-3.webp",
+# Git blob SHA-1 of the actual ad bytes seen in the user's screenshot.
+# Do not blacklist a file *number*: if a third real photograph is later
+# added to Power Cord Hybrid, it must remain visible.
+CONFIRMED_BAD_BLOB_IDS = {
+    "4e7c915a04ec4ac931d9d01abe207691357f8774",
 }
 PROMO_TERMS = re.compile(
     r"(?:самовывоз|бесплатн.{0,20}(?:доставк|самовывоз)|"
@@ -31,8 +34,17 @@ PROMO_TERMS = re.compile(
 
 
 def banned_reference(ref: str) -> bool:
-    """Exact manually confirmed files, not all third photos."""
-    return Path(str(ref)).name in CONFIRMED_BAD_REFERENCES
+    """Recognize the real advertising file by its bytes, not by image slot."""
+    path = Path(str(ref))
+    if not path.is_file():
+        return False
+    try:
+        data = path.read_bytes()
+    except OSError:
+        return False
+    # Git's SHA identifies the actual, original picture content.
+    data_hash = hashlib.sha1(b"blob " + str(len(data)).encode("ascii") + b"\\0" + data).hexdigest()
+    return data_hash in CONFIRMED_BAD_BLOB_IDS
 
 
 def promotional_url(url: str) -> bool:
