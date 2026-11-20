@@ -368,7 +368,7 @@
   return "https://www.facebook.com/plugins/"+(v.isReel?"post.php":"video.php")+
    "?href="+encodeURIComponent(v.original)+"&show_text=false&width="+(v.isReel?"420":"640");
  }
- function showFeaturedVideo(index){
+ function showFeaturedVideo(index,autoplay=false){
   const clip=featuredItems[index];
   const holder=get("productVideoMainFrame");
   if(!clip||!holder)return;
@@ -376,22 +376,44 @@
   const t=mainCopy[locale]||mainCopy.en;
   holder.replaceChildren();
   holder.classList.toggle("is-reel",Boolean(clip.isReel));
-  const iframe=document.createElement("iframe");
-  iframe.src=mainVideoSource(clip);
-  iframe.title=clip.title+" — "+clip.provider+" — "+clip.language;
-  iframe.referrerPolicy="strict-origin-when-cross-origin";
-  iframe.loading="eager";
-  iframe.allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share; fullscreen";
-  iframe.allowFullscreen=true;
-  holder.append(iframe);
+  if(autoplay){
+   const iframe=document.createElement("iframe");
+   iframe.src=mainVideoSource(clip);
+   iframe.title=clip.title+" — "+clip.provider+" — "+clip.language;
+   iframe.referrerPolicy="strict-origin-when-cross-origin";
+   iframe.loading="eager";
+   iframe.allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share; fullscreen";
+   iframe.allowFullscreen=true;
+   holder.append(iframe);
+  }else{
+   // Player itself is only requested after a real user click.
+   const button=document.createElement("button");
+   button.type="button";button.className="product-video-main-start";
+   button.dataset.startFeatured=String(index);
+   button.setAttribute("aria-label",clip.title+" — "+t.note);
+   if(clip.provider==="youtube"){
+    const cover=document.createElement("img");
+    cover.src="https://i.ytimg.com/vi/"+clip.id+"/hqdefault.jpg";
+    cover.loading="lazy";cover.decoding="async";cover.alt="";
+    button.append(cover);
+   }else{
+    const icon=document.createElement("span");
+    icon.className="product-video-main-fb-preview";
+    icon.textContent="f";icon.setAttribute("aria-hidden","true");button.append(icon);
+   }
+   const play=document.createElement("span");
+   play.className="product-video-main-start-icon";
+   play.textContent="▶";play.setAttribute("aria-hidden","true");
+   button.append(play);holder.append(button);
+  }
   get("productVideoMainProvider").textContent=
    (clip.provider==="facebook"?t.facebook:t.youtube)+" · "+clip.language;
   get("productVideoMainCaption").textContent=clip.title;
   const link=get("productVideoMainOriginal");
   link.href=clip.original;
   link.textContent=clip.provider==="facebook"?"Facebook ↗":"YouTube ↗";
-  overlay.querySelectorAll("[data-featured-index]").forEach((button,i)=>{
-   const active=i===index;
+  overlay.querySelectorAll("[data-featured-index]").forEach(button=>{
+   const active=Number(button.dataset.featuredIndex)===index;
    button.classList.toggle("is-active",active);
    button.setAttribute("aria-pressed",String(active));
   });
