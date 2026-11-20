@@ -258,3 +258,88 @@
   animation:none!important;
  }
 }
+
+/* Click-through destinations for the NEW newsroom ad: each visual element
+   takes the visitor to its real section. Keep prev/next controls separate. */
+#showcaseSlides .featured-slide--promo-newsroom .promo-art-object{
+ pointer-events:auto!important;
+}
+#showcaseSlides .featured-slide--promo-newsroom .newsroom-promo-screen{
+ pointer-events:auto;
+}
+#showcaseSlides .featured-slide--promo-newsroom .newsroom-promo-jump{
+ cursor:pointer;text-decoration:none!important;
+ -webkit-tap-highlight-color:rgba(33,169,221,.15);
+ transition:filter .22s ease,box-shadow .22s ease,background .22s ease;
+}
+#showcaseSlides .featured-slide--promo-newsroom .newsroom-promo-brand{
+ text-decoration:none;color:#175f8a;
+}
+#showcaseSlides .featured-slide--promo-newsroom .newsroom-promo-video{
+ display:block;
+}
+#showcaseSlides .featured-slide--promo-newsroom .newsroom-promo-jump:focus-visible{
+ outline:3px solid #28bde9!important;outline-offset:2px;
+}
+#showcaseSlides .featured-slide--promo-newsroom .newsroom-promo-video:hover,
+#showcaseSlides .featured-slide--promo-newsroom .newsroom-promo-stats:hover{
+ box-shadow:0 0 0 2px #62d8f9a0,0 4px 16px #097eb14a;
+ filter:brightness(1.04);
+}
+#showcaseSlides .featured-slide--promo-newsroom .newsroom-promo-video:active,
+#showcaseSlides .featured-slide--promo-newsroom .newsroom-promo-stats:active{
+ filter:brightness(.97);
+}
+#showcaseSlides .featured-slide--promo-newsroom .newsroom-promo-topic-links{
+ min-width:0;max-width:100%;
+ display:flex;align-items:center;gap:3px;
+ overflow:hidden;
+}
+#showcaseSlides .featured-slide--promo-newsroom .newsroom-promo-topic{
+ box-sizing:border-box;display:inline-flex;align-items:center;
+ justify-content:center;white-space:nowrap;
+ min-width:0;min-height:21px;
+ padding:4px 6px;border-radius:9px;
+ border:1px solid #b4dbee;
+ background:linear-gradient(145deg,#e6f6ff,#fcfeff);
+ color:#1f7dab;font-size:8px;line-height:1.1;
+ font-weight:900;text-decoration:none!important;
+}
+#showcaseSlides .featured-slide--promo-newsroom .newsroom-promo-topic:hover{
+ color:#fff;border-color:#219ad5;
+ background:linear-gradient(120deg,#1c9dd5,#1c77b7);
+}
+#showcaseSlides .featured-slide--promo-newsroom .newsroom-promo-topic:active{
+ background:#126a9f;color:#fff;
+}
+#showcaseSlides .featured-slide--promo-newsroom .newsroom-promo-footer{
+ min-height:31px;padding:4px 8px;
+}
+@media(max-width:720px){
+ #showcaseSlides .featured-slide--promo-newsroom .newsroom-promo-footer{
+  min-height:29px;padding:3px 5px;gap:3px;
+ }
+ #showcaseSlides .featured-slide--promo-newsroom .newsroom-promo-topic-links{
+  gap:2px;
+ }
+ #showcaseSlides .featured-slide--promo-newsroom .newsroom-promo-topic{
+  font-size:7.4px;min-height:22px;
+  padding:4px 4px;border-radius:7px;
+ }
+ #showcaseSlides .featured-slide--promo-newsroom .newsroom-promo-illustrative{
+  font-size:6.5px;white-space:nowrap;
+ }
+}
+@media(max-width:360px){
+ #showcaseSlides .featured-slide--promo-newsroom .newsroom-promo-topic{
+  font-size:7px;padding:3px 3px;
+ }
+ #showcaseSlides .featured-slide--promo-newsroom .newsroom-promo-illustrative{
+  font-size:6px;
+ }
+}
+@media(prefers-reduced-motion:reduce){
+ #showcaseSlides .featured-slide--promo-newsroom .newsroom-promo-jump{
+  transition:none!important;
+ }
+}
