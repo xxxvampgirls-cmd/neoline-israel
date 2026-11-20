@@ -72,10 +72,12 @@ def relevant(title: str) -> bool:
     return bool(ROAD.search(title)) and not bool(EXCLUDE.search(title))
 
 
-def category(title: str) -> str:
+def category(title: str, source: str = "") -> str:
     if CRASH.search(title):
         return "accidents"
-    if ENFORCEMENT.search(title):
+    # Videos from the verified Police channel are traffic enforcement or
+    # road-safety explainers even when the headline does not say "police".
+    if source == "police" or ENFORCEMENT.search(title):
         return "police"
     return "reports"
 
@@ -100,7 +102,7 @@ def parse_feed(raw: bytes, source_id: str, now: dt.datetime) -> list[dict]:
             "date": published.isoformat(timespec="seconds").replace("+00:00", "Z"),
             "source": source_id,
             "publisher": CHANNEL_NAMES[source_id],
-            "category": category(title),
+            "category": category(title, source_id),
             "url": "https://www.youtube.com/watch?v=" + vid,
         })
     return items
@@ -138,7 +140,7 @@ def refresh(now: dt.datetime | None = None) -> dict:
             source in CHANNEL_NAMES and when and cutoff <= when <= now):
             merged[vid] = {
                 "id": vid, "title": title[:220], "source": source,
-                "publisher": CHANNEL_NAMES[source], "category": category(title),
+                "publisher": CHANNEL_NAMES[source], "category": category(title, source),
                 "date": when.isoformat(timespec="seconds").replace("+00:00", "Z"),
                 "url": "https://www.youtube.com/watch?v=" + vid,
             }
@@ -202,6 +204,7 @@ def self_test() -> None:
     assert found[0]["url"].endswith("/watch?v=AbC123_def0")
     assert relevant("תיעוד האכיפה בכביש 4")
     assert category("שוטרי התנועה בדוחות נהגים") == "police"
+    assert category("העיניים בטלפון ולא בכביש = סכנה", "police") == "police"
     assert not relevant("פיגוע דריסה בכביש")
     print("Road video source filtering and 30-day expiry self-test passed")
 
