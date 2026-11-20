@@ -13,10 +13,10 @@ const NEWS_REMOTE_BASE="https://raw.githubusercontent.com/xxxvampgirls-cmd/neoli
 let newsFetchAt=0,newsLoading=false,newsFeedDate=0,newsFeedReady=false,newsFeedOrigin="pages",newsLinked=false;
 try{const saved=localStorage.getItem("neoline-language");if(["ru","he","en","ar"].includes(saved))state.lang=saved}catch(e){}
 const i18n={
-ru:{eyebrow:"NEOLINE · ИЗРАИЛЬ · АВТОНОВОСТИ",heading:"Что происходит <em>на дорогах Израиля</em>",intro:"Аварии, камеры контроля скорости, новые правила, дороги и автомобили. Коротко о главном — с датой публикации и ссылкой на первоисточник.",period:"Только последние 30 дней",search:"Найти новость…",all:"Все",accidents:"ДТП",speed:"Скорость",laws:"Правила и законы",roads:"Дороги",cars:"Автомобили",updated:"Обновлено",empty:"За последние 30 дней пока нет проверенных материалов в этой категории. Попробуйте другую тему.",noFeed:"Сейчас нет доступных новостей за последние 30 дней. Как только появятся новые проверенные публикации, они автоматически отобразятся здесь.",read:"Читать источник",expand:"Развернуть новость",collapse:"Свернуть",original:"Заголовок первоисточника",allPeriod:"Новости за 30 дней · законы за 6 месяцев",lawsPeriod:"Правила и законы · последние 6 месяцев",image:"Иллюстрация",home:"Главная",catalog:"Каталог",news:"Новости",delivery:"Доставка",cart:"Корзина",back:"← Каталог",warning:"Это информационная сводка, а не подтверждение вступления закона в силу.",legal:"Короткие справки, дата и ссылка на первоисточник. Обложки — лицензированные тематические фото или AI-иллюстрации. Только пометка «Фото из публикации» означает, что изображение предоставлено самим источником; остальные фото не являются документальными кадрами событий. Статус правил дорожного движения сверяйте с официальными публикациями Министерства транспорта Израиля."},
-en:{eyebrow:"NEOLINE · ISRAEL · AUTO NEWS",heading:"What's happening <em>on Israel's roads</em>",intro:"Traffic accidents, speed cameras, rules, roads and new cars. Short updates with original sources.",period:"Last 30 days only",search:"Search news…",all:"All",accidents:"Crashes",speed:"Speed",laws:"Rules and laws",roads:"Roads",cars:"Cars",updated:"Updated",empty:"No verified reports in this category during the last 30 days.",noFeed:"No recent verified reports yet. New items will appear here after the next update.",read:"Read source",expand:"Expand story",collapse:"Collapse",original:"Original headline",allPeriod:"News 30 days · laws 6 months",lawsPeriod:"Rules and laws · last 6 months",image:"Illustration",home:"Home",catalog:"Catalog",news:"News",delivery:"Delivery",cart:"Cart",back:"← Catalog",warning:"An article does not confirm a rule has entered into force.",legal:"Short source-linked reports. Covers use licensed thematic photos or AI illustrations. Only a 'Publisher photo' label means the image came from the original publisher; all other photos are illustrative. Check official Ministry of Transport publications for current legal rules."},
-he:{eyebrow:"NEOLINE · ישראל · חדשות רכב",heading:"מה חדש <em>בכבישי ישראל</em>",intro:"תאונות, מצלמות מהירות, חוקים, כבישים ורכב. עדכונים קצרים עם קישורים למקורות.",period:"רק ב־30 הימים האחרונים",search:"חיפוש בחדשות…",all:"הכול",accidents:"תאונות",speed:"מהירות",laws:"חוקים",roads:"כבישים",cars:"רכב",updated:"עודכן",empty:"אין כתבות מאומתות בקטגוריה זו בחודש האחרון.",noFeed:"אין כרגע כתבות מעודכנות ומאומתות. פרסומים חדשים יופיעו לאחר עדכון.",read:"למקור",expand:"הרחבת הידיעה",collapse:"סגירה",original:"הכותרת המקורית",allPeriod:"חדשות 30 יום · חוקים 6 חודשים",lawsPeriod:"חוקים ותקנות · שישה חודשים",image:"איור",home:"ראשי",catalog:"קטלוג",news:"חדשות",delivery:"משלוח",cart:"סל",back:"← קטלוג",warning:"פרסום על הצעה אינו אישור שהחוק נכנס לתוקף.",legal:"תקצירים קצרים וקישורים למקור. תמונות השער הן תמונות נושא ברישיון מתאים או איורי AI. רק תמונה המסומנת 'צילום מהמקור' הגיעה מהפרסום המקורי; השאר להמחשה. יש לבדוק תקנות עדכניות במשרד התחבורה."},
-ar:{eyebrow:"NEOLINE · إسرائيل · أخبار السيارات",heading:"ما الجديد <em>على طرق إسرائيل</em>",intro:"حوادث وكاميرات السرعة والأنظمة والطرق والسيارات. تحديثات قصيرة مع روابط المصادر.",period:"آخر 30 يومًا فقط",search:"البحث في الأخبار…",all:"الكل",accidents:"حوادث",speed:"السرعة",laws:"القوانين",roads:"الطرق",cars:"السيارات",updated:"آخر تحديث",empty:"لا توجد أخبار موثقة في هذه الفئة خلال آخر 30 يومًا.",noFeed:"لا توجد أخبار حديثة موثقة حاليًا. ستظهر المنشورات الجديدة بعد التحديث.",read:"اقرأ المصدر",expand:"توسيع الخبر",collapse:"طي الخبر",original:"العنوان الأصلي",allPeriod:"أخبار 30 يومًا · قوانين 6 أشهر",lawsPeriod:"الأنظمة والقوانين · آخر 6 أشهر",image:"رسم توضيحي",home:"الرئيسية",catalog:"الكتالوج",news:"الأخبار",delivery:"التوصيل",cart:"السلة",back:"← الكتالوج",warning:"وجود خبر عن مقترح لا يعني دخوله حيز التنفيذ.",legal:"ملخصات قصيرة وروابط للمصادر. صور الأغلفة صور موضوعية مرخصة أو رسومات بالذكاء الاصطناعي. فقط الصور الموسومة «صورة المصدر» مأخوذة من المنشور الأصلي؛ غيرها توضيحي. تحقق من القواعد السارية لدى وزارة النقل."}
+ru:{eyebrow:"NEOLINE · ИЗРАИЛЬ · АВТОНОВОСТИ",heading:"Что происходит <em>на дорогах Израиля</em>",intro:"Аварии, камеры контроля скорости, новые правила, дороги и автомобили. Коротко о главном — с датой публикации и ссылкой на первоисточник.",period:"Только последние 30 дней",search:"Найти новость…",all:"Все",accidents:"ДТП",speed:"Скорость",laws:"Правила и законы",roads:"Дороги",cars:"Автомобили",updated:"Обновлено",empty:"За последние 30 дней пока нет проверенных материалов в этой категории. Попробуйте другую тему.",noFeed:"Сейчас нет доступных новостей за последние 30 дней. Как только появятся новые проверенные публикации, они автоматически отобразятся здесь.",read:"Читать источник",expand:"Развернуть новость",collapse:"Свернуть",original:"Заголовок первоисточника",allPeriod:"Новости за 30 дней · законы за 6 месяцев",lawsPeriod:"Правила и законы · последние 6 месяцев",image:"Иллюстрация",home:"Главная",catalog:"Каталог",news:"Новости",delivery:"Доставка",cart:"Корзина",back:"← Каталог",warning:"Это информационная сводка, а не подтверждение вступления закона в силу.",legal:"Короткие справки, дата и ссылка на первоисточник. В верхних слайдах фотографии показываются только при подтверждённой связи с темой новости; при отсутствии подходящей фотографии показывается фон без снимка. Иллюстративные фотографии не являются кадрами происшествий. Статус правил дорожного движения сверяйте с официальными публикациями Министерства транспорта Израиля."},
+en:{eyebrow:"NEOLINE · ISRAEL · AUTO NEWS",heading:"What's happening <em>on Israel's roads</em>",intro:"Traffic accidents, speed cameras, rules, roads and new cars. Short updates with original sources.",period:"Last 30 days only",search:"Search news…",all:"All",accidents:"Crashes",speed:"Speed",laws:"Rules and laws",roads:"Roads",cars:"Cars",updated:"Updated",empty:"No verified reports in this category during the last 30 days.",noFeed:"No recent verified reports yet. New items will appear here after the next update.",read:"Read source",expand:"Expand story",collapse:"Collapse",original:"Original headline",allPeriod:"News 30 days · laws 6 months",lawsPeriod:"Rules and laws · last 6 months",image:"Illustration",home:"Home",catalog:"Catalog",news:"News",delivery:"Delivery",cart:"Cart",back:"← Catalog",warning:"An article does not confirm a rule has entered into force.",legal:"Short source-linked reports. Top slides show a photo only when its subject is verified as relevant; otherwise they show a photo-free background. Illustrative photos are not documentary images of the event. Check official Ministry of Transport publications for current legal rules."},
+he:{eyebrow:"NEOLINE · ישראל · חדשות רכב",heading:"מה חדש <em>בכבישי ישראל</em>",intro:"תאונות, מצלמות מהירות, חוקים, כבישים ורכב. עדכונים קצרים עם קישורים למקורות.",period:"רק ב־30 הימים האחרונים",search:"חיפוש בחדשות…",all:"הכול",accidents:"תאונות",speed:"מהירות",laws:"חוקים",roads:"כבישים",cars:"רכב",updated:"עודכן",empty:"אין כתבות מאומתות בקטגוריה זו בחודש האחרון.",noFeed:"אין כרגע כתבות מעודכנות ומאומתות. פרסומים חדשים יופיעו לאחר עדכון.",read:"למקור",expand:"הרחבת הידיעה",collapse:"סגירה",original:"הכותרת המקורית",allPeriod:"חדשות 30 יום · חוקים 6 חודשים",lawsPeriod:"חוקים ותקנות · שישה חודשים",image:"איור",home:"ראשי",catalog:"קטלוג",news:"חדשות",delivery:"משלוח",cart:"סל",back:"← קטלוג",warning:"פרסום על הצעה אינו אישור שהחוק נכנס לתוקף.",legal:"תקצירים קצרים וקישורים למקור. התמונות בשקופיות העליונות מוצגות רק כשאומת שהן מתאימות לנושא. אחרת מוצג רק רקע. תמונות להמחשה אינן תיעוד של האירוע. יש לבדוק תקנות עדכניות במשרד התחבורה."},
+ar:{eyebrow:"NEOLINE · إسرائيل · أخبار السيارات",heading:"ما الجديد <em>على طرق إسرائيل</em>",intro:"حوادث وكاميرات السرعة والأنظمة والطرق والسيارات. تحديثات قصيرة مع روابط المصادر.",period:"آخر 30 يومًا فقط",search:"البحث في الأخبار…",all:"الكل",accidents:"حوادث",speed:"السرعة",laws:"القوانين",roads:"الطرق",cars:"السيارات",updated:"آخر تحديث",empty:"لا توجد أخبار موثقة في هذه الفئة خلال آخر 30 يومًا.",noFeed:"لا توجد أخبار حديثة موثقة حاليًا. ستظهر المنشورات الجديدة بعد التحديث.",read:"اقرأ المصدر",expand:"توسيع الخبر",collapse:"طي الخبر",original:"العنوان الأصلي",allPeriod:"أخبار 30 يومًا · قوانين 6 أشهر",lawsPeriod:"الأنظمة والقوانين · آخر 6 أشهر",image:"رسم توضيحي",home:"الرئيسية",catalog:"الكتالوج",news:"الأخبار",delivery:"التوصيل",cart:"السلة",back:"← الكتالوج",warning:"وجود خبر عن مقترح لا يعني دخوله حيز التنفيذ.",legal:"ملخصات قصيرة وروابط للمصادر. تُعرض الصور في الشرائح العلوية فقط عند التحقق من ملاءمتها لموضوع الخبر؛ وإلا تظهر خلفية بلا صورة. الصور التوضيحية ليست توثيقًا للحدث. تحقق من القواعد السارية لدى وزارة النقل."}
 };
 const tr=k=>(i18n[state.lang]||i18n.ru)[k]||k;
 const safe=str=>String(str??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
@@ -26,6 +26,13 @@ const newsPicture=item=>{
  if(!/^\.\/assets\/news\/images\/[a-f0-9]{20}\.(?:svg|webp|jpe?g|png)$/.test(image))return "";
  // New stories may not yet have been copied to the Cloudflare Pages build.
  return newsFeedOrigin==="github"?NEWS_REMOTE_BASE+image.replace(/^\.\//,""):image;
+};
+/* Never misrepresent an unrelated Wikimedia stock shot as an incident photo.
+   The picture must be licensed and explicitly matched to this story's subject. */
+const featurePicture=item=>{
+ if(item.imageType!=="sourceLicensedPhoto"&&item.subjectPhotoMatched!==true)return "";
+ if(!item.imageCredit||!safeURL(item.imageCredit.url))return "";
+ return newsPicture(item);
 };
 function localStory(item){
  const t=item.translations||{}, row=t[state.lang]||{};
@@ -97,12 +104,12 @@ function drawFeature(){
  if(!list.length){host.innerHTML='<p class="news-feature-loading">'+safe(featureTr("empty"))+'</p>';return}
  const item=list[feature.index],url=safeURL(item.url);
  {
-  const localized=localStory(item),pic=newsPicture(item);
+  const localized=localStory(item),pic=featurePicture(item);
   const photo=pic?'<img src="'+safe(pic)+'" width="640" height="360" decoding="async" alt="" class="news-feature-img">':'';
   const creditURL=item.imageCredit&&safeURL(item.imageCredit.url);
-  const attribution=creditURL?'<a class="news-feature-credit" href="'+safe(creditURL)+'" target="_blank" rel="noopener noreferrer" title="'+safe(item.imageCredit.text||"Photo credit")+'">'+safe(item.imageCredit.text||"Photo credit")+'</a>':'';
+  const attribution=pic&&creditURL?'<a class="news-feature-credit" href="'+safe(creditURL)+'" target="_blank" rel="noopener noreferrer" title="'+safe(item.imageCredit.text||"Photo credit")+'">'+safe(item.imageCredit.text||"Photo credit")+'</a>':'';
   host.innerHTML='<a class="news-feature-story" href="'+safe(url)+'" target="_blank" rel="noopener noreferrer nofollow" aria-label="'+safe(localized.title)+'">'+
-   '<span class="news-feature-photo">'+photo+'</span>'+
+   '<span class="news-feature-photo'+(pic?'':' news-feature-photo--empty')+'">'+photo+'</span>'+
    '<span class="news-feature-pattern" aria-hidden="true"></span><span class="news-feature-blueprint" aria-hidden="true"></span>'+
    '<span class="news-feature-copy"><span class="news-feature-tag">'+safe(featureTr("latest"))+' <i>·</i> '+safe(tr(item.category))+'</span>'+
    '<strong class="news-feature-title" dir="auto">'+safe(localized.title)+'</strong>'+
@@ -213,27 +220,15 @@ function render(append=false){
  });
  const offset=append?state.rendered:0;
  const list=matches.slice(offset,state.visible);
- const cards=list.map((item,index)=>{
-  const pos=offset+index;
+ const cards=list.map(item=>{
   const label=tr(item.category),url=safeURL(item.url),localized=localStory(item);
-  const pic=newsPicture(item);
-  const image=pic?
-   '<img class="news-art-image" loading="'+(pos<2?'eager':'lazy')+'" decoding="async" width="640" height="360" alt="'+safe(tr("image"))+'" src="'+safe(pic)+'">':
-   '<div class="news-photo-placeholder" aria-hidden="true"></div>';
-  const type=item.imageType==="sourceLicensedPhoto"?({ru:"Фото из публикации",en:"Publisher photo",he:"צילום מהמקור",ar:"صورة المصدر"}[state.lang]):
-   item.imageType==="ai"?({ru:"AI · иллюстрация",en:"AI · illustration",he:"AI · הדמיה",ar:"AI · صورة توضيحية"}[state.lang]):
-   item.imageType==="licensedPhoto"?({ru:"Фото · иллюстрация",en:"Photo · illustration",he:"צילום · המחשה",ar:"صورة توضيحية"}[state.lang]):tr("image");
-  const photoCredit=item.imageCredit&&item.imageCredit.url?
-   '<a class="news-photo-credit" href="'+safe(safeURL(item.imageCredit.url))+'" target="_blank" rel="noopener noreferrer">'+safe(item.imageCredit.text||"Wikimedia Commons")+'</a>':'';
-  return '<article id="news-story-'+safe(item.id)+'" class="news-card '+(pos===0&&state.category==="all"&&!state.query?'news-card--lead':'')+'">'+
-   '<div class="news-art news-art--'+safe(item.category)+'"><span class="news-art-type">'+safe(label)+'</span>'+image+
-   '<span class="news-art-decoration" aria-hidden="true"></span><span class="news-art-source">'+safe(type)+'</span><a class="news-art-caption" href="'+safe(url)+'" target="_blank" rel="noopener noreferrer nofollow" dir="auto" aria-label="'+safe(tr("read"))+'">'+safe(localized.title)+'</a>'+photoCredit+'</div>'+
-   '<div class="news-card-body"><div class="news-card-meta">'+safe(displayDate(item.date))+
+  return '<article id="news-story-'+safe(item.id)+'" class="news-card news-card--headline">'+
+   '<div class="news-card-body"><div class="news-card-meta">'+
+   '<span class="news-card-category">'+safe(label)+'</span>'+
+   '<time datetime="'+safe(item.date)+'">'+safe(displayDate(item.date))+'</time>'+
    ' <b>· '+safe(item.publisher||"")+'</b>'+(item.official?' · gov.il':'')+'</div>'+
-   '<h2 dir="auto"><a class="news-title-button" href="'+safe(url)+'" target="_blank" rel="noopener noreferrer nofollow" aria-label="'+safe(tr("read"))+'">'+safe(localized.title)+'</a></h2>'+
-   '<p class="summary" dir="auto">'+safe(localized.summary||"")+'</p>'+
-   (item.category==="laws"&&!item.official?'<p class="summary note">'+safe(tr("warning"))+'</p>':'')+
-   '<a class="news-link" href="'+safe(url)+'" target="_blank" rel="noopener noreferrer nofollow">'+safe(tr("read"))+' ↗</a></div></article>';
+   '<h2 dir="auto"><a class="news-title-button" href="'+safe(url)+'" target="_blank" rel="noopener noreferrer nofollow" aria-label="'+safe(localized.title)+'">'+safe(localized.title)+'</a></h2>'+
+   '</div></article>';
  }).join("");
  if(append)$("newsGrid").insertAdjacentHTML("beforeend",cards);
  else $("newsGrid").innerHTML=cards;
