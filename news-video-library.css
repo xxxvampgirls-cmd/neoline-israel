@@ -196,3 +196,39 @@ body.news-video-modal-open{overflow:hidden}
  .news-video-card{transition:none}
  .news-video-card:hover{transform:none}
 }
+
+/* Selected genuine older reports are deliberately separated from the
+   last-30-day rolling gallery. 13 News official source, archive marker. */
+.news-video-archive{
+ margin:5px 0 17px;padding:13px 12px 11px;
+ border:1px solid #cbdfee;border-radius:15px;
+ background:linear-gradient(135deg,#f6fbff,#eaf5fc);
+}
+.news-video-archive[hidden]{display:none!important}
+.news-video-archive h3{
+ margin:0 0 5px;font-size:14px;line-height:1.35;
+ color:#1c628c;font-weight:850;
+}
+.news-video-archive p{
+ margin:0 0 9px;color:#68879b;font-size:11px;
+ line-height:1.55;
+}
+.news-video-archive-grid{
+ padding-block:2px 10px;scrollbar-color:#a4cddd transparent;
+}
+.news-video-archive-grid .news-video-card{
+ flex-basis:min(252px,70vw);border-radius:13px;
+ box-shadow:0 3px 11px #12486c0c;
+}
+.news-video-archive-more{
+ display:inline-flex;align-items:center;
+ color:#1a7eb8;font-size:11px;font-weight:850;
+ text-decoration:underline;text-underline-offset:3px;
+ text-decoration-color:#a3cfea;padding:4px 0;
+}
+@media(max-width:720px){
+ .news-video-archive{padding:12px 10px;margin:8px 0 13px}
+ .news-video-archive h3{font-size:13px}
+ .news-video-archive p{font-size:10px}
+ .news-video-archive-grid .news-video-card{flex-basis:min(221px,70vw)}
+}
