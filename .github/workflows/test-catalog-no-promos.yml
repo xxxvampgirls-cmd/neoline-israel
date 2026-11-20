@@ -1,0 +1,94 @@
+name: Browser-check product galleries contain no shipping advertisements
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - 'index.html'
+      - 'catalog-ui.js'
+      - 'assets/catalog/catalog.json'
+      - 'scripts/catalog_promo_filter.py'
+      - '.github/workflows/test-catalog-no-promos.yml'
+permissions:
+  contents: read
+concurrency:
+  group: neoline-no-promo-gallery-browser
+  cancel-in-progress: true
+jobs:
+  no-promos:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Install mobile Chromium
+        run: |
+          npm install --no-save playwright
+          npx playwright install --with-deps chromium
+      - name: Serve production files
+        run: python3 -m http.server 8776 --bind 127.0.0.1 >/tmp/neoline-promo.log 2>&1 &
+      - name: Check source pictures remain while all blue shipping ads are absent
+        run: |
+          node <<'JS'
+          const {chromium}=require('playwright');
+          (async()=>{
+           const browser=await chromium.launch({headless:true});
+           const page=await browser.newPage({viewport:{width:390,height:844},isMobile:true,hasTouch:true});
+           page.setDefaultTimeout(12000);
+           const errors=[];
+           page.on('pageerror',error=>errors.push(error.message));
+           await page.goto('http://127.0.0.1:8776/',{waitUntil:'domcontentloaded'});
+           await page.waitForFunction(()=>
+             [...document.querySelectorAll('#products .product')].length>=8,{timeout:20000});
+           const catalog=await page.evaluate(async()=>await(await fetch('./assets/catalog/catalog.json')).json());
+           const cable=catalog.products.find(p=>p.id===951833046070);
+           const inflator=catalog.products.find(p=>p.id===159268200852);
+           const magnet=catalog.products.find(p=>p.id===425441257138);
+           if(!cable||!inflator||!magnet)
+             throw Error('Product records missing after banner cleanup');
+           if(cable.images.length!==2||cable.images.some(path=>path.endsWith('951833046070-3.webp')))
+             throw Error('Blue pickup banner still included in power cord photo gallery');
+           if(inflator.images.length!==0)
+             throw Error('Dela-B must not show blue shipping ad as sole product picture');
+           if(magnet.images.length<4)
+             throw Error('Genuine product photographs inadvertently lost');
+           const badPaths=catalog.products.flatMap(p=>p.images.filter(x=>
+             x.endsWith('951833046070-3.webp')));
+           if(badPaths.length)throw Error('User-flagged advertisement remains in catalog: '+badPaths);
+           await page.locator('#tabs [data-cat="accessories"]').click();
+           for(const [lang,dir] of [['ru','ltr'],['en','ltr'],['he','rtl'],['ar','rtl']]){
+             await page.locator('[data-language="'+lang+'"]').click();
+             await page.waitForFunction(l=>document.documentElement.lang===l,lang);
+             await page.locator('#search').fill('Power Cord Hybrid');
+             await page.waitForFunction(()=>document.querySelectorAll('#products .product').length===1);
+             await page.locator('#products [data-details]').click();
+             if(await page.locator('#productModalBody [data-import-photo]').count()!==2)
+               throw Error('Marketing graphic remains or real pictures missing in '+lang);
+             if(await page.locator('#modalPhotoCounter').innerText()!=='1 / 2')
+               throw Error('Gallery counter wrong after removing ad in '+lang);
+             await page.locator('#modalNextImage').click();
+             const image=await page.locator('#modalBig').getAttribute('src');
+             if(!image.endsWith('951833046070-2.webp'))
+               throw Error('Photo 2 of 2 should be real power cable, not the shipping banner');
+             if(await page.locator('html').getAttribute('dir')!==dir)
+               throw Error('Layout direction changed on '+lang);
+             await page.locator('#closeProduct').click();
+             await page.locator('#search').fill('');
+           }
+           await page.locator('[data-language="ru"]').click();
+           await page.locator('#search').fill('Dela-B');
+           await page.waitForFunction(()=>document.querySelectorAll('#products .product').length===1);
+           await page.locator('#products [data-details]').click();
+           if(await page.locator('#modalBig').count())
+             throw Error('Marketing banner must not be used as Dela-B main photo');
+           if(!await page.locator('.catalog-image-empty').isVisible())
+             throw Error('Source-photo fallback missing when product has no real photo');
+           if(await page.locator('.catalog-official-art').count()!==1)
+             throw Error('Genuine feature illustrations should remain in their separate panel');
+           if(errors.length)throw Error('Browser runtime errors: '+errors.join(' | '));
+           console.log('PASS: all 4 languages show 2 real Power Cord Hybrid photos (not 3), and Dela-B never displays pickup ad.');
+           await browser.close();
+          })().catch(e=>{console.error(e);process.exit(1)});
+          JS
