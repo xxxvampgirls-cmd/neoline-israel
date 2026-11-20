@@ -98,6 +98,24 @@ jobs:
              result[lang]={title,expected};
              await page.locator('#closeProduct').click();
              await page.setViewportSize({width:390,height:844});
+             // Check the rendered modal, not just the translation dictionary:
+             // the product ID must reach the hand-edited source-specific copy.
+             await page.locator('#search').fill('Dela-B');
+             await page.waitForFunction(()=>document.querySelectorAll('#products .product').length===1);
+             await page.locator('#products [data-details]').first().click();
+             const dbody=await page.locator('#productModalBody').innerText();
+             const phrases={
+               ru:'90 Вт',
+               en:'90 W motor',
+               he:'90 ואט',
+               ar:'90 واط'
+             };
+             if(!dbody.includes(phrases[lang]))
+               throw Error('The real Dela-B modal is not using specific source-checked copy '+lang);
+             if(await page.locator('#productModalBody .catalog-official-art').count()!==1)
+               throw Error('Verified Dela-B manufacturer illustration section missing '+lang);
+             await page.locator('#closeProduct').click();
+             await page.locator('#search').fill('');
            }
            // No fabricated localized description: original facts always sourced,
            // unrecognized labels must retain Russian source metadata.
