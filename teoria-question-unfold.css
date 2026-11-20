@@ -1,0 +1,86 @@
+/* NEOLINE Theory — unfolding question cards.
+   Each new question opens from its top edge, then answers arrive in sequence.
+   Presentation only: no changes to question data, scoring or input handling. */
+#gamePlaying .question-card{
+  transform-origin:50% 0;
+  perspective:950px;
+  backface-visibility:hidden;
+}
+#gamePlaying .question-card.question-in:not(.question-out){
+  animation:neolineQuestionUnfold .72s cubic-bezier(.18,.8,.22,1) both;
+}
+@keyframes neolineQuestionUnfold{
+  0%{
+    opacity:0;
+    transform:translateY(-8px) perspective(950px) rotateX(-24deg) scaleY(.78);
+    clip-path:inset(0 0 91% 0 round 16px);
+  }
+  36%{
+    opacity:1;
+    transform:translateY(-2px) perspective(950px) rotateX(-7deg) scaleY(.96);
+    clip-path:inset(0 0 42% 0 round 16px);
+  }
+  70%{
+    opacity:1;
+    transform:translateY(0) perspective(950px) rotateX(1.4deg) scaleY(1.012);
+    clip-path:inset(0 0 0 0 round 16px);
+  }
+  100%{
+    opacity:1;
+    transform:translateY(0) perspective(950px) rotateX(0deg) scaleY(1);
+    clip-path:inset(0 0 0 0 round 16px);
+  }
+}
+#gamePlaying .question-card.question-out{
+  animation:neolineQuestionFoldAway .22s ease-in both;
+  pointer-events:none;
+}
+@keyframes neolineQuestionFoldAway{
+  0%{
+    opacity:1;
+    transform:translateY(0) perspective(950px) rotateX(0) scaleY(1);
+    clip-path:inset(0 0 0 0 round 16px);
+  }
+  100%{
+    opacity:0;
+    transform:translateY(-9px) perspective(950px) rotateX(-16deg) scaleY(.85);
+    clip-path:inset(0 0 72% 0 round 16px);
+  }
+}
+/* The question and its illustrative road sign follow the opening paper fold. */
+#gamePlaying .question-card.question-in:not(.question-out) .question-eyebrow,
+#gamePlaying .question-card.question-in:not(.question-out) #questionText{
+  animation:neolineQuestionTextReveal .42s cubic-bezier(.18,.78,.26,1) .10s both;
+}
+#gamePlaying .question-card.question-in:not(.question-out) .question-picture:not([hidden]){
+  animation:neolineQuestionTextReveal .44s cubic-bezier(.18,.78,.26,1) .17s both;
+}
+@keyframes neolineQuestionTextReveal{
+  from{opacity:0;transform:translateY(9px)}
+  to{opacity:1;transform:translateY(0)}
+}
+/* Answer buttons unfold one after another, while existing correct/wrong
+   feedback animations still take priority once a player answers. */
+#gamePlaying .question-card.question-in:not(.question-out) .answer-list .answer:not(.answer-celebrate):not(.answer-shake):not(.answer-reveal):not(.answer-confirmed){
+  transform-origin:center top;
+  animation:neolineAnswerUnfold .40s cubic-bezier(.17,.82,.25,1) both;
+}
+#gamePlaying .question-card.question-in:not(.question-out) .answer-list .answer:nth-child(1){animation-delay:.21s}
+#gamePlaying .question-card.question-in:not(.question-out) .answer-list .answer:nth-child(2){animation-delay:.28s}
+#gamePlaying .question-card.question-in:not(.question-out) .answer-list .answer:nth-child(3){animation-delay:.35s}
+#gamePlaying .question-card.question-in:not(.question-out) .answer-list .answer:nth-child(4){animation-delay:.42s}
+@keyframes neolineAnswerUnfold{
+  0%{opacity:0;transform:translateY(13px) scaleY(.8)}
+  65%{opacity:1;transform:translateY(-1px) scaleY(1.018)}
+  100%{opacity:1;transform:translateY(0) scaleY(1)}
+}
+@media(prefers-reduced-motion:reduce){
+  #gamePlaying .question-card.question-in,
+  #gamePlaying .question-card.question-out,
+  #gamePlaying .question-card.question-in :is(.question-eyebrow,#questionText,.question-picture,.answer){
+    animation:none!important;
+    opacity:1!important;
+    transform:none!important;
+    clip-path:none!important;
+  }
+}
