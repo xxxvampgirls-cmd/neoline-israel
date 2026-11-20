@@ -1,0 +1,97 @@
+name: Browser-check Arabic driving theory gameplay
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - 'teoria.html'
+      - 'teoria.js'
+      - 'teoria-v2.js'
+      - 'teoria-ar.js'
+      - 'teoria-ar-ui.js'
+      - 'teoria-ar.css'
+      - 'teoria-dashboard.js'
+      - 'teoria-game-dock4-road9.js'
+      - 'assets/teoria/ar.json'
+      - '.github/workflows/test-teoria-ar.yml'
+permissions:
+  contents: read
+jobs:
+  arabic:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Install browser for mobile RTL game tests
+        run: |
+          npm install --no-save playwright
+          npx playwright install --with-deps chromium
+      - name: Start project HTTP server
+        run: |
+          python3 -m http.server 8765 --bind 127.0.0.1 > /tmp/neoline-theory-server.log 2>&1 &
+      - name: Verify real Arabic question bank, menus, play and progress
+        run: |
+          node <<'JS'
+          const {chromium}=require('playwright');
+          (async()=>{
+            const browser=await chromium.launch({headless:true});
+            const page=await browser.newPage({viewport:{width:390,height:844},isMobile:true,hasTouch:true});
+            const errors=[];
+            page.on('pageerror',e=>errors.push(e.message));
+            await page.goto('http://127.0.0.1:8765/teoria.html',{waitUntil:'domcontentloaded'});
+            const bank=await page.evaluate(async()=>{
+              const res=await fetch('./assets/teoria/ar.json');
+              if(!res.ok)throw Error('Arabic bank missing: '+res.status);
+              return await res.json();
+            });
+            if(bank.language!=='ar'||bank.questions.length<1500)throw Error('Arabic bank incomplete');
+            if(bank.questions.filter(q=>q.classes.includes('B')).length<1000)throw Error('Arabic class B bank too small');
+            if(bank.questions.filter(q=>q.topic==='signs').length<100)throw Error('Arabic sign-question classification incomplete');
+            if(bank.questions.some(q=>!q.q||q.a.length!==4||q.correct<0||q.correct>3))throw Error('Arabic bank invalid');
+            await page.locator('[data-lang="ar"]').click();
+            await page.waitForFunction(()=>document.getElementById('bankStatus')?.classList.contains('loaded'),null,{timeout:20000});
+            const localized=await page.evaluate(()=>({
+              language:document.documentElement.lang,direction:document.documentElement.dir,
+              title:document.getElementById('heroTitle').textContent,
+              route:document.getElementById('modeRoute').textContent,
+              bank:document.getElementById('bankText').textContent,
+              source:document.getElementById('sourceBank').href,
+              overflow:document.documentElement.scrollWidth-innerWidth
+            }));
+            if(localized.language!=='ar'||localized.direction!=='rtl')throw Error('Arabic RTL not activated: '+JSON.stringify(localized));
+            if(!localized.title.includes('القيادة')||!localized.route.includes('رحلة')||!localized.bank.includes('سؤال'))
+              throw Error('Arabic UI labels missing: '+JSON.stringify(localized));
+            if(!localized.source.includes('/tqar'))throw Error('Arabic official source wrong');
+            if(localized.overflow>4)throw Error('Arabic mobile overflows horizontally: '+JSON.stringify(localized));
+            await page.locator('#gameProgressOpen').click();
+            if(!await page.locator('#gameProgressDialog').isVisible())throw Error('Arabic progress dialog missing');
+            if(!await page.locator('#gameProgressTitle').innerText().then(t=>t.includes('تقدّمي')))
+              throw Error('Arabic achievements still untranslated');
+            await page.locator('#gameProgressClose').click();
+            await page.locator('[data-mode="route"]').click();
+            if(!await page.locator('#gamePlaying').isVisible())throw Error('Arabic route not opening');
+            const prompt=await page.locator('#questionText').innerText();
+            if(!/[\u0600-\u06ff]/.test(prompt))throw Error('Actual Arabic question text missing: '+prompt);
+            if(await page.locator('#answers button').count()!==4)throw Error('Four Arabic answers missing');
+            const labels=await page.locator('#answers button').allInnerTexts();
+            if(labels.some(t=>!/[\u0600-\u06ff]/.test(t)))throw Error('Some Arabic answers not localized');
+            await page.locator('#answers button').first().click();
+            if(!await page.locator('#nextQuestion').isHidden())throw Error('Manual Next button became visible');
+            await page.waitForFunction(()=>document.querySelector('#questionCounter')?.textContent==='1 / 10' &&
+              !document.querySelector('#answers button')?.disabled,null,{timeout:10000});
+            await page.locator('#exitQuiz').click();
+            await page.locator('[data-mode="exam"]').click();
+            if(!await page.locator('#gamePlaying').isVisible())throw Error('Arabic exam mode unavailable');
+            await page.locator('#exitQuiz').click();
+            await page.locator('[data-lang="ru"]').click();
+            await page.waitForFunction(()=>document.documentElement.lang==='ru'&&
+              document.getElementById('bankStatus')?.classList.contains('loaded'),null,{timeout:15000});
+            if(document && false){} // no-op keeps browser-only assertions inside the page
+            if(errors.length)throw Error('Browser runtime exceptions: '+errors.join(' | '));
+            console.log('ARABIC THEORY PASS',JSON.stringify({count:bank.questions.length,B:bank.questions.filter(q=>q.classes.includes('B')).length,rtl:true,route:true,exam:true,progress:true}));
+            await browser.close();
+          })().catch(e=>{console.error(e);process.exitCode=1});
+          JS
