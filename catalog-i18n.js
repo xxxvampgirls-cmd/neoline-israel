@@ -643,7 +643,7 @@
  };
  window.NEOLINE_CATALOG_I18N=Object.freeze({
   locale,copy:lang=>copy[locale(lang)],
-  isSourceOnly,formatSpecs,displayName,overview,
+  isSourceOnly,formatSpecs,displayName,overview,modelIdentifier:extractedModel,
   coverage:()=>({translatedLabels:labels.size})
  });
 })();
