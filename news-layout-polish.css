@@ -33,7 +33,7 @@
 .accident-strip-ident small{font-size:11px}
 .accident-chart-scroll{margin-top:12px;margin-bottom:4px;overflow-x:auto}
 .accident-chart{
- min-width:0;height:138px;gap:3px;padding:2px 2px 1px;
+ min-width:0;height:186px;gap:3px;padding:2px 2px 1px;
  background:repeating-linear-gradient(to top,
   transparent 0,transparent 26px,#c8e6f5a6 27px,
   transparent 28px,transparent 54px);
@@ -41,7 +41,7 @@
 }
 .accident-day{gap:5px}
 .accident-day-rail{
- background:none;height:113px;align-items:flex-end;
+ background:none;height:156px;align-items:flex-end;
 }
 .accident-day-bar{
  max-width:19px;border-radius:4px 4px 1px 1px;
@@ -76,8 +76,8 @@
  .accident-strip{padding:12px 10px 10px}
  .accident-strip-ident strong{font-size:12px}
  .accident-strip-ident small{font-size:10px}
- .accident-chart{height:128px;gap:2px}
- .accident-day-rail{height:104px}
+ .accident-chart{height:172px;gap:2px}
+ .accident-day-rail{height:143px}
  .accident-day-tick{font-size:8px}
  .accident-chart-bottom{font-size:10px}
  .accident-chart-disclaimer{font-size:9.5px}
