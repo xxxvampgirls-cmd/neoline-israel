@@ -115,42 +115,69 @@ jobs:
             await page.waitForFunction(()=>document.querySelectorAll('.news-feature-dot').length===10,{timeout:15000});
             if(!await carousel.isVisible())throw Error('Top ten-news carousel is hidden');
             const firstFeature=await carousel.locator('.news-feature-title').innerText();
-            // The stage persists; the category-colored full-size planes travel
-            // horizontally with linear timing. Both colors belong to NEOLINE.
-            await page.locator('.news-feature-backdrops').evaluate(el=>{el.dataset.persistentNewsTrack='yes'});
-            if(await carousel.locator('img, picture').count())
-              throw Error('News carousel must contain no photographs');
-            const firstTheme=await page.locator('.news-feature-backdrop--current').getAttribute('data-news-category');
+            if(await carousel.locator('img,picture').count())
+              throw Error('No photographs allowed in news slideshow');
+            const firstTheme=await page.locator('.news-scene--current').getAttribute('data-news-theme');
             if(!['accidents','laws','speed','roads','cars'].includes(firstTheme))
-              throw Error('Missing category theme: '+firstTheme);
+              throw Error('Unknown newsroom color theme: '+firstTheme);
+            // One fully masked frame should replace another (not just slide a blue overlay).
             await page.locator('#newsFeatureNext').click();
-            const track=await page.locator('.news-feature-backdrops').getAttribute('data-persistent-news-track');
-            if(track!=='yes')throw Error('News backdrop track remounted during transition');
-            const sliding=await page.locator('.news-feature-backdrop--enter-next').first().evaluate(el=>({
+            const second=page.locator('.news-scene--current');
+            const secondTheme=await second.getAttribute('data-news-theme');
+            if(!['accidents','laws','speed','roads','cars'].includes(secondTheme))
+              throw Error('Category theme changed to an invalid value: '+secondTheme);
+            const effect=await second.evaluate(el=>({
               animation:getComputedStyle(el).animationName,
-              timing:getComputedStyle(el).animationTimingFunction,
-              theme:el.dataset.newsCategory
+              mask:getComputedStyle(el).clipPath,
+              copy:!!el.querySelector('.news-feature-title'),
+              coloredFrame:!!el.querySelector('.news-feature-backdrop')
             }));
-            if(!sliding.animation.includes('neolineNewsBgFromRight')||sliding.timing!=='linear')
-              throw Error('Linear full-backdrop transition missing: '+JSON.stringify(sliding));
-            if(!['accidents','laws','speed','roads','cars'].includes(sliding.theme))
-              throw Error('Second slide lost news category palette');
-            const transition=await page.locator('.news-feature-copy--enter').first().evaluate(el=>getComputedStyle(el).animationName);
-            if(!transition.includes('neolineNewsCopyEnter'))throw Error('Kinetic news transition missing: '+transition);
-            const secondFeature=await carousel.locator('.news-feature-title:not(.news-feature-copy--exit .news-feature-title)').last().innerText();
-            if(firstFeature===secondFeature)throw Error('Carousel next arrow did not change the story');
-            const counter=await page.locator('#newsFeatureCounter').textContent();
-            if(!/02\s*\/\s*10/.test(counter))throw Error('Wrong carousel counter after next: '+counter);
+            if(!effect.animation.includes('neolineMaskDiagonalRight')||!effect.copy||!effect.coloredFrame)
+              throw Error('First transition must reveal an entire new broadcast scene: '+JSON.stringify(effect));
+            await page.waitForTimeout(1020);
+            if(await carousel.locator('.news-scene').count()!==1)
+              throw Error('Old broadcast scene was not cleaned up');
+            const secondFeature=await carousel.locator('.news-feature-title').innerText();
+            if(secondFeature===firstFeature)throw Error('News headline did not change');
+            let counter=await page.locator('#newsFeatureCounter').textContent();
+            if(!/02\s*\/\s*10/.test(counter))throw Error('Wrong carousel counter: '+counter);
+            // Next: five *masked clones* of the arriving frame with diagonal
+            // bands that are actually cut out, not an overlay above static copy.
+            await page.locator('#newsFeatureNext').click();
+            let fragments=await carousel.locator('.news-scene--fragment-ribbons').count();
+            if(fragments!==5)throw Error('Diagonal ribbon mask must split whole arriving frame in five: '+fragments);
+            const part=await carousel.locator('.news-scene--part-2').first().evaluate(el=>({
+              animation:getComputedStyle(el).animationName,clip:getComputedStyle(el).clipPath,
+              label:!!el.querySelector('.news-feature-title')
+            }));
+            if(!part.animation.includes('neolineMaskStripFromRight')||part.clip==='none'||!part.label)
+              throw Error('Ribbons failed to reveal the whole incoming frame: '+JSON.stringify(part));
+            await page.waitForTimeout(1050);
+            if(await carousel.locator('.news-scene').count()!==1)
+              throw Error('Five ribbon clones were not removed after the reveal');
+            // Next: chevron wedge, next: segmented news shutters, then diamond.
+            await page.locator('#newsFeatureNext').click();
+            const chevron=await carousel.locator('.news-scene--wipe-chevron').count();
+            if(chevron!==1)throw Error('Third broadcast transition should be chevron');
+            await page.waitForTimeout(1000);
+            await page.locator('#newsFeatureNext').click();
+            if(await carousel.locator('.news-scene--fragment-shutters').count()!==5)
+              throw Error('Fourth transition should use five segmented shutter masks');
+            await page.waitForTimeout(1000);
+            await page.locator('#newsFeatureNext').click();
+            if(await carousel.locator('.news-scene--wipe-diamond').count()!==1)
+              throw Error('Fifth transition should use a centered diamond reveal');
+            // Rapid taps while a mask is active must never accumulate old frames.
             await page.locator('#newsFeaturePrev').click();
-            await page.waitForTimeout(800);
-            if(await carousel.locator('.news-feature-title').count()!==1)
-              throw Error('Carousel left stale transition headlines in the DOM');
-            if(await carousel.locator('.news-feature-backdrop').count()!==1)
-              throw Error('Carousel left stale colored backdrops after transition');
-            if(await carousel.locator('.news-feature-title').innerText()!==firstFeature)
-              throw Error('Carousel prev did not restore the first story');
-            if(await carousel.locator('img, picture').count())
-              throw Error('News carousel next/prev inserted a photo');
+            await page.locator('#newsFeatureNext').click();
+            await page.waitForTimeout(1020);
+            if(await carousel.locator('.news-scene').count()!==1)
+              throw Error('Rapid clicks left stale broadcast mask elements');
+            if(await carousel.locator('img,picture').count())
+              throw Error('Mask transitions inserted a photograph');
+            const prevCounter=await page.locator('#newsFeatureCounter').textContent();
+            if(!/06\s*\/\s*10/.test(prevCounter))
+              throw Error('Carousel lost its place after rapid taps: '+prevCounter);
             // Headline slider retains the existing compact mobile geometry.
             const geometry=await page.evaluate(()=>{
               const hero=document.querySelector('.news-feature-slide').getBoundingClientRect();
@@ -167,7 +194,7 @@ jobs:
             if(Math.abs(geometry.heroHeight-245)>2)
               throw Error('Carousel mobile image height changed unexpectedly: '+JSON.stringify(geometry));
             console.log('ANIMATED NEWS BACKDROP PASS: image-free and mobile image height retained '+JSON.stringify(geometry));
-            console.log('FEATURE CAROUSEL PASS: 10 dots, left/right kinetic transitions, linear category-colored image-free background');
+            console.log('FEATURE CAROUSEL PASS: diagonal, ribbon, chevron, shutters, diamond news-scene masks; image-free category palettes');
             const now=Date.now(),limit=now-30*86400*1000;
             const cutoff=new Date(now),day=cutoff.getUTCDate();
             cutoff.setUTCDate(1);cutoff.setUTCMonth(cutoff.getUTCMonth()-6);
