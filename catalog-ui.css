@@ -84,3 +84,43 @@
 .catalog-show-more button:focus-visible{outline:3px solid #66bded;outline-offset:3px}
 .catalog-show-more span{font-size:11px;font-weight:650;color:#7292ad}
 @media(max-width:720px){.catalog-show-more{padding:14px 0 7px}.catalog-show-more button{width:90%;max-width:360px;padding:14px 12px;font-size:12px}}
+
+/* Four-language, fact-first imported product detail panel.
+   Source-only Russian content is behind an explicitly labeled disclosure. */
+.catalog-import-detail .catalog-import-caution{
+ margin:9px 0 15px;padding:10px 12px;border:1px solid #cce6f2;
+ background:#f1faff;border-radius:12px;color:#5b7b91;
+ font-size:11px;line-height:1.5;
+}
+.catalog-import-detail .catalog-import-original{
+ margin-top:20px;border:1px solid #cfe3ef;border-radius:13px;
+ overflow:hidden;background:#f9fcff;max-width:100%;
+}
+.catalog-import-detail .catalog-import-original summary{
+ padding:12px 14px;color:#176b99;font-size:12px;
+ font-weight:850;line-height:1.4;cursor:pointer;
+}
+.catalog-import-detail .catalog-import-original[open] summary{
+ border-bottom:1px solid #dcecf4;background:#f0f8fc;
+}
+.catalog-import-original>div{padding:12px 14px 16px;text-align:left}
+.catalog-import-original p{margin:0 0 12px;color:#526c84;font-size:12px;line-height:1.65}
+.catalog-import-original-row{
+ display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:8px;
+ padding:8px 0;border-bottom:1px solid #e5eff6;
+ color:#41637c;font-size:11px;line-height:1.5;overflow-wrap:anywhere;
+}
+.catalog-import-original-row:last-child{border-bottom:0}
+.catalog-import-original-row strong{font-weight:800;color:#294f6d}
+.catalog-import-property .catalog-ru-mark{
+ display:inline-flex;margin-inline-start:5px;padding:1px 4px;
+ border-radius:4px;background:#edf3f7;color:#657b8a;
+ font-size:9px;font-weight:900;line-height:1.5;
+}
+[dir="rtl"] .catalog-import-detail{text-align:start}
+[dir="rtl"] .catalog-import-original>div{text-align:left}
+@media(max-width:720px){
+ .catalog-import-detail .catalog-import-original{margin-top:14px}
+ .catalog-import-original-row{grid-template-columns:1fr;gap:2px}
+ .catalog-import-detail .catalog-import-caution{font-size:10px}
+}
