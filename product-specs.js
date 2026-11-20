@@ -9,6 +9,7 @@ window.NEOLINE_DETAILS = (() => {
     characteristics:['Характеристики','Specifications','מפרט טכני','المواصفات'],
     included:['Комплектация','In the box','תכולת האריזה','محتويات العلبة'],
     installation:['Установка и замечания','Setup & notes','התקנה והערות','التركيب والملاحظات'],
+    updates:['Загрузить обновления','Device updates','עדכוני מכשיר','تحديثات الجهاز'],
     documentation:['Инструкция и источник','Manual & official source','מדריך ומקור רשמי','الدليل والمصدر الرسمي'],
     downloadManual:['Инструкция производителя (PDF, русский) ↗','Manufacturer manual (PDF, Russian) ↗','מדריך היצרן (PDF, רוסית) ↗','دليل الشركة (PDF بالروسية) ↗'],
     source:['Карточка на сайте NEOLINE','Manufacturer product page','דף המוצר באתר היצרן','صفحة المنتج لدى الشركة'],
