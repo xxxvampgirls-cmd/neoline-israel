@@ -156,6 +156,18 @@ jobs:
               throw Error('Compact pickup action lost the delivery-map link');
             if(await entryButtons.nth(0).getAttribute('data-scroll')!=='catalog')
               throw Error('Select camera must still open catalog');
+            await page.waitForTimeout(650); // settle browser native hash scroll
+            await page.setViewportSize({width:390,height:844});
+            const roadAtAnchor=await page.locator('#neolineRoadDemo').evaluate(el=>{
+              const r=el.getBoundingClientRect(),
+               hdr=document.querySelector('.neoline-site-header')?.getBoundingClientRect(),
+               nav=document.querySelector('.mobile-nav')?.getBoundingClientRect();
+              return {top:r.top,bottom:r.bottom,headBottom:hdr?.bottom||0,
+                bottomNavTop:nav?.top||innerHeight,viewport:innerHeight};
+            });
+            if(roadAtAnchor.top<roadAtAnchor.headBottom-5||
+               roadAtAnchor.bottom>roadAtAnchor.bottomNavTop+2)
+              throw Error('Ad should land with entire interactive HUD visible: '+JSON.stringify(roadAtAnchor));
             for(const width of [320,390]){
               await page.setViewportSize({width,height:844});
               const row=await actionBar.evaluate(el=>{
@@ -172,16 +184,6 @@ jobs:
                 throw Error('Two compact buttons must stay in ONE row at '+width+'px: '+JSON.stringify(row));
             }
             await page.setViewportSize({width:390,height:844});
-            const roadAtAnchor=await page.locator('#neolineRoadDemo').evaluate(el=>{
-              const r=el.getBoundingClientRect(),
-               hdr=document.querySelector('.neoline-site-header')?.getBoundingClientRect(),
-               nav=document.querySelector('.mobile-nav')?.getBoundingClientRect();
-              return {top:r.top,bottom:r.bottom,headBottom:hdr?.bottom||0,
-                bottomNavTop:nav?.top||innerHeight,viewport:innerHeight};
-            });
-            if(roadAtAnchor.top<roadAtAnchor.headBottom-5||
-               roadAtAnchor.bottom>roadAtAnchor.bottomNavTop+2)
-              throw Error('Ad should land with entire interactive HUD visible: '+JSON.stringify(roadAtAnchor));
             console.log('HOW IT WORKS SHOWCASE PASS: position #3, 9 dots, 4 languages, 2-button row and fully visible HUD');
 
             // Premium car demo: genuinely layered SVG/CSS, 4 interactive modes,
