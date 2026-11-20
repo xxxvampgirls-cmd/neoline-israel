@@ -378,7 +378,7 @@ def attach_photos(item,previous_by_id):
  signatures=[]
  for relative in approved:
   if not isinstance(relative,str) or not re.fullmatch(
-      r"\\./assets/catalog/images/[0-9]+-[0-9]+\\.webp",relative):continue
+      r"\./assets/catalog/images/[0-9]+-[0-9]+\.webp",relative):continue
   path=Path(relative)
   if not path.is_file():
    print(f"approved picture unavailable: {path}",flush=True)
