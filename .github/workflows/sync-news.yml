@@ -7,6 +7,7 @@ on:
     branches: [main]
     paths:
       - 'scripts/sync_news.py'
+      - 'scripts/sync_road_videos.py'
       - 'scripts/verified_auto_news.json'
       - 'scripts/telegram_news.py'
       - 'scripts/facebook_news.py'
@@ -38,6 +39,10 @@ jobs:
         env:
           FACEBOOK_GRAPH_TOKEN: ${{ secrets.FACEBOOK_GRAPH_TOKEN }}
         run: python scripts/sync_news.py
+      - name: Validate official YouTube road-video filter (offline)
+        run: python scripts/sync_road_videos.py --self-test
+      - name: Refresh 30-day video library from 13 News, KAN News and Israel Police
+        run: python scripts/sync_road_videos.py
       - name: Build compressed 16:9 image thumbnails (licensed photos; optional paid AI)
         env:
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
@@ -70,6 +75,26 @@ jobs:
                   assert image.is_file(),item["image"]
                   assert image.suffix==".webp",(image,item["image"])
                   assert image.stat().st_size<90_000,(image,image.stat().st_size)
+          # Video gallery is a separate rolling 30-day index of genuine
+          # YouTube videos. No links, dates or thumbnails may be fabricated.
+          video=json.load(open("assets/news/road-videos.json",encoding="utf-8"))
+          assert video["version"]==1 and video["retentionDays"]==30
+          official={"news13","kan11","police"}
+          video_ids=set()
+          for clip in video["items"]:
+              vid=clip["id"]
+              import re
+              assert re.fullmatch(r"[A-Za-z0-9_-]{11}",vid),vid
+              assert vid not in video_ids,("duplicate video",vid)
+              video_ids.add(vid)
+              assert clip["source"] in official,clip["source"]
+              assert clip["url"]=="https://www.youtube.com/watch?v="+vid,vid
+              assert clip["category"] in {"accidents","police","reports"},vid
+              assert isinstance(clip["title"],str) and clip["title"],vid
+              published=dt.datetime.fromisoformat(clip["date"].replace("Z","+00:00"))
+              age=now-published
+              assert dt.timedelta(hours=-12)<=age<=dt.timedelta(days=30,minutes=2),vid
+          print("Verified road-video metadata:",len(video_ids),"official channels only")
           # Files of expired stories must not remain in deployed news assets.
           image_dir=Path("assets/news/images")
           expected={item["id"]+".webp" for item in p["items"] if item.get("image")}
