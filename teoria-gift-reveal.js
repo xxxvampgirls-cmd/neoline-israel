@@ -1,4 +1,5 @@
 /* NEOLINE / THEORY — three automatic cinematic gift reveals (illustration only).
+   Each round shakes for roughly 3 seconds, then bursts with a gold bonus frame.
    No reward issuance, random odds, discounts, XP deductions or cart mutations. */
 (()=>{
  "use strict";
@@ -111,12 +112,12 @@
   after(()=>{
    if(token!==sequence||!dialog.open)return;
    setPhase("burst");
-  },1120);
+  },3020);
   after(()=>{
    if(token!==sequence||!dialog.open)return;
    fillCard(index);
    setPhase("revealed");
-  },1840);
+  },3760);
   after(()=>{
    if(token!==sequence||!dialog.open)return;
    if(index<2){
@@ -127,7 +128,7 @@
     setStatus();
     replay.hidden=false;
    }
-  },3510);
+  },5780);
  }
  function play(){
   clearTimers();
