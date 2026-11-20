@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "fetched": "2026-11-17T11:33:50.585359+00:00",
+  "fetched": "2026-11-20T06:14:56.903242+00:00",
   "languages": {
     "ru": {
       "count": 1801,
@@ -16,9 +16,20 @@
       "count": 1803,
       "classB": 1278,
       "imageCount": 598
+    },
+    "ar": {
+      "count": 1799,
+      "classB": 1274,
+      "imageCount": 598
     }
   },
-  "source": "https://data.gov.il/he/datasets/ministry_of_transport/tqru",
+  "source": "https://data.gov.il/he/datasets/ministry_of_transport/tqar",
+  "licenseByLanguage": {
+    "ru": "Creative Commons Attribution (CC BY)",
+    "he": "Creative Commons Attribution (CC BY)",
+    "en": "Creative Commons Attribution (CC BY)",
+    "ar": "Other (Open) — per data.gov.il dataset and portal usage terms"
+  },
   "license": "Creative Commons Attribution (CC BY)",
   "publisher": "Israel Ministry of Transport and Road Safety"
 }
