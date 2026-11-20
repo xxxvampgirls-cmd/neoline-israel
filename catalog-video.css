@@ -858,3 +858,71 @@ html[dir="rtl"] .product-video-search-arrow{right:auto;left:9px}
  .product-video-facebook-actions{display:grid;grid-template-columns:1fr}
  .product-video-facebook-actions :is(button,a){width:100%;box-sizing:border-box}
 }
+
+
+/* Main player: visible immediately, optional exploration follows below. */
+.product-video-main{padding:0 0 12px}
+.product-video-main-heading{display:flex;justify-content:space-between;align-items:center;gap:8px;margin:0 0 10px}
+.product-video-main-heading h3{margin:0;font-size:15px;line-height:1.3;font-weight:900;color:#194d6e}
+.product-video-main-provider{
+ max-width:57%;display:inline-flex;align-items:center;
+ border:1px solid #c9e2f4;padding:6px 9px;border-radius:99px;
+ background:#f2faff;color:#277298;
+ font-size:10px;font-weight:800;line-height:1.2;text-align:center;
+}
+.product-video-main-frame{
+ position:relative;width:100%;aspect-ratio:16/9;overflow:hidden;
+ border-radius:15px;border:1px solid #97cfe9;
+ background:linear-gradient(135deg,#123c60,#062943);
+ box-shadow:0 10px 23px rgba(12,74,124,.18);
+}
+.product-video-main-frame iframe{
+ display:block;width:100%;height:100%;border:0;background:#071c33;
+}
+.product-video-main-caption{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:10px 2px 5px}
+.product-video-main-caption strong{min-width:0;font-size:12px;font-weight:850;color:#174d70;line-height:1.45;overflow-wrap:anywhere}
+.product-video-main-caption a{
+ flex:none;color:#1479ae;text-decoration:none;white-space:nowrap;
+ font-size:11px;font-weight:850;
+}
+.product-video-main-warning{
+ margin:7px 0 8px;padding:9px 11px;
+ border-radius:11px;border:1px solid #dceaf4;background:#f3faff;
+ color:#507c98;font-size:11px;line-height:1.5;
+}
+.product-video-main-note{margin:5px 2px 0;font-size:10px;color:#7695aa}
+.product-video-main-playlist{display:flex;gap:8px;overflow-x:auto;overscroll-behavior-x:contain;scrollbar-width:thin;padding:8px 0 5px}
+.product-video-main-choice{
+ display:flex;align-items:center;gap:8px;text-align:start;
+ flex:0 0 min(220px,78%);max-width:220px;min-width:0;
+ border:1px solid #d3e7f1;background:#fff;border-radius:12px;
+ padding:6px;cursor:pointer;color:#174665;
+}
+.product-video-main-choice.is-active{border:2px solid #1b9bd0;background:#effaff;padding:5px}
+.product-video-main-choice-art{flex:none;width:74px;height:48px;overflow:hidden;border-radius:8px;background:#d7edfa}
+.product-video-main-choice-art img{width:100%;height:100%;object-fit:cover}
+.product-video-main-fb-thumb{display:grid;place-items:center;background:#1877f2;color:#fff;font:bold 36px Arial;width:100%;height:100%;padding-top:4px;box-sizing:border-box}
+.product-video-main-choice-caption{display:block;min-width:0}
+.product-video-main-choice-caption b{display:block;font-size:10px;color:#168abb;margin-bottom:2px}
+.product-video-main-choice-caption small{display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;font-size:10px;line-height:1.3}
+.product-video-extras{margin-top:10px;border:1px solid #c4e2ee;border-radius:15px;overflow:hidden;background:linear-gradient(135deg,#f9fdff,#eaf8ff)}
+.product-video-extras>summary{
+ display:flex;align-items:center;gap:10px;padding:12px;
+ list-style:none;cursor:pointer;color:#1f5f81;font-weight:850;font-size:12px;
+}
+.product-video-extras>summary::-webkit-details-marker{display:none}
+.product-video-extras>summary::marker{content:""}
+.product-video-extras-icon{display:grid;place-items:center;flex:none;width:29px;height:29px;border:1px solid #c4e3ef;background:#e6f8ff;border-radius:9px;color:#148cbd;font-size:19px}
+.product-video-extras>summary>span:nth-child(2){min-width:0;flex:1}
+.product-video-extras[open]>summary{border-bottom:1px solid #cbe5f0}
+.product-video-extras[open]>summary .product-video-chevron{transform:rotate(225deg)}
+.product-video-extras-body{padding:0 12px 12px}
+.product-video-extras-body .product-video-searches{margin-top:12px}
+.product-video-extras-body .product-video-social{margin-top:10px}
+@media(max-width:650px){
+ .product-video-main-heading h3{font-size:13px}
+ .product-video-main-provider{font-size:9px}
+ .product-video-main-frame{border-radius:12px}
+ .product-video-main-caption strong{font-size:11px}
+ .product-video-main-choice{flex-basis:min(190px,78%)}
+}
