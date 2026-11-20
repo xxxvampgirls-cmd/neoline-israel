@@ -319,3 +319,25 @@
  #installation .road-demo-step{font-size:8px;line-height:1.12}
  #installation .road-demo-tag{letter-spacing:0;font-size:8.5px}
 }
+
+/* Horizontal expansion only: give the LIVE road scene a little more room
+   to the LEFT and RIGHT, while preserving the fixed-height frame. */
+@media (max-width:650px){
+ #installation .story{
+  padding-left:12px;
+  padding-right:12px;
+ }
+ #installation .road-demo{
+  width:calc(100% + 20px);
+  max-width:none;
+  margin-left:-10px;
+  margin-right:-10px;
+ }
+}
+@media (max-width:355px){
+ #installation .road-demo{
+  width:calc(100% + 14px);
+  margin-left:-7px;
+  margin-right:-7px;
+ }
+}
