@@ -162,13 +162,14 @@ jobs:
                 bottomMask:getComputedStyle(lower).clipPath
               };
             });
-            if(dotGrid.upperCount<14||dotGrid.upperCount!==dotGrid.bottomCount||
+            if(dotGrid.upperCount<24||dotGrid.upperCount!==dotGrid.bottomCount||
                !dotGrid.gridsStationary||!dotGrid.sameMirror||
-               dotGrid.spacing<16||dotGrid.spacing>25||
-               dotGrid.firstSize<=dotGrid.smallestSize||
+               dotGrid.spacing<14||dotGrid.spacing>21||
+               dotGrid.firstSize-dotGrid.smallestSize<3.5||
+               dotGrid.smallestSize>2.5||
                dotGrid.background!=='none'||
                !dotGrid.topMask.includes('polygon')||!dotGrid.bottomMask.includes('polygon'))
-              throw Error('Corner dots must form one symmetrical, graduated, regularly spaced grid: '+JSON.stringify(dotGrid));
+              throw Error('Halftone corners need one dense, symmetric wave of graduated dots: '+JSON.stringify(dotGrid));
             const edges=await corners.locator('.news-studio-edges').evaluate(el=>({
               paths:[...el.querySelectorAll('path')].map(p=>({
                 path:p.getAttribute('d'),
