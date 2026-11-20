@@ -598,15 +598,19 @@
   "Ссылка":["Link","קישור","رابط"]
  };
  const locale=lang=>copy[lang]?lang:"ru";
- const isSourceOnly=label=>/^(?:Сплит|Название|Внимание|Режим работы техподдержки|Прошивка\b|Инструкция по обновлению|Мобильное приложение|База радаров для|Голосовой пакет|Альтернативный голосовой пакет|2\. Изменена функция|«Превышаешь\?)/iu.test(label);
+ const isSourceOnly=label=>/^(?:Сплит|Название|Внимание|Режим работы техподдержки|Прошивка(?:\s|$)|Инструкция по обновлению|Мобильное приложение|База радаров для|Голосовой пакет|Альтернативный голосовой пакет|2\. Изменена функция|«Превышаешь\?)/iu.test(label);
  // Never silently treat firmware download instructions as product specifications.
  const translateValue=(raw,lang)=>{
   const value=String(raw??"").trim(),l=locale(lang);
   if(l==="ru")return value;
   const mapped=ruValues[value];if(mapped)return mapped[["en","he","ar"].indexOf(l)]||value;
-  return value.replace(/\bГб\b/gu,"GB").replace(/\bкГц\b/gu,"kHz")
-   .replace(/\bГц\b/gu,"Hz").replace(/(?<=\d)\s*к\/с\b/gu," fps")
-   .replace(/\bдюйма\b/gu,"in");
+  return value.replace(/Гб(?=$|[^А-Яа-яЁё])/gu,"GB").replace(/кГц(?=$|[^А-Яа-яЁё])/gu,"kHz")
+   .replace(/Гц(?=$|[^А-Яа-яЁё])/gu,"Hz").replace(/(\d)\s*к\/с(?=$|[^А-Яа-яЁё])/gu,"$1 fps")
+   .replace(/дюйма(?=$|[^А-Яа-яЁё])/gu,"in")
+   .replace(/(\d)\s*В(?=$|[^А-Яа-яЁё])/gu,"$1 V")
+   .replace(/(\d)\s*А(?=$|[^А-Яа-яЁё])/gu,"$1 A")
+   .replace(/(\d)\s*г(?=$|[^А-Яа-яЁё])/gu,"$1 g")
+   .replace(/(\d)\s*м(?=$|[^А-Яа-яЁё])/gu,"$1 m");
  };
  const formatSpecs=(specs,lang)=>{
   const l=locale(lang);
