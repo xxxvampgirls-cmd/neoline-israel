@@ -1,0 +1,55 @@
+name: One-time cleanup of obsolete NEOLINE backup refs
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/cleanup-old-restores.yml'
+permissions:
+  contents: write
+jobs:
+  retire-old-refs:
+    if: contains(github.event.head_commit.message, 'Run archived backup cleanup')
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Delete ONLY archived temporary backup branches after verifying exact SHA
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const {owner,repo}=context.repo;
+            const {data:file}=await github.rest.repos.getContent({
+              owner,repo,path:'.github/RESTORE-ARCHIVE.md',ref:'main'
+            });
+            const archive=Buffer.from(file.content,'base64').toString('utf8');
+            const targets=new Map();
+            for(const line of archive.split('\n')){
+              const m=line.match(/^\| `((?:backup\/|backup-before-)[^`]+)` \| `([0-9a-f]{40})` \|$/);
+              if(m)targets.set(m[1],m[2]);
+            }
+            if(targets.size!==47){
+              core.setFailed('Archive mismatch: expected 47 old backup refs, found '+targets.size);return;
+            }
+            const protectedRefs=new Set(['main','traffic-live','fines-live',
+              'backup/2026-11-18-before-full-cleanup',
+              'backup/2026-11-20-before-arabic-theory',
+              'restore/2026-11-20-before-smart-hub-upgrade']);
+            const branches=await github.paginate(github.rest.repos.listBranches,{owner,repo,per_page:100});
+            let deleted=0,skipped=0;
+            for(const b of branches){
+              if(!targets.has(b.name))continue;
+              if(protectedRefs.has(b.name)||!b.name.startsWith('backup')||b.protected){
+                skipped++;core.warning('Protected/unsafe: '+b.name);continue;
+              }
+              if(targets.get(b.name)!==b.commit.sha){
+                skipped++;core.warning('Branch head moved; SKIPPED '+b.name);continue;
+              }
+              try{
+                await github.rest.git.deleteRef({owner,repo,ref:'heads/'+b.name});
+                deleted++;core.info('Archived and retired '+b.name);
+              }catch(err){
+                skipped++;core.warning('Cannot retire '+b.name+': '+err.message);
+              }
+            }
+            core.info('Archived temporary refs retired: '+deleted+'; skipped: '+skipped+
+              '; original restore branches and main remain unchanged.');
+            if(deleted===0)core.setFailed('No archived branches were deleted: inspect token permissions.');
