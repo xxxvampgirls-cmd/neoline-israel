@@ -1083,38 +1083,60 @@ html[dir=rtl] .news-feature-credit{right:auto;left:12px}
  }
 }
 
-/* 2026-11-20: keep the pearl-white lighting away from rounded news corners */
-/* The highlighted top-left diagonal and bottom-right cyan triangle were legacy
-   photographic overlays, not part of the new television transition masks.
-   Keep the backdrop clean in all five news categories and RTL layouts. */
+/* 2026-11-20: restore the approved static top-left and bottom-right
+   cyan corner compositions. They are part of the permanent foreground, not
+   the animated scene/matte: keep each corner its original fixed blue color. */
 #newsFeatureSlide .news-broadcast-foreground::after{content:none!important}
-#newsFeatureSlide .news-bg-layer::before,
-#newsFeatureSlide .news-bg-layer::after,
 #newsFeatureSlide .news-bg-layer .news-feature-blueprint::before,
-#newsFeatureSlide .news-bg-layer .news-feature-blueprint::after{content:none!important}
-/* Keep the tiny newsroom dot grid centered; no dots or cyan wedges in corners. */
-#newsFeatureSlide .news-bg-layer .news-feature-pattern{
- top:20%;left:25%;right:auto;width:50%;height:45%;opacity:.22;
- -webkit-mask-image:radial-gradient(ellipse at center,#0009 0%,transparent 78%);
- mask-image:radial-gradient(ellipse at center,#0009 0%,transparent 78%);
+#newsFeatureSlide .news-bg-layer .news-feature-blueprint::after{
+ content:none!important
 }
+/* The tiny grid inside changing backgrounds stays subtle. Corner grids below
+   are entirely static and opaque, regardless of transitions or pearl motion. */
+#newsFeatureSlide .news-bg-layer .news-feature-pattern{
+ top:20%;left:25%;right:auto;width:50%;height:45%;opacity:.18;
+ -webkit-mask-image:radial-gradient(ellipse at center,#0007 0%,transparent 78%);
+ mask-image:radial-gradient(ellipse at center,#0007 0%,transparent 78%);
+}
+#newsFeatureSlide .news-studio-corners{
+ position:absolute;inset:0;display:block;z-index:5;
+ pointer-events:none;overflow:hidden;
+}
+#newsFeatureSlide .news-studio-corners::before{
+ content:"";position:absolute;inset:0;
+ background:
+  radial-gradient(circle,#c4efff7c 1.45px,transparent 2.4px) 0 0/31px 31px,
+  repeating-linear-gradient(90deg,transparent 0 76px,#a1dbf62b 77px,transparent 79px),
+  linear-gradient(145deg,#3495bf 0%,#277eac 46%,#1b608e 100%);
+ clip-path:polygon(0 0,42% 0,0 53%);
+}
+#newsFeatureSlide .news-studio-corners::after{
+ content:"";position:absolute;inset:0;
+ background:
+  radial-gradient(circle,#d7f8ff6c 1.35px,transparent 2.3px) 0 0/31px 31px,
+  linear-gradient(318deg,#2285b4 0%,#1c709f 45%,#164d79 100%);
+ clip-path:polygon(100% 46%,100% 100%,57% 100%);
+}
+/* Pearl motion belongs to the central newsroom panel only. Its transforms
+   never animate the corner ornaments, which are drawn above the entire stage. */
 #newsFeatureSlide .news-broadcast-stage::before,
 #newsFeatureSlide .news-broadcast-stage::after{
- inset:11% 12%;
- border-radius:20px;
- -webkit-mask-image:radial-gradient(ellipse 58% 61% at 50% 50%,#000 25%,transparent 92%);
- mask-image:radial-gradient(ellipse 58% 61% at 50% 50%,#000 25%,transparent 92%);
+ inset:14% 18%;border-radius:20px;
+ -webkit-mask-image:radial-gradient(ellipse 55% 59% at 50% 50%,#000 20%,transparent 90%);
+ mask-image:radial-gradient(ellipse 55% 59% at 50% 50%,#000 20%,transparent 90%);
 }
 #newsFeatureSlide .news-broadcast-stage::before{
  background:
-  radial-gradient(ellipse 45% 58% at 38% 38%,rgba(251,254,255,.25),transparent 85%),
-  radial-gradient(ellipse 43% 48% at 66% 57%,rgba(182,232,255,.19),transparent 87%);
+  radial-gradient(ellipse 48% 58% at 38% 38%,rgba(251,254,255,.26),transparent 85%),
+  radial-gradient(ellipse 42% 46% at 67% 59%,rgba(186,234,255,.21),transparent 87%);
 }
 #newsFeatureSlide .news-broadcast-stage::after{
- background:linear-gradient(112deg,transparent 23%,rgba(237,250,255,.035) 38%,
-  rgba(255,255,255,.13) 49%,rgba(184,235,255,.12) 56%,transparent 73%);
+ background:linear-gradient(112deg,transparent 23%,rgba(237,250,255,.045) 38%,
+  rgba(255,255,255,.14) 49%,rgba(184,235,255,.13) 56%,transparent 73%);
 }
 @media(prefers-reduced-motion:reduce){
  #newsFeatureSlide .news-broadcast-stage::before,
- #newsFeatureSlide .news-broadcast-stage::after{animation:none!important;transform:none!important}
+ #newsFeatureSlide .news-broadcast-stage::after{
+  animation:none!important;transform:none!important;
+ }
 }
