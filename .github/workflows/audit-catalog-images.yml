@@ -6,6 +6,8 @@ on:
     paths:
       - 'assets/catalog/catalog.json'
       - 'assets/catalog/images/**'
+      - 'assets/catalog/gallery-repair-report.json'
+      - 'scripts/catalog_photo_quality.py'
       - 'scripts/audit_catalog_photos.py'
       - '.github/workflows/audit-catalog-images.yml'
 permissions:
