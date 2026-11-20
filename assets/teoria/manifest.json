@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "fetched": "2026-11-20T06:14:56.903242+00:00",
+  "fetched": "2026-11-20T06:23:55.682624+00:00",
   "languages": {
     "ru": {
       "count": 1801,
@@ -30,6 +30,6 @@
     "en": "Creative Commons Attribution (CC BY)",
     "ar": "Other (Open) — per data.gov.il dataset and portal usage terms"
   },
-  "license": "Creative Commons Attribution (CC BY)",
+  "license": "Varies by language — see licenseByLanguage",
   "publisher": "Israel Ministry of Transport and Road Safety"
 }
