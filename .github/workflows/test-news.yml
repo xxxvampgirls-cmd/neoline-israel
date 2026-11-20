@@ -116,61 +116,72 @@ jobs:
             if(!await carousel.isVisible())throw Error('Top ten-news carousel is hidden');
             const firstFeature=await carousel.locator('.news-feature-title').innerText();
             if(await carousel.locator('img,picture').count())
-              throw Error('News studio slider should never contain photographs');
-            const firstTheme=await page.locator('.news-scene--current').getAttribute('data-news-theme');
-            if(!['accidents','laws','speed','roads','cars'].includes(firstTheme))
-              throw Error('News category palette invalid: '+firstTheme);
+              throw Error('No news story photos in broadcast slider');
+            const foreground=carousel.locator('.news-broadcast-foreground');
+            const theme=await page.locator('#newsFeatureSlide').getAttribute('data-news-theme');
+            if(!['accidents','laws','speed','roads','cars'].includes(theme))
+              throw Error('News article has no valid category color: '+theme);
+            // Neither text nor URL may be contained inside any background mask.
+            if(await carousel.locator('.news-broadcast-stage .news-feature-title').count())
+              throw Error('News text was duplicated inside a background mask');
             const masks=['ribbons','chevron','shutters','diagonal','diamond'];
             for(let i=0;i<masks.length;i++){
-              const mask=masks[i];
+              const effect=masks[i];
               await page.locator('#newsFeatureNext').click();
-              const scene=carousel.locator('.news-scene--current');
-              if(!['accidents','laws','speed','roads','cars'].includes(await scene.getAttribute('data-news-theme')))
-                throw Error('Incoming frame lost category palette in '+mask);
-              if(mask==='ribbons'||mask==='shutters'){
-                const pieces=carousel.locator('.news-scene--fragment-'+mask);
-                if(await pieces.count()!==5)
-                  throw Error(mask+' must contain five fully masked fragments of the new frame');
-                const cut=await pieces.nth(2).evaluate(el=>({
+              if(await carousel.locator('.news-broadcast-stage .news-feature-title').count())
+                throw Error(effect+' background transition contains duplicate text');
+              if(await foreground.count()!==1)
+                throw Error('Foreground link was remounted during '+effect);
+              if(await carousel.locator('.news-copy-enter').count()!==1)
+                throw Error('New title should fade in separately during '+effect);
+              const accents=carousel.locator('.news-mask-accent');
+              if(await accents.count()!==3)throw Error('Expected three colored mask bands during '+effect);
+              const stripe=await accents.first().evaluate(el=>({
+                animation:getComputedStyle(el).animationName,
+                background:getComputedStyle(el).backgroundImage
+              }));
+              if(!stripe.animation.includes('newsAccentSweep')||!stripe.background.includes('linear-gradient'))
+                throw Error('Colored accent strips not applied: '+JSON.stringify(stripe));
+              if(effect==='ribbons'||effect==='shutters'){
+                const segments=carousel.locator('.news-bg-fragment--'+effect);
+                if(await segments.count()!==5)
+                  throw Error(effect+' must mask five strips of the BACKGROUND only');
+                const testSegment=await segments.nth(2).evaluate(el=>({
                   animation:getComputedStyle(el).animationName,
                   clip:getComputedStyle(el).clipPath,
-                  copy:!!el.querySelector('.news-feature-title'),
-                  background:!!el.querySelector('.news-feature-backdrop')
+                  containsText:!!el.querySelector('.news-feature-title')
                 }));
-                if(!cut.animation.includes('neolineMaskStripFrom')||cut.clip==='none'||!cut.copy||!cut.background)
-                  throw Error(mask+' is not masking a whole incoming news scene: '+JSON.stringify(cut));
+                if(!testSegment.animation.includes('newsBgStripFrom')||testSegment.clip==='none'||testSegment.containsText)
+                  throw Error('Masked background fragment invalid: '+JSON.stringify(testSegment));
               }else{
-                const wipe=carousel.locator('.news-scene--wipe-'+mask);
-                if(await wipe.count()!==1)
-                  throw Error('Expected a distinct full-scene '+mask+' news mask');
-                const animation=await wipe.evaluate(el=>getComputedStyle(el).animationName);
-                if(!animation.includes(mask==='diamond'?'neolineMaskDiamond':
-                    mask==='chevron'?'neolineMaskChevron':'neolineMaskDiagonal'))
-                  throw Error(mask+' animation missing: '+animation);
+                const layer=carousel.locator('.news-bg-wipe--'+effect);
+                if(await layer.count()!==1)
+                  throw Error('Background geometric mask '+effect+' missing');
+                const animation=await layer.evaluate(el=>getComputedStyle(el).animationName);
+                if(!animation.includes(effect==='diamond'?'newsBgDiamond':
+                  effect==='chevron'?'newsBgChevron':'newsBgDiagonal'))
+                  throw Error('Background '+effect+' has no mask animation');
               }
-              await page.waitForTimeout(1020);
-              if(await carousel.locator('.news-scene').count()!==1)
-                throw Error('Stale scenes or mask fragments remain after '+mask);
-              if(await carousel.locator('img,picture').count())
-                throw Error(mask+' injected an unrelated image');
+              await page.waitForTimeout(1120);
+              if(await carousel.locator('.news-bg-layer').count()!==1 ||
+                 await carousel.locator('.news-mask-accent').count())
+                throw Error(effect+' left stray background layers or stripes');
+              if(await carousel.locator('.news-feature-title').count()!==1)
+                throw Error(effect+' left an old headline in the foreground');
             }
-            const currentFeature=await carousel.locator('.news-feature-title').innerText();
-            if(currentFeature===firstFeature)throw Error('Five transitions did not change the headline');
+            if(await carousel.locator('.news-feature-title').innerText()===firstFeature)
+              throw Error('Broadcast transitions did not change news story');
             const counter=await page.locator('#newsFeatureCounter').textContent();
-            if(!/06\s*\/\s*10/.test(counter))
-              throw Error('Wrong 6/10 slide position after mask series: '+counter);
-            // Backward transition must reverse the mask direction, and interrupted
-            // masks may not leave behind extra frames or focusable duplicate links.
+            if(!/06\\s*\\/\\s*10/.test(counter))
+              throw Error('Wrong current slide after five transitions: '+counter);
             await page.locator('#newsFeaturePrev').click();
-            if(await carousel.locator('.news-scene--fragment-ribbons.news-scene--from-prev').count()!==5)
-              throw Error('Reverse news transition did not mirror ribbon direction');
+            if(await carousel.locator('.news-bg-fragment--ribbons.news-bg-from-prev').count()!==5)
+              throw Error('Reverse diagonal ribbons did not move in opposite direction');
             await page.locator('#newsFeatureNext').click();
-            await page.waitForTimeout(1030);
-            if(await carousel.locator('.news-scene').count()!==1)
-              throw Error('Rapid taps left stale mask fragments in the DOM');
-            const finalCounter=await page.locator('#newsFeatureCounter').textContent();
-            if(!/06\s*\/\s*10/.test(finalCounter))
-              throw Error('Carousel position changed after rapid prev/next');
+            await page.waitForTimeout(1120);
+            if(await carousel.locator('.news-bg-layer').count()!==1 ||
+               await carousel.locator('.news-feature-title').count()!==1)
+              throw Error('Rapid taps left orphaned masks or headlines');
             // Headline slider retains the existing compact mobile geometry.
             const geometry=await page.evaluate(()=>{
               const hero=document.querySelector('.news-feature-slide').getBoundingClientRect();
@@ -187,7 +198,7 @@ jobs:
             if(Math.abs(geometry.heroHeight-245)>2)
               throw Error('Carousel mobile image height changed unexpectedly: '+JSON.stringify(geometry));
             console.log('ANIMATED NEWS BACKDROP PASS: image-free and mobile image height retained '+JSON.stringify(geometry));
-            console.log('FEATURE CAROUSEL PASS: diagonal, ribbon, chevron, shutters, diamond news-scene masks; image-free category palettes');
+            console.log('FEATURE CAROUSEL PASS: 5 background-only masks, colored diagonal accents, independent news headline');
             const now=Date.now(),limit=now-30*86400*1000;
             const cutoff=new Date(now),day=cutoff.getUTCDate();
             cutoff.setUTCDate(1);cutoff.setUTCMonth(cutoff.getUTCMonth()-6);
