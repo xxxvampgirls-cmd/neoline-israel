@@ -93,8 +93,8 @@ function importedModal(id){
  if(!p||!info)return;
  const urls=media[id]||[];
  const imgs=urls.length?'<img class="modal-big" id="modalBig" src="'+esc(urls[0])+'" alt="'+esc(p.name)+'">'+
-   '<div class="modal-gallery-controls"><button class="modal-photo-arrow" id="modalPrevImage" type="button">‹</button><span id="modalPhotoCounter">1 / '+urls.length+'</span><button class="modal-photo-arrow" id="modalNextImage" type="button">›</button></div>'+
-   '<div class="modal-thumbs">'+urls.map((u,i)=>'<button type="button" data-import-photo="'+i+'" class="'+(i?'':'active')+'"><img src="'+esc(u)+'" loading="lazy" alt=""></button>').join('')+'</div>':
+   '<div class="modal-gallery-controls"><button class="modal-photo-arrow" id="modalPrevImage" type="button" aria-label="Previous photo">‹</button><span id="modalPhotoCounter" aria-live="polite">1 / '+urls.length+'</span><button class="modal-photo-arrow" id="modalNextImage" type="button" aria-label="Next photo">›</button></div>'+
+   '<div class="modal-thumbs">'+urls.map((u,i)=>'<button type="button" data-import-photo="'+i+'" aria-label="Photo '+(i+1)+'" class="'+(i?'':'active')+'"><img src="'+esc(u)+'" loading="lazy" alt=""></button>').join('')+'</div>':
    '<div class="catalog-image-empty">'+esc(ui("fallback"))+'</div>';
  const specs=info.specs.map(kv=>'<div class="catalog-import-property"><strong>'+esc(kv.label)+'</strong><span>'+esc(kv.value)+'</span></div>').join('');
  $('productModalBody').innerHTML='<div class="modal-grid"><div class="modal-media">'+imgs+'</div><div class="modal-content">'+
@@ -106,10 +106,37 @@ function importedModal(id){
  const img=$('modalBig');
  if(img){
   let index=0;
-  const advance=delta=>{index=(index+delta+urls.length)%urls.length;img.src=urls[index];$('modalPhotoCounter').textContent=(index+1)+' / '+urls.length;document.querySelectorAll('[data-import-photo]').forEach((b,j)=>b.classList.toggle('active',j===index))};
+  const thumbs=[...$('productModalBody').querySelectorAll('[data-import-photo]')];
+  const advance=delta=>{
+   index=(index+delta+urls.length)%urls.length;
+   img.src=urls[index];img.alt=p.name+' – '+(index+1)+' / '+urls.length;
+   $('modalPhotoCounter').textContent=(index+1)+' / '+urls.length;
+   thumbs.forEach((b,j)=>b.classList.toggle('active',j===index));
+   thumbs[index]?.scrollIntoView({behavior:'smooth',block:'nearest',inline:'nearest'});
+  };
   $('modalPrevImage').onclick=()=>advance(-1);$('modalNextImage').onclick=()=>advance(1);
-  document.querySelectorAll('[data-import-photo]').forEach((el,i)=>el.onclick=()=>advance(i-index));
-  img.onclick=()=>{$('lightboxImg').src=img.src;$('photoLightbox').classList.add('open')};
+  thumbs.forEach((el,i)=>el.onclick=()=>advance(i-index));
+  img.onclick=()=>{
+   if(img.dataset.swiped)return;
+   $('lightboxImg').src=img.src;$('photoLightbox').classList.add('open');
+  };
+  // Match the main eight cameras: swipe between real catalogue photos on mobile.
+  let touchX=null,touchY=0;
+  img.addEventListener('touchstart',event=>{
+   if(event.touches.length!==1)return;
+   touchX=event.touches[0].clientX;touchY=event.touches[0].clientY;
+  },{passive:true});
+  img.addEventListener('touchend',event=>{
+   if(touchX===null||!event.changedTouches.length)return;
+   const dx=event.changedTouches[0].clientX-touchX;
+   const dy=event.changedTouches[0].clientY-touchY;
+   touchX=null;
+   if(urls.length<2||Math.abs(dx)<48||Math.abs(dx)<=Math.abs(dy)*1.3)return;
+   advance(dx<0?1:-1);
+   img.dataset.swiped='yes';
+   setTimeout(()=>{delete img.dataset.swiped},350);
+  },{passive:true});
+  img.addEventListener('touchcancel',()=>{touchX=null},{passive:true});
  }
  $('productModal').classList.add('open');
  $('productModal').querySelector('.product-panel').scrollTop=0;
