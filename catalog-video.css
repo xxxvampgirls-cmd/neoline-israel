@@ -926,3 +926,44 @@ html[dir="rtl"] .product-video-search-arrow{right:auto;left:9px}
  .product-video-main-caption strong{font-size:11px}
  .product-video-main-choice{flex-basis:min(190px,78%)}
 }
+
+
+/* Secondary catalog: English setup videos and Facebook short Reels.
+   User opens a details panel only on demand; main player stays visible. */
+.product-video-addons{margin:5px 0 13px}
+.product-video-addons-top{display:flex;align-items:baseline;justify-content:space-between;gap:8px;margin-bottom:9px}
+.product-video-addons-top h3{margin:0;font-size:13px;font-weight:900;color:#194f70}
+.product-video-addons-top>span{font-size:10px;color:#6a8da2;line-height:1.35;text-align:end}
+.product-video-addons-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}
+.product-video-addon{min-width:0;align-self:start;overflow:hidden;border-radius:13px;border:1px solid #c9e5f2;background:linear-gradient(145deg,#fff,#e9f6fc);box-shadow:0 4px 10px #126c9510}
+.product-video-addon>summary{display:flex;align-items:center;gap:9px;min-height:55px;padding:10px;list-style:none;cursor:pointer;touch-action:manipulation}
+.product-video-addon>summary::-webkit-details-marker{display:none}
+.product-video-addon>summary::marker{content:""}
+.product-video-addon-symbol{display:grid;place-items:center;flex:none;width:34px;height:34px;border-radius:11px;background:linear-gradient(135deg,#e8f7ff,#ccecff);color:#1680b2;border:1px solid #bbe1f1;font-weight:900;font-size:19px}
+.product-video-addon-heading{flex:1;min-width:0;font-size:12px;line-height:1.27;font-weight:900;color:#1c5273}
+.product-video-addon-heading small{display:block;margin-top:4px;color:#6d9bb4;font-size:9px;font-weight:800}
+.product-video-addon .product-video-chevron{flex:none;margin-inline-start:auto}
+.product-video-addon[open]{grid-column:span 2}
+.product-video-addon[open]>summary{border-bottom:1px solid #d3e9f3}
+.product-video-addon[open]>summary .product-video-chevron{transform:rotate(225deg)}
+.product-video-addon-body{padding:10px;display:grid;gap:8px}
+.product-video-addon-empty{margin:0;color:#63859b;font-size:11px;line-height:1.5}
+.product-video-addon-guide{display:flex;align-items:center;gap:8px;padding:9px 11px;border-radius:10px;border:1px solid #d0e7f6;background:#fff;text-decoration:none;color:#2379a5;font-size:11px;font-weight:800;line-height:1.4}
+.product-video-addon-guide>span:first-child{flex:none;display:grid;place-items:center;width:24px;height:24px;border-radius:7px;background:#e6f6ff}
+.product-video-addon-video{display:flex;gap:10px;align-items:center;width:100%;min-width:0;padding:7px;border:1px solid #cfe7f4;border-radius:11px;background:white;text-align:start;cursor:pointer;color:#1b526f}
+.product-video-addon-video:focus-visible,.product-video-addon>summary:focus-visible{outline:3px solid #36a7d5;outline-offset:-2px}
+.product-video-addon-cover{flex:none;width:88px;height:55px;border-radius:8px;overflow:hidden;background:#c8e9ff}
+.product-video-addon-cover.is-reel{width:38px;height:66px}
+.product-video-addon-cover img{display:block;width:100%;height:100%;object-fit:cover}
+.product-video-addon-cover-fb{display:grid;place-items:center;width:100%;height:100%;font:bold 32px Arial;color:white;background:linear-gradient(135deg,#1671e7,#43a6fd)}
+.product-video-addon-itemcopy{display:block;flex:1;min-width:0}
+.product-video-addon-itemcopy b{display:block;color:#16496c;font-size:12px;line-height:1.35;overflow-wrap:anywhere}
+.product-video-addon-itemcopy small{display:block;color:#4788a7;font-size:10px;margin-top:4px}
+.product-video-main-frame.is-reel{width:min(100%,345px);aspect-ratio:9/16;margin-inline:auto}
+@media(max-width:370px){
+ .product-video-addons-grid{gap:6px}
+ .product-video-addon>summary{gap:6px;padding:8px;min-height:54px}
+ .product-video-addon-symbol{width:28px;height:28px;font-size:16px}
+ .product-video-addon-heading{font-size:10px}
+ .product-video-addon-heading small{font-size:8px}
+}
