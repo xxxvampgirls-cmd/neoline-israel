@@ -119,8 +119,15 @@ def is_local(title: str, description: str = "", channel: str = "",
                (INCIDENT, DASHCAM, FUNNY, RADAR, POLICE, ROAD_BEHAVIOUR)):
         return False
     text = title + " " + (description or "")[:600]
-    if FOREIGN.search(title) and not ISRAEL.search(title):
-        return False
+    # A foreign crash mentioning "road 50" is not suddenly an Israeli one.
+    # Numbered highways are insufficient to override explicit foreign context.
+    if FOREIGN.search(title):
+        explicit_israel = re.search(
+            r"ישראל|ישראלי|בישראל|תל[ -]?אביב|ירושלים|חיפה|"
+            r"\bisrael\b|\bisraeli\b|израил|тель[ -]?авив",
+            title, re.I)
+        if not explicit_israel:
+            return False
     # A channel name can establish a source identity, but NEVER by itself
     # establish the clip's filming location unless the title is local.
     if ISRAEL.search(title):
