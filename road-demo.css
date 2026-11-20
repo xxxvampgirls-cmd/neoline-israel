@@ -1,0 +1,149 @@
+/* NEOLINE Israel | Motion road demo: lightweight SVG and CSS, no video/WebGL. */
+#installation .story{
+ display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);
+ gap:clamp(14px,2.7vw,32px);align-items:center;
+ padding:clamp(20px,3.2vw,35px);
+ overflow:hidden;
+}
+#installation .story>div:first-child{min-width:0;position:relative;z-index:1}
+#installation .story h2{
+ font-size:clamp(27px,3vw,38px);
+ line-height:1.13;letter-spacing:-.043em;
+ margin:10px 0 15px;
+}
+#installation .story>div:first-child>p{
+ font-size:clamp(12px,1.2vw,14px);line-height:1.65;
+ margin:0 0 19px;max-width:48ch;
+}
+#installation .story .primary{margin-bottom:9px}
+#installation .road-demo{
+ --road-ink:#d9f4ff;
+ position:relative;display:flex;flex-direction:column;align-self:stretch;
+ min-height:0;height:auto;isolation:isolate;
+ border:1px solid rgba(70,157,206,.55);border-radius:21px;
+ background:#0c2841;box-shadow:0 16px 38px rgba(12,75,127,.2);
+ overflow:hidden;contain:layout style paint;perspective:none;
+}
+#installation .road-demo::before{display:none}
+#installation .road-demo-visual{
+ position:relative;isolation:isolate;width:100%;min-height:0;flex:1 1 auto;
+ background:linear-gradient(155deg,#0a2947,#18476a 52%,#0a253e);
+}
+#installation .road-demo-visual>svg{
+ display:block;width:100%;height:100%;min-height:220px;
+ max-height:none;aspect-ratio:560/330;object-fit:cover;
+}
+#installation .road-demo-top{
+ position:absolute;z-index:2;top:11px;inset-inline:12px;
+ display:flex;align-items:center;justify-content:space-between;gap:8px;
+ pointer-events:none;
+}
+#installation .road-demo-logo{
+ display:flex;align-items:center;gap:7px;
+ padding:5px 9px;border:1px solid #d0f6ff45;border-radius:9px;
+ background:#051f34c9;color:#e5f8ff;backdrop-filter:blur(5px);
+ font:800 10px/1.3 Arial,sans-serif;letter-spacing:.075em;
+}
+#installation .road-demo-logo svg{width:20px;height:16px;flex:none;color:#49c6f2}
+#installation .road-demo-rec{
+ display:flex;align-items:center;gap:7px;
+ padding:5px 9px;border:1px solid #ffeed829;border-radius:9px;
+ background:#061d30c4;color:#f9faff;
+ font:850 10px/1.3 Arial,sans-serif;letter-spacing:.08em;
+}
+#installation .road-demo-rec>i{
+ width:7px;height:7px;border-radius:50%;display:inline-block;
+ background:#ff6570;box-shadow:0 0 8px #ff657077;
+}
+#installation .road-demo-hud{
+ position:absolute;top:55px;inset-inline-end:11px;z-index:2;
+ display:flex;align-items:center;gap:6px;
+ border:1px solid #95dffc59;background:#0e3551c9;
+ border-radius:8px;padding:6px 9px;
+ color:#d4faff;line-height:1.3;
+ font-size:10px;font-weight:850;pointer-events:none;
+}
+#installation .road-demo-hud>span:first-child{
+ display:inline-grid;place-items:center;width:18px;height:18px;
+ border-radius:5px;background:#3da7de40;color:#8df3ff;
+}
+#installation .road-demo-bottom{
+ position:relative;z-index:3;display:flex;flex-direction:column;gap:9px;
+ padding:11px 13px 12px;
+ color:var(--road-ink);
+ background:linear-gradient(140deg,#0c314d,#102e48);
+ border-top:1px solid #6ec7f63d;
+}
+#installation .road-demo-caption{display:flex;align-items:baseline;gap:9px;flex-wrap:wrap}
+#installation .road-demo-caption strong{font-size:12px;letter-spacing:.005em;color:#f3fbff;font-weight:850}
+#installation .road-demo-caption small{font-size:10px;color:#9bbcd4;line-height:1.4}
+#installation .road-demo-steps{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:6px}
+#installation .road-demo-step{
+ min-height:34px;min-width:0;padding:7px 4px;
+ display:grid;place-items:center;
+ border:1px solid #81b5ce4f;border-radius:9px;
+ background:#16415e;color:#bbdbeb;cursor:pointer;
+ font:800 10px/1.25 Arial,sans-serif;
+ text-align:center;transition:background .18s,border-color .18s,color .18s;
+}
+#installation .road-demo-step[aria-pressed="true"]{
+ background:#1c8ec0;border-color:#5edaff;color:#fff;
+ box-shadow:inset 0 1px 0 #ffffff33;
+}
+#installation .road-demo-step:focus-visible{outline:2px solid #a7f2ff;outline-offset:2px}
+#installation .road-demo-note{
+ display:block;margin-top:0;font-size:9px;line-height:1.4;color:#a1c3d7;
+}
+#installation .road-demo .lane-dashes{stroke-dasharray:17 22;stroke-dashoffset:0}
+#installation .road-demo .road-demo-scan{opacity:.75}
+#installation .road-demo .road-demo-sweep{opacity:.36;transform-origin:280px 269px}
+#installation .road-demo .road-demo-sensor{opacity:.65}
+#installation .road-demo .road-demo-gps,
+#installation .road-demo .road-demo-rear,
+#installation .road-demo .road-demo-parking{opacity:0}
+#installation .road-demo[data-road-stage="1"] .road-demo-gps,
+#installation .road-demo[data-road-stage="2"] .road-demo-rear,
+#installation .road-demo[data-road-stage="3"] .road-demo-parking{opacity:1}
+#installation .road-demo[data-road-stage="3"] .road-demo-scan{opacity:.12}
+#installation .road-demo.is-playing .lane-dashes{animation:neolineRoadDash 2.7s linear infinite}
+#installation .road-demo.is-playing .road-demo-sweep{animation:neolineRoadSweep 4.4s ease-in-out infinite alternate}
+#installation .road-demo.is-playing .road-demo-sensor{animation:neolineRoadPulse 2.6s ease-in-out infinite}
+#installation .road-demo.is-playing .road-demo-rec>i{animation:neolineRoadPulse 1.9s ease-in-out infinite}
+#installation .road-demo.is-playing .road-demo-gps,
+#installation .road-demo.is-playing .road-demo-parking{
+ transition:opacity .36s ease;
+}
+@keyframes neolineRoadDash{to{stroke-dashoffset:-78}}
+@keyframes neolineRoadSweep{0%{transform:rotate(-19deg);opacity:.12}50%{opacity:.45}100%{transform:rotate(19deg);opacity:.25}}
+@keyframes neolineRoadPulse{0%,100%{opacity:.53}50%{opacity:1}}
+@media(max-width:1020px){
+ #installation .story{grid-template-columns:1fr;gap:17px}
+ #installation .story h2{max-width:17ch}
+ #installation .story>div:first-child>p{max-width:65ch}
+ #installation .road-demo{max-width:700px;width:100%;margin-inline:auto}
+}
+@media(max-width:650px){
+ #installation .story{padding:18px 15px 16px;gap:14px;border-radius:21px}
+ #installation .story h2{font-size:clamp(25px,6.6vw,30px);margin:7px 0 10px;max-width:unset}
+ #installation .story>div:first-child>p{font-size:12px;line-height:1.55;margin:0 0 13px}
+ #installation .story .primary{min-height:42px}
+ #installation .road-demo{border-radius:17px}
+ #installation .road-demo-visual>svg{min-height:190px}
+ #installation .road-demo-top{inset-inline:9px;top:8px}
+ #installation .road-demo-logo{font-size:9px;padding:5px 7px}
+ #installation .road-demo-rec{font-size:9px;padding:5px 7px}
+ #installation .road-demo-hud{top:45px;inset-inline-end:9px;font-size:9px;padding:5px 7px}
+ #installation .road-demo-bottom{padding:9px 10px 10px;gap:7px}
+ #installation .road-demo-caption strong{font-size:11px}
+ #installation .road-demo-caption small{font-size:9px}
+ #installation .road-demo-step{min-height:32px;font-size:9px;padding:6px 2px;border-radius:8px}
+ #installation .road-demo-note{font-size:9px}
+}
+@media(max-width:370px){
+ #installation .story{padding-inline:11px}
+ #installation .road-demo-steps{gap:4px}
+ #installation .road-demo-step{font-size:8.2px}
+}
+@media(prefers-reduced-motion:reduce){
+ #installation .road-demo *{animation:none!important;transition:none!important}
+}
