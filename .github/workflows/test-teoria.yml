@@ -11,6 +11,9 @@ on:
       - '.github/workflows/test-teoria.yml'
 permissions:
   contents: read
+concurrency:
+  group: browser-theory-main
+  cancel-in-progress: true
 jobs:
   game:
     runs-on: ubuntu-latest
@@ -165,5 +168,5 @@ jobs:
            if(errors.length)throw Error('Game JS errors: '+errors.join(' | '));
            console.log('NEOLINE THEORY PASS: 4 languages, official questions, RTL, practice, 3-life Game Over, replay, hidden exam answers, deterministic 5-question daily quest and Israel-date streak');
            await browser.close();
-          })().catch(e=>{console.error(e);process.exitCode=1});
+          })().catch(e=>{console.error(e);process.exit(1)});
           JS
