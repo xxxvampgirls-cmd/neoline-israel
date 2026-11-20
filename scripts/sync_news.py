@@ -69,6 +69,11 @@ FEEDS=[
  ("Globes · צרכנות","https://www.globes.co.il/webservice/rss/rssfeeder.asmx/FeederNode?iID=821"),
  ("Autonews Israel","https://autonews.co.il/feed/"),
  ("Mako · Израиль","https://rcs.mako.co.il/rss/news-israel.xml"),
+ # Local road reporters and the publisher's public news RSS.
+ # Repeated URLs in a general and topical feed are deduplicated by article ID.
+ ("News08 · Israel local","https://www.news08.net/feed/"),
+ ("News08 · Traffic incidents","https://www.news08.net/tag/%D7%AA%D7%90%D7%95%D7%A0%D7%AA-%D7%93%D7%A8%D7%9B%D7%99%D7%9D/feed/"),
+ ("Ynet · Israel news","https://www.ynet.co.il/Integration/StoryRss2.xml"),
  ("Минтранс Израиля · Новости","https://www.gov.il/he/api/NewsApi/rss/48eaee91-0c97-4ef3-b364-50ae52e3b56f"),
  ("Srugim","https://www.srugim.co.il/feed"),
  ("Haaretz","https://www.haaretz.com/srv/israel-news-rss"),
@@ -85,7 +90,7 @@ KEYWORDS={
  "cars":["רכבי","רכבים","רכב חדש","מכונית","מכוניות","חשמליות","טעינה","כלי רכב","byd","טסלה","יונדאי","פולקסווגן","car ","cars","automotive","vehicle","electric vehicle","tesla","автомобил","электромобил"],
 }
 EXCLUDE=("טיל","איראן","לבנון","מלחמה","טיסה","מטוס","אירוויזיון",
- "כדורגל","מכבי חיפה","הפועל באר שבע","וולט","wolt","aircraft","airline","missile","רכבת","רכבות","אוטובוס","train","autopsy",
+ "כדורגל","מכבי חיפה","הפועל באר שבע","וולט","wolt","aircraft","airline","missile","רכבת","רכבות","train","autopsy",
  "פיגוע","מחבל","טרור","גרזן","גרזנ","הותקף","תקפו","terror attack","terrorist","attackers","ניתוח","תינוק",
  "תאונת עבודה","תאונה במפעל","industrial accident","несчастного случая на производстве","рабочий погиб на производстве",
  "крымский мост","украинский мост","взрыв на мосту")
@@ -126,6 +131,17 @@ def relevant(title):
   return "speed"
  if "км/ч" in low and any(x in low for x in ("полици","штраф","водител","дорог","шоссе","нарушен")):
   return "speed"
+ # Brief flashes may report a road user injured without naming an 'accident'.
+ # Require both a road-user term and an incident term, either order.
+ road_user=r"(?:רוכב(?:ת)?|הולך\\s+רגל|הולכת\\s+רגל|קורקינט|אופנוע|קטנוע|אופניים\\s+חשמליים|רכב|אוטובוס)"
+ injury=r"(?:נפצע\\w*|נפגע\\w*|נהרג\\w*|נדרס\\w*|פונה\\w*|התהפכ\\w*|באורח\\s+(?:קשה|בינוני))"
+ if re.search(road_user+r".{0,90}"+injury,low) or re.search(injury+r".{0,90}"+road_user,low):
+  return "accidents"
+ # Closure and congestion bulletins often refer to a numbered highway only.
+ road_place=r"(?:כביש\\s*\\d{1,3}|צומת|מחלף|נתיב(?:י)?\\s+איילון)"
+ disruption=r"(?:נחסם\\w*|ייחסמ\\w*|נסגר\\w*|סגיר\\w*|עומס\\w*|פקק\\w*|שיבוש\\w*|עבודות\\s+כביש)"
+ if re.search(road_place+r".{0,75}"+disruption,low) or re.search(disruption+r".{0,75}"+road_place,low):
+  return "roads"
  for section in ("speed","accidents","laws","roads"):
   if any(x in low for x in KEYWORDS[section]):return section
  if any(x in low for x in KEYWORDS["cars"]):return "cars"
@@ -226,6 +242,7 @@ def publisher_name(provider):
  if provider.startswith("Walla"):return "Walla"
  if provider.startswith("Maariv"):return "Maariv"
  if provider.startswith("Ynet"):return "Ynet"
+ if provider.startswith("News08"):return "News08"
  if provider.startswith("Israel Hayom"):return "Israel Hayom"
  if provider.startswith("Globes"):return "Globes"
  return provider
