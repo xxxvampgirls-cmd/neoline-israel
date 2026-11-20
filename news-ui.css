@@ -653,3 +653,41 @@ html[dir=rtl] .news-feature-credit{right:auto;left:12px}
  .traffic-waze-areas button{font-size:9px;padding:6px 8px}
 }
 @media(prefers-reduced-motion:reduce){.traffic-waze-chevron{transition:none}}
+
+/* 2026-11-20: News below the feature slider is a concise headline list.
+   No duplicated caption/photo/title or heavy "lead" tile at any width. */
+.news-grid{grid-template-columns:minmax(0,1fr);gap:9px;content-visibility:visible;contain-intrinsic-size:auto}
+.news-card--headline{
+ display:block;min-height:0;border-radius:15px;
+ background:linear-gradient(116deg,#fff 0%,#f4fbff 100%);
+ border:1px solid #cfe4f2;box-shadow:0 3px 13px #195c8510;
+ content-visibility:visible;contain-intrinsic-size:auto;
+ transition:background .16s,border-color .16s,box-shadow .16s,transform .16s;
+}
+.news-card--headline:hover{background:#eaf7ff;border-color:#96cbe9;box-shadow:0 5px 17px #1778bb16;transform:translateY(-1px)}
+.news-card--headline .news-card-body{padding:13px 17px 14px;gap:7px}
+.news-card--headline .news-card-meta{gap:5px 9px;font-size:10px;line-height:1.45;color:#708b9c;font-weight:650}
+.news-card--headline .news-card-meta b{font-weight:700;color:#60829b}
+.news-card-category{
+ display:inline-flex;align-items:center;border-radius:7px;padding:3px 8px;
+ background:#e5f3fd;color:#137eb8;border:1px solid #c9e6f6;
+ font-size:10px;line-height:1.35;font-weight:850;white-space:nowrap;
+}
+.news-card--headline h2{font-size:clamp(15px,1.35vw,18px);line-height:1.42;margin:0;font-weight:800;color:#163e5b;letter-spacing:-.018em}
+.news-card--headline .news-title-button{width:auto;display:inline;line-height:inherit}
+.news-card--headline .news-title-button::after{content:" ↗";color:#168fca;font-size:.86em;white-space:nowrap}
+.news-card--headline .news-title-button:focus-visible{outline:2px solid #0b8acb;outline-offset:3px;border-radius:3px}
+/* For unverified news photos, a quiet plain newsroom backdrop is safer than a
+   misleading picture of another accident, vehicle or country. */
+.news-feature-photo--empty{
+ background:linear-gradient(120deg,#092e4d 0%,#126a9c 50%,#0d486b 100%);
+}
+@media(max-width:720px){
+ .news-grid{grid-template-columns:minmax(0,1fr);gap:7px}
+ .news-card--headline{border-radius:13px}
+ .news-card--headline .news-card-body{padding:12px 13px;gap:6px}
+ .news-card--headline .news-card-meta{font-size:10px;gap:4px 7px}
+ .news-card--headline h2{font-size:15px!important;line-height:1.42}
+ .news-card-category{font-size:9px;padding:2px 7px}
+}
+@media(prefers-reduced-motion:reduce){.news-card--headline{transition:none!important}}
