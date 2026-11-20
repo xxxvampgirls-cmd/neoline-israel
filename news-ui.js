@@ -193,7 +193,11 @@ function drawFeature(direction=0){
   corners.setAttribute("aria-hidden","true");
   // Identical 180-degree mirrored lattices, one proportional size rule.
   corners.innerHTML='<span class="news-studio-dots news-studio-dots--top"></span>'+
-   '<span class="news-studio-dots news-studio-dots--bottom"></span>';
+   '<span class="news-studio-dots news-studio-dots--bottom"></span>'+
+   // Each quiet dark line follows the actual diagonal edge and mirrors exactly.
+   // SVG preserveAspectRatio=none maps the 0-100 coordinates to responsive size.
+   '<svg class="news-studio-edges" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true" focusable="false">'+
+   '<path d="M42.4 0 L0 53.4"></path><path d="M100 46.6 L57.6 100"></path></svg>';
   story.prepend(corners);
  }
  initializeNewsCornerGrid(host);
