@@ -266,6 +266,24 @@ def collect_specs(soup):
  return specs
 
 
+# Some pages embed recommended audio products beside unrelated accessories.
+# Those speaker-only properties must never appear on radar mounts or cables.
+SPEAKER_PROPERTIES={
+ "Диффузор","Подвес","Материал купола","Тип акустической системы",
+ "Форм-фактор","Частотный диапазон","Импеданс, Ом","Размер купола"
+}
+NON_SPEC_LABELS={"Сплит","Название"}
+
+def validated_product_specs(category,specs):
+ output=[]
+ for row in specs:
+  label=row.get("label","")
+  if label in NON_SPEC_LABELS:continue
+  if category!="audio" and label in SPEAKER_PROPERTIES:continue
+  output.append(row)
+ return output
+
+
 def detail(url,group):
  try:
   soup=BeautifulSoup(get(url,timeout=22).text,"html.parser")
@@ -285,6 +303,7 @@ def detail(url,group):
   elif re.search(r"динамики|акустик|ultera",title,re.I):cat="audio"
   elif re.search(r"видеорегистратор|wowcam|smartway|argus|flash 2k|easydrive|g-tech",title,re.I):
    cat="dual" if re.search(r"dual|двумя камер|заднего вида|зеркало",title,re.I) else "single"
+  specs=validated_product_specs(cat,specs)
   name=title if "neoline" in title.lower() else "Neoline "+title
   digits=hashlib.sha256(url.encode()).hexdigest()
   ident=1000+int(digits[:10],16)
