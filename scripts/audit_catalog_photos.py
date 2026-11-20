@@ -9,6 +9,7 @@ from pathlib import Path
 from PIL import UnidentifiedImageError
 
 from catalog_photo_quality import duplicate_kind, photo_signature
+from catalog_promo_filter import classify_file
 
 ROOT = Path(__file__).resolve().parents[1]
 CATALOG = ROOT / "assets/catalog/catalog.json"
@@ -45,6 +46,10 @@ def audit() -> int:
                 errors.append(f"{name}: missing source photo {relative}")
                 continue
             try:
+                advertisement, metrics = classify_file(path)
+                if advertisement:
+                    errors.append(f"{name}: promotional image {relative}: {advertisement}; {metrics}")
+                    continue
                 signature = signatures.setdefault(relative, photo_signature(path))
             except (OSError, ValueError, UnidentifiedImageError) as error:
                 errors.append(f"{name}: broken/too-small source photo {relative}: {error}")
@@ -78,7 +83,7 @@ def audit() -> int:
         "manualReviewFlags": len(review),
         "errors": errors,
         "review": review,
-        "note": "Perceptual matching requires both hash and low RGB difference, so distinct angles are retained.",
+        "note": "Rejects confirmed advertisements and wide saturated promo banners; retains genuine elongated product shots. Exact and perceptual duplicate checks also apply.",
     }
     OUT.write_text(json.dumps(report, ensure_ascii=False, indent=2)+"\n", encoding="utf-8")
     print(json.dumps({k:v for k,v in report.items() if k not in ("errors","review")},
