@@ -93,7 +93,7 @@ def parsedate(value: str) -> dt.datetime | None:
 
 
 def relevant(title: str) -> bool:
-    return bool(ROAD.search(title)) and not bool(EXCLUDE.search(title))
+    return bool(ROAD.search(title) or RADARS.search(title)) and not bool(EXCLUDE.search(title))
 
 
 def category(title: str, source: str = "") -> str:
