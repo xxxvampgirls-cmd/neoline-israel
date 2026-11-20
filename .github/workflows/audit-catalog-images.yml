@@ -1,0 +1,36 @@
+name: Audit authentic NEOLINE product photo galleries
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - 'assets/catalog/catalog.json'
+      - 'assets/catalog/images/**'
+      - 'scripts/audit_catalog_photos.py'
+      - '.github/workflows/audit-catalog-images.yml'
+permissions:
+  contents: read
+concurrency:
+  group: neoline-gallery-audit
+  cancel-in-progress: true
+jobs:
+  galleries:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install image decoder
+        run: python -m pip install --disable-pip-version-check 'Pillow>=11,<13'
+      - name: Analyze real local gallery photos (no files deleted)
+        run: python scripts/audit_catalog_photos.py
+      - name: Keep photo review report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: neoline-gallery-quality
+          path: assets/catalog/gallery-quality.json
+          if-no-files-found: warn
+          retention-days: 21
