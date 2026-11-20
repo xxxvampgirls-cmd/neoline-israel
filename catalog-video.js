@@ -163,6 +163,96 @@
     if(currentId!==null && !overlay.hidden)renderVideoList(currentId);
    }).catch(()=>{/* No unverified fallback videos: the rest of the catalog still works. */});
  }
+
+ /* Main inline player is ALWAYS above search panels.
+    No video is mislabeled as English: RU fallback is explicitly tagged.
+    When a real verified English Facebook clip is added to the curated JSON,
+    it automatically replaces the fallback for English, Hebrew and Arabic. */
+ const mainCopy={
+  ru:{featured:"Смотреть видео",playlist:"Другие ролики",extras:"Дополнительные видео и поиск",fallback:"Пока нет подтверждённого английского видео этой модели. Доступен обзор на русском.",missing:"Для этой модели ещё нет подтверждённого ролика. Поиск доступен ниже.",facebook:"Facebook · на английском",youtube:"YouTube",note:"Нажмите ▶ в плеере, чтобы начать просмотр."},
+  en:{featured:"Watch product video",playlist:"More videos",extras:"More videos, reviews and searches",fallback:"English video for this exact model is not verified yet. Playing the available Russian-language review instead.",missing:"No verified video for this exact model yet. Use the additional searches below.",facebook:"Facebook · English",youtube:"YouTube",note:"Tap ▶ in the player to start watching."},
+  he:{featured:"צפייה בסרטון המוצר",playlist:"סרטונים נוספים",extras:"סרטונים נוספים וחיפוש",fallback:"עדיין אין סרטון אנגלי מאומת לדגם הזה. מוצג סרטון ברוסית.",missing:"עדיין אין סרטון מאומת לדגם הזה. חיפוש נוסף זמין למטה.",facebook:"Facebook · אנגלית",youtube:"YouTube",note:"לחצו ▶ בנגן להתחלת הצפייה."},
+  ar:{featured:"شاهد فيديو المنتج",playlist:"فيديوهات أخرى",extras:"مزيد من الفيديوهات وعمليات البحث",fallback:"لم يتم التحقق بعد من فيديو إنجليزي لهذا الطراز. يظهر فيديو باللغة الروسية.",missing:"لا يوجد فيديو موثق لهذا الطراز بعد. يمكن استخدام البحث الإضافي أدناه.",facebook:"Facebook · الإنجليزية",youtube:"YouTube",note:"اضغط ▶ في المشغل لبدء المشاهدة."}
+ };
+ let featuredItems=[];
+ function curatedFeatured(id,selectedLang){
+  const fb=facebookForModel(id).map(v=>({
+   provider:"facebook",language:"EN",title:v.title||modelName(id),
+   original:checkedFacebookUrl(v.url)
+  }));
+  const yt=(verified[id]||[]).filter(v=>/^[A-Za-z0-9_-]{11}$/.test(v.id)).map(v=>({
+   provider:"youtube",language:v.lang,title:v.title,id:v.id,
+   original:"https://www.youtube.com/watch?v="+v.id
+  }));
+  const enYouTube=yt.filter(v=>v.language==="EN");
+  const ruYouTube=yt.filter(v=>v.language!=="EN");
+  if(selectedLang==="ru")return [...ruYouTube,...fb,...enYouTube];
+  return [...fb,...enYouTube,...ruYouTube];
+ }
+ function featuredMarkup(id,selectedLang){
+  const t=mainCopy[selectedLang]||mainCopy.en;
+  featuredItems=curatedFeatured(id,selectedLang);
+  const availableEnglish=featuredItems.some(v=>v.language==="EN");
+  const fallback=selectedLang!=="ru"&&!availableEnglish;
+  const playlist=featuredItems.length>1?
+   '<div class="product-video-main-playlist" role="group" aria-label="'+secureText(t.playlist)+'">'+
+   featuredItems.map((v,i)=>{
+    const thumb=v.provider==="youtube"
+      ?'<img src="https://i.ytimg.com/vi/'+v.id+'/mqdefault.jpg" loading="lazy" decoding="async" alt="">'
+      :'<span class="product-video-main-fb-thumb" aria-hidden="true">f</span>';
+    return '<button type="button" class="product-video-main-choice'+(i===0?' is-active':'')+'" data-featured-index="'+i+'" aria-pressed="'+(i===0)+'">'+
+     '<span class="product-video-main-choice-art">'+thumb+'</span>'+
+     '<span class="product-video-main-choice-caption"><b>'+secureText(v.language)+'</b>'+
+     '<small>'+secureText(v.title)+'</small></span></button>';
+   }).join('')+'</div>':"";
+  return '<section class="product-video-main" aria-label="'+secureText(t.featured)+'">'+
+   '<div class="product-video-main-heading"><h3>'+secureText(t.featured)+'</h3>'+
+   (featuredItems.length?'<span class="product-video-main-provider" id="videoMainProvider"></span>':"")+'</div>'+
+   (featuredItems.length?
+    '<div class="product-video-main-frame" id="productVideoMainFrame"></div>'+
+    '<div class="product-video-main-caption"><strong id="productVideoMainCaption"></strong>'+
+    '<a id="productVideoMainOriginal" target="_blank" rel="noopener noreferrer"></a></div>'+
+    (fallback?'<p class="product-video-main-warning">'+secureText(t.fallback)+'</p>':"")+
+    playlist+
+    '<p class="product-video-main-note">'+secureText(t.note)+'</p>'
+    :'<p class="product-video-main-warning">'+secureText(t.missing)+'</p>')+
+   '</section>';
+ }
+ function mainVideoSource(v){
+  if(v.provider==="youtube"){
+   return "https://www.youtube-nocookie.com/embed/"+v.id+"?rel=0&playsinline=1"+
+    (v.language==="RU"?"&cc_load_policy=1&cc_lang_pref=en":"");
+  }
+  return "https://www.facebook.com/plugins/video.php?href="+encodeURIComponent(v.original)+
+   "&show_text=false&width=640";
+ }
+ function showFeaturedVideo(index){
+  const clip=featuredItems[index];
+  const holder=get("productVideoMainFrame");
+  if(!clip||!holder)return;
+  const locale=typeof lang==="string"?lang:document.documentElement.lang;
+  const t=mainCopy[locale]||mainCopy.en;
+  holder.replaceChildren();
+  const iframe=document.createElement("iframe");
+  iframe.src=mainVideoSource(clip);
+  iframe.title=clip.title+" — "+clip.provider+" — "+clip.language;
+  iframe.referrerPolicy="strict-origin-when-cross-origin";
+  iframe.loading="eager";
+  iframe.allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share; fullscreen";
+  iframe.allowFullscreen=true;
+  holder.append(iframe);
+  get("productVideoMainProvider").textContent=
+   (clip.provider==="facebook"?t.facebook:t.youtube)+" · "+clip.language;
+  get("productVideoMainCaption").textContent=clip.title;
+  const link=get("productVideoMainOriginal");
+  link.href=clip.original;
+  link.textContent=clip.provider==="facebook"?"Facebook ↗":"YouTube ↗";
+  overlay.querySelectorAll("[data-featured-index]").forEach((button,i)=>{
+   const active=i===index;
+   button.classList.toggle("is-active",active);
+   button.setAttribute("aria-pressed",String(active));
+  });
+ }
  function videoPreference(){
   const l=typeof lang==="string"?lang:document.documentElement.lang;
   return localVideo[l]||localVideo.ru;
@@ -246,8 +336,18 @@
   const other=foreign.length?
    '<details class="product-video-other"><summary><span class="product-video-other-symbol">'+worldSvg+'</span><span class="product-video-other-label">'+secureText(pref.other)+' ('+foreign.length+')</span><span class="product-video-chevron" aria-hidden="true"></span></summary><div class="product-video-other-body">'+renderClips(foreign,t)+'</div></details>':"";
   const selectedLang=typeof lang==="string"?lang:document.documentElement.lang;
-  const facebook=renderFacebook(id,selectedLang);
-  get("productVideoResults").innerHTML=(selectedLang==="ru"?"":facebook)+searches+renderSocial(id,selectedLang)+localClips+other+(selectedLang==="ru"?facebook:"");
+  // The actual embedded player is visible immediately. Everything else is secondary.
+  const mc=mainCopy[selectedLang]||mainCopy.en;
+  const main=featuredMarkup(id,selectedLang);
+  const extra='<details class="product-video-extras"><summary>'+
+   '<span class="product-video-extras-icon" aria-hidden="true">☷</span>'+
+   '<span>'+secureText(mc.extras)+'</span>'+
+   '<span class="product-video-chevron" aria-hidden="true"></span></summary>'+
+   '<div class="product-video-extras-body">'+searches+renderSocial(id,selectedLang)+
+   (featuredItems.length?"":localClips)+
+   (featuredItems.length?"":other)+'</div></details>';
+  get("productVideoResults").innerHTML=main+extra;
+  if(featuredItems.length)showFeaturedVideo(0);
  }
 
  function openVideos(id){
@@ -259,6 +359,15 @@
  }
  overlay.addEventListener("click",event=>{
   if(event.target.closest("[data-close-video]")){closeVideos();return}
+  const featuredButton=event.target.closest("[data-featured-index]");
+  if(featuredButton){
+   const index=Number(featuredButton.dataset.featuredIndex);
+   if(Number.isSafeInteger(index)&&index>=0&&index<featuredItems.length){
+    stopPlayback();
+    showFeaturedVideo(index);
+   }
+   return;
+  }
   const fbButton=event.target.closest("[data-play-facebook]");
   if(fbButton){
    const number=Number(fbButton.dataset.playFacebook);
