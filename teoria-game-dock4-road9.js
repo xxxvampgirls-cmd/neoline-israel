@@ -5,7 +5,7 @@
 const $=id=>document.getElementById(id);
 const playing=$("gamePlaying"),dock=$("theoryGameDock"),siteNav=$("theoryBottomNav");
 if(!playing||!dock||!siteNav)return;
-const lang=()=>{const l=String(document.documentElement.lang||"ru").split("-")[0];return l==="en"||l==="he"?l:"ru"};
+const lang=()=>{const l=String(document.documentElement.lang||"ru").split("-")[0];return ["en","he","ar"].includes(l)?l:"ru"};
 const labels={
  ru:{modes:"Режимы",back:"К выбору режимов",progress:"Пройдено вопросов",hearts:"Осталось жизней",
   hint:"Подсказка",hintUsed:"Подсказка уже использована в этом вопросе",
@@ -17,7 +17,8 @@ const labels={
   stats:"My progress",exam:"Exam",unlimited:"Unlimited lives"},
  he:{modes:"מצבים",back:"בחירת מצב משחק",progress:"שאלות שנענו",hearts:"חיים שנותרו",
   hint:"רמז",hintUsed:"הרמז לשאלה זו כבר נוצל",hintNone:"אין רמזים נוספים",
-  examNoHint:"אין רמזים במבחן",stats:"ההתקדמות שלי",exam:"מבחן",unlimited:"ללא הגבלת חיים"}
+  examNoHint:"אין רמזים במבחן",stats:"ההתקדמות שלי",exam:"מבחן",unlimited:"ללא הגבלת חיים"},
+ ar:window.NEOLINE_THEORY_AR?.dock||{}
 };
 let game={done:0,total:10,lives:3,earned:0,mode:null,hintsLeft:3,hintUsed:false,answered:false};
 function current(){return labels[lang()]||labels.ru}
