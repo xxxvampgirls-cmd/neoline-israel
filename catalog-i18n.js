@@ -597,6 +597,81 @@
   "Скачать":["Download","הורדה","تنزيل"],
   "Ссылка":["Link","קישור","رابط"]
  };
+ // Human-reviewed, model-specific paraphrases of the available official
+ // manufacturer text for accessories that have no structured spec tables.
+ // Stored by the same stable source URL-derived product IDs used by catalog.json.
+ const curatedAccessoryText={
+ "133214697389": {
+  "en": "A combined power cable and mounting accessory for the NEOLINE G-Tech X77. It is designed for a fixed connection to the vehicle fuse box.",
+  "he": "כבל חשמל משולב בתושבת עבור NEOLINE G-Tech X77. מיועד לחיבור קבוע לתיבת הנתיכים של הרכב.",
+  "ar": "كابل طاقة مع حامل مخصص لجهاز NEOLINE G-Tech X77، للتوصيل الثابت بعلبة مصهرات السيارة."
+ },
+ "962010999584": {
+  "en": "NEOLINE Power Cord Radar is a power cable for radar-detector equipment. Before ordering, check that the connector and device model are compatible.",
+  "he": "כבל חשמל NEOLINE Power Cord Radar לציוד גלאי מכ״ם. לפני רכישה יש לוודא התאמה של המחבר לדגם המכשיר.",
+  "ar": "كابل طاقة NEOLINE Power Cord Radar لأجهزة كشف الرادار. تأكد من توافق الموصل مع طراز جهازك قبل الشراء."
+ },
+ "425441257138": {
+  "en": "The X-COP Magnet is a rubber-coated magnetic mount, approximately 5 cm in diameter. Its adhesive base attaches to the dashboard, allowing a compatible radar detector to be fitted and removed easily.",
+  "he": "X-COP Magnet הוא מעמד מגנטי מצופה גומי, בקוטר של כ־5 ס״מ. הבסיס המודבק נצמד ללוח המחוונים ומאפשר הצמדה והסרה נוחות של גלאי מכ״ם תואם.",
+  "ar": "حامل X-COP Magnet مغناطيسي مغطى بالمطاط بقطر نحو 5 سم. تُثبَّت قاعدته اللاصقة على لوحة القيادة لتسهيل تركيب كاشف رادار متوافق وإزالته."
+ },
+ "747440919228": {
+  "en": "The X-COP Pad is an adhesive-backed silicone dashboard mat. It helps hold radar detectors, smartphones and other small items in position.",
+  "he": "X-COP Pad הוא משטח סיליקון עם בסיס דביק ללוח המחוונים. הוא מסייע להחזיק גלאי מכ״ם, טלפונים ופריטים קטנים אחרים במקומם.",
+  "ar": "X-COP Pad وسادة سيليكون ذات قاعدة لاصقة للوحة القيادة. تساعد على تثبيت كاشفات الرادار والهواتف والأغراض الصغيرة الأخرى."
+ },
+ "53159148980": {
+  "en": "This Smart Click mount attaches an X-COP hybrid device to the windscreen using 3M adhesive. It does not supply power: connect the power cable directly to the unit. Installation on near-vertical windscreens may be difficult.",
+  "he": "תושבת Smart Click מחברת מכשיר X-COP משולב לשמשה הקדמית בעזרת דבק 3M. אין אספקת חשמל דרך התושבת, ולכן יש לחבר את הכבל ישירות למכשיר. ייתכן קושי בהתקנה על שמשות אנכיות כמעט לחלוטין.",
+  "ar": "يثبّت حامل Smart Click جهاز X-COP الهجين على الزجاج الأمامي بلاصق 3M. لا يوفّر الحامل الطاقة؛ يجب وصل كابل الكهرباء بالجهاز مباشرةً. قد يصعب تركيبه على الزجاج شبه العمودي."
+ },
+ "53499792058": {
+  "en": "The H91 3M Power is a windscreen mount with an active power connection for compatible NEOLINE hybrid units. It uses 3M adhesive; check the exact supported model before installation.",
+  "he": "H91 3M Power היא תושבת לשמשה הקדמית עם חיבור חשמל פעיל למכשירים משולבים תואמים של NEOLINE. ההתקנה באמצעות דבק 3M; יש לבדוק התאמה לדגם המדויק.",
+  "ar": "H91 3M Power حامل للزجاج الأمامي مزود بتوصيل طاقة نشط لأجهزة NEOLINE الهجينة المتوافقة، ويُثبَّت بلاصق 3M. تحقّق من الطراز المتوافق قبل التركيب."
+ },
+ "26547920530": {
+  "en": "The X-COP H90 Smart Click suction mount attaches a compatible hybrid unit to the windscreen. The mount has no active power connection, so power is connected directly to the device.",
+  "he": "תושבת הוואקום X-COP H90 Smart Click מחברת מכשיר משולב תואם לשמשה הקדמית. אין בה חיבור חשמל פעיל, ולכן כבל החשמל מתחבר ישירות למכשיר.",
+  "ar": "يثبّت حامل الشفط X-COP H90 Smart Click الجهاز الهجين المتوافق على الزجاج الأمامي. لا يحتوي الحامل على توصيل طاقة نشط، لذا يُوصل الكابل بالجهاز مباشرةً."
+ },
+ "969355328957": {
+  "en": "NEOLINE Fuse Cord 3 pin is a power cable intended for compatible three-pin hybrid devices. Confirm the pin layout and voltage requirements before connecting it.",
+  "he": "NEOLINE Fuse Cord 3 pin הוא כבל חשמל המיועד למכשירים משולבים תואמים בעלי מחבר בן שלושה פינים. יש לבדוק את סידור הפינים ודרישות המתח לפני חיבור.",
+  "ar": "NEOLINE Fuse Cord 3 pin كابل طاقة مخصص للأجهزة الهجينة المتوافقة ذات موصل ثلاثي السنون. تأكد من ترتيب السنون ومتطلبات الجهد قبل التوصيل."
+ },
+ "951833046070": {
+  "en": "NEOLINE Power Cord Hybrid connects a compatible hybrid unit to a vehicle's 12/24 V accessory socket. The approximately 3 m cable has a built-in fuse; on supported installations, the unit powers on when the engine starts.",
+  "he": "NEOLINE Power Cord Hybrid מחבר מכשיר משולב תואם לשקע אביזרים של רכב במתח 12/24 וולט. לכבל באורך כ־3 מטרים יש נתיך מובנה; בהתקנה מתאימה המכשיר נדלק עם התנעת המנוע.",
+  "ar": "يوصل NEOLINE Power Cord Hybrid جهازاً هجيناً متوافقاً بمقبس ملحقات السيارة 12/24 فولت. طول الكابل نحو 3 أمتار ويحتوي على مصهر مدمج؛ ويمكن تشغيل الجهاز عند بدء المحرك في التركيبات المدعومة."
+ },
+ "9377540786": {
+  "en": "NEOLINE Fuse Cord is a power cable for compatible X-COP radar detectors. Verify the supported connector and model before fitting the cable.",
+  "he": "NEOLINE Fuse Cord הוא כבל חשמל לגלאי מכ״ם תואמים מסדרת X-COP. יש לבדוק את הדגם והמחבר לפני התקנה.",
+  "ar": "NEOLINE Fuse Cord كابل طاقة لكاشفات الرادار المتوافقة من سلسلة X-COP. تحقّق من الطراز والموصل المدعوم قبل التركيب."
+ },
+ "825044539847": {
+  "en": "NEOLINE Fuse Cord X7 combines a power cable and mount for G-Tech X72/X73 dash cameras, designed for connection to the vehicle's fuse box.",
+  "he": "NEOLINE Fuse Cord X7 משלב כבל חשמל ותושבת למצלמות הדרך G-Tech X72/X73, ומיועד לחיבור לתיבת הנתיכים ברכב.",
+  "ar": "يجمع NEOLINE Fuse Cord X7 بين كابل طاقة وحامل لكاميرات G-Tech X72/X73، وهو مخصص للتوصيل بعلبة مصهرات السيارة."
+ },
+ "176789604743": {
+  "en": "NEOLINE Fuse Cord X74/X75 combines a power cable and mount for G-Tech X74/X75 dash cameras, designed for connection to the vehicle fuse box.",
+  "he": "NEOLINE Fuse Cord X74/X75 משלב כבל חשמל ותושבת למצלמות הדרך G-Tech X74/X75 ומיועד לחיבור לתיבת הנתיכים ברכב.",
+  "ar": "يجمع NEOLINE Fuse Cord X74/X75 بين كابل طاقة وحامل لكاميرات G-Tech X74/X75، وهو مصمم للتوصيل بعلبة مصهرات السيارة."
+ },
+ "189185819046": {
+  "en": "The X-COP Visor is a mount for attaching compatible NEOLINE X-COP radar detectors to a vehicle sun visor.",
+  "he": "X-COP Visor היא תושבת לחיבור גלאי מכ״ם תואמים מסדרת NEOLINE X-COP לסוכך השמש ברכב.",
+  "ar": "X-COP Visor حامل لتثبيت كاشفات الرادار المتوافقة من سلسلة NEOLINE X-COP على حاجب الشمس في السيارة."
+ },
+ "314310319880": {
+  "en": "The NEOLINE CPL 93 polarizing filter is designed to reduce sunlight glare and dashboard reflections visible through the windscreen.",
+  "he": "המסנן המקטב NEOLINE CPL 93 נועד להפחית סנוור מאור השמש והשתקפויות של לוח המחוונים בשמשה הקדמית.",
+  "ar": "مرشح الاستقطاب NEOLINE CPL 93 مصمم لتقليل وهج الشمس وانعكاسات لوحة القيادة على الزجاج الأمامي."
+ }
+};
  const descriptions={
   en:{
    single:"A NEOLINE dash camera designed to record the journey ahead. The recording, storage and driver-assistance features below are taken from the manufacturer's specification for this model.",
@@ -689,9 +764,10 @@
    .sort((a,b)=>keyLabels.indexOf(a.rawLabel)===-1?1:keyLabels.indexOf(b.rawLabel)===-1?-1:
     keyLabels.indexOf(a.rawLabel)-keyLabels.indexOf(b.rawLabel));
   const selected=facts.slice(0,9);
-  const details=selected.length
+  const specific=curatedAccessoryText[item.id]?.[l];
+  const details=specific || (selected.length
    ?c.facts+": "+selected.map(k=>k.label+" — "+k.value).join("; ")+"."
-   :c.missing;
+   :c.missing);
   return lead+"\n"+details;
  };
  window.NEOLINE_CATALOG_I18N=Object.freeze({
