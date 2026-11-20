@@ -81,10 +81,15 @@ jobs:
                       else:
                           manifest = json.loads(fetch("assets/catalog/catalog.json"))
                           count = len(manifest.get("products", []))
+                          feature_manifest = json.loads(fetch("assets/catalog/feature-media.json"))
+                          groups = {int(item["id"]): len(item.get("features",[]))
+                                    for item in feature_manifest.get("products", [])}
                           if count < 50:
                               last_reason = f"Catalogue data incomplete: {count} imported products"
+                          elif groups.get(159268200852) != 6 or groups.get(1087255377614) != 4:
+                              last_reason = f"Manufacturer art incomplete: {groups}"
                           else:
-                              print(f"PASS: Cloudflare serves both current pages and all current JS/CSS files, authentic manufacturer feature artwork, curated videos and product data; {count} imported products")
+                              print(f"PASS: Cloudflare has all current pages, ten locally cached original manufacturer illustrations, video guides and {count} products")
                               break
               except Exception as exc:
                   last_reason = f"{type(exc).__name__}: {exc}"
