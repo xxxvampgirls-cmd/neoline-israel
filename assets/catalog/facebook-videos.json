@@ -1,10 +1,20 @@
 {
   "_notes": [
-    "Only real PUBLIC Facebook videos for the EXACT NEOLINE product model. Do not add guessed or unrelated URLs.",
-    "The site prioritizes EN Facebook embeds for en/he/ar; Russian views keep Russian videos first.",
-    "Add videos like: {\"model\":\"NEOLINE WowCam Wi-Fi\",\"language\":\"en\",\"title\":\"Real English video title\",\"url\":\"https://www.facebook.com/<verified-page>/videos/<real-id>/\"}.",
-    "modelId can replace model for an already verified stable catalogue ID. The video must allow embedding on third-party sites.",
-    "No Facebook links passed verification during this update, so no sample/fake video is included."
+    "Videos must be verified public HTTPS URLs for the EXACT NEOLINE model, no guesses or stock videos.",
+    "For English/Hebrew/Arabic, English-language Facebook clips are prioritized in the main embedded player. Russian view prioritizes Russian clips.",
+    "English setup videos: add {\"modelId\":1,\"language\":\"en\",\"kind\":\"setup\",\"title\":\"Verified exact title\",\"url\":\"https://www.facebook.com/<page>/videos/<real-id>/\"}.",
+    "English short clips: add {\"modelId\":1,\"language\":\"en\",\"kind\":\"reel\",\"title\":\"Verified exact title\",\"url\":\"https://www.facebook.com/reel/<real-id>/\"}.",
+    "Reels open in a vertically proportioned Facebook embed. Publisher-side privacy or embedding restrictions can prevent playback.",
+    "Only real Facebook URLs belong in 'videos'; English manufacturer instruction pages (not videos) may be placed in 'guides'.",
+    "Facebook blocks automated access without a suitable account or API authorization: do not invent Reel IDs. There are currently no verified direct Facebook video links."
   ],
-  "videos": []
+  "videos": [],
+  "guides": [
+    {
+      "modelId": 1,
+      "language": "en",
+      "title": "NEOLINE WOWCAM Wi-Fi — official English setup and support",
+      "url": "https://info.neoline.com/wowcam/eu"
+    }
+  ]
 }
