@@ -597,6 +597,38 @@
   "Скачать":["Download","הורדה","تنزيل"],
   "Ссылка":["Link","קישור","رابط"]
  };
+ const descriptions={
+  en:{
+   single:"A NEOLINE dash camera designed to record the journey ahead. The recording, storage and driver-assistance features below are taken from the manufacturer's specification for this model.",
+   dual:"A multi-camera NEOLINE recording system intended to cover more than one view of the vehicle. Check the manufacturer's listed number of cameras, recording modes and installation requirements below.",
+   hybrid:"This NEOLINE hybrid combines a driving recorder with radar-detection alerts. The available recording and detection functions depend on the exact hardware revision and region.",
+   radar:"A NEOLINE radar detector intended to alert drivers to supported speed-control systems. Radar bands, GPS data and supported warning modes vary by product and region.",
+   accessories:"A vehicle accessory for compatible NEOLINE equipment. Check the device name, connector, power requirements and vehicle installation before ordering.",
+   audio:"NEOLINE automotive speakers. Installation size, impedance, speaker design and materials are shown from the manufacturer’s specifications.",
+   sale:"An item listed in the original NEOLINE catalog. The manufacturer’s product description and any structured specifications are available below.",
+   facts:"Model specifications",missing:"No structured specifications have been published for this accessory. See the original source description for compatibility and installation details."
+  },
+  he:{
+   single:"מצלמת דרך של NEOLINE המיועדת לתיעוד הנסיעה מלפנים. נתוני ההקלטה, האחסון והעזר לנהג שלהלן מבוססים על המפרט שפרסם היצרן לדגם זה.",
+   dual:"מערכת צילום של NEOLINE עם יותר מערוץ צילום אחד, המיועדת לתיעוד מספר זוויות ברכב. מספר המצלמות, מצבי ההקלטה ודרישות ההתקנה מפורטים בנתוני היצרן שלהלן.",
+   hybrid:"מכשיר משולב של NEOLINE הכולל מצלמת דרך והתרעות זיהוי מכ״ם. אפשרויות הצילום והזיהוי תלויות בגרסת החומרה ובאזור השימוש.",
+   radar:"גלאי מכ״ם של NEOLINE המיועד להתריע על מערכות אכיפת מהירות נתמכות. תחומי הזיהוי, נתוני ה-GPS וסוגי ההתרעות משתנים בין דגמים ואזורים.",
+   accessories:"אביזר רכב המיועד לציוד תואם של NEOLINE. לפני הזמנה יש לבדוק את שם הדגם, המחבר, דרישות החשמל ותנאי ההתקנה ברכב.",
+   audio:"רמקולים לרכב מבית NEOLINE. מידות ההתקנה, העכבה, מבנה הרמקול והחומרים מפורטים במפרט היצרן שלהלן.",
+   sale:"מוצר המופיע בקטלוג המקורי של NEOLINE. בהמשך מופיעים תיאור היצרן והמפרט הזמין.",
+   facts:"נתוני הדגם",missing:"לפריט זה לא פורסם מפרט טכני מובנה. למידע על התאמה והתקנה יש לעיין בתיאור המקורי של היצרן."
+  },
+  ar:{
+   single:"كاميرا قيادة من NEOLINE لتوثيق الطريق أمام السيارة. بيانات التسجيل والتخزين وميزات مساعدة السائق أدناه مستندة إلى مواصفات الشركة لهذا الطراز.",
+   dual:"نظام تسجيل من NEOLINE يستخدم أكثر من قناة تصوير لتغطية زوايا مختلفة من السيارة. تحقّق أدناه من عدد الكاميرات وأوضاع التسجيل ومتطلبات التركيب الواردة في مواصفات الشركة.",
+   hybrid:"جهاز هجين من NEOLINE يجمع بين تسجيل الطريق والتنبيه إلى أنظمة الرادار. تختلف ميزات التسجيل والكشف باختلاف إصدار الجهاز والمنطقة.",
+   radar:"كاشف رادار من NEOLINE لتنبيه السائق إلى أنظمة مراقبة السرعة المدعومة. تختلف نطاقات الكشف وبيانات GPS وأوضاع التنبيه بحسب الطراز والمنطقة.",
+   accessories:"ملحق سيارة مُخصص لأجهزة NEOLINE المتوافقة. تحقّق من اسم الطراز ونوع الموصل ومتطلبات الطاقة والتركيب في سيارتك قبل الطلب.",
+   audio:"سماعات سيارات من NEOLINE. يوضح وصف الشركة أدناه مقاس التركيب والممانعة وتصميم السماعة وموادها.",
+   sale:"منتج مُدرج في كتالوج NEOLINE الأصلي. تظهر أدناه تفاصيل المصدر والمواصفات الفنية المتاحة.",
+   facts:"معلومات الطراز",missing:"لم تُنشر مواصفات تقنية منظمة لهذا الملحق. راجع وصف الشركة الأصلي للتحقق من التوافق ومتطلبات التركيب."
+  }
+ };
  const locale=lang=>copy[lang]?lang:"ru";
  const isSourceOnly=label=>/^(?:Сплит|Название|Внимание|Режим работы техподдержки|Прошивка(?:\s|$)|Инструкция по обновлению|Мобильное приложение|База радаров для|Голосовой пакет|Альтернативный голосовой пакет|2\. Изменена функция|«Превышаешь\?)/iu.test(label);
  // Never silently treat firmware download instructions as product specifications.
@@ -641,9 +673,26 @@
  const overview=(item,lang)=>{
   const l=locale(lang);
   if(l==="ru")return item.description||item.name;
-  const translated=formatSpecs(item.specs,l).filter(k=>!k.isOriginal).slice(0,4);
-  const heading=copy[l].category[item.category]||copy[l].category.accessories;
-  return [heading,...translated.map(k=>k.label+": "+k.value)].join(" · ");
+  const c=descriptions[l]||descriptions.en;
+  const lead=c[item.category]||c.accessories;
+  const keyLabels=[
+   "Количество камер","Разрешение","Матрица","Угол обзора","Дисплей",
+   "Тип акустической системы","Форм-фактор","Частотный диапазон",
+   "Максимальное давление, атм (кг/см2)","Производительность, л/мин",
+   "Напряжение","Выходное напряжение","Входное напряжение",
+   "Мощность, Вт","Длина кабеля","Разъем питания",
+   "Wi-Fi обновление","GPS-модуль","Режим парковки","Крепление",
+   "Автостоп","Импеданс, Ом","Макс. объем карты памяти"
+  ];
+  const facts=formatSpecs(item.specs,l)
+   .filter(k=>!k.isOriginal&&!/[А-Яа-яЁё]/u.test(k.value))
+   .sort((a,b)=>keyLabels.indexOf(a.rawLabel)===-1?1:keyLabels.indexOf(b.rawLabel)===-1?-1:
+    keyLabels.indexOf(a.rawLabel)-keyLabels.indexOf(b.rawLabel));
+  const selected=facts.slice(0,9);
+  const details=selected.length
+   ?c.facts+": "+selected.map(k=>k.label+" — "+k.value).join("; ")+"."
+   :c.missing;
+  return lead+"\n"+details;
  };
  window.NEOLINE_CATALOG_I18N=Object.freeze({
   locale,copy:lang=>copy[locale(lang)],
