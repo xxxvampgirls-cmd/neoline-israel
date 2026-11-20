@@ -139,14 +139,34 @@ jobs:
                fixedCorners.upperAnimation!=='none'||fixedCorners.lowerAnimation!=='none'||
                !fixedCorners.upperColor.includes('linear-gradient')||!fixedCorners.lowerColor.includes('linear-gradient'))
               throw Error('The original corners must stay colored and motionless: '+JSON.stringify(fixedCorners));
+            const dots=await corners.evaluate(el=>{
+              const upper=el.querySelector('.news-studio-dots--top');
+              const lower=el.querySelector('.news-studio-dots--bottom');
+              const small=getComputedStyle(upper);
+              const medium=getComputedStyle(upper,'::before');
+              const large=getComputedStyle(upper,'::after');
+              return {
+                fields:el.querySelectorAll('.news-studio-dots').length,
+                upperAnimation:small.animationName,
+                lowerAnimation:getComputedStyle(lower).animationName,
+                smallGrid:small.backgroundSize,mediumGrid:medium.backgroundSize,
+                largeGrid:large.backgroundSize,
+                upperMask:small.clipPath,lowerMask:getComputedStyle(lower).clipPath
+              };
+            });
+            if(dots.fields!==2||dots.upperAnimation!=='none'||dots.lowerAnimation!=='none'||
+               !dots.smallGrid.includes('16px')||!dots.mediumGrid.includes('25px')||
+               !dots.largeGrid.includes('32px')||!dots.upperMask.includes('polygon')||
+               !dots.lowerMask.includes('polygon'))
+              throw Error('Graded dots should be plentiful and static in both corners: '+JSON.stringify(dots));
             await corners.evaluate(el=>{el.dataset.fixedCorners='original'});
             const pearl=await carousel.locator('.news-broadcast-stage').evaluate(el=>({
               glows:getComputedStyle(el,'::before').animationName,
               sweep:getComputedStyle(el,'::after').animationName,
               layers:el.querySelectorAll('.news-mask-accent').length
             }));
-            if(!pearl.glows.includes('newsPearlStudioFlow')||!pearl.sweep.includes('newsPearlStudioSweep'))
-              throw Error('Soft white-blue studio background animation missing: '+JSON.stringify(pearl));
+            if(!pearl.glows.includes('newsPearlStudioFloat')||!pearl.sweep.includes('newsPearlStudioWave'))
+              throw Error('The white-blue studio light must float vertically and horizontally: '+JSON.stringify(pearl));
             const foreground=carousel.locator('.news-broadcast-foreground');
             const theme=await page.locator('#newsFeatureSlide').getAttribute('data-news-theme');
             if(!['accidents','laws','speed','roads','cars'].includes(theme))
