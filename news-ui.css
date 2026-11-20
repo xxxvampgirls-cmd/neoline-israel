@@ -1141,9 +1141,9 @@ html[dir=rtl] .news-feature-credit{right:auto;left:12px}
  }
 }
 
-/* NEOLINE optical dot grid — one regular rhythm, one circle at each grid
-   intersection; NO overlapping raster layers, no competing dot sizes.
-   Both corner triangles use the SAME blue and an exact 180° mirror. */
+/* NEOLINE halftone wave: one orderly lattice, dot sizes taper smoothly
+   through a subtle curved modulation. Inspired by the provided dot-wave
+   references, not a copy of any stock illustration. Corners stay stationary. */
 #newsFeatureSlide .news-studio-corners{isolation:isolate}
 #newsFeatureSlide .news-studio-corners::before,
 #newsFeatureSlide .news-studio-corners::after{
@@ -1174,7 +1174,7 @@ html[dir=rtl] .news-feature-credit{right:auto;left:12px}
 }
 #newsFeatureSlide .news-studio-dot{
  position:absolute;display:block;flex:none;border-radius:50%;
- background:#dbf6ff;box-shadow:none;
+ background:#d7f5ff;box-shadow:none;
  pointer-events:none;animation:none!important;transform:none!important;
 }
 /* Restore visible atmospheric motion throughout the central blue panel:
