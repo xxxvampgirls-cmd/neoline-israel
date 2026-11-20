@@ -528,6 +528,47 @@
  }
  overlay.addEventListener("click",event=>{
   if(event.target.closest("[data-close-video]")){closeVideos();return}
+  const startFeatured=event.target.closest("[data-start-featured]");
+  if(startFeatured){
+   const index=Number(startFeatured.dataset.startFeatured);
+   if(Number.isInteger(index)&&index>=0&&index<featuredItems.length){
+    stopPlayback();showFeaturedVideo(index,true);
+   }
+   return;
+  }
+  const topicButton=event.target.closest("[data-video-topic]");
+  if(topicButton){
+   const next=topicButton.dataset.videoTopic;
+   if(["all","connect","review"].includes(next)){
+    tutorialFilter=next;
+    const section=overlay.querySelector(".product-video-real-guides");
+    if(section){
+     const box=document.createElement("div");
+     box.innerHTML=renderTutorials(currentId,document.documentElement.lang);
+     if(box.firstElementChild)section.replaceWith(box.firstElementChild);
+    }
+   }
+   return;
+  }
+  const guideButton=event.target.closest("[data-play-guide]");
+  if(guideButton){
+   const id=guideButton.dataset.playGuide;
+   const listed=tutorialCatalog.some(v=>v.id===id&&v.modelIds.includes(currentId));
+   if(!listed||!/^[A-Za-z0-9_-]{11}$/.test(id))return;
+   stopPlayback();
+   const holder=overlay.querySelector('[data-guide-embed="'+id+'"]');
+   if(!holder)return;
+   const iframe=document.createElement("iframe");
+   iframe.src="https://www.youtube-nocookie.com/embed/"+id+"?autoplay=1&rel=0&playsinline=1";
+   iframe.title="NEOLINE YouTube tutorial · "+id;
+   iframe.loading="eager";
+   iframe.referrerPolicy="strict-origin-when-cross-origin";
+   iframe.allow="autoplay; encrypted-media; picture-in-picture; fullscreen";
+   iframe.allowFullscreen=true;
+   holder.append(iframe);
+   holder.scrollIntoView({behavior:"smooth",block:"nearest"});
+   return;
+  }
   const featuredButton=event.target.closest("[data-featured-index]");
   if(featuredButton){
    const index=Number(featuredButton.dataset.featuredIndex);
