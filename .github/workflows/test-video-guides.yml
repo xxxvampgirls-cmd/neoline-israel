@@ -45,7 +45,7 @@ jobs:
               if(!r.ok)throw Error('Tutorial data file missing');
               return (await r.json()).videos;
             });
-            if(curated.length<3||curated.filter(x=>x.publisher==='Neoline Россия'&&x.category==='connect').length!==2)
+            if(curated.length<6||curated.filter(x=>x.publisher==='Neoline Россия'&&x.category==='connect').length!==2)
               throw Error('Two official connection tutorials unavailable');
             if(!curated.some(x=>x.language==='pl'&&x.modelIds.includes(2)))
               throw Error('Verified Polish multi-model review missing');
@@ -88,6 +88,29 @@ jobs:
             if((await page.locator('.product-video-real-badge').first().innerText())!=='PL')
               throw Error('Polish review language label missing');
             await page.evaluate(()=>window.NEOLINE_PRODUCT_VIDEOS.close());
+            // Imported products must show only verified, exact-model clips:
+            // Spectrum and X-COP 6200s, not generic or mislabeled YouTube videos.
+            for(const [modelId,clipId,modelText] of [
+              [84595738561,'abTTYza2aTk','Spectrum'],
+              [1069082480124,'QBxtvqSlc_o','6200s'],
+              [839336600060,'2qQBchWAr9E','Argus 4K Dual']
+            ]){
+              await page.evaluate(x=>window.NEOLINE_PRODUCT_VIDEOS.open(x),modelId);
+              await page.waitForFunction(id=>!!document.querySelector('[data-guide-id="'+id+'"]'),clipId,{timeout:10000});
+              if(await page.locator('.product-video-real-guide').count()!==1)
+                throw Error('Imported model video incorrectly duplicated or missing '+modelId);
+              if(!(await page.locator('#productVideoModel').innerText()).includes(modelText))
+                throw Error('Imported product model title mismatched '+modelId);
+              const first=page.locator('.product-video-search-grid a').first();
+              const href=await first.getAttribute('href');
+              if(!href.includes(encodeURIComponent(modelText).slice(0,4)) && !href.toLowerCase().includes('neoline'))
+                throw Error('Model-only locale video search unavailable '+modelId+' '+href);
+              if(href.includes('%D0%B2%D0%B8%D0%B4%D0%B5%D0%BE'))
+                throw Error('Untranslated long Russian product type in search URL '+modelId);
+              if(await page.locator('#productVideoCatalog iframe').count())
+                throw Error('Imported model video autoplayed without tap '+modelId);
+              await page.evaluate(()=>window.NEOLINE_PRODUCT_VIDEOS.close());
+            }
             // Hebrew and Arabic should be RTL, with localized searches;
             // for the Arabic-language site, target Israel rather than UAE.
             for(const [l,region] of [['he','gl=IL'],['ar','gl=IL']]){
