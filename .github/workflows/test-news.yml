@@ -100,7 +100,7 @@ jobs:
             // The video archive is built from actual YouTube IDs and the same
             // 30-day period as the road news (never placeholder stock imagery).
             const videos=page.locator('#newsVideoLibrary');
-            if(!await videos.isVisible()||await page.locator('#newsVideoFilters .news-video-chip').count()!==4)
+            if(!await videos.isVisible()||await page.locator('#newsVideoFilters .news-video-chip').count()!==5)
               throw Error('30-day official road-video library missing');
             const sourceLinks=await page.locator('.news-video-sources a').count();
             if(sourceLinks!==3)throw Error('Expected verified sources: 13 News, KAN News and Israel Police');
@@ -109,7 +109,17 @@ jobs:
               const count=document.getElementById('newsVideoCount');
               return status&&count&&count.textContent?.trim().length>1;
             },null,{timeout:16000});
-            const videoCards=page.locator('.news-video-card');
+            // Radar reports are their own monthly category, with verified
+            // News 13 older clips presented in a SEPARATE labeled archive.
+            const radarFilter=page.locator('#newsVideoFilters [data-video-cat="radars"]');
+            if(!await radarFilter.isVisible())throw Error('Radars/speed cameras filter missing');
+            if(await page.locator('#newsVideoArchiveGrid .news-video-card').count()!==2)
+              throw Error('The two verified older News 13 radar clips are not shown separately');
+            await radarFilter.click();
+            if(await page.locator('#newsVideoArchiveGrid .news-video-card').count()!==2)
+              throw Error('Radar filter should retain the separately labeled News 13 archive');
+            await page.locator('#newsVideoFilters [data-video-cat="all"]').click();
+            const videoCards=page.locator('#newsVideoGrid .news-video-card');
             const firstVideoCount=await videoCards.count();
             if(firstVideoCount){
               const vid=await videoCards.first().getAttribute('data-video');
