@@ -207,7 +207,7 @@
    }).join('')+'</div>':"";
   return '<section class="product-video-main" aria-label="'+secureText(t.featured)+'">'+
    '<div class="product-video-main-heading"><h3>'+secureText(t.featured)+'</h3>'+
-   (featuredItems.length?'<span class="product-video-main-provider" id="videoMainProvider"></span>':"")+'</div>'+
+   (featuredItems.length?'<span class="product-video-main-provider" id="productVideoMainProvider"></span>':"")+'</div>'+
    (featuredItems.length?
     '<div class="product-video-main-frame" id="productVideoMainFrame"></div>'+
     '<div class="product-video-main-caption"><strong id="productVideoMainCaption"></strong>'+
