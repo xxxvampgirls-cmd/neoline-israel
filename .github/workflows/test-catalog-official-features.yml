@@ -1,0 +1,115 @@
+name: Browser-check NEOLINE authentic product gallery and feature illustrations
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - 'index.html'
+      - 'catalog-ui.js'
+      - 'catalog-ui.css'
+      - 'assets/catalog/feature-media.json'
+      - 'assets/catalog/feature-images/**'
+      - '.github/workflows/test-catalog-official-features.yml'
+permissions:
+  contents: read
+concurrency:
+  group: neoline-official-features-main
+  cancel-in-progress: true
+jobs:
+  features:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Install Chromium
+        run: |
+          npm install --no-save playwright
+          npx playwright install --with-deps chromium
+      - name: Serve website locally
+        run: python3 -m http.server 8769 --bind 127.0.0.1 >/tmp/neoline-features.log 2>&1 &
+      - name: Check actual photographs versus official presentation art, RTL and zoom
+        run: |
+          node <<'JS'
+          const {chromium}=require('playwright');
+          (async()=>{
+            const browser=await chromium.launch({headless:true});
+            const page=await browser.newPage({viewport:{width:390,height:844},isMobile:true,hasTouch:true});
+            page.setDefaultTimeout(12000);
+            const errors=[];
+            page.on('pageerror',e=>errors.push(e.message));
+            await page.goto('http://127.0.0.1:8769/',{waitUntil:'domcontentloaded'});
+            await page.waitForFunction(()=>window.NEOLINE_CATALOG_I18N &&
+              [...document.querySelectorAll('#products .product')].length>=8,{timeout:20000});
+            const data=await page.evaluate(async()=>{
+              const [c,f]=await Promise.all([
+                fetch('./assets/catalog/catalog.json').then(r=>r.json()),
+                fetch('./assets/catalog/feature-media.json').then(r=>r.json())
+              ]);
+              return {product:c.products.find(p=>p.id===159268200852),
+                feature:f.products.find(p=>p.id===159268200852)};
+            });
+            if(!data.product||data.product.images.length!==1||data.feature?.features.length!==6)
+              throw Error('Dela-B source photos and six manufacturer illustrations not separated');
+            await page.locator('#tabs [data-cat="accessories"]').click();
+            for(const [lang,phrase,rtl] of [
+              ['ru','Иллюстрации производителя',false],
+              ['en','Manufacturer illustrations',false],
+              ['he','איורים של היצרן',true],
+              ['ar','صور توضيحية من الشركة',true]
+            ]){
+              await page.locator('[data-language="'+lang+'"]').click();
+              await page.waitForFunction(l=>document.documentElement.lang===l,lang);
+              await page.locator('#search').fill('Dela-B');
+              await page.waitForFunction(()=>document.querySelectorAll('#products .product').length===1);
+              await page.locator('#products [data-details]').click();
+              const modal=page.locator('#productModalBody');
+              if(await modal.locator('#modalPrevImage').count())
+                throw Error('Single source photo incorrectly shows carousel arrows');
+              if(await modal.locator('.modal-thumbs [data-import-photo]').count()!==1)
+                throw Error('Single source product angle must remain exactly one');
+              const info=modal.locator('.catalog-official-art');
+              if(await info.count()!==1||!(await info.locator('summary').innerText()).includes(phrase))
+                throw Error('No correctly localized manufacturer illustrations '+lang);
+              if(await info.locator('details').getAttribute('open')!==null)
+                throw Error('Feature art must be collapsed on initial product visit');
+              await info.locator('summary').click();
+              if(await info.locator('.catalog-feature-preview').count()!==6)
+                throw Error('Verified manufacturer feature illustrations missing '+lang);
+              if(await info.locator('img').count()!==6)
+                throw Error('Official manufacturer image count incorrect '+lang);
+              const issue=await info.locator('img').evaluateAll(imgs=>
+                imgs.some(img=>!img.getAttribute('src')?.startsWith('./assets/catalog/feature-images/')));
+              if(issue)throw Error('Untrusted remote/stock images in manufacturer feature panel '+lang);
+              await info.locator('.catalog-feature-preview').first().click();
+              if(!await page.locator('#photoLightbox').evaluate(el=>el.classList.contains('open')))
+                throw Error('Manufacturer illustration zoom does not open '+lang);
+              await page.locator('#closeLightbox').click();
+              await modal.locator('.modal-thumbs [data-import-photo]').first().click();
+              for(const width of [320,390]){
+                await page.setViewportSize({width,height:844});
+                const overflow=await page.evaluate(()=>({
+                  page:document.documentElement.scrollWidth,
+                  window:window.innerWidth
+                }));
+                if(overflow.page>overflow.window+4)
+                  throw Error('Feature art overflow at '+width+'px in '+lang);
+              }
+              if(await page.locator('html').getAttribute('dir')!==(rtl?'rtl':'ltr'))
+                throw Error('Wrong RTL/LTR direction for '+lang);
+              await page.locator('#closeProduct').click();
+              await page.setViewportSize({width:390,height:844});
+            }
+            await page.locator('[data-language="ru"]').click();
+            await page.locator('#search').fill('CPL 93');
+            await page.waitForFunction(()=>document.querySelectorAll('#products .product').length===1);
+            await page.locator('#products [data-details]').click();
+            if(await page.locator('#productModalBody .catalog-official-art').count())
+              throw Error('Product without verified extra illustrations gained fabricated gallery');
+            if(errors.length)throw Error('Runtime script errors: '+errors.join(' | '));
+            console.log('PASS: original one-photo Dela-B, six separate authentic illustrated features, 4 locale captions, zoom, strict mobile/RTL, other product unmodified.');
+            await browser.close();
+          })().catch(e=>{console.error(e);process.exit(1)});
+          JS
