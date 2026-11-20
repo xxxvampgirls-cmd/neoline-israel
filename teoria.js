@@ -112,7 +112,7 @@ function setCopy(){
  if(state.mode && !$("gamePlaying").hidden)updateQuizHUD();
  $("heroTitle").innerHTML=text("heroTitle");
  $("sourceBank").href=sourceFor(state.lang);
- document.querySelectorAll("[data-lang]").forEach(b=>{b.classList.toggle("on",b.dataset.lang===state.lang);b.setAttribute("aria-pressed",String(b.dataset.lang===state.lang))});
+ document.querySelectorAll("[data-lang]").forEach(b=>{const selected=b.dataset.lang===state.lang;b.classList.toggle("on",selected);b.classList.toggle("active",selected);b.setAttribute("aria-pressed",String(selected))});
  $("licenseSelect").value=state.licence;
 
  refreshStats();
