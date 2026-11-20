@@ -10,6 +10,7 @@ on:
       - 'catalog-i18n.js'
       - 'catalog-video.js'
       - 'assets/catalog/tutorial-videos.json'
+      - 'assets/catalog/catalog.json'
       - 'neoline-academy.js'
       - 'neoline-academy.css'
       - 'teoria.html'
@@ -38,7 +39,7 @@ jobs:
           revision = os.environ.get("GITHUB_COMMIT","")[:12]
           shop_files = ("catalog-ui.js","catalog-ui.css","catalog-i18n.js","catalog-video.js","neoline-academy.js","neoline-academy.css")
           game_files = ("teoria.js","teoria-ar.js","teoria-v2.js","teoria-daily.css")
-          verified_data = ("assets/catalog/tutorial-videos.json",)
+          verified_data = ("assets/catalog/tutorial-videos.json","assets/catalog/catalog.json")
           files = shop_files + game_files + verified_data
           local_pages = {
               "index.html": Path("index.html").read_text(encoding="utf-8"),
@@ -80,7 +81,7 @@ jobs:
                           if count < 50:
                               last_reason = f"Catalogue data incomplete: {count} imported products"
                           else:
-                              print(f"PASS: Cloudflare serves both current pages and all 10 JS/CSS files and verified video manifest, including theory; {count} imported products")
+                              print(f"PASS: Cloudflare serves both current pages and all current JS/CSS files, curated videos and de-duplicated product manifest; {count} imported products")
                               break
               except Exception as exc:
                   last_reason = f"{type(exc).__name__}: {exc}"
