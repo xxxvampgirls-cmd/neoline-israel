@@ -1,0 +1,62 @@
+name: Cache verified manufacturer feature illustrations
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - 'assets/catalog/feature-media-sources.json'
+      - 'scripts/sync_catalog_features.py'
+      - '.github/workflows/sync-catalog-features.yml'
+  schedule:
+    - cron: '40 5 * * 1'
+permissions:
+  contents: write
+concurrency:
+  group: neoline-manufacturer-feature-art
+  cancel-in-progress: false
+jobs:
+  feature-images:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          persist-credentials: true
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install verified image decoder and downloader
+        run: pip install --disable-pip-version-check 'requests>=2.31,<3' 'Pillow>=11,<13'
+      - name: Download only reviewed original NEOLINE feature illustrations
+        run: |
+          python -m py_compile scripts/sync_catalog_features.py
+          python scripts/sync_catalog_features.py
+      - name: Verify feature manifest and original gallery isolation
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          p=Path('assets/catalog/feature-media.json')
+          d=json.loads(p.read_text(encoding='utf-8'))
+          assert d['version']==1
+          for item in d['products']:
+              assert len(item['features']) >= 2
+              for media in item['features']:
+                  assert media['image'].startswith('./assets/catalog/feature-images/')
+                  assert Path(media['image']).is_file()
+                  assert all(media['title'][k] for k in ('ru','en','he','ar'))
+          print('Verified feature assets, no product gallery mutations')
+          PY
+      - name: Commit feature illustrations separately from the main photo gallery
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add assets/catalog/feature-media.json assets/catalog/feature-images/
+          if git diff --cached --quiet; then
+            echo 'Manufacturer feature art already up to date'
+            exit 0
+          fi
+          git commit -m 'Cache verified NEOLINE manufacturer presentation illustrations'
+          git pull --rebase origin main
+          git push origin HEAD:main
