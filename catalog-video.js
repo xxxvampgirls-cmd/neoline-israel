@@ -106,6 +106,7 @@
   ar:{title:"فيديوهات Facebook · الإنجليزية",featured:"الفيديوهات الإنجليزية أولاً",play:"شاهد على الموقع",source:"الأصل على Facebook ↗",note:"مشغل Facebook المضمّن. إذا كانت هناك قيود على العرض، افتح المصدر."}
  };
  let facebookCatalog=[];
+ let facebookGuides=[];
  function checkedFacebookUrl(input){
   if(typeof input!=="string")return null;
   try{
@@ -156,10 +157,11 @@
    '<p class="product-video-facebook-note">'+secureText(t.note)+'</p></section>';
  }
  function loadFacebookCatalog(){
-  fetch("./assets/catalog/facebook-videos.json?v=20261120-en-facebook-v1",{cache:"no-store"})
+  fetch("./assets/catalog/facebook-videos.json?v=20261120-addons-v2",{cache:"no-store"})
    .then(response=>{if(!response.ok)throw new Error("Facebook video catalog unavailable");return response.json()})
    .then(data=>{
     facebookCatalog=Array.isArray(data.videos)?data.videos.filter(v=>v&&typeof v==="object"):[];
+    facebookGuides=Array.isArray(data.guides)?data.guides.filter(v=>v&&typeof v==="object"):[];
     if(currentId!==null && !overlay.hidden)renderVideoList(currentId);
    }).catch(()=>{/* No unverified fallback videos: the rest of the catalog still works. */});
  }
@@ -178,7 +180,9 @@
  function curatedFeatured(id,selectedLang){
   const fb=facebookForModel(id).map(v=>({
    provider:"facebook",language:"EN",title:v.title||modelName(id),
-   original:checkedFacebookUrl(v.url)
+   original:checkedFacebookUrl(v.url),
+   isReel:/\/reel\//.test(v.url),
+   kind:typeof v.kind==="string"?v.kind.toLowerCase():"review"
   }));
   const yt=(verified[id]||[]).filter(v=>/^[A-Za-z0-9_-]{11}$/.test(v.id)).map(v=>({
    provider:"youtube",language:v.lang,title:v.title,id:v.id,
@@ -188,6 +192,74 @@
   const ruYouTube=yt.filter(v=>v.language!=="EN");
   if(selectedLang==="ru")return [...ruYouTube,...fb,...enYouTube];
   return [...fb,...enYouTube,...ruYouTube];
+ }
+
+ /* Exact-model English tutorials and Facebook Reels appear below the main
+    player, never instead of it. No unverifiable Reel IDs are fabricated.
+    Only known HTTPS manufacturer pages can be offered as support guides. */
+ const addonCopy={
+  ru:{title:"Дополнительные видео",setup:"Настройка и подключение",reels:"Facebook Reels",source:"На английском языке",emptySetup:"Проверенных английских видеоинструкций именно для этой модели пока нет.",emptyReels:"Подтверждённых Reels этой модели пока нет.",guide:"Официальная инструкция (EN) ↗",facebook:"Facebook производителя ↗",view:"Смотреть в плеере",language:"EN"},
+  en:{title:"More from NEOLINE",setup:"Setup & how-to videos",reels:"Facebook Reels",source:"English-language clips",emptySetup:"No verified English how-to videos for this exact model yet.",emptyReels:"No verified Reels for this exact model yet.",guide:"Official English guide ↗",facebook:"Manufacturer Facebook page ↗",view:"Watch in player",language:"EN"},
+  he:{title:"עוד סרטונים של NEOLINE",setup:"הדרכות והגדרות",reels:"Facebook Reels",source:"סרטונים באנגלית",emptySetup:"עדיין אין סרטוני הדרכה מאומתים באנגלית לדגם זה.",emptyReels:"עדיין אין Reels מאומתים לדגם זה.",guide:"הוראות רשמיות באנגלית ↗",facebook:"עמוד הפייסבוק של היצרן ↗",view:"צפייה בנגן",language:"EN"},
+  ar:{title:"المزيد من NEOLINE",setup:"الإعداد وطريقة الاستخدام",reels:"Facebook Reels",source:"فيديوهات باللغة الإنجليزية",emptySetup:"لا توجد فيديوهات تعليمية إنجليزية موثقة لهذا الطراز بعد.",emptyReels:"لا توجد Reels موثقة لهذا الطراز بعد.",guide:"دليل الشركة الرسمي بالإنجليزية ↗",facebook:"صفحة الشركة على Facebook ↗",view:"شاهد في المشغل",language:"EN"}
+ };
+ function safeGuideUrl(input){
+  try{
+   const u=new URL(input);
+   if(u.protocol!=="https:" || !["neoline.com","www.neoline.com","info.neoline.com"].includes(u.hostname))return null;
+   return u.href;
+  }catch{return null}
+ }
+ function guideForModel(id){
+  return facebookGuides.filter(g=>g &&
+   (g.modelId!==undefined && Number(g.modelId)===id ||
+     typeof g.model==="string" && normalizedVideoModel(g.model)===normalizedVideoModel(modelName(id))) &&
+   /^en(?:[-_][a-z]+)?$/i.test(String(g.language||""))&&safeGuideUrl(g.url));
+ }
+ function renderAddOnItems(items,caption){
+  return items.map(clip=>{
+   const index=featuredItems.indexOf(clip);
+   if(index<0)return "";
+   const thumb=clip.provider==="youtube"?
+     '<img src="https://i.ytimg.com/vi/'+clip.id+'/mqdefault.jpg" loading="lazy" decoding="async" alt="">':
+     '<span class="product-video-addon-cover-fb" aria-hidden="true">f</span>';
+   return '<button type="button" class="product-video-addon-video" data-featured-index="'+index+'">'+
+    '<span class="product-video-addon-cover'+(clip.isReel?' is-reel':'')+'">'+thumb+'</span>'+
+    '<span class="product-video-addon-itemcopy"><b>'+secureText(clip.title)+'</b>'+
+    '<small>▶ '+secureText(caption)+' · '+secureText(clip.provider==="facebook"?"Facebook":"YouTube")+' · EN</small></span></button>';
+  }).join("");
+ }
+ function renderEducationAddons(id,selectedLang){
+  const t=addonCopy[selectedLang]||addonCopy.en;
+  const verifiedEn=featuredItems.filter(v=>v.language==="EN");
+  const setup=verifiedEn.filter(v=>["setup","settings","howto","tutorial","wifi","installation","firmware"].includes(v.kind));
+  const reels=verifiedEn.filter(v=>v.provider==="facebook"&&v.isReel);
+  const guides=guideForModel(id);
+  const guideLinks=guides.map(g=>
+   '<a class="product-video-addon-guide" href="'+safeGuideUrl(g.url)+'" target="_blank" rel="noopener noreferrer">'+
+   '<span aria-hidden="true">↗</span><span>'+secureText(g.title||t.guide)+'</span></a>'
+  ).join("");
+  const cards=[
+   {label:t.setup,icon:"⚙",type:"setup",clips:setup,
+    empty:t.emptySetup,resources:guideLinks},
+   {label:t.reels,icon:"▷",type:"reels",clips:reels,
+    empty:t.emptyReels,
+    resources:'<a class="product-video-addon-guide" href="https://www.facebook.com/neolainas/" target="_blank" rel="noopener noreferrer">'+
+      '<span aria-hidden="true">↗</span><span>'+secureText(t.facebook)+'</span></a>'}
+  ];
+  return '<section class="product-video-addons"><div class="product-video-addons-top"><h3>'+secureText(t.title)+'</h3>'+
+    '<span>'+secureText(t.source)+'</span></div><div class="product-video-addons-grid">'+
+    cards.map(card=>
+      '<details class="product-video-addon" data-video-addon="'+card.type+'"><summary>'+
+      '<span class="product-video-addon-symbol" aria-hidden="true">'+card.icon+'</span>'+
+      '<span class="product-video-addon-heading">'+secureText(card.label)+
+      '<small>'+card.clips.length+' '+secureText(t.language)+'</small></span>'+
+      '<span class="product-video-chevron" aria-hidden="true"></span></summary>'+
+      '<div class="product-video-addon-body">'+
+      (card.clips.length?renderAddOnItems(card.clips,t.view):
+        '<p class="product-video-addon-empty">'+secureText(card.empty)+'</p>')+
+      card.resources+'</div></details>').join("")+
+    '</div></section>';
  }
  function featuredMarkup(id,selectedLang){
   const t=mainCopy[selectedLang]||mainCopy.en;
@@ -223,8 +295,8 @@
    return "https://www.youtube-nocookie.com/embed/"+v.id+"?rel=0&playsinline=1"+
     (v.language==="RU"?"&cc_load_policy=1&cc_lang_pref=en":"");
   }
-  return "https://www.facebook.com/plugins/video.php?href="+encodeURIComponent(v.original)+
-   "&show_text=false&width=640";
+  return "https://www.facebook.com/plugins/"+(v.isReel?"post.php":"video.php")+
+   "?href="+encodeURIComponent(v.original)+"&show_text=false&width="+(v.isReel?"420":"640");
  }
  function showFeaturedVideo(index){
   const clip=featuredItems[index];
@@ -233,6 +305,7 @@
   const locale=typeof lang==="string"?lang:document.documentElement.lang;
   const t=mainCopy[locale]||mainCopy.en;
   holder.replaceChildren();
+  holder.classList.toggle("is-reel",Boolean(clip.isReel));
   const iframe=document.createElement("iframe");
   iframe.src=mainVideoSource(clip);
   iframe.title=clip.title+" — "+clip.provider+" — "+clip.language;
@@ -339,6 +412,7 @@
   // The actual embedded player is visible immediately. Everything else is secondary.
   const mc=mainCopy[selectedLang]||mainCopy.en;
   const main=featuredMarkup(id,selectedLang);
+  const additions=renderEducationAddons(id,selectedLang);
   const extra='<details class="product-video-extras"><summary>'+
    '<span class="product-video-extras-icon" aria-hidden="true">☷</span>'+
    '<span>'+secureText(mc.extras)+'</span>'+
@@ -346,7 +420,7 @@
    '<div class="product-video-extras-body">'+searches+renderSocial(id,selectedLang)+
    (featuredItems.length?"":localClips)+
    (featuredItems.length?"":other)+'</div></details>';
-  get("productVideoResults").innerHTML=main+extra;
+  get("productVideoResults").innerHTML=main+additions+extra;
   if(featuredItems.length)showFeaturedVideo(0);
  }
 
@@ -365,6 +439,9 @@
    if(Number.isSafeInteger(index)&&index>=0&&index<featuredItems.length){
     stopPlayback();
     showFeaturedVideo(index);
+    if(featuredButton.closest(".product-video-addon")){
+     get("productVideoMainFrame")?.scrollIntoView({behavior:"smooth",block:"nearest"});
+    }
    }
    return;
   }
