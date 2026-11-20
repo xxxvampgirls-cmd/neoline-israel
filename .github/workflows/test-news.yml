@@ -117,6 +117,13 @@ jobs:
             const firstFeature=await carousel.locator('.news-feature-title').innerText();
             if(await carousel.locator('img,picture').count())
               throw Error('No news story photos in broadcast slider');
+            const pearl=await carousel.locator('.news-broadcast-stage').evaluate(el=>({
+              glows:getComputedStyle(el,'::before').animationName,
+              sweep:getComputedStyle(el,'::after').animationName,
+              layers:el.querySelectorAll('.news-mask-accent').length
+            }));
+            if(!pearl.glows.includes('newsPearlStudioFlow')||!pearl.sweep.includes('newsPearlStudioSweep'))
+              throw Error('Soft white-blue studio background animation missing: '+JSON.stringify(pearl));
             const foreground=carousel.locator('.news-broadcast-foreground');
             const theme=await page.locator('#newsFeatureSlide').getAttribute('data-news-theme');
             if(!['accidents','laws','speed','roads','cars'].includes(theme))
