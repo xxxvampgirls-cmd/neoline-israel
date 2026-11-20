@@ -27,6 +27,16 @@ CHANNELS = (
     ("police", "UCrwyHUb4iIrpknhP6MTvnww", "משטרת ישראל"),
 )
 CHANNEL_NAMES = {cid: name for cid, _, name in CHANNELS}
+CHANNEL_IDS = {youtube_id: cid for cid, youtube_id, _ in CHANNELS}
+# Queries beyond Atom's newest 15 uploads; slow discovery runs at most twice
+# daily, not on every hourly RSS refresh. A video is admitted ONLY if its
+# metadata confirms one of the exact official channel IDs and a real date.
+RADAR_REPORT_QUERIES = (
+    "חדשות 13 מצלמות מהירות רדאר משטרת התנועה",
+    "חדשות 13 אכיפת מהירות אקדח לייזר בכביש",
+    "כאן חדשות מצלמות מהירות אכיפה דרכים",
+    "משטרת ישראל מצלמות מהירות רדאר כבישים",
+)
 ATOM = {"a": "http://www.w3.org/2005/Atom",
         "yt": "http://www.youtube.com/xml/schemas/2015"}
 ID_RE = re.compile(r"^[A-Za-z0-9_-]{11}$")
@@ -133,6 +143,69 @@ def fetch(url: str) -> bytes:
         return raw
 
 
+def discover_older_feed_misses(now: dt.datetime) -> list[dict]:
+    """Optional verified YouTube search, to find reports buried behind uploads.
+
+    Runs infrequently in the scheduled job; all metadata is verified against
+    official channel IDs. If YouTube blocks extraction, normal RSS still works.
+    """
+    try:
+        import yt_dlp
+    except ImportError:
+        print("Targeted road-video search skipped (yt-dlp not installed)")
+        return []
+    found = {}
+    cutoff = now - dt.timedelta(days=DAYS)
+    options = {
+        "quiet": True, "no_warnings": True, "skip_download": True,
+        "ignoreerrors": True, "noplaylist": True,
+        "socket_timeout": 12, "retries": 1, "extractor_retries": 1,
+        "playlistend": 5, "lazy_playlist": False,
+    }
+    for query in RADAR_REPORT_QUERIES:
+        try:
+            with yt_dlp.YoutubeDL(options) as client:
+                result = client.extract_info("ytsearchdate5:" + query, download=False)
+        except Exception as exc:
+            print(f"Road-video targeted search unavailable: {type(exc).__name__}")
+            continue
+        for clip in (result or {}).get("entries") or ():
+            if not isinstance(clip, dict):
+                continue
+            video_id = clip.get("id")
+            channel_id = clip.get("channel_id")
+            title = clip.get("title") or ""
+            if (not isinstance(video_id, str) or not ID_RE.fullmatch(video_id)
+                or channel_id not in CHANNEL_IDS or not isinstance(title, str)
+                or not relevant(title)):
+                continue
+            published = None
+            upload_date = clip.get("upload_date") or clip.get("release_date")
+            if isinstance(upload_date, str) and re.fullmatch(r"\d{8}", upload_date):
+                try:
+                    published = dt.datetime.strptime(upload_date, "%Y%m%d").replace(tzinfo=UTC)
+                except ValueError:
+                    pass
+            if published is None and isinstance(clip.get("release_timestamp"), (int, float)):
+                published = dt.datetime.fromtimestamp(clip["release_timestamp"], tz=UTC)
+            if published is None and isinstance(clip.get("timestamp"), (int, float)):
+                published = dt.datetime.fromtimestamp(clip["timestamp"], tz=UTC)
+            if published is None or not cutoff <= published <= now + dt.timedelta(hours=12):
+                continue
+            source = CHANNEL_IDS[channel_id]
+            found[video_id] = {
+                "id": video_id,
+                "title": title[:220],
+                "date": published.isoformat(timespec="seconds").replace("+00:00", "Z"),
+                "source": source,
+                "publisher": CHANNEL_NAMES[source],
+                "category": category(title, source),
+                "url": "https://www.youtube.com/watch?v=" + video_id,
+            }
+    print(f"Targeted road-video search: {len(found)} verified official-channel videos")
+    return list(found.values())
+
+
 def refresh(now: dt.datetime | None = None) -> dict:
     now = (now or dt.datetime.now(UTC)).astimezone(UTC)
     cutoff = now - dt.timedelta(days=DAYS)
@@ -156,6 +229,8 @@ def refresh(now: dt.datetime | None = None) -> dict:
                 "url": "https://www.youtube.com/watch?v=" + vid,
             }
     successes, failures, discovered = 0, [], 0
+    search_updated = parsedate(previous.get("searchUpdated"))
+    searched = False
     for source, channel_id, _ in CHANNELS:
         # Latest uploads and regular uploads (no Shorts). Two feeds improve
         # coverage without a YouTube API key or unauthorized scraping.
@@ -174,6 +249,15 @@ def refresh(now: dt.datetime | None = None) -> dict:
                 if row["id"] not in merged:
                     discovered += 1
                 merged[row["id"]] = row
+    # Standard YouTube Atom exposes only recent uploads. Search only if the
+    # last successful attempt was at least 12 h ago. Never add a search hit
+    # without a verified official channel ID and genuine publish date.
+    if search_updated is None or now - search_updated >= dt.timedelta(hours=12):
+        searched = True
+        for row in discover_older_feed_misses(now):
+            if row["id"] not in merged:
+                discovered += 1
+                merged[row["id"]] = row
     items = sorted(merged.values(), key=lambda row: row["date"], reverse=True)[:LIMIT]
     result = {
         "version": 1,
@@ -181,6 +265,8 @@ def refresh(now: dt.datetime | None = None) -> dict:
         "updated": now.isoformat(timespec="seconds").replace("+00:00", "Z"),
         "status": "ok" if successes else "sources_unavailable",
         "sourceCount": successes,
+        "searchUpdated": (now if searched else search_updated or now).isoformat(
+            timespec="seconds").replace("+00:00", "Z"),
         "sources": [{"id": cid, "name": name,
                      "channel": "https://www.youtube.com/channel/" + channel_id}
                     for cid, channel_id, name in CHANNELS],
