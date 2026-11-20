@@ -169,6 +169,22 @@ jobs:
                dotGrid.background!=='none'||
                !dotGrid.topMask.includes('polygon')||!dotGrid.bottomMask.includes('polygon'))
               throw Error('Corner dots must form one symmetrical, graduated, regularly spaced grid: '+JSON.stringify(dotGrid));
+            const edges=await corners.locator('.news-studio-edges').evaluate(el=>({
+              paths:[...el.querySelectorAll('path')].map(p=>({
+                path:p.getAttribute('d'),
+                stroke:getComputedStyle(p).stroke,
+                width:Number.parseFloat(getComputedStyle(p).strokeWidth),
+                opacity:Number.parseFloat(getComputedStyle(p).strokeOpacity)
+              })),
+              motion:getComputedStyle(el).animationName,
+              mirror:el.getAttribute('preserveAspectRatio')
+            }));
+            if(edges.paths.length!==2||
+               edges.paths[0].path!=='M42.4 0 L0 53.4'||
+               edges.paths[1].path!=='M100 46.6 L57.6 100'||
+               edges.paths.some(x=>x.width<1.5||x.width>2.5||x.opacity>.8)||
+               edges.motion!=='none'||edges.mirror!=='none')
+              throw Error('Both corner diagonals need restrained matching static dark edges: '+JSON.stringify(edges));
             await corners.evaluate(el=>{el.dataset.fixedCorners='original'});
             const pearl=await carousel.locator('.news-broadcast-stage').evaluate(el=>({
               glows:getComputedStyle(el,'::before').animationName,
