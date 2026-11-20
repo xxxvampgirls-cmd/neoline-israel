@@ -1,4 +1,4 @@
-/* NEOLINE ISRAEL · THEORY QUEST — official CC BY question data, not a government service.
+/* NEOLINE ISRAEL · THEORY QUEST — government-open question data, not a government service.
    All answer keys are taken from official Ministry of Transport records.
    Practice progress stays only in this browser, no login / analytics. */
 (()=>{
@@ -10,6 +10,7 @@ ru:{backHome:"← На главную",heroEyebrow:"NEOLINE · ИЗРАИЛЬ ·
 en:{backHome:"← Home",heroEyebrow:"NEOLINE · ISRAEL · GAME",heroTitle:"Driving theory",heroSubtitle:"Israel's actual driving theory questions, turned into a game. Master signs, regulations and real road scenarios.",badgeOfficial:"✓ Government question bank",badgeFree:"No registration",badgeB:"Licence B",selectLabel:"GAME MODES",selectTitle:"Pick a game",progressSummary:"🏆 My progress",licenseLabel:"Licence",statSeenLabel:"Questions studied",statAccuracyLabel:"Accuracy",statMistakesLabel:"Mistakes to review",modeRoute:"City drive",descRoute:"10 questions · 3 lives",ctaRoute:"Start driving ↗",modeSigns:"Road sign hunt",descSigns:"12 questions · signs",ctaSigns:"Learn signs ↗",modeExam:"Real exam practice",descExam:"30 questions · 40 min",ctaExam:"Mock exam ↗",modeMistakes:"Retry mistakes",descMistakes:"Review tricky questions",ctaMistakes:"Review ↗",modeMarathon:"Grand road trip · all questions",descMarathon:"20 new questions per stage",ctaMarathon:"Continue the road trip ↗",sourceNotice:"Source: Israel Ministry of Transport and Road Safety (open government data, CC BY). NEOLINE is an independent learning tool, not a government exam. Always check current rules.",sourceBank:"Official question bank ↗",sourceRules:"Government exam rules ↗",exitLabel:"Modes",questionTip:"Select one correct answer.",next:"Next →",done:"Finish →",resultKicker:"ROUTE COMPLETED",resultPercentLabel:"Correct answers",resultXPLabel:"Earned",restartLabel:"Play again",backModesLabel:"Other modes",footerBack:"Home ↗",loading:"Loading official questions…",bankReady:(count,b)=>"✓ "+count+" official questions · "+countB+" for licence "+b,bankBroken:"The official question bank is temporarily unavailable. Please reload.",bankShort:"Not enough licensed questions are available for this mode.",noMistakes:"No mistakes to review yet. Play another route first!",correct:"Correct! Great reaction! +15 XP",wrong:"Not quite. The correct answer is highlighted in green.",examSelected:"Answer saved. Correct answers are revealed after the mock exam.",heart:"Lives",topics:{signs:"Road signs",laws:"Traffic rules",vehicle:"Vehicle knowledge",safety:"Road safety"},resultPass:"Mock exam passed! 🎉",resultFail:"Mock exam not passed yet",resultGreat:"Amazing drive!",resultGood:"Nice practice!",resultKeep:"Let's review the tricky ones",examResult:(n)=>"26 out of 30 are needed to pass. You got "+n+" correct.",practiceResult:"Keep learning — each correct answer brings you closer to your driving licence.",zeroMistakes:"Perfect run — no mistakes!",errorsList:"Questions to review",timeOut:"Time's up. Unanswered questions count as incorrect.",retry:"Try again"},
 he:{backHome:"→ חזרה לראשי",heroEyebrow:"NEOLINE · ישראל · משחק",heroTitle:"תיאוריה בנהיגה",heroSubtitle:"השאלות האמיתיות של מבחן התיאוריה בישראל, עכשיו במשחק. תרגלו תמרורים, חוקים ובטיחות בדרכים.",badgeOfficial:"✓ מאגר השאלות הממשלתי",badgeFree:"בלי הרשמה",badgeB:"דרגה B",selectLabel:"מצבי משחק",selectTitle:"בחרו משחק",progressSummary:"🏆 ההתקדמות שלי",licenseLabel:"רישיון",statSeenLabel:"שאלות שנלמדו",statAccuracyLabel:"דיוק",statMistakesLabel:"טעויות לחזרה",modeRoute:"נסיעה בעיר",descRoute:"10 שאלות · 3 לבבות",ctaRoute:"לדרך ↗",modeSigns:"ציד תמרורים",descSigns:"12 שאלות · תמרורים",ctaSigns:"ללמוד תמרורים ↗",modeExam:"הדמיית מבחן",descExam:"30 שאלות · 40 דקות",ctaExam:"מבחן לדוגמה ↗",modeMistakes:"לומדים מטעויות",descMistakes:"חוזרים לשאלות קשות",ctaMistakes:"חזרה ↗",modeMarathon:"מסע גדול · כל השאלות",descMarathon:"20 שאלות חדשות בכל שלב",ctaMarathon:"ממשיכים במסע ↗",sourceNotice:"מקור: משרד התחבורה והבטיחות בדרכים (מידע ממשלתי פתוח, CC BY). כלי הלימוד של NEOLINE אינו מבחן ממשלתי רשמי. יש לבדוק את הכללים העדכניים.",sourceBank:"מאגר השאלות הרשמי ↗",sourceRules:"כללי הבחינה באתר הממשלה ↗",exitLabel:"מסלולים",questionTip:"בחרו תשובה אחת נכונה.",next:"הבא ←",done:"סיום ←",resultKicker:"המסלול הושלם",resultPercentLabel:"תשובות נכונות",resultXPLabel:"נקודות",restartLabel:"לשחק שוב",backModesLabel:"מסלולים נוספים",footerBack:"לראשי ↗",loading:"טוענים שאלות רשמיות…",bankReady:(count,b)=>"✓ "+count+" שאלות רשמיות · "+countB+" לרישיון "+b,bankBroken:"מאגר השאלות אינו זמין כרגע. נא לטעון מחדש.",bankShort:"אין מספיק שאלות למצב משחק זה.",noMistakes:"אין כרגע טעויות לחזור עליהן. שחקו במסלול אחר!",correct:"נכון! כל הכבוד! ‎+15 XP",wrong:"לא בדיוק. התשובה הנכונה מסומנת בירוק.",examSelected:"התשובה נשמרה. התוצאות יוצגו בסיום המבחן.",heart:"לבבות",topics:{signs:"תמרורים",laws:"חוקי התנועה",vehicle:"הכרת הרכב",safety:"בטיחות בדרכים"},resultPass:"עברתם את הבחינה! 🎉",resultFail:"עוד לא עברתם את הבחינה",resultGreat:"נסיעה מצוינת!",resultGood:"תרגול מוצלח!",resultKeep:"בואו נחזור לשאלות הקשות",examResult:(n)=>"כדי לעבור צריך 26 מתוך 30. השבתם נכון על "+n+" שאלות.",practiceResult:"המשיכו לתרגל — כל תשובה נכונה מקדמת אתכם לרישיון.",zeroMistakes:"כל הכבוד! לא היו טעויות.",errorsList:"שאלות לחזרה",timeOut:"הזמן נגמר. שאלות ללא תשובה נחשבות שגויות.",retry:"לנסות שוב"}
 };
+DICTS.ar=window.NEOLINE_THEORY_AR?.ui||DICTS.ru;
 const text=(k)=>(DICTS[state.lang]||DICTS.ru)[k];
 const state={lang:"ru",licence:"B",banks:{},pool:[],mode:null,questions:[],index:0,choices:[],selected:null,answers:[],correct:0,earned:0,lives:3,ticker:null,deadline:0,loadSeq:0,ready:false,finished:false};
 let stats={answered:{},wrong:[],xp:0,history:[]};
@@ -47,12 +48,13 @@ function readStats(){try{const data=JSON.parse(safeStoreGet(statsKey())||"{}");r
 function saveStats(){safeStorePut(statsKey(),JSON.stringify(stats))}
 function shuffled(values){const out=[...values];for(let i=out.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[out[i],out[j]]=[out[j],out[i]]}return out}
 function classes(){return state.pool.filter(q=>q.classes.includes(state.licence))}
-function sourceFor(lang){return "https://data.gov.il/he/datasets/ministry_of_transport/"+({ru:"tqru",he:"tqhe",en:"tqen"}[lang]||"tqru")}
+function sourceFor(lang){return "https://data.gov.il/he/datasets/ministry_of_transport/"+({ru:"tqru",he:"tqhe",en:"tqen",ar:"tqar"}[lang]||"tqru")}
 
 const NAV_LABELS={
  ru:{home:"Главная",catalog:"Каталог",news:"Новости",delivery:"Доставка",cart:"Корзина",game:"Игра"},
  he:{home:"ראשי",catalog:"קטלוג",news:"חדשות",delivery:"משלוח",cart:"סל",game:"משחק"},
- en:{home:"Home",catalog:"Catalog",news:"News",delivery:"Delivery",cart:"Cart",game:"Game"}
+ en:{home:"Home",catalog:"Catalog",news:"News",delivery:"Delivery",cart:"Cart",game:"Game"},
+ ar:window.NEOLINE_THEORY_AR?.nav||{home:"الرئيسية",catalog:"الكتالوج",news:"الأخبار",delivery:"التوصيل",cart:"السلة",game:"لعبة"}
 };
 function updateTheoryNavigation(){
  // Fifth dock item: Theory game (all supported locales).
@@ -102,7 +104,7 @@ function initTheoryNavAutoHide(){
 
 function setCopy(){
  document.documentElement.lang=state.lang;
- document.documentElement.dir=state.lang==="he"?"rtl":"ltr";
+ document.documentElement.dir=["he","ar"].includes(state.lang)?"rtl":"ltr";
  for(const id of ["heroEyebrow","heroSubtitle","badgeOfficial","badgeFree","badgeB","selectLabel","selectTitle","progressSummary","licenseLabel","statSeenLabel","statAccuracyLabel","statMistakesLabel","modeRoute","descRoute","ctaRoute","modeSigns","descSigns","ctaSigns","modeExam","descExam","ctaExam","modeMistakes","descMistakes","ctaMistakes","modeMarathon","descMarathon","ctaMarathon","sourceNotice","sourceBank","sourceRules","exitLabel","questionTip","resultKicker","resultPercentLabel","resultXPLabel","restartLabel","backModesLabel","footerBack"]){
   const el=$(id);if(el&&text(id))el.textContent=typeof text(id)==="function"?"":text(id)
  }
@@ -161,6 +163,7 @@ async function loadBank(){
   $("bankText").textContent=state.ready?
    (state.lang==="ru"?"✓ "+count+" официальных вопросов · для категории "+state.licence+" доступно "+countB:
     state.lang==="he"?"✓ "+count+" שאלות רשמיות · "+countB+" לדרגה "+state.licence:
+    state.lang==="ar"?"✓ "+count+" سؤال رسمي · "+countB+" للفئة "+state.licence:
     "✓ "+count+" official questions · "+countB+" for licence "+state.licence):text("bankShort");
  }catch(error){
   if(seq!==state.loadSeq)return;
@@ -202,7 +205,8 @@ const GAME_OVER_COPY={
   message:"Your three lives are gone.<br>Don't worry — give it another try!",
   retry:"Play again",modes:"Choose a game mode",promoLabel:"For your next drive",promoLink:"View in store",
   close:"Close and go back to modes"
- }
+ },
+ ar:window.NEOLINE_THEORY_AR?.gameOver||{}
 };
 function hideGameOver(){
  const overlay=$("gameOver");
@@ -349,7 +353,8 @@ function updateQuizHUD(){
  const labels={
   ru:{done:"ОТВЕЧЕНО",progress:"Отвечено",of:"из",lives:"Осталось жизней"},
   en:{done:"ANSWERED",progress:"Answered",of:"of",lives:"Lives left"},
-  he:{done:"נענו",progress:"נענו",of:"מתוך",lives:"לבבות שנותרו"}
+  he:{done:"נענו",progress:"נענו",of:"מתוך",lives:"לבבות שנותרו"},
+  ar:window.NEOLINE_THEORY_AR?.hud||{}
  };
  const copy=labels[state.lang]||labels.ru;
  $("progressCaption").textContent=copy.done;
@@ -378,7 +383,7 @@ function renderQuestion(){
  $("questionId").textContent="№ "+q.id;
  $("questionTopic").textContent=text("topics")[q.topic]||text("topics").laws;
  $("questionText").textContent=q.q;
- $("questionText").dir=state.lang==="he"?"rtl":"auto";
+ $("questionText").dir=["he","ar"].includes(state.lang)?"rtl":"auto";
 
  const img=safeImage(q.image);
  $("questionPicture").hidden=!img;
@@ -417,7 +422,7 @@ function useGameHint(){
  if(!wrong.length)return;
  const picked=wrong[Math.floor(Math.random()*wrong.length)];
  picked.disabled=true;picked.classList.add("hint-eliminated");
- const removedCopy=state.lang==="he"?"אפשרות שגויה שהוסרה ברמז":state.lang==="en"?"Incorrect option eliminated by hint":"Неверный вариант исключён подсказкой";
+ const removedCopy=state.lang==="he"?"אפשרות שגויה שהוסרה ברמז":state.lang==="en"?"Incorrect option eliminated by hint":state.lang==="ar"?"حُذفت إجابة خاطئة باستخدام التلميح":"Неверный вариант исключён подсказкой";
  picked.setAttribute("aria-label",picked.textContent+" — "+removedCopy);
  state.hintUsed=true;state.hintsLeft-=1;
  window.dispatchEvent(new CustomEvent("neoline:theory-hint",{detail:{
