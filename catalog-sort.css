@@ -64,8 +64,14 @@
 }
 #catalog .catalog-sort-ui.is-open .catalog-sort-chevron{transform:rotate(180deg)}
 #catalog .catalog-sort-menu{
- position:absolute;top:calc(100% + 8px);inset-inline-end:0;
- z-index:80;width:min(310px,calc(100vw - 32px));min-width:100%;
+ /* Sort now occupies the FIRST column. Anchor its dropdown to the START
+    edge; end-alignment pushed the popup offscreen to the left on Android.
+    Logical properties preserve correct placement for Hebrew/Arabic RTL. */
+ position:absolute;top:calc(100% + 8px);
+ inset-inline-start:0;inset-inline-end:auto;
+ box-sizing:border-box;
+ z-index:80;width:min(310px,calc(100vw - 32px));
+ max-width:calc(100vw - 32px);min-width:100%;
  max-height:min(54dvh,290px);
  padding:7px;overflow:auto;overscroll-behavior:contain;
  border:1px solid #c1dded;border-radius:17px;
