@@ -1,0 +1,116 @@
+name: Browser-check NEOLINE catalog multilingual technical facts
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - 'index.html'
+      - 'catalog-ui.js'
+      - 'catalog-ui.css'
+      - 'catalog-i18n.js'
+      - 'assets/catalog/catalog.json'
+      - '.github/workflows/test-catalog-i18n.yml'
+permissions:
+  contents: read
+concurrency:
+  group: neoline-catalog-i18n-main
+  cancel-in-progress: true
+jobs:
+  catalog-locales:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Prepare mobile Chromium
+        run: |
+          npm install --no-save playwright
+          npx playwright install --with-deps chromium
+      - name: Serve repository
+        run: python3 -m http.server 8768 --bind 127.0.0.1 >/tmp/neoline-catalog-i18n.log 2>&1 &
+      - name: Verify four locales, truthful sources, translated specs and responsive details
+        run: |
+          node <<'JS'
+          const {chromium}=require('playwright');
+          (async()=>{
+           const browser=await chromium.launch({headless:true});
+           const page=await browser.newPage({viewport:{width:390,height:844},isMobile:true,hasTouch:true});
+           const errors=[];
+           page.on('pageerror',e=>errors.push(e.message));
+           await page.goto('http://127.0.0.1:8768/',{waitUntil:'domcontentloaded'});
+           await page.waitForFunction(()=>window.NEOLINE_CATALOG_I18N?.coverage().translatedLabels>=90&&
+               [...document.querySelectorAll('#products .product')].length>=8,{timeout:20000});
+           const manifest=await page.evaluate(async()=>{
+             const raw=await fetch('./assets/catalog/catalog.json');
+             const data=await raw.json();
+             const item=data.products.find(p=>p.name.includes('Hardwire Kit'));
+             return {count:data.products.length,item};
+           });
+           if(manifest.count<50||!manifest.item)throw Error('Manufacturer import missing');
+           const result={};
+           for(const [lang,expected,rtl] of [
+              ['ru','Выходное напряжение',false],
+              ['en','Output voltage',false],
+              ['he','מתח יציאה',true],
+              ['ar','جهد الخرج',true]
+           ]){
+             await page.locator('[data-language="'+lang+'"]').click();
+             await page.waitForFunction(l=>document.documentElement.lang===l,lang);
+             await page.locator('#search').fill('Hardwire Kit');
+             await page.waitForFunction(()=>document.querySelectorAll('#products .product').length===1);
+             const title=await page.locator('#products .product-name').first().innerText();
+             if(lang!=='ru'&&!title.includes('Vehicle accessory')&&!rtl)
+               throw Error('English translated category missing: '+title);
+             await page.locator('#products [data-details]').first().click();
+             const details=page.locator('#productModalBody');
+             if(!await details.locator('.catalog-import-property').count())
+               throw Error('No technical specification rows '+lang);
+             if(!(await details.innerText()).includes(expected))
+               throw Error('Technical term not translated to '+lang);
+             if((await details.locator('a.catalog-origin').getAttribute('href'))!==manifest.item.source)
+               throw Error('Manufacturer origin URL changed');
+             const source=details.locator('.catalog-import-original');
+             if(lang==='ru'){
+               if(await source.count())throw Error('Russian source accordion duplicated in RU mode');
+             }else{
+               if(await source.count()!==1)throw Error('Source-language disclosure missing '+lang);
+               if(await source.getAttribute('open')!==null)
+                 throw Error('Original long Russian text must stay collapsed');
+               if((await source.locator('div[lang="ru"]').count())!==1)
+                 throw Error('Manufacturer text lost source language annotation');
+               await source.locator('summary').click();
+               if(!(await source.innerText()).includes('Hardwire Kit'))
+                 throw Error('Original source content missing '+lang);
+             }
+             if(await page.locator('html').getAttribute('dir')!==(rtl?'rtl':'ltr'))
+               throw Error('Wrong document direction '+lang);
+             for(const width of [320,390]){
+               await page.setViewportSize({width,height:844});
+               const sizes=await page.evaluate(()=>{
+                 const panel=document.querySelector('#productModal .product-panel').getBoundingClientRect();
+                 return {page:document.documentElement.scrollWidth,win:innerWidth,panelX:panel.left,panelRight:panel.right};
+               });
+               if(sizes.page>sizes.win+4||sizes.panelX< -4||sizes.panelRight>sizes.win+4)
+                 throw Error('Mobile modal overflow '+lang+' '+width+': '+JSON.stringify(sizes));
+             }
+             result[lang]={title,expected};
+             await page.locator('#closeProduct').click();
+             await page.setViewportSize({width:390,height:844});
+           }
+           // No fabricated localized description: original facts always sourced,
+           // unrecognized labels must retain Russian source metadata.
+           const guard=await page.evaluate(()=>{
+             const api=window.NEOLINE_CATALOG_I18N;
+             return {source:api.isSourceOnly('Прошивка DVR 15 для Spectrum от 19.11.26'),
+               normal:api.formatSpecs([{label:'Выходное напряжение',value:'5В'}],'en'),
+               uncommon:api.formatSpecs([{label:'Новое свойство',value:'Значение'}],'ar')};
+           });
+           if(!guard.source||guard.normal[0].label!=='Output voltage'||
+               guard.uncommon[0].isOriginal!==true)throw Error('Facts/source guard failed '+JSON.stringify(guard));
+           if(errors.length)throw Error('JavaScript errors '+errors.join(' | '));
+           console.log('CATALOG FACT LOCALIZATION PASS:',JSON.stringify(result));
+           await browser.close();
+          })().catch(error=>{console.error(error);process.exit(1)});
+          JS
