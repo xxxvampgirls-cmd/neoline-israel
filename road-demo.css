@@ -147,3 +147,175 @@
 @media(prefers-reduced-motion:reduce){
  #installation .road-demo *{animation:none!important;transition:none!important}
 }
+
+/* FIXED-FRAME V2 | Neutral premium automotive HUD. No layout-shifting captions. */
+#installation .story{
+ grid-template-columns:minmax(0,.80fr) minmax(0,1.20fr);
+ gap:clamp(15px,2vw,26px);
+ padding-inline:clamp(14px,2.1vw,27px);
+}
+#installation .road-demo{
+ box-sizing:border-box;
+ width:100%;max-width:none;
+ height:452px;min-height:452px;max-height:452px;
+ align-self:center;margin:0;
+ border:1px solid #449ec87d;
+ border-radius:22px;
+ background:#0a273f;
+ box-shadow:0 15px 34px #073c6470,inset 0 1px #c5f6ff24;
+ overflow:hidden;
+}
+#installation .road-demo-visual{
+ box-sizing:border-box;
+ flex:1 1 0%;
+ height:auto;min-height:0;max-height:none;
+ overflow:hidden;
+ background:linear-gradient(155deg,#08253d,#195479 55%,#0b243e);
+}
+#installation .road-demo-visual>svg{
+ display:block;width:100%;height:100%;
+ min-height:0!important;max-height:none;aspect-ratio:auto;
+}
+#installation .road-demo-top{
+ top:12px;inset-inline:13px;
+}
+#installation .road-demo-tag,
+#installation .road-demo-rec,
+#installation .road-demo-hud{
+ box-sizing:border-box;
+ background:linear-gradient(135deg,#071f35e8,#123c56db);
+ border:1px solid #b9edff38;
+ border-radius:11px;
+ color:#e6f7ff;
+ box-shadow:0 4px 14px #00192944,inset 0 1px #ffffff16;
+ backdrop-filter:none;
+ -webkit-backdrop-filter:none;
+}
+#installation .road-demo-tag{
+ display:inline-flex;align-items:center;
+ min-height:29px;padding:6px 10px;
+ font:850 10px/1.3 Arial,sans-serif;
+ letter-spacing:.045em;
+}
+#installation .road-demo-tag::before{
+ content:"";width:6px;height:6px;flex:none;
+ border-radius:50%;margin-inline-end:7px;
+ background:#50d7eb;box-shadow:0 0 5px #6ee9fdbb;
+}
+#installation .road-demo-rec{
+ min-height:29px;padding:6px 9px;
+ font:850 10px/1.3 Arial,sans-serif;
+ letter-spacing:.035em;
+}
+#installation .road-demo-hud{
+ top:53px;inset-inline-end:13px;
+ min-height:31px;padding:5px 8px;
+ font-size:10px;
+}
+#installation .road-demo-hud>span:first-child{
+ width:18px;height:18px;border-radius:6px;
+ background:#0e668475;color:#92f5ff;
+}
+#installation .road-demo-bottom{
+ box-sizing:border-box;
+ flex:0 0 155px;
+ height:155px;min-height:155px;max-height:155px;
+ display:grid;
+ grid-template-rows:43px 42px minmax(0,1fr);
+ align-content:start;
+ gap:7px;
+ padding:13px 15px 12px;
+ overflow:hidden;
+ border-top:1px solid #7dd8fa47;
+ background:linear-gradient(160deg,#0b3452,#102d46 65%,#10283d);
+}
+#installation .road-demo-caption{
+ min-width:0;min-height:0;height:43px;max-height:43px;
+ display:grid;grid-template-rows:22px 18px;gap:2px;
+ align-content:start;overflow:hidden;
+}
+#installation .road-demo-caption strong{
+ display:block;min-width:0;max-width:100%;
+ font-size:13px;line-height:21px;font-weight:850;
+ white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+}
+#installation .road-demo-caption small{
+ display:block;min-width:0;max-width:100%;
+ font-size:10px;line-height:17px;
+ white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+ color:#b3d4e5;
+}
+#installation .road-demo-steps{
+ height:42px;max-height:42px;min-height:0;
+ display:grid;grid-template-columns:repeat(4,minmax(0,1fr));
+ gap:8px;
+}
+#installation .road-demo-step{
+ box-sizing:border-box;
+ min-width:0;min-height:42px;max-height:42px;
+ padding:5px 4px;
+ border-radius:10px;
+ border:1px solid #7fb1ce57;
+ background:#153d5c;
+ font-size:10px;line-height:1.2;
+ transition:background .2s,border-color .2s;
+ overflow-wrap:anywhere;
+}
+#installation .road-demo-step[aria-pressed="true"]{
+ background:linear-gradient(140deg,#1388b9,#1a729d);
+ border-color:#71d6f6;
+ box-shadow:inset 0 1px #ffffff24,0 0 0 1px #67d6ec1a;
+}
+#installation .road-demo-note{
+ display:-webkit-box;
+ -webkit-box-orient:vertical;
+ -webkit-line-clamp:2;
+ white-space:normal;
+ min-height:0;max-height:26px;
+ overflow:hidden;
+ text-overflow:ellipsis;
+ font-size:9px;line-height:1.35;
+ color:#a6c8da;
+}
+@media(max-width:1020px){
+ #installation .story{grid-template-columns:minmax(0,1fr);gap:16px}
+ #installation .road-demo{height:430px;min-height:430px;max-height:430px;max-width:760px}
+}
+@media(max-width:650px){
+ #installation .story{padding:17px 12px 16px;gap:14px}
+ #installation .road-demo{
+  height:clamp(360px,93vw,404px);
+  min-height:clamp(360px,93vw,404px);
+  max-height:clamp(360px,93vw,404px);
+  border-radius:19px;
+  margin-inline:auto;
+ }
+ #installation .road-demo-bottom{
+  flex-basis:148px;height:148px;min-height:148px;max-height:148px;
+  grid-template-rows:39px 40px minmax(0,1fr);
+  gap:6px;padding:11px 12px 10px;
+ }
+ #installation .road-demo-caption{
+  height:39px;max-height:39px;
+  grid-template-rows:20px 17px;gap:2px;
+ }
+ #installation .road-demo-caption strong{font-size:12px;line-height:19px}
+ #installation .road-demo-caption small{font-size:10px;line-height:16px}
+ #installation .road-demo-steps{height:40px;max-height:40px;gap:6px}
+ #installation .road-demo-step{
+  min-height:40px;max-height:40px;
+  font-size:9px;padding:5px 2px;border-radius:9px;
+ }
+ #installation .road-demo-note{font-size:8.8px;max-height:26px}
+ #installation .road-demo-top{inset-inline:10px;top:9px}
+ #installation .road-demo-tag{font-size:9px;min-height:27px;padding:5px 7px}
+ #installation .road-demo-rec{font-size:9px;min-height:27px;padding:5px 7px}
+ #installation .road-demo-hud{top:43px;inset-inline-end:10px;font-size:9px}
+}
+@media(max-width:355px){
+ #installation .story{padding-inline:9px}
+ #installation .road-demo{height:350px;min-height:350px;max-height:350px}
+ #installation .road-demo-steps{gap:4px}
+ #installation .road-demo-step{font-size:8px;line-height:1.12}
+ #installation .road-demo-tag{letter-spacing:0;font-size:8.5px}
+}
