@@ -871,7 +871,7 @@ html[dir=rtl] .news-feature-credit{right:auto;left:12px}
  animation:none;background:transparent;
 }
 #newsFeatureSlide .news-broadcast-foreground .news-feature-copy{
- position:absolute;z-index:6;animation:none;transform:none;
+ position:absolute;z-index:6;
 }
 #newsFeatureSlide .news-bg-layer .news-feature-pattern{
  position:absolute;z-index:2;animation:neolineNewsDots 16s ease-in-out infinite alternate;
