@@ -107,6 +107,12 @@ jobs:
               throw Error('Header language tabs or fifth game icon missing: '+JSON.stringify(compact));
             if(compact.chartTop<compact.titleBottom-4||compact.carouselTop<compact.chartBottom-4)
               throw Error('30-day news chart must be visible between title and carousel: '+JSON.stringify(compact));
+            const chartSize=await page.locator('#accidentChart').evaluate(el=>({
+              height:el.getBoundingClientRect().height,
+              dayRows:el.querySelectorAll('.accident-day').length
+            }));
+            if(chartSize.height<165)
+              throw Error('Mobile monthly accident graph is too compressed: '+JSON.stringify(chartSize));
             console.log('CHART-FIRST NEWS HERO PASS '+JSON.stringify(compact));
             await page.waitForFunction(()=>document.querySelectorAll('.news-card').length>0 || !document.getElementById('newsEmpty').hidden,{timeout:30000});
             const data=await page.evaluate(async()=>await (await fetch('./assets/news/news.json')).json());
@@ -117,6 +123,11 @@ jobs:
             const firstFeature=await carousel.locator('.news-feature-title').innerText();
             if(await carousel.locator('img,picture').count())
               throw Error('No news story photos in broadcast slider');
+            const corner=await carousel.locator('#newsFeatureSlide .news-broadcast-foreground').evaluate(el=>({
+              corner:getComputedStyle(el,'::after').content
+            }));
+            if(corner.corner!=='none')
+              throw Error('Legacy bright top-left news corner is still visible');
             const pearl=await carousel.locator('.news-broadcast-stage').evaluate(el=>({
               glows:getComputedStyle(el,'::before').animationName,
               sweep:getComputedStyle(el,'::after').animationName,
