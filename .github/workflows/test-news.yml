@@ -139,26 +139,36 @@ jobs:
                fixedCorners.upperAnimation!=='none'||fixedCorners.lowerAnimation!=='none'||
                !fixedCorners.upperColor.includes('linear-gradient')||!fixedCorners.lowerColor.includes('linear-gradient'))
               throw Error('The original corners must stay colored and motionless: '+JSON.stringify(fixedCorners));
-            const dots=await corners.evaluate(el=>{
+            const dotGrid=await corners.evaluate(el=>{
               const upper=el.querySelector('.news-studio-dots--top');
               const lower=el.querySelector('.news-studio-dots--bottom');
-              const small=getComputedStyle(upper);
-              const medium=getComputedStyle(upper,'::before');
-              const large=getComputedStyle(upper,'::after');
+              const topDots=[...upper.querySelectorAll('.news-studio-dot')];
+              const bottomDots=[...lower.querySelectorAll('.news-studio-dot')];
+              const topStyles=topDots.map(n=>getComputedStyle(n));
+              const lowStyles=bottomDots.map(n=>getComputedStyle(n));
+              const spacing=(Number.parseFloat(topStyles[1]?.left)-Number.parseFloat(topStyles[0]?.left));
               return {
-                fields:el.querySelectorAll('.news-studio-dots').length,
-                upperAnimation:small.animationName,
-                lowerAnimation:getComputedStyle(lower).animationName,
-                smallGrid:small.backgroundSize,mediumGrid:medium.backgroundSize,
-                largeGrid:large.backgroundSize,
-                upperMask:small.clipPath,lowerMask:getComputedStyle(lower).clipPath
+                upperCount:topDots.length,bottomCount:bottomDots.length,
+                gridsStationary:getComputedStyle(upper).animationName==='none'&&getComputedStyle(lower).animationName==='none',
+                sameMirror:topDots.every((n,i)=>{
+                  const top=getComputedStyle(n),low=lowStyles[i];
+                  return top.width===low.width&&top.height===low.height&&
+                   top.left===low.right&&top.top===low.bottom&&top.opacity===low.opacity;
+                }),
+                spacing,firstSize:Number.parseFloat(topStyles[0]?.width),
+                smallestSize:Math.min(...topStyles.map(x=>Number.parseFloat(x.width))),
+                background:getComputedStyle(upper).backgroundImage,
+                topMask:getComputedStyle(upper).clipPath,
+                bottomMask:getComputedStyle(lower).clipPath
               };
             });
-            if(dots.fields!==2||dots.upperAnimation!=='none'||dots.lowerAnimation!=='none'||
-               !dots.smallGrid.includes('16px')||!dots.mediumGrid.includes('25px')||
-               !dots.largeGrid.includes('32px')||!dots.upperMask.includes('polygon')||
-               !dots.lowerMask.includes('polygon'))
-              throw Error('Graded dots should be plentiful and static in both corners: '+JSON.stringify(dots));
+            if(dotGrid.upperCount<14||dotGrid.upperCount!==dotGrid.bottomCount||
+               !dotGrid.gridsStationary||!dotGrid.sameMirror||
+               dotGrid.spacing<16||dotGrid.spacing>25||
+               dotGrid.firstSize<=dotGrid.smallestSize||
+               dotGrid.background!=='none'||
+               !dotGrid.topMask.includes('polygon')||!dotGrid.bottomMask.includes('polygon'))
+              throw Error('Corner dots must form one symmetrical, graduated, regularly spaced grid: '+JSON.stringify(dotGrid));
             await corners.evaluate(el=>{el.dataset.fixedCorners='original'});
             const pearl=await carousel.locator('.news-broadcast-stage').evaluate(el=>({
               glows:getComputedStyle(el,'::before').animationName,
