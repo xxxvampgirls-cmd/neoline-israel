@@ -47,6 +47,30 @@ jobs:
             await page.locator('#catalogShowMoreBtn').click();
             await page.waitForFunction(()=>document.querySelectorAll('#products .product').length===16,{timeout:10000});
             console.log('PRODUCT FIRST 8 PASS: 8 -> 16');
+            // After swapping sort and search, dropdown must be fully onscreen
+            // instead of spilling out of the mobile viewport at the left.
+            for(const width of [320,390]){
+              await page.setViewportSize({width,height:844});
+              await page.locator('#catalogSortButton').click();
+              const position=await page.locator('#catalogSortMenu').evaluate(el=>{
+                const r=el.getBoundingClientRect();
+                return {left:r.left,right:r.right,width:r.width,
+                  viewport:document.documentElement.clientWidth,
+                  visible:getComputedStyle(el).display!=='none'};
+              });
+              if(!position.visible||position.left<7||
+                 position.right>position.viewport-7||position.width<250)
+                throw Error('Sort dropdown cropped on '+width+'px Android: '+JSON.stringify(position));
+              const labels=await page.locator('#catalogSortMenu .catalog-sort-option-label').allTextContents();
+              if(labels.length!==3||labels.some(label=>!label.trim()))
+                throw Error('Sort popup option text missing: '+JSON.stringify(labels));
+              await page.locator('#catalogSortMenu [data-sort-value="low"]').click();
+              if(await page.locator('#sort').inputValue()!=='low'||
+                 await page.locator('#catalogSortButton').getAttribute('aria-expanded')!=='false')
+                throw Error('Sort menu did not update price order and close');
+            }
+            await page.setViewportSize({width:390,height:844});
+            console.log('CATALOG SORT POPUP PASS: 320px/390px complete visible labels and price sorting');
             const tabs=await page.locator('.mobile-nav>button, .mobile-nav>a').count();
             if(tabs!==5)throw Error('Expected five mobile navigation controls, got '+tabs);
             const deliveryTab=page.locator('#mobileDelivery');
