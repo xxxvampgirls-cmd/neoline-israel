@@ -1082,3 +1082,39 @@ html[dir=rtl] .news-feature-credit{right:auto;left:12px}
   animation:none!important;transform:none!important;will-change:auto;
  }
 }
+
+/* 2026-11-20: keep the pearl-white lighting away from rounded news corners */
+/* The highlighted top-left diagonal and bottom-right cyan triangle were legacy
+   photographic overlays, not part of the new television transition masks.
+   Keep the backdrop clean in all five news categories and RTL layouts. */
+#newsFeatureSlide .news-broadcast-foreground::after{content:none!important}
+#newsFeatureSlide .news-bg-layer::before,
+#newsFeatureSlide .news-bg-layer::after,
+#newsFeatureSlide .news-bg-layer .news-feature-blueprint::before,
+#newsFeatureSlide .news-bg-layer .news-feature-blueprint::after{content:none!important}
+/* Keep the tiny newsroom dot grid centered; no dots or cyan wedges in corners. */
+#newsFeatureSlide .news-bg-layer .news-feature-pattern{
+ top:20%;left:25%;right:auto;width:50%;height:45%;opacity:.22;
+ -webkit-mask-image:radial-gradient(ellipse at center,#0009 0%,transparent 78%);
+ mask-image:radial-gradient(ellipse at center,#0009 0%,transparent 78%);
+}
+#newsFeatureSlide .news-broadcast-stage::before,
+#newsFeatureSlide .news-broadcast-stage::after{
+ inset:11% 12%;
+ border-radius:20px;
+ -webkit-mask-image:radial-gradient(ellipse 58% 61% at 50% 50%,#000 25%,transparent 92%);
+ mask-image:radial-gradient(ellipse 58% 61% at 50% 50%,#000 25%,transparent 92%);
+}
+#newsFeatureSlide .news-broadcast-stage::before{
+ background:
+  radial-gradient(ellipse 45% 58% at 38% 38%,rgba(251,254,255,.25),transparent 85%),
+  radial-gradient(ellipse 43% 48% at 66% 57%,rgba(182,232,255,.19),transparent 87%);
+}
+#newsFeatureSlide .news-broadcast-stage::after{
+ background:linear-gradient(112deg,transparent 23%,rgba(237,250,255,.035) 38%,
+  rgba(255,255,255,.13) 49%,rgba(184,235,255,.12) 56%,transparent 73%);
+}
+@media(prefers-reduced-motion:reduce){
+ #newsFeatureSlide .news-broadcast-stage::before,
+ #newsFeatureSlide .news-broadcast-stage::after{animation:none!important;transform:none!important}
+}
