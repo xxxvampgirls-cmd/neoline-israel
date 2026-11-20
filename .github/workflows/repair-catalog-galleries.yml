@@ -1,0 +1,58 @@
+name: Repair repeated NEOLINE gallery references safely
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - 'scripts/repair_catalog_galleries.py'
+      - 'scripts/catalog_photo_quality.py'
+      - '.github/workflows/repair-catalog-galleries.yml'
+  schedule:
+    - cron: '45 6 * * 1'
+permissions:
+  contents: write
+concurrency:
+  group: neoline-catalog-gallery-repair
+  cancel-in-progress: false
+jobs:
+  repair:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          persist-credentials: true
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install image reader
+        run: python -m pip install --disable-pip-version-check 'Pillow>=11,<13'
+      - name: Rewrite references only, retaining original images for recovery
+        run: python scripts/repair_catalog_galleries.py --apply
+      - name: Check all resulting gallery references and four-language catalog JSON
+        run: |
+          python scripts/audit_catalog_photos.py
+          python -m json.tool assets/catalog/catalog.json >/dev/null
+      - name: Save quality reports
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: neoline-gallery-cleanup
+          path: |
+            assets/catalog/gallery-repair-report.json
+            assets/catalog/gallery-quality.json
+          if-no-files-found: warn
+          retention-days: 21
+      - name: Commit safe gallery cleanup
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add assets/catalog/catalog.json assets/catalog/gallery-repair-report.json assets/catalog/gallery-quality.json
+          if git diff --cached --quiet; then
+            echo "No gallery references needed changing"
+            exit 0
+          fi
+          git commit -m "Remove verified duplicate catalog gallery references (preserve original files)"
+          git pull --rebase origin main
+          git push origin HEAD:main
