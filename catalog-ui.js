@@ -158,7 +158,7 @@ function importedModal(id){
   const advance=delta=>{
    index=(index+delta+urls.length)%urls.length;
    img.src=urls[index];img.alt=p.name+' – '+(index+1)+' / '+urls.length;
-   $('modalPhotoCounter').textContent=(index+1)+' / '+urls.length;
+   const counter=$('modalPhotoCounter');if(counter)counter.textContent=(index+1)+' / '+urls.length;
    thumbs.forEach((b,j)=>b.classList.toggle('active',j===index));
    thumbs[index]?.scrollIntoView({behavior:'smooth',block:'nearest',inline:'nearest'});
   };
