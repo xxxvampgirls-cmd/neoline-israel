@@ -42,6 +42,33 @@ jobs:
            await page.goto('http://127.0.0.1:8765/teoria.html',{waitUntil:'domcontentloaded'});
            const wait=async()=>page.waitForFunction(()=>document.getElementById('bankStatus')?.classList.contains('loaded'),null,{timeout:20000});
            await wait();
+           // New daily card belongs in the exact slot between hero and mode picker,
+           // never inside the long game modes panel below the five cards.
+           const dailyCard=page.locator('#theoryDaily');
+           if(!await dailyCard.isVisible())throw Error('Daily challenge is not visible above modes');
+           if(await page.locator('#theoryDaily').count()!==1)throw Error('Duplicate daily challenge');
+           const position=await page.evaluate(()=>{
+             const rect=selector=>document.querySelector(selector).getBoundingClientRect();
+             const hero=rect('.game-hero.theory-dashboard'),daily=rect('#theoryDaily'),lobby=rect('#gameLobby');
+             return {heroBottom:hero.bottom,dailyTop:daily.top,dailyBottom:daily.bottom,lobbyTop:lobby.top,
+                     childOfLobby:document.getElementById('gameLobby').contains(document.getElementById('theoryDaily'))};
+           });
+           if(position.childOfLobby||position.dailyTop<position.heroBottom-2||position.dailyBottom>position.lobbyTop+2)
+             throw Error('Daily card is not between hero stats and mode picker: '+JSON.stringify(position));
+           for(const width of [320,390,760]){
+             await page.setViewportSize({width,height:844});
+             const bounds=await page.evaluate(()=>{
+               const card=document.getElementById('theoryDaily');
+               const button=document.getElementById('dailyStart');
+               const badge=document.getElementById('dailyStreak');
+               const a=card.getBoundingClientRect(),b=button.getBoundingClientRect(),c=badge.getBoundingClientRect();
+               return {scroll:document.documentElement.scrollWidth,view:innerWidth,card:a.toJSON(),button:b.toJSON(),badge:c.toJSON()};
+             });
+             if(bounds.scroll>bounds.view+3||bounds.button.right>bounds.card.right+1||
+                bounds.badge.left<bounds.card.left-1||bounds.button.left<bounds.badge.right-2)
+               throw Error('Daily challenge card layout overflows or controls overlap at '+width+': '+JSON.stringify(bounds));
+           }
+           await page.setViewportSize({width:390,height:844});
            for(const [lang,rtl] of [['ru',false],['en',false],['he',true],['ar',true]]){
              if(lang!=='ru')await page.locator('[data-lang="'+lang+'"]').click();
              await page.waitForFunction(l=>document.documentElement.lang===l&&document.getElementById('bankStatus')?.classList.contains('loaded'),lang,{timeout:20000});
@@ -123,11 +150,13 @@ jobs:
            await page.reload({waitUntil:'domcontentloaded'});
            await wait();
            await page.locator('#dailyStart').click();
+           if(await dailyCard.isVisible())throw Error('Relocated daily card must hide during active game');
            if(!await page.locator('#gamePlaying').isVisible()||
               !(await page.locator('#currentMode').innerText()).includes('Задание дня'))
              throw Error('Daily challenge did not begin');
            const firstId=await page.locator('#questionId').innerText();
            await page.locator('#exitQuiz').click();
+           if(!await dailyCard.isVisible())throw Error('Daily card did not reappear after leaving the game');
            await page.locator('#dailyStart').click();
            if(await page.locator('#questionId').innerText()!==firstId)
              throw Error('Daily challenge changed questions on same day');
@@ -166,7 +195,7 @@ jobs:
              if(dims.document>dims.window+3)throw Error('Horizontal overflow '+JSON.stringify(dims));
            }
            if(errors.length)throw Error('Game JS errors: '+errors.join(' | '));
-           console.log('NEOLINE THEORY PASS: 4 languages, official questions, RTL, practice, 3-life Game Over, replay, hidden exam answers, deterministic 5-question daily quest and Israel-date streak');
+           console.log('NEOLINE THEORY PASS: 4 languages, official questions, RTL, daily card between hero and modes without overlaps, game-time hiding, 3-life Game Over, daily quest and Israeli-date streak');
            await browser.close();
           })().catch(e=>{console.error(e);process.exit(1)});
           JS
