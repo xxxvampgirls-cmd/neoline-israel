@@ -142,7 +142,7 @@
 #neolineAcademy .academy-lesson-actions{
  display:flex;gap:8px;flex-wrap:wrap;margin-top:15px;
 }
-#neolineAcademy .academy-mark,#neolineAcademy .academy-video-button{
+#neolineAcademy .academy-mark,#neolineAcademy .academy-video-button,#neolineAcademy .academy-next{
  box-sizing:border-box;display:inline-flex;justify-content:center;align-items:center;
  min-height:39px;padding:9px 13px;border-radius:10px;
  border:1px solid #147daf;background:#167fbc;color:#fff;
@@ -150,6 +150,16 @@
 }
 #neolineAcademy .academy-mark.is-completed{background:#e9f9f4;color:#15806a;border-color:#addfd1}
 #neolineAcademy .academy-video-button{background:#ebf8ff;color:#147ca9;border-color:#b5ddec}
+#neolineAcademy .academy-next{
+ background:linear-gradient(135deg,#137db0,#0c9ccd);
+ border-color:#188ac1;box-shadow:0 4px 11px #1780ae20;
+}
+#neolineAcademy .academy-next:hover{filter:brightness(1.045)}
+#neolineAcademy .academy-finished{
+ margin:10px 0 0;padding:10px 12px;border-radius:10px;
+ background:#e9f9f4;border:1px solid #addfd1;
+ color:#127c64;font-size:11px;font-weight:800;line-height:1.5;
+}
 #neolineAcademy .academy-video-note{
  margin:9px 0 0;color:#89a2b0;font-size:10px;line-height:1.6;
 }
@@ -213,6 +223,7 @@
  #neolineAcademy .academy-step-list{gap:8px}
  #neolineAcademy .academy-step-list>li{padding:9px 10px}
  #neolineAcademy .academy-lesson-actions>*{flex:1}
+ #neolineAcademy .academy-lesson-actions>.academy-next{flex:1 1 100%}
  #neolineAcademy .academy-resources{gap:9px}
  #neolineAcademy .academy-resource-links{grid-template-columns:repeat(2,minmax(0,1fr));gap:6px}
  #neolineAcademy .academy-resource-link{font-size:10px;min-height:38px}
