@@ -129,7 +129,7 @@
   const name=normalizedVideoModel(modelName(id));
   return facebookCatalog.filter(v=>{
    if(!v||typeof v!=="object"||!checkedFacebookUrl(v.url))return false;
-   if(!/^en(?:[-_][a-z]+)?$/i.test(String(v.language||"en")))return false;
+   if(typeof v.language!=="string" || !/^en(?:[-_][a-z]+)?$/i.test(v.language))return false;
    if(v.modelId!==undefined && v.modelId!==null)return Number(v.modelId)===id;
    return typeof v.model==="string"&&normalizedVideoModel(v.model)===name;
   });
