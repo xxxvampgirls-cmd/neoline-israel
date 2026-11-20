@@ -1,0 +1,71 @@
+name: Remove advertisements from real NEOLINE product photos
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - 'assets/catalog/catalog.json'
+      - 'assets/catalog/images/**'
+      - 'scripts/catalog_promo_filter.py'
+      - 'scripts/remove_catalog_promo_images.py'
+      - '.github/workflows/remove-catalog-promo.yml'
+  schedule:
+    - cron: '20 6 * * 1'
+permissions:
+  contents: write
+concurrency:
+  group: neoline-no-advertisements-in-product-galleries
+  cancel-in-progress: false
+jobs:
+  clean:
+    runs-on: ubuntu-latest
+    timeout-minutes: 14
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          persist-credentials: true
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install image decoder
+        run: python -m pip install --disable-pip-version-check 'Pillow>=11,<13'
+      - name: Remove confirmed pickup, delivery and sale banners from every product gallery
+        run: |
+          python -m py_compile scripts/catalog_promo_filter.py scripts/remove_catalog_promo_images.py
+          python scripts/remove_catalog_promo_images.py --apply
+      - name: Audit genuine remaining images without changing the photos
+        run: |
+          python scripts/audit_catalog_photos.py
+          python -m json.tool assets/catalog/catalog.json >/dev/null
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          j=json.loads(Path('assets/catalog/catalog.json').read_text())
+          product=next(p for p in j['products'] if p['id']==951833046070)
+          assert './assets/catalog/images/951833046070-3.webp' not in product['images'], 'User-confirmed shipping ad remains in gallery'
+          assert len(product['images'])>=1, 'Never leave the real cable product without an image'
+          print('PASS: shipping advertisement removed, remaining real photos:',len(product['images']))
+          PY
+      - name: Save complete cleanup report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: NEOLINE-no-banners-gallery-report
+          path: |
+            assets/catalog/promo-image-cleanup.json
+            assets/catalog/gallery-quality.json
+          if-no-files-found: warn
+          retention-days: 21
+      - name: Commit filtered product galleries and audit, preserving original files
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add assets/catalog/catalog.json assets/catalog/promo-image-cleanup.json assets/catalog/gallery-quality.json
+          if git diff --cached --quiet; then
+            echo 'No additional promotional images identified'
+            exit 0
+          fi
+          git commit -m 'Remove shipping and marketing banners from real product photo galleries'
+          git pull --rebase origin main
+          git push origin HEAD:main
