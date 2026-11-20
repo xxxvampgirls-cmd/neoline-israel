@@ -79,35 +79,31 @@ function restartFeatureTimer(){
  if(feature.items.length<2||feature.paused||document.hidden||featureReducedMotion())return;
  feature.timer=setTimeout(()=>setFeatureIndex(feature.index+1,false),7600);
 }
-/* Two full-size color planes move horizontally with constant speed, like
-   a video slide transition. Text retains its independent speed-ramped motion.
-   Pure CSS colors/shapes: no photographs, canvas or video downloads. */
-function paintFeatureBackdrop(host,category,direction){
- const track=host.querySelector(".news-feature-backdrops");
- if(!track)return;
- const theme=Object.prototype.hasOwnProperty.call(artPaths,category)?category:"cars";
- const old=track.querySelector(".news-feature-backdrop--current");
- // Language changes and source refreshes must not restart the same backdrop.
- if(direction===0&&old&&old.dataset.newsCategory===theme)return;
- track.querySelectorAll(".news-feature-backdrop--exit").forEach(el=>el.remove());
- const plane=document.createElement("span");
- plane.className="news-feature-backdrop news-feature-backdrop--"+theme+" news-feature-backdrop--current";
- plane.dataset.newsCategory=theme;
- plane.setAttribute("aria-hidden","true");
- plane.innerHTML='<span class="news-feature-pattern"></span><span class="news-feature-blueprint"></span>';
- const animate=direction!==0&&!!old&&!featureReducedMotion();
- if(!animate){track.replaceChildren(plane);return}
- const side=direction>0?"next":"prev";
- old.classList.remove("news-feature-backdrop--current","news-feature-backdrop--enter-next","news-feature-backdrop--enter-prev");
- old.classList.add("news-feature-backdrop--exit","news-feature-backdrop--exit-"+side);
- plane.classList.add("news-feature-backdrop--enter","news-feature-backdrop--enter-"+side);
- track.appendChild(plane);
- const cleanup=()=>{
-  old.remove();
-  plane.classList.remove("news-feature-backdrop--enter","news-feature-backdrop--enter-"+side);
- };
- plane.addEventListener("animationend",event=>{if(event.target===plane)cleanup()},{once:true});
- setTimeout(cleanup,850);
+/* Broadcast scene mixer. Every scene contains its own headline, source and
+   category-colored background, so animated masks reveal a genuinely different
+   full frame rather than a colored layer passing over fixed text.
+   Five transitions cycle: diagonal, ribbon shards, chevron, segmented blinds,
+   and centered diamond. No photos, video downloads or image dependencies. */
+const newsBroadcastMasks=["diagonal","ribbons","chevron","shutters","diamond"];
+let newsBroadcastStep=0;
+function makeFeatureScene(item){
+ const url=safeURL(item.url),localized=localStory(item);
+ const theme=Object.prototype.hasOwnProperty.call(artPaths,item.category)?item.category:"cars";
+ const scene=document.createElement("a");
+ scene.className="news-feature-story news-feature-story--animated news-scene news-scene--current";
+ scene.href=url;
+ scene.target="_blank";
+ scene.rel="noopener noreferrer nofollow";
+ scene.dataset.newsTheme=theme;
+ scene.setAttribute("aria-label",localized.title);
+ scene.innerHTML='<span class="news-feature-backdrop news-feature-backdrop--'+safe(theme)+'" aria-hidden="true">'+
+  '<span class="news-feature-pattern"></span><span class="news-feature-blueprint"></span></span>'+
+  '<span class="news-feature-copy"><span class="news-feature-tag">'+safe(featureTr("latest"))+
+  ' <i>·</i> '+safe(tr(item.category))+'</span>'+
+  '<strong class="news-feature-title" dir="auto">'+safe(localized.title)+'</strong>'+
+  '<span class="news-feature-footer">'+safe(displayDate(item.date))+' · '+safe(item.publisher||"")+
+  '<span class="news-feature-go">'+safe(featureTr("view"))+' ↗</span></span></span>';
+ return scene;
 }
 function drawFeature(direction=0){
  const host=$("newsFeatureSlide"),controls=$("newsFeatureControls");
@@ -118,52 +114,57 @@ function drawFeature(direction=0){
  $("newsFeaturePrev").setAttribute("aria-label",featureTr("prev"));
  $("newsFeatureNext").setAttribute("aria-label",featureTr("next"));
  $("newsFeatureDots").setAttribute("aria-label",featureTr("pick"));
- if(!list.length){host.innerHTML='<p class="news-feature-loading">'+safe(featureTr("empty"))+'</p>';return}
- const item=list[feature.index],url=safeURL(item.url),localized=localStory(item);
- let story=host.querySelector(".news-feature-story--animated");
- if(!story){
-  host.innerHTML='<span class="news-feature-backdrops" aria-hidden="true"></span>'+
-    '<a class="news-feature-story news-feature-story--animated" target="_blank" rel="noopener noreferrer nofollow">'+
-    '<span class="news-feature-photo news-feature-photo--empty" aria-hidden="true"></span></a>';
-  story=host.querySelector(".news-feature-story--animated");
+ // Resolve fast taps immediately; never keep a partly clipped scene alive.
+ if(feature.finishTransition)feature.finishTransition();
+ if(!list.length){
+  host.innerHTML='<p class="news-feature-loading">'+safe(featureTr("empty"))+'</p>';
+  return;
  }
- paintFeatureBackdrop(host,item.category,direction);
- story.href=url;
- story.dataset.newsTheme=item.category;
- story.setAttribute("aria-label",localized.title);
- const newCopy=document.createElement("span");
- newCopy.className="news-feature-copy";
- newCopy.innerHTML='<span class="news-feature-tag">'+safe(featureTr("latest"))+' <i>·</i> '+safe(tr(item.category))+'</span>'+
-  '<strong class="news-feature-title" dir="auto">'+safe(localized.title)+'</strong>'+
-  '<span class="news-feature-footer">'+safe(displayDate(item.date))+' · '+safe(item.publisher||"")+
-  '<span class="news-feature-go">'+safe(featureTr("view"))+' ↗</span></span>';
- // Fast repeated taps never leave orphaned outgoing text overlays.
- story.querySelectorAll(".news-feature-copy--exit").forEach(el=>el.remove());
- const previous=story.querySelector(".news-feature-copy");
- const animate=direction!==0&&previous&&!featureReducedMotion();
- if(!animate){
-  if(previous)previous.replaceWith(newCopy);
-  else story.appendChild(newCopy);
- }else{
-  const forward=direction>0;
-  const shift=forward?"-64%":"64%";
+ const scene=makeFeatureScene(list[feature.index]);
+ const previous=host.querySelector(".news-scene--current");
+ const animate=direction!==0&&!!previous&&!featureReducedMotion();
+ if(!animate)host.replaceChildren(scene);
+ else{
+  const effect=newsBroadcastMasks[(newsBroadcastStep++)%newsBroadcastMasks.length];
+  const side=direction>0?"next":"prev";
+  previous.classList.remove("news-scene--current");
+  previous.classList.add("news-scene--leaving");
   previous.setAttribute("aria-hidden","true");
-  previous.style.setProperty("--news-exit-shift",shift);
-  previous.style.setProperty("--news-slant",forward?"-4deg":"4deg");
-  previous.classList.remove("news-feature-copy--enter");
-  previous.classList.add("news-feature-copy--exit");
-  newCopy.style.setProperty("--news-enter-shift",forward?"68%":"-68%");
-  newCopy.style.setProperty("--news-overshoot",forward?"-2%":"2%");
-  newCopy.style.setProperty("--news-slant",forward?"-4deg":"4deg");
-  newCopy.classList.add("news-feature-copy--enter");
-  story.appendChild(newCopy);
-  // animationend can be suppressed on background tabs; clean up regardless.
-  const cleanup=()=>{
-   previous.remove();
-   newCopy.classList.remove("news-feature-copy--enter");
+  previous.tabIndex=-1;
+  host.appendChild(scene);
+  if(effect==="ribbons"||effect==="shutters"){
+   // The arriving frame is revealed through FIVE true image masks.
+   // Fragments clone the whole graphic frame, not only a decorative overlay.
+   scene.classList.add("news-scene--queued");
+   scene.setAttribute("aria-hidden","true");
+   scene.tabIndex=-1;
+   for(let i=0;i<5;i++){
+    const fragment=scene.cloneNode(true);
+    fragment.classList.remove("news-scene--current","news-scene--queued");
+    fragment.classList.add("news-scene--fragment","news-scene--fragment-"+effect,
+      "news-scene--part-"+i,"news-scene--from-"+side);
+    fragment.removeAttribute("href");
+    fragment.tabIndex=-1;
+    fragment.setAttribute("aria-hidden","true");
+    fragment.style.setProperty("--news-mask-delay",String(i*52)+"ms");
+    host.appendChild(fragment);
+   }
+  }else{
+   scene.classList.add("news-scene--wipe","news-scene--wipe-"+effect,"news-scene--from-"+side);
+  }
+  let timer;
+  const finish=()=>{
+   if(feature.finishTransition!==finish)return;
+   feature.finishTransition=null;
+   clearTimeout(timer);
+   scene.classList.remove("news-scene--queued","news-scene--wipe",
+    "news-scene--wipe-"+effect,"news-scene--from-"+side);
+   scene.removeAttribute("aria-hidden");
+   scene.removeAttribute("tabindex");
+   host.replaceChildren(scene);
   };
-  newCopy.addEventListener("animationend",cleanup,{once:true});
-  setTimeout(cleanup,700);
+  feature.finishTransition=finish;
+  timer=setTimeout(finish,950);
  }
  const dots=$("newsFeatureDots");
  if(dots.childElementCount!==list.length){
@@ -182,6 +183,7 @@ function setFeatureIndex(index,manual=true){
  const oldIndex=feature.index;
  feature.index=(index+feature.items.length)%feature.items.length;
  if(feature.index===oldIndex){restartFeatureTimer();return}
+ // Preserve the chosen direction even across the last-to-first wrap.
  drawFeature(index>oldIndex?1:-1);
  if(manual)feature.paused=false;
  restartFeatureTimer();
