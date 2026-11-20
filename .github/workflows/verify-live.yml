@@ -9,6 +9,9 @@ on:
       - 'catalog-video.js'
       - 'neoline-academy.js'
       - 'neoline-academy.css'
+      - 'teoria.html'
+      - 'teoria*.js'
+      - 'teoria*.css'
       - '.github/workflows/verify-live.yml'
 permissions:
   contents: read
@@ -30,14 +33,20 @@ jobs:
           from pathlib import Path
           base = "https://neoline-israel.pages.dev/"
           revision = os.environ.get("GITHUB_COMMIT","")[:12]
-          files = ("catalog-ui.js","catalog-video.js","neoline-academy.js","neoline-academy.css")
-          local_html = Path("index.html").read_text(encoding="utf-8")
+          shop_files = ("catalog-ui.js","catalog-video.js","neoline-academy.js","neoline-academy.css")
+          game_files = ("teoria.js","teoria-ar.js","teoria-v2.js","teoria-daily.css")
+          files = shop_files + game_files
+          local_pages = {
+              "index.html": Path("index.html").read_text(encoding="utf-8"),
+              "teoria.html": Path("teoria.html").read_text(encoding="utf-8")
+          }
           markers = {}
           for path in files:
-              matches = re.findall(r'\./'+re.escape(path)+r'\?v=[^"\s]+', local_html)
+              page = "index.html" if path in shop_files else "teoria.html"
+              matches = re.findall(r'\./'+re.escape(path)+r'\?v=[^"\s]+', local_pages[page])
               if len(matches) != 1:
-                  raise SystemExit(f"FAIL: index.html must reference one versioned {path}, found {len(matches)}")
-              markers[path] = matches[0]
+                  raise SystemExit(f"FAIL: {page} must reference one versioned {path}, found {len(matches)}")
+              markers[path] = (page,matches[0])
           hashes = {path:hashlib.sha256(Path(path).read_bytes()).hexdigest() for path in files}
           def fetch(path):
               separator = '&' if '?' in path else '?'
@@ -48,8 +57,12 @@ jobs:
           last_reason = "not checked"
           for attempt in range(12):
               try:
-                  html = fetch("").decode("utf-8","replace")
-                  missing = [name for name,marker in markers.items() if marker not in html]
+                  live_pages = {
+                      "index.html": fetch("").decode("utf-8","replace"),
+                      "teoria.html": fetch("teoria.html").decode("utf-8","replace")
+                  }
+                  missing = [name for name,(page,marker) in markers.items()
+                             if marker not in live_pages[page]]
                   if missing:
                       last_reason = "Cloudflare HTML is behind for: "+", ".join(missing)
                   else:
@@ -63,7 +76,7 @@ jobs:
                           if count < 50:
                               last_reason = f"Catalogue data incomplete: {count} imported products"
                           else:
-                              print(f"PASS: Cloudflare reflects this release, all 4 JS/CSS files match GitHub; {count} imported products")
+                              print(f"PASS: Cloudflare serves both current pages and all 8 JS/CSS files, including theory; {count} imported products")
                               break
               except Exception as exc:
                   last_reason = f"{type(exc).__name__}: {exc}"
