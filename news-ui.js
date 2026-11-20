@@ -62,8 +62,8 @@ function currentOnly(o){
 }
 
 
-/* Featured news header: only one slide image exists in the DOM at a time.
-   It rotates the latest 10 valid stories independently of the 8-card list. */
+/* Featured news rotates the latest ten headlines independently of the list.
+   Each editorial category has its own restrained NEOLINE blue-family palette. */
 const feature={items:[],index:0,timer:null,touchX:null,touchY:null,paused:false,swipedUntil:0};
 const featureTerms={
  ru:{latest:"10 СВЕЖИХ НОВОСТЕЙ",view:"Читать новость",slide:"Новость",of:"из",prev:"Предыдущая новость",next:"Следующая новость",pick:"Выбрать новость",loading:"Загружаем последние новости…",empty:"Пока нет проверенных новостей"},
@@ -79,8 +79,36 @@ function restartFeatureTimer(){
  if(feature.items.length<2||feature.paused||document.hidden||featureReducedMotion())return;
  feature.timer=setTimeout(()=>setFeatureIndex(feature.index+1,false),7600);
 }
-/* Slide copy moves with a short cinematic speed-ramp while the backdrop,
-   dot grid and glass accents stay fixed. No image or duplicate link nodes. */
+/* Two full-size color planes move horizontally with constant speed, like
+   a video slide transition. Text retains its independent speed-ramped motion.
+   Pure CSS colors/shapes: no photographs, canvas or video downloads. */
+function paintFeatureBackdrop(host,category,direction){
+ const track=host.querySelector(".news-feature-backdrops");
+ if(!track)return;
+ const theme=Object.prototype.hasOwnProperty.call(artPaths,category)?category:"cars";
+ const old=track.querySelector(".news-feature-backdrop--current");
+ // Language changes and source refreshes must not restart the same backdrop.
+ if(direction===0&&old&&old.dataset.newsCategory===theme)return;
+ track.querySelectorAll(".news-feature-backdrop--exit").forEach(el=>el.remove());
+ const plane=document.createElement("span");
+ plane.className="news-feature-backdrop news-feature-backdrop--"+theme+" news-feature-backdrop--current";
+ plane.dataset.newsCategory=theme;
+ plane.setAttribute("aria-hidden","true");
+ plane.innerHTML='<span class="news-feature-pattern"></span><span class="news-feature-blueprint"></span>';
+ const animate=direction!==0&&!!old&&!featureReducedMotion();
+ if(!animate){track.replaceChildren(plane);return}
+ const side=direction>0?"next":"prev";
+ old.classList.remove("news-feature-backdrop--current","news-feature-backdrop--enter-next","news-feature-backdrop--enter-prev");
+ old.classList.add("news-feature-backdrop--exit","news-feature-backdrop--exit-"+side);
+ plane.classList.add("news-feature-backdrop--enter","news-feature-backdrop--enter-"+side);
+ track.appendChild(plane);
+ const cleanup=()=>{
+  old.remove();
+  plane.classList.remove("news-feature-backdrop--enter","news-feature-backdrop--enter-"+side);
+ };
+ plane.addEventListener("animationend",event=>{if(event.target===plane)cleanup()},{once:true});
+ setTimeout(cleanup,850);
+}
 function drawFeature(direction=0){
  const host=$("newsFeatureSlide"),controls=$("newsFeatureControls");
  if(!host||!controls)return;
@@ -94,13 +122,14 @@ function drawFeature(direction=0){
  const item=list[feature.index],url=safeURL(item.url),localized=localStory(item);
  let story=host.querySelector(".news-feature-story--animated");
  if(!story){
-  host.innerHTML='<a class="news-feature-story news-feature-story--animated" target="_blank" rel="noopener noreferrer nofollow">'+
-    '<span class="news-feature-photo news-feature-photo--empty" aria-hidden="true"></span>'+
-    '<span class="news-feature-pattern" aria-hidden="true"></span>'+
-    '<span class="news-feature-blueprint" aria-hidden="true"></span></a>';
+  host.innerHTML='<span class="news-feature-backdrops" aria-hidden="true"></span>'+
+    '<a class="news-feature-story news-feature-story--animated" target="_blank" rel="noopener noreferrer nofollow">'+
+    '<span class="news-feature-photo news-feature-photo--empty" aria-hidden="true"></span></a>';
   story=host.querySelector(".news-feature-story--animated");
  }
+ paintFeatureBackdrop(host,item.category,direction);
  story.href=url;
+ story.dataset.newsTheme=item.category;
  story.setAttribute("aria-label",localized.title);
  const newCopy=document.createElement("span");
  newCopy.className="news-feature-copy";
