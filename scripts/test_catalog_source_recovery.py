@@ -41,6 +41,11 @@ class ProductImageRecoveryTests(unittest.TestCase):
         # Exact image was shown by the user as photo 3/3 of Power Cord Hybrid.
         self.assertTrue(banned_reference("./assets/catalog/images/951833046070-3.webp"))
         self.assertFalse(banned_reference("./assets/catalog/images/951833046070-2.webp"))
+        with tempfile.TemporaryDirectory() as folder:
+            new_real_photo=Path(folder)/"951833046070-3.webp"
+            new_real_photo.write_bytes(picture(1))
+            self.assertFalse(banned_reference(str(new_real_photo)),
+                             "Future genuine photo 3 must never be rejected by filename alone")
         marketing=Image.new("RGB",(900,275),(5,105,222))
         draw=ImageDraw.Draw(marketing)
         draw.rectangle((140,104,760,152),fill=(240,240,245))
