@@ -176,7 +176,9 @@ async function loadBank(){
  refreshStats();
 }
 function selectLanguage(lang){
- if(!DICTS[lang])return;
+ if(!DICTS[lang]||lang===state.lang)return;
+ // Never mix languages in an active exam/practice session.
+ if(state.mode)quitSession();
  state.lang=lang;
  safeStorePut("neoline-language",lang);
  setCopy();loadBank();
@@ -380,7 +382,7 @@ function renderQuestion(){
  state.choices=shuffled([0,1,2,3]);
  const total=state.questions.length;
  updateQuizHUD();
- $("questionId").textContent="№ "+q.id;
+ $("questionId").textContent=(state.lang==="ar"?"رقم ":"№ ")+q.id;
  $("questionTopic").textContent=text("topics")[q.topic]||text("topics").laws;
  $("questionText").textContent=q.q;
  $("questionText").dir=["he","ar"].includes(state.lang)?"rtl":"auto";
@@ -511,7 +513,7 @@ function finishSession(timedOut){
  if(wrong.length){
   $("resultMistakes").hidden=false;
   $("resultMistakes").innerHTML="<strong>"+esc(text("errorsList"))+"</strong>"+wrong.slice(0,30).map(x=>
-   '<div><strong>№ '+esc(x.q.id)+' · '+esc(x.q.q)+'</strong><span>✓ '+esc(x.q.a[x.q.correct])+'</span></div>'
+   '<div><strong>'+(state.lang==="ar"?"رقم ":"№ ")+esc(x.q.id)+' · '+esc(x.q.q)+'</strong><span>✓ '+esc(x.q.a[x.q.correct])+'</span></div>'
   ).join("");
  }
  $("gameResult").scrollIntoView({behavior:"smooth",block:"start"});
