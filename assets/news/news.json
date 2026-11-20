@@ -2,8 +2,122 @@
   "version": 1,
   "retentionDays": 30,
   "lawsRetentionMonths": 6,
-  "updated": "2026-11-19T20:36:14.181275Z",
+  "updated": "2026-11-20T02:19:29.345732Z",
   "items": [
+    {
+      "id": "a510d702a53b22b5c2a5",
+      "titleOriginal": "מרדף בתל אביב: נהג פגע בשוטר וניגח כלי רכב, המשטרה פתחה באש",
+      "sourceLanguage": "he",
+      "date": "2026-11-19T22:31:07Z",
+      "url": "https://www.inn.co.il/flashes/1141766",
+      "publisher": "Arutz Sheva · Israel National News",
+      "category": "cars",
+      "art": "cars",
+      "image": "./assets/news/images/a510d702a53b22b5c2a5.webp",
+      "official": false,
+      "translations": {
+        "he": {
+          "title": "מרדף בתל אביב: נהג פגע בשוטר וניגח כלי רכב, המשטרה פתחה באש",
+          "summary": "כתבה על מכוניות או שוק הרכב בישראל. פרטים באתר המקור."
+        },
+        "ru": {
+          "title": "Погоня в Тель-Авиве: водитель сбил полицейского и протаранил транспортное средство, полиция открыла огонь",
+          "summary": "Материал об автомобиле или автомобильном рынке Израиля. Подробности — на сайте издания."
+        },
+        "en": {
+          "title": "A chase in Tel Aviv: a driver hit a police officer and rammed a vehicle, the police opened fire",
+          "summary": "An update about vehicles or Israel's car market. Details are available at the source."
+        },
+        "ar": {
+          "title": "مطاردة في تل أبيب: صدم سائق ضابط شرطة وصدم مركبة، وفتحت الشرطة النار",
+          "summary": "تحديث عن السيارات أو سوق المركبات في إسرائيل. التفاصيل في المصدر."
+        }
+      },
+      "title": "Погоня в Тель-Авиве: водитель сбил полицейского и протаранил транспортное средство, полиция открыла огонь",
+      "summary": "Материал об автомобиле или автомобильном рынке Израиля. Подробности — на сайте издания.",
+      "translated": true,
+      "imageType": "licensedPhoto",
+      "imageCredit": {
+        "text": "Ivan Radic · CC BY 2.0",
+        "url": "https://commons.wikimedia.org/wiki/File:Close-up_of_an_electric_car_charging._Traffic_lights_in_a_blurry_background.jpg"
+      }
+    },
+    {
+      "id": "705f9714378d5b6fc2f1",
+      "titleOriginal": "Возле Веред-Йерихо в ДТП тяжело травмированы два мотоциклиста",
+      "sourceLanguage": "en",
+      "date": "2026-11-19T21:27:11Z",
+      "url": "https://t.me/NEWSruIsrael/126311",
+      "publisher": "NEWSru.co.il · Telegram",
+      "category": "accidents",
+      "art": "accidents",
+      "image": "./assets/news/images/705f9714378d5b6fc2f1.webp",
+      "official": false,
+      "translations": {
+        "he": {
+          "title": "שני רוכבי אופנוע נפצעו קשה בתאונה סמוך לורד יריחו",
+          "summary": "דיווח על תאונת דרכים בישראל. פרטים ועדכונים בכתבת המקור."
+        },
+        "ru": {
+          "title": "Возле Веред-Йерихо в ДТП тяжело травмированы два мотоциклиста",
+          "summary": "Дорожное происшествие в Израиле. Обстоятельства и актуальные сведения — в материале источника."
+        },
+        "en": {
+          "title": "Возле Веред-Йерихо в ДТП тяжело травмированы два мотоциклиста",
+          "summary": "A reported road incident in Israel. Details and updates are in the original report."
+        },
+        "ar": {
+          "title": "أصيب اثنان من سائقي الدراجات النارية بجروح خطيرة في حادث سير بالقرب من فيرد أريحا",
+          "summary": "تقرير عن حادث مروري في إسرائيل. التفاصيل والتحديثات في المصدر."
+        }
+      },
+      "title": "Возле Веред-Йерихо в ДТП тяжело травмированы два мотоциклиста",
+      "summary": "Дорожное происшествие в Израиле. Обстоятельства и актуальные сведения — в материале источника.",
+      "translated": true,
+      "imageType": "licensedPhoto",
+      "imageCredit": {
+        "text": "Jeff Attaway from Abuja, Nigeria · CC BY 2.0",
+        "url": "https://commons.wikimedia.org/wiki/File:Bad_one_-_auto_wreck_in_Dakar_Senegal,_2011.jpg"
+      }
+    },
+    {
+      "id": "5671b2f5227cabc66de7",
+      "titleOriginal": "2 רוכבי אופנוע במצב קשה בעקבות תאונה סמוך לורד יריחו",
+      "sourceLanguage": "he",
+      "date": "2026-11-19T21:24:07Z",
+      "url": "https://www.maariv.co.il/breaking-news/article-1390409",
+      "publisher": "Maariv",
+      "category": "accidents",
+      "art": "accidents",
+      "image": "./assets/news/images/5671b2f5227cabc66de7.webp",
+      "official": false,
+      "translations": {
+        "he": {
+          "title": "2 רוכבי אופנוע במצב קשה בעקבות תאונה סמוך לורד יריחו",
+          "summary": "דיווח על תאונת דרכים בישראל. פרטים ועדכונים בכתבת המקור."
+        },
+        "ru": {
+          "title": "Два мотоциклиста в тяжелом состоянии после аварии недалеко от Лорда Иерихона",
+          "summary": "Дорожное происшествие в Израиле. Обстоятельства и актуальные сведения — в материале источника."
+        },
+        "en": {
+          "title": "2 motorcyclists in serious condition following an accident near Lord Jericho",
+          "summary": "A reported road incident in Israel. Details and updates are in the original report."
+        },
+        "ar": {
+          "title": "2 من راكبي الدراجات النارية في حالة خطيرة إثر حادث بالقرب من اللورد جيريكو",
+          "summary": "تقرير عن حادث مروري في إسرائيل. التفاصيل والتحديثات في المصدر."
+        }
+      },
+      "title": "Два мотоциклиста в тяжелом состоянии после аварии недалеко от Лорда Иерихона",
+      "summary": "Дорожное происшествие в Израиле. Обстоятельства и актуальные сведения — в материале источника.",
+      "translated": true,
+      "imageType": "licensedPhoto",
+      "imageCredit": {
+        "text": "Wikimedia Commons · Public domain",
+        "url": "https://commons.wikimedia.org/wiki/File:Hurricane_Rita_Evacuation_ambulance_1.jpg"
+      }
+    },
     {
       "id": "2e54647fc508f74b89dd",
       "titleOriginal": "החלה סלילת הנתיבים החדשים בכביש 60 בבנימין",
@@ -40,7 +154,8 @@
       "imageCredit": {
         "text": "Rakoon · CC0",
         "url": "https://commons.wikimedia.org/wiki/File:20150812_August_2015_in_Tel_Aviv_05.jpg"
-      }
+      },
+      "subjectPhotoChecked": true
     },
     {
       "id": "7b655cbd4f9c78e08d18",
@@ -306,7 +421,8 @@
       "imageCredit": {
         "text": "Eric Friedebach · CC BY 2.0",
         "url": "https://commons.wikimedia.org/wiki/File:1973_Ford_Mustang_Interior_Dashboard_(51838912069).jpg"
-      }
+      },
+      "subjectPhotoChecked": true
     },
     {
       "id": "d5e50b60d5591efe530a",
@@ -382,7 +498,8 @@
       "imageCredit": {
         "text": "Rakoon · CC0",
         "url": "https://commons.wikimedia.org/wiki/File:20150812_August_2015_in_Tel_Aviv_05.jpg"
-      }
+      },
+      "subjectPhotoChecked": true
     },
     {
       "id": "8835ecdf675c82f8f3ec",
@@ -420,7 +537,8 @@
       "imageCredit": {
         "text": "Rakoon · CC0",
         "url": "https://commons.wikimedia.org/wiki/File:20150812_August_2015_in_Tel_Aviv_05.jpg"
-      }
+      },
+      "subjectPhotoChecked": true
     },
     {
       "id": "fb38b71406649933e2d7",
@@ -3960,8 +4078,12 @@
       "title": "Минтранс подписал изменения для прав B и C1: электрофургоны до 4,25 тонны",
       "summary": "Согласно сообщению Минтранса от 9 ноября, водителям с правами B не менее двух лет предусмотрена возможность управлять некоторыми разрешёнными электрическими коммерческими автомобилями до 4,25 т при соблюдении условий. Подписание документа не означает автоматического вступления всех положений в силу.",
       "translated": true,
-      "image": null,
-      "imageType": "none"
+      "image": "./assets/news/images/405054d69e7896d1263c.webp",
+      "imageType": "licensedPhoto",
+      "imageCredit": {
+        "text": "Wikimedia Commons · CC BY 4.0",
+        "url": "https://commons.wikimedia.org/wiki/File:Close_up_of_Carmen_Rupe_pedestrian_crossing_light.jpg"
+      }
     },
     {
       "id": "d142b35bf1342c908ea0",
@@ -4193,8 +4315,8 @@
       "image": "./assets/news/images/043c07748b86319ae3ba.webp",
       "imageType": "licensedPhoto",
       "imageCredit": {
-        "text": "Eric Friedebach · CC BY 2.0",
-        "url": "https://commons.wikimedia.org/wiki/File:1973_Ford_Mustang_Interior_Dashboard_(51838912069).jpg"
+        "text": "Ivan Radic · CC BY 2.0",
+        "url": "https://commons.wikimedia.org/wiki/File:Close-up_of_an_electric_car_charging._Traffic_lights_in_a_blurry_background.jpg"
       }
     },
     {
@@ -4310,8 +4432,8 @@
       "image": "./assets/news/images/494a55a00ec511c28008.webp",
       "imageType": "licensedPhoto",
       "imageCredit": {
-        "text": "Trougnouf (Benoit Brummer) · CC BY 4.0",
-        "url": "https://commons.wikimedia.org/wiki/File:Roadside_cat_in_Belœil,_Belgium_(DSCF4999).jpg"
+        "text": "Marek Ślusarczyk (Tupungato) Photo portfolio · CC BY 3.0",
+        "url": "https://commons.wikimedia.org/wiki/File:10_US_Highway_speed_limit_sign_55_MPH_-_Garfield_County,_Colorado.jpg"
       }
     },
     {
@@ -4428,8 +4550,8 @@
       "image": "./assets/news/images/c0cd2d5f07618f67dc83.webp",
       "imageType": "licensedPhoto",
       "imageCredit": {
-        "text": "Trougnouf (Benoit Brummer) · CC BY 4.0",
-        "url": "https://commons.wikimedia.org/wiki/File:Roadside_cat_in_Belœil,_Belgium_(DSCF4999).jpg"
+        "text": "Marek Ślusarczyk (Tupungato) Photo portfolio · CC BY 3.0",
+        "url": "https://commons.wikimedia.org/wiki/File:10_US_Highway_speed_limit_sign_55_MPH_-_Garfield_County,_Colorado.jpg"
       }
     },
     {
@@ -5007,8 +5129,12 @@
       "title": "Кнессет одобрил новые правила импорта техники для автоспорта",
       "summary": "7 июля профильный комитет одобрил изменения правил ввоза спортивной соревновательной техники и запчастей для автоспорта. Изменения касаются специализированных соревнований, а не обычного использования автомобилей на дорогах.",
       "translated": true,
-      "image": null,
-      "imageType": "none"
+      "image": "./assets/news/images/9ce7f097f16e763c9cea.webp",
+      "imageType": "licensedPhoto",
+      "imageCredit": {
+        "text": "Wikimedia Commons · CC BY 4.0",
+        "url": "https://commons.wikimedia.org/wiki/File:Close_up_of_Carmen_Rupe_pedestrian_crossing_light.jpg"
+      }
     },
     {
       "id": "8da0d7e6aaf29974e4b9",
@@ -5118,8 +5244,12 @@
       "title": "Кнессет одобрил изменения системы штрафных баллов за нарушения ПДД",
       "summary": "22 июня экономический комитет Кнессета утвердил обновлённые правила начисления баллов за административные нарушения. Для менее серьёзных проступков предусмотрено смягчение, а за опасные нарушения, включая проезд на красный и телефон за рулём, — более строгие баллы. Позднее условия применения могли уточняться.",
       "translated": true,
-      "image": null,
-      "imageType": "none"
+      "image": "./assets/news/images/821987599de17e7c0751.webp",
+      "imageType": "licensedPhoto",
+      "imageCredit": {
+        "text": "Wikimedia Commons · CC BY 4.0",
+        "url": "https://commons.wikimedia.org/wiki/File:Close_up_of_Carmen_Rupe_pedestrian_crossing_light.jpg"
+      }
     },
     {
       "id": "2c4584c5e877e25e077e",
@@ -5229,8 +5359,12 @@
       "title": "3 июня комитет Кнессета отложил реформу штрафных баллов и потребовал послаблений",
       "summary": "3 июня экономический комитет не утвердил предложенную редакцию правил начисления баллов и потребовал пересмотра в течение двух недель. Это исторический этап обсуждения: 22 июня комитет впоследствии одобрил изменённую редакцию.",
       "translated": true,
-      "image": null,
-      "imageType": "none"
+      "image": "./assets/news/images/84399e428bc60574368d.webp",
+      "imageType": "licensedPhoto",
+      "imageCredit": {
+        "text": "Wikimedia Commons · CC BY 4.0",
+        "url": "https://commons.wikimedia.org/wiki/File:Close_up_of_Carmen_Rupe_pedestrian_crossing_light.jpg"
+      }
     },
     {
       "id": "8afa884f224efe65331b",
