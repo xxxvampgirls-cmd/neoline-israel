@@ -124,3 +124,27 @@
  .catalog-import-original-row{grid-template-columns:1fr;gap:2px}
  .catalog-import-detail .catalog-import-caution{font-size:10px}
 }
+
+/* Manufacturer-backed, fuller four-language product explanations. */
+.catalog-import-detail>.catalog-localized-paragraph{
+ margin:0 0 10px;color:#405e76;font-size:13px;line-height:1.7;
+ overflow-wrap:anywhere;
+}
+.catalog-import-detail>.catalog-localized-paragraph:first-of-type{
+ color:#214965;font-weight:600;
+}
+.catalog-import-detail>.catalog-localized-paragraph + .catalog-localized-paragraph{
+ padding:10px 13px;margin-top:11px;margin-bottom:12px;
+ border:1px solid #d7eaf3;border-radius:12px;
+ background:linear-gradient(130deg,#f8fcff,#f0f8fc);
+ font-size:12px;line-height:1.7;color:#55758d;
+}
+[dir="rtl"] .catalog-import-detail>.catalog-localized-paragraph{
+ text-align:start;unicode-bidi:plaintext;
+}
+@media(max-width:720px){
+ .catalog-import-detail>.catalog-localized-paragraph{font-size:12px;line-height:1.6}
+ .catalog-import-detail>.catalog-localized-paragraph + .catalog-localized-paragraph{
+  padding:9px 11px;font-size:11px;
+ }
+}
