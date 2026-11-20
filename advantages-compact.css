@@ -1,0 +1,140 @@
+/* NEOLINE Israel — compact manufacturer facts, four languages.
+   Figures are sourced from NEOLINE Europe's public site and are not promises
+   about services, GPS coverage or warranty availability in Israel. */
+#advantages.advantage-section{
+ padding-top:clamp(28px,4vw,48px)!important;
+ padding-bottom:clamp(16px,2.4vw,28px)!important;
+}
+#advantages .advantage-head{margin-bottom:16px!important}
+#advantages .advantage-head h2{
+ margin-top:5px;
+ font-size:clamp(24px,3vw,34px);
+ line-height:1.15;
+ letter-spacing:-.04em;
+}
+#advantages .advantages-cards{
+ display:grid;
+ grid-template-columns:repeat(4,minmax(0,1fr));
+ align-items:stretch;
+ gap:12px;
+}
+#advantages .advantages-cards .advantage-card{
+ box-sizing:border-box;
+ min-width:0;
+ display:flex;
+ flex-direction:column;
+ align-items:flex-start;
+ padding:17px 17px 14px;
+ border:1px solid #d5e7f2;
+ border-radius:18px;
+ background:linear-gradient(145deg,#fff 15%,#f0f9fe 100%);
+ box-shadow:0 5px 20px rgba(25,99,151,.07);
+ text-align:start;
+ overflow:hidden;
+}
+#advantages .advantage-card .feature-icon{
+ display:grid;
+ place-items:center;
+ flex:0 0 auto;
+ width:40px;
+ height:40px;
+ margin:0 0 12px;
+ border:1px solid #cee8f5;
+ border-radius:13px;
+ background:linear-gradient(145deg,#f1fbff,#dceffa);
+ box-shadow:inset 0 1px 0 #fff;
+ color:#147faf;
+ font-size:0;
+}
+#advantages .advantage-card .feature-icon svg{
+ display:block;
+ width:24px;
+ height:24px;
+}
+#advantages .advantage-card b{
+ display:block;
+ width:100%;
+ color:#194966;
+ font-size:13px;
+ font-weight:850;
+ line-height:1.3;
+ letter-spacing:-.018em;
+}
+#advantages .advantage-card p{
+ color:#638199;
+ margin:7px 0 10px;
+ font-size:11px;
+ line-height:1.48;
+ font-weight:450;
+}
+#advantages .advantage-card .feature-stat{
+ display:inline-flex;
+ align-items:center;
+ max-width:100%;
+ box-sizing:border-box;
+ margin-top:auto;
+ padding:5px 9px;
+ border:1px solid #cce9f5;
+ border-radius:20px;
+ background:#eaf7ff;
+ color:#1479a8;
+ font-size:10px;
+ font-weight:850;
+ line-height:1.32;
+ white-space:normal;
+ overflow-wrap:anywhere;
+}
+#advantages .advantages-source{
+ display:flex;
+ align-items:center;
+ justify-content:space-between;
+ flex-wrap:wrap;
+ gap:4px 12px;
+ margin:11px 2px 0;
+ color:#718da0;
+ font-size:10px;
+ line-height:1.45;
+}
+#advantages .advantages-source a{
+ color:#287da8;
+ font-weight:800;
+ text-decoration:underline;
+ text-underline-offset:3px;
+}
+#advantages .advantages-source a:focus-visible{
+ outline:2px solid #1e96ca;
+ outline-offset:4px;
+ border-radius:3px;
+}
+#installation.section{
+ padding-top:clamp(16px,2.6vw,30px)!important;
+}
+@media(max-width:900px){
+ #advantages .advantages-cards{grid-template-columns:repeat(2,minmax(0,1fr));gap:11px}
+}
+@media(max-width:650px){
+ #advantages.advantage-section{padding-top:22px!important;padding-bottom:12px!important}
+ #advantages .advantage-head{margin-bottom:13px!important}
+ #advantages .advantage-head h2{font-size:clamp(23px,6.3vw,29px);margin-top:5px}
+ #advantages .advantages-cards{gap:9px}
+ #advantages .advantages-cards .advantage-card{
+  padding:12px 12px 11px;
+  border-radius:15px;
+  box-shadow:0 4px 13px rgba(28,102,155,.06);
+ }
+ #advantages .advantage-card .feature-icon{
+  width:32px;height:32px;margin-bottom:9px;border-radius:11px;
+ }
+ #advantages .advantage-card .feature-icon svg{width:20px;height:20px}
+ #advantages .advantage-card b{font-size:12px;line-height:1.25}
+ #advantages .advantage-card p{font-size:10px;line-height:1.4;margin:6px 0 10px}
+ #advantages .advantage-card .feature-stat{padding:4px 7px;font-size:9px}
+ #advantages .advantages-source{align-items:flex-start;margin-top:10px;font-size:9px}
+ #installation.section{padding-top:16px!important}
+}
+@media(max-width:355px){
+ #advantages .advantages-cards{gap:7px}
+ #advantages .advantages-cards .advantage-card{padding:10px 9px}
+ #advantages .advantage-card p{font-size:9.5px}
+ #advantages .advantage-card b{font-size:11.3px}
+}
