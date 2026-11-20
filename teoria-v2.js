@@ -20,7 +20,7 @@ const L={
   noHistory:"Пока нет данных за эти дни.",correct:"Правильно",errors:"Ошибки",right:"верно",
   completed:"Получено",locked:"Ещё не открыто",gift:"Информация о будущих подарках",
   close:"Закрыть прогресс",resultProgress:"Мой прогресс и достижения",
-  routes:{route:"Поездка по городу",signs:"Охота за знаками",exam:"Как на экзамене",mistakes:"Работа над ошибками",marathon:"Большое путешествие"},
+  routes:{route:"Поездка по городу",signs:"Охота за знаками",exam:"Как на экзамене",mistakes:"Работа над ошибками",marathon:"Большое путешествие",daily:"Задание дня"},
   badges:[
    {id:"first",name:"Первая поездка",help:"Заверши любую игру",emoji:"🚘"},
    {id:"ten",name:"Первые 10 вопросов",help:"Изучи 10 разных вопросов",emoji:"📖"},
@@ -40,7 +40,7 @@ const L={
   noGames:"No completed games yet. Choose a mode to begin!",noHistory:"No game results for these days.",
   correct:"Correct",errors:"Mistakes",right:"correct",completed:"Unlocked",locked:"Locked",
   gift:"Potential gift information",close:"Close progress",resultProgress:"Progress and achievements",
-  routes:{route:"City drive",signs:"Sign hunt",exam:"Mock exam",mistakes:"Learn from mistakes",marathon:"Grand journey"},
+  routes:{route:"City drive",signs:"Sign hunt",exam:"Mock exam",mistakes:"Learn from mistakes",marathon:"Grand journey",daily:"Daily challenge"},
   badges:[
    {id:"first",name:"First drive",help:"Finish any game",emoji:"🚘"},
    {id:"ten",name:"10 questions",help:"Study 10 different questions",emoji:"📖"},
@@ -60,7 +60,7 @@ const L={
   noGames:"עדיין אין משחקים שהושלמו. בחרו מצב משחק!",noHistory:"אין תוצאות לימים האלה.",
   correct:"תשובות נכונות",errors:"טעויות",right:"נכון",completed:"נפתח",locked:"נעול",
   gift:"מידע על מתנות עתידיות",close:"סגירת ההתקדמות",resultProgress:"התקדמות והישגים",
-  routes:{route:"נסיעה בעיר",signs:"ציד תמרורים",exam:"מבחן לדוגמה",mistakes:"למידה מטעויות",marathon:"מסע גדול"},
+  routes:{route:"נסיעה בעיר",signs:"ציד תמרורים",exam:"מבחן לדוגמה",mistakes:"למידה מטעויות",marathon:"מסע גדול",daily:"אתגר יומי"},
   badges:[
    {id:"first",name:"נסיעה ראשונה",help:"סיימו משחק כלשהו",emoji:"🚘"},
    {id:"ten",name:"10 שאלות",help:"למדו 10 שאלות שונות",emoji:"📖"},
@@ -96,7 +96,7 @@ function dom(tag,className,content){
  return e;
 }
 function validGames(history){
- return history.filter(h=>["route","signs","exam","mistakes","marathon"].includes(h.mode)&&
+ return history.filter(h=>["route","signs","exam","mistakes","marathon","daily"].includes(h.mode)&&
   Number.isFinite(Number(h.correct))&&Number.isFinite(Number(h.total))&&Number(h.total)>0&&
   !Number.isNaN(new Date(h.time).getTime()));
 }
