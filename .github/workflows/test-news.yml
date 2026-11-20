@@ -115,8 +115,15 @@ jobs:
             await page.waitForFunction(()=>document.querySelectorAll('.news-feature-dot').length===10,{timeout:15000});
             if(!await carousel.isVisible())throw Error('Top ten-news carousel is hidden');
             const firstFeature=await carousel.locator('.news-feature-title').innerText();
-            const firstPicture=carousel.locator('.news-feature-img');
-            if(await firstPicture.count()!==1)throw Error('Expected one carousel image in the DOM');
+            if(await carousel.locator('img, picture').count())
+              throw Error('News carousel must contain no photographs');
+            const heroAnimation=await page.locator('#newsFeatureSlide').evaluate(el=>({
+              glow:getComputedStyle(el,'::before').animationName,
+              shine:getComputedStyle(el,'::after').animationName,
+              images:el.querySelectorAll('img, picture').length
+            }));
+            if(heroAnimation.images||!heroAnimation.glow.includes('neolineNewsGlow')||!heroAnimation.shine.includes('neolineNewsLight'))
+              throw Error('Continuous animated background missing: '+JSON.stringify(heroAnimation));
             await page.locator('#newsFeatureNext').click();
             const secondFeature=await carousel.locator('.news-feature-title').innerText();
             if(firstFeature===secondFeature)throw Error('Carousel next arrow did not change the story');
@@ -125,29 +132,25 @@ jobs:
             await page.locator('#newsFeaturePrev').click();
             if(await carousel.locator('.news-feature-title').innerText()!==firstFeature)
               throw Error('Carousel prev did not restore the first story');
-            if(await carousel.locator('.news-feature-img').count()!==1)
-              throw Error('Carousel must keep only the active photo in DOM');
-            const blueDots=await page.locator('.news-art').first().evaluate(el=>getComputedStyle(el,'::after').backgroundImage);
-            if(!blueDots.includes('radial-gradient'))throw Error('Blue photo dot-grid is missing');
-            // User-approved layout: the carousel photo must span the same width
-            // as cards below, while preserving the earlier mobile image height.
+            if(await carousel.locator('img, picture').count())
+              throw Error('News carousel next/prev inserted a photo');
+            // Headline slider retains the existing compact mobile geometry.
             const geometry=await page.evaluate(()=>{
               const hero=document.querySelector('.news-feature-slide').getBoundingClientRect();
               const card=document.querySelector('.news-card').getBoundingClientRect();
               const frame=document.querySelector('.news-feature-carousel').getBoundingClientRect();
               const deco=document.querySelector('.news-feature-blueprint');
-              const dot=document.querySelector('.news-art-decoration');
               return {heroWidth:hero.width,cardWidth:card.width,heroHeight:hero.height,
-               frameWidth:frame.width,decoration:!!deco,cardDecoration:!!dot};
+               frameWidth:frame.width,decoration:!!deco};
             });
-            if(!geometry.decoration||!geometry.cardDecoration)
-              throw Error('Approved design #4 cyan photo decorations missing: '+JSON.stringify(geometry));
+            if(!geometry.decoration)
+              throw Error('NEOLINE slide accents missing: '+JSON.stringify(geometry));
             if(Math.abs(geometry.heroWidth-geometry.cardWidth)>4)
-              throw Error('Carousel is not as wide as lower news photography: '+JSON.stringify(geometry));
+              throw Error('Carousel must align with headline list: '+JSON.stringify(geometry));
             if(Math.abs(geometry.heroHeight-245)>2)
               throw Error('Carousel mobile image height changed unexpectedly: '+JSON.stringify(geometry));
-            console.log('PHOTO DESIGN #4 PASS: width aligned and mobile image height retained '+JSON.stringify(geometry));
-            console.log('FEATURE CAROUSEL PASS: 10 dots, next/prev, one image, editorial overlay');
+            console.log('ANIMATED NEWS BACKDROP PASS: image-free and mobile image height retained '+JSON.stringify(geometry));
+            console.log('FEATURE CAROUSEL PASS: 10 dots, next/prev, continuous image-free background');
             const now=Date.now(),limit=now-30*86400*1000;
             const cutoff=new Date(now),day=cutoff.getUTCDate();
             cutoff.setUTCDate(1);cutoff.setUTCMonth(cutoff.getUTCMonth()-6);
@@ -197,14 +200,9 @@ jobs:
               console.log('NEWS FIRST 8 AND BUTTON PASS '+cards+' -> '+next);
             }
             if(cards){
-             const image=page.locator('.news-card .news-art img, .news-card .news-photo-placeholder').first();
-             if(!await image.isVisible())throw Error('News thumbnail or fallback missing');
-             if(await image.evaluate(el=>el.tagName.toLowerCase())==='img'){
-               await image.evaluate(el=>el.decode().catch(()=>null));
-               if(!await image.evaluate(el=>el.complete&&el.naturalWidth>0))
-                 throw Error('Thumbnail did not load');
-             }
-             const link=await page.locator('.news-card .news-link').first().getAttribute('href');
+             if(await page.locator('.news-card img, .news-card picture, .news-card .news-art, .news-card .news-photo-placeholder').count())
+               throw Error('Headline news list must not contain pictures or repeated photo captions');
+             const link=await page.locator('.news-card .news-title-button').first().getAttribute('href');
              if(!link||!link.startsWith('http'))throw Error('News item has no valid source link');
             }
             // Individual accordions were intentionally removed: the expand button
