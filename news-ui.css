@@ -691,3 +691,49 @@ html[dir=rtl] .news-feature-credit{right:auto;left:12px}
  .news-card-category{font-size:9px;padding:2px 7px}
 }
 @media(prefers-reduced-motion:reduce){.news-card--headline{transition:none!important}}
+
+/* 2026-11-20: Photo-free NEOLINE newsroom. Animation lives on the fixed
+   slide container and therefore stays continuous between headline changes. */
+#newsFeatureSlide{
+ isolation:isolate;
+ background:linear-gradient(125deg,#092b49 0%,#0c527e 46%,#117bb5 100%);
+}
+#newsFeatureSlide::before,#newsFeatureSlide::after{
+ content:"";position:absolute;pointer-events:none;z-index:0;
+}
+#newsFeatureSlide::before{
+ inset:-28%;
+ background:
+  radial-gradient(circle at 18% 19%,rgba(104,212,255,.30),transparent 32%),
+  radial-gradient(circle at 85% 73%,rgba(55,172,236,.25),transparent 34%);
+ animation:neolineNewsGlow 19s ease-in-out infinite alternate;
+}
+#newsFeatureSlide::after{
+ inset:-20%;
+ background:linear-gradient(112deg,transparent 42%,rgba(136,222,255,.12) 50%,transparent 58%);
+ animation:neolineNewsLight 24s ease-in-out infinite alternate;
+}
+.news-feature-story--animated{z-index:1;background:transparent}
+.news-feature-story--animated .news-feature-photo--empty{background:transparent}
+.news-feature-story--animated .news-feature-pattern{animation:neolineNewsDots 16s ease-in-out infinite alternate}
+.news-feature-story--animated .news-feature-blueprint::before{animation:neolineNewsAccent 13s ease-in-out infinite alternate}
+.news-feature-story--animated .news-feature-blueprint::after{animation:neolineNewsAccent 11s ease-in-out infinite alternate-reverse}
+@keyframes neolineNewsGlow{
+ from{transform:translate3d(-2%,1%,0) scale(1)}
+ to{transform:translate3d(4%,-2%,0) scale(1.06)}
+}
+@keyframes neolineNewsLight{
+ from{transform:translate3d(-17%,0,0)}
+ to{transform:translate3d(17%,0,0)}
+}
+@keyframes neolineNewsDots{
+ from{transform:translate3d(0,0,0);opacity:.54}
+ to{transform:translate3d(7px,-7px,0);opacity:.78}
+}
+@keyframes neolineNewsAccent{from{opacity:.6}to{opacity:1}}
+@media(prefers-reduced-motion:reduce){
+ #newsFeatureSlide::before,#newsFeatureSlide::after,
+ .news-feature-story--animated .news-feature-pattern,
+ .news-feature-story--animated .news-feature-blueprint::before,
+ .news-feature-story--animated .news-feature-blueprint::after{animation:none!important}
+}
