@@ -1,47 +1,75 @@
-name: Verify published NEOLINE catalog
+name: Verify published NEOLINE release on Cloudflare
 on:
   workflow_dispatch:
   push:
     branches: [main]
     paths:
+      - 'index.html'
+      - 'catalog-ui.js'
+      - 'catalog-video.js'
+      - 'neoline-academy.js'
+      - 'neoline-academy.css'
       - '.github/workflows/verify-live.yml'
 permissions:
   contents: read
+concurrency:
+  group: verify-published-neoline-main
+  cancel-in-progress: true
 jobs:
   check-site:
     runs-on: ubuntu-latest
-    timeout-minutes: 6
+    timeout-minutes: 8
     steps:
-      - name: Check Cloudflare public site and catalog data
-        shell: bash
+      - uses: actions/checkout@v4
+      - name: Compare live Cloudflare files with this GitHub release
+        env:
+          GITHUB_COMMIT: ${{ github.sha }}
         run: |
-          python - <<'PY'
-          import json, time, urllib.request
-          base="https://neoline-israel.pages.dev/"
-          success=False
-          for attempt in range(4):
-              print(f"Public website check {attempt+1}/4",flush=True)
+          python3 - <<'PY'
+          import hashlib, json, os, re, time, urllib.request
+          from pathlib import Path
+          base = "https://neoline-israel.pages.dev/"
+          revision = os.environ.get("GITHUB_COMMIT","")[:12]
+          files = ("catalog-ui.js","catalog-video.js","neoline-academy.js","neoline-academy.css")
+          local_html = Path("index.html").read_text(encoding="utf-8")
+          markers = {}
+          for path in files:
+              matches = re.findall(r'\\./'+re.escape(path)+r'\\?v=[^"\\s]+', local_html)
+              if len(matches) != 1:
+                  raise SystemExit(f"FAIL: index.html must reference one versioned {path}, found {len(matches)}")
+              markers[path] = matches[0]
+          hashes = {path:hashlib.sha256(Path(path).read_bytes()).hexdigest() for path in files}
+          def fetch(path):
+              separator = '&' if '?' in path else '?'
+              url = base+path+separator+'releasecheck='+revision
+              request = urllib.request.Request(url,headers={"User-Agent":"Mozilla/5.0 (NEOLINE release verification)","Cache-Control":"no-cache"})
+              with urllib.request.urlopen(request, timeout=18) as response:
+                  return response.read()
+          last_reason = "not checked"
+          for attempt in range(12):
               try:
-                  def read(path):
-                      with urllib.request.urlopen(
-                          urllib.request.Request(base+path,headers={"User-Agent":"Mozilla/5.0"}),
-                          timeout=14) as resp:
-                          return resp.read()
-                  html=read("").decode("utf-8","replace")
-                  script=read("catalog-ui.js").decode("utf-8","replace")
-                  manifest=json.loads(read("assets/catalog/catalog.json"))
-                  verified=(('src="./catalog-ui.js"' in html) and
-                            ("renderExtendedProducts" in script) and
-                            len(manifest.get("products",[]))>=50)
-                  marker = 'src="./catalog-ui.js"'
-                  print(f"HTML integration={marker in html}, script={len(script)} bytes, product_count={len(manifest.get('products',[]))}",flush=True)
-                  if verified:
-                      print("PASS: published site serves the full NEOLINE catalog",flush=True)
-                      success=True
-                      break
+                  html = fetch("").decode("utf-8","replace")
+                  missing = [name for name,marker in markers.items() if marker not in html]
+                  if missing:
+                      last_reason = "Cloudflare HTML is behind for: "+", ".join(missing)
+                  else:
+                      stale = [name for name,digest in hashes.items()
+                               if hashlib.sha256(fetch(name)).hexdigest()!=digest]
+                      if stale:
+                          last_reason = "Cloudflare assets are behind: "+", ".join(stale)
+                      else:
+                          manifest = json.loads(fetch("assets/catalog/catalog.json"))
+                          count = len(manifest.get("products", []))
+                          if count < 50:
+                              last_reason = f"Catalogue data incomplete: {count} imported products"
+                          else:
+                              print(f"PASS: Cloudflare reflects this release, all 4 JS/CSS files match GitHub; {count} imported products")
+                              break
               except Exception as exc:
-                  print("Public website not verified:",type(exc).__name__,str(exc),flush=True)
-              time.sleep(20)
-          if not success:
-              raise SystemExit("FAIL: Cloudflare deployment unverified; GitHub source may be newer than public site")
+                  last_reason = f"{type(exc).__name__}: {exc}"
+              print(f"Attempt {attempt+1}/12: {last_reason}",flush=True)
+              if attempt < 11:
+                  time.sleep(20)
+          else:
+              raise SystemExit("FAIL: latest GitHub change is not verified as live on Cloudflare. "+last_reason)
           PY
