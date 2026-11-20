@@ -1,18 +1,40 @@
 # NEOLINE Israel — структура проекта
 
 Рабочий сайт: https://neoline-israel.pages.dev/  
-Основная ветка: `main`. Перед оптимизацией 18.11.2026 создана **полная резервная ветка**
-[`backup/2026-11-18-before-full-cleanup`](https://github.com/xxxvampgirls-cmd/neoline-israel/tree/backup/2026-11-18-before-full-cleanup).
+Основная ветка: `main`.
+
+**Текущая точка восстановления (до нового Smart Hub):**
+[`restore/2026-11-20-before-smart-hub-upgrade`](https://github.com/xxxvampgirls-cmd/neoline-israel/tree/restore/2026-11-20-before-smart-hub-upgrade).
+
+В дополнение сохранены базовые архивные ветки
+[`backup/2026-11-18-before-full-cleanup`](https://github.com/xxxvampgirls-cmd/neoline-israel/tree/backup/2026-11-18-before-full-cleanup)
+и `backup/2026-11-20-before-arabic-theory`. 47 временных резервных веток
+удалены после записи их исходных названий и SHA в
+[`.github/RESTORE-ARCHIVE.md`](.github/RESTORE-ARCHIVE.md). Рабочие ветки
+`traffic-live` и `fines-live` сохранены.
 
 ## Страницы
 
 | Страница | Содержание |
 | --- | --- |
-| `index.html` | Главная, каталог, рекламные слайды, корзина |
+| `index.html` | Главная, каталог, рекламные слайды, корзина, подбор/сравнение камер, «Моё устройство»/Academy |
 | `news.html` | Новости Израиля и 30-дневный график публикаций о ДТП |
 | `hot.html` | Срочные сообщения полиции, 72-часовая лента и Waze |
 | `delivery.html` | Карта точек выдачи, магазинов и фильтры |
 | `teoria.html` | Учебная игра «Теория вождения» |
+
+**Smart Hub:** `smart-hub.js` + `smart-hub.css` — три встроенных инструмента: подбор по реальным
+характеристикам, сравнительная таблица до трёх устройств и сохранённая в браузере
+модель с инструкцией, приложениями/обновлениями и учебной памяткой. Сопоставлять
+можно восемь основных моделей с проверенными ключами `NEOLINE_DETAILS`; автоматически
+импортированные товары без нормализованных характеристик в сравнение не включаются.
+Демонстрационные цены/заказы не превращать в настоящие без подтверждения.
+
+**Проверки:** `test-smart-hub.yml` — локальный Chromium на мобильной ширине,
+`test-teoria.yml` — реальная игра RU/EN/HE/AR с проверкой официальных банков,
+`test-teoria-ar.yml` — углублённый тест арабского, `test-news.yml` — новости и
+показ фильтров доставки в актуальном модальном интерфейсе. Тесты не должны
+полагаться на устаревшие селекторы или требовать немедленного Cloudflare деплоя.
 
 Шапка общая: `site-header.css`, `site-header.js`, `assets/flag-israel.svg`.
 Нижнее меню: `nav-current.css`, `nav-current.js`.
@@ -23,7 +45,7 @@
 - Новости: `assets/news/news.json`, `scripts/sync_news.py`, `scripts/build_news_thumbnails.py`, workflow `sync-news.yml`.
 - Точки доставки: `assets/pickup/points.json`, `scripts/sync_pickup_points.py`, workflow `sync-pickup-points.yml`.
 - Магазины: `assets/retail/points.json`, `scripts/sync_retail_points.py`, workflow `sync-retail-points.yml`.
-- Игра: `assets/teoria/{ru,he,en}.json`, workflow `sync-teoria.yml`.
+- Игра: `assets/teoria/{ru,he,en,ar}.json`, workflow `sync-teoria.yml`.
 - Срочные события: данные полиции в отдельной ветке `traffic-live`, workflow `sync-traffic.yml`.
 
 Карта отображает только доступные координаты OSM. Сведения о продавцах не подтверждают партнёрства.
@@ -37,4 +59,7 @@
 3. При изменениях проверять `node --check` для JS, ссылки на ассеты и GitHub Actions. Обновлять параметр `?v=` у изменённых ресурсов для сброса кеша Cloudflare.
 4. Публичную публикацию Cloudflare подтверждать отдельно; коммит в GitHub не доказывает, что новая версия уже доступна на сайте.
 
-Хронология предыдущих пробных итераций и исходный `CURRENT_TASK.md` полностью сохранены в резервной ветке.
+Хронология предыдущих итераций, включая оригинальные пробные файлы и
+`CURRENT_TASK.md`, доступна в восстановительной истории. Удалена только
+неиспользуемая `teoria-traffic-signs.css` (была заменена новым оформлением).
+Одноразовый скрипт очистки старых веток удалён после успешного исполнения.
