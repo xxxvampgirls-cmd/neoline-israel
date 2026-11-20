@@ -95,6 +95,74 @@
  he:{hl:"iw",gl:"IL",tag:"HE",flag:"🇮🇱",region:"ישראל",title:"סקירות בעברית",items:["סקירות בעברית","השוואות","פרסומות ומצגות","דוגמאות צילום"],terms:["סקירה ביקורת בדיקה","השוואה מצלמת רכב","פרסומת מצגת רשמית","צילום דוגמה יום לילה"],other:"סרטונים בשפות אחרות",none:"אין כרגע סקירה מאומתת בעברית. חיפוש בעברית מקבל קדימות.",note:"חיפוש ביוטיוב בעברית באזור ישראל. שפת הסרטונים אינה מובטחת."},
  ar:{hl:"ar",gl:"AE",tag:"AR",flag:"🇦🇪",region:"الإمارات",title:"مراجعات باللغة العربية",items:["مراجعات عربية","مقارنات","إعلانات وعروض","تجارب التصوير"],terms:["مراجعة وتجربة كاميرا سيارة","مقارنة أجهزة تسجيل القيادة","إعلان عرض رسمي","تجربة تصوير نهار ليل"],other:"فيديوهات بلغات أخرى",none:"لا توجد مراجعات عربية موثقة حالياً. البحث باللغة العربية يظهر أولاً.",note:"يفتح البحث في يوتيوب بالعربية والإمارات. اللغة ليست مضمونة."}
  };
+
+ /* Facebook: only manually verified, public, exact-model English videos.
+    Catalog is separately maintained so product cards never invent a clip.
+    Facebook is the first embedded provider for EN/HE/AR; RU keeps RU first. */
+ const facebookText={
+  ru:{title:"Видео Facebook на английском",featured:"Англоязычные видео производителя",play:"Смотреть на сайте",source:"Оригинал в Facebook ↗",note:"Встроенный плеер Facebook. Если автор ограничил просмотр, откройте оригинал."},
+  en:{title:"Facebook videos · English",featured:"English videos first",play:"Watch on this site",source:"Original on Facebook ↗",note:"Facebook's embedded player. If playback is restricted by its owner, open the original."},
+  he:{title:"סרטוני Facebook · אנגלית",featured:"סרטונים באנגלית תחילה",play:"צפייה באתר",source:"מקור ב-Facebook ↗",note:"נגן Facebook מוטמע. אם הסרטון מוגבל, אפשר לפתוח את המקור."},
+  ar:{title:"فيديوهات Facebook · الإنجليزية",featured:"الفيديوهات الإنجليزية أولاً",play:"شاهد على الموقع",source:"الأصل على Facebook ↗",note:"مشغل Facebook المضمّن. إذا كانت هناك قيود على العرض، افتح المصدر."}
+ };
+ let facebookCatalog=[];
+ function checkedFacebookUrl(input){
+  if(typeof input!=="string")return null;
+  try{
+   const url=new URL(input);
+   if(url.protocol!=="https:" || !["facebook.com","www.facebook.com","m.facebook.com"].includes(url.hostname))return null;
+   const path=url.pathname;
+   const valid=/^\/[A-Za-z0-9._-]+\/videos\/\d+\/?$/.test(path)
+    || /^\/reel\/\d+\/?$/.test(path)
+    || (path==="/watch/" && /^\d+$/.test(url.searchParams.get("v")||""))
+    || (path==="/video.php" && /^\d+$/.test(url.searchParams.get("v")||""));
+   if(!valid)return null;
+   const safe=new URL("https://www.facebook.com"+path);
+   if(path==="/watch/" || path==="/video.php")safe.searchParams.set("v",url.searchParams.get("v"));
+   return safe.href;
+  }catch{return null}
+ }
+ function normalizedVideoModel(value){
+  return String(value||"").toLocaleLowerCase("en").replace(/[^a-z0-9]+/g," ").trim();
+ }
+ function facebookForModel(id){
+  const name=normalizedVideoModel(modelName(id));
+  return facebookCatalog.filter(v=>{
+   if(!v||typeof v!=="object"||!checkedFacebookUrl(v.url))return false;
+   if(!/^en(?:[-_][a-z]+)?$/i.test(String(v.language||"en")))return false;
+   if(v.modelId!==undefined && v.modelId!==null)return Number(v.modelId)===id;
+   return typeof v.model==="string"&&normalizedVideoModel(v.model)===name;
+  });
+ }
+ function renderFacebook(id,selectedLang){
+  const videos=facebookForModel(id);
+  if(!videos.length)return "";
+  const t=facebookText[selectedLang]||facebookText.en;
+  const items=videos.map((v,index)=>{
+   const original=checkedFacebookUrl(v.url);
+   return '<article class="product-video-facebook-item">'+
+    '<div class="product-video-facebook-meta"><span class="product-video-facebook-icon" aria-hidden="true">f</span>'+
+    '<span>Facebook · EN</span></div>'+
+    '<strong class="product-video-facebook-name">'+secureText(v.title||modelName(id))+'</strong>'+
+    '<div class="product-video-facebook-actions">'+
+    '<button type="button" data-play-facebook="'+index+'">▶ '+secureText(t.play)+'</button>'+
+    '<a href="'+original+'" target="_blank" rel="noopener noreferrer">'+secureText(t.source)+'</a></div>'+
+    '<div class="product-video-embed" data-facebook-embed-for="'+index+'"></div></article>';
+  }).join("");
+  return '<section class="product-video-facebook" aria-label="'+secureText(t.title)+'">'+
+   '<div class="product-video-facebook-heading"><span class="product-video-facebook-heading-icon" aria-hidden="true">f</span>'+
+   '<div><h3>'+secureText(t.title)+'</h3><span>'+secureText(t.featured)+'</span></div></div>'+
+   '<div class="product-video-facebook-list">'+items+'</div>'+
+   '<p class="product-video-facebook-note">'+secureText(t.note)+'</p></section>';
+ }
+ function loadFacebookCatalog(){
+  fetch("./assets/catalog/facebook-videos.json?v=20261120-en-facebook-v1",{cache:"no-store"})
+   .then(response=>{if(!response.ok)throw new Error("Facebook video catalog unavailable");return response.json()})
+   .then(data=>{
+    facebookCatalog=Array.isArray(data.videos)?data.videos.filter(v=>v&&typeof v==="object"):[];
+    if(currentId!==null && !overlay.hidden)renderVideoList(currentId);
+   }).catch(()=>{/* No unverified fallback videos: the rest of the catalog still works. */});
+ }
  function videoPreference(){
   const l=typeof lang==="string"?lang:document.documentElement.lang;
   return localVideo[l]||localVideo.ru;
@@ -177,7 +245,9 @@
     ).join('')+'</div><p class="product-video-note">'+secureText(pref.note)+'</p></section>';
   const other=foreign.length?
    '<details class="product-video-other"><summary><span class="product-video-other-symbol">'+worldSvg+'</span><span class="product-video-other-label">'+secureText(pref.other)+' ('+foreign.length+')</span><span class="product-video-chevron" aria-hidden="true"></span></summary><div class="product-video-other-body">'+renderClips(foreign,t)+'</div></details>':"";
-  get("productVideoResults").innerHTML=searches+renderSocial(id,typeof lang==="string"?lang:document.documentElement.lang)+localClips+other;
+  const selectedLang=typeof lang==="string"?lang:document.documentElement.lang;
+  const facebook=renderFacebook(id,selectedLang);
+  get("productVideoResults").innerHTML=(selectedLang==="ru"?"":facebook)+searches+renderSocial(id,selectedLang)+localClips+other+(selectedLang==="ru"?facebook:"");
  }
 
  function openVideos(id){
@@ -189,6 +259,27 @@
  }
  overlay.addEventListener("click",event=>{
   if(event.target.closest("[data-close-video]")){closeVideos();return}
+  const fbButton=event.target.closest("[data-play-facebook]");
+  if(fbButton){
+   const number=Number(fbButton.dataset.playFacebook);
+   const video=facebookForModel(currentId)[number];
+   const original=video&&checkedFacebookUrl(video.url);
+   if(!original || !Number.isSafeInteger(number))return;
+   stopPlayback();
+   const container=overlay.querySelector('[data-facebook-embed-for="'+number+'"]');
+   if(!container)return;
+   const frame=document.createElement("iframe");
+   const plugin=/\/reel\//.test(original)?"post.php":"video.php";
+   frame.src="https://www.facebook.com/plugins/"+plugin+"?href="+encodeURIComponent(original)+"&show_text=false&width=640";
+   frame.title="NEOLINE Facebook video";
+   frame.loading="eager";
+   frame.allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; fullscreen";
+   frame.referrerPolicy="strict-origin-when-cross-origin";
+   frame.allowFullscreen=true;
+   container.append(frame);
+   container.scrollIntoView({behavior:"smooth",block:"nearest"});
+   return;
+  }
   const social=event.target.closest("[data-play-social]");
   const play=event.target.closest("[data-play-yt]");
   if(!social&&!play)return;
@@ -270,5 +361,6 @@
   if(event.target===get("productModal"))closeVideos();
  });
  window.addEventListener("pagehide",closeVideos);
+ loadFacebookCatalog();
  window.NEOLINE_PRODUCT_VIDEOS={open:openVideos,close:closeVideos};
 })();
