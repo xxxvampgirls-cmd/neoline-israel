@@ -1,0 +1,122 @@
+name: Browser-check NEOLINE Academy on mobile
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - 'index.html'
+      - 'neoline-academy.js'
+      - 'neoline-academy.css'
+      - 'device-updates.js'
+      - 'smart-hub.js'
+      - '.github/workflows/test-academy.yml'
+permissions:
+  contents: read
+jobs:
+  academy:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Prepare Chromium
+        run: |
+          npm install --no-save playwright
+          npx playwright install --with-deps chromium
+      - name: Run local site
+        run: |
+          python3 -m http.server 8765 --bind 127.0.0.1 >/tmp/neoline-academy.log 2>&1 &
+      - name: Verify four-language Academy, manufacturer resources and learning progress
+        run: |
+          node <<'JS'
+          const {chromium}=require('playwright');
+          (async()=>{
+            const browser=await chromium.launch({headless:true});
+            const page=await browser.newPage({viewport:{width:390,height:844},isMobile:true,hasTouch:true});
+            const errors=[];
+            page.on('pageerror',err=>errors.push(err.message));
+            await page.goto('http://127.0.0.1:8765/',{waitUntil:'domcontentloaded'});
+            await page.waitForFunction(()=>window.NEOLINE_ACADEMY?.topics?.length===4,{timeout:20000});
+            if(await page.locator('#neolineAcademy [data-academy-model]').count()!==8)
+              throw Error('Academy does not list all 8 modeled devices');
+            if(await page.locator('#neolineAcademy [data-academy-topic]').count()!==4)
+              throw Error('Academy must show 4 educational topics');
+            if(await page.locator('#neolineAcademy iframe').count())
+              throw Error('Academy must not load videos without permission');
+            const initial=await page.evaluate(()=>({
+              model:window.NEOLINE_ACADEMY.getModel(),
+              resources:[...document.querySelectorAll('#neolineAcademy .academy-resource-link')].map(a=>a.href),
+              european:window.NEOLINE_DEVICE_UPDATES.get(6)
+            }));
+            if(initial.model!==6||
+               !initial.resources.some(u=>u.includes('argus-4k-argus-4k-dual'))||
+               !initial.european.appName.includes('Assist'))
+              throw Error('Official model source facts not loaded: '+JSON.stringify(initial));
+            await page.locator('#neolineAcademy [data-academy-model="3"]').click();
+            if(await page.evaluate(()=>window.NEOLINE_ACADEMY.getModel())!==3)
+              throw Error('Switching Academy model did not work');
+            await page.locator('#neolineAcademy [data-academy-topic="update"]').click();
+            if(!await page.locator('#neolineAcademy .academy-safety-strong').isVisible())
+              throw Error('Firmware warning missing');
+            await page.locator('#neolineAcademy [data-academy-updates]').click();
+            if(!await page.locator('#neolineAcademy .pd-updates').isVisible())
+              throw Error('EU downloads panel missing');
+            if(!await page.locator('#neolineAcademy a[href*="flash-2k-dual"]').count())
+              throw Error('Flash 2K Dual official EU support URL missing');
+            await page.locator('#neolineAcademy [data-academy-done]').click();
+            if(await page.evaluate(()=>window.NEOLINE_ACADEMY.getReviewed())!==1)
+              throw Error('Topic progress not recorded');
+            if(await page.locator('#neolineAcademy [data-academy-done]').getAttribute('aria-pressed')!=='true')
+              throw Error('Reviewed topic not checked');
+            await page.reload({waitUntil:'domcontentloaded'});
+            await page.waitForFunction(()=>window.NEOLINE_ACADEMY?.topics?.length===4);
+            await page.locator('#neolineAcademy [data-academy-model="3"]').click();
+            if(await page.evaluate(()=>window.NEOLINE_ACADEMY.getReviewed())!==1)
+              throw Error('Learning progress did not survive reload');
+            await page.evaluate(()=>{
+              window.__academyVideoId=null;
+              window.NEOLINE_PRODUCT_VIDEOS.open=id=>{window.__academyVideoId=id};
+            });
+            await page.locator('#neolineAcademy [data-academy-video]').click();
+            if(await page.evaluate(()=>window.__academyVideoId)!==3)
+              throw Error('Academy did not open the correct model video catalog');
+            // Saving a model in "My device" must synchronize Academy immediately.
+            await page.locator('#smartHub [data-hub-tab="owner"]').click();
+            await page.locator('#smartHub [data-hub-device]').selectOption('1');
+            await page.locator('#smartHub [data-hub-save]').click();
+            if(await page.evaluate(()=>window.NEOLINE_ACADEMY.getModel())!==1)
+              throw Error('Saved device did not synchronize Academy');
+            await page.locator('#smartHub [data-hub-academy]').click();
+            if(await page.evaluate(()=>window.NEOLINE_ACADEMY.getModel())!==1)
+              throw Error('My Device did not open its Academy');
+            // Confirm names, text direction and card layout in all four locales.
+            for(const [lang,rtl] of [['en',false],['he',true],['ar',true],['ru',false]]){
+              await page.evaluate(l=>{
+                document.documentElement.lang=l;
+                document.documentElement.dir=['he','ar'].includes(l)?'rtl':'ltr';
+              },lang);
+              await page.waitForFunction(l=>document.querySelector('#neolineAcademy')?.lang===l,lang);
+              const localized=await page.locator('#neolineAcademy .academy-title-group h2').innerText();
+              if(!localized||localized.length<6)throw Error('Academy heading missing '+lang);
+              if(await page.locator('#neolineAcademy').getAttribute('dir')!==(rtl?'rtl':'ltr'))
+                throw Error('Academy direction wrong '+lang);
+              if(await page.locator('#neolineAcademy [data-academy-topic]').count()!==4)
+                throw Error('Localized modules disappeared '+lang);
+            }
+            for(const width of [320,390,768]){
+              await page.setViewportSize({width,height:840});
+              const dims=await page.evaluate(()=>({
+                doc:document.documentElement.scrollWidth,
+                win:innerWidth,
+                card:document.getElementById('neolineAcademy').getBoundingClientRect().width
+              }));
+              if(dims.doc>dims.win+4||dims.card>dims.win+4)
+                throw Error('Academy overflows viewport '+JSON.stringify(dims));
+            }
+            if(errors.length)throw Error('Javascript errors: '+errors.join(' | '));
+            console.log('NEOLINE ACADEMY PASS: 8 models, 4 locales, RTL, video lazy, saved-device sync, official manufacturer links, checklist progress');
+            await browser.close();
+          })().catch(err=>{console.error(err);process.exitCode=1});
+          JS
