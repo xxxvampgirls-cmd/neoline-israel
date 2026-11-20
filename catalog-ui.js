@@ -11,6 +11,9 @@ const names={
  ar:{all:"الكل",hybrid:"الأجهزة الهجينة",radar:"كاشفات الرادار",accessories:"الملحقات",audio:"الصوتيات",sale:"المخفضة",price:"السعر في إسرائيل غير مؤكد",details:"التفاصيل والمواصفات",origin:"الصفحة الرسمية للمنتج ↗",notYet:"الأسعار والمبيعات في إسرائيل غير مؤكدة.",description:"الوصف",specs:"المواصفات",fallback:"لا تتوفر صورة",total:"منتجات الكتالوج",from:"من neoline.ru",noSpec:"راجع موقع الشركة للمعلومات الكاملة."}
 };
 const ui=(key)=>(names[lang]||names.ru)[key]||key;
+const localizer=()=>window.NEOLINE_CATALOG_I18N||null;
+const localTitle=p=>p.isImported&&localizer()?localizer().displayName(p,lang):p.name;
+const sourceSpecs=info=>localizer()?localizer().formatSpecs(info.specs,lang):info.specs.map(kv=>({...kv,isOriginal:false}));
 const esc=str=>String(str??"").replace(/[&<>"']/g,ch=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[ch]));
 function secureSource(value){
  try{const x=new URL(value);return x.protocol==="https:"&&x.hostname==="neoline.ru"?x.href:null}catch(e){return null}
@@ -45,7 +48,9 @@ function productImage(p){
    '</button>';
 }
 function renderExtendedProducts(){
- let items=products.filter(p=>(cat==="all"||p.category===cat)&&p.name.toLowerCase().includes($('search').value.toLowerCase()));
+ const query=$('search').value.toLocaleLowerCase();
+ let items=products.filter(p=>(cat==="all"||p.category===cat)&&
+  (p.name+" "+localTitle(p)).toLocaleLowerCase().includes(query));
  const sort=$('sort').value,preferred=[6,5,3,4,2,1,7,8];
  if(sort==="low")items.sort((a,b)=>(a.isImported?1e14:a.price)-(b.isImported?1e14:b.price));
  else if(sort==="high")items.sort((a,b)=>(a.isImported?-1e14:a.price)-(b.isImported?-1e14:b.price));
@@ -63,8 +68,10 @@ function renderExtendedProducts(){
   const badge=p.isImported?esc(imported.get(p.id)?.group||'NEOLINE'):(p.id===6?'4K / DUAL':p.id===3?'2K / DUAL':t(p.badge));
   const price=p.isImported?'<div class="catalog-price-pending">'+esc(ui("price"))+'</div>':'<div class="price">₪'+p.price.toLocaleString('en-US')+'<small>'+t('estimated')+'</small></div>';
   const buy=p.isImported?"":'<button class="add" data-add="'+p.id+'" aria-label="Add to cart">+</button>';
-  const specs=(p.spec||[]).map(esc).join(' · ');
-  return '<article class="product"><div class="product-art">'+art+'<span class="badge">'+badge+'</span></div><div class="product-content"><div class="product-name">'+esc(p.name)+'</div><div class="spec">'+specs+'</div><div class="price-row">'+price+buy+'</div><button class="details-link" data-details="'+p.id+'">'+(p.isImported?esc(ui('details')):extraTranslations[lang].productDetails)+'</button></div></article>';
+  const importedFacts=p.isImported?sourceSpecs(imported.get(p.id)).filter(k=>!k.isOriginal&&!/[А-Яа-яЁё]/.test(k.value)).slice(0,2).map(k=>k.label+': '+k.value):[];
+  const specs=(p.isImported?(importedFacts.length?importedFacts:[localizer()?.copy(lang).category[p.category]||p.spec?.[0]||'NEOLINE']):(p.spec||[])).map(esc).join(' · ');
+  const productName=localTitle(p);
+  return '<article class="product"><div class="product-art">'+art+'<span class="badge">'+(p.isImported&&localizer()&&lang!=='ru'?esc(localizer().copy(lang).category[p.category]||'NEOLINE'):badge)+'</span></div><div class="product-content"><div class="product-name">'+esc(productName)+'</div><div class="spec">'+specs+'</div><div class="price-row">'+price+buy+'</div><button class="details-link" data-details="'+p.id+'">'+(p.isImported?esc(ui('details')):extraTranslations[lang].productDetails)+'</button></div></article>';
  }).join(''):'<div class="empty">'+esc(t('resultsEmpty'))+'</div>';
  const more=$('catalogShowMore'),button=$('catalogShowMoreBtn'),count=$('catalogProductCount');
  if(more&&button&&count){
@@ -96,13 +103,21 @@ function importedModal(id){
    '<div class="modal-gallery-controls"><button class="modal-photo-arrow" id="modalPrevImage" type="button" aria-label="Previous photo">‹</button><span id="modalPhotoCounter" aria-live="polite">1 / '+urls.length+'</span><button class="modal-photo-arrow" id="modalNextImage" type="button" aria-label="Next photo">›</button></div>'+
    '<div class="modal-thumbs">'+urls.map((u,i)=>'<button type="button" data-import-photo="'+i+'" aria-label="Photo '+(i+1)+'" class="'+(i?'':'active')+'"><img src="'+esc(u)+'" loading="lazy" alt=""></button>').join('')+'</div>':
    '<div class="catalog-image-empty">'+esc(ui("fallback"))+'</div>';
- const specs=info.specs.map(kv=>'<div class="catalog-import-property"><strong>'+esc(kv.label)+'</strong><span>'+esc(kv.value)+'</span></div>').join('');
+ const local=localizer();
+ const translation=local?.copy(lang);
+ const rows=sourceSpecs(info);
+ const specs=rows.map(kv=>'<div class="catalog-import-property"><strong'+(kv.isOriginal?' lang="ru" dir="auto"':'')+'>'+esc(kv.label)+(kv.isOriginal?' <span class="catalog-ru-mark">RU</span>':'')+'</strong><span'+(/[А-Яа-яЁё]/.test(kv.value)?' lang="ru" dir="auto"':'')+'>'+esc(kv.value)+'</span></div>').join('');
+ const shortDescription=local?local.overview({name:p.name,category:p.category,specs:info.specs,description:info.description},lang):(info.description||p.name);
+ const originalRows=info.specs.map(kv=>'<div class="catalog-import-original-row"><strong>'+esc(kv.label)+'</strong><span>'+esc(kv.value)+'</span></div>').join('');
+ const raw=(lang!=="ru" && local)?'<details class="catalog-import-original"><summary>'+esc(translation.all)+'</summary><div lang="ru" dir="ltr"><p>'+esc(info.description||p.name)+'</p>'+originalRows+'</div></details>':'';
  $('productModalBody').innerHTML='<div class="modal-grid"><div class="modal-media">'+imgs+'</div><div class="modal-content">'+
-  '<div class="kicker">'+esc(info.group)+'</div><h2>'+esc(p.name)+'</h2><p class="catalog-price-pending">'+esc(ui("price"))+'</p>'+
+  '<div class="kicker">'+esc((lang==='ru'?info.group:translation?.category[p.category])||info.group)+'</div><h2>'+esc(localTitle(p))+'</h2><p class="catalog-price-pending">'+esc(ui("price"))+'</p>'+
   '<p class="modal-help">'+esc(ui("notYet"))+'</p>'+
   '<a class="secondary catalog-origin" href="'+esc(info.source)+'" target="_blank" rel="noopener noreferrer">'+esc(ui("origin"))+'</a></div></div>'+
-  '<section class="catalog-import-detail"><h3>'+esc(ui("description"))+'</h3><p>'+esc(info.description||p.name)+'</p>'+
-  '<h3>'+esc(ui("specs"))+'</h3><div class="catalog-import-grid">'+(specs||'<p>'+esc(ui('noSpec'))+'</p>')+'</div></section>';
+  '<section class="catalog-import-detail"><h3>'+esc(translation?.description||ui("description"))+'</h3><p>'+esc(shortDescription)+'</p>'+
+  (lang==="ru"?"":'<p class="catalog-import-caution">'+esc(translation?.notes||"")+'</p>')+
+  '<h3>'+esc(translation?.short||ui("specs"))+'</h3><div class="catalog-import-grid">'+(specs||'<p>'+esc(translation?.empty||ui("noSpec"))+'</p>')+'</div>'+
+  raw+'</section>';
  const img=$('modalBig');
  if(img){
   let index=0;
