@@ -215,6 +215,34 @@
  }
 }
 
+/* Tighter catalog typography: remove the legacy fixed blank title/spec slots.
+   Keep natural two-line wrapping for long model names and all RTL translations. */
+#catalog .products .product .product-name{
+ min-height:0!important;
+ height:auto!important;
+ margin:0 0 4px!important;
+ line-height:1.3!important;
+}
+#catalog .products .product .spec{
+ min-height:0!important;
+ height:auto!important;
+ margin:0 0 12px!important;
+ line-height:1.36!important;
+}
+#catalog .products .product .price-row{
+ margin-top:0!important;
+}
+@media(max-width:720px){
+ #catalog .products .product .product-name{
+  margin-bottom:3px!important;
+  line-height:1.3!important;
+ }
+ #catalog .products .product .spec{
+  margin-bottom:10px!important;
+  line-height:1.35!important;
+ }
+}
+
 @media(prefers-reduced-motion:reduce){
  .hub-model-picker-dialog *{transition:none!important;animation:none!important}
 }
