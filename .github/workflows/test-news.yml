@@ -128,6 +128,25 @@ jobs:
             const alert=road.locator('.road-demo-speed-warning');
             if(await alert.getAttribute('aria-hidden')!=='false')
               throw Error('GPS overspeed warning must be visible and accessible');
+            const gpsEffect=await road.evaluate(el=>{
+              const satellite=el.querySelector('.road-demo-satellite-link');
+              const float=el.querySelector('.road-demo-satellite-float');
+              const signal=el.querySelector('.road-demo-gps-answer-beam');
+              const search=el.querySelector('.road-demo-gps-search-beam');
+              return {
+                visible:satellite&&getComputedStyle(satellite).visibility,
+                float:float&&getComputedStyle(float).animationName,
+                downlink:signal&&getComputedStyle(signal).animationName,
+                acquisition:search&&getComputedStyle(search).animationName,
+                waves:el.querySelectorAll('.road-demo-gps-wave').length,
+                note:el.querySelector('[data-road-note]')?.textContent||''
+              };
+            });
+            if(gpsEffect.visible!=='visible'||gpsEffect.float!=='premiumSatelliteFloat'||
+               gpsEffect.downlink!=='premiumSatelliteReply'||
+               gpsEffect.acquisition!=='premiumSatelliteSearch'||gpsEffect.waves!==3||
+               !gpsEffect.note.includes('GPS'))
+              throw Error('GPS mode must animate the satellite, reception and lock: '+JSON.stringify(gpsEffect));
             await road.locator('[data-road-step="0"]').click();
             if(await road.evaluate(el=>el.classList.contains('is-overspeed')))
               throw Error('GPS-only overspeed alert leaked into plain record mode');
@@ -145,7 +164,33 @@ jobs:
             if(!vehicleGeometry||vehicleGeometry.lights!==2||
                vehicleGeometry.lamps>=vehicleGeometry.glass-24)
               throw Error('Main car headlights must sit ahead of the windshield: '+JSON.stringify(vehicleGeometry));
+            const carMotion=await road.locator('.road-demo-car-motion')
+              .evaluate(el=>getComputedStyle(el).animationName);
+            if(carMotion!=='premiumLaneDeparture')
+              throw Error('Recording mode car must drift toward right lane boundary: '+carMotion);
+            const satelliteInRecord=await road.locator('.road-demo-satellite-link')
+              .evaluate(el=>getComputedStyle(el).visibility);
+            if(satelliteInRecord!=='hidden')
+              throw Error('The GPS satellite must disappear in recording mode');
+            await page.waitForFunction(()=>document.getElementById('neolineRoadDemo')
+              ?.classList.contains('is-lane-alert'),null,{timeout:4600});
+            const laneWarn=await road.evaluate(el=>({
+              text:el.querySelector('[data-road-lane-status]')?.textContent||'',
+              redLine:getComputedStyle(el.querySelector('.road-demo-lane-danger')).opacity,
+              warning:el.classList.contains('is-lane-alert')
+            }));
+            if(!laneWarn.warning||!laneWarn.text.includes('Выезд из полосы')||
+               Number(laneWarn.redLine)<=0)
+              throw Error('Lane departure warning and highlighted boundary missing: '+
+                JSON.stringify(laneWarn));
+            await page.waitForFunction(()=>{
+              const el=document.getElementById('neolineRoadDemo');
+              return el&&!el.classList.contains('is-lane-alert')&&
+                el.querySelector('[data-road-lane-status]')?.textContent.includes('распознана');
+            },null,{timeout:4200});
             await road.locator('[data-road-step="2"]').click();
+            if(await road.evaluate(el=>el.classList.contains('is-lane-alert')))
+              throw Error('Lane warning leaked into rear-camera mode');
             const rearCar=await road.locator('.road-demo-rear-feed svg').evaluate(el=>({
               bodyPaths:el.querySelectorAll('.road-demo-rear-car path').length,
               cartoonEyes:el.querySelectorAll('.road-demo-rear-car circle').length,
