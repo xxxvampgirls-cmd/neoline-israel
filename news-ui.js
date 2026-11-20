@@ -79,7 +79,9 @@ function restartFeatureTimer(){
  if(feature.items.length<2||feature.paused||document.hidden||featureReducedMotion())return;
  feature.timer=setTimeout(()=>setFeatureIndex(feature.index+1,false),7600);
 }
-function drawFeature(){
+/* Slide copy moves with a short cinematic speed-ramp while the backdrop,
+   dot grid and glass accents stay fixed. No image or duplicate link nodes. */
+function drawFeature(direction=0){
  const host=$("newsFeatureSlide"),controls=$("newsFeatureControls");
  if(!host||!controls)return;
  const list=feature.items;
@@ -90,14 +92,50 @@ function drawFeature(){
  $("newsFeatureDots").setAttribute("aria-label",featureTr("pick"));
  if(!list.length){host.innerHTML='<p class="news-feature-loading">'+safe(featureTr("empty"))+'</p>';return}
  const item=list[feature.index],url=safeURL(item.url),localized=localStory(item);
- // #newsFeatureSlide hosts the continuous background animation; this DOM
- // replacement changes headlines, never the backdrop. No photographs.
- host.innerHTML='<a class="news-feature-story news-feature-story--animated" href="'+safe(url)+'" target="_blank" rel="noopener noreferrer nofollow" aria-label="'+safe(localized.title)+'">'+
-  '<span class="news-feature-photo news-feature-photo--empty" aria-hidden="true"></span>'+
-  '<span class="news-feature-pattern" aria-hidden="true"></span><span class="news-feature-blueprint" aria-hidden="true"></span>'+
-  '<span class="news-feature-copy"><span class="news-feature-tag">'+safe(featureTr("latest"))+' <i>·</i> '+safe(tr(item.category))+'</span>'+
+ let story=host.querySelector(".news-feature-story--animated");
+ if(!story){
+  host.innerHTML='<a class="news-feature-story news-feature-story--animated" target="_blank" rel="noopener noreferrer nofollow">'+
+    '<span class="news-feature-photo news-feature-photo--empty" aria-hidden="true"></span>'+
+    '<span class="news-feature-pattern" aria-hidden="true"></span>'+
+    '<span class="news-feature-blueprint" aria-hidden="true"></span></a>';
+  story=host.querySelector(".news-feature-story--animated");
+ }
+ story.href=url;
+ story.setAttribute("aria-label",localized.title);
+ const newCopy=document.createElement("span");
+ newCopy.className="news-feature-copy";
+ newCopy.innerHTML='<span class="news-feature-tag">'+safe(featureTr("latest"))+' <i>·</i> '+safe(tr(item.category))+'</span>'+
   '<strong class="news-feature-title" dir="auto">'+safe(localized.title)+'</strong>'+
-  '<span class="news-feature-footer">'+safe(displayDate(item.date))+' · '+safe(item.publisher||"")+'<span class="news-feature-go">'+safe(featureTr("view"))+' ↗</span></span></span></a>';
+  '<span class="news-feature-footer">'+safe(displayDate(item.date))+' · '+safe(item.publisher||"")+
+  '<span class="news-feature-go">'+safe(featureTr("view"))+' ↗</span></span>';
+ // Fast repeated taps never leave orphaned outgoing text overlays.
+ story.querySelectorAll(".news-feature-copy--exit").forEach(el=>el.remove());
+ const previous=story.querySelector(".news-feature-copy");
+ const animate=direction!==0&&previous&&!featureReducedMotion();
+ if(!animate){
+  if(previous)previous.replaceWith(newCopy);
+  else story.appendChild(newCopy);
+ }else{
+  const forward=direction>0;
+  const shift=forward?"-64%":"64%";
+  previous.setAttribute("aria-hidden","true");
+  previous.style.setProperty("--news-exit-shift",shift);
+  previous.style.setProperty("--news-slant",forward?"-4deg":"4deg");
+  previous.classList.remove("news-feature-copy--enter");
+  previous.classList.add("news-feature-copy--exit");
+  newCopy.style.setProperty("--news-enter-shift",forward?"68%":"-68%");
+  newCopy.style.setProperty("--news-overshoot",forward?"-2%":"2%");
+  newCopy.style.setProperty("--news-slant",forward?"-4deg":"4deg");
+  newCopy.classList.add("news-feature-copy--enter");
+  story.appendChild(newCopy);
+  // animationend can be suppressed on background tabs; clean up regardless.
+  const cleanup=()=>{
+   previous.remove();
+   newCopy.classList.remove("news-feature-copy--enter");
+  };
+  newCopy.addEventListener("animationend",cleanup,{once:true});
+  setTimeout(cleanup,700);
+ }
  const dots=$("newsFeatureDots");
  if(dots.childElementCount!==list.length){
   dots.innerHTML=list.map((v,i)=>'<button type="button" data-feature-dot="'+i+'" class="news-feature-dot" aria-label="'+safe(featureTr("slide"))+' '+(i+1)+' '+safe(featureTr("of"))+' '+list.length+'"></button>').join("");
@@ -112,8 +150,10 @@ function drawFeature(){
 }
 function setFeatureIndex(index,manual=true){
  if(!feature.items.length)return;
+ const oldIndex=feature.index;
  feature.index=(index+feature.items.length)%feature.items.length;
- drawFeature();
+ if(feature.index===oldIndex){restartFeatureTimer();return}
+ drawFeature(index>oldIndex?1:-1);
  if(manual)feature.paused=false;
  restartFeatureTimer();
 }
