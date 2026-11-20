@@ -21,7 +21,7 @@ const langPack={
   archiveMore:"Другие сюжеты 13 канала ↗",loading:"Собираем видео за месяц…",
   empty:"За последние 30 дней пока нет подтверждённых роликов по этой теме.",
   unavailable:"Подборка обновляется из YouTube. Пока можно открыть проверенные каналы ниже.",
-  watch:"Смотреть",youtube:"Открыть на YouTube ↗",sources:"Источники:",
+  watch:"Смотреть",youtube:"Открыть на YouTube ↗",sources:"В том числе каналы:",
   expand:"Показать ещё видео",count:n=>n+" видео",notice:"Видео размещены авторами на YouTube; могут содержать кадры происшествий.",
   close:"Закрыть видео",player:"Видеорепортаж"},
  en:{label:"ROAD FOOTAGE · ISRAEL",title:"Videos from the roads",period:"Last 30 days",
@@ -32,7 +32,7 @@ const langPack={
   archiveMore:"More News 13 coverage ↗",loading:"Loading this month's videos…",
   empty:"No verified clips for this topic were found in the last 30 days.",
   unavailable:"This playlist is built from YouTube feeds. Browse the verified channels below.",
-  watch:"Watch",youtube:"Open on YouTube ↗",sources:"Sources:",
+  watch:"Watch",youtube:"Open on YouTube ↗",sources:"Including channels:",
   expand:"More videos",count:n=>n+" videos",notice:"Videos remain on YouTube; some may show sensitive crash footage.",
   close:"Close video",player:"Video report"},
  he:{label:"וידאו מהכבישים · ישראל",title:"סרטונים מהכבישים",period:"30 הימים האחרונים",
@@ -43,7 +43,7 @@ const langPack={
   archiveMore:"עוד כתבות בחדשות 13 ↗",loading:"טוענים סרטונים מהחודש…",
   empty:"אין סרטונים מאומתים בנושא זה ב־30 הימים האחרונים.",
   unavailable:"האוסף מתעדכן מיוטיוב. אפשר לבקר בערוצים הרשמיים בהמשך.",
-  watch:"צפייה",youtube:"לצפייה ביוטיוב ↗",sources:"מקורות:",
+  watch:"צפייה",youtube:"לצפייה ביוטיוב ↗",sources:"בין היתר ערוצים:",
   expand:"עוד סרטונים",count:n=>n+" סרטונים",notice:"הסרטונים מתארחים ביוטיוב ועלולים להכיל תיעוד תאונות.",
   close:"סגירת הסרטון",player:"כתבת וידאו"},
  ar:{label:"فيديو الطرق · إسرائيل",title:"فيديوهات الطرق",period:"آخر 30 يومًا",
@@ -54,7 +54,7 @@ const langPack={
   archiveMore:"المزيد من أخبار 13 ↗",loading:"جار تحميل فيديوهات الشهر…",
   empty:"لا توجد مقاطع موثقة عن هذا الموضوع خلال آخر 30 يومًا.",
   unavailable:"تُحدّث المجموعة من يوتيوب. يمكنك زيارة القنوات الرسمية أدناه.",
-  watch:"مشاهدة",youtube:"فتح على يوتيوب ↗",sources:"المصادر:",
+  watch:"مشاهدة",youtube:"فتح على يوتيوب ↗",sources:"من القنوات:",
   expand:"مزيد من الفيديوهات",count:n=>n+" فيديو",notice:"الفيديوهات مستضافة على يوتيوب وقد تتضمن مشاهد حوادث.",
   close:"إغلاق الفيديو",player:"تقرير مصور"}
 };
@@ -88,13 +88,15 @@ function sanitize(data){
   if(!item||!validID(item.id)||!validDate(item.date)||!(official||community)||
      typeof item.title!=="string"||!item.title.trim()||seen.has(item.id))continue;
   seen.add(item.id);
+  const allowedTags=Array.isArray(item.tags)?item.tags.filter(cat=>
+    CATS.includes(cat)&&cat!=="all"):[];
   rows.push({
    id:item.id,title:item.title.trim(),date:item.date,
    source:item.source,
    publisher:official?SOURCES[item.source].name:item.publisher.trim().slice(0,100),
    channelId:community?item.channelId:null,
-   tags:Array.isArray(item.tags)?item.tags.filter(cat=>CATS.includes(cat)&&cat!=="all"):
-     [CATS.includes(item.category)?item.category:"reports"],
+   tags:allowedTags.length?allowedTags:
+     [CATS.includes(item.category)&&item.category!=="all"?item.category:"reports"],
    category:CATS.includes(item.category)&&item.category!=="all"?item.category:"reports",
    url:"https://www.youtube.com/watch?v="+item.id
   });
