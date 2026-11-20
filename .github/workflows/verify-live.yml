@@ -84,12 +84,18 @@ jobs:
                           feature_manifest = json.loads(fetch("assets/catalog/feature-media.json"))
                           groups = {int(item["id"]): len(item.get("features",[]))
                                     for item in feature_manifest.get("products", [])}
+                          cable = next((p for p in manifest["products"] if p["id"] == 951833046070), None)
+                          banner = "./assets/catalog/images/951833046070-3.webp"
+                          invalid_gallery = (not cable or len(cable.get("images",[]))!=2
+                                             or banner in cable.get("images",[]))
                           if count < 50:
                               last_reason = f"Catalogue data incomplete: {count} imported products"
+                          elif invalid_gallery:
+                              last_reason = "User-reported shipping promo still appears in live Power Cord Hybrid gallery"
                           elif groups.get(159268200852) != 6 or groups.get(1087255377614) != 4:
                               last_reason = f"Manufacturer art incomplete: {groups}"
                           else:
-                              print(f"PASS: Cloudflare has all current pages, ten locally cached original manufacturer illustrations, video guides and {count} products")
+                              print(f"PASS: Cloudflare has 2 real Power Cord Hybrid photos, no blue shipping banner, ten illustrated manufacturer features and {count} products")
                               break
               except Exception as exc:
                   last_reason = f"{type(exc).__name__}: {exc}"
