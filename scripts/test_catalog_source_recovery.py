@@ -17,6 +17,7 @@ from PIL import Image, ImageDraw
 
 import sync_catalog as shop
 from catalog_photo_quality import duplicate_kind, photo_signature
+from catalog_promo_filter import banner_diagnosis, promotional_url, banned_reference
 
 
 def picture(mode: int) -> bytes:
@@ -34,6 +35,40 @@ def picture(mode: int) -> bytes:
     image.save(output, format="WEBP", quality=90)
     return output.getvalue()
 
+
+class ProductImageRecoveryTests(unittest.TestCase):
+    def test_user_confirmed_ad_and_wide_colored_promo_banners_are_rejected(self):
+        # Exact image was shown by the user as photo 3/3 of Power Cord Hybrid.
+        self.assertTrue(banned_reference("./assets/catalog/images/951833046070-3.webp"))
+        self.assertFalse(banned_reference("./assets/catalog/images/951833046070-2.webp"))
+        marketing=Image.new("RGB",(900,275),(5,105,222))
+        draw=ImageDraw.Draw(marketing)
+        draw.rectangle((140,104,760,152),fill=(240,240,245))
+        reason,details=banner_diagnosis(marketing)
+        self.assertIsNotNone(reason)
+        self.assertGreater(details["saturated_fraction"],0.5)
+        # A long white-background power cord is not a banner.
+        cable=Image.new("RGB",(900,275),"white")
+        draw=ImageDraw.Draw(cable)
+        draw.line([(120,120),(350,80),(510,125),(780,115)],width=12,fill="black")
+        self.assertIsNone(banner_diagnosis(cable)[0])
+        self.assertTrue(promotional_url("https://neoline.ru/upload/medialibrary/a/Бесплатный_самовывоз.webp"))
+        self.assertTrue(promotional_url("https://neoline.ru/upload/iblock/delivery_banner.webp"))
+        self.assertFalse(promotional_url("https://neoline.ru/upload/iblock/neoline_power_cord_hybrid.webp"))
+
+    def test_future_sync_skips_promo_image_before_background_conversion(self):
+        marketing=Image.new("RGB",(900,275),(6,95,220))
+        stream=io.BytesIO()
+        marketing.save(stream,format="PNG")
+        fake=type("Response",(),{"content":stream.getvalue()})()
+        with tempfile.TemporaryDirectory() as tmp:
+            target=Path(tmp)/"product.webp"
+            with patch.object(shop,"get",return_value=fake):
+                actual=shop.download_unique_image(
+                    "https://neoline.ru/upload/iblock/rasterized-banner.png",
+                    target,[])
+            self.assertIsNone(actual)
+            self.assertFalse(target.exists())
 
 class ProductImageRecoveryTests(unittest.TestCase):
     def test_speaker_facts_do_not_leak_into_radar_mounts(self):
