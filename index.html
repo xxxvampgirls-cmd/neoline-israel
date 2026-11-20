@@ -3179,7 +3179,7 @@ function renderShowcase(){
   flight.append(copy,picture);
   // Touching the picture follows the slide's primary action, while navigation arrows
   // and horizontal swipes keep their original carousel behavior.
-  const primary=copy.querySelector('.featured-cta .primary');
+  const primary=(slide.classList.contains('featured-slide--israel') ? copy.querySelector('.featured-cta [data-open-feature]') : null) || copy.querySelector('.featured-cta .primary');
   if(primary){
    picture.classList.add('showcase-click-target');
    picture.tabIndex=0;
