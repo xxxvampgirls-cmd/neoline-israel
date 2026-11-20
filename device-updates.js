@@ -185,5 +185,22 @@
    '<p class="pd-updates-footnote">'+e(t.noGps)+'</p>'+
    '</div>';
  }
- window.NEOLINE_DEVICE_UPDATES={render,models:Object.freeze(Object.keys(catalog).map(Number))};
+ window.NEOLINE_DEVICE_UPDATES={
+  render,
+  models:Object.freeze(Object.keys(catalog).map(Number)),
+  // Read-only official support-page metadata for Academy. Deliberately
+  // omits direct firmware binaries: users must verify hardware/region first.
+  get(id){
+   const item=catalog[Number(id)];
+   if(!item)return null;
+   return Object.freeze({
+    euPage:item.euPage||"https://neoline.com/update/",
+    manual:item.manual||null,
+    app:item.app||null,
+    appName:item.appName||null,
+    variant:Boolean(item.variant),
+    noPackage:Boolean(item.noPackage)
+   });
+  }
+ };
 })();
