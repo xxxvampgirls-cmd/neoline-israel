@@ -20,6 +20,7 @@ from urllib.parse import urljoin, urlparse, urlunparse
 import requests
 from bs4 import BeautifulSoup
 from PIL import Image, ImageOps, UnidentifiedImageError
+from catalog_photo_quality import photo_signature, duplicate_kind
 
 HOST = "https://neoline.ru"
 SECTIONS = {
@@ -153,30 +154,65 @@ def nested_jsonld(soup):
 
 
 def image_candidates(soup, data, title):
+ """Prioritize actual manufacturer product media, not recommended products/icons.
+
+ Bitrix product pages use varying <picture>, lazy-image and zoom-gallery
+ attributes. Keep only official /upload/ URLs. Similar rendered images are
+ independently deduplicated after download.
+ """
  options={}
  def add(raw,score):
-  if isinstance(raw,dict): raw=raw.get("url") or raw.get("contentUrl")
+  if isinstance(raw,dict):raw=raw.get("url") or raw.get("contentUrl")
   if not isinstance(raw,str):return
   url=canonical_image(raw)
   if not url:return
   options[url]=max(score,options.get(url,0))
+ def variants(raw):
+  if not isinstance(raw,str):return []
+  # Capture ALL srcset variants, not only its first low-resolution thumbnail.
+  if "," in raw and re.search(r"\\s[0-9.]+[wx](?:,|$)",raw):
+   return [p.strip().split(" ")[0] for p in raw.split(",") if p.strip()]
+  return [raw]
  for meta in soup.select('meta[property="og:image"],meta[name="twitter:image"]'):
   add(meta.get("content"),80)
  for item in (data.get("image",[]) if isinstance(data.get("image",[]),list) else [data.get("image")]):
   add(item,95)
- keywords=set(re.findall(r"[a-z0-9]{3,}",title.lower()))
- for img in soup.select("img"):
-  parent=img.find_parent(class_=re.compile("catalog|detail|product|gallery|slider|item|picture",re.I))
-  alt=tidy(img.get("alt","")).lower()
-  rel=len(keywords & set(re.findall(r"[a-z0-9]{3,}",alt)))
-  score=15+min(rel*10,35) + (15 if parent else 0)
-  if "neoline" in alt:score+=5
-  for attr in ("data-src","data-lazyload","data-original","data-srcset","src"):
-   raw=img.get(attr,"")
-   if attr.endswith("srcset") and isinstance(raw,str):raw=raw.split(",")[0].strip().split(" ")[0]
-   add(raw,score)
- return [url for url,score in sorted(options.items(),key=lambda p:p[1],reverse=True)][:24]
-
+ words={k for k in re.findall(r"[a-z0-9]{3,}",title.lower()) if k not in ("neoline","wifi","dual","wi")}
+ excluded=re.compile(r"related|recommend|similar|also.buy|soput|catalog.list|product.list|other.products",re.I)
+ gallery=re.compile(r"gallery|slider|swiper|fancybox|zoom|detail.*image|product.*image|product.*photo|main.photo|picture",re.I)
+ for element in soup.select("img,picture source,source[srcset],a[data-fancybox],a[data-src],a[data-zoom-image]"):
+  ancestry=element
+  is_gallery=False
+  reject=False
+  for _ in range(7):
+   if ancestry is None:break
+   classes=" ".join(ancestry.get("class",[]))+" "+str(ancestry.get("id",""))
+   if excluded.search(classes):
+    reject=True;break
+   if gallery.search(classes) or ancestry.has_attr("data-fancybox"):
+    is_gallery=True
+   ancestry=ancestry.parent
+  if reject:continue
+  alt=tidy(element.get("alt","")).lower()
+  rel=len(words & set(re.findall(r"[a-z0-9]{3,}",alt)))
+  score=15+min(rel*12,35)+(30 if is_gallery else 0)
+  if "neoline" in alt:score+=10
+  if not is_gallery and rel==0:continue
+  for attr in ("data-zoom-image","data-large-image","data-original","data-full","data-big",
+               "data-fancybox-href","data-src","data-lazyload","data-srcset",
+               "srcset","src","href"):
+   if attr=="href" and not element.has_attr("data-fancybox"):continue
+   for raw in variants(element.get(attr,"")):
+    add(raw,score+12 if attr.startswith("data-") else score)
+ for node in soup.select('[style*="background-image"],[style*="background:"]'):
+  classes=" ".join(node.get("class",[]))+" "+str(node.get("id",""))
+  if not gallery.search(classes):continue
+  for found in re.findall(r"url\\(\\s*['\\\"]?([^'\\\"\\)]+)",node.get("style","")):
+   add(found,60)
+ # Do not blindly pad the gallery from unrelated footer/product tiles.
+ # Keep a wider candidate pool for genuine alternate angles or larger variants.
+ return [url for url,score in sorted(options.items(),key=lambda p:p[1],reverse=True)
+         if score>=35][:65]
 
 def canonical_image(raw):
  p=urlparse(urljoin(HOST,raw))
@@ -308,76 +344,75 @@ def clean_image(img):
  return base,"original"
 
 
-def image_fingerprint(img):
- """Perceptual dHash (64-bit) for excluding the same picture at different URLs."""
- gray=ImageOps.exif_transpose(img).convert("L").resize((9,8),Image.Resampling.LANCZOS)
- px=list(gray.getdata())
- bits=0
- for y in range(8):
-  for x in range(8):
-   bits=(bits<<1)|int(px[y*9+x]>px[y*9+x+1])
- return bits
-
-
-def near_duplicate(value,known):
- return any((value^other).bit_count()<=4 for other in known)
-
-
 def download_unique_image(url,path,known):
+ """Save a real manufacturer picture only when distinct from approved ones."""
  response=get(url,timeout=24)
  if len(response.content)>MAX_IMAGE_BYTES:raise ValueError("image too large")
  img=Image.open(io.BytesIO(response.content));img.load()
  if img.width<180 or img.height<140 or img.width*img.height>20_000_000:
   raise ValueError("bad dimensions")
- fingerprint=image_fingerprint(img)
- if near_duplicate(fingerprint,known):return None
  output,mode=clean_image(img)
- path.parent.mkdir(parents=True,exist_ok=True)
- output.save(path,format="WEBP",quality=89,method=5)
- return mode,fingerprint
+ pending=path.with_name(path.stem+".pending.webp")
+ try:
+  output.save(pending,format="WEBP",quality=89,method=5)
+  signature=photo_signature(pending)
+  if any(duplicate_kind(signature,old)[0] in ("identical","perceptual") for old in known):
+   return None
+  # Do not expose any incomplete picture to a concurrent client.
+  pending.replace(path)
+  return mode,signature
+ finally:
+  pending.unlink(missing_ok=True)
 
 
-def attach_photos(item):
- """Keep up to 6 authentic, distinct images (not 6 copies of one product view)."""
+def attach_photos(item,previous_by_id):
+ """Keep existing approved views, then look for genuinely different source shots.
+
+ The sync must not accidentally re-import references already rejected by the
+ last gallery audit merely because their old .webp files remain on disk.
+ """
  if not item:return None
- slug=str(item["id"])
  directory=OUT/"images"
  directory.mkdir(parents=True,exist_ok=True)
- seen=[]
- previous=[]
- for i in range(1,11):
-  path=directory/f"{slug}-{i}.webp"
-  if not path.is_file() or path.stat().st_size<3000:continue
+ slug=str(item["id"])
+ approved=previous_by_id.get(item["id"],[])
+ retained=[]
+ signatures=[]
+ for relative in approved:
+  if not isinstance(relative,str) or not re.fullmatch(
+      r"\\./assets/catalog/images/[0-9]+-[0-9]+\\.webp",relative):continue
+  path=Path(relative)
+  if not path.is_file():continue
   try:
-   with Image.open(path) as img:
-    img.load()
-    fingerprint=image_fingerprint(img)
-   if near_duplicate(fingerprint,seen):continue
-   previous.append((path.read_bytes(),fingerprint))
-   seen.append(fingerprint)
+   signature=photo_signature(path)
+   if any(duplicate_kind(signature,old)[0] in ("identical","perceptual")
+          for old in signatures):continue
+   retained.append(path.read_bytes())
+   signatures.append(signature)
   except (ValueError,OSError,UnidentifiedImageError):continue
+ # Retained images are written to contiguous stable numbered slots. Preserve
+ # bytes first; overwriting a target cannot destroy a yet-to-be-read old photo.
  images=[]
- for index,(binary,fingerprint) in enumerate(previous[:6],start=1):
-  path=directory/f"{slug}-{index}.webp"
-  if not path.exists() or path.read_bytes()!=binary:
-   path.write_bytes(binary)
-  images.append("./"+path.as_posix())
- for url in item.pop("imageSources",[])[:22]:
+ for index,binary in enumerate(retained[:6],start=1):
+  target=directory/f"{slug}-{index}.webp"
+  if not target.exists() or target.read_bytes()!=binary:
+   target.write_bytes(binary)
+  images.append("./"+target.as_posix())
+ for url in item.pop("imageSources",[])[:65]:
   if len(images)>=6:break
   target=directory/f"{slug}-{len(images)+1}.webp"
   try:
-   found=download_unique_image(url,target,seen)
+   found=download_unique_image(url,target,signatures)
    if not found:continue
-   mode,fingerprint=found
-   seen.append(fingerprint)
+   mode,signature=found
+   signatures.append(signature)
    images.append("./"+target.as_posix())
-   print(f"unique photo {slug} {mode}: {target.name}",flush=True)
+   print(f"new verified product photo {slug} {mode}: {target.name}",flush=True)
   except (requests.RequestException,ValueError,OSError,UnidentifiedImageError) as exc:
-   print(f"SKIP photo {slug}: {type(exc).__name__} {str(exc)[:80]}",flush=True)
+   print(f"SKIP photo {slug}: {type(exc).__name__} {str(exc)[:100]}",flush=True)
  item["images"]=images
  item["spec"]=[entry["value"] for entry in item["specs"][:3]]
  return item
-
 
 def main():
  OUT.mkdir(parents=True,exist_ok=True)
@@ -401,10 +436,17 @@ def main():
   report["parsed"]=len(entries)
   (OUT/"sync-report.json").write_text(json.dumps(report,ensure_ascii=False,indent=2)+"\n")
   return 3
- # Prefer 5–6 unique official product photos when actually available.
+ # Reuse only references still approved in the CURRENT published catalog.
+ # Orphan photos from an earlier generation are not reinserted automatically.
+ previous_by_id={}
+ try:
+  old=json.loads((OUT/"catalog.json").read_text(encoding="utf-8"))
+  previous_by_id={int(p["id"]):list(p.get("images") or []) for p in old.get("products",[])}
+ except (OSError,ValueError,KeyError,TypeError) as exc:
+  print(f"Previous catalogue unavailable; source-only media recovery: {exc}",flush=True)
  entries.sort(key=lambda p:(p["category"],p["name"].casefold(),p["source"]))
  with ThreadPoolExecutor(max_workers=3) as pool:
-  list(pool.map(attach_photos,entries))
+  list(pool.map(lambda item:attach_photos(item,previous_by_id),entries))
  report["parsed"]=len(entries)
  report["photos"]=sum(len(p["images"]) for p in entries)
  report["uniquePhotosPerProduct"]={p["name"]:len(p["images"]) for p in entries}
