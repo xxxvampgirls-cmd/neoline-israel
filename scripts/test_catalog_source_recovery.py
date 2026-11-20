@@ -70,7 +70,6 @@ class ProductImageRecoveryTests(unittest.TestCase):
             self.assertIsNone(actual)
             self.assertFalse(target.exists())
 
-class ProductImageRecoveryTests(unittest.TestCase):
     def test_speaker_facts_do_not_leak_into_radar_mounts(self):
         rows=[
             {"label":"Диффузор","value":"Стекловолокно"},
