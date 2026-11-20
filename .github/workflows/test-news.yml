@@ -199,7 +199,7 @@ jobs:
               ?.classList.contains('active'),null,{timeout:3200});
             if(await newsPromo.locator('.ad-photo-stripes').count()!==1 ||
                await newsPromo.locator('.promo-art-object .newsroom-promo-screen').count()!==1 ||
-               await newsPromo.locator('.newsroom-promo-video svg').count()!==1 ||
+               await newsPromo.locator('.newsroom-promo-video > svg').count()!==1 ||
                await newsPromo.locator('.newsroom-promo-chart i').count()!==8)
               throw Error('Newsroom ad must contain original video artwork and illustrative daily statistics');
             if(await newsPromo.locator('.newsroom-promo-screen img').count()!==0)
