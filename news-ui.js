@@ -79,31 +79,30 @@ function restartFeatureTimer(){
  if(feature.items.length<2||feature.paused||document.hidden||featureReducedMotion())return;
  feature.timer=setTimeout(()=>setFeatureIndex(feature.index+1,false),7600);
 }
-/* Broadcast scene mixer. Every scene contains its own headline, source and
-   category-colored background, so animated masks reveal a genuinely different
-   full frame rather than a colored layer passing over fixed text.
-   Five transitions cycle: diagonal, ribbon shards, chevron, segmented blinds,
-   and centered diamond. No photos, video downloads or image dependencies. */
+/* TV-news transitions: masks and colored diagonal bands operate ONLY on
+   background layers. The clickable editorial headline occupies its own fixed
+   foreground layer: it gently fades, or exits sideways, independently. */
 const newsBroadcastMasks=["ribbons","chevron","shutters","diagonal","diamond"];
 let newsBroadcastStep=0;
-function makeFeatureScene(item){
- const url=safeURL(item.url),localized=localStory(item);
- const theme=Object.prototype.hasOwnProperty.call(artPaths,item.category)?item.category:"cars";
- const scene=document.createElement("a");
- scene.className="news-feature-story news-feature-story--animated news-scene news-scene--current";
- scene.href=url;
- scene.target="_blank";
- scene.rel="noopener noreferrer nofollow";
- scene.dataset.newsTheme=theme;
- scene.setAttribute("aria-label",localized.title);
- scene.innerHTML='<span class="news-feature-backdrop news-feature-backdrop--'+safe(theme)+'" aria-hidden="true">'+
-  '<span class="news-feature-pattern"></span><span class="news-feature-blueprint"></span></span>'+
-  '<span class="news-feature-copy"><span class="news-feature-tag">'+safe(featureTr("latest"))+
+const newsTheme=item=>Object.prototype.hasOwnProperty.call(artPaths,item.category)?item.category:"cars";
+function makeNewsBackdrop(item){
+ const layer=document.createElement("span");
+ layer.className="news-feature-backdrop news-bg-layer news-feature-backdrop--"+newsTheme(item)+" news-bg--current";
+ layer.dataset.newsTheme=newsTheme(item);
+ layer.setAttribute("aria-hidden","true");
+ layer.innerHTML='<span class="news-feature-pattern"></span><span class="news-feature-blueprint"></span>';
+ return layer;
+}
+function makeNewsCopy(item){
+ const localized=localStory(item);
+ const copy=document.createElement("span");
+ copy.className="news-feature-copy";
+ copy.innerHTML='<span class="news-feature-tag">'+safe(featureTr("latest"))+
   ' <i>·</i> '+safe(tr(item.category))+'</span>'+
   '<strong class="news-feature-title" dir="auto">'+safe(localized.title)+'</strong>'+
   '<span class="news-feature-footer">'+safe(displayDate(item.date))+' · '+safe(item.publisher||"")+
-  '<span class="news-feature-go">'+safe(featureTr("view"))+' ↗</span></span></span>';
- return scene;
+  '<span class="news-feature-go">'+safe(featureTr("view"))+' ↗</span></span>';
+ return copy;
 }
 function drawFeature(direction=0){
  const host=$("newsFeatureSlide"),controls=$("newsFeatureControls");
@@ -114,57 +113,84 @@ function drawFeature(direction=0){
  $("newsFeaturePrev").setAttribute("aria-label",featureTr("prev"));
  $("newsFeatureNext").setAttribute("aria-label",featureTr("next"));
  $("newsFeatureDots").setAttribute("aria-label",featureTr("pick"));
- // Resolve fast taps immediately; never keep a partly clipped scene alive.
+ // Complete an interrupted wipe before starting another; no orphaned strips.
  if(feature.finishTransition)feature.finishTransition();
  if(!list.length){
   host.innerHTML='<p class="news-feature-loading">'+safe(featureTr("empty"))+'</p>';
   return;
  }
- const scene=makeFeatureScene(list[feature.index]);
- const previous=host.querySelector(".news-scene--current");
- const animate=direction!==0&&!!previous&&!featureReducedMotion();
- if(!animate)host.replaceChildren(scene);
- else{
+ const item=list[feature.index],localized=localStory(item);
+ let track=host.querySelector(".news-broadcast-stage");
+ let story=host.querySelector(".news-feature-story--animated");
+ if(!track||!story){
+  track=document.createElement("span");
+  track.className="news-broadcast-stage";
+  track.setAttribute("aria-hidden","true");
+  story=document.createElement("a");
+  story.className="news-feature-story news-feature-story--animated news-broadcast-foreground";
+  story.target="_blank";
+  story.rel="noopener noreferrer nofollow";
+  host.replaceChildren(track,story);
+ }
+ story.href=safeURL(item.url);
+ story.dataset.newsTheme=newsTheme(item);
+ story.setAttribute("aria-label",localized.title);
+ const incoming=makeNewsBackdrop(item);
+ const previous=track.querySelector(".news-bg--current");
+ const newCopy=makeNewsCopy(item);
+ const oldCopy=story.querySelector(".news-feature-copy");
+ const animate=direction!==0&&previous&&oldCopy&&!featureReducedMotion();
+ host.dataset.newsTheme=newsTheme(item);
+ if(!animate){
+  track.replaceChildren(incoming);
+  story.replaceChildren(newCopy);
+ }else{
   const effect=newsBroadcastMasks[(newsBroadcastStep++)%newsBroadcastMasks.length];
   const side=direction>0?"next":"prev";
-  previous.classList.remove("news-scene--current");
-  previous.classList.add("news-scene--leaving");
-  previous.setAttribute("aria-hidden","true");
-  previous.tabIndex=-1;
-  host.appendChild(scene);
+  incoming.classList.add("news-bg--queued");
+  previous.classList.remove("news-bg--current");
+  previous.classList.add("news-bg--previous");
+  track.appendChild(incoming);
   if(effect==="ribbons"||effect==="shutters"){
-   // The arriving frame is revealed through FIVE true image masks.
-   // Fragments clone the whole graphic frame, not only a decorative overlay.
-   scene.classList.add("news-scene--queued");
-   scene.setAttribute("aria-hidden","true");
-   scene.tabIndex=-1;
+   // Cut five strips from the NEW background only, never clone text.
    for(let i=0;i<5;i++){
-    const fragment=scene.cloneNode(true);
-    fragment.classList.remove("news-scene--current","news-scene--queued");
-    fragment.classList.add("news-scene--fragment","news-scene--fragment-"+effect,
-      "news-scene--part-"+i,"news-scene--from-"+side);
-    fragment.removeAttribute("href");
-    fragment.tabIndex=-1;
-    fragment.setAttribute("aria-hidden","true");
-    fragment.style.setProperty("--news-mask-delay",String(i*52)+"ms");
-    host.appendChild(fragment);
+    const segment=incoming.cloneNode(true);
+    segment.classList.remove("news-bg--queued","news-bg--current");
+    segment.classList.add("news-bg-fragment","news-bg-fragment--"+effect,
+      "news-bg-part-"+i,"news-bg-from-"+side);
+    segment.style.setProperty("--news-mask-delay",String(i*48)+"ms");
+    track.appendChild(segment);
    }
   }else{
-   scene.classList.add("news-scene--wipe","news-scene--wipe-"+effect,"news-scene--from-"+side);
+   incoming.classList.remove("news-bg--queued");
+   incoming.classList.add("news-bg-wipe","news-bg-wipe--"+effect,"news-bg-from-"+side);
   }
+  // Colored diagonal blades flash across the BACKDROP, below readable text.
+  for(let i=0;i<3;i++){
+   const stripe=document.createElement("span");
+   stripe.className="news-mask-accent news-mask-accent--"+i+" news-mask-accent--"+side;
+   stripe.style.setProperty("--news-accent-delay",String(i*75)+"ms");
+   stripe.setAttribute("aria-hidden","true");
+   track.appendChild(stripe);
+  }
+  oldCopy.setAttribute("aria-hidden","true");
+  oldCopy.classList.add("news-copy-exit",effect==="diagonal"||effect==="chevron"?
+    "news-copy-exit--side-"+side:"news-copy-exit--fade");
+  newCopy.classList.add("news-copy-enter");
+  story.appendChild(newCopy);
   let timer;
-  const finish=()=>{
-   if(feature.finishTransition!==finish)return;
+  const cleanup=()=>{
+   if(feature.finishTransition!==cleanup)return;
    feature.finishTransition=null;
    clearTimeout(timer);
-   scene.classList.remove("news-scene--queued","news-scene--wipe",
-    "news-scene--wipe-"+effect,"news-scene--from-"+side);
-   scene.removeAttribute("aria-hidden");
-   scene.removeAttribute("tabindex");
-   host.replaceChildren(scene);
+   incoming.classList.remove("news-bg--queued","news-bg-wipe",
+     "news-bg-wipe--"+effect,"news-bg-from-"+side);
+   track.replaceChildren(incoming);
+   newCopy.classList.remove("news-copy-enter");
+   story.replaceChildren(newCopy);
   };
-  feature.finishTransition=finish;
-  timer=setTimeout(finish,950);
+  feature.finishTransition=cleanup;
+  timer=setTimeout(cleanup,970);
  }
  const dots=$("newsFeatureDots");
  if(dots.childElementCount!==list.length){
