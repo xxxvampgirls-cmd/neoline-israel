@@ -130,7 +130,7 @@ jobs:
              throw Error('Daily challenge changed questions on same day');
            for(let i=0;i<5;i++){
              await page.evaluate(bank=>{
-               const id=document.getElementById('questionId').textContent.replace(/\\D/g,'');
+               const id=document.getElementById('questionId').textContent.replace(/\D/g,'');
                const q=bank.find(x=>x.id===id);
                if(!q)throw Error('Official daily question missing '+id);
                const correct=[...document.querySelectorAll('#answers button')]
