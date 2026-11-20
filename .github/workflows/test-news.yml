@@ -5,6 +5,8 @@ on:
     branches: [main]
     paths:
       - "news.html"
+      - "news-video-library.js"
+      - "news-video-library.css"
       - "news-ui.js"
       - "news-ui.css"
       - "news-accidents.js"
@@ -95,6 +97,46 @@ jobs:
             console.log('NEWS AFTER CLICK URL='+page.url());
             await page.waitForURL(url=>/\/news(?:\.html)?\/?$/.test(new URL(url).pathname),{timeout:15000});
             await page.waitForSelector('#newsGrid',{state:'attached',timeout:12000});
+            // The video archive is built from actual YouTube IDs and the same
+            // 30-day period as the road news (never placeholder stock imagery).
+            const videos=page.locator('#newsVideoLibrary');
+            if(!await videos.isVisible()||await page.locator('#newsVideoFilters .news-video-chip').count()!==4)
+              throw Error('30-day official road-video library missing');
+            const sourceLinks=await page.locator('.news-video-sources a').count();
+            if(sourceLinks!==3)throw Error('Expected verified sources: 13 News, KAN News and Israel Police');
+            await page.waitForFunction(()=>{
+              const status=document.getElementById('newsVideoStatus');
+              const count=document.getElementById('newsVideoCount');
+              return status&&count&&count.textContent?.trim().length>1;
+            },null,{timeout:16000});
+            const videoCards=page.locator('.news-video-card');
+            const firstVideoCount=await videoCards.count();
+            if(firstVideoCount){
+              const vid=await videoCards.first().getAttribute('data-video');
+              if(!/^[a-zA-Z0-9_-]{11}$/.test(vid))
+                throw Error('Video card must use an original YouTube video ID: '+vid);
+              await videoCards.first().click();
+              const iframe=page.locator('#newsVideoEmbed iframe');
+              if(!await iframe.isVisible()||!(await iframe.getAttribute('src')).includes('youtube-nocookie.com/embed/'+vid))
+                throw Error('Embedded video requires explicit click and authentic YouTube ID');
+              if(!(await page.locator('#newsVideoExternal').getAttribute('href')).endsWith('watch?v='+vid))
+                throw Error('Video player must link back to the actual publisher clip');
+              await page.locator('#newsVideoClose').click();
+              if(await page.locator('#newsVideoEmbed iframe').count())
+                throw Error('Video iframe should unload when viewer closes');
+            }
+            for(const width of [320,390]){
+              await page.setViewportSize({width,height:844});
+              const dims=await videos.evaluate(el=>({
+                width:el.getBoundingClientRect().width,
+                scroll:document.documentElement.scrollWidth,
+                screen:document.documentElement.clientWidth
+              }));
+              if(dims.scroll>dims.screen+3)
+                throw Error('Video library created horizontal mobile overflow at '+width+'px: '+JSON.stringify(dims));
+            }
+            await page.setViewportSize({width:390,height:844});
+            console.log('ROAD VIDEO LIBRARY PASS: real publisher links, 30-day filter, 320/390px layout, mobile player');
             // Catch HTML regressions where one missing quote disables both
             // the stylesheet and the news script on Android browsers.
             const assetState=await page.evaluate(()=>{
