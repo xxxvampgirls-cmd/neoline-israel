@@ -545,3 +545,209 @@
 @media(prefers-reduced-motion:reduce){
  #installation .road-demo-headlamp-cones{opacity:.23}
 }
+
+/* ═════════════ NEOLINE GPS / lane-assist illustrations ═════════════
+   Satellite in the open sky: the upward flash is a VISUAL ACQUISITION CUE,
+   NOT a real request sent from the car (GPS receivers are passive).
+   Actual one-way navigation broadcasts are represented by blue downlink
+   pulses followed by GPS lock and a brighter route. Only mode 1 displays it.
+   Lane departure is staged separately in mode 0, then car self-centers.
+   Everything uses the SVG we already have, with no raster/network media. */
+#installation .road-demo-satellite-link{
+ opacity:0;visibility:hidden;pointer-events:none;
+ transition:opacity .45s ease,visibility .45s ease;
+}
+#installation .road-demo[data-road-stage="1"] .road-demo-satellite-link{
+ opacity:1;visibility:visible;
+}
+#installation .road-demo-satellite-float{
+ transform-origin:0 0;
+ filter:drop-shadow(0 2px 5px #48dfff48);
+}
+#installation .road-demo-satellite-beacon{opacity:.22}
+#installation .road-demo-gps-search-beam{
+ stroke-dasharray:190 210;stroke-dashoffset:190;
+ opacity:0;filter:drop-shadow(0 0 3px #6dfaffae);
+}
+#installation .road-demo-gps-search-start{
+ opacity:0;filter:drop-shadow(0 0 4px #84fbff);
+}
+#installation .road-demo-gps-answer-beam{
+ opacity:0;stroke-dashoffset:170;
+ filter:drop-shadow(0 0 5px #4deaff93);
+}
+#installation .road-demo-gps-wave{
+ opacity:0;transform-origin:344px 72px;
+ transform-box:view-box;
+ filter:drop-shadow(0 0 3px #51d5ff9e);
+}
+#installation .road-demo-gps-lock{
+ opacity:0;transform-origin:281px 220px;
+ transform-box:view-box;
+ filter:drop-shadow(0 0 3px #73f8ff);
+}
+#installation .road-demo.is-playing[data-road-stage="1"] .road-demo-satellite-float{
+ animation:premiumSatelliteFloat 5.8s ease-in-out infinite;
+}
+#installation .road-demo.is-playing[data-road-stage="1"] .road-demo-satellite-beacon{
+ animation:premiumSatelliteBeacon 5.8s ease-in-out infinite;
+}
+#installation .road-demo.is-playing[data-road-stage="1"] .road-demo-gps-search-beam{
+ animation:premiumSatelliteSearch 5.8s linear infinite;
+}
+#installation .road-demo.is-playing[data-road-stage="1"] .road-demo-gps-search-start{
+ animation:premiumSatelliteStart 5.8s ease-in-out infinite;
+}
+#installation .road-demo.is-playing[data-road-stage="1"] .road-demo-gps-answer-beam{
+ animation:premiumSatelliteReply 5.8s ease-out infinite;
+}
+#installation .road-demo.is-playing[data-road-stage="1"] .road-demo-gps-wave{
+ animation:premiumSatelliteWave 5.8s ease-in-out infinite;
+}
+#installation .road-demo.is-playing[data-road-stage="1"] .road-demo-gps-wave--two{
+ animation-delay:.25s;
+}
+#installation .road-demo.is-playing[data-road-stage="1"] .road-demo-gps-wave--three{
+ animation-delay:.5s;
+}
+#installation .road-demo.is-playing[data-road-stage="1"] .road-demo-gps-lock{
+ animation:premiumSatelliteLock 5.8s ease-in-out infinite;
+}
+#installation .road-demo.is-playing[data-road-stage="1"] .road-demo-route{
+ animation:premiumSatelliteRoute 5.8s ease-in-out infinite;
+}
+#installation .road-demo.is-playing[data-road-stage="1"] .road-telemetry-gps{
+ animation:premiumSatelliteGPSCard 5.8s ease-in-out infinite;
+}
+@keyframes premiumSatelliteFloat{
+ 0%,100%{transform:translate3d(0,0,0) rotate(-2deg)}
+ 32%{transform:translate3d(3px,-3px,0) rotate(1.5deg)}
+ 68%{transform:translate3d(-2px,2px,0) rotate(-1deg)}
+}
+@keyframes premiumSatelliteBeacon{
+ 0%,13%,69%,100%{opacity:.2;transform:scale(.7)}
+ 26%,48%{opacity:.92;transform:scale(1.26)}
+}
+@keyframes premiumSatelliteSearch{
+ 0%,8%{opacity:0;stroke-dashoffset:190}
+ 13%{opacity:.78;stroke-dashoffset:150}
+ 27%{opacity:.95;stroke-dashoffset:0}
+ 34%,100%{opacity:0;stroke-dashoffset:-25}
+}
+@keyframes premiumSatelliteStart{
+ 0%,8%,32%,100%{opacity:0;transform:scale(.6);transform-origin:280px 208px}
+ 15%{opacity:1;transform:scale(1.25);transform-origin:280px 208px}
+ 26%{opacity:.34;transform:scale(.65);transform-origin:280px 208px}
+}
+@keyframes premiumSatelliteReply{
+ 0%,29%{opacity:0;stroke-dashoffset:170}
+ 36%{opacity:.90;stroke-dashoffset:130}
+ 60%{opacity:.94;stroke-dashoffset:0}
+ 69%,100%{opacity:0;stroke-dashoffset:-38}
+}
+@keyframes premiumSatelliteWave{
+ 0%,29%,69%,100%{opacity:0;transform:scale(.82)}
+ 39%{opacity:.94;transform:scale(1)}
+ 53%{opacity:.47;transform:scale(1.08)}
+}
+@keyframes premiumSatelliteLock{
+ 0%,59%,100%{opacity:0;transform:scale(.7)}
+ 69%,79%{opacity:1;transform:scale(1)}
+ 89%{opacity:.25;transform:scale(1.18)}
+}
+@keyframes premiumSatelliteRoute{
+ 0%,56%,100%{opacity:.13}
+ 70%,90%{opacity:1}
+}
+@keyframes premiumSatelliteGPSCard{
+ 0%,61%,100%{box-shadow:0 5px 22px #061a3040,inset 0 1px #ffffff1a}
+ 70%,85%{box-shadow:0 0 20px #2adfff80,inset 0 1px #b6fdff54}
+}
+/* Departing to the RIGHT lane line: at y≈256 the line is x≈338, the
+   33px half-width vehicle moves 25px from x280 to x305, touching x338.
+   Then smoothly returns to the road centre. Do not animate the SVG parent
+   translate(280 256), only its nested group to preserve alignment. */
+#installation .road-demo-lane-danger{
+ opacity:0;transition:opacity .2s ease;
+ filter:drop-shadow(0 0 5px #ff596dab);
+}
+#installation .road-demo.is-playing.is-lane-demo .road-demo-car-motion{
+ animation:premiumLaneDeparture 7.2s ease-in-out infinite;
+}
+@keyframes premiumLaneDeparture{
+ 0%,17%,100%{transform:translate3d(0,0,0)}
+ 29%{transform:translate3d(15px,-1px,0)}
+ 39%,57%{transform:translate3d(25px,0,0)}
+ 69%{transform:translate3d(12px,-1px,0)}
+ 81%,95%{transform:translate3d(0,0,0)}
+}
+#installation .road-demo.is-lane-alert .road-demo-lane-danger{
+ opacity:.93;animation:premiumLaneRedLine .46s ease-in-out infinite alternate;
+}
+@keyframes premiumLaneRedLine{
+ from{opacity:.4}
+ to{opacity:1}
+}
+#installation .road-demo-lane-alert-symbol{
+ display:grid;place-items:center;flex:none;
+ width:18px;height:18px;line-height:18px;border-radius:50%;
+ color:#fff;font-size:13px;font-weight:900;
+ background:#e93b57;box-shadow:0 0 9px #ff5b78ac;
+ opacity:0;width:0;overflow:hidden;
+ transition:opacity .18s ease,width .18s ease;
+}
+#installation .road-demo.is-lane-alert .road-telemetry-lane{
+ color:#fff;
+ background:linear-gradient(135deg,#7b2237ee,#4d2036e8);
+ border-color:#ff90a4;
+ animation:premiumLaneCardWarning .46s ease-in-out infinite alternate;
+}
+#installation .road-demo.is-lane-alert .road-telemetry-lane small{
+ color:#ffd6db;font-weight:800;
+}
+#installation .road-demo.is-lane-alert .road-telemetry-lane-icon{
+ color:#ff6d88;filter:drop-shadow(0 0 3px #ff4d6eac);
+}
+#installation .road-demo.is-lane-alert .road-demo-lane-alert-symbol{
+ opacity:1;width:18px;
+ animation:premiumLaneSymbol .46s ease-in-out infinite alternate;
+}
+@keyframes premiumLaneCardWarning{
+ from{box-shadow:0 2px 9px #1b182954,inset 0 1px #ffffff16}
+ to{box-shadow:0 0 18px #ff5d7a8c,inset 0 1px #ffffff6b}
+}
+@keyframes premiumLaneSymbol{
+ from{opacity:.52;transform:scale(.91)}
+ to{opacity:1;transform:scale(1.05)}
+}
+@media(max-width:650px){
+ #installation .road-demo-satellite-float{
+  filter:drop-shadow(0 0 3px #48dfff66);
+ }
+ #installation .road-demo.is-lane-alert .road-telemetry-lane{
+  max-width:47%;
+ }
+ #installation .road-demo.is-lane-alert .road-telemetry-lane strong{
+  font-size:9px;
+ }
+ #installation .road-demo.is-lane-alert .road-telemetry-lane small{
+  font-size:7.6px;
+ }
+}
+@media(prefers-reduced-motion:reduce){
+ #installation .road-demo-satellite-float,
+ #installation .road-demo-gps-search-beam,
+ #installation .road-demo-gps-answer-beam,
+ #installation .road-demo-gps-wave,
+ #installation .road-demo-gps-lock,
+ #installation .road-demo-satellite-beacon,
+ #installation .road-demo-route,
+ #installation .road-demo-lane-danger,
+ #installation .road-demo-car-motion,
+ #installation .road-telemetry-lane{
+  animation:none!important;transition:none!important;
+ }
+ #installation .road-demo[data-road-stage="1"] .road-demo-gps-lock{opacity:.7}
+ #installation .road-demo[data-road-stage="1"] .road-demo-gps-wave--one{opacity:.45}
+ #installation .road-demo[data-road-stage="1"] .road-demo-route{opacity:1}
+}
