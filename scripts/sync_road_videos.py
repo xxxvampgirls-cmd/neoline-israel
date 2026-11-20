@@ -163,7 +163,7 @@ def discover_older_feed_misses(now: dt.datetime) -> list[dict]:
     cutoff = now - dt.timedelta(days=DAYS)
     options = {
         "quiet": True, "no_warnings": True, "skip_download": True,
-        "ignoreerrors": True, "noplaylist": True,
+        "ignoreerrors": True,
         "socket_timeout": 12, "retries": 1, "extractor_retries": 1,
         "playlistend": 5, "lazy_playlist": False,
     }
