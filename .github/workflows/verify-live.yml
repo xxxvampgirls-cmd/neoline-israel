@@ -6,7 +6,10 @@ on:
     paths:
       - 'index.html'
       - 'catalog-ui.js'
+      - 'catalog-ui.css'
+      - 'catalog-i18n.js'
       - 'catalog-video.js'
+      - 'assets/catalog/tutorial-videos.json'
       - 'neoline-academy.js'
       - 'neoline-academy.css'
       - 'teoria.html'
@@ -33,15 +36,16 @@ jobs:
           from pathlib import Path
           base = "https://neoline-israel.pages.dev/"
           revision = os.environ.get("GITHUB_COMMIT","")[:12]
-          shop_files = ("catalog-ui.js","catalog-video.js","neoline-academy.js","neoline-academy.css")
+          shop_files = ("catalog-ui.js","catalog-ui.css","catalog-i18n.js","catalog-video.js","neoline-academy.js","neoline-academy.css")
           game_files = ("teoria.js","teoria-ar.js","teoria-v2.js","teoria-daily.css")
-          files = shop_files + game_files
+          verified_data = ("assets/catalog/tutorial-videos.json",)
+          files = shop_files + game_files + verified_data
           local_pages = {
               "index.html": Path("index.html").read_text(encoding="utf-8"),
               "teoria.html": Path("teoria.html").read_text(encoding="utf-8")
           }
           markers = {}
-          for path in files:
+          for path in shop_files + game_files:
               page = "index.html" if path in shop_files else "teoria.html"
               matches = re.findall(r'\./'+re.escape(path)+r'\?v=[^"\s]+', local_pages[page])
               if len(matches) != 1:
@@ -76,7 +80,7 @@ jobs:
                           if count < 50:
                               last_reason = f"Catalogue data incomplete: {count} imported products"
                           else:
-                              print(f"PASS: Cloudflare serves both current pages and all 8 JS/CSS files, including theory; {count} imported products")
+                              print(f"PASS: Cloudflare serves both current pages and all 10 JS/CSS files and verified video manifest, including theory; {count} imported products")
                               break
               except Exception as exc:
                   last_reason = f"{type(exc).__name__}: {exc}"
