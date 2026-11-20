@@ -62,6 +62,11 @@ def run() -> None:
     valid_products = {x["id"]: x["source"] for x in catalog.get("products", [])}
     records = []
     IMAGE_DIR.mkdir(parents=True, exist_ok=True)
+    try:
+        previous = json.loads(DEST.read_text(encoding="utf-8"))
+        cached = {entry["id"]: entry for entry in previous.get("products", [])}
+    except (OSError, ValueError, KeyError, TypeError):
+        cached = {}
 
     for product in instructions["products"]:
         product_id = product["id"]
@@ -70,6 +75,8 @@ def run() -> None:
             raise ValueError(f"Product/source mapping is stale: {product_id}")
         features = []
         seen_payloads = set()
+        prior = cached.get(product_id, {}) if cached.get(product_id, {}).get("source") == page else {}
+        prior_by_url = {entry.get("sourceUrl"): entry for entry in prior.get("features", [])}
         for slot, item in enumerate(product["features"], 1):
             url = item["url"]
             titles = item["title"]
@@ -77,16 +84,22 @@ def run() -> None:
                        for lang in LOCALES):
                 raise ValueError(f"Missing feature translations for {product_id}/{slot}")
             try:
-                data = load_image(url)
                 import hashlib
+                target = IMAGE_DIR / f"{product_id}-{slot}.webp"
+                already = prior_by_url.get(url)
+                if already and already.get("image") == "./assets/catalog/feature-images/" + target.name and target.is_file():
+                    data = target.read_bytes()
+                    print(f"REUSE reviewed manufacturer illustration {product_id}/{slot}")
+                else:
+                    data = load_image(url)
+                    if not target.exists() or target.read_bytes() != data:
+                        target.write_bytes(data)
+                    print(f"FETCH reviewed manufacturer illustration {product_id}/{slot}")
                 digest = hashlib.sha256(data).hexdigest()
                 if digest in seen_payloads:
                     print(f"SKIP repeated official illustration {product_id}/{slot}")
                     continue
                 seen_payloads.add(digest)
-                target = IMAGE_DIR / f"{product_id}-{slot}.webp"
-                if not target.exists() or target.read_bytes() != data:
-                    target.write_bytes(data)
                 features.append({
                     "image": "./assets/catalog/feature-images/" + target.name,
                     "title": {lang: titles[lang].strip() for lang in LOCALES},
@@ -96,9 +109,20 @@ def run() -> None:
             except (ValueError, requests.RequestException, OSError, UnidentifiedImageError) as error:
                 print(f"SKIP unreliable manufacturer illustration {product_id}/{slot}: {error}")
         if len(features) < 2:
-            raise ValueError(f"Only {len(features)} valid manufacturer illustration(s) for {product_id}; keep previous manifest")
+            old_features = prior.get("features", [])
+            if len(old_features) >= 2 and all(
+                (ROOT / it["image"]).is_file() for it in old_features
+            ):
+                records.append(prior)
+                print(f"KEEP last verified manufacturer visuals for {product_id}")
+            else:
+                print(f"DEFER feature media for {product_id}: only {len(features)} of "
+                      f"{len(product['features'])} official files reachable. Main product photos are unchanged.")
+            continue
         records.append({"id": product_id, "source": page, "features": features})
 
+    if not records:
+        raise ValueError("No valid source gallery remains; refusing to overwrite published media manifest")
     manifest = {
         "version": 1,
         "note": "Manufacturer's feature illustrations, NOT additional product-angle photos.",
