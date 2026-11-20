@@ -20,7 +20,7 @@
 <link rel="stylesheet" href="./teoria-gameover-ice.css?v=20261119-map-no-scroll-v2">
 <link rel="stylesheet" href="./teoria-progress-centered.css?v=20261119-folds-center-v1">
 <link rel="stylesheet" href="./teoria-photo-soft-fade.css?v=20261119-deeper-soft-fade-v3">
-<link rel="stylesheet" href="./teoria-daily.css?v=20261120-daily-v1">
+<link rel="stylesheet" href="./teoria-daily.css?v=20261120-relocated-strict-v2">
 </head><body>
 <header class="topbar neoline-site-header"><div class="neoline-site-header__inner">
 <a class="neoline-site-header__logo" href="./" aria-label="NEOLINE — главная страница"><img src="./assets/neoline-clean.svg?v=20261116-compact" width="501" height="108" alt="NEOLINE"></a>
@@ -134,6 +134,17 @@
   </div>
  </div>
 </section>
+<section class="theory-daily" id="theoryDaily" aria-labelledby="modeDaily">
+ <span class="theory-daily-icon" aria-hidden="true">✦</span>
+ <div class="theory-daily-text">
+  <strong id="modeDaily">Задание дня</strong>
+  <span id="descDaily">5 официальных вопросов · 3 жизни · новый набор каждый день</span>
+ </div>
+ <div class="theory-daily-actions">
+  <span class="theory-daily-streak" id="dailyStreak" aria-live="polite">🔥 0 дн. подряд</span>
+  <button type="button" class="theory-daily-start" id="dailyStart" disabled>Начать вызов ↗</button>
+ </div>
+</section>
 <section class="game-panel" id="gameLobby" aria-label="Выбор режима">
  <div class="panel-toolbar">
   <div class="toolbar-title"><span class="tiny-label" id="selectLabel">ВЫБЕРИ ИГРУ</span><h2 id="selectTitle">Выбери режим</h2></div>
@@ -157,12 +168,6 @@
   <button type="button" class="route-card route-amber" data-mode="mistakes" data-card-index="04"><span class="game-mode-photo"></span><span class="route-top"><span class="route-icon"><svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="20" cy="20" r="16"/><circle cx="20" cy="20" r="9"/><circle cx="20" cy="20" r="3" fill="currentColor" stroke="none"/><path d="m31 9 6-6m-4 0h4v4"/></svg></span><span class="route-length" id="mistakesBadge">0</span></span><strong id="modeMistakes">Работа над ошибками</strong><span id="descMistakes">Повторяй вопросы, которые раньше вызвали затруднения.</span><span class="route-cta" id="ctaMistakes">Повторить ↗</span></button>
   <button type="button" class="route-card route-full" data-mode="marathon" data-card-index="05"><span class="game-mode-photo"></span><span class="route-top"><span class="route-icon"><svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m3 9 11-5 13 5 10-5v27l-10 5-13-5-11 5z"/><path d="M14 4v27M27 9v27"/><path d="m7 25 6-5 7 4 9-11" stroke-dasharray="2 4"/><circle cx="29" cy="13" r="3" fill="currentColor" stroke="none"/></svg></span><span class="route-length">20</span></span><strong id="modeMarathon">Большое путешествие · все билеты</strong><span id="descMarathon">Проходи весь официальный банк по этапам из 20 новых вопросов. Прогресс сохраняется.</span><span class="route-cta" id="ctaMarathon">Продолжить путешествие ↗</span></button>
  </div>
- <section class="theory-daily" id="theoryDaily" aria-label="Задание дня">
-  <span class="theory-daily-icon" aria-hidden="true">✦</span>
-  <div class="theory-daily-text"><strong id="modeDaily">Задание дня</strong><span id="descDaily">5 официальных вопросов каждый день · 3 жизни</span></div>
-  <span class="theory-daily-streak" id="dailyStreak" aria-live="polite">🔥 0 дней подряд</span>
-  <button type="button" class="theory-daily-start" id="dailyStart" disabled>Начать ↗</button>
- </section>
  <div id="theoryLegacyStats" hidden aria-hidden="true"><span id="statSeen">0</span><span id="statAccuracy">—</span><span id="statXP">0</span><span id="statMistakes">0</span></div>
  <p class="source-note" id="sourceNotice">Данные: Министерство транспорта и безопасности дорожного движения Израиля, открытый банк вопросов (CC BY). Учебный проект NEOLINE, не официальный государственный экзамен.</p>
  <div class="source-links"><a href="https://data.gov.il/he/datasets/ministry_of_transport/tqru" target="_blank" rel="noopener noreferrer" id="sourceBank">Государственный банк вопросов ↗</a><a href="https://www.gov.il/en/service/apply_for_new_driver_drivers_license" target="_blank" rel="noopener noreferrer" id="sourceRules">Официальные условия экзамена ↗</a></div>
