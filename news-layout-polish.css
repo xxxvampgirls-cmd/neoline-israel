@@ -97,3 +97,15 @@
  .hot-events-link{font-size:9px;padding:6px}
 }
 @media(prefers-reduced-motion:reduce){.accident-day-bar{transition:none}}
+
+/* Direct entry points from the interactive homepage newsroom slide.
+   Keep the target below NEOLINE's sticky mobile header so the video
+   gallery, statistics or selected news filter is visible on arrival. */
+#newsVideoLibrary,#accidentStrip,#newsCategories{
+ scroll-margin-top:100px;
+}
+@media(max-width:650px){
+ #newsVideoLibrary,#accidentStrip,#newsCategories{
+  scroll-margin-top:83px;
+ }
+}
