@@ -2,6 +2,24 @@
 (function(){
 "use strict";
 const imported=new Map();
+const manufacturerFeatures=new Map();
+async function preloadOfficialFeatures(){
+ try{
+  const response=await fetch('./assets/catalog/feature-media.json?v=20261120-official-art-v1',{cache:'no-cache'});
+  if(!response.ok)return;
+  const manifest=await response.json();
+  if(manifest.version!==1||!Array.isArray(manifest.products))return;
+  for(const item of manifest.products){
+   if(!item||!Number.isSafeInteger(item.id)||!Array.isArray(item.features))continue;
+   const featureImage=image=>typeof image==='string'&&
+     /^\.\/assets\/catalog\/feature-images\/[0-9]+-[0-9]+\.webp$/.test(image);
+   const valid=item.features.filter(x=>x&&featureImage(x.image)&&x.title&&
+     ['ru','en','he','ar'].every(l=>typeof x.title[l]==='string'&&x.title[l].length<110)).slice(0,9);
+   if(valid.length>=2)manufacturerFeatures.set(item.id,{source:item.source,items:valid});
+  }
+ }catch(e){console.warn('Verified manufacturer illustrations unavailable',e)}
+}
+const officialFeaturesReady=preloadOfficialFeatures();
 let visibleProducts=8; // Mobile and desktop: load first 8, then on demand.
 const originalRender=renderProducts,originalOpen=openProduct,originalAdd=add;
 const names={
@@ -100,7 +118,7 @@ function importedModal(id){
  if(!p||!info)return;
  const urls=media[id]||[];
  const imgs=urls.length?'<img class="modal-big" id="modalBig" src="'+esc(urls[0])+'" alt="'+esc(p.name)+'">'+
-   '<div class="modal-gallery-controls"><button class="modal-photo-arrow" id="modalPrevImage" type="button" aria-label="Previous photo">‹</button><span id="modalPhotoCounter" aria-live="polite">1 / '+urls.length+'</span><button class="modal-photo-arrow" id="modalNextImage" type="button" aria-label="Next photo">›</button></div>'+
+   (urls.length>1?'<div class="modal-gallery-controls"><button class="modal-photo-arrow" id="modalPrevImage" type="button" aria-label="Previous photo">‹</button><span id="modalPhotoCounter" aria-live="polite">1 / '+urls.length+'</span><button class="modal-photo-arrow" id="modalNextImage" type="button" aria-label="Next photo">›</button></div>':'<div class="catalog-photo-single">1 / 1</div>')+
    '<div class="modal-thumbs">'+urls.map((u,i)=>'<button type="button" data-import-photo="'+i+'" aria-label="Photo '+(i+1)+'" class="'+(i?'':'active')+'"><img src="'+esc(u)+'" loading="lazy" alt=""></button>').join('')+'</div>':
    '<div class="catalog-image-empty">'+esc(ui("fallback"))+'</div>';
  const local=localizer();
@@ -109,6 +127,20 @@ function importedModal(id){
  const specs=rows.map(kv=>'<div class="catalog-import-property"><strong'+(kv.isOriginal?' lang="ru" dir="auto"':'')+'>'+esc(kv.label)+(kv.isOriginal?' <span class="catalog-ru-mark">RU</span>':'')+'</strong><span'+(/[А-Яа-яЁё]/.test(kv.value)?' lang="ru" dir="auto"':'')+'>'+esc(kv.value)+'</span></div>').join('');
  const shortDescription=local?local.overview({name:p.name,category:p.category,specs:info.specs,description:info.description},lang):(info.description||p.name);
  const originalRows=info.specs.map(kv=>'<div class="catalog-import-original-row"><strong>'+esc(kv.label)+'</strong><span>'+esc(kv.value)+'</span></div>').join('');
+ const extra=manufacturerFeatures.get(id);
+ const artwork=extra&&extra.source===info.source?extra.items:[];
+ const tr={
+  ru:{label:'Иллюстрации производителя',note:'Фирменные изображения возможностей устройства — не дополнительные ракурсы товара.',units:'иллюстраций',zoom:'Открыть изображение'},
+  en:{label:'Manufacturer illustrations',note:'Official device feature graphics, not additional photographs of the product.',units:'illustrations',zoom:'View image'},
+  he:{label:'איורים של היצרן',note:'המחשות מקוריות של תכונות המכשיר, ולא תמונות נוספות של המוצר מזוויות שונות.',units:'איורים',zoom:'פתיחת תמונה'},
+  ar:{label:'صور توضيحية من الشركة',note:'رسومات أصلية توضّح ميزات الجهاز، وليست صوراً إضافية للمنتج من زوايا أخرى.',units:'صور',zoom:'فتح الصورة'}
+ }[lang]||{label:'Manufacturer illustrations',note:'Official product feature illustrations.',units:'images',zoom:'View image'};
+ const artworkHtml=artwork.length?'<section class="catalog-official-art"><details>'+
+  '<summary><span>'+esc(tr.label)+'</span><small>'+artwork.length+' '+esc(tr.units)+'</small></summary>'+
+  '<p>'+esc(tr.note)+'</p><div class="catalog-official-art-grid">'+artwork.map((item,i)=>
+    '<button type="button" class="catalog-feature-preview" data-feature-image="'+i+'" aria-label="'+esc(tr.zoom+': '+item.title[lang])+'">'+
+     '<img loading="lazy" decoding="async" src="'+esc(item.image)+'" alt="'+esc(item.title[lang])+'">'+
+     '<span>'+esc(item.title[lang])+'</span></button>').join('')+'</div></details></section>':'';
  const raw=(lang!=="ru" && local)?'<details class="catalog-import-original"><summary>'+esc(translation.all)+'</summary><div lang="ru" dir="ltr"><p>'+esc(info.description||p.name)+'</p>'+originalRows+'</div></details>':'';
  $('productModalBody').innerHTML='<div class="modal-grid"><div class="modal-media">'+imgs+'</div><div class="modal-content">'+
   '<div class="kicker">'+esc((lang==='ru'?info.group:translation?.category[p.category])||info.group)+'</div><h2>'+esc(localTitle(p))+'</h2><p class="catalog-price-pending">'+esc(ui("price"))+'</p>'+
@@ -118,7 +150,7 @@ function importedModal(id){
   String(shortDescription).split(/\n+/).filter(Boolean).map(part=>'<p class="catalog-localized-paragraph">'+esc(part)+'</p>').join('')+
   (lang==="ru"?"":'<p class="catalog-import-caution">'+esc(translation?.notes||"")+'</p>')+
   '<h3>'+esc(translation?.short||ui("specs"))+'</h3><div class="catalog-import-grid">'+(specs||'<p>'+esc(translation?.empty||ui("noSpec"))+'</p>')+'</div>'+
-  raw+'</section>';
+  artworkHtml+raw+'</section>';
  const img=$('modalBig');
  if(img){
   let index=0;
@@ -130,7 +162,8 @@ function importedModal(id){
    thumbs.forEach((b,j)=>b.classList.toggle('active',j===index));
    thumbs[index]?.scrollIntoView({behavior:'smooth',block:'nearest',inline:'nearest'});
   };
-  $('modalPrevImage').onclick=()=>advance(-1);$('modalNextImage').onclick=()=>advance(1);
+  if($('modalPrevImage'))$('modalPrevImage').onclick=()=>advance(-1);
+  if($('modalNextImage'))$('modalNextImage').onclick=()=>advance(1);
   thumbs.forEach((el,i)=>el.onclick=()=>advance(i-index));
   img.onclick=()=>{
    if(img.dataset.swiped)return;
@@ -154,6 +187,15 @@ function importedModal(id){
   },{passive:true});
   img.addEventListener('touchcancel',()=>{touchX=null},{passive:true});
  }
+ $('productModalBody').querySelectorAll('[data-feature-image]').forEach(button=>{
+  button.onclick=()=>{
+   const image=button.querySelector('img');
+   if(!image)return;
+   $('lightboxImg').src=image.src;
+   $('lightboxImg').alt=image.alt;
+   $('photoLightbox').classList.add('open');
+  };
+ });
  $('productModal').classList.add('open');
  $('productModal').querySelector('.product-panel').scrollTop=0;
  document.body.style.overflow='hidden';
@@ -182,8 +224,9 @@ async function load(){
    imported.set(row.id,{description:typeof item.description==="string"?item.description.slice(0,900):"",specs,source,group:item.group||""});
    products.push(row);media[row.id]=pics;datas[row.id]=row.spec;productUrls[row.id]=source;
   }
+  await officialFeaturesReady;
   renderTabs();renderProducts();
-  console.info("NEOLINE verified catalog rows loaded",imported.size);
+  console.info("NEOLINE verified catalog rows loaded",imported.size,"official feature products",manufacturerFeatures.size);
  }catch(e){console.warn("Manufacturer catalog file unavailable: retaining original product list",e)}
 }
 renderTabs();renderProducts();load();
