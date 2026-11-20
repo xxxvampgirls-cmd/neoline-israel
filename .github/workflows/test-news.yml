@@ -18,6 +18,9 @@ on:
       - "catalog-ui.css"
       - "catalog-ui.js"
       - "index.html"
+      - "road-demo.js"
+      - "road-demo.css"
+      - "road-demo-premium.css"
       - "delivery.html"
       - "pickup-ui.css"
       - ".github/workflows/test-news.yml"
@@ -83,6 +86,55 @@ jobs:
             if(await page.locator('#desktopDelivery').count()!==1)
               throw Error('Desktop delivery shortcut missing');
             console.log('HOMEPAGE DELIVERY NAV PASS: no favorites, truck link available');
+            // Premium car demo: genuinely layered SVG/CSS, 4 interactive modes,
+            // the entire frame MUST remain fixed height while text or HUD changes.
+            const road=page.locator('#neolineRoadDemo');
+            await road.scrollIntoViewIfNeeded();
+            if(await road.locator('.road-demo-telemetry .road-telemetry-card').count()!==4)
+              throw Error('Premium road demo must show 4 distinct telemetry panels');
+            if(await road.locator('.road-demo-range-ring').count()!==3||
+               await road.locator('.road-demo-flow-line').count()<2)
+              throw Error('Radar rings or flowing lane guidance not present in roadway');
+            if(await road.locator('[data-road-step]').count()!==4)
+              throw Error('Premium road demo requires 4 actual modes');
+            const baseHeight=await road.evaluate(el=>el.getBoundingClientRect().height);
+            if(baseHeight<340||baseHeight>510)
+              throw Error('Road demo frame height must remain compact: '+baseHeight);
+            for(const [stage,needle] of [[1,'GPS'],[2,'REAR'],[3,'P'],[0,'REC']]){
+              await road.locator('[data-road-step="'+stage+'"]').click();
+              if(await road.getAttribute('data-road-stage')!==String(stage))
+                throw Error('Road demo mode was not selected: '+stage);
+              if(await road.locator('[data-road-step="'+stage+'"]').getAttribute('aria-pressed')!=='true')
+                throw Error('Road demo mode lacks pressed state: '+stage);
+              const actual=await road.locator('[data-road-hud]').innerText();
+              if(!actual.includes(needle))
+                throw Error('Road HUD was not updated for mode '+stage+': '+actual);
+              const height=await road.evaluate(el=>el.getBoundingClientRect().height);
+              if(Math.abs(height-baseHeight)>1)
+                throw Error('Mode '+stage+' shifted fixed demo frame: '+height+' vs '+baseHeight);
+            }
+            await road.locator('[data-road-step="2"]').click();
+            const split=await road.locator('.road-demo-rear-feed').evaluate(el=>getComputedStyle(el).visibility);
+            if(split!=='visible')throw Error('Dual-camera mode must open inset rear view');
+            await road.locator('[data-road-step="3"]').click();
+            if(await road.locator('[data-road-speed]').innerText()!=='0')
+              throw Error('Parked demo speed should display zero');
+            await road.locator('[data-road-step="0"]').click();
+            for(const width of [320,390]){
+              await page.setViewportSize({width,height:844});
+              const r=await road.evaluate(el=>{
+                const rect=el.getBoundingClientRect();
+                return {left:rect.left,right:rect.right,height:rect.height,
+                  viewport:document.documentElement.clientWidth};
+              });
+              if(r.left<0||r.right>r.viewport+1||r.height<345||r.height>455)
+                throw Error('Premium road demo must fit '+width+'px mobile width: '+JSON.stringify(r));
+              const hud=await road.locator('.road-demo-telemetry').evaluate(el=>getComputedStyle(el).position);
+              if(hud!=='absolute')
+                throw Error('Demo HUD must overlay the graphic, not reflow captions');
+            }
+            await page.setViewportSize({width:390,height:844});
+            console.log('PREMIUM ROAD HUD PASS: radar, flow, 4 interactive modes, fixed frame and 320/390 mobile');
             const target=await page.locator('#openNewsMobile').evaluate(el=>({html:el.outerHTML,disabled:el.disabled}));
             console.log('NEWS TARGET '+JSON.stringify(target)+' before URL='+page.url());
             // The auto-hiding dock is intentionally hidden while scrolling down.
