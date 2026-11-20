@@ -139,5 +139,5 @@ jobs:
             if(errors.length)throw Error('Runtime JavaScript errors: '+errors.join(' | '));
             console.log('NEOLINE VERIFIED VIDEO GUIDES PASS: exact models, RU official Android/iOS, PL review, EN first, HE/AR locale, lazy playback and Academy');
             await browser.close();
-          })().catch(e=>{console.error(e);process.exitCode=1});
+          })().catch(e=>{console.error(e);process.exit(1)});
           JS
