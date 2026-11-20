@@ -117,6 +117,7 @@ jobs:
             if(await page.locator('#productModalBody .modal-thumbs [data-import-photo]').count()!==4)
               throw Error('Dela-S source gallery must retain its four original angles');
             const delaS=page.locator('#productModalBody .catalog-official-art');
+            if(!delaSManifest)throw Error('Dela-S official manufacturer feature set is missing from published manifest');
             if(delaSManifest){
               if(delaSManifest.features.length!==4||await delaS.count()!==1)
                 throw Error('Dela-S should display four cached original feature panels');
@@ -137,7 +138,7 @@ jobs:
             if(await page.locator('#productModalBody .catalog-official-art').count())
               throw Error('Product without verified extra illustrations gained fabricated gallery');
             if(errors.length)throw Error('Runtime script errors: '+errors.join(' | '));
-            console.log('PASS: original Dela-B 1+6, Dela-S 4 photos with '+(delaSManifest?'4 verified illustrations':'feature assets deferred')+', 4 languages, zoom and responsive source isolation.');
+            console.log('PASS: Dela-B 1 product photo + 6 verified illustrations, Dela-S 4 product photos + 4 verified illustrations, four languages, zoom and responsive source isolation.');
             await browser.close();
           })().catch(e=>{console.error(e);process.exit(1)});
           JS
