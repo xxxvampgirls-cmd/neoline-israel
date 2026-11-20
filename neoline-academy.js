@@ -24,7 +24,7 @@ const copy={
   kick:"NEOLINE ACADEMY",title:"Знакомство с устройством",
   lead:"Практические инструкции по вашей модели: установка, подключение телефона, запись видео и безопасные обновления.",
   choose:"Выберите модель",progress:"Изучено разделов",sections:"Шаги обучения",
-  steps:"Что проверить",complete:"Отметить как изучено",completed:"✓ Изучено",
+  steps:"Что проверить",complete:"Отметить как изучено",completed:"✓ Изучено",next:"Следующий раздел",finished:"Все 4 раздела пройдены! Можете вернуться к любому из них.",
   video:"▶ Видеообзоры и инструкции",manual:"Руководство (PDF, русский) ↗",
   product:"Описание производителя ↗",eu:"Поддержка модели · Европа ↗",euDirectory:"Каталог обновлений NEOLINE Europe ↗",noFirmware:"Прямой файл прошивки для этой модификации не подтверждён. Проверьте каталог производителя или свяжитесь с поддержкой.",
   app:"Приложение",support:"Помощь NEOLINE Europe ↗",
@@ -63,7 +63,7 @@ const copy={
   kick:"NEOLINE ACADEMY",title:"Learn your device",
   lead:"Model-specific guides to setup, phone connection, recording and safe updates — with official manufacturer sources.",
   choose:"Choose a model",progress:"Topics reviewed",sections:"Learning topics",
-  steps:"What to check",complete:"Mark as reviewed",completed:"✓ Reviewed",
+  steps:"What to check",complete:"Mark as reviewed",completed:"✓ Reviewed",next:"Next topic",finished:"All 4 topics complete! You can revisit any topic.",
   video:"▶ Video reviews & tutorials",manual:"User manual (PDF, Russian) ↗",
   product:"Manufacturer product page ↗",eu:"EU model support ↗",euDirectory:"NEOLINE Europe updates directory ↗",noFirmware:"No direct firmware package is verified for this variant. Check the official update directory or contact support.",
   app:"Mobile app",support:"NEOLINE Europe support ↗",
@@ -102,7 +102,7 @@ const copy={
   kick:"NEOLINE ACADEMY",title:"לומדים להכיר את המכשיר",
   lead:"מדריך לפי דגם להתקנה, חיבור לטלפון, הקלטה ועדכונים בטוחים, עם מקורות רשמיים.",
   choose:"בחירת דגם",progress:"נושאים שנלמדו",sections:"נושאי לימוד",
-  steps:"מה צריך לבדוק",complete:"סימון כנלמד",completed:"✓ נלמד",
+  steps:"מה צריך לבדוק",complete:"סימון כנלמד",completed:"✓ נלמד",next:"לנושא הבא",finished:"הושלמו כל 4 הנושאים! אפשר לחזור לכל נושא.",
   video:"▶ סרטוני סקירה והדרכה",manual:"מדריך (PDF, ברוסית) ↗",
   product:"דף המוצר של היצרן ↗",eu:"תמיכה אירופית לדגם ↗",euDirectory:"קטלוג עדכוני NEOLINE אירופה ↗",noFirmware:"אין קובץ קושחה ישיר ומאומת לגרסה זו. בדקו בקטלוג היצרן או פנו לתמיכה.",
   app:"אפליקציה",support:"תמיכת NEOLINE אירופה ↗",
@@ -141,7 +141,7 @@ const copy={
   kick:"NEOLINE ACADEMY",title:"تعلّم استخدام جهازك",
   lead:"إرشادات حسب الطراز للتثبيت والاتصال بالهاتف والتسجيل والتحديثات الآمنة، مع مصادر الشركة الرسمية.",
   choose:"اختر الطراز",progress:"موضوعات تمت مراجعتها",sections:"موضوعات التدريب",
-  steps:"الخطوات",complete:"وضع علامة تمت المراجعة",completed:"✓ تمت المراجعة",
+  steps:"الخطوات",complete:"وضع علامة تمت المراجعة",completed:"✓ تمت المراجعة",next:"الموضوع التالي",finished:"اكتملت الموضوعات الأربعة! يمكنك مراجعة أي موضوع مجددًا.",
   video:"▶ مراجعات ودروس فيديو",manual:"الدليل (PDF بالروسية) ↗",
   product:"صفحة المنتج لدى الشركة ↗",eu:"دعم الطراز الأوروبي ↗",euDirectory:"دليل تحديثات NEOLINE أوروبا ↗",noFirmware:"لم يتم التحقق من ملف برنامج ثابت مباشر لهذا الإصدار. راجع دليل الشركة الرسمي أو الدعم.",
   app:"تطبيق الهاتف",support:"دعم NEOLINE أوروبا ↗",
@@ -205,9 +205,17 @@ const officialLink=(url,label)=>{
 };
 const countDone=id=>topicKeys.filter(k=>Boolean(reviewed[id+"."+k])).length;
 const currentLesson=()=>Math.max(0,topicKeys.indexOf(topic));
+const nextUnreviewed=()=>{
+ const start=currentLesson();
+ for(let step=1;step<=topicKeys.length;step++){
+  const next=topicKeys[(start+step)%topicKeys.length];
+  if(!reviewed[model+"."+next])return next;
+ }
+ return null;
+};
 function render(){
  const t=tr(),s=readSource(model),p=window.NEOLINE_DETAILS?.read?.(model,code());
- const lessonIndex=currentLesson(),lesson=t.lessons[lessonIndex],done=Boolean(reviewed[model+"."+topic]);
+ const lessonIndex=currentLesson(),lesson=t.lessons[lessonIndex],done=Boolean(reviewed[model+"."+topic]),nextTopic=nextUnreviewed();
  const rtl=["he","ar"].includes(code());
  root.dir=rtl?"rtl":"ltr";
  root.setAttribute("lang",code());
@@ -230,7 +238,9 @@ function render(){
     (s.variant?'<p class="academy-variant-warning">'+esc(t.variant)+'</p>':"")+
     (topic==='update'&&s.noPackage?'<p class="academy-variant-warning">'+esc(t.noFirmware)+'</p>':"")+
     '<div class="academy-lesson-actions"><button type="button" class="academy-mark'+(done?' is-completed':'')+'" data-academy-done aria-pressed="'+String(done)+'">'+esc(done?t.completed:t.complete)+'</button>'+
-    '<button type="button" class="academy-video-button" data-academy-video>'+esc(t.video)+'</button></div>'+
+    '<button type="button" class="academy-video-button" data-academy-video>'+esc(t.video)+'</button>'+
+    (done&&nextTopic?'<button type="button" class="academy-next" data-academy-next>'+esc(t.next)+' <span aria-hidden="true">'+(rtl?'←':'→')+'</span></button>':'')+'</div>'+
+    (countDone(model)===topicKeys.length?'<p class="academy-finished" role="status">✓ '+esc(t.finished)+'</p>':'')+
     '<p class="academy-video-note">'+esc(t.videoNotice)+'</p>'+
    '</div>'+
    '<aside class="academy-resources"><h3>'+esc(t.official)+'</h3>'+
@@ -270,6 +280,13 @@ root.addEventListener("click",event=>{
   return;
  }
  if(b.hasAttribute("data-academy-done")){markReviewed();return}
+ if(b.hasAttribute("data-academy-next")){
+  const next=nextUnreviewed();
+  if(!next)return;
+  topic=next;showUpdates=false;render();
+  root.querySelector('[data-academy-topic="'+next+'"]')?.focus({preventScroll:true});
+  return;
+ }
  if(b.hasAttribute("data-academy-video")){
   window.NEOLINE_PRODUCT_VIDEOS?.open?.(model,{topic});return;
  }
