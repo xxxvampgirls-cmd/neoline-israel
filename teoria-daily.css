@@ -1,40 +1,100 @@
-/* NEOLINE Theory daily mini-quest — intentionally compact below existing modes. */
+/* NEOLINE Theory · calm, precise daily challenge between hero and game modes. */
 #theoryDaily{
- display:flex;align-items:center;gap:12px;min-width:0;
- margin-top:10px;padding:11px 14px;border:1px solid #b9dcf0;border-radius:16px;
- background:linear-gradient(110deg,#f5fbff,#e5f5ff);
- box-shadow:0 5px 15px #157cac13;color:#255a7d;
+ box-sizing:border-box;display:grid;
+ grid-template-columns:54px minmax(0,1fr) auto;
+ align-items:center;gap:14px;
+ min-width:0;margin:10px 0 12px;padding:14px 17px;
+ border:1px solid #badbec;border-radius:19px;
+ background:linear-gradient(115deg,#f9fdff 0%,#f1f9ff 52%,#eaf6ff 100%);
+ box-shadow:0 7px 22px rgba(18,110,155,.10);
+ color:#164567;
 }
 #theoryDaily .theory-daily-icon{
- display:grid;place-items:center;flex:none;width:39px;height:39px;
- border-radius:12px;background:linear-gradient(145deg,#1276af,#3bb8ea);
- color:#fff;font-size:24px;font-weight:900;box-shadow:0 5px 12px #1489c32b;
+ display:grid;place-items:center;flex:none;
+ box-sizing:border-box;width:54px;height:54px;
+ border-radius:16px;background:linear-gradient(145deg,#1685bd,#18a3d3);
+ color:#fff;font-size:27px;font-weight:800;
+ box-shadow:0 4px 12px rgba(20,134,187,.18);
 }
-#theoryDaily .theory-daily-text{display:flex;flex-direction:column;gap:4px;min-width:0;flex:1}
-#theoryDaily .theory-daily-text strong{font-size:13px;line-height:1.25;font-weight:900}
-#theoryDaily .theory-daily-text span{font-size:10px;line-height:1.4;color:#6889a0}
+#theoryDaily .theory-daily-text{
+ min-width:0;display:flex;flex-direction:column;justify-content:center;
+ gap:5px;padding-inline-start:14px;
+ border-inline-start:1px solid #c4dfed;
+}
+#theoryDaily .theory-daily-text strong{
+ color:#163f5f;font-size:clamp(14px,1.45vw,17px);
+ font-weight:900;line-height:1.3;letter-spacing:-.015em;
+}
+#theoryDaily .theory-daily-text span{
+ display:block;color:#668397;font-size:clamp(10px,1.1vw,12px);
+ line-height:1.5;overflow-wrap:break-word;
+}
+#theoryDaily .theory-daily-actions{
+ display:flex;align-items:center;justify-content:flex-end;
+ min-width:0;gap:10px;
+}
 #theoryDaily .theory-daily-streak{
- flex:none;padding:7px 9px;border-radius:10px;background:#fff;border:1px solid #cce6f3;
- color:#167da7;font-size:10px;font-weight:850;white-space:nowrap;
+ box-sizing:border-box;display:inline-flex;align-items:center;
+ justify-content:center;min-height:34px;
+ padding:7px 10px;border:1px solid #cfe6f2;border-radius:999px;
+ background:rgba(255,255,255,.85);color:#337994;
+ font-size:11px;font-weight:800;line-height:1.3;white-space:nowrap;
 }
 #theoryDaily .theory-daily-start{
- flex:none;min-height:36px;padding:9px 13px;border:1px solid #1885b5;
- border-radius:10px;background:#137fb8;color:#fff;
- font:850 11px/1.2 Manrope,Arial,sans-serif;cursor:pointer;white-space:nowrap;
- box-shadow:0 4px 10px #1574ad22;
+ box-sizing:border-box;display:inline-flex;align-items:center;justify-content:center;
+ flex:none;min-width:157px;min-height:41px;padding:10px 15px;
+ border:1px solid #1580b6;border-radius:12px;
+ background:linear-gradient(125deg,#0e7bad,#138cc2);
+ color:#fff;font:850 12px/1.3 Manrope,Arial,sans-serif;
+ letter-spacing:0;text-align:center;white-space:nowrap;cursor:pointer;
+ box-shadow:0 4px 12px rgba(18,117,168,.16);
+ transition:background-color .15s ease,box-shadow .15s ease,transform .15s ease;
 }
-#theoryDaily .theory-daily-start:hover:not(:disabled){background:#0c6ea5}
+#theoryDaily .theory-daily-start:hover:not(:disabled){
+ background:#086e9e;box-shadow:0 5px 14px rgba(18,117,168,.23);
+}
+#theoryDaily .theory-daily-start:active:not(:disabled){transform:translateY(1px)}
 #theoryDaily .theory-daily-start:disabled{
- color:#317f71;border-color:#b5e3d9;background:#e4f8f1;
- box-shadow:none;cursor:default;
+ border-color:#badfd5;background:#e6f6f0;
+ color:#2e826c;box-shadow:none;cursor:default;
 }
-#theoryDaily .theory-daily-start:focus-visible{outline:3px solid #1da8df;outline-offset:3px}
-@media(max-width:600px){
- #theoryDaily{display:grid;grid-template-columns:38px minmax(0,1fr);gap:7px 10px;padding:10px 11px;border-radius:14px}
- #theoryDaily .theory-daily-icon{width:36px;height:36px}
- #theoryDaily .theory-daily-text strong{font-size:12px}
- #theoryDaily .theory-daily-text span{font-size:9px}
- #theoryDaily .theory-daily-streak{grid-column:1/2;justify-self:start;padding:6px 7px;font-size:9px}
- #theoryDaily .theory-daily-start{grid-column:2/3;justify-self:stretch;min-height:34px;padding:7px 9px}
+#theoryDaily .theory-daily-start:focus-visible{
+ outline:3px solid #149dd6;outline-offset:3px;
 }
-@media(prefers-reduced-motion:reduce){#theoryDaily *{transition:none!important;animation:none!important}}
+/* Unlike the old card inside the lobby, the moved card must disappear
+   during an active or completed game just as the mode selector does. */
+body.game-active #theoryDaily{display:none}
+@media(max-width:760px){
+ #theoryDaily{
+  grid-template-columns:44px minmax(0,1fr);
+  grid-template-areas:"icon copy" "actions actions";
+  gap:9px 12px;margin:9px 0 11px;
+  padding:12px;border-radius:16px;
+ }
+ #theoryDaily .theory-daily-icon{
+  grid-area:icon;width:44px;height:44px;
+  border-radius:13px;font-size:24px;
+ }
+ #theoryDaily .theory-daily-text{
+  grid-area:copy;gap:3px;padding-inline-start:12px;
+ }
+ #theoryDaily .theory-daily-text strong{font-size:14px}
+ #theoryDaily .theory-daily-text span{font-size:10px;line-height:1.4}
+ #theoryDaily .theory-daily-actions{
+  grid-area:actions;justify-content:space-between;
+  gap:9px;
+ }
+ #theoryDaily .theory-daily-streak{min-height:34px;padding:7px 10px;font-size:10px}
+ #theoryDaily .theory-daily-start{
+  min-height:37px;min-width:0;flex:1;
+  padding:8px 11px;font-size:11px;border-radius:10px;
+ }
+}
+@media(max-width:350px){
+ #theoryDaily{gap:8px 9px;padding:10px}
+ #theoryDaily .theory-daily-streak{padding:7px 8px;font-size:9px}
+ #theoryDaily .theory-daily-start{padding:7px 8px;font-size:10px}
+}
+@media(prefers-reduced-motion:reduce){
+ #theoryDaily *{animation:none!important;transition:none!important}
+}
