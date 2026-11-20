@@ -1,0 +1,227 @@
+/* NEOLINE Academy · mobile-first four-language owner learning center.
+   No remote fonts, no images, no video embeds until deliberately opened. */
+#neolineAcademy{scroll-margin-top:86px;padding-top:clamp(20px,3vw,39px);padding-bottom:clamp(20px,3vw,39px);}
+#neolineAcademy[lang="he"],#neolineAcademy[lang="ar"]{text-align:start}
+#neolineAcademy .academy-heading{
+ display:flex;align-items:flex-end;justify-content:space-between;flex-wrap:wrap;gap:16px;
+ margin:0 0 18px;
+}
+#neolineAcademy .academy-title-group{max-width:700px;min-width:0;flex:1}
+#neolineAcademy .academy-kicker{
+ display:inline-block;color:#188ab8;font-size:10px;font-weight:950;letter-spacing:.12em;text-transform:uppercase;
+}
+#neolineAcademy .academy-title-group h2{
+ margin:5px 0 8px;color:#173d5e;font-size:clamp(24px,3.4vw,36px);
+ letter-spacing:-.035em;line-height:1.18;
+}
+#neolineAcademy .academy-title-group p{margin:0;color:#648095;max-width:68ch;font-size:12px;line-height:1.65}
+#neolineAcademy .academy-progress{
+ display:flex;align-items:center;gap:11px;padding:10px 16px;
+ background:#e8f6ff;border:1px solid #c5e5f4;border-radius:14px;
+ box-shadow:0 5px 17px #1979a515;
+ color:#477c98;font-size:11px;font-weight:850;
+}
+#neolineAcademy .academy-progress strong{font-size:23px;color:#187fad;line-height:1;white-space:nowrap}
+#neolineAcademy .academy-progress strong small{font-size:13px;color:#79afc4}
+#neolineAcademy .academy-body{
+ box-sizing:border-box;min-width:0;padding:clamp(14px,2.25vw,25px);
+ border:1px solid #d1e8f5;border-radius:23px;
+ background:linear-gradient(150deg,#f9fdff,#eef8ff);
+ box-shadow:0 13px 33px #1b7ca216;
+ overflow:hidden;
+}
+#neolineAcademy .academy-model-heading{
+ display:flex;align-items:baseline;justify-content:space-between;gap:11px;flex-wrap:wrap;
+ margin:0 0 9px;
+}
+#neolineAcademy .academy-model-heading strong{font-size:12px;font-weight:900;color:#285c7b}
+#neolineAcademy .academy-model-heading span{
+ font-size:12px;color:#167cb2;font-weight:850;line-height:1.4;
+}
+#neolineAcademy .academy-model-list{
+ display:flex;align-items:stretch;gap:8px;overflow-x:auto;max-width:100%;
+ padding:3px 1px 10px;scrollbar-width:thin;scrollbar-color:#b2d9e9 transparent;
+ overscroll-behavior-inline:contain;scroll-snap-type:x proximity;
+}
+#neolineAcademy .academy-model-list button{
+ box-sizing:border-box;flex:none;max-width:190px;min-width:130px;min-height:38px;
+ padding:8px 12px;scroll-snap-align:start;
+ background:#fff;border:1px solid #c6e2f1;border-radius:10px;
+ font:850 11px/1.35 Manrope,Arial,sans-serif;color:#507993;
+ text-align:center;cursor:pointer;
+}
+#neolineAcademy .academy-model-list button:hover{border-color:#76c4e8;color:#177db2}
+#neolineAcademy .academy-model-list button[aria-pressed="true"]{
+ background:linear-gradient(135deg,#147bb4,#0c96d2);color:#fff;
+ border-color:#0e85bd;box-shadow:0 4px 11px #1172a633;
+}
+#neolineAcademy .academy-topic-grid{
+ display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:9px;
+ margin-top:8px;margin-bottom:14px;
+}
+#neolineAcademy .academy-topic{
+ position:relative;display:flex;align-items:center;gap:10px;min-width:0;
+ box-sizing:border-box;min-height:70px;padding:10px 12px;
+ border:1px solid #cde6f4;border-radius:14px;
+ background:#fff;color:#21587a;text-align:start;
+ cursor:pointer;box-shadow:0 5px 12px #177d9a0d;
+}
+#neolineAcademy .academy-topic-icon{
+ flex:none;display:grid;place-items:center;width:32px;height:32px;
+ border-radius:10px;color:#1585b9;background:#e5f6ff;
+ font-size:20px;font-weight:700;
+}
+#neolineAcademy .academy-topic-name{
+ display:block;min-width:0;font:900 11px/1.3 Manrope,Arial,sans-serif;
+ overflow-wrap:anywhere;flex:1;
+}
+#neolineAcademy .academy-topic small{
+ display:none;flex:1 1 100%;font-size:9px;line-height:1.3;color:#88a2b2;
+}
+#neolineAcademy .academy-topic.active{
+ background:linear-gradient(135deg,#e6f6ff,#f5fcff);
+ border-color:#66bde2;box-shadow:inset 0 0 0 1px #78cbeb55,0 4px 15px #0a7faa18;
+}
+#neolineAcademy .academy-topic-checked{
+ position:absolute;top:5px;inset-inline-end:6px;width:16px;height:16px;
+ display:grid;place-items:center;border-radius:50%;font-size:10px;
+ color:#fff;background:#1a9caf;
+}
+#neolineAcademy .academy-content{
+ display:grid;grid-template-columns:minmax(0,1.48fr) minmax(220px,.75fr);
+ gap:12px;align-items:stretch;min-width:0;
+}
+#neolineAcademy .academy-lesson,#neolineAcademy .academy-resources{
+ box-sizing:border-box;min-width:0;padding:clamp(15px,2.2vw,24px);
+ border-radius:17px;border:1px solid #d2e8f3;background:#fff;
+}
+#neolineAcademy .academy-lesson-lead{display:flex;align-items:center;gap:12px;margin-bottom:15px}
+#neolineAcademy .academy-step-number{
+ flex:none;width:40px;height:40px;border-radius:13px;
+ display:grid;place-items:center;color:#fff;
+ font:900 16px/1 Manrope,Arial,sans-serif;
+ background:linear-gradient(135deg,#117cb6,#19a2d5);
+ box-shadow:0 4px 11px #137aaa30;
+}
+#neolineAcademy .academy-lesson-lead>div{min-width:0}
+#neolineAcademy .academy-lesson-lead small{
+ color:#769bb2;font-size:10px;font-weight:800;letter-spacing:.04em;
+}
+#neolineAcademy .academy-lesson-lead h3{
+ margin:3px 0 0;color:#173c5c;font-size:clamp(16px,2vw,21px);line-height:1.3;
+}
+#neolineAcademy .academy-step-list{
+ display:grid;gap:10px;list-style:none;padding:0;margin:0;
+ counter-reset:none;
+}
+#neolineAcademy .academy-step-list>li{
+ display:flex;align-items:flex-start;gap:10px;min-width:0;
+ padding:10px 11px;border-radius:11px;
+ background:#f4faff;border:1px solid #e0eef6;
+}
+#neolineAcademy .academy-number{
+ flex:none;display:grid;place-items:center;width:23px;height:23px;border-radius:8px;
+ background:#deeffa;color:#1482b5;font-size:11px;font-weight:900;
+}
+#neolineAcademy .academy-step-list p{
+ margin:0;min-width:0;flex:1;font-size:11px;color:#416a86;line-height:1.62;
+ overflow-wrap:anywhere;
+}
+#neolineAcademy .academy-safety,#neolineAcademy .academy-variant-warning,
+#neolineAcademy .academy-wifi-caution{
+ display:flex;gap:9px;align-items:flex-start;
+ margin:13px 0 0;padding:10px 12px;border-radius:11px;
+ background:#eaf7ff;border:1px solid #cfeaf6;
+ color:#50778e;font-size:10px;line-height:1.6;
+}
+#neolineAcademy .academy-safety span{color:#148ebd;font-size:14px;font-weight:900}
+#neolineAcademy .academy-safety-strong,#neolineAcademy .academy-variant-warning{
+ color:#855f28;background:#fff7e9;border-color:#f0dfbd;
+}
+#neolineAcademy .academy-wifi-caution{background:#f7fbff}
+#neolineAcademy .academy-lesson-actions{
+ display:flex;gap:8px;flex-wrap:wrap;margin-top:15px;
+}
+#neolineAcademy .academy-mark,#neolineAcademy .academy-video-button{
+ box-sizing:border-box;display:inline-flex;justify-content:center;align-items:center;
+ min-height:39px;padding:9px 13px;border-radius:10px;
+ border:1px solid #147daf;background:#167fbc;color:#fff;
+ font:850 11px/1.3 Manrope,Arial,sans-serif;text-align:center;cursor:pointer;
+}
+#neolineAcademy .academy-mark.is-completed{background:#e9f9f4;color:#15806a;border-color:#addfd1}
+#neolineAcademy .academy-video-button{background:#ebf8ff;color:#147ca9;border-color:#b5ddec}
+#neolineAcademy .academy-video-note{
+ margin:9px 0 0;color:#89a2b0;font-size:10px;line-height:1.6;
+}
+#neolineAcademy .academy-resources{
+ display:flex;flex-direction:column;gap:11px;
+ background:linear-gradient(165deg,#fff,#f6fbff);
+}
+#neolineAcademy .academy-resources h3{
+ margin:0;color:#174f75;font-size:16px;line-height:1.3;
+}
+#neolineAcademy .academy-resource-links{display:grid;gap:7px}
+#neolineAcademy .academy-resource-link{
+ box-sizing:border-box;display:flex;align-items:center;
+ min-height:36px;padding:8px 10px;
+ border-radius:10px;border:1px solid #d4e8f3;
+ background:#fff;color:#2b789e;
+ font-size:10px;font-weight:800;line-height:1.45;text-decoration:none;
+ overflow-wrap:anywhere;
+}
+#neolineAcademy .academy-resource-link:hover{
+ color:#0979b5;background:#eaf7ff;border-color:#a9d5ec;
+}
+#neolineAcademy .academy-details,#neolineAcademy .academy-update-toggle{
+ display:flex;align-items:center;justify-content:center;gap:9px;
+ box-sizing:border-box;width:100%;min-height:37px;padding:8px 10px;
+ border:1px solid #b5deeb;border-radius:10px;
+ background:#eaf8ff;color:#1675a4;
+ font-size:11px;font-weight:850;line-height:1.4;text-align:center;cursor:pointer;
+}
+#neolineAcademy .academy-update-toggle{background:#fff;border-color:#d2e6f2}
+#neolineAcademy .academy-update-details{margin-top:13px}
+#neolineAcademy .academy-update-details .pd-updates{
+ max-width:100%;width:100%;box-sizing:border-box;
+}
+#neolineAcademy .academy-fineprint{
+ margin:13px 0 0;padding-top:11px;border-top:1px solid #dcebf3;
+ color:#7897a8;font-size:10px;line-height:1.6;
+}
+#neolineAcademy button:focus-visible,#neolineAcademy a:focus-visible{
+ outline:3px solid #1b9adb;outline-offset:2px;
+}
+@media(max-width:980px){
+ #neolineAcademy .academy-content{grid-template-columns:minmax(0,1fr) minmax(220px,.68fr)}
+ #neolineAcademy .academy-topic{flex-direction:column;align-items:flex-start;justify-content:center;gap:6px}
+ #neolineAcademy .academy-topic-icon{width:29px;height:29px}
+}
+@media(max-width:740px){
+ #neolineAcademy{padding-top:20px;padding-bottom:20px}
+ #neolineAcademy .academy-heading{gap:9px;margin-bottom:13px}
+ #neolineAcademy .academy-progress{padding:8px 11px}
+ #neolineAcademy .academy-body{padding:12px;border-radius:18px}
+ #neolineAcademy .academy-model-heading{gap:4px}
+ #neolineAcademy .academy-model-list button{min-width:124px;max-width:170px;min-height:39px}
+ #neolineAcademy .academy-topic-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:7px;margin-bottom:10px}
+ #neolineAcademy .academy-topic{flex-direction:row;align-items:center;min-height:58px;padding:8px 10px;gap:8px;border-radius:12px}
+ #neolineAcademy .academy-topic-icon{width:31px;height:31px;font-size:19px}
+ #neolineAcademy .academy-topic-name{font-size:11px}
+ #neolineAcademy .academy-content{grid-template-columns:1fr;gap:9px}
+ #neolineAcademy .academy-lesson,#neolineAcademy .academy-resources{padding:13px;border-radius:13px}
+ #neolineAcademy .academy-lesson-lead{margin-bottom:12px}
+ #neolineAcademy .academy-step-list{gap:8px}
+ #neolineAcademy .academy-step-list>li{padding:9px 10px}
+ #neolineAcademy .academy-lesson-actions>*{flex:1}
+ #neolineAcademy .academy-resources{gap:9px}
+ #neolineAcademy .academy-resource-links{grid-template-columns:repeat(2,minmax(0,1fr));gap:6px}
+ #neolineAcademy .academy-resource-link{font-size:10px;min-height:38px}
+}
+@media(max-width:360px){
+ #neolineAcademy .academy-resource-links{grid-template-columns:1fr}
+ #neolineAcademy .academy-body{padding:9px}
+ #neolineAcademy .academy-lesson-actions>*{flex:1 1 100%}
+}
+@media(prefers-reduced-motion:reduce){
+ #neolineAcademy *{scroll-behavior:auto!important;animation:none!important;transition:none!important}
+}
