@@ -43,7 +43,7 @@ def banned_reference(ref: str) -> bool:
     except OSError:
         return False
     # Git's SHA identifies the actual, original picture content.
-    data_hash = hashlib.sha1(b"blob " + str(len(data)).encode("ascii") + b"\\0" + data).hexdigest()
+    data_hash = hashlib.sha1(b"blob " + str(len(data)).encode("ascii") + b"\0" + data).hexdigest()
     return data_hash in CONFIRMED_BAD_BLOB_IDS
 
 
