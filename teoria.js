@@ -165,6 +165,7 @@ function setCopy(){
  $("sourceBank").href=sourceFor(state.lang);
  document.querySelectorAll("[data-lang]").forEach(b=>{const selected=b.dataset.lang===state.lang;b.classList.toggle("on",selected);b.classList.toggle("active",selected);b.setAttribute("aria-pressed",String(selected))});
  $("licenseSelect").value=state.licence;
+ $("theoryDaily")?.setAttribute("aria-label",text("modeDaily"));
 
  refreshStats();
 }
