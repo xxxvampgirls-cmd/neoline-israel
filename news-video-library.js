@@ -14,8 +14,8 @@ const SOURCES={
 };
 const langPack={
  ru:{label:"ВИДЕОХРОНИКА · ИЗРАИЛЬ",title:"Видео с дорог",period:"За последние 30 дней",
-  about:"ДТП, радары, камеры контроля скорости, репортажи и дорожная полиция — только официальные источники.",
-  all:"Все",accidents:"ДТП",radars:"Радары и камеры",reports:"Репортажи",police:"Полиция",
+  about:"Аварии, наезды, записи видеорегистраторов, курьёзы, радары и репортажи — видео с YouTube по Израилю.",
+  all:"Все",accidents:"ДТП",dashcam:"Регистраторы",funny:"Курьёзы",radars:"Радары и камеры",reports:"Репортажи",police:"Полиция",
   archiveHeading:"Радары и камеры · Архив 13 канала",archiveLabel:"Архив",
   archiveDescription:"Отдельные репортажи прошлых месяцев, не входят в подборку за 30 дней.",
   archiveMore:"Другие сюжеты 13 канала ↗",loading:"Собираем видео за месяц…",
@@ -24,9 +24,9 @@ const langPack={
   watch:"Смотреть",youtube:"Открыть на YouTube ↗",sources:"Источники:",
   expand:"Показать ещё видео",count:n=>n+" видео",notice:"Видео размещены авторами на YouTube; могут содержать кадры происшествий.",
   close:"Закрыть видео",player:"Видеорепортаж"},
- en:{label:"VIDEO REPORTS · ISRAEL",title:"Road videos",period:"Last 30 days",
-  about:"Crashes, radar, speed cameras, reports and police — official publishers only.",
-  all:"All",accidents:"Crashes",radars:"Radars & cameras",reports:"Reports",police:"Police",
+ en:{label:"ROAD FOOTAGE · ISRAEL",title:"Videos from the roads",period:"Last 30 days",
+  about:"Crashes, pedestrian incidents, dashcam footage, unusual driving, speed cameras and news from Israel.",
+  all:"All",accidents:"Crashes",dashcam:"Dashcams",funny:"Road fails",radars:"Radars & cameras",reports:"Reports",police:"Police",
   archiveHeading:"Radar & camera reports · News 13 archive",archiveLabel:"Archive",
   archiveDescription:"Older features, separate from the rolling last-30-days collection.",
   archiveMore:"More News 13 coverage ↗",loading:"Loading this month's videos…",
@@ -36,8 +36,8 @@ const langPack={
   expand:"More videos",count:n=>n+" videos",notice:"Videos remain on YouTube; some may show sensitive crash footage.",
   close:"Close video",player:"Video report"},
  he:{label:"וידאו מהכבישים · ישראל",title:"סרטונים מהכבישים",period:"30 הימים האחרונים",
-  about:"תאונות, רדארים, מצלמות מהירות, כתבות ואכיפת תנועה — ערוצים רשמיים בלבד.",
-  all:"הכול",accidents:"תאונות",radars:"רדארים ומצלמות",reports:"כתבות",police:"משטרה",
+  about:"תאונות, פגיעות הולכי רגל, מצלמות רכב, נהיגה הזויה, רדארים וכתבות מיוטיוב בישראל.",
+  all:"הכול",accidents:"תאונות",dashcam:"מצלמות רכב",funny:"נהיגה הזויה",radars:"רדארים ומצלמות",reports:"כתבות",police:"משטרה",
   archiveHeading:"רדארים ומצלמות · ארכיון חדשות 13",archiveLabel:"ארכיון",
   archiveDescription:"כתבות מחודשים קודמים, בנפרד מאוסף 30 הימים האחרונים.",
   archiveMore:"עוד כתבות בחדשות 13 ↗",loading:"טוענים סרטונים מהחודש…",
@@ -47,8 +47,8 @@ const langPack={
   expand:"עוד סרטונים",count:n=>n+" סרטונים",notice:"הסרטונים מתארחים ביוטיוב ועלולים להכיל תיעוד תאונות.",
   close:"סגירת הסרטון",player:"כתבת וידאו"},
  ar:{label:"فيديو الطرق · إسرائيل",title:"فيديوهات الطرق",period:"آخر 30 يومًا",
-  about:"حوادث ورادارات وكاميرات السرعة وتقارير المرور — من القنوات الرسمية فقط.",
-  all:"الكل",accidents:"حوادث",radars:"الرادارات والكاميرات",reports:"تقارير",police:"الشرطة",
+  about:"حوادث ودهس ومقاطع كاميرات السيارات ومواقف طريفة ورادارات وتقارير من يوتيوب في إسرائيل.",
+  all:"الكل",accidents:"حوادث",dashcam:"كاميرات السيارات",funny:"مواقف طريفة",radars:"الرادارات والكاميرات",reports:"تقارير",police:"الشرطة",
   archiveHeading:"الرادارات والكاميرات · أرشيف أخبار 13",archiveLabel:"الأرشيف",
   archiveDescription:"تقارير أقدم، منفصلة عن مجموعة آخر 30 يومًا.",
   archiveMore:"المزيد من أخبار 13 ↗",loading:"جار تحميل فيديوهات الشهر…",
@@ -58,7 +58,7 @@ const langPack={
   expand:"مزيد من الفيديوهات",count:n=>n+" فيديو",notice:"الفيديوهات مستضافة على يوتيوب وقد تتضمن مشاهد حوادث.",
   close:"إغلاق الفيديو",player:"تقرير مصور"}
 };
-const CATS=["all","accidents","radars","reports","police"];
+const CATS=["all","accidents","dashcam","funny","radars","reports","police"];
 // Two verified news reports on News 13's official YouTube channel.
 // Both predate the rolling 30-day period; neither is falsely counted as a
 // current-month publication. No artificial dates or thumbnail assets.
@@ -79,12 +79,22 @@ function sanitize(data){
  if(!data||data.version!==1||data.retentionDays!==30||!Array.isArray(data.items))return null;
  const seen=new Set(),rows=[];
  for(const item of data.items){
-  if(!item||!validID(item.id)||!validDate(item.date)||!SOURCES[item.source]||
+  const official=!!SOURCES[item?.source];
+  const community=item?.source==="youtube" &&
+    typeof item.channelId==="string" &&
+    /^UC[A-Za-z0-9_-]{22}$/.test(item.channelId) &&
+    item.localVerified===true && typeof item.publisher==="string" &&
+    item.publisher.trim().length>0;
+  if(!item||!validID(item.id)||!validDate(item.date)||!(official||community)||
      typeof item.title!=="string"||!item.title.trim()||seen.has(item.id))continue;
   seen.add(item.id);
   rows.push({
    id:item.id,title:item.title.trim(),date:item.date,
-   source:item.source,publisher:SOURCES[item.source].name,
+   source:item.source,
+   publisher:official?SOURCES[item.source].name:item.publisher.trim().slice(0,100),
+   channelId:community?item.channelId:null,
+   tags:Array.isArray(item.tags)?item.tags.filter(cat=>CATS.includes(cat)&&cat!=="all"):
+     [CATS.includes(item.category)?item.category:"reports"],
    category:CATS.includes(item.category)&&item.category!=="all"?item.category:"reports",
    url:"https://www.youtube.com/watch?v="+item.id
   });
@@ -113,7 +123,8 @@ async function refresh(){
  draw();
 }
 function filtered(){
- return state.all.filter(item=>state.cat==="all"||item.category===state.cat).filter(item=>validDate(item.date));
+ return state.all.filter(item=>state.cat==="all"||item.category===state.cat||
+   item.tags.includes(state.cat)).filter(item=>validDate(item.date));
 }
 function when(date){
  const lang=document.documentElement.lang||"ru";
