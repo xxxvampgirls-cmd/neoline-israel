@@ -1,0 +1,10 @@
+{
+  "_notes": [
+    "Only real PUBLIC Facebook videos for the EXACT NEOLINE product model. Do not add guessed or unrelated URLs.",
+    "The site prioritizes EN Facebook embeds for en/he/ar; Russian views keep Russian videos first.",
+    "Add videos like: {\"model\":\"NEOLINE WowCam Wi-Fi\",\"language\":\"en\",\"title\":\"Real English video title\",\"url\":\"https://www.facebook.com/<verified-page>/videos/<real-id>/\"}.",
+    "modelId can replace model for an already verified stable catalogue ID. The video must allow embedding on third-party sites.",
+    "No Facebook links passed verification during this update, so no sample/fake video is included."
+  ],
+  "videos": []
+}
