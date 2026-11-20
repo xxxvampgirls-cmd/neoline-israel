@@ -1,0 +1,50 @@
+{
+  "version": 1,
+  "scannedAt": "2026-11-20T14:40:40.199506+00:00",
+  "mode": "apply",
+  "products": 54,
+  "picturesBefore": 251,
+  "picturesAfter": 251,
+  "removedCount": 0,
+  "affectedProducts": 0,
+  "removed": [],
+  "reviewOnly": [
+    {
+      "productId": 53203841542,
+      "reference": "./assets/catalog/images/53203841542-3.webp",
+      "ratio": 3.346,
+      "note": "Wide photograph retained for review: could be a genuine long accessory."
+    },
+    {
+      "productId": 470127869532,
+      "reference": "./assets/catalog/images/470127869532-3.webp",
+      "ratio": 3.346,
+      "note": "Wide photograph retained for review: could be a genuine long accessory."
+    },
+    {
+      "productId": 554864778016,
+      "reference": "./assets/catalog/images/554864778016-3.webp",
+      "ratio": 3.346,
+      "note": "Wide photograph retained for review: could be a genuine long accessory."
+    },
+    {
+      "productId": 299336828122,
+      "reference": "./assets/catalog/images/299336828122-3.webp",
+      "ratio": 3.231,
+      "note": "Wide photograph retained for review: could be a genuine long accessory."
+    },
+    {
+      "productId": 299336828122,
+      "reference": "./assets/catalog/images/299336828122-4.webp",
+      "ratio": 2.484,
+      "note": "Wide photograph retained for review: could be a genuine long accessory."
+    },
+    {
+      "productId": 299336828122,
+      "reference": "./assets/catalog/images/299336828122-5.webp",
+      "ratio": 4.78,
+      "note": "Wide photograph retained for review: could be a genuine long accessory."
+    }
+  ],
+  "policy": "Remove confirmed ads/wide marketing graphics from product photos; do not invent or pad images. Source binaries retained for rollback."
+}
