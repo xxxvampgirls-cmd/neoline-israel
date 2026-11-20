@@ -37,8 +37,8 @@
 }
 #installation .road-demo-visual>svg .road-demo-range-ring--two{opacity:.27}
 #installation .road-demo-visual>svg .road-demo-range-ring--three{opacity:.18}
-#installation .road-demo-visual>svg .road-demo-car{
- transform-origin:280px 256px;
+#installation .road-demo-visual>svg .road-demo-car-motion{
+ transform-origin:0 0;
 }
 #installation .road-demo-visual>svg .road-demo-scan{opacity:.80}
 #installation .road-demo-visual>svg .road-demo-sweep{opacity:.24}
@@ -314,7 +314,7 @@
 #installation .road-demo.is-playing .road-demo-range-ring--three{
  animation:premiumRoadRings 3.5s ease-out -2.3s infinite;
 }
-#installation .road-demo.is-playing .road-demo-car{
+#installation .road-demo.is-playing .road-demo-car-motion{
  animation:premiumRoadCarHover 3.4s ease-in-out infinite;
 }
 #installation .road-demo.is-playing .road-demo-flow-line{
