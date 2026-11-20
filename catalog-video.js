@@ -93,7 +93,7 @@
  ru:{hl:"ru",gl:"RU",tag:"RU",flag:"🇷🇺",region:"Россия",title:"Обзоры на русском",items:["Обзоры","Сравнения","Презентации и реклама","Примеры съёмки"],terms:["обзор отзыв тест","сравнение видеорегистраторов","официальная презентация реклама","пример записи день ночь"],other:"Видео на других языках",none:"Проверенных русскоязычных роликов для этой модели пока нет. Начните с подборок ниже.",note:"YouTube открывается на русском языке с регионом Россия. Язык видео не гарантирован."},
  en:{hl:"en-GB",gl:"GB",tag:"EN",flag:"🇬🇧",region:"United Kingdom",title:"English reviews first",items:["English reviews","Comparisons","Ads and presentations","Video samples"],terms:["review hands on English","comparison dashcam English","official promo presentation English","sample footage day night English"],other:"Videos in other languages",none:"No verified English review for this exact model yet. English searches below take priority over Russian videos.",note:"Search opens YouTube in English with the United Kingdom region. Results and spoken language depend on YouTube."},
  he:{hl:"iw",gl:"IL",tag:"HE",flag:"🇮🇱",region:"ישראל",title:"סקירות בעברית",items:["סקירות בעברית","השוואות","פרסומות ומצגות","דוגמאות צילום"],terms:["סקירה ביקורת בדיקה","השוואה מצלמת רכב","פרסומת מצגת רשמית","צילום דוגמה יום לילה"],other:"סרטונים בשפות אחרות",none:"אין כרגע סקירה מאומתת בעברית. חיפוש בעברית מקבל קדימות.",note:"חיפוש ביוטיוב בעברית באזור ישראל. שפת הסרטונים אינה מובטחת."},
- ar:{hl:"ar",gl:"AE",tag:"AR",flag:"🇦🇪",region:"الإمارات",title:"مراجعات باللغة العربية",items:["مراجعات عربية","مقارنات","إعلانات وعروض","تجارب التصوير"],terms:["مراجعة وتجربة كاميرا سيارة","مقارنة أجهزة تسجيل القيادة","إعلان عرض رسمي","تجربة تصوير نهار ليل"],other:"فيديوهات بلغات أخرى",none:"لا توجد مراجعات عربية موثقة حالياً. البحث باللغة العربية يظهر أولاً.",note:"يفتح البحث في يوتيوب بالعربية والإمارات. اللغة ليست مضمونة."}
+ ar:{hl:"ar",gl:"IL",tag:"AR",flag:"🇮🇱",region:"إسرائيل",title:"مراجعات باللغة العربية",items:["مراجعات عربية","مقارنات","إعلانات وعروض","تجارب التصوير"],terms:["مراجعة وتجربة كاميرا سيارة","مقارنة أجهزة تسجيل القيادة","إعلان عرض رسمي","تجربة تصوير نهار ليل"],other:"فيديوهات بلغات أخرى",none:"لا توجد مراجعات عربية موثقة حالياً. البحث باللغة العربية يظهر أولاً.",note:"يفتح البحث في يوتيوب بالعربية والإمارات. اللغة ليست مضمونة."}
  };
 
  /* Facebook: only manually verified, public, exact-model English videos.
@@ -171,12 +171,80 @@
     When a real verified English Facebook clip is added to the curated JSON,
     it automatically replaces the fallback for English, Hebrew and Arabic. */
  const mainCopy={
-  ru:{featured:"Смотреть видео",playlist:"Другие ролики",extras:"Дополнительные видео и поиск",fallback:"Пока нет подтверждённого английского видео этой модели. Доступен обзор на русском.",missing:"Для этой модели ещё нет подтверждённого ролика. Поиск доступен ниже.",facebook:"Facebook · на английском",youtube:"YouTube",note:"Нажмите ▶ в плеере, чтобы начать просмотр."},
-  en:{featured:"Watch product video",playlist:"More videos",extras:"More videos, reviews and searches",fallback:"English video for this exact model is not verified yet. Playing the available Russian-language review instead.",missing:"No verified video for this exact model yet. Use the additional searches below.",facebook:"Facebook · English",youtube:"YouTube",note:"Tap ▶ in the player to start watching."},
-  he:{featured:"צפייה בסרטון המוצר",playlist:"סרטונים נוספים",extras:"סרטונים נוספים וחיפוש",fallback:"עדיין אין סרטון אנגלי מאומת לדגם הזה. מוצג סרטון ברוסית.",missing:"עדיין אין סרטון מאומת לדגם הזה. חיפוש נוסף זמין למטה.",facebook:"Facebook · אנגלית",youtube:"YouTube",note:"לחצו ▶ בנגן להתחלת הצפייה."},
-  ar:{featured:"شاهد فيديو المنتج",playlist:"فيديوهات أخرى",extras:"مزيد من الفيديوهات وعمليات البحث",fallback:"لم يتم التحقق بعد من فيديو إنجليزي لهذا الطراز. يظهر فيديو باللغة الروسية.",missing:"لا يوجد فيديو موثق لهذا الطراز بعد. يمكن استخدام البحث الإضافي أدناه.",facebook:"Facebook · الإنجليزية",youtube:"YouTube",note:"اضغط ▶ في المشغل لبدء المشاهدة."}
+  ru:{featured:"Смотреть видео",playlist:"Другие ролики",extras:"Дополнительные видео и поиск",fallback:"Англоязычное видео этой модели ещё не подтверждено. Доступен обзор на русском.",missing:"Для этой модели ещё нет подтверждённого ролика. Поиск доступен ниже.",facebook:"Facebook · на английском",youtube:"YouTube",note:"Нажмите ▶ в плеере, чтобы начать просмотр."},
+  en:{featured:"Watch product video",playlist:"More videos",extras:"More videos, reviews and searches",fallback:"No verified English video for this exact model. Russian reviews are available under other languages; you can also search in English.",missing:"No verified video for this exact model yet. Use the additional searches below.",facebook:"Facebook · English",youtube:"YouTube",note:"Tap ▶ in the player to start watching."},
+  he:{featured:"צפייה בסרטון המוצר",playlist:"סרטונים נוספים",extras:"סרטונים נוספים וחיפוש",fallback:"עדיין אין סרטון אנגלי מאומת לדגם הזה. סקירות ברוסית נמצאות תחת שפות אחרות.",missing:"עדיין אין סרטון מאומת לדגם הזה. חיפוש נוסף זמין למטה.",facebook:"Facebook · אנגלית",youtube:"YouTube",note:"לחצו ▶ בנגן להתחלת הצפייה."},
+  ar:{featured:"شاهد فيديو المنتج",playlist:"فيديوهات أخرى",extras:"مزيد من الفيديوهات وعمليات البحث",fallback:"لم يتم التحقق من فيديو إنجليزي لهذا الطراز. المقاطع الروسية متاحة ضمن اللغات الأخرى.",missing:"لا يوجد فيديو موثق لهذا الطراز بعد. يمكن استخدام البحث الإضافي أدناه.",facebook:"Facebook · الإنجليزية",youtube:"YouTube",note:"اضغط ▶ في المشغل لبدء المشاهدة."}
  };
  let featuredItems=[];
+
+ // Verified video guides: lazy-loaded only on explicit video-catalog open.
+ // A verified Polish multi-model review is always marked PL, never EN.
+ let tutorialCatalog=[];
+ let tutorialLoaded=false;
+ let tutorialLoading=null;
+ let tutorialFilter="all";
+ const tutorialCopy={
+  ru:{title:"Проверенные видеоинструкции и обзоры",note:"Ссылки на реальные публикации: автор и язык отмечены. Видео загружается только по нажатию.",all:"Все",connect:"Подключение",review:"Обзор",watch:"Смотреть здесь",original:"YouTube ↗",none:"Проверенного видео по этому разделу для данной модели пока нет. Используйте поиск по модели ниже.",publisher:"Источник",devices:{android:"Android",ios:"iPhone",all:""}},
+  en:{title:"Verified tutorials and reviews",note:"Real published clips with original language and creator shown. Playback loads only on tap.",all:"All",connect:"Phone setup",review:"Review",watch:"Watch here",original:"YouTube ↗",none:"No verified video for this model and topic yet. Try the exact-model search below.",publisher:"Publisher",devices:{android:"Android",ios:"iPhone",all:""}},
+  he:{title:"הדרכות וסקירות מאומתות",note:"סרטונים אמיתיים עם ציון שפת המקור והיוצר. הנגן נטען רק בלחיצה.",all:"הכול",connect:"חיבור לטלפון",review:"סקירה",watch:"צפייה כאן",original:"יוטיוב ↗",none:"לא נמצא סרטון מאומת לדגם ולנושא. אפשר לחפש לפי שם הדגם.",publisher:"מפרסם",devices:{android:"Android",ios:"iPhone",all:""}},
+  ar:{title:"شروحات ومراجعات موثقة",note:"مقاطع منشورة حقيقية مع اللغة والناشر. يُحمّل المشغل بعد النقر فقط.",all:"الكل",connect:"اتصال الهاتف",review:"مراجعة",watch:"شاهد هنا",original:"يوتيوب ↗",none:"لا يوجد مقطع مؤكد لهذا الطراز والموضوع بعد. استخدم البحث باسم الطراز.",publisher:"الناشر",devices:{android:"Android",ios:"iPhone",all:""}}
+ };
+ function validateTutorial(item){
+  return item && item.platform==="youtube" &&
+   typeof item.id==="string" && /^[A-Za-z0-9_-]{11}$/.test(item.id) &&
+   Array.isArray(item.modelIds) && item.modelIds.length>0 &&
+   item.modelIds.every(id=>Number.isInteger(id)&&id>=1&&id<=8) &&
+   ["ru","pl","en","he","ar"].includes(item.language) &&
+   ["connect","review","setup","record","update"].includes(item.category) &&
+   typeof item.title==="string" && item.title.trim().length>3 &&
+   typeof item.publisher==="string" && item.publisher.trim().length>2;
+ }
+ function loadTutorialCatalog(){
+  if(tutorialLoaded||tutorialLoading)return tutorialLoading;
+  tutorialLoading=fetch("./assets/catalog/tutorial-videos.json?v=20261120-real-guides-v1",{cache:"force-cache"})
+   .then(response=>{if(!response.ok)throw Error("Tutorial catalog unavailable");return response.json()})
+   .then(data=>{
+    tutorialCatalog=(Array.isArray(data.videos)?data.videos:[]).filter(validateTutorial);
+    tutorialLoaded=true;
+    if(currentId!==null&&!overlay.hidden)renderVideoList(currentId);
+   }).catch(()=>{tutorialLoaded=true;tutorialCatalog=[]})
+   .finally(()=>{tutorialLoading=null});
+  return tutorialLoading;
+ }
+ function renderTutorials(id,locale){
+  const t=tutorialCopy[locale]||tutorialCopy.en;
+  const all=tutorialCatalog.filter(v=>v.modelIds.includes(id));
+  if(!all.length)return "";
+  const tabs=["all","connect","review"].map(k=>
+   '<button type="button" data-video-topic="'+k+'" aria-pressed="'+String(k===tutorialFilter)+'">'+
+   secureText(t[k])+'</button>').join("");
+  const selected=all.filter(v=>tutorialFilter==="all"||v.category===tutorialFilter);
+  const items=selected.map(v=>{
+   const videoUrl="https://www.youtube.com/watch?v="+v.id;
+   const cat=t[v.category]||v.category;
+   const device=t.devices[v.device]||"";
+   return '<article class="product-video-real-guide" data-guide-id="'+secureText(v.id)+'">'+
+    '<div class="product-video-real-thumb"><img loading="lazy" decoding="async" src="https://i.ytimg.com/vi/'+v.id+'/mqdefault.jpg" alt="">'+
+     '<span class="product-video-real-badge">'+secureText(v.language.toUpperCase())+'</span></div>'+
+    '<div class="product-video-real-body"><div class="product-video-real-meta">'+
+     '<span>'+secureText(cat)+(device?" · "+secureText(device):"")+'</span>'+
+     '<span>'+secureText(v.publisher)+'</span></div>'+
+     '<strong>'+secureText(v.title)+'</strong>'+
+     '<div class="product-video-real-actions"><button type="button" data-play-guide="'+secureText(v.id)+'">▶ '+secureText(t.watch)+'</button>'+
+     '<a href="'+videoUrl+'" target="_blank" rel="noopener noreferrer">'+secureText(t.original)+'</a></div></div>'+
+     '<div class="product-video-real-embed" data-guide-embed="'+secureText(v.id)+'"></div>'+
+    '</article>';
+  }).join("");
+  return '<section class="product-video-real-guides" aria-label="'+secureText(t.title)+'">'+
+   '<div class="product-video-real-heading"><h3>'+secureText(t.title)+'</h3>'+
+    '<span>'+all.length+'</span></div>'+
+    '<div class="product-video-real-filters" role="group" aria-label="'+secureText(t.title)+'">'+tabs+'</div>'+
+    (items?'<div class="product-video-real-list">'+items+'</div>':
+      '<p class="product-video-real-empty">'+secureText(t.none)+'</p>')+
+    '<p class="product-video-real-note">'+secureText(t.note)+'</p></section>';
+ }
+
  function curatedFeatured(id,selectedLang){
   const fb=facebookForModel(id).map(v=>({
    provider:"facebook",language:"EN",title:v.title||modelName(id),
@@ -189,9 +257,11 @@
    original:"https://www.youtube.com/watch?v="+v.id
   }));
   const enYouTube=yt.filter(v=>v.language==="EN");
-  const ruYouTube=yt.filter(v=>v.language!=="EN");
-  if(selectedLang==="ru")return [...ruYouTube,...fb,...enYouTube];
-  return [...fb,...enYouTube,...ruYouTube];
+  const ruYouTube=yt.filter(v=>v.language==="RU");
+  // Do not silently start a Russian video on an English/Hebrew/Arabic page.
+  // Local-language searches and accurately tagged foreign videos remain available.
+  if(selectedLang==="ru")return [...ruYouTube,...enYouTube,...fb];
+  return [...fb,...enYouTube];
  }
 
  /* Exact-model English tutorials and Facebook Reels appear below the main
