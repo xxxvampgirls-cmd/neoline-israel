@@ -19,6 +19,7 @@ on:
       - "catalog-ui.js"
       - "index.html"
       - "showcase-how.css"
+      - "showcase-newsroom.css"
       - "road-demo.js"
       - "road-demo.css"
       - "road-demo-premium.css"
@@ -94,16 +95,19 @@ jobs:
             // must follow the demo ad in the original ice-blue showroom.
             const carousel=page.locator('#showcaseSlides');
             const heroSlides=carousel.locator('.featured-slide');
-            if(await heroSlides.count()!==9)
-              throw Error('Showroom must now contain 9 slides (8 original + interactive demo promo)');
+            if(await heroSlides.count()!==10)
+              throw Error('Showroom must contain 10 slides (original product/promo ads plus two new promos)');
             const order=await heroSlides.evaluateAll(nodes=>nodes.map(n=>({
               cls:n.className,cta:n.querySelector('[data-open-feature]')?.getAttribute('data-open-feature')||null
             })));
             if(!order[2].cls.includes('featured-slide--promo-how')||order[3].cta!=='2'||
-               !order[2].cls.includes('featured-slide--site-promo'))
+               !order[2].cls.includes('featured-slide--site-promo')||
+               order[5].cta!=='3'||
+               !order[6].cls.includes('featured-slide--promo-newsroom')||
+               order[7].cta!=='4')
               throw Error('How it works ad must sit BETWEEN the 2nd and 3rd showroom products: '+JSON.stringify(order));
-            if(await page.locator('#showcaseDots .showcase-dot').count()!==9)
-              throw Error('Navigation must expose all 9 showroom slides');
+            if(await page.locator('#showcaseDots .showcase-dot').count()!==10)
+              throw Error('Navigation must expose all 10 showroom slides');
             await page.locator('#showcaseDots [data-dot="2"]').click();
             const how=carousel.locator('.featured-slide--promo-how');
             await page.waitForFunction(()=>document.querySelector('#showcaseSlides .featured-slide--promo-how')
@@ -184,7 +188,55 @@ jobs:
                 throw Error('Two compact buttons must stay in ONE row at '+width+'px: '+JSON.stringify(row));
             }
             await page.setViewportSize({width:390,height:844});
-            console.log('HOW IT WORKS SHOWCASE PASS: position #3, 9 dots, 4 languages, 2-button row and fully visible HUD');
+            console.log('HOW IT WORKS SHOWCASE PASS: position #3, 10 dots, 4 languages, 2-button row and fully visible HUD');
+
+            // Sixth position = product 3; seventh position = news + video
+            // and statistics, followed by product 4. No real crash photo or
+            // invented accident numbers are inserted into the promotion.
+            await page.locator('#showcaseDots [data-dot="6"]').click();
+            const newsPromo=carousel.locator('.featured-slide--promo-newsroom');
+            await page.waitForFunction(()=>document.querySelector('#showcaseSlides .featured-slide--promo-newsroom')
+              ?.classList.contains('active'),null,{timeout:3200});
+            if(await newsPromo.locator('.ad-photo-stripes').count()!==1 ||
+               await newsPromo.locator('.promo-art-object .newsroom-promo-screen').count()!==1 ||
+               await newsPromo.locator('.newsroom-promo-video svg').count()!==1 ||
+               await newsPromo.locator('.newsroom-promo-chart i').count()!==8)
+              throw Error('Newsroom ad must contain original video artwork and illustrative daily statistics');
+            if(await newsPromo.locator('.newsroom-promo-screen img').count()!==0)
+              throw Error('Newsroom advertisement must not use an unrelated crash/photo thumbnail');
+            if(await newsPromo.locator('[data-newsroom-cta]').getAttribute('href')!=='./news.html'||
+               await newsPromo.locator('[data-newsroom-video]').getAttribute('href')!=='./news.html#newsVideoLibrary')
+              throw Error('Newsroom CTA links must open the real news and video archive');
+            if(!(await newsPromo.locator('.newsroom-promo-illustrative').innerText()).includes('Схематично'))
+              throw Error('Illustrative graph must not be presented as actual values');
+            await page.evaluate(()=>changeLang('en'));
+            if(!(await carousel.locator('.featured-slide--promo-newsroom h1').innerText()).includes('Israel') ||
+               !(await carousel.locator('.featured-slide--promo-newsroom .newsroom-promo-chart-caption').innerText()).includes('accidents'))
+              throw Error('Newsroom headline and chart label must localize to English');
+            await page.evaluate(()=>changeLang('he'));
+            if(!(await carousel.locator('.featured-slide--promo-newsroom h1').innerText()).includes('בישראל'))
+              throw Error('Newsroom headline must localize to Hebrew');
+            await page.evaluate(()=>changeLang('ar'));
+            if(!(await carousel.locator('.featured-slide--promo-newsroom h1').innerText()).includes('إسرائيل'))
+              throw Error('Newsroom headline must localize to Arabic');
+            await page.evaluate(()=>changeLang('ru'));
+            for(const width of [320,390]){
+              await page.setViewportSize({width,height:844});
+              const size=await carousel.locator('.featured-slide--promo-newsroom').evaluate(el=>{
+                const main=el.getBoundingClientRect(),
+                 image=el.querySelector('.featured-image').getBoundingClientRect(),
+                 board=el.querySelector('.newsroom-promo-screen').getBoundingClientRect();
+                return {viewport:document.documentElement.clientWidth,card:main.width,
+                  board:board.width,image:image.width,
+                  primary:el.querySelector('[data-newsroom-cta]').getBoundingClientRect().width,
+                  secondary:el.querySelector('[data-newsroom-video]').getBoundingClientRect().width};
+              });
+              if(size.card>size.viewport+2||size.board<130||size.board>size.image+2||
+                 size.primary<85||size.secondary<75)
+                throw Error('Newsroom ad must remain readable at '+width+'px: '+JSON.stringify(size));
+            }
+            await page.setViewportSize({width:390,height:844});
+            console.log('NEWSROOM PROMO PASS: 7th slide, 10 dots, video, statistics, 4 languages, mobile and real links');
 
             // Premium car demo: genuinely layered SVG/CSS, 4 interactive modes,
             // the entire frame MUST remain fixed height while text or HUD changes.
