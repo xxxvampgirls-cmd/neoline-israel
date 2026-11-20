@@ -104,10 +104,9 @@ function makeNewsCopy(item){
   '<span class="news-feature-go">'+safe(featureTr("view"))+' ↗</span></span>';
  return copy;
 }
-/* A single optical grid governs BOTH fixed corner motifs. Each point sits on
-   the same spacing rhythm; its diameter and opacity taper smoothly toward the
-   diagonal, instead of layering three incompatible, overlapping dot grids.
-   Mirroring is exact: (x,y) at top-left becomes (right:x,bottom:y). */
+/* NEOLINE halftone wave: unified optical rhythm; tiny-to-large circular tones
+   make a curved visual flow without physically moving any dots.
+   The bottom-right module is a perfect 180° mirror of top-left. */
 function layoutNewsCornerDots(host){
  const corners=host.querySelector(".news-studio-corners");
  if(!corners)return;
@@ -118,16 +117,22 @@ function layoutNewsCornerDots(host){
  const top=corners.querySelector(".news-studio-dots--top");
  const bottom=corners.querySelector(".news-studio-dots--bottom");
  if(!top||!bottom)return;
- const spacing=Math.max(17,Math.min(23,Math.round(Math.min(w,h)/14)));
- const margin=Math.round(spacing*.74);
+ // Halftone field: ONE evenly spaced lattice per corner, rather than
+ // several circles painted on top of one another. Each dot is calculated from
+ // the same continuous falloff, with a low-amplitude curved wave through it.
+ // All coordinates and values are mirrored 180° into the opposite corner.
+ const spacing=Math.max(14,Math.min(20,Math.round(Math.min(w,h)/16)));
+ const margin=Math.round(spacing*.78);
  const maxX=w*.42,maxY=h*.53;
  const a=document.createDocumentFragment(),b=document.createDocumentFragment();
  for(let y=margin;y<maxY-margin*.4;y+=spacing){
   for(let x=margin;x<maxX-margin*.4;x+=spacing){
-   const distance=x/maxX+y/maxY;
-   if(distance>.90)continue;
-   const diameter=(6.3-3.7*distance).toFixed(2)+"px";
-   const alpha=(.66-.24*distance).toFixed(2);
+   const u=x/maxX,v=y/maxY,depth=u+v;
+   if(depth>.90)continue;
+   const fade=Math.pow(Math.max(0,1-depth/.92),.92);
+   const wave=.84+.16*Math.cos((u*2.2-v*.9)*Math.PI+.35);
+   const diameter=(1.35+6.6*fade*wave).toFixed(2)+"px";
+   const alpha=(.22+.46*fade*wave).toFixed(2);
    for(const [fragment,flip] of [[a,false],[b,true]]){
     const dot=document.createElement("span");
     dot.className="news-studio-dot";
