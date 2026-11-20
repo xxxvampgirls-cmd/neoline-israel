@@ -1,0 +1,125 @@
+name: Browser-check NEOLINE video guides by language
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - 'catalog-video.js'
+      - 'catalog-video-guides.css'
+      - 'index.html'
+      - 'neoline-academy.js'
+      - 'assets/catalog/tutorial-videos.json'
+      - '.github/workflows/test-video-guides.yml'
+permissions:
+  contents: read
+jobs:
+  videos:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Install Chromium
+        run: |
+          npm install --no-save playwright
+          npx playwright install --with-deps chromium
+      - name: Serve repository as static site
+        run: |
+          python3 -m http.server 8765 --bind 127.0.0.1 >/tmp/neoline-videos.log 2>&1 &
+      - name: Confirm official clips, correct language, no autoplay and Academy link
+        run: |
+          node <<'JS'
+          const {chromium}=require('playwright');
+          (async()=>{
+            const browser=await chromium.launch({headless:true});
+            const page=await browser.newPage({viewport:{width:390,height:844},isMobile:true,hasTouch:true});
+            const errors=[];
+            page.on('pageerror',err=>errors.push(err.message));
+            await page.goto('http://127.0.0.1:8765/',{waitUntil:'domcontentloaded'});
+            await page.waitForFunction(()=>window.NEOLINE_PRODUCT_VIDEOS?.open &&
+              window.NEOLINE_ACADEMY?.open,{timeout:20000});
+            const curated=await page.evaluate(async()=>{
+              const r=await fetch('./assets/catalog/tutorial-videos.json');
+              if(!r.ok)throw Error('Tutorial data file missing');
+              return (await r.json()).videos;
+            });
+            if(curated.length<3||curated.filter(x=>x.publisher==='Neoline Россия'&&x.category==='connect').length!==2)
+              throw Error('Two official connection tutorials unavailable');
+            if(!curated.some(x=>x.language==='pl'&&x.modelIds.includes(2)))
+              throw Error('Verified Polish multi-model review missing');
+            // RU: official Android/iOS setup available with original language label.
+            await page.evaluate(()=>window.NEOLINE_PRODUCT_VIDEOS.open(1,{topic:'connect'}));
+            await page.waitForFunction(()=>document.querySelectorAll('.product-video-real-guide').length===2,{timeout:15000});
+            if(await page.locator('.product-video-real-guide').count()!==2)
+              throw Error('Exactly two Wowcam connection clips expected');
+            if(await page.locator('.product-video-real-badge').allTextContents().then(a=>a.some(t=>t!=='RU')))
+              throw Error('Official Russian tutorials language mislabeled');
+            if(await page.locator('#productVideoCatalog iframe').count())
+              throw Error('Video iframe loaded before visitor clicked Play');
+            if(await page.locator('.product-video-main-start').count()!==1)
+              throw Error('Verified video has no lazy play cover');
+            await page.locator('.product-video-real-guide').first().locator('[data-play-guide]').click();
+            const frame=page.locator('.product-video-real-guide iframe');
+            if(!await frame.count())throw Error('Explicit tutorial playback did not initialize iframe');
+            if(!(await frame.getAttribute('src')).includes('4ktXzrnHyXw'))
+              throw Error('Wrong verified Android video played');
+            await page.evaluate(()=>window.NEOLINE_PRODUCT_VIDEOS.close());
+            if(await page.locator('#productVideoCatalog iframe').count())
+              throw Error('Closing modal did not destroy YouTube iframe');
+            // English first: no unverified Russian video should be shown as
+            // the main English clip; searches for the exact model must be visible.
+            await page.evaluate(()=>{
+              document.documentElement.lang='en';
+              document.documentElement.dir='ltr';
+              window.NEOLINE_PRODUCT_VIDEOS.open(1);
+            });
+            if(await page.locator('#productVideoMainFrame iframe').count())
+              throw Error('Russian video autoplayed in English mode');
+            if(await page.locator('.product-video-real-badge').allTextContents().then(a=>a.some(t=>t==='EN')))
+              throw Error('Russian/Polish guides mislabeled as English');
+            if(!await page.locator('.product-video-extras').getAttribute('open').then(v=>v!==null))
+              throw Error('English exact-model searches should be expanded when no English video verified');
+            const links=await page.locator('.product-video-search-grid a').evaluateAll(a=>a.map(x=>x.href));
+            if(!links.length||!links[0].includes('gl=GB')||!links[0].includes('hl=en-GB'))
+              throw Error('English locale search region invalid: '+JSON.stringify(links));
+            await page.evaluate(()=>window.NEOLINE_PRODUCT_VIDEOS.close());
+            // Second model only verified in Polish (not an English setup guide).
+            await page.evaluate(()=>window.NEOLINE_PRODUCT_VIDEOS.open(2));
+            await page.waitForFunction(()=>document.querySelectorAll('.product-video-real-guide').length===1);
+            if((await page.locator('.product-video-real-badge').first().innerText())!=='PL')
+              throw Error('Polish review language label missing');
+            await page.evaluate(()=>window.NEOLINE_PRODUCT_VIDEOS.close());
+            // Hebrew and Arabic should be RTL, with localized searches;
+            // for the Arabic-language site, target Israel rather than UAE.
+            for(const [l,region] of [['he','gl=IL'],['ar','gl=IL']]){
+              await page.evaluate(code=>{
+                document.documentElement.lang=code;
+                document.documentElement.dir='rtl';
+                window.NEOLINE_PRODUCT_VIDEOS.open(1);
+              },l);
+              const href=await page.locator('.product-video-search-grid a').first().getAttribute('href');
+              if(!href.includes(region))throw Error('Incorrect search country '+l+' '+href);
+              const width=await page.evaluate(()=>document.documentElement.scrollWidth-innerWidth);
+              if(width>4)throw Error('RTL video dialog overflow '+l+' '+width);
+              await page.evaluate(()=>window.NEOLINE_PRODUCT_VIDEOS.close());
+            }
+            // Academy phone-connection tutorial passes topic to the modal.
+            await page.evaluate(()=>{
+              document.documentElement.lang='ru';
+              document.documentElement.dir='ltr';
+              window.NEOLINE_ACADEMY.open(1);
+            });
+            await page.locator('#neolineAcademy [data-academy-topic="connect"]').click();
+            await page.locator('#neolineAcademy [data-academy-video]').click();
+            await page.waitForFunction(()=>document.querySelector('.product-video-real-guides [data-video-topic="connect"][aria-pressed="true"]'));
+            if(await page.locator('.product-video-real-guide').count()!==2)
+              throw Error('Academy Connect did not show relevant official guides');
+            if(await page.locator('#productVideoCatalog iframe').count())
+              throw Error('Academy triggered background video embeds');
+            if(errors.length)throw Error('Runtime JavaScript errors: '+errors.join(' | '));
+            console.log('NEOLINE VERIFIED VIDEO GUIDES PASS: exact models, RU official Android/iOS, PL review, EN first, HE/AR locale, lazy playback and Academy');
+            await browser.close();
+          })().catch(e=>{console.error(e);process.exitCode=1});
+          JS
