@@ -1,0 +1,84 @@
+name: Browser-check imported catalog photo galleries on mobile
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - 'index.html'
+      - 'catalog-ui.js'
+      - '.github/workflows/test-catalog-gallery.yml'
+permissions:
+  contents: read
+jobs:
+  gallery:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Install mobile browser
+        run: |
+          npm install --no-save playwright
+          npx playwright install --with-deps chromium
+      - name: Serve committed website
+        run: python3 -m http.server 8766 --bind 127.0.0.1 >/tmp/neoline-gallery.log 2>&1 &
+      - name: Verify authentic photos, thumbnails, arrow controls, touch swiping and no accidental lightbox
+        run: |
+          node <<'JS'
+          const {chromium}=require('playwright');
+          (async()=>{
+            const browser=await chromium.launch({headless:true});
+            const page=await browser.newPage({viewport:{width:390,height:844},isMobile:true,hasTouch:true});
+            const errors=[];
+            page.on('pageerror',e=>errors.push(e.message));
+            await page.goto('http://127.0.0.1:8766/',{waitUntil:'domcontentloaded'});
+            await page.waitForSelector('#tabs [data-cat="accessories"]',{timeout:25000});
+            await page.locator('#tabs [data-cat="accessories"]').click();
+            await page.locator('#products [data-details]').first().click();
+            const modal=page.locator('#productModal');
+            if(!await modal.isVisible())throw Error('Imported product modal did not open');
+            const imgs=page.locator('#productModalBody [data-import-photo]');
+            const count=await imgs.count();
+            if(count<2)throw Error('Imported gallery needs at least 2 actual photographs: '+count);
+            const big=page.locator('#modalBig');
+            const before=await big.getAttribute('src');
+            await page.locator('#modalNextImage').click();
+            const after=await big.getAttribute('src');
+            if(before===after)throw Error('Next gallery arrow did not advance');
+            if(await page.locator('#modalPhotoCounter').innerText()!=='2 / '+count)
+              throw Error('Accessible photo count did not update after next');
+            if(await page.locator('#modalPhotoCounter').getAttribute('aria-live')!=='polite')
+              throw Error('Photo number is not announced to screen readers');
+            await page.locator('#modalPrevImage').click();
+            if(await big.getAttribute('src')!==before)
+              throw Error('Previous gallery arrow did not restore first picture');
+            await page.evaluate(()=>{
+              const img=document.getElementById('modalBig');
+              const t=(x)=>new Touch({identifier:3,target:img,clientX:x,clientY:180});
+              img.dispatchEvent(new TouchEvent('touchstart',{bubbles:true,touches:[t(300)],targetTouches:[t(300)],changedTouches:[t(300)]}));
+              img.dispatchEvent(new TouchEvent('touchend',{bubbles:true,touches:[],targetTouches:[],changedTouches:[t(90)]}));
+            });
+            if(await big.getAttribute('src')===before)
+              throw Error('Mobile swipe did not advance to second gallery photo');
+            await big.click({force:true});
+            if(await page.locator('#photoLightbox').evaluate(el=>el.classList.contains('open')))
+              throw Error('Swipe accidentally opens the photo lightbox');
+            if(await imgs.nth(1).getAttribute('class')!=='active')
+              throw Error('Active thumbnail did not follow swipe');
+            await page.waitForTimeout(400);
+            await big.click();
+            if(!await page.locator('#photoLightbox').evaluate(el=>el.classList.contains('open')))
+              throw Error('Deliberate image tap should open lightbox after swipe');
+            await page.locator('#closeLightbox').click();
+            for(const width of [320,390]){
+              await page.setViewportSize({width,height:844});
+              const dims=await page.evaluate(()=>({doc:document.documentElement.scrollWidth,win:innerWidth}));
+              if(dims.doc>dims.win+4)throw Error('Mobile modal overflows '+width+'px: '+JSON.stringify(dims));
+            }
+            if(errors.length)throw Error('Browser errors: '+errors.join(' | '));
+            console.log('IMPORTED GALLERY PASS: '+count+' authentic photos, swipe, arrow buttons, thumbnail state and safe zoom');
+            await browser.close();
+          })().catch(e=>{console.error(e);process.exitCode=1});
+          JS
