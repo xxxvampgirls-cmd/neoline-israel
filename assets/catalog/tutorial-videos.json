@@ -3,7 +3,8 @@
     "Curated real public YouTube pages confirmed by external search, checked 2026-11-20.",
     "Keep the spoken language and exact subject honest: Russian tutorials are not presented as English-language videos.",
     "A multi-model Polish review is tagged review, not an installation tutorial.",
-    "Do not use a video as a firmware or compatibility instruction for other model revisions."
+    "Do not use a video as a firmware or compatibility instruction for other model revisions.",
+    "Additional model-specific review pages checked 2026-11-20; only exact imported catalog product IDs are matched."
   ],
   "videos": [
     {
@@ -44,6 +45,46 @@
       "device": "all",
       "publisher": "Польскоязычный обзор",
       "title": "NEOLINE FLASH 2K & NEOLINE WOWCAM — recenzja, nagrania przejazdu",
+      "verified": "2026-11-20"
+    },
+    {
+      "id": "abTTYza2aTk",
+      "platform": "youtube",
+      "modelIds": [
+        84595738561
+      ],
+      "language": "ru",
+      "category": "review",
+      "device": "all",
+      "publisher": "Big Look Auto — Интересно об автомобилях",
+      "title": "Neoline Spectrum 2026 — полевые тесты радаров, дневная и ночная запись",
+      "verified": "2026-11-20"
+    },
+    {
+      "id": "QBxtvqSlc_o",
+      "platform": "youtube",
+      "modelIds": [
+        1069082480124
+      ],
+      "language": "ru",
+      "category": "review",
+      "device": "all",
+      "publisher": "Обзорыч ТМ",
+      "title": "Neoline X-COP 6200s EXD2.5 Wi-Fi — обзор и обновление базы через Wi-Fi",
+      "verified": "2026-11-20"
+    },
+    {
+      "id": "2qQBchWAr9E",
+      "platform": "youtube",
+      "modelIds": [
+        6,
+        839336600060
+      ],
+      "language": "ru",
+      "category": "review",
+      "device": "all",
+      "publisher": "Вилимас Подскажет — Safe Roads",
+      "title": "Neoline Argus 4K Dual — обзор двухкамерного видеорегистратора",
       "verified": "2026-11-20"
     }
   ]
