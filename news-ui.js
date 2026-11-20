@@ -104,6 +104,55 @@ function makeNewsCopy(item){
   '<span class="news-feature-go">'+safe(featureTr("view"))+' ↗</span></span>';
  return copy;
 }
+/* A single optical grid governs BOTH fixed corner motifs. Each point sits on
+   the same spacing rhythm; its diameter and opacity taper smoothly toward the
+   diagonal, instead of layering three incompatible, overlapping dot grids.
+   Mirroring is exact: (x,y) at top-left becomes (right:x,bottom:y). */
+function layoutNewsCornerDots(host){
+ const corners=host.querySelector(".news-studio-corners");
+ if(!corners)return;
+ const w=Math.round(host.clientWidth),h=Math.round(host.clientHeight);
+ if(w<150||h<100)return;
+ const key=w+"x"+h;
+ if(corners.dataset.gridGeometry===key)return;
+ const top=corners.querySelector(".news-studio-dots--top");
+ const bottom=corners.querySelector(".news-studio-dots--bottom");
+ if(!top||!bottom)return;
+ const spacing=Math.max(17,Math.min(23,Math.round(Math.min(w,h)/14)));
+ const margin=Math.round(spacing*.74);
+ const maxX=w*.42,maxY=h*.53;
+ const a=document.createDocumentFragment(),b=document.createDocumentFragment();
+ for(let y=margin;y<maxY-margin*.4;y+=spacing){
+  for(let x=margin;x<maxX-margin*.4;x+=spacing){
+   const distance=x/maxX+y/maxY;
+   if(distance>.90)continue;
+   const diameter=(6.3-3.7*distance).toFixed(2)+"px";
+   const alpha=(.66-.24*distance).toFixed(2);
+   for(const [fragment,flip] of [[a,false],[b,true]]){
+    const dot=document.createElement("span");
+    dot.className="news-studio-dot";
+    dot.style.width=diameter;
+    dot.style.height=diameter;
+    dot.style.opacity=alpha;
+    if(flip){dot.style.right=x+"px";dot.style.bottom=y+"px"}
+    else{dot.style.left=x+"px";dot.style.top=y+"px"}
+    fragment.appendChild(dot);
+   }
+  }
+ }
+ top.replaceChildren(a);bottom.replaceChildren(b);
+ corners.dataset.gridGeometry=key;
+}
+function initializeNewsCornerGrid(host){
+ if(host.newsCornerResizeObserver)return;
+ if(window.ResizeObserver){
+  host.newsCornerResizeObserver=new ResizeObserver(()=>layoutNewsCornerDots(host));
+  host.newsCornerResizeObserver.observe(host);
+ }else{
+  window.addEventListener("resize",()=>layoutNewsCornerDots(host),{passive:true});
+  host.newsCornerResizeObserver=true;
+ }
+}
 function drawFeature(direction=0){
  const host=$("newsFeatureSlide"),controls=$("newsFeatureControls");
  if(!host||!controls)return;
@@ -142,12 +191,13 @@ function drawFeature(direction=0){
   corners=document.createElement("span");
   corners.className="news-studio-corners";
   corners.setAttribute("aria-hidden","true");
-  // Three stationary dot sizes per corner: big at the tip, medium farther
-  // along the triangle and finer dots by the diagonal edge.
+  // Identical 180-degree mirrored lattices, one proportional size rule.
   corners.innerHTML='<span class="news-studio-dots news-studio-dots--top"></span>'+
    '<span class="news-studio-dots news-studio-dots--bottom"></span>';
   story.prepend(corners);
  }
+ initializeNewsCornerGrid(host);
+ layoutNewsCornerDots(host);
  const incoming=makeNewsBackdrop(item);
  const previous=track.querySelector(".news-bg--current");
  const newCopy=makeNewsCopy(item);
