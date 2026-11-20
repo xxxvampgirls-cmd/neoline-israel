@@ -737,3 +737,35 @@ html[dir=rtl] .news-feature-credit{right:auto;left:12px}
  .news-feature-story--animated .news-feature-blueprint::before,
  .news-feature-story--animated .news-feature-blueprint::after{animation:none!important}
 }
+
+/* Cinematic horizontal whip-slide: fixed blue frame; only editorial copy moves.
+   Accelerate out in 300 ms, slide in with a short deceleration and overshoot.
+   No layout-shifting transforms on the hero container itself. */
+.news-feature-story--animated{animation:newsHeroSlideIn .52s ease both}
+.news-feature-copy--exit{
+ pointer-events:none;
+ z-index:4;
+ animation:neolineNewsCopyExit .30s cubic-bezier(.68,.06,.98,.48) both;
+}
+.news-feature-copy--enter{
+ z-index:5;
+ animation:neolineNewsCopyEnter .54s cubic-bezier(.19,1,.28,1) both;
+}
+@keyframes neolineNewsCopyExit{
+ 0%{opacity:1;transform:translate3d(0,0,0) skewX(0deg);filter:blur(0)}
+ 18%{opacity:1;transform:translate3d(-1%,0,0) skewX(0deg);filter:blur(0)}
+ 100%{opacity:0;transform:translate3d(var(--news-exit-shift),0,0) skewX(var(--news-slant));filter:blur(6px)}
+}
+@keyframes neolineNewsCopyEnter{
+ 0%{opacity:0;transform:translate3d(var(--news-enter-shift),0,0) skewX(var(--news-slant));filter:blur(7px)}
+ 35%{opacity:1;filter:blur(1px)}
+ 67%{opacity:1;transform:translate3d(var(--news-overshoot),0,0) skewX(0deg);filter:blur(0)}
+ 100%{opacity:1;transform:translate3d(0,0,0) skewX(0deg);filter:blur(0)}
+}
+@media(max-width:720px){
+ .news-feature-copy--enter{animation-duration:.48s}
+ .news-feature-copy--exit{animation-duration:.27s}
+}
+@media(prefers-reduced-motion:reduce){
+ .news-feature-copy--enter,.news-feature-copy--exit{animation:none!important;filter:none!important;transform:none!important}
+}
