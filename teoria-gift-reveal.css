@@ -73,16 +73,6 @@
  background:linear-gradient(90deg,#8e1324,#e43a4d 22%,#ff9c98 46%,#cb1b33 69%,#8e1324);
  box-shadow:0 0 4px #9d2733a8,inset 2px 0 3px #ffe0dd9c;
 }
-#gameGiftDialog .gift-reveal-crate-logo{
- position:absolute;z-index:2;bottom:13px;left:50%;transform:translateX(-50%);
- border-radius:999px;padding:3px 7px;background:#fff8d9f5;
- color:#855015;font:1000 13px/1 Manrope,Arial,sans-serif;letter-spacing:.02em;
- box-shadow:0 1px 5px #1c8dc542;
-}
-#gameGiftDialog .gift-reveal-crate-glint{
- position:absolute;right:12px;top:13px;width:22px;height:5px;border-radius:12px;
- background:#fff;box-shadow:0 0 13px 3px #fff;
-}
 #gameGiftDialog .gift-reveal-lid{
  position:absolute;z-index:4;left:0;bottom:81px;width:162px;height:39px;
  border:2px solid #ffecac;border-radius:11px;
@@ -130,7 +120,7 @@
  text-align:center;font-size:12px;line-height:1.2;color:#115778;font-weight:900;
 }
 #gameGiftDialog .gift-reveal[data-phase="shake"] .gift-reveal-box{
- animation:neolineLootShake 2.9s ease-in-out 1 both;
+ animation:neolineLootShake 2.35s linear 1 both;
 }
 #gameGiftDialog .gift-reveal[data-phase="burst"] .gift-reveal-lid,
 #gameGiftDialog .gift-reveal[data-phase="revealed"] .gift-reveal-lid{
@@ -152,11 +142,7 @@
 #gameGiftDialog .gift-reveal[data-phase="revealed"] .gift-reveal-halo{
  animation:neolineLootHalo 1.7s ease-in-out infinite;
 }
-@keyframes neolineLootShake{
- 0%,100%{transform:translateX(-50%) rotate(0)}
- 10%,30%,50%,70%,90%{transform:translateX(calc(-50% - 7px)) rotate(-5deg)}
- 20%,40%,60%,80%{transform:translateX(calc(-50% + 7px)) rotate(5deg)}
-}
+
 @keyframes neolineLootStarFlight{
  0%{opacity:0;transform:translate(-50%,-50%) scale(.15) rotate(0)}
  14%{opacity:1}
@@ -345,24 +331,152 @@ html[dir="rtl"] #gameGiftDialog .gift-reveal-number{right:auto;left:12px}
  100%{background-position:0 0,0% 50%}
 }
 /* Escalating suspense: gentler movements first, larger rapid shakes before opening. */
-@keyframes neolineLootShake{
- 0%,100%{transform:translateX(-50%) rotate(0)}
- 12%{transform:translateX(calc(-50% - 2px)) rotate(-1.3deg)}
- 20%{transform:translateX(calc(-50% + 3px)) rotate(1.8deg)}
- 29%{transform:translateX(calc(-50% - 4px)) rotate(-2.8deg)}
- 37%{transform:translateX(calc(-50% + 5px)) rotate(2.9deg)}
- 46%{transform:translateX(calc(-50% - 5px)) rotate(-3.3deg)}
- 53%{transform:translateX(calc(-50% + 6px)) rotate(4deg)}
- 62%{transform:translateX(calc(-50% - 7px)) rotate(-4.8deg)}
- 70%{transform:translateX(calc(-50% + 8px)) rotate(5deg)}
- 77%{transform:translateX(calc(-50% - 9px)) rotate(-5.7deg)}
- 83%{transform:translateX(calc(-50% + 9px)) rotate(5.8deg)}
- 88%{transform:translateX(calc(-50% - 10px)) rotate(-5.8deg)}
- 93%{transform:translateX(calc(-50% + 10px)) rotate(6deg)}
- 97%{transform:translateX(calc(-50% - 5px)) rotate(-3deg)}
-}
+
 @media(prefers-reduced-motion:reduce){
  #gameGiftDialog .gift-reveal[data-phase="revealed"],
  #gameGiftDialog .gift-reveal[data-phase="revealed"] .gift-reveal-float,
  #gameGiftDialog .gift-reveal-slot.unlocked{animation:none!important}
+}
+
+
+/* Gift illustration v3: a clean gold present instead of a technical equipment crate. */
+#gameGiftDialog .gift-reveal-box{
+ width:158px;height:124px;bottom:25px;
+ filter:drop-shadow(0 8px 9px #75541a75);
+}
+#gameGiftDialog .gift-reveal-crate{
+ width:134px;height:83px;left:12px;
+ border:1px solid #ffebad;border-radius:14px 14px 19px 19px;
+ background:linear-gradient(110deg,#b77713 0%,#ffd977 24%,#ffe9aa 40%,#edb334 72%,#a96810 100%);
+ box-shadow:inset 0 3px 9px #fff8d493,inset 0 -6px 9px #aa631866,0 4px 0 #a7741b;
+}
+#gameGiftDialog .gift-reveal-crate::before{
+ inset:6px 7px 7px;border:0;border-radius:9px;
+ box-shadow:inset 2px 1px 8px #fff5b05c;
+}
+#gameGiftDialog .gift-reveal-crate-ribbon{width:24px}
+#gameGiftDialog .gift-reveal-crate-cross-ribbon{top:25px;height:16px}
+#gameGiftDialog .gift-reveal-lid{
+ left:2px;bottom:80px;width:154px;height:35px;border:1px solid #ffeab2;border-radius:11px;
+ background:linear-gradient(155deg,#fff3b4,#eab139 34%,#ffdb87 54%,#b77b1b);
+ box-shadow:0 3px 0 #b77c19,0 4px 9px #9761195c,inset 0 2px 4px #fff5c68b;
+}
+#gameGiftDialog .gift-reveal-lid::after{inset:5px 7px;border:0;box-shadow:inset 0 1px #fffad375}
+#gameGiftDialog .gift-reveal-lid-ribbon{width:23px}
+#gameGiftDialog .gift-reveal-bow{top:-35px;scale:.91}
+#gameGiftDialog .gift-reveal-crate-seal{
+ position:absolute;z-index:3;bottom:11px;left:50%;transform:translateX(-50%);
+ display:grid;place-items:center;
+ width:31px;height:31px;border:2px solid #fbe6a0;border-radius:50%;
+ color:#ffe8a2;background:linear-gradient(125deg,#c78023,#8f4f11);
+ box-shadow:0 2px 5px #80501c80,inset 0 1px 2px #ffedb1a8;
+ font:900 16px/1 Arial,sans-serif;
+}
+/* Tiny drifting sparks during shake. They grow in number as the shake accelerates. */
+#gameGiftDialog .gift-reveal-spark-dust{
+ position:absolute;z-index:5;left:50%;top:61%;
+ width:0;height:0;pointer-events:none;
+}
+#gameGiftDialog .gift-reveal-spark-dust i{
+ display:block;position:absolute;left:var(--dust-x);top:var(--dust-y);
+ font:900 var(--dust-size,8px)/1 Arial,sans-serif;
+ color:var(--dust-color,#ffe190);
+ text-shadow:0 0 5px #fff,0 0 8px #ffc750;
+ opacity:0;
+}
+#gameGiftDialog .gift-reveal[data-phase="shake"] .gift-reveal-spark-dust i{
+ animation:neolineGiftDust var(--dust-speed,.5s) ease-out var(--dust-delay,0s) infinite;
+}
+@keyframes neolineGiftDust{
+ 0%{opacity:0;transform:translateY(10px) scale(.3) rotate(0)}
+ 34%{opacity:.9;transform:translateY(-1px) scale(1.05) rotate(17deg)}
+ 100%{opacity:0;transform:translateY(-17px) scale(.2) rotate(82deg)}
+}
+/* Acceleration: each successive shake reverses sooner and with more energy. */
+@keyframes neolineLootShake{
+ 0%{transform:translateX(calc(-50% + 0px)) rotate(0deg)}
+ 9%{transform:translateX(calc(-50% + -3px)) rotate(-2deg)}
+ 17%{transform:translateX(calc(-50% + 3px)) rotate(2deg)}
+ 24%{transform:translateX(calc(-50% + -4px)) rotate(-2.6deg)}
+ 30%{transform:translateX(calc(-50% + 4px)) rotate(2.6deg)}
+ 36%{transform:translateX(calc(-50% + -5px)) rotate(-3.3deg)}
+ 41%{transform:translateX(calc(-50% + 5px)) rotate(3.3deg)}
+ 46%{transform:translateX(calc(-50% + -5px)) rotate(-3.3deg)}
+ 50%{transform:translateX(calc(-50% + 6px)) rotate(3.9deg)}
+ 54%{transform:translateX(calc(-50% + -6px)) rotate(-3.9deg)}
+ 57%{transform:translateX(calc(-50% + 6px)) rotate(3.9deg)}
+ 60%{transform:translateX(calc(-50% + -6px)) rotate(-3.9deg)}
+ 63%{transform:translateX(calc(-50% + 6px)) rotate(3.9deg)}
+ 66%{transform:translateX(calc(-50% + -7px)) rotate(-4.5deg)}
+ 69%{transform:translateX(calc(-50% + 7px)) rotate(4.5deg)}
+ 72%{transform:translateX(calc(-50% + -7px)) rotate(-4.5deg)}
+ 74.5%{transform:translateX(calc(-50% + 7px)) rotate(4.5deg)}
+ 77%{transform:translateX(calc(-50% + -7px)) rotate(-4.5deg)}
+ 79.5%{transform:translateX(calc(-50% + 8px)) rotate(5.2deg)}
+ 82%{transform:translateX(calc(-50% + -8px)) rotate(-5.2deg)}
+ 84%{transform:translateX(calc(-50% + 8px)) rotate(5.2deg)}
+ 86%{transform:translateX(calc(-50% + -8px)) rotate(-5.2deg)}
+ 88%{transform:translateX(calc(-50% + 8px)) rotate(5.2deg)}
+ 90%{transform:translateX(calc(-50% + -8px)) rotate(-5.2deg)}
+ 92%{transform:translateX(calc(-50% + 8px)) rotate(5.2deg)}
+ 94%{transform:translateX(calc(-50% + -9px)) rotate(-5.9deg)}
+ 96%{transform:translateX(calc(-50% + 9px)) rotate(5.9deg)}
+ 98%{transform:translateX(calc(-50% + -9px)) rotate(-5.9deg)}
+ 100%{transform:translateX(calc(-50% + 0px)) rotate(0deg)}
+}
+/* Stars across the entire VIEWPORT, launched once after the final third bonus.
+   The popover is in the browser top layer above the native rewards dialog. */
+#gameGiftScreenBurst{
+ position:fixed!important;inset:0!important;margin:0!important;padding:0!important;
+ width:100vw!important;height:100vh!important;height:100dvh!important;
+ max-width:none!important;max-height:none!important;
+ border:0!important;border-radius:0!important;
+ background:transparent!important;
+ box-shadow:none!important;outline:0!important;
+ pointer-events:none!important;overflow:hidden;
+ z-index:2147483647;display:none;
+}
+#gameGiftScreenBurst:popover-open,
+#gameGiftScreenBurst.is-fallback{display:block!important}
+#gameGiftScreenBurst .gift-full-star{
+ position:absolute;z-index:2;
+ left:var(--origin-x);top:var(--origin-y);
+ display:block;line-height:1;
+ font-size:var(--star-size,14px);
+ font-weight:900;color:var(--star-color,#f8bf41);
+ text-shadow:0 0 4px #fff,0 0 10px #ffcc6a;
+ will-change:transform,opacity;
+ opacity:0;
+ animation:neolineGiftFullscreenStar var(--star-speed,1.2s)
+  cubic-bezier(.15,.75,.22,1) var(--star-delay,0s) both;
+}
+#gameGiftScreenBurst .gift-full-star.star-white{color:#fffef0}
+#gameGiftScreenBurst .gift-full-star.star-cyan{color:#91efff}
+#gameGiftScreenBurst .gift-full-star.star-red{color:#fd9a80}
+#gameGiftScreenBurst .gift-burst-ring{
+ position:absolute;left:var(--origin-x);top:var(--origin-y);
+ width:18px;height:18px;border-radius:50%;
+ border:4px solid #fff1ab;background:radial-gradient(circle,#fffde1b8,transparent 70%);
+ box-shadow:0 0 30px #ffcb47aa;
+ transform:translate(-50%,-50%) scale(.1);
+ animation:neolineGiftFullscreenRing 1s ease-out both;
+}
+@keyframes neolineGiftFullscreenStar{
+ 0%{transform:translate(-50%,-50%) scale(.1) rotate(0);opacity:0}
+ 8%{opacity:1}
+ 24%{opacity:1}
+ 100%{transform:translate(calc(-50% + var(--star-dx)),calc(-50% + var(--star-dy)))
+    scale(var(--star-end-scale,.6)) rotate(var(--star-rotate,120deg));opacity:0}
+}
+@keyframes neolineGiftFullscreenRing{
+ 0%{opacity:0;transform:translate(-50%,-50%) scale(.1)}
+ 17%{opacity:.92}
+ 100%{opacity:0;transform:translate(-50%,-50%) scale(33)}
+}
+#gameGiftScreenBurst.is-fallback{
+ position:absolute!important;inset:0!important;width:100%!important;height:100%!important;
+}
+@media(prefers-reduced-motion:reduce){
+ #gameGiftScreenBurst{display:none!important}
+ #gameGiftDialog .gift-reveal-spark-dust{display:none!important}
 }
