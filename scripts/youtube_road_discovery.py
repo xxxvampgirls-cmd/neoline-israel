@@ -194,6 +194,10 @@ def normalize_video(vid: str, title: str, published: dt.datetime,
         "source": source,
         "publisher": pub,
         "channelId": channel_id,
+        # Keep the fact that the location was verified in the original public
+        # metadata; later hourly refreshes must not lose a valid report just
+        # because its title alone did not contain an Israeli place name.
+        "localVerified": True,
         "category": primary_category(title, source),
         "tags": categories,
         "url": "https://www.youtube.com/watch?v=" + vid,
@@ -236,8 +240,7 @@ def via_data_api(now: dt.datetime, official_ids: dict[str, str],
                 continue
             details = _http_json("videos", {
                 "part": "snippet,status,contentDetails", "id": ",".join(ids),
-                "maxResults": 50,
-            }, key)
+                }, key)
             for vid in details.get("items") or []:
                 status = vid.get("status", {})
                 restrictions = vid.get("contentDetails", {}).get("regionRestriction") or {}
