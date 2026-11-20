@@ -5,9 +5,8 @@ on:
     branches: [main]
     paths:
       - 'teoria.html'
-      - 'teoria.css'
-      - 'teoria.js'
-      - 'index.html'
+      - 'teoria*.js'
+      - 'teoria*.css'
       - 'assets/teoria/**'
       - '.github/workflows/test-teoria.yml'
 permissions:
@@ -17,509 +16,102 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 12
     steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
       - name: Install Chromium
         run: |
           npm install --no-save playwright
-          npx playwright install chromium
-      - name: Verify public official bank, mobile gameplay, exam and progress
+          npx playwright install --with-deps chromium
+      - name: Start local production-equivalent server
+        run: |
+          python3 -m http.server 8765 --bind 127.0.0.1 >/tmp/neoline-theory.log 2>&1 &
+      - name: Test four official banks, gameplay, Game Over, exam and progress
         run: |
           node <<'JS'
           const {chromium}=require('playwright');
           (async()=>{
-            const browser=await chromium.launch({headless:true});
-            const errors=[];
-            const page=await browser.newPage({viewport:{width:390,height:844},isMobile:true,hasTouch:true});
-            page.on('pageerror',e=>errors.push(e.message));
-            const origin='https://neoline-israel.pages.dev';
-            // Cloudflare Pages deploys asynchronously; allow an upcoming asset version.
-            for(let i=0;i<12;i++){
-              await page.goto(origin+'/teoria.html?ci='+i,{waitUntil:'domcontentloaded',timeout:40000});
-              const script=page.locator('script[src*="teoria.js"]'),css=page.locator('link[rel="stylesheet"][href*="teoria.css"]');
-              if(await script.count()&&await css.count()&&
-                 (await script.getAttribute("src")||"").includes("20261118-no-footer-v8")&&
-                 await page.locator('[data-mode="route"]').count())break;
-              await page.waitForTimeout(4000);
-            }
-            if(await page.locator('script[src*="teoria.js"]').count()!==1||
-                await page.locator('link[rel="stylesheet"][href*="teoria.css"]').count()!==1)throw Error('Theory page CSS/JS malformed');
-            if(await page.locator('footer.footer, #footerBack').count())
-              throw Error('Obsolete Theory footer must be removed entirely');
-            if(!await page.locator('#theoryBottomNav').count())
-              throw Error('Essential five-button bottom menu must remain');
-            await page.waitForFunction(()=>document.getElementById('bankStatus').classList.contains('loaded'),null,{timeout:60000});
-            const bank=await page.evaluate(async()=>{
-              const response=await fetch('./assets/teoria/ru.json');if(!response.ok)throw Error('bank response '+response.status);
-              const b=await response.json();
-              return {total:b.questions.length,forB:b.questions.filter(q=>q.classes.includes('B')).length,images:b.questions.filter(q=>q.image).length,
-                countSigns:b.questions.filter(q=>q.topic==='signs'&&q.classes.includes('B')).length,
-                bad:b.questions.filter(q=>q.a.length!==4||q.correct<0||q.correct>3||!q.id).length};
-            });
-            if(bank.total<1500||bank.forB<1000||bank.images<350||bank.countSigns<100||bank.bad)throw Error('Incomplete real question bank '+JSON.stringify(bank));
-            const font=await page.locator('body').evaluate(el=>getComputedStyle(el).fontFamily);
-            if(!font.includes('Manrope'))throw Error('Game stylesheet not applied: '+font);
-            const width=await page.evaluate(()=>({page:document.documentElement.scrollWidth,window:innerWidth}));
-            if(width.page>width.window+3)throw Error('Game overflows 390px '+JSON.stringify(width));
-            const hud=await page.locator('#gamePlaying .quiz-hud').count();
-            if(hud!==1)throw Error('New compact circular quiz HUD missing');
-            const orbit=await page.locator('#progressFill').count();
-            if(orbit!==1)throw Error('Circular progress fill missing');
-            console.log('OFFICIAL BANK GAME PASS '+JSON.stringify(bank));
-            // Compact quick-play launcher: players should choose a mode immediately
-            // on a real phone, with no huge welcome poster or information counters.
-            const quick=await page.evaluate(()=>{
-              const box=selector=>{const el=document.querySelector(selector);if(!el)return null;
-                const r=el.getBoundingClientRect();return {top:Math.round(r.top),bottom:Math.round(r.bottom),
-                  height:Math.round(r.height),width:Math.round(r.width),display:getComputedStyle(el).display}};
-              const cards=[...document.querySelectorAll('#modeGrid [data-mode]')].map(el=>{
-                const r=el.getBoundingClientRect();return {name:el.dataset.mode,top:Math.round(r.top),
-                bottom:Math.round(r.bottom),width:Math.round(r.width)}
-              });
-              return {hero:box('.game-hero'),lobby:box('#gameLobby'),bank:box('#bankStatus'),
-                progressOpen:document.querySelector('#progressDisclosure').open,
-                heroChips:!!document.querySelector('.hero-chips'),
-                roadScene:!!document.querySelector('.road-scene'),
-                intro:!!document.querySelector('#heroSubtitle'),cards};
-            });
-            console.log('QUICK PLAY FIRST FOLD '+JSON.stringify(quick));
-            if(quick.heroChips||quick.roadScene||quick.intro)
-              throw Error('Large introduction and information cloud must be removed');
-            if(quick.bank?.display!=='none'||quick.progressOpen)
-              throw Error('Loaded-bank info and progress numbers must not crowd game modes');
-            if(quick.hero.bottom>190||quick.cards[0].top>345||
-               Math.max(...quick.cards.slice(0,4).map(c=>c.bottom))>710||quick.cards[4].bottom>810)
-              throw Error('Game modes are not immediately tappable on first phone screen: '+JSON.stringify(quick));
-            if(quick.cards.length!==5||quick.cards.some(c=>c.width<118))
-              throw Error('Five easy-to-tap modes must be visible without horizontal clipping');
-            await page.locator('#progressSummary').click();
-            if(!await page.locator('#statsRow').isVisible())throw Error('Collapsible personal progress is inaccessible');
-            await page.locator('#progressSummary').click();
-            if(await page.locator('#statsRow').isVisible())throw Error('Progress should collapse again');
-            const officialLabel=await page.locator('#modeMarathon').innerText();
-            if(!/путешествие|билеты/i.test(officialLabel))
-              throw Error('All-ticket journey mode missing');
-            await page.locator('[data-mode="marathon"]').click();
-            if(await page.locator('.game-hero').isVisible())
-              throw Error('Welcome header should disappear when game begins');
-            if(!await page.locator('#gamePlaying').isVisible()||
-               await page.locator('#questionCounter').textContent()!=='0 / 20')
-              throw Error('All-question 20-step journey failed');
-            await page.locator('#answers button').first().click();
-            if(!await page.locator('#nextQuestion').isHidden())throw Error('Manual Next should be hidden');
-            await page.waitForFunction(()=>document.querySelector('#questionCounter')?.textContent==='1 / 20'&&
-              document.querySelector('#answers button')&&!document.querySelector('#answers button').disabled,null,{timeout:6500});
-            if(await page.locator('#questionCounter').textContent()!=='1 / 20')
-              throw Error('Marathon auto-next failed');
-            await page.locator('#exitQuiz').click();
-            if(!await page.locator('.game-hero').isVisible())
-              throw Error('Compact game header not restored after leaving question view');
-            console.log('ALL-TICKETS JOURNEY PASS: full 1801-bank, 20-question stages, new questions prioritised');
-            await page.locator('[data-mode="route"]').click();
-            if(!await page.locator('#gamePlaying').isVisible())throw Error('Route does not start');
-            let firstId=await page.locator('#questionId').textContent();
-            if(!/^№ \d+$/.test(firstId))throw Error('Official question number missing: '+firstId);
-            const firstAnswers=page.locator('#answers button');
-            if(await firstAnswers.count()!==4)throw Error('Not four official answer options');
-            const position=await page.evaluate(()=>{
-              const a=document.querySelector('#gamePlaying .quiz-hud').getBoundingClientRect();
-              const p=document.getElementById('progress').getBoundingClientRect();
-              return {cardCenter:a.left+a.width/2,circleCenter:p.left+p.width/2};
-            });
-            if(Math.abs(position.cardCenter-position.circleCenter)>3)
-              throw Error('HUD progress is not centered: '+JSON.stringify(position));
-            await firstAnswers.first().click();
-            if(!await page.locator('#nextQuestion').isHidden())throw Error('Next button should not display');
-            if(!await page.locator('#feedback').isVisible())throw Error('Practice must reveal feedback');
-            await page.waitForFunction(()=>document.querySelector('#questionCounter')?.textContent==='1 / 10'&&
-              document.querySelector('#answers button')&&!document.querySelector('#answers button').disabled,null,{timeout:6500});
-            if(await page.locator('#questionCounter').textContent()!=='1 / 10')throw Error('Route progression broken');
-            await page.locator('#exitQuiz').click();
-            if(!await page.locator('#gameLobby').isVisible())throw Error('Back to game modes broken');
-            await page.locator('[data-mode="mistakes"]').count();
-            // Actual browser test for three wrong answers. Route and sign hunt
-            // must stop immediately: no fourth question, no Next click needed.
-            // Keep official 30-question exam and marathon rules unchanged.
-            const officialRu=await page.evaluate(async()=>{
-              const r=await fetch('./assets/teoria/ru.json');
-              return (await r.json()).questions.map(q=>({id:String(q.id),correct:q.correct}));
-            });
-            async function loseAllThreeLives(mode){
-              await page.locator('[data-mode="'+mode+'"]').click();
-              for(let i=0;i<3;i++){
-                await page.evaluate(bank=>{
-                  const questionId=document.getElementById('questionId').textContent.replace(/\D/g,'');
-                  const q=bank.find(x=>x.id===questionId);
-                  if(!q)throw Error('Question id missing from official bank: '+questionId);
-                  const wrong=[...document.querySelectorAll('#answers button')]
-                    .find(el=>Number(el.dataset.original)!==q.correct);
-                  if(!wrong)throw Error('No wrong answer choice');
-                  wrong.click();
-                },officialRu);
-                if(i<2){
-                  if(await page.locator('#gameOver').isVisible())
-                    throw Error('Game over too early, error '+(i+1));
-                  await page.waitForFunction(expected=>document.querySelector('#questionCounter')?.textContent===expected&&
-                    document.querySelector('#answers button')&&!document.querySelector('#answers button').disabled,
-                    (i+1)+' / '+(mode==='signs'?12:10),{timeout:6500});
-                }
-              }
-              await page.locator('#gameOver').waitFor({state:'visible',timeout:6500});
-              if(!await page.locator('#gameOver').isVisible())
-                throw Error('Third mistake did not show GAME OVER after feedback in '+mode);
-              if(!await page.locator('#nextQuestion').isHidden())
-                throw Error('Manual Next reappeared despite 0 hearts in '+mode);
-              if((await page.locator('#gameOverTitle').innerText()).trim()!=='GAME OVER')
-                throw Error('Game Over heading absent');
-              if(!/не огорчайся/i.test(await page.locator('#gameOverMessage').innerText()))
-                throw Error('Encouraging message missing');
-              if(!await page.locator('body').evaluate(el=>el.classList.contains('game-over-open')))
-                throw Error('Game Over overlay not locking gameplay');
-              const score=await page.locator('#gameOverScore').innerText();
-              if(!score.includes('/ 3'))throw Error('Game Over attempt count wrong: '+score);
-              return score;
-            }
-            const firstLostScore=await loseAllThreeLives('route');
-            await page.locator('#gameOverRetry').click();
-            if(await page.locator('#gameOver').isVisible()||
-               !await page.locator('#gamePlaying').isVisible()||
-               await page.locator('#questionCounter').innerText()!=='0 / 10')
-              throw Error('Play again must start a fresh route with 3 lives');
-            await page.locator('#exitQuiz').click();
-            const signsLostScore=await loseAllThreeLives('signs');
-            await page.locator('#gameOverModes').click();
-            if(await page.locator('#gameOver').isVisible()||
-               !await page.locator('#gameLobby').isVisible())
-              throw Error('Back to game modes does not dismiss GAME OVER');
-            if(await page.locator('.hero-mini-svg').count()!==1)
-              throw Error('Hero must use new NEOLINE SVG car artwork rather than emojis');
-            console.log('THREE LIVES GAME OVER PASS: route '+firstLostScore+', signs '+signsLostScore+
-              ', immediate stop, replay, return to menu, official answers');
-            await page.locator('[data-mode="signs"]').click();
-            const signsTopic=await page.locator('#questionTopic').innerText();
-            if(!/знаки/i.test(signsTopic))throw Error('Road sign mode not filtering signs: '+signsTopic);
-            await page.locator('#exitQuiz').click();
-            await page.locator('[data-mode="exam"]').click();
-            if(await page.locator('#timerBox').isHidden())throw Error('Mock exam timer missing');
-            for(let i=0;i<30;i++){
-              const answer=page.locator('#answers button').first();
-              await answer.click();
-              if(await page.locator('#feedback').isVisible())throw Error('Mock exam leaked correct answers before finish');
-              if(i<29)await page.waitForFunction(expected=>document.querySelector('#questionCounter')?.textContent===expected&&
-                document.querySelector('#answers button')&&!document.querySelector('#answers button').disabled,
-                (i+1)+' / 30',{timeout:6500});
-              else await page.locator('#gameResult').waitFor({state:'visible',timeout:6500});
-            }
-            if(!await page.locator('#gameResult').isVisible())throw Error('30 question exam did not finish');
-            const result=await page.locator('#resultScore').textContent();
-            if(!/\/ 30/.test(result))throw Error('Wrong exam result '+result);
-            console.log('MOCK EXAM PASS 30 questions + timer + answer secrecy '+result);
-            await page.locator('#backToModes').click();
-            await page.locator('button[data-lang="he"]').click();
-            await page.waitForFunction(()=>document.getElementById('bankStatus').classList.contains('loaded'),null,{timeout:40000});
-            const hebrew=await page.locator('#modeExam').textContent();
-            if(!hebrew.includes('מבחן'))throw Error('Hebrew translation not working');
-            if(await page.locator('html').getAttribute('dir')!=='rtl')throw Error('Hebrew layout not RTL');
-            await page.locator('button[data-lang="en"]').click();
-            await page.waitForFunction(()=>document.getElementById('bankStatus').classList.contains('loaded'),null,{timeout:40000});
-            if(await page.locator('html').getAttribute('dir')!=='ltr')throw Error('English layout not LTR');
-            console.log('LANGUAGES PASS RU/HE/EN');
-            if(errors.length)throw Error('JS page errors '+errors.join('|'));
-            await page.setViewportSize({width:320,height:720});
-            await page.reload({waitUntil:'domcontentloaded'});
-            await page.waitForFunction(()=>document.getElementById('bankStatus').classList.contains('loaded'),null,{timeout:40000});
-            const size=await page.evaluate(()=>({page:document.documentElement.scrollWidth,w:innerWidth}));
-            if(size.page>size.w+3)throw Error('Game mobile overflow at 320px '+JSON.stringify(size));
-            console.log('MOBILE GAME PASS 320px and 390px JSerrors=0');
-
-            // The compact game is a real NEOLINE page, not a detached app:
-            // four blue/white/ink game buttons, SVG icons and an identical
-            // five-link bottom dock that hides DOWN and reappears UP.
-            let redesigned=false;
-            for(let k=0;k<7;k++){
-              redesigned=await page.locator('#theoryBottomNav [data-theory-nav]').count()===5&&
-                await page.locator('#modeGrid .route-card .route-icon svg').count()===5;
-              if(redesigned)break;
-              await page.waitForTimeout(5500);
-              await page.reload({waitUntil:'domcontentloaded'});
-              await page.waitForFunction(()=>document.getElementById('bankStatus').classList.contains('loaded'),null,{timeout:40000});
-            }
-            if(!redesigned)throw Error('Theory premium modes or five-item bottom dock not deployed yet');
-            const navi=await page.evaluate(()=>{
-              const nav=document.querySelector('#theoryBottomNav');
-              const tiles=[...document.querySelectorAll('#modeGrid .route-card')];
-              return {
-                visible:getComputedStyle(nav).display!=='none',
-                position:getComputedStyle(nav).position,
-                links:[...nav.querySelectorAll('a')].map(x=>x.getAttribute('href')),
-                animated:nav.dataset.navScrollBehavior==='directional',
-                svgIcons:tiles.filter(t=>t.querySelector('.route-icon svg')).length,
-                darkCardColor:getComputedStyle(tiles[2].querySelector('strong')).color,
-                routes:tiles.map(t=>t.dataset.mode),
-                width:document.documentElement.scrollWidth,
-                viewport:innerWidth,
-              };
-            });
-            console.log('THEORY NEW DESIGN + 5-LINK NAV '+JSON.stringify(navi));
-            if(!navi.visible||navi.position!=='fixed'||!navi.animated||
-               navi.links.join('|')!=='./|./#catalog|./news.html|./delivery.html|./teoria.html'||
-               navi.svgIcons!==5||navi.routes.join(',')!=='route,signs,exam,mistakes,marathon'||
-               navi.darkCardColor!=='rgb(255, 255, 255)')
-              throw Error('Brand palette, vector game modes or dock broken '+JSON.stringify(navi));
-            if(navi.width>navi.viewport+3)throw Error('Nav/design causes 320px horizontal scroll');
-            // A 720px high phone can fit most of this deliberately compact game;
-            // shrink only the test viewport's height so downward scroll >105px exists.
-            await page.setViewportSize({width:320,height:500});
-            await page.evaluate(()=>window.scrollTo(0,document.documentElement.scrollHeight));
-            console.log('BOTTOM NAV SCROLL DEBUG '+JSON.stringify(await page.evaluate(()=>({y:scrollY,scrollHeight:document.documentElement.scrollHeight,innerHeight,nav:document.getElementById('theoryBottomNav').className}))));
-            await page.waitForFunction(()=>{const x=document.querySelector('#theoryBottomNav');return x.classList.contains('nav-scroll-hidden')&&getComputedStyle(x).visibility==='hidden';},null,{timeout:9000});
-            await page.evaluate(()=>window.scrollBy(0,-140));
-            await page.waitForFunction(()=>!document.getElementById('theoryBottomNav').classList.contains('nav-scroll-hidden'));
-            await page.evaluate(()=>window.scrollTo(0,0));
-            console.log('THEORY BOTTOM NAV DIRECTION PASS: 5 tabs, down hidden, up restored, no 320px overflow');
-
-            // Theory promotion is the LAST carousel frame. It shares the
-            // product-ad blue bands/halo but uses a single restrained 3D
-            // digital quiz display, not the rejected cartoon driving scene.
-            let homepageReady=false;
-            for(let tryNum=0;tryNum<6;tryNum++){
-              await page.goto(origin+'/?theory-ad-last='+tryNum,{waitUntil:'domcontentloaded',timeout:40000});
-              homepageReady=await page.locator('#showcaseSlides .featured-slide--theory .theory-device').count()===1;
-              if(homepageReady)break;
-              await page.waitForTimeout(6000);
-            }
-            if(!homepageReady)throw Error('New premium last-slide theory artwork not published');
-            const slides=page.locator('#showcaseSlides .featured-slide');
-            if(await slides.count()!==12)throw Error('Expected 12 showroom and advertising slides');
-            const classes=await slides.evaluateAll(nodes=>nodes.map(n=>n.className));
-            if(classes.filter(x=>x.includes('featured-slide--news-item')).length!==3||
-               classes.filter(x=>x.includes('featured-slide--site-promo')).length!==4||
-               classes.filter(x=>x.includes('featured-slide--theory')).length!==1)
-              throw Error('Missing editorial / delivery / service ad slides '+JSON.stringify(classes));
-            const promoLinks=await page.locator('#showcaseSlides .featured-slide--site-promo a.primary').evaluateAll(ns=>ns.map(n=>n.getAttribute('href')));
-            if(!promoLinks.includes('./news.html')||!promoLinks.includes('./delivery.html')||!promoLinks.includes('./#installation'))
-              throw Error('Campaign ads need working local news, delivery and installation links '+JSON.stringify(promoLinks));
-            const last=slides.last();
-            if(!(await last.getAttribute('class')).includes('featured-slide--theory'))
-              throw Error('Theory ad must be LAST (not second)');
-            if(await last.locator('a[href="./teoria.html"]').count()!==1)
-              throw Error('Last carousel slide lost its working game CTA');
-            if(await page.locator('#theoryPreviewStart,#openTheoryHeader,#theoryQuick').count())
-              throw Error('Old standalone theory promo/header buttons were reintroduced');
-            await page.waitForFunction(()=>document.querySelectorAll('#showcaseSlides .featured-slide--news-item .news-showcase-cutout img').length===3,null,{timeout:18000});
-            const threeNews=await page.locator('#showcaseSlides .featured-slide--news-item').evaluateAll(nodes=>nodes.map(n=>({
-              title:n.querySelector('h1')?.textContent?.trim(),url:n.querySelector('a.primary')?.getAttribute('href'),
-              image:n.querySelector('.news-showcase-cutout img')?.getAttribute('src')
-            })));
-            if(threeNews.length!==3||threeNews.some(n=>!n.title||!/^\.\/news\.html\?story=[a-f0-9]{20}$/.test(n.url)||!/^\.\/assets\/news\/images\/\w+\.(webp|svg|jpg|png)$/.test(n.image)))
-              throw Error('Three real news reports must open on this site with source-linked photo '+JSON.stringify(threeNews));
-            await page.locator('#showcaseDots .showcase-dot').last().evaluate(el=>el.click());
-            // Async image-manifest refresh can rebuild the carousel during
-            // a click; wait for the ACTUAL visible stage before measuring.
-            await page.waitForTimeout(650);
-            if(!(await last.getAttribute('class')).includes('active'))
-              await page.locator('#showcaseDots .showcase-dot').last().evaluate(el=>el.click());
-            await page.waitForFunction(()=>{
-              const slide=document.querySelector('#showcaseSlides .featured-slide--theory');
-              const stage=slide?.querySelector('.theory-stage');
-              return !!slide?.classList.contains('active')&&!!stage&&
-                stage.isConnected&&stage.getBoundingClientRect().width>100;
-            },null,{timeout:15000});
-            const artwork=await last.evaluate(el=>{
-              const frame=el.querySelector('.theory-stage');
-              const device=el.querySelector('.theory-device');
-              const ring=el.querySelector('.theory-halo');
-              const bands=el.querySelectorAll('.ad-photo-band');
-              const rect=x=>{const r=x.getBoundingClientRect();return {top:r.top,left:r.left,width:r.width,height:r.height,right:r.right,bottom:r.bottom}};
-              return {
-                stage:rect(frame),device:rect(device),
-                halo:!!ring,bands:bands.length,signs:el.querySelectorAll('.theory-screen-sign').length,
-                carDoodle:el.querySelectorAll('.theory-scene-car,.theory-art-car').length,
-                stageOverflow:getComputedStyle(frame).overflow,
-                photoOverflow:getComputedStyle(el.querySelector('.theory-featured-image')).overflow,
-                slideOverflow:getComputedStyle(el).overflow,
-                deviceAnimation:getComputedStyle(device).animationName,
-                fineTrails:[...el.querySelectorAll('.ad-photo-stripes .ad-speed-trail')].filter(n=>getComputedStyle(n).display!=='none').map(n=>({
-                  name:getComputedStyle(n).animationName,blur:getComputedStyle(n).filter,
-                  duration:parseFloat(getComputedStyle(n).animationDuration),
-                  delay:parseFloat(getComputedStyle(n).animationDelay)
-                })),
-                hasPrev:!!el.querySelector('[data-feature-prev]'),
-                hasNext:!!el.querySelector('[data-feature-next]'),
-                pageWidth:document.documentElement.scrollWidth,viewport:innerWidth
-              };
-            });
-            console.log('PREMIUM LAST THEORY AD '+JSON.stringify(artwork));
-            if(!artwork.halo||artwork.bands!==2||!artwork.hasPrev||!artwork.hasNext||artwork.signs!==1)
-              throw Error('Theory photo-like blue-band design incomplete');
-            if(artwork.carDoodle>0)throw Error('Rejected cartoon car is still present');
-            if(artwork.stageOverflow==='hidden'||artwork.photoOverflow==='hidden'||artwork.slideOverflow==='hidden')
-              throw Error('Premium illustration must pop past the inner frame');
-            if(artwork.device.top>=artwork.stage.top)
-              throw Error('Device must subtly escape above photo frame');
-            if(artwork.deviceAnimation==='none')
-              throw Error('Gentle floating motion missing');
-            if(artwork.fineTrails.length<5||artwork.fineTrails.some(x=>x.name!=='neolineIndependentRoadTrail'))
-              throw Error('Independent speed trails missing on theory slide '+JSON.stringify(artwork.fineTrails));
-            await page.emulateMedia({reducedMotion:'reduce'});
-            const reducedMotion=await last.locator('.ad-photo-stripes').first().evaluate(n=>({
-              trails:[...n.querySelectorAll('.ad-speed-trail')].map(t=>getComputedStyle(t).animationName),
-              top:getComputedStyle(n.querySelector('.ad-photo-band')).animationName,
-              bottom:getComputedStyle(n.querySelector('.ad-photo-band:nth-child(2)')).animationName
-            }));
-            if(reducedMotion.top!=='none'||reducedMotion.bottom!=='none'||
-               reducedMotion.trails.some(x=>x!=='none'))
-              throw Error('Reduced motion not respected '+JSON.stringify(reducedMotion));
-            await page.emulateMedia({reducedMotion:'no-preference'});
-            for(let i=0;i<5;i++){
-              await page.locator('#showcaseDots .showcase-dot').nth(i).evaluate(el=>el.click());
-              await page.waitForFunction(n=>document.querySelectorAll('#showcaseSlides .featured-slide')[n]?.classList.contains('active'),i);
-              const speed=await slides.nth(i).evaluate(el=>{
-                const stripes=el.querySelector('.ad-photo-stripes');
-                const bands=[...stripes.querySelectorAll('.ad-photo-band')];
-                const focus=stripes.querySelector('.ad-photo-focus');
-                const ribbons=bands.map(b=>({
-                  name:getComputedStyle(b).animationName,
-                  seconds:parseFloat(getComputedStyle(b).animationDuration),
-                  height:parseFloat(getComputedStyle(b).height),
-                  z:parseInt(getComputedStyle(b).zIndex,10),
-                  width:parseFloat(getComputedStyle(b).width)
-                }));
-                const feather=focus?getComputedStyle(focus):null;
-                const trails=[...stripes.querySelectorAll('.ad-speed-trail')]
-                  .filter(n=>getComputedStyle(n).display!=='none')
-                  .map(n=>{
-                    const v=getComputedStyle(n);
-                    return {name:v.animationName,seconds:parseFloat(v.animationDuration),
-                            phase:parseFloat(v.animationDelay),thickness:parseFloat(v.height),
-                            blur:parseFloat(v.filter.replace('blur(','')),
-                            peak:parseFloat(v.getPropertyValue('--trail-peak')),
-                            z:parseInt(v.zIndex,10)};
-                  });
-                const product=el.querySelector('.featured-image > img');
-                const ground=el.querySelector('.ad-device-shadow');
-                const theoryDevice=el.querySelector('.theory-device');
-                const theoryHalo=el.querySelector('.theory-halo');
-                return {bands:bands.length,ribbons,trails,
-                        focus:!!focus,
-                        focusZ:feather?parseInt(feather.zIndex,10):-1,
-                        focusGradient:feather?.backgroundImage.includes('radial-gradient')||false,
-                        focusWidth:focus?.getBoundingClientRect().width,
-                        stageWidth:stripes.getBoundingClientRect().width,
-                        itemFilter:product?getComputedStyle(product).filter:null,
-                        floorGradient:ground?getComputedStyle(ground).backgroundImage:null,
-                        floorFilter:ground?getComputedStyle(ground).filter:null,
-                        deviceShadow:theoryDevice?getComputedStyle(theoryDevice).boxShadow:null,
-                        theoryHaloRatio:theoryHalo?theoryHalo.getBoundingClientRect().width/stripes.getBoundingClientRect().width:null};
-              });
-              if(!speed.focusWidth||speed.focusWidth>=speed.stageWidth*.76||
-                 (speed.itemFilter&&!speed.itemFilter.includes('drop-shadow'))||
-                 (speed.floorGradient&&(!speed.floorGradient.includes('radial-gradient')||speed.floorFilter!=='none'))||
-                 (speed.deviceShadow&&(!speed.deviceShadow.includes('rgb(')||speed.theoryHaloRatio>=.72)))
-                throw Error('Product needs compact white halo and distinct depth shadow '+JSON.stringify(speed));
-              if(speed.bands!==2||!speed.focus||!speed.focusGradient||
-                 speed.ribbons.some(b=>b.z<=speed.focusZ)||speed.ribbons.some(b=>b.width<300)||
-                 speed.ribbons[0].name!=='neolineMainBandLeftToRight'||
-                 speed.ribbons[1].name!=='neolineMainBandRightToLeft'||
-                 speed.ribbons.some(b=>!(b.height>=8&&b.height<=16))||
-                 speed.ribbons[0].height===speed.ribbons[1].height||
-                 speed.trails.length<5||speed.trails.length>7||
-                 speed.trails.some(t=>t.name!=='neolineIndependentRoadTrail')||
-                 speed.trails.some(t=>!(t.blur>.3&&t.blur<=1.3&&t.z<speed.focusZ))||
-                 speed.trails.some(t=>t.seconds<3||t.seconds>8)||
-                 speed.trails.filter(t=>t.seconds<speed.ribbons[0].seconds).length<4||
-                 speed.ribbons.some(b=>b.seconds<5.5||b.seconds>7.2)||
-                 speed.ribbons[0].seconds>=speed.ribbons[1].seconds||
-                 new Set(speed.trails.map(t=>t.seconds)).size!==speed.trails.length||
-                 new Set(speed.trails.map(t=>t.phase)).size!==speed.trails.length||
-                 new Set(speed.trails.map(t=>t.peak)).size<5||
-                 new Set(speed.trails.map(t=>t.thickness)).size<5)
-                throw Error('Slide '+(i+1)+' needs unsynchronized soft streaks and two opposing crisp ribbons '+JSON.stringify(speed));
-            }
-            // Only two PNG cutouts move: blue bands, white focus disc,
-            // photo stage, text and main layout remain in place throughout.
-            await page.locator('#showcaseDots .showcase-dot').first().evaluate(el=>el.click());
-            await page.waitForTimeout(930);
-            await page.locator('#showcaseDots .showcase-dot').nth(1).evaluate(el=>el.click());
-            const forward=await page.evaluate(()=>{
-              const cards=document.querySelectorAll('#showcaseSlides .featured-slide');
-              const left=cards[0],right=cards[1];
-              const outImage=left.querySelector('.featured-image > img:not([hidden])')||
-                             left.querySelector('.featured-image > .feature-img-fallback:not([hidden])');
-              const inImage=right.querySelector('.featured-image > img:not([hidden])')||
-                            right.querySelector('.featured-image > .feature-img-fallback:not([hidden])');
-              const stage=right.querySelector('.featured-image');
-              const bands=stage.querySelectorAll('.ad-photo-band');
-              return {out:left.className,arrive:right.className,
-                      outAnim:getComputedStyle(outImage).animationName,
-                      inAnim:getComputedStyle(inImage).animationName,
-                      copyAnim:getComputedStyle(right.querySelector('.feature-slide-flight')).animationName,
-                      stageAnim:getComputedStyle(stage).animationName,
-                      stageTransform:getComputedStyle(stage).transform,
-                      glowAnim:getComputedStyle(stage.querySelector('.ad-photo-focus')).animationName,
-                      outStage:getComputedStyle(left.querySelector('.featured-image')).backgroundColor,
-                      oldBg:getComputedStyle(left.querySelector('.ad-photo-stripes')).visibility,
-                      newBg:getComputedStyle(right.querySelector('.ad-photo-stripes')).visibility,
-                      outOpacity:getComputedStyle(outImage).opacity,
-                      inOpacity:getComputedStyle(inImage).opacity,
-                      mainBands:[...bands].map(b=>getComputedStyle(b).animationName),
-                      hasHalo:!!stage.querySelector('.ad-photo-focus'),
-                      hasContactShadow:!!stage.querySelector('.ad-device-shadow')};
-            });
-            if(!forward.out.includes('ad-exiting')||!forward.arrive.includes('ad-arriving')||
-               forward.outAnim!=='neolineCutoutLeaveLeft'||
-               forward.inAnim!=='neolineCutoutEnterRight'||
-               forward.copyAnim!=='none'||forward.stageAnim!=='none'||
-               forward.stageTransform!=='none'||forward.glowAnim!=='none'||
-               forward.oldBg!=='hidden'||forward.newBg!=='visible'||
-               forward.outOpacity!=='1'||forward.inOpacity!=='1'||
-               !forward.hasHalo||!forward.hasContactShadow||
-               forward.mainBands[0]!=='neolineMainBandLeftToRight'||
-               forward.mainBands[1]!=='neolineMainBandRightToLeft')
-              throw Error('Only PNG cutouts should slide over a fixed, continuously animated background '+JSON.stringify(forward));
-            await page.waitForTimeout(220);
-            const moving=await page.evaluate(()=>{
-              const cards=document.querySelectorAll('#showcaseSlides .featured-slide');
-              const oldProduct=cards[0].querySelector('.featured-image > img:not([hidden])');
-              const nextProduct=cards[1].querySelector('.featured-image > img:not([hidden])');
-              const background=cards[1].querySelector('.featured-image');
-              return {out:getComputedStyle(oldProduct).transform,
-                      next:getComputedStyle(nextProduct).transform,
-                      background:getComputedStyle(background).transform};
-            });
-            if(moving.out==='none'||moving.next==='none'||moving.out===moving.next||
-               moving.background!=='none')
-              throw Error('Only PNGs should actually move over stationary stage '+JSON.stringify(moving));
-            await page.waitForTimeout(730);
-            await page.waitForFunction(()=>!document.querySelector('#showcaseSlides .featured-slide.ad-exiting'));
-            await page.locator('#showcaseDots .showcase-dot').first().evaluate(el=>el.click());
-            const backward=await page.evaluate(()=>{
-              const cards=document.querySelectorAll('#showcaseSlides .featured-slide');
-              return {out:getComputedStyle(cards[1].querySelector('.featured-image > img:not([hidden])')).animationName,
-                      enter:getComputedStyle(cards[0].querySelector('.featured-image > img:not([hidden])')).animationName};
-            });
-            if(backward.out!=='neolineCutoutLeaveRight'||backward.enter!=='neolineCutoutEnterLeft')
-              throw Error('Backward movement should slide only PNGs in reverse '+JSON.stringify(backward));
-            await page.waitForTimeout(950);
-            // Motion-reduction preferences must never leave a flying ghost.
-            await page.emulateMedia({reducedMotion:'reduce'});
-            await page.locator('#showcaseDots .showcase-dot').nth(1).evaluate(el=>el.click());
-            const quiet=await page.evaluate(()=>({
-              leftover:document.querySelectorAll('#showcaseSlides .featured-slide.ad-exiting').length,
-              arrived:document.querySelectorAll('#showcaseSlides .featured-slide.ad-arriving').length,
-              active:document.querySelectorAll('#showcaseSlides .featured-slide.active').length
-            }));
-            if(quiet.leftover||quiet.arrived||quiet.active!==1)
-              throw Error('Reduced-motion carousel must switch instantly '+JSON.stringify(quiet));
-            await page.emulateMedia({reducedMotion:'no-preference'});
-            await page.locator('#showcaseDots .showcase-dot').last().evaluate(el=>el.click());
-            await page.waitForTimeout(950);
-            await page.waitForFunction(()=>document.querySelector('#showcaseSlides .featured-slide--theory')?.classList.contains('active'));
-            if(artwork.pageWidth>artwork.viewport+3)
-              throw Error('The new ad creates mobile horizontal overflow '+JSON.stringify(artwork));
-            await last.locator('[data-feature-next]').click();
-            if(!(await slides.first().getAttribute('class')).includes('active'))
-              throw Error('Arrow from LAST theory ad must wrap to first product slide');
-            if(errors.length)throw Error('Homepage JS errors '+errors.join('|'));
-            console.log('HOMEPAGE 12-SLIDE EDITORIAL + PREMIUM THEORY PASS: 3 fresh news, 4 campaigns and 5 original product/game frames, blue bands, mobile and wrap');
-            await browser.close();
-          })().catch(e=>{console.error(e);process.exit(1)});
+           const browser=await chromium.launch({headless:true});
+           const page=await browser.newPage({viewport:{width:390,height:844},isMobile:true,hasTouch:true});
+           const errors=[];
+           page.on('pageerror',e=>errors.push(e.message));
+           await page.goto('http://127.0.0.1:8765/teoria.html',{waitUntil:'domcontentloaded'});
+           const wait=async()=>page.waitForFunction(()=>document.getElementById('bankStatus')?.classList.contains('loaded'),null,{timeout:20000});
+           await wait();
+           for(const [lang,rtl] of [['ru',false],['en',false],['he',true],['ar',true]]){
+             if(lang!=='ru')await page.locator('[data-lang="'+lang+'"]').click();
+             await page.waitForFunction(l=>document.documentElement.lang===l&&document.getElementById('bankStatus')?.classList.contains('loaded'),lang,{timeout:20000});
+             const doc=await page.evaluate(async l=>{
+               const r=await fetch('./assets/teoria/'+l+'.json');
+               if(!r.ok)throw Error('Missing question bank '+l);
+               const x=await r.json();
+               return {
+                 language:x.language,total:x.questions.length,
+                 b:x.questions.filter(q=>q.classes.includes('B')).length,
+                 bad:x.questions.filter(q=>q.a.length!==4||q.correct<0||q.correct>3||!q.q).length,
+                 arabic:x.questions.filter(q=>/[\u0600-\u06ff]/.test(q.q)).length,
+               };
+             },lang);
+             if(doc.language!==lang||doc.total<1500||doc.b<1000||doc.bad)throw Error('Question bank invalid '+JSON.stringify(doc));
+             if(lang==='ar'&&doc.arabic<1500)throw Error('Arabic questions missing '+JSON.stringify(doc));
+             const direction=await page.locator('html').getAttribute('dir');
+             if(direction!==(rtl?'rtl':'ltr'))throw Error('Direction wrong for '+lang+' got '+direction);
+             if(await page.locator('[data-lang="'+lang+'"]').getAttribute('aria-pressed')!=='true')
+               throw Error('Language control not selected for '+lang);
+             await page.locator('[data-mode="route"]').click();
+             if(!await page.locator('#gamePlaying').isVisible())throw Error('Route missing '+lang);
+             if(await page.locator('#answers button').count()!==4)throw Error('Answer count wrong '+lang);
+             if(lang==='ar'&&!(await page.locator('#questionText').innerText()).match(/[\u0600-\u06ff]/))
+               throw Error('Arabic route question not translated');
+             await page.locator('#answers button').first().click();
+             if(!await page.locator('#nextQuestion').isHidden())throw Error('Old Next button visible '+lang);
+             if(!await page.locator('#feedback').isVisible())throw Error('Missing practice feedback '+lang);
+             await page.locator('#exitQuiz').click();
+             if(!await page.locator('#gameLobby').isVisible())throw Error('Leaving game failed '+lang);
+             if(lang==='ar'){
+               await page.locator('#gameProgressOpen').click();
+               if(!await page.locator('#gameProgressDialog').isVisible())throw Error('Arabic progress modal inaccessible');
+               if(!(await page.locator('#gameProgressTitle').innerText()).includes('تقدّمي'))
+                 throw Error('Progress untranslated in Arabic');
+               await page.locator('#gameProgressClose').click();
+             }
+             console.log('OFFICIAL THEORY',lang,JSON.stringify(doc));
+           }
+           await page.locator('[data-lang="ru"]').click();
+           await wait();
+           const bank=await page.evaluate(async()=>((await(await fetch('./assets/teoria/ru.json')).json()).questions.map(q=>({id:String(q.id),correct:q.correct}))));
+           await page.locator('[data-mode="route"]').click();
+           for(let attempt=0;attempt<3;attempt++){
+             await page.evaluate(bank=>{
+               const id=document.getElementById('questionId').textContent.replace(/\D/g,'');
+               const q=bank.find(x=>x.id===id);
+               if(!q)throw Error('Official question missing '+id);
+               const bad=[...document.querySelectorAll('#answers button')].find(el=>Number(el.dataset.original)!==q.correct);
+               if(!bad)throw Error('No wrong answer choice');
+               bad.click();
+             },bank);
+             if(attempt<2)await page.waitForFunction(x=>document.getElementById('questionCounter')?.textContent===x&&
+               document.querySelector('#answers button')&&!document.querySelector('#answers button').disabled,
+               (attempt+1)+' / 10',{timeout:10000});
+           }
+           await page.locator('#gameOver').waitFor({state:'visible',timeout:10000});
+           if(!(await page.locator('#gameOverScore').innerText()).includes('/ 3'))throw Error('Game over score incorrect');
+           await page.locator('#gameOverRetry').click();
+           if(await page.locator('#gameOver').isVisible()||!await page.locator('#gamePlaying').isVisible())throw Error('Replay failed');
+           await page.locator('#exitQuiz').click();
+           await page.locator('[data-mode="exam"]').click();
+           if(!await page.locator('#timerBox').isVisible())throw Error('40 min mock-exam clock missing');
+           await page.locator('#answers button').first().click();
+           if(await page.locator('#feedback').isVisible())throw Error('Exam leaked correct answer');
+           await page.locator('#exitQuiz').click();
+           for(const width of [320,390]){
+             await page.setViewportSize({width,height:844});
+             const dims=await page.evaluate(()=>({document:document.documentElement.scrollWidth,window:innerWidth}));
+             if(dims.document>dims.window+3)throw Error('Horizontal overflow '+JSON.stringify(dims));
+           }
+           if(errors.length)throw Error('Game JS errors: '+errors.join(' | '));
+           console.log('NEOLINE THEORY PASS: 4 languages, official questions, RTL, practice, 3-life Game Over, replay, hidden exam answers');
+           await browser.close();
+          })().catch(e=>{console.error(e);process.exitCode=1});
           JS
