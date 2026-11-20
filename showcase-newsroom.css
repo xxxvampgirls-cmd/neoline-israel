@@ -1,0 +1,260 @@
+/* NEOLINE Israel · Road News / Video / Statistics showroom promo.
+ * A tenth slide uses the SAME ice-blue studio ribbons and masked cutout
+ * transitions as product, game and technology advertisements. The video
+ * preview is original vector artwork—not real crash footage or a thumbnail
+ * for any particular event. The tiny chart has NO made-up numbers or claims. */
+#showcaseSlides .featured-slide--promo-newsroom .feature-copy{position:relative;z-index:4}
+#showcaseSlides .featured-slide--promo-newsroom .feature-copy h1{
+ font-size:clamp(31px,3.75vw,53px);line-height:1.11;
+ letter-spacing:-.039em;
+}
+#showcaseSlides .featured-slide--promo-newsroom .feature-copy h1 em{
+ color:#0785c4;
+}
+#showcaseSlides .featured-slide--promo-newsroom .hero-lead{
+ max-width:445px;
+}
+#showcaseSlides .featured-slide--promo-newsroom .featured-cta{
+ display:flex;gap:8px;flex-wrap:nowrap;
+}
+#showcaseSlides .featured-slide--promo-newsroom .featured-cta a{
+ box-sizing:border-box;min-width:0;white-space:normal;
+ text-align:center;text-wrap:balance;
+}
+#showcaseSlides .featured-slide--promo-newsroom .featured-cta .primary{
+ background:linear-gradient(112deg,#0879cb,#19a7e6);
+ box-shadow:0 9px 22px rgba(22,124,187,.24);
+}
+#showcaseSlides .featured-slide--promo-newsroom .featured-cta .secondary{
+ border-color:#b6d8ea;color:#237dab;background:#f5fbff;
+}
+#showcaseSlides .featured-slide--promo-newsroom .featured-image{
+ background:radial-gradient(ellipse at 49% 48%,#fff 10%,#edf9ff 64%,#dbeffc 100%)!important;
+ border-color:#cde8f6!important;
+}
+#showcaseSlides .featured-slide--promo-newsroom .promo-art-object{
+ inset:5% 4% 4%!important;
+ display:grid!important;place-items:center;
+}
+#showcaseSlides .featured-slide--promo-newsroom .newsroom-promo-screen{
+ box-sizing:border-box;
+ width:min(92%,460px);height:84%;
+ position:relative;isolation:isolate;
+ display:flex;flex-direction:column;min-height:0;min-width:0;
+ border:3px solid #fff;border-radius:22px;overflow:hidden;
+ transform:rotate(-2.1deg);
+ color:#164568;
+ background:linear-gradient(145deg,#fbfeff,#ecf8ff);
+ box-shadow:0 16px 29px #17699f35,0 3px 12px #21649a18,
+   inset 0 1px 1px #fff;
+}
+#showcaseSlides .featured-slide--promo-newsroom .newsroom-promo-screen::after{
+ content:"";pointer-events:none;position:absolute;inset:0;
+ border-radius:19px;border:1px solid #8cd2f359;z-index:5;
+}
+#showcaseSlides .featured-slide--promo-newsroom .newsroom-promo-head{
+ display:flex;align-items:center;justify-content:space-between;
+ gap:7px;flex:0 0 auto;
+ padding:10px 12px 9px;
+ background:linear-gradient(112deg,#f7fcff,#e9f6ff);
+ border-bottom:1px solid #cbe5f4;
+}
+#showcaseSlides .featured-slide--promo-newsroom .newsroom-promo-brand{
+ display:flex;align-items:center;gap:6px;min-width:0;
+ font-size:10px;line-height:1.2;letter-spacing:.06em;
+ color:#175f8a;font-weight:950;
+}
+#showcaseSlides .featured-slide--promo-newsroom .newsroom-promo-brand i{
+ display:inline-block;width:17px;height:13px;flex:0 0 auto;
+ background:linear-gradient(140deg,#23d1ef 22%,#007ac7 70%);
+ clip-path:polygon(0 57%,36% 4%,59% 4%,44% 43%,88% 5%,100% 37%,58% 96%,37% 96%,52% 53%,13% 98%);
+ filter:drop-shadow(0 1px 2px #15a4de37);
+}
+#showcaseSlides .featured-slide--promo-newsroom .newsroom-promo-il{
+ display:flex;align-items:center;gap:6px;
+ font-size:9px;font-weight:900;letter-spacing:.08em;
+ color:#4389aa;white-space:nowrap;
+}
+#showcaseSlides .featured-slide--promo-newsroom .newsroom-promo-il::before{
+ content:"";display:block;width:6px;height:6px;
+ background:#19a8dc;border-radius:50%;box-shadow:0 0 0 4px #2fb5e71c;
+}
+#showcaseSlides .featured-slide--promo-newsroom .newsroom-promo-content{
+ flex:1 1 0;display:grid;grid-template-columns:minmax(0,1.38fr) minmax(0,1fr);
+ align-items:stretch;gap:8px;padding:9px 10px;min-height:0;
+}
+#showcaseSlides .featured-slide--promo-newsroom .newsroom-promo-video{
+ position:relative;min-width:0;min-height:0;
+ overflow:hidden;border-radius:12px;
+ background:linear-gradient(160deg,#10527e,#0b2c50);
+ box-shadow:0 3px 13px #0e628a28;
+}
+#showcaseSlides .featured-slide--promo-newsroom .newsroom-promo-video svg{
+ display:block;width:100%;height:100%;min-height:0;
+}
+#showcaseSlides .featured-slide--promo-newsroom .newsroom-promo-video::after{
+ content:"";position:absolute;inset:0;pointer-events:none;
+ background:linear-gradient(180deg,transparent 56%,#071f4090);
+}
+#showcaseSlides .featured-slide--promo-newsroom .newsroom-promo-video-pill{
+ position:absolute;inset-inline-start:7px;top:8px;z-index:2;
+ padding:4px 7px;border:1px solid #d5faff69;
+ border-radius:99px;background:#06395cc9;color:#d8fbff;
+ font-size:9px;line-height:1.2;font-weight:900;letter-spacing:.03em;
+}
+#showcaseSlides .featured-slide--promo-newsroom .newsroom-promo-play{
+ position:absolute;z-index:2;left:50%;top:51%;
+ width:44px;height:44px;border-radius:50%;
+ display:grid;place-items:center;transform:translate(-50%,-50%);
+ border:1px solid #e3faff9e;
+ background:linear-gradient(145deg,#1dc3f6ed,#117cbeec);
+ box-shadow:0 0 0 7px #e6faff1d,0 3px 13px #07223a7a;
+ color:white;
+}
+#showcaseSlides .featured-slide--promo-newsroom .newsroom-promo-play svg{
+ width:23px;height:23px;display:block;margin-inline-start:3px;
+}
+#showcaseSlides .featured-slide--promo-newsroom .newsroom-promo-video-name{
+ position:absolute;z-index:2;inset-inline-start:8px;bottom:7px;
+ color:#ecfbff;font-size:9px;line-height:1.2;font-weight:800;
+ text-shadow:0 1px 4px #051c31;
+}
+#showcaseSlides .featured-slide--promo-newsroom .newsroom-promo-stats{
+ box-sizing:border-box;min-width:0;min-height:0;
+ display:flex;flex-direction:column;justify-content:space-between;
+ background:linear-gradient(137deg,#fff,#e9f6fe);
+ border:1px solid #b9dfee;border-radius:12px;
+ padding:10px 9px 8px;
+ box-shadow:inset 0 1px white,0 2px 8px #195f8f0c;
+}
+#showcaseSlides .featured-slide--promo-newsroom .newsroom-promo-stats h3{
+ margin:0;color:#2077a7;font-size:10px;line-height:1.2;
+ font-weight:950;letter-spacing:.04em;
+}
+#showcaseSlides .featured-slide--promo-newsroom .newsroom-promo-chart{
+ width:100%;min-height:35px;flex:1 1 auto;
+ display:flex;align-items:flex-end;gap:5px;
+ border-bottom:1px solid #aacddd;
+ padding:9px 2px 2px;
+ box-sizing:border-box;
+}
+#showcaseSlides .featured-slide--promo-newsroom .newsroom-promo-chart i{
+ display:block;flex:1 1 0;min-width:0;
+ height:var(--bar);
+ border-radius:4px 4px 1px 1px;
+ transform-origin:50% 100%;
+ background:linear-gradient(180deg,#1ec3f2,#1977b5);
+ box-shadow:0 -1px 3px #54d8f647;
+}
+#showcaseSlides .featured-slide--promo-newsroom .newsroom-promo-chart i:nth-child(2n){
+ background:linear-gradient(180deg,#73d9f5,#4daacb);
+}
+#showcaseSlides .featured-slide--promo-newsroom .newsroom-promo-chart-caption{
+ font-size:8.6px;font-weight:800;color:#638aa6;
+ line-height:1.25;margin-top:6px;
+}
+#showcaseSlides .featured-slide--promo-newsroom .newsroom-promo-footer{
+ flex:0 0 auto;min-height:24px;padding:5px 10px;
+ display:flex;align-items:center;justify-content:space-between;
+ gap:6px;background:#f7fcff;border-top:1px solid #d1e6f3;
+}
+#showcaseSlides .featured-slide--promo-newsroom .newsroom-promo-topics{
+ color:#2d789f;font-size:8.5px;line-height:1.2;
+ font-weight:850;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+}
+#showcaseSlides .featured-slide--promo-newsroom .newsroom-promo-illustrative{
+ color:#83a1b3;font-size:8px;line-height:1.1;white-space:nowrap;
+}
+#showcaseSlides .featured-slide--promo-newsroom .newsroom-promo-screen-shadow{
+ position:absolute;left:17%;right:14%;bottom:8%;height:8%;
+ border-radius:50%;background:#1a80bf34;filter:blur(12px);
+ z-index:-1;
+}
+/* Animate the illustration only. The established blue/white hero stage
+   and background ribbon elements remain fixed through transitions. */
+#showcaseSlides .featured-slide--promo-newsroom.active:not(.ad-exiting) .newsroom-promo-play{
+ animation:newsroomPulse 2.7s ease-in-out infinite;
+}
+#showcaseSlides .featured-slide--promo-newsroom.active:not(.ad-exiting) .newsroom-promo-chart i{
+ animation:newsroomGraph 3.8s ease-in-out infinite;
+ animation-delay:calc(var(--n) * -.37s);
+}
+#showcaseSlides .featured-slide--promo-newsroom.active:not(.ad-exiting) .newsroom-promo-roadline{
+ animation:newsroomLineFlow 2.8s linear infinite;
+}
+#showcaseSlides .featured-slide--promo-newsroom.active:not(.ad-exiting) .newsroom-promo-playmark{
+ animation:newsroomPlay 2.7s ease-in-out infinite;
+}
+@keyframes newsroomPulse{
+ 0%,100%{box-shadow:0 0 0 5px #e6faff15,0 3px 13px #07223a72}
+ 50%{box-shadow:0 0 0 11px #e6faff0a,0 3px 19px #25caff77}
+}
+@keyframes newsroomGraph{
+ 0%,100%{transform:scaleY(.83);opacity:.8}
+ 45%,60%{transform:scaleY(1);opacity:1}
+}
+@keyframes newsroomLineFlow{
+ from{stroke-dashoffset:112}
+ to{stroke-dashoffset:-112}
+}
+@keyframes newsroomPlay{
+ 0%,100%{opacity:.86}
+ 50%{opacity:1}
+}
+@media(max-width:720px){
+ #showcaseSlides .featured-slide--promo-newsroom .feature-copy h1{
+  font-size:clamp(26px,6.6vw,33px)!important;line-height:1.12!important;
+ }
+ #showcaseSlides .featured-slide--promo-newsroom .promo-art-object{
+  inset:7% 3% 4%!important;
+ }
+ #showcaseSlides .featured-slide--promo-newsroom .newsroom-promo-screen{
+  width:89%;height:84%;border-width:2px;
+  border-radius:17px;transform:rotate(-1.6deg);
+ }
+ #showcaseSlides .featured-slide--promo-newsroom .newsroom-promo-screen::after{
+  border-radius:15px;
+ }
+ #showcaseSlides .featured-slide--promo-newsroom .newsroom-promo-head{
+  padding:7px 9px 6px;
+ }
+ #showcaseSlides .featured-slide--promo-newsroom .newsroom-promo-brand{font-size:8.5px}
+ #showcaseSlides .featured-slide--promo-newsroom .newsroom-promo-il{font-size:8px}
+ #showcaseSlides .featured-slide--promo-newsroom .newsroom-promo-content{
+  padding:7px 8px;gap:6px;
+ }
+ #showcaseSlides .featured-slide--promo-newsroom .newsroom-promo-play{
+  width:37px;height:37px;
+ }
+ #showcaseSlides .featured-slide--promo-newsroom .newsroom-promo-play svg{
+  width:19px;height:19px;
+ }
+ #showcaseSlides .featured-slide--promo-newsroom .newsroom-promo-stats{
+  padding:7px 6px 6px;border-radius:10px;
+ }
+ #showcaseSlides .featured-slide--promo-newsroom .newsroom-promo-stats h3{font-size:8px}
+ #showcaseSlides .featured-slide--promo-newsroom .newsroom-promo-chart{gap:3px;padding-top:4px}
+ #showcaseSlides .featured-slide--promo-newsroom .newsroom-promo-chart-caption{font-size:7.5px}
+ #showcaseSlides .featured-slide--promo-newsroom .newsroom-promo-footer{
+  padding:4px 8px;min-height:21px;
+ }
+ #showcaseSlides .featured-slide--promo-newsroom .newsroom-promo-topics{font-size:7.5px}
+ #showcaseSlides .featured-slide--promo-newsroom .newsroom-promo-illustrative{font-size:7px}
+ #showcaseSlides .featured-slide--promo-newsroom .featured-cta a{font-size:11px!important}
+}
+@media(max-width:360px){
+ #showcaseSlides .featured-slide--promo-newsroom .newsroom-promo-screen{
+  width:92%;height:87%;
+ }
+ #showcaseSlides .featured-slide--promo-newsroom .newsroom-promo-stats h3{font-size:7.5px}
+ #showcaseSlides .featured-slide--promo-newsroom .newsroom-promo-video-pill{font-size:8px}
+ #showcaseSlides .featured-slide--promo-newsroom .newsroom-promo-video-name{font-size:8px}
+}
+@media(prefers-reduced-motion:reduce){
+ #showcaseSlides .featured-slide--promo-newsroom .newsroom-promo-play,
+ #showcaseSlides .featured-slide--promo-newsroom .newsroom-promo-playmark,
+ #showcaseSlides .featured-slide--promo-newsroom .newsroom-promo-chart i,
+ #showcaseSlides .featured-slide--promo-newsroom .newsroom-promo-roadline{
+  animation:none!important;
+ }
+}
