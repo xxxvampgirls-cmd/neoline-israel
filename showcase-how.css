@@ -1,0 +1,208 @@
+/* NEOLINE Israel — 3rd showroom slide: "How it works" advertisement.
+ * The SAME icy-blue headline, ribbons, oval focus, navigation and cutout
+ * hand-off remain untouched. Only a small foreground illustration moves;
+ * not a second dark hero frame or a copy of the interactive demo.
+ * No stock images, fonts, libraries, canvases or video downloads. */
+#showcaseSlides .featured-slide--promo-how .feature-copy{position:relative;z-index:4}
+#showcaseSlides .featured-slide--promo-how .feature-copy h1{
+ font-size:clamp(32px,3.9vw,54px);
+ line-height:1.10;
+}
+#showcaseSlides .featured-slide--promo-how .feature-copy h1 em{
+ color:#057dbf;
+}
+#showcaseSlides .featured-slide--promo-how .hero-lead{
+ max-width:430px;
+}
+#showcaseSlides .featured-slide--promo-how .featured-cta .primary{
+ background:linear-gradient(115deg,#0475c7,#19a8e5);
+ box-shadow:0 10px 22px #167cbb2d;
+}
+#showcaseSlides .featured-slide--promo-how .featured-image{
+ /* Same stage as the product and delivery advertising, deliberately not
+    another navy-blue rectangle across the full slide. */
+ background:radial-gradient(ellipse at 50% 46%,#fff 11%,#edf9ff 60%,#d9f0ff)!important;
+ border-color:#cbe6f7!important;
+}
+#showcaseSlides .featured-slide--promo-how .promo-art-object{
+ inset:6% 6% 4%;
+ display:grid;place-items:center;
+}
+#showcaseSlides .featured-slide--promo-how .how-promo-device{
+ position:relative;isolation:isolate;
+ box-sizing:border-box;display:flex;flex-direction:column;
+ width:min(89%,420px);height:84%;
+ min-height:0;
+ border:4px solid #edfbff;
+ border-radius:23px;
+ overflow:hidden;
+ background:linear-gradient(155deg,#0a3660 0%,#093052 80%,#09263d 100%);
+ box-shadow:0 16px 24px rgba(12,81,133,.28),0 3px 9px rgba(3,78,130,.18),
+            inset 0 1px rgba(212,251,255,.7);
+ transform:rotate(-3deg);
+}
+#showcaseSlides .featured-slide--promo-how .how-promo-device::after{
+ content:"";position:absolute;z-index:4;inset:0;
+ border-radius:19px;border:1px solid #71d8ff6b;
+ pointer-events:none;box-shadow:inset 0 0 17px #4addff17;
+}
+#showcaseSlides .featured-slide--promo-how .how-promo-device-top{
+ display:flex;align-items:center;justify-content:space-between;
+ flex:none;min-height:31px;gap:7px;
+ padding:5px 11px;
+ color:#f4fbff;font-size:10px;line-height:1.1;font-weight:900;
+ letter-spacing:.025em;
+ background:linear-gradient(110deg,#0a3c66,#0c577f);
+ border-bottom:1px solid #70d6fa44;
+}
+#showcaseSlides .featured-slide--promo-how .how-promo-rec{
+ display:inline-flex;align-items:center;gap:7px;
+}
+#showcaseSlides .featured-slide--promo-how .how-promo-rec i{
+ display:block;flex:none;width:7px;height:7px;
+ border-radius:50%;background:#fb6882;
+ box-shadow:0 0 7px #ff506fa8;
+}
+#showcaseSlides .featured-slide--promo-how .how-promo-mode{
+ padding:4px 8px;border:1px solid #9fecff55;border-radius:50px;
+ background:#0d7ea16b;color:#b9faff;font-size:9px;
+}
+#showcaseSlides .featured-slide--promo-how .how-promo-road{
+ display:block;flex:1 1 auto;
+ width:100%;height:0;min-height:0;
+ object-fit:cover;
+}
+#showcaseSlides .featured-slide--promo-how .how-promo-device-bottom{
+ flex:none;min-height:29px;
+ display:flex;align-items:center;justify-content:space-between;
+ gap:7px;padding:5px 10px;
+ color:#c5f5ff;background:linear-gradient(95deg,#092b47,#0e486c);
+ border-top:1px solid #75d9fc44;
+}
+#showcaseSlides .featured-slide--promo-how .how-promo-device-mode{
+ font-size:9px;letter-spacing:.04em;font-weight:900;
+ white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+}
+#showcaseSlides .featured-slide--promo-how .how-promo-device-steps{
+ display:flex;align-items:center;gap:4px;flex:none;
+}
+#showcaseSlides .featured-slide--promo-how .how-promo-device-steps i{
+ width:19px;height:4px;border-radius:10px;background:#326d91;
+}
+#showcaseSlides .featured-slide--promo-how .how-promo-device-steps i:first-child{
+ background:#40defa;box-shadow:0 0 6px #53deff8a;
+}
+#showcaseSlides .featured-slide--promo-how .how-promo-limit{
+ position:absolute;right:6%;bottom:23%;z-index:4;
+ display:grid;place-items:center;width:45px;height:45px;
+ border:5px solid #ef424c;border-radius:50%;
+ background:#fff;color:#153957;
+ font:950 19px/1 Arial,sans-serif;
+ box-shadow:0 5px 16px #1468983b;
+ transform:rotate(5deg);
+}
+#showcaseSlides .featured-slide--promo-how .how-promo-glint{
+ position:absolute;left:8%;top:20%;z-index:1;
+ width:58%;height:60%;
+ border-radius:50%;
+ background:radial-gradient(ellipse,#81d8ff60 0%,#e8fbff24 42%,transparent 74%);
+ filter:blur(12px);pointer-events:none;
+}
+#showcaseSlides .featured-slide--promo-how .how-promo-beam,
+#showcaseSlides .featured-slide--promo-how .how-promo-signal{
+ stroke-dashoffset:0;
+}
+#showcaseSlides .featured-slide--promo-how .how-promo-signal-wave{
+ opacity:.6;
+}
+#showcaseSlides .featured-slide--promo-how .how-promo-rings{
+ opacity:.7;
+}
+/* Intentional micro-motion only while this slide is in view.
+   The blue background/ribbons NEVER move, matching the other ads. */
+#showcaseSlides .featured-slide--promo-how.active:not(.ad-exiting) .how-promo-beam{
+ animation:howPromoLane 2.7s linear infinite;
+}
+#showcaseSlides .featured-slide--promo-how.active:not(.ad-exiting) .how-promo-signal{
+ animation:howPromoSatellite 4.8s ease-in-out infinite;
+}
+#showcaseSlides .featured-slide--promo-how.active:not(.ad-exiting) .how-promo-signal-wave{
+ animation:howPromoSatelliteWaves 4.8s ease-in-out infinite;
+}
+#showcaseSlides .featured-slide--promo-how.active:not(.ad-exiting) .how-promo-rings{
+ animation:howPromoRadar 3.2s ease-in-out infinite;
+}
+#showcaseSlides .featured-slide--promo-how.active:not(.ad-exiting) .how-promo-rec i{
+ animation:howPromoRec 1.7s ease-in-out infinite;
+}
+@keyframes howPromoLane{
+ from{stroke-dashoffset:150}
+ to{stroke-dashoffset:-150}
+}
+@keyframes howPromoSatellite{
+ 0%,15%{opacity:.1;stroke-dashoffset:100}
+ 35%,61%{opacity:1;stroke-dashoffset:0}
+ 82%,100%{opacity:.1;stroke-dashoffset:-80}
+}
+@keyframes howPromoSatelliteWaves{
+ 0%,23%,86%,100%{opacity:.15}
+ 42%,65%{opacity:1}
+}
+@keyframes howPromoRadar{
+ 0%,100%{opacity:.42}
+ 50%{opacity:1}
+}
+@keyframes howPromoRec{
+ 0%,100%{opacity:.55}
+ 50%{opacity:1}
+}
+@media(max-width:720px){
+ #showcaseSlides .featured-slide--promo-how .feature-copy h1{
+  font-size:clamp(25px,6.5vw,32px)!important;
+  line-height:1.12!important;
+ }
+ #showcaseSlides .featured-slide--promo-how .promo-art-object{
+  inset:8% 4% 4%;
+ }
+ #showcaseSlides .featured-slide--promo-how .how-promo-device{
+  width:86%;height:85%;border-width:3px;border-radius:17px;
+  transform:rotate(-2deg);
+ }
+ #showcaseSlides .featured-slide--promo-how .how-promo-device::after{
+  border-radius:15px;
+ }
+ #showcaseSlides .featured-slide--promo-how .how-promo-device-top{
+  min-height:25px;padding:4px 8px;font-size:8px;
+ }
+ #showcaseSlides .featured-slide--promo-how .how-promo-mode{
+  font-size:8px;padding:2px 6px;
+ }
+ #showcaseSlides .featured-slide--promo-how .how-promo-device-bottom{
+  min-height:22px;padding:3px 7px;
+ }
+ #showcaseSlides .featured-slide--promo-how .how-promo-device-mode{
+  font-size:8px;
+ }
+ #showcaseSlides .featured-slide--promo-how .how-promo-device-steps i{
+  width:12px;height:3px;
+ }
+ #showcaseSlides .featured-slide--promo-how .how-promo-limit{
+  width:35px;height:35px;border-width:4px;right:6%;bottom:17%;
+  font-size:15px;
+ }
+}
+@media(max-width:360px){
+ #showcaseSlides .featured-slide--promo-how .how-promo-device{width:87%}
+ #showcaseSlides .featured-slide--promo-how .how-promo-limit{
+  width:30px;height:30px;border-width:3px;font-size:13px;
+ }
+}
+@media(prefers-reduced-motion:reduce){
+ #showcaseSlides .featured-slide--promo-how .how-promo-beam,
+ #showcaseSlides .featured-slide--promo-how .how-promo-signal,
+ #showcaseSlides .featured-slide--promo-how .how-promo-signal-wave,
+ #showcaseSlides .featured-slide--promo-how .how-promo-rings,
+ #showcaseSlides .featured-slide--promo-how .how-promo-rec i{
+  animation:none!important;
+ }
+}
