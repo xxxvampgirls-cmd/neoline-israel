@@ -3,6 +3,9 @@
 Рабочий сайт: https://neoline-israel.pages.dev/  
 Основная ветка: `main`.
 
+**Вторая точка восстановления (новый Smart Hub, все основные проверки пройдены):**
+[`restore/2026-11-20-smart-hub-v1-verified`](https://github.com/xxxvampgirls-cmd/neoline-israel/tree/restore/2026-11-20-smart-hub-v1-verified).
+
 **Текущая точка восстановления (до нового Smart Hub):**
 [`restore/2026-11-20-before-smart-hub-upgrade`](https://github.com/xxxvampgirls-cmd/neoline-israel/tree/restore/2026-11-20-before-smart-hub-upgrade).
 
