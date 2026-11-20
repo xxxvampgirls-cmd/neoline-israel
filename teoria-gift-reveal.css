@@ -11,31 +11,52 @@
 #gameGiftDialog .gift-reveal-scene{
  height:196px;position:relative;overflow:hidden;
  background:
-  radial-gradient(ellipse at 49% 67%,#efffffee 0 9%,transparent 61%),
-  radial-gradient(circle at 50% 13%,#ffffffc7 0,transparent 67%),
-  linear-gradient(155deg,#c2ecff,#e4faff 50%,#b5e4fa);
+  radial-gradient(ellipse at 50% 64%,#fffdf0b8 0,transparent 61%),
+  linear-gradient(155deg,#c7ebff,#eefaff 48%,#bce7fc);
  perspective:600px;
 }
+/* Transparent golden sunbeams radiate all the way to the card edges.
+   One rotating background layer stays BEHIND the gift and answer cards. */
 #gameGiftDialog .gift-reveal-scene::before{
- content:"";position:absolute;inset:-30%;
- pointer-events:none;opacity:.37;
- background:repeating-conic-gradient(from 8deg at 50% 75%,#6bd4f636 0deg 12deg,transparent 12deg 29deg);
+ content:"";position:absolute;z-index:0;pointer-events:none;
+ top:69%;left:50%;width:900px;height:900px;max-width:none;
+ background:repeating-conic-gradient(
+  from -8deg at 50% 50%,
+  #ffe18b4d 0deg 11deg,
+  #fff4bc2a 11deg 15deg,
+  #fffce009 15deg 34deg
+ );
+ opacity:.92;transform:translate(-50%,-50%) rotate(0deg);
+ transform-origin:50% 50%;
+ animation:neolineGoldenSunbeams 22s linear infinite;
+ will-change:transform;
+}
+@keyframes neolineGoldenSunbeams{
+ to{transform:translate(-50%,-50%) rotate(360deg)}
 }
 #gameGiftDialog .gift-reveal-scene::after{
- content:"";position:absolute;inset:auto 5% 0;
- height:2px;background:linear-gradient(90deg,transparent,#65bddf,transparent);opacity:.5;
+ content:"";position:absolute;z-index:1;pointer-events:none;
+ inset:auto 0 50px;height:1px;
+ background:linear-gradient(90deg,transparent,#fffdeaed 34%,#fff5cb 50%,#fffdeaed 66%,transparent);
+ opacity:.8;
 }
-#gameGiftDialog .gift-reveal-halo{
- position:absolute;z-index:0;left:50%;bottom:16px;
- width:250px;height:58px;border:2px solid #85def9b0;
- border-radius:50%;transform:translateX(-50%) rotateX(50deg);
- box-shadow:0 0 0 13px #9ae9ff27,0 0 25px #53cbea6c;
-}
+/* Remove the former oval below the box. The present sits on a continuous floor. */
+#gameGiftDialog .gift-reveal-halo{display:none!important}
+/* Edge-to-edge pearlescent stage floor, with a subtle golden reflection. */
 #gameGiftDialog .gift-reveal-platform{
- position:absolute;z-index:1;bottom:20px;left:50%;transform:translateX(-50%);
- width:174px;height:25px;border-radius:50%;
- background:radial-gradient(ellipse,#1687be7a,transparent 72%);
- filter:blur(7px);
+ position:absolute;z-index:1;left:0;right:0;bottom:0;
+ width:100%;height:51px;transform:none;filter:none;border-radius:0;
+ border-top:1px solid #fffce4b3;
+ background:
+  radial-gradient(ellipse 46% 85% at 50% 0%,#ffcb6b85 0%,#fff6ce45 36%,transparent 100%),
+  linear-gradient(180deg,#e8faff20,#e0f5ffcc 65%,#caebfced);
+ box-shadow:inset 0 6px 17px #ffffff7d;
+}
+#gameGiftDialog .gift-reveal-platform::after{
+ content:"";position:absolute;pointer-events:none;
+ top:4px;left:34%;width:32%;height:46px;
+ background:linear-gradient(180deg,#f9cc6b64,transparent);
+ filter:blur(9px);opacity:.55;
 }
 #gameGiftDialog .gift-reveal-beam{
  position:absolute;z-index:1;left:50%;bottom:57px;
@@ -479,4 +500,5 @@ html[dir="rtl"] #gameGiftDialog .gift-reveal-number{right:auto;left:12px}
 @media(prefers-reduced-motion:reduce){
  #gameGiftScreenBurst{display:none!important}
  #gameGiftDialog .gift-reveal-spark-dust{display:none!important}
+ #gameGiftDialog .gift-reveal-scene::before{animation:none!important;will-change:auto!important}
 }
