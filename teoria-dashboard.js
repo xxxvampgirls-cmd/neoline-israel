@@ -8,7 +8,8 @@ const reduce=window.matchMedia("(prefers-reduced-motion: reduce)");
 const copy={
  ru:{questions:"Вопросы",accuracy:"Точность",xp:"Опыт (XP)",of:"из",progress:"Игровой прогресс"},
  en:{questions:"Questions",accuracy:"Accuracy",xp:"XP earned",of:"of",progress:"Game progress"},
- he:{questions:"שאלות",accuracy:"דיוק",xp:"נקודות XP",of:"מתוך",progress:"התקדמות במשחק"}
+ he:{questions:"שאלות",accuracy:"דיוק",xp:"נקודות XP",of:"מתוך",progress:"התקדמות במשחק"},
+ ar:window.NEOLINE_THEORY_AR?.dash||{}
 };
 const stat={
  seen:{number:0,animated:0,ring:"heroSeenRing",id:"heroSeenValue"},
@@ -16,7 +17,7 @@ const stat={
  xp:{number:0,animated:0,ring:"heroXPRing",id:"heroXPValue"}
 };
 let lang="ru",total=0,first=true;
-const fmt=n=>new Intl.NumberFormat(lang==="he"?"he-IL":lang==="en"?"en-GB":"ru-RU").format(n);
+const fmt=n=>new Intl.NumberFormat(lang==="he"?"he-IL":lang==="ar"?"ar-IL":lang==="en"?"en-GB":"ru-RU").format(n);
 const clamp=(v,min,max)=>Math.max(min,Math.min(max,v));
 function setText(){
  const t=copy[lang]||copy.ru;
