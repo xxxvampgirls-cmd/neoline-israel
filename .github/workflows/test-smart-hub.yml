@@ -7,6 +7,8 @@ on:
       - 'index.html'
       - 'smart-hub.js'
       - 'smart-hub.css'
+      - 'smart-hub-picker.js'
+      - 'smart-hub-picker.css'
       - 'product-specs.js'
       - 'device-updates.js'
       - '.github/workflows/test-smart-hub.yml'
@@ -56,6 +58,40 @@ jobs:
             await page.locator('[data-hub-tab="compare"]').click();
             if(await page.locator('.hub-compare thead th').count()!==3)
               throw Error('Default comparison should show exactly two models');
+            // User-facing model selectors must never invoke Android's dark OS list.
+            const trigger=page.locator('[data-hub-picker-for="compare:2"]');
+            await trigger.waitFor({state:'visible',timeout:15000});
+            await trigger.click();
+            const picker=page.locator('#hubModelPicker');
+            if(!await picker.isVisible())throw Error('NEOLINE model picker did not open');
+            if(await picker.locator('.hub-model-picker-option').count()!==9)
+              throw Error('Model picker should contain 8 models and an empty choice');
+            const design=await page.evaluate(()=>({
+              surface:getComputedStyle(document.querySelector('#hubModelPicker')).backgroundColor,
+              bodyWidth:innerWidth,dialogWidth:document.querySelector('#hubModelPicker').getBoundingClientRect().width
+            }));
+            if(design.surface!=='rgb(255, 255, 255)'||design.dialogWidth>design.bodyWidth)
+              throw Error('Model picker is not a compact white modal: '+JSON.stringify(design));
+            await picker.locator('.hub-model-picker-option[data-picker-value="1"]').click();
+            if(await picker.isVisible()||
+              (await page.locator('[data-hub-compare="2"]').inputValue())!=='1')
+              throw Error('Custom model picker selection did not update comparison');
+            if(await page.locator('.hub-compare thead th').count()!==4)
+              throw Error('Third model comparison failed');
+            await page.locator('[data-hub-picker-for="compare:0"]').click();
+            if(!await picker.locator('.hub-model-picker-option[data-picker-value="6"]').isDisabled())
+              throw Error('A model already compared must be disabled in the picker');
+            await picker.locator('.hub-model-picker-close').click();
+            if(await picker.isVisible())throw Error('Model picker close did not work');
+            if(await page.locator('#catalog .product .hub-compact-compare').count()<4)
+              throw Error('Product compare shortcuts did not render');
+            const card=await page.locator('#catalog .product').first().evaluate(node=>{
+              const actions=node.querySelector('.hub-card-actions'),details=node.querySelector('.details-link'),icon=node.querySelector('.hub-compact-compare');
+              if(!actions||!details||!icon)return null;
+              const a=actions.getBoundingClientRect(),d=details.getBoundingClientRect(),i=icon.getBoundingClientRect();
+              return {row:a.width,details:d.width,icon:i.width,sameRow:Math.abs(d.top-i.top)<35,style:getComputedStyle(icon).backgroundColor};
+            });
+            if(!card||!card.sameRow||card.icon>52)throw Error('Compare icon not inline or compact: '+JSON.stringify(card));
             await page.locator('[data-hub-compare="2"]').selectOption('1');
             if(await page.locator('.hub-compare thead th').count()!==4)
               throw Error('Third model comparison failed');
