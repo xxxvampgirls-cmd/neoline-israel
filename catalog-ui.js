@@ -5,7 +5,7 @@ const imported=new Map();
 const manufacturerFeatures=new Map();
 async function preloadOfficialFeatures(){
  try{
-  const response=await fetch('./assets/catalog/feature-media.json?v=20261120-official-art-v1',{cache:'no-cache'});
+  const response=await fetch('./assets/catalog/feature-media.json?v=20261120-official-art-v2',{cache:'no-cache'});
   if(!response.ok)return;
   const manifest=await response.json();
   if(manifest.version!==1||!Array.isArray(manifest.products))return;
@@ -135,8 +135,9 @@ function importedModal(id){
   he:{label:'איורים של היצרן',note:'המחשות מקוריות של תכונות המכשיר, ולא תמונות נוספות של המוצר מזוויות שונות.',units:'איורים',zoom:'פתיחת תמונה'},
   ar:{label:'صور توضيحية من الشركة',note:'رسومات أصلية توضّح ميزات الجهاز، وليست صوراً إضافية للمنتج من زوايا أخرى.',units:'صور',zoom:'فتح الصورة'}
  }[lang]||{label:'Manufacturer illustrations',note:'Official product feature illustrations.',units:'images',zoom:'View image'};
+ const artworkUnit=lang==='ru'&&artwork.length>=2&&artwork.length<=4?'иллюстрации':tr.units;
  const artworkHtml=artwork.length?'<section class="catalog-official-art"><details>'+
-  '<summary><span>'+esc(tr.label)+'</span><small>'+artwork.length+' '+esc(tr.units)+'</small></summary>'+
+  '<summary><span>'+esc(tr.label)+'</span><small>'+artwork.length+' '+esc(artworkUnit)+'</small></summary>'+
   '<p>'+esc(tr.note)+'</p><div class="catalog-official-art-grid">'+artwork.map((item,i)=>
     '<button type="button" class="catalog-feature-preview" data-feature-image="'+i+'" aria-label="'+esc(tr.zoom+': '+item.title[lang])+'">'+
      '<img loading="lazy" decoding="async" src="'+esc(item.image)+'" alt="'+esc(item.title[lang])+'">'+
