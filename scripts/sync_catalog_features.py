@@ -108,7 +108,7 @@ def run() -> None:
                 print(f"VERIFIED manufacturer illustration {product_id}/{slot}")
             except (ValueError, requests.RequestException, OSError, UnidentifiedImageError) as error:
                 print(f"SKIP unreliable manufacturer illustration {product_id}/{slot}: {error}")
-        if len(features) < 2:
+        if len(features) != len(product["features"]):
             old_features = prior.get("features", [])
             if len(old_features) >= 2 and all(
                 (ROOT / it["image"]).is_file() for it in old_features
@@ -116,6 +116,12 @@ def run() -> None:
                 records.append(prior)
                 print(f"KEEP last verified manufacturer visuals for {product_id}")
             else:
+                # Incomplete groups remain unpublished, and any partially
+                # downloaded unverified files stay out of the public repository.
+                for image in features:
+                    path = ROOT / image["image"]
+                    if path.is_file():
+                        path.unlink()
                 print(f"DEFER feature media for {product_id}: only {len(features)} of "
                       f"{len(product['features'])} official files reachable. Main product photos are unchanged.")
             continue
