@@ -292,5 +292,5 @@
       "metric": 22.93
     }
   ],
-  "note": "Perceptual matching requires both hash and low RGB difference, so distinct angles are retained."
+  "note": "Rejects confirmed advertisements and wide saturated promo banners; retains genuine elongated product shots. Exact and perceptual duplicate checks also apply."
 }
