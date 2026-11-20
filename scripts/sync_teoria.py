@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Import the actual Israeli Ministry of Transport driving-theory Q&A bank.
 
-Source: data.gov.il tqru/tqhe/tqen CC BY datasets. Only answers explicitly
+Source: data.gov.il tqru/tqhe/tqen/tqar CC BY datasets. Only answers explicitly
 marked by "correctAnswerNNNN" in official source are used. No invented tickets.
 All questions are copied as learning material with Ministry attribution.
 """
@@ -18,7 +18,7 @@ from bs4 import BeautifulSoup
 
 BASE="https://data.gov.il"
 OUT=Path("assets/teoria")
-LANGS={"ru":"tqru","he":"tqhe","en":"tqen"}
+LANGS={"ru":"tqru","he":"tqhe","en":"tqen","ar":"tqar"}
 S=requests.Session()
 S.headers.update({"User-Agent":"NEOLINE-Israel-Educational-Theory/1.0 (+source: data.gov.il)", "Accept":"application/json"})
 LICENSE="Creative Commons Attribution (CC BY)"
@@ -78,9 +78,9 @@ def resource_rows(info):
     raise RuntimeError("No validated official question resource: "+"; ".join(errors[:4]))
 def category(value):
     t=str(value or "").lower()
-    if any(x in t for x in ("תמרור","traffic sign","road sign","дорожные знаки","дорожные зна","знаки", "signs")):return "signs"
-    if any(x in t for x in ("בטיחות","safety","безопасност","veilig")):return "safety"
-    if any(x in t for x in ("רכב","vehicle","автомобил","транспортного средства","устройство")):return "vehicle"
+    if any(x in t for x in ("תמרור","traffic sign","road sign","дорожные знаки","дорожные зна","знаки", "signs","إشارات","اشارات","الإشارات","الاشارات","علامات المرور","شاخصات")):return "signs"
+    if any(x in t for x in ("בטיחות","safety","безопасност","veilig","السلامة","الأمان","الامان")):return "safety"
+    if any(x in t for x in ("רכב","vehicle","автомобил","транспортного средства","устройство","المركبة","السيارة","معرفة السيارة","معرفة المركبة")):return "vehicle"
     return "laws"
 def strip(v):
     return re.sub(r"\s+"," ",str(v or "")).strip()
@@ -145,18 +145,21 @@ def main():
         results[lang]=result
         print("VALIDATED",lang,len(ordered),"B",sum("B" in x["classes"] for x in ordered),
               "with images",sum(bool(x["image"]) for x in ordered),flush=True)
-    # The Russian official spreadsheet omits image tags for many sign
+    # The Russian and Arabic official spreadsheets can omit image tags for some sign
     # questions. Reuse ONLY the original government photo from the exact
     # same official numeric question ID in Hebrew/English, never stock photos.
     official_images={q["id"]:q["image"] for lang in ("he","en")
                      for q in results[lang]["questions"] if q["image"]}
     inherited=0
-    for q in results["ru"]["questions"]:
-        if not q["image"] and official_images.get(q["id"]):
-            q["image"]=official_images[q["id"]]
-            inherited+=1
-    print("Russian bank recovered",inherited,"original gov.il sign/road images by matching official question ID",flush=True)
-    # Commit only once all three original-language banks are valid.
+    for language in ("ru","ar"):
+        restored=0
+        for q in results[language]["questions"]:
+            if not q["image"] and official_images.get(q["id"]):
+                q["image"]=official_images[q["id"]]
+                restored+=1
+        inherited+=restored
+        print(language,"bank recovered",restored,"original gov.il images by matching official question ID",flush=True)
+    # Commit only once all four original-language banks are validated.
     for lang,record in results.items():
         (OUT/(lang+".json")).write_text(json.dumps(record,ensure_ascii=False,separators=(",",":"))+"\n",encoding="utf8")
     (OUT/"manifest.json").write_text(json.dumps({
@@ -164,7 +167,7 @@ def main():
         "languages":{lang:{"count":item["total"],"classB":sum("B" in q["classes"] for q in item["questions"]),
                            "imageCount":sum(bool(q["image"]) for q in item["questions"])}
                      for lang,item in results.items()},
-        "source":"https://data.gov.il/he/datasets/ministry_of_transport/tqru",
+        "source":"https://data.gov.il/he/datasets/ministry_of_transport/tqar",
         "license":LICENSE,"publisher":"Israel Ministry of Transport and Road Safety"
     },ensure_ascii=False,indent=2)+"\n",encoding="utf8")
     print("TEORIA OFFICIAL DATASET SYNC COMPLETE",flush=True)
