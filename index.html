@@ -2317,6 +2317,9 @@ html[dir=rtl] .theory-preview{text-align:right}
  .header #mobileCart{width:28px}
 }
 
+/* Artwork on each carousel slide links to its primary destination. */
+#showcaseSlides .featured-image.showcase-click-target{cursor:pointer;-webkit-tap-highlight-color:transparent}
+#showcaseSlides .featured-image.showcase-click-target:focus-visible{outline:3px solid #1585cf;outline-offset:4px}
 </style><link rel="stylesheet" href="./showcase-how.css?v=20261120-promo-how-v1"><link rel="stylesheet" href="./showcase-newsroom.css?v=20261120-news-clicks-v2"><link rel="stylesheet" href="./site-header.css?v=20261118-flag-fix-v3"><link rel="stylesheet" href="./catalog-sort.css?v=20261120-left-popup-v3"><link rel="stylesheet" href="./catalog-ui.css?v=20261120-official-features-v5"><link rel="stylesheet" href="./catalog-video.css?v=20261120-reels-tutorials-v1"><link rel="stylesheet" href="./catalog-video-guides.css?v=20261120-verified-v1"><link rel="stylesheet" href="./advantages-compact.css?v=20261120-compact-v1"><link rel="stylesheet" href="./device-updates.css?v=20261120-europe-v1"><link rel="stylesheet" href="./road-demo.css?v=20261120-road-wider-v3"><link rel="stylesheet" href="./road-demo-premium.css?v=20261120-rear-bottom-v7"><link rel="stylesheet" href="./smart-hub.css?v=20261120-hub-v2"><link rel="stylesheet" href="./smart-hub-picker.css?v=20261120-card-tight-v3"><link rel="stylesheet" href="./smart-hub-tray.css?v=20261120-tray-v1"><link rel="stylesheet" href="./neoline-academy.css?v=20261120-guided-v2"><link rel="stylesheet" href="./pickup-ui.css"><link rel="stylesheet" href="./road-demo-entry.css?v=20261120-two-cta-v1"><!-- Cloudflare Pages Git reconnection deployment probe: 2026-11-16 --><link rel="stylesheet" href="./nav-current.css?v=20261118-active-nav-v1"></head><body>
 <div class="sticky neoline-site-header"><div class="shell header neoline-site-header__inner"><a class="brand brand-original neoline-site-header__logo" href="#top" aria-label="NEOLINE"><span class="brand-lockup"><img class="brand-clean" src="assets/neoline-clean.svg?v=20261116-compact" alt="NEOLINE" width="501" height="108" decoding="async"></span></a><nav class="nav"><button data-scroll="catalog" class="active" data-i="navCatalog">Каталог</button><button type="button" id="openNewsHeader" aria-label="Автоновости Израиля"><span id="headerNewsLabel">Новости</span></button><button data-scroll="advantages" data-i="navBenefits">Преимущества</button><button data-scroll="installation" data-i="navInstall">Установка и доставка</button><button data-scroll="footer" data-i="navContact">Контакты</button></nav><div class="head-actions neoline-site-header__actions"><div class="neoline-site-header__flags" role="group" aria-label="Язык / Language / שפה / اللغة"><button class="neoline-site-header__flag active" type="button" data-language="ru" title="Русский" aria-label="Русский язык" aria-pressed="true"><span class="flag-graphic" aria-hidden="true"><svg viewBox="0 0 36 24" xmlns="http://www.w3.org/2000/svg" focusable="false"><rect width="36" height="24" fill="#fff"/><path d="M0 8h36v8H0z" fill="#0039a6"/><path d="M0 16h36v8H0z" fill="#d52b1e"/></svg></span></button><button class="neoline-site-header__flag" type="button" data-language="he" title="עברית" aria-label="עברית - Hebrew" aria-pressed="false"><span class="flag-graphic" aria-hidden="true"><img src="./assets/flag-israel.svg?v=20261118-fixed-star-v1" width="36" height="24" loading="eager" alt="" aria-hidden="true"></span></button><button class="neoline-site-header__flag" type="button" data-language="en" title="English" aria-label="English language" aria-pressed="false"><span class="flag-graphic" aria-hidden="true"><svg viewBox="0 0 36 24" xmlns="http://www.w3.org/2000/svg" focusable="false"><rect width="36" height="24" fill="#012169"/><path d="M0 0l36 24M36 0L0 24" stroke="#fff" stroke-width="6"/><path d="M0 0l36 24M36 0L0 24" stroke="#c8102e" stroke-width="2.5"/><path d="M18 0v24M0 12h36" stroke="#fff" stroke-width="9"/><path d="M18 0v24M0 12h36" stroke="#c8102e" stroke-width="4.6"/></svg></span></button><button class="neoline-site-header__flag neoline-site-header__flag--ar" type="button" data-language="ar" title="العربية" aria-label="اللغة العربية" aria-pressed="false" lang="ar" dir="rtl">عربي</button></div><select class="language language-native neoline-site-header__native-select" id="lang" aria-label="Language" tabindex="-1"><option value="ru">RU</option><option value="he">עברית</option><option value="en">ENG</option><option value="ar">العربية</option></select><button id="mobileCart" class="mobile-action-with-count neoline-site-header__cart" aria-label="Корзина"><span class="mobile-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 8h14l1.2 13H3.8L5 8Z"/><path d="M9 9V6a3 3 0 0 1 6 0v3"/></svg></span><span data-i="mobileCart">Корзина</span><span class="mobile-counter" id="mobileCartCount" hidden>0</span></button></div></div></div>
 <main id="top"><section class="showcase" aria-label="Featured products"><div class="hero-stage"><div id="showcaseSlides" aria-live="polite"></div><div class="showcase-controls"><button class="showcase-arrow" id="slidePrev" aria-label="Previous">‹</button><div id="showcaseDots" class="showcase-dots"></div><button class="showcase-arrow" id="slideNext" aria-label="Next">›</button></div><div class="sneak" aria-label="Highlights"><span>NEOLINE ISRAEL · CONCEPT</span><span>◉ 4K · 2K · Wi-Fi</span><span>🚙 Dash cams</span><span>₪ Estimated local pricing</span></div></div></section>
@@ -2750,7 +2753,6 @@ function firstIsraelSlide(){
   +'<span class="feature-img-fallback" hidden>'+deviceSvg('dualargus')+'</span>'
   +'<button class="feature-img-prev" type="button" data-feature-prev aria-label="Previous slide">‹</button>'
   +'<button class="feature-img-next" type="button" data-feature-next aria-label="Next slide">›</button>'
-  +'<button class="feature-img-zoom" type="button" data-feature-zoom="6" aria-label="Argus 4K Dual photos">↗</button>'
   +'</div></article>';
 }
 
@@ -3163,7 +3165,6 @@ function renderShowcase(){
    +'<span class="feature-img-fallback" hidden>'+deviceSvg(p.shape)+'</span>'
    +'<button class="feature-img-prev" type="button" data-feature-prev aria-label="Previous model">‹</button>'
    +'<button class="feature-img-next" type="button" data-feature-next aria-label="Next model">›</button>'
-   +'<button class="feature-img-zoom" type="button" data-feature-zoom="'+id+'" aria-label="View '+p.name+' photos">↗</button>'
    +'</div></article>';
  }).join('');
  // Wrap the two halves of each slide in ONE movable, grid/flex-matched stage.
@@ -3176,6 +3177,38 @@ function renderShowcase(){
   flight.className='feature-slide-flight';
   copy.before(flight);
   flight.append(copy,picture);
+  // Touching the picture follows the slide's primary action, while navigation arrows
+  // and horizontal swipes keep their original carousel behavior.
+  const primary=copy.querySelector('.featured-cta .primary');
+  if(primary){
+   picture.classList.add('showcase-click-target');
+   picture.tabIndex=0;
+   picture.setAttribute('role',primary.tagName==='A'?'link':'button');
+   picture.setAttribute('aria-label',primary.textContent.trim()+' — '+(slide.getAttribute('aria-label')||'NEOLINE'));
+   let touchStartX=0,touchStartY=0,ignoreClickUntil=0;
+   picture.addEventListener('touchstart',event=>{
+    const touch=event.touches[0];
+    if(touch){touchStartX=touch.clientX;touchStartY=touch.clientY;}
+   },{passive:true});
+   picture.addEventListener('touchend',event=>{
+    const touch=event.changedTouches[0];
+    if(touch&&(Math.abs(touch.clientX-touchStartX)>24||Math.abs(touch.clientY-touchStartY)>24))ignoreClickUntil=Date.now()+550;
+   },{passive:true});
+   const activate=()=>{
+    if(slide.classList.contains('active')&&!slide.classList.contains('ad-exiting'))primary.click();
+   };
+   picture.addEventListener('click',event=>{
+    if(Date.now()<ignoreClickUntil)return;
+    const nestedAction=event.target.closest('button,a');
+    if(nestedAction&&picture.contains(nestedAction))return;
+    activate();
+   });
+   picture.addEventListener('keydown',event=>{
+    if(event.target!==picture||!['Enter',' '].includes(event.key))return;
+    event.preventDefault();
+    activate();
+   });
+  }
  });
  host.querySelectorAll('.featured-slide:not(.active)').forEach(el=>el.setAttribute('inert',''));
  alignShowcaseMotion(host.querySelector('.featured-slide.active'));
@@ -3184,7 +3217,6 @@ function renderShowcase(){
  host.querySelectorAll('[data-open-feature]').forEach(el=>el.onclick=()=>openProduct(Number(el.dataset.openFeature)));
  host.querySelectorAll('[data-feature-catalog]').forEach(el=>el.onclick=()=>document.getElementById('catalog').scrollIntoView({behavior:'smooth'}));
  host.querySelectorAll('[data-add-feature]').forEach(el=>el.onclick=()=>add(Number(el.dataset.addFeature)));
- host.querySelectorAll('[data-feature-zoom]').forEach(el=>el.onclick=()=>openProduct(Number(el.dataset.featureZoom)));
  host.querySelectorAll('[data-feature-prev]').forEach(el=>el.onclick=()=>setSlide(slideIndex-1));
  host.querySelectorAll('[data-feature-next]').forEach(el=>el.onclick=()=>setSlide(slideIndex+1));
  $('showcaseDots').querySelectorAll('[data-dot]').forEach(el=>el.onclick=()=>setSlide(Number(el.dataset.dot)));
