@@ -22,7 +22,7 @@ const words={
  match:"Подходит по характеристикам",open:"Подробнее",compare:"Сравнить",resultNote:"Подбор основан на опубликованных характеристиках производителя. Это не рейтинг качества и не рекомендация о покупке.",
  compareTitle:"Сравните до 3 моделей",compareIntro:"Различия видны сразу. Все значения взяты из карточек производителя.",model:"Модель",
  choose:"Выберите модель",third:"Третья модель (необязательно)",already:"Модели не должны повторяться.",compareNote:"Данные из описаний NEOLINE. Наличие функций, комплектация и совместимость зависят от версии устройства и региона. Цены магазина демонстрационные.",
- ownerTitle:"Ваш NEOLINE + Академия",ownerIntro:"Сохраните устройство на этом телефоне: руководство, проверенные параметры и обновления будут рядом.",
+ academyGo:"Открыть NEOLINE Academy",ownerTitle:"Ваш NEOLINE + Академия",ownerIntro:"Сохраните устройство на этом телефоне: руководство, проверенные параметры и обновления будут рядом.",
  ownerPick:"Ваше устройство",save:"Сохранить на этом устройстве",saved:"Сохранено в этом браузере · без регистрации",manual:"Руководство производителя (RU) ↗",source:"Официальная карточка ↗",updates:"Обновления и приложения",updateHide:"Скрыть обновления",
  lessons:["Первое подключение","Приложение и Wi-Fi","Прошивки и поддержка"],lessonText:["Выберите место установки, закрепите регистратор и проверьте питание. Следуйте инструкции именно своей модели.","Смотрите название приложения в характеристиках модели. Перед подключением проверьте настройки Wi-Fi.","Устанавливайте только прошивку для точной модели, аппаратной версии и региона; не отключайте питание."],
  academyNote:"Это краткая памятка, а не замена официальной инструкции. Видеоуроки можно открыть в карточке соответствующей модели.",
@@ -34,7 +34,7 @@ const words={
  match:"Matches your preferences",open:"Explore details",compare:"Compare",resultNote:"Matching is based on manufacturer specifications, not independent testing or a purchase endorsement.",
  compareTitle:"Compare up to 3 models",compareIntro:"Explore the differences, using published device specifications.",model:"Model",
  choose:"Select a model",third:"Third model (optional)",already:"Select different models.",compareNote:"Manufacturer specifications. Features, box contents and regional compatibility may vary. Store prices are illustrative.",
- ownerTitle:"Your NEOLINE + Academy",ownerIntro:"Keep a device profile on this phone, with manuals, specifications and update support.",
+ academyGo:"Open NEOLINE Academy",ownerTitle:"Your NEOLINE + Academy",ownerIntro:"Keep a device profile on this phone, with manuals, specifications and update support.",
  ownerPick:"Your device",save:"Save on this device",saved:"Saved in this browser · no account needed",manual:"Manufacturer manual (RU) ↗",source:"Official product page ↗",updates:"Updates and apps",updateHide:"Hide updates",
  lessons:["First-time setup","App and Wi-Fi","Firmware and support"],lessonText:["Mount securely, connect suitable power and follow the exact model's manual.","Check which app the model uses and follow its Wi-Fi pairing instructions.","Only use firmware for the exact model, hardware revision and region; keep power connected."],
  academyNote:"A quick guide, not a replacement for official instructions. Open the product details for its videos.",
@@ -46,7 +46,7 @@ const words={
  match:"מתאים להעדפות",open:"לפרטים",compare:"השוואה",resultNote:"ההתאמה מבוססת על מפרט היצרן, ולא על בדיקה עצמאית או המלצת רכישה.",
  compareTitle:"השוו עד 3 דגמים",compareIntro:"הבדלים לפי מאפייני היצרן.",model:"דגם",
  choose:"בחרו דגם",third:"דגם שלישי (לא חובה)",already:"יש לבחור דגמים שונים.",compareNote:"מפרט היצרן. התכונות והתאימות עשויות להשתנות לפי אזור וגרסת חומרה. המחירים באתר להמחשה בלבד.",
- ownerTitle:"ה-NEOLINE שלי + הדרכה",ownerIntro:"שמרו את הדגם בטלפון וצפו במדריך ובמידע על עדכונים.",
+ academyGo:"פתיחת NEOLINE Academy",ownerTitle:"ה-NEOLINE שלי + הדרכה",ownerIntro:"שמרו את הדגם בטלפון וצפו במדריך ובמידע על עדכונים.",
  ownerPick:"המכשיר שלכם",save:"שמירה במכשיר",saved:"נשמר בדפדפן · ללא הרשמה",manual:"מדריך יצרן (רוסית) ↗",source:"דף הדגם הרשמי ↗",updates:"עדכונים ואפליקציות",updateHide:"הסתרת עדכונים",
  lessons:["חיבור ראשון","אפליקציה ו-Wi-Fi","קושחה ותמיכה"],lessonText:["התקינו את המצלמה, חברו מתח מתאים ופעלו לפי המדריך לדגם המדויק.","בדקו במפרט מהו שם האפליקציה ואת הוראות החיבור לרשת.","השתמשו רק בקושחה המתאימה לדגם, לגרסת החומרה ולאזור. אין לנתק מתח במהלך העדכון."],
  academyNote:"הסבר מקוצר בלבד, לא תחליף למדריך הרשמי. סרטונים זמינים בפרטי הדגם.",
@@ -58,7 +58,7 @@ const words={
  match:"متوافق مع التفضيلات",open:"تفاصيل",compare:"مقارنة",resultNote:"الاختيار يعتمد على مواصفات الشركة ولا يمثل اختباراً مستقلاً أو توصية شراء.",
  compareTitle:"قارن حتى 3 طرازات",compareIntro:"اطّلع على الفروق وفق مواصفات الشركة المصنعة.",model:"الطراز",
  choose:"اختر طرازاً",third:"الطراز الثالث (اختياري)",already:"اختر طرازات مختلفة.",compareNote:"المعلومات من الشركة. قد تختلف الميزات والتوافق حسب المنطقة وإصدار الجهاز. الأسعار توضيحية فقط.",
- ownerTitle:"جهازي + الأكاديمية",ownerIntro:"احفظ جهازك في هذا الهاتف للرجوع إلى الدليل والتحديثات.",
+ academyGo:"فتح NEOLINE Academy",ownerTitle:"جهازي + الأكاديمية",ownerIntro:"احفظ جهازك في هذا الهاتف للرجوع إلى الدليل والتحديثات.",
  ownerPick:"جهازك",save:"حفظ على هذا الجهاز",saved:"محفوظ في المتصفح · دون حساب",manual:"دليل الشركة (بالروسية) ↗",source:"صفحة المنتج الرسمية ↗",updates:"التحديثات والتطبيقات",updateHide:"إخفاء التحديثات",
  lessons:["الإعداد لأول مرة","التطبيق وWi-Fi","البرامج الثابتة والدعم"],lessonText:["ثبّت الكاميرا ووصل التغذية المناسبة واتبع دليل طرازك المحدد.","تحقق من اسم التطبيق وإرشادات الاتصال بالشبكة حسب الطراز.","استخدم فقط البرامج الثابتة المتوافقة مع الطراز وإصدار العتاد والمنطقة. لا تفصل الطاقة أثناء التحديث."],
  academyNote:"دليل مختصر لا يغني عن تعليمات الشركة الرسمية. يمكن فتح فيديوهات المنتج من تفاصيله.",
@@ -220,7 +220,7 @@ function ownerPanel(){
  '<div class="hub-owner-tags">'+facts.map(v=>'<span>'+esc(v.label)+': '+esc(v.value)+'</span>').join("")+'</div>'+
  '<div class="hub-owner-actions">'+link(p.source,t.source)+(p.manual?link(p.manual,t.manual):'<span class="hub-inline-note">'+esc(t.noManual)+'</span>')+
  '<button type="button" class="hub-link" data-hub-updates>'+esc(showUpdates?t.updateHide:t.updates)+'</button>'+
- '<button type="button" class="hub-link" data-hub-open="'+(id||1)+'">'+esc(t.details)+'</button></div>'+
+ '<button type="button" class="hub-link" data-hub-open="'+(id||1)+'">'+esc(t.details)+'</button>'+'<button type="button" class="hub-link" data-hub-academy="'+(id||1)+'">🎓 '+esc(t.academyGo)+'</button></div>'+
  (id===savedDevice?'<p class="hub-inline-note">'+esc(t.saved)+'</p>':"")+
  (showUpdates&&window.NEOLINE_DEVICE_UPDATES?.render?'<div class="hub-update-details">'+window.NEOLINE_DEVICE_UPDATES.render(id||1,locale())+'</div>':"")+
  '</div>';
@@ -300,8 +300,10 @@ root.addEventListener("click",event=>{
   if(!ids.includes(current))return;
   device=current;
   try{localStorage.setItem(savedKey,String(device));savedDevice=device}catch(_){}
+  window.dispatchEvent(new CustomEvent('neoline:device-saved',{detail:{id:device}}));
   render();return;
  }
+ if(button.matches("[data-hub-academy]")){window.NEOLINE_ACADEMY?.open?.(Number(button.dataset.hubAcademy));return}
  if(button.matches("[data-hub-updates]")){showUpdates=!showUpdates;render();return}
 });
 document.getElementById("products")?.addEventListener("click",event=>{
