@@ -850,133 +850,192 @@ html[dir=rtl] .news-feature-credit{right:auto;left:12px}
  .news-feature-backdrop .news-feature-pattern{animation:none!important}
 }
 
-/* 2026-11-20 — real broadcast scene masks instead of colored-layer motion.
-   Full frames (text + gradients + graphic accents) transition through five
-   different TV-news-inspired geometric wipes. CSS only, no added assets. */
+
+/* 2026-11-20: NEOLINE broadcast masks, independent colored backdrop.
+   Always reserve the entire foreground for the headline; geometry wipes
+   and color accents touch the background ONLY. Five composited transitions. */
 #newsFeatureSlide{isolation:isolate}
-#newsFeatureSlide .news-scene{
- position:absolute;inset:0;width:100%;height:100%;
- animation:none;overflow:hidden;
- background:transparent;
+#newsFeatureSlide .news-broadcast-stage{
+ position:absolute;inset:0;z-index:1;pointer-events:none;
+ display:block;overflow:hidden;isolation:isolate;
 }
-#newsFeatureSlide .news-scene--current{z-index:3}
-#newsFeatureSlide .news-scene--leaving{z-index:1;pointer-events:none}
-#newsFeatureSlide .news-scene--queued{z-index:2;visibility:hidden;pointer-events:none}
-#newsFeatureSlide .news-scene--fragment{
- z-index:4;pointer-events:none;will-change:transform;
- animation-duration:.66s;animation-timing-function:cubic-bezier(.25,.8,.26,1);
+#newsFeatureSlide .news-bg-layer{
+ position:absolute;inset:0;display:block;width:100%;height:100%;
+ transform:none;overflow:hidden;
+}
+#newsFeatureSlide .news-bg--current{z-index:2}
+#newsFeatureSlide .news-bg--previous{z-index:1}
+#newsFeatureSlide .news-bg--queued{z-index:2;visibility:hidden}
+#newsFeatureSlide .news-broadcast-foreground{
+ position:absolute;inset:0;z-index:12;
+ animation:none;background:transparent;
+}
+#newsFeatureSlide .news-broadcast-foreground .news-feature-copy{
+ position:absolute;z-index:6;animation:none;transform:none;
+}
+#newsFeatureSlide .news-bg-layer .news-feature-pattern{
+ position:absolute;z-index:2;animation:neolineNewsDots 16s ease-in-out infinite alternate;
+}
+#newsFeatureSlide .news-bg-layer .news-feature-blueprint{position:absolute;z-index:2}
+#newsFeatureSlide[data-news-theme="accidents"]{
+ --news-stripe:rgba(181,210,224,.78);--news-stripe-soft:rgba(228,173,129,.37);
+}
+#newsFeatureSlide[data-news-theme="laws"]{
+ --news-stripe:rgba(180,183,238,.8);--news-stripe-soft:rgba(105,154,214,.36);
+}
+#newsFeatureSlide[data-news-theme="speed"]{
+ --news-stripe:rgba(97,209,245,.81);--news-stripe-soft:rgba(143,224,246,.37);
+}
+#newsFeatureSlide[data-news-theme="roads"]{
+ --news-stripe:rgba(109,209,209,.79);--news-stripe-soft:rgba(147,235,216,.37);
+}
+#newsFeatureSlide[data-news-theme="cars"]{
+ --news-stripe:rgba(165,201,237,.79);--news-stripe-soft:rgba(109,179,220,.38);
+}
+/* Full background opens through irregular diagonal and geometric masks. */
+#newsFeatureSlide .news-bg-wipe{
+ z-index:3;visibility:visible;
+ animation-duration:.75s;
+ animation-timing-function:cubic-bezier(.23,.8,.28,1);
+ animation-fill-mode:both;
+ will-change:clip-path;
+}
+#newsFeatureSlide .news-bg-wipe--diagonal.news-bg-from-next{animation-name:newsBgDiagonalNext}
+#newsFeatureSlide .news-bg-wipe--diagonal.news-bg-from-prev{animation-name:newsBgDiagonalPrev}
+#newsFeatureSlide .news-bg-wipe--chevron.news-bg-from-next{animation-name:newsBgChevronNext}
+#newsFeatureSlide .news-bg-wipe--chevron.news-bg-from-prev{animation-name:newsBgChevronPrev}
+#newsFeatureSlide .news-bg-wipe--diamond{animation-name:newsBgDiamond;animation-duration:.8s}
+@keyframes newsBgDiagonalNext{
+ 0%{clip-path:polygon(130% 0,150% 0,150% 100%,130% 100%)}
+ 50%{clip-path:polygon(37% 0,140% 0,140% 100%,67% 100%)}
+ 100%{clip-path:polygon(-55% 0,140% 0,140% 100%,-20% 100%)}
+}
+@keyframes newsBgDiagonalPrev{
+ 0%{clip-path:polygon(-50% 0,-30% 0,-50% 100%,-50% 100%)}
+ 50%{clip-path:polygon(-30% 0,63% 0,33% 100%,-30% 100%)}
+ 100%{clip-path:polygon(-40% 0,155% 0,120% 100%,-40% 100%)}
+}
+@keyframes newsBgChevronNext{
+ 0%{clip-path:polygon(120% 0,145% 0,160% 50%,145% 100%,120% 100%)}
+ 50%{clip-path:polygon(20% 0,140% 0,155% 50%,140% 100%,20% 100%)}
+ 100%{clip-path:polygon(-45% 0,140% 0,155% 50%,140% 100%,-45% 100%)}
+}
+@keyframes newsBgChevronPrev{
+ 0%{clip-path:polygon(-45% 0,-20% 0,-35% 50%,-20% 100%,-45% 100%)}
+ 50%{clip-path:polygon(-40% 0,80% 0,65% 50%,80% 100%,-40% 100%)}
+ 100%{clip-path:polygon(-40% 0,145% 0,130% 50%,145% 100%,-40% 100%)}
+}
+@keyframes newsBgDiamond{
+ 0%{clip-path:polygon(50% 50%,50% 50%,50% 50%,50% 50%)}
+ 46%{clip-path:polygon(50% -12%,118% 50%,50% 112%,-18% 50%)}
+ 100%{clip-path:polygon(50% -140%,225% 50%,50% 240%,-125% 50%)}
+}
+/* Broadcast ribbons are slices of the BACKGROUND gradient only.
+   Decorative glint lines use their own translucent color separately. */
+#newsFeatureSlide .news-bg-fragment{
+ z-index:3;visibility:visible;will-change:transform;
+ animation-duration:.70s;
+ animation-timing-function:cubic-bezier(.22,.85,.33,1);
  animation-delay:var(--news-mask-delay,0ms);animation-fill-mode:both;
 }
-#newsFeatureSlide .news-scene>.news-feature-backdrop{
- position:absolute;inset:0;z-index:0;display:block;
- transform:none;animation:none;
-}
-#newsFeatureSlide .news-scene .news-feature-pattern{
- animation:neolineNewsDots 16s ease-in-out infinite alternate;
-}
-#newsFeatureSlide .news-scene .news-feature-copy{
- z-index:4;transform:none;animation:none;
-}
-#newsFeatureSlide .news-scene--wipe{
- z-index:4;will-change:clip-path;
- animation-duration:.76s;animation-timing-function:cubic-bezier(.32,.02,.22,1);
- animation-fill-mode:both;
-}
-#newsFeatureSlide .news-scene--wipe-diagonal.news-scene--from-next{animation-name:neolineMaskDiagonalRight}
-#newsFeatureSlide .news-scene--wipe-diagonal.news-scene--from-prev{animation-name:neolineMaskDiagonalLeft}
-#newsFeatureSlide .news-scene--wipe-chevron.news-scene--from-next{animation-name:neolineMaskChevronRight}
-#newsFeatureSlide .news-scene--wipe-chevron.news-scene--from-prev{animation-name:neolineMaskChevronLeft}
-#newsFeatureSlide .news-scene--wipe-diamond{animation-name:neolineMaskDiamond;animation-duration:.8s}
-/* Diagonal blade wipes the entire outgoing scene, including the headline. */
-@keyframes neolineMaskDiagonalRight{
- 0%{clip-path:polygon(125% 0,150% 0,150% 100%,150% 100%)}
- 46%{clip-path:polygon(39% 0,120% 0,120% 100%,79% 100%)}
- 100%{clip-path:polygon(-44% 0,120% 0,120% 100%,-6% 100%)}
-}
-@keyframes neolineMaskDiagonalLeft{
- 0%{clip-path:polygon(-50% 0,-25% 0,-50% 100%,-50% 100%)}
- 46%{clip-path:polygon(-20% 0,61% 0,21% 100%,-20% 100%)}
- 100%{clip-path:polygon(-20% 0,144% 0,106% 100%,-20% 100%)}
-}
-/* The chevron keeps a pointed reveal edge, rather than a flat sliding panel. */
-@keyframes neolineMaskChevronRight{
- 0%{clip-path:polygon(125% 0,145% 0,160% 50%,145% 100%,125% 100%)}
- 54%{clip-path:polygon(30% 0,120% 0,136% 50%,120% 100%,30% 100%)}
- 100%{clip-path:polygon(-28% 0,120% 0,140% 50%,120% 100%,-28% 100%)}
-}
-@keyframes neolineMaskChevronLeft{
- 0%{clip-path:polygon(-45% 0,-25% 0,-40% 50%,-25% 100%,-45% 100%)}
- 54%{clip-path:polygon(-20% 0,70% 0,54% 50%,70% 100%,-20% 100%)}
- 100%{clip-path:polygon(-20% 0,128% 0,112% 50%,128% 100%,-20% 100%)}
-}
-/* Center-to-corners iris, like a camera vision-mixer diamond matte. */
-@keyframes neolineMaskDiamond{
- 0%{clip-path:polygon(50% 50%,50% 50%,50% 50%,50% 50%)}
- 48%{clip-path:polygon(50% -9%,116% 50%,50% 109%,-16% 50%)}
- 100%{clip-path:polygon(50% -115%,205% 50%,50% 215%,-105% 50%)}
-}
-/* Angled fragments reconstruct the entire second frame in five staggered
-   diagonal strips. They are not decorative bands over the old frame. */
-#newsFeatureSlide .news-scene--fragment-ribbons.news-scene--part-0{
+#newsFeatureSlide .news-bg-fragment--ribbons.news-bg-part-0{
  clip-path:polygon(-25% 0,0 0,25% 100%,0 100%)
 }
-#newsFeatureSlide .news-scene--fragment-ribbons.news-scene--part-1{
+#newsFeatureSlide .news-bg-fragment--ribbons.news-bg-part-1{
  clip-path:polygon(0 0,25% 0,50% 100%,25% 100%)
 }
-#newsFeatureSlide .news-scene--fragment-ribbons.news-scene--part-2{
+#newsFeatureSlide .news-bg-fragment--ribbons.news-bg-part-2{
  clip-path:polygon(25% 0,50% 0,75% 100%,50% 100%)
 }
-#newsFeatureSlide .news-scene--fragment-ribbons.news-scene--part-3{
+#newsFeatureSlide .news-bg-fragment--ribbons.news-bg-part-3{
  clip-path:polygon(50% 0,75% 0,100% 100%,75% 100%)
 }
-#newsFeatureSlide .news-scene--fragment-ribbons.news-scene--part-4{
+#newsFeatureSlide .news-bg-fragment--ribbons.news-bg-part-4{
  clip-path:polygon(75% 0,100% 0,125% 100%,100% 100%)
 }
-#newsFeatureSlide .news-scene--fragment-shutters.news-scene--part-0{
+#newsFeatureSlide .news-bg-fragment--shutters.news-bg-part-0{
  clip-path:polygon(0 0,100% 0,100% 20%,0 20%)
 }
-#newsFeatureSlide .news-scene--fragment-shutters.news-scene--part-1{
+#newsFeatureSlide .news-bg-fragment--shutters.news-bg-part-1{
  clip-path:polygon(0 20%,100% 20%,100% 40%,0 40%)
 }
-#newsFeatureSlide .news-scene--fragment-shutters.news-scene--part-2{
+#newsFeatureSlide .news-bg-fragment--shutters.news-bg-part-2{
  clip-path:polygon(0 40%,100% 40%,100% 60%,0 60%)
 }
-#newsFeatureSlide .news-scene--fragment-shutters.news-scene--part-3{
+#newsFeatureSlide .news-bg-fragment--shutters.news-bg-part-3{
  clip-path:polygon(0 60%,100% 60%,100% 80%,0 80%)
 }
-#newsFeatureSlide .news-scene--fragment-shutters.news-scene--part-4{
+#newsFeatureSlide .news-bg-fragment--shutters.news-bg-part-4{
  clip-path:polygon(0 80%,100% 80%,100% 100%,0 100%)
 }
-#newsFeatureSlide .news-scene--fragment-ribbons.news-scene--from-next{animation-name:neolineMaskStripFromRight}
-#newsFeatureSlide .news-scene--fragment-ribbons.news-scene--from-prev{animation-name:neolineMaskStripFromLeft}
-#newsFeatureSlide .news-scene--fragment-shutters.news-scene--from-next{animation-name:neolineMaskStripFromRight}
-#newsFeatureSlide .news-scene--fragment-shutters.news-scene--from-prev{animation-name:neolineMaskStripFromLeft}
-#newsFeatureSlide .news-scene--fragment-shutters.news-scene--part-1,
-#newsFeatureSlide .news-scene--fragment-shutters.news-scene--part-3{
- animation-name:neolineMaskStripFromLeft
+#newsFeatureSlide .news-bg-fragment.news-bg-from-next{animation-name:newsBgStripFromRight}
+#newsFeatureSlide .news-bg-fragment.news-bg-from-prev{animation-name:newsBgStripFromLeft}
+#newsFeatureSlide .news-bg-fragment--shutters.news-bg-part-1,
+#newsFeatureSlide .news-bg-fragment--shutters.news-bg-part-3{
+ animation-name:newsBgStripFromLeft;
 }
-#newsFeatureSlide .news-scene--fragment-shutters.news-scene--from-prev.news-scene--part-1,
-#newsFeatureSlide .news-scene--fragment-shutters.news-scene--from-prev.news-scene--part-3{
- animation-name:neolineMaskStripFromRight
+#newsFeatureSlide .news-bg-fragment--shutters.news-bg-from-prev.news-bg-part-1,
+#newsFeatureSlide .news-bg-fragment--shutters.news-bg-from-prev.news-bg-part-3{
+ animation-name:newsBgStripFromRight;
 }
-@keyframes neolineMaskStripFromRight{
- from{transform:translate3d(112%,0,0)}
- to{transform:translate3d(0,0,0)}
+@keyframes newsBgStripFromRight{
+ from{transform:translate3d(110%,0,0)}to{transform:translate3d(0,0,0)}
 }
-@keyframes neolineMaskStripFromLeft{
- from{transform:translate3d(-112%,0,0)}
- to{transform:translate3d(0,0,0)}
+@keyframes newsBgStripFromLeft{
+ from{transform:translate3d(-110%,0,0)}to{transform:translate3d(0,0,0)}
 }
-/* Keep neutral frame geometry and category palettes exactly as before. */
-#newsFeatureSlide .news-scene--current .news-feature-tag{
- background:#0e82c7df
+/* Three visibly COLORED diagonal stripes cross the old/new backgrounds. */
+#newsFeatureSlide .news-mask-accent{
+ position:absolute;top:-10%;height:125%;width:clamp(48px,25%,185px);
+ z-index:5;pointer-events:none;opacity:1;
+ background:linear-gradient(90deg,transparent 0%,var(--news-stripe-soft) 16%,
+  var(--news-stripe) 34%,var(--news-stripe) 63%,var(--news-stripe-soft) 83%,transparent 100%);
+ clip-path:polygon(24% 0,100% 0,76% 100%,0 100%);
+ filter:drop-shadow(0 0 12px rgba(111,203,242,.17));
+ animation-duration:.77s;animation-timing-function:cubic-bezier(.25,.83,.27,1);
+ animation-delay:var(--news-accent-delay,0ms);animation-fill-mode:both;
 }
+#newsFeatureSlide .news-mask-accent--0{opacity:.84}
+#newsFeatureSlide .news-mask-accent--1{opacity:.62}
+#newsFeatureSlide .news-mask-accent--2{opacity:.44}
+#newsFeatureSlide .news-mask-accent--next{left:0;animation-name:newsAccentSweepNext}
+#newsFeatureSlide .news-mask-accent--prev{right:0;animation-name:newsAccentSweepPrev}
+@keyframes newsAccentSweepNext{
+ from{transform:translate3d(480%,0,0)}
+ to{transform:translate3d(-480%,0,0)}
+}
+@keyframes newsAccentSweepPrev{
+ from{transform:translate3d(-480%,0,0)}
+ to{transform:translate3d(480%,0,0)}
+}
+/* Headline stays at the fixed foreground position. No headline clipping,
+   no masked text fragments. Small independent fade or sideways departure. */
+#newsFeatureSlide .news-copy-exit{
+ z-index:5;pointer-events:none;animation-duration:.25s;
+ animation-timing-function:ease-out;animation-fill-mode:both;
+}
+#newsFeatureSlide .news-copy-exit--fade{animation-name:newsTextFadeOut}
+#newsFeatureSlide .news-copy-exit--side-next{animation-name:newsTextSlideOutLeft}
+#newsFeatureSlide .news-copy-exit--side-prev{animation-name:newsTextSlideOutRight}
+#newsFeatureSlide .news-copy-enter{
+ z-index:6;opacity:0;animation:newsTextFadeIn .29s ease-out .31s both;
+}
+@keyframes newsTextFadeOut{from{opacity:1}to{opacity:0}}
+@keyframes newsTextSlideOutLeft{
+ from{opacity:1;transform:translate3d(0,0,0)}
+ to{opacity:0;transform:translate3d(-24%,0,0)}
+}
+@keyframes newsTextSlideOutRight{
+ from{opacity:1;transform:translate3d(0,0,0)}
+ to{opacity:0;transform:translate3d(24%,0,0)}
+}
+@keyframes newsTextFadeIn{from{opacity:0}to{opacity:1}}
 @media(max-width:720px){
- #newsFeatureSlide .news-scene--fragment{animation-duration:.6s}
- #newsFeatureSlide .news-scene--wipe{animation-duration:.7s}
+ #newsFeatureSlide .news-mask-accent{width:clamp(42px,26%,110px)}
 }
 @media(prefers-reduced-motion:reduce){
- #newsFeatureSlide .news-scene--wipe,
- #newsFeatureSlide .news-scene--fragment{animation:none!important;clip-path:none!important}
- #newsFeatureSlide .news-scene .news-feature-pattern{animation:none!important}
+ #newsFeatureSlide .news-bg-fragment,#newsFeatureSlide .news-bg-wipe,
+ #newsFeatureSlide .news-mask-accent,#newsFeatureSlide .news-copy-exit,
+ #newsFeatureSlide .news-copy-enter{animation:none!important;transform:none!important;clip-path:none!important}
+ #newsFeatureSlide .news-bg-layer .news-feature-pattern{animation:none!important}
 }
