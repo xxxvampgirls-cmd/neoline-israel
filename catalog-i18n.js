@@ -622,9 +622,9 @@
   "ar": "X-COP Pad وسادة سيليكون ذات قاعدة لاصقة للوحة القيادة. تساعد على تثبيت كاشفات الرادار والهواتف والأغراض الصغيرة الأخرى."
  },
  "53159148980": {
-  "en": "This Smart Click mount attaches an X-COP hybrid device to the windscreen using 3M adhesive. It does not supply power: connect the power cable directly to the unit. Installation on near-vertical windscreens may be difficult.",
-  "he": "תושבת Smart Click מחברת מכשיר X-COP משולב לשמשה הקדמית בעזרת דבק 3M. אין אספקת חשמל דרך התושבת, ולכן יש לחבר את הכבל ישירות למכשיר. ייתכן קושי בהתקנה על שמשות אנכיות כמעט לחלוטין.",
-  "ar": "يثبّت حامل Smart Click جهاز X-COP الهجين على الزجاج الأمامي بلاصق 3M. لا يوفّر الحامل الطاقة؛ يجب وصل كابل الكهرباء بالجهاز مباشرةً. قد يصعب تركيبه على الزجاج شبه العمودي."
+  "en": "This X-COP H90 Smart Click windscreen mount uses 3M adhesive and has no active power connection: the power cable connects directly to the hybrid device. The manufacturer warns that near-vertical windscreens may complicate installation and states that X-COP 9500/9500s are not compatible.",
+  "he": "תושבת X-COP H90 Smart Click נדבקת לשמשה הקדמית באמצעות 3M, ללא אספקת חשמל פעילה; יש לחבר את הכבל ישירות למכשיר המשולב. היצרן מזהיר מפני קושי בשמשות כמעט אנכיות ומציין ש־X-COP 9500/9500s אינם תואמים.",
+  "ar": "يثبّت حامل X-COP H90 Smart Click باللاصق 3M على الزجاج الأمامي دون تغذية كهربائية نشطة؛ يوصل كابل الطاقة بالجهاز الهجين مباشرةً. تحذر الشركة من صعوبة التركيب على الزجاج شبه العمودي وتوضح عدم توافق X-COP 9500/9500s."
  },
  "53499792058": {
   "en": "The H91 3M Power is a windscreen mount with an active power connection for compatible NEOLINE hybrid units. It uses 3M adhesive; check the exact supported model before installation.",
@@ -667,9 +667,49 @@
   "ar": "X-COP Visor حامل لتثبيت كاشفات الرادار المتوافقة من سلسلة NEOLINE X-COP على حاجب الشمس في السيارة."
  },
  "314310319880": {
-  "en": "The NEOLINE CPL 93 polarizing filter is designed to reduce sunlight glare and dashboard reflections visible through the windscreen.",
-  "he": "המסנן המקטב NEOLINE CPL 93 נועד להפחית סנוור מאור השמש והשתקפויות של לוח המחוונים בשמשה הקדמית.",
-  "ar": "مرشح الاستقطاب NEOLINE CPL 93 مصمم لتقليل وهج الشمس وانعكاسات لوحة القيادة على الزجاج الأمامي."
+  "en": "The NEOLINE CPL 93 polarizing filter uses the manufacturer's Fix&Roll mount to reduce sun glare and reflections of the dashboard in the windscreen. The official compatibility list includes NEOLINE Spectrum, CitySmart and selected X-COP models; confirm the exact model before purchase.",
+  "he": "המסנן המקטב NEOLINE CPL 93 עם תושבת Fix&Roll מיועד לצמצם סנוור שמש והשתקפויות של לוח המחוונים בשמשה הקדמית. ברשימת ההתאמה של היצרן מופיעים NEOLINE Spectrum, ‏CitySmart ודגמי X-COP מסוימים; יש לבדוק התאמה לדגם המדויק לפני רכישה.",
+  "ar": "مرشح الاستقطاب NEOLINE CPL 93 المزود بحامل Fix&Roll يقلل وهج الشمس وانعكاسات لوحة القيادة على الزجاج الأمامي. تشمل قائمة التوافق الرسمية NEOLINE Spectrum وCitySmart وبعض طرازات X-COP؛ تأكد من الطراز المحدد قبل الشراء."
+ },
+ "414463685743": {
+  "en": "NEOLINE Knife M is a folding multi-tool combining a knife, a bottle opener and a corkscrew. The original catalog also identifies a screen-printed NEOLINE logo. The source does not list further materials or dimensions.",
+  "he": "NEOLINE Knife M הוא כלי רב־תכליתי מתקפל הכולל סכין, פותחן בקבוקים וחולץ פקקים. לפי קטלוג היצרן מופיע עליו לוגו NEOLINE בהדפסת משי. לא פורטו חומרי הייצור והמידות.",
+  "ar": "NEOLINE Knife M أداة متعددة الاستخدامات قابلة للطي، تتضمن سكيناً وفتّاحة زجاجات ومفتاح فلّين. يذكر كتالوج الشركة شعار NEOLINE المطبوع على الأداة. لا تتوفر تفاصيل إضافية عن المواد أو الأبعاد."
+ },
+ "637819513172": {
+  "en": "NEOLINE Pliers L is a compact folding multi-tool for routine repairs and outdoor use. The manufacturer's list includes pliers, a straight and serrated blade, screwdrivers, scissors and a file. Listed weight: 300 g.",
+  "he": "NEOLINE Pliers L הוא כלי רב־תכליתי מתקפל לתיקונים יומיומיים ולשימוש מחוץ לבית. לפי היצרן הוא כולל צבת, להב רגיל ומשונן, מברגים, מספריים ופצירה. משקל מצוין: 300 גרם.",
+  "ar": "NEOLINE Pliers L أداة متعددة الاستخدامات قابلة للطي للصيانة اليومية والاستخدام الخارجي. تتضمن وفقاً للشركة كماشة وشفرتين عادية ومسننة ومفكات ومقصاً ومبرداً. الوزن المذكور: 300 غرام."
+ },
+ "445754661251": {
+  "en": "This optional rear/cabin camera is intended for NEOLINE Spectrum. The manufacturer specifies Full HD 1920 × 1080 at 30 fps, a 6 m cable and a 3M adhesive mount. It can record the vehicle's rear area or cabin, depending on installation.",
+  "he": "מצלמה אחורית/פנימית אופציונלית למכשיר NEOLINE Spectrum. לפי היצרן היא מצלמת ב־Full HD ‏1920×1080 ב־30 תמונות בשנייה, עם כבל באורך 6 מ׳ ותושבת הדבקה 3M. ניתן להתקין לתיעוד מאחורי הרכב או בתא הנוסעים.",
+  "ar": "كاميرا خلفية أو داخلية اختيارية لجهاز NEOLINE Spectrum. توضح مواصفات الشركة تسجيل Full HD ‏1920×1080 بمعدل 30 إطاراً/ثانية، وكابلاً بطول 6 أمتار وحامل تثبيت بلاصق 3M. تستخدم لتصوير خلف السيارة أو المقصورة حسب التركيب."
+ },
+ "665637135112": {
+  "en": "NEOLINE Fuse Cord X3x provides a fixed connection to a car's fuse box for G-Tech X35/X36/X38, Flash 2K, Flash 2K Dual and SmartWay. The manufacturer lists 12/24 V input, 5 V/2 A output, USB-C and a 3.5 m cable. Important: the source warns against use in Euro 6 or newer vehicles.",
+  "he": "NEOLINE Fuse Cord X3x מיועד לחיבור קבוע לתיבת הנתיכים ברכב עבור G-Tech X35/X36/X38, Flash 2K, Flash 2K Dual ו־SmartWay. היצרן מציין כניסת ‎12/24V‎, יציאת ‎5V/2A‎, חיבור USB‑C וכבל 3.5 מ׳. אזהרה: בדף היצרן מצוין שהכבל אינו מתאים לרכבי Euro 6 ומעלה.",
+  "ar": "NEOLINE Fuse Cord X3x كابل توصيل ثابت بعلبة مصهرات السيارة لأجهزة G-Tech X35/X36/X38 وFlash 2K وFlash 2K Dual وSmartWay. يذكر المصدر دخل 12/24 فولت وخرج 5 فولت/2 أمبير وموصل USB‑C وطول 3.5 م. تنبيه: تحذر الشركة من استخدامه في سيارات معيار Euro 6 أو أحدث."
+ },
+ "145705044329": {
+  "en": "This NEOLINE Fuse Cord is a fuse-box power cable for compatible WowCam and Argus recorders. The published specifications list USB‑C, 5 V/2.4 A output and a 2.8 m cable. Check your car's battery-voltage cut-off requirements: the manufacturer warns against use where its minimum threshold is unsuitable.",
+  "he": "כבל NEOLINE Fuse Cord לחיבור קבוע לתיבת הנתיכים עבור מצלמות WowCam ו־Argus תואמות. המפרט מציין USB‑C, יציאת ‎5V/2.4A‎ וכבל באורך 2.8 מ׳. יש לבדוק את סף ניתוק המתח של מצבר הרכב; היצרן מזהיר מפני שימוש כאשר ערך הסף אינו מתאים.",
+  "ar": "كابل NEOLINE Fuse Cord للتوصيل الثابت بعلبة المصهرات لكاميرات WowCam وArgus المتوافقة. تشمل المواصفات USB‑C وخرج 5 فولت/2.4 أمبير وكابلاً بطول 2.8 م. تحقق من حد فصل جهد بطارية سيارتك؛ تحذر الشركة من استخدامه إذا لم يناسب الحد الأدنى المطلوب."
+ },
+ "159268200852": {
+  "en": "NEOLINE Dela-B is a portable car tyre inflator with a 90 W motor, a digital pressure gauge, five inflation presets, automatic stop and an LED lamp. The manufacturer specifies an air flow of 23 L/min and describes three supplied nozzle attachments. The six optional illustrations below are official feature artwork, not six different product angles.",
+  "he": "NEOLINE Dela-B הוא מדחס נייד לניפוח צמיגים, עם מנוע בהספק 90 ואט, מד לחץ דיגיטלי, חמישה מצבי ניפוח, עצירה אוטומטית ופנס LED. היצרן מציין ספיקת אוויר של 23 ליטר לדקה ושלוש פיות נלוות. ששת האיורים הנוספים הם המחשות תכונות רשמיות, ולא שישה צילומים מזוויות שונות.",
+  "ar": "NEOLINE Dela-B منفاخ إطارات محمول بقدرة 90 واط، مع مقياس ضغط رقمي وخمسة أوضاع نفخ وإيقاف تلقائي ومصباح LED. تذكر الشركة تدفقاً قدره 23 لتراً/الدقيقة وثلاث فوهات مرفقة. الصور التوضيحية الست الإضافية هي رسومات رسمية للميزات، وليست ست زوايا تصوير مختلفة."
+ },
+ "1087255377614": {
+  "en": "NEOLINE Dela-S is a portable compressor for tyre inflation. Its documented specifications include a 100 W motor, 23 L/min output, a digital pressure gauge, automatic stop, a 0.54 m hose and a 12 V vehicle power connection.",
+  "he": "NEOLINE Dela-S הוא מדחס נייד לניפוח צמיגים. לפי היצרן הוא מצויד במנוע 100 ואט, ספיקת אוויר 23 ליטר לדקה, מד לחץ דיגיטלי, עצירה אוטומטית, צינור 0.54 מ׳ וחיבור למתח רכב 12 וולט.",
+  "ar": "NEOLINE Dela-S ضاغط محمول لنفخ الإطارات. تتضمن المواصفات محركاً بقدرة 100 واط وتدفق هواء 23 لتراً/الدقيقة ومقياس ضغط رقمي وإيقافاً تلقائياً وخرطوماً بطول 0.54 م وتغذية من السيارة بجهد 12 فولت."
+ },
+ "105776419608": {
+  "en": "NEOLINE X-COP Holder is a silicone-based windscreen mount for compatible X-COP radar detectors. The source does not list speaker components; speaker specifications are not applicable to this mount.",
+  "he": "NEOLINE X-COP Holder היא תושבת על בסיס סיליקון לשמשה הקדמית עבור גלאי מכ״ם תואמים מסדרת X-COP. רכיבי רמקולים אינם חלק ממפרט התושבת.",
+  "ar": "NEOLINE X-COP Holder حامل للزجاج الأمامي يعتمد على السيليكون لكاشفات الرادار المتوافقة من سلسلة X-COP. مواصفات مكونات السماعات لا تنطبق على هذا الحامل."
  }
 };
  const descriptions={
