@@ -90,6 +90,11 @@ jobs:
             // the entire frame MUST remain fixed height while text or HUD changes.
             const road=page.locator('#neolineRoadDemo');
             await road.scrollIntoViewIfNeeded();
+            await page.waitForFunction(()=>document.getElementById('neolineRoadDemo')?.classList.contains('is-playing'),
+              null,{timeout:2500});
+            const motion=await road.locator('.road-demo-halo').evaluate(el=>getComputedStyle(el).animationName);
+            if(!motion.includes('premiumRoadHalo'))
+              throw Error('Central glow must animate while road demo is visible: '+motion);
             if(await road.locator('.road-demo-telemetry .road-telemetry-card').count()!==4)
               throw Error('Premium road demo must show 4 distinct telemetry panels');
             if(await road.locator('.road-demo-range-ring').count()!==3||
@@ -119,6 +124,10 @@ jobs:
             await road.locator('[data-road-step="3"]').click();
             if(await road.locator('[data-road-speed]').innerText()!=='0')
               throw Error('Parked demo speed should display zero');
+            if(await road.locator('.road-demo-parking-zones').count()!==1)
+              throw Error('Parking demonstration sensor contours missing');
+            if(await road.locator('.road-demo-route-beam').count()!==1)
+              throw Error('GPS demonstration route beam missing');
             await road.locator('[data-road-step="0"]').click();
             for(const width of [320,390]){
               await page.setViewportSize({width,height:844});
