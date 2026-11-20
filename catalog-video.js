@@ -194,7 +194,7 @@
   return item && item.platform==="youtube" &&
    typeof item.id==="string" && /^[A-Za-z0-9_-]{11}$/.test(item.id) &&
    Array.isArray(item.modelIds) && item.modelIds.length>0 &&
-   item.modelIds.every(id=>Number.isInteger(id)&&id>=1&&id<=8) &&
+   item.modelIds.every(id=>Number.isSafeInteger(id)&&id>0) &&
    ["ru","pl","en","he","ar"].includes(item.language) &&
    ["connect","review","setup","record","update"].includes(item.category) &&
    typeof item.title==="string" && item.title.trim().length>3 &&
