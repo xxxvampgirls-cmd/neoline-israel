@@ -84,7 +84,7 @@ function restartFeatureTimer(){
    full frame rather than a colored layer passing over fixed text.
    Five transitions cycle: diagonal, ribbon shards, chevron, segmented blinds,
    and centered diamond. No photos, video downloads or image dependencies. */
-const newsBroadcastMasks=["diagonal","ribbons","chevron","shutters","diamond"];
+const newsBroadcastMasks=["ribbons","chevron","shutters","diagonal","diamond"];
 let newsBroadcastStep=0;
 function makeFeatureScene(item){
  const url=safeURL(item.url),localized=localStory(item);
@@ -183,7 +183,7 @@ function setFeatureIndex(index,manual=true){
  const oldIndex=feature.index;
  feature.index=(index+feature.items.length)%feature.items.length;
  if(feature.index===oldIndex){restartFeatureTimer();return}
- // Preserve the chosen direction even across the last-to-first wrap.
+ // Use the requested index BEFORE modulo: 09->10 is forward, 01->-1 backward.
  drawFeature(index>oldIndex?1:-1);
  if(manual)feature.paused=false;
  restartFeatureTimer();
