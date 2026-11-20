@@ -201,6 +201,30 @@ jobs:
               throw Error('Rear camera should show a detailed sedan, not cartoon eyes: '+JSON.stringify(rearCar));
             const split=await road.locator('.road-demo-rear-feed').evaluate(el=>getComputedStyle(el).visibility);
             if(split!=='visible')throw Error('Dual-camera mode must open inset rear view');
+            // Rear feed must stay below the road's main action on a phone,
+            // completely inside the road scene, and right of the main car.
+            for(const width of [320,390]){
+              await page.setViewportSize({width,height:844});
+              const rearPlacement=await road.evaluate(el=>{
+                const rear=el.querySelector('.road-demo-rear-feed').getBoundingClientRect();
+                const visual=el.querySelector('.road-demo-visual').getBoundingClientRect();
+                const style=getComputedStyle(el.querySelector('.road-demo-rear-feed'));
+                return {
+                  rearTop:rear.top, rearBottom:rear.bottom,rearLeft:rear.left,
+                  rearWidth:rear.width,visualTop:visual.top,visualBottom:visual.bottom,
+                  visualMid:visual.left+visual.width/2,
+                  sceneHeight:visual.height,cssBottom:style.bottom,cssTop:style.top
+                };
+              });
+              const rp=rearPlacement;
+              if(rp.rearTop < rp.visualTop+rp.sceneHeight*.50 ||
+                 rp.rearBottom > rp.visualBottom+1 ||
+                 rp.rearBottom < rp.visualBottom-20 ||
+                 rp.rearLeft <= rp.visualMid+12)
+                throw Error('Rear camera must sit compactly in the bottom-right corner on '+width+
+                  'px view: '+JSON.stringify(rp));
+            }
+            await page.setViewportSize({width:390,height:844});
             await road.locator('[data-road-step="3"]').click();
             if(await road.locator('[data-road-speed]').innerText()!=='0')
               throw Error('Parked demo speed should display zero');
