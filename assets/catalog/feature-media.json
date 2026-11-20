@@ -1,0 +1,72 @@
+{
+  "version": 1,
+  "note": "Manufacturer's feature illustrations, NOT additional product-angle photos.",
+  "products": [
+    {
+      "id": 159268200852,
+      "source": "https://neoline.ru/shop/kompressor-avtomobilnyy-neoline-dela-b/",
+      "features": [
+        {
+          "image": "./assets/catalog/feature-images/159268200852-1.webp",
+          "title": {
+            "ru": "Быстрая накачка",
+            "en": "Fast inflation",
+            "he": "ניפוח מהיר",
+            "ar": "نفخ سريع"
+          },
+          "sourceUrl": "https://neoline.ru/upload/medialibrary/214/u7vh5m7o8s0477nga24si4lrhtvk4oaa/%D0%91%D1%8B%D1%81%D1%82%D1%80%D0%B0%D1%8F%20%D0%BD%D0%B0%D0%BA%D0%B0%D1%87%D0%BA%D0%B0.png"
+        },
+        {
+          "image": "./assets/catalog/feature-images/159268200852-2.webp",
+          "title": {
+            "ru": "Пять режимов",
+            "en": "Five inflation modes",
+            "he": "חמישה מצבי ניפוח",
+            "ar": "خمسة أوضاع للنفخ"
+          },
+          "sourceUrl": "https://neoline.ru/upload/medialibrary/288/ifjgym2xpq09k8fkptm0coyiuw22dlbr/5%20%D1%80%D0%B5%D0%B6%D0%B8%D0%BC%D0%BE%D0%B2%20%D0%BF%D0%BE%D0%B4%D0%BA%D0%B0%D1%87%D0%BA%D0%B8.png"
+        },
+        {
+          "image": "./assets/catalog/feature-images/159268200852-3.webp",
+          "title": {
+            "ru": "Фонарь и дисплей",
+            "en": "LED light and display",
+            "he": "תאורה ומסך",
+            "ar": "مصباح وشاشة"
+          },
+          "sourceUrl": "https://neoline.ru/upload/medialibrary/237/6bb9zw5psaxdp413rmvd7zgb4drxofyo/%D0%A4%D0%BE%D0%BD%D0%B0%D1%80%D1%8C%20%D0%B8%20%D0%B4%D0%B8%D1%81%D0%BF%D0%BB%D0%B5%D0%B9.png"
+        },
+        {
+          "image": "./assets/catalog/feature-images/159268200852-4.webp",
+          "title": {
+            "ru": "Зарядка устройств",
+            "en": "Charging devices",
+            "he": "טעינת מכשירים",
+            "ar": "شحن الأجهزة"
+          },
+          "sourceUrl": "https://neoline.ru/upload/medialibrary/b96/ldbpnnp74bs9nbni81dznl1zxljajksm/%D0%A4%D1%83%D0%BD%D0%BA%D1%86%D0%B8%D1%8F%20%D0%B7%D0%B0%D1%80%D1%8F%D0%B4%D0%BA%D0%B8.png"
+        },
+        {
+          "image": "./assets/catalog/feature-images/159268200852-5.webp",
+          "title": {
+            "ru": "Запоминание настроек",
+            "en": "Saved settings",
+            "he": "שמירת הגדרות",
+            "ar": "حفظ الإعدادات"
+          },
+          "sourceUrl": "https://neoline.ru/upload/medialibrary/8c8/con1zosgr2c6flyyb9ivo9095462njn7/%D0%A4%D1%83%D0%BD%D0%BA%D1%86%D0%B8%D1%8F%20%D0%BF%D0%B0%D0%BC%D1%8F%D1%82%D0%B8.png"
+        },
+        {
+          "image": "./assets/catalog/feature-images/159268200852-6.webp",
+          "title": {
+            "ru": "Портативность",
+            "en": "Compact design",
+            "he": "מבנה קומפקטי",
+            "ar": "تصميم مدمج"
+          },
+          "sourceUrl": "https://neoline.ru/upload/medialibrary/3b7/cf3w0l1y3gghga7bbha900ia481iad3q/%D0%9F%D0%BE%D1%80%D1%82%D0%B0%D1%82%D0%B8%D0%B2%D0%BD%D0%BE%D1%81%D1%82%D1%8C.png"
+        }
+      ]
+    }
+  ]
+}
