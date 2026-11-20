@@ -1,0 +1,363 @@
+{
+  "source": "assets/catalog/catalog.json",
+  "products": 54,
+  "validImages": 197,
+  "distinctPaths": 197,
+  "confirmedDuplicatesOrBroken": 0,
+  "manualReviewFlags": 73,
+  "errors": [],
+  "review": [
+    {
+      "product": "Neoline Fuse Cord X77 для X77 с креплением",
+      "reason": "Fewer than 5 authentic photos (4)"
+    },
+    {
+      "product": "Neoline Hardwire Kit (G-Tech X3x/X7x)",
+      "reason": "Fewer than 5 authentic photos (3)"
+    },
+    {
+      "product": "Neoline Power Cord Radar",
+      "reason": "Fewer than 5 authentic photos (4)"
+    },
+    {
+      "product": "Neoline X-COP Magnet",
+      "reason": "Fewer than 5 authentic photos (3)"
+    },
+    {
+      "product": "Neoline X-COP Pad",
+      "reason": "Fewer than 5 authentic photos (3)"
+    },
+    {
+      "product": "Neoline Крепление к лобовому стеклу на 3M скотче X-COP H90 3M для гибридов",
+      "reason": "Fewer than 5 authentic photos (3)"
+    },
+    {
+      "product": "Neoline Крепление к лобовому стеклу на 3M скотче с активной зарядкой H91 3M Power для гибридов",
+      "reason": "Fewer than 5 authentic photos (3)"
+    },
+    {
+      "product": "Neoline Крепление к лобовому стеклу на присоске X-COP H90 для гибридов",
+      "reason": "Fewer than 5 authentic photos (3)"
+    },
+    {
+      "product": "Neoline Мультитул Нож M",
+      "reason": "Fewer than 5 authentic photos (4)"
+    },
+    {
+      "product": "Neoline Мультитул Пассатижи L",
+      "reason": "Shared photo file data across products",
+      "image_a": "./assets/catalog/images/414463685743-3.webp",
+      "image_b": "./assets/catalog/images/637819513172-3.webp"
+    },
+    {
+      "product": "Neoline Мультитул Пассатижи L",
+      "reason": "Fewer than 5 authentic photos (4)"
+    },
+    {
+      "product": "Задняя камера Neoline Spectrum",
+      "reason": "Fewer than 5 authentic photos (2)"
+    },
+    {
+      "product": "Кабель Neoline Fuse Cord X3х для подключения к блоку предохранителей видеорегистратора Flash 2K/Flash 2K Dual, Smartway",
+      "reason": "Shared photo file data across products",
+      "image_a": "./assets/catalog/images/747440919228-6.webp",
+      "image_b": "./assets/catalog/images/665637135112-6.webp"
+    },
+    {
+      "product": "Кабель Neoline Fuse Cord X3х для подключения к блоку предохранителей видеорегистратора Flash 2K/Flash 2K Dual, Smartway",
+      "reason": "Fewer than 5 authentic photos (2)"
+    },
+    {
+      "product": "Кабель питания Neoline Fuse Cord Flash 2K/Flash 2K Dual/EasyDrive/G-Tech X64 с настройкой нижнего предела напряжения сети",
+      "reason": "Fewer than 5 authentic photos (3)"
+    },
+    {
+      "product": "Кабель питания Neoline Fuse Cord mini USB для видеорегистратора Neoline G-Tech X28",
+      "reason": "Fewer than 5 authentic photos (3)"
+    },
+    {
+      "product": "Кабель питания Neoline Fuse Cord SmartWay с настройкой нижнего предела напряжения сети",
+      "reason": "Fewer than 5 authentic photos (3)"
+    },
+    {
+      "product": "Кабель питания Neoline Fuse Cord Type-C для Flash 2K/Flash 2K DUAL, EasyDrive, G-Tech X64",
+      "reason": "Shared photo file data across products",
+      "image_a": "./assets/catalog/images/747440919228-6.webp",
+      "image_b": "./assets/catalog/images/229861511999-6.webp"
+    },
+    {
+      "product": "Кабель питания Neoline Fuse Cord Type-C для Flash 2K/Flash 2K DUAL, EasyDrive, G-Tech X64",
+      "reason": "Fewer than 5 authentic photos (4)"
+    },
+    {
+      "product": "Кабель питания Neoline Fuse Cord WowCam, Argus",
+      "reason": "Fewer than 5 authentic photos (3)"
+    },
+    {
+      "product": "Кабель питания Neoline Fuse Cord WowCam, Argus с настройкой нижнего предела напряжения сети",
+      "reason": "Fewer than 5 authentic photos (3)"
+    },
+    {
+      "product": "Кабель питания для гибридов Neoline Fuse Cord 3 pin",
+      "reason": "Shared photo file data across products",
+      "image_a": "./assets/catalog/images/747440919228-6.webp",
+      "image_b": "./assets/catalog/images/969355328957-6.webp"
+    },
+    {
+      "product": "Кабель питания для гибридов Neoline Fuse Cord 3 pin",
+      "reason": "Fewer than 5 authentic photos (4)"
+    },
+    {
+      "product": "Кабель питания для гибридов в автомобильную розетку Neoline Power Cord Hybrid",
+      "reason": "Shared photo file data across products",
+      "image_a": "./assets/catalog/images/747440919228-6.webp",
+      "image_b": "./assets/catalog/images/951833046070-6.webp"
+    },
+    {
+      "product": "Кабель питания для гибридов в автомобильную розетку Neoline Power Cord Hybrid",
+      "reason": "Fewer than 5 authentic photos (3)"
+    },
+    {
+      "product": "Кабель питания для радар-детекторов Х-СОР Neoline Fuse Cord",
+      "reason": "Fewer than 5 authentic photos (3)"
+    },
+    {
+      "product": "Кабель питания и крепление Neoline Fuse Cord X7 для подключения к блоку предохранителей видеорегистраторов X72/X73",
+      "reason": "Shared photo file data across products",
+      "image_a": "./assets/catalog/images/133214697389-1.webp",
+      "image_b": "./assets/catalog/images/825044539847-1.webp"
+    },
+    {
+      "product": "Кабель питания и крепление Neoline Fuse Cord X7 для подключения к блоку предохранителей видеорегистраторов X72/X73",
+      "reason": "Shared photo file data across products",
+      "image_a": "./assets/catalog/images/133214697389-2.webp",
+      "image_b": "./assets/catalog/images/825044539847-2.webp"
+    },
+    {
+      "product": "Кабель питания и крепление Neoline Fuse Cord X7 для подключения к блоку предохранителей видеорегистраторов X72/X73",
+      "reason": "Shared photo file data across products",
+      "image_a": "./assets/catalog/images/133214697389-3.webp",
+      "image_b": "./assets/catalog/images/825044539847-3.webp"
+    },
+    {
+      "product": "Кабель питания и крепление Neoline Fuse Cord X7 для подключения к блоку предохранителей видеорегистраторов X72/X73",
+      "reason": "Shared photo file data across products",
+      "image_a": "./assets/catalog/images/133214697389-6.webp",
+      "image_b": "./assets/catalog/images/825044539847-6.webp"
+    },
+    {
+      "product": "Кабель питания и крепление Neoline Fuse Cord X7 для подключения к блоку предохранителей видеорегистраторов X72/X73",
+      "reason": "Fewer than 5 authentic photos (4)"
+    },
+    {
+      "product": "Кабель питания и крепление Neoline Fuse Cord X74/X75 для подключения к блоку предохранителей видеорегистратора G-Tech X74/X75",
+      "reason": "Shared photo file data across products",
+      "image_a": "./assets/catalog/images/133214697389-1.webp",
+      "image_b": "./assets/catalog/images/176789604743-1.webp"
+    },
+    {
+      "product": "Кабель питания и крепление Neoline Fuse Cord X74/X75 для подключения к блоку предохранителей видеорегистратора G-Tech X74/X75",
+      "reason": "Shared photo file data across products",
+      "image_a": "./assets/catalog/images/133214697389-2.webp",
+      "image_b": "./assets/catalog/images/176789604743-2.webp"
+    },
+    {
+      "product": "Кабель питания и крепление Neoline Fuse Cord X74/X75 для подключения к блоку предохранителей видеорегистратора G-Tech X74/X75",
+      "reason": "Shared photo file data across products",
+      "image_a": "./assets/catalog/images/133214697389-3.webp",
+      "image_b": "./assets/catalog/images/176789604743-3.webp"
+    },
+    {
+      "product": "Кабель питания и крепление Neoline Fuse Cord X74/X75 для подключения к блоку предохранителей видеорегистратора G-Tech X74/X75",
+      "reason": "Shared photo file data across products",
+      "image_a": "./assets/catalog/images/133214697389-6.webp",
+      "image_b": "./assets/catalog/images/176789604743-6.webp"
+    },
+    {
+      "product": "Кабель питания и крепление Neoline Fuse Cord X74/X75 для подключения к блоку предохранителей видеорегистратора G-Tech X74/X75",
+      "reason": "Fewer than 5 authentic photos (4)"
+    },
+    {
+      "product": "Кабель питания и крепление Neoline Fuse Cord X76 для подключения к блоку предохранителей видеорегистратора G-Tech X76",
+      "reason": "Shared photo file data across products",
+      "image_a": "./assets/catalog/images/133214697389-1.webp",
+      "image_b": "./assets/catalog/images/266511558689-1.webp"
+    },
+    {
+      "product": "Кабель питания и крепление Neoline Fuse Cord X76 для подключения к блоку предохранителей видеорегистратора G-Tech X76",
+      "reason": "Shared photo file data across products",
+      "image_a": "./assets/catalog/images/133214697389-2.webp",
+      "image_b": "./assets/catalog/images/266511558689-2.webp"
+    },
+    {
+      "product": "Кабель питания и крепление Neoline Fuse Cord X76 для подключения к блоку предохранителей видеорегистратора G-Tech X76",
+      "reason": "Shared photo file data across products",
+      "image_a": "./assets/catalog/images/133214697389-3.webp",
+      "image_b": "./assets/catalog/images/266511558689-3.webp"
+    },
+    {
+      "product": "Кабель питания и крепление Neoline Fuse Cord X76 для подключения к блоку предохранителей видеорегистратора G-Tech X76",
+      "reason": "Shared photo file data across products",
+      "image_a": "./assets/catalog/images/133214697389-6.webp",
+      "image_b": "./assets/catalog/images/266511558689-6.webp"
+    },
+    {
+      "product": "Кабель питания и крепление Neoline Fuse Cord X76 для подключения к блоку предохранителей видеорегистратора G-Tech X76",
+      "reason": "Fewer than 5 authentic photos (4)"
+    },
+    {
+      "product": "Компрессор автомобильный Neoline Dela-B",
+      "reason": "Shared photo file data across products",
+      "image_a": "./assets/catalog/images/747440919228-6.webp",
+      "image_b": "./assets/catalog/images/159268200852-6.webp"
+    },
+    {
+      "product": "Компрессор автомобильный Neoline Dela-B",
+      "reason": "Fewer than 5 authentic photos (1)"
+    },
+    {
+      "product": "Компрессор автомобильный Neoline Dela-S",
+      "reason": "Similar photo angles; keep until reviewed",
+      "image_a": "./assets/catalog/images/1087255377614-1.webp",
+      "image_b": "./assets/catalog/images/1087255377614-2.webp",
+      "metric": 14.34
+    },
+    {
+      "product": "Компрессор автомобильный Neoline Dela-S",
+      "reason": "Fewer than 5 authentic photos (3)"
+    },
+    {
+      "product": "Компрессор автомобильный Neoline Dela-X",
+      "reason": "Fewer than 5 authentic photos (4)"
+    },
+    {
+      "product": "Крепление к лобовому стеклу для радар-детекторов Х-СОР Neoline X-COP Holder",
+      "reason": "Shared photo file data across products",
+      "image_a": "./assets/catalog/images/747440919228-6.webp",
+      "image_b": "./assets/catalog/images/105776419608-6.webp"
+    },
+    {
+      "product": "Крепление к лобовому стеклу для радар-детекторов Х-СОР Neoline X-COP Holder",
+      "reason": "Fewer than 5 authentic photos (3)"
+    },
+    {
+      "product": "Крепление на солнцезащитный козырек для радар-детекторов серии X-COP Neoline X-COP Visor",
+      "reason": "Fewer than 5 authentic photos (3)"
+    },
+    {
+      "product": "Магнитное крепление для радар-детектора Neoline 6000s/c, 6200s",
+      "reason": "Similar photo angles; keep until reviewed",
+      "image_a": "./assets/catalog/images/275924150939-1.webp",
+      "image_b": "./assets/catalog/images/275924150939-2.webp",
+      "metric": 19.19
+    },
+    {
+      "product": "Магнитное крепление для радар-детектора Neoline 6000s/c, 6200s",
+      "reason": "Fewer than 5 authentic photos (4)"
+    },
+    {
+      "product": "Поляризационный фильтр Neoline CPL 93",
+      "reason": "Fewer than 5 authentic photos (3)"
+    },
+    {
+      "product": "Динамики автомобильные коаксиальные Neoline Ultera RS52",
+      "reason": "Fewer than 5 authentic photos (4)"
+    },
+    {
+      "product": "Динамики автомобильные коаксиальные Neoline Ultera RS65",
+      "reason": "Fewer than 5 authentic photos (3)"
+    },
+    {
+      "product": "Динамики автомобильные коаксиальные Neoline Ultera RS69",
+      "reason": "Fewer than 5 authentic photos (3)"
+    },
+    {
+      "product": "Динамики автомобильные компонентные Neoline Ultera RS65C",
+      "reason": "Fewer than 5 authentic photos (3)"
+    },
+    {
+      "product": "Видеорегистратор Neoline Argus 4K Dual с камерой заднего вида",
+      "reason": "Similar photo angles; keep until reviewed",
+      "image_a": "./assets/catalog/images/839336600060-1.webp",
+      "image_b": "./assets/catalog/images/839336600060-3.webp",
+      "metric": 12.11
+    },
+    {
+      "product": "Видеорегистратор Neoline Argus 4K Dual с камерой заднего вида",
+      "reason": "Fewer than 5 authentic photos (4)"
+    },
+    {
+      "product": "Видеорегистратор Neoline Flash 2K Wi-Fi Dual с двумя камерами",
+      "reason": "Similar photo angles; keep until reviewed",
+      "image_a": "./assets/catalog/images/809180330239-1.webp",
+      "image_b": "./assets/catalog/images/809180330239-3.webp",
+      "metric": 20.43
+    },
+    {
+      "product": "Видеорегистратор-зеркало Neoline EasyDrive 2K Wi-Fi Dual",
+      "reason": "Fewer than 5 authentic photos (3)"
+    },
+    {
+      "product": "Гибрид видеорегистратора с радар-детектором Neoline Shadow Wi-Fi",
+      "reason": "Fewer than 5 authentic photos (4)"
+    },
+    {
+      "product": "Гибрид видеорегистратора с радар-детектором Neoline SPECTRUM DUAL",
+      "reason": "Similar photo angles; keep until reviewed",
+      "image_a": "./assets/catalog/images/869134258859-1.webp",
+      "image_b": "./assets/catalog/images/869134258859-3.webp",
+      "metric": 20.21
+    },
+    {
+      "product": "Гибрид видеорегистратора с радар-детектором Neoline SPECTRUM DUAL",
+      "reason": "Shared photo file data across products",
+      "image_a": "./assets/catalog/images/84595738561-5.webp",
+      "image_b": "./assets/catalog/images/869134258859-5.webp"
+    },
+    {
+      "product": "Гибрид видеорегистратора с радар-детектором Neoline SPECTRUM DUAL",
+      "reason": "Shared photo file data across products",
+      "image_a": "./assets/catalog/images/84595738561-6.webp",
+      "image_b": "./assets/catalog/images/869134258859-6.webp"
+    },
+    {
+      "product": "Гибрид видеорегистратора с радар-детектором Neoline X-COP CITYSMART",
+      "reason": "Fewer than 5 authentic photos (4)"
+    },
+    {
+      "product": "Гибрид видеорегистратора с радар-детектором Neoline X-COP ROADMASTER",
+      "reason": "Fewer than 5 authentic photos (4)"
+    },
+    {
+      "product": "Сигнатурный гибрид Neoline DEEPSCAN WI-FI BLACK",
+      "reason": "Fewer than 5 authentic photos (4)"
+    },
+    {
+      "product": "Видеорегистратор Neoline Argus 4K",
+      "reason": "Shared photo file data across products",
+      "image_a": "./assets/catalog/images/839336600060-6.webp",
+      "image_b": "./assets/catalog/images/910715505247-5.webp"
+    },
+    {
+      "product": "Видеорегистратор Neoline Argus 4K",
+      "reason": "Fewer than 5 authentic photos (4)"
+    },
+    {
+      "product": "Видеорегистратор Neoline Flash 2K Wi-Fi",
+      "reason": "Fewer than 5 authentic photos (4)"
+    },
+    {
+      "product": "Видеорегистратор Neoline G-Tech X64",
+      "reason": "Fewer than 5 authentic photos (3)"
+    },
+    {
+      "product": "Видеорегистратор Neoline WowCam 2",
+      "reason": "Fewer than 5 authentic photos (4)"
+    },
+    {
+      "product": "Видеорегистратор Neoline WowCam Wi-Fi",
+      "reason": "Fewer than 5 authentic photos (3)"
+    }
+  ],
+  "note": "Perceptual matching requires both hash and low RGB difference, so distinct angles are retained."
+}
