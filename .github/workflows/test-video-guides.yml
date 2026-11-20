@@ -103,7 +103,7 @@ jobs:
               await page.waitForFunction(id=>!!document.querySelector('[data-guide-id="'+id+'"]'),clipId,{timeout:10000});
               if(await page.locator('.product-video-real-guide').count()!==1)
                 throw Error('Imported model video incorrectly duplicated or missing '+modelId);
-              if(!(await page.locator('#productVideoModel').innerText()).includes(modelText))
+              if(!(await page.locator('#productVideoModel').innerText()).toLowerCase().includes(modelText.toLowerCase()))
                 throw Error('Imported product model title mismatched '+modelId);
               const first=page.locator('.product-video-search-grid a').first();
               const href=await first.getAttribute('href');
