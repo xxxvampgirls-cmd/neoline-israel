@@ -97,7 +97,7 @@ jobs:
             for(const [modelId,clipId,modelText] of [
               [84595738561,'abTTYza2aTk','Spectrum'],
               [1069082480124,'QBxtvqSlc_o','6200s'],
-              [839336600060,'2qQBchWAr9E','Argus 4K Dual']
+              [6,'2qQBchWAr9E','Argus 4K Dual']
             ]){
               await page.evaluate(x=>window.NEOLINE_PRODUCT_VIDEOS.open(x),modelId);
               await page.waitForFunction(id=>!!document.querySelector('[data-guide-id="'+id+'"]'),clipId,{timeout:10000});
