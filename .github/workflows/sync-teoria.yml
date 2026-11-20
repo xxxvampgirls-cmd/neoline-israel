@@ -35,7 +35,7 @@ jobs:
         run: |
           python - <<'PY'
           import json,pathlib
-          for lang in ('ru','he','en'):
+          for lang in ('ru','he','en','ar'):
             a=json.loads(pathlib.Path('assets/teoria/'+lang+'.json').read_text(encoding='utf-8'))
             items=a['questions']
             assert len(items)>=900,(lang,len(items))
