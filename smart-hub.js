@@ -98,6 +98,73 @@ const ranks=(count="any",priority="quality")=>ids.map(id=>{
 const values=["front","rear","cameras","GPS","wireless","screen","parking","app","storage"];
 const labels={ru:"Сравнить",en:"Compare",he:"השוואה",ar:"مقارنة"};
 let tab="finder",count="any",priority="quality",chosen=[5,6,0],device=0,savedDevice=0,showUpdates=false;
+
+const trayTexts={
+ ru:{title:"Сравнение камер",selected:"Выбрано",clear:"Очистить",compare:"Сравнить",remove:"Убрать из сравнения",more:"Добавьте ещё одну камеру",max:"Можно выбрать не более трёх камер"},
+ en:{title:"Compare cameras",selected:"Selected",clear:"Clear",compare:"Compare",remove:"Remove from comparison",more:"Add another camera",max:"Select up to 3 cameras"},
+ he:{title:"השוואת מצלמות",selected:"נבחרו",clear:"נקה",compare:"השוואה",remove:"הסרה מההשוואה",more:"בחרו מצלמה נוספת",max:"אפשר לבחור עד 3 מצלמות"},
+ ar:{title:"مقارنة الكاميرات",selected:"تم اختيار",clear:"مسح",compare:"قارن",remove:"إزالة من المقارنة",more:"أضف كاميرا أخرى",max:"يمكن اختيار 3 كاميرات كحد أقصى"}
+};
+const trayText=()=>trayTexts[locale()]||trayTexts.ru;
+const trayKey="neoline:comparison-draft:v1";
+let trayIds=[],trayNotice="",noticeTimer=0;
+try{
+ const parsed=JSON.parse(sessionStorage.getItem(trayKey)||"[]");
+ if(Array.isArray(parsed))trayIds=[...new Set(parsed.map(Number).filter(id=>ids.includes(id)))].slice(0,3);
+}catch(_){}
+const tray=document.createElement("aside");
+tray.id="hubCompareTray";
+tray.className="hub-compare-tray";
+tray.hidden=true;
+tray.setAttribute("role","region");
+document.body.append(tray);
+function renderTray(){
+ const t=trayText(),n=trayIds.length;
+ tray.hidden=n===0;
+ document.body.classList.toggle("has-hub-compare-tray",n>0);
+ if(!n){tray.innerHTML="";return}
+ tray.dir=["he","ar"].includes(locale())?"rtl":"ltr";
+ tray.setAttribute("aria-label",t.title);
+ tray.innerHTML='<div class="hub-tray-top"><div class="hub-tray-info"><strong>⚖ '+esc(t.title)+'</strong><small class="hub-tray-message">'+esc(trayNotice||(n===1?t.more:t.selected+" "+n+" / 3"))+'</small></div>'+
+ '<button type="button" class="hub-tray-clear" data-tray-clear>'+esc(t.clear)+'</button></div>'+
+ '<div class="hub-tray-bottom"><div class="hub-tray-chips" role="list">'+
+ trayIds.map(id=>'<span role="listitem" class="hub-tray-chip"><span>'+esc(names[id].replace(/^NEOLINE\\s+/,""))+'</span><button type="button" data-tray-remove="'+id+'" aria-label="'+esc(t.remove+" · "+names[id])+'">×</button></span>').join("")+
+ '</div><button class="hub-tray-go" type="button" data-tray-go'+(n<2?' disabled':'')+'>'+esc(t.compare)+' '+n+' ↗</button></div>';
+}
+function saveTray(){try{sessionStorage.setItem(trayKey,JSON.stringify(trayIds))}catch(_){}}
+function toggleCompare(id){
+ id=Number(id);if(!ids.includes(id))return;
+ const idx=trayIds.indexOf(id);
+ if(idx>=0)trayIds.splice(idx,1);
+ else if(trayIds.length>=3){
+  trayNotice=trayText().max;renderTray();
+  clearTimeout(noticeTimer);
+  noticeTimer=setTimeout(()=>{trayNotice="";renderTray()},2200);
+  return;
+ }else trayIds.push(id);
+ trayNotice="";saveTray();renderTray();decorateProducts();
+}
+function clearCompare(){
+ trayIds=[];trayNotice="";saveTray();
+ if(tab==="compare"){chosen=[0,0,0];render()}
+ else{renderTray();decorateProducts()}
+}
+tray.addEventListener("click",event=>{
+ const button=event.target.closest("button");if(!button)return;
+ if(button.hasAttribute("data-tray-clear")){clearCompare();return}
+ if(button.hasAttribute("data-tray-remove")){
+  toggleCompare(button.dataset.trayRemove);
+  if(tab==="compare"){chosen=trayIds.concat([0,0,0]).slice(0,3);render()}
+  return;
+ }
+ if(button.hasAttribute("data-tray-go")&&trayIds.length>=2){
+  chosen=trayIds.concat([0,0,0]).slice(0,3);
+  tab="compare";render();
+  root.scrollIntoView({behavior:"smooth",block:"start"});
+  root.querySelector('[data-hub-tab="compare"]')?.focus({preventScroll:true});
+ }
+});
+
 try{const saved=Number(localStorage.getItem(savedKey));if(ids.includes(saved)){device=saved;savedDevice=saved}}catch(_){}
 const optionModel=(selected,includeEmpty=false,emptyLabel="")=>(includeEmpty?'<option value="0">'+esc(emptyLabel)+'</option>':"")+
  ids.map(id=>'<option value="'+id+'"'+(id===Number(selected)?' selected':'')+'>'+esc(names[id])+'</option>').join("");
