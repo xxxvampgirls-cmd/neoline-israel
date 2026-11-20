@@ -115,6 +115,8 @@ jobs:
             await page.waitForFunction(()=>document.querySelectorAll('.news-feature-dot').length===10,{timeout:15000});
             if(!await carousel.isVisible())throw Error('Top ten-news carousel is hidden');
             const firstFeature=await carousel.locator('.news-feature-title').innerText();
+            // The background nodes must survive slide changes, not restart.
+            await page.locator('.news-feature-pattern').first().evaluate(el=>{el.dataset.persistentNewsBackdrop='yes'});
             if(await carousel.locator('img, picture').count())
               throw Error('News carousel must contain no photographs');
             const heroAnimation=await page.locator('#newsFeatureSlide').evaluate(el=>({
@@ -125,11 +127,18 @@ jobs:
             if(heroAnimation.images||!heroAnimation.glow.includes('neolineNewsGlow')||!heroAnimation.shine.includes('neolineNewsLight'))
               throw Error('Continuous animated background missing: '+JSON.stringify(heroAnimation));
             await page.locator('#newsFeatureNext').click();
-            const secondFeature=await carousel.locator('.news-feature-title').innerText();
+            const persistent=await page.locator('.news-feature-pattern').first().getAttribute('data-persistent-news-backdrop');
+            if(persistent!=='yes')throw Error('News background remounted during slide transition');
+            const transition=await page.locator('.news-feature-copy--enter').first().evaluate(el=>getComputedStyle(el).animationName);
+            if(!transition.includes('neolineNewsCopyEnter'))throw Error('Kinetic news transition missing: '+transition);
+            const secondFeature=await carousel.locator('.news-feature-title:not(.news-feature-copy--exit .news-feature-title)').last().innerText();
             if(firstFeature===secondFeature)throw Error('Carousel next arrow did not change the story');
             const counter=await page.locator('#newsFeatureCounter').textContent();
             if(!/02\s*\/\s*10/.test(counter))throw Error('Wrong carousel counter after next: '+counter);
             await page.locator('#newsFeaturePrev').click();
+            await page.waitForTimeout(800);
+            if(await carousel.locator('.news-feature-title').count()!==1)
+              throw Error('Carousel left stale transition headlines in the DOM');
             if(await carousel.locator('.news-feature-title').innerText()!==firstFeature)
               throw Error('Carousel prev did not restore the first story');
             if(await carousel.locator('img, picture').count())
@@ -150,7 +159,7 @@ jobs:
             if(Math.abs(geometry.heroHeight-245)>2)
               throw Error('Carousel mobile image height changed unexpectedly: '+JSON.stringify(geometry));
             console.log('ANIMATED NEWS BACKDROP PASS: image-free and mobile image height retained '+JSON.stringify(geometry));
-            console.log('FEATURE CAROUSEL PASS: 10 dots, next/prev, continuous image-free background');
+            console.log('FEATURE CAROUSEL PASS: 10 dots, left/right kinetic transitions, stationary image-free background');
             const now=Date.now(),limit=now-30*86400*1000;
             const cutoff=new Date(now),day=cutoff.getUTCDate();
             cutoff.setUTCDate(1);cutoff.setUTCMonth(cutoff.getUTCMonth()-6);
