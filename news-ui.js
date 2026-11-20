@@ -135,6 +135,15 @@ function drawFeature(direction=0){
  story.href=safeURL(item.url);
  story.dataset.newsTheme=newsTheme(item);
  story.setAttribute("aria-label",localized.title);
+ // The original cyan corner ornaments belong to the fixed foreground, not the
+ // changing color planes: they must never catch the animated pearl shimmer.
+ let corners=story.querySelector(".news-studio-corners");
+ if(!corners){
+  corners=document.createElement("span");
+  corners.className="news-studio-corners";
+  corners.setAttribute("aria-hidden","true");
+  story.prepend(corners);
+ }
  const incoming=makeNewsBackdrop(item);
  const previous=track.querySelector(".news-bg--current");
  const newCopy=makeNewsCopy(item);
@@ -143,7 +152,7 @@ function drawFeature(direction=0){
  host.dataset.newsTheme=newsTheme(item);
  if(!animate){
   track.replaceChildren(incoming);
-  story.replaceChildren(newCopy);
+  story.replaceChildren(corners,newCopy);
  }else{
   const effect=newsBroadcastMasks[(newsBroadcastStep++)%newsBroadcastMasks.length];
   const side=direction>0?"next":"prev";
@@ -187,7 +196,7 @@ function drawFeature(direction=0){
      "news-bg-wipe--"+effect,"news-bg-from-"+side);
    track.replaceChildren(incoming);
    newCopy.classList.remove("news-copy-enter");
-   story.replaceChildren(newCopy);
+   story.replaceChildren(corners,newCopy);
   };
   feature.finishTransition=cleanup;
   timer=setTimeout(cleanup,970);
