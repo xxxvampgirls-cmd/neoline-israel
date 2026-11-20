@@ -9,6 +9,7 @@
 <link rel="stylesheet" href="./nav-current.css?v=20261118-active-nav-v1"><link rel="stylesheet" href="./site-header.css?v=20261118-flag-fix-v3">
 <link rel="stylesheet" href="./teoria-redesign.css?v=20261118-full-arcade-v1">
 <link rel="stylesheet" href="./teoria-gifts.css?v=20261118-gifts-preview-v1">
+<link rel="stylesheet" href="./teoria-gift-reveal.css?v=20261120-reveal3-v1">
 <link rel="stylesheet" href="./teoria-v2.css?v=20261118-approved-v3">
 <link rel="stylesheet" href="./teoria-compact-v3.css?v=20261118-corrective-v3">
 <link rel="stylesheet" href="./teoria-reference-art.css?v=20261119-hd-illustrations-v4">
@@ -271,19 +272,60 @@
     </div>
     <p class="game-gift-dialog__intro" id="gameGiftIntro">Играйте, учитесь и собирайте достижения. Мы рассматриваем будущие бонусы к заказам NEOLINE.</p>
     <h3 class="game-gift-dialog__section-title" id="gameGiftOptionsTitle">Что можно будет получить</h3>
-    <div class="game-gift-dialog__options">
-      <article class="game-gift-dialog__option">
-        <span class="game-gift-dialog__option-icon" aria-hidden="true">%</span>
-        <div><strong id="gameGiftDiscountTitle">Дополнительная скидка</strong><p id="gameGiftDiscountDescription">Возможный бонус к покупке товаров NEOLINE.</p></div>
-      </article>
-      <article class="game-gift-dialog__option">
-        <span class="game-gift-dialog__option-icon" aria-hidden="true">🎁</span>
-        <div><strong id="gameGiftAccessoryTitle">Автоаксессуар в подарок</strong><p id="gameGiftAccessoryDescription">Полезная вещь для автомобиля вместе с заказом.</p></div>
-      </article>
-      <article class="game-gift-dialog__option">
-        <span class="game-gift-dialog__option-icon" aria-hidden="true">✦</span>
-        <div><strong id="gameGiftSurpriseTitle">Специальный бонус</strong><p id="gameGiftSurpriseDescription">Дополнительная выгода или сюрприз при покупке.</p></div>
-      </article>
+    <div class="gift-reveal" id="gameGiftReveal" data-phase="idle" data-round="0" aria-label="Демонстрация трёх возможных бонусов">
+      <div class="gift-reveal-scene">
+        <span class="gift-reveal-halo" aria-hidden="true"></span>
+        <span class="gift-reveal-beam" aria-hidden="true"></span>
+        <span class="gift-reveal-platform" aria-hidden="true"></span>
+        <span class="gift-reveal-number" id="gameGiftRevealNumber">01 / 03</span>
+        <div class="gift-reveal-stars" aria-hidden="true">
+          <i style="--x:-100px;--y:-80px;--r:-25deg;--delay:0ms">✦</i>
+          <i style="--x:92px;--y:-79px;--r:30deg;--delay:65ms">✧</i>
+          <i style="--x:-132px;--y:-30px;--r:25deg;--delay:90ms">✦</i>
+          <i style="--x:130px;--y:-18px;--r:-25deg;--delay:110ms">✦</i>
+          <i style="--x:-60px;--y:-115px;--r:55deg;--delay:140ms">★</i>
+          <i style="--x:38px;--y:-120px;--r:-40deg;--delay:80ms">✦</i>
+          <i style="--x:-148px;--y:23px;--r:-15deg;--delay:190ms">✧</i>
+          <i style="--x:145px;--y:26px;--r:35deg;--delay:145ms">★</i>
+          <i style="--x:0px;--y:-145px;--r:15deg;--delay:35ms">✦</i>
+          <i style="--x:-115px;--y:-109px;--r:-60deg;--delay:190ms">★</i>
+          <i style="--x:115px;--y:-109px;--r:45deg;--delay:210ms">✧</i>
+          <i style="--x:0px;--y:62px;--r:10deg;--delay:235ms">✧</i>
+        </div>
+        <div class="gift-reveal-box" aria-hidden="true">
+          <div class="gift-reveal-lid"><span class="gift-reveal-lid-ribbon"></span></div>
+          <div class="gift-reveal-crate">
+            <span class="gift-reveal-crate-ribbon"></span>
+            <span class="gift-reveal-crate-logo">NEOLINE</span>
+            <span class="gift-reveal-crate-glint"></span>
+          </div>
+        </div>
+        <div class="gift-reveal-float" aria-hidden="true">
+          <span class="gift-reveal-float-icon" id="gameGiftRevealIcon">%</span>
+          <strong id="gameGiftRevealTitle">Дополнительная скидка</strong>
+        </div>
+      </div>
+      <div class="gift-reveal-slots" id="gameGiftRevealSlots" aria-label="Возможные бонусы">
+        <div class="gift-reveal-slot" data-reveal-slot="0">
+          <span class="gift-reveal-slot-icon" aria-hidden="true">%</span>
+          <strong id="gameGiftDiscountTitle">Дополнительная скидка</strong>
+          <p id="gameGiftDiscountDescription">Возможный бонус к покупке товаров NEOLINE.</p>
+        </div>
+        <div class="gift-reveal-slot" data-reveal-slot="1">
+          <span class="gift-reveal-slot-icon" aria-hidden="true">🎁</span>
+          <strong id="gameGiftAccessoryTitle">Автоаксессуар в подарок</strong>
+          <p id="gameGiftAccessoryDescription">Полезная вещь для автомобиля вместе с заказом.</p>
+        </div>
+        <div class="gift-reveal-slot" data-reveal-slot="2">
+          <span class="gift-reveal-slot-icon" aria-hidden="true">✦</span>
+          <strong id="gameGiftSurpriseTitle">Специальный бонус</strong>
+          <p id="gameGiftSurpriseDescription">Дополнительная выгода или сюрприз при покупке.</p>
+        </div>
+      </div>
+      <div class="gift-reveal-footer">
+        <span class="gift-reveal-status" id="gameGiftRevealStatus" role="status" aria-live="polite">Примеры бонусов — демонстрация</span>
+        <button class="gift-reveal-replay" type="button" id="gameGiftRevealReplay" hidden>Повторить ↻</button>
+      </div>
     </div>
     <p class="game-gift-dialog__notice" id="gameGiftNotice">Пока это только примеры. Какие подарки появятся, сколько будет нужно очков и за что их начислять — решим позже. Сейчас XP остаются игровыми очками: подарки не выдаются и в корзину не отправляются.</p>
     <button type="button" class="game-gift-dialog__ok" id="gameGiftOK">Понятно</button>
@@ -346,6 +388,7 @@
 <script src="./teoria.js?v=20261120-daily-v2" defer></script>
 <script src="./teoria-v2.js?v=20261120-daily-v2" defer></script>
 <script src="./teoria-gifts.js?v=20261118-gifts-preview-v1" defer></script>
+<script src="./teoria-gift-reveal.js?v=20261120-reveal3-v1" defer></script>
 <script src="./teoria-licence-dialog.js?v=20261119-custom-v1" defer></script>
 <script src="./teoria-game-dock4-road9.js?v=20261120-ar-v1" defer></script>
 <script src="./teoria-ar-ui.js?v=20261120-ar-v2" defer></script><script src="./nav-current.js?v=20261118-game-v3" defer></script><script src="./site-header.js?v=20261118-unified-v2" defer></script>
