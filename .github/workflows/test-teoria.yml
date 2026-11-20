@@ -139,7 +139,7 @@ jobs:
                correct.click();
              },bank);
              if(i<4)await page.waitForFunction(n=>
-               document.getElementById('questionCounter')?.textContent===(n+1)+' / 5'&&
+               document.getElementById('questionCounter')?.textContent===n+' / 5'&&
                !document.querySelector('#answers button')?.disabled,
                i+1,{timeout:11000});
            }
