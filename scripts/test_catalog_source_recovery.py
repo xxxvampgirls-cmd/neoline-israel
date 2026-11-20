@@ -36,6 +36,25 @@ def picture(mode: int) -> bytes:
 
 
 class ProductImageRecoveryTests(unittest.TestCase):
+    def test_speaker_facts_do_not_leak_into_radar_mounts(self):
+        rows=[
+            {"label":"Диффузор","value":"Стекловолокно"},
+            {"label":"Подвес","value":"Бутилкаучуковая резина"},
+            {"label":"Материал купола","value":"Шелк"},
+            {"label":"Способ установки","value":"На лобовое стекло"},
+            {"label":"Сплит","value":"оплата частями"}
+        ]
+        filtered=shop.validated_product_specs("accessories",rows)
+        self.assertEqual(filtered,[{"label":"Способ установки","value":"На лобовое стекло"}])
+        audio=shop.validated_product_specs("audio",rows)
+        self.assertEqual(len(audio),4)
+
+    def test_committed_mount_has_no_unrelated_speaker_parameters(self):
+        import json
+        data=json.loads((Path(__file__).resolve().parents[1] /
+                         "assets/catalog/catalog.json").read_text(encoding="utf-8"))
+        mount=next(p for p in data["products"] if p["id"]==105776419608)
+        self.assertFalse(any(row["label"] in shop.SPEAKER_PROPERTIES for row in mount["specs"]))
     def test_source_candidates_reject_related_product_photos(self):
         markup = """
           <meta property="og:image" content="/upload/iblock/product_main.webp">
