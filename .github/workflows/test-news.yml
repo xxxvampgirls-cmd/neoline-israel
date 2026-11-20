@@ -172,7 +172,7 @@ jobs:
             if(await carousel.locator('.news-feature-title').innerText()===firstFeature)
               throw Error('Broadcast transitions did not change news story');
             const counter=await page.locator('#newsFeatureCounter').textContent();
-            if(!/06\\s*\\/\\s*10/.test(counter))
+            if(!/06\s*\/\s*10/.test(counter))
               throw Error('Wrong current slide after five transitions: '+counter);
             await page.locator('#newsFeaturePrev').click();
             if(await carousel.locator('.news-bg-fragment--ribbons.news-bg-from-prev').count()!==5)
