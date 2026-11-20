@@ -105,13 +105,65 @@ jobs:
            await page.locator('#answers button').first().click();
            if(await page.locator('#feedback').isVisible())throw Error('Exam leaked correct answer');
            await page.locator('#exitQuiz').click();
+           // Daily challenge uses a fixed five-question bank per Israeli calendar day,
+           // with one streak completion per day and shared state across site languages.
+           if(!await page.locator('#dailyStart').isEnabled())
+             throw Error('Daily challenge not enabled after official bank loaded');
+           await page.evaluate(()=>{
+             const today=Object.fromEntries(new Intl.DateTimeFormat('en-GB',{
+               timeZone:'Asia/Jerusalem',year:'numeric',month:'2-digit',day:'2-digit'
+             }).formatToParts(new Date()).map(p=>[p.type,p.value]));
+             const day=today.year+'-'+today.month+'-'+today.day;
+             const yesterday=new Date(Date.parse(day+'T00:00:00Z')-86400000).toISOString().slice(0,10);
+             localStorage.setItem('neoline-teoria:daily:v1:B',JSON.stringify({date:yesterday,streak:4}));
+           });
+           await page.reload({waitUntil:'domcontentloaded'});
+           await wait();
+           await page.locator('#dailyStart').click();
+           if(!await page.locator('#gamePlaying').isVisible()||
+              !(await page.locator('#currentMode').innerText()).includes('Задание дня'))
+             throw Error('Daily challenge did not begin');
+           const firstId=await page.locator('#questionId').innerText();
+           await page.locator('#exitQuiz').click();
+           await page.locator('#dailyStart').click();
+           if(await page.locator('#questionId').innerText()!==firstId)
+             throw Error('Daily challenge changed questions on same day');
+           for(let i=0;i<5;i++){
+             await page.evaluate(bank=>{
+               const id=document.getElementById('questionId').textContent.replace(/\\D/g,'');
+               const q=bank.find(x=>x.id===id);
+               if(!q)throw Error('Official daily question missing '+id);
+               const correct=[...document.querySelectorAll('#answers button')]
+                 .find(el=>Number(el.dataset.original)===q.correct);
+               if(!correct)throw Error('Correct daily answer missing '+id);
+               correct.click();
+             },bank);
+             if(i<4)await page.waitForFunction(n=>
+               document.getElementById('questionCounter')?.textContent===(n+1)+' / 5'&&
+               !document.querySelector('#answers button')?.disabled,
+               i+1,{timeout:11000});
+           }
+           await page.locator('#gameResult').waitFor({state:'visible',timeout:12000});
+           const daily=await page.evaluate(()=>JSON.parse(localStorage.getItem('neoline-teoria:daily:v1:B')||'{}'));
+           if(daily.streak!==5||daily.score!==5||daily.total!==5)
+             throw Error('Daily Israeli calendar streak not saved '+JSON.stringify(daily));
+           await page.locator('#backToModes').click();
+           if(!await page.locator('#dailyStart').isDisabled())
+             throw Error('Daily quest allows repeat streak reward on the same day');
+           await page.locator('[data-lang="ar"]').click();
+           await wait();
+           if(!await page.locator('#dailyStart').isDisabled()||
+              !(await page.locator('#dailyStart').innerText()).includes('اكتمل'))
+             throw Error('Daily challenge does not retain completion in Arabic');
+           await page.locator('[data-lang="ru"]').click();
+           await wait();
            for(const width of [320,390]){
              await page.setViewportSize({width,height:844});
              const dims=await page.evaluate(()=>({document:document.documentElement.scrollWidth,window:innerWidth}));
              if(dims.document>dims.window+3)throw Error('Horizontal overflow '+JSON.stringify(dims));
            }
            if(errors.length)throw Error('Game JS errors: '+errors.join(' | '));
-           console.log('NEOLINE THEORY PASS: 4 languages, official questions, RTL, practice, 3-life Game Over, replay, hidden exam answers');
+           console.log('NEOLINE THEORY PASS: 4 languages, official questions, RTL, practice, 3-life Game Over, replay, hidden exam answers, deterministic 5-question daily quest and Israel-date streak');
            await browser.close();
           })().catch(e=>{console.error(e);process.exitCode=1});
           JS
