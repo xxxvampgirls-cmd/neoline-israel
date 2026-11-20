@@ -45,20 +45,20 @@ ROAD = re.compile(
     r"дтп|авари|водител|дорог|видеорегистратор|наезд|радар",
     re.I)
 ISRAEL = re.compile(
-    r"ישראל|ישראלי|בישראל|בארץ|כביש\\s*\\d{1,3}|"
+    r"ישראל|ישראלי|בישראל|בארץ|כביש\s*\d{1,3}|"
     r"תל[ -]?אביב|ירושלים|חיפה|רמת גן|ראשון לציון|פתח תקווה|"
     r"נתניה|באר שבע|בני ברק|רעננה|אשדוד|אשקלון|הרצליה|"
     r"רחובות|חולון|נצרת|כפר סבא|מודיעין|איילון|"
     r"צומת גלילות|כביש החוף|השרון|בשומרון|"
-    r"\\bisrael\\b|\\bisraeli\\b|\\btel[ -]?aviv\\b|\\bhaifa\\b|"
-    r"\\bjerusalem\\b|\\bbeersheba\\b|\\bnetanya\\b|"
+    r"\bisrael\b|\bisraeli\b|\btel[ -]?aviv\b|\bhaifa\b|"
+    r"\bjerusalem\b|\bbeersheba\b|\bnetanya\b|"
     r"израил|тель[ -]?авив|иерусалим|хайфа",
     re.I)
 FOREIGN = re.compile(
     r"באמריקה|בארה.ב|בארצות הברית|באירופה|בברזיל|בסין|ברוסיה|"
     r"בהודו|בתאילנד|באוקראינה|בקנדה|ביפן|"
-    r"\\busa\\b|\\bbrazil\\b|\\bchina\\b|\\bindia\\b|"
-    r"\\brussia\\b|\\bthailand\\b|\\bukraine\\b|"
+    r"\busa\b|\bbrazil\b|\bchina\b|\bindia\b|"
+    r"\brussia\b|\bthailand\b|\bukraine\b|"
     r"бразили|в китае|в россии|в сша|в индии",
     re.I)
 EXCLUDE = re.compile(
@@ -150,7 +150,7 @@ def _dt(value: str) -> dt.datetime | None:
 
 def _published_date_from_ytdlp(info: dict) -> dt.datetime | None:
     upload = info.get("upload_date") or info.get("release_date")
-    if isinstance(upload, str) and re.fullmatch(r"\\d{8}", upload):
+    if isinstance(upload, str) and re.fullmatch(r"\d{8}", upload):
         try:
             return dt.datetime.strptime(upload, "%Y%m%d").replace(tzinfo=UTC)
         except ValueError:
