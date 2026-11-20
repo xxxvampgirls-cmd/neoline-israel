@@ -13,6 +13,7 @@
    demo:"ДЕМОНСТРАЦИЯ",note:"Иллюстрация: функции зависят от модели и региона.",
    rec:"ЗАПИСЬ",gps:"GPS",dual:"2 КАМЕРЫ",parking:"ПАРКОВКА",
    unit:"КМ/Ч",satellites:"12 спутников",lane:"Полоса",laneStatus:"распознана ✓",
+   laneWarning:"Выезд из полосы!",gpsNote:"GPS принимает сигналы спутников; схема условная. Функции зависят от модели.",
    recording:"Запись",rear:"Камера сзади",parkingStatus:"Контроль парковки",
    speedLimit:"Ограничение",overspeed:"Превышение скорости",
    stages:[
@@ -27,6 +28,7 @@
    demo:"DEMONSTRATION",note:"Illustration only. Features vary by model and region.",
    rec:"RECORD",gps:"GPS",dual:"DUAL CAM",parking:"PARKING",
    unit:"KM/H",satellites:"12 satellites",lane:"Lane",laneStatus:"recognized ✓",
+   laneWarning:"Lane departure!",gpsNote:"GPS receives satellite signals. Visualized for demonstration; features vary by model.",
    recording:"Recording",rear:"Rear camera",parkingStatus:"Parking monitoring",
    speedLimit:"Speed limit",overspeed:"Speeding warning",
    stages:[
@@ -41,6 +43,7 @@
    demo:"להמחשה",note:"הדמיה בלבד. התכונות תלויות בדגם ובאזור.",
    rec:"צילום",gps:"GPS",dual:"2 מצלמות",parking:"חניה",
    unit:'קמ"ש',satellites:"12 לוויינים",lane:"נתיב",laneStatus:"זוהה ✓",
+   laneWarning:"סטייה מנתיב!",gpsNote:"GPS קולט אותות מהלוויינים. ההדמיה להמחשה בלבד; תלוי בדגם.",
    recording:"הקלטה",rear:"מצלמה אחורית",parkingStatus:"ניטור חניה",
    speedLimit:"מהירות מותרת",overspeed:"חריגה מהמהירות",
    stages:[
@@ -55,6 +58,7 @@
    demo:"عرض توضيحي",note:"للتوضيح فقط؛ تختلف الميزات حسب الطراز والمنطقة.",
    rec:"تسجيل",gps:"GPS",dual:"كاميرتان",parking:"وقوف",
    unit:"كم/س",satellites:"12 قمراً صناعياً",lane:"المسار",laneStatus:"تم التعرف ✓",
+   laneWarning:"انحراف عن المسار!",gpsNote:"يستقبل GPS إشارات الأقمار الصناعية. العرض توضيحي والميزات حسب الطراز.",
    recording:"التسجيل",rear:"الكاميرا الخلفية",parkingStatus:"مراقبة الوقوف",
    speedLimit:"السرعة المسموحة",overspeed:"تجاوز السرعة",
    stages:[
@@ -82,6 +86,7 @@
  const media=window.matchMedia("(prefers-reduced-motion: reduce)");
  const language=()=>languages[document.documentElement.lang]||languages.ru;
  let stage=0,visible=false,autoTimer=0,elapsedTimer=0,elapsed=156;
+ let laneOnTimer=0,laneOffTimer=0;
  function formatClock(seconds){
   const m=Math.floor(seconds/60),s=seconds%60;
   return String(Math.floor(m/60)).padStart(2,"0")+":"+
@@ -91,11 +96,15 @@
   const tr=language();
   const step=tr.stages[stage];
   root.dataset.roadStage=String(stage);
+  root.classList.toggle("is-lane-demo",stage===0);
+  if(stage!==0)root.classList.remove("is-lane-alert");
   root.setAttribute("aria-label",tr.label);
   fields.title.textContent=step.title;
   fields.detail.textContent=step.sub;
   fields.hud.textContent=step.hud;
-  fields.note.textContent=tr.note;
+  // GPS broadcasts are received by the car. The animated upward pulse
+  // represents receiver acquisition, not a real uplink request.
+  fields.note.textContent=stage===1?tr.gpsNote:tr.note;
   fields.demo.textContent=tr.demo;
   if(fields.tag)fields.tag.textContent=tr.tag;
   // Illustrative speeds only. In GPS mode a 60 km/h section is simulated:
@@ -115,7 +124,8 @@
   fields.unit.textContent=tr.unit;
   fields.satellites.textContent=tr.satellites;
   fields.lane.textContent=tr.lane;
-  fields.laneStatus.textContent=tr.laneStatus;
+  fields.laneStatus.textContent=root.classList.contains("is-lane-alert")?
+    tr.laneWarning:tr.laneStatus;
   fields.record.textContent=tr.recording;
   fields.rear.textContent=tr.rear;
   fields.parking.textContent=tr.parkingStatus;
@@ -126,15 +136,38 @@
    button.setAttribute("aria-label",button.textContent.trim());
   });
  }
+ function clearLaneAlert(){
+  root.classList.remove("is-lane-alert");
+  if(fields.laneStatus)fields.laneStatus.textContent=language().laneStatus;
+ }
  function stop(){
   clearTimeout(autoTimer);autoTimer=0;
   clearInterval(elapsedTimer);elapsedTimer=0;
+  clearTimeout(laneOnTimer);laneOnTimer=0;
+  clearTimeout(laneOffTimer);laneOffTimer=0;
+  clearLaneAlert();
   root.classList.remove("is-playing");
+ }
+ function scheduleLaneDemo(){
+  if(stage!==0||!visible||document.hidden||media.matches)return;
+  // CSS car drift takes 7.2s. Raise lane warning while the car's right
+  // side actually reaches the lane marker, then clear during recentering.
+  // Repeat only when the user holds recording mode for another full cycle.
+  const flash=()=>{
+   if(stage!==0||!visible||document.hidden||media.matches)return;
+   root.classList.add("is-lane-alert");
+   fields.laneStatus.textContent=language().laneWarning;
+   clearTimeout(laneOffTimer);
+   laneOffTimer=window.setTimeout(clearLaneAlert,1660);
+   laneOnTimer=window.setTimeout(flash,7200);
+  };
+  laneOnTimer=window.setTimeout(flash,2800);
  }
  function start(holdUserChoice=false){
   stop();
   if(!visible||document.hidden||media.matches)return;
   root.classList.add("is-playing");
+  if(stage===0)scheduleLaneDemo();
   autoTimer=window.setTimeout(()=>{
    stage=(stage+1)%4;
    repaint();
