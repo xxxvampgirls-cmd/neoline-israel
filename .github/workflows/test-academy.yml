@@ -70,6 +70,11 @@ jobs:
               throw Error('Topic progress not recorded');
             if(await page.locator('#neolineAcademy [data-academy-done]').getAttribute('aria-pressed')!=='true')
               throw Error('Reviewed topic not checked');
+            if(!await page.locator('#neolineAcademy [data-academy-next]').isVisible())
+              throw Error('Next incomplete topic button missing after reviewing a topic');
+            await page.locator('#neolineAcademy [data-academy-next]').click();
+            if(await page.locator('#neolineAcademy [data-academy-topic="setup"]').getAttribute('aria-selected')!=='true')
+              throw Error('Next button did not navigate to first incomplete topic');
             await page.reload({waitUntil:'domcontentloaded'});
             await page.waitForFunction(()=>window.NEOLINE_ACADEMY?.topics?.length===4);
             await page.locator('#neolineAcademy [data-academy-model="3"]').click();
@@ -105,6 +110,25 @@ jobs:
               if(await page.locator('#neolineAcademy [data-academy-topic]').count()!==4)
                 throw Error('Localized modules disappeared '+lang);
             }
+            // Completing all four topics should show a clear localized result
+            // and must never point the next-step button to an already done topic.
+            await page.locator('#neolineAcademy [data-academy-model="3"]').click();
+            for(const item of ['setup','connect','record']){
+              await page.locator('#neolineAcademy [data-academy-topic="'+item+'"]').click();
+              await page.locator('#neolineAcademy [data-academy-done]').click();
+            }
+            if(await page.evaluate(()=>window.NEOLINE_ACADEMY.getReviewed())!==4)
+              throw Error('Academy guided mode failed to record all four lessons');
+            if(!await page.locator('#neolineAcademy .academy-finished').isVisible())
+              throw Error('Academy completion banner missing');
+            if(await page.locator('#neolineAcademy [data-academy-next]').count())
+              throw Error('Guided next button must disappear when all lessons are done');
+            for(const [lang,word] of [['he','הושלמו'],['ar','اكتملت'],['ru','пройдены']]){
+              await page.evaluate(l=>{document.documentElement.lang=l},lang);
+              await page.waitForFunction(l=>document.querySelector('#neolineAcademy')?.lang===l,lang);
+              if(!(await page.locator('#neolineAcademy .academy-finished').innerText()).includes(word))
+                throw Error('Completion message not translated '+lang);
+            }
             for(const width of [320,390,768]){
               await page.setViewportSize({width,height:840});
               const dims=await page.evaluate(()=>({
@@ -116,7 +140,7 @@ jobs:
                 throw Error('Academy overflows viewport '+JSON.stringify(dims));
             }
             if(errors.length)throw Error('Javascript errors: '+errors.join(' | '));
-            console.log('NEOLINE ACADEMY PASS: 8 models, 4 locales, RTL, video lazy, saved-device sync, official manufacturer links, checklist progress');
+            console.log('NEOLINE ACADEMY PASS: 8 models, 4 locales, RTL, video lazy, saved-device sync, official manufacturer links, checklist progress, next incomplete topic, four-language completion');
             await browser.close();
           })().catch(err=>{console.error(err);process.exitCode=1});
           JS
