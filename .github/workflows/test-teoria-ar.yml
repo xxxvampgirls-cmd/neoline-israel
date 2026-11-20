@@ -89,7 +89,6 @@ jobs:
             await page.locator('[data-lang="ru"]').click();
             await page.waitForFunction(()=>document.documentElement.lang==='ru'&&
               document.getElementById('bankStatus')?.classList.contains('loaded'),null,{timeout:15000});
-            if(document && false){} // no-op keeps browser-only assertions inside the page
             if(errors.length)throw Error('Browser runtime exceptions: '+errors.join(' | '));
             console.log('ARABIC THEORY PASS',JSON.stringify({count:bank.questions.length,B:bank.questions.filter(q=>q.classes.includes('B')).length,rtl:true,route:true,exam:true,progress:true}));
             await browser.close();
