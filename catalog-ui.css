@@ -148,3 +148,62 @@
   padding:9px 11px;font-size:11px;
  }
 }
+
+/* Genuine source gallery stays distinct from manufacturer's marketing feature art. */
+.catalog-photo-single{display:flex;justify-content:center;margin:8px auto 2px;color:#63879c;font-size:11px;font-weight:800}
+.catalog-official-art{margin-top:20px;min-width:0}
+.catalog-official-art details{
+ border:1px solid #c3deee;border-radius:15px;
+ background:linear-gradient(135deg,#f8fcff,#eff8fe);
+ overflow:hidden;
+}
+.catalog-official-art summary{
+ display:flex;align-items:center;justify-content:space-between;gap:14px;
+ padding:13px 15px;cursor:pointer;list-style:none;
+ color:#1c567b;font-size:13px;font-weight:850;
+}
+.catalog-official-art summary::-webkit-details-marker{display:none}
+.catalog-official-art summary::after{
+ content:"⌄";font-size:22px;font-weight:500;
+ color:#5a8eaf;line-height:1;transition:transform .2s ease;
+}
+.catalog-official-art details[open] summary::after{transform:rotate(180deg)}
+.catalog-official-art summary small{
+ margin-inline-start:auto;font-size:10px;font-weight:750;
+ white-space:nowrap;color:#437c9f;background:#fff;
+ padding:5px 8px;border:1px solid #d2e7f3;border-radius:8px;
+}
+.catalog-official-art details>p{
+ margin:0 15px 11px;color:#6b8597;font-size:11px;line-height:1.6;
+}
+.catalog-official-art-grid{
+ display:grid;grid-template-columns:repeat(3,minmax(0,1fr));
+ padding:0 13px 14px;gap:11px;min-width:0;
+}
+.catalog-feature-preview{
+ display:flex;flex-direction:column;min-width:0;
+ padding:5px 5px 10px;gap:8px;
+ border:1px solid #cfe2ee;border-radius:12px;
+ background:#fff;cursor:zoom-in;
+ box-shadow:0 3px 9px rgba(20,88,124,.06);
+ color:#285d7d;font:750 11px/1.4 Manrope,Arial,sans-serif;
+ overflow:hidden;transition:border-color .15s ease,box-shadow .15s ease;
+}
+.catalog-feature-preview:hover{border-color:#8fbfdb;box-shadow:0 4px 12px rgba(30,117,166,.11)}
+.catalog-feature-preview:focus-visible{outline:3px solid #1d92c9;outline-offset:2px}
+.catalog-feature-preview img{
+ display:block;width:100%;aspect-ratio:1/1;object-fit:contain;
+ border-radius:8px;background:#101d2c;
+}
+.catalog-feature-preview span{display:block;padding-inline:4px;overflow-wrap:anywhere}
+[dir="rtl"] .catalog-official-art summary{text-align:start}
+[dir="rtl"] .catalog-feature-preview span{text-align:center}
+@media(max-width:720px){
+ .catalog-official-art{margin-top:15px}
+ .catalog-official-art summary{font-size:12px;padding:12px 11px}
+ .catalog-official-art-grid{grid-template-columns:repeat(2,minmax(0,1fr));padding:0 10px 12px;gap:9px}
+ .catalog-feature-preview{font-size:10px}
+}
+@media(prefers-reduced-motion:reduce){
+ .catalog-official-art *{transition:none!important}
+}
