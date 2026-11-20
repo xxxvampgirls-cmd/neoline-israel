@@ -17,12 +17,16 @@ function update(){
  document.querySelectorAll("[data-pickup-short]").forEach(el=>{
   const label=el.querySelector("[data-pickup-short-text]");
   if(label)label.textContent=shortPickup[lang]||shortPickup.ru;
-  el.setAttribute("aria-label",l[8].replace(/\\s*↗$/,""));
+  el.setAttribute("aria-label",l[8].replace(/\s*↗$/,""));
  });
 }
 if(document.getElementById("pickup-preview")){
  update();
  document.querySelectorAll("[data-language]").forEach(el=>el.addEventListener("click",()=>setTimeout(update,0)));
  document.getElementById("lang")?.addEventListener("change",()=>setTimeout(update,0));
+ // Re-render when the main page changes language programmatically as well.
+ new MutationObserver(update).observe(document.documentElement,{
+  attributes:true,attributeFilter:["lang"]
+ });
 }
 })();
