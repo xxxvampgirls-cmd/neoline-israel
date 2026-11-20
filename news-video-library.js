@@ -14,39 +14,62 @@ const SOURCES={
 };
 const langPack={
  ru:{label:"ВИДЕОХРОНИКА · ИЗРАИЛЬ",title:"Видео с дорог",period:"За последние 30 дней",
-  about:"ДТП, репортажи и дорожная полиция — только видео из официальных источников.",
-  all:"Все",accidents:"ДТП",reports:"Репортажи",police:"Полиция",loading:"Собираем видео за месяц…",
+  about:"ДТП, радары, камеры контроля скорости, репортажи и дорожная полиция — только официальные источники.",
+  all:"Все",accidents:"ДТП",radars:"Радары и камеры",reports:"Репортажи",police:"Полиция",
+  archiveHeading:"Радары и камеры · Архив 13 канала",archiveLabel:"Архив",
+  archiveDescription:"Отдельные репортажи прошлых месяцев, не входят в подборку за 30 дней.",
+  archiveMore:"Другие сюжеты 13 канала ↗",loading:"Собираем видео за месяц…",
   empty:"За последние 30 дней пока нет подтверждённых роликов по этой теме.",
   unavailable:"Подборка обновляется из YouTube. Пока можно открыть проверенные каналы ниже.",
   watch:"Смотреть",youtube:"Открыть на YouTube ↗",sources:"Источники:",
   expand:"Показать ещё видео",count:n=>n+" видео",notice:"Видео размещены авторами на YouTube; могут содержать кадры происшествий.",
   close:"Закрыть видео",player:"Видеорепортаж"},
  en:{label:"VIDEO REPORTS · ISRAEL",title:"Road videos",period:"Last 30 days",
-  about:"Crashes, reports and traffic enforcement — official publishers only.",
-  all:"All",accidents:"Crashes",reports:"Reports",police:"Police",loading:"Loading this month's videos…",
+  about:"Crashes, radar, speed cameras, reports and police — official publishers only.",
+  all:"All",accidents:"Crashes",radars:"Radars & cameras",reports:"Reports",police:"Police",
+  archiveHeading:"Radar & camera reports · News 13 archive",archiveLabel:"Archive",
+  archiveDescription:"Older features, separate from the rolling last-30-days collection.",
+  archiveMore:"More News 13 coverage ↗",loading:"Loading this month's videos…",
   empty:"No verified clips for this topic were found in the last 30 days.",
   unavailable:"This playlist is built from YouTube feeds. Browse the verified channels below.",
   watch:"Watch",youtube:"Open on YouTube ↗",sources:"Sources:",
   expand:"More videos",count:n=>n+" videos",notice:"Videos remain on YouTube; some may show sensitive crash footage.",
   close:"Close video",player:"Video report"},
  he:{label:"וידאו מהכבישים · ישראל",title:"סרטונים מהכבישים",period:"30 הימים האחרונים",
-  about:"תאונות, כתבות ואכיפת תנועה — מערוצים רשמיים בלבד.",
-  all:"הכול",accidents:"תאונות",reports:"כתבות",police:"משטרה",loading:"טוענים סרטונים מהחודש…",
+  about:"תאונות, רדארים, מצלמות מהירות, כתבות ואכיפת תנועה — ערוצים רשמיים בלבד.",
+  all:"הכול",accidents:"תאונות",radars:"רדארים ומצלמות",reports:"כתבות",police:"משטרה",
+  archiveHeading:"רדארים ומצלמות · ארכיון חדשות 13",archiveLabel:"ארכיון",
+  archiveDescription:"כתבות מחודשים קודמים, בנפרד מאוסף 30 הימים האחרונים.",
+  archiveMore:"עוד כתבות בחדשות 13 ↗",loading:"טוענים סרטונים מהחודש…",
   empty:"אין סרטונים מאומתים בנושא זה ב־30 הימים האחרונים.",
   unavailable:"האוסף מתעדכן מיוטיוב. אפשר לבקר בערוצים הרשמיים בהמשך.",
   watch:"צפייה",youtube:"לצפייה ביוטיוב ↗",sources:"מקורות:",
   expand:"עוד סרטונים",count:n=>n+" סרטונים",notice:"הסרטונים מתארחים ביוטיוב ועלולים להכיל תיעוד תאונות.",
   close:"סגירת הסרטון",player:"כתבת וידאו"},
  ar:{label:"فيديو الطرق · إسرائيل",title:"فيديوهات الطرق",period:"آخر 30 يومًا",
-  about:"حوادث وتقارير وشرطة المرور — من القنوات الرسمية فقط.",
-  all:"الكل",accidents:"حوادث",reports:"تقارير",police:"الشرطة",loading:"جار تحميل فيديوهات الشهر…",
+  about:"حوادث ورادارات وكاميرات السرعة وتقارير المرور — من القنوات الرسمية فقط.",
+  all:"الكل",accidents:"حوادث",radars:"الرادارات والكاميرات",reports:"تقارير",police:"الشرطة",
+  archiveHeading:"الرادارات والكاميرات · أرشيف أخبار 13",archiveLabel:"الأرشيف",
+  archiveDescription:"تقارير أقدم، منفصلة عن مجموعة آخر 30 يومًا.",
+  archiveMore:"المزيد من أخبار 13 ↗",loading:"جار تحميل فيديوهات الشهر…",
   empty:"لا توجد مقاطع موثقة عن هذا الموضوع خلال آخر 30 يومًا.",
   unavailable:"تُحدّث المجموعة من يوتيوب. يمكنك زيارة القنوات الرسمية أدناه.",
   watch:"مشاهدة",youtube:"فتح على يوتيوب ↗",sources:"المصادر:",
   expand:"مزيد من الفيديوهات",count:n=>n+" فيديو",notice:"الفيديوهات مستضافة على يوتيوب وقد تتضمن مشاهد حوادث.",
   close:"إغلاق الفيديو",player:"تقرير مصور"}
 };
-const CATS=["all","accidents","reports","police"];
+const CATS=["all","accidents","radars","reports","police"];
+// Two verified news reports on News 13's official YouTube channel.
+// Both predate the rolling 30-day period; neither is falsely counted as a
+// current-month publication. No artificial dates or thumbnail assets.
+const ARCHIVE=[
+ {id:"c4tTPoVYwws",title:"החידוש באגף התנועה: מצלמות המהירות משנות את כללי האכיפה",
+  source:"news13",publisher:SOURCES.news13.name,category:"radars",archive:true,
+  url:"https://www.youtube.com/watch?v=c4tTPoVYwws"},
+ {id:"gPkpDS04sjA",title:"קנס ישר הביתה: המדריך למצלמות החדשות של המשטרה",
+  source:"news13",publisher:SOURCES.news13.name,category:"radars",archive:true,
+  url:"https://www.youtube.com/watch?v=gPkpDS04sjA"}
+];
 const state={all:[],cat:"all",visible:6,ready:false,updated:0};
 const tr=()=>langPack[document.documentElement.lang]||langPack.ru;
 const safe=str=>String(str??"").replace(/[&<>"']/g,ch=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[ch]));
@@ -109,7 +132,7 @@ function card(item){
    '<span class="news-video-category">'+category+'</span>'+
   '</span><span class="news-video-card-body">'+
    '<strong class="news-video-card-title" dir="auto">'+title+'</strong>'+
-   '<span class="news-video-card-meta" dir="auto">'+safe(item.publisher)+' · '+safe(when(item.date))+'</span>'+
+   '<span class="news-video-card-meta" dir="auto">'+safe(item.publisher)+' · '+safe(item.archive?t.archiveLabel:when(item.date))+'</span>'+
   '</span></button>';
 }
 function draw(){
@@ -120,6 +143,12 @@ function draw(){
  $("newsVideoDescription").textContent=t.about;
  $("newsVideoNotice").textContent=t.notice;
  $("newsVideoSourcesLabel").textContent=t.sources;
+ const archive=$("newsVideoArchive");
+ archive.hidden=state.cat!=="all"&&state.cat!=="radars";
+ $("newsVideoArchiveTitle").textContent=t.archiveHeading;
+ $("newsVideoArchiveDescription").textContent=t.archiveDescription;
+ $("newsVideoArchiveMore").textContent=t.archiveMore;
+ if(!archive.hidden)$("newsVideoArchiveGrid").innerHTML=ARCHIVE.map(card).join("");
  const chips=$("newsVideoFilters");
  chips.replaceChildren();
  for(const cat of CATS){
@@ -153,8 +182,8 @@ function draw(){
  $("newsVideoDialog").setAttribute("aria-label",t.player);
 }
 function openVideo(id){
- const row=state.all.find(x=>x.id===id);
- if(!row||!validDate(row.date))return;
+ const row=state.all.find(x=>x.id===id)||ARCHIVE.find(x=>x.id===id);
+ if(!row||(!row.archive&&!validDate(row.date)))return;
  const dialog=$("newsVideoDialog");
  $("newsVideoExternal").href=row.url;
  $("newsVideoPlayerTitle").textContent=row.title;
@@ -188,6 +217,10 @@ $("newsVideoFilters").addEventListener("click",event=>{
 grid.addEventListener("click",event=>{
  const id=event.target.closest("[data-video]")?.dataset.video;
  if(id)openVideo(id);
+});
+$("newsVideoArchiveGrid").addEventListener("click",event=>{
+ const id=event.target.closest("[data-video]")?.dataset.video;
+ if(id&&ARCHIVE.some(x=>x.id===id))openVideo(id);
 });
 $("newsVideoMore").addEventListener("click",()=>{state.visible+=6;draw();});
 $("newsVideoClose").addEventListener("click",closeVideo);
