@@ -9,6 +9,7 @@ on:
       - 'smart-hub.css'
       - 'smart-hub-picker.js'
       - 'smart-hub-picker.css'
+      - 'smart-hub-tray.css'
       - 'product-specs.js'
       - 'device-updates.js'
       - '.github/workflows/test-smart-hub.yml'
@@ -125,6 +126,46 @@ jobs:
             await page.locator('[data-hub-tab="owner"]').click();
             if((await page.locator('[data-hub-device]').inputValue())!=='3')
               throw Error('Model not remembered between visits');
+
+            // Catalog comparison: tap model icons, inspect the floating tray,
+            // open the actual comparison, then remove and clear the selection.
+            const modelButtons=page.locator('#catalog .product .hub-compact-compare');
+            if(await modelButtons.count()<4)throw Error('Too few model cards for tray test');
+            await modelButtons.nth(0).click();
+            if(!await page.locator('#hubCompareTray').isVisible())
+              throw Error('Sticky compare tray did not open');
+            if(await page.locator('.hub-tray-chip').count()!==1)
+              throw Error('First selected camera missing from tray');
+            if(!await page.locator('[data-tray-go]').isDisabled())
+              throw Error('Comparing one camera must be disabled');
+            await modelButtons.nth(1).click();
+            if(await page.locator('.hub-tray-chip').count()!==2)
+              throw Error('Two-camera compare selection did not accumulate');
+            if(!await modelButtons.nth(0).getAttribute('aria-pressed').then(x=>x==='true'))
+              throw Error('Selected card is not visibly marked');
+            const trayPlacement=await page.evaluate(()=>{
+              const tray=document.getElementById('hubCompareTray')?.getBoundingClientRect();
+              const nav=document.querySelector('.mobile-nav')?.getBoundingClientRect();
+              return {trayBottom:tray?.bottom,navTop:nav?.top,window:innerWidth,fullWidth:tray?.width};
+            });
+            if(trayPlacement.trayBottom>trayPlacement.navTop+4||
+               trayPlacement.fullWidth>trayPlacement.window)
+              throw Error('Compare tray overlaps mobile navbar or overflows: '+JSON.stringify(trayPlacement));
+            await page.locator('[data-tray-go]').click();
+            if(await page.locator('[data-hub-tab="compare"]').getAttribute('aria-selected')!=='true')
+              throw Error('Tray did not open comparison tab');
+            if(await page.locator('.hub-compare thead th').count()!==3)
+              throw Error('Tray comparison has wrong model count');
+            await page.locator('.hub-tray-chip button[data-tray-remove]').first().click();
+            if(await page.locator('.hub-tray-chip').count()!==1||
+              !await page.locator('[data-tray-go]').isDisabled())
+              throw Error('Removing camera did not update tray');
+            await page.locator('[data-tray-clear]').click();
+            if(await page.locator('#hubCompareTray').isVisible())
+              throw Error('Cleared comparison tray is still visible');
+            if(await page.evaluate(()=>JSON.parse(sessionStorage.getItem('neoline:comparison-draft:v1')||'[]').length)!==0)
+              throw Error('Cleared selection remains in session storage');
+
             for(const [code,rtl] of [['en',false],['he',true],['ar',true],['ru',false]]){
               await page.evaluate(lang=>{
                 document.documentElement.lang=lang;
