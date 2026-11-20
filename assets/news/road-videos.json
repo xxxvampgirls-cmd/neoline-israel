@@ -1,8 +1,8 @@
 {
   "version": 1,
   "retentionDays": 30,
-  "updated": null,
-  "status": "waiting_first_sync",
+  "updated": "2026-11-20T18:00:00Z",
+  "status": "verified_editorial_seed",
   "sourceCount": 0,
   "sources": [
     {
@@ -21,5 +21,42 @@
       "channel": "https://www.youtube.com/channel/UCrwyHUb4iIrpknhP6MTvnww"
     }
   ],
-  "items": []
+  "items": [
+    {
+      "id": "d_yErBbVf28",
+      "title": "נהגת נתפסה מתפללת וקוראת מהסידור בנהיגה",
+      "date": "2026-11-16T00:00:00Z",
+      "source": "police",
+      "publisher": "משטרת ישראל",
+      "category": "police",
+      "url": "https://www.youtube.com/watch?v=d_yErBbVf28"
+    },
+    {
+      "id": "W-DCMoG3-L0",
+      "title": "רחפני המשטרה נגד פורעי החוק בכבישים",
+      "date": "2026-11-10T00:00:00Z",
+      "source": "police",
+      "publisher": "משטרת ישראל",
+      "category": "police",
+      "url": "https://www.youtube.com/watch?v=W-DCMoG3-L0"
+    },
+    {
+      "id": "feYlQtGtGGc",
+      "title": "העיניים בטלפון ולא בכביש = סכנה ⚠️",
+      "date": "2026-11-03T00:00:00Z",
+      "source": "police",
+      "publisher": "משטרת ישראל",
+      "category": "police",
+      "url": "https://www.youtube.com/watch?v=feYlQtGtGGc"
+    },
+    {
+      "id": "kPT-fpEeQ3k",
+      "title": "מסר חשוב לכל אדם שעולה על ההגה",
+      "date": "2026-11-01T00:00:00Z",
+      "source": "police",
+      "publisher": "משטרת ישראל",
+      "category": "police",
+      "url": "https://www.youtube.com/watch?v=kPT-fpEeQ3k"
+    }
+  ]
 }
