@@ -128,7 +128,7 @@ function renderTray(){
  tray.innerHTML='<div class="hub-tray-top"><div class="hub-tray-info"><strong>⚖ '+esc(t.title)+'</strong><small class="hub-tray-message">'+esc(trayNotice||(n===1?t.more:t.selected+" "+n+" / 3"))+'</small></div>'+
  '<button type="button" class="hub-tray-clear" data-tray-clear>'+esc(t.clear)+'</button></div>'+
  '<div class="hub-tray-bottom"><div class="hub-tray-chips" role="list">'+
- trayIds.map(id=>'<span role="listitem" class="hub-tray-chip"><span>'+esc(names[id].replace(/^NEOLINE\\s+/,""))+'</span><button type="button" data-tray-remove="'+id+'" aria-label="'+esc(t.remove+" · "+names[id])+'">×</button></span>').join("")+
+ trayIds.map(id=>'<span role="listitem" class="hub-tray-chip"><span>'+esc(names[id].replace(/^NEOLINE\s+/,""))+'</span><button type="button" data-tray-remove="'+id+'" aria-label="'+esc(t.remove+" · "+names[id])+'">×</button></span>').join("")+
  '</div><button class="hub-tray-go" type="button" data-tray-go'+(n<2?' disabled':'')+'>'+esc(t.compare)+' '+n+' ↗</button></div>';
 }
 function saveTray(){try{sessionStorage.setItem(trayKey,JSON.stringify(trayIds))}catch(_){}}
@@ -198,7 +198,7 @@ function findPanel(){
 function comparisonPanel(){
  const t=tx(), selected=chosen.filter(Boolean);
  const selects='<div class="hub-compare-selectors">'+chosen.map((id,i)=>'<label class="hub-field">'+esc(i===2?t.third:t.model+" "+(i+1))+
-  '<select data-hub-compare="'+i+'">'+optionModel(id,i===2,t.choose)+'</select></label>').join("")+'</div>';
+  '<select data-hub-compare="'+i+'">'+optionModel(id,true,t.choose)+'</select></label>').join("")+'</div>';
  const table='<div class="hub-compare-wrap" role="region" tabindex="0" aria-label="'+esc(t.compareTitle)+'"><table class="hub-compare"><thead><tr><th scope="col">'+esc(t.model)+'</th>'+
  selected.map(id=>'<th scope="col">'+esc(names[id])+'</th>').join("")+'</tr></thead><tbody>'+
  values.map((key,i)=>'<tr><th scope="row">'+esc(t.rows[i])+'</th>'+
@@ -237,6 +237,7 @@ function render(){
  '</div>'+(tab==="finder"?findPanel():tab==="compare"?comparisonPanel():ownerPanel())+'</div>';
  updateShortcuts();
  decorateProducts();
+ renderTray();
 }
 function decorateProducts(){
  const grid=document.getElementById("products");if(!grid)return;
@@ -264,6 +265,8 @@ function decorateProducts(){
   }
   btn.innerHTML='<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 3v17M5 6h14M5 6 2 12h6L5 6Zm14 0-3 6h6l-3-6ZM8 12c0 2-1 3-3 3s-3-1-3-3M22 12c0 2-1 3-3 3s-3-1-3-3M7 21h10"/></svg><span class="hub-compare-text">'+esc(labels[locale()])+'</span>';
   btn.setAttribute("aria-label",labels[locale()]+" · "+names[id]);
+  btn.setAttribute("aria-pressed",String(trayIds.includes(id)));
+  btn.classList.toggle("hub-is-picked",trayIds.includes(id));
   btn.title=labels[locale()]+" · "+names[id];
  }
 }
@@ -278,7 +281,9 @@ root.addEventListener("change",event=>{
    const message=document.getElementById("hubCompareError");if(message)message.hidden=false;
    return;
   }
-  chosen[index]=id;render();
+  chosen[index]=id;
+  if(trayIds.length){trayIds=chosen.filter(Boolean).slice(0,3);saveTray()}
+  render();
  }else if(e.matches("[data-hub-device]")){
   device=Number(e.value);
   if(!ids.includes(device))device=1;
@@ -289,14 +294,7 @@ root.addEventListener("click",event=>{
  const button=event.target.closest("button");if(!button)return;
  if(button.matches("[data-hub-tab]")){tab=button.dataset.hubTab;showUpdates=false;render();root.querySelector('[data-hub-tab="'+tab+'"]')?.focus();return}
  if(button.matches("[data-hub-open]")){openModel(Number(button.dataset.hubOpen));return}
- if(button.matches("[data-hub-choose]")){
-  const id=Number(button.dataset.hubChoose);
-  chosen=chosen.filter(x=>x&&x!==id);
-  chosen.unshift(id);chosen=chosen.slice(0,3);
-  while(chosen.length<3)chosen.push(0);
-  if(chosen.filter(Boolean).length===1)chosen[1]=chosen[0]===5?6:5;
-  tab="compare";render();root.scrollIntoView({behavior:"smooth",block:"start"});return;
- }
+ if(button.matches("[data-hub-choose]")){toggleCompare(button.dataset.hubChoose);return}
  if(button.matches("[data-hub-save]")){
   const current=Number(root.querySelector("[data-hub-device]")?.value)||device||1;
   if(!ids.includes(current))return;
@@ -307,15 +305,9 @@ root.addEventListener("click",event=>{
  if(button.matches("[data-hub-updates]")){showUpdates=!showUpdates;render();return}
 });
 document.getElementById("products")?.addEventListener("click",event=>{
- const btn=event.target.closest("[data-hub-card-compare]");
- if(!btn)return;
- const id=Number(btn.dataset.hubCardCompare);
- if(!ids.includes(id))return;
- chosen=chosen.filter(x=>x&&x!==id);chosen.unshift(id);
- chosen=chosen.slice(0,3);
- while(chosen.length<3)chosen.push(0);
- if(chosen.filter(Boolean).length===1)chosen[1]=chosen[0]===5?6:5;
- tab="compare";render();root.scrollIntoView({behavior:"smooth",block:"start"});
+ const button=event.target.closest("[data-hub-card-compare]");
+ if(!button)return;
+ toggleCompare(button.dataset.hubCardCompare);
 });
 /* Primary catalog shortcuts keep the new features discoverable before the
    long product listing. They are buttons, not fake sales CTAs. */
@@ -344,6 +336,6 @@ function updateShortcuts(){
 const products=document.getElementById("products");
 if(products)new MutationObserver(decorateProducts).observe(products,{childList:true});
 new MutationObserver(records=>{if(records.some(x=>x.attributeName==="lang"))render();}).observe(document.documentElement,{attributes:true,attributeFilter:["lang"]});
-window.NEOLINE_SMART_HUB={ranks,has,selectTab(key){if(["finder","compare","owner"].includes(key)){tab=key;render()}},models:ids.slice()};
+window.NEOLINE_SMART_HUB={ranks,has,selectTab(key){if(["finder","compare","owner"].includes(key)){tab=key;render()}},getSelection:()=>trayIds.slice(),toggleCompare,clearCompare,models:ids.slice()};
 render();
 })();
