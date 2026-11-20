@@ -207,3 +207,15 @@
 @media(prefers-reduced-motion:reduce){
  .catalog-official-art *{transition:none!important}
 }
+
+/* Keep the product dialog close control above long manufacturer image lists.
+   A scrolled feature-grid SVG must never intercept the close button. */
+#productModal .product-panel > #closeProduct{
+ position:sticky;top:12px;z-index:300;
+ pointer-events:auto;isolation:isolate;
+ box-shadow:0 4px 12px rgba(11,68,105,.22);
+ background:#f4faff;
+}
+#productModal .product-panel > #closeProduct:focus-visible{
+ outline:3px solid #1c9acb;outline-offset:2px;
+}
