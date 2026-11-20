@@ -18,6 +18,7 @@ on:
       - "catalog-ui.css"
       - "catalog-ui.js"
       - "index.html"
+      - "showcase-how.css"
       - "road-demo.js"
       - "road-demo.css"
       - "road-demo-premium.css"
@@ -86,6 +87,65 @@ jobs:
             if(await page.locator('#desktopDelivery').count()!==1)
               throw Error('Desktop delivery shortcut missing');
             console.log('HOMEPAGE DELIVERY NAV PASS: no favorites, truck link available');
+            // New 3rd slide advertises the EXISTING working interactive demo.
+            // Product 1 and product 2 must remain untouched and product 3
+            // must follow the demo ad in the original ice-blue showroom.
+            const carousel=page.locator('#showcaseSlides');
+            const heroSlides=carousel.locator('.featured-slide');
+            if(await heroSlides.count()!==9)
+              throw Error('Showroom must now contain 9 slides (8 original + interactive demo promo)');
+            const order=await heroSlides.evaluateAll(nodes=>nodes.map(n=>({
+              cls:n.className,cta:n.querySelector('[data-open-feature]')?.getAttribute('data-open-feature')||null
+            })));
+            if(!order[2].cls.includes('featured-slide--promo-how')||order[3].cta!=='2'||
+               !order[2].cls.includes('featured-slide--site-promo'))
+              throw Error('How it works ad must sit BETWEEN the 2nd and 3rd showroom products: '+JSON.stringify(order));
+            if(await page.locator('#showcaseDots .showcase-dot').count()!==9)
+              throw Error('Navigation must expose all 9 showroom slides');
+            await page.locator('#showcaseDots [data-dot="2"]').click();
+            const how=carousel.locator('.featured-slide--promo-how');
+            await page.waitForFunction(()=>document.querySelector('#showcaseSlides .featured-slide--promo-how')
+              ?.classList.contains('active'),null,{timeout:2500});
+            if(await how.locator('.ad-photo-stripes').count()!==1||
+               await how.locator('.promo-art-object .how-promo-device').count()!==1||
+               await how.locator('.how-promo-road').count()!==1||
+               await how.locator('.how-promo-satellite').count()!==1)
+              throw Error('How promo is not using the same ribbon backdrop with SVG road device');
+            const demoLink=how.locator('[data-how-demo-link]');
+            if(await demoLink.getAttribute('href')!=='#installation')
+              throw Error('How it works CTA must navigate to actual four-mode demo');
+            // Four languages use exactly the same art/layout and a localized CTA.
+            const ruLabel=await demoLink.innerText();
+            await page.evaluate(()=>changeLang('en'));
+            if(!(await carousel.locator('.featured-slide--promo-how h1').innerText()).includes('How does it work')||
+               await carousel.locator('[data-how-demo-link]').innerText()===ruLabel)
+              throw Error('How it works advertisement does not localize in English');
+            await page.evaluate(()=>changeLang('he'));
+            if(!(await carousel.locator('.featured-slide--promo-how h1').innerText()).includes('איך'))
+              throw Error('How it works advertisement does not localize in Hebrew');
+            await page.evaluate(()=>changeLang('ar'));
+            if(!(await carousel.locator('.featured-slide--promo-how h1').innerText()).includes('كيف'))
+              throw Error('How it works advertisement does not localize in Arabic');
+            await page.evaluate(()=>changeLang('ru'));
+            for(const width of [320,390]){
+              await page.setViewportSize({width,height:844});
+              const metrics=await carousel.locator('.featured-slide--promo-how').evaluate(el=>{
+                const card=el.getBoundingClientRect(),visual=el.querySelector('.featured-image').getBoundingClientRect();
+                const mini=el.querySelector('.how-promo-device').getBoundingClientRect();
+                const cta=el.querySelector('[data-how-demo-link]').getBoundingClientRect();
+                return {cardWidth:card.width,visualWidth:visual.width,
+                  miniWidth:mini.width,ctaWidth:cta.width,viewport:document.documentElement.clientWidth};
+              });
+              if(metrics.cardWidth>metrics.viewport+2||metrics.miniWidth<140||
+                 metrics.ctaWidth<140||metrics.visualWidth<230)
+                throw Error('Demo ad overflow or tiny preview on '+width+'px: '+JSON.stringify(metrics));
+            }
+            await page.setViewportSize({width:390,height:844});
+            await carousel.locator('.featured-slide--promo-how [data-how-demo-link]').click();
+            if(await page.evaluate(()=>location.hash)!=='#installation')
+              throw Error('Promo CTA must open the actual how-it-works section');
+            console.log('HOW IT WORKS SHOWCASE PASS: position #3, 9 dots, matching art, 4 languages, mobile, CTA');
+
             // Premium car demo: genuinely layered SVG/CSS, 4 interactive modes,
             // the entire frame MUST remain fixed height while text or HUD changes.
             const road=page.locator('#neolineRoadDemo');
