@@ -142,6 +142,10 @@ function drawFeature(direction=0){
   corners=document.createElement("span");
   corners.className="news-studio-corners";
   corners.setAttribute("aria-hidden","true");
+  // Three stationary dot sizes per corner: big at the tip, medium farther
+  // along the triangle and finer dots by the diagonal edge.
+  corners.innerHTML='<span class="news-studio-dots news-studio-dots--top"></span>'+
+   '<span class="news-studio-dots news-studio-dots--bottom"></span>';
   story.prepend(corners);
  }
  const incoming=makeNewsBackdrop(item);
