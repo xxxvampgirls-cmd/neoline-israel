@@ -67,3 +67,25 @@
  #smartHub .hub-compare{min-width:480px}
 }
 @media(prefers-reduced-motion:reduce){#smartHub *{scroll-behavior:auto!important;transition:none!important}}
+
+/* Quick links immediately under catalog filters: always visible before cards. */
+#catalog .hub-quick-link-row{
+ display:flex;flex-wrap:wrap;gap:7px;
+ margin:-2px 0 13px;
+}
+#catalog .hub-quick-link-row button{
+ display:inline-flex;align-items:center;justify-content:center;gap:7px;
+ min-height:35px;box-sizing:border-box;
+ padding:7px 12px;border-radius:10px;
+ border:1px solid #b7ddeb;background:linear-gradient(135deg,#e9f7ff,#f6fcff);
+ color:#146e9e;font-size:11px;font-weight:850;line-height:1.3;cursor:pointer;
+ box-shadow:0 3px 12px #217aa30c;
+}
+#catalog .hub-quick-link-row button:hover{border-color:#7dc4e5;background:#e5f5ff}
+#catalog .hub-quick-link-row button:focus-visible{outline:2px solid #188ccc;outline-offset:2px}
+#catalog .hub-quick-link-row button span{font-size:15px;line-height:1}
+@media(max-width:650px){
+ #catalog .hub-quick-link-row{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px;margin:2px 0 12px}
+ #catalog .hub-quick-link-row button{min-height:39px;padding:6px 4px;font-size:9px;gap:4px}
+ #catalog .hub-quick-link-row button span{font-size:13px}
+}
