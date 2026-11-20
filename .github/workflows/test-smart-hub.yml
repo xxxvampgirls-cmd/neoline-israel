@@ -89,9 +89,21 @@ jobs:
               const actions=node.querySelector('.hub-card-actions'),details=node.querySelector('.details-link'),icon=node.querySelector('.hub-compact-compare');
               if(!actions||!details||!icon)return null;
               const a=actions.getBoundingClientRect(),d=details.getBoundingClientRect(),i=icon.getBoundingClientRect();
-              return {row:a.width,details:d.width,icon:i.width,sameRow:Math.abs(d.top-i.top)<35,style:getComputedStyle(icon).backgroundColor};
+              const product=node.getBoundingClientRect();
+              const style=getComputedStyle(actions);
+              return {
+                row:a.width,details:d.width,icon:i.width,
+                sameRow:Math.abs(d.top-i.top)<35,
+                style:getComputedStyle(icon).backgroundColor,
+                footerGradient:style.backgroundImage.includes('linear-gradient'),
+                footerLeft:Math.abs(a.left-product.left),
+                footerRight:Math.abs(a.right-product.right),
+                footerBottom:Math.abs(a.bottom-product.bottom)
+              };
             });
             if(!card||!card.sameRow||card.icon>52)throw Error('Compare icon not inline or compact: '+JSON.stringify(card));
+            if(!card.footerGradient||card.footerLeft>4||card.footerRight>4||card.footerBottom>4)
+              throw Error('Product actions are not a full-width colored footer: '+JSON.stringify(card));
             await page.locator('[data-hub-compare="2"]').selectOption('1');
             if(await page.locator('.hub-compare thead th').count()!==4)
               throw Error('Third model comparison failed');
