@@ -1,0 +1,50 @@
+{
+  "_notes": [
+    "Curated real public YouTube pages confirmed by external search, checked 2026-11-20.",
+    "Keep the spoken language and exact subject honest: Russian tutorials are not presented as English-language videos.",
+    "A multi-model Polish review is tagged review, not an installation tutorial.",
+    "Do not use a video as a firmware or compatibility instruction for other model revisions."
+  ],
+  "videos": [
+    {
+      "id": "4ktXzrnHyXw",
+      "platform": "youtube",
+      "modelIds": [
+        1
+      ],
+      "language": "ru",
+      "category": "connect",
+      "device": "android",
+      "publisher": "Neoline Россия",
+      "title": "Neoline Wowcam. Первое подключение к приложению Neoline Connect (через Android)",
+      "verified": "2026-11-20"
+    },
+    {
+      "id": "2s9DZRaD11M",
+      "platform": "youtube",
+      "modelIds": [
+        1
+      ],
+      "language": "ru",
+      "category": "connect",
+      "device": "ios",
+      "publisher": "Neoline Россия",
+      "title": "Neoline Wowcam. Первое подключение к приложению Neoline Connect (через IOS)",
+      "verified": "2026-11-20"
+    },
+    {
+      "id": "HNuazDiWspI",
+      "platform": "youtube",
+      "modelIds": [
+        1,
+        2
+      ],
+      "language": "pl",
+      "category": "review",
+      "device": "all",
+      "publisher": "Польскоязычный обзор",
+      "title": "NEOLINE FLASH 2K & NEOLINE WOWCAM — recenzja, nagrania przejazdu",
+      "verified": "2026-11-20"
+    }
+  ]
+}
