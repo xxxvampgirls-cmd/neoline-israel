@@ -209,6 +209,33 @@ jobs:
               throw Error('Newsroom CTA links must open the real news and video archive');
             if(!(await newsPromo.locator('.newsroom-promo-illustrative').innerText()).includes('Схематично'))
               throw Error('Illustrative graph must not be presented as actual values');
+            // Actual individual clickable hotspots in the new promo. No
+            // overlapping full-card link may steal previous/next navigation.
+            const newsroomLinks={
+              '.newsroom-promo-brand':'./news.html',
+              '.newsroom-promo-video':'./news.html#newsVideoLibrary',
+              '.newsroom-promo-stats':'./news.html#accidentStrip',
+              '.newsroom-promo-topic:nth-child(1)':'./news.html?category=accidents#newsCategories',
+              '.newsroom-promo-topic:nth-child(2)':'./news.html?category=speed#newsCategories',
+              '.newsroom-promo-topic:nth-child(3)':'./news.html?category=laws#newsCategories'
+            };
+            for(const [selector,destination] of Object.entries(newsroomLinks)){
+              const target=newsPromo.locator(selector);
+              if(await target.count()!==1||
+                 await target.getAttribute('href')!==destination)
+                throw Error('Wrong click destination for '+selector);
+              const styles=await target.evaluate(el=>({
+                pointer:getComputedStyle(el).pointerEvents,
+                width:el.getBoundingClientRect().width,
+                height:el.getBoundingClientRect().height,
+                hidden:el.closest('[aria-hidden="true"]')!==null
+              }));
+              if(styles.pointer==='none'||styles.width<20||styles.height<12||styles.hidden)
+                throw Error('Newsroom element not truly clickable or accessible: '+selector+' '+JSON.stringify(styles));
+            }
+            if(await newsPromo.locator('[data-feature-prev]').count()!==1||
+               await newsPromo.locator('[data-feature-next]').count()!==1)
+              throw Error('Slide arrow navigation must remain separate from visual links');
             await page.evaluate(()=>changeLang('en'));
             if(!(await carousel.locator('.featured-slide--promo-newsroom h1').innerText()).includes('Israel') ||
                !(await carousel.locator('.featured-slide--promo-newsroom .newsroom-promo-chart-caption').innerText()).includes('accidents'))
@@ -236,7 +263,18 @@ jobs:
                 throw Error('Newsroom ad must remain readable at '+width+'px: '+JSON.stringify(size));
             }
             await page.setViewportSize({width:390,height:844});
-            console.log('NEWSROOM PROMO PASS: 7th slide, 10 dots, video, statistics, 4 languages, mobile and real links');
+            // Deep link must really select the destination category in the
+            // news page, rather than silently ignoring ?category=speed.
+            const newsCheck=await browser.newPage({viewport:{width:390,height:844},isMobile:true,hasTouch:true});
+            try{
+              await newsCheck.goto('https://neoline-israel.pages.dev/news.html?category=speed#newsCategories',
+                {waitUntil:'domcontentloaded',timeout:40000});
+              await newsCheck.waitForSelector('#newsCategories [data-news-category="speed"]',
+                {timeout:15000});
+              if(await newsCheck.locator('#newsCategories [data-news-category="speed"]').getAttribute('aria-pressed')!=='true')
+                throw Error('News category deep link failed to select the radar/speed filter');
+            }finally{await newsCheck.close();}
+            console.log('NEWSROOM PROMO PASS: 7th slide, clickable video/stats/topics, deep links, 4 languages, mobile');
 
             // Premium car demo: genuinely layered SVG/CSS, 4 interactive modes,
             // the entire frame MUST remain fixed height while text or HUD changes.
