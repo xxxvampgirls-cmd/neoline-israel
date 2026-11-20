@@ -216,8 +216,10 @@
  background:#ff6175;box-shadow:0 0 8px #ff6b7c86;margin-inline-start:2px;
 }
 #installation .road-demo-rear-feed{
- position:absolute;z-index:5;top:44%;right:4%;
- width:40%;max-width:194px;aspect-ratio:180/107;
+ /* Keep the upper road, GPS and main vehicle clear. Mini rear-camera screen
+    sits near the lower-right edge of the scene, ABOVE the caption panel. */
+ position:absolute;z-index:5;top:auto;bottom:10px;right:3.2%;
+ width:34%;max-width:168px;aspect-ratio:180/107;
  padding:4px;background:linear-gradient(135deg,#0b4a70,#052a46);
  border:1px solid #67e5ff9c;border-radius:13px;
  overflow:hidden;box-shadow:0 9px 25px #00192cc2;
@@ -402,6 +404,10 @@
  #installation .road-telemetry-card{padding:6px 7px;gap:5px;border-radius:11px}
  #installation .road-telemetry-card strong{font-size:9px}
  #installation .road-telemetry-card small{font-size:8px}
+ #installation .road-demo-rear-feed{
+  top:auto;bottom:9px;right:3%;
+  width:34%;max-width:154px;
+ }
  #installation .road-telemetry-speed{top:34%;left:6%;min-width:60px;padding:4px 5px}
  #installation .road-telemetry-gauge{width:42px;height:30px}
  #installation .road-telemetry-gauge svg{width:42px;height:30px}
