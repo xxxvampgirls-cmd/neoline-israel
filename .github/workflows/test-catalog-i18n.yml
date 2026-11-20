@@ -109,6 +109,31 @@ jobs:
            });
            if(!guard.source||guard.normal[0].label!=='Output voltage'||
                guard.uncommon[0].isOriginal!==true)throw Error('Facts/source guard failed '+JSON.stringify(guard));
+           // All 54 imported records must have a readable source-based
+           // explanation in the active language, with no fabricated claims.
+           const contentCoverage=await page.evaluate(async()=>{
+             const data=await (await fetch('./assets/catalog/catalog.json')).json();
+             const api=window.NEOLINE_CATALOG_I18N;
+             const results={en:0,he:0,ar:0,missing:[]};
+             for(const p of data.products){
+               for(const lang of ['en','he','ar']){
+                 const copy=api.overview(p,lang);
+                 if(copy.split('\n').length!==2||copy.length<90)
+                   results.missing.push(p.id+':'+lang+':'+copy.slice(0,80));
+                 else results[lang]++;
+               }
+             }
+             const pad=data.products.find(p=>p.name.includes('X-COP Pad'));
+             const magnet=data.products.find(p=>p.name.includes('X-COP Magnet'));
+             return {results,
+               accessory:pad&&api.overview(pad,'en'),
+               magnet:magnet&&api.overview(magnet,'he')};
+           });
+           if(contentCoverage.results.missing.length||Object.values(contentCoverage.results)
+             .slice(0,3).some(n=>n<50))throw Error('Incomplete multilingual product overviews '+JSON.stringify(contentCoverage));
+           if(!contentCoverage.accessory?.includes('silicone dashboard mat')||
+              !contentCoverage.magnet?.includes('מגנטי'))
+              throw Error('Hand-edited source-checked accessory explanations missing');
            if(errors.length)throw Error('JavaScript errors '+errors.join(' | '));
            console.log('CATALOG FACT LOCALIZATION PASS:',JSON.stringify(result));
            await browser.close();
