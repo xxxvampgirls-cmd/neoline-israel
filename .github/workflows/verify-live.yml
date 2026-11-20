@@ -34,7 +34,7 @@ jobs:
           local_html = Path("index.html").read_text(encoding="utf-8")
           markers = {}
           for path in files:
-              matches = re.findall(r'\\./'+re.escape(path)+r'\\?v=[^"\\s]+', local_html)
+              matches = re.findall(r'\./'+re.escape(path)+r'\?v=[^"\s]+', local_html)
               if len(matches) != 1:
                   raise SystemExit(f"FAIL: index.html must reference one versioned {path}, found {len(matches)}")
               markers[path] = matches[0]
