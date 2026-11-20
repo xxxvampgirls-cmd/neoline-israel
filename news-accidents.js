@@ -21,6 +21,7 @@ const dateKey=d=>{
 };
 const display=(d)=>new Intl.DateTimeFormat(locale[document.documentElement.lang]||"ru-RU",{timeZone:"UTC",day:"numeric",month:"short"}).format(d);
 let articles=null,updated="",selected=null,dayShown="",unavailable=false;
+let chartLatestRevealed=false;
 function draw(){
  const c=$("accidentChart"),t=words();
  if(!articles){
@@ -107,6 +108,18 @@ function draw(){
    setDayDetail(label,true);
   });
   c.append(b);
+ }
+ // Show the most recent days on mobile, rather than opening on the oldest
+ // narrow bars while the large current-day bars remain offscreen.
+ // Only auto-scroll once: further user scrolling stays untouched.
+ if(!chartLatestRevealed){
+  chartLatestRevealed=true;
+  requestAnimationFrame(()=>{
+   const viewport=$("accidentChartScroll");
+   if(!viewport)return;
+   const max=Math.max(0,viewport.scrollWidth-viewport.clientWidth);
+   viewport.scrollLeft=document.documentElement.dir==="rtl"?-max:max;
+  });
  }
  const sum=days.reduce((n,x)=>n+x.count,0);
  const upd=new Date(updated);
