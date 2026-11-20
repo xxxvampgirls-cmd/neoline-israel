@@ -202,7 +202,7 @@
  }
  function loadTutorialCatalog(){
   if(tutorialLoaded||tutorialLoading)return tutorialLoading;
-  tutorialLoading=fetch("./assets/catalog/tutorial-videos.json?v=20261120-real-guides-v1",{cache:"force-cache"})
+  tutorialLoading=fetch("./assets/catalog/tutorial-videos.json?v=20261120-six-verified-v2",{cache:"force-cache"})
    .then(response=>{if(!response.ok)throw Error("Tutorial catalog unavailable");return response.json()})
    .then(data=>{
     tutorialCatalog=(Array.isArray(data.videos)?data.videos:[]).filter(validateTutorial);
@@ -439,7 +439,18 @@
  document.body.append(overlay);
  function modelName(id){
   const item=typeof products!=="undefined"?products.find(p=>p.id===id):null;
-  return item?.name||"NEOLINE";
+  if(!item)return "NEOLINE";
+  const localized=window.NEOLINE_CATALOG_I18N;
+  const locale=typeof lang==="string"?lang:document.documentElement.lang;
+  return item.isImported&&localized?localized.displayName(item,locale):item.name;
+ }
+ function searchModelName(id){
+  const item=typeof products!=="undefined"?products.find(p=>p.id===id):null;
+  if(!item)return "NEOLINE";
+  // Search for the exact Latin hardware identifier rather than appending
+  // untranslated long Russian product-category descriptions.
+  return item.isImported && window.NEOLINE_CATALOG_I18N
+   ?window.NEOLINE_CATALOG_I18N.modelIdentifier(item.name):item.name;
  }
 
  function youtubeSearch(query,pref){
@@ -494,7 +505,7 @@
    '<div class="product-video-section-heading"><h3><span class="product-video-lang-code" aria-hidden="true">'+secureText(pref.tag)+'</span>'+secureText(pref.title)+'</h3>'+
    '<span class="product-video-region">'+secureText(pref.region)+' · YouTube</span></div>'+
    '<div class="product-video-search-grid">'+pref.items.map((label,i)=>
-     '<a target="_blank" rel="noopener noreferrer" href="'+youtubeSearch('"'+name+'" '+pref.terms[i],pref)+'" aria-label="'+secureText(label)+' — YouTube">'+
+     '<a target="_blank" rel="noopener noreferrer" href="'+youtubeSearch('"'+searchModelName(id)+'" '+pref.terms[i],pref)+'" aria-label="'+secureText(label)+' — YouTube">'+
       '<span class="product-video-search-icon">'+iconSvg(i)+'</span><span class="product-video-search-label">'+secureText(label)+'</span>'+
       '<span class="product-video-search-arrow" aria-hidden="true">'+arrowSvg+'</span></a>'
     ).join('')+'</div><p class="product-video-note">'+secureText(pref.note)+'</p></section>';
