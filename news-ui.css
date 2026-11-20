@@ -1140,3 +1140,103 @@ html[dir=rtl] .news-feature-credit{right:auto;left:12px}
   animation:none!important;transform:none!important;
  }
 }
+
+/* NEOLINE 2026-11-20: richer static corner dots and free-floating central
+   blue/white studio illumination. Corner color and dots NEVER animate. */
+#newsFeatureSlide .news-studio-corners{isolation:isolate}
+#newsFeatureSlide .news-studio-corners::before,
+#newsFeatureSlide .news-studio-corners::after{
+ z-index:0;animation:none!important;transform:none!important;
+}
+#newsFeatureSlide .news-studio-corners::before{
+ background:
+  repeating-linear-gradient(90deg,transparent 0 62px,#c2eafa24 63px,transparent 64px),
+  linear-gradient(145deg,#3495bf 0%,#277eac 46%,#1b608e 100%);
+}
+#newsFeatureSlide .news-studio-corners::after{
+ background:
+  repeating-linear-gradient(0deg,transparent 0 70px,#a7dffa19 71px,transparent 72px),
+  linear-gradient(318deg,#2285b4 0%,#1c709f 45%,#164d79 100%);
+}
+/* Each corner has many small points, fewer medium points and large dots near
+   its outer tip. Size decreases progressively toward the slanted boundary. */
+#newsFeatureSlide .news-studio-dots{
+ position:absolute;inset:0;display:block;z-index:1;
+ animation:none!important;transform:none!important;pointer-events:none;
+ background-image:radial-gradient(circle,#dcf7ff8e 1.2px,transparent 1.85px);
+ background-size:16px 16px;
+ background-position:4px 4px;
+}
+#newsFeatureSlide .news-studio-dots--top{
+ clip-path:polygon(0 0,42% 0,0 53%);
+}
+#newsFeatureSlide .news-studio-dots--bottom{
+ clip-path:polygon(100% 46%,100% 100%,57% 100%);
+}
+#newsFeatureSlide .news-studio-dots::before,
+#newsFeatureSlide .news-studio-dots::after{
+ content:"";position:absolute;display:block;
+ background-repeat:repeat;animation:none!important;transform:none!important;
+}
+/* Medium dots cover the middle of each triangle. */
+#newsFeatureSlide .news-studio-dots--top::before{
+ left:0;top:0;width:32%;height:40%;
+ background-image:radial-gradient(circle,#e7faffb0 2px,transparent 2.8px);
+ background-size:25px 25px;background-position:2px 3px;
+}
+#newsFeatureSlide .news-studio-dots--bottom::before{
+ right:0;bottom:0;width:32%;height:40%;
+ background-image:radial-gradient(circle,#e7faffb0 2px,transparent 2.8px);
+ background-size:25px 25px;background-position:3px 4px;
+}
+/* Large dots cluster nearest the corner tip; smaller dots remain beyond. */
+#newsFeatureSlide .news-studio-dots--top::after{
+ left:0;top:0;width:23%;height:29%;
+ background-image:radial-gradient(circle,#f0fdffcc 3.1px,transparent 4px);
+ background-size:32px 32px;background-position:5px 5px;
+}
+#newsFeatureSlide .news-studio-dots--bottom::after{
+ right:0;bottom:0;width:23%;height:29%;
+ background-image:radial-gradient(circle,#f0fdffcc 3.1px,transparent 4px);
+ background-size:32px 32px;background-position:5px 5px;
+}
+/* Restore visible atmospheric motion throughout the central blue panel:
+   light drifts UP, LEFT, DOWN and RIGHT instead of a barely moving sweep.
+   All light layers remain underneath fixed colored corner decorations. */
+#newsFeatureSlide .news-broadcast-stage::before,
+#newsFeatureSlide .news-broadcast-stage::after{
+ inset:5% 7%;
+ -webkit-mask-image:radial-gradient(ellipse 68% 72% at 50% 50%,#000 25%,#000b 52%,transparent 93%);
+ mask-image:radial-gradient(ellipse 68% 72% at 50% 50%,#000 25%,#000b 52%,transparent 93%);
+}
+#newsFeatureSlide .news-broadcast-stage::before{
+ background:
+  radial-gradient(ellipse 38% 51% at 29% 35%,rgba(255,255,255,.36),transparent 90%),
+  radial-gradient(ellipse 44% 53% at 75% 65%,rgba(168,229,255,.26),transparent 90%);
+ animation:newsPearlStudioFloat 17s ease-in-out infinite;
+}
+#newsFeatureSlide .news-broadcast-stage::after{
+ background:linear-gradient(114deg,transparent 20%,rgba(238,250,255,.05) 36%,
+  rgba(255,255,255,.20) 48%,rgba(186,236,255,.17) 57%,transparent 76%);
+ animation:newsPearlStudioWave 21s ease-in-out infinite;
+}
+@keyframes newsPearlStudioFloat{
+ 0%{transform:translate3d(-8%,9%,0) scale(1);opacity:.66}
+ 25%{transform:translate3d(3%,-12%,0) scale(1.06);opacity:.96}
+ 50%{transform:translate3d(10%,2%,0) scale(1.035);opacity:.82}
+ 75%{transform:translate3d(-1%,12%,0) scale(1.09);opacity:1}
+ 100%{transform:translate3d(-8%,9%,0) scale(1);opacity:.66}
+}
+@keyframes newsPearlStudioWave{
+ 0%{transform:translate3d(-20%,9%,0) rotate(-2deg);opacity:.49}
+ 25%{transform:translate3d(-3%,-10%,0) rotate(1deg);opacity:.82}
+ 50%{transform:translate3d(19%,-2%,0) rotate(2deg);opacity:.58}
+ 75%{transform:translate3d(4%,11%,0) rotate(-1deg);opacity:.9}
+ 100%{transform:translate3d(-20%,9%,0) rotate(-2deg);opacity:.49}
+}
+@media(prefers-reduced-motion:reduce){
+ #newsFeatureSlide .news-broadcast-stage::before,
+ #newsFeatureSlide .news-broadcast-stage::after{
+  animation:none!important;transform:none!important;will-change:auto;
+ }
+}
