@@ -2883,6 +2883,7 @@ const homepageNewsroomPromo={
   lead:'Видеохроника ДТП, репортажи о радарах, статистика аварий по дням и изменения правил — в одном разделе.',
   cta:'Открыть новости',videoCta:'Видеотека',mini:'ВИДЕО · СТАТИСТИКА · ИЗРАИЛЬ',
   video:'ВИДЕО',videoTitle:'Кадры с дорог',stats:'СТАТИСТИКА',days:'ДТП по дням',
+  accidents:'ДТП',radars:'РАДАРЫ',laws:'ЗАКОНЫ',
   topics:'ДТП · РАДАРЫ · ЗАКОНЫ',illustrative:'Схематично'
  },
  en:{
@@ -2890,6 +2891,7 @@ const homepageNewsroomPromo={
   lead:'Crash videos, radar reports, day-by-day accident statistics and traffic-rule updates, all in one place.',
   cta:'Explore the news',videoCta:'Video library',mini:'VIDEO · STATISTICS · ISRAEL',
   video:'VIDEO',videoTitle:'Road footage',stats:'STATISTICS',days:'Road accidents by day',
+  accidents:'CRASHES',radars:'RADARS',laws:'LAWS',
   topics:'CRASHES · RADARS · LAWS',illustrative:'Illustration'
  },
  he:{
@@ -2897,6 +2899,7 @@ const homepageNewsroomPromo={
   lead:'סרטוני תאונות, כתבות על מצלמות מהירות, סטטיסטיקה לפי ימים ועדכוני חוקי התנועה במקום אחד.',
   cta:'לחדשות',videoCta:'ספריית וידאו',mini:'וידאו · סטטיסטיקה · ישראל',
   video:'וידאו',videoTitle:'תיעוד מהכבישים',stats:'סטטיסטיקה',days:'תאונות לפי יום',
+  accidents:'תאונות',radars:'מצלמות',laws:'חוקים',
   topics:'תאונות · מצלמות · חוקים',illustrative:'המחשה'
  },
  ar:{
@@ -2904,17 +2907,18 @@ const homepageNewsroomPromo={
   lead:'مقاطع الحوادث وتقارير الرادارات وإحصاءات الحوادث اليومية وتحديثات قوانين المرور في مكان واحد.',
   cta:'تصفح الأخبار',videoCta:'مكتبة الفيديو',mini:'فيديو · إحصاءات · إسرائيل',
   video:'فيديو',videoTitle:'لقطات من الطرق',stats:'إحصاءات',days:'الحوادث حسب اليوم',
+  accidents:'حوادث',radars:'رادارات',laws:'قوانين',
   topics:'حوادث · رادارات · قوانين',illustrative:'رسم توضيحي'
  }
 };
 function homepageNewsroomScene(t){
  const bars=[43,67,35,57,84,49,74,36].map((height,index)=>
   '<i style="--bar:'+height+'%;--n:'+index+'"></i>').join('');
- return '<div class="newsroom-promo-screen" aria-hidden="true">'+
-  '<div class="newsroom-promo-head"><span class="newsroom-promo-brand"><i></i>NEOLINE NEWS</span>'+
+ return '<div class="newsroom-promo-screen">'+
+  '<div class="newsroom-promo-head"><a class="newsroom-promo-brand newsroom-promo-jump" href="./news.html" aria-label="'+t.cta+'"><i aria-hidden="true"></i>NEOLINE NEWS</a>'+
    '<span class="newsroom-promo-il">ISRAEL</span></div>'+
   '<div class="newsroom-promo-content">'+
-   '<div class="newsroom-promo-video">'+
+   '<a class="newsroom-promo-video newsroom-promo-jump" href="./news.html#newsVideoLibrary" aria-label="'+t.videoCta+'">'+
     '<svg viewBox="0 0 270 170" preserveAspectRatio="xMidYMid slice" aria-hidden="true" focusable="false">'+
      '<defs><linearGradient id="nroom-sky" x1="0" y1="0" x2="0" y2="1">'+
       '<stop stop-color="#0b2a51"/><stop offset=".58" stop-color="#136b96"/>'+
@@ -2941,13 +2945,17 @@ function homepageNewsroomScene(t){
     '<span class="newsroom-promo-play"><svg class="newsroom-promo-playmark" viewBox="0 0 24 24" aria-hidden="true">'+
      '<path d="M7 3 21 12 7 21Z" fill="currentColor"/></svg></span>'+
     '<span class="newsroom-promo-video-name">'+t.videoTitle+'</span>'+
-   '</div>'+
-   '<div class="newsroom-promo-stats"><h3>'+t.stats+'</h3>'+
+   '</a>'+
+   '<a class="newsroom-promo-stats newsroom-promo-jump" href="./news.html#accidentStrip" aria-label="'+t.stats+': '+t.days+'"><h3>'+t.stats+'</h3>'+
     '<div class="newsroom-promo-chart">'+bars+'</div>'+
     '<span class="newsroom-promo-chart-caption">'+t.days+'</span>'+
-   '</div>'+
+   '</a>'+
   '</div>'+
-  '<div class="newsroom-promo-footer"><span class="newsroom-promo-topics">'+t.topics+'</span>'+
+  '<div class="newsroom-promo-footer"><div class="newsroom-promo-topic-links">'+
+    '<a href="./news.html?category=accidents#newsCategories" class="newsroom-promo-topic newsroom-promo-jump" aria-label="'+t.accidents+'">'+t.accidents+'</a>'+
+    '<a href="./news.html?category=speed#newsCategories" class="newsroom-promo-topic newsroom-promo-jump" aria-label="'+t.radars+'">'+t.radars+'</a>'+
+    '<a href="./news.html?category=laws#newsCategories" class="newsroom-promo-topic newsroom-promo-jump" aria-label="'+t.laws+'">'+t.laws+'</a>'+
+   '</div>'+
    '<small class="newsroom-promo-illustrative">'+t.illustrative+'</small></div>'+
  '</div><span class="newsroom-promo-screen-shadow" aria-hidden="true"></span>';
 }
