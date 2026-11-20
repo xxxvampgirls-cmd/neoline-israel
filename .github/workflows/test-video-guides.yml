@@ -70,11 +70,8 @@ jobs:
               throw Error('Closing modal did not destroy YouTube iframe');
             // English first: no unverified Russian video should be shown as
             // the main English clip; searches for the exact model must be visible.
-            await page.evaluate(()=>{
-              document.documentElement.lang='en';
-              document.documentElement.dir='ltr';
-              window.NEOLINE_PRODUCT_VIDEOS.open(1);
-            });
+            await page.locator('[data-language="en"]').click();
+            await page.evaluate(()=>window.NEOLINE_PRODUCT_VIDEOS.open(1));
             if(await page.locator('#productVideoMainFrame iframe').count())
               throw Error('Russian video autoplayed in English mode');
             if(await page.locator('.product-video-real-badge').allTextContents().then(a=>a.some(t=>t==='EN')))
@@ -94,11 +91,8 @@ jobs:
             // Hebrew and Arabic should be RTL, with localized searches;
             // for the Arabic-language site, target Israel rather than UAE.
             for(const [l,region] of [['he','gl=IL'],['ar','gl=IL']]){
-              await page.evaluate(code=>{
-                document.documentElement.lang=code;
-                document.documentElement.dir='rtl';
-                window.NEOLINE_PRODUCT_VIDEOS.open(1);
-              },l);
+              await page.locator('[data-language="'+l+'"]').click();
+              await page.evaluate(()=>window.NEOLINE_PRODUCT_VIDEOS.open(1));
               const href=await page.locator('.product-video-search-grid a').first().getAttribute('href');
               if(!href.includes(region))throw Error('Incorrect search country '+l+' '+href);
               const width=await page.evaluate(()=>document.documentElement.scrollWidth-innerWidth);
@@ -106,11 +100,8 @@ jobs:
               await page.evaluate(()=>window.NEOLINE_PRODUCT_VIDEOS.close());
             }
             // Academy phone-connection tutorial passes topic to the modal.
-            await page.evaluate(()=>{
-              document.documentElement.lang='ru';
-              document.documentElement.dir='ltr';
-              window.NEOLINE_ACADEMY.open(1);
-            });
+            await page.locator('[data-language="ru"]').click();
+            await page.evaluate(()=>window.NEOLINE_ACADEMY.open(1));
             await page.locator('#neolineAcademy [data-academy-topic="connect"]').click();
             await page.locator('#neolineAcademy [data-academy-video]').click();
             await page.waitForFunction(()=>document.querySelector('.product-video-real-guides [data-video-topic="connect"][aria-pressed="true"]'));
