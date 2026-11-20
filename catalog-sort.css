@@ -3,7 +3,7 @@
    Android/Brave system popup is replaced by a light on-page listbox. */
 #catalog .catalog-tools{
  display:grid;
- grid-template-columns:minmax(0,1fr) minmax(195px,245px);
+ grid-template-columns:minmax(195px,245px) minmax(0,1fr);
  align-items:center;
  gap:12px;
  margin-bottom:21px;
@@ -105,7 +105,7 @@
 }
 @media(max-width:720px){
  #catalog .catalog-tools{
-  grid-template-columns:minmax(0,1fr) minmax(138px,43%);
+  grid-template-columns:minmax(138px,43%) minmax(0,1fr);
   gap:10px;margin-bottom:17px;
  }
  #catalog .catalog-tools .search,
@@ -117,7 +117,7 @@
  #catalog .catalog-sort-menu{border-radius:14px}
 }
 @media(max-width:350px){
- #catalog .catalog-tools{grid-template-columns:minmax(0,1fr) 129px;gap:8px}
+ #catalog .catalog-tools{grid-template-columns:129px minmax(0,1fr);gap:8px}
  #catalog .catalog-sort-trigger{font-size:12px;padding-inline:9px}
  #catalog .catalog-tools .search input{font-size:12px}
 }
