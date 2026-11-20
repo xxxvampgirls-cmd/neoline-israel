@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 """Curate a truthful rolling 30-day YouTube road-video gallery for NEOLINE.
 
-Only videos actually published by the three listed official Israeli channels
-are accepted. Never fill missing slots with guessed links or stock pictures.
+Videos come from the known official channels AND authentic date-checked
+YouTube metadata across publishers and users. Never invent videos or dates.
 YouTube Atom feeds normally expose just the newest 15 entries; hourly polling
 and persisted video IDs grow the real month archive over time.
 """
@@ -15,11 +15,12 @@ import urllib.error
 import urllib.request
 import xml.etree.ElementTree as ET
 from pathlib import Path
+import youtube_road_discovery as discovery
 
 ROOT = Path(__file__).resolve().parents[1]
 OUTPUT = ROOT / "assets" / "news" / "road-videos.json"
 DAYS = 30
-LIMIT = 72
+LIMIT = 250
 UTC = dt.timezone.utc
 CHANNELS = (
     ("news13", "UCvQmPpU20hw1Trss_CVwaew", "חדשות 13"),
@@ -149,66 +150,11 @@ def fetch(url: str) -> bytes:
 
 
 def discover_older_feed_misses(now: dt.datetime) -> list[dict]:
-    """Optional verified YouTube search, to find reports buried behind uploads.
-
-    Runs infrequently in the scheduled job; all metadata is verified against
-    official channel IDs. If YouTube blocks extraction, normal RSS still works.
+    """Find public Israeli crash, dashcam, road-fail and radar clips on ALL
+    YouTube channels, including official media and ordinary users. Both
+    fallbacks require a real published timestamp and actual channel ID.
     """
-    try:
-        import yt_dlp
-    except ImportError:
-        print("Targeted road-video search skipped (yt-dlp not installed)")
-        return []
-    found = {}
-    cutoff = now - dt.timedelta(days=DAYS)
-    options = {
-        "quiet": True, "no_warnings": True, "skip_download": True,
-        "ignoreerrors": True,
-        "socket_timeout": 12, "retries": 1, "extractor_retries": 1,
-        "playlistend": 5, "lazy_playlist": False,
-    }
-    for query in RADAR_REPORT_QUERIES:
-        try:
-            with yt_dlp.YoutubeDL(options) as client:
-                result = client.extract_info("ytsearchdate5:" + query, download=False)
-        except Exception as exc:
-            print(f"Road-video targeted search unavailable: {type(exc).__name__}")
-            continue
-        for clip in (result or {}).get("entries") or ():
-            if not isinstance(clip, dict):
-                continue
-            video_id = clip.get("id")
-            channel_id = clip.get("channel_id")
-            title = clip.get("title") or ""
-            if (not isinstance(video_id, str) or not ID_RE.fullmatch(video_id)
-                or channel_id not in CHANNEL_IDS or not isinstance(title, str)
-                or not relevant(title)):
-                continue
-            published = None
-            upload_date = clip.get("upload_date") or clip.get("release_date")
-            if isinstance(upload_date, str) and re.fullmatch(r"\d{8}", upload_date):
-                try:
-                    published = dt.datetime.strptime(upload_date, "%Y%m%d").replace(tzinfo=UTC)
-                except ValueError:
-                    pass
-            if published is None and isinstance(clip.get("release_timestamp"), (int, float)):
-                published = dt.datetime.fromtimestamp(clip["release_timestamp"], tz=UTC)
-            if published is None and isinstance(clip.get("timestamp"), (int, float)):
-                published = dt.datetime.fromtimestamp(clip["timestamp"], tz=UTC)
-            if published is None or not cutoff <= published <= now + dt.timedelta(hours=12):
-                continue
-            source = CHANNEL_IDS[channel_id]
-            found[video_id] = {
-                "id": video_id,
-                "title": title[:220],
-                "date": published.isoformat(timespec="seconds").replace("+00:00", "Z"),
-                "source": source,
-                "publisher": CHANNEL_NAMES[source],
-                "category": category(title, source),
-                "url": "https://www.youtube.com/watch?v=" + video_id,
-            }
-    print(f"Targeted road-video search: {len(found)} verified official-channel videos")
-    return list(found.values())
+    return discovery.discover(now, {youtube_id: cid for cid, youtube_id, _ in CHANNELS})
 
 
 def refresh(now: dt.datetime | None = None) -> dict:
@@ -224,15 +170,34 @@ def refresh(now: dt.datetime | None = None) -> dict:
             continue
         vid, title, source = row.get("id"), row.get("title"), row.get("source")
         when = parsedate(row.get("date"))
-        if (isinstance(vid, str) and ID_RE.fullmatch(vid) and
-            isinstance(title, str) and relevant(title) and
-            source in CHANNEL_NAMES and when and cutoff <= when <= now):
-            merged[vid] = {
-                "id": vid, "title": title[:220], "source": source,
-                "publisher": CHANNEL_NAMES[source], "category": category(title, source),
-                "date": when.isoformat(timespec="seconds").replace("+00:00", "Z"),
-                "url": "https://www.youtube.com/watch?v=" + vid,
-            }
+        if (not isinstance(vid, str) or not ID_RE.fullmatch(vid)
+            or not isinstance(title, str) or not when
+            or not cutoff <= when <= now):
+            continue
+        if source in CHANNEL_NAMES:
+            if not relevant(title):
+                continue
+            publisher = CHANNEL_NAMES[source]
+            channel_id = next((youtube_id for cid, youtube_id, _ in CHANNELS
+                               if cid == source), "")
+        elif source == "youtube":
+            channel_id = row.get("channelId", "")
+            publisher = row.get("publisher", "")
+            if (not isinstance(channel_id, str)
+                or not discovery.CHANNEL_ID.fullmatch(channel_id)
+                or not isinstance(publisher, str) or not publisher.strip()
+                or not discovery.is_local(title, row.get("description", ""), publisher)):
+                continue
+        else:
+            continue
+        tags = discovery.tags_for(title, source)
+        merged[vid] = {
+            "id": vid, "title": title[:220], "source": source,
+            "publisher": publisher[:100], "channelId": channel_id,
+            "category": discovery.primary_category(title, source),
+            "tags": tags, "date": when.isoformat(timespec="seconds").replace("+00:00", "Z"),
+            "url": "https://www.youtube.com/watch?v=" + vid,
+        }
     successes, failures, discovered = 0, [], 0
     search_updated = parsedate(previous.get("searchUpdated"))
     searched = False
@@ -253,10 +218,13 @@ def refresh(now: dt.datetime | None = None) -> dict:
             for row in incoming:
                 if row["id"] not in merged:
                     discovered += 1
+                row["tags"] = discovery.tags_for(row["title"], source)
+                row["category"] = discovery.primary_category(row["title"], source)
+                row["channelId"] = channel_id
                 merged[row["id"]] = row
-    # Standard YouTube Atom exposes only recent uploads. Search only if the
-    # last successful attempt was at least 12 h ago. Never add a search hit
-    # without a verified official channel ID and genuine publish date.
+    # Atom only exposes the newest uploads; use YouTube's real publishedAfter
+    # metadata / optional verified yt-dlp search to reach ALL Israeli channels.
+    # A real source/channel/date is required before adding a community video.
     if search_updated is None or now - search_updated >= dt.timedelta(hours=12):
         searched = True
         for row in discover_older_feed_misses(now):
@@ -282,8 +250,9 @@ def refresh(now: dt.datetime | None = None) -> dict:
     if result.get("status") != "ok" and previous.get("items") == items:
         result["updated"] = previous.get("updated", result["updated"])
     OUTPUT.write_text(json.dumps(result, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
-    print(f"Road videos: {len(items)} kept, {discovered} new; "
-          f"{successes}/6 feeds working; errors={failures[:6]}")
+    print(f"Road videos: {len(items)} kept, {discovered} new, "
+          f"{sum(x['source']=='youtube' for x in items)} other-channel clips; "
+          f"{successes}/6 official feeds working; errors={failures[:6]}")
     return result
 
 
@@ -316,6 +285,7 @@ def self_test() -> None:
     assert category("תאונה בגלל מצלמת מהירות", "news13") == "accidents"
     assert category("העיניים בטלפון ולא בכביש = סכנה", "police") == "police"
     assert not relevant("פיגוע דריסה בכביש")
+    discovery.self_test()
     print("Road video source filtering and 30-day expiry self-test passed")
 
 
