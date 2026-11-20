@@ -1,0 +1,99 @@
+name: Browser-check NEOLINE Smart Hub
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - 'index.html'
+      - 'smart-hub.js'
+      - 'smart-hub.css'
+      - 'product-specs.js'
+      - 'device-updates.js'
+      - '.github/workflows/test-smart-hub.yml'
+permissions:
+  contents: read
+jobs:
+  smart-hub:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Prepare Chromium
+        run: |
+          npm install --no-save playwright
+          npx playwright install --with-deps chromium
+      - name: Start site
+        run: |
+          python3 -m http.server 8765 --bind 127.0.0.1 >/tmp/neoline-smart-hub.log 2>&1 &
+      - name: Test finder, manufacturer facts, comparison, 4 locales and saved device
+        run: |
+          node <<'JS'
+          const {chromium}=require('playwright');
+          (async()=>{
+            const browser=await chromium.launch({headless:true});
+            const page=await browser.newPage({viewport:{width:390,height:844},isMobile:true,hasTouch:true});
+            const errors=[];page.on('pageerror',e=>errors.push(e.message));
+            await page.goto('http://127.0.0.1:8765/',{waitUntil:'domcontentloaded'});
+            await page.waitForFunction(()=>window.NEOLINE_SMART_HUB?.models?.length===8,null,{timeout:20000});
+            const features=await page.evaluate(()=>({
+              dual:window.NEOLINE_SMART_HUB.has(6,'dual'),
+              gps:window.NEOLINE_SMART_HUB.has(6,'gps'),
+              fourK:window.NEOLINE_SMART_HUB.has(6,'4k'),
+              single:window.NEOLINE_SMART_HUB.has(1,'single'),
+              first:window.NEOLINE_SMART_HUB.ranks('dual','quality')[0].id
+            }));
+            if(!features.dual||!features.gps||!features.fourK||!features.single||features.first!==6)
+              throw Error('Product finder does not use manufacturer facts '+JSON.stringify(features));
+            if(await page.locator('[data-hub-tab]').count()!==3)throw Error('Three hub tabs missing');
+            if(await page.locator('.hub-product').count()!==3)throw Error('Finder does not present 3 matches');
+            await page.locator('[data-hub-count]').selectOption('dual');
+            await page.locator('[data-hub-priority]').selectOption('gps');
+            if(!(await page.locator('.hub-product').first().innerText()).includes('NEOLINE'))
+              throw Error('Recommendation cards disappeared');
+            await page.locator('[data-hub-tab="compare"]').click();
+            if(await page.locator('.hub-compare thead th').count()!==3)
+              throw Error('Default comparison should show exactly two models');
+            await page.locator('[data-hub-compare="2"]').selectOption('1');
+            if(await page.locator('.hub-compare thead th').count()!==4)
+              throw Error('Third model comparison failed');
+            if(await page.locator('.hub-compare tbody tr').count()!==9)
+              throw Error('Comparison does not show manufacturer specs');
+            await page.locator('[data-hub-compare="2"]').selectOption('5');
+            if(!await page.locator('#hubCompareError').isVisible())
+              throw Error('Duplicate comparison not rejected');
+            await page.locator('[data-hub-tab="owner"]').click();
+            await page.locator('[data-hub-device]').selectOption('3');
+            await page.locator('[data-hub-save]').click();
+            const stored=await page.evaluate(()=>localStorage.getItem('neoline:saved-device:v1'));
+            if(stored!=='3')throw Error('Saved model not persisted');
+            await page.locator('[data-hub-updates]').click();
+            if(!await page.locator('.hub-update-details .pd-updates').isVisible())
+              throw Error('Model-specific official updates missing');
+            await page.reload({waitUntil:'domcontentloaded'});
+            await page.waitForFunction(()=>window.NEOLINE_SMART_HUB?.models?.length===8);
+            await page.locator('[data-hub-tab="owner"]').click();
+            if((await page.locator('[data-hub-device]').inputValue())!=='3')
+              throw Error('Model not remembered between visits');
+            for(const [code,rtl] of [['en',false],['he',true],['ar',true],['ru',false]]){
+              await page.evaluate(lang=>{
+                document.documentElement.lang=lang;
+                document.documentElement.dir=['he','ar'].includes(lang)?'rtl':'ltr';
+              },code);
+              await page.waitForFunction(lang=>document.querySelector('#smartHub .hub-heading')?.textContent.length>5 &&
+                document.getElementById('smartHub').getAttribute('dir')===(['he','ar'].includes(lang)?'rtl':'ltr'),code);
+              if(await page.locator('[data-hub-tab]').count()!==3)
+                throw Error('Localized hub tabs missing '+code);
+            }
+            for(const width of [320,390]){
+              await page.setViewportSize({width,height:840});
+              const x=await page.evaluate(()=>({scroll:document.documentElement.scrollWidth,w:innerWidth}));
+              if(x.scroll>x.w+4)throw Error('Hub caused mobile horizontal overflow '+JSON.stringify(x));
+            }
+            if(errors.length)throw Error('JS errors '+errors.join(' | '));
+            console.log('SMART HUB PASS finder=8 models, 3 recommendations, 2/3 comparison, exact source specs, saved owner model, Arabic RTL');
+            await browser.close();
+          })().catch(e=>{console.error(e);process.exitCode=1});
+          JS
