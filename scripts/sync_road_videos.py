@@ -260,7 +260,7 @@ def refresh(now: dt.datetime | None = None) -> dict:
 
 def self_test() -> None:
     now = dt.datetime(2026, 11, 20, 18, 0, tzinfo=UTC)
-    sample = b'''<?xml version="1.0" encoding="UTF-8"?>
+    sample = '''<?xml version="1.0" encoding="UTF-8"?>
     <feed xmlns="http://www.w3.org/2005/Atom" xmlns:yt="http://www.youtube.com/xml/schemas/2015">
       <entry><yt:videoId>AbC123_def0</yt:videoId>
         <title>תאונת דרכים בכביש 6: תיעוד</title>
@@ -271,7 +271,7 @@ def self_test() -> None:
       <entry><yt:videoId>Old123_def0</yt:videoId>
         <title>תאונת דרכים ישנה</title>
         <published>2026-09-01T10:15:00+00:00</published></entry>
-    </feed>'''
+    </feed>'''.encode("utf-8")
     found = parse_feed(sample, "news13", now)
     assert len(found) == 1 and found[0]["category"] == "accidents", found
     assert found[0]["url"].endswith("/watch?v=AbC123_def0")
