@@ -217,7 +217,7 @@
 }
 
 /* 2026-11-21 · Synchronised dual-colour rays.
-   Big sapphire fan = backdrop; smaller gold fan = foreground. During the
+   Big sapphire fan with smaller golden beams precisely in its light-blue gaps. During the
    2.35s shaking phase gold builds up; at burst both rotate at the SAME speed.
    Both are clipped inside the stage, behind the original box/cards, and only
    transforms/opacity animate (no expensive blur or gradient animation). */
@@ -243,19 +243,22 @@
 #gameGiftDialog .gift-reveal-beam{
   display:block!important;
   position:absolute;
-  z-index:1; /* smaller golden rays behind blue */
+  z-index:1; /* yellow in the light-blue gaps, blue spokes unobscured */
   top:54%;left:50%;bottom:auto;
-  width:310px;height:310px;
+  width:560px;height:560px;
   border-radius:50%;
   transform-origin:50% 50%;
   transform:translate(-50%,-50%) rotate(0deg) scale(.65);
   background:repeating-conic-gradient(
     from -12deg,
-    #ffc6389c 0deg 6deg,
-    #fff3ac65 6deg 9deg,
-    transparent 9deg 30deg,
-    #ffb82975 30deg 33deg,
-    transparent 34deg 48deg
+    transparent 0deg 17deg,
+    #ffbb27c9 17deg 23deg,
+    #fff5b5e0 23deg 26deg,
+    #ffc13ac4 26deg 29deg,
+    transparent 29deg 37deg,
+    #ffc12ac0 37deg 41deg,
+    #ffe58dd6 41deg 44deg,
+    transparent 44deg 48deg
   )!important;
   opacity:0;
   filter:none!important;
@@ -279,8 +282,8 @@
 @keyframes neolineRaysGoldCharge{
   0%{opacity:0;transform:translate(-50%,-50%) rotate(0deg) scale(.65)}
   30%{opacity:.23;transform:translate(-50%,-50%) rotate(3deg) scale(.76)}
-  65%{opacity:.39;transform:translate(-50%,-50%) rotate(8deg) scale(.88)}
-  100%{opacity:.56;transform:translate(-50%,-50%) rotate(12deg) scale(1)}
+  65%{opacity:.62;transform:translate(-50%,-50%) rotate(8deg) scale(.88)}
+  100%{opacity:.96;transform:translate(-50%,-50%) rotate(12deg) scale(1)}
 }
 /* One shared rotation sweep gives perfectly synchronised yellow/blue rays. */
 #gameGiftDialog .gift-reveal[data-phase="burst"] .gift-reveal-scene::before,
@@ -297,13 +300,13 @@
   100%{opacity:.34;transform:translate(-50%,-50%) rotate(190deg) scale(1.05)}
 }
 @keyframes neolineRaysGoldBurst{
-  0%{opacity:.6;transform:translate(-50%,-50%) rotate(12deg) scale(1)}
-  38%{opacity:.67;transform:translate(-50%,-50%) rotate(86deg) scale(1.04)}
+  0%{opacity:.96;transform:translate(-50%,-50%) rotate(12deg) scale(1)}
+  38%{opacity:1;transform:translate(-50%,-50%) rotate(86deg) scale(1.04)}
   100%{opacity:0;transform:translate(-50%,-50%) rotate(190deg) scale(1.05)}
 }
 @media(max-width:385px){
   #gameGiftDialog .gift-reveal-scene::before{width:570px;height:570px}
-  #gameGiftDialog .gift-reveal-beam{width:265px;height:265px}
+  #gameGiftDialog .gift-reveal-beam{width:485px;height:485px}
 }
 @media(prefers-reduced-motion:reduce){
   #gameGiftDialog .gift-reveal-scene::before,
