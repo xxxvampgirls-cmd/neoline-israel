@@ -1,0 +1,134 @@
+/* NEOLINE gift reveal v5 | TWO REAL FINISHED 3D RENDERS.
+   No pseudo-3D slicing, no shrinkage of the branded lower half.
+   Keep existing 2.35s progressively escalating box-shake, three rounds,
+   animated gold frame and the final full-viewport star finale. */
+#gameGiftDialog .gift-reveal-scene{
+ height:218px;
+}
+#gameGiftDialog .gift-reveal-box.gift-reveal-box--neoline-blue{
+ z-index:4;
+ left:50%;bottom:0;
+ width:184px;height:211px;
+ transform:translateX(-50%);
+ transform-origin:50% 80%;
+ scale:1;
+ filter:drop-shadow(0 8px 6px #163c5e44);
+}
+#gameGiftDialog .gift-reveal-box--neoline-blue .gift-reveal-brand-art{
+ position:absolute!important;
+ inset:0!important;
+ display:block!important;
+ width:100%!important;height:100%!important;
+ max-width:none!important;max-height:none!important;
+ margin:0!important;padding:0!important;
+ object-fit:fill!important;
+ border:0!important;
+ clip-path:none!important;
+ transform:none!important;
+ transform-origin:center center!important;
+ filter:none!important;
+ scale:1!important;
+ user-select:none;pointer-events:none;
+ backface-visibility:hidden;
+}
+#gameGiftDialog .gift-reveal-box--neoline-blue .gift-reveal-brand-base{
+ z-index:1;
+ opacity:1;
+ transition:opacity .18s ease-out!important;
+}
+#gameGiftDialog .gift-reveal-box--neoline-blue .gift-reveal-brand-lid{
+ z-index:2;
+ opacity:0;
+ transition:opacity .18s ease-out!important;
+}
+/* The animated reveal swaps the complete photographed render; the front
+   body never scales, tilts, reduces in height, or gets sliced in half. */
+#gameGiftDialog .gift-reveal[data-phase="burst"] .gift-reveal-brand-base,
+#gameGiftDialog .gift-reveal[data-phase="revealed"] .gift-reveal-brand-base{
+ opacity:0;
+}
+#gameGiftDialog .gift-reveal[data-phase="burst"] .gift-reveal-brand-lid,
+#gameGiftDialog .gift-reveal[data-phase="revealed"] .gift-reveal-brand-lid{
+ opacity:1;
+ transform:none!important;
+}
+#gameGiftDialog .gift-reveal-interior{display:none!important}
+/* Stars: visible cyan and golden accents coming straight out of the box.
+   Leave existing timings, dust shake, burst beam and 3-round logic intact. */
+#gameGiftDialog .gift-reveal-stars i{
+ color:#ffca52;
+ text-shadow:0 0 5px #fff,0 0 10px #ffcf65;
+}
+#gameGiftDialog .gift-reveal-stars i:nth-child(2n){
+ color:#39c8ff;
+ text-shadow:0 0 6px #fff,0 0 12px #36c9ff;
+}
+#gameGiftDialog .gift-reveal-stars i:nth-child(3n){
+ color:#ffe69a;
+}
+#gameGiftDialog .gift-reveal-spark-dust i{
+ color:var(--dust-color,#66d5ff);
+ text-shadow:0 0 5px #fff,0 0 9px #34caff;
+}
+#gameGiftDialog .gift-reveal[data-phase="burst"] .gift-reveal-beam,
+#gameGiftDialog .gift-reveal[data-phase="revealed"] .gift-reveal-beam{
+ opacity:.9;
+ background:conic-gradient(from 225deg at 50% 100%,transparent 0deg,#22cbffbd 15deg,transparent 28deg,#fff4b8c9 49deg,transparent 58deg,#38c8ffec 77deg,transparent 90deg);
+ filter:blur(9px);
+}
+/* Three saturated blue closed question tiles. Their contents only become
+   visible once individually awarded, preserving the demonstration logic. */
+#gameGiftDialog .gift-reveal-slot:not(.unlocked){
+ border:1px solid #83d4ff!important;
+ background:linear-gradient(140deg,#72ceff 0%,#259df2 55%,#087aca 100%)!important;
+ box-shadow:inset 0 1px 1px #dcf9ff91,inset 0 -2px 6px #005eab55,0 5px 12px #087cb12e!important;
+}
+#gameGiftDialog .gift-reveal-slot:not(.unlocked)::after{
+ color:#fff!important;
+ font:900 30px/1 Manrope,Arial,sans-serif!important;
+ text-shadow:0 2px 4px #065b99,0 0 10px #c8f4ff8c!important;
+}
+#gameGiftDialog .gift-reveal-slot.unlocked{
+ border:1px solid #39aeec!important;
+ background:linear-gradient(145deg,#e9faff,#bdeeff 60%,#90d8fa)!important;
+ background-size:auto!important;
+ box-shadow:0 0 0 1px #ffffff90 inset,0 4px 11px #1d90c841!important;
+}
+#gameGiftDialog .gift-reveal-slot.unlocked .gift-reveal-slot-icon{
+ background:linear-gradient(140deg,#42b7fb,#1785d5)!important;
+ color:#fff!important;
+}
+#gameGiftDialog .gift-reveal-slot.unlocked strong{color:#125778!important}
+#gameGiftDialog .gift-reveal-slot.unlocked.is-current{
+ animation:neolineLootCardPop .5s ease-out both!important;
+}
+#gameGiftDialog .gift-reveal-slot.unlocked:not(.is-current){
+ animation:none!important;
+}
+#gameGiftDialog .gift-reveal-number{z-index:9}
+/* Keep bonus banner near top; never use opacity transforms on the actual
+   box except its original shake. The full body remains 184x211px. */
+#gameGiftDialog .gift-reveal-float{z-index:8;top:6px}
+/* Final burst defaults to blue/gold only (remove old red accent). */
+#gameGiftScreenBurst .gift-full-star{
+ color:var(--star-color,#ffcb54);
+ text-shadow:0 0 4px #fff,0 0 10px #ffc95b;
+}
+#gameGiftScreenBurst .gift-full-star.star-cyan,
+#gameGiftScreenBurst .gift-full-star.star-red{
+ color:#45d7ff;
+ text-shadow:0 0 4px #fff,0 0 11px #48cbff;
+}
+#gameGiftScreenBurst .gift-burst-ring{
+ border-color:#adf0ff;
+ box-shadow:0 0 28px #4fcaffaf,0 0 42px #ffcf6990;
+}
+@media(max-width:385px){
+ #gameGiftDialog .gift-reveal-scene{height:203px}
+ #gameGiftDialog .gift-reveal-box.gift-reveal-box--neoline-blue{
+  width:167px;height:191px;bottom:0;scale:1;
+ }
+}
+@media(prefers-reduced-motion:reduce){
+ #gameGiftDialog .gift-reveal-brand-art{transition:none!important}
+}
