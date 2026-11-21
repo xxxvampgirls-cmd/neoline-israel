@@ -3198,6 +3198,7 @@ function startShowcaseZoom(slide){
 }
 function renderShowcase(){
  const host=$('showcaseSlides');if(!host)return;
+ clearShowroomGhosts();
  clearTimeout(showcaseExitTimer);
  host.innerHTML=featuredIds.map((id,i)=>{
   if(id===0)return firstIsraelSlide();
@@ -3281,6 +3282,86 @@ function renderShowcase(){
  host.querySelectorAll('[data-feature-next]').forEach(el=>el.onclick=()=>setSlide(slideIndex+1));
  $('showcaseDots').querySelectorAll('[data-dot]').forEach(el=>el.onclick=()=>setSlide(Number(el.dataset.dot)));
 }
+/* NEOLINE · viewport-wide showroom handoff.
+ * Product cutouts travel behind the PHONE SCREEN edge, not behind the
+ * internal product picture frame. No backplate, copy, or fixed header moves.
+ * Ghost images are clipped by the viewport itself, using the standard
+ * 840 ms showroom timing. CSS transitions inside the frame are visually
+ * suppressed only while the matching ghost is in flight. */
+let showroomGhostCleanup=null;
+function clearShowroomGhosts(){
+ if(typeof showroomGhostCleanup==='function'){
+  showroomGhostCleanup();
+  showroomGhostCleanup=null;
+ }
+}
+function showcaseCutoutImage(slide){
+ return slide?.querySelector(':scope .featured-image > img:not([hidden])')||null;
+}
+function createShowroomFlightGhost(img,box,fromX,toX,stage){
+ if(!img||!box?.width||!box?.height||!img.complete||img.naturalWidth<1)return null;
+ const copy=img.cloneNode(false);
+ copy.removeAttribute('id');
+ copy.removeAttribute('class');
+ copy.removeAttribute('onerror');
+ copy.setAttribute('aria-hidden','true');
+ copy.tabIndex=-1;
+ copy.style.cssText='position:absolute!important;display:block!important;box-sizing:border-box!important;'+
+  'left:'+box.left+'px!important;top:'+box.top+'px!important;'+
+  'width:'+box.width+'px!important;height:'+box.height+'px!important;'+
+  'max-width:none!important;max-height:none!important;'+
+  'object-fit:contain!important;margin:0!important;padding:0!important;'+
+  'opacity:1!important;mix-blend-mode:normal!important;'+
+  'filter:drop-shadow(0 9px 9px #10385e52)!important;'+
+  'pointer-events:none!important;transform-origin:center center!important;';
+ stage.appendChild(copy);
+ const anim=copy.animate([
+   {transform:'translate3d('+fromX+'px,0,0)'},
+   {transform:'translate3d('+toX+'px,0,0)'}
+  ],{duration:840,easing:'cubic-bezier(.43,.08,.3,1)',fill:'both'});
+ return anim;
+}
+function startShowroomViewportFlight(oldSlide,newSlide,oldBox,direction){
+ clearShowroomGhosts();
+ if(window.matchMedia('(prefers-reduced-motion: reduce)').matches)return;
+ const outgoing=showcaseCutoutImage(oldSlide);
+ const incoming=showcaseCutoutImage(newSlide);
+ const nextBox=incoming?.getBoundingClientRect();
+ if(!outgoing&&!incoming)return;
+ const viewport=document.createElement('div');
+ viewport.className='neoline-showroom-viewport-flight';
+ viewport.setAttribute('aria-hidden','true');
+ viewport.style.cssText='position:fixed!important;inset:0!important;'+
+  'height:100dvh!important;width:100vw!important;overflow:hidden!important;'+
+  'z-index:75!important;pointer-events:none!important;contain:layout style paint;';
+ document.body.appendChild(viewport);
+ const all=[];
+ let closed=false;
+ const hide=(im)=>{if(!im)return;im.style.setProperty('visibility','hidden','important');all.push(im);};
+ const offset=window.innerWidth+Math.max(oldBox?.width||0,nextBox?.width||0)+80;
+ const sign=direction==='ad-move-backward'?1:-1;
+ if(outgoing&&oldBox?.width){
+  const a=createShowroomFlightGhost(outgoing,oldBox,0,sign*offset,viewport);
+  if(a)hide(outgoing);
+ }
+ if(incoming&&nextBox?.width){
+  const b=createShowroomFlightGhost(incoming,nextBox,-sign*offset,0,viewport);
+  if(b)hide(incoming);
+ }
+ if(!viewport.childElementCount){viewport.remove();return}
+ const timer=setTimeout(cleanup,875);
+ function cleanup(){
+  if(closed)return;
+  closed=true;
+  clearTimeout(timer);
+  for(const im of all)im.style.removeProperty('visibility');
+  viewport.getAnimations({subtree:true}).forEach(a=>a.cancel());
+  viewport.remove();
+  if(showroomGhostCleanup===cleanup)showroomGhostCleanup=null;
+ }
+ showroomGhostCleanup=cleanup;
+}
+
 /* Change the slide content while its picture backplate stays stationary.
    Only cutout PNGs (or the game's foreground device) travel across the stage. */
 function revealShowcaseSlide(index){
@@ -3291,6 +3372,7 @@ function revealShowcaseSlide(index){
  if(next===slideIndex)return;
  clearTimeout(showcaseExitTimer);
  const previous=slides[slideIndex],incoming=slides[next];
+ const outgoingBox=showcaseCutoutImage(previous)?.getBoundingClientRect()||null;
  for(const el of slides){
   el.classList.remove('ad-exiting','ad-arriving','ad-move-forward','ad-move-backward');
   if(el!==previous)el.classList.remove('ad-zooming');
@@ -3309,6 +3391,9 @@ function revealShowcaseSlide(index){
  incoming.classList.add('active');
  if(!reduced)incoming.classList.add('ad-arriving',direction);
  incoming.removeAttribute('inert');
+ // Animate foreground photos in a viewport-level overlay so the transition
+ // remains visible until each photo passes the phone screen edge.
+ startShowroomViewportFlight(previous,incoming,outgoingBox,direction);
  startShowcaseZoom(incoming);
  slideIndex=next;
  $('showcaseDots').querySelectorAll('.showcase-dot').forEach((dot,i)=>dot.classList.toggle('active',i===next));
