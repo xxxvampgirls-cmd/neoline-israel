@@ -60,6 +60,26 @@
  const dust=stage.querySelector(".gift-reveal-spark-dust");
  const burstOverlay=document.getElementById("gameGiftScreenBurst");
  const giftBox=stage.querySelector(".gift-reveal-box");
+ // More varied particles on all three openings, built once for mobile performance.
+ const flyingStars=stage.querySelector(".gift-reveal-stars");
+ if(flyingStars){
+  const extra=document.createDocumentFragment();
+  const forms=["✦","✧","★","✶"];
+  for(let i=0;i<20;i++){
+   const star=document.createElement("i");
+   const angle=(i*137.508+18)*Math.PI/180;
+   const reach=65+(i*29)%100;
+   star.textContent=forms[i%forms.length];
+   star.style.setProperty("--x",Math.round(Math.cos(angle)*reach)+"px");
+   star.style.setProperty("--y",Math.round(Math.sin(angle)*reach-26)+"px");
+   star.style.setProperty("--r",(-160+(i*47)%320)+"deg");
+   star.style.setProperty("--delay","0ms");
+   star.style.setProperty("--size",(9+(i*7)%16)+"px");
+   extra.appendChild(star);
+  }
+  flyingStars.appendChild(extra);
+ }
+
  // Fixed-size, deterministic small sparkles: limited DOM work on mobile.
  if(dust){
   const fragment=document.createDocumentFragment();
