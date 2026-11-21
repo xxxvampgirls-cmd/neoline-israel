@@ -1,9 +1,9 @@
 {
   "version": 1,
   "retentionDays": 30,
-  "updated": "2026-11-21T16:11:11Z",
+  "updated": "2026-11-21T16:11:54Z",
   "status": "ok",
-  "sourceCount": 6,
+  "sourceCount": 10,
   "searchUpdated": "2026-11-21T12:05:16Z",
   "sources": [
     {
@@ -20,6 +20,16 @@
       "id": "police",
       "name": "משטרת ישראל",
       "channel": "https://www.youtube.com/channel/UCrwyHUb4iIrpknhP6MTvnww"
+    },
+    {
+      "id": "ynet",
+      "name": "ynet",
+      "channel": "https://www.youtube.com/channel/UCpSSzrovhI4fA2PQNItecUA"
+    },
+    {
+      "id": "i24he",
+      "name": "i24NEWS עברית",
+      "channel": "https://www.youtube.com/channel/UCisowXt5wZkp2sR3rFh9lnQ"
     }
   ],
   "items": [
@@ -35,6 +45,19 @@
         "police"
       ],
       "channelId": "UCvQmPpU20hw1Trss_CVwaew"
+    },
+    {
+      "id": "Qqa0339oIRM",
+      "title": "ירושלים: שוטר רכב על אופנוע לתוך הפגנת החרדים - שפוזרה באמצעות אלות ורימוני הלם",
+      "date": "2026-11-19T15:03:51Z",
+      "source": "ynet",
+      "publisher": "ynet",
+      "category": "police",
+      "url": "https://www.youtube.com/watch?v=Qqa0339oIRM",
+      "tags": [
+        "police"
+      ],
+      "channelId": "UCpSSzrovhI4fA2PQNItecUA"
     },
     {
       "id": "T4DCog8t0c8",
