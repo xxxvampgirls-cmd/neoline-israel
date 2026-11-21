@@ -1,0 +1,163 @@
+/* NEOLINE gift carousel · consolidated, mobile-friendly final design.
+   IMPORTANT: share the exact main hero slide background with the other
+   showcase cards; there is NO extra box, dark stage, gradient pane or frame.
+   A single static 3D SVG renders the ribbons, lid, edges, carbon and logo.
+   Only transform and opacity animate, avoiding paint-heavy 3D layer effects. */
+#showcaseSlides .featured-slide--promo-gift .feature-copy{
+ position:relative;z-index:4;
+}
+#showcaseSlides .featured-slide--promo-gift .feature-copy h1{
+ font-size:clamp(34px,3.7vw,58px);
+ line-height:1.1;
+}
+#showcaseSlides .featured-slide--promo-gift .feature-copy h1 em{
+ color:#0b85c8;
+}
+#showcaseSlides .featured-slide--promo-gift .feature-copy .hero-lead{
+ max-width:430px;
+}
+#showcaseSlides .featured-slide--promo-gift .giftad-disclaimer{
+ display:block;
+ margin:10px 0 0;
+ color:#6a91a8;
+ font:800 9px/1.4 Manrope,Arial,sans-serif;
+ letter-spacing:.055em;
+}
+#showcaseSlides .featured-slide--promo-gift .giftad-cta{
+ display:inline-flex;align-items:center;justify-content:center;
+ border-radius:13px;color:#fff;
+ background:linear-gradient(115deg,#0877c3,#16a7db)!important;
+ box-shadow:0 9px 20px #116bb92a;
+ border:1px solid #64c6ec!important;
+}
+/* The critical reset. Avoid overriding the parent .featured-slide background:
+   #showcaseSlides uses a common icy gradient for products and campaigns. */
+#showcaseSlides .featured-slide--site-promo.featured-slide--promo-gift .featured-image{
+ position:relative;min-width:0;isolation:isolate;
+ background:transparent!important;
+ border:0!important;border-radius:0!important;
+ box-shadow:none!important;
+ overflow:visible!important;
+}
+#showcaseSlides .featured-slide--promo-gift .featured-image::before,
+#showcaseSlides .featured-slide--promo-gift .featured-image::after{
+ display:none!important;
+}
+#showcaseSlides .featured-slide--promo-gift .giftad-stage{
+ position:absolute;z-index:1;inset:0;
+ display:flex;align-items:center;justify-content:center;
+ overflow:visible;
+ pointer-events:none;user-select:none;
+}
+#showcaseSlides .featured-slide--promo-gift .giftad-motion{
+ position:relative;flex:none;
+ height:100%;width:100%;
+ display:grid;place-items:center;
+ transform:translate3d(0,0,0);
+ transform-origin:50% 75%;
+ backface-visibility:hidden;
+ pointer-events:none;
+}
+#showcaseSlides .featured-slide--promo-gift .giftad-premium-img{
+ display:block!important;
+ position:relative!important;
+ width:100%!important;height:100%!important;
+ max-width:100%!important;max-height:100%!important;
+ min-height:0;min-width:0;
+ margin:auto!important;
+ object-fit:contain!important;
+ mix-blend-mode:normal!important;
+ filter:none!important;
+ transform:none!important;
+ opacity:1!important;
+ pointer-events:none;
+ user-select:none;
+ -webkit-user-drag:none;
+}
+/* Tiny overlay follows the exact line coordinates in the SVG viewBox.
+   An opacity pulse keeps the effect light on mobile graphics processors. */
+#showcaseSlides .featured-slide--promo-gift .giftad-glint{
+ position:absolute;inset:0;
+ display:block;width:100%;height:100%;
+ pointer-events:none;
+ opacity:0;
+ overflow:visible;
+ filter:none;
+}
+#showcaseSlides .featured-slide--promo-gift .giftad-glint path{
+ filter:none;stroke-opacity:.8;
+}
+#showcaseSlides .featured-slide--promo-gift.active:not(.ad-exiting):not(.ad-arriving) .giftad-motion{
+ animation:giftadOneLayerShake 4.45s linear infinite;
+ will-change:transform;
+}
+#showcaseSlides .featured-slide--promo-gift.active:not(.ad-exiting) .giftad-glint{
+ animation:giftadNeonBreath 3.6s ease-in-out infinite;
+}
+/* A short crescendo, soft return to rest. Rotate/translate only ONE layer.
+   No animation of box-shadow, background-position, filter or 3D child faces. */
+@keyframes giftadOneLayerShake{
+ 0%,17%,100%{transform:translate3d(0,0,0) rotate(0)}
+ 22%{transform:translate3d(-1px,-1px,0) rotate(-.75deg)}
+ 29%{transform:translate3d(2px,0,0) rotate(1.05deg)}
+ 36%{transform:translate3d(-3px,-1px,0) rotate(-1.5deg)}
+ 43%{transform:translate3d(3px,-2px,0) rotate(2.05deg)}
+ 48%{transform:translate3d(-4px,-2px,0) rotate(-2.45deg)}
+ 54%{transform:translate3d(4px,-1px,0) rotate(2.65deg)}
+ 60%{transform:translate3d(-4px,-2px,0) rotate(-2.4deg)}
+ 67%{transform:translate3d(3px,-1px,0) rotate(1.7deg)}
+ 76%{transform:translate3d(-2px,0,0) rotate(-.9deg)}
+ 86%{transform:translate3d(0,0,0) rotate(0)}
+}
+@keyframes giftadNeonBreath{
+ 0%,20%,100%{opacity:.05}
+ 45%{opacity:.42}
+ 62%{opacity:.9}
+ 84%{opacity:.2}
+}
+/* During carousel transitions the gift moves as ONE isolated sprite.
+   Background stays fixed, in line with other product cutout slides. */
+#showcaseSlides .featured-slide--promo-gift.ad-arriving .giftad-motion{
+ animation:giftadCarouselIn .68s cubic-bezier(.18,.65,.28,1) both!important;
+}
+#showcaseSlides .featured-slide--promo-gift.ad-exiting .giftad-motion{
+ animation:giftadCarouselOut .64s cubic-bezier(.42,.04,.66,1) both!important;
+}
+@keyframes giftadCarouselIn{
+ from{opacity:0;transform:translate3d(70px,0,0) scale(.95)}
+ to{opacity:1;transform:translate3d(0,0,0) scale(1)}
+}
+@keyframes giftadCarouselOut{
+ from{opacity:1;transform:translate3d(0,0,0) scale(1)}
+ to{opacity:0;transform:translate3d(-74px,0,0) scale(.96)}
+}
+#showcaseSlides .featured-slide--promo-gift .feature-img-prev,
+#showcaseSlides .featured-slide--promo-gift .feature-img-next{
+ position:absolute;z-index:15!important;
+ pointer-events:auto!important;touch-action:manipulation;
+}
+/* Preserve the same image-frame dimensions as all other slides. */
+@media(max-width:720px){
+ #showcaseSlides .featured-slide--promo-gift .feature-copy h1{
+  font-size:clamp(28px,7.4vw,38px)!important;line-height:1.1!important;
+ }
+ #showcaseSlides .featured-slide--promo-gift .giftad-disclaimer{
+  margin-top:7px;font-size:8.5px;
+ }
+ #showcaseSlides .featured-slide--site-promo.featured-slide--promo-gift .featured-image{
+  height:clamp(220px,66vw,280px)!important;
+  min-height:0!important;max-height:34vh!important;
+  order:-1!important;
+ }
+ #showcaseSlides .featured-slide--promo-gift .giftad-premium-img,
+ #showcaseSlides .featured-slide--promo-gift .giftad-glint{
+  width:100%!important;height:100%!important;
+ }
+}
+@media(prefers-reduced-motion:reduce){
+ #showcaseSlides .featured-slide--promo-gift .giftad-motion,
+ #showcaseSlides .featured-slide--promo-gift .giftad-glint{
+  animation:none!important;will-change:auto!important;
+ }
+ #showcaseSlides .featured-slide--promo-gift .giftad-glint{opacity:.25}
+}
