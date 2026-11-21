@@ -1,0 +1,251 @@
+/* NEOLINE Gift Campaign · carousel slide #9.
+   Independent lightweight CSS illustration; no external image/video downloads.
+   The gift is a preview only. A click opens the existing real three-round
+   reward-demo dialog inside the Driving Theory page. */
+#showcaseSlides .featured-slide--promo-gift .feature-copy{
+ position:relative;z-index:5;
+}
+#showcaseSlides .featured-slide--promo-gift .feature-copy h1{
+ font-size:clamp(35px,4.2vw,60px);line-height:1.06;
+}
+#showcaseSlides .featured-slide--promo-gift .feature-copy h1 em{
+ color:#0a82c0;
+}
+#showcaseSlides .featured-slide--promo-gift .hero-lead{
+ max-width:435px;
+}
+#showcaseSlides .featured-slide--promo-gift .featured-image{
+ isolation:isolate;
+ overflow:hidden!important;
+ background:radial-gradient(ellipse at 51% 40%,#fffdf7 4%,#effaff 45%,#d2ecff 100%)!important;
+ border-color:#b8ddef!important;
+}
+#showcaseSlides .featured-slide--promo-gift .giftad-disclaimer{
+ display:block;margin:13px 0 0;
+ font:800 9px/1.4 Manrope,Arial,sans-serif;
+ letter-spacing:.08em;color:#6b94ac;
+}
+#showcaseSlides .featured-slide--promo-gift .giftad-cta{
+ display:inline-flex;align-items:center;justify-content:center;
+ color:#fff;background:linear-gradient(105deg,#047ac2,#19b4e4)!important;
+ border:1px solid #58d7f3!important;
+ border-radius:15px;
+ box-shadow:0 9px 21px #077bb938,0 0 0 3px #b7ebff39;
+}
+#showcaseSlides .featured-slide--promo-gift .giftad-scene{
+ position:absolute;inset:0;z-index:2;
+ overflow:hidden;pointer-events:none;isolation:isolate;
+}
+#showcaseSlides .featured-slide--promo-gift .giftad-rays{
+ position:absolute;z-index:-1;left:50%;top:53%;
+ width:690px;height:690px;max-width:none;
+ border-radius:50%;
+ background:repeating-conic-gradient(
+  from -8deg at 50% 50%,
+  #ffcf6a4f 0deg 7deg,
+  #ffeca72a 7deg 13deg,
+  transparent 13deg 24deg
+ );
+ transform:translate(-50%,-50%) rotate(0deg);
+ opacity:.80;
+}
+#showcaseSlides .featured-slide--promo-gift .giftad-light{
+ position:absolute;z-index:0;left:50%;top:54%;
+ width:80%;max-width:400px;aspect-ratio:1;
+ border-radius:50%;transform:translate(-50%,-50%);
+ background:radial-gradient(circle,#fff 0%,#fff7daac 23%,#fbd17a30 49%,transparent 73%);
+ filter:blur(14px);
+ opacity:.75;
+}
+#showcaseSlides .featured-slide--promo-gift .giftad-floor{
+ position:absolute;z-index:0;inset:auto 0 0;height:26%;
+ border-top:1px solid #ffffffed;
+ background:linear-gradient(180deg,#edfaff7a,#bfe2f5bc 100%);
+ box-shadow:0 -5px 17px #fef8de88;
+}
+#showcaseSlides .featured-slide--promo-gift .giftad-floor::before{
+ content:"";position:absolute;top:0;left:50%;width:230px;height:60px;
+ transform:translateX(-50%);
+ background:radial-gradient(ellipse at 50% 0%,#ffdf91ae,#ffe5a82b 44%,transparent 74%);
+ filter:blur(10px);
+}
+#showcaseSlides .featured-slide--promo-gift .giftad-box{
+ --giftad-red:#c21b36;
+ position:absolute;z-index:3;
+ left:50%;top:51%;
+ width:180px;height:175px;
+ transform:translate(-50%,-50%);
+ transform-origin:50% 85%;
+ filter:drop-shadow(0 15px 10px #6e583a45);
+ will-change:transform;
+}
+#showcaseSlides .featured-slide--promo-gift .giftad-body{
+ position:absolute;left:11px;right:11px;top:51px;bottom:12px;
+ overflow:hidden;
+ border:1px solid #c38b29;border-radius:5px 5px 13px 13px;
+ background:
+  linear-gradient(102deg,#a46b17 0%,#f3c15d 16%,#fff1b0 36%,#c88922 62%,#ffdfa0 83%,#aa6f18 100%);
+ box-shadow:inset 0 2px 1px #fff0b3bd,inset 0 -6px 9px #8f560b59,0 8px 11px #b8752b3b;
+}
+#showcaseSlides .featured-slide--promo-gift .giftad-ribbon{
+ position:absolute;top:0;bottom:0;left:calc(50% - 14px);width:28px;
+ background:linear-gradient(90deg,#8d1024 0%,#cf193b 24%,#f85b5b 55%,#a9102c 100%);
+ border-left:1px solid #ff8e8e5e;border-right:1px solid #74051e69;
+ box-shadow:2px 0 5px #64251b55;
+}
+#showcaseSlides .featured-slide--promo-gift .giftad-ribbon-h{
+ position:absolute;top:13px;left:0;right:0;height:11px;
+ background:linear-gradient(180deg,#a61432,#fa6d70 40%,#b00b30);
+ opacity:.91;
+}
+#showcaseSlides .featured-slide--promo-gift .giftad-boxshine{
+ position:absolute;inset:0;
+ background:linear-gradient(105deg,transparent 20%,#fff8c16b 35%,transparent 45%,transparent 70%,#fff9d159 80%,transparent 91%);
+ opacity:.65;
+ pointer-events:none;
+}
+#showcaseSlides .featured-slide--promo-gift .giftad-lid{
+ position:absolute;z-index:4;left:1px;right:1px;top:39px;
+ height:30px;border-radius:8px 8px 5px 5px;
+ border:1px solid #d39c31;
+ background:linear-gradient(100deg,#a67520,#ffdf88 17%,#ffeaaa 35%,#c88d28 65%,#ffdb7c 82%,#996513);
+ box-shadow:0 5px 5px #7841174f,inset 0 2px 1px #fff7cfce;
+}
+#showcaseSlides .featured-slide--promo-gift .giftad-lid-ribbon{
+ position:absolute;inset:0 auto 0 calc(50% - 15px);width:30px;
+ border-left:1px solid #ed7082;
+ background:linear-gradient(90deg,#960c28,#db2744 29%,#ff7475 55%,#a80729);
+ box-shadow:1px 1px 3px #8a0d3052;
+}
+#showcaseSlides .featured-slide--promo-gift .giftad-bow{
+ position:absolute;z-index:5;left:50%;bottom:24px;
+ width:108px;height:43px;transform:translateX(-50%);
+ filter:drop-shadow(0 5px 3px #85092042);
+}
+#showcaseSlides .featured-slide--promo-gift .giftad-bow-left,
+#showcaseSlides .featured-slide--promo-gift .giftad-bow-right{
+ position:absolute;top:9px;width:49px;height:31px;
+ border:2px solid #ffe2b766;
+ background:radial-gradient(ellipse at 53% 19%,#ff767b,#e42c45 51%,#8e0928);
+}
+#showcaseSlides .featured-slide--promo-gift .giftad-bow-left{
+ left:7px;border-radius:65% 28% 65% 32%;
+ transform:rotate(22deg);
+}
+#showcaseSlides .featured-slide--promo-gift .giftad-bow-right{
+ right:7px;border-radius:28% 65% 32% 65%;
+ transform:rotate(-22deg);
+}
+#showcaseSlides .featured-slide--promo-gift .giftad-bow-knot{
+ position:absolute;z-index:6;top:20px;left:50%;
+ width:20px;height:21px;border-radius:7px;
+ transform:translateX(-50%) rotate(45deg);
+ border:1px solid #fdaaaa9e;
+ background:linear-gradient(135deg,#ff777e,#bf1737);
+ box-shadow:0 2px 4px #9615296b;
+}
+#showcaseSlides .featured-slide--promo-gift .giftad-star{
+ position:absolute;z-index:3;
+ color:#ffc65b;font-size:23px;line-height:1;
+ text-shadow:0 0 10px #ffe9ae,0 0 15px #e2a83d9d;
+ opacity:0;pointer-events:none;
+}
+#showcaseSlides .featured-slide--promo-gift .giftad-star--1{top:22%;left:18%;font-size:19px}
+#showcaseSlides .featured-slide--promo-gift .giftad-star--2{top:35%;right:19%;font-size:29px}
+#showcaseSlides .featured-slide--promo-gift .giftad-star--3{top:62%;left:13%;font-size:25px}
+#showcaseSlides .featured-slide--promo-gift .giftad-star--4{top:20%;right:24%;font-size:15px}
+#showcaseSlides .featured-slide--promo-gift .giftad-star--5{top:69%;right:14%;font-size:17px}
+#showcaseSlides .featured-slide--promo-gift .giftad-star--6{top:42%;left:7%;font-size:14px}
+#showcaseSlides .featured-slide--promo-gift .giftad-sparkburst{
+ position:absolute;z-index:2;left:50%;top:49%;
+ color:#fff7d0;font-size:30px;opacity:0;
+ transform:translate(-50%,-50%) scale(.3);
+ filter:drop-shadow(0 0 14px #fff6c9);
+}
+/* Accelerating but never frantic gift-box wobble, aligned to the same shaking
+   gift motif shown in Driving Theory. Only animate the foreground gift. */
+#showcaseSlides .featured-slide--promo-gift.active:not(.ad-exiting) .giftad-box{
+ animation:giftadWiggle 5.4s ease-in-out infinite;
+}
+#showcaseSlides .featured-slide--promo-gift.active:not(.ad-exiting) .giftad-rays{
+ animation:giftadRayTurn 24s linear infinite;
+}
+#showcaseSlides .featured-slide--promo-gift.active:not(.ad-exiting) .giftad-light{
+ animation:giftadGlow 5.4s ease-in-out infinite;
+}
+#showcaseSlides .featured-slide--promo-gift.active:not(.ad-exiting) .giftad-star{
+ animation:giftadStars 5.4s ease-in-out infinite;
+}
+#showcaseSlides .featured-slide--promo-gift.active:not(.ad-exiting) .giftad-star--2{animation-delay:.10s}
+#showcaseSlides .featured-slide--promo-gift.active:not(.ad-exiting) .giftad-star--3{animation-delay:.25s}
+#showcaseSlides .featured-slide--promo-gift.active:not(.ad-exiting) .giftad-star--4{animation-delay:.18s}
+#showcaseSlides .featured-slide--promo-gift.active:not(.ad-exiting) .giftad-star--5{animation-delay:.32s}
+#showcaseSlides .featured-slide--promo-gift.active:not(.ad-exiting) .giftad-star--6{animation-delay:.38s}
+#showcaseSlides .featured-slide--promo-gift.active:not(.ad-exiting) .giftad-sparkburst{
+ animation:giftadSpark 5.4s ease-out infinite;
+}
+@keyframes giftadWiggle{
+ 0%,19%,90%,100%{transform:translate(-50%,-50%) rotate(0deg)}
+ 28%{transform:translate(-50%,-51%) rotate(-1.5deg)}
+ 35%{transform:translate(-50%,-50%) rotate(1.9deg)}
+ 43%{transform:translate(-50%,-51%) rotate(-2.2deg)}
+ 50%{transform:translate(-50%,-50%) rotate(2.5deg)}
+ 56%{transform:translate(-50%,-52%) rotate(-3.2deg)}
+ 61%{transform:translate(-50%,-51%) rotate(3.8deg)}
+ 66%{transform:translate(-50%,-52%) rotate(-4deg)}
+ 71%{transform:translate(-50%,-50%) rotate(3.4deg)}
+ 77%{transform:translate(-50%,-51%) rotate(-2.0deg)}
+ 84%{transform:translate(-50%,-50%) rotate(.8deg)}
+}
+@keyframes giftadGlow{
+ 0%,18%,100%{opacity:.5;transform:translate(-50%,-50%) scale(.89)}
+ 54%{opacity:.78}
+ 72%{opacity:1;transform:translate(-50%,-50%) scale(1.17)}
+ 90%{opacity:.58}
+}
+@keyframes giftadRayTurn{to{transform:translate(-50%,-50%) rotate(360deg)}}
+@keyframes giftadStars{
+ 0%,29%,100%{opacity:0;transform:translate3d(0,8px,0) scale(.5)}
+ 45%{opacity:.5}
+ 62%{opacity:1;transform:translate3d(0,-6px,0) scale(1.17)}
+ 83%{opacity:.2;transform:translate3d(0,-18px,0) scale(.8)}
+ 91%{opacity:0}
+}
+@keyframes giftadSpark{
+ 0%,60%,90%,100%{opacity:0;transform:translate(-50%,-50%) scale(.3)}
+ 72%{opacity:.98;transform:translate(-50%,-50%) scale(5)}
+ 86%{opacity:0;transform:translate(-50%,-50%) scale(8)}
+}
+@media(max-width:720px){
+ #showcaseSlides .featured-slide--promo-gift .feature-copy h1{
+  font-size:clamp(29px,7.5vw,38px)!important;
+  line-height:1.08!important;
+ }
+ #showcaseSlides .featured-slide--promo-gift .featured-image{
+  min-height:265px!important;
+ }
+ #showcaseSlides .featured-slide--promo-gift .giftad-box{
+  width:150px;height:155px;top:52%;
+ }
+ #showcaseSlides .featured-slide--promo-gift .giftad-body{top:50px}
+ #showcaseSlides .featured-slide--promo-gift .giftad-floor{height:24%}
+ #showcaseSlides .featured-slide--promo-gift .giftad-rays{width:510px;height:510px}
+ #showcaseSlides .featured-slide--promo-gift .giftad-disclaimer{font-size:8.5px;margin-top:9px}
+}
+@media(max-width:360px){
+ #showcaseSlides .featured-slide--promo-gift .featured-image{min-height:235px!important}
+ #showcaseSlides .featured-slide--promo-gift .giftad-box{transform:translate(-50%,-50%) scale(.91)}
+}
+@media(prefers-reduced-motion:reduce){
+ #showcaseSlides .featured-slide--promo-gift .giftad-box,
+ #showcaseSlides .featured-slide--promo-gift .giftad-rays,
+ #showcaseSlides .featured-slide--promo-gift .giftad-light,
+ #showcaseSlides .featured-slide--promo-gift .giftad-star,
+ #showcaseSlides .featured-slide--promo-gift .giftad-sparkburst{
+  animation:none!important;will-change:auto!important;
+ }
+ #showcaseSlides .featured-slide--promo-gift .giftad-star--1,
+ #showcaseSlides .featured-slide--promo-gift .giftad-star--2{
+  opacity:.55;
+ }
+}
