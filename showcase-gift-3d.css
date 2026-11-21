@@ -205,6 +205,22 @@
  40%{filter:brightness(1.6)}
  65%{filter:brightness(1.15)}
 }
+/* Carousel handoff: unlike the old flat box, the gift visibly travels
+   away with the other showroom objects instead of suddenly disappearing. */
+#showcaseSlides .featured-slide--promo-gift.ad-arriving .giftad-box--3d{
+ animation:giftad3dEnter .80s cubic-bezier(.16,.65,.26,1) both!important;
+}
+#showcaseSlides .featured-slide--promo-gift.ad-exiting .giftad-box--3d{
+ animation:giftad3dExit .70s cubic-bezier(.44,.02,.64,1) both!important;
+}
+@keyframes giftad3dEnter{
+ from{opacity:0;transform:translate(calc(-50% + 92px),-50%) scale(.85)}
+ to{opacity:1;transform:translate(-50%,-50%) scale(1)}
+}
+@keyframes giftad3dExit{
+ from{opacity:1;transform:translate(-50%,-50%) scale(1)}
+ to{opacity:0;transform:translate(calc(-50% - 110px),-50%) scale(.87)}
+}
 #showcaseSlides .featured-slide--promo-gift .feature-img-prev,
 #showcaseSlides .featured-slide--promo-gift .feature-img-next{
  z-index:40!important;pointer-events:auto!important;touch-action:manipulation;
