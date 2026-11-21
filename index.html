@@ -3324,7 +3324,9 @@ function showcaseFlightSubject(slide){
   return {element:photo,kind:'image',box:photo.getBoundingClientRect(),image};
  const svg=image.querySelector(':scope > .feature-img-fallback:not([hidden])');
  if(svg)return {element:svg,kind:'scene',box:image.getBoundingClientRect(),image};
- const art=image.querySelector(':scope > .promo-art-object, :scope > .news-showcase-cutout, :scope > .theory-stage');
+ const theory=image.querySelector(':scope > .theory-stage');
+ if(theory)return {element:theory,kind:'theory',box:image.getBoundingClientRect(),image};
+ const art=image.querySelector(':scope > .promo-art-object, :scope > .news-showcase-cutout');
  if(art)return {element:art,kind:'scene',box:image.getBoundingClientRect(),image};
  // Image not downloaded yet: let the original CSS cutout animation run.
  return null;
@@ -3338,9 +3340,65 @@ function showcaseFlightSubject(slide){
  * wrapper is NOT a .featured-slide, avoiding legacy transform:none!important
  * from overriding the animation. The inner visual keeps .active so all
  * CSS-only promotional scenes render instead of popping into existence. */
+/* For the driving-theory ad, keep the whole original blue-white stage,
+ * bands and lighting IN PLACE. Only the three foreground cards fly across
+ * the phone viewport. Moving .theory-stage itself used to make its entire
+ * background disappear and pop back after 900ms. */
+function createTheoryForegroundFlight(slide,subject,fromX,toX,scope,restoreList){
+ const {box,element:theory}=subject;
+ const pieces=[...theory.querySelectorAll(':scope > .theory-back-card, :scope > .theory-device, :scope > .theory-floating-award')];
+ if(!pieces.length)return null;
+ const track=document.createElement('div');
+ track.className='neoline-flight-track';
+ track.style.cssText='position:absolute!important;left:'+box.left+'px!important;top:'+box.top+'px!important;'+
+  'width:'+box.width+'px!important;height:'+box.height+'px!important;'+
+  'pointer-events:none!important;overflow:visible!important;';
+ const ghost=document.createElement('article');
+ ghost.className='featured-slide featured-slide--theory showroom-flight-copy active';
+ ghost.style.cssText='display:block!important;position:absolute!important;inset:0!important;'+
+  'width:100%!important;height:100%!important;min-height:0!important;'+
+  'margin:0!important;padding:0!important;border:0!important;'+
+  'background:transparent!important;box-shadow:none!important;pointer-events:none!important;';
+ const frame=document.createElement('div');
+ frame.className='featured-image theory-featured-image';
+ frame.style.cssText='position:absolute!important;inset:0!important;display:block!important;'+
+  'width:100%!important;height:100%!important;min-height:0!important;max-height:none!important;'+
+  'padding:0!important;margin:0!important;background:transparent!important;'+
+  'border:0!important;box-shadow:none!important;overflow:visible!important;';
+ const visual=document.createElement('div');
+ visual.className='theory-stage';
+ visual.style.cssText='position:relative!important;width:100%!important;height:100%!important;'+
+  'min-height:0!important;overflow:visible!important;'+
+  'background:transparent!important;border:0!important;box-shadow:none!important;'+
+  'pointer-events:none!important;';
+ pieces.forEach(piece=>{
+  const originParent=piece.parentNode,prior=piece.getAttribute('style');
+  const marker=document.createComment('neoline-theory-card-origin');
+  originParent.insertBefore(marker,piece);
+  restoreList.push(()=>{
+   if(marker.parentNode){marker.parentNode.insertBefore(piece,marker);marker.remove()}
+   if(prior===null)piece.removeAttribute('style');
+   else piece.setAttribute('style',prior);
+  });
+  // Pause the idle bobbing while crossing; keep original scale on landing.
+  piece.style.setProperty('animation','none','important');
+  piece.style.setProperty('transition','none','important');
+  piece.style.setProperty('scale','.965','important');
+  visual.appendChild(piece);
+ });
+ frame.appendChild(visual);
+ ghost.appendChild(frame);
+ track.appendChild(ghost);
+ scope.appendChild(track);
+ return track.animate([
+  {transform:'translate3d('+fromX+'px,0,0)'},
+  {transform:'translate3d('+toX+'px,0,0)'}
+ ],{duration:840,easing:'cubic-bezier(.43,.08,.3,1)',fill:'both'});
+}
 function createShowroomFlightGhost(slide,subject,fromX,toX,scope,restoreList){
  if(!slide||!subject?.box?.width||!subject.box.height)return null;
  const {box,kind,element}=subject;
+ if(kind==='theory')return createTheoryForegroundFlight(slide,subject,fromX,toX,scope,restoreList);
  const originParent=element.parentNode;
  if(!originParent)return null;
  const nextSibling=element.nextSibling;
