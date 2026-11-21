@@ -1,0 +1,282 @@
+/* NEOLINE | gift promo concept 6 + 2: carbon black / electric cyan / blue-gold ribbon.
+   Actual responsive HTML + compositor-only glow/shake; not a static animation
+   mockup. Applies only to the 9th homepage carousel slide. */
+#showcaseSlides .featured-slide--promo-gift .featured-image{
+ background:
+  radial-gradient(ellipse 74% 77% at 50% 62%,#103c5a 0%,#071d33 62%,#04101e 100%)!important;
+ border:1px solid #3288b4!important;
+ box-shadow:inset 0 1px 0 #a0edff40,inset 0 0 30px #0578c225,0 9px 27px #0c416534;
+}
+#showcaseSlides .featured-slide--promo-gift .featured-image .ad-photo-stripes{display:none!important}
+#showcaseSlides .featured-slide--promo-gift .giftad-scene{
+ background:
+  linear-gradient(135deg,transparent 22%,#2196ca08 35%,transparent 51%),
+  repeating-linear-gradient(0deg,transparent 0,transparent 23px,#67d6f909 24px);
+}
+#showcaseSlides .featured-slide--promo-gift .giftad-scene::before{
+ content:"";position:absolute;z-index:0;inset:8% 12%;
+ background:radial-gradient(ellipse 68% 67% at 50% 55%,#0c6fa72f 0%,transparent 76%);
+ pointer-events:none;
+}
+#showcaseSlides .featured-slide--promo-gift .giftad-rays{
+ width:540px;height:540px;top:54%;z-index:0;
+ background:repeating-conic-gradient(from -10deg,#20b3ed18 0deg 7deg,#2ba1d90b 7deg 11deg,transparent 11deg 27deg);
+ opacity:.55;
+}
+#showcaseSlides .featured-slide--promo-gift .giftad-light{
+ top:58%;width:78%;max-width:400px;
+ background:radial-gradient(circle,#4ddcff6e 0%,#147bb85c 30%,#1e719922 56%,transparent 77%);
+ filter:blur(22px);opacity:.78;
+}
+#showcaseSlides .featured-slide--promo-gift .giftad-floor{
+ height:23%;border-top:1px solid #318eb37a;
+ background:linear-gradient(180deg,#123b617d,#07172c 100%);
+ box-shadow:0 -13px 34px #0089e018,inset 0 1px 0 #9ceaff1f;
+}
+#showcaseSlides .featured-slide--promo-gift .giftad-floor::before{
+ width:240px;height:58px;
+ background:radial-gradient(ellipse at 50% 0%,#118ed9ac 0%,#187eb239 42%,transparent 79%);
+ filter:blur(11px);
+}
+#showcaseSlides .featured-slide--promo-gift .giftad-orbit{
+ position:absolute;z-index:1;left:50%;bottom:14%;
+ width:270px;height:48px;max-width:82%;
+ border:2px solid #32c8ffba;border-radius:50%;
+ transform:translateX(-50%) rotate(0deg);
+ opacity:.76;pointer-events:none;
+ box-shadow:0 0 7px #41c9ffcf,inset 0 0 8px #42dfff6b,0 0 23px #007bca66;
+}
+#showcaseSlides .featured-slide--promo-gift .giftad-orbit::after{
+ content:"";position:absolute;inset:8px 16px;
+ border:1px solid #3199d86b;border-radius:50%;
+ filter:blur(2px);
+}
+#showcaseSlides .featured-slide--promo-gift .giftad-box{
+ width:210px;height:192px;top:48%;
+ transform:translate(-50%,-50%);
+ transform-origin:50% 83%;
+ filter:drop-shadow(0 17px 13px #000d1d96) drop-shadow(0 0 12px #00bbff62);
+ will-change:transform;
+}
+#showcaseSlides .featured-slide--promo-gift .giftad-box::before{
+ content:"";position:absolute;z-index:0;
+ left:12px;right:12px;top:48px;bottom:10px;border-radius:8px;
+ background:#0a1829;
+ box-shadow:0 0 18px #00aaff4b,0 15px 21px #000b17c2;
+}
+#showcaseSlides .featured-slide--promo-gift .giftad-body{
+ left:12px;right:12px;top:52px;bottom:12px;
+ border:1px solid #23678c;border-radius:4px 4px 10px 10px;
+ background:
+  linear-gradient(130deg,#233141 0%,#101724 22%,#0b111e 62%,#131d2d 86%,#091524 100%);
+ box-shadow:inset 0 2px 2px #d7f6ff29,inset -9px 0 15px #000b1b8c,
+  inset 0 -4px 8px #073c635c,0 7px 10px #0013235c;
+}
+#showcaseSlides .featured-slide--promo-gift .giftad-body::before{
+ content:"";position:absolute;z-index:0;inset:0;
+ background:repeating-linear-gradient(135deg,transparent 0 4px,#9bc1d609 5px,transparent 6px 11px);
+ pointer-events:none;
+}
+#showcaseSlides .featured-slide--promo-gift .giftad-body::after{
+ content:"";position:absolute;z-index:8;inset:0;
+ border-radius:inherit;pointer-events:none;
+ border-bottom:2px solid #4acaff;border-right:1px solid #27a9ee;
+ box-shadow:inset 0 -2px 10px #1199df45,0 1px 7px #2cbeffb2;
+}
+#showcaseSlides .featured-slide--promo-gift .giftad-halftone{
+ position:absolute;z-index:1;left:0;bottom:0;
+ width:53%;height:66%;
+ background-image:radial-gradient(circle,#17c8ffb4 1.05px,transparent 1.75px);
+ background-size:9px 9px;
+ mask-image:linear-gradient(to right,#000 5%,#0007 67%,transparent),linear-gradient(to top,#000 4%,#0009 54%,transparent 98%);
+ mask-composite:intersect;
+ -webkit-mask-image:linear-gradient(90deg,#000 10%,transparent 100%);
+ opacity:.86;
+}
+#showcaseSlides .featured-slide--promo-gift .giftad-diagonal,
+#showcaseSlides .featured-slide--promo-gift .giftad-diagonal-shimmer{
+ position:absolute;inset:0;pointer-events:none;
+ clip-path:polygon(0 100%,28% 100%,100% 21%,100% 2%,79% 2%,0 79%);
+}
+#showcaseSlides .featured-slide--promo-gift .giftad-diagonal{
+ z-index:2;
+ background:linear-gradient(120deg,#08649e 0%,#128ddd 30%,#27c9ff 53%,#1188d0 72%,#0b5492 100%);
+ filter:drop-shadow(0 0 8px #008fd8);
+}
+#showcaseSlides .featured-slide--promo-gift .giftad-diagonal-shimmer{
+ z-index:3;
+ background:linear-gradient(110deg,transparent 30%,#c6ffff1a 45%,#edfffff2 52%,#77f5ff72 58%,transparent 72%);
+ background-size:270% 100%;
+ background-position:-130% 0;
+ mix-blend-mode:screen;
+ opacity:.83;
+}
+#showcaseSlides .featured-slide--promo-gift .giftad-neon-trace{
+ position:absolute;z-index:5;inset:0;
+ border-top:1px solid #94e9ff6f;border-bottom:2px solid #28d0ff;
+ border-right:2px solid #2abfff75;
+ border-radius:3px 3px 9px 9px;
+ box-shadow:inset 0 -1px 9px #10aeff3b,0 0 12px #008fe26b;
+ pointer-events:none;
+}
+#showcaseSlides .featured-slide--promo-gift .giftad-front-logo{
+ position:absolute;z-index:6;top:20%;left:39%;right:6%;
+ display:block;line-height:0;
+ filter:drop-shadow(0 1px 5px #03111e);
+}
+#showcaseSlides .featured-slide--promo-gift .giftad-front-logo img{
+ display:block;width:100%;height:auto;
+ filter:brightness(0) invert(1) drop-shadow(0 0 4px #ffffff4d)!important;
+ opacity:.97;
+}
+#showcaseSlides .featured-slide--promo-gift .giftad-ribbon{
+ z-index:6;left:16%;width:27px;
+ background:linear-gradient(90deg,#043961 0%,#087bbc 20%,#20b9ff 50%,#0564a4 85%,#042e53);
+ border-left:2px solid #e4bb65;border-right:2px solid #d09d3f;
+ box-shadow:2px 0 6px #031223a3,inset 0 0 3px #95edff89;
+}
+#showcaseSlides .featured-slide--promo-gift .giftad-ribbon-h{display:none}
+#showcaseSlides .featured-slide--promo-gift .giftad-boxshine{
+ z-index:7;
+ background:linear-gradient(114deg,transparent 0%,transparent 30%,#e3f9ff1c 43%,transparent 50%,transparent 86%,#99e6ff31 92%,transparent 100%);
+ opacity:.6;
+}
+#showcaseSlides .featured-slide--promo-gift .giftad-lid{
+ left:1px;right:1px;top:38px;height:32px;
+ border:1px solid #254663;border-radius:7px 7px 4px 4px;
+ background:linear-gradient(105deg,#1f2d3b,#0b1322 23%,#131d2c 54%,#283446 88%,#111c2c);
+ box-shadow:0 3px 0 #1193c9a8,0 4px 10px #00acff76,
+  inset 0 2px 1px #f7ffff39,inset 0 -1px 0 #00baff92;
+}
+#showcaseSlides .featured-slide--promo-gift .giftad-lid::after{
+ content:"";position:absolute;left:2px;right:2px;bottom:1px;height:2px;
+ background:linear-gradient(90deg,transparent,#3dcdff,#e9fdff,#32bfff,transparent);
+ box-shadow:0 0 8px #0bc6ff;opacity:.7;
+}
+#showcaseSlides .featured-slide--promo-gift .giftad-lid-ribbon{
+ left:16%;width:30px;
+ background:linear-gradient(90deg,#053c64,#0a78b9 24%,#28bdff 52%,#07649c 88%,#042847);
+ border-left:2px solid #f6d385;border-right:2px solid #e5b65b;
+ box-shadow:2px 0 5px #000914b3;
+}
+#showcaseSlides .featured-slide--promo-gift .giftad-bow{
+ width:111px;height:47px;bottom:24px;
+ filter:drop-shadow(0 5px 4px #000b1f96);
+}
+#showcaseSlides .featured-slide--promo-gift .giftad-bow-left,
+#showcaseSlides .featured-slide--promo-gift .giftad-bow-right{
+ border:2px solid #d6ae66;
+ background:radial-gradient(ellipse at 50% 16%,#42d5ff 2%,#1388dc 40%,#07528d 80%,#032c56);
+ box-shadow:inset 0 1px 4px #c6f4ff65,inset 0 -3px 3px #031b3655;
+}
+#showcaseSlides .featured-slide--promo-gift .giftad-bow-knot{
+ border:1px solid #f0c66e;
+ background:linear-gradient(130deg,#34bfff,#0669a9 68%,#084979);
+ box-shadow:0 1px 3px #0323437a,inset 0 1px 1px #8febff87;
+}
+#showcaseSlides .featured-slide--promo-gift .giftad-star{
+ color:#8ddffe;font-size:15px;text-shadow:0 0 8px #55cbff,0 0 15px #0099ffb7;
+}
+#showcaseSlides .featured-slide--promo-gift .giftad-sparkburst{
+ color:#ffdf82;
+ text-shadow:0 0 12px #ffd56ba6;
+ filter:drop-shadow(0 0 13px #ffd973);
+}
+#showcaseSlides .featured-slide--promo-gift.active:not(.ad-exiting) .giftad-box{
+ animation:giftadCyberShake 5.25s linear infinite;
+}
+#showcaseSlides .featured-slide--promo-gift.active:not(.ad-exiting) .giftad-orbit{
+ animation:giftadOrbitPulse 5.25s ease-in-out infinite;
+}
+#showcaseSlides .featured-slide--promo-gift.active:not(.ad-exiting) .giftad-neon-trace{
+ animation:giftadEdgeLight 5.25s ease-in-out infinite;
+}
+#showcaseSlides .featured-slide--promo-gift.active:not(.ad-exiting) .giftad-diagonal-shimmer{
+ animation:giftadBlueSweep 2.75s linear infinite;
+}
+#showcaseSlides .featured-slide--promo-gift.active:not(.ad-exiting) .giftad-lid::after{
+ animation:giftadEdgeLight 5.25s ease-in-out infinite;
+}
+#showcaseSlides .featured-slide--promo-gift.active:not(.ad-exiting) .giftad-star{
+ animation:giftadStars 5.25s ease-in-out infinite;
+}
+#showcaseSlides .featured-slide--promo-gift.active:not(.ad-exiting) .giftad-light{
+ animation:giftadCyberGlow 5.25s ease-in-out infinite;
+}
+#showcaseSlides .featured-slide--promo-gift.active:not(.ad-exiting) .giftad-sparkburst{
+ animation:giftadCyberSpark 5.25s ease-out infinite;
+}
+/* Stronger controlled shaking: the gift tries to open but remains shut,
+   then the neon traces travel across the black/blue body. */
+@keyframes giftadCyberShake{
+ 0%,13%,100%{transform:translate(-50%,-50%) rotate(0) scale(1)}
+ 20%{transform:translate(calc(-50% - 2px),-50%) rotate(-1.2deg) scale(1.005)}
+ 28%{transform:translate(calc(-50% + 3px),calc(-50% - 1px)) rotate(1.8deg) scale(1.009)}
+ 35%{transform:translate(calc(-50% - 4px),calc(-50% - 1px)) rotate(-2.7deg) scale(1.014)}
+ 42%{transform:translate(calc(-50% + 4px),calc(-50% - 2px)) rotate(3.5deg) scale(1.017)}
+ 47%{transform:translate(calc(-50% - 5px),calc(-50% - 2px)) rotate(-3.9deg) scale(1.022)}
+ 52%{transform:translate(calc(-50% + 6px),calc(-50% - 1px)) rotate(4.5deg) scale(1.025)}
+ 57%{transform:translate(calc(-50% - 6px),calc(-50% - 2px)) rotate(-4.4deg) scale(1.023)}
+ 63%{transform:translate(calc(-50% + 5px),-50%) rotate(3.6deg) scale(1.020)}
+ 69%{transform:translate(calc(-50% - 4px),calc(-50% - 1px)) rotate(-2.8deg) scale(1.015)}
+ 77%{transform:translate(calc(-50% + 2px),-50%) rotate(1.5deg) scale(1.006)}
+ 85%{transform:translate(calc(-50% - 1px),-50%) rotate(-.5deg) scale(1.003)}
+ 93%{transform:translate(-50%,-50%) rotate(0) scale(1)}
+}
+@keyframes giftadBlueSweep{
+ 0%{background-position:-130% 0;opacity:.4}
+ 14%{opacity:.98}
+ 86%{opacity:.95}
+ 100%{background-position:180% 0;opacity:.4}
+}
+@keyframes giftadEdgeLight{
+ 0%,16%,100%{opacity:.35}
+ 47%{opacity:.95}
+ 63%{opacity:1;filter:brightness(1.6)}
+ 84%{opacity:.43}
+}
+@keyframes giftadOrbitPulse{
+ 0%,14%,100%{opacity:.25;box-shadow:0 0 7px #00aeff67,0 0 22px #047bc52b}
+ 50%{opacity:.8;box-shadow:0 0 10px #28d0ffcb,0 0 29px #0388e07d}
+ 67%{opacity:1;box-shadow:0 0 15px #87e7ff,0 0 40px #05adffc1}
+ 88%{opacity:.34}
+}
+@keyframes giftadCyberGlow{
+ 0%,15%,100%{opacity:.30;transform:translate(-50%,-50%) scale(.89)}
+ 48%{opacity:.76;transform:translate(-50%,-50%) scale(1.08)}
+ 66%{opacity:1;transform:translate(-50%,-50%) scale(1.23)}
+ 88%{opacity:.42;transform:translate(-50%,-50%) scale(.95)}
+}
+@keyframes giftadCyberSpark{
+ 0%,52%,83%,100%{opacity:0;transform:translate(-50%,-50%) scale(.3)}
+ 67%{opacity:.89;transform:translate(-50%,-50%) scale(3.1)}
+ 79%{opacity:0;transform:translate(-50%,-50%) scale(5.5)}
+}
+@media(max-width:720px){
+ #showcaseSlides .featured-slide--promo-gift .featured-image{
+  height:clamp(235px,68vw,280px)!important;max-height:34vh;
+ }
+ #showcaseSlides .featured-slide--promo-gift .giftad-box{
+  width:180px;height:171px;top:50%;
+ }
+ #showcaseSlides .featured-slide--promo-gift .giftad-body{top:51px;bottom:10px}
+ #showcaseSlides .featured-slide--promo-gift .giftad-lid{top:39px}
+ #showcaseSlides .featured-slide--promo-gift .giftad-orbit{
+  width:220px;height:39px;bottom:10%;
+ }
+ #showcaseSlides .featured-slide--promo-gift .giftad-rays{width:430px;height:430px}
+}
+@media(prefers-reduced-motion:reduce){
+ #showcaseSlides .featured-slide--promo-gift.active:not(.ad-exiting) .giftad-box,
+ #showcaseSlides .featured-slide--promo-gift.active:not(.ad-exiting) .giftad-orbit,
+ #showcaseSlides .featured-slide--promo-gift.active:not(.ad-exiting) .giftad-neon-trace,
+ #showcaseSlides .featured-slide--promo-gift.active:not(.ad-exiting) .giftad-diagonal-shimmer,
+ #showcaseSlides .featured-slide--promo-gift.active:not(.ad-exiting) .giftad-lid::after,
+ #showcaseSlides .featured-slide--promo-gift.active:not(.ad-exiting) .giftad-star,
+ #showcaseSlides .featured-slide--promo-gift.active:not(.ad-exiting) .giftad-light,
+ #showcaseSlides .featured-slide--promo-gift.active:not(.ad-exiting) .giftad-sparkburst{
+  animation:none!important;filter:none;
+ }
+ #showcaseSlides .featured-slide--promo-gift .giftad-diagonal-shimmer{opacity:.55}
+ #showcaseSlides .featured-slide--promo-gift .giftad-orbit{opacity:.55}
+}
