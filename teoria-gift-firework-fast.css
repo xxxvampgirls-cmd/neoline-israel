@@ -248,7 +248,7 @@
   width:560px;height:560px;
   border-radius:50%;
   transform-origin:50% 50%;
-  transform:translate(-50%,-50%) rotate(0deg) scale(.65);
+  transform:translate(-50%,-50%) rotate(0deg) scale(.24);
   background:repeating-conic-gradient(
     from -12deg,
     transparent 0deg 17deg,
@@ -280,10 +280,13 @@
   100%{opacity:.76;transform:translate(-50%,-50%) rotate(12deg) scale(1)}
 }
 @keyframes neolineRaysGoldCharge{
-  0%{opacity:0;transform:translate(-50%,-50%) rotate(0deg) scale(.65)}
-  30%{opacity:.23;transform:translate(-50%,-50%) rotate(3deg) scale(.76)}
-  65%{opacity:.62;transform:translate(-50%,-50%) rotate(8deg) scale(.88)}
-  100%{opacity:.96;transform:translate(-50%,-50%) rotate(12deg) scale(1)}
+  /* A tiny brilliant halo peeks out FROM BEHIND the shaking box,
+     then expands smoothly to the approved full-size open-box rays. */
+  0%{opacity:.0;transform:translate(-50%,-50%) rotate(0deg) scale(.24)}
+  15%{opacity:.42;transform:translate(-50%,-50%) rotate(1deg) scale(.29)}
+  40%{opacity:.75;transform:translate(-50%,-50%) rotate(4deg) scale(.44)}
+  68%{opacity:.91;transform:translate(-50%,-50%) rotate(8deg) scale(.71)}
+  100%{opacity:1;transform:translate(-50%,-50%) rotate(12deg) scale(1)}
 }
 /* One shared rotation sweep gives perfectly synchronised yellow/blue rays. */
 #gameGiftDialog .gift-reveal[data-phase="burst"] .gift-reveal-scene::before,
@@ -300,9 +303,9 @@
   100%{opacity:.34;transform:translate(-50%,-50%) rotate(190deg) scale(1.05)}
 }
 @keyframes neolineRaysGoldBurst{
-  0%{opacity:.96;transform:translate(-50%,-50%) rotate(12deg) scale(1)}
+  0%{opacity:1;transform:translate(-50%,-50%) rotate(12deg) scale(1)}
   38%{opacity:1;transform:translate(-50%,-50%) rotate(86deg) scale(1.04)}
-  100%{opacity:0;transform:translate(-50%,-50%) rotate(190deg) scale(1.05)}
+  100%{opacity:.7;transform:translate(-50%,-50%) rotate(190deg) scale(1.05)}
 }
 @media(max-width:385px){
   #gameGiftDialog .gift-reveal-scene::before{width:570px;height:570px}
