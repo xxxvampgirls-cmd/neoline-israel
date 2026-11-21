@@ -24,6 +24,7 @@
 <link rel="stylesheet" href="./teoria-daily.css?v=20261120-relocated-strict-v2">
 <link rel="stylesheet" href="./teoria-hero-promo.css?v=20261120-four-ads-v1">
 <link rel="stylesheet" href="./teoria-question-unfold.css?v=20261121-unfold-v1">
+<link rel="stylesheet" href="./teoria-progress-compact.css?v=20261121-progress-v1">
 </head><body>
 <header class="topbar neoline-site-header"><div class="neoline-site-header__inner">
 <a class="neoline-site-header__logo" href="./" aria-label="NEOLINE — главная страница"><img src="./assets/neoline-clean.svg?v=20261116-compact" width="501" height="108" alt="NEOLINE"></a>
@@ -237,7 +238,7 @@
  <div class="game-progress-panel">
   <header class="game-progress-head"><button type="button" id="gameProgressClose" class="game-progress-close" aria-label="Закрыть">←</button>
    <span class="game-progress-header-brand">NEOLINE · <span id="gameProgressHeaderLabel">МОЯ ИГРА</span></span>
-   <button type="button" class="game-progress-gift" id="gameProgressGift" aria-haspopup="dialog" aria-controls="gameGiftDialog" data-gift-preview>🎁</button></header>
+   <button type="button" class="game-progress-gift" id="gameProgressGift" aria-haspopup="dialog" aria-controls="gameGiftDialog" data-gift-preview><span class="game-progress-gift-emoji" aria-hidden="true">🎁</span></button></header>
   <div class="game-progress-headline"><span class="game-progress-headline-icon" aria-hidden="true">🏅</span><div><span class="game-progress-kicker" id="gameProgressKicker">ТВОИ ДОСТИЖЕНИЯ</span><h2 id="gameProgressTitle">Мой прогресс</h2><p id="gameProgressSubtitle">Здесь только реальные результаты твоих игр.</p></div></div>
   <div class="game-progress-topstats">
    <div><span class="game-progress-stat-icon">📖</span><strong id="gameProgressSeen">0</strong><span id="gameProgressSeenText">Вопросов</span></div>
@@ -246,10 +247,10 @@
    <div><span class="game-progress-stat-icon">🏆</span><strong id="gameProgressGames">0</strong><span id="gameProgressGamesText">Игр</span></div>
   </div>
   <section class="game-progress-section game-progress-achievements" aria-labelledby="gameProgressAchievementsTitle">
-   <div class="game-progress-section-heading"><h3 id="gameProgressAchievementsTitle">Достижения</h3><span id="gameProgressBadgeCount" class="game-progress-badges-count" aria-label="Получено достижений">0/5</span></div>
+   <div class="game-progress-section-heading"><h3 id="gameProgressAchievementsTitle">Достижения</h3><span id="gameProgressBadgeCount" class="game-progress-badges-count" aria-label="Получено достижений">0/5</span><button type="button" class="game-progress-more" id="gameAchievementToggle" aria-controls="gameAchievementGrid" aria-expanded="false">Показать все достижения</button></div>
    <div class="game-achievement-grid" id="gameAchievementGrid"></div>
-   <button type="button" class="game-progress-more" id="gameAchievementToggle" aria-controls="gameAchievementGrid" aria-expanded="false">Показать все достижения</button>
   </section>
+  <div class="game-progress-insights">
   <details class="game-progress-fold" id="gameProgressWeekFold">
    <summary class="game-progress-fold-heading"><span aria-hidden="true">📊</span><span id="gameProgressChartTitle">Последние 7 дней</span><span class="game-progress-fold-chevron" aria-hidden="true"></span></summary>
    <div class="game-progress-fold-content"><p id="gameProgressChartNote">Точность по завершённым играм. Пропуски — нет данных.</p><div class="game-progress-chart" id="gameProgressChart" role="img" aria-label="Результаты по дням"></div></div>
@@ -258,6 +259,7 @@
    <summary class="game-progress-fold-heading"><span aria-hidden="true">🕘</span><span id="gameProgressHistoryTitle">Последние игры</span><span class="game-progress-fold-chevron" aria-hidden="true"></span></summary>
    <div class="game-progress-fold-content"><div class="game-progress-history" id="gameProgressHistory"></div></div>
   </details>
+  </div>
   <p class="game-progress-footnote" id="gameProgressFootnote">Прогресс хранится на этом устройстве и для выбранного языка и категории прав.</p>
  </div>
 </dialog>
@@ -279,6 +281,8 @@
         <span class="gift-reveal-halo" aria-hidden="true"></span>
         <span class="gift-reveal-beam" aria-hidden="true"></span>
         <span class="gift-reveal-platform" aria-hidden="true"></span>
+        <span class="gift-reveal-backglow" aria-hidden="true"></span>
+        <span class="gift-reveal-open-ring" aria-hidden="true"></span>
         <span class="gift-reveal-number" id="gameGiftRevealNumber">01 / 03</span>
         <div class="gift-reveal-stars" aria-hidden="true">
           <i style="--x:-100px;--y:-80px;--r:-25deg;--delay:0ms">✦</i>
