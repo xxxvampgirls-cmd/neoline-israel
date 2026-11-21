@@ -56,7 +56,7 @@ ROAD = re.compile(
     r"traffic|driv(?:ing|er|ers)|road|highway|crash|accident|"
     r"speed(?:ing)?|speed gun|laser gun|radar|speed camera|dashcam|"
     r"collision|motorcycl|police car|"
-    r"дтп|авари|дорожн|водител|штраф|камера скорости",
+    r"дтп|авари|дорожн|водител|штраф|камера скорости|حادث سير|حوادث طرق|شرطة المرور",
     re.IGNORECASE)
 EXCLUDE = re.compile(
     r"פיגוע|מחבל|טרור|חמאס|עזה|איראן|צה\x22ל|"
@@ -65,7 +65,7 @@ EXCLUDE = re.compile(
     re.IGNORECASE)
 CRASH = re.compile(
     r"תאונ|התנגשות|התנגש|דריס|נדרס|התהפכ|"
-    r"crash|accident|collision|дтп|авари",
+    r"crash|accident|collision|дтп|авари|حادث سير|حوادث طرق|تصادم|دهس",
     re.IGNORECASE)
 RADARS = re.compile(
     r"רדאר|רדארים|מכמונ|ממל.ז|מד מהירות|מצלמ(?:ת|ות)? מהירות|"
@@ -121,7 +121,9 @@ def parse_feed(raw: bytes, source_id: str, now: dt.datetime) -> list[dict]:
             continue
         if not cutoff <= published <= now + dt.timedelta(hours=12):
             continue
-        if not relevant(title):
+        if not relevant(title) or not discovery.is_local(
+            title, "", CHANNEL_NAMES[source_id], known_official=True
+        ):
             continue
         items.append({
             "id": vid,
@@ -175,7 +177,9 @@ def refresh(now: dt.datetime | None = None) -> dict:
             or not cutoff <= when <= now):
             continue
         if source in CHANNEL_NAMES:
-            if not relevant(title):
+            if not relevant(title) or not discovery.is_local(
+                title, "", CHANNEL_NAMES[source], known_official=True
+            ):
                 continue
             publisher = CHANNEL_NAMES[source]
             channel_id = next((youtube_id for cid, youtube_id, _ in CHANNELS
