@@ -531,7 +531,9 @@ document.addEventListener("visibilitychange",()=>{
 setInterval(()=>{
  if(document.hidden)return;
  updateNewsFreshnessLabel();
- if(Date.now()-newsFetchAt>=30*60000)load();
+ // Retry stale snapshots every five minutes; healthy snapshots every 30.
+ const stale=!newsFeedReady||Date.now()-newsFeedDate>=3*3600000;
+ if(Date.now()-newsFetchAt>=(stale?5:30)*60000)load();
 },60000);
 window.addEventListener("online",()=>{if(!document.hidden&&Date.now()-newsFetchAt>5*60000)load()});
 localize();tabs();load();
