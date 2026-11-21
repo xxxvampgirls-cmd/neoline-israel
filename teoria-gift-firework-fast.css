@@ -176,11 +176,13 @@
  }
 }
 
-/* 2026-11-21: lower the three bonus cards beneath the chest, without changing
-   the original gift illustration, reveal animation or card styling. */
-#gameGiftDialog .gift-reveal-slots{
-  padding-top:32px;
+/* Prize name: place the gold title ribbon across the FRONT of the opened
+   NEOLINE box, as indicated in the mobile screenshot. Keep the three
+   blue reward tiles in their original position below the scene. */
+#gameGiftDialog .gift-reveal-float{
+  top:101px;
+  z-index:8;
 }
 @media(max-width:385px){
-  #gameGiftDialog .gift-reveal-slots{padding-top:24px}
+  #gameGiftDialog .gift-reveal-float{top:94px}
 }
