@@ -3313,31 +3313,50 @@ function showcaseFlightSubject(slide){
  // Image not downloaded yet: let the original CSS cutout animation run.
  return null;
 }
-function createShowroomFlightGhost(slide,subject,fromX,toX,stage){
+/* Zero-deep-clone viewport flight. Reparent the EXISTING foreground node
+ * into a lightweight fixed portal, then restore it after 840ms. Cloning
+ * nested SVG promo/road/news artwork each swipe forced heavy layout,
+ * image decode and GPU upload on budget Android phones. */
+function createShowroomFlightGhost(slide,subject,fromX,toX,stage,restoreList){
  if(!slide||!subject?.box?.width||!subject.box.height)return null;
  const {box,kind,element}=subject;
- let ghost;
+ const originParent=element.parentNode;
+ if(!originParent)return null;
+ const nextSibling=element.nextSibling;
+ const previousStyle=element.getAttribute('style');
+ const marker=document.createComment('neoline-showcase-flight-origin');
+ originParent.insertBefore(marker,element);
+ const restore=()=>{
+  if(marker.parentNode){
+   marker.parentNode.insertBefore(element,marker);
+   marker.remove();
+  }else if(originParent.isConnected){
+   originParent.insertBefore(element,nextSibling?.parentNode===originParent?nextSibling:null);
+  }
+  if(previousStyle===null)element.removeAttribute('style');
+  else element.setAttribute('style',previousStyle);
+ };
+ restoreList.push(restore);
+ let ghost,subjectParent;
  if(kind==='image'){
-  ghost=element.cloneNode(false);
-  ghost.removeAttribute('id');
-  ghost.removeAttribute('class');
-  ghost.removeAttribute('onerror');
-  ghost.style.cssText='position:absolute!important;display:block!important;box-sizing:border-box!important;'+
+  ghost=document.createElement('div');
+  ghost.style.cssText='position:absolute!important;box-sizing:border-box!important;'+
    'left:'+box.left+'px!important;top:'+box.top+'px!important;'+
    'width:'+box.width+'px!important;height:'+box.height+'px!important;'+
-   'max-width:none!important;max-height:none!important;'+
-   'object-fit:contain!important;margin:0!important;padding:0!important;'+
-   'opacity:1!important;mix-blend-mode:normal!important;'+
+   'overflow:visible!important;pointer-events:none!important;';
+  subjectParent=ghost;
+  element.style.cssText='position:absolute!important;inset:0!important;'+
+   'display:block!important;width:100%!important;height:100%!important;'+
+   'min-width:0!important;min-height:0!important;'+
+   'max-width:none!important;max-height:none!important;margin:0!important;'+
+   'object-fit:contain!important;opacity:1!important;mix-blend-mode:normal!important;'+
    'filter:drop-shadow(0 9px 9px #10385e52)!important;'+
-   'pointer-events:none!important;transform-origin:center center!important;';
+   'animation:none!important;transition:none!important;scale:1!important;'+
+   'pointer-events:none!important;';
  }else{
-  // Retain original CSS selectors and proportional coordinates for vector
-  // art without freezing the entire background into a moving screenshot.
+  // Keep only a cheap shell, not a duplicate SVG/HTML subtree.
   ghost=document.createElement('article');
   ghost.className=slide.className.replace(/\b(?:active|ad-exiting|ad-arriving|ad-move-forward|ad-move-backward|ad-zooming)\b/g,'').trim();
-  // Do not mark the moving clone "active": the carousel has an
-  // active:not(.ad-exiting){transform:none!important} rule, which blocks
-  // Web Animations and made CSS-drawn promo artwork simply pop in.
   ghost.classList.add('showroom-flight-copy');
   ghost.style.cssText='display:block!important;position:absolute!important;box-sizing:border-box!important;'+
    'left:'+box.left+'px!important;top:'+box.top+'px!important;'+
@@ -3352,30 +3371,23 @@ function createShowroomFlightGhost(slide,subject,fromX,toX,stage){
    'max-height:none!important;margin:0!important;padding:0!important;'+
    'border:0!important;border-radius:0!important;box-shadow:none!important;'+
    'background:transparent!important;overflow:visible!important;pointer-events:none!important;';
-  const art=element.cloneNode(true);
-  // Never duplicate an interactive control or an ID when cloning ad artwork.
-  if(art.hasAttribute('id'))art.removeAttribute('id');
-  art.querySelectorAll('[id],button,a').forEach(el=>{
-   if(el.matches('button,a')){el.remove();return}
-   el.removeAttribute('id');
-  });
-  if(art.classList.contains('theory-stage')){
-   [...art.children].forEach(child=>{
-    if(!child.matches('.theory-device,.theory-back-card,.theory-floating-award'))child.remove();
-   });
-   art.style.setProperty('background','transparent','important');
-   art.style.setProperty('border','0','important');
-   art.style.setProperty('box-shadow','none','important');
-  }
-  frame.appendChild(art);
   ghost.appendChild(frame);
+  subjectParent=frame;
+  element.style.setProperty('animation','none','important');
+  element.style.setProperty('transition','none','important');
+  if(element.classList.contains('theory-stage')){
+   element.style.setProperty('background','transparent','important');
+   element.style.setProperty('border','0','important');
+   element.style.setProperty('box-shadow','none','important');
+  }
  }
+ subjectParent.appendChild(element);
  ghost.setAttribute('aria-hidden','true');
  ghost.tabIndex=-1;
  stage.appendChild(ghost);
  return ghost.animate([
-  {transform:'translate3d('+fromX+'px,0,0)'},
-  {transform:'translate3d('+toX+'px,0,0)'}
+   {transform:'translate3d('+fromX+'px,0,0)'},
+   {transform:'translate3d('+toX+'px,0,0)'}
  ],{duration:840,easing:'cubic-bezier(.43,.08,.3,1)',fill:'both'});
 }
 function startShowroomViewportFlight(oldSlide,newSlide,outgoingSubject,direction){
@@ -3390,9 +3402,6 @@ function startShowroomViewportFlight(oldSlide,newSlide,outgoingSubject,direction
  viewport.style.cssText='position:fixed!important;inset:0!important;'+
   'height:100dvh!important;width:100vw!important;overflow:hidden!important;'+
   'z-index:75!important;pointer-events:none!important;contain:layout style paint;';
- // A second temporary selector scope ensures the cloned CSS artwork looks
- // exactly like it did inside the original carousel. Original node comes
- // earlier in DOM order, so getElementById keeps returning the real host.
  const scope=document.createElement('div');
  scope.id='showcaseSlides';
  scope.className='showroom-flight-scope';
@@ -3400,38 +3409,20 @@ function startShowroomViewportFlight(oldSlide,newSlide,outgoingSubject,direction
   'height:100%!important;pointer-events:none!important;overflow:visible!important;';
  viewport.appendChild(scope);
  document.body.appendChild(viewport);
- const hidden=[];
+ const restoreList=[];
  let closed=false;
- const hide=(subject)=>{
-  if(!subject)return;
-  const el=subject.element;
-  const old=el.style.getPropertyValue('visibility');
-  const priority=el.style.getPropertyPriority('visibility');
-  el.style.setProperty('visibility','hidden','important');
-  hidden.push({el,old,priority});
- };
- const maxWidth=Math.max(outgoing?.box?.width||0,incoming?.box?.width||0);
- const offset=window.innerWidth+maxWidth+80;
+ const offset=window.innerWidth+Math.max(outgoing?.box?.width||0,incoming?.box?.width||0)+80;
  const sign=direction==='ad-move-backward'?1:-1;
- if(outgoing){
-  const a=createShowroomFlightGhost(oldSlide,outgoing,0,sign*offset,scope);
-  if(a)hide(outgoing);
- }
- if(incoming){
-  const b=createShowroomFlightGhost(newSlide,incoming,-sign*offset,0,scope);
-  if(b)hide(incoming);
- }
- if(!scope.querySelector('.showroom-flight-copy')&&scope.childElementCount===0){viewport.remove();return}
+ if(outgoing)createShowroomFlightGhost(oldSlide,outgoing,0,sign*offset,scope,restoreList);
+ if(incoming)createShowroomFlightGhost(newSlide,incoming,-sign*offset,0,scope,restoreList);
+ if(!restoreList.length){viewport.remove();return}
  const timer=setTimeout(cleanup,910);
  function cleanup(){
   if(closed)return;
   closed=true;
   clearTimeout(timer);
-  for(const {el,old,priority} of hidden){
-   if(old)el.style.setProperty('visibility',old,priority);
-   else el.style.removeProperty('visibility');
-  }
   viewport.getAnimations({subtree:true}).forEach(a=>a.cancel());
+  for(const restore of restoreList)restore();
   viewport.remove();
   if(showroomGhostCleanup===cleanup)showroomGhostCleanup=null;
  }
