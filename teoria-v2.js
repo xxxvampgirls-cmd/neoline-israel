@@ -137,7 +137,14 @@ function updateAchievementFold(){
  button.hidden=grid.children.length<=2;
  grid.classList.toggle("is-expanded",achievementsExpanded);
  button.setAttribute("aria-expanded",String(achievementsExpanded));
- button.textContent=achievementsExpanded?c.lessBadges:c.moreBadges;
+ const shortLabels={
+  ru:["Все","Свернуть"],en:["All","Less"],
+  he:["הכל","פחות"],ar:["الكل","إخفاء"]
+ };
+ const pair=shortLabels[locale()]||shortLabels.ru;
+ button.textContent=pair[achievementsExpanded?1:0];
+ button.title=achievementsExpanded?c.lessBadges:c.moreBadges;
+ button.setAttribute("aria-label",button.title);
 }
 function drawProgress(){
  const copy=L[locale()]||L.ru;
