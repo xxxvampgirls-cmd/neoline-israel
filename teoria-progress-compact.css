@@ -1,0 +1,287 @@
+/* NEOLINE Theory — mobile-first compact "My progress" dialog, Nov 21.
+   The user's real stats, badges and history continue to come from teoria-v2.js. */
+.game-progress-dialog .game-progress-panel{
+ width:min(100%,660px);
+ padding:11px 18px 18px;
+}
+.game-progress-dialog .game-progress-head{
+ display:grid;grid-template-columns:46px minmax(0,1fr) 46px;
+ align-items:center;gap:8px;
+ min-height:53px;
+}
+.game-progress-dialog .game-progress-close{
+ width:43px;height:43px;border-radius:14px;font-size:23px;
+}
+.game-progress-dialog .game-progress-header-brand{
+ justify-self:center;text-align:center;min-width:0;
+ font-size:11px;letter-spacing:.09em;line-height:1.3;
+ color:#197ba6;
+}
+.game-progress-dialog .game-progress-gift{
+ position:relative;isolation:isolate;
+ width:46px;height:46px;justify-self:end;overflow:visible;
+ border:1px solid #aeddf1;border-radius:15px;
+ background:linear-gradient(140deg,#fff,#f1fbff);
+ box-shadow:0 3px 11px #0c81ad27,inset 0 1px #fff;
+ font-size:32px;line-height:1;cursor:pointer;
+ -webkit-tap-highlight-color:transparent;
+}
+.game-progress-dialog .game-progress-gift-emoji{
+ display:block;position:relative;z-index:2;
+ font-size:32px;line-height:1;
+ transform-origin:50% 74%;
+ filter:drop-shadow(0 2px 2px #a36c2755);
+ animation:neolineProgressGiftAlmostOpen 5.3s ease-in-out infinite;
+}
+.game-progress-dialog .game-progress-gift::before{
+ content:"";position:absolute;inset:-5px;z-index:0;pointer-events:none;
+ border-radius:19px;
+ background:radial-gradient(circle,#ffebafad,#e5faff00 72%);
+ opacity:.25;
+ animation:neolineProgressGiftHalo 5.3s ease-in-out infinite;
+}
+.game-progress-dialog .game-progress-gift::after{
+ content:"✦";position:absolute;z-index:3;right:-5px;top:-6px;
+ font:900 15px/1 Arial,sans-serif;color:#ffcb63;
+ text-shadow:0 0 7px #fff7c9;
+ pointer-events:none;opacity:0;
+ animation:neolineProgressGiftSpark 5.3s ease-in-out infinite;
+}
+@keyframes neolineProgressGiftAlmostOpen{
+ 0%,53%,100%{transform:translateY(0) rotate(0) scale(1)}
+ 59%{transform:translateY(-1px) rotate(-1.5deg)}
+ 64%{transform:translateY(0) rotate(1.8deg)}
+ 68%{transform:translateY(-2px) rotate(-2.3deg)}
+ 72%{transform:translateY(-1px) rotate(2.5deg)}
+ 75%{transform:translateY(-2px) rotate(-3deg)}
+ 78%{transform:translateY(-2px) rotate(3deg)}
+ 81%{transform:translateY(-1px) rotate(-3.1deg)}
+ 84%{transform:translateY(-2px) rotate(3.2deg)}
+ 87%{transform:translateY(0) rotate(-2deg)}
+ 91%{transform:translateY(-1px) rotate(1deg)}
+ 95%{transform:translateY(0) rotate(0)}
+}
+@keyframes neolineProgressGiftHalo{
+ 0%,54%,100%{opacity:.16;transform:scale(.95)}
+ 72%,87%{opacity:.83;transform:scale(1.1)}
+}
+@keyframes neolineProgressGiftSpark{
+ 0%,63%,98%,100%{opacity:0;transform:translateY(6px) scale(.55)}
+ 75%,87%{opacity:1;transform:translateY(-2px) scale(1)}
+}
+.game-progress-dialog .game-progress-gift:focus-visible,
+.game-progress-dialog .game-progress-close:focus-visible{
+ outline:3px solid #14a2d8;outline-offset:3px;
+}
+.game-progress-dialog .game-progress-headline{
+ margin:8px 0 10px;padding:10px 12px;gap:11px;
+ border-radius:17px;
+}
+.game-progress-dialog .game-progress-headline-icon{
+ flex:0 0 48px;width:48px;height:48px;
+ font-size:27px;border-radius:14px;
+}
+.game-progress-dialog .game-progress-headline h2{
+ margin:1px 0 2px;font-size:21px;line-height:1.13;
+}
+.game-progress-dialog .game-progress-kicker{font-size:9px;letter-spacing:.07em}
+.game-progress-dialog .game-progress-headline p{font-size:10px;line-height:1.3}
+.game-progress-dialog .game-progress-topstats{
+ gap:7px;grid-template-columns:repeat(4,minmax(0,1fr));
+}
+.game-progress-dialog .game-progress-topstats>div{
+ min-height:75px;gap:3px;padding:8px 4px;
+ border-radius:13px;box-shadow:0 3px 9px #176d9914;
+}
+.game-progress-dialog .game-progress-stat-icon{font-size:17px;line-height:1.05}
+.game-progress-dialog .game-progress-topstats strong{font-size:19px;line-height:1.1}
+.game-progress-dialog .game-progress-topstats>div>span:last-child{
+ font-size:9px;line-height:1.2;
+}
+.game-progress-dialog .game-progress-achievements{
+ max-width:600px;margin:14px auto 0;text-align:start;
+}
+.game-progress-dialog .game-progress-section-heading{
+ display:flex;justify-content:flex-start;align-items:center;
+ flex-wrap:nowrap;gap:7px;max-width:none;
+ margin:0 0 9px;padding:0 2px;
+}
+.game-progress-dialog .game-progress-section-heading h3{
+ flex:0 1 auto;min-width:0;margin:0;
+ color:#174f75;font-size:16px;line-height:1.25;
+}
+.game-progress-dialog .game-progress-badges-count{
+ flex:none;min-width:35px;height:23px;padding:1px 6px;
+ font-size:10px;
+}
+.game-progress-dialog .game-progress-more{
+ flex:0 0 auto;margin:0 0 0 auto;
+ width:auto;min-width:51px;max-width:108px;
+ min-height:32px;padding:5px 9px;gap:5px;
+ border-radius:11px;
+ font-size:10px;line-height:1.2;
+ box-shadow:0 2px 6px #1174a51a;
+}
+.game-progress-dialog .game-progress-more::after{
+ font-size:17px;
+}
+.game-progress-dialog .game-achievement-grid{
+ width:100%;max-width:none;gap:7px;
+ grid-template-columns:repeat(2,minmax(0,1fr));
+}
+.game-progress-dialog .game-achievement{
+ min-height:56px;gap:8px;padding:7px 9px;
+ border-radius:13px;
+ box-shadow:0 2px 7px #147ab214;
+}
+.game-progress-dialog .game-achievement__icon{
+ flex:0 0 35px;width:35px;height:35px;
+ font-size:20px;border-radius:11px;
+}
+.game-progress-dialog .game-achievement__text{min-width:0}
+.game-progress-dialog .game-achievement__text strong{
+ font-size:10px;line-height:1.25;overflow-wrap:anywhere;
+}
+.game-progress-dialog .game-achievement__text span{
+ font-size:9px;line-height:1.2;margin-top:2px;
+}
+.game-progress-dialog .game-progress-insights{
+ display:grid;grid-template-columns:repeat(2,minmax(0,1fr));
+ gap:8px;max-width:600px;width:100%;margin:10px auto 0;
+ align-items:start;
+}
+.game-progress-dialog .game-progress-insights>.game-progress-fold{
+ min-width:0;width:100%;max-width:none;margin:0;
+ border-radius:14px;box-shadow:0 2px 8px #146b9c17;
+}
+.game-progress-dialog .game-progress-insights>.game-progress-fold[open]{
+ grid-column:1/-1;
+}
+.game-progress-dialog .game-progress-fold-heading{
+ justify-content:center;min-height:51px;gap:6px;
+ padding:8px 9px;font-size:11px;line-height:1.22;
+ white-space:normal;letter-spacing:-.01em;
+}
+.game-progress-dialog .game-progress-fold-heading>span:nth-child(2){
+ flex:0 1 auto;min-width:0;
+}
+.game-progress-dialog .game-progress-fold-heading>span:first-child{
+ flex:none;font-size:16px;line-height:1;
+}
+.game-progress-dialog .game-progress-fold-chevron{
+ width:7px;height:7px;margin-inline-start:1px;
+}
+.game-progress-dialog .game-progress-fold[open] .game-progress-fold-heading{
+ justify-content:flex-start;
+ padding-inline:13px;
+}
+.game-progress-dialog .game-progress-fold-content{
+ padding:10px 10px 13px;
+}
+.game-progress-dialog .game-progress-fold-content>p{
+ margin:0 auto 9px;font-size:10px;
+}
+.game-progress-dialog .game-progress-chart .day__bar{height:73px}
+.game-progress-dialog .game-progress-history-item{padding:8px 10px}
+.game-progress-dialog .game-progress-footnote{
+ max-width:470px;margin:11px auto 0;
+ color:#7494a6;font-size:9px;line-height:1.35;
+ text-align:center;
+}
+/* Previously requested effects: bright blurred white halo and a gold ring
+   appear on EVERY box opening, before the reward card arrives. */
+#gameGiftDialog .gift-reveal-backglow{
+ position:absolute;z-index:2;left:50%;top:48%;
+ width:142px;height:120px;
+ transform:translate(-50%,-50%) scale(.78);
+ background:radial-gradient(ellipse,#ffffffff 0%,#fffefbd9 24%,#fff8ce7a 46%,transparent 73%);
+ border-radius:50%;filter:blur(14px);
+ opacity:.28;pointer-events:none;
+}
+#gameGiftDialog .gift-reveal-open-ring{
+ position:absolute;z-index:2;left:50%;top:56%;
+ width:28px;height:28px;box-sizing:border-box;
+ border:3px solid #fff5c2;border-radius:50%;
+ background:radial-gradient(circle,#fffdf1ae,transparent 70%);
+ box-shadow:0 0 12px #fff7cb,0 0 22px #ffce69a1;
+ transform:translate(-50%,-50%) scale(.1);
+ opacity:0;pointer-events:none;
+}
+#gameGiftDialog .gift-reveal[data-phase="shake"] .gift-reveal-backglow{
+ animation:neolineGiftBackCharge 2.34s ease-in forwards;
+}
+#gameGiftDialog .gift-reveal[data-phase="burst"] .gift-reveal-backglow{
+ animation:neolineGiftBackFlash .56s ease-out both;
+}
+#gameGiftDialog .gift-reveal[data-phase="burst"] .gift-reveal-open-ring{
+ animation:neolineGiftOpenPulse .53s cubic-bezier(.12,.58,.28,1) both;
+}
+#gameGiftDialog .gift-reveal[data-phase="revealed"] .gift-reveal-backglow{
+ opacity:.56;transform:translate(-50%,-50%) scale(1.07);
+}
+@keyframes neolineGiftBackCharge{
+ 0%{opacity:.24;transform:translate(-50%,-50%) scale(.72)}
+ 100%{opacity:.73;transform:translate(-50%,-50%) scale(1)}
+}
+@keyframes neolineGiftBackFlash{
+ 0%{opacity:.73;transform:translate(-50%,-50%) scale(.97)}
+ 36%{opacity:1;transform:translate(-50%,-50%) scale(1.32)}
+ 100%{opacity:.56;transform:translate(-50%,-50%) scale(1.07)}
+}
+@keyframes neolineGiftOpenPulse{
+ 0%{opacity:0;transform:translate(-50%,-50%) scale(.1)}
+ 13%{opacity:1}
+ 100%{opacity:0;transform:translate(-50%,-50%) scale(9)}
+}
+@media(max-width:720px){
+ .game-progress-dialog .game-progress-panel{
+  padding:9px max(12px,env(safe-area-inset-left))
+   calc(22px + env(safe-area-inset-bottom))
+   max(12px,env(safe-area-inset-right));
+ }
+ .game-progress-dialog .game-progress-head{
+  position:sticky;top:0;z-index:5;
+  margin:0 0 4px;padding:4px 0 6px;
+  background:#f8fcfff2;backdrop-filter:blur(8px);
+ }
+ .game-progress-dialog .game-progress-headline{
+  margin:6px 0 9px;padding:9px 10px;
+ }
+ .game-progress-dialog .game-progress-headline-icon{
+  flex-basis:46px;width:46px;height:46px;
+ }
+ .game-progress-dialog .game-progress-topstats>div{
+  min-height:70px;padding:7px 2px;
+ }
+ .game-progress-dialog .game-progress-topstats strong{font-size:18px}
+ .game-progress-dialog .game-progress-achievements{margin-top:13px}
+ .game-progress-dialog .game-achievement{padding:7px;gap:6px;min-height:55px}
+ .game-progress-dialog .game-achievement__icon{
+  flex-basis:32px;width:32px;height:32px;font-size:18px;
+ }
+ .game-progress-dialog .game-achievement__text strong{font-size:9.5px}
+ .game-progress-dialog .game-achievement__text span{font-size:9px}
+ .game-progress-dialog .game-progress-insights{margin-top:9px}
+ .game-progress-dialog .game-progress-fold-heading{
+  min-height:50px;padding:8px 7px;font-size:10.5px;gap:5px;
+ }
+}
+@media(max-width:365px){
+ .game-progress-dialog .game-progress-panel{padding-inline:10px}
+ .game-progress-dialog .game-progress-section-heading{gap:5px}
+ .game-progress-dialog .game-progress-section-heading h3{font-size:15px}
+ .game-progress-dialog .game-progress-more{
+  min-width:48px;padding:5px 7px;font-size:9px;
+ }
+ .game-progress-dialog .game-progress-badges-count{min-width:33px}
+ .game-progress-dialog .game-progress-fold-heading{font-size:10px;gap:3px}
+}
+@media(prefers-reduced-motion:reduce){
+ .game-progress-dialog .game-progress-gift-emoji,
+ .game-progress-dialog .game-progress-gift::before,
+ .game-progress-dialog .game-progress-gift::after,
+ #gameGiftDialog .gift-reveal-backglow,
+ #gameGiftDialog .gift-reveal-open-ring{
+  animation:none!important;
+ }
+}
