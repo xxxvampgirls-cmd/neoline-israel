@@ -161,12 +161,12 @@
  72%{opacity:.24}
  100%{opacity:0;transform:scale(4.4)}
 }
-/* Remove the old cone-shaped light from the box; rings and stars carry the
-   entire visual effect. */
+/* The previous cone beam stays hidden until the dual-ray layer starts;
+   this baseline must not override the new ray animation's opacity. */
 #gameGiftDialog .gift-reveal[data-phase="burst"] .gift-reveal-beam,
 #gameGiftDialog .gift-reveal[data-phase="revealed"] .gift-reveal-beam{
- opacity:0!important;
- animation:none!important;
+ opacity:0;
+ animation:none;
 }
 @media(prefers-reduced-motion:reduce){
  #gameGiftDialog .gift-reveal-open-ring,
@@ -290,7 +290,6 @@
 #gameGiftDialog .gift-reveal[data-phase="burst"] .gift-reveal-beam,
 #gameGiftDialog .gift-reveal[data-phase="revealed"] .gift-reveal-beam{
   animation:neolineRaysGoldBurst 1.2s cubic-bezier(.13,.62,.25,1) both!important;
-  opacity:1!important;
 }
 @keyframes neolineRaysBlueBurst{
   0%{opacity:.9;transform:translate(-50%,-50%) rotate(12deg) scale(1)}
