@@ -3375,7 +3375,7 @@ function createShowroomFlightGhost(slide,subject,fromX,toX,scope,restoreList){
    'max-width:none!important;max-height:none!important;margin:0!important;'+
    'object-fit:contain!important;opacity:1!important;mix-blend-mode:normal!important;'+
    'filter:drop-shadow(0 8px 8px #10385e44)!important;'+
-   'animation:none!important;transition:none!important;scale:1!important;'+
+   'animation:none!important;transition:none!important;scale:.965!important;'+
    'pointer-events:none!important;';
  }else{
   const ghost=document.createElement('article');
@@ -3398,7 +3398,7 @@ function createShowroomFlightGhost(slide,subject,fromX,toX,scope,restoreList){
   parent=frame;
   element.style.setProperty('animation','none','important');
   element.style.setProperty('transition','none','important');
-  element.style.setProperty('scale','1','important');
+  element.style.setProperty('scale','.965','important');
   if(element.classList.contains('theory-stage')){
    element.style.setProperty('background','transparent','important');
    element.style.setProperty('border','0','important');
@@ -3414,10 +3414,10 @@ function createShowroomFlightGhost(slide,subject,fromX,toX,scope,restoreList){
 }
 function startShowroomViewportFlight(oldSlide,newSlide,outgoingSubject,direction,incomingSnapshot){
  clearShowroomGhosts();
- if(window.matchMedia('(prefers-reduced-motion: reduce)').matches)return;
+ if(window.matchMedia('(prefers-reduced-motion: reduce)').matches)return false;
  const outgoing=outgoingSubject||showcaseFlightSubject(oldSlide);
  const incoming=incomingSnapshot||showcaseFlightSubject(newSlide);
- if(!outgoing&&!incoming)return;
+ if(!outgoing&&!incoming)return false;
  const viewport=document.createElement('div');
  viewport.className='neoline-showroom-viewport-flight';
  viewport.setAttribute('aria-hidden','true');
@@ -3437,7 +3437,7 @@ function startShowroomViewportFlight(oldSlide,newSlide,outgoingSubject,direction
  const sign=direction==='ad-move-backward'?1:-1;
  if(outgoing)createShowroomFlightGhost(oldSlide,outgoing,0,sign*offset,scope,restoreList);
  if(incoming)createShowroomFlightGhost(newSlide,incoming,-sign*offset,0,scope,restoreList);
- if(!restoreList.length){viewport.remove();return}
+ if(!restoreList.length){viewport.remove();return false}
  const timer=setTimeout(cleanup,900);
  function cleanup(){
   if(closed)return;
@@ -3449,8 +3449,15 @@ function startShowroomViewportFlight(oldSlide,newSlide,outgoingSubject,direction
   for(const restore of restoreList)restore();
   viewport.remove();
   if(showroomGhostCleanup===cleanup)showroomGhostCleanup=null;
+  // Start the original gentle 7.6s zoom only once the flight has landed.
+  // Before this, portal styles explicitly fix the scale to its start value;
+  // setting ad-zooming early skipped the transition and made it pop larger.
+  if(newSlide.classList.contains('active')&&!newSlide.classList.contains('ad-exiting')){
+   startShowcaseZoom(newSlide);
+  }
  }
  showroomGhostCleanup=cleanup;
+ return true;
 }
 
 /* Change the slide content while its picture backplate stays stationary.
@@ -3491,8 +3498,8 @@ function revealShowcaseSlide(index){
  if(!reduced)incoming.classList.add('ad-arriving',direction);
  // Animate foreground photos in a viewport-level overlay so the transition
  // remains visible until each photo passes the phone screen edge.
- startShowroomViewportFlight(previous,incoming,outgoingSubject,direction,incomingSubject);
- startShowcaseZoom(incoming);
+ const flightStarted=startShowroomViewportFlight(previous,incoming,outgoingSubject,direction,incomingSubject);
+ if(!flightStarted)startShowcaseZoom(incoming);
  slideIndex=next;
  // Prime the following image before its transition, without eagerly loading all 11 slides.
  warmShowcaseNextPhoto(next);
