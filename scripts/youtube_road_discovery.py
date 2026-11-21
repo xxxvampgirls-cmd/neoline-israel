@@ -17,23 +17,29 @@ import urllib.request
 UTC = dt.timezone.utc
 VIDEO_ID = re.compile(r"^[A-Za-z0-9_-]{11}$")
 CHANNEL_ID = re.compile(r"^UC[A-Za-z0-9_-]{22}$")
+# Search across all four NEOLINE languages, rotating no country-generic clips.
+# YouTube regionCode=IL is availability, not filming-location verification.
 SEARCH_TERMS = (
     "תאונת דרכים מצלמת רכב ישראל",
-    "תאונות דרכים תיעוד מצלמות כביש ישראל",
-    "תאונת דרכים פגיעה בהולך רגל בישראל",
-    "מצלמת דרך תאונה כמעט תאונה ישראל",
-    "נהגים מצחיקים בכבישי ישראל",
-    "נהיגה הזויה בכבישי ישראל תיעוד",
-    "dashcam accidents Israel",
-    "מצלמת רכב נהגים משתוללים בישראל",
-    "רוכב אופנוע תאונה תיעוד ישראל",
-    "כביש 6 תאונה מצלמת רכב",
-    "מצלמות מהירות רדאר משטרת התנועה ישראל",
     "חדשות 13 תאונות דרכים תיעוד",
-    "כאן חדשות תאונות דרכים",
-    "ערוץ 14 תאונות דרכים מצלמת רכב",
-    "כבישים בישראל כמעט תאונה סרטון",
-    "תאונה מצחיקה מצלמת רכב בישראל",
+    "כאן חדשות תאונת דרכים כתב",
+    "תיעוד תאונה כביש 6 ישראל",
+    "משטרת התנועה תאונות דרכים ישראל",
+    "ДТП Израиль видео с регистратора",
+    "авария Израиль дорожная полиция репортаж",
+    "авария Тель Авив Хайфа видео",
+    "новости Израиля дорожные аварии видео",
+    "дорожные происшествия Израиль видео очевидцев",
+    "Israel traffic accident dashcam report",
+    "Israel road crash news footage",
+    "Israel police traffic incident video",
+    "Israel highway accident video report",
+    "Israeli road safety cameras accident",
+    "حوادث طرق إسرائيل فيديو",
+    "حادث سير في إسرائيل تقرير",
+    "حادث طريق تل أبيب فيديو",
+    "شرطة المرور إسرائيل حادث سير",
+    "حادث سير حيفا القدس فيديو",
 )
 ROAD = re.compile(
     r"תאונ|נדרס|דריס|התנגש|התנגשות|תאונות|התהפכ|פגע בהולך|פגעה בהולך|"
@@ -42,7 +48,8 @@ ROAD = re.compile(
     r"רדאר|לייזר|מצלמות מהירות|מכמונ|אכיפת|"
     r"dash.?cam|driv(?:ing|er)|traffic|road|car crash|speed camera|radar|"
     r"collision|accident|motorcyc|pedestrian|highway|"
-    r"дтп|авари|водител|дорог|видеорегистратор|наезд|радар",
+    r"дтп|авари|водител|дорог|видеорегистратор|наезд|радар|"
+    r"حادث سير|حوادث سير|حوادث طرق|تصادم|دهس|شرطة المرور|طريق|سيارة|كاميرا سرعة",
     re.I)
 ISRAEL = re.compile(
     r"ישראל|ישראלי|בישראל|בארץ|כביש\s*\d{1,3}|"
@@ -52,7 +59,8 @@ ISRAEL = re.compile(
     r"צומת גלילות|כביש החוף|השרון|בשומרון|"
     r"\bisrael\b|\bisraeli\b|\btel[ -]?aviv\b|\bhaifa\b|"
     r"\bjerusalem\b|\bbeersheba\b|\bnetanya\b|"
-    r"израил|тель[ -]?авив|иерусалим|хайфа",
+    r"израил|тель[ -]?авив|иерусалим|хайфа|"
+    r"إسرائيل|اسرائيل|تل أبيب|تل ابيب|حيفا|القدس|بئر السبع",
     re.I)
 FOREIGN = re.compile(
     r"באמריקה|בארה.ב|בארצות הברית|באירופה|בברזיל|בסין|ברוסיה|"
@@ -64,12 +72,12 @@ FOREIGN = re.compile(
 EXCLUDE = re.compile(
     r"פיגוע|מחבל|טרור|חמאס|עזה|איראן|צה.ל|"
     r"terror|missile|rocket attack|war footage|gaza|hamas|"
-    r"теракт|террор|ракетн|взрыв на войне",
+    r"теракт|террор|ракетн|взрыв на войне|هجوم إرهابي|صاروخ|حماس",
     re.I)
 INCIDENT = re.compile(
     r"תאונ|דריס|נדרס|התנגש|התנגשות|התהפכ|פגע בהולך|"
     r"crash|collision|accident|hit.and.run|"
-    r"дтп|авари|наезд", re.I)
+    r"дтп|авاري|авари|наезд|حادث سير|حوادث طرق|تصادم|دهس", re.I)
 DASHCAM = re.compile(
     r"מצלמת רכב|מצלמת דרך|מצלמת דשבורד|מצלמות רכב|"
     r"תיעוד מהכביש|דאשקאם|"
@@ -79,7 +87,7 @@ FUNNY = re.compile(
     r"מצחיק|מצחיקים|הזוי|פדיחה|כמעט תאונה|כמעט התנגש|"
     r"נהגים גרועים|נהג הזוי|שטויות בכביש|"
     r"funny|fails?|idiots in cars|crazy drivers|"
-    r"прикол|смешн|нелеп|курьез", re.I)
+    r"прикол|смешн|нелеп|курьез|قيادة متهورة", re.I)
 RADAR = re.compile(
     r"רדאר|מכמונ|ממל.ז|מצלמות מהירות|אקדח מהירות|"
     r"מד מהירות|אכיפת מהירות|"
@@ -99,7 +107,7 @@ PRODUCT_ONLY = re.compile(
 POLICE = re.compile(
     r"משטר|שוטר|דוח|דו.ח|אכיפ|קנס|"
     r"police|traffic enforc|fine|speeding ticket|"
-    r"полици|штраф|гибдд", re.I)
+    r"полици|штраф|гибдд|شرطة المرور|الشرطة", re.I)
 KNOWN_LOCAL_CHANNELS = re.compile(
     r"חדשות 13|כאן חדשות|חדשות 12|ערוץ 14|עכשיו 14|ynet|mako|"
     r"news 13|israel police|משטרת ישראל|חדשות 14|n12", re.I)
@@ -239,7 +247,7 @@ def _http_json(endpoint: str, params: dict[str, str | int], api_key: str) -> dic
 
 
 def via_data_api(now: dt.datetime, official_ids: dict[str, str],
-                 max_queries: int = 16) -> list[dict]:
+                 max_queries: int = 20) -> list[dict]:
     """Use real video publish dates and embeddability from videos.list."""
     key = os.environ.get("YOUTUBE_API_KEY", "").strip()
     if not key:
@@ -364,6 +372,8 @@ def self_test() -> None:
     assert not is_local("מבחן רכב חדש בישראל")
     assert is_local("נהיגה הזויה בכבישי ישראל")
     assert is_local("תאונה בכביש 6 מצלמת רכב")
+    assert is_local("حادث سير في تل أبيب إسرائيل فيديو")
+    assert primary_category("حادث سير في حيفا إسرائيل") == "accidents"
     assert _published_date_from_ytdlp({"upload_date": "20261118"}) == (
         dt.datetime(2026, 11, 18, tzinfo=UTC))
     print("Community YouTube video geography, 30-day, IDs and category checks passed")
