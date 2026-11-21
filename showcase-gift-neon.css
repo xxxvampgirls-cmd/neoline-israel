@@ -125,7 +125,11 @@
  filter:drop-shadow(0 1px 5px #03111e);
 }
 #showcaseSlides .featured-slide--promo-gift .giftad-front-logo img{
- display:block;width:100%;height:auto;
+ display:block!important;position:relative!important;
+ width:100%!important;height:auto!important;
+ max-width:100%!important;max-height:none!important;
+ object-fit:contain!important;margin:0!important;
+ mix-blend-mode:normal!important;
  filter:brightness(0) invert(1) drop-shadow(0 0 4px #ffffff4d)!important;
  opacity:.97;
 }
