@@ -1,5 +1,5 @@
 {
-  "attempted": "2026-11-21T19:22:52.285101Z",
+  "attempted": "2026-11-21T19:32:34.377036Z",
   "feeds": {
     "Walla · Авто": 30,
     "Walla · Безопасность": 30,
@@ -35,8 +35,8 @@
   },
   "facebook": {},
   "facebookState": "not_configured",
-  "new": 28,
-  "retained": 260,
+  "new": 20,
+  "retained": 261,
   "discardedGoogleLinks": 0,
   "errors": {
     "The Times of Israel": "HTTPError: 403 Client Error: Forbidden for url: https://www.timesofisrael.com/feed/",
@@ -55,7 +55,7 @@
     "Маген Давид Адом · ДТП · Telegram": 59,
     "Ихуд Ацала · Telegram": 65,
     "Maariv": 26,
-    "Arutz Sheva · Israel National News": 11,
+    "Arutz Sheva · Israel National News": 12,
     "Wheel · Автоновости": 5,
     "News08": 15,
     "Ynet": 4,
