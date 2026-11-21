@@ -22,6 +22,7 @@ CHANNELS = [
     # Source-linked, public Israeli publishers. No login or private chats.
     ("Минтранс Израиля · Telegram", "Transport_Il"),
     ("Calcalist · Telegram", "calcalist"),
+    ("Маген Давид Адом · ДТП · Telegram", "mdaisrael"),
 ]
 # Keep non-driving stories (including wartime vehicle mentions) out of the auto feed.
 UNRELATED = (
