@@ -1,9 +1,10 @@
 {
   "version": 1,
   "retentionDays": 30,
-  "updated": "2026-11-20T18:00:00Z",
-  "status": "verified_editorial_seed",
-  "sourceCount": 0,
+  "updated": "2026-11-21T12:05:16Z",
+  "status": "ok",
+  "sourceCount": 6,
+  "searchUpdated": "2026-11-21T12:05:16Z",
   "sources": [
     {
       "id": "news13",
@@ -23,18 +24,60 @@
   ],
   "items": [
     {
-      "id": "d_yErBbVf28",
-      "title": "נהגת נתפסה מתפללת וקוראת מהסידור בנהיגה",
-      "date": "2026-11-16T00:00:00Z",
+      "id": "V4EVtjnCCKE",
+      "title": "במבצע אכיפה נרחב: המשטרה מבשרת לנהגים שקיבלו קנס - ב-SMS",
+      "date": "2026-11-20T06:53:38Z",
+      "source": "news13",
+      "publisher": "חדשות 13",
+      "category": "police",
+      "url": "https://www.youtube.com/watch?v=V4EVtjnCCKE",
+      "tags": [
+        "police"
+      ],
+      "channelId": "UCvQmPpU20hw1Trss_CVwaew"
+    },
+    {
+      "id": "xatwzz087Uo",
+      "title": "שב\"חים מאחורי דופן כפולה ברכב מסחרי",
+      "date": "2026-11-19T09:45:12Z",
       "source": "police",
       "publisher": "משטרת ישראל",
       "category": "police",
-      "url": "https://www.youtube.com/watch?v=d_yErBbVf28"
+      "url": "https://www.youtube.com/watch?v=xatwzz087Uo",
+      "tags": [
+        "police"
+      ],
+      "channelId": "UCrwyHUb4iIrpknhP6MTvnww"
+    },
+    {
+      "id": "GF-oOQ52dxE",
+      "title": "גנב טרקטורון מחצר בית פרטי בנתיבות ונתפס",
+      "date": "2026-11-18T09:33:12Z",
+      "source": "police",
+      "publisher": "משטרת ישראל",
+      "category": "police",
+      "url": "https://www.youtube.com/watch?v=GF-oOQ52dxE",
+      "tags": [
+        "police"
+      ],
+      "channelId": "UCrwyHUb4iIrpknhP6MTvnww"
+    },
+    {
+      "id": "d_yErBbVf28",
+      "title": "נהגת נתפסה מתפללת וקוראת מהסידור בנהיגה",
+      "date": "2026-11-16T11:02:55Z",
+      "source": "police",
+      "publisher": "משטרת ישראל",
+      "category": "police",
+      "url": "https://www.youtube.com/watch?v=d_yErBbVf28",
+      "tags": [
+        "police"
+      ],
+      "channelId": "UCrwyHUb4iIrpknhP6MTvnww"
     },
     {
       "id": "T4DCog8t0c8",
       "title": "ג'יפ משטרתי ממוגן נסע באדום - והתנגש ברכב מנהלת בית ספר שנהרגה",
-      "date": "2026-11-14T00:00:00Z",
       "source": "youtube",
       "publisher": "ynet",
       "channelId": "UCpSSzrovhI4fA2PQNItecUA",
@@ -42,37 +85,62 @@
       "category": "accidents",
       "tags": [
         "accidents",
-        "dashcam",
         "police"
       ],
+      "date": "2026-11-14T00:00:00Z",
       "url": "https://www.youtube.com/watch?v=T4DCog8t0c8"
     },
     {
       "id": "W-DCMoG3-L0",
       "title": "רחפני המשטרה נגד פורעי החוק בכבישים",
-      "date": "2026-11-10T00:00:00Z",
+      "date": "2026-11-10T14:18:20Z",
       "source": "police",
       "publisher": "משטרת ישראל",
       "category": "police",
-      "url": "https://www.youtube.com/watch?v=W-DCMoG3-L0"
+      "url": "https://www.youtube.com/watch?v=W-DCMoG3-L0",
+      "tags": [
+        "police"
+      ],
+      "channelId": "UCrwyHUb4iIrpknhP6MTvnww"
     },
     {
       "id": "feYlQtGtGGc",
       "title": "העיניים בטלפון ולא בכביש = סכנה ⚠️",
-      "date": "2026-11-03T00:00:00Z",
+      "date": "2026-11-03T12:45:00Z",
       "source": "police",
       "publisher": "משטרת ישראל",
       "category": "police",
-      "url": "https://www.youtube.com/watch?v=feYlQtGtGGc"
+      "url": "https://www.youtube.com/watch?v=feYlQtGtGGc",
+      "tags": [
+        "police"
+      ],
+      "channelId": "UCrwyHUb4iIrpknhP6MTvnww"
     },
     {
       "id": "kPT-fpEeQ3k",
       "title": "מסר חשוב לכל אדם שעולה על ההגה",
-      "date": "2026-11-01T00:00:00Z",
+      "date": "2026-11-01T09:08:22Z",
       "source": "police",
       "publisher": "משטרת ישראל",
       "category": "police",
-      "url": "https://www.youtube.com/watch?v=kPT-fpEeQ3k"
+      "url": "https://www.youtube.com/watch?v=kPT-fpEeQ3k",
+      "tags": [
+        "police"
+      ],
+      "channelId": "UCrwyHUb4iIrpknhP6MTvnww"
+    },
+    {
+      "id": "KYeButZCIEA",
+      "title": "משטובות וליקויים מסוכנים | אכיפה בכבישי בנימין",
+      "date": "2026-10-25T08:26:56Z",
+      "source": "police",
+      "publisher": "משטרת ישראל",
+      "category": "police",
+      "url": "https://www.youtube.com/watch?v=KYeButZCIEA",
+      "tags": [
+        "police"
+      ],
+      "channelId": "UCrwyHUb4iIrpknhP6MTvnww"
     }
   ]
 }
