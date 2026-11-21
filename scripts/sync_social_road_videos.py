@@ -131,7 +131,7 @@ def extract(html, handle, publisher, cutoff, now):
         candidates.extend(external_links(wrap))
         for platform,url in candidates:
             # Dedupe by original video identity, not by a re-shared news title.
-            uid=hashlib.sha256(url.split("?")[0].encode("utf-8")).hexdigest()[:20]
+            uid=hashlib.sha256(url.encode("utf-8")).hexdigest()[:20]
             items.append({
                 "id":uid,"title":title,"publisher":publisher,"platform":platform,
                 "url":url,"sourcePost":post_url,"sourceChannel":handle,
@@ -177,7 +177,8 @@ def refresh(now=None,session=None):
         except (requests.RequestException,ValueError) as err:
             errors[handle]=type(err).__name__
     items=sorted(saved.values(),key=lambda row:row["date"],reverse=True)[:MAX_ITEMS]
-    result={"version":1,"retentionDays":30,"updated":iso(now),
+    result={"version":1,"retentionDays":30,"updated":iso(now) if stats else previous.get("updated",iso(now)),
+            "status":"ok" if stats else "sources_unavailable",
             "sourceTimeMeaning":"Telegram post timestamp; may differ from original external video upload",
             "sources":stats,"errors":errors,"new":new,"items":items}
     OUTPUT.parent.mkdir(parents=True,exist_ok=True)
