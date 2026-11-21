@@ -9,6 +9,7 @@ on:
       - 'scripts/sync_news.py'
       - 'scripts/sync_road_videos.py'
       - 'scripts/youtube_road_discovery.py'
+      - 'scripts/sync_social_road_videos.py'
       - 'scripts/verified_auto_news.json'
       - 'scripts/telegram_news.py'
       - 'scripts/facebook_news.py'
@@ -77,6 +78,13 @@ jobs:
         env:
           YOUTUBE_API_KEY: ${{ secrets.YOUTUBE_API_KEY }}
         run: python scripts/sync_road_videos.py
+      # Social links are discovered from dated public posts; failure of a
+      # third-party social site must not block independently refreshed news.
+      - name: Test public social video identity and four-language road filters
+        run: python scripts/sync_social_road_videos.py --self-test
+      - name: Collect public Telegram video and cross-platform source links
+        continue-on-error: true
+        run: python scripts/sync_social_road_videos.py
       - name: Build compressed 16:9 image thumbnails (licensed photos; optional paid AI)
         env:
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
