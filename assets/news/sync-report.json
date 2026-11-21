@@ -1,5 +1,5 @@
 {
-  "attempted": "2026-11-21T16:00:24.018720Z",
+  "attempted": "2026-11-21T16:04:38.127518Z",
   "feeds": {
     "Walla · Авто": 30,
     "Walla · Безопасность": 30,
@@ -7,7 +7,6 @@
     "Walla · Все автомобили": 30,
     "Walla · Новости Израиля": 30,
     "The Jerusalem Post": 23,
-    "Arutz Sheva · Israel National News": 10,
     "Wheel · Автоновости": 10,
     "TheCar · Автоновости": 100,
     "Мицу · Камеры скорости": 2,
@@ -35,13 +34,14 @@
   },
   "facebook": {},
   "facebookState": "not_configured",
-  "new": 78,
+  "new": 20,
   "retained": 251,
-  "imageCount": 193,
+  "imageCount": 251,
   "deletedImages": 0,
   "discardedGoogleLinks": 0,
   "errors": {
     "The Times of Israel": "HTTPError: 403 Client Error: Forbidden for url: https://www.timesofisrael.com/feed/",
+    "Arutz Sheva · Israel National News": "ValueError: Feed has no entries",
     "Davar · Национальные новости": "HTTPError: 403 Client Error: Forbidden for url: https://www.davar1.co.il/feed/",
     "Israel Hayom": "HTTPError: 403 Client Error: Forbidden for url: https://www.israelhayom.co.il/rss.xml",
     "Минтранс Израиля · Новости": "HTTPError: 403 Client Error: Forbidden for url: https://www.gov.il/he/api/NewsApi/rss/48eaee91-0c97-4ef3-b364-5",
