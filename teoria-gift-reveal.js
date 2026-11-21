@@ -183,7 +183,7 @@
   after(()=>{
    if(token!==sequence||!dialog.open)return;
    setPhase("burst");
-  },2390);
+  },2350);
   after(()=>{
    if(token!==sequence||!dialog.open)return;
    fillCard(index);
