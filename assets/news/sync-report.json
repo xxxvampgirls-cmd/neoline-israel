@@ -1,5 +1,5 @@
 {
-  "attempted": "2026-11-21T12:04:17.997973Z",
+  "attempted": "2026-11-21T12:05:42.761643Z",
   "feeds": {
     "Walla · Авто": 30,
     "Walla · Безопасность": 30,
@@ -32,10 +32,10 @@
   },
   "facebook": {},
   "facebookState": "not_configured",
-  "new": 28,
+  "new": 21,
   "retained": 188,
-  "imageCount": 181,
-  "deletedImages": 1,
+  "imageCount": 188,
+  "deletedImages": 0,
   "discardedGoogleLinks": 0,
   "errors": {
     "The Times of Israel": "HTTPError: 403 Client Error: Forbidden for url: https://www.timesofisrael.com/feed/",

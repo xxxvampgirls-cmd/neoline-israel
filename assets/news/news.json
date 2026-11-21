@@ -2,7 +2,7 @@
   "version": 1,
   "retentionDays": 30,
   "lawsRetentionMonths": 6,
-  "updated": "2026-11-21T12:04:17.997973Z",
+  "updated": "2026-11-21T12:05:42.761643Z",
   "items": [
     {
       "id": "1c44bbb76c009ed6af98",
@@ -4325,12 +4325,7 @@
       "title": "Камеры скорости штрафуют за небольшие превышения. На шоссе №6 появилось автоматическое взвешивание грузовиков",
       "summary": "По сообщению Calcalist, часть стационарных камер уже фиксирует небольшое превышение скорости. Полиция также ввела на шоссе №6 систему проверки веса грузовиков без предварительной остановки.",
       "translated": true,
-      "image": "./assets/news/images/7cec5fc092180f21c267.webp",
-      "imageType": "licensedPhoto",
-      "imageCredit": {
-        "text": "Erkki Voutilainen · CC BY 4.0",
-        "url": "https://commons.wikimedia.org/wiki/File:Police_patrolling_1950_(JOKAMT2Yh01-2).tif"
-      }
+      "image": "./assets/news/images/7cec5fc092180f21c267.webp"
     },
     {
       "id": "4b767b7917a133212e28",
@@ -5489,12 +5484,7 @@
       "title": "Минтранс подписал изменения для прав B и C1: электрофургоны до 4,25 тонны",
       "summary": "Согласно сообщению Минтранса от 9 ноября, водителям с правами B не менее двух лет предусмотрена возможность управлять некоторыми разрешёнными электрическими коммерческими автомобилями до 4,25 т при соблюдении условий. Подписание документа не означает автоматического вступления всех положений в силу.",
       "translated": true,
-      "image": "./assets/news/images/405054d69e7896d1263c.webp",
-      "imageType": "licensedPhoto",
-      "imageCredit": {
-        "text": "Wikimedia Commons · CC BY 4.0",
-        "url": "https://commons.wikimedia.org/wiki/File:Close_up_of_Carmen_Rupe_pedestrian_crossing_light.jpg"
-      }
+      "image": "./assets/news/images/405054d69e7896d1263c.webp"
     },
     {
       "id": "27c8bc4518bd9c38e651",
@@ -6106,12 +6096,7 @@
       "title": "В Израиле проводят бесплатную проверку автомобилей и мотоциклов перед зимой",
       "summary": "Национальное управление безопасности дорожного движения сообщает о бесплатных проверках тормозов, шин, света, дворников и рулевого управления в участвующих сервисах. Акция запланирована с 1 ноября 2026 до 1 января 2027 года; запись и наличие услуги необходимо уточнять у сервиса.",
       "translated": true,
-      "image": "./assets/news/images/043c07748b86319ae3ba.webp",
-      "imageType": "licensedPhoto",
-      "imageCredit": {
-        "text": "Ivan Radic · CC BY 2.0",
-        "url": "https://commons.wikimedia.org/wiki/File:Close-up_of_an_electric_car_charging._Traffic_lights_in_a_blurry_background.jpg"
-      }
+      "image": "./assets/news/images/043c07748b86319ae3ba.webp"
     },
     {
       "id": "ea45b3fcdeeaf64559c3",
@@ -6222,12 +6207,7 @@
       "title": "Полиция планирует установить около 200 дорожных камер; штрафы начнут отправлять по SMS",
       "summary": "Davar сообщает о планах полиции развернуть примерно 200 новых камер. На 16 ноября был намечен пилот отправки уведомлений о штрафах владельцам машин по SMS; начало работы и масштабы внедрения требуют отдельного подтверждения.",
       "translated": true,
-      "image": "./assets/news/images/494a55a00ec511c28008.webp",
-      "imageType": "licensedPhoto",
-      "imageCredit": {
-        "text": "Marek Ślusarczyk (Tupungato) Photo portfolio · CC BY 3.0",
-        "url": "https://commons.wikimedia.org/wiki/File:10_US_Highway_speed_limit_sign_55_MPH_-_Garfield_County,_Colorado.jpg"
-      }
+      "image": "./assets/news/images/494a55a00ec511c28008.webp"
     },
     {
       "id": "69b2308b30c9f6dc846d",
@@ -6300,12 +6280,7 @@
       "title": "Мотоциклиста задержали после погони: полиция зафиксировала 239 км/ч на шоссе №70",
       "summary": "По данным Arutz Sheva, 30-летний мотоциклист из Назарета попытался скрыться от полиции. В поиске участвовал полицейский вертолёт; после задержания мотоцикл изъяли для расследования.",
       "translated": true,
-      "image": "./assets/news/images/c0cd2d5f07618f67dc83.webp",
-      "imageType": "licensedPhoto",
-      "imageCredit": {
-        "text": "Marek Ślusarczyk (Tupungato) Photo portfolio · CC BY 3.0",
-        "url": "https://commons.wikimedia.org/wiki/File:10_US_Highway_speed_limit_sign_55_MPH_-_Garfield_County,_Colorado.jpg"
-      }
+      "image": "./assets/news/images/c0cd2d5f07618f67dc83.webp"
     },
     {
       "id": "79df53609138c1864198",
@@ -6649,12 +6624,7 @@
       "title": "Кнессет одобрил новые правила импорта техники для автоспорта",
       "summary": "7 июля профильный комитет одобрил изменения правил ввоза спортивной соревновательной техники и запчастей для автоспорта. Изменения касаются специализированных соревнований, а не обычного использования автомобилей на дорогах.",
       "translated": true,
-      "image": "./assets/news/images/9ce7f097f16e763c9cea.webp",
-      "imageType": "licensedPhoto",
-      "imageCredit": {
-        "text": "Wikimedia Commons · CC BY 4.0",
-        "url": "https://commons.wikimedia.org/wiki/File:Close_up_of_Carmen_Rupe_pedestrian_crossing_light.jpg"
-      }
+      "image": "./assets/news/images/9ce7f097f16e763c9cea.webp"
     },
     {
       "id": "8da0d7e6aaf29974e4b9",
@@ -6764,12 +6734,7 @@
       "title": "Кнессет одобрил изменения системы штрафных баллов за нарушения ПДД",
       "summary": "22 июня экономический комитет Кнессета утвердил обновлённые правила начисления баллов за административные нарушения. Для менее серьёзных проступков предусмотрено смягчение, а за опасные нарушения, включая проезд на красный и телефон за рулём, — более строгие баллы. Позднее условия применения могли уточняться.",
       "translated": true,
-      "image": "./assets/news/images/821987599de17e7c0751.webp",
-      "imageType": "licensedPhoto",
-      "imageCredit": {
-        "text": "Wikimedia Commons · CC BY 4.0",
-        "url": "https://commons.wikimedia.org/wiki/File:Close_up_of_Carmen_Rupe_pedestrian_crossing_light.jpg"
-      }
+      "image": "./assets/news/images/821987599de17e7c0751.webp"
     },
     {
       "id": "2c4584c5e877e25e077e",
@@ -6879,12 +6844,7 @@
       "title": "3 июня комитет Кнессета отложил реформу штрафных баллов и потребовал послаблений",
       "summary": "3 июня экономический комитет не утвердил предложенную редакцию правил начисления баллов и потребовал пересмотра в течение двух недель. Это исторический этап обсуждения: 22 июня комитет впоследствии одобрил изменённую редакцию.",
       "translated": true,
-      "image": "./assets/news/images/84399e428bc60574368d.webp",
-      "imageType": "licensedPhoto",
-      "imageCredit": {
-        "text": "Wikimedia Commons · CC BY 4.0",
-        "url": "https://commons.wikimedia.org/wiki/File:Close_up_of_Carmen_Rupe_pedestrian_crossing_light.jpg"
-      }
+      "image": "./assets/news/images/84399e428bc60574368d.webp"
     },
     {
       "id": "8afa884f224efe65331b",
