@@ -2,7 +2,7 @@
   "version": 1,
   "retentionDays": 30,
   "updated": "2026-11-21T16:07:05Z",
-  "status": "ok",
+  "status": "awaiting_strict_recheck",
   "sourceTimeMeaning": "Telegram post timestamp; may differ from original external video upload",
   "sources": {
     "Atanpolice": 0,
@@ -13,38 +13,5 @@
   },
   "errors": {},
   "new": 0,
-  "items": [
-    {
-      "id": "af5db99c8deb4df8bca6",
-      "title": "Жесть в Кривом Роге. Центр города в огне. На дороге лежат трупы",
-      "publisher": "Алексей Железнов",
-      "platform": "telegram",
-      "url": "https://t.me/alexavni/165922",
-      "sourcePost": "https://t.me/alexavni/165922",
-      "sourceChannel": "alexavni",
-      "date": "2026-11-20T18:50:27Z",
-      "dateKind": "source_post",
-      "category": "reports",
-      "tags": [
-        "reports"
-      ],
-      "localVerified": true
-    },
-    {
-      "id": "c33987500a9d3fc1a8ee",
-      "title": "Падение охватило акции технологических компаний и производителей полупроводников.",
-      "publisher": "Алексей Железнов",
-      "platform": "telegram",
-      "url": "https://t.me/alexavni/165874",
-      "sourcePost": "https://t.me/alexavni/165874",
-      "sourceChannel": "alexavni",
-      "date": "2026-11-20T11:10:03Z",
-      "dateKind": "source_post",
-      "category": "reports",
-      "tags": [
-        "reports"
-      ],
-      "localVerified": true
-    }
-  ]
+  "items": []
 }
