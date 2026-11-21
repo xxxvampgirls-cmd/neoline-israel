@@ -14,29 +14,29 @@ const SOURCES={
 };
 const langPack={
  ru:{label:"ВИДЕОХРОНИКА · ИЗРАИЛЬ",title:"Видео с дорог",period:"За последние 30 дней",
-  about:"Аварии, наезды, записи видеорегистраторов, курьёзы, радары и репортажи — видео с YouTube по Израилю.",
+  about:"Аварии, наезды, записи регистраторов и репортажи Израиля — YouTube и проверенные публичные ссылки из Telegram, TikTok, Facebook, Instagram, VK и X.",
   all:"Все",accidents:"ДТП",dashcam:"Регистраторы",funny:"Курьёзы",radars:"Радары и камеры",reports:"Репортажи",police:"Полиция",
   archiveHeading:"Радары и камеры · Архив 13 канала",archiveLabel:"Архив",
   archiveDescription:"Отдельные репортажи прошлых месяцев, не входят в подборку за 30 дней.",
   archiveMore:"Другие сюжеты 13 канала ↗",loading:"Собираем видео за месяц…",
   empty:"За последние 30 дней пока нет подтверждённых роликов по этой теме.",
-  unavailable:"Подборка обновляется из YouTube. Пока можно открыть проверенные каналы ниже.",
+  unavailable:"Проверяем YouTube и публичные источники соцсетей. Пока можно открыть проверенные каналы ниже.",
   watch:"Смотреть",youtube:"Открыть на YouTube ↗",sources:"В том числе каналы:",
-  expand:"Показать ещё видео",count:n=>n+" видео",notice:"Видео размещены авторами на YouTube; могут содержать кадры происшествий.",
+  expand:"Показать ещё видео",count:n=>n+" видео",notice:"Видео остаются у авторов. Ссылки из соцсетей открываются на исходной платформе; дата такой карточки — дата сообщения источника, а не обязательно загрузки ролика. Возможны кадры ДТП.",
   close:"Закрыть видео",player:"Видеорепортаж"},
  en:{label:"ROAD FOOTAGE · ISRAEL",title:"Videos from the roads",period:"Last 30 days",
-  about:"Crashes, pedestrian incidents, dashcam footage, unusual driving, speed cameras and news from Israel.",
+  about:"Israeli crashes, dashcam footage and reports from YouTube plus source-linked Telegram, TikTok, Facebook, Instagram, VK and X posts.",
   all:"All",accidents:"Crashes",dashcam:"Dashcams",funny:"Road fails",radars:"Radars & cameras",reports:"Reports",police:"Police",
   archiveHeading:"Radar & camera reports · News 13 archive",archiveLabel:"Archive",
   archiveDescription:"Older features, separate from the rolling last-30-days collection.",
   archiveMore:"More News 13 coverage ↗",loading:"Loading this month's videos…",
   empty:"No verified clips for this topic were found in the last 30 days.",
-  unavailable:"This playlist is built from YouTube feeds. Browse the verified channels below.",
+  unavailable:"Checking YouTube and public social media links. Browse the verified channels below.",
   watch:"Watch",youtube:"Open on YouTube ↗",sources:"Including channels:",
-  expand:"More videos",count:n=>n+" videos",notice:"Videos remain on YouTube; some may show sensitive crash footage.",
+  expand:"More videos",count:n=>n+" videos",notice:"Videos stay with their publishers. Social links open the original site; the card date is when the source post appeared, not necessarily the video upload date. Some clips may be sensitive.",
   close:"Close video",player:"Video report"},
  he:{label:"וידאו מהכבישים · ישראל",title:"סרטונים מהכבישים",period:"30 הימים האחרונים",
-  about:"תאונות, פגיעות הולכי רגל, מצלמות רכב, נהיגה הזויה, רדארים וכתבות מיוטיוב בישראל.",
+  about:"תאונות וכתבות וידאו מישראל: YouTube וקישורים ציבוריים מאומתים מ-Telegram ורשתות חברתיות.",
   all:"הכול",accidents:"תאונות",dashcam:"מצלמות רכב",funny:"נהיגה הזויה",radars:"רדארים ומצלמות",reports:"כתבות",police:"משטרה",
   archiveHeading:"רדארים ומצלמות · ארכיון חדשות 13",archiveLabel:"ארכיון",
   archiveDescription:"כתבות מחודשים קודמים, בנפרד מאוסף 30 הימים האחרונים.",
@@ -44,10 +44,10 @@ const langPack={
   empty:"אין סרטונים מאומתים בנושא זה ב־30 הימים האחרונים.",
   unavailable:"האוסף מתעדכן מיוטיוב. אפשר לבקר בערוצים הרשמיים בהמשך.",
   watch:"צפייה",youtube:"לצפייה ביוטיוב ↗",sources:"בין היתר ערוצים:",
-  expand:"עוד סרטונים",count:n=>n+" סרטונים",notice:"הסרטונים מתארחים ביוטיוב ועלולים להכיל תיעוד תאונות.",
+  expand:"עוד סרטונים",count:n=>n+" סרטונים",notice:"סרטונים נשארים במקור. קישורי רשתות נפתחים באתר המקור; תאריך הכרטיס הוא תאריך הודעת המקור. חלקם עשויים לכלול תיעוד תאונות.",
   close:"סגירת הסרטון",player:"כתבת וידאו"},
  ar:{label:"فيديو الطرق · إسرائيل",title:"فيديوهات الطرق",period:"آخر 30 يومًا",
-  about:"حوادث ودهس ومقاطع كاميرات السيارات ومواقف طريفة ورادارات وتقارير من يوتيوب في إسرائيل.",
+  about:"حوادث الطرق والتقارير في إسرائيل: YouTube وروابط عامة موثوقة من Telegram ومنصات التواصل.",
   all:"الكل",accidents:"حوادث",dashcam:"كاميرات السيارات",funny:"مواقف طريفة",radars:"الرادارات والكاميرات",reports:"تقارير",police:"الشرطة",
   archiveHeading:"الرادارات والكاميرات · أرشيف أخبار 13",archiveLabel:"الأرشيف",
   archiveDescription:"تقارير أقدم، منفصلة عن مجموعة آخر 30 يومًا.",
@@ -55,7 +55,7 @@ const langPack={
   empty:"لا توجد مقاطع موثقة عن هذا الموضوع خلال آخر 30 يومًا.",
   unavailable:"تُحدّث المجموعة من يوتيوب. يمكنك زيارة القنوات الرسمية أدناه.",
   watch:"مشاهدة",youtube:"فتح على يوتيوب ↗",sources:"من القنوات:",
-  expand:"مزيد من الفيديوهات",count:n=>n+" فيديو",notice:"الفيديوهات مستضافة على يوتيوب وقد تتضمن مشاهد حوادث.",
+  expand:"مزيد من الفيديوهات",count:n=>n+" فيديو",notice:"تبقى الفيديوهات لدى الناشرين. تُفتح روابط التواصل في المصدر؛ تاريخ البطاقة هو تاريخ المنشور المرجعي وليس بالضرورة رفع الفيديو. قد تحتوي على مشاهد حوادث.",
   close:"إغلاق الفيديو",player:"تقرير مصور"}
 };
 const CATS=["all","accidents","dashcam","funny","radars","reports","police"];
@@ -70,7 +70,7 @@ const ARCHIVE=[
   source:"news13",publisher:SOURCES.news13.name,category:"radars",archive:true,
   url:"https://www.youtube.com/watch?v=gPkpDS04sjA"}
 ];
-const state={all:[],social:[],cat:"all",visible:6,ready:false,updated:0};
+const state={all:[],social:[],cat:"all",visible:6,ready:false,updated:0,lastFetch:0,loading:false};
 const tr=()=>langPack[document.documentElement.lang]||langPack.ru;
 const safe=str=>String(str??"").replace(/[&<>"']/g,ch=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[ch]));
 const validID=id=>typeof id==="string"&&/^[A-Za-z0-9_-]{11}$/.test(id);
@@ -156,6 +156,8 @@ async function fetchIndex(url){
  }catch(_){return null;}
 }
 async function refresh(){
+ if(state.loading)return;
+ state.loading=true;state.lastFetch=Date.now();
  const urls=[
   "./assets/news/road-videos.json?ts="+Date.now(),
   "https://raw.githubusercontent.com/xxxvampgirls-cmd/neoline-israel/main/assets/news/road-videos.json?ts="+Date.now()
@@ -164,9 +166,12 @@ async function refresh(){
   "./assets/news/social-road-videos.json?ts="+Date.now(),
   "https://raw.githubusercontent.com/xxxvampgirls-cmd/neoline-israel/main/assets/news/social-road-videos.json?ts="+Date.now()
  ];
- const [youtubeResults,socialResults]=await Promise.all([
-  Promise.all(urls.map(fetchIndex)),Promise.all(socialUrls.map(fetchSocialIndex))
- ]);
+ let youtubeResults=[],socialResults=[];
+ try{
+  [youtubeResults,socialResults]=await Promise.all([
+   Promise.all(urls.map(fetchIndex)),Promise.all(socialUrls.map(fetchSocialIndex))
+  ]);
+ }finally{state.loading=false}
  const found=youtubeResults.filter(Boolean),social=socialResults.filter(Boolean);
  found.sort((a,b)=>b.updated-a.updated);
  social.sort((a,b)=>b.updated-a.updated);
@@ -315,8 +320,10 @@ $("newsVideoDialog").addEventListener("click",event=>{
 window.addEventListener("neoline:news-language",draw);
 document.addEventListener("visibilitychange",()=>{
  if(document.hidden)closeVideo();
- else if(state.updated&&Date.now()-state.updated>2*3600000)refresh();
+ else if(Date.now()-state.lastFetch>15*60000)refresh();
 });
+// Static endpoints are light to re-check; long-lived mobile pages stay current.
+setInterval(()=>{if(!document.hidden&&Date.now()-state.lastFetch>=15*60000)refresh()},60000);
 draw();
 refresh();
 })();
