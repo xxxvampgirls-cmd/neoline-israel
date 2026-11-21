@@ -40,6 +40,37 @@ jobs:
         env:
           FACEBOOK_GRAPH_TOKEN: ${{ secrets.FACEBOOK_GRAPH_TOKEN }}
         run: python scripts/sync_news.py
+      # News is the critical feed. Publish its already validated result BEFORE
+      # auxiliary video discovery or thumbnail steps: failure of optional
+      # dependencies must never freeze all news categories again.
+      - name: Check news feed freshness and publish independently
+        run: |
+          python - <<'PY'
+          import datetime as dt, json, pathlib, sys
+          f = json.loads(pathlib.Path("assets/news/news.json").read_text(encoding="utf-8"))
+          report = json.loads(pathlib.Path("assets/news/sync-report.json").read_text(encoding="utf-8"))
+          now = dt.datetime.now(dt.timezone.utc)
+          stamp = dt.datetime.fromisoformat(f["updated"].replace("Z", "+00:00"))
+          age_min = (now - stamp).total_seconds() / 60
+          assert f["version"] == 1 and f["retentionDays"] == 30 and f["lawsRetentionMonths"] == 6
+          assert len(f["items"]) > 0, "Refusing to replace live news with empty snapshot"
+          assert 0 <= age_min < 30, f"News fetch too old: {age_min:.1f} min"
+          assert report["directLinksOnly"], "Unverified/non-direct news links"
+          assert sum(int(v) for v in report.get("feeds", {}).values()) > 0, "No live news feed was read"
+          assert len(report.get("sources", {})) >= 3, "Insufficient independent publishers"
+          print("NEWS HEALTH OK:", len(f["items"]), "articles from",
+                len(report["sources"]), "publishers, generated", round(age_min, 1), "minutes ago")
+          PY
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A assets/news/news.json assets/news/sync-report.json assets/news/images/
+          if git diff --cached --quiet; then
+            echo "News feed has no changes (same validated snapshot)"
+          else
+            git commit -m "Refresh verified Israeli road news independently"
+            git pull --rebase origin main
+            git push origin HEAD:main
+          fi
       - name: Test 30-day Israeli YouTube discovery and regional filtering (offline)
         run: python scripts/sync_road_videos.py --self-test
       - name: Refresh 30-day Israeli traffic videos (official + community YouTube)
