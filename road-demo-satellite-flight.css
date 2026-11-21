@@ -1,7 +1,7 @@
 /* NEOLINE — orbiting GPS satellite, center HUD safe-zone.
  * The acquisition pulse moving upward is illustrative. Actual GPS is
  * a passive receiver of satellite broadcasts; it sends no requests.
- * One gentle 8.2s flyby completes inside the GPS demo chapter. */
+ * One gentle 9s flyby completes inside the GPS demo chapter. */
 #installation .road-demo-satellite-flight{
  transform-box:fill-box;
  transform-origin:center center;
@@ -27,25 +27,27 @@
  transform-box:view-box;
 }
 #installation .road-demo.is-playing[data-road-stage="1"] .road-demo-satellite-flight{
- animation:neolineSatelliteFlyBy 8.2s ease-in-out 1 both;
+ animation:neolineSatelliteFlyBy 9s linear 1 both;
 }
+/* Avoid nested translate/rotate cycles: those caused a visible double wobble
+   on mobile. Only the outer flight group controls the smooth orbit. */
 #installation .road-demo.is-playing[data-road-stage="1"] .road-demo-satellite-float{
- animation:neolineSatelliteHover 8.2s ease-in-out 1 both;
+ animation:none!important;
 }
 #installation .road-demo.is-playing[data-road-stage="1"] .road-demo-satellite-beacon{
- animation:neolineSatelliteBeacon 8.2s ease-in-out 1 both;
+ animation:neolineSatelliteBeacon 9s ease-in-out 1 both;
 }
 #installation .road-demo.is-playing[data-road-stage="1"] .road-demo-gps-search-beam{
- animation:neolineSatelliteAcquire 8.2s linear 1 both;
+ animation:neolineSatelliteAcquire 9s linear 1 both;
 }
 #installation .road-demo.is-playing[data-road-stage="1"] .road-demo-gps-search-start{
- animation:neolineSatelliteAcquireStart 8.2s ease-in-out 1 both;
+ animation:neolineSatelliteAcquireStart 9s ease-in-out 1 both;
 }
 #installation .road-demo.is-playing[data-road-stage="1"] .road-demo-gps-answer-beam{
- animation:neolineSatelliteBroadcast 8.2s ease-out 1 both;
+ animation:neolineSatelliteBroadcast 9s ease-out 1 both;
 }
 #installation .road-demo.is-playing[data-road-stage="1"] .road-demo-gps-wave{
- animation:neolineSatelliteSignalWave 8.2s ease-in-out 1 both;
+ animation:neolineSatelliteSignalWave 9s ease-in-out 1 both;
 }
 #installation .road-demo.is-playing[data-road-stage="1"] .road-demo-gps-wave--two{
  animation-delay:.16s;
@@ -54,28 +56,72 @@
  animation-delay:.32s;
 }
 #installation .road-demo.is-playing[data-road-stage="1"] .road-demo-gps-lock{
- animation:neolineSatelliteGPSLock 8.2s ease-in-out 1 both;
+ animation:neolineSatelliteGPSLock 9s ease-in-out 1 both;
 }
 #installation .road-demo.is-playing[data-road-stage="1"] .road-demo-route{
- animation:neolineSatelliteRouteGlow 8.2s ease-in-out 1 both;
+ animation:neolineSatelliteRouteGlow 9s ease-in-out 1 both;
 }
 #installation .road-demo.is-playing[data-road-stage="1"] .road-telemetry-gps{
- animation:neolineSatelliteGPSCard 8.2s ease-in-out 1 both;
+ animation:neolineSatelliteGPSCard 9s ease-in-out 1 both;
 }
 /* Clear sky zone x=280, y=72 in the SVG 560×330 viewBox.
    Keep the satellite behind the existing text/telemetry HUD layers. */
+/* A distant small satellite grows as it follows a shallow orbital arc,
+   hovers in the clear center for GPS broadcast, then recedes to the far
+   horizon and fades away. Constant time progression: NO per-keyframe easing. */
+
 @keyframes neolineSatelliteFlyBy{
-0%{opacity:0;transform:translate3d(-112px,7px,0) scale(.93)}
- 11%{opacity:.14;transform:translate3d(-100px,6px,0) scale(.94)}
- 22%{opacity:.48;transform:translate3d(-69px,4px,0) scale(.97)}
- 33%{opacity:.86;transform:translate3d(-25px,2px,0) scale(.99)}
- 40%{opacity:1;transform:translate3d(0,0,0) scale(1)}
- 53%{opacity:1;transform:translate3d(3px,-1px,0) scale(1)}
- 68%{opacity:1;transform:translate3d(5px,-1px,0) scale(1)}
- 76%{opacity:1;transform:translate3d(9px,0,0) scale(1)}
- 85%{opacity:.76;transform:translate3d(41px,-3px,0) scale(.98)}
- 93%{opacity:.31;transform:translate3d(79px,-5px,0) scale(.96)}
- 100%{opacity:0;transform:translate3d(108px,-7px,0) scale(.94)}
+ 0%{opacity:0.000;transform:translate3d(-116.00px,24.00px,0) rotate(-5.00deg) scale(0.335)}
+ 2%{opacity:0.043;transform:translate3d(-115.24px,23.47px,0) rotate(-4.97deg) scale(0.335)}
+ 4%{opacity:0.156;transform:translate3d(-113.04px,21.99px,0) rotate(-4.87deg) scale(0.336)}
+ 6%{opacity:0.316;transform:translate3d(-109.57px,19.69px,0) rotate(-4.72deg) scale(0.341)}
+ 8%{opacity:0.500;transform:translate3d(-104.98px,16.76px,0) rotate(-4.52deg) scale(0.354)}
+ 10%{opacity:0.684;transform:translate3d(-99.40px,13.37px,0) rotate(-4.28deg) scale(0.376)}
+ 12%{opacity:0.844;transform:translate3d(-93.00px,9.71px,0) rotate(-4.01deg) scale(0.410)}
+ 14%{opacity:0.957;transform:translate3d(-85.93px,5.95px,0) rotate(-3.70deg) scale(0.457)}
+ 16%{opacity:1.000;transform:translate3d(-78.32px,2.24px,0) rotate(-3.38deg) scale(0.516)}
+ 18%{opacity:1.000;transform:translate3d(-70.34px,-1.29px,0) rotate(-3.03deg) scale(0.585)}
+ 20%{opacity:1.000;transform:translate3d(-62.14px,-4.52px,0) rotate(-2.68deg) scale(0.661)}
+ 22%{opacity:1.000;transform:translate3d(-53.86px,-7.38px,0) rotate(-2.32deg) scale(0.739)}
+ 24%{opacity:1.000;transform:translate3d(-45.66px,-9.80px,0) rotate(-1.97deg) scale(0.815)}
+ 26%{opacity:1.000;transform:translate3d(-37.68px,-11.78px,0) rotate(-1.62deg) scale(0.884)}
+ 28%{opacity:1.000;transform:translate3d(-30.07px,-13.31px,0) rotate(-1.30deg) scale(0.943)}
+ 30%{opacity:1.000;transform:translate3d(-23.00px,-14.43px,0) rotate(-0.99deg) scale(0.990)}
+ 32%{opacity:1.000;transform:translate3d(-16.60px,-15.18px,0) rotate(-0.72deg) scale(1.024)}
+ 34%{opacity:1.000;transform:translate3d(-11.02px,-15.64px,0) rotate(-0.48deg) scale(1.046)}
+ 36%{opacity:1.000;transform:translate3d(-6.43px,-15.88px,0) rotate(-0.28deg) scale(1.059)}
+ 38%{opacity:1.000;transform:translate3d(-2.96px,-15.97px,0) rotate(-0.13deg) scale(1.064)}
+ 40%{opacity:1.000;transform:translate3d(-0.76px,-16.00px,0) rotate(-0.03deg) scale(1.065)}
+ 42%{opacity:1.000;transform:translate3d(0.00px,-16.00px,0) rotate(0.00deg) scale(1.065)}
+ 44%{opacity:1.000;transform:translate3d(0.00px,-16.00px,0) rotate(0.00deg) scale(1.065)}
+ 46%{opacity:1.000;transform:translate3d(0.00px,-16.00px,0) rotate(0.00deg) scale(1.065)}
+ 48%{opacity:1.000;transform:translate3d(0.00px,-16.00px,0) rotate(0.00deg) scale(1.065)}
+ 50%{opacity:1.000;transform:translate3d(0.00px,-16.00px,0) rotate(0.00deg) scale(1.065)}
+ 52%{opacity:1.000;transform:translate3d(0.00px,-16.00px,0) rotate(0.00deg) scale(1.065)}
+ 54%{opacity:1.000;transform:translate3d(0.00px,-16.00px,0) rotate(0.00deg) scale(1.065)}
+ 56%{opacity:1.000;transform:translate3d(0.00px,-16.00px,0) rotate(0.00deg) scale(1.065)}
+ 58%{opacity:1.000;transform:translate3d(0.00px,-16.00px,0) rotate(0.00deg) scale(1.065)}
+ 60%{opacity:1.000;transform:translate3d(0.00px,-16.00px,0) rotate(0.00deg) scale(1.065)}
+ 62%{opacity:1.000;transform:translate3d(0.00px,-16.00px,0) rotate(0.00deg) scale(1.065)}
+ 64%{opacity:1.000;transform:translate3d(0.00px,-16.00px,0) rotate(0.00deg) scale(1.065)}
+ 66%{opacity:1.000;transform:translate3d(0.00px,-16.00px,0) rotate(0.00deg) scale(1.065)}
+ 68%{opacity:1.000;transform:translate3d(1.16px,-16.00px,0) rotate(0.05deg) scale(1.065)}
+ 70%{opacity:1.000;transform:translate3d(4.44px,-15.94px,0) rotate(0.19deg) scale(1.062)}
+ 72%{opacity:1.000;transform:translate3d(9.56px,-15.73px,0) rotate(0.41deg) scale(1.051)}
+ 74%{opacity:1.000;transform:translate3d(16.24px,-15.22px,0) rotate(0.70deg) scale(1.026)}
+ 76%{opacity:1.000;transform:translate3d(24.20px,-14.26px,0) rotate(1.04deg) scale(0.983)}
+ 78%{opacity:1.000;transform:translate3d(33.15px,-12.73px,0) rotate(1.43deg) scale(0.920)}
+ 80%{opacity:1.000;transform:translate3d(42.81px,-10.55px,0) rotate(1.85deg) scale(0.840)}
+ 82%{opacity:1.000;transform:translate3d(52.89px,-7.68px,0) rotate(2.28deg) scale(0.748)}
+ 84%{opacity:1.000;transform:translate3d(63.11px,-4.16px,0) rotate(2.72deg) scale(0.652)}
+ 86%{opacity:0.957;transform:translate3d(73.19px,-0.07px,0) rotate(3.15deg) scale(0.560)}
+ 88%{opacity:0.844;transform:translate3d(82.85px,4.40px,0) rotate(3.57deg) scale(0.480)}
+ 90%{opacity:0.684;transform:translate3d(91.80px,9.05px,0) rotate(3.96deg) scale(0.417)}
+ 92%{opacity:0.500;transform:translate3d(99.76px,13.58px,0) rotate(4.30deg) scale(0.374)}
+ 94%{opacity:0.316;transform:translate3d(106.44px,17.68px,0) rotate(4.59deg) scale(0.349)}
+ 96%{opacity:0.156;transform:translate3d(111.56px,21.00px,0) rotate(4.81deg) scale(0.338)}
+ 98%{opacity:0.043;transform:translate3d(114.84px,23.21px,0) rotate(4.95deg) scale(0.335)}
+ 100%{opacity:0.000;transform:translate3d(116.00px,24.00px,0) rotate(5.00deg) scale(0.335)}
 }
 @keyframes neolineSatelliteHover{
 0%,31%,76%,100%{transform:translate(0,0) rotate(0)}
