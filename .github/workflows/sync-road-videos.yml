@@ -1,0 +1,94 @@
+name: Refresh verified Israel road videos across platforms
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '31 * * * *' # hourly best effort; metadata search itself runs twice daily
+  push:
+    branches: [main]
+    paths:
+      - 'scripts/sync_road_videos.py'
+      - 'scripts/youtube_road_discovery.py'
+      - 'scripts/sync_social_road_videos.py'
+      - '.github/workflows/sync-road-videos.yml'
+permissions:
+  contents: write
+concurrency:
+  group: neoline-road-video-refresh
+  cancel-in-progress: false
+jobs:
+  collect:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          persist-credentials: true
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install media discovery dependencies
+        run: python -m pip install --disable-pip-version-check 'requests>=2.31,<3' 'beautifulsoup4>=4.12,<5' 'yt-dlp>=2025.1'
+      - name: Verify source and language rules offline
+        run: |
+          python scripts/sync_road_videos.py --self-test
+          python scripts/sync_social_road_videos.py --self-test
+      - name: Refresh public YouTube traffic incident videos
+        id: youtube
+        continue-on-error: true
+        env:
+          YOUTUBE_API_KEY: ${{ secrets.YOUTUBE_API_KEY }}
+        run: python scripts/sync_road_videos.py
+      - name: Refresh public Telegram videos and cross-platform video links
+        id: social
+        continue-on-error: true
+        run: python scripts/sync_social_road_videos.py
+      - name: Validate real video metadata and publish independently of news thumbnails
+        env:
+          YOUTUBE_RESULT: ${{ steps.youtube.outcome }}
+          SOCIAL_RESULT: ${{ steps.social.outcome }}
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import datetime as dt,json,os,re
+          from pathlib import Path
+          from urllib.parse import urlparse
+          now=dt.datetime.now(dt.timezone.utc)
+          def when(value):
+              x=dt.datetime.fromisoformat(value.replace('Z','+00:00'))
+              assert x.tzinfo is not None
+              return x
+          if os.environ["YOUTUBE_RESULT"]=="success":
+              data=json.loads(Path("assets/news/road-videos.json").read_text(encoding="utf-8"))
+              assert data["version"]==1 and data["retentionDays"]==30
+              for row in data["items"]:
+                  assert re.fullmatch(r"[a-zA-Z0-9_-]{11}",row["id"])
+                  assert row["url"]=="https://www.youtube.com/watch?v="+row["id"]
+                  assert dt.timedelta(hours=-12)<=now-when(row["date"])<=dt.timedelta(days=30,minutes=2)
+              print("YouTube:",len(data["items"]),"verified clips")
+          if os.environ["SOCIAL_RESULT"]=="success":
+              data=json.loads(Path("assets/news/social-road-videos.json").read_text(encoding="utf-8"))
+              assert data["version"]==1 and data["retentionDays"]==30
+              allowed={"telegram":("t.me","www.t.me"),"facebook":("facebook.com","www.facebook.com","m.facebook.com"),
+                  "instagram":("instagram.com","www.instagram.com"),"tiktok":("tiktok.com","www.tiktok.com"),
+                  "vk":("vk.com","www.vk.com"),"x":("x.com","www.x.com","twitter.com","www.twitter.com")}
+              for row in data["items"]:
+                  assert re.fullmatch(r"[a-f0-9]{20}",row["id"])
+                  assert row["platform"] in allowed
+                  assert urlparse(row["url"]).hostname in allowed[row["platform"]]
+                  assert row["category"] in ("accidents","reports") and row["localVerified"] is True
+                  assert row["dateKind"]=="source_post"
+                  assert dt.timedelta(hours=-6)<=now-when(row["date"])<=dt.timedelta(days=30,minutes=2)
+              print("Social:",len(data["items"]),"verified public references")
+          PY
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          if [ "$YOUTUBE_RESULT" = success ]; then git add assets/news/road-videos.json; fi
+          if [ "$SOCIAL_RESULT" = success ]; then git add assets/news/social-road-videos.json; fi
+          if git diff --cached --quiet; then
+            echo "No media metadata to publish"
+            exit 0
+          fi
+          git commit -m "Refresh verified multilingual road video and social source links"
+          git pull --rebase origin main
+          git push origin HEAD:main
