@@ -1,0 +1,140 @@
+/* NEOLINE — orbiting GPS satellite, center HUD safe-zone.
+ * The acquisition pulse moving upward is illustrative. Actual GPS is
+ * a passive receiver of satellite broadcasts; it sends no requests.
+ * One 7.05s flight fits inside the automatic 7.8s GPS chapter. */
+#installation .road-demo-satellite-flight{
+ transform-box:view-box;
+ transform-origin:280px 72px;
+ transform:translate3d(0,0,0);
+ opacity:1;
+ will-change:transform,opacity;
+}
+#installation .road-demo-satellite-float{
+ transform-origin:0 0;
+ filter:drop-shadow(0 2px 5px #48dfff68);
+}
+#installation .road-demo-gps-search-beam{
+ stroke-dasharray:155 170;
+ stroke-dashoffset:155;
+}
+#installation .road-demo-gps-search-start{
+ transform-origin:280px 207px;
+ transform-box:view-box;
+}
+#installation .road-demo-gps-answer-beam{stroke-dashoffset:175}
+#installation .road-demo-gps-wave{
+ transform-origin:280px 108px;
+ transform-box:view-box;
+}
+#installation .road-demo.is-playing[data-road-stage="1"] .road-demo-satellite-flight{
+ animation:neolineSatelliteFlyBy 7.05s ease-in-out infinite;
+}
+#installation .road-demo.is-playing[data-road-stage="1"] .road-demo-satellite-float{
+ animation:neolineSatelliteHover 7.05s ease-in-out infinite;
+}
+#installation .road-demo.is-playing[data-road-stage="1"] .road-demo-satellite-beacon{
+ animation:neolineSatelliteBeacon 7.05s ease-in-out infinite;
+}
+#installation .road-demo.is-playing[data-road-stage="1"] .road-demo-gps-search-beam{
+ animation:neolineSatelliteAcquire 7.05s linear infinite;
+}
+#installation .road-demo.is-playing[data-road-stage="1"] .road-demo-gps-search-start{
+ animation:neolineSatelliteAcquireStart 7.05s ease-in-out infinite;
+}
+#installation .road-demo.is-playing[data-road-stage="1"] .road-demo-gps-answer-beam{
+ animation:neolineSatelliteBroadcast 7.05s ease-out infinite;
+}
+#installation .road-demo.is-playing[data-road-stage="1"] .road-demo-gps-wave{
+ animation:neolineSatelliteSignalWave 7.05s ease-in-out infinite;
+}
+#installation .road-demo.is-playing[data-road-stage="1"] .road-demo-gps-wave--two{
+ animation-delay:.16s;
+}
+#installation .road-demo.is-playing[data-road-stage="1"] .road-demo-gps-wave--three{
+ animation-delay:.32s;
+}
+#installation .road-demo.is-playing[data-road-stage="1"] .road-demo-gps-lock{
+ animation:neolineSatelliteGPSLock 7.05s ease-in-out infinite;
+}
+#installation .road-demo.is-playing[data-road-stage="1"] .road-demo-route{
+ animation:neolineSatelliteRouteGlow 7.05s ease-in-out infinite;
+}
+#installation .road-demo.is-playing[data-road-stage="1"] .road-telemetry-gps{
+ animation:neolineSatelliteGPSCard 7.05s ease-in-out infinite;
+}
+/* Clear sky zone x=280, y=72 in the SVG 560×330 viewBox.
+   Keep the satellite behind the existing text/telemetry HUD layers. */
+@keyframes neolineSatelliteFlyBy{
+ 0%{opacity:0;transform:translate3d(-385px,9px,0) scale(.83)}
+ 7%{opacity:1}
+ 25%{opacity:1;transform:translate3d(0,0,0) scale(1)}
+ 35%{opacity:1;transform:translate3d(0,-1px,0) scale(1)}
+ 67%{opacity:1;transform:translate3d(0,-1px,0) scale(1)}
+ 75%{opacity:1;transform:translate3d(0,0,0) scale(1)}
+ 83%{opacity:1;transform:translate3d(125px,-8px,0) scale(.94)}
+ 97%,100%{opacity:0;transform:translate3d(406px,-25px,0) scale(.8)}
+}
+@keyframes neolineSatelliteHover{
+ 0%,24%,76%,100%{transform:translate(0,0) rotate(0)}
+ 37%{transform:translate(0,-1.5px) rotate(-1.2deg)}
+ 58%{transform:translate(0,1.5px) rotate(1.1deg)}
+ 68%{transform:translate(0,-1px) rotate(-.6deg)}
+}
+@keyframes neolineSatelliteBeacon{
+ 0%,33%,77%,100%{opacity:.17;transform:scale(.7)}
+ 49%{opacity:.94;transform:scale(1.26)}
+ 58%{opacity:.3;transform:scale(.85)}
+ 66%{opacity:1;transform:scale(1.4)}
+}
+@keyframes neolineSatelliteAcquire{
+ 0%,30%{opacity:0;stroke-dashoffset:155}
+ 35%{opacity:.86;stroke-dashoffset:131}
+ 46%{opacity:.98;stroke-dashoffset:0}
+ 51%,100%{opacity:0;stroke-dashoffset:-22}
+}
+@keyframes neolineSatelliteAcquireStart{
+ 0%,30%,48%,100%{opacity:0;transform:scale(.6)}
+ 36%{opacity:1;transform:scale(1.28)}
+ 44%{opacity:.34;transform:scale(.72)}
+}
+@keyframes neolineSatelliteBroadcast{
+ 0%,47%{opacity:0;stroke-dashoffset:175}
+ 53%{opacity:.94;stroke-dashoffset:142}
+ 67%{opacity:1;stroke-dashoffset:0}
+ 76%,100%{opacity:0;stroke-dashoffset:-35}
+}
+@keyframes neolineSatelliteSignalWave{
+ 0%,49%,79%,100%{opacity:0;transform:scale(.84)}
+ 56%{opacity:.98;transform:scale(1)}
+ 68%{opacity:.54;transform:scale(1.09)}
+}
+@keyframes neolineSatelliteGPSLock{
+ 0%,65%,100%{opacity:0;transform:scale(.7)}
+ 72%,82%{opacity:1;transform:scale(1)}
+ 91%{opacity:.2;transform:scale(1.17)}
+}
+@keyframes neolineSatelliteRouteGlow{
+ 0%,61%,100%{opacity:.13}
+ 73%,91%{opacity:1}
+}
+@keyframes neolineSatelliteGPSCard{
+ 0%,64%,100%{box-shadow:0 5px 22px #061a3040,inset 0 1px #ffffff1a}
+ 73%,89%{box-shadow:0 0 22px #2adfff8c,inset 0 1px #b6fdff54}
+}
+@media(prefers-reduced-motion:reduce){
+ #installation .road-demo.is-playing[data-road-stage="1"] .road-demo-satellite-flight,
+ #installation .road-demo.is-playing[data-road-stage="1"] .road-demo-satellite-float,
+ #installation .road-demo.is-playing[data-road-stage="1"] .road-demo-satellite-beacon,
+ #installation .road-demo.is-playing[data-road-stage="1"] .road-demo-gps-search-beam,
+ #installation .road-demo.is-playing[data-road-stage="1"] .road-demo-gps-search-start,
+ #installation .road-demo.is-playing[data-road-stage="1"] .road-demo-gps-answer-beam,
+ #installation .road-demo.is-playing[data-road-stage="1"] .road-demo-gps-wave,
+ #installation .road-demo.is-playing[data-road-stage="1"] .road-demo-gps-lock,
+ #installation .road-demo.is-playing[data-road-stage="1"] .road-demo-route,
+ #installation .road-demo.is-playing[data-road-stage="1"] .road-telemetry-gps{
+  animation:none!important;will-change:auto!important;
+ }
+ #installation .road-demo[data-road-stage="1"] .road-demo-gps-lock{opacity:.7}
+ #installation .road-demo[data-road-stage="1"] .road-demo-gps-wave--one{opacity:.45}
+ #installation .road-demo[data-road-stage="1"] .road-demo-route{opacity:1}
+}
