@@ -175,3 +175,12 @@
   animation:none!important;opacity:0!important;
  }
 }
+
+/* 2026-11-21: lower the three bonus cards beneath the chest, without changing
+   the original gift illustration, reveal animation or card styling. */
+#gameGiftDialog .gift-reveal-slots{
+  padding-top:32px;
+}
+@media(max-width:385px){
+  #gameGiftDialog .gift-reveal-slots{padding-top:24px}
+}
