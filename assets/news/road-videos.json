@@ -1,7 +1,7 @@
 {
   "version": 1,
   "retentionDays": 30,
-  "updated": "2026-11-21T16:12:29Z",
+  "updated": "2026-11-21T21:49:48Z",
   "status": "ok",
   "sourceCount": 10,
   "searchUpdated": "2026-11-21T12:05:16Z",
@@ -49,15 +49,16 @@
     {
       "id": "Qqa0339oIRM",
       "title": "ירושלים: שוטר רכב על אופנוע לתוך הפגנת החרדים - שפוזרה באמצעות אלות ורימוני הלם",
-      "date": "2026-11-19T15:03:51Z",
       "source": "ynet",
       "publisher": "ynet",
+      "channelId": "UCpSSzrovhI4fA2PQNItecUA",
+      "localVerified": false,
       "category": "police",
-      "url": "https://www.youtube.com/watch?v=Qqa0339oIRM",
       "tags": [
         "police"
       ],
-      "channelId": "UCpSSzrovhI4fA2PQNItecUA"
+      "date": "2026-11-19T15:03:51Z",
+      "url": "https://www.youtube.com/watch?v=Qqa0339oIRM"
     },
     {
       "id": "T4DCog8t0c8",
