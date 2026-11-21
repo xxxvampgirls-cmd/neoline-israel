@@ -215,3 +215,110 @@
   transform:translate(-50%,0) scale(1)!important;
  }
 }
+
+/* 2026-11-21 · Synchronised dual-colour rays.
+   Big sapphire fan = backdrop; smaller gold fan = foreground. During the
+   2.35s shaking phase gold builds up; at burst both rotate at the SAME speed.
+   Both are clipped inside the stage, behind the original box/cards, and only
+   transforms/opacity animate (no expensive blur or gradient animation). */
+#gameGiftDialog .gift-reveal-scene::before{
+  top:54%;left:50%;
+  width:660px;height:660px;
+  max-width:none;
+  z-index:0;
+  border-radius:50%;
+  background:repeating-conic-gradient(
+    from -12deg,
+    #57b9f456 0deg 12deg,
+    #c7efff37 12deg 16deg,
+    transparent 16deg 30deg,
+    #278edc39 30deg 35deg,
+    transparent 35deg 48deg
+  );
+  opacity:.45;
+  transform:translate(-50%,-50%) rotate(0deg) scale(.9);
+  animation:neolineRaysBlueIdle 24s linear infinite;
+  will-change:transform,opacity;
+}
+#gameGiftDialog .gift-reveal-beam{
+  display:block!important;
+  position:absolute;
+  z-index:1;
+  top:54%;left:50%;bottom:auto;
+  width:355px;height:355px;
+  border-radius:50%;
+  transform-origin:50% 50%;
+  transform:translate(-50%,-50%) rotate(0deg) scale(.65);
+  background:repeating-conic-gradient(
+    from -12deg,
+    #ffc638b8 0deg 8deg,
+    #fff3ac7d 8deg 12deg,
+    transparent 12deg 30deg,
+    #ffb82991 30deg 34deg,
+    transparent 34deg 48deg
+  )!important;
+  opacity:0;
+  filter:none!important;
+  pointer-events:none;
+  will-change:transform,opacity;
+}
+@keyframes neolineRaysBlueIdle{
+  to{transform:translate(-50%,-50%) rotate(360deg) scale(.9)}
+}
+#gameGiftDialog .gift-reveal[data-phase="shake"] .gift-reveal-scene::before{
+  animation:neolineRaysBlueCharge 2.35s linear both!important;
+}
+#gameGiftDialog .gift-reveal[data-phase="shake"] .gift-reveal-beam{
+  animation:neolineRaysGoldCharge 2.35s linear both!important;
+}
+@keyframes neolineRaysBlueCharge{
+  0%{opacity:.38;transform:translate(-50%,-50%) rotate(0deg) scale(.9)}
+  55%{opacity:.55;transform:translate(-50%,-50%) rotate(6deg) scale(.96)}
+  100%{opacity:.76;transform:translate(-50%,-50%) rotate(12deg) scale(1)}
+}
+@keyframes neolineRaysGoldCharge{
+  0%{opacity:0;transform:translate(-50%,-50%) rotate(0deg) scale(.65)}
+  30%{opacity:.23;transform:translate(-50%,-50%) rotate(3deg) scale(.76)}
+  65%{opacity:.49;transform:translate(-50%,-50%) rotate(8deg) scale(.88)}
+  100%{opacity:.83;transform:translate(-50%,-50%) rotate(12deg) scale(1)}
+}
+/* One shared rotation sweep gives perfectly synchronised yellow/blue rays. */
+#gameGiftDialog .gift-reveal[data-phase="burst"] .gift-reveal-scene::before,
+#gameGiftDialog .gift-reveal[data-phase="revealed"] .gift-reveal-scene::before{
+  animation:neolineRaysBlueBurst 1.2s cubic-bezier(.13,.62,.25,1) both!important;
+}
+#gameGiftDialog .gift-reveal[data-phase="burst"] .gift-reveal-beam,
+#gameGiftDialog .gift-reveal[data-phase="revealed"] .gift-reveal-beam{
+  animation:neolineRaysGoldBurst 1.2s cubic-bezier(.13,.62,.25,1) both!important;
+  opacity:1!important;
+}
+@keyframes neolineRaysBlueBurst{
+  0%{opacity:.9;transform:translate(-50%,-50%) rotate(12deg) scale(1)}
+  38%{opacity:1;transform:translate(-50%,-50%) rotate(86deg) scale(1.04)}
+  100%{opacity:.34;transform:translate(-50%,-50%) rotate(190deg) scale(1.05)}
+}
+@keyframes neolineRaysGoldBurst{
+  0%{opacity:.94;transform:translate(-50%,-50%) rotate(12deg) scale(1)}
+  38%{opacity:1;transform:translate(-50%,-50%) rotate(86deg) scale(1.04)}
+  100%{opacity:0;transform:translate(-50%,-50%) rotate(190deg) scale(1.05)}
+}
+@media(max-width:385px){
+  #gameGiftDialog .gift-reveal-scene::before{width:570px;height:570px}
+  #gameGiftDialog .gift-reveal-beam{width:300px;height:300px}
+}
+@media(prefers-reduced-motion:reduce){
+  #gameGiftDialog .gift-reveal-scene::before,
+  #gameGiftDialog .gift-reveal[data-phase="shake"] .gift-reveal-scene::before,
+  #gameGiftDialog .gift-reveal[data-phase="burst"] .gift-reveal-scene::before,
+  #gameGiftDialog .gift-reveal[data-phase="revealed"] .gift-reveal-scene::before{
+    animation:none!important;opacity:.42!important;
+    transform:translate(-50%,-50%) scale(.9)!important;
+  }
+  #gameGiftDialog .gift-reveal-beam,
+  #gameGiftDialog .gift-reveal[data-phase="shake"] .gift-reveal-beam,
+  #gameGiftDialog .gift-reveal[data-phase="burst"] .gift-reveal-beam,
+  #gameGiftDialog .gift-reveal[data-phase="revealed"] .gift-reveal-beam{
+    animation:none!important;opacity:.2!important;
+    transform:translate(-50%,-50%) scale(.85)!important;
+  }
+}
