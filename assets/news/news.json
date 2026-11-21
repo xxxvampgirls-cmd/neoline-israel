@@ -2,8 +2,74 @@
   "version": 1,
   "retentionDays": 30,
   "lawsRetentionMonths": 6,
-  "updated": "2026-11-21T12:05:42.761643Z",
+  "updated": "2026-11-21T15:55:46.012615Z",
   "items": [
+    {
+      "id": "b70e31e390675c047417",
+      "titleOriginal": "גבר בן 62 במצב בינוני לאחר שהתנגש עם רכבו במעקה בטיחות בזמר",
+      "sourceLanguage": "he",
+      "date": "2026-11-21T15:47:22Z",
+      "url": "https://www.maariv.co.il/breaking-news/article-1390743",
+      "publisher": "Maariv",
+      "category": "accidents",
+      "art": "accidents",
+      "image": null,
+      "official": false,
+      "translations": {
+        "he": {
+          "title": "גבר בן 62 במצב בינוני לאחר שהתנגש עם רכבו במעקה בטיחות בזמר",
+          "summary": "דיווח על תאונת דרכים בישראל. פרטים ועדכונים בכתבת המקור."
+        },
+        "ru": {
+          "title": "62-летний мужчина находится в состоянии средней степени тяжести после того, как его машина столкнулась с ограждением в Земере.",
+          "summary": "Дорожное происшествие в Израиле. Обстоятельства и актуальные сведения — в материале источника."
+        },
+        "en": {
+          "title": "A 62-year-old man is in moderate condition after his car collided with a guardrail in Zemer",
+          "summary": "A reported road incident in Israel. Details and updates are in the original report."
+        },
+        "ar": {
+          "title": "رجل يبلغ من العمر 62 عاما في حالة متوسطة بعد اصطدام سيارته بحاجز حماية في زيمر",
+          "summary": "تقرير عن حادث مروري في إسرائيل. التفاصيل والتحديثات في المصدر."
+        }
+      },
+      "title": "62-летний мужчина находится в состоянии средней степени тяжести после того, как его машина столкнулась с ограждением в Земере.",
+      "summary": "Дорожное происшествие в Израиле. Обстоятельства и актуальные сведения — в материале источника.",
+      "translated": true
+    },
+    {
+      "id": "409c207fd4d987d13c46",
+      "titleOriginal": "בן 82 נפצע באורח בינוני לאחר שרכבו הידרדר לוואדי סמוך לעין נקובא באזור הרי ירושלים",
+      "sourceLanguage": "he",
+      "date": "2026-11-21T15:36:25Z",
+      "url": "https://www.inn.co.il/flashes/1141862",
+      "publisher": "Arutz Sheva · Israel National News",
+      "category": "accidents",
+      "art": "accidents",
+      "image": null,
+      "official": false,
+      "translations": {
+        "he": {
+          "title": "בן 82 נפצע באורח בינוני לאחר שרכבו הידרדר לוואדי סמוך לעין נקובא באזור הרי ירושלים",
+          "summary": "דיווח על תאונת דרכים בישראל. פרטים ועדכונים בכתבת המקור."
+        },
+        "ru": {
+          "title": "82-летний мужчина получил ранения средней степени тяжести после того, как его автомобиль съехал в вади возле Эйн-Накобы в районе Иерусалимских гор.",
+          "summary": "Дорожное происшествие в Израиле. Обстоятельства и актуальные сведения — в материале источника."
+        },
+        "en": {
+          "title": "An 82-year-old was moderately injured after his vehicle slid into a wadi near Ein Nakoba in the Jerusalem Mountains area",
+          "summary": "A reported road incident in Israel. Details and updates are in the original report."
+        },
+        "ar": {
+          "title": "إصابة رجل (82 عاما) بجراح متوسطة بعد انزلاق مركبته في واد قرب عين نعقوبة في منطقة جبال القدس",
+          "summary": "تقرير عن حادث مروري في إسرائيل. التفاصيل والتحديثات في المصدر."
+        }
+      },
+      "title": "82-летний мужчина получил ранения средней степени тяжести после того, как его автомобиль съехал в вади возле Эйн-Накобы в районе Иерусалимских гор.",
+      "summary": "Дорожное происшествие в Израиле. Обстоятельства и актуальные сведения — в материале источника.",
+      "translated": true
+    },
     {
       "id": "1c44bbb76c009ed6af98",
       "titleOriginal": "מצפה רמון, גן יבנה והנגב: הרוג ופצועים קשה בסוף שבוע של תאונות דרכים",
@@ -41,6 +107,39 @@
         "text": "No machine-readable author provided. EPO assumed (based on copyright claims). · CC BY 2.5",
         "url": "https://commons.wikimedia.org/wiki/File:Falck_sv_04.jpg"
       }
+    },
+    {
+      "id": "f7593da6959a5badb8da",
+      "titleOriginal": "גבר בן 82 נפצע באורח בינוני לאחר שהדרדר עם רכבו לואדי סמוך לעין נקובא",
+      "sourceLanguage": "he",
+      "date": "2026-11-21T15:36:41Z",
+      "url": "https://www.maariv.co.il/breaking-news/article-1390740",
+      "publisher": "Maariv",
+      "category": "accidents",
+      "art": "accidents",
+      "image": null,
+      "official": false,
+      "translations": {
+        "he": {
+          "title": "גבר בן 82 נפצע באורח בינוני לאחר שהדרדר עם רכבו לואדי סמוך לעין נקובא",
+          "summary": "דיווח על תאונת דרכים בישראל. פרטים ועדכונים בכתבת המקור."
+        },
+        "ru": {
+          "title": "82-летний мужчина получил травмы средней степени тяжести после того, как сошел с рельсов на своей машине в Луади возле Эйн-Накоба.",
+          "summary": "Дорожное происшествие в Израиле. Обстоятельства и актуальные сведения — в материале источника."
+        },
+        "en": {
+          "title": "An 82-year-old man was moderately injured after he derailed with his car in Luadi near Ein Nakoba",
+          "summary": "A reported road incident in Israel. Details and updates are in the original report."
+        },
+        "ar": {
+          "title": "إصابة رجل يبلغ من العمر 82 عاماً بجراح متوسطة بعد أن خرج بسيارته عن مسارها في لؤادي قرب عين نعقوبة",
+          "summary": "تقرير عن حادث مروري في إسرائيل. التفاصيل والتحديثات في المصدر."
+        }
+      },
+      "title": "82-летний мужчина получил травмы средней степени тяжести после того, как сошел с рельсов на своей машине в Луади возле Эйн-Накоба.",
+      "summary": "Дорожное происшествие в Израиле. Обстоятельства и актуальные сведения — в материале источника.",
+      "translated": true
     },
     {
       "id": "83a5cb1de860c3c4e999",
@@ -121,42 +220,37 @@
       "subjectPhotoChecked": true
     },
     {
-      "id": "0a0db3b5915fae626466",
-      "titleOriginal": "טרגדיה בטירה: אישה חוסלה בפיצוץ מטען ברכבה, שני ילדים נפצעו",
+      "id": "64862b95d16db3115c21",
+      "titleOriginal": "שתי נשים כבנות 60 נפצעו באורח בינוני וקל מפגיעת רכב בחיפה",
       "sourceLanguage": "he",
-      "date": "2026-11-20T20:35:14Z",
-      "url": "https://www.maariv.co.il/news/law/article-1390597",
+      "date": "2026-11-21T14:26:35Z",
+      "url": "https://www.maariv.co.il/breaking-news/article-1390719",
       "publisher": "Maariv",
       "category": "accidents",
       "art": "accidents",
-      "image": "./assets/news/images/0a0db3b5915fae626466.webp",
+      "image": null,
       "official": false,
       "translations": {
         "he": {
-          "title": "טרגדיה בטירה: אישה חוסלה בפיצוץ מטען ברכבה, שני ילדים נפצעו",
+          "title": "שתי נשים כבנות 60 נפצעו באורח בינוני וקל מפגיעת רכב בחיפה",
           "summary": "דיווח על תאונת דרכים בישראל. פרטים ועדכונים בכתבת המקור."
         },
         "ru": {
-          "title": "Трагедия в замке: женщина погибла в результате взрыва взрывного устройства в своей машине, двое детей получили ранения",
+          "title": "Две женщины в возрасте 60 лет получили ранения средней и легкой степени тяжести после того, как их сбила машина в Хайфе.",
           "summary": "Дорожное происшествие в Израиле. Обстоятельства и актуальные сведения — в материале источника."
         },
         "en": {
-          "title": "Tragedy in the castle: a woman was killed by an explosive device in her car, two children were injured",
+          "title": "Two women in their 60s were moderately and lightly injured after being hit by a car in Haifa",
           "summary": "A reported road incident in Israel. Details and updates are in the original report."
         },
         "ar": {
-          "title": "فاجعة القلعة: مقتل امرأة بانفجار عبوة ناسفة في سيارتها وإصابة طفلين",
+          "title": "أصيبت سيدتان في الستينيات من العمر بإصابات متوسطة وخفيفة بعد أن صدمتهما سيارة في حيفا",
           "summary": "تقرير عن حادث مروري في إسرائيل. التفاصيل والتحديثات في المصدر."
         }
       },
-      "title": "Трагедия в замке: женщина погибла в результате взрыва взрывного устройства в своей машине, двое детей получили ранения",
+      "title": "Две женщины в возрасте 60 лет получили ранения средней и легкой степени тяжести после того, как их сбила машина в Хайфе.",
       "summary": "Дорожное происшествие в Израиле. Обстоятельства и актуальные сведения — в материале источника.",
-      "translated": true,
-      "imageType": "licensedPhoto",
-      "imageCredit": {
-        "text": "Wikimedia Commons · Public domain",
-        "url": "https://commons.wikimedia.org/wiki/File:Hurricane_Rita_Evacuation_ambulance_1.jpg"
-      }
+      "translated": true
     },
     {
       "id": "bd4830363cd1b0df7971",
@@ -235,6 +329,77 @@
       }
     },
     {
+      "id": "0e15687d0929f3e81329",
+      "titleOriginal": "רוכב אופנוע כבן 20 נפצע באורח בינוני מפגיעת רכב בירושלים",
+      "sourceLanguage": "he",
+      "date": "2026-11-21T14:23:05Z",
+      "url": "https://www.maariv.co.il/breaking-news/article-1390717",
+      "publisher": "Maariv",
+      "category": "accidents",
+      "art": "accidents",
+      "image": null,
+      "official": false,
+      "translations": {
+        "he": {
+          "title": "רוכב אופנוע כבן 20 נפצע באורח בינוני מפגיעת רכב בירושלים",
+          "summary": "דיווח על תאונת דרכים בישראל. פרטים ועדכונים בכתבת המקור."
+        },
+        "ru": {
+          "title": "20-летний мотоциклист получил травмы средней степени тяжести после того, как его сбила машина в Иерусалиме.",
+          "summary": "Дорожное происшествие в Израиле. Обстоятельства и актуальные сведения — в материале источника."
+        },
+        "en": {
+          "title": "A 20-year-old motorcyclist was moderately injured after being hit by a car in Jerusalem",
+          "summary": "A reported road incident in Israel. Details and updates are in the original report."
+        },
+        "ar": {
+          "title": "وأصيب سائق دراجة نارية (20 عاما) بجروح متوسطة بعد أن صدمته سيارة في القدس",
+          "summary": "تقرير عن حادث مروري في إسرائيل. التفاصيل والتحديثات في المصدر."
+        }
+      },
+      "title": "20-летний мотоциклист получил травмы средней степени тяжести после того, как его сбила машина в Иерусалиме.",
+      "summary": "Дорожное происшествие в Израиле. Обстоятельства и актуальные сведения — в материале источника.",
+      "translated": true
+    },
+    {
+      "id": "f77310616a6ba55a58ac",
+      "titleOriginal": "צעיר נהרג בתאונה ליד מצפה רמון",
+      "sourceLanguage": "he",
+      "date": "2026-11-20T19:27:57Z",
+      "url": "https://www.ynet.co.il/news/article/bktbaz0cmx",
+      "publisher": "Ynet",
+      "category": "accidents",
+      "art": "accidents",
+      "image": "./assets/news/images/f77310616a6ba55a58ac.webp",
+      "official": false,
+      "translations": {
+        "he": {
+          "title": "צעיר נהרג בתאונה ליד מצפה רמון",
+          "summary": "דיווח על תאונת דרכים בישראל. פרטים ועדכונים בכתבת המקור."
+        },
+        "ru": {
+          "title": "Молодой человек погиб в результате ДТП недалеко от Мицпе-Рамона",
+          "summary": "Дорожное происшествие в Израиле. Обстоятельства и актуальные сведения — в материале источника."
+        },
+        "en": {
+          "title": "A young man was killed in an accident near Mitzpe Ramon",
+          "summary": "A reported road incident in Israel. Details and updates are in the original report."
+        },
+        "ar": {
+          "title": "مقتل شاب في حادث سير بالقرب من متسبيه رامون",
+          "summary": "تقرير عن حادث مروري في إسرائيل. التفاصيل والتحديثات في المصدر."
+        }
+      },
+      "title": "Молодой человек погиб в результате ДТП недалеко от Мицпе-Рамона",
+      "summary": "Дорожное происшествие в Израиле. Обстоятельства и актуальные сведения — в материале источника.",
+      "translated": true,
+      "imageType": "licensedPhoto",
+      "imageCredit": {
+        "text": "Jeff Attaway from Abuja, Nigeria · CC BY 2.0",
+        "url": "https://commons.wikimedia.org/wiki/File:Bad_one_-_auto_wreck_in_Dakar_Senegal,_2011.jpg"
+      }
+    },
+    {
       "id": "6c18c09e272b9237e18c",
       "titleOriginal": "צוותי הרפואה מ'יחידת חוד' של איחוד הצלה הוזעקו לכביש 65 סמוך לצומת הכניסה לכפר כנא עקב דיווח על תאונה עם מעורבות שני כלי רכב, שאחד מהם התהפך.",
       "sourceLanguage": "he",
@@ -273,41 +438,41 @@
       }
     },
     {
-      "id": "f77310616a6ba55a58ac",
-      "titleOriginal": "צעיר נהרג בתאונה ליד מצפה רמון",
+      "id": "0a0db3b5915fae626466",
+      "titleOriginal": "טרגדיה בטירה: אישה חוסלה בפיצוץ מטען ברכבה, שני ילדים נפצעו",
       "sourceLanguage": "he",
-      "date": "2026-11-20T19:27:57Z",
-      "url": "https://www.ynet.co.il/news/article/bktbaz0cmx",
-      "publisher": "Ynet",
+      "date": "2026-11-20T20:35:14Z",
+      "url": "https://www.maariv.co.il/news/law/article-1390597",
+      "publisher": "Maariv",
       "category": "accidents",
       "art": "accidents",
-      "image": "./assets/news/images/f77310616a6ba55a58ac.webp",
+      "image": "./assets/news/images/0a0db3b5915fae626466.webp",
       "official": false,
       "translations": {
         "he": {
-          "title": "צעיר נהרג בתאונה ליד מצפה רמון",
+          "title": "טרגדיה בטירה: אישה חוסלה בפיצוץ מטען ברכבה, שני ילדים נפצעו",
           "summary": "דיווח על תאונת דרכים בישראל. פרטים ועדכונים בכתבת המקור."
         },
         "ru": {
-          "title": "Молодой человек погиб в результате ДТП недалеко от Мицпе-Рамона",
+          "title": "Трагедия в замке: женщина погибла в результате взрыва взрывного устройства в своей машине, двое детей получили ранения",
           "summary": "Дорожное происшествие в Израиле. Обстоятельства и актуальные сведения — в материале источника."
         },
         "en": {
-          "title": "A young man was killed in an accident near Mitzpe Ramon",
+          "title": "Tragedy in the castle: a woman was killed by an explosive device in her car, two children were injured",
           "summary": "A reported road incident in Israel. Details and updates are in the original report."
         },
         "ar": {
-          "title": "مقتل شاب في حادث سير بالقرب من متسبيه رامون",
+          "title": "فاجعة القلعة: مقتل امرأة بانفجار عبوة ناسفة في سيارتها وإصابة طفلين",
           "summary": "تقرير عن حادث مروري في إسرائيل. التفاصيل والتحديثات في المصدر."
         }
       },
-      "title": "Молодой человек погиб в результате ДТП недалеко от Мицпе-Рамона",
+      "title": "Трагедия в замке: женщина погибла в результате взрыва взрывного устройства в своей машине, двое детей получили ранения",
       "summary": "Дорожное происшествие в Израиле. Обстоятельства и актуальные сведения — в материале источника.",
       "translated": true,
       "imageType": "licensedPhoto",
       "imageCredit": {
-        "text": "Jeff Attaway from Abuja, Nigeria · CC BY 2.0",
-        "url": "https://commons.wikimedia.org/wiki/File:Bad_one_-_auto_wreck_in_Dakar_Senegal,_2011.jpg"
+        "text": "Wikimedia Commons · Public domain",
+        "url": "https://commons.wikimedia.org/wiki/File:Hurricane_Rita_Evacuation_ambulance_1.jpg"
       }
     },
     {
@@ -4327,12 +4492,7 @@
       "title": "Камеры скорости штрафуют за небольшие превышения. На шоссе №6 появилось автоматическое взвешивание грузовиков",
       "summary": "По сообщению Calcalist, часть стационарных камер уже фиксирует небольшое превышение скорости. Полиция также ввела на шоссе №6 систему проверки веса грузовиков без предварительной остановки.",
       "translated": true,
-      "image": "./assets/news/images/7cec5fc092180f21c267.webp",
-      "imageType": "licensedPhoto",
-      "imageCredit": {
-        "text": "Erkki Voutilainen · CC BY 4.0",
-        "url": "https://commons.wikimedia.org/wiki/File:Police_patrolling_1950_(JOKAMT2Yh01-2).tif"
-      }
+      "image": "./assets/news/images/7cec5fc092180f21c267.webp"
     },
     {
       "id": "4b767b7917a133212e28",
@@ -5491,12 +5651,7 @@
       "title": "Минтранс подписал изменения для прав B и C1: электрофургоны до 4,25 тонны",
       "summary": "Согласно сообщению Минтранса от 9 ноября, водителям с правами B не менее двух лет предусмотрена возможность управлять некоторыми разрешёнными электрическими коммерческими автомобилями до 4,25 т при соблюдении условий. Подписание документа не означает автоматического вступления всех положений в силу.",
       "translated": true,
-      "image": "./assets/news/images/405054d69e7896d1263c.webp",
-      "imageType": "licensedPhoto",
-      "imageCredit": {
-        "text": "Wikimedia Commons · CC BY 4.0",
-        "url": "https://commons.wikimedia.org/wiki/File:Close_up_of_Carmen_Rupe_pedestrian_crossing_light.jpg"
-      }
+      "image": "./assets/news/images/405054d69e7896d1263c.webp"
     },
     {
       "id": "27c8bc4518bd9c38e651",
@@ -6108,12 +6263,7 @@
       "title": "В Израиле проводят бесплатную проверку автомобилей и мотоциклов перед зимой",
       "summary": "Национальное управление безопасности дорожного движения сообщает о бесплатных проверках тормозов, шин, света, дворников и рулевого управления в участвующих сервисах. Акция запланирована с 1 ноября 2026 до 1 января 2027 года; запись и наличие услуги необходимо уточнять у сервиса.",
       "translated": true,
-      "image": "./assets/news/images/043c07748b86319ae3ba.webp",
-      "imageType": "licensedPhoto",
-      "imageCredit": {
-        "text": "Ivan Radic · CC BY 2.0",
-        "url": "https://commons.wikimedia.org/wiki/File:Close-up_of_an_electric_car_charging._Traffic_lights_in_a_blurry_background.jpg"
-      }
+      "image": "./assets/news/images/043c07748b86319ae3ba.webp"
     },
     {
       "id": "ea45b3fcdeeaf64559c3",
@@ -6224,12 +6374,7 @@
       "title": "Полиция планирует установить около 200 дорожных камер; штрафы начнут отправлять по SMS",
       "summary": "Davar сообщает о планах полиции развернуть примерно 200 новых камер. На 16 ноября был намечен пилот отправки уведомлений о штрафах владельцам машин по SMS; начало работы и масштабы внедрения требуют отдельного подтверждения.",
       "translated": true,
-      "image": "./assets/news/images/494a55a00ec511c28008.webp",
-      "imageType": "licensedPhoto",
-      "imageCredit": {
-        "text": "Marek Ślusarczyk (Tupungato) Photo portfolio · CC BY 3.0",
-        "url": "https://commons.wikimedia.org/wiki/File:10_US_Highway_speed_limit_sign_55_MPH_-_Garfield_County,_Colorado.jpg"
-      }
+      "image": "./assets/news/images/494a55a00ec511c28008.webp"
     },
     {
       "id": "69b2308b30c9f6dc846d",
@@ -6302,12 +6447,7 @@
       "title": "Мотоциклиста задержали после погони: полиция зафиксировала 239 км/ч на шоссе №70",
       "summary": "По данным Arutz Sheva, 30-летний мотоциклист из Назарета попытался скрыться от полиции. В поиске участвовал полицейский вертолёт; после задержания мотоцикл изъяли для расследования.",
       "translated": true,
-      "image": "./assets/news/images/c0cd2d5f07618f67dc83.webp",
-      "imageType": "licensedPhoto",
-      "imageCredit": {
-        "text": "Marek Ślusarczyk (Tupungato) Photo portfolio · CC BY 3.0",
-        "url": "https://commons.wikimedia.org/wiki/File:10_US_Highway_speed_limit_sign_55_MPH_-_Garfield_County,_Colorado.jpg"
-      }
+      "image": "./assets/news/images/c0cd2d5f07618f67dc83.webp"
     },
     {
       "id": "79df53609138c1864198",
@@ -6651,12 +6791,7 @@
       "title": "Кнессет одобрил новые правила импорта техники для автоспорта",
       "summary": "7 июля профильный комитет одобрил изменения правил ввоза спортивной соревновательной техники и запчастей для автоспорта. Изменения касаются специализированных соревнований, а не обычного использования автомобилей на дорогах.",
       "translated": true,
-      "image": "./assets/news/images/9ce7f097f16e763c9cea.webp",
-      "imageType": "licensedPhoto",
-      "imageCredit": {
-        "text": "Wikimedia Commons · CC BY 4.0",
-        "url": "https://commons.wikimedia.org/wiki/File:Close_up_of_Carmen_Rupe_pedestrian_crossing_light.jpg"
-      }
+      "image": "./assets/news/images/9ce7f097f16e763c9cea.webp"
     },
     {
       "id": "8da0d7e6aaf29974e4b9",
@@ -6766,12 +6901,7 @@
       "title": "Кнессет одобрил изменения системы штрафных баллов за нарушения ПДД",
       "summary": "22 июня экономический комитет Кнессета утвердил обновлённые правила начисления баллов за административные нарушения. Для менее серьёзных проступков предусмотрено смягчение, а за опасные нарушения, включая проезд на красный и телефон за рулём, — более строгие баллы. Позднее условия применения могли уточняться.",
       "translated": true,
-      "image": "./assets/news/images/821987599de17e7c0751.webp",
-      "imageType": "licensedPhoto",
-      "imageCredit": {
-        "text": "Wikimedia Commons · CC BY 4.0",
-        "url": "https://commons.wikimedia.org/wiki/File:Close_up_of_Carmen_Rupe_pedestrian_crossing_light.jpg"
-      }
+      "image": "./assets/news/images/821987599de17e7c0751.webp"
     },
     {
       "id": "2c4584c5e877e25e077e",
@@ -6881,12 +7011,7 @@
       "title": "3 июня комитет Кнессета отложил реформу штрафных баллов и потребовал послаблений",
       "summary": "3 июня экономический комитет не утвердил предложенную редакцию правил начисления баллов и потребовал пересмотра в течение двух недель. Это исторический этап обсуждения: 22 июня комитет впоследствии одобрил изменённую редакцию.",
       "translated": true,
-      "image": "./assets/news/images/84399e428bc60574368d.webp",
-      "imageType": "licensedPhoto",
-      "imageCredit": {
-        "text": "Wikimedia Commons · CC BY 4.0",
-        "url": "https://commons.wikimedia.org/wiki/File:Close_up_of_Carmen_Rupe_pedestrian_crossing_light.jpg"
-      }
+      "image": "./assets/news/images/84399e428bc60574368d.webp"
     },
     {
       "id": "8afa884f224efe65331b",
