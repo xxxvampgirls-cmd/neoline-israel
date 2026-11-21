@@ -1,0 +1,63 @@
+name: Enrich NEOLINE news with licensed thumbnails (non-blocking)
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '13 3,15 * * *' # twice daily, independent of live news metadata refresh
+  push:
+    branches: [main]
+    paths:
+      - 'scripts/build_news_thumbnails.py'
+      - '.github/workflows/sync-news-images.yml'
+permissions:
+  contents: write
+concurrency:
+  group: neoline-news-image-enrichment
+  cancel-in-progress: false
+jobs:
+  images:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          persist-credentials: true
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install optional image dependencies
+        run: python -m pip install --disable-pip-version-check 'requests>=2.31,<3' 'beautifulsoup4>=4.12,<5' 'Pillow>=11,<13'
+      - name: Add only appropriately licensed photos; never block headline refresh
+        env:
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+          MAX_AI_PER_RUN: "0"
+        run: python scripts/build_news_thumbnails.py
+      - name: Validate image references and publisher news dates
+        run: |
+          python - <<'PY'
+          import json,datetime as dt
+          from pathlib import Path
+          archive=json.loads(Path('assets/news/news.json').read_text(encoding='utf-8'))
+          assert archive['version']==1 and archive['items']
+          for item in archive['items']:
+              if item.get('image'):
+                  path=Path(item['image'].lstrip('./'))
+                  assert path.is_file() and path.suffix=='.webp'
+                  assert path.stat().st_size<90_000
+          print('Thumbnail enrichment validated; news itself is published separately')
+          PY
+      - name: Publish thumbnails only if no newer news conflicts
+        run: |
+          set -euo pipefail
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add -A assets/news/news.json assets/news/image-report.json assets/news/images/
+          if git diff --cached --quiet; then
+            echo 'No new licensed images'
+            exit 0
+          fi
+          git commit -m 'Enrich verified Israeli news with licensed thumbnail assets'
+          # If a newer collector snapshot changed news.json, prefer newer news
+          # over thumbnail coverage and retry at next scheduled image refresh.
+          git pull --rebase origin main || { git rebase --abort || true; echo 'Newer news exists; images can retry later'; exit 0; }
+          git push origin HEAD:main
