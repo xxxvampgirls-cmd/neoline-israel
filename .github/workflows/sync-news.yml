@@ -2,7 +2,7 @@ name: Refresh Israel automotive news (general + six-month law archive)
 on:
   workflow_dispatch:
   schedule:
-    - cron: '17 * * * *'  # hourly best-effort, GitHub schedules may run late
+    - cron: '17,47 * * * *'  # twice hourly; backup watchdog triggers when overdue
   push:
     branches: [main]
     paths:
