@@ -80,8 +80,8 @@
 @keyframes neolineGiftBigStars{
  0%{opacity:0;transform:translate(-50%,-50%) scale(.14) rotate(-14deg)}
  12%{opacity:1}
- 32%{opacity:1;transform:translate(calc(-50% + var(--x) * .36),calc(-50% + var(--y) * .38)) scale(.92) rotate(13deg)}
- 72%{opacity:1;transform:translate(calc(-50% + var(--x) * .82),calc(-50% + var(--y) * .83)) scale(1.25) rotate(var(--r))}
+ 32%{opacity:1;transform:translate(-50%,-50%) scale(.92) rotate(13deg)}
+ 72%{opacity:1;transform:translate(calc(-50% + var(--x)),calc(-50% + var(--y))) scale(1.25) rotate(var(--r))}
  88%{opacity:.89}
  100%{opacity:0;transform:translate(calc(-50% + var(--x)),calc(-50% + var(--y))) scale(1.36) rotate(var(--r))}
 }
