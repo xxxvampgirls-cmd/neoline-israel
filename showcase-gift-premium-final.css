@@ -61,8 +61,7 @@
  mix-blend-mode:normal!important;
  filter:drop-shadow(0 10px 11px #15476d54)!important;
  transform-origin:center 70%;
- scale:1!important;
- transition:scale 0s!important;
+ /* Allow the shared carousel's slow approach zoom. */
  pointer-events:none;
  user-select:none;
  -webkit-user-drag:none;
