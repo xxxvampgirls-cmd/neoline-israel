@@ -418,6 +418,27 @@ function validNewsPayload(data){
   Number.isFinite(Date.parse(data.updated))&&
   Date.parse(data.updated)<=Date.now()+12*3600000;
 }
+/* Actual feed timestamp, never the visitor's clock posing as a new report.
+   If the scheduled collector stalls, show a visible warning immediately. */
+function updateNewsFreshnessLabel(){
+ const node=$("newsUpdated");
+ if(!node)return;
+ if(!newsFeedReady||!Number.isFinite(newsFeedDate)||newsFeedDate<=0){
+  node.dataset.stale="unknown";
+  node.textContent=({ru:"Проверяем обновление новостей…",en:"Checking news updates…",he:"בודקים עדכוני חדשות…",ar:"جارٍ فحص تحديث الأخبار…"})[state.lang]||"Checking news updates…";
+  return;
+ }
+ const ageHours=(Date.now()-newsFeedDate)/3600000;
+ const stale=ageHours>=3;
+ const format=new Intl.DateTimeFormat(
+  {ru:"ru-RU",en:"en-GB",he:"he-IL",ar:"ar-IL"}[state.lang]||"ru-RU",
+  {timeZone:"Asia/Jerusalem",day:"numeric",month:"short",hour:"2-digit",minute:"2-digit"}
+ ).format(new Date(newsFeedDate));
+ const clean=({ru:"Обновлено",en:"Updated",he:"עודכן",ar:"تم التحديث"})[state.lang];
+ const warning=({ru:"⚠ Лента обновляется с задержкой",en:"⚠ News refresh is delayed",he:"⚠ עדכון החדשות מתעכב",ar:"⚠ تحديث الأخبار متأخر"})[state.lang];
+ node.dataset.stale=stale?"true":"false";
+ node.textContent=(stale?warning:clean)+" · "+format;
+}
 function applyNewsPayload(data,origin){
  if(!validNewsPayload(data))throw Error("Invalid news payload");
  const stamp=Date.parse(data.updated);
@@ -431,7 +452,7 @@ function applyNewsPayload(data,origin){
  }));
  document.documentElement.dataset.newsSource=origin;
  document.documentElement.dataset.newsUpdated=data.updated;
- $("newsUpdated").textContent=tr("updated")+": "+displayDate(data.updated);
+ updateNewsFreshnessLabel();
  const deepId=new URLSearchParams(location.search).get("story");
  const target=typeof deepId==="string"&&/^[a-f0-9]{20}$/.test(deepId)?
   state.items.findIndex(item=>item.id===deepId):-1;
@@ -474,7 +495,7 @@ async function load(){
    catch(e){console.warn("News feed "+origin+" unavailable:",e.message)}
   }));
   if(!newsFeedReady){
-   $("newsUpdated").textContent="";
+   updateNewsFreshnessLabel();
    state.items=[];
    tabs();render();initializeFeatures(true);
    window.dispatchEvent(new Event("neoline:news-archive-unavailable"));
@@ -509,6 +530,7 @@ document.addEventListener("visibilitychange",()=>{
 // Keep long-lived tabs up to date without increasing the daily publisher crawl.
 setInterval(()=>{
  if(document.hidden)return;
+ updateNewsFreshnessLabel();
  if(Date.now()-newsFetchAt>=30*60000)load();
 },60000);
 window.addEventListener("online",()=>{if(!document.hidden&&Date.now()-newsFetchAt>5*60000)load()});
