@@ -48,8 +48,21 @@ EXCLUDE=re.compile(
     r"هجوم إرهابي|صاروخ|حماس",re.I)
 FOREIGN=re.compile(
     r"בארה.ב|באמריקה|בסין|ברוסיה|בהודו|באירופה|"
-    r"в россии|в бразилии|в китае|в сша|"
+    r"в россии|в бразилии|в китае|в сша|на украине|в украине|"
+    r"кривом роге|кривой рог|днепре|одессе|"
     r"\bin the usa\b|\bin china\b|\bin brazil\b",re.I)
+# A road word in a multi-topic news post is not evidence of road footage.
+# Require a focused road incident or driving-enforcement report in the HEADLINE.
+ROAD_REPORT=re.compile(
+    r"משטרת התנועה|אגף התנועה|מצלמת רכב|מצלמות מהירות|אכיפת מהירות|"
+    r"נהיגה מסוכנת|עבירת תנועה|כביש\\s*\\d{1,3}|חסימת כביש|"
+    r"дорожн.{0,18}(?:полици|происшеств|движен|авари|наруш)|"
+    r"видеорегистратор|дорожная камера|камера скорости|"
+    r"шоссе|трассе|превышен.{0,12}скорост|"
+    r"road crash|dashcam|traffic accident|traffic police|"
+    r"road closure|speed camera|road report|"
+    r"شرطة المرور|كاميرا سرعة|مخالفة مرور",re.I)
+TRUSTED_OFFICIAL={"atanpolice","israelpoliceforce","uh1221"}
 ISRAEL=re.compile(
     r"ישראל|ישראלי|כביש\s*\d{1,3}|תל אביב|ירושלים|חיפה|איילון|"
     r"израил|тель.авив|иерусалим|хайфа|"
@@ -78,12 +91,18 @@ def date(value):
     except (ValueError,TypeError):
         return None
 
-def permitted(title:str, body:str, trusted:bool=True)->bool:
-    if not title or not TRAFFIC.search(title+" "+body[:650]):return False
-    if EXCLUDE.search(title+" "+body[:650]) or FOREIGN.search(title):return False
-    # A verified Israeli traffic/police publisher is a local contextual source,
-    # but third-party reposts need at least one explicit Israel reference.
-    return bool(trusted or ISRAEL.search(title+" "+body[:400]))
+def permitted(title:str, body:str, handle:str="")->bool:
+    if not title or not TRAFFIC.search(title):return False
+    if not (INCIDENT.search(title) or ROAD_REPORT.search(title)):return False
+    if EXCLUDE.search(title+" "+body[:450]) or FOREIGN.search(title+" "+body[:450]):
+        return False
+    # Police and rescue are locally authoritative if a HE/AR traffic heading
+    # is explicitly present. General news channels MUST say Israel in title;
+    # content mentioning Israel elsewhere does not establish video location.
+    official=handle.lower() in TRUSTED_OFFICIAL
+    israeli_title=bool(ISRAEL.search(title))
+    local_script=bool(re.search(r"[א-ת]{3,}",title))
+    return israeli_title or (official and local_script)
 
 def classify(title,body):
     return "accidents" if INCIDENT.search(title+" "+body[:200]) else "reports"
@@ -122,7 +141,7 @@ def extract(html, handle, publisher, cutoff, now):
         body_el=wrap.select_one(".tgme_widget_message_text")
         body=body_el.get_text("\n",strip=True) if body_el else ""
         title=clean_title(body)
-        if not permitted(title,body):continue
+        if not permitted(title,body,handle):continue
         kind=classify(title,body)
         post_url=f"https://t.me/{handle}/{number}"
         candidates=[]
@@ -153,7 +172,7 @@ def refresh(now=None,session=None):
     for row in previous.get("items",[]):
         if not isinstance(row,dict):continue
         when=date(row.get("date"))
-        if when and cutoff<=when<=now and row.get("localVerified") is True and row.get("platform") in (*VIDEO_LINKS.keys(),"telegram"):
+        if when and cutoff<=when<=now and row.get("localVerified") is True and row.get("platform") in (*VIDEO_LINKS.keys(),"telegram") and permitted(str(row.get("title","")),"",str(row.get("sourceChannel",""))):
             saved[row.get("url")]=row
     stats={};errors={};new=0
     for publisher,handle in CHANNELS:
@@ -197,7 +216,9 @@ def self_test():
     items,_=extract(sample,"Atanpolice","Police",now-dt.timedelta(days=30),now)
     assert {x["platform"] for x in items}=={"telegram","tiktok"},items
     assert all(x["category"]=="accidents" and x["dateKind"]=="source_post" for x in items)
-    assert not permitted("حادث في روسيا","حادث",True)
+    assert not permitted("حادث سير в россии","حادث", "Atanpolice")
+    assert not permitted("Жесть в Кривом Роге. На дороге лежат трупы","", "alexavni")
+    assert not permitted("Падение охватило акции технологических компаний и производителей полупроводников.","на дороге", "alexavni")
     assert clean_title("حوادث طرق إسرائيل فيديو\nتابع")=="حوادث طرق إسرائيل فيديو"
     assert not list(external_links(BeautifulSoup('<a href="https://instagram.com/username/">profile</a>',"html.parser")))
     print("Social road-video verified-link self test passed")
