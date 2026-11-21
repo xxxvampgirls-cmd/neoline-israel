@@ -26,6 +26,8 @@ CHANNELS = (
     ("news13", "UCvQmPpU20hw1Trss_CVwaew", "חדשות 13"),
     ("kan11", "UC_HwfTAcjBESKZRJq6BTCpg", "כאן חדשות"),
     ("police", "UCrwyHUb4iIrpknhP6MTvnww", "משטרת ישראל"),
+    ("ynet", "UCpSSzrovhI4fA2PQNItecUA", "ynet"),
+    ("i24he", "UCisowXt5wZkp2sR3rFh9lnQ", "i24NEWS עברית"),
 )
 CHANNEL_NAMES = {cid: name for cid, _, name in CHANNELS}
 CHANNEL_IDS = {youtube_id: cid for cid, youtube_id, _ in CHANNELS}
@@ -258,7 +260,7 @@ def refresh(now: dt.datetime | None = None) -> dict:
     OUTPUT.write_text(json.dumps(result, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     print(f"Road videos: {len(items)} kept, {discovered} new, "
           f"{sum(x['source']=='youtube' for x in items)} other-channel clips; "
-          f"{successes}/6 official feeds working; errors={failures[:6]}")
+          f"{successes}/{2*len(CHANNELS)} official feeds working; errors={failures[:6]}")
     return result
 
 
