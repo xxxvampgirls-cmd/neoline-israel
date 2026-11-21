@@ -186,3 +186,32 @@
 @media(max-width:385px){
   #gameGiftDialog .gift-reveal-float{top:94px}
 }
+
+/* Fly the gold prize ribbon out of the open chest at the EXACT same burst
+   as the stars. One transform-only motion; it lands at its approved position. */
+#gameGiftDialog .gift-reveal[data-phase="burst"] .gift-reveal-float,
+#gameGiftDialog .gift-reveal[data-phase="revealed"] .gift-reveal-float{
+  animation:neolineRibbonLaunch .78s cubic-bezier(.15,.78,.2,1) 0s both!important;
+}
+@keyframes neolineRibbonLaunch{
+  0%{opacity:0;transform:translate(-50%,90px) scale(.34)}
+  12%{opacity:1}
+  72%{opacity:1;transform:translate(-50%,-7px) scale(1.045)}
+  100%{opacity:1;transform:translate(-50%,0) scale(1)}
+}
+/* Mixed sizes, same-frame blast; existing palette and box are unchanged. */
+#gameGiftDialog .gift-reveal-stars i{
+  font-size:var(--size,17px)!important;
+}
+#gameGiftDialog .gift-reveal[data-phase="burst"] .gift-reveal-stars i,
+#gameGiftDialog .gift-reveal[data-phase="revealed"] .gift-reveal-stars i{
+  animation-duration:1.18s!important;
+}
+@media(prefers-reduced-motion:reduce){
+ #gameGiftDialog .gift-reveal[data-phase="burst"] .gift-reveal-float,
+ #gameGiftDialog .gift-reveal[data-phase="revealed"] .gift-reveal-float{
+  animation:none!important;
+  opacity:1!important;
+  transform:translate(-50%,0) scale(1)!important;
+ }
+}
