@@ -3142,13 +3142,32 @@ function homepageNewsSlide(slot,i){
 }
 /* Only official local curated feed; never fabricate three stories or retain expired ones.
    News promos remain visible when the feed is temporarily unreachable. */
+let homepageNewsLastUpdated=0,homepageNewsLoading=false;
 async function loadHomepageNews(){
+ if(homepageNewsLoading)return;
+ homepageNewsLoading=true;
  try{
-  const response=await fetch('./assets/news/news.json',{cache:'no-store'});
-  if(!response.ok)throw Error('News feed unavailable');
-  const data=await response.json();
-  if(data.version!==1||!Array.isArray(data.items)||data.retentionDays!==30||data.lawsRetentionMonths!==6)
-   throw Error('Unexpected news schema');
+  // Prefer the freshest genuine snapshot: Cloudflare Pages or GitHub raw.
+  const version=Math.floor(Date.now()/600000);
+  const endpoints=[
+   './assets/news/news.json?v='+version,
+   'https://raw.githubusercontent.com/xxxvampgirls-cmd/neoline-israel/main/assets/news/news.json?v='+version
+  ];
+  const options=await Promise.all(endpoints.map(async url=>{
+   try{
+    const response=await fetch(url,{cache:'no-store',signal:AbortSignal.timeout(10000)});
+    if(!response.ok)return null;
+    const data=await response.json();
+    if(data?.version!==1||!Array.isArray(data.items)||data.retentionDays!==30||data.lawsRetentionMonths!==6)return null;
+    const stamp=Date.parse(data.updated);
+    if(!Number.isFinite(stamp)||stamp>Date.now()+12*3600e3)return null;
+    return {data,stamp};
+   }catch(_){return null}
+  }));
+  const chosen=options.filter(Boolean).sort((a,b)=>b.stamp-a.stamp)[0];
+  if(!chosen||chosen.stamp<=homepageNewsLastUpdated)return;
+  homepageNewsLastUpdated=chosen.stamp;
+  const data=chosen.data;
   const now=Date.now(),sixMonths=new Date(now);sixMonths.setUTCDate(1);sixMonths.setUTCMonth(sixMonths.getUTCMonth()-6);
   homepageNews=data.items.filter(x=>{
    const date=Date.parse(x.date),age=now-date;
@@ -3160,7 +3179,8 @@ async function loadHomepageNews(){
   // Avoid breaking a halfway-complete cutout flight on slow connections.
   const redraw=()=>{if(document.querySelector('#showcaseSlides .ad-exiting'))setTimeout(redraw,950);else renderShowcase()};
   redraw();
- }catch(e){/* Empty slots lead to /news.html rather than showing invented reports. */}
+ }catch(e){console.warn('Homepage verified news feed unavailable:',e.message)}
+ finally{homepageNewsLoading=false}
 }
 
 
@@ -3669,6 +3689,10 @@ $('adShare').onclick=async()=>{
  }catch(e){if(e.name!=='AbortError')toast(({ru:'Не удалось поделиться',en:'Could not share',he:'השיתוף נכשל',ar:'تعذرت المشاركة'})[lang])}
 };
 let preferredLang='ru';try{const saved=localStorage.getItem('neoline-language');if(['ru','he','en','ar'].includes(saved))preferredLang=saved}catch(e){}changeLang(preferredLang);updateCounts();loadTransparentPhotos();
+ // The old loader was never called: initialise and keep the slides current.
+ loadHomepageNews();
+ setInterval(()=>{if(!document.hidden)loadHomepageNews()},10*60*1000);
+ document.addEventListener('visibilitychange',()=>{if(!document.hidden)loadHomepageNews()});
 /* Verify that the official brand asset is reachable; otherwise use a readable
    text fallback. The page remains usable even when the image CDN is blocked. */
 
