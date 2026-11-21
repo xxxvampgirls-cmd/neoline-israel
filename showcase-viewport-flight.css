@@ -1,0 +1,51 @@
+/* NEOLINE showroom viewport flight normalization.
+   Artwork and product photos move through the actual phone viewport during
+   forward/backward transitions. Backplate remains in its normal stationary
+   carousel. The portal is pointer-inert and automatically removed after 910ms. */
+.neoline-showroom-viewport-flight,
+.neoline-showroom-viewport-flight *{
+ pointer-events:none!important;
+}
+.neoline-showroom-viewport-flight .showroom-flight-copy,
+.neoline-showroom-viewport-flight .showroom-flight-copy .featured-image{
+ transition:none!important;
+ animation:none!important;
+}
+.neoline-showroom-viewport-flight .showroom-flight-copy::before,
+.neoline-showroom-viewport-flight .showroom-flight-copy::after,
+.neoline-showroom-viewport-flight .showroom-flight-copy .featured-image::before,
+.neoline-showroom-viewport-flight .showroom-flight-copy .featured-image::after,
+.neoline-showroom-viewport-flight .showroom-flight-copy .theory-stage::before,
+.neoline-showroom-viewport-flight .showroom-flight-copy .theory-stage::after{
+ display:none!important;
+}
+/* Only the copy’s foreground art is visible, never the image panel itself. */
+.neoline-showroom-viewport-flight .showroom-flight-copy .ad-photo-stripes,
+.neoline-showroom-viewport-flight .showroom-flight-copy .ad-device-shadow,
+.neoline-showroom-viewport-flight .showroom-flight-copy .feature-img-tag,
+.neoline-showroom-viewport-flight .showroom-flight-copy .feature-img-prev,
+.neoline-showroom-viewport-flight .showroom-flight-copy .feature-img-next{
+ display:none!important;
+}
+.neoline-showroom-viewport-flight .showroom-flight-copy .promo-art-object,
+.neoline-showroom-viewport-flight .showroom-flight-copy .news-showcase-cutout,
+.neoline-showroom-viewport-flight .showroom-flight-copy .theory-stage{
+ visibility:visible!important;
+ animation:none!important;
+ transition:none!important;
+}
+.neoline-showroom-viewport-flight .showroom-flight-copy .promo-art-object{
+ scale:1!important;
+}
+.neoline-showroom-viewport-flight .showroom-flight-copy .theory-stage{
+ overflow:visible!important;
+ background:transparent!important;
+ border:0!important;
+ box-shadow:none!important;
+}
+.neoline-showroom-viewport-flight .showroom-flight-copy .theory-halo{
+ display:none!important;
+}
+@media(prefers-reduced-motion:reduce){
+ .neoline-showroom-viewport-flight{display:none!important}
+}
