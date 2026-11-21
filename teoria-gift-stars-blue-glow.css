@@ -31,7 +31,7 @@
 }
 #gameGiftDialog .gift-reveal[data-phase="burst"] .gift-reveal-backglow,
 #gameGiftDialog .gift-reveal[data-phase="revealed"] .gift-reveal-backglow{
- animation:neolineGiftBlueBloom 2.25s ease-out both;
+ animation:neolineGiftBlueBloom 1.88s ease-out both;
 }
 #gameGiftDialog .gift-reveal[data-phase="burst"] .gift-reveal-open-ring,
 #gameGiftDialog .gift-reveal[data-phase="revealed"] .gift-reveal-open-ring{
@@ -53,11 +53,34 @@
  87%{opacity:.26;transform:translate(-50%,-50%) scale(15)}
  100%{opacity:0;transform:translate(-50%,-50%) scale(16.5)}
 }
+/* Bright cyan light is emitted from INSIDE the visible 3D box, not
+   only behind the entire artwork. No new image, filter or DOM reflow. */
+#gameGiftDialog .gift-reveal-box--neoline-blue::after{
+ content:"";
+ position:absolute;z-index:4;pointer-events:none;
+ left:50%;top:47%;width:112px;height:54px;
+ border-radius:50%;
+ background:radial-gradient(ellipse at center,
+  #f2ffffdc 0%,#90efffbf 18%,#12cfff8e 40%,#009fff38 65%,transparent 83%);
+ box-shadow:0 0 14px #23d5ffa1;
+ opacity:0;transform:translate(-50%,-50%) scale(.5);
+}
+#gameGiftDialog .gift-reveal[data-phase="burst"] .gift-reveal-box--neoline-blue::after,
+#gameGiftDialog .gift-reveal[data-phase="revealed"] .gift-reveal-box--neoline-blue::after{
+ animation:neolineCavityGlow 1.88s ease-out both;
+}
+@keyframes neolineCavityGlow{
+ 0%{opacity:.85;transform:translate(-50%,-50%) scale(.65)}
+ 10%{opacity:1;transform:translate(-50%,-50%) scale(1.05)}
+ 65%{opacity:.9;transform:translate(-50%,-50%) scale(1.12)}
+ 100%{opacity:.27;transform:translate(-50%,-50%) scale(1)}
+}
+
 /* Persist the same animation through burst → revealed, preventing the
    570ms phase change from abruptly cancelling flying stars. */
 #gameGiftDialog .gift-reveal[data-phase="burst"] .gift-reveal-stars i,
 #gameGiftDialog .gift-reveal[data-phase="revealed"] .gift-reveal-stars i{
- animation:neolineGiftBigStars 2.18s cubic-bezier(.15,.53,.2,.99) var(--delay) both!important;
+ animation:neolineGiftBigStars 1.82s cubic-bezier(.12,.7,.25,1) var(--delay) both!important;
 }
 /* Bigger shapes and a more luminous center, without adding many particles. */
 #gameGiftDialog .gift-reveal-stars{
@@ -80,13 +103,15 @@
 #gameGiftDialog .gift-reveal-stars i:nth-child(4n){font-size:21px!important}
 #gameGiftDialog .gift-reveal-stars i:nth-child(5n){font-size:25px!important}
 #gameGiftDialog .gift-reveal-stars i:nth-child(7n){font-size:15px!important}
+/* No stationary 0–32% hold: motion starts from the open cavity immediately.
+   Keep enough travel time for a pleasant, readable sparkle trail. */
 @keyframes neolineGiftBigStars{
- 0%{opacity:0;transform:translate(-50%,-50%) scale(.14) rotate(-14deg)}
- 12%{opacity:1}
- 32%{opacity:1;transform:translate(-50%,-50%) scale(.92) rotate(13deg)}
- 72%{opacity:1;transform:translate(calc(-50% + var(--x)),calc(-50% + var(--y))) scale(1.25) rotate(var(--r))}
- 88%{opacity:.89}
- 100%{opacity:0;transform:translate(calc(-50% + var(--x)),calc(-50% + var(--y))) scale(1.36) rotate(var(--r))}
+ 0%{opacity:0;transform:translate(-50%,-50%) scale(.3) rotate(0)}
+ 7%{opacity:1;transform:translate(calc(-50% + var(--x) * 0.12),calc(-50% + var(--y) * 0.12)) scale(.62) rotate(9deg)}
+ 28%{opacity:1;transform:translate(calc(-50% + var(--x) * 0.47),calc(-50% + var(--y) * 0.47)) scale(.95) rotate(20deg)}
+ 66%{opacity:1;transform:translate(calc(-50% + var(--x) * 0.94),calc(-50% + var(--y) * 0.94)) scale(1.13) rotate(var(--r))}
+ 82%{opacity:.82}
+ 100%{opacity:0;transform:translate(calc(-50% + var(--x)),calc(-50% + var(--y))) scale(1.16) rotate(var(--r))}
 }
 /* Slightly prolong the rays from the opened box at EVERY reveal. */
 #gameGiftDialog .gift-reveal[data-phase="burst"] .gift-reveal-beam,
