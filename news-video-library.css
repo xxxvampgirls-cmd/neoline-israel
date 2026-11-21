@@ -232,3 +232,29 @@ body.news-video-modal-open{overflow:hidden}
  .news-video-archive p{font-size:10px}
  .news-video-archive-grid .news-video-card{flex-basis:min(221px,70vw)}
 }
+
+/* External public social-source videos: original platform opens by tap.
+   No fake social thumbnails and no re-hosted crash footage. */
+.news-video-card--social{
+ text-decoration:none;
+}
+.news-video-art--social{
+ display:flex;align-items:center;justify-content:center;
+ background:linear-gradient(145deg,#123e62,#096b9f 63%,#31a8d8);
+}
+.news-video-art--social::before{
+ content:"";position:absolute;inset:-40%;
+ background:repeating-linear-gradient(135deg,transparent 0 25px,#ffffff0e 26px 28px);
+ transform:rotate(7deg);pointer-events:none;
+}
+.news-video-social-mark{
+ position:relative;z-index:1;
+ color:#fff;font:850 clamp(17px,4vw,23px)/1.2 Manrope,Arial,sans-serif;
+ text-shadow:0 2px 14px #002b5290;
+ text-transform:capitalize;letter-spacing:.01em;
+}
+.news-video-social-arrow{
+ position:absolute;right:13px;bottom:9px;color:#e3f7ff;
+ font-size:23px;font-weight:800;z-index:2;
+}
+.news-video-art--social .news-video-category{background:#eefaff;color:#12608c}
