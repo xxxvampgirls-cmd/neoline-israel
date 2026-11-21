@@ -3333,7 +3333,12 @@ function showcaseFlightSubject(slide){
  * into a lightweight fixed portal, then restore it after 840ms. Cloning
  * nested SVG promo/road/news artwork each swipe forced heavy layout,
  * image decode and GPU upload on budget Android phones. */
-function createShowroomFlightGhost(slide,subject,fromX,toX,stage,restoreList){
+/* Every carousel foreground travels through one fixed viewport portal.
+ * Keep its ORIGINAL DOM (no expensive SVG cloning). The independent motion
+ * wrapper is NOT a .featured-slide, avoiding legacy transform:none!important
+ * from overriding the animation. The inner visual keeps .active so all
+ * CSS-only promotional scenes render instead of popping into existence. */
+function createShowroomFlightGhost(slide,subject,fromX,toX,scope,restoreList){
  if(!slide||!subject?.box?.width||!subject.box.height)return null;
  const {box,kind,element}=subject;
  const originParent=element.parentNode;
@@ -3353,33 +3358,34 @@ function createShowroomFlightGhost(slide,subject,fromX,toX,stage,restoreList){
   else element.setAttribute('style',previousStyle);
  };
  restoreList.push(restore);
- let ghost,subjectParent;
+ // Only this wrapper moves. No CSS carousel rule can override its transform.
+ const track=document.createElement('div');
+ track.className='neoline-flight-track';
+ track.style.cssText='position:absolute!important;display:block!important;'+
+  'left:'+box.left+'px!important;top:'+box.top+'px!important;'+
+  'width:'+box.width+'px!important;height:'+box.height+'px!important;'+
+  'pointer-events:none!important;overflow:visible!important;'+
+  'z-index:1!important;';
+ let parent;
  if(kind==='image'){
-  ghost=document.createElement('div');
-  ghost.style.cssText='position:absolute!important;box-sizing:border-box!important;'+
-   'left:'+box.left+'px!important;top:'+box.top+'px!important;'+
-   'width:'+box.width+'px!important;height:'+box.height+'px!important;'+
-   'overflow:visible!important;pointer-events:none!important;';
-  subjectParent=ghost;
+  parent=track;
   element.style.cssText='position:absolute!important;inset:0!important;'+
    'display:block!important;width:100%!important;height:100%!important;'+
    'min-width:0!important;min-height:0!important;'+
    'max-width:none!important;max-height:none!important;margin:0!important;'+
    'object-fit:contain!important;opacity:1!important;mix-blend-mode:normal!important;'+
-   'filter:drop-shadow(0 9px 9px #10385e52)!important;'+
+   'filter:drop-shadow(0 8px 8px #10385e44)!important;'+
    'animation:none!important;transition:none!important;scale:1!important;'+
    'pointer-events:none!important;';
  }else{
-  // Keep only a cheap shell, not a duplicate SVG/HTML subtree.
-  ghost=document.createElement('article');
-  ghost.className=slide.className.replace(/\b(?:active|ad-exiting|ad-arriving|ad-move-forward|ad-move-backward|ad-zooming)\b/g,'').trim();
-  ghost.classList.add('showroom-flight-copy');
-  ghost.style.cssText='display:block!important;position:absolute!important;box-sizing:border-box!important;'+
-   'left:'+box.left+'px!important;top:'+box.top+'px!important;'+
-   'width:'+box.width+'px!important;height:'+box.height+'px!important;'+
-   'min-height:0!important;padding:0!important;margin:0!important;'+
-   'border:0!important;box-shadow:none!important;background:none!important;'+
-   'overflow:visible!important;pointer-events:none!important;';
+  const ghost=document.createElement('article');
+  ghost.className=slide.className.replace(/\b(?:ad-exiting|ad-arriving|ad-move-forward|ad-move-backward|ad-zooming)\b/g,'').trim();
+  ghost.classList.add('active','showroom-flight-copy');
+  ghost.style.cssText='display:block!important;position:absolute!important;inset:0!important;'+
+   'width:100%!important;height:100%!important;min-height:0!important;'+
+   'padding:0!important;margin:0!important;border:0!important;'+
+   'background:transparent!important;box-shadow:none!important;overflow:visible!important;'+
+   'pointer-events:none!important;';
   const frame=document.createElement('div');
   frame.className=subject.image.className;
   frame.style.cssText='display:block!important;position:absolute!important;inset:0!important;'+
@@ -3388,29 +3394,29 @@ function createShowroomFlightGhost(slide,subject,fromX,toX,stage,restoreList){
    'border:0!important;border-radius:0!important;box-shadow:none!important;'+
    'background:transparent!important;overflow:visible!important;pointer-events:none!important;';
   ghost.appendChild(frame);
-  subjectParent=frame;
+  track.appendChild(ghost);
+  parent=frame;
   element.style.setProperty('animation','none','important');
   element.style.setProperty('transition','none','important');
+  element.style.setProperty('scale','1','important');
   if(element.classList.contains('theory-stage')){
    element.style.setProperty('background','transparent','important');
    element.style.setProperty('border','0','important');
    element.style.setProperty('box-shadow','none','important');
   }
  }
- subjectParent.appendChild(element);
- ghost.setAttribute('aria-hidden','true');
- ghost.tabIndex=-1;
- stage.appendChild(ghost);
- return ghost.animate([
-   {transform:'translate3d('+fromX+'px,0,0)'},
-   {transform:'translate3d('+toX+'px,0,0)'}
+ parent.appendChild(element);
+ scope.appendChild(track);
+ return track.animate([
+  {transform:'translate3d('+fromX+'px,0,0)'},
+  {transform:'translate3d('+toX+'px,0,0)'}
  ],{duration:840,easing:'cubic-bezier(.43,.08,.3,1)',fill:'both'});
 }
-function startShowroomViewportFlight(oldSlide,newSlide,outgoingSubject,direction){
+function startShowroomViewportFlight(oldSlide,newSlide,outgoingSubject,direction,incomingSnapshot){
  clearShowroomGhosts();
  if(window.matchMedia('(prefers-reduced-motion: reduce)').matches)return;
  const outgoing=outgoingSubject||showcaseFlightSubject(oldSlide);
- const incoming=showcaseFlightSubject(newSlide);
+ const incoming=incomingSnapshot||showcaseFlightSubject(newSlide);
  if(!outgoing&&!incoming)return;
  const viewport=document.createElement('div');
  viewport.className='neoline-showroom-viewport-flight';
@@ -3432,11 +3438,13 @@ function startShowroomViewportFlight(oldSlide,newSlide,outgoingSubject,direction
  if(outgoing)createShowroomFlightGhost(oldSlide,outgoing,0,sign*offset,scope,restoreList);
  if(incoming)createShowroomFlightGhost(newSlide,incoming,-sign*offset,0,scope,restoreList);
  if(!restoreList.length){viewport.remove();return}
- const timer=setTimeout(cleanup,910);
+ const timer=setTimeout(cleanup,900);
  function cleanup(){
   if(closed)return;
   closed=true;
   clearTimeout(timer);
+  // Cancel compositor animations before returning the elements to avoid
+  // showing the box for a frame at an out-of-viewport transform.
   viewport.getAnimations({subtree:true}).forEach(a=>a.cancel());
   for(const restore of restoreList)restore();
   viewport.remove();
@@ -3472,11 +3480,15 @@ function revealShowcaseSlide(index){
  }
  alignShowcaseMotion(incoming);
  incoming.classList.add('active');
- if(!reduced)incoming.classList.add('ad-arriving',direction);
  incoming.removeAttribute('inert');
+ // The incoming foreground must be measured in its CENTERED position,
+ // before ad-arriving CSS translates it into the next frame.
+ // Otherwise the viewport animation starts from an already shifted box.
+ const incomingSubject=showcaseFlightSubject(incoming);
+ if(!reduced)incoming.classList.add('ad-arriving',direction);
  // Animate foreground photos in a viewport-level overlay so the transition
  // remains visible until each photo passes the phone screen edge.
- startShowroomViewportFlight(previous,incoming,outgoingSubject,direction);
+ startShowroomViewportFlight(previous,incoming,outgoingSubject,direction,incomingSubject);
  startShowcaseZoom(incoming);
  slideIndex=next;
  // Prime the following image before its transition, without eagerly loading all 11 slides.
