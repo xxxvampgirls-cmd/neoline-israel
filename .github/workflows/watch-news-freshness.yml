@@ -4,6 +4,12 @@ on:
   schedule:
     # Check twice hourly; GitHub schedule can be delayed.
     - cron: '12,42 * * * *'
+  push:
+    branches: [main]
+    paths:
+      - 'scripts/sync_news.py'
+      - '.github/workflows/sync-news.yml'
+      - '.github/workflows/watch-news-freshness.yml'
 permissions:
   contents: read
   issues: write
@@ -95,7 +101,7 @@ jobs:
           existing="$(gh issue list --state open --limit 100 --json number,title --jq '.[] | select(.title == "NEOLINE NEWS: automatic feed refresh stalled") | .number' | head -n 1)"
           if [ "$NEWS_HEALTH_RESULT" != success ]; then
             if [ -z "$existing" ]; then
-              gh issue create --title "$title" --body "Automatic news freshness check failed. News feed must be refreshed; inspect the latest sync-news workflow and assets/news/sync-report.json. Do NOT invent dates or articles. Monitoring runs hourly. [Workflow runs](https://github.com/$GH_REPO/actions/workflows/sync-news.yml)."
+              gh issue create --title "$title" --body "Automatic news freshness check failed. News feed must be refreshed; inspect the latest sync-news workflow and assets/news/sync-report.json. Do NOT invent dates or articles. Monitoring runs twice hourly and on collector code changes. [Workflow runs](https://github.com/$GH_REPO/actions/workflows/sync-news.yml)."
             else
               echo "Existing open alert: #$existing (no duplicate issue)"
             fi
