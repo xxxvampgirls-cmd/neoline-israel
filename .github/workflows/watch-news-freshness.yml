@@ -1,0 +1,71 @@
+name: NEOLINE news freshness watchdog
+on:
+  workflow_dispatch:
+  schedule:
+    # News collection starts near minute 17; check at :47 every hour.
+    - cron: '47 * * * *'
+permissions:
+  contents: read
+  issues: write
+concurrency:
+  group: neoline-news-watchdog
+  cancel-in-progress: false
+jobs:
+  freshness:
+    runs-on: ubuntu-latest
+    timeout-minutes: 7
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+      - name: Verify news health (not just presence of cached cards)
+        id: check
+        continue-on-error: true
+        run: |
+          python - <<'PY'
+          import datetime as dt, json, os
+          from pathlib import Path
+          now = dt.datetime.now(dt.timezone.utc)
+          try:
+              data = json.loads(Path("assets/news/news.json").read_text(encoding="utf-8"))
+              report = json.loads(Path("assets/news/sync-report.json").read_text(encoding="utf-8"))
+              updated = dt.datetime.fromisoformat(data["updated"].replace("Z","+00:00"))
+              attempted = dt.datetime.fromisoformat(report["attempted"].replace("Z","+00:00"))
+              age_h = (now-updated).total_seconds()/3600
+              check_h = (now-attempted).total_seconds()/3600
+              articles = len(data.get("items",[]))
+              publishers = len(report.get("sources",{}))
+              recent = max((dt.datetime.fromisoformat(item["date"].replace("Z","+00:00")) for item in data["items"]),default=None)
+              newest_h = (now-recent).total_seconds()/3600 if recent else 9999
+              print(f"HEALTH: last_success={age_h:.2f}h; last_run={check_h:.2f}h; latest_article={newest_h:.2f}h; articles={articles}; publishers={publishers}")
+              assert data["version"]==1 and articles>0 and data["retentionDays"]==30
+              assert data["lawsRetentionMonths"]==6 and report.get("directLinksOnly") is True
+              assert 0<=age_h<3, "No published update in last 3 hours"
+              assert 0<=check_h<3, "No collector attempt in last 3 hours"
+              assert publishers>=3, "Fewer than three independent publishers"
+              assert 0<=newest_h<48, "No newly published source article in 48 hours"
+          except Exception as e:
+              print("NEWS WATCHDOG FAILURE:",repr(e))
+              raise SystemExit(1)
+          PY
+      - name: Open or close one persistent news-failure issue
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
+          NEWS_HEALTH_RESULT: ${{ steps.check.outcome }}
+        run: |
+          set -euo pipefail
+          title='NEOLINE NEWS: automatic feed refresh stalled'
+          existing="$(gh issue list --state open --limit 100 --json number,title --jq '.[] | select(.title == "NEOLINE NEWS: automatic feed refresh stalled") | .number' | head -n 1)"
+          if [ "$NEWS_HEALTH_RESULT" != success ]; then
+            if [ -z "$existing" ]; then
+              gh issue create --title "$title" --body "Automatic news freshness check failed. News feed must be refreshed; inspect the latest sync-news workflow and assets/news/sync-report.json. Do NOT invent dates or articles. Monitoring runs hourly. [Workflow runs](https://github.com/$GH_REPO/actions/workflows/sync-news.yml)."
+            else
+              echo "Existing open alert: #$existing (no duplicate issue)"
+            fi
+            exit 1
+          fi
+          if [ -n "$existing" ]; then
+            gh issue close "$existing" --comment "Automatic check recovered: feed timestamp, original sources, and current news all passed."
+          fi
+          echo "Fresh news verified. No open alert."
