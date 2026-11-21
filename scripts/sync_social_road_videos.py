@@ -78,7 +78,7 @@ VIDEO_LINKS={
     "vk": re.compile(r"^https://(?:www\.)?vk\.com/video-?\d+_\d+",re.I),
 }
 VIDEO_MARKERS=".tgme_widget_message_video_player, .tgme_widget_message_video, .tgme_widget_message_roundvideo, video"
-MAX_PAGES=5
+MAX_PAGES=8
 MAX_ITEMS=160
 
 def iso(when:dt.datetime)->str:
@@ -122,8 +122,11 @@ def external_links(post):
         if href.startswith("https://"):urls.add(href)
     for platform,expression in VIDEO_LINKS.items():
         for url in sorted(urls):
-            if expression.match(url):
-                yield platform,url.split("#")[0]
+            if not expression.match(url):continue
+            # An X status URL alone is not proof of a video; pair it with
+            # media actually visible in the dated source post.
+            if platform=="x" and not post.select_one(VIDEO_MARKERS):continue
+            yield platform,url.split("#")[0]
 
 def extract(html, handle, publisher, cutoff, now):
     soup=BeautifulSoup(html,"html.parser")
