@@ -2387,23 +2387,25 @@ html[dir=rtl] .theory-preview{text-align:right}
     <path class="road-demo-flow-line" d="M239 112 39 335M321 112 521 335" stroke="#68eaff" stroke-width="2.4" stroke-dasharray="50 120" opacity=".75"/>
     <path class="road-demo-flow-line road-demo-flow-line--late" d="M258 118 218 334M302 118 342 334" stroke="#b0f6ff" stroke-width="1.2" stroke-dasharray="16 65" opacity=".42"/>
    </g>
-   <!-- GPS satellite: illustrated reception. GPS is passive in reality:
-        the car does not transmit a request to satellites. The thin ascending
-        search pulse symbolizes receiver acquisition; downlink is broadcast.
-        Position kept in the clear sky, between the upper HUD badges. -->
+   <!-- Satellite crosses the central, unobstructed sky, pauses for the
+        receiver-acquisition and GPS-broadcast sequence, then exits.
+        The rising trace is only a VISUAL acquisition cue: GPS is one-way
+        (the car never actually requests a satellite transmission). -->
    <g class="road-demo-satellite-link" aria-hidden="true">
     <g class="road-demo-satellite-search" fill="none">
-     <path class="road-demo-gps-search-beam" d="M280 209Q299 141 344 79"
+     <path class="road-demo-gps-search-beam" d="M280 207Q271 147 280 91"
       stroke="#8ff7ff" stroke-width="2.2" stroke-linecap="round"/>
-     <circle class="road-demo-gps-search-start" cx="280" cy="208" r="5" fill="#a1faff" stroke="#5adfff" stroke-width="1.5"/>
+     <circle class="road-demo-gps-search-start" cx="280" cy="207" r="5" fill="#a1faff" stroke="#5adfff" stroke-width="1.5"/>
     </g>
     <g class="road-demo-satellite-downlink" fill="none" stroke="#5feaff" stroke-linecap="round">
-     <path class="road-demo-gps-answer-beam" d="M344 81Q318 145 283 215" stroke-width="3.2" stroke-dasharray="15 12"/>
-     <path class="road-demo-gps-wave road-demo-gps-wave--one" d="M332 100Q345 111 356 99" stroke-width="2.1"/>
-     <path class="road-demo-gps-wave road-demo-gps-wave--two" d="M322 114Q345 130 368 112" stroke-width="1.8"/>
-     <path class="road-demo-gps-wave road-demo-gps-wave--three" d="M313 128Q345 153 379 126" stroke-width="1.6"/>
+     <path class="road-demo-gps-answer-beam" d="M280 92Q287 146 280 215" stroke-width="3.2" stroke-dasharray="15 12"/>
+     <path class="road-demo-gps-wave road-demo-gps-wave--one" d="M265 106Q280 119 295 106" stroke-width="2.1"/>
+     <path class="road-demo-gps-wave road-demo-gps-wave--two" d="M254 116Q280 139 306 116" stroke-width="1.8"/>
+     <path class="road-demo-gps-wave road-demo-gps-wave--three" d="M243 126Q280 159 317 126" stroke-width="1.6"/>
     </g>
-    <g class="road-demo-satellite" transform="translate(344 65)">
+    <g class="road-demo-satellite" transform="translate(280 72)">
+     <!-- Translate only this inner flight group; keep SVG parent fixed. -->
+     <g class="road-demo-satellite-flight">
      <g class="road-demo-satellite-float">
       <ellipse cx="0" cy="0" rx="19" ry="12" fill="#65e7ff" opacity=".08"/>
       <g class="road-demo-satellite-panels" stroke="#80ddfa" stroke-width="1">
@@ -2421,6 +2423,7 @@ html[dir=rtl] .theory-preview{text-align:right}
      </g>
      <circle class="road-demo-satellite-beacon" cx="0" cy="0" r="9"
       fill="none" stroke="#9af7ff" stroke-width="1.5"/>
+     </g>
     </g>
     <g class="road-demo-gps-lock" fill="none" stroke="#91f7ff">
      <circle cx="281" cy="220" r="15" stroke-width="1.5"/>
