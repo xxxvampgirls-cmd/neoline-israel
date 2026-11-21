@@ -172,7 +172,7 @@
    stage=(stage+1)%4;
    repaint();
    start(false);
-  },holdUserChoice?11500:7800);
+  },stage===1?(holdUserChoice?10400:9400):(holdUserChoice?11500:7800));
   elapsedTimer=window.setInterval(()=>{
    elapsed++;
    if(fields.elapsed)fields.elapsed.textContent=formatClock(elapsed);
