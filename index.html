@@ -3196,6 +3196,20 @@ function startShowcaseZoom(slide){
   if(slide.classList.contains('active')&&!slide.classList.contains('ad-exiting'))slide.classList.add('ad-zooming');
  }));
 }
+/* Load only the immediate next real product photo. Most product slides are
+   intentionally lazy to keep first paint fast; without a neighbor warm-up
+   the camera can decode only AFTER it becomes visible and appears to pop. */
+function warmShowcaseNextPhoto(index){
+ const host=$('showcaseSlides');
+ if(!host)return;
+ const slides=host.querySelectorAll('.featured-slide');
+ const next=slides[(index+1)%slides.length];
+ const img=next?.querySelector(':scope .featured-image > img:not([hidden])');
+ if(!img)return;
+ img.loading='eager';
+ img.decoding='async';
+ img.fetchPriority='low';
+}
 function renderShowcase(){
  const host=$('showcaseSlides');if(!host)return;
  clearShowroomGhosts();
@@ -3272,6 +3286,8 @@ function renderShowcase(){
   }
  });
  host.querySelectorAll('.featured-slide:not(.active)').forEach(el=>el.setAttribute('inert',''));
+ // Warm the upcoming photo only after constructing the slide nodes.
+ warmShowcaseNextPhoto(slideIndex);
  alignShowcaseMotion(host.querySelector('.featured-slide.active'));
  startShowcaseZoom(host.querySelector('.featured-slide.active'));
  $('showcaseDots').innerHTML=featuredIds.map((v,i)=>'<button class="showcase-dot '+(i===slideIndex?'active':'')+'" data-dot="'+i+'" aria-label="Slide '+(i+1)+'"></button>').join('');
@@ -3463,6 +3479,8 @@ function revealShowcaseSlide(index){
  startShowroomViewportFlight(previous,incoming,outgoingSubject,direction);
  startShowcaseZoom(incoming);
  slideIndex=next;
+ // Prime the following image before its transition, without eagerly loading all 11 slides.
+ warmShowcaseNextPhoto(next);
  $('showcaseDots').querySelectorAll('.showcase-dot').forEach((dot,i)=>dot.classList.toggle('active',i===next));
  if(!reduced){
   showcaseExitTimer=setTimeout(()=>{
