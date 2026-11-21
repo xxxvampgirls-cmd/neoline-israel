@@ -1,0 +1,109 @@
+/* NEOLINE gift animation refinement / 2026-11-21.
+   Preserve the approved full-sized body and the exact shake timing.
+   Each of the THREE openings now has the same sapphire light crescendo,
+   larger, slow-fading gold/cyan stars and a soft opening shockwave. */
+
+#gameGiftDialog .gift-reveal-backglow{
+ position:absolute;
+ z-index:2;
+ pointer-events:none;
+ left:50%;top:52%;
+ width:238px;height:176px;
+ border-radius:50%;
+ background:radial-gradient(ellipse at center,
+  #e2ffffd9 0%,#6feaffba 19%,#179eff76 41%,#3e9ff72b 61%,transparent 78%);
+ filter:blur(15px);
+ opacity:0;
+ transform:translate(-50%,-50%) scale(.5);
+}
+#gameGiftDialog .gift-reveal-open-ring{
+ position:absolute;
+ z-index:5;
+ pointer-events:none;
+ left:50%;top:55%;
+ width:74px;height:24px;
+ border:2px solid #b7f8ff;
+ border-radius:50%;
+ background:radial-gradient(ellipse,#e2ffff8c,#3bd3ff4a 38%,transparent 70%);
+ box-shadow:0 0 15px #2fd2ffe5,0 0 31px #168cf5aa;
+ opacity:0;
+ transform:translate(-50%,-50%) scale(.3);
+}
+#gameGiftDialog .gift-reveal[data-phase="burst"] .gift-reveal-backglow,
+#gameGiftDialog .gift-reveal[data-phase="revealed"] .gift-reveal-backglow{
+ animation:neolineGiftBlueBloom 2.25s ease-out both;
+}
+#gameGiftDialog .gift-reveal[data-phase="burst"] .gift-reveal-open-ring,
+#gameGiftDialog .gift-reveal[data-phase="revealed"] .gift-reveal-open-ring{
+ animation:neolineGiftBlueRipple 2.1s cubic-bezier(.18,.57,.31,1) both;
+}
+@keyframes neolineGiftBlueBloom{
+ 0%{opacity:0;transform:translate(-50%,-50%) scale(.5)}
+ 13%{opacity:.85;transform:translate(-50%,-50%) scale(1.03)}
+ 31%{opacity:1;transform:translate(-50%,-50%) scale(1.18)}
+ 70%{opacity:.83;transform:translate(-50%,-50%) scale(1.2)}
+ 90%{opacity:.47;transform:translate(-50%,-50%) scale(1.14)}
+ 100%{opacity:.3;transform:translate(-50%,-50%) scale(1.03)}
+}
+@keyframes neolineGiftBlueRipple{
+ 0%{opacity:0;transform:translate(-50%,-50%) scale(.28)}
+ 18%{opacity:.94}
+ 42%{opacity:.78}
+ 83%{opacity:.2}
+ 100%{opacity:0;transform:translate(-50%,-50%) scale(3.2)}
+}
+/* Persist the same animation through burst → revealed, preventing the
+   570ms phase change from abruptly cancelling flying stars. */
+#gameGiftDialog .gift-reveal[data-phase="burst"] .gift-reveal-stars i,
+#gameGiftDialog .gift-reveal[data-phase="revealed"] .gift-reveal-stars i{
+ animation:neolineGiftBigStars 2.18s cubic-bezier(.15,.53,.2,.99) var(--delay) both!important;
+}
+/* Bigger shapes and a more luminous center, without adding many particles. */
+#gameGiftDialog .gift-reveal-stars{
+ z-index:7;
+ top:53%;
+}
+#gameGiftDialog .gift-reveal-stars i{
+ font-size:29px!important;
+ text-shadow:0 0 4px #fff,0 0 11px #ffe6a7,0 0 16px #ffc552;
+}
+#gameGiftDialog .gift-reveal-stars i:nth-child(2n){
+ color:#3fdaff!important;
+ text-shadow:0 0 5px #fff,0 0 12px #21ccff,0 0 19px #008ce8!important;
+}
+#gameGiftDialog .gift-reveal-stars i:nth-child(3n){
+ color:#ffda78!important;
+}
+#gameGiftDialog .gift-reveal-stars i:nth-child(5n){
+ font-size:35px!important;
+}
+@keyframes neolineGiftBigStars{
+ 0%{opacity:0;transform:translate(-50%,-50%) scale(.14) rotate(-14deg)}
+ 12%{opacity:1}
+ 32%{opacity:1;transform:translate(calc(-50% + var(--x) * .36),calc(-50% + var(--y) * .38)) scale(.92) rotate(13deg)}
+ 72%{opacity:1;transform:translate(calc(-50% + var(--x) * .82),calc(-50% + var(--y) * .83)) scale(1.25) rotate(var(--r))}
+ 88%{opacity:.89}
+ 100%{opacity:0;transform:translate(calc(-50% + var(--x)),calc(-50% + var(--y))) scale(1.36) rotate(var(--r))}
+}
+/* Slightly prolong the rays from the opened box at EVERY reveal. */
+#gameGiftDialog .gift-reveal[data-phase="burst"] .gift-reveal-beam,
+#gameGiftDialog .gift-reveal[data-phase="revealed"] .gift-reveal-beam{
+ animation:neolineGiftBlueBeam 2.22s ease-out both;
+}
+@keyframes neolineGiftBlueBeam{
+ 0%{opacity:0;transform:translateX(-50%) scaleY(.18)}
+ 18%{opacity:1;transform:translateX(-50%) scaleY(1.15)}
+ 74%{opacity:.88;transform:translateX(-50%) scaleY(1.04)}
+ 100%{opacity:.37;transform:translateX(-50%) scaleY(.91)}
+}
+@media(prefers-reduced-motion:reduce){
+ #gameGiftDialog .gift-reveal-backglow,
+ #gameGiftDialog .gift-reveal-open-ring,
+ #gameGiftDialog .gift-reveal-stars i,
+ #gameGiftDialog .gift-reveal-beam{
+  animation:none!important;
+ }
+ #gameGiftDialog .gift-reveal[data-phase="revealed"] .gift-reveal-backglow{
+  opacity:.38;transform:translate(-50%,-50%) scale(1);
+ }
+}
