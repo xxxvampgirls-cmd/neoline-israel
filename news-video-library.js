@@ -70,7 +70,7 @@ const ARCHIVE=[
   source:"news13",publisher:SOURCES.news13.name,category:"radars",archive:true,
   url:"https://www.youtube.com/watch?v=gPkpDS04sjA"}
 ];
-const state={all:[],cat:"all",visible:6,ready:false,updated:0};
+const state={all:[],social:[],cat:"all",visible:6,ready:false,updated:0};
 const tr=()=>langPack[document.documentElement.lang]||langPack.ru;
 const safe=str=>String(str??"").replace(/[&<>"']/g,ch=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[ch]));
 const validID=id=>typeof id==="string"&&/^[A-Za-z0-9_-]{11}$/.test(id);
@@ -104,6 +104,50 @@ function sanitize(data){
  rows.sort((a,b)=>Date.parse(b.date)-Date.parse(a.date));
  return {rows,updated:Date.parse(data.updated)||0};
 }
+// Public short-video links have their own index: dated source posts, not
+// guessed upload dates. Only safe, platform-specific URLs are accepted.
+const SOCIAL_HOSTS={
+ telegram:/^(?:t\\.me|www\\.t\\.me)$/,
+ facebook:/^(?:www\\.|m\\.)?facebook\\.com$/,
+ instagram:/^(?:www\\.)?instagram\\.com$/,
+ tiktok:/^(?:www\\.)?tiktok\\.com$/,
+ x:/^(?:www\\.)?(?:x|twitter)\\.com$/,
+ vk:/^(?:www\\.)?vk\\.com$/
+};
+function sanitizeSocial(data){
+ if(!data||data.version!==1||data.retentionDays!==30||!Array.isArray(data.items))return null;
+ const seen=new Set(),rows=[];
+ for(const item of data.items){
+  if(!item||typeof item.id!=="string"||!/^[a-f0-9]{20}$/.test(item.id)||
+     !validDate(item.date)||item.localVerified!==true||
+     !["accidents","reports"].includes(item.category)||
+     !SOCIAL_HOSTS[item.platform]||typeof item.title!=="string"||
+     !item.title.trim()||typeof item.publisher!=="string"||!item.publisher.trim())continue;
+  let u;
+  try{u=new URL(item.url)}catch(_){continue}
+  if(u.protocol!=="https:"||!SOCIAL_HOSTS[item.platform].test(u.hostname)||
+     seen.has(u.href))continue;
+  if(item.platform==="telegram"&&!/^\\/[A-Za-z0-9_]+\\/\\d+$/.test(u.pathname))continue;
+  if(item.platform==="instagram"&&!/^\\/reel\\/[\\w-]+/.test(u.pathname))continue;
+  if(item.platform==="tiktok"&&!/^\\/@[\\w.-]+\\/video\\/\\d+/.test(u.pathname))continue;
+  if(item.platform==="facebook"&&!/\\/videos\\/\\d+|\\/watch\\//.test(u.pathname))continue;
+  if(item.platform==="x"&&!/^\\/[A-Za-z0-9_]+\\/status\\/\\d+/.test(u.pathname))continue;
+  if(item.platform==="vk"&&!/^\\/video-?\\d+_\\d+/.test(u.pathname))continue;
+  seen.add(u.href);
+  rows.push({id:item.id,title:item.title.trim(),publisher:item.publisher,
+   date:item.date,category:item.category,tags:[item.category],
+   platform:item.platform,url:u.href,social:true});
+ }
+ rows.sort((a,b)=>Date.parse(b.date)-Date.parse(a.date));
+ return {rows,updated:Date.parse(data.updated)||0};
+}
+async function fetchSocialIndex(url){
+ try{
+  const res=await fetch(url,{cache:"no-store",signal:AbortSignal.timeout(8500)});
+  if(!res.ok)return null;
+  return sanitizeSocial(await res.json());
+ }catch(_){return null}
+}
 async function fetchIndex(url){
  try{
   const res=await fetch(url,{cache:"no-store",signal:AbortSignal.timeout(8500)});
@@ -116,17 +160,28 @@ async function refresh(){
   "./assets/news/road-videos.json?ts="+Date.now(),
   "https://raw.githubusercontent.com/xxxvampgirls-cmd/neoline-israel/main/assets/news/road-videos.json?ts="+Date.now()
  ];
- const found=(await Promise.all(urls.map(fetchIndex))).filter(Boolean);
- if(!found.length){state.ready=true;draw();return;}
+ const socialUrls=[
+  "./assets/news/social-road-videos.json?ts="+Date.now(),
+  "https://raw.githubusercontent.com/xxxvampgirls-cmd/neoline-israel/main/assets/news/social-road-videos.json?ts="+Date.now()
+ ];
+ const [youtubeResults,socialResults]=await Promise.all([
+  Promise.all(urls.map(fetchIndex)),Promise.all(socialUrls.map(fetchSocialIndex))
+ ]);
+ const found=youtubeResults.filter(Boolean),social=socialResults.filter(Boolean);
  found.sort((a,b)=>b.updated-a.updated);
- state.all=found[0].rows;
- state.updated=found[0].updated;
+ social.sort((a,b)=>b.updated-a.updated);
+ if(found.length){state.all=found[0].rows;state.updated=found[0].updated}
+ if(social.length){
+  state.social=social[0].rows;
+  state.updated=Math.max(state.updated,social[0].updated);
+ }
  state.ready=true;
  draw();
 }
 function filtered(){
- return state.all.filter(item=>state.cat==="all"||item.category===state.cat||
-   item.tags.includes(state.cat)).filter(item=>validDate(item.date));
+ return [...state.all,...state.social].filter(item=>state.cat==="all"||item.category===state.cat||
+   item.tags.includes(state.cat)).filter(item=>validDate(item.date))
+   .sort((a,b)=>Date.parse(b.date)-Date.parse(a.date));
 }
 function when(date){
  const lang=document.documentElement.lang||"ru";
@@ -135,6 +190,22 @@ function when(date){
 }
 function card(item){
  const t=tr();
+ if(item.social){
+  const title=safe(item.title);
+  const cat=safe(t[item.category]||t.reports);
+  const site=safe(item.platform==="x"?"X":item.platform.charAt(0).toUpperCase()+item.platform.slice(1));
+  const label=({ru:"Открыть видео",he:"פתיחת סרטון",en:"Open video",ar:"فتح الفيديو"}[document.documentElement.lang]||"Открыть видео");
+  return '<a class="news-video-card news-video-card--social" href="'+safe(item.url)+'" target="_blank" rel="noopener noreferrer" aria-label="'+safe(label)+' · '+title+'">'+
+   '<span class="news-video-art news-video-art--social">'+
+     '<span class="news-video-social-mark" aria-hidden="true">'+site+'</span>'+
+     '<span class="news-video-social-arrow" aria-hidden="true">↗</span>'+
+     '<span class="news-video-category">'+cat+'</span>'+
+   '</span><span class="news-video-card-body">'+
+      '<strong class="news-video-card-title" dir="auto">'+title+'</strong>'+
+      '<span class="news-video-card-meta" dir="auto">'+safe(item.publisher)+' · '+safe(when(item.date))+' · '+site+'</span>'+
+   '</span></a>';
+ }
+
  const thumbnail="https://i.ytimg.com/vi/"+item.id+"/hqdefault.jpg";
  const title=safe(item.title);
  const category=safe(t[item.category]||t.reports);
@@ -180,7 +251,7 @@ function draw(){
  const status=$("newsVideoStatus");
  status.textContent="";
  if(!state.ready){status.textContent=t.loading;}
- else if(!state.all.length){
+ else if(!state.all.length&&!state.social.length){
   status.textContent=t.unavailable;
  }else if(!rows.length){
   status.textContent=t.empty;
