@@ -255,4 +255,19 @@
   }
  }).observe(document.documentElement,{attributes:true,attributeFilter:["lang"]});
  setStatus();
+ // Open the existing real three-round preview after clicking the new
+ // homepage gift-campaign slide; no prizes or XP are credited.
+ if(new URLSearchParams(location.search).get("gift")==="preview"){
+  requestAnimationFrame(()=>{
+   const giftButton=document.getElementById("gameGiftTrigger")||triggers[0];
+   giftButton?.click();
+   // Consume the campaign query so refreshing the game doesn't pop up a
+   // promotional modal repeatedly. Preserve any unrelated query params.
+   try{
+    const next=new URL(location.href);
+    next.searchParams.delete("gift");
+    history.replaceState(history.state,"",next.pathname+next.search+next.hash);
+   }catch(e){}
+  });
+ }
 })();
