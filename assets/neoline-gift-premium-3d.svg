@@ -1,0 +1,77 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="600" height="500" viewBox="0 0 600 500" role="img" aria-label="Объёмная подарочная коробка NEOLINE: чёрный графит, голубая диагональ, синий бант с золотой окантовкой">
+<defs>
+ <linearGradient id="front" x1="0" x2="1" y1="0" y2=".1"><stop stop-color="#273749"/><stop offset=".19" stop-color="#101c2c"/><stop offset=".67" stop-color="#080e1b"/><stop offset="1" stop-color="#152d40"/></linearGradient>
+ <linearGradient id="side" x1="0" x2="1" y1="0" y2="0"><stop stop-color="#0e2135"/><stop offset=".42" stop-color="#142e43"/><stop offset="1" stop-color="#020915"/></linearGradient>
+ <linearGradient id="lidfront" x1="0" x2="0" y1="0" y2="1"><stop stop-color="#303a49"/><stop offset=".19" stop-color="#172433"/><stop offset=".83" stop-color="#0b1422"/><stop offset="1" stop-color="#091522"/></linearGradient>
+ <linearGradient id="lidtop" x1="0" x2="0" y1="0" y2="1"><stop stop-color="#34465a"/><stop offset=".46" stop-color="#1a2a3b"/><stop offset="1" stop-color="#0c1625"/></linearGradient>
+ <linearGradient id="stripe" x1="0" x2=".8" y1="1" y2="0"><stop stop-color="#004d99"/><stop offset=".22" stop-color="#008be3"/><stop offset=".53" stop-color="#19c3ff"/><stop offset=".82" stop-color="#0d8ce3"/><stop offset="1" stop-color="#06477d"/></linearGradient>
+ <linearGradient id="ribbon" x1="0" x2="1"><stop stop-color="#003460"/><stop offset=".21" stop-color="#007cc1"/><stop offset=".48" stop-color="#39d2ff"/><stop offset=".72" stop-color="#0588d5"/><stop offset="1" stop-color="#003567"/></linearGradient>
+ <linearGradient id="loopL" x1=".1" x2=".9" y1="0" y2="1"><stop stop-color="#e8fcff"/><stop offset=".13" stop-color="#2fd0ff"/><stop offset=".5" stop-color="#0e86cf"/><stop offset=".87" stop-color="#063a7d"/><stop offset="1" stop-color="#061e4b"/></linearGradient>
+ <linearGradient id="loopR" x1="0" x2="1" y1="0" y2="1"><stop stop-color="#054379"/><stop offset=".24" stop-color="#0f8dda"/><stop offset=".63" stop-color="#48d8ff"/><stop offset="1" stop-color="#063b78"/></linearGradient>
+ <linearGradient id="gold" x1="0" x2="1"><stop stop-color="#8a5818"/><stop offset=".27" stop-color="#ffdfa4"/><stop offset=".52" stop-color="#c98922"/><stop offset=".78" stop-color="#ffdf8b"/><stop offset="1" stop-color="#976522"/></linearGradient>
+ <radialGradient id="floorGlow"><stop stop-color="#2ec6ff" stop-opacity=".38"/><stop offset=".55" stop-color="#39a8e4" stop-opacity=".12"/><stop offset="1" stop-color="#2786be" stop-opacity="0"/></radialGradient>
+ <linearGradient id="bodyGlint" x1="0" x2="1" y1="0" y2="0"><stop stop-color="#fff" stop-opacity="0"/><stop offset=".18" stop-color="#c8f7ff" stop-opacity=".08"/><stop offset=".24" stop-color="#c3f8ff" stop-opacity=".30"/><stop offset=".32" stop-color="#fff" stop-opacity="0"/></linearGradient>
+ <pattern id="carbon" width="12" height="12" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><path d="M0 0 V12 M6 0 V12" stroke="#84b4d0" stroke-opacity=".04" stroke-width="2"/></pattern>
+ <pattern id="dot" width="10" height="10" patternUnits="userSpaceOnUse"><circle cx="3.5" cy="3.5" r="1.75" fill="#17c8ff" opacity=".96"/></pattern>
+ <linearGradient id="dotFade" x1="0" y1="0" x2="1" y2="0"><stop stop-color="white"/><stop offset=".5" stop-color="white" stop-opacity=".72"/><stop offset="1" stop-color="white" stop-opacity="0"/></linearGradient>
+ <mask id="dotMask"><path fill="url(#dotFade)" d="M118 270H285V428H118Z"/></mask>
+ <filter id="shadow" x="-30%" y="-100%" width="160%" height="300%"><feGaussianBlur stdDeviation="11"/></filter>
+ <filter id="ambient" x="-100%" y="-100%" width="300%" height="300%"><feGaussianBlur stdDeviation="9"/></filter>
+ <filter id="glow" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="3"/></filter>
+ <clipPath id="frontclip"><path d="M110 196L418 196L418 424L110 424Z"/></clipPath>
+ <clipPath id="sideclip"><path d="M418 196L507 157L507 386L418 424Z"/></clipPath>
+</defs>
+<!-- No opaque rectangular background: the same carousel backdrop stays visible. -->
+<ellipse cx="312" cy="445" rx="219" ry="26" fill="#173d57" opacity=".36" filter="url(#shadow)"/>
+<ellipse cx="315" cy="433" rx="235" ry="52" fill="url(#floorGlow)"/>
+<path d="M128 448 C173 461 420 459 511 427" stroke="#1bc9ff" stroke-width="3" stroke-linecap="round" opacity=".35" fill="none" filter="url(#glow)"/>
+<!-- right wall with actual depth -->
+<path d="M418 196L507 157L507 386L418 424Z" fill="url(#side)" stroke="#1d4764" stroke-width="2"/>
+<g clip-path="url(#sideclip)">
+ <path d="M417 204L507 168V390L416 425Z" fill="url(#carbon)" opacity=".75"/>
+ <path d="M442 188L465 178L465 408L442 417Z" fill="url(#ribbon)" stroke="#e8b965" stroke-width="2"/>
+ <path d="M466 178L472 176V405L465 409Z" fill="#e0faff" opacity=".23"/>
+ <path d="M497 155L503 158V383L497 387Z" fill="#30d3ff" opacity=".23"/>
+</g>
+<!-- front wall -->
+<path d="M110 196L418 196L418 424Q418 428 412 428L115 428Q110 428 110 424Z" fill="url(#front)" stroke="#244f69" stroke-width="2"/>
+<g clip-path="url(#frontclip)">
+ <rect x="110" y="196" width="308" height="229" fill="url(#carbon)"/>
+ <path d="M109 285H281V426H109Z" fill="url(#dot)" mask="url(#dotMask)" opacity=".82"/>
+ <path d="M246 425L308 425L418 285L418 213L400 218Z" fill="url(#stripe)"/>
+ <path d="M254 424L312 424L417 287" fill="none" stroke="#59e7ff" stroke-width="3" opacity=".84"/>
+ <path d="M270 425L419 242" fill="none" stroke="#c1ffff" stroke-width="4" opacity=".26" filter="url(#glow)"/>
+ <path d="M110 198H418V426H110Z" fill="url(#bodyGlint)" opacity=".4"/>
+ <!-- White official NEOLINE logo paths, taken from the site's own SVG -->
+ <svg x="158" y="254" width="193" height="42" viewBox="0 0 501 108" overflow="visible" aria-hidden="true"><g transform="translate(-6 -2) scale(.61)" fill="#fff" fill-rule="evenodd"><path d="M167,66 163,63 142,63 131,65 128,70 122,75 122,78 101,108 100,112 96,115 92,123 88,126 77,126 75,124 74,100 72,92 69,91 62,98 57,108 54,110 51,117 45,125 44,165 46,169 51,171 96,171 103,168 115,149 125,137 126,133 130,129 137,116 140,114 153,93 156,91 159,83 162,81 168,71Z M132,7 127,4 82,4 78,6 64,23 57,36 46,50 40,61 37,63 35,68 25,81 24,85 21,87 13,99 10,111 13,113 41,113 48,109 60,93 62,87 68,81 73,71 76,69 80,61 89,50 98,49 104,53 104,78 106,84 110,84 120,72 120,70 124,66 134,48 134,11Z"/></g><g transform="translate(109 23) scale(.82 .68)" fill="#fff" fill-rule="evenodd"><path d="M421,9 420,89 476,90 476,74 443,74 441,71 441,61 443,59 467,58 467,40 443,40 441,38 441,27 443,25 474,25 476,24 476,10 473,8Z M337,8 335,10 335,89 356,89 356,49 359,48 369,66 371,67 386,90 407,90 408,10 406,8 388,9 388,48 385,51 358,9Z M305,8 302,10 302,89 322,90 324,89 324,10 321,8Z M241,8 239,11 240,90 295,90 295,68 261,68 259,66 259,9Z M94,8 92,10 92,89 148,90 150,86 150,78 148,74 115,74 113,72 113,61 115,59 138,59 139,57 139,41 115,40 113,38 113,26 147,25 148,10 145,8Z M9,8 8,89 27,90 29,48 32,50 57,90 80,89 80,10 78,8 62,8 59,10 59,49 57,51 30,9Z M190,6 183,7 170,15 164,22 159,31 156,41 156,58 161,72 168,82 182,91 196,93 206,91 220,82 229,68 229,64 231,62 232,48 229,31 222,19 214,12 205,7Z M191,25 197,25 202,27 209,34 212,39 214,49 210,63 204,70 196,74 186,72 178,64 175,53 175,46 178,35 186,27Z"/></g></svg>
+ <path d="M372 197H399V429H372Z" fill="url(#ribbon)" stroke="#e9b46a" stroke-width="2.2"/>
+ <path d="M381 198V427" stroke="#caf5ff" stroke-opacity=".35" stroke-width="1.4"/>
+ <path d="M110 424H416" stroke="#31cdfa" stroke-width="2.6" opacity=".9"/>
+</g>
+<path d="M117 197L117 424" stroke="#acdaec" stroke-opacity=".24" stroke-width="2"/>
+<!-- top lid / overhang / actual right depth -->
+<path d="M434 151L530 110L530 169L434 207Z" fill="url(#side)" stroke="#2d5368" stroke-width="2"/>
+<path d="M437 169L528 134L528 166L437 205Z" fill="#020b16" opacity=".42"/>
+<path d="M94 151L191 110L530 110L434 151Z" fill="url(#lidtop)" stroke="#455f72" stroke-width="2"/>
+<path d="M360 151L392 151L488 113L455 113Z" fill="url(#ribbon)" stroke="#e5ae56" stroke-width="2"/>
+<path d="M285 113L318 113L220 151L187 151Z" fill="url(#ribbon)" stroke="#e5ae56" stroke-width="2"/>
+<!-- substantial lid front; make it read as a real box rather than a flat cube -->
+<path d="M94 151H434V202Q434 207 428 207H100Q94 207 94 201Z" fill="url(#lidfront)" stroke="#415e72" stroke-width="2"/>
+<path d="M94 201H432" stroke="#1eaef0" stroke-width="3" opacity=".69"/>
+<path d="M98 153H432" stroke="#e4f8ff" stroke-width="2" opacity=".21"/>
+<path d="M363 152H393V207H363Z" fill="url(#ribbon)" stroke="#e6b665" stroke-width="2"/>
+<path d="M375 155V204" stroke="#c7efff" stroke-opacity=".37" stroke-width="1.3"/>
+<path d="M435 202L528 167" stroke="#0dbaf0" stroke-width="2" opacity=".75"/>
+<!-- Actual folded ribbon loops with holes, gold piping, dimensional inner folds -->
+<path d="M304 133C270 90 218 63 191 77C171 87 171 110 191 127C212 148 264 148 304 140Z" fill="url(#loopL)" stroke="url(#gold)" stroke-width="4" stroke-linejoin="round"/>
+<path d="M294 132C268 113 233 92 215 95C196 98 211 119 235 127C256 133 280 136 294 132Z" fill="#082445" stroke="#dea755" stroke-width="1.5" opacity=".95"/>
+<path d="M198 84C231 75 271 109 296 129" fill="none" stroke="#ccf6ff" stroke-opacity=".62" stroke-width="3" stroke-linecap="round"/>
+<path d="M306 137C335 91 393 64 426 82C448 93 447 118 421 130C387 146 337 150 306 143Z" fill="url(#loopR)" stroke="url(#gold)" stroke-width="4" stroke-linejoin="round"/>
+<path d="M317 131C349 109 391 93 407 99C428 108 396 129 371 130C344 133 332 133 317 131Z" fill="#082e56" stroke="#e1af5e" stroke-width="1.5" opacity=".95"/>
+<path d="M320 130C352 97 405 74 424 89" fill="none" stroke="#b2efff" stroke-opacity=".57" stroke-width="3" stroke-linecap="round"/>
+<path d="M294 127L315 121L334 137L318 150L300 146Z" fill="url(#ribbon)" stroke="url(#gold)" stroke-width="3" stroke-linejoin="round"/>
+<path d="M301 132L315 127" stroke="#d6faff" stroke-width="2.1" opacity=".7"/>
+<!-- Small gold/cyan accent glows sit on the package, never on a dark inset backdrop -->
+<path d="M94 151L191 110L530 110" fill="none" stroke="#b9f4ff" stroke-width="1.8" stroke-opacity=".46"/>
+<path d="M110 422H415L507 384" fill="none" stroke="#14bfff" stroke-width="2" stroke-opacity=".48"/>
+</svg>
