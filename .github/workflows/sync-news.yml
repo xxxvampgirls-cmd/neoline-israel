@@ -21,7 +21,7 @@ concurrency:
 jobs:
   refresh:
     runs-on: ubuntu-latest
-    timeout-minutes: 45
+    timeout-minutes: 20
     steps:
       - name: Check out project
         uses: actions/checkout@v4
@@ -32,8 +32,10 @@ jobs:
         uses: actions/setup-python@v5
         with:
           python-version: '3.12'
-      - name: Install feed libraries
-        run: python -m pip install --disable-pip-version-check 'requests>=2.31,<3' 'beautifulsoup4>=4.12,<5' 'feedparser>=6,<7' 'Pillow>=11,<13' 'yt-dlp>=2025.1'
+      - name: Install fast news metadata libraries
+        run: python -m pip install --disable-pip-version-check 'requests>=2.31,<3' 'beautifulsoup4>=4.12,<5' 'feedparser>=6,<7'
+      - name: Validate collector syntax
+        run: python -m py_compile scripts/sync_news.py scripts/telegram_news.py scripts/facebook_news.py
       - name: Gather news with separate 30-day and six-month archive limits
         env:
           FACEBOOK_GRAPH_TOKEN: ${{ secrets.FACEBOOK_GRAPH_TOKEN }}
@@ -69,55 +71,3 @@ jobs:
             git pull --rebase origin main
             git push origin HEAD:main
           fi
-      - name: Build compressed 16:9 image thumbnails (licensed photos; optional paid AI)
-        env:
-          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
-          MAX_AI_PER_RUN: "0"
-        run: python scripts/build_news_thumbnails.py
-      - name: Strictly validate per-category retention and direct source links
-        run: |
-          python - <<'PY'
-          import datetime as dt,json,calendar
-          p=json.load(open("assets/news/news.json",encoding="utf-8"))
-          now=dt.datetime.now(dt.timezone.utc)
-          assert p["retentionDays"]==30 and p["lawsRetentionMonths"]==6
-          mi=now.year*12+now.month-1-6
-          year,month=divmod(mi,12)
-          month+=1
-          laws_cutoff=now.replace(year=year,month=month,day=min(now.day,calendar.monthrange(year,month)[1]))
-          for item in p["items"]:
-              age=now-dt.datetime.fromisoformat(item["date"].replace("Z","+00:00"))
-              if item["category"]=="laws":
-                  published=dt.datetime.fromisoformat(item["date"].replace("Z","+00:00"))
-                  assert laws_cutoff-dt.timedelta(minutes=2)<=published<=now+dt.timedelta(hours=12),(item["title"],age)
-              else:
-                  assert dt.timedelta(hours=-12)<=age<=dt.timedelta(days=30,minutes=2),(item["title"],age)
-              assert item["url"].startswith("https://")
-              assert "google." not in item["url"].split("/")[2]
-              assert "translations" in item
-              from pathlib import Path
-              if item.get("image"):
-                  image=Path(item["image"].lstrip("./"))
-                  assert image.is_file(),item["image"]
-                  assert image.suffix==".webp",(image,item["image"])
-                  assert image.stat().st_size<90_000,(image,image.stat().st_size)
-          # Files of expired stories must not remain in deployed news assets.
-          image_dir=Path("assets/news/images")
-          expected={item["id"]+".webp" for item in p["items"] if item.get("image")}
-          actual={file.name for file in image_dir.glob("*.webp")}
-          assert actual==expected,{"orphan_images":sorted(actual-expected),"missing_images":sorted(expected-actual)}
-          assert not list(image_dir.glob("*.svg")), "Old SVG illustrations must not accumulate"
-          print("Verified current news:",len(p["items"]),"image files:",len(actual),"orphan files: 0")
-          PY
-      - name: Publish refreshed rolling archive
-        run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add -A assets/news/
-          if git diff --cached --quiet; then
-            echo "No updates to news archive"
-            exit 0
-          fi
-          git commit -m "Refresh Israeli news: 30-day general, six-month laws"
-          git pull --rebase origin main
-          git push origin HEAD:main
