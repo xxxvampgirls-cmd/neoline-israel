@@ -117,7 +117,7 @@
   ring.setAttribute("aria-hidden","true");
   fragment.appendChild(ring);
   const icons=["✦","✧","✶","★","✧"];
-  const total=76;
+  const total=44;
   const reach=Math.hypot(frame.width,frame.height);
   for(let i=0;i<total;i++){
    const star=document.createElement("span");
@@ -130,14 +130,14 @@
    star.style.setProperty("--star-dx",dx.toFixed(0)+"px");
    star.style.setProperty("--star-dy",dy.toFixed(0)+"px");
    star.style.setProperty("--star-size",(8+(i*11)%12)+"px");
-   star.style.setProperty("--star-speed",(.9+(i%6)*.09).toFixed(2)+"s");
-   star.style.setProperty("--star-delay",(i%8*35)+"ms");
+   star.style.setProperty("--star-speed",(.78+(i%6)*.065).toFixed(2)+"s");
+   star.style.setProperty("--star-delay",(i%8*16)+"ms");
    star.style.setProperty("--star-rotate",(-240+(i*37)%480)+"deg");
    star.style.setProperty("--star-end-scale",(.3+(i%5)*.18).toFixed(2));
    fragment.appendChild(star);
   }
   burstOverlay.appendChild(fragment);
-  after(clearStarFinale,1700);
+  after(clearStarFinale,1280);
  }
  function setStatus(){
   const c=currentCopy();
