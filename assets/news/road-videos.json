@@ -1,7 +1,7 @@
 {
   "version": 1,
   "retentionDays": 30,
-  "updated": "2026-11-21T16:07:04Z",
+  "updated": "2026-11-21T16:09:43Z",
   "status": "ok",
   "sourceCount": 6,
   "searchUpdated": "2026-11-21T12:05:16Z",
@@ -35,45 +35,6 @@
         "police"
       ],
       "channelId": "UCvQmPpU20hw1Trss_CVwaew"
-    },
-    {
-      "id": "xatwzz087Uo",
-      "title": "שב\"חים מאחורי דופן כפולה ברכב מסחרי",
-      "date": "2026-11-19T09:45:12Z",
-      "source": "police",
-      "publisher": "משטרת ישראל",
-      "category": "police",
-      "url": "https://www.youtube.com/watch?v=xatwzz087Uo",
-      "tags": [
-        "police"
-      ],
-      "channelId": "UCrwyHUb4iIrpknhP6MTvnww"
-    },
-    {
-      "id": "GF-oOQ52dxE",
-      "title": "גנב טרקטורון מחצר בית פרטי בנתיבות ונתפס",
-      "date": "2026-11-18T09:33:12Z",
-      "source": "police",
-      "publisher": "משטרת ישראל",
-      "category": "police",
-      "url": "https://www.youtube.com/watch?v=GF-oOQ52dxE",
-      "tags": [
-        "police"
-      ],
-      "channelId": "UCrwyHUb4iIrpknhP6MTvnww"
-    },
-    {
-      "id": "d_yErBbVf28",
-      "title": "נהגת נתפסה מתפללת וקוראת מהסידור בנהיגה",
-      "date": "2026-11-16T11:02:55Z",
-      "source": "police",
-      "publisher": "משטרת ישראל",
-      "category": "police",
-      "url": "https://www.youtube.com/watch?v=d_yErBbVf28",
-      "tags": [
-        "police"
-      ],
-      "channelId": "UCrwyHUb4iIrpknhP6MTvnww"
     },
     {
       "id": "T4DCog8t0c8",
@@ -111,19 +72,6 @@
       "publisher": "משטרת ישראל",
       "category": "police",
       "url": "https://www.youtube.com/watch?v=feYlQtGtGGc",
-      "tags": [
-        "police"
-      ],
-      "channelId": "UCrwyHUb4iIrpknhP6MTvnww"
-    },
-    {
-      "id": "kPT-fpEeQ3k",
-      "title": "מסר חשוב לכל אדם שעולה על ההגה",
-      "date": "2026-11-01T09:08:22Z",
-      "source": "police",
-      "publisher": "משטרת ישראל",
-      "category": "police",
-      "url": "https://www.youtube.com/watch?v=kPT-fpEeQ3k",
       "tags": [
         "police"
       ],

@@ -1,15 +1,15 @@
 {
   "version": 1,
   "retentionDays": 30,
-  "updated": "2026-11-21T16:07:05Z",
-  "status": "awaiting_strict_recheck",
+  "updated": "2026-11-21T16:09:48Z",
+  "status": "ok",
   "sourceTimeMeaning": "Telegram post timestamp; may differ from original external video upload",
   "sources": {
     "Atanpolice": 0,
     "israelpoliceforce": 0,
     "uh1221": 0,
     "NEWSruIsrael": 0,
-    "alexavni": 2
+    "alexavni": 0
   },
   "errors": {},
   "new": 0,
