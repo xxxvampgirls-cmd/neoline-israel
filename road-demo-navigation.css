@@ -1,0 +1,63 @@
+/* NEOLINE Israel — four-action contextual navigation for the road demo.
+   Keeps the established homepage five-tab bar everywhere else. */
+.road-demo-quicknav{display:none}
+@media(max-width:720px){
+  .road-demo-quicknav{
+    position:fixed;inset:auto 0 0;z-index:72;
+    box-sizing:border-box;
+    display:grid;grid-template-columns:repeat(4,minmax(0,1fr));
+    align-items:stretch;gap:4px;
+    min-height:76px;
+    padding:8px max(7px,env(safe-area-inset-right)) max(9px,env(safe-area-inset-bottom)) max(7px,env(safe-area-inset-left));
+    background:linear-gradient(180deg,#fcfefffa,#f0f9fffb);
+    border-top:1px solid #bedff2;
+    box-shadow:0 -10px 30px #0c65a02b;
+    backdrop-filter:blur(15px);-webkit-backdrop-filter:blur(15px);
+    transform:translate3d(0,110%,0);
+    opacity:0;visibility:hidden;pointer-events:none;
+    transition:transform .32s cubic-bezier(.2,.75,.25,1),opacity .23s ease,visibility .32s linear;
+  }
+  body.road-demo-nav-active .road-demo-quicknav{
+    transform:translate3d(0,0,0);
+    opacity:1;visibility:visible;pointer-events:auto;
+  }
+  body.road-demo-nav-active .mobile-nav{
+    transform:translate3d(0,calc(100% + 24px),0)!important;
+    opacity:0!important;visibility:hidden!important;
+    pointer-events:none!important;
+  }
+  .road-demo-quicknav__item{
+    display:flex;flex-direction:column;align-items:center;justify-content:center;
+    gap:4px;min-width:0;min-height:54px;padding:5px 3px;
+    border:1px solid transparent;border-radius:13px;
+    background:transparent;color:#28779e;
+    font:800 10px/1.12 Manrope,Arial,sans-serif;
+    text-decoration:none;text-align:center;
+    cursor:pointer;touch-action:manipulation;
+    -webkit-tap-highlight-color:transparent;
+    transition:background .2s,transform .15s,border-color .2s;
+  }
+  .road-demo-quicknav__item:first-child{
+    color:#076ca8;background:#e1f4ff;
+    border-color:#c5e8f8;
+  }
+  .road-demo-quicknav__item svg{
+    width:26px;height:26px;flex:none;
+    stroke:currentColor;stroke-width:1.8;stroke-linecap:round;
+    stroke-linejoin:round;fill:none;
+  }
+  .road-demo-quicknav__item span{
+    max-width:100%;min-width:0;
+    white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+  }
+  .road-demo-quicknav__item:active{
+    transform:scale(.95);background:#dbf2ff;
+  }
+  .road-demo-quicknav__item:focus-visible{
+    outline:2px solid #118fca;outline-offset:-2px;
+  }
+}
+@media(prefers-reduced-motion:reduce){
+ .road-demo-quicknav{transition:none!important}
+ .road-demo-quicknav__item{transition:none!important}
+}
