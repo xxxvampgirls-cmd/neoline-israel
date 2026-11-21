@@ -1,7 +1,7 @@
 {
   "version": 1,
   "retentionDays": 30,
-  "updated": "2026-11-21T16:06:32Z",
+  "updated": "2026-11-21T16:07:05Z",
   "status": "ok",
   "sourceTimeMeaning": "Telegram post timestamp; may differ from original external video upload",
   "sources": {
@@ -12,7 +12,7 @@
     "alexavni": 2
   },
   "errors": {},
-  "new": 2,
+  "new": 0,
   "items": [
     {
       "id": "af5db99c8deb4df8bca6",
