@@ -7,9 +7,6 @@ on:
     branches: [main]
     paths:
       - 'scripts/sync_news.py'
-      - 'scripts/sync_road_videos.py'
-      - 'scripts/youtube_road_discovery.py'
-      - 'scripts/sync_social_road_videos.py'
       - 'scripts/verified_auto_news.json'
       - 'scripts/telegram_news.py'
       - 'scripts/facebook_news.py'
@@ -72,19 +69,6 @@ jobs:
             git pull --rebase origin main
             git push origin HEAD:main
           fi
-      - name: Test 30-day Israeli YouTube discovery and regional filtering (offline)
-        run: python scripts/sync_road_videos.py --self-test
-      - name: Refresh 30-day Israeli traffic videos (official + community YouTube)
-        env:
-          YOUTUBE_API_KEY: ${{ secrets.YOUTUBE_API_KEY }}
-        run: python scripts/sync_road_videos.py
-      # Social links are discovered from dated public posts; failure of a
-      # third-party social site must not block independently refreshed news.
-      - name: Test public social video identity and four-language road filters
-        run: python scripts/sync_social_road_videos.py --self-test
-      - name: Collect public Telegram video and cross-platform source links
-        continue-on-error: true
-        run: python scripts/sync_social_road_videos.py
       - name: Build compressed 16:9 image thumbnails (licensed photos; optional paid AI)
         env:
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
@@ -117,36 +101,6 @@ jobs:
                   assert image.is_file(),item["image"]
                   assert image.suffix==".webp",(image,item["image"])
                   assert image.stat().st_size<90_000,(image,image.stat().st_size)
-          # Video gallery is a separate rolling 30-day index of genuine
-          # YouTube videos. No links, dates or thumbnails may be fabricated.
-          video=json.load(open("assets/news/road-videos.json",encoding="utf-8"))
-          assert video["version"]==1 and video["retentionDays"]==30
-          official={"news13","kan11","police"}
-          allowed=official|{"youtube"}
-          valid_categories={"accidents","radars","dashcam","funny","police","reports"}
-          video_ids=set()
-          for clip in video["items"]:
-              vid=clip["id"]
-              import re
-              assert re.fullmatch(r"[A-Za-z0-9_-]{11}",vid),vid
-              assert vid not in video_ids,("duplicate video",vid)
-              video_ids.add(vid)
-              assert clip["source"] in allowed,clip["source"]
-              if clip["source"]=="youtube":
-                  assert clip.get("localVerified") is True,("unverified Israel location",vid)
-                  assert re.fullmatch(r"UC[A-Za-z0-9_-]{22}",clip.get("channelId","")),(vid,clip.get("channelId"))
-                  assert clip.get("publisher","").strip(),("missing user-channel publisher",vid)
-              assert clip["url"]=="https://www.youtube.com/watch?v="+vid,vid
-              assert clip["category"] in valid_categories,vid
-              assert isinstance(clip.get("tags"),list),("missing video topic tags",vid)
-              assert all(tag in valid_categories for tag in clip["tags"]),vid
-              assert isinstance(clip["title"],str) and clip["title"],vid
-              published=dt.datetime.fromisoformat(clip["date"].replace("Z","+00:00"))
-              age=now-published
-              assert dt.timedelta(hours=-12)<=age<=dt.timedelta(days=30,minutes=2),vid
-          print("Verified Israeli road-video metadata:",len(video_ids),
-                "official:",sum(x["source"] in official for x in video["items"]),
-                "community:",sum(x["source"]=="youtube" for x in video["items"]))
           # Files of expired stories must not remain in deployed news assets.
           image_dir=Path("assets/news/images")
           expected={item["id"]+".webp" for item in p["items"] if item.get("image")}
