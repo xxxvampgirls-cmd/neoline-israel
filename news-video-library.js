@@ -107,12 +107,12 @@ function sanitize(data){
 // Public short-video links have their own index: dated source posts, not
 // guessed upload dates. Only safe, platform-specific URLs are accepted.
 const SOCIAL_HOSTS={
- telegram:/^(?:t\\.me|www\\.t\\.me)$/,
- facebook:/^(?:www\\.|m\\.)?facebook\\.com$/,
- instagram:/^(?:www\\.)?instagram\\.com$/,
- tiktok:/^(?:www\\.)?tiktok\\.com$/,
- x:/^(?:www\\.)?(?:x|twitter)\\.com$/,
- vk:/^(?:www\\.)?vk\\.com$/
+ telegram:/^(?:t\.me|www\.t\.me)$/,
+ facebook:/^(?:www\.|m\.)?facebook\.com$/,
+ instagram:/^(?:www\.)?instagram\.com$/,
+ tiktok:/^(?:www\.)?tiktok\.com$/,
+ x:/^(?:www\.)?(?:x|twitter)\.com$/,
+ vk:/^(?:www\.)?vk\.com$/
 };
 function sanitizeSocial(data){
  if(!data||data.version!==1||data.retentionDays!==30||!Array.isArray(data.items))return null;
@@ -127,12 +127,12 @@ function sanitizeSocial(data){
   try{u=new URL(item.url)}catch(_){continue}
   if(u.protocol!=="https:"||!SOCIAL_HOSTS[item.platform].test(u.hostname)||
      seen.has(u.href))continue;
-  if(item.platform==="telegram"&&!/^\\/[A-Za-z0-9_]+\\/\\d+$/.test(u.pathname))continue;
-  if(item.platform==="instagram"&&!/^\\/reel\\/[\\w-]+/.test(u.pathname))continue;
-  if(item.platform==="tiktok"&&!/^\\/@[\\w.-]+\\/video\\/\\d+/.test(u.pathname))continue;
-  if(item.platform==="facebook"&&!/\\/videos\\/\\d+|\\/watch\\//.test(u.pathname))continue;
-  if(item.platform==="x"&&!/^\\/[A-Za-z0-9_]+\\/status\\/\\d+/.test(u.pathname))continue;
-  if(item.platform==="vk"&&!/^\\/video-?\\d+_\\d+/.test(u.pathname))continue;
+  if(item.platform==="telegram"&&!/^\/[A-Za-z0-9_]+\/\d+$/.test(u.pathname))continue;
+  if(item.platform==="instagram"&&!/^\/reel\/[\w-]+/.test(u.pathname))continue;
+  if(item.platform==="tiktok"&&!/^\/@[\w.-]+\/video\/\d+/.test(u.pathname))continue;
+  if(item.platform==="facebook"&&!/\/videos\/\d+|\/watch\//.test(u.pathname))continue;
+  if(item.platform==="x"&&!/^\/[A-Za-z0-9_]+\/status\/\d+/.test(u.pathname))continue;
+  if(item.platform==="vk"&&!/^\/video-?\d+_\d+/.test(u.pathname))continue;
   seen.add(u.href);
   rows.push({id:item.id,title:item.title.trim(),publisher:item.publisher,
    date:item.date,category:item.category,tags:[item.category],
