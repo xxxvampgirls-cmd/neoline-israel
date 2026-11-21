@@ -10,7 +10,9 @@ const DAY=86400000,WINDOW=30*DAY;
 const SOURCES={
  news13:{name:"חדשות 13",url:"https://www.youtube.com/channel/UCvQmPpU20hw1Trss_CVwaew"},
  kan11:{name:"כאן חדשות",url:"https://www.youtube.com/channel/UC_HwfTAcjBESKZRJq6BTCpg"},
- police:{name:"משטרת ישראל",url:"https://www.youtube.com/channel/UCrwyHUb4iIrpknhP6MTvnww"}
+ police:{name:"משטרת ישראל",url:"https://www.youtube.com/channel/UCrwyHUb4iIrpknhP6MTvnww"},
+ ynet:{name:"ynet",url:"https://www.youtube.com/channel/UCpSSzrovhI4fA2PQNItecUA"},
+ i24he:{name:"i24NEWS עברית",url:"https://www.youtube.com/channel/UCisowXt5wZkp2sR3rFh9lnQ"}
 };
 const langPack={
  ru:{label:"ВИДЕОХРОНИКА · ИЗРАИЛЬ",title:"Видео с дорог",period:"За последние 30 дней",
