@@ -110,7 +110,7 @@ POLICE = re.compile(
     r"полици|штраф|гибдд|شرطة المرور|الشرطة", re.I)
 KNOWN_LOCAL_CHANNELS = re.compile(
     r"חדשות 13|כאן חדשות|חדשות 12|ערוץ 14|עכשיו 14|ynet|mako|"
-    r"news 13|israel police|משטרת ישראל|חדשות 14|n12", re.I)
+    r"news 13|israel police|משטרת ישראל|חדשות 14|n12|i24news|איי24", re.I)
 DATA_API = "https://www.googleapis.com/youtube/v3/"
 
 
