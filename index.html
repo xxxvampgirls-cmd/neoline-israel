@@ -3462,6 +3462,9 @@ function revealShowcaseSlide(index){
  if(slides.length!==featuredIds.length){slideIndex=next;renderShowcase();return}
  if(next===slideIndex)return;
  clearTimeout(showcaseExitTimer);
+ // Restore any in-flight foreground before measuring it again. A rapid
+ // double swipe used to find an empty source because it was in the portal.
+ clearShowroomGhosts();
  const previous=slides[slideIndex],incoming=slides[next];
  const outgoingSubject=showcaseFlightSubject(previous);
  for(const el of slides){
