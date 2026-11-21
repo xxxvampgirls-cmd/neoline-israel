@@ -55,7 +55,7 @@ FOREIGN=re.compile(
 # Require a focused road incident or driving-enforcement report in the HEADLINE.
 ROAD_REPORT=re.compile(
     r"משטרת התנועה|אגף התנועה|מצלמת רכב|מצלמות מהירות|אכיפת מהירות|"
-    r"נהיגה מסוכנת|עבירת תנועה|כביש\\s*\\d{1,3}|חסימת כביש|"
+    r"נהיגה מסוכנת|עבירת תנועה|כביש\s*\d{1,3}|חסימת כביש|"
     r"дорожн.{0,18}(?:полици|происшеств|движен|авари|наруш)|"
     r"видеорегистратор|дорожная камера|камера скорости|"
     r"шоссе|трассе|превышен.{0,12}скорост|"
@@ -101,7 +101,7 @@ def permitted(title:str, body:str, handle:str="")->bool:
     # content mentioning Israel elsewhere does not establish video location.
     official=handle.lower() in TRUSTED_OFFICIAL
     israeli_title=bool(ISRAEL.search(title))
-    local_script=bool(re.search(r"[א-ת]{3,}",title))
+    local_script=bool(re.search(r"[א-ת]{3,}|[\u0600-\u06FF]{3,}",title))
     return israeli_title or (official and local_script)
 
 def classify(title,body):
