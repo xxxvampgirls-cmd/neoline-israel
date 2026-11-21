@@ -732,12 +732,8 @@ jobs:
                 if(!article.translations[lang]?.title||!article.translations[lang]?.summary)
                   throw Error('Translation missing for '+article.id+' / '+lang);
               }
-              if(article.image){
-                const picture=await page.request.get(new URL(article.image,page.url()).href);
-                if(!picture.ok())throw Error('Thumbnail URL not published: '+article.image+' / '+picture.status());
-                if(article.image.endsWith('.webp')&&(await picture.body()).length>=90_000)
-                  throw Error('Thumbnail exceeds 90 KB: '+article.image);
-              }
+              if(['image','imageType','imageCredit','sourcePhoto'].some(key=>Object.hasOwn(article,key)))
+                throw Error('Text-only news must not contain image fields: '+article.id);
             }
             const firstOrder=await page.locator('#newsCategories button').evaluateAll(els=>els.map(el=>el.dataset.newsCategory));
             if(firstOrder.indexOf('laws')>firstOrder.indexOf('speed'))throw Error('Rules and laws must precede Speed');

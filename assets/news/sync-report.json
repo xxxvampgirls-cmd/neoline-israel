@@ -37,8 +37,6 @@
   "facebookState": "not_configured",
   "new": 28,
   "retained": 260,
-  "imageCount": 249,
-  "deletedImages": 2,
   "discardedGoogleLinks": 0,
   "errors": {
     "The Times of Israel": "HTTPError: 403 Client Error: Forbidden for url: https://www.timesofisrael.com/feed/",

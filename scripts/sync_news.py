@@ -2,9 +2,9 @@
 """NEOLINE Israel news — direct publisher links, original art, four locales.
 
 RSS is used only for factual metadata and links; no republished article text.
-Every dated item has a generated *unique* editorial SVG, shared across
-Russian/Hebrew/English/Arabic. Missing translations remain clearly source
-language instead of being fabricated. Never keep items older than 30 days.
+News is stored as lightweight text-only headlines, dates and publisher links.
+Translations are optional; photos, thumbnails and illustrations are not created.
+Never keep items older than 30 days (laws: six months).
 """
 from __future__ import annotations
 import datetime as dt
@@ -13,13 +13,10 @@ import hashlib
 import html
 import json
 import os
-import math
-import random
 import re
 import time
 from pathlib import Path
 from urllib.parse import urlparse
-import xml.etree.ElementTree as ET
 import feedparser
 import requests
 from collections import Counter, defaultdict
@@ -28,7 +25,6 @@ from telegram_news import collect as collect_public_telegram
 from facebook_news import collect as collect_authorized_facebook
 
 ROOT=Path("assets/news")
-IMAGES=ROOT/"images"
 DEST=ROOT/"news.json"
 REPORT=ROOT/"sync-report.json"
 UTC=dt.timezone.utc
@@ -179,69 +175,6 @@ def translate(value,to_lang):
   result="".join(x[0] for x in resp.json()[0] if isinstance(x,list) and x and isinstance(x[0],str))
   return tidy(result)[:250] if result else ""
  except (ValueError,requests.RequestException):return ""
-def unique_svg(entry):
- """Deterministic original automotive illustration made from story keywords.
-    Does not depict or claim to depict the real incident or persons involved."""
- cat=entry["category"]
- id=entry["id"]
- randomizer=random.Random(int(id[:12],16))
- blue=randomizer.choice(["#1688d5","#0a72b3","#2097ce"])
- ink=randomizer.choice(["#17334c","#1e425d","#254563"])
- pale=randomizer.choice(["#edf9ff","#e2f4ff","#dcecff"])
- sunset=randomizer.randint(42,64)
- lane=randomizer.choice([620,660,710])
- carx=randomizer.randint(500,790)
- sedan=(f'<g transform="translate({carx} 490)">'
-   '<ellipse cx="158" cy="199" rx="190" ry="22" fill="#163b5c" opacity=".16"/>'
-   f'<path d="M8 133 49 80Q68 56 101 51L241 49q34 5 53 40l32 44 28 9v51H-8v-43z" fill="{ink}" stroke="#81c8eb" stroke-width="5"/>'
-   '<path d="m69 83 36-19h125l34 42H50z" fill="#94dfff" opacity=".92"/>'
-   '<rect x="15" y="141" width="37" height="21" rx="8" fill="#dcf5ff"/><rect x="310" y="141" width="35" height="20" rx="8" fill="#ffdbb0"/>'
-   '<circle cx="78" cy="192" r="30" fill="#102c42" stroke="#b0e4ff" stroke-width="9"/>'
-   '<circle cx="285" cy="192" r="30" fill="#102c42" stroke="#b0e4ff" stroke-width="9"/></g>')
- city=''.join(f'<rect x="{n*113-14}" y="{randomizer.randint(250,340)}" width="{randomizer.randint(55,83)}" height="250" rx="6" fill="#ffffff" opacity=".20"/>' for n in range(16))
- if cat=="speed":
-  focus=(f'<g transform="translate(198 268)"><rect x="0" y="25" width="236" height="186" rx="34" fill="#ffffff" stroke="{blue}" stroke-width="10"/>'
-   f'<circle cx="118" cy="115" r="69" fill="{pale}" stroke="{blue}" stroke-width="8"/>'
-   f'<path d="m119 115 45-36" stroke="{ink}" stroke-width="12" stroke-linecap="round"/><circle cx="119" cy="115" r="10" fill="{ink}"/>'
-   f'<rect x="208" y="74" width="70" height="68" rx="13" fill="{ink}"/><circle cx="241" cy="108" r="19" fill="{blue}"/></g>')
- elif cat=="laws":
-  focus=(f'<g transform="translate(175 200) rotate({randomizer.randint(-5,5)} 190 180)">'
-   f'<rect x="64" y="24" width="278" height="350" rx="30" fill="#ffffff" stroke="{blue}" stroke-width="9"/>'
-   f'<path d="M100 108h188M100 155h188M100 202h165M100 248h185" stroke="#9bbdd5" stroke-width="10" stroke-linecap="round"/>'
-   '<circle cx="284" cy="297" r="50" fill="#b7edff" stroke="#1a81c8" stroke-width="9"/>'
-   f'<path d="m261 298 16 17 27-36" stroke="{ink}" stroke-width="12" fill="none" stroke-linecap="round"/></g>')
- elif cat=="accidents":
-  focus=('<g transform="translate(215 275)"><path d="M175 0 340 290H10Z" fill="#fff4e4" stroke="#efac4b" stroke-width="18" stroke-linejoin="round"/>'
-   '<path d="M175 90v93" stroke="#b96e11" stroke-width="22" stroke-linecap="round"/><circle cx="175" cy="231" r="12" fill="#b96e11"/>'
-   '</g>')
- elif cat=="roads":
-  focus=(f'<g transform="translate(230 270)"><rect x="0" y="0" width="320" height="195" rx="20" fill="{ink}" stroke="#b6e6ff" stroke-width="11"/>'
-    '<path d="M35 54h250" stroke="#e0f8ff" stroke-width="17" stroke-linecap="round"/>'
-    '<path d="M35 126h250" stroke="#e0f8ff" stroke-width="17" stroke-dasharray="30 26" stroke-linecap="round"/>'
-    f'<path d="m185 95 46 40 54-59" fill="none" stroke="{blue}" stroke-width="17" stroke-linecap="round"/></g>')
- else:
-  focus=(f'<g transform="translate(240 225)"><circle cx="215" cy="190" r="145" fill="#ffffff" opacity=".52"/>'
-   f'<path d="M85 285q-40-22-20-65l44-90q18-38 64-37h142q51 0 68 46l35 83q9 35-22 63" fill="{ink}" stroke="#83d4f4" stroke-width="9"/>'
-   '<path d="M128 153h202l34 89H90z" fill="#8fddf8" opacity=".85"/>'
-   '<circle cx="136" cy="289" r="34" fill="#102c42" stroke="#b1e7ff" stroke-width="12"/>'
-   '<circle cx="347" cy="289" r="34" fill="#102c42" stroke="#b1e7ff" stroke-width="12"/></g>')
- dots=''.join(f'<circle cx="{randomizer.randint(85,1510)}" cy="{randomizer.randint(125,435)}" r="{randomizer.randint(4,16)}" fill="#ffffff" opacity="{randomizer.randint(15,40)/100:.2f}"/>' for _ in range(23))
- # Deliberately no text in the image: one asset in all four languages.
- return (f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" role="img" aria-label="Independent automotive editorial illustration">'
-  f'<defs><linearGradient id="sky" x2="1" y2="1"><stop stop-color="{pale}"/><stop offset=".67" stop-color="#abdaf3"/><stop offset="1" stop-color="#6baedb"/></linearGradient>'
-  '<linearGradient id="road" x2="0" y2="1"><stop stop-color="#476982"/><stop offset="1" stop-color="#0d243a"/></linearGradient>'
-  '<filter id="shade"><feGaussianBlur stdDeviation="12"/></filter></defs>'
-  '<rect width="1600" height="900" fill="url(#sky)"/>'
-  f'<circle cx="1270" cy="{sunset*6}" r="250" fill="#ffffff" opacity=".31"/>'
-  f'{city}{dots}'
-  f'<path d="M0 630Q500 530 1600 605v330H0Z" fill="#a3d1e8"/>'
-  f'<path d="M{lane-220} 525h{lane+180}l430 405H50z" fill="url(#road)"/>'
-  '<path d="M790 560 870 900" fill="none" stroke="#c1e6f9" stroke-width="12" stroke-dasharray="65 60" opacity=".75"/>'
-  f'<ellipse cx="790" cy="700" rx="395" ry="70" fill="#173652" opacity=".22" filter="url(#shade)"/>'
-  f'{sedan}{focus}'
-  f'<path d="M0 55H1600M0 830H1600" stroke="{blue}" stroke-width="24" opacity=".34"/>'
-  '<rect x="43" y="47" width="1514" height="806" rx="46" fill="none" stroke="#ffffff" stroke-width="5" opacity=".52"/>'
-  '</svg>')
 def publisher_name(provider):
  if provider.startswith("Walla"):return "Walla"
  if provider.startswith("Maariv"):return "Maariv"
@@ -250,33 +183,6 @@ def publisher_name(provider):
  if provider.startswith("Israel Hayom"):return "Israel Hayom"
  if provider.startswith("Globes"):return "Globes"
  return provider
-
-def reusable_source_media(entry, article_url, provider):
- """Use original publisher image only with an explicit reusable RSS license.
-
- Merely displaying a news image in a feed is not permission to copy it.
- """
- rights=" ".join(str(entry.get(k,"") or "") for k in
-  ("rights","license","cc_license","media_license","copyright"))
- for link in entry.get("links") or []:
-  if isinstance(link,dict) and link.get("rel")=="license":
-   rights+=" "+str(link.get("href",""))
- cc0=bool(re.search(r"(?:\bCC0\b|creative\s+commons\s+zero|public\s+domain)",rights,re.I))
- ccby=bool(re.search(r"\bCC[-\s]?BY[-\s]?(?:2\.0|3\.0|4\.0)\b|creativecommons\.org/licenses/by/(?:2\.0|3\.0|4\.0)",rights,re.I))
- if not (cc0 or ccby):return None
- if re.search(r"all rights reserved|כל הזכויות שמורות",rights,re.I):return None
- license_name="CC0" if cc0 else "CC BY"
- candidates=(entry.get("media_content") or [])+(entry.get("media_thumbnail") or [])+(entry.get("enclosures") or [])
- for media in candidates:
-  if not isinstance(media,dict):continue
-  image=str(media.get("url","")).strip()
-  if not allowed(image) or len(image)>1000:continue
-  if not urlparse(image).path.lower().endswith((".jpg",".jpeg",".png",".webp")):continue
-  typ=str(media.get("type","")).lower()
-  if typ and not typ.startswith("image/"):continue
-  credit=tidy(entry.get("author") or provider)[:120]
-  return {"url":image,"license":license_name,"credit":credit,"sourceUrl":article_url}
- return None
 
 def article(entry,provider):
  title=tidy(entry.get("title",""))
@@ -291,10 +197,8 @@ def article(entry,provider):
  id=hashlib.sha256(url.split("?")[0].encode("utf-8")).hexdigest()[:20]
  result={"id":id,"titleOriginal":title,"sourceLanguage":"he" if re.search(r"[\u0590-\u05ff]",title) else "en",
   "date":pub.isoformat().replace("+00:00","Z"),"url":url,"publisher":publisher_name(provider),
-  "category":kind,"art":kind,"image":f"./assets/news/images/{id}.svg",
+  "category":kind,
   "official":False,"translations":{}}
- source_media=reusable_source_media(entry,url,provider)
- if source_media:result["sourcePhoto"]=source_media
  return result
 def valid(item):
  if not isinstance(item,dict):return False
@@ -344,9 +248,14 @@ def select_diverse(candidates):
   counts[name]+=1
  return chosen
 
+# News metadata is text-only; remove visual fields from previous archives.
+IMAGE_FIELDS=("image","imageType","imageCredit","sourcePhoto","subjectPhotoMatched","subjectPhotoChecked","art")
+def text_only(item):
+ for key in IMAGE_FIELDS:item.pop(key,None)
+ return item
+
 def main():
  ROOT.mkdir(parents=True,exist_ok=True)
- IMAGES.mkdir(parents=True,exist_ok=True)
  previous=read_previous()
  keep={}
  for x in previous:
@@ -354,9 +263,6 @@ def main():
   canonical_id=hashlib.sha256(x["url"].split("?")[0].encode("utf-8")).hexdigest()[:20]
   if canonical_id in keep:continue
   x["id"]=canonical_id
-  photo=IMAGES/(canonical_id+".webp")
-  x["image"]=(f"./assets/news/images/{canonical_id}.webp" if photo.is_file()
-              else f"./assets/news/images/{canonical_id}.svg")
   keep[canonical_id]=x
  # A very small set of individually source-checked stories from outlets whose
  # short feeds have already dropped the item. Never extend a dated report past
@@ -390,10 +296,7 @@ def main():
    for e in entries[:180]:
     item=article(e,provider)
     if not item:continue
-    if item["id"] in keep:
-     if item.get("sourcePhoto") and not keep[item["id"]].get("sourcePhoto"):
-      keep[item["id"]]["sourcePhoto"]=item["sourcePhoto"]
-     continue
+    if item["id"] in keep:continue
     keep[item["id"]]=item;discovered+=1
    print(f"FEED {provider}: {len(entries)} entries, collected {len(keep)}",flush=True)
   except Exception as exc:
@@ -429,7 +332,7 @@ def main():
    print(f"FACEBOOK {len(facebook_posts)} collected from authorized pages",flush=True)
   except Exception as exc:
    errors["Facebook Page Graph API"]=type(exc).__name__+" (check permissions)"
- recent=select_diverse(x for x in keep.values() if valid(x))
+ recent=select_diverse(text_only(x) for x in keep.values() if valid(x))
  new_count=0
  translation_started=time.monotonic()
  for x in recent:
@@ -441,20 +344,12 @@ def main():
   else:
    x["title"]=x["titleOriginal"]
    x["summary"]=BRIEFS[x["category"]]["ru"]
-  # Photographic thumbnails are created separately in build_news_thumbnails.py.
-  photo=IMAGES/(x["id"]+".webp")
-  x["image"]=("./assets/news/images/"+x["id"]+".webp") if photo.is_file() else None
- # Avoid accumulating stale image files beyond one month.
- live_names={x["id"]+".webp" for x in recent}
- deleted=0
- for path in list(IMAGES.glob("*.svg"))+list(IMAGES.glob("*.webp")):
-  if path.name not in live_names:path.unlink();deleted+=1
  last=NOW.isoformat().replace("+00:00","Z") if feed_stats else ""
  payload={"version":1,"retentionDays":30,"lawsRetentionMonths":6,"updated":last,"items":recent}
  report={"attempted":NOW.isoformat().replace("+00:00","Z"),"feeds":feed_stats,"telegram":telegram_stats,
   "facebook":facebook_stats,"facebookState":facebook_state,
-  "new":discovered,"retained":len(recent),"imageCount":sum(bool(x["image"]) for x in recent),
-  "deletedImages":deleted,"discardedGoogleLinks":existing_google,"errors":errors,
+  "new":discovered,"retained":len(recent),
+  "discardedGoogleLinks":existing_google,"errors":errors,
   "directLinksOnly":all(allowed(x["url"]) for x in recent),
   "manuallyVerified":verified_count,"lawsRetentionMonths":6,"lawsStories":sum(x["category"]=="laws" for x in recent),
   "sourceCount":len(set(x["publisher"] for x in recent)),

@@ -13,7 +13,7 @@ from urllib.parse import unquote, urlparse
 
 ROOT = Path(__file__).resolve().parents[1]
 PAGES = ("index.html", "news.html", "hot.html", "delivery.html", "teoria.html")
-ASSET_DIRS = ("assets/catalog/images", "assets/news/images", "assets/transparent")
+ASSET_DIRS = ("assets/catalog/images", "assets/transparent")
 errors: list[str] = []
 warnings: list[str] = []
 

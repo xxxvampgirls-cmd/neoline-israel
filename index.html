@@ -3123,8 +3123,6 @@ function homepageNewsSlide(slot,i){
  const summary=ready?(row.summary||((lang==='ru')?item.summary:'')||''):'';
  const category=ready?String(item.category).toUpperCase():'ISRAEL';
  const url=ready&&/^[a-f0-9]{20}$/.test(item.id)?'./news.html?story='+item.id:'./news.html';
- const photo=ready&&typeof item.image==='string'&&/^\.\/assets\/news\/images\/[a-f0-9]{20}\.(?:webp|png|jpe?g|svg)$/.test(item.image)?item.image:'';
- const credit=ready&&item.imageType==='sourceLicensedPhoto'?words.photoNote:words.imageNote;
  const timestamp=ready?new Intl.DateTimeFormat(({ru:'ru-RU',en:'en-GB',he:'he-IL',ar:'ar-IL'})[lang]||'ru-RU',{timeZone:'Asia/Jerusalem',day:'numeric',month:'short'}).format(new Date(item.date)):'';
  return '<article class="featured-slide featured-slide--news-item '+(i===slideIndex?'active':'')+'" aria-label="'+words.latest+' '+(slot+1)+'">'+
  '<div class="feature-copy"><div class="eyebrow">'+words.latest+' · '+(slot+1)+'/3</div>'+
@@ -3133,10 +3131,9 @@ function homepageNewsSlide(slot,i){
  '<a class="secondary" href="./news.html">'+words.all+'</a></div></div>'+
  '<div class="featured-image featured-image--news">'+homepagePromoStripes+
  '<div class="news-showcase-cutout">'+
- (photo?'<img src="'+escapeDetailText(photo)+'" alt="" decoding="async" loading="lazy">':
- '<span class="news-showcase-placeholder" aria-hidden="true">NEOLINE<br>NEWS</span>')+
+ '<span class="news-showcase-placeholder" aria-hidden="true">NEOLINE<br>NEWS</span>'+
  '<div class="news-showcase-coverline"><b>'+escapeDetailText(ready?(item.publisher||category):words.latest)+'</b>'+
- '<span>'+escapeDetailText(timestamp)+' · '+credit+'</span></div></div>'+
+ '<span>'+escapeDetailText(timestamp)+'</span></div></div>'+
  '<button class="feature-img-prev" type="button" data-feature-prev aria-label="Previous slide">‹</button>'+
  '<button class="feature-img-next" type="button" data-feature-next aria-label="Next slide">›</button></div></article>';
 }
