@@ -19,6 +19,9 @@ CHANNELS = [
     ("Ихуд Ацала · Telegram", "uh1221"),
     ("Алексей Железнов · Telegram", "alexavni"),
     ("NEWSru.co.il · Telegram", "NEWSruIsrael"),
+    # Source-linked, public Israeli publishers. No login or private chats.
+    ("Минтранс Израиля · Telegram", "Transport_Il"),
+    ("Calcalist · Telegram", "calcalist"),
 ]
 # Keep non-driving stories (including wartime vehicle mentions) out of the auto feed.
 UNRELATED = (
@@ -40,6 +43,8 @@ TRAFFIC_PATTERNS=(
     r"תאונ", r"התנגש",r"נדרס",r"דרס",r"פגע וברח",r"נפגע מרכב",
     r'קמ["״׳\']?ש',r"מהירות מופרזת",r"מצלמות מהירות",r"ממל",r"אכיפת מהירות",
     r"חסימת כביש",r"כביש נחסם",r"כביש \d",r"פקק",r"עומסי תנועה",r"תקנות התעבורה",
+    r"רישיון נהיגה",r"רישיון רכב",r"רישוי רכב",r"בטיחות בדרכים",
+    r"רכב חשמלי",r"רכבים חשמליים",r"מס קנייה על רכב",r"יבואני רכב",
 )
 TRAFFIC_RE=re.compile("|".join(TRAFFIC_PATTERNS),re.I)
 SKIP_LINES=re.compile(r"^(?:[-_=]{3,}|⚡|➡|подписаться|הצטרפו לערוץ|"
