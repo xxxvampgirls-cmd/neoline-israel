@@ -3334,7 +3334,7 @@ function createShowroomFlightGhost(slide,subject,fromX,toX,stage){
   // Retain original CSS selectors and proportional coordinates for vector
   // art without freezing the entire background into a moving screenshot.
   ghost=document.createElement('article');
-  ghost.className=slide.className.replace(/\\b(?:ad-exiting|ad-arriving|ad-move-forward|ad-move-backward|ad-zooming)\\b/g,'').trim();
+  ghost.className=slide.className.replace(/\b(?:ad-exiting|ad-arriving|ad-move-forward|ad-move-backward|ad-zooming)\b/g,'').trim();
   ghost.classList.add('active','showroom-flight-copy');
   ghost.style.cssText='display:block!important;position:absolute!important;box-sizing:border-box!important;'+
    'left:'+box.left+'px!important;top:'+box.top+'px!important;'+
