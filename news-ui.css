@@ -1235,3 +1235,11 @@ html[dir=rtl] .news-feature-credit{right:auto;left:12px}
 @media(max-width:520px){
  #newsFeatureSlide .news-studio-edges path{stroke-width:1.9}
 }
+
+/* Live archive freshness. Visible only as a compact status, never an invented article. */
+.news-fresh-row.news-fresh-row--health{display:flex!important;align-items:center;gap:8px;flex-wrap:wrap;margin-top:7px!important}
+.news-fresh-row--health .news-fresh-pill{padding:5px 10px;font-size:10px}
+.news-fresh-row--health .news-updated{font-size:11px;font-weight:700;color:#247b9f}
+.news-fresh-row--health .news-updated[data-stale="true"]{color:#aa4835;background:#fff2ec;border:1px solid #ffd3be;padding:5px 9px;border-radius:10px}
+.news-fresh-row--health .news-updated[data-stale="false"]{color:#1d866f}
+@media(max-width:760px){.news-fresh-row.news-fresh-row--health{margin-top:4px!important;margin-bottom:2px!important;gap:5px}.news-fresh-row--health .news-fresh-pill{font-size:9px;padding:4px 7px}.news-fresh-row--health .news-updated{font-size:10px}}
