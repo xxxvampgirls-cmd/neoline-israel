@@ -1,0 +1,245 @@
+/* Real three-dimensional NEOLINE gift box · front, right wall, top lid.
+   Black graphite, cobalt/cyan ribbon with gold piping from the approved
+   concept #6. The light blue carousel background remains unchanged. */
+#showcaseSlides .featured-slide--promo-gift .giftad-box--3d{
+ width:226px;height:210px;top:49%;
+ perspective:950px;
+ transform-style:preserve-3d;
+ filter:drop-shadow(0 19px 13px #17395184) drop-shadow(0 0 9px #009bdb7d);
+}
+#showcaseSlides .featured-slide--promo-gift .giftad-box--3d::before{
+ display:none;
+}
+#showcaseSlides .featured-slide--promo-gift .giftad-cube{
+ --cube-depth:56px;
+ position:absolute;left:50%;top:54%;
+ width:190px;height:145px;
+ transform:translate(-50%,-50%) rotateX(-12deg) rotateY(-22deg);
+ transform-style:preserve-3d;
+ will-change:transform;
+}
+#showcaseSlides .featured-slide--promo-gift .giftad-cube-front,
+#showcaseSlides .featured-slide--promo-gift .giftad-cube-right,
+#showcaseSlides .featured-slide--promo-gift .giftad-cube-top{
+ position:absolute;display:block;box-sizing:border-box;
+ backface-visibility:hidden;
+ transform-style:preserve-3d;
+}
+#showcaseSlides .featured-slide--promo-gift .giftad-cube-front{
+ inset:0;
+ transform:translateZ(28px);
+ overflow:hidden;border-radius:3px 3px 6px 6px;
+ border:1px solid #345a73;
+ background:linear-gradient(128deg,#283544 0%,#111923 24%,#071423 62%,#0c1b29 100%);
+ box-shadow:inset 0 1px #a6d1e344,inset 0 -5px 10px #000e1e70;
+}
+#showcaseSlides .featured-slide--promo-gift .giftad-cube-carbon{
+ position:absolute;inset:0;
+ background:
+ repeating-linear-gradient(135deg,transparent 0 3px,#9cc6df0d 4px,transparent 5px 9px);
+ opacity:.75;pointer-events:none;
+}
+#showcaseSlides .featured-slide--promo-gift .giftad-cube-front::before{
+ content:"";position:absolute;z-index:9;inset:0;
+ border-left:1px solid #d6f5ff69;
+ border-bottom:2px solid #33cfff;
+ box-shadow:inset 0 -2px 10px #06baff70,0 0 8px #08aaff9c;
+ pointer-events:none;
+}
+#showcaseSlides .featured-slide--promo-gift .giftad-cube-dots{
+ position:absolute;z-index:1;left:-2px;bottom:0;width:57%;height:79%;
+ background:radial-gradient(circle,#18c9f8ed 0 1px,transparent 1.65px);
+ background-size:8px 8px;
+ -webkit-mask-image:linear-gradient(90deg,#000 0%,#0008 55%,transparent 100%);
+ mask-image:linear-gradient(90deg,#000 0%,#0008 55%,transparent 100%);
+ opacity:.85;
+}
+#showcaseSlides .featured-slide--promo-gift .giftad-cube-diagonal{
+ position:absolute;z-index:2;inset:0;
+ clip-path:polygon(40% 100%,61% 100%,100% 31%,100% 0%,83% 0%,23% 100%);
+ background:linear-gradient(110deg,#0471bb 0%,#2db9ff 36%,#0092db 66%,#075997 100%);
+ filter:drop-shadow(0 0 6px #08c8ff);
+}
+#showcaseSlides .featured-slide--promo-gift .giftad-cube-diagonal::before{
+ content:"";position:absolute;inset:0;
+ background:linear-gradient(104deg,transparent 30%,#efffff0c 42%,#ddffffd9 49%,#81faff7d 55%,transparent 70%);
+ background-size:250% 100%;background-position:-110% 0;
+ opacity:.88;
+}
+#showcaseSlides .featured-slide--promo-gift .giftad-cube-diagonal i{
+ position:absolute;inset:0;
+ border-left:2px solid #e5ffff8c;
+ box-shadow:0 0 15px #19d5ff82;
+}
+#showcaseSlides .featured-slide--promo-gift .giftad-cube-trace{
+ position:absolute;z-index:4;inset:0;
+ border-right:2px solid #1dbaf7;
+ border-bottom:2px solid #46dfff;
+ box-shadow:inset -2px 0 12px #15baf066;
+ pointer-events:none;
+}
+#showcaseSlides .featured-slide--promo-gift .giftad-cube-logo{
+ position:absolute;z-index:5;left:26%;top:24%;width:67%;
+ filter:drop-shadow(0 1px 4px #03131b);
+}
+#showcaseSlides .featured-slide--promo-gift .giftad-cube-logo img{
+ display:block!important;position:static!important;
+ width:100%!important;height:auto!important;max-width:100%!important;
+ max-height:none!important;object-fit:contain!important;margin:0!important;
+ mix-blend-mode:normal!important;
+ filter:brightness(0) invert(1) drop-shadow(0 0 3px #c5f3ff55)!important;
+ opacity:.96;
+}
+#showcaseSlides .featured-slide--promo-gift .giftad-cube-right{
+ top:0;left:calc(100% - 28px);
+ width:56px;height:100%;
+ transform:rotateY(90deg);
+ border-radius:0 5px 5px 0;
+ border:1px solid #143d5b;
+ background:linear-gradient(95deg,#192b3e 0%,#0b1729 40%,#081421 100%);
+ box-shadow:inset -4px 0 10px #071220ba;
+ overflow:hidden;
+}
+#showcaseSlides .featured-slide--promo-gift .giftad-cube-right::before{
+ content:"";position:absolute;inset:0;
+ background:linear-gradient(130deg,transparent 15%,#18abf066 20%,transparent 26%,transparent 65%,#034a7988 75%,transparent 85%);
+ border-right:2px solid #18a3e4;
+ opacity:.8;
+}
+#showcaseSlides .featured-slide--promo-gift .giftad-cube-side-ribbon{
+ position:absolute;z-index:2;left:34%;top:0;bottom:0;width:20px;
+ border-inline:2px solid #cda058;
+ background:linear-gradient(90deg,#063e72,#0b97dc 43%,#22c6ff 57%,#064780);
+ box-shadow:0 0 6px #13afff6b;
+}
+#showcaseSlides .featured-slide--promo-gift .giftad-cube-side-shine{
+ position:absolute;z-index:3;inset:0;
+ background:linear-gradient(105deg,transparent 20%,#69daff25 50%,transparent 72%);
+}
+#showcaseSlides .featured-slide--promo-gift .giftad-cube-top{
+ left:0;top:-28px;
+ width:100%;height:56px;
+ transform:rotateX(90deg);
+ border:1px solid #35516b;border-radius:4px 4px 1px 1px;
+ background:linear-gradient(125deg,#27394d 0%,#0c1625 45%,#1b3044 100%);
+ box-shadow:inset 0 1px #c3f5ff52;
+ overflow:hidden;
+}
+#showcaseSlides .featured-slide--promo-gift .giftad-cube-top::before{
+ content:"";position:absolute;left:0;right:0;bottom:0;height:3px;
+ background:linear-gradient(90deg,transparent,#58daff,#ddffff,#65ceff,transparent);
+ box-shadow:0 0 6px #14aefc;
+}
+#showcaseSlides .featured-slide--promo-gift .giftad-cube-top-ribbon{
+ position:absolute;left:26%;top:0;bottom:0;width:25px;
+ border-inline:2px solid #e2bd71;
+ background:linear-gradient(90deg,#043867,#098ac7 38%,#2bc3ff 57%,#06517d 100%);
+ box-shadow:0 0 6px #00bfff65;
+}
+#showcaseSlides .featured-slide--promo-gift .giftad-cube-top-cross{
+ position:absolute;top:43%;left:0;right:0;height:19px;
+ border-block:1px solid #d9b270;
+ background:linear-gradient(180deg,#013b76,#169bda 45%,#0060a8);
+ box-shadow:0 0 4px #10bcff94;
+}
+#showcaseSlides .featured-slide--promo-gift .giftad-cube-bow{
+ position:absolute;z-index:6;
+ left:25%;top:-57px;
+ width:126px;height:49px;
+ transform:translateZ(29px) rotateY(-2deg);
+ transform-style:preserve-3d;
+ filter:drop-shadow(0 4px 3px #0715288c);
+}
+#showcaseSlides .featured-slide--promo-gift .giftad-cube-loop{
+ position:absolute;top:8px;width:57px;height:37px;
+ border:2px solid #e7bd6f;
+ background:radial-gradient(ellipse at 53% 12%,#69dcff 0%,#118cdb 45%,#034c93 85%,#07305a 100%);
+ box-shadow:inset 0 2px 4px #d4f9ff89,inset 0 -4px 5px #052c6587,0 2px 4px #17202b5f;
+}
+#showcaseSlides .featured-slide--promo-gift .giftad-cube-loop--left{
+ left:2px;transform:rotate(23deg);
+ border-radius:66% 28% 66% 27%;
+}
+#showcaseSlides .featured-slide--promo-gift .giftad-cube-loop--right{
+ right:2px;transform:rotate(-23deg);
+ border-radius:28% 66% 27% 66%;
+}
+#showcaseSlides .featured-slide--promo-gift .giftad-cube-knot{
+ position:absolute;z-index:7;left:51%;top:21px;
+ width:24px;height:21px;transform:translateX(-50%) rotate(45deg);
+ border:2px solid #e8b667;border-radius:6px;
+ background:linear-gradient(135deg,#37c7ff,#07629e 70%,#063b6e);
+ box-shadow:0 1px 6px #014478b9;
+}
+/* Real depth stays visible during the existing controlled wobble. */
+#showcaseSlides .featured-slide--promo-gift.active:not(.ad-exiting) .giftad-cube{
+ animation:giftadDepthFloat 5.25s ease-in-out infinite;
+}
+#showcaseSlides .featured-slide--promo-gift.active:not(.ad-exiting) .giftad-cube-diagonal::before{
+ animation:giftad3dSweep 2.45s linear infinite;
+}
+#showcaseSlides .featured-slide--promo-gift.active:not(.ad-exiting) .giftad-cube-front::before,
+#showcaseSlides .featured-slide--promo-gift.active:not(.ad-exiting) .giftad-cube-top::before{
+ animation:giftad3dEdgePulse 5.25s ease-in-out infinite;
+}
+#showcaseSlides .featured-slide--promo-gift.active:not(.ad-exiting) .giftad-cube-side-ribbon{
+ animation:giftad3dBlueShimmer 2.6s linear infinite;
+}
+@keyframes giftadDepthFloat{
+ 0%,15%,100%{transform:translate(-50%,-50%) rotateX(-12deg) rotateY(-22deg)}
+ 48%{transform:translate(-50%,-50%) rotateX(-10deg) rotateY(-18deg)}
+ 66%{transform:translate(-50%,-50%) rotateX(-13deg) rotateY(-26deg)}
+ 90%{transform:translate(-50%,-50%) rotateX(-12deg) rotateY(-22deg)}
+}
+@keyframes giftad3dSweep{
+ from{background-position:-110% 0}
+ to{background-position:150% 0}
+}
+@keyframes giftad3dEdgePulse{
+ 0%,12%,100%{opacity:.45;filter:brightness(.8)}
+ 47%,70%{opacity:1;filter:brightness(1.4)}
+ 86%{opacity:.6;filter:brightness(1)}
+}
+@keyframes giftad3dBlueShimmer{
+ 0%,100%{filter:brightness(.85)}
+ 40%{filter:brightness(1.6)}
+ 65%{filter:brightness(1.15)}
+}
+#showcaseSlides .featured-slide--promo-gift .feature-img-prev,
+#showcaseSlides .featured-slide--promo-gift .feature-img-next{
+ z-index:40!important;pointer-events:auto!important;touch-action:manipulation;
+}
+/* Keep the gift on the shared, uncluttered ice-white slide background. */
+#showcaseSlides .featured-slide--promo-gift .giftad-scene{pointer-events:none}
+@media(max-width:720px){
+ #showcaseSlides .featured-slide--promo-gift .giftad-box--3d{
+  width:230px;height:220px;top:51%;
+ }
+ #showcaseSlides .featured-slide--promo-gift .giftad-cube{
+  width:186px;height:141px;top:54%;
+ }
+ #showcaseSlides .featured-slide--promo-gift .giftad-cube-bow{
+  left:23%;top:-57px;
+ }
+}
+@media(max-width:380px){
+ #showcaseSlides .featured-slide--promo-gift .giftad-box--3d{
+  width:206px;height:196px;
+ }
+ #showcaseSlides .featured-slide--promo-gift .giftad-cube{
+  width:167px;height:127px;
+ }
+ #showcaseSlides .featured-slide--promo-gift .giftad-cube-bow{
+  transform:translateZ(29px) rotateY(-2deg) scale(.89);
+  left:18%;top:-53px;
+ }
+}
+@media(prefers-reduced-motion:reduce){
+ #showcaseSlides .featured-slide--promo-gift.active:not(.ad-exiting) .giftad-cube,
+ #showcaseSlides .featured-slide--promo-gift.active:not(.ad-exiting) .giftad-cube-diagonal::before,
+ #showcaseSlides .featured-slide--promo-gift.active:not(.ad-exiting) .giftad-cube-front::before,
+ #showcaseSlides .featured-slide--promo-gift.active:not(.ad-exiting) .giftad-cube-top::before,
+ #showcaseSlides .featured-slide--promo-gift.active:not(.ad-exiting) .giftad-cube-side-ribbon{
+  animation:none!important;filter:none!important;
+ }
+}
