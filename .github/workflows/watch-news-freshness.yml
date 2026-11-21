@@ -2,11 +2,12 @@ name: NEOLINE news freshness watchdog
 on:
   workflow_dispatch:
   schedule:
-    # News collection starts near minute 17; check at :47 every hour.
-    - cron: '47 * * * *'
+    # Check twice hourly; GitHub schedule can be delayed.
+    - cron: '12,42 * * * *'
 permissions:
   contents: read
   issues: write
+  actions: write
 concurrency:
   group: neoline-news-watchdog
   cancel-in-progress: false
@@ -48,6 +49,41 @@ jobs:
               print("NEWS WATCHDOG FAILURE:",repr(e))
               raise SystemExit(1)
           PY
+      - name: Automatically restart stalled news collection (self-healing)
+        if: steps.check.outcome == 'failure'
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
+        run: |
+          set -euo pipefail
+          # An old source article is not itself a reason to loop endlessly.
+          # Restart only if the collector has stopped writing snapshots.
+          python - <<'PY'
+          import datetime as dt,json,os
+          from pathlib import Path
+          now=dt.datetime.now(dt.timezone.utc)
+          try:
+              feed=json.loads(Path("assets/news/news.json").read_text())
+              report=json.loads(Path("assets/news/sync-report.json").read_text())
+              last=dt.datetime.fromisoformat(feed["updated"].replace("Z","+00:00"))
+              attempted=dt.datetime.fromisoformat(report["attempted"].replace("Z","+00:00"))
+              overdue=max((now-last).total_seconds(),(now-attempted).total_seconds())>2*3600
+          except Exception: overdue=True
+          Path(os.environ["RUNNER_TEMP"],"news_recovery_needed").write_text(str(int(overdue)))
+          print("Collector overdue:",overdue)
+          PY
+          if [ "$(cat "$RUNNER_TEMP/news_recovery_needed")" != 1 ]; then
+            echo "Collector ran recently. News publisher cadence is a separate issue."
+            exit 0
+          fi
+          # Do not stack duplicate 45-minute fetches on top of an active run.
+          active="$(gh run list --workflow sync-news.yml --limit 10 --json status --jq '[.[] | select(.status == "in_progress" or .status == "queued" or .status == "waiting" or .status == "pending")] | length')"
+          if [ "$active" != 0 ]; then
+            echo "News collector is already active ($active runs); no duplicate dispatch."
+            exit 0
+          fi
+          gh workflow run sync-news.yml --ref main
+          echo "SELF HEAL: dispatched the stalled news collector."
       - name: Open or close one persistent news-failure issue
         env:
           GH_TOKEN: ${{ github.token }}
