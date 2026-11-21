@@ -3,8 +3,8 @@
  * a passive receiver of satellite broadcasts; it sends no requests.
  * One 7.05s flight fits inside the automatic 7.8s GPS chapter. */
 #installation .road-demo-satellite-flight{
- transform-box:view-box;
- transform-origin:280px 72px;
+ transform-box:fill-box;
+ transform-origin:center center;
  transform:translate3d(0,0,0);
  opacity:1;
  will-change:transform,opacity;
