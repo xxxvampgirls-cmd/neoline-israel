@@ -1,8 +1,6 @@
-/* NEOLINE gift advertisement — photo-real source approved by the user.
-   Exact showroom panel styling matches the product ads:
-   ONE pale-blue image stage + TWO sky-blue bands + NEOLINE • ISRAEL tag.
-   The transparent gift image is isolated so only simple compositor-based
-   transform/opacity animation runs on mobile. */
+/* NEOLINE | gift campaign, unified with original product carousel.
+   One photo cutout, no separate lid, no seam, no secondary animation engine.
+   The existing showcase's built-in cutout transition handles EVERY slide. */
 #showcaseSlides .featured-slide--promo-gift .feature-copy{
  position:relative;z-index:4;
 }
@@ -28,19 +26,14 @@
  box-shadow:0 9px 20px #116bb92a;
  border:1px solid #64c6ec!important;
 }
-/* Intentional identical geometry/background to other promo/product panels.
-   Removing our earlier transparent override fixes the missing blue stripes. */
-#showcaseSlides .featured-slide--site-promo.featured-slide--promo-gift .featured-image{
- position:relative;min-width:0;isolation:isolate;
- background:radial-gradient(ellipse at 50% 47%,#f9fdff 10%,#e3f3ff 100%)!important;
- border:1px solid #d1eafa!important;
- border-radius:19px!important;
- box-shadow:none!important;
+/* EXACT shared image panel with the first Israeli product slide.
+   The gift markup now uses the SAME israel-featured-image class. */
+#showcaseSlides .featured-slide--promo-gift .featured-image{
+ position:relative;isolation:isolate;
+ background:radial-gradient(ellipse at 50% 55%,#f9fdff 15%,#e0f1ff 93%)!important;
+ border:1px solid #cce8fb!important;
+ border-radius:22px!important;
  overflow:hidden!important;
-}
-#showcaseSlides .featured-slide--promo-gift .featured-image::before,
-#showcaseSlides .featured-slide--promo-gift .featured-image::after{
- display:none!important;
 }
 #showcaseSlides .featured-slide--promo-gift .ad-photo-stripes{
  z-index:0;
@@ -49,154 +42,75 @@
  z-index:8;
 }
 #showcaseSlides .featured-slide--promo-gift .ad-device-shadow{
- z-index:1;opacity:.25;
+ z-index:1;opacity:.18;
 }
-#showcaseSlides .featured-slide--promo-gift .giftad-stage{
- position:absolute;z-index:2;inset:0;
- display:flex;align-items:center;justify-content:center;
- overflow:hidden;
- pointer-events:none;user-select:none;
-}
-#showcaseSlides .featured-slide--promo-gift .giftad-motion{
- position:relative;flex:0 0 auto;
- width:auto;height:95%;max-width:95%;
- aspect-ratio:394 / 387;
- transform:translate3d(0,0,0);
- transform-origin:50% 84%;
- pointer-events:none;
- will-change:transform;
-}
-#showcaseSlides .featured-slide--promo-gift .giftad-premium-img,
-#showcaseSlides .featured-slide--promo-gift .giftad-lid-lift img{
+/* Foreground image is a DIRECT CHILD of .featured-image.
+   Standard carousel neolineCutoutEnter*/ 
+#showcaseSlides .featured-slide--promo-gift .featured-image > img.giftad-premium-img{
+ position:relative!important;
+ z-index:2;
  display:block!important;
- position:absolute!important;inset:0;
- width:100%!important;height:100%!important;
- max-width:100%!important;max-height:100%!important;
+ flex:0 0 auto;
+ width:64%!important;height:76%!important;
+ max-width:310px!important;max-height:76%!important;
+ min-width:0!important;min-height:0!important;
  object-fit:contain!important;
+ margin:auto!important;
+ opacity:1;
+ clip-path:none!important;
  mix-blend-mode:normal!important;
- filter:none!important;
- opacity:1!important;
- transform:none!important;
- margin:0!important;
- pointer-events:none;user-select:none;-webkit-user-drag:none;
+ filter:drop-shadow(0 10px 11px #15476d54)!important;
+ transform-origin:center 70%;
+ scale:1!important;
+ transition:scale 0s!important;
+ pointer-events:none;
+ user-select:none;
+ -webkit-user-drag:none;
 }
-#showcaseSlides .featured-slide--promo-gift .giftad-premium-img{
- /* Lower 53% is the body, so the lid above can move independently. */
- clip-path:inset(47% 0 0);
-}
-#showcaseSlides .featured-slide--promo-gift .giftad-lid-lift{
- position:absolute;inset:0;z-index:3;
- overflow:visible;
- clip-path:inset(0 0 53% 0);
- transform:translate3d(0,0,0);
+/* Only a SHORT shake while active. The normal forward/backward slide
+   animation takes control automatically on ad-arriving / ad-exiting.
+   Do not change the carousel timing functions or event logic. */
+#showcaseSlides .featured-slide--promo-gift.active:not(.ad-arriving):not(.ad-exiting) .featured-image > img.giftad-premium-img{
+ animation:neolineGiftFastShake 2.65s linear infinite!important;
  will-change:transform;
- pointer-events:none;
 }
-#showcaseSlides .featured-slide--promo-gift .giftad-seam-light{
- position:absolute;z-index:2;
- left:12%;top:46.4%;width:77%;height:3px;
- border-radius:50%;
- background:linear-gradient(90deg,transparent 0%,#c6faff 20%,#fff 52%,#9cefff 80%,transparent);
- box-shadow:0 0 5px #9bdcffb4;
- opacity:0;
- pointer-events:none;
+@keyframes neolineGiftFastShake{
+ 0%,28%,100%{transform:translate3d(0,0,0) rotate(0)}
+ 35%{transform:translate3d(-1px,0,0) rotate(-.9deg)}
+ 42%{transform:translate3d(2px,-1px,0) rotate(1.2deg)}
+ 48%{transform:translate3d(-3px,0,0) rotate(-1.8deg)}
+ 54%{transform:translate3d(3px,-1px,0) rotate(2.1deg)}
+ 60%{transform:translate3d(-3px,-1px,0) rotate(-1.9deg)}
+ 66%{transform:translate3d(2px,0,0) rotate(1.3deg)}
+ 72%{transform:translate3d(-1px,0,0) rotate(-.6deg)}
+ 79%{transform:translate3d(0,0,0) rotate(0)}
 }
-#showcaseSlides .featured-slide--promo-gift .giftad-neon-pass{
- position:absolute;z-index:4;inset:0;
- clip-path:polygon(43% 98%,59% 98%,96% 54%,96% 37%,82% 44%,33% 98%);
- background:linear-gradient(111deg,transparent 35%,#ccfcff11 45%,#c3faffab 52%,transparent 61%);
- opacity:0;
- pointer-events:none;
- mix-blend-mode:screen;
-}
-/* Controlled 5.3s story: anticipation, accelerating short wobble,
-   lid rises only 4px, a cyan light appears, then it settles closed.
-   No animated filters, box-shadow, gradients or reflow. */
-#showcaseSlides .featured-slide--promo-gift.active:not(.ad-exiting):not(.ad-arriving) .giftad-motion{
- animation:neolineGiftRealShake 5.3s linear infinite;
-}
-#showcaseSlides .featured-slide--promo-gift.active:not(.ad-exiting):not(.ad-arriving) .giftad-lid-lift{
- animation:neolineGiftRealLid 5.3s ease-in-out infinite;
-}
-#showcaseSlides .featured-slide--promo-gift.active:not(.ad-exiting):not(.ad-arriving) .giftad-seam-light{
- animation:neolineGiftRealSeam 5.3s ease-in-out infinite;
-}
-#showcaseSlides .featured-slide--promo-gift.active:not(.ad-exiting):not(.ad-arriving) .giftad-neon-pass{
- animation:neolineGiftRealNeon 5.3s ease-in-out infinite;
-}
-@keyframes neolineGiftRealShake{
- 0%,22%,100%{transform:translate3d(0,0,0) rotate(0)}
- 27%{transform:translate3d(-1px,0,0) rotate(-.38deg)}
- 33%{transform:translate3d(1px,-1px,0) rotate(.48deg)}
- 39%{transform:translate3d(-2px,0,0) rotate(-.82deg)}
- 45%{transform:translate3d(2px,-1px,0) rotate(1.1deg)}
- 51%{transform:translate3d(-3px,-2px,0) rotate(-1.35deg)}
- 56%{transform:translate3d(3px,-2px,0) rotate(1.6deg)}
- 61%{transform:translate3d(-3px,-1px,0) rotate(-1.5deg)}
- 67%{transform:translate3d(2px,-1px,0) rotate(1deg)}
- 74%{transform:translate3d(-1px,0,0) rotate(-.42deg)}
- 82%{transform:translate3d(0,0,0) rotate(0)}
-}
-@keyframes neolineGiftRealLid{
- 0%,42%,83%,100%{transform:translate3d(0,0,0)}
- 51%,63%{transform:translate3d(0,-4px,0)}
- 73%{transform:translate3d(0,-1px,0)}
-}
-@keyframes neolineGiftRealSeam{
- 0%,42%,79%,100%{opacity:0;transform:scaleX(.68)}
- 53%,64%{opacity:.94;transform:scaleX(1)}
- 72%{opacity:.32;transform:scaleX(.88)}
-}
-@keyframes neolineGiftRealNeon{
- 0%,25%,89%,100%{opacity:0}
- 43%{opacity:.18}
- 55%,73%{opacity:.72}
- 82%{opacity:.15}
-}
-/* Only foreground moves between carousel slides. Blue bands and parent
-   card stay stationary, consistent with the other showroom ads. */
-#showcaseSlides .featured-slide--promo-gift.ad-arriving .giftad-motion{
- animation:neolineGiftRealEnter .7s cubic-bezier(.18,.65,.28,1) both!important;
-}
-#showcaseSlides .featured-slide--promo-gift.ad-exiting .giftad-motion{
- animation:neolineGiftRealExit .65s cubic-bezier(.42,.04,.66,1) both!important;
-}
-@keyframes neolineGiftRealEnter{
- from{opacity:0;transform:translate3d(65px,0,0) scale(.95)}
- to{opacity:1;transform:translate3d(0,0,0) scale(1)}
-}
-@keyframes neolineGiftRealExit{
- from{opacity:1;transform:translate3d(0,0,0) scale(1)}
- to{opacity:0;transform:translate3d(-65px,0,0) scale(.96)}
-}
+/* Keep the ordinary next/previous buttons above the photo, as on all ads. */
 #showcaseSlides .featured-slide--promo-gift .feature-img-prev,
 #showcaseSlides .featured-slide--promo-gift .feature-img-next{
- position:absolute;z-index:15!important;
- pointer-events:auto!important;touch-action:manipulation;
+ z-index:15!important;pointer-events:auto!important;
+ touch-action:manipulation;
 }
 @media(max-width:720px){
  #showcaseSlides .featured-slide--promo-gift .feature-copy h1{
-  font-size:clamp(28px,7.4vw,38px)!important;
-  line-height:1.1!important;
+  font-size:clamp(28px,7.4vw,38px)!important;line-height:1.1!important;
  }
  #showcaseSlides .featured-slide--promo-gift .giftad-disclaimer{
   margin-top:7px;font-size:8.5px;
  }
- #showcaseSlides .featured-slide--site-promo.featured-slide--promo-gift .featured-image{
-  height:clamp(220px,66vw,280px)!important;
-  min-height:0!important;
-  max-height:34vh!important;
+ #showcaseSlides .featured-slide--promo-gift .featured-image{
+  height:clamp(234px,70vw,298px)!important;
+  max-height:none!important;
+  border-radius:18px!important;
   order:-1!important;
  }
- #showcaseSlides .featured-slide--promo-gift .giftad-motion{
-  height:96%;
+ #showcaseSlides .featured-slide--promo-gift .featured-image > img.giftad-premium-img{
+  width:65%!important;height:73%!important;
+  max-width:280px!important;max-height:73%!important;
  }
 }
 @media(prefers-reduced-motion:reduce){
- #showcaseSlides .featured-slide--promo-gift .giftad-motion,
- #showcaseSlides .featured-slide--promo-gift .giftad-lid-lift,
- #showcaseSlides .featured-slide--promo-gift .giftad-seam-light,
- #showcaseSlides .featured-slide--promo-gift .giftad-neon-pass{
+ #showcaseSlides .featured-slide--promo-gift.active .featured-image > img.giftad-premium-img{
   animation:none!important;will-change:auto!important;
  }
 }
