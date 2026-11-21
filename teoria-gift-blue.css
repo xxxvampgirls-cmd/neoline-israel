@@ -1,0 +1,92 @@
+/* NEOLINE 2026-11-21 · One approved gift across home and driving-theory.
+   Matte-black 3D package, sapphire satin bow, fine gold piping.
+   Two clipped views of the SAME branded art retain the reveal mechanism:
+   only the lid moves at each burst, never a gold/red substitute. */
+#gameGiftDialog .gift-reveal-scene{
+ background:
+  radial-gradient(ellipse at 50% 66%,#fcfeff 0%,#e6f6ff 49%,#cce9fc 100%);
+}
+#gameGiftDialog .gift-reveal-scene::before{
+ background:repeating-conic-gradient(
+  from -8deg at 50% 50%,
+  #46b5ef30 0deg 11deg,
+  #a8dfff25 11deg 16deg,
+  #f5fcff0b 16deg 34deg);
+ opacity:.7;
+}
+#gameGiftDialog .gift-reveal-scene::after{
+ border-top-color:#d0f1ff;
+ background:linear-gradient(180deg,#e3f8ff21,#e5f8fff2);
+}
+#gameGiftDialog .gift-reveal-platform{
+ border-top:1px solid #ffffffb8;
+ background:
+  radial-gradient(ellipse 43% 76% at 50% 0%,#73c8f67d 0%,#c8eaff3e 44%,transparent 100%),
+  linear-gradient(180deg,#f0fcff00,#e2f5ffb8 66%,#d4effee0);
+}
+#gameGiftDialog .gift-reveal-box--neoline-blue{
+ position:absolute;
+ left:50%;bottom:7px;
+ width:184px;height:179px;
+ z-index:4;
+ transform:translateX(-50%);
+ transform-origin:50% 80%;
+ filter:drop-shadow(0 11px 9px #123b5c64);
+}
+#gameGiftDialog .gift-reveal-box--neoline-blue::before{
+ content:"";position:absolute;z-index:-1;
+ left:9%;right:9%;top:19%;bottom:6%;
+ background:radial-gradient(ellipse,#faffffcf 0%,#b6e9ff97 37%,#67caff41 61%,transparent 76%);
+ filter:blur(15px);opacity:.55;
+ pointer-events:none;transform:scale(.87);
+ transition:opacity .3s ease,transform .3s ease;
+}
+#gameGiftDialog .gift-reveal-brand-art{
+ position:absolute;left:0;top:0;
+ display:block;width:100%;height:100%;
+ max-width:none;max-height:none;
+ object-fit:contain;
+ margin:0;padding:0;
+ user-select:none;pointer-events:none;
+ -webkit-user-drag:none;
+ image-rendering:auto;
+}
+#gameGiftDialog .gift-reveal-brand-base{
+ /* The lid seam follows perspective: front face falls gently from left to
+    right, with the right side of the lid meeting the body a little higher. */
+ clip-path:polygon(0% 47%,14% 47%,72% 52%,86% 44%,100% 44%,100% 100%,0% 100%);
+}
+#gameGiftDialog .gift-reveal-brand-lid{
+ z-index:2;
+ clip-path:polygon(0% 0%,100% 0%,100% 44%,86% 44%,72% 52%,14% 47%,0% 47%);
+ transform:translate3d(0,0,0) rotate(0deg);
+ transform-origin:24% 44%;
+ transition:transform .44s cubic-bezier(.16,.8,.25,1);
+}
+#gameGiftDialog .gift-reveal[data-phase="burst"] .gift-reveal-brand-lid,
+#gameGiftDialog .gift-reveal[data-phase="revealed"] .gift-reveal-brand-lid{
+ transform:translate3d(-7px,-28px,0) rotate(-12deg);
+}
+#gameGiftDialog .gift-reveal[data-phase="burst"] .gift-reveal-box--neoline-blue::before,
+#gameGiftDialog .gift-reveal[data-phase="revealed"] .gift-reveal-box--neoline-blue::before{
+ opacity:1;transform:scale(1.28);
+}
+#gameGiftDialog .gift-reveal[data-phase="burst"] .gift-reveal-beam{
+ background:conic-gradient(from 222deg at 50% 100%,
+ transparent 0deg,#8fe2ffc2 16deg,transparent 29deg,
+ #ffffffd1 47deg,transparent 60deg,#67c8fff0 79deg,transparent 90deg);
+ filter:blur(9px);
+}
+#gameGiftDialog .gift-reveal-spark-dust i{
+ color:#9cddff;
+ text-shadow:0 0 7px #fff,0 0 9px #50b8f7;
+}
+@media(max-width:385px){
+ #gameGiftDialog .gift-reveal-box--neoline-blue{
+  width:164px;height:158px;bottom:9px;scale:1;
+ }
+}
+@media(prefers-reduced-motion:reduce){
+ #gameGiftDialog .gift-reveal-brand-lid{transition:none!important}
+ #gameGiftDialog .gift-reveal-box--neoline-blue::before{transition:none!important}
+}
