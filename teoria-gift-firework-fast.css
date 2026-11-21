@@ -85,3 +85,93 @@
   animation:none!important;
  }
 }
+
+/* 2026-11-21: approved gift unchanged. Remove the rectangular-looking
+   cavity lighting entirely; three thin expanding circular wavefronts follow
+   the star launch at EACH of the three openings. */
+#gameGiftDialog .gift-reveal-box--neoline-blue::after,
+#gameGiftDialog .gift-reveal-backglow{
+ display:none!important;
+ animation:none!important;
+ opacity:0!important;
+}
+#gameGiftDialog .gift-reveal[data-phase="burst"] .gift-reveal-box--neoline-blue::after,
+#gameGiftDialog .gift-reveal[data-phase="revealed"] .gift-reveal-box--neoline-blue::after,
+#gameGiftDialog .gift-reveal[data-phase="burst"] .gift-reveal-backglow,
+#gameGiftDialog .gift-reveal[data-phase="revealed"] .gift-reveal-backglow{
+ display:none!important;animation:none!important;
+}
+/* Leave the existing 3D images, lid opening, box shake and flying stars alone. */
+#gameGiftDialog .gift-reveal-open-ring{
+ display:block!important;
+ position:absolute;
+ z-index:6;
+ pointer-events:none;
+ left:50%;top:53%;
+ width:38px;height:38px;
+ border:2px solid #5fceff;
+ border-radius:50%;
+ background:transparent!important;
+ box-shadow:0 0 8px #49dbff80!important;
+ opacity:0;
+ transform:translate(-50%,-50%) scale(.35);
+ will-change:transform,opacity;
+}
+#gameGiftDialog .gift-reveal-open-ring::before,
+#gameGiftDialog .gift-reveal-open-ring::after{
+ content:"";display:block;
+ position:absolute;
+ inset:-2px;
+ border-radius:50%;
+ background:transparent!important;
+ box-shadow:0 0 7px currentColor;
+ opacity:0;
+ transform:scale(.35);
+ pointer-events:none;
+}
+#gameGiftDialog .gift-reveal-open-ring::before{
+ color:#bfefff;
+ border:2px solid #a6eaff;
+}
+#gameGiftDialog .gift-reveal-open-ring::after{
+ color:#f4d88a;
+ border:2px solid #f4d88a;
+}
+#gameGiftDialog .gift-reveal[data-phase="burst"] .gift-reveal-open-ring,
+#gameGiftDialog .gift-reveal[data-phase="revealed"] .gift-reveal-open-ring{
+ animation:neolineCircularShockwave 1.22s ease-out 0s both!important;
+}
+#gameGiftDialog .gift-reveal[data-phase="burst"] .gift-reveal-open-ring::before,
+#gameGiftDialog .gift-reveal[data-phase="revealed"] .gift-reveal-open-ring::before{
+ animation:neolineCircularShockwaveInner 1.22s ease-out .11s both!important;
+}
+#gameGiftDialog .gift-reveal[data-phase="burst"] .gift-reveal-open-ring::after,
+#gameGiftDialog .gift-reveal[data-phase="revealed"] .gift-reveal-open-ring::after{
+ animation:neolineCircularShockwaveInner 1.1s ease-out .24s both!important;
+}
+@keyframes neolineCircularShockwave{
+ 0%{opacity:.85;transform:translate(-50%,-50%) scale(.4)}
+ 22%{opacity:.78}
+ 75%{opacity:.28}
+ 100%{opacity:0;transform:translate(-50%,-50%) scale(5.2)}
+}
+@keyframes neolineCircularShockwaveInner{
+ 0%{opacity:.75;transform:scale(.5)}
+ 25%{opacity:.7}
+ 72%{opacity:.24}
+ 100%{opacity:0;transform:scale(4.4)}
+}
+/* Remove the old cone-shaped light from the box; rings and stars carry the
+   entire visual effect. */
+#gameGiftDialog .gift-reveal[data-phase="burst"] .gift-reveal-beam,
+#gameGiftDialog .gift-reveal[data-phase="revealed"] .gift-reveal-beam{
+ opacity:0!important;
+ animation:none!important;
+}
+@media(prefers-reduced-motion:reduce){
+ #gameGiftDialog .gift-reveal-open-ring,
+ #gameGiftDialog .gift-reveal-open-ring::before,
+ #gameGiftDialog .gift-reveal-open-ring::after{
+  animation:none!important;opacity:0!important;
+ }
+}
