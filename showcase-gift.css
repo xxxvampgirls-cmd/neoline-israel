@@ -249,3 +249,142 @@
   opacity:.55;
  }
 }
+
+
+/* NEOLINE PREMIUM GIFT BLUE / GOLD · Nov 21
+   Brand-matched cool metallic blue + satin gold, restrained rays and a
+   visibly stronger shake. Keep the lid shut until the user opens the
+   existing three-round gift preview on the Driving Theory page. */
+#showcaseSlides .featured-slide--promo-gift .featured-image{
+ background:radial-gradient(ellipse at 50% 35%,#ffffff 4%,#f0faff 55%,#d5ebf7 100%)!important;
+ border-color:#b5dbea!important;
+ box-shadow:inset 0 1px #fff,0 7px 23px #216d9120;
+}
+#showcaseSlides .featured-slide--promo-gift .giftad-rays{
+ opacity:.32;
+ background:repeating-conic-gradient(
+  from -7deg at 50% 50%,#b5ddeb68 0deg 7deg,
+  #d7c38b32 7deg 12deg,transparent 12deg 28deg);
+}
+#showcaseSlides .featured-slide--promo-gift .giftad-light{
+ background:radial-gradient(circle,#fff 0%,#b1e8ff9a 27%,#f1d49225 53%,transparent 74%);
+ filter:blur(18px);
+ opacity:.63;
+}
+#showcaseSlides .featured-slide--promo-gift .giftad-floor{
+ background:linear-gradient(180deg,#effbff9c,#c1e4f08d);
+ border-top-color:#ffffffcb;
+ box-shadow:0 -5px 15px #d1efff70;
+}
+#showcaseSlides .featured-slide--promo-gift .giftad-floor::before{
+ background:radial-gradient(ellipse at 50% 0%,#b0def8a6,#c0eaf933 42%,transparent 75%);
+}
+#showcaseSlides .featured-slide--promo-gift .giftad-box{
+ filter:drop-shadow(0 17px 13px #0d3b5970) drop-shadow(0 0 16px #62d0ff26);
+}
+#showcaseSlides .featured-slide--promo-gift .giftad-body{
+ border:1px solid #1e6d9a;
+ border-radius:5px 5px 11px 11px;
+ background:linear-gradient(105deg,
+  #092c50 0%,#114d78 15%,#2d8ebd 35%,#136c9c 47%,
+  #0b4673 65%,#3d99bb 82%,#092e4e 100%);
+ box-shadow:inset 0 2px 2px #aee8ff99,
+  inset 0 -9px 12px #032b4b84,
+  0 10px 14px #0d456c45;
+}
+#showcaseSlides .featured-slide--promo-gift .giftad-ribbon{
+ background:linear-gradient(90deg,
+  #7b5214 0%,#bf9129 25%,#fff0a7 53%,#d0a441 74%,#855d18 100%);
+ border-left:1px solid #fff0a0b2;
+ border-right:1px solid #6944106e;
+ box-shadow:2px 0 5px #062d487a,-2px 0 3px #ffefaa30;
+}
+#showcaseSlides .featured-slide--promo-gift .giftad-ribbon-h{
+ background:linear-gradient(180deg,#745012 0%,#c89b36 30%,#ffeca0 56%,#8d631a 100%);
+ opacity:.96;
+}
+#showcaseSlides .featured-slide--promo-gift .giftad-boxshine{
+ background:linear-gradient(106deg,transparent 14%,#e1f8ff52 30%,transparent 43%,transparent 71%,#e2faff46 82%,transparent 94%);
+ opacity:.7;
+}
+#showcaseSlides .featured-slide--promo-gift .giftad-lid{
+ border:1px solid #227ba7;
+ border-radius:7px 7px 4px 4px;
+ background:linear-gradient(101deg,#0a3459,#17638b 17%,#3ba0c0 41%,#126593 66%,#64b4d0 81%,#0b365a);
+ box-shadow:0 5px 7px #082f4f63,inset 0 2px 2px #c8f5ffab;
+}
+#showcaseSlides .featured-slide--promo-gift .giftad-lid-ribbon{
+ background:linear-gradient(90deg,#795318,#c0902a 27%,#ffeda9 54%,#c59a35 78%,#7e5719);
+ border-left:1px solid #fff4bfa3;
+ box-shadow:2px 0 4px #07374f61;
+}
+#showcaseSlides .featured-slide--promo-gift .giftad-bow{
+ filter:drop-shadow(0 4px 3px #51402863);
+}
+#showcaseSlides .featured-slide--promo-gift .giftad-bow-left,
+#showcaseSlides .featured-slide--promo-gift .giftad-bow-right{
+ border:1.5px solid #fff4c29c;
+ background:radial-gradient(ellipse at 55% 16%,#fff1ad,#d7b153 43%,#a47922 79%,#775319);
+ box-shadow:inset 0 1px 3px #fffcdaa2,0 2px 4px #78561b59;
+}
+#showcaseSlides .featured-slide--promo-gift .giftad-bow-knot{
+ border-color:#fff5c5b4;
+ background:linear-gradient(135deg,#ffefad,#c39835 70%,#7d551c);
+ box-shadow:0 2px 4px #6241156d;
+}
+#showcaseSlides .featured-slide--promo-gift .giftad-star{
+ color:#bddff0;font-size:17px;
+ text-shadow:0 0 7px #fff,0 0 12px #7fcce3a6;
+}
+#showcaseSlides .featured-slide--promo-gift .giftad-sparkburst{
+ color:#eafdff;font-size:19px;
+ filter:drop-shadow(0 0 11px #8bdfff);
+}
+#showcaseSlides .featured-slide--promo-gift.active:not(.ad-exiting) .giftad-box{
+ animation:giftadPremiumShake 4.35s linear infinite;
+}
+#showcaseSlides .featured-slide--promo-gift.active:not(.ad-exiting) .giftad-light{
+ animation:giftadPremiumGlow 4.35s ease-in-out infinite;
+}
+#showcaseSlides .featured-slide--promo-gift.active:not(.ad-exiting) .giftad-star{
+ animation:giftadStars 4.35s ease-in-out infinite;
+}
+#showcaseSlides .featured-slide--promo-gift.active:not(.ad-exiting) .giftad-sparkburst{
+ animation:giftadPremiumSpark 4.35s ease-out infinite;
+}
+/* Controlled momentum: 0.75s anticipation, accelerating 0.2s oscillations,
+   4–5deg maximum roll plus a 6px lateral swing, then a gentle settle.
+   No opening animation or lid movement in the ad itself. */
+@keyframes giftadPremiumShake{
+ 0%,16%,100%{transform:translate(-50%,-50%) rotate(0) scale(1)}
+ 23%{transform:translate(calc(-50% - 2px),calc(-50% - 1px)) rotate(-1.5deg) scale(1.004)}
+ 30%{transform:translate(calc(-50% + 3px),-50%) rotate(2deg) scale(1.01)}
+ 37%{transform:translate(calc(-50% - 4px),calc(-50% - 2px)) rotate(-2.7deg) scale(1.016)}
+ 43%{transform:translate(calc(-50% + 5px),-50%) rotate(3.5deg) scale(1.018)}
+ 48%{transform:translate(calc(-50% - 6px),calc(-50% - 3px)) rotate(-4deg) scale(1.02)}
+ 53%{transform:translate(calc(-50% + 6px),calc(-50% - 1px)) rotate(4.5deg) scale(1.023)}
+ 58%{transform:translate(calc(-50% - 6px),calc(-50% - 2px)) rotate(-4.7deg) scale(1.022)}
+ 63%{transform:translate(calc(-50% + 5px),-50%) rotate(4deg) scale(1.019)}
+ 69%{transform:translate(calc(-50% - 4px),calc(-50% - 1px)) rotate(-3.1deg) scale(1.014)}
+ 75%{transform:translate(calc(-50% + 3px),-50%) rotate(1.8deg) scale(1.008)}
+ 82%{transform:translate(calc(-50% - 1px),-50%) rotate(-.5deg) scale(1.003)}
+ 91%{transform:translate(-50%,-50%) rotate(0) scale(1)}
+}
+@keyframes giftadPremiumGlow{
+ 0%,15%,100%{opacity:.48;transform:translate(-50%,-50%) scale(.89)}
+ 51%,68%{opacity:.92;transform:translate(-50%,-50%) scale(1.1)}
+ 91%{opacity:.54;transform:translate(-50%,-50%) scale(.98)}
+}
+@keyframes giftadPremiumSpark{
+ 0%,53%,89%,100%{opacity:0;transform:translate(-50%,-50%) scale(.3)}
+ 66%{opacity:.76;transform:translate(-50%,-50%) scale(3.7)}
+ 81%{opacity:0;transform:translate(-50%,-50%) scale(6.6)}
+}
+@media(prefers-reduced-motion:reduce){
+ #showcaseSlides .featured-slide--promo-gift.active:not(.ad-exiting) .giftad-box,
+ #showcaseSlides .featured-slide--promo-gift.active:not(.ad-exiting) .giftad-light,
+ #showcaseSlides .featured-slide--promo-gift.active:not(.ad-exiting) .giftad-star,
+ #showcaseSlides .featured-slide--promo-gift.active:not(.ad-exiting) .giftad-sparkburst{
+  animation:none!important;
+ }
+}
