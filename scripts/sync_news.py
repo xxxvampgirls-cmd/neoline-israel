@@ -42,7 +42,9 @@ LAW_CUTOFF=months_ago(NOW,6)
 def cutoff_for(section):
  return LAW_CUTOFF if section=="laws" else CUTOFF
 MAX_ITEMS=300
-NEW_PER_RUN=100
+NEW_PER_RUN=16
+# Keep metadata refresh independent of slow optional translations.
+TRANSLATION_BUDGET_SECONDS=180
 MAX_PER_SOURCE=65
 S=requests.Session()
 S.headers.update({"User-Agent":"Mozilla/5.0 (compatible; NEOLINE-Israel-Headlines/2.0)","Accept-Language":"he-IL,he;q=.8,en;q=.5"})
@@ -160,6 +162,8 @@ def feed(url):
    return p.entries
   except (requests.RequestException,ValueError) as e:
    err=e
+   # Auth/quota denials are not transient; do not waste a second fetch.
+   if isinstance(e,requests.HTTPError) and e.response is not None and e.response.status_code in (401,403,429):break
    if attempt==0:time.sleep(1.5)
  raise err
 def translate(value,to_lang):
@@ -427,10 +431,11 @@ def main():
    errors["Facebook Page Graph API"]=type(exc).__name__+" (check permissions)"
  recent=select_diverse(x for x in keep.values() if valid(x))
  new_count=0
+ translation_started=time.monotonic()
  for x in recent:
   has_full=all(isinstance(x.get("translations",{}).get(lang),dict)
                and x["translations"][lang].get("title") for lang in LOCALES)
-  if has_full or new_count<NEW_PER_RUN:
+  if has_full or (new_count<NEW_PER_RUN and time.monotonic()-translation_started<TRANSLATION_BUDGET_SECONDS):
    if not has_full:new_count+=1
    enrich(x)
   else:
