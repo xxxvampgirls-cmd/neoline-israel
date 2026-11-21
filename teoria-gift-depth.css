@@ -1,0 +1,108 @@
+/* NEOLINE gift / realistic 3D cavity under the moving cover.
+   The blue-black gift is one artwork split into independently moving lid and
+   fixed body. A perspective inner chamber must occupy the gap during reveal;
+   otherwise the photo is literally cut in half on a white background. */
+#gameGiftDialog .gift-reveal-box--neoline-blue{
+ isolation:isolate;
+ perspective:720px;
+}
+#gameGiftDialog .gift-reveal-brand-base{
+ z-index:1;
+}
+#gameGiftDialog .gift-reveal-brand-lid{
+ z-index:5;
+ backface-visibility:hidden;
+ will-change:transform;
+}
+/* Cavity remains totally hidden when the present is shut, so nothing
+   changes about the carefully approved closed gift illustration. */
+#gameGiftDialog .gift-reveal-interior{
+ position:absolute;
+ z-index:3;
+ pointer-events:none;
+ left:16%;right:13%;
+ top:38%;height:27%;
+ opacity:0;
+ transform:translate3d(0,7px,0) scaleY(.14);
+ transform-origin:50% 100%;
+ transition:opacity .18s ease,transform .42s cubic-bezier(.15,.68,.25,1);
+ filter:drop-shadow(0 2px 2px #010b18a8);
+}
+#gameGiftDialog .gift-reveal-interior > span{
+ position:absolute;display:block;pointer-events:none;
+}
+#gameGiftDialog .gift-reveal-interior-rear{
+ z-index:1;left:5%;right:5%;top:5%;height:53%;
+ clip-path:polygon(0 22%,79% 0,100% 13%,100% 100%,0 100%);
+ background:linear-gradient(180deg,#020711 2%,#031a32 52%,#0b2f4b 100%);
+ box-shadow:inset 0 -8px 16px #008ac366;
+}
+#gameGiftDialog .gift-reveal-interior-floor{
+ z-index:2;left:5%;right:5%;top:38%;height:49%;
+ clip-path:polygon(0 0,100% 0,85% 94%,12% 100%);
+ background:
+  radial-gradient(ellipse at 50% 70%,#4ce4ff66,transparent 66%),
+  linear-gradient(180deg,#041b33 0%,#020a17 82%);
+ border-bottom:2px solid #155478;
+}
+#gameGiftDialog .gift-reveal-interior-left{
+ z-index:3;left:1%;top:14%;width:18%;height:80%;
+ clip-path:polygon(0 0,100% 12%,100% 100%,0 74%);
+ background:linear-gradient(90deg,#183c59,#07152a 62%,#000b17);
+ border-left:1px solid #2f819d8c;
+}
+#gameGiftDialog .gift-reveal-interior-right{
+ z-index:3;right:0;top:0;width:20%;height:85%;
+ clip-path:polygon(0 13%,100% 0,100% 80%,0 100%);
+ background:linear-gradient(95deg,#010813,#0c2439 69%,#1b5678);
+ border-right:1px solid #1684b4ad;
+}
+#gameGiftDialog .gift-reveal-interior-lip{
+ z-index:4;left:2%;right:1%;bottom:5%;height:17%;
+ clip-path:polygon(0 20%,82% 20%,100% 0,100% 45%,82% 100%,0 90%);
+ background:linear-gradient(180deg,#113b56 0%,#061525 60%,#020915 100%);
+ border-top:2px solid #2691bd;
+ box-shadow:0 2px 3px #010e1b8f;
+}
+#gameGiftDialog .gift-reveal-interior-glow{
+ z-index:5;left:16%;right:15%;top:15%;bottom:17%;
+ background:radial-gradient(ellipse at 50% 67%,#d4fbffdc,#58d4ff7b 34%,transparent 75%);
+ filter:blur(7px);
+ opacity:.72;
+ transform:scale(.8);
+ transition:transform .43s,opacity .43s;
+}
+/* Opening sequence: the viewer sees a dark recessed chamber, back wall,
+   two side walls and a rim before the glowing reward card arrives. */
+#gameGiftDialog .gift-reveal[data-phase="burst"] .gift-reveal-interior,
+#gameGiftDialog .gift-reveal[data-phase="revealed"] .gift-reveal-interior{
+ opacity:1;
+ transform:translate3d(0,0,0) scaleY(1);
+}
+#gameGiftDialog .gift-reveal[data-phase="burst"] .gift-reveal-interior-glow,
+#gameGiftDialog .gift-reveal[data-phase="revealed"] .gift-reveal-interior-glow{
+ opacity:1;transform:scale(1.08);
+}
+/* Actual 3D lid motion: lift back and tilt into depth rather than pulling
+   a flat slice sideways off the picture (which looked like half the box).
+   Retain the approved side-view perspective of the source artwork. */
+#gameGiftDialog .gift-reveal[data-phase="burst"] .gift-reveal-brand-lid,
+#gameGiftDialog .gift-reveal[data-phase="revealed"] .gift-reveal-brand-lid{
+ transform:translate3d(-3px,-30px,12px) rotate(-5deg);
+}
+#gameGiftDialog .gift-reveal[data-phase="shake"] .gift-reveal-interior,
+#gameGiftDialog .gift-reveal[data-phase="idle"] .gift-reveal-interior{
+ opacity:0;
+}
+@media(max-width:385px){
+ #gameGiftDialog .gift-reveal-interior{
+  top:39%;height:26%;
+ }
+}
+@media(prefers-reduced-motion:reduce){
+ #gameGiftDialog .gift-reveal-interior,
+ #gameGiftDialog .gift-reveal-interior-glow,
+ #gameGiftDialog .gift-reveal-brand-lid{
+  transition:none!important;
+ }
+}
