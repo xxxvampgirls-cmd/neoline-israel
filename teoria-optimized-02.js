@@ -2289,7 +2289,7 @@ async function openOriginalTrack(track){
  try{
   const abort=new AbortController();
   const timeout=setTimeout(()=>abort.abort(),3000);
-  try{const response=await fetch(url,{method:"HEAD",cache:"no-store",signal:abort.signal});isHosted=response.ok}
+  try{const response=await fetch(url,{method:"HEAD",cache:"no-store",signal:abort.signal});isHosted=response.ok&&!/text\/html/i.test(response.headers.get("content-type")||"")}
   finally{clearTimeout(timeout)}
  }catch(_){}
  if(serial!==modalSequence||!originalDialog.open)return;
