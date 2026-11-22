@@ -1,3 +1,5 @@
+/* Radar remains invisible in classic NEOLINE mode. */
+#dock4Progress .vice-radar-map{display:none}
 /* NEOLINE Israel — GTA-inspired in-game radar & cinematic failure.
    Only active when visitor opts into the neon visual theme.
    Quiz data, answers, timing, XP and reward logic remain authoritative. */
