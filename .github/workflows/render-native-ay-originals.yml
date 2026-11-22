@@ -31,8 +31,8 @@ jobs:
         run: |
           git clone --depth 1 --branch develop https://github.com/vitamin-caig/zxtune.git /tmp/zxtune-src
           make -C /tmp/zxtune-src/apps/zxtune123 -j2 platform=linux distro=ubuntu arch=x86_64 system.zlib=1 \
-            support.alsa=0 support.pulse_audio=0 support.openal=0 \
-            support.sdl=0 support.mp3=0 support.ogg=0 support.flac=0
+            support_alsa= support_pulseaudio= support_oss= \
+            support_curl= support_mp3= support_ogg= support_flac=
           ZXTUNE=$(find /tmp/zxtune-src/bin -type f -name zxtune123 -perm /111 | head -1)
           test -n "$ZXTUNE"
           "$ZXTUNE" --help | head -30 || true
