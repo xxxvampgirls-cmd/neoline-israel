@@ -1,6 +1,13 @@
 /* Browser smoke test: the neon game HUD is live, compact and reversible.
    Tests final CSS plus real progress-event wiring on common Android widths. */
 const {chromium}=require("playwright");
+async function capture(page,label){
+ if(!process.env.NEOLINE_RADAR_CAPTURE)return;
+ const raw=(await page.screenshot({type:"jpeg",quality:65,fullPage:false})).toString("base64");
+ console.log("NEOLINE_RADAR_"+label+"_TOTAL:"+Math.ceil(raw.length/4800));
+ for(let i=0;i<raw.length;i+=4800)console.log("NEOLINE_RADAR_"+label+"_PART_"+(i/4800)+":"+raw.slice(i,i+4800));
+}
+
 (async()=>{
  const browser=await chromium.launch({headless:true});
  try{
@@ -58,6 +65,7 @@ const {chromium}=require("playwright");
      hints:document.getElementById("dock4HintCount").textContent
    }));
    if(progress.map!=="40"||progress.num!=="4/10"||progress.xp!=="+45 XP"||!progress.hearts.includes("♥")||progress.hints!=="2")throw Error("HUD desynced "+width+" "+JSON.stringify(progress));
+   if(width===390)await capture(page,"HUD");
    // Trigger existing overlay's public DOM state to check the cinematic
    // composition without modifying official question-bank progress.
    await page.evaluate(()=>{
@@ -78,6 +86,7 @@ const {chromium}=require("playwright");
    });
    if(!wasted.blur.includes("blur")||wasted.promo!=="none"||wasted.headingHeight<42||wasted.retries.includes(true)||wasted.overflow>width+2)
     throw Error("WASTED overlay check "+width+" "+JSON.stringify(wasted));
+   if(width===390)await capture(page,"WASTED");
    await page.evaluate(()=>{document.documentElement.lang="en"});
    await page.waitForFunction(()=>document.getElementById("gameOverTitle").textContent==="WASTED");
    await page.locator("#gameOverModes").click();
