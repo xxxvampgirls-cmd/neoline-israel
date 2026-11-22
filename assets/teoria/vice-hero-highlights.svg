@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 860 420" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+<defs>
+ <linearGradient id="air" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#40385d"/><stop offset=".52" stop-color="#221c45"/><stop offset="1" stop-color="#14142f"/></linearGradient>
+ <linearGradient id="glass" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#c5eff5"/><stop offset=".46" stop-color="#4f91b2"/><stop offset="1" stop-color="#1d2a60"/></linearGradient>
+ <radialGradient id="light"><stop stop-color="#ffdba7" stop-opacity=".78"/><stop offset=".55" stop-color="#ff9eab" stop-opacity=".22"/><stop offset="1" stop-color="#ff9eab" stop-opacity="0"/></radialGradient>
+ <filter id="glow" x="-80%" y="-80%" width="260%" height="260%"><feGaussianBlur stdDeviation="5"/></filter>
+</defs>
+<!-- Soft high-altitude light, behind the helicopter -->
+<ellipse cx="608" cy="102" rx="105" ry="48" fill="url(#light)" opacity=".48"/>
+<!-- A detailed original helicopter silhouette, in front of the sunset -->
+<g transform="translate(567 84) rotate(-8 77 39)" stroke-linecap="round" stroke-linejoin="round">
+ <path d="M40 39 5 25l-13-1-2 7 11 4 39 17Z" fill="#1c2040" stroke="#ecadbf" stroke-opacity=".35" stroke-width="1.7"/>
+ <path d="M7 22 9 41" stroke="#33253d" stroke-width="4"/>
+ <path d="M-2 21 18 40M0 40 18 22" stroke="#1a1936" stroke-width="3"/>
+ <path d="M29 44q6-19 34-22 31-4 47 5 9 6 9 18-2 16-24 24H49Q29 60 29 44Z" fill="url(#air)" stroke="#e4c1cb" stroke-opacity=".5" stroke-width="2"/>
+ <path d="M68 26q12-6 29 1 7 4 10 15H68Z" fill="url(#glass)" stroke="#9ba4bc" stroke-width="1.7"/>
+ <path d="M43 41q9-10 22-14v15H43Z" fill="#3c6485"/>
+ <path d="M30 46h73" stroke="#e5a0b6" stroke-opacity=".44" stroke-width="2"/>
+ <path d="M56 20v-8h22v8M67 12V6" fill="none" stroke="#25213c" stroke-width="4"/>
+ <path d="M-6 7h148" stroke="#27213a" stroke-width="3.5"/>
+ <path d="M27 7h103" stroke="#d7a2c7" stroke-opacity=".6" stroke-width="1.5"/>
+ <path d="M52 71l-10 12h65l8-12" fill="none" stroke="#191b39" stroke-width="4"/>
+ <path d="M46 76h68" stroke="#e7b2c6" stroke-opacity=".48" stroke-width="1.5"/>
+ <circle cx="61" cy="47" r="2.5" fill="#fff0a8"/>
+ <ellipse cx="61" cy="47" rx="12" ry="9" fill="#ffbf8d" opacity=".3" filter="url(#glow)"/>
+</g>
+<!-- Glass shimmer, sunbeams and a few scattered lens glints -->
+<g fill="none" stroke-linecap="round">
+ <path d="M95 372Q209 335 345 362t219-3" stroke="#fa78c5" stroke-width="10" opacity=".26" filter="url(#glow)"/>
+ <path d="M116 376Q251 338 360 366" stroke="#ffe5e4" stroke-width="2" opacity=".65"/>
+ <path d="M678 364Q729 336 829 359" stroke="#ffb17a" stroke-width="7" opacity=".43" filter="url(#glow)"/>
+</g>
+<g fill="#fff5cc">
+ <path d="m794 276 5 12 12 4-12 4-5 13-4-13-12-4 12-4Z"/>
+ <path d="m822 320 3 8 8 3-8 2-3 9-3-9-9-2 9-3Z" opacity=".8"/>
+ <path d="m619 34 4 8 8 3-8 3-4 9-3-9-9-3 9-3Z" opacity=".7"/>
+</g>
+<g fill="#94fcff" opacity=".8">
+ <circle cx="762" cy="266" r="2.5"/><circle cx="824" cy="290" r="2"/><circle cx="123" cy="55" r="2"/>
+</g>
+</svg>
