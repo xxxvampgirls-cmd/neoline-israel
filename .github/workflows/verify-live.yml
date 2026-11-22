@@ -18,6 +18,7 @@ on:
       - 'teoria.html'
       - 'teoria*.js'
       - 'teoria*.css'
+      - 'assets/teoria/ay-originals/**'
       - '.github/workflows/verify-live.yml'
 permissions:
   contents: read
@@ -43,7 +44,16 @@ jobs:
           game_files = ("teoria-optimized-01.js","teoria-optimized-02.js", "teoria-optimized-01.css","teoria-optimized-02.css","teoria-optimized-03.css","teoria-optimized-04.css")
           verified_data = ("assets/catalog/tutorial-videos.json","assets/catalog/catalog.json","assets/catalog/feature-media.json")
           feature_art = tuple(str(p) for p in sorted(Path("assets/catalog/feature-images").glob("*.webp")))
-          files = shop_files + game_files + verified_data + feature_art
+          native_file = Path("assets/teoria/ay-originals/manifest.json")
+          native_files = ()
+          if native_file.exists():
+              manifest_native = json.loads(native_file.read_text(encoding="utf-8"))
+              native_files = ("assets/teoria/ay-originals/manifest.json",) + tuple(
+                  entry["url"].removeprefix("./")
+                  for entry in manifest_native.get("tracks", {}).values()
+              )
+              assert len(native_files) > 1, "Native original music manifest contains no tracks"
+          files = shop_files + game_files + verified_data + feature_art + native_files
           local_pages = {
               "index.html": Path("index.html").read_text(encoding="utf-8"),
               "teoria.html": Path("teoria.html").read_text(encoding="utf-8")
