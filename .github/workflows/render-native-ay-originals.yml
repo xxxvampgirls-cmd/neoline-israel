@@ -30,7 +30,7 @@ jobs:
       - name: Build upstream ZXTune CLI (native AY tracker decoder)
         run: |
           git clone --depth 1 --branch develop https://github.com/vitamin-caig/zxtune.git /tmp/zxtune-src
-          make -C /tmp/zxtune-src/apps/zxtune123 -j2 platform=linux arch=x86_64 system.zlib=1 \
+          make -C /tmp/zxtune-src/apps/zxtune123 -j2 platform=linux distro=ubuntu arch=x86_64 system.zlib=1 \
             support.alsa=0 support.pulse_audio=0 support.openal=0 \
             support.sdl=0 support.mp3=0 support.ogg=0 support.flac=0
           ZXTUNE=$(find /tmp/zxtune-src/bin -type f -name zxtune123 -perm /111 | head -1)
