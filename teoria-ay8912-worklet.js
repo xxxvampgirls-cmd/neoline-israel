@@ -9,6 +9,9 @@ const AY_CLOCK=1773400;
 // ROM block timings. Driven by the same samples as the sound; no fake gap
 // between the 8063 leader pulses, two sync pulses and the header data.
 const ZX_TSTATES=3500000;
+// Omit just the first second of the intro; the remaining pulses and pauses
+// keep their original timing and pitch.
+const ZX_START_TRIM_SECONDS=1;
 const ZX_HEADER_BYTES=(()=>{
  const header=[0,3,78,69,79,76,73,78,69,32,32,32,0,192,0,0,0,0];
  const checksum=header.reduce((sum,byte)=>sum^byte,0);
@@ -162,8 +165,8 @@ class NeolineAY8912 extends AudioWorkletProcessor{
  }
  tapeSample(sr){
   const sample=this.tapeSamples++;
-  const elapsed=sample/sr;
-  const total=this.tapeDurationSamples/sr;
+  const elapsed=sample/sr+ZX_START_TRIM_SECONDS;
+  const total=this.tapeDurationSamples/sr+ZX_START_TRIM_SECONDS;
   if(sample>=this.tapeDurationSamples){
    this.tapeActive=false;this.tapePhaseEvent("done");
    return 0;
