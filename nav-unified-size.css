@@ -1,0 +1,108 @@
+/* NEOLINE Israel — a single bottom navigation size on EVERY page.
+   Approved reference: the five-item dock on the News screen (Nov 22).
+   Do not alter the game-only in-session dock, hide-on-scroll or overlays.
+   Height includes the device safe-area IN ADDITION to a fixed 66px menu. */
+@media (max-width:760px){
+ :is(.mobile-nav,.news-bottom,.delivery-nav,.theory-bottom) {
+  --neoline-dock-height:66px;
+  position:fixed!important;
+  left:0!important;right:0!important;bottom:0!important;
+  width:100%!important;
+  height:calc(var(--neoline-dock-height) + env(safe-area-inset-bottom,0px))!important;
+  min-height:0!important;max-height:none!important;
+  box-sizing:border-box!important;
+  display:grid!important;
+  grid-template-columns:repeat(5,minmax(0,1fr))!important;
+  grid-template-rows:56px!important;
+  align-items:start!important;
+  justify-items:stretch!important;
+  gap:0!important;
+  padding:5px 5px calc(5px + env(safe-area-inset-bottom,0px))!important;
+  margin:0!important;
+  background:rgba(255,255,255,.97)!important;
+  border:0!important;border-top:1px solid #d4e8f6!important;
+  border-radius:0!important;
+  box-shadow:0 -7px 21px #195c9017!important;
+  -webkit-backdrop-filter:blur(15px);backdrop-filter:blur(15px);
+  direction:ltr!important; /* fixed Home/Catalog/News/Delivery/Game order */
+  z-index:50!important;
+ }
+ :is(.mobile-nav,.news-bottom,.delivery-nav,.theory-bottom) > :is(a,button) {
+  box-sizing:border-box!important;
+  display:flex!important;flex-direction:column!important;
+  align-items:center!important;justify-content:center!important;
+  min-width:0!important;max-width:none!important;
+  width:100%!important;
+  height:56px!important;min-height:56px!important;max-height:56px!important;
+  gap:4px!important;
+  padding:5px 2px 4px!important;
+  margin:0!important;
+  border:0!important;border-radius:18px!important;
+  background:transparent;
+  box-shadow:none;
+  color:#718ca0!important;
+  font-family:Manrope,Arial,sans-serif!important;
+  font-size:11px!important;font-weight:660!important;line-height:15px!important;
+  text-align:center!important;text-decoration:none!important;
+  -webkit-tap-highlight-color:transparent;
+  touch-action:manipulation;
+ }
+ :is(.mobile-nav,.news-bottom,.delivery-nav,.theory-bottom) > :is(a,button) > svg,
+ :is(.mobile-nav,.news-bottom,.delivery-nav,.theory-bottom) > :is(a,button) > .mobile-icon > svg {
+  box-sizing:border-box!important;
+  display:block!important;
+  width:26px!important;height:26px!important;
+  max-width:26px!important;max-height:26px!important;
+  min-width:26px!important;min-height:26px!important;
+  flex:0 0 26px!important;
+  fill:none;
+  stroke:currentColor!important;
+  stroke-width:1.8;
+ }
+ .mobile-nav > :is(a,button) > .mobile-icon {
+  display:grid!important;place-items:center!important;
+  width:28px!important;height:26px!important;min-height:26px!important;
+  max-height:26px!important;
+  flex:0 0 26px!important;
+  font-size:inherit!important;line-height:26px!important;
+  color:inherit!important;
+ }
+ :is(.mobile-nav,.news-bottom,.delivery-nav,.theory-bottom) > :is(a,button) > span:not(.mobile-icon) {
+  display:block!important;
+  min-width:0!important;max-width:100%!important;
+  margin:0!important;padding:0!important;
+  font-size:11px!important;line-height:15px!important;
+  font-weight:inherit!important;color:inherit!important;
+  text-align:center!important;
+  white-space:nowrap!important;
+  overflow:hidden!important;text-overflow:ellipsis!important;
+  unicode-bidi:plaintext;
+ }
+ /* Same complete light-blue active tile, including outline icon + caption. */
+ :is(.mobile-nav,.news-bottom,.delivery-nav,.theory-bottom) > :is(a,button):is(.neoline-current,.active,[aria-current]) {
+  color:#196eaa!important;
+  background:#e7f5ff!important;
+  font-weight:850!important;
+  box-shadow:inset 0 0 0 1px #c9e9fb80!important;
+ }
+ :is(.mobile-nav,.news-bottom,.delivery-nav,.theory-bottom) > :is(a,button):is(.neoline-current,.active,[aria-current]) > svg,
+ :is(.mobile-nav,.news-bottom,.delivery-nav,.theory-bottom) > :is(a,button):is(.neoline-current,.active,[aria-current]) .mobile-icon svg {
+  stroke:#0b7dbb!important;
+ }
+ :is(.mobile-nav,.news-bottom,.delivery-nav,.theory-bottom) > :is(a,button):focus-visible {
+  outline:2px solid #158dd4!important;
+  outline-offset:-3px!important;
+ }
+ /* A fixed 56px tile should never grow with language, active state or scroll. */
+ :is(.mobile-nav,.news-bottom,.delivery-nav,.theory-bottom) > :is(a,button) .mobile-counter {
+  position:absolute;z-index:2;
+ }
+ /* Keep the separate 4-button gameplay HUD unchanged and visible.
+    The normal dock is deliberately hidden by this existing game state. */
+ body.theory-in-session .theory-bottom {display:none!important}
+}
+@media (prefers-reduced-motion:reduce) {
+ :is(.mobile-nav,.news-bottom,.delivery-nav,.theory-bottom) > :is(a,button) {
+  transition:none!important;
+ }
+}
