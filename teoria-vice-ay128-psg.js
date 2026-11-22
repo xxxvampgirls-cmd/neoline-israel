@@ -185,42 +185,74 @@ function syncScene(){
  const next=guessScene();
  if(scene!==next){scene=next;loadScene(true)}
 }
-async function unlock(){
- if(!isVice()||!Ctx||audioError)return false;
+// Browser sound policy: decode and initialize the PSG early. Try autoplay,
+// but do not wait for a blocked ctx.resume() promise: on mobile it may remain
+// pending until an actual user gesture. The very first tap resumes the chip.
+function reportAudio(){
+ window.dispatchEvent(new CustomEvent("neoline:ay-status",{detail:{
+  playing:!!(ctx&&ctx.state==="running"&&node&&musicOn&&isVice()&&!document.hidden),
+  ready:!!node,
+  blocked:!!(ctx&&ctx.state!=="running"&&isVice()&&musicOn),
+  musicOn,sfxOn,error:audioError
+ }}));
+}
+function prepareAudio(){
+ if(!isVice()||!Ctx||audioError)return null;
+ if(boot)return boot;
  try{
-  if(!ctx){
-   ctx=new Ctx({latencyHint:"interactive"});
-   // Resume within the genuine gesture before waiting for addModule.
-   const resumed=ctx.resume();
-   boot=Promise.all([
-    resumed,
-    ctx.audioWorklet.addModule("./teoria-ay8912-worklet.js?v=20261122-pt3-loop-v4")
-   ]).then(()=>{
+  ctx=new Ctx({latencyHint:"interactive"});
+  ctx.addEventListener("statechange",()=>{updateControls();reportAudio()});
+  boot=ctx.audioWorklet.addModule("./teoria-ay8912-worklet.js?v=20261122-pt3-balanced-v5")
+   .then(()=>{
     node=new AudioWorkletNode(ctx,"neoline-ay8912",{
      numberOfInputs:0,numberOfOutputs:1,outputChannelCount:[2]
     });
     node.port.onmessage=event=>{
-      if(event.data?.type!=="song-loop"||!isVice()||!musicOn||!GAME_MODES.has(scene))return;
-      selectedGameSong=nextGameTrack();loadScene(true);
-     };
-     const master=ctx.createGain();
+     if(event.data?.type!=="song-loop"||!isVice()||!musicOn||!GAME_MODES.has(scene))return;
+     selectedGameSong=nextGameTrack();
+     void loadScene(true);
+    };
+    const master=ctx.createGain();
     master.gain.value=.80;
     node.connect(master);master.connect(ctx.destination);
     scene=guessScene();
-    loadScene(true);
-    updateControls();
+    void loadScene(true);
+    updateControls();reportAudio();
     return true;
    }).catch(error=>{
     audioError=true;console.warn("NEOLINE AY8912 startup:",error);
-    updateControls();return false;
+    updateControls();reportAudio();return false;
    });
-  }else if(ctx.state!=="running")await ctx.resume();
-  const started=await boot;
-  if(started&&ctx.state!=="running")await ctx.resume();
-  stateToChip();updateControls();
-  return Boolean(started&&ctx.state==="running");
- }catch(error){audioError=true;console.warn("NEOLINE AY8912:",error);updateControls();return false}
+  // Decode the original lobby tracker ahead of time, without starting sound.
+  // A user gesture can then resume already-prepared chip audio immediately.
+  void pt3Bytes("sonya").catch(err=>console.warn("NEOLINE Sonya PT3 preload:",err));
+  return boot;
+ }catch(error){
+  audioError=true;console.warn("NEOLINE AY8912 setup:",error);
+  updateControls();reportAudio();return null;
+ }
 }
+function requestResume(){
+ if(!ctx||ctx.state==="running")return;
+ try{
+  // Must be invoked synchronously inside pointerdown/click to retain
+  // browser's transient user activation on Chrome/Safari/Android.
+  void ctx.resume().then(()=>{
+   if(isVice()){stateToChip();updateControls();reportAudio()}
+  }).catch(err=>console.warn("NEOLINE audio blocked by browser:",err));
+ }catch(error){console.warn("NEOLINE audio gesture:",error)}
+}
+async function unlock(){
+ if(!isVice()||!Ctx||audioError)return false;
+ const ready=prepareAudio();
+ if(!ready)return false;
+ requestResume(); // Called BEFORE first await, while gesture is active.
+ const prepared=await ready;
+ if(!prepared)return false;
+ updateControls();reportAudio();
+ return ctx?.state==="running";
+}
+window.neolineStartAYAudio=unlock;
 function playFx(name){
  if(!isVice()||!sfxOn||!node||ctx?.state!=="running"||document.hidden)return;
  msg({type:"fx",frames:compileFx(name)});
@@ -268,14 +300,14 @@ function updateControls(){
    button.classList.toggle("is-off",!on);
    button.disabled=!Ctx||audioError;
   }
-  bar.status.textContent=audioError||!Ctx?t.unavailable:node?"AY-3-8912 · 3CH":t.tap;
+  bar.status.textContent=audioError||!Ctx?t.unavailable:node&&ctx?.state==="running"?"AY-3-8912 · 3CH":t.tap;
  }
 }
-document.addEventListener("pointerdown",e=>{
- if(isVice()&&e.target.closest("button,a,select,[role='button']"))void unlock();
+document.addEventListener("pointerdown",()=>{
+ if(isVice()&&ctx?.state!=="running")void unlock();
 },{capture:true,passive:true});
 document.addEventListener("keydown",e=>{
- if(isVice()&&(e.key===" "||e.key==="Enter")&&e.target.closest("button,a,select"))void unlock();
+ if(isVice()&&!e.repeat&&e.key!=="Shift"&&e.key!=="Control"&&e.key!=="Alt"&&e.key!=="Meta"&&ctx?.state!=="running")void unlock();
 },{capture:true});
 document.addEventListener("click",e=>{
  if(!isVice())return;
@@ -379,4 +411,11 @@ window.addEventListener("storage",e=>{
 });
 new MutationObserver(updateControls).observe(root,{attributes:true,attributeFilter:["lang"]});
 updateControls();
+// On reload in saved GTA mode, prepare the entire sound engine right away.
+// Browsers that permit autoplay will play immediately; others can start it
+// with the first tap anywhere or the prominent sound start button.
+if(isVice()&&musicOn&&Ctx){
+ prepareAudio();
+ requestResume();
+}
 })();
