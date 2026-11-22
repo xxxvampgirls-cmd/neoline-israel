@@ -2512,19 +2512,36 @@ html:not([data-vice-theme="on"])[lang^="ru"] .theory-promo-host:has(>.vice-promo
  display:block;object-fit:cover;object-position:50% 50%;
  z-index:0;pointer-events:none;user-select:none;-webkit-user-drag:none;
 }
-.vice-boot-overlay.is-active .vice-boot-art{
- animation:vice-boot-tape-reveal var(--vice-boot-time,5600ms) steps(72,end) var(--vice-boot-pilot-time,5244ms) both;
+.vice-boot-art--ink{z-index:0;filter:grayscale(1) contrast(1.15)}
+.vice-boot-art--color{z-index:1}
+.vice-boot-overlay.is-active:not(.is-data):not(.is-ready) .vice-boot-art{
+ clip-path:inset(0 0 100% 0)
 }
-.vice-boot-overlay.is-ready .vice-boot-art{
- animation:none;clip-path:none;filter:none;
+.vice-boot-overlay.is-active.is-data .vice-boot-art--ink{
+ animation:vice-boot-pixels var(--vice-boot-time,3800ms) steps(64,end) both;
 }
-@keyframes vice-boot-tape-reveal{
- 0%{clip-path:inset(0 0 100% 0);filter:grayscale(1) contrast(1.18)}
- 22%,26.5%{clip-path:inset(0 0 80% 0);filter:grayscale(1) contrast(1.18)}
- 56%,61.5%{clip-path:inset(0 0 40% 0);filter:grayscale(1) contrast(1.18)}
- 75%,78%{clip-path:inset(0 0 16% 0);filter:grayscale(1) contrast(1.18)}
- 90%{clip-path:inset(0);filter:grayscale(1)}
- 100%{clip-path:inset(0);filter:none}
+.vice-boot-overlay.is-active.is-data .vice-boot-art--color{
+ animation:vice-boot-colors var(--vice-boot-time,3800ms) steps(64,end) both;
+}
+.vice-boot-overlay.is-ready .vice-boot-art--ink{
+ animation:none;clip-path:none;filter:grayscale(1)
+}
+.vice-boot-overlay.is-ready .vice-boot-art--color{
+ animation:none;clip-path:none;filter:none
+}
+/* Bitmap bytes arrive first; color attributes are filled on a later pass. */
+@keyframes vice-boot-pixels{
+ 0%{clip-path:inset(0 0 100% 0)}
+ 22%,26.5%{clip-path:inset(0 0 80% 0)}
+ 56%,61.5%{clip-path:inset(0 0 36% 0)}
+ 75%,78%{clip-path:inset(0 0 16% 0)}
+ 85%,100%{clip-path:inset(0)}
+}
+@keyframes vice-boot-colors{
+ 0%,68%{clip-path:inset(0 0 100% 0)}
+ 80%{clip-path:inset(0 0 68% 0)}
+ 92%{clip-path:inset(0 0 28% 0)}
+ 100%{clip-path:inset(0)}
 }
 .vice-boot-overlay::before{
  content:"";position:absolute;inset:-15%;z-index:4;pointer-events:none;
@@ -2731,9 +2748,9 @@ html:not([data-vice-theme="on"])[lang^="ru"] .theory-promo-host:has(>.vice-promo
   repeating-linear-gradient(0deg,#8becff 0 15px,#f4cc6f 15px 31px,#2a50ce 31px 46px,#ff8fcf 46px 61px) right top/8px 100% no-repeat;
  filter:drop-shadow(0 0 7px #d370e6a0);
 }
-.vice-boot-overlay.is-active .vice-boot-tape-border{
+.vice-boot-overlay.is-active.is-data .vice-boot-tape-border{
  animation:vice-boot-tape-flash .32s steps(4,end) infinite,
-           vice-boot-tape-gaps var(--vice-boot-time,5600ms) linear var(--vice-boot-pilot-time,5244ms) both;
+           vice-boot-tape-gaps var(--vice-boot-time,3800ms) linear both;
 }
 .vice-boot-tape-screen{
  position:absolute;left:8px;right:8px;top:20%;height:45%;z-index:2;
@@ -2742,12 +2759,12 @@ html:not([data-vice-theme="on"])[lang^="ru"] .theory-promo-host:has(>.vice-promo
   repeating-linear-gradient(180deg,transparent 0 3px,#fff0c522 3px 7px,transparent 7px 13px,#353ec132 13px 17px);
  background-size:100% 64px;
 }
-.vice-boot-overlay.is-active .vice-boot-tape-screen{
+.vice-boot-overlay.is-active.is-data .vice-boot-tape-screen{
  animation:vice-boot-data-scroll .33s steps(3,end) infinite,
-           vice-boot-data-gaps var(--vice-boot-time,5600ms) linear var(--vice-boot-pilot-time,5244ms) both;
+           vice-boot-data-gaps var(--vice-boot-time,3800ms) linear both;
 }
-.vice-boot-overlay.is-active .vice-boot-meter span{
- animation:vice-boot-tape-progress var(--vice-boot-time,5600ms) steps(64,end) var(--vice-boot-pilot-time,5244ms) both;
+.vice-boot-overlay.is-active.is-data .vice-boot-meter span{
+ animation:vice-boot-tape-progress var(--vice-boot-time,3800ms) steps(64,end) both;
 }
 .vice-boot-tape-info{
  position:fixed;z-index:10;top:calc(74% + 55px);left:8%;width:84%;
@@ -2836,41 +2853,74 @@ html:not([data-vice-theme="on"])[lang^="ru"] .theory-promo-host:has(>.vice-promo
 .vice-boot-tape-touch[hidden]{display:none!important}
 
 
-/* First ZX Spectrum ROM header: ~5 seconds of the untouched pilot sound.
-   The ONLY visible content is white paper, ULA cassette border stripes
-   and the literal LOAD command at the bottom. No branding or progress. */
+/* ZX ROM loading display. White paper and its ULA border remain in
+   front of all cinematic art until the second block's pilot + sync finish.
+   No decorations, indicators or game copy are allowed on this screen. */
 .vice-boot-pilot{
- position:absolute;inset:0;z-index:30;display:none;
- background:#fff;color:#151515;overflow:hidden;
+ position:absolute;inset:0;z-index:30;display:none;overflow:hidden;
+ background:#fff;color:#000;contain:paint;
 }
-.vice-boot-overlay.is-pilot .vice-boot-pilot{display:block}
-.vice-boot-pilot::before{
- content:"";position:absolute;inset:0;pointer-events:none;
+.vice-boot-overlay.is-active.is-pilot .vice-boot-pilot{display:block}
+.vice-boot-pilot__border{
+ position:absolute;inset:0;pointer-events:none;
  background:
-  repeating-linear-gradient(90deg,#24c4cd 0 18px,#e33d68 18px 36px) top left/100% 8px no-repeat,
-  repeating-linear-gradient(90deg,#e33d68 0 18px,#24c4cd 18px 36px) bottom left/100% 8px no-repeat,
-  repeating-linear-gradient(0deg,#24c4cd 0 18px,#e33d68 18px 36px) top left/8px 100% no-repeat,
-  repeating-linear-gradient(0deg,#e33d68 0 18px,#24c4cd 18px 36px) top right/8px 100% no-repeat;
- animation:vice-boot-rom-stripes .24s steps(2,end) infinite;
+  repeating-linear-gradient(90deg,#ec3b38 0 18px,#37d9d7 18px 36px) left top/100% 8px no-repeat,
+  repeating-linear-gradient(90deg,#37d9d7 0 18px,#ec3b38 18px 36px) left bottom/100% 8px no-repeat,
+  repeating-linear-gradient(0deg,#ec3b38 0 18px,#37d9d7 18px 36px) left top/8px 100% no-repeat,
+  repeating-linear-gradient(0deg,#37d9d7 0 18px,#ec3b38 18px 36px) right top/8px 100% no-repeat;
+ animation:vice-rom-border-motion .22s steps(4,end) infinite;
 }
-@keyframes vice-boot-rom-stripes{
- 0%{opacity:1;filter:none}
- 49%{opacity:1;filter:none}
- 50%,100%{opacity:1;filter:hue-rotate(180deg)}
+@keyframes vice-rom-border-motion{
+ from{background-position:0 0,0 100%,0 0,100% 0}
+ to{background-position:36px 0,-36px 100%,0 -36px,100% 36px}
 }
-.vice-boot-pilot span{
- position:absolute;left:50%;bottom:max(42px,calc(env(safe-area-inset-bottom,0px) + 32px));
- transform:translateX(-50%);color:#111;
- font:700 clamp(23px,6.5vw,35px)/1 "Courier New",monospace;
- letter-spacing:.03em;white-space:nowrap;
+/* The original first pilot is solid; color changes ONLY at audio block
+   boundaries, driven by messages emitted by the AY worklet's EAR clock. */
+.vice-boot-overlay[data-tape-phase="header-data"] .vice-boot-pilot__border,
+.vice-boot-overlay[data-tape-phase="sync-header"] .vice-boot-pilot__border,
+.vice-boot-overlay[data-tape-phase="sync-data"] .vice-boot-pilot__border{
+ background-image:
+  repeating-linear-gradient(90deg,#f7d647 0 18px,#294cdd 18px 36px),
+  repeating-linear-gradient(90deg,#294cdd 0 18px,#f7d647 18px 36px),
+  repeating-linear-gradient(0deg,#f7d647 0 18px,#294cdd 18px 36px),
+  repeating-linear-gradient(0deg,#294cdd 0 18px,#f7d647 18px 36px);
+}
+.vice-boot-overlay[data-tape-phase="interblock-pause"] .vice-boot-pilot__border{
+ animation-play-state:paused;
+ background-image:
+  linear-gradient(#356ac1,#356ac1),linear-gradient(#356ac1,#356ac1),
+  linear-gradient(#356ac1,#356ac1),linear-gradient(#356ac1,#356ac1);
+}
+.vice-boot-pilot__line{
+ position:absolute;left:clamp(26px,4vw,46px);
+ bottom:max(26px,calc(env(safe-area-inset-bottom,0px) + 30px));
+ display:inline-flex;align-items:center;gap:3px;white-space:nowrap;
+ height:clamp(20px,3vw,29px);color:#070707;
+ font:700 clamp(19px,3vw,28px)/1 "Courier New",monospace;
+ letter-spacing:0;text-rendering:geometricPrecision;
+}
+.vice-boot-pilot__cursor{
+ display:inline-block;flex:none;
+ width:clamp(12px,2.1vw,19px);height:clamp(19px,3vw,27px);
+ background:#070707;animation:vice-rom-cursor .64s steps(1,end) infinite;
+}
+@keyframes vice-rom-cursor{
+ 0%,49%{opacity:1}50%,100%{opacity:0}
 }
 @media(max-width:420px){
- .vice-boot-pilot::before{
+ .vice-boot-pilot__line{
+  left:24px;bottom:max(23px,calc(env(safe-area-inset-bottom,0px) + 24px));
+  font-size:21px;height:23px;
+ }
+ .vice-boot-pilot__cursor{width:14px;height:21px}
+ .vice-boot-pilot__border{
   background-size:100% 6px,100% 6px,6px 100%,6px 100%;
  }
 }
 @media(prefers-reduced-motion:reduce){
- .vice-boot-pilot::before{animation:none}
+ .vice-boot-pilot__border,.vice-boot-pilot__cursor{animation:none}
+ .vice-boot-pilot__cursor{opacity:1}
+ .vice-boot-overlay.is-active .vice-boot-art--color{clip-path:none}
 }
 
 
