@@ -2647,7 +2647,9 @@ const HEADER_MS=(667+735+HEADER_BYTES.reduce((total,byte)=>{
 const INTERBLOCK_MS=1000; // genuine between-block silence, never before sync
 const DATA_PILOT_MS=3223*2168*1000/ZX_CLOCK;
 const DATA_SYNC_MS=(667+735)*1000/ZX_CLOCK;
-const OPEN_MS=PILOT_MS+HEADER_MS+INTERBLOCK_MS+DATA_PILOT_MS+DATA_SYNC_MS;
+// Skip the first second of the intro; leave all later stages unchanged.
+const START_TRIM_MS=1000;
+const OPEN_MS=PILOT_MS+HEADER_MS+INTERBLOCK_MS+DATA_PILOT_MS+DATA_SYNC_MS-START_TRIM_MS;
 const FULL_MS=3800,RELOAD_MS=3200,READY_PAUSE_MS=1700;
 let stageIndex=0,currentDuration=OPEN_MS+FULL_MS,dataDuration=FULL_MS;
 let timelineStarted=false,phaseDriven=false,pendingFallback=0;
