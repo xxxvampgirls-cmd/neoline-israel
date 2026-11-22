@@ -194,7 +194,7 @@ async function unlock(){
    const resumed=ctx.resume();
    boot=Promise.all([
     resumed,
-    ctx.audioWorklet.addModule("./teoria-ay8912-worklet.js?v=20261122-pt3-loop-v3")
+    ctx.audioWorklet.addModule("./teoria-ay8912-worklet.js?v=20261122-pt3-loop-v4")
    ]).then(()=>{
     node=new AudioWorkletNode(ctx,"neoline-ay8912",{
      numberOfInputs:0,numberOfOutputs:1,outputChannelCount:[2]
