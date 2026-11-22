@@ -380,9 +380,11 @@
   lastTheme=on;
  });
  window.addEventListener("neoline:theory-quiz",e=>{
-  if(!isVice())return;
+  // Capture the selected mode even before the player turns on Vice sound.
+  // Activating GTA VI mid-question must start that question's own soundtrack.
   const d=e.detail||{};
   if(d.mode && TRACKS[d.mode]) currentMode=d.mode;
+  if(!isVice())return;
   const wasScene=scene;
   changeScene(guessScene());
   if(isQuizScene()&&wasScene!==scene) {lastDone=0;fx("start");return}
@@ -442,6 +444,16 @@
    if(ctx&&musicOn&&isVice()&&ctx.state==="running"&&scene!=="fail")
     setBus(dialog.open?.085:isQuizScene()?.22:.185);
   }).observe(dialog,{attributes:true,attributeFilter:["open"]});
+ }
+
+ // Keep the score in sync when the player leaves a run via Back/Restart
+ // without a new quiz event (otherwise the last mode could keep playing).
+ for(const id of ["gamePlaying","gameResult","gameOver"]){
+  const panel=byId(id);
+  if(!panel)continue;
+  new MutationObserver(()=>{
+   if(isVice()) changeScene(guessScene());
+  }).observe(panel,{attributes:true,attributeFilter:["hidden"]});
  }
  document.addEventListener("visibilitychange",()=>{
   if(!ctx)return;
