@@ -1,10 +1,10 @@
 {
   "version": 1,
   "retentionDays": 30,
-  "updated": "2026-11-22T11:52:31Z",
+  "updated": "2026-11-22T19:55:38Z",
   "status": "ok",
   "sourceCount": 10,
-  "searchUpdated": "2026-11-22T02:34:10Z",
+  "searchUpdated": "2026-11-22T19:55:38Z",
   "sources": [
     {
       "id": "news13",
