@@ -91,6 +91,15 @@ async function capture(page,label){
       h.circle.right>h.heartsBox.left+3||h.heartsBox.right>h.hintBox.left+3)
     throw Error("Modes, XP, GPS, hearts, hints have incorrect order or overlap "+width+" "+JSON.stringify(h));
    if(h.circle.bottom>781||h.circle.top<0)throw Error("Circle outside viewport "+width+" "+JSON.stringify(h));
+   const leftInset=h.modesBox.left-h.dock.left;
+   const rightInset=h.dock.right-h.hintBox.right;
+   if(leftInset<11||rightInset<11||Math.abs(leftInset-rightInset)>3){
+    throw Error("Edge HUD buttons need equal breathing room "+width+
+      " left="+leftInset+" right="+rightInset+" "+JSON.stringify(h));
+   }
+   if(h.xpBox.left<h.modesBox.right+3||h.heartsBox.right>h.hintBox.left-3){
+    throw Error("Side controls are not evenly spaced from XP and hearts "+width+" "+JSON.stringify(h));
+   }
 
    // Actual quiz engine reports these values via neoline:theory-quiz.
    await page.evaluate(()=>window.dispatchEvent(new CustomEvent("neoline:theory-quiz",{
