@@ -1,62 +1,104 @@
-/* Optional ZX Spectrum 128K / Ocean-era audio controls for Vice theme only.
-   No changes to classic NEOLINE UI or fixed five-icon navigation. */
-.vice-ay-controls{
- display:none;align-items:center;justify-content:flex-start;
- flex-wrap:wrap;gap:6px;max-width:100%;
- margin:6px 0 3px;direction:ltr;
+/* Ocean-era AY sound controls.
+   Two icon-only toggles replace the cart in teoria.html's top header.
+   All previous duplicated bars in lobby/question/results are removed. */
+.neoline-site-header .vice-ay-controls{
+ display:none;box-sizing:border-box;align-items:center;justify-content:flex-end;
+ gap:5px;flex:0 0 auto;margin:0;min-width:0;
+ direction:ltr;white-space:nowrap;
 }
-html[data-vice-theme="on"] .vice-ay-controls{display:flex}
-.vice-ay-button{
- box-sizing:border-box;display:inline-flex;gap:6px;align-items:center;
- justify-content:center;min-height:35px;padding:6px 10px;
- white-space:nowrap;cursor:pointer;
- color:#fff0e9;background:#3b2454ed;
- border:1px solid #fa9fd3;border-radius:10px;
- box-shadow:inset 0 1px 0 #ffffff30;
- font:800 10px/1.1 Manrope,Arial,sans-serif;
- letter-spacing:.015em;touch-action:manipulation;
- transition:border-color .14s,background-color .14s,opacity .14s;
+html[data-vice-theme="on"] .neoline-site-header .vice-ay-controls{display:flex!important}
+.neoline-site-header .vice-ay-button{
+ position:relative;box-sizing:border-box;display:grid;place-items:center;
+ padding:0;flex:0 0 39px;width:39px;height:42px;min-width:0;
+ border:1px solid #e7b0d5;border-radius:13px;
+ color:#5b3169;background:#fff4fb;
+ box-shadow:inset 0 1px #ffffffb5,0 2px 7px #4b22571f;
+ cursor:pointer;touch-action:manipulation;
+ transition:background .16s,box-shadow .16s,opacity .16s;
 }
-.vice-ay-button[aria-pressed="true"]{
- border-color:#ffb57d;color:#fff6d7;
- background:linear-gradient(115deg,#593064,#733061);
+html[data-vice-theme="on"] .neoline-site-header .vice-ay-button[aria-pressed="true"]{
+ color:#522858;
+ background:linear-gradient(140deg,#ffe3f4,#ffd5a9);
+ border-color:#f09dca;
+ box-shadow:inset 0 1px #ffffffa9,0 0 0 1px #f7a6dc55;
 }
-.vice-ay-button.is-off{
- background:#1f1a36ed;color:#bcaec9;
- border-color:#61516f;box-shadow:none;
+.neoline-site-header .vice-ay-button.is-off{
+ color:#9487a0;background:#f1e9ef;border-color:#ded1e0;
+ box-shadow:none;
 }
-.vice-ay-button:disabled{cursor:not-allowed;opacity:.45}
-.vice-ay-button:focus-visible{outline:3px solid #fff1ae;outline-offset:2px}
-.vice-ay-icon{font-size:18px;line-height:1;min-width:16px;text-align:center}
-.vice-ay-state{
- display:inline-flex;align-items:center;gap:5px;
- color:#f6c6e4;font:800 9px/1.25 Manrope,Arial,sans-serif;
- letter-spacing:.055em;padding-inline:4px;
+.neoline-site-header .vice-ay-button.is-off::after{
+ content:"";position:absolute;width:23px;height:2px;
+ background:#d3547a;border-radius:3px;transform:rotate(-43deg);
+ box-shadow:0 1px 1px #fff9;
 }
-.vice-ay-state::before{content:"";width:5px;height:5px;flex:none;border-radius:50%;background:#75f6da;box-shadow:0 0 7px #75f6daaa}
-#gameLobby .toolbar-title .vice-ay-controls{margin-top:5px;margin-bottom:2px}
-#gamePlaying .question-eyebrow .vice-ay-controls{
- margin:0 0 0 auto;flex:none;gap:5px;max-width:100%;
+.neoline-site-header .vice-ay-button:disabled{cursor:not-allowed;opacity:.48}
+.neoline-site-header .vice-ay-button:focus-visible{
+ outline:3px solid #f179a5;outline-offset:2px;
 }
-#gamePlaying .question-eyebrow .vice-ay-button{
- min-height:37px;min-width:38px;padding:6px 8px;border-radius:10px;
+.neoline-site-header .vice-ay-icon{
+ display:grid;place-items:center;width:24px;height:24px;line-height:1;
 }
-#gamePlaying .question-eyebrow .vice-ay-button .vice-ay-label{
- position:absolute;width:1px;height:1px;overflow:hidden;
- clip:rect(0,0,0,0);white-space:nowrap;
+.neoline-site-header .vice-ay-icon svg{
+ width:24px;height:24px;display:block;
+ stroke:currentColor;stroke-width:1.8;fill:none;
+ stroke-linecap:round;stroke-linejoin:round;
 }
-#gamePlaying .question-eyebrow .vice-ay-state{
- position:absolute;width:1px;height:1px;overflow:hidden;
- clip:rect(0,0,0,0);white-space:nowrap;
+.neoline-site-header .vice-ay-label,.neoline-site-header .vice-ay-state{
+ position:absolute!important;width:1px!important;height:1px!important;
+ padding:0!important;margin:-1px!important;overflow:hidden!important;
+ clip:rect(0,0,0,0)!important;white-space:nowrap!important;border:0!important;
 }
-#gameResult .vice-ay-controls{justify-content:center;margin:6px auto 14px}
-@media(max-width:450px){
- #gameLobby .toolbar-title .vice-ay-controls{gap:5px}
- #gameLobby .toolbar-title .vice-ay-button{font-size:9px;padding:5px 8px;min-height:34px}
- #gameLobby .toolbar-title .vice-ay-state{font-size:8px}
- #gamePlaying .question-eyebrow .vice-ay-controls{gap:4px}
- #gamePlaying .question-eyebrow .vice-ay-button{min-height:35px;min-width:35px;padding:5px 7px}
+@media(hover:hover) and (pointer:fine){
+ .neoline-site-header .vice-ay-button:hover:not(:disabled){background:#fff;box-shadow:0 3px 12px #b8428947}
+}
+/* Preserve logo + four languages + TWO usable sound buttons on phones.
+   Make room inside the existing header instead of growing its height. */
+@media(max-width:650px){
+ .neoline-site-header .neoline-site-header__inner{
+  gap:5px;padding-inline:8px!important;
+ }
+ .neoline-site-header .neoline-site-header__logo img{
+  width:clamp(103px,31vw,142px)!important;max-width:none;
+ }
+ .neoline-site-header .neoline-site-header__actions{gap:5px}
+ .neoline-site-header__flags{gap:2px;padding:3px 4px}
+ .neoline-site-header .neoline-site-header__flag{
+  flex:0 0 29px;width:29px;height:37px;
+  padding:2px;
+ }
+ .neoline-site-header .neoline-site-header__flag--ar{
+  flex-basis:41px;width:41px;font-size:10px!important;
+ }
+ .neoline-site-header .vice-ay-controls{gap:4px}
+ .neoline-site-header .vice-ay-button{
+  flex-basis:36px;width:36px;height:39px;border-radius:12px;
+ }
+ .neoline-site-header .vice-ay-icon,
+ .neoline-site-header .vice-ay-icon svg{width:22px;height:22px}
+}
+@media(max-width:370px){
+ .neoline-site-header .neoline-site-header__inner{gap:3px;padding-inline:5px!important}
+ .neoline-site-header .neoline-site-header__logo img{width:clamp(95px,31vw,111px)!important}
+ .neoline-site-header .neoline-site-header__actions{gap:3px}
+ .neoline-site-header__flags{gap:1px;padding:2px 3px}
+ .neoline-site-header .neoline-site-header__flag{
+  flex-basis:26px;width:26px;height:35px;
+ }
+ .neoline-site-header .neoline-site-header__flag--ar{
+  flex-basis:36px;width:36px;font-size:9px!important;
+ }
+ .neoline-site-header .neoline-site-header__flag .flag-graphic,
+ .neoline-site-header .neoline-site-header__flag .flag-graphic svg,
+ .neoline-site-header .neoline-site-header__flag .flag-graphic img{
+  width:24px;height:18px;
+ }
+ .neoline-site-header .vice-ay-controls{gap:3px}
+ .neoline-site-header .vice-ay-button{
+  flex-basis:32px;width:32px;height:36px;border-radius:10px;
+ }
+ .neoline-site-header .vice-ay-icon,
+ .neoline-site-header .vice-ay-icon svg{width:21px;height:21px}
 }
 @media(prefers-reduced-motion:reduce){
- .vice-ay-button{transition:none!important}
+ .neoline-site-header .vice-ay-button{transition:none}
 }
