@@ -11,6 +11,7 @@ on:
       - 'scripts/test_teoria_vice_theme.cjs'
       - 'scripts/test_teoria_cinematic.cjs'
       - 'teoria-vice-cinematic.css'
+      - 'teoria-vice-reference-match.css'
       - 'teoria-vice-cinematic.js'
       - 'assets/teoria/vice-card-city.svg'
       - 'assets/teoria/vice-card-signs.svg'
