@@ -88,6 +88,40 @@ const fmt=sec=>{
  const n=Math.max(0,Math.floor(Number(sec)||0));
  return Math.floor(n/60)+":"+String(n%60).padStart(2,"0");
 };
+
+const pendingSongs=[
+ {name:"Ghostbusters 2",format:"AY",file:"Ghostbusters_2.ay"},
+ {name:"Jurassic Park",format:"ASC",file:"Jurassic_Park.asc"},
+ {name:"Lyra II 3",format:"STC",file:"LyraII3.stc"},
+ {name:"Lyra II 4",format:"STC",file:"LyraII4.stc"},
+ {name:"Navy Seals",format:"AY",file:"Navy_Seals.ay"},
+ {name:"Paradise",format:"STC",file:"PARADISE.stc"},
+ {name:"Shock 3",format:"STC",file:"Shock3.stc"},
+ {name:"Shock 6",format:"STC",file:"Shock6.stc"},
+ {name:"The NeverEnding Story",format:"STC",file:"the_neverending_story.stc"},
+ {name:"Tim Follin",format:"SQT",file:"Tim_Follin.sqt"},
+ {name:"Voyage",format:"ASC",file:"VOYAGE.asc"},
+ {name:"4×4 Puzzle",format:"PT2",file:"4x4_puzzle_Hi_.pt2"},
+ {name:"TDM Schiva Part 2",format:"SQT",file:"63a_tdm-TDMSchivaPart2.sqt"},
+ {name:"Batman: The Movie",format:"AY",file:"Batman_The_Movie.ay"},
+ {name:"Hung Up — 2×AY cover",format:"SQT · 2×AY",file:"Cover_of_Hung_Up_by_Madonna_2xAY_ACB_.sqt"},
+ {name:"Twin Peaks",format:"STP",file:"dado_s_twin_peaks.stp"},
+ {name:"Electric City",format:"SQT",file:"Electric_city.sqt"},
+ {name:"Galactic",format:"PT2",file:"Galactic.pt2"},
+ {name:"Galaxy 2",format:"ASC",file:"GALAXY2.asc"}
+];
+// One identical Batman_The_Movie_3.ay duplicate intentionally omitted.
+const extra={
+ ru:{drawer:"Музыкальная коллекция ZX 128K",subtitle:"Плеер и вся музыка · нажми, чтобы открыть",ready:"ДОСТУПНО ДЛЯ ПРОСЛУШИВАНИЯ",waiting:"ИЗ АРХИВА · ОЖИДАЮТ ПЕРЕВОДА В PT3",state:"Ещё не конвертировано",count:"{a} PT3 · {b} ожидают",foot:"Оригинальные PT3 воспроизводятся через AY-3-8912. Остальные композиции из архива показаны для учёта; воспроизведение включим после проверенной конвертации в PT3. Дубликаты удалены."},
+ en:{drawer:"ZX 128K Music Collection",subtitle:"Player and complete list · tap to expand",ready:"READY TO LISTEN",waiting:"FROM THE ARCHIVE · AWAITING PT3 CONVERSION",state:"Not converted yet",count:"{a} PT3 · {b} pending",foot:"Original PT3 modules play through AY-3-8912. Other archive songs are listed but disabled until verified PT3 conversion. Duplicates omitted."},
+ he:{drawer:"אוסף מוזיקה ZX 128K",subtitle:"נגן וכל המוזיקה · לחצו לפתיחה",ready:"מוכן להאזנה",waiting:"מהארכיון · ממתין להמרה ל-PT3",state:"טרם הומר",count:"{a} PT3 · {b} בהמתנה",foot:"קובצי PT3 מקוריים מנוגנים באמצעות AY-3-8912. שאר הקטעים ממתינים להמרה מאומתת. כפילויות הוסרו."},
+ ar:{drawer:"مجموعة موسيقى ZX 128K",subtitle:"المشغل وكل المقاطع · اضغط للفتح",ready:"جاهز للاستماع",waiting:"من الأرشيف · في انتظار التحويل إلى PT3",state:"لم يُحوّل بعد",count:"{a} PT3 · {b} قيد الانتظار",foot:"يتم تشغيل PT3 الأصلي عبر AY-3-8912. بقية المقاطع تظهر في القائمة حتى التحقق من تحويلها إلى PT3. أزيلت الملفات المكررة."}
+};
+const extraLabels=()=>extra[(doc.lang||"ru").split("-")[0]]||extra.ru;
+const drawerTitle=$("viceSoundtrackDrawerTitle"),drawerSubtitle=$("viceSoundtrackDrawerSubtitle"),drawerStat=$("viceSoundtrackDrawerStat");
+const listHeader=()=>{const item=document.createElement("li");item.className="vice-soundtrack__group";list.append(item);return item};
+const playableHeader=listHeader();
+
 const trackButtons=new Map();
 for(const [index,track] of api.tracks.entries()){
  const li=document.createElement("li");li.className="vice-soundtrack__item";
@@ -107,14 +141,46 @@ for(const [index,track] of api.tracks.entries()){
  li.append(button);list.append(li);
  trackButtons.set(track.id,{button,kind,action});
 }
+
+const pendingHeader=listHeader();
+const pendingButtons=[];
+for(const track of pendingSongs){
+ const li=document.createElement("li");li.className="vice-soundtrack__item vice-soundtrack__item--pending";
+ const button=document.createElement("button");
+ button.type="button";button.disabled=true;
+ button.className="vice-soundtrack__track";
+ button.dataset.original=track.file;
+ button.setAttribute("aria-disabled","true");
+ const number=document.createElement("span");number.className="vice-soundtrack__index";
+ number.textContent=String(api.tracks.length+pendingButtons.length+1).padStart(2,"0");
+ const copy=document.createElement("span");copy.className="vice-soundtrack__trackname";
+ const label=document.createElement("b");label.textContent=track.name;
+ const kind=document.createElement("small");
+ const action=document.createElement("span");action.className="vice-soundtrack__playicon";
+ action.textContent="⌛";action.setAttribute("aria-hidden","true");
+ copy.append(label,kind);button.append(number,copy,action);
+ li.append(button);list.append(li);
+ pendingButtons.push({button,kind,track});
+}
+
 function translate(){
- const t=translations();
+ const t=translations(),x=extraLabels();
+ if(drawerTitle)drawerTitle.textContent=x.drawer;
+ if(drawerSubtitle)drawerSubtitle.textContent=x.subtitle;
+ if(drawerStat)drawerStat.textContent=x.count.replace("{a}",api.tracks.length).replace("{b}",pendingSongs.length);
+ playableHeader.textContent=x.ready+" · "+api.tracks.length;
+ pendingHeader.textContent=x.waiting+" · "+pendingSongs.length;
+ for(const {button,kind,track} of pendingButtons){
+  kind.textContent=track.format+" · "+x.state;
+  button.setAttribute("aria-label",track.name+" — "+track.format+" — "+x.state);
+  button.title=track.file+" · "+x.state;
+ }
  eyebrow.textContent=t.eyebrow;
  title.textContent=t.title;
- count.textContent=t.count.replace("{n}",String(api.tracks.length));
+ count.textContent=x.count.replace("{a}",api.tracks.length).replace("{b}",pendingSongs.length);
  nowLabel.textContent=t.now;
  btnList.textContent=t.list;
- foot.textContent=t.foot;
+ foot.textContent=x.foot;
  btnPrev.setAttribute("aria-label",t.prev);btnPrev.title=t.prev;
  btnNext.setAttribute("aria-label",t.next);btnNext.title=t.next;
  btnStop.setAttribute("aria-label",t.stop);btnStop.title=t.stop;
