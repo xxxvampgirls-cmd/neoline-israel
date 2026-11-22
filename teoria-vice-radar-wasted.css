@@ -498,3 +498,41 @@ html[data-vice-theme="on"] body.game-over-open .theory-bottom,
 html[data-vice-theme="on"] body.game-over-open > .topbar{
  display:none!important;
 }
+
+/* 2026-11-22 — game question takes priority: remove the entire redundant
+   upper route/title bar in the optional neon game. The fixed bottom HUD
+   remains the single place for navigation, XP, lives and hints. */
+html[data-vice-theme="on"] body.theory-in-session #gamePlaying .game-quiz-topline,
+html[data-vice-theme="on"] body.theory-in-session #gamePlaying .quiz-hud{
+ display:none!important;
+ visibility:hidden!important;
+}
+html[data-vice-theme="on"] body.theory-in-session #gamePlaying{
+ padding-top:0!important;
+ margin-top:0!important;
+ scroll-margin-top:8px!important;
+}
+html[data-vice-theme="on"] body.theory-in-session #gamePlaying .question-card{
+ margin-top:0!important;
+}
+html[data-vice-theme="on"] body.theory-in-session #gamePlaying .question-eyebrow{
+ flex-wrap:wrap!important;
+ gap:5px 8px!important;
+}
+/* Preserve the exam's real countdown when hiding its parent HUD.
+   A read-only mirror appears as a small chip inside the question header. */
+.vice-quiz-timer[hidden],.vice-quiz-timer{display:none!important}
+html[data-vice-theme="on"] body.theory-in-session #gamePlaying .question-eyebrow .vice-quiz-timer:not([hidden]){
+ display:inline-flex!important;
+ align-items:center!important;
+ justify-content:center!important;
+ flex:none!important;
+ direction:ltr!important;
+ white-space:nowrap!important;
+ color:#ffe2a4!important;
+ border:1px solid #e2aa76!important;
+ background:#4a2649!important;
+ border-radius:8px!important;
+ padding:3px 7px!important;
+ font:850 11px/1.15 Manrope,Arial,sans-serif!important;
+}
