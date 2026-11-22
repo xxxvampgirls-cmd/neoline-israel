@@ -2800,6 +2800,17 @@ html:not([data-vice-theme="on"])[lang^="ru"] .theory-promo-host:has(>.vice-promo
  .vice-boot-overlay.is-active .vice-boot-meter span{animation:none;transform:scaleX(1)}
 }
 
+.vice-boot-tape-touch{
+ flex-basis:100%;
+ display:block;
+ margin:2px auto 0;
+ color:#fff2a2;
+ font:900 10px/1.3 Manrope,Arial,sans-serif;
+ letter-spacing:.065em;
+ text-shadow:0 0 10px #fff38fa3,0 1px 4px #241033;
+}
+.vice-boot-tape-touch[hidden]{display:none!important}
+
 
 /* SOURCE: teoria-vice-sunset-boulevard.css */
 /* NEOLINE VICE / SECOND AD — sunset boulevard, 22 Nov 2026
