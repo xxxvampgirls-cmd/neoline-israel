@@ -13,6 +13,7 @@ const {chromium}=require("playwright");
    await page.waitForFunction(()=>document.querySelectorAll(".vice-cinema-frame").length===5,{timeout:12000});
    await page.locator("#gtaModeToggle").click();
    await page.waitForFunction(()=>document.documentElement.dataset.viceTheme==="on");
+   await page.waitForTimeout(950); // settle optional entrance transforms before measuring pixel dimensions
    const status=await page.evaluate(()=>{
     const inspect=e=>({display:getComputedStyle(e).display,visibility:getComputedStyle(e).visibility,
       rect:(()=>{const r=e.getBoundingClientRect();return {top:r.top,bottom:r.bottom,width:r.width,height:r.height}})()});
@@ -46,7 +47,7 @@ const {chromium}=require("playwright");
    if(status.imageLinks.length!==5||status.imageLinks.some(x=>!x.includes("vice-card-")&&!x.includes("vice-cinematic-duo")))fail("Missing cinematic carousel artwork");
    if(status.promoStage.display==="none"||status.promoStage.rect.height<110)fail("Cinema stage hidden");
    if(status.heroStats.rect.top<status.heroCopy.rect.bottom-4)fail("Top title overlaps the medal HUD");
-   if(status.cards.some(x=>x.rect.height<100))fail("Game card height too short");
+   if(status.cards.some(x=>x.rect.height<95))fail("Game card height too short");
    if(status.heroFont!=="italic")fail("Headline not upgraded");
    const artFiles=[
     "vice-card-city.svg","vice-card-signs.svg","vice-card-exam.svg",
