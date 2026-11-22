@@ -2646,7 +2646,7 @@ overlay.innerHTML=[
  '<p class="vice-boot-deck"></p>',
  '<div class="vice-boot-meter"><span></span></div>',
  '<div class="vice-boot-status" role="presentation"></div>',
- '<div class="vice-boot-tape-info" aria-hidden="true"><span class="vice-boot-tape-file">LOAD "NEOLINE_VICE"</span><span class="vice-boot-tape-block"></span><span class="vice-boot-tape-bytes">00000 / 49152</span></div>',
+ '<div class="vice-boot-tape-info" aria-hidden="true"><span class="vice-boot-tape-file">LOAD "NEOLINE_VICE"</span><span class="vice-boot-tape-block"></span><span class="vice-boot-tape-bytes">00000 / 49152</span><span class="vice-boot-tape-touch" hidden></span></div>',
  '</div>',
  '<button type="button" class="vice-boot-tape-skip"></button>',
  '<div class="vice-boot-bottomline"><span>NEON CITY  //  ZX 128K</span><span>EST. <b>1988</b></span></div>'
@@ -2658,6 +2658,7 @@ const status=overlay.querySelector(".vice-boot-status");
 const bytes=overlay.querySelector(".vice-boot-tape-bytes");
 const blocks=overlay.querySelector(".vice-boot-tape-block");
 const skip=overlay.querySelector(".vice-boot-tape-skip");
+const touch=overlay.querySelector(".vice-boot-tape-touch");
 const wake=document.createElement("div");
 wake.className="vice-audio-wake";
 wake.setAttribute("role","group");
@@ -2676,11 +2677,16 @@ function translate(){
  status.textContent=entering?w.stages[stageIndex]:(shown?x.ready:x.loading);
  blocks.textContent=w.block+" "+(stageIndex>=5?"02":"01")+" / 02";
  skip.textContent=w.skip;
+ touch.textContent=w.tap;
  startButton.textContent=x.start;
  dismissButton.setAttribute("aria-label",x.dismiss);
  dismissButton.title=x.dismiss;
 }
 function hideWake(){wake.classList.remove("is-visible")}
+function updateTapeHint(){
+ const info=window.neolineGetAYAudioState?.()||lastStatus;
+ touch.hidden=!entering||!info?.sfxOn||!info?.blocked;
+}
 function refreshWake(){
  if(shown||!isOn()||dismissed){hideWake();return}
  const info=window.neolineGetAYAudioState?.()||lastStatus;
@@ -2696,6 +2702,7 @@ function finish(){
  clearTimeout(shortTimer);clearStages();
  entering=false;
  window.neolineCassetteLoading?.(false);
+ touch.hidden=true;
  overlay.classList.add("is-ready");
  status.textContent=t().ready;
  skip.hidden=true;
@@ -2724,6 +2731,7 @@ function begin(initial=false){
  overlay.classList.add("is-active");
  // One worklet emulates tape EAR pulses; the real AY music waits until finish.
  if(!reduce)window.neolineCassetteLoading?.(true,currentDuration);
+ updateTapeHint();
  const schedule=[
   [.075,1],[.245,2],[.275,3],[.49,4],[.745,5],[.82,6]
  ];
@@ -2750,6 +2758,7 @@ function begin(initial=false){
 function cancel(){
  clearTimeout(shortTimer);clearTimeout(clearTimer);clearStages();
  window.neolineCassetteLoading?.(false);
+ touch.hidden=true;
  entering=false;shown=false;dismissed=false;
  overlay.setAttribute("aria-hidden","true");
  overlay.classList.remove("is-active","is-ready");
@@ -2778,6 +2787,7 @@ document.addEventListener("visibilitychange",()=>{
 window.addEventListener("neoline:vice-theme",e=>switchTheme(!!e.detail?.enabled));
 window.addEventListener("neoline:ay-status",e=>{
  lastStatus=e.detail||null;
+ updateTapeHint();
  refreshWake();
 });
 new MutationObserver(translate).observe(root,{attributes:true,attributeFilter:["lang"]});
