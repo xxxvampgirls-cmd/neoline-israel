@@ -1,5 +1,5 @@
 {
-  "attempted": "2026-11-22T05:25:46.886538Z",
+  "attempted": "2026-11-22T08:51:04.648771Z",
   "feeds": {
     "Walla · Авто": 30,
     "Walla · Безопасность": 30,
@@ -26,17 +26,17 @@
   "telegram": {
     "Дорожная полиция Израиля · Telegram": 0,
     "Полиция Израиля · Telegram": 0,
-    "Ихуд Ацала · Telegram": 88,
+    "Ихуд Ацала · Telegram": 89,
     "Алексей Железнов · Telegram": 1,
-    "NEWSru.co.il · Telegram": 5,
+    "NEWSru.co.il · Telegram": 3,
     "Минтранс Израиля · Telegram": 0,
     "Calcalist · Telegram": 1,
     "Маген Давид Адом · ДТП · Telegram": 59
   },
   "facebook": {},
   "facebookState": "not_configured",
-  "new": 22,
-  "retained": 269,
+  "new": 26,
+  "retained": 275,
   "discardedGoogleLinks": 0,
   "errors": {
     "The Times of Israel": "HTTPError: 403 Client Error: Forbidden for url: https://www.timesofisrael.com/feed/",
@@ -51,13 +51,13 @@
   "lawsStories": 7,
   "sourceCount": 26,
   "sources": {
-    "News08": 19,
+    "News08": 20,
     "Ихуд Ацала · Telegram": 65,
-    "Maariv": 27,
+    "Walla": 16,
+    "Маген Давид Адом · ДТП · Telegram": 62,
+    "Maariv": 29,
     "Arutz Sheva · Israel National News": 13,
-    "Маген Давид Адом · ДТП · Telegram": 60,
     "Autonews Israel": 10,
-    "Walla": 15,
     "Wheel · Автоновости": 5,
     "Ynet": 4,
     "Haaretz": 3,
