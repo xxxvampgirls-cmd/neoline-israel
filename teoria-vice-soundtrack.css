@@ -1,0 +1,190 @@
+/* NEOLINE · GTA VI Style · on-page ZX 128K music library.
+   Regular content at bottom of game page; never replaces the unified nav. */
+.vice-soundtrack{display:none}
+html[data-vice-theme="on"] .vice-soundtrack{
+ display:block;position:relative;isolation:isolate;overflow:hidden;
+ box-sizing:border-box;margin:25px auto 110px;padding:clamp(14px,3vw,25px);
+ border:1px solid #e68abac2;border-radius:23px;
+ background:
+  radial-gradient(ellipse at 84% 4%,#d16d8851,transparent 44%),
+  radial-gradient(ellipse at 8% 100%,#692e7f6b,transparent 45%),
+  linear-gradient(148deg,#21152c 0%,#432443 53%,#211a36 100%);
+ color:#fff2ed;
+ box-shadow:0 16px 45px #1f0e3852,inset 0 1px #ffdeee55;
+}
+.vice-soundtrack *{box-sizing:border-box}
+.vice-soundtrack::before{
+ content:"";position:absolute;inset:0 0 auto;height:3px;
+ background:linear-gradient(90deg,#7aede4,#f599d2,#ffd1a5);
+ opacity:.85;z-index:2
+}
+.vice-soundtrack__head{
+ display:flex;align-items:flex-start;justify-content:space-between;
+ gap:10px 18px;flex-wrap:wrap;margin-bottom:17px;position:relative;z-index:1
+}
+.vice-soundtrack__eyebrow{
+ display:block;margin-bottom:3px;
+ font:900 10px/1.4 Manrope,Arial,sans-serif;letter-spacing:.15em;
+ color:#8feddf;text-transform:uppercase;
+}
+.vice-soundtrack__head h2{
+ margin:0;color:#fff4eb;font:900 clamp(20px,4.7vw,30px)/1.13 Manrope,Arial,sans-serif;
+ text-transform:none;letter-spacing:-.025em
+}
+.vice-soundtrack__count{
+ align-self:flex-start;display:inline-block;padding:7px 11px;border-radius:999px;
+ color:#ffe8ed;font:800 10px/1.1 Manrope,Arial,sans-serif;
+ letter-spacing:.055em;border:1px solid #f1a7cf70;background:#ffffff15;white-space:nowrap;
+}
+.vice-soundtrack__deck{
+ border:1px solid #f19ec56b;border-radius:17px;
+ background:linear-gradient(135deg,#442347ef,#5c3055d9);
+ padding:14px 15px 13px;box-shadow:inset 0 1px #ffffff23;
+ position:relative
+}
+.vice-soundtrack__now{
+ display:flex;align-items:center;gap:12px;margin-bottom:10px
+}
+.vice-soundtrack__art{
+ flex:0 0 55px;width:55px;height:55px;border-radius:13px;
+ border:1px solid #ffacc6ab;display:grid;place-items:center;
+ background:linear-gradient(160deg,#df7ab3,#a04790 55%,#3b2a68);
+ box-shadow:0 4px 15px #230e35a6;
+ color:#fff9dc;font:1000 19px/1 Manrope,Arial,sans-serif;letter-spacing:-.06em
+}
+.vice-soundtrack__titleblock{flex:1;min-width:0;line-height:1.35}
+.vice-soundtrack__label{
+ display:block;color:#aaf6e9;font:800 9px/1.2 Manrope,Arial,sans-serif;
+ letter-spacing:.15em;text-transform:uppercase
+}
+.vice-soundtrack__title{
+ display:block;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;
+ color:#fff9ee;font:900 clamp(15px,3vw,20px)/1.25 Manrope,Arial,sans-serif
+}
+.vice-soundtrack__status{
+ display:block;color:#f8cede;line-height:1.4;font:700 11px/1.4 Manrope,Arial,sans-serif;
+}
+.vice-soundtrack__eq{
+ display:flex;align-items:flex-end;gap:3px;width:24px;height:22px;
+ flex:0 0 auto;opacity:.45
+}
+.vice-soundtrack__eq span{
+ background:linear-gradient(#b4fff1,#fbaad5);
+ width:4px;height:25%;border-radius:2px;transform-origin:bottom;
+}
+.vice-soundtrack.is-playing .vice-soundtrack__eq{opacity:1}
+.vice-soundtrack.is-playing .vice-soundtrack__eq span:nth-child(1){animation:vs-level .68s ease-in-out infinite alternate}
+.vice-soundtrack.is-playing .vice-soundtrack__eq span:nth-child(2){animation:vs-level .49s ease-in-out .14s infinite alternate}
+.vice-soundtrack.is-playing .vice-soundtrack__eq span:nth-child(3){animation:vs-level .82s ease-in-out .25s infinite alternate}
+.vice-soundtrack.is-playing .vice-soundtrack__eq span:nth-child(4){animation:vs-level .57s ease-in-out .1s infinite alternate}
+@keyframes vs-level{0%{height:24%}100%{height:100%}}
+.vice-soundtrack__progress{display:flex;align-items:center;gap:9px;min-width:0}
+.vice-soundtrack__time{
+ display:inline-block;min-width:31px;text-align:center;
+ color:#edcfdf;font:800 10px/1.2 Manrope,Arial,sans-serif;
+ font-variant-numeric:tabular-nums
+}
+.vice-soundtrack__seek{
+ appearance:none;-webkit-appearance:none;flex:1;min-width:50px;
+ width:auto;height:6px;border-radius:99px;
+ background:linear-gradient(90deg,#9ef0e4 var(--vs-progress,0%),#eed2e25c var(--vs-progress,0%));
+ cursor:pointer;touch-action:pan-y
+}
+.vice-soundtrack__seek::-webkit-slider-thumb{
+ -webkit-appearance:none;width:17px;height:17px;border-radius:50%;
+ border:2px solid #fff5df;background:#fa9aca;box-shadow:0 0 0 2px #fba5d055;
+}
+.vice-soundtrack__seek::-moz-range-thumb{
+ width:15px;height:15px;border-radius:50%;border:2px solid #fff5df;background:#fa9aca;
+}
+.vice-soundtrack__seek:disabled{opacity:.5;cursor:default}
+.vice-soundtrack__controls{
+ display:flex;align-items:center;justify-content:center;gap:9px;margin-top:13px
+}
+.vice-soundtrack__control{
+ flex:0 0 43px;display:grid;place-items:center;width:43px;height:43px;padding:0;
+ border:1px solid #ffc2dd89;border-radius:13px;
+ color:#ffeaf5;background:#ffffff12;
+ font:900 19px/1 Arial,sans-serif;cursor:pointer;touch-action:manipulation;
+ transition:background .15s,transform .15s;
+}
+.vice-soundtrack__control--play{
+ flex-basis:52px;width:52px;height:52px;
+ background:linear-gradient(145deg,#ffd1a6,#f99ccb);color:#50284f;
+ border-color:#ffe8d3;box-shadow:0 3px 13px #f698c066;
+ border-radius:16px;font-size:22px;
+}
+.vice-soundtrack__control:disabled{opacity:.38;cursor:not-allowed}
+@media(hover:hover) and (pointer:fine){
+ .vice-soundtrack__control:not(:disabled):hover{background:#ae5a8c;transform:translateY(-1px)}
+ .vice-soundtrack__control--play:not(:disabled):hover{background:#ffe8c1}
+}
+.vice-soundtrack__control:focus-visible,
+.vice-soundtrack__track:focus-visible,
+.vice-soundtrack__seek:focus-visible,
+.vice-soundtrack__fold summary:focus-visible{
+ outline:3px solid #affaf0;outline-offset:3px
+}
+.vice-soundtrack__fold{margin-top:17px}
+.vice-soundtrack__fold summary{
+ display:flex;justify-content:space-between;align-items:center;gap:14px;
+ cursor:pointer;list-style:none;padding:2px 3px 12px;
+ color:#ffe8ee;font:900 12px/1.3 Manrope,Arial,sans-serif;
+ letter-spacing:.045em;
+}
+.vice-soundtrack__fold summary::-webkit-details-marker{display:none}
+.vice-soundtrack__fold summary::after{content:"⌄";font-size:21px;line-height:.8;color:#edb2d0;transform:rotate(-90deg)}
+.vice-soundtrack__fold[open] summary::after{transform:rotate(0)}
+.vice-soundtrack__list{
+ list-style:none;margin:0;padding:0;display:grid;gap:7px;
+ grid-template-columns:repeat(2,minmax(0,1fr));
+}
+.vice-soundtrack__item{margin:0;padding:0;min-width:0}
+.vice-soundtrack__track{
+ width:100%;display:flex;align-items:center;text-align:start;
+ border:1px solid #f6b6d354;border-radius:12px;gap:11px;
+ padding:11px 12px;min-width:0;min-height:55px;
+ color:#ffeff3;background:#ffffff0c;
+ cursor:pointer;touch-action:manipulation;
+ transition:background .15s,border-color .15s,box-shadow .15s;
+}
+.vice-soundtrack__track:hover{background:#ffffff19;border-color:#f4b1ce91}
+.vice-soundtrack__track[aria-pressed="true"]{
+ background:linear-gradient(90deg,#ca619844,#e6a36f26);
+ border-color:#a2f8e0bd;box-shadow:inset 3px 0 #8ff4df;
+}
+.vice-soundtrack__index{
+ display:grid;place-items:center;flex:0 0 30px;width:30px;height:30px;
+ border:1px solid #e5b4d56b;border-radius:9px;color:#fbd6e8;
+ background:#2516346b;font:900 12px/1 Manrope,Arial,sans-serif;
+}
+.vice-soundtrack__trackname{flex:1;display:flex;flex-direction:column;min-width:0;gap:3px}
+.vice-soundtrack__trackname b{
+ font:800 13px/1.25 Manrope,Arial,sans-serif;color:#fff6ed;
+ overflow:hidden;text-overflow:ellipsis;white-space:nowrap;
+}
+.vice-soundtrack__trackname small{
+ font:800 9px/1.2 Manrope,Arial,sans-serif;letter-spacing:.055em;
+ color:#d8acd6;text-transform:uppercase
+}
+.vice-soundtrack__playicon{color:#abf9ea;font-size:15px;flex:0 0 19px;text-align:center}
+.vice-soundtrack__foot{
+ margin:14px 2px 0;font:700 11px/1.5 Manrope,Arial,sans-serif;
+ color:#e4c4dc;text-align:center
+}
+html[data-vice-theme="on"] .vice-soundtrack[aria-busy="true"] .vice-soundtrack__playicon{opacity:.45}
+@media(max-width:620px){
+ html[data-vice-theme="on"] .vice-soundtrack{
+  padding:15px 12px;margin:18px auto 100px;border-radius:18px;
+ }
+ .vice-soundtrack__list{grid-template-columns:1fr}
+ .vice-soundtrack__track{padding:10px;min-height:51px}
+ .vice-soundtrack__head h2{font-size:22px}
+ .vice-soundtrack__art{flex-basis:46px;width:46px;height:46px}
+ .vice-soundtrack__deck{padding:12px}
+ .vice-soundtrack__controls{gap:8px}
+}
+@media(prefers-reduced-motion:reduce){
+ .vice-soundtrack__eq span{animation:none!important}
+ .vice-soundtrack__control,.vice-soundtrack__track{transition:none}
+}
