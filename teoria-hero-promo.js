@@ -219,9 +219,16 @@
   localize();
  }
  function restart(){
-  clearInterval(timer);
+  clearTimeout(timer);
+  // Give the visually important first poster time to be seen and read.
+  // All other promotions still rotate; touch, dots and arrows stay instant.
   if(document.hidden||!onScreen||hovering||focusWithin||motionReduced)return;
-  timer=window.setInterval(()=>select(current+1,1),5600);
+  const neon=document.documentElement.dataset.viceTheme==="on";
+  const stay=(neon&&current===0)?13500:(neon?7700:5600);
+  timer=window.setTimeout(()=>{
+   select(current+1,1);
+   restart();
+  },stay);
  }
  function jumpTo(el){
   if(!el)return;
