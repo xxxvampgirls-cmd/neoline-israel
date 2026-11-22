@@ -22,6 +22,7 @@ const {chromium}=require("playwright");
    });
    if(errors.length)throw Error("JS initial errors "+errors.join("|"));
    if(initial.bodyScroll>width+2)throw Error("Horizontal overflow classic @"+width+": "+JSON.stringify(initial));
+   if(initial.copyBottom>initial.orbTop+2)throw Error("Theme switch caused dashboard stat overlap @"+width+": "+JSON.stringify(initial));
    if(initial.labels.some(x=>x!=="false"))throw Error("Classic is not default @"+width);
    console.log("Classic "+width+"px: "+JSON.stringify(initial));
    await page.locator("#gtaModeToggle").click();
