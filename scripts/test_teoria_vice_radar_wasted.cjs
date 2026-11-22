@@ -32,12 +32,19 @@ async function capture(page,label){
    let h=await page.evaluate(()=>{
     const box=el=>{let r=el.getBoundingClientRect();return {left:r.left,top:r.top,right:r.right,bottom:r.bottom,width:r.width,height:r.height}};
     const dock=document.getElementById("theoryGameDock");
+    const circle=document.getElementById("dock4Progress");
+    const xp=document.querySelector(".theory-game-dock .dock4-xp");
+    const hearts=document.getElementById("dock4Hearts");
+    const modes=document.getElementById("dock4Modes");
+    const hint=document.getElementById("dock4Hint");
     const route=document.querySelector("#gamePlaying .quiz-hud .game-quiz-route.road9");
     const radar=document.querySelector("#dock4Progress .vice-radar-map");
     const topbar=document.querySelector("#gamePlaying .quiz-hud");
     const question=document.querySelector("#gamePlaying .question-card");
     return {
       dock:box(dock),radar:box(radar),topbar:box(topbar),question:box(question),
+      circle:box(circle),xpBox:box(xp),heartsBox:box(hearts),
+      modesBox:box(modes),hintBox:box(hint),
       heroVisible:getComputedStyle(document.querySelector(".game-hero.theory-dashboard")).display,
       modeTitle:document.querySelector(".vice-hud-title")?.textContent,
       headerVisible:getComputedStyle(topbar).display,
@@ -71,6 +78,20 @@ async function capture(page,label){
    await page.evaluate(()=>document.getElementById("timerBox").hidden=true);
    await page.waitForFunction(()=>document.querySelector(".vice-quiz-timer")?.hidden===true);
    if(!h.hasXP||!h.hasHearts||!h.hasHint||h.siteNav!=="none")throw Error("Lost working HUD buttons "+width+" "+JSON.stringify(h));
+   // The visual reference has one thin neon rail and a large circular map
+   // overlapping BOTH edges. It is centered on the screen between XP and lives.
+   if(h.dock.height>59||h.dock.height<50)throw Error("Bottom dock is not slim "+width+" "+JSON.stringify(h));
+   if(h.circle.width<82||h.circle.height<h.dock.height+24)
+    throw Error("GPS circle was not enlarged "+width+" "+JSON.stringify(h));
+   if(Math.abs((h.circle.left+h.circle.right)/2-width/2)>4)
+    throw Error("GPS not horizontally centered "+width+" "+JSON.stringify(h));
+   if(h.circle.top>=h.dock.top-10||h.circle.bottom<=h.dock.bottom+10)
+    throw Error("GPS does not cross top and bottom borders "+width+" "+JSON.stringify(h));
+   if(h.modesBox.right>h.xpBox.left+3||h.xpBox.right>h.circle.left+3||
+      h.circle.right>h.heartsBox.left+3||h.heartsBox.right>h.hintBox.left+3)
+    throw Error("Modes, XP, GPS, hearts, hints have incorrect order or overlap "+width+" "+JSON.stringify(h));
+   if(h.circle.bottom>781||h.circle.top<0)throw Error("Circle outside viewport "+width+" "+JSON.stringify(h));
+
    // Actual quiz engine reports these values via neoline:theory-quiz.
    await page.evaluate(()=>window.dispatchEvent(new CustomEvent("neoline:theory-quiz",{
      detail:{done:4,total:10,earned:45,lives:1,hintsLeft:2,mode:"route"}
