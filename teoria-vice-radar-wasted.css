@@ -549,7 +549,7 @@ html[data-vice-theme="on"] body.theory-in-session .theory-game-dock{
  height:54px!important;
  min-height:54px!important;
  padding:2px 6px!important;
- bottom:max(24px,env(safe-area-inset-bottom,0px))!important;
+ bottom:max(32px,env(safe-area-inset-bottom,0px))!important;
  border-radius:999px!important;
  border:1.5px solid #ff9ed5!important;
  overflow:visible!important;
