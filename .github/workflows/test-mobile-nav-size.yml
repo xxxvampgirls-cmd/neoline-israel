@@ -1,0 +1,30 @@
+name: Verify identical NEOLINE mobile navigation dimensions on every page
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - 'nav-unified-size.css'
+      - 'scripts/test_mobile_nav_size.cjs'
+      - 'index.html'
+      - 'news.html'
+      - 'hot.html'
+      - 'delivery.html'
+      - 'teoria.html'
+      - '.github/workflows/test-mobile-nav-size.yml'
+permissions:
+  contents: read
+jobs:
+  compare:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install Chromium for visual layout measurement
+        run: |
+          npm install --no-save playwright
+          npx playwright install chromium
+      - name: Serve exactly the committed site and measure all mobile navs
+        run: |
+          python3 -m http.server 8765 --bind 127.0.0.1 >/tmp/neoline-dock-server.log 2>&1 &
+          node scripts/test_mobile_nav_size.cjs
