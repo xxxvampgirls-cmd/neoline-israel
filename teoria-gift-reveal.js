@@ -106,6 +106,10 @@
  let activeRound=0;
  let phase="idle";
  let finished=false;
+ // Sync sound to the EXISTING animation's real events and three 2.35s shakes.
+ const cue=(name,index=activeRound)=>window.dispatchEvent(
+  new CustomEvent("neoline:gift-audio",{detail:{cue:name,round:index}})
+ );
  const after=(fn,ms)=>{const id=setTimeout(fn,ms);timers.push(id);};
  const clearTimers=()=>{timers.forEach(clearTimeout);timers=[];sequence++;};
  function clearStarFinale(){
@@ -157,6 +161,7 @@
    fragment.appendChild(star);
   }
   burstOverlay.appendChild(fragment);
+  cue("finale");
   after(clearStarFinale,1280);
  }
  function setStatus(){
@@ -194,8 +199,10 @@
   icon.textContent=symbols[index];
   // Reset lid and star keyframes before every new shake.
   stage.dataset.phase="idle";
+  stage.dataset.round=String(index);
   void stage.offsetWidth;
   setPhase("shake");
+  cue("shake",index);
  }
  function round(index,token){
   if(token!==sequence||!dialog.open||document.hidden)return;
@@ -203,11 +210,13 @@
   after(()=>{
    if(token!==sequence||!dialog.open)return;
    setPhase("burst");
+   cue("burst",index);
   },2350);
   after(()=>{
    if(token!==sequence||!dialog.open)return;
    fillCard(index);
    setPhase("revealed");
+   cue("revealed",index);
    if(index===2)after(()=>{if(token===sequence&&dialog.open)starFinale();},360);
   },2960);
   after(()=>{
@@ -253,6 +262,7 @@
   clearStarFinale();
   phase="idle";
   stage.dataset.phase="idle";
+  cue("stop");
  }
  for(const btn of triggers){
   // teoria-gifts.js opens the dialog synchronously on the same click.
