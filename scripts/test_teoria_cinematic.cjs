@@ -73,9 +73,10 @@ const {chromium}=require("playwright");
    const snapshots=[];
    for(const lang of ["ru","en","he","ar"]){
     await page.evaluate(l=>document.documentElement.lang=l,lang);
-    snapshots.push(await page.locator('.vice-cinema-frame[data-slide="2"] .vice-cinema-headline').innerText());
+    await page.waitForTimeout(80); // MutationObserver localization is asynchronous
+    snapshots.push(await page.locator('.vice-cinema-frame[data-slide="2"] .vice-cinema-headline').textContent());
    }
-   if(new Set(snapshots).size!==4)fail("Missing four-language cinematic copy");
+   if(new Set(snapshots).size!==4)fail("Missing four-language cinematic copy "+JSON.stringify(snapshots));
    await page.locator(".vice-cinema-arrow--next").click();
    await page.waitForFunction(()=>document.querySelector('.vice-cinema-frame.is-active')?.dataset.slide==="3");
    await page.locator("#gtaModeToggle").click();
