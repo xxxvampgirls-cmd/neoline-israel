@@ -551,3 +551,140 @@ html[data-vice-theme="on"] #gameLobby .routes .route-card{
   animation:none!important;transform:none!important;
  }
 }
+
+/* Cinematic artwork v3 and compact play-card geometry, 2026-11-22.
+ * Use the existing approved duo image as the central photograph, with an
+ * original character-free sunset SVG behind it. No text is baked into art. */
+html[data-vice-theme="on"] .theory-promo-host .vice-cinema-frame--city .vice-cinema-scene{
+ background-image:url("./assets/teoria/vice-cinematic-backdrop.svg")!important;
+ background-repeat:no-repeat!important;
+ background-size:cover!important;
+ background-position:center 48%!important;
+}
+html[data-vice-theme="on"] .theory-promo-host .vice-cinema-frame--city .vice-cinema-scene::before{
+ content:"";
+ position:absolute;inset:0 auto 0 24%;width:60%;height:100%;
+ pointer-events:none;
+ background:url("./assets/teoria/vice-approved-protagonists.webp") center 45%/cover no-repeat;
+ -webkit-mask-image:radial-gradient(ellipse 73% 88% at 51% 48%,#000 36%,#000d 60%,transparent 100%);
+ mask-image:radial-gradient(ellipse 73% 88% at 51% 48%,#000 36%,#000d 60%,transparent 100%);
+ filter:saturate(1.12) contrast(1.06);
+}
+html[data-vice-theme="on"] .game-hero.theory-dashboard #heroTitle{
+ font-size:clamp(28px,4.2vw,46px)!important;
+ font-weight:1000!important;
+}
+html[data-vice-theme="on"] .theory-promo-host .vice-cinema-frame--city .vice-cinema-tag{
+ display:none!important;
+}
+html[data-vice-theme="on"] .theory-promo-host .vice-cinema-frame--city .vice-cinema-story{
+ top:33%!important;
+}
+html[data-vice-theme="on"] .theory-promo-host .vice-cinema-frame--city .vice-cinema-headline{
+ background:linear-gradient(140deg,#ffdc77,#ffad72)!important;
+ box-shadow:0 2px 0 #c47569,0 3px 16px #fb97a3ba!important;
+ border:1px solid #ffe4b0!important;
+ color:#291539!important;
+}
+html[data-vice-theme="on"] #gameLobby .routes .route-card{
+ filter:saturate(1.08);
+}
+@media(max-width:760px){
+ html[data-vice-theme="on"] .game-hero.theory-dashboard #heroTitle{
+  font-size:clamp(25px,7.12vw,32px)!important;
+  line-height:1.05!important;
+  max-width:100%!important;
+ }
+ html[data-vice-theme="on"] .game-hero.theory-dashboard .hero-copy{
+  width:43%!important;max-width:43%!important;
+  padding:12px 0 12px 13px!important;
+ }
+ html[data-vice-theme="on"] .theory-promo-host .vice-cinema-frame--city .vice-cinema-scene::before{
+  left:21%;width:62%;
+  background-position:center 50%;
+ }
+ html[data-vice-theme="on"] .theory-promo-host .vice-cinema-frame--city .vice-cinema-story{
+  top:28%!important;right:7px!important;
+  width:30%!important;max-width:30%!important;
+  gap:5px!important;
+ }
+ html[data-vice-theme="on"] .theory-promo-host .vice-cinema-frame--city .vice-cinema-headline{
+  font-size:clamp(12px,3.35vw,17px)!important;
+  line-height:1!important;
+  padding:5px 6px!important;
+ }
+ html[data-vice-theme="on"] .theory-promo-host .vice-cinema-frame--city .vice-cinema-sub{
+  font-size:clamp(8px,2.05vw,10px)!important;
+  line-height:1.22!important;
+ }
+ html[data-vice-theme="on"] #gameLobby{
+  padding-bottom:12px!important;
+ }
+ html[data-vice-theme="on"] #gameLobby .panel-toolbar{
+  padding-bottom:7px!important;
+ }
+ html[data-vice-theme="on"] #gameLobby .routes .route-card:not(.route-full){
+  min-height:0!important;
+  height:clamp(110px,30vw,128px)!important;
+  padding:8px 9px 9px!important;
+  gap:2px!important;
+  border-radius:16px!important;
+ }
+ html[data-vice-theme="on"] #gameLobby .routes .route-card .route-top{
+  top:6px!important;left:7px!important;right:7px!important;
+ }
+ html[data-vice-theme="on"] #gameLobby .route-card .route-icon{
+  width:30px!important;height:30px!important;
+  min-width:30px!important;max-width:30px!important;
+  padding:4px!important;
+  border-radius:9px!important;
+ }
+ html[data-vice-theme="on"] #gameLobby .route-card .route-icon svg{
+  width:21px!important;height:21px!important;
+ }
+ html[data-vice-theme="on"] #gameLobby .route-card .route-length{
+  min-width:27px!important;width:auto!important;
+  height:27px!important;padding:2px 6px!important;
+  font-size:12px!important;
+ }
+ html[data-vice-theme="on"] #gameLobby .routes .route-card strong{
+  font-size:clamp(12px,3.65vw,17px)!important;
+  line-height:1.1!important;
+  margin:auto 0 0!important;
+  padding:0!important;
+ }
+ html[data-vice-theme="on"] #gameLobby .routes .route-card>span:not(.route-top):not(.route-cta):not(.game-mode-photo){
+  font-size:clamp(9px,2.15vw,10px)!important;
+  line-height:1.17!important;
+ }
+ html[data-vice-theme="on"] #gameLobby .routes .route-full{
+  min-height:90px!important;height:90px!important;
+  padding:11px 10px 10px 46px!important;
+ }
+ html[data-vice-theme="on"] #gameLobby .route-full .route-top{
+  top:11px!important;left:8px!important;
+ }
+ html[data-vice-theme="on"] #gameLobby .route-full .route-icon{
+  width:28px!important;height:28px!important;
+  min-width:28px!important;max-width:28px!important;
+ }
+ html[data-vice-theme="on"] #gameLobby .routes{
+  gap:8px!important;margin-top:2px!important;
+ }
+ html[data-vice-theme="on"] #gameLobby .source-note{
+  margin-top:8px!important;
+  padding:7px 9px!important;
+  line-height:1.32!important;font-size:9px!important;
+ }
+}
+@media(max-width:350px){
+ html[data-vice-theme="on"] .game-hero.theory-dashboard #heroTitle{
+  font-size:24px!important;
+ }
+ html[data-vice-theme="on"] #gameLobby .routes .route-card:not(.route-full){
+  min-height:112px!important;height:112px!important;
+ }
+}
+@media(prefers-reduced-motion:reduce){
+ html[data-vice-theme="on"] .theory-promo-host .vice-cinema-frame--city .vice-cinema-scene::before{transition:none!important}
+}
