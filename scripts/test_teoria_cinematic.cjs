@@ -22,6 +22,7 @@ const {chromium}=require("playwright");
       width:innerWidth,documentWidth:document.documentElement.scrollWidth,
       hero:inspect(document.querySelector(".game-hero.theory-dashboard")),
       heroCopy:inspect(document.querySelector(".game-hero .hero-copy")),
+      heroArt:inspect(document.querySelector(".game-hero .hero-art")),
       heroStats:inspect(document.querySelector(".game-hero .hero-orbs")),
       lobby:inspect(document.querySelector("#gameLobby")),
       navHeight:document.querySelector(".theory-bottom").getBoundingClientRect().height,
@@ -32,6 +33,7 @@ const {chromium}=require("playwright");
       imageLinks:[...document.querySelectorAll(".vice-cinema-frame .vice-cinema-scene")].map(x=>getComputedStyle(x).backgroundImage),
       activeFrame:document.querySelector(".vice-cinema-frame.is-active")?.dataset.slide,
       premiumCssLoaded:[...document.styleSheets].some(x=>x.href?.includes("teoria-vice-cinematic.css")),
+      approvedLayoutCssLoaded:[...document.styleSheets].some(x=>x.href?.includes("teoria-vice-reference-match.css")),
       promoStage:inspect(document.querySelector(".vice-cinema-stage")),
       heroFont:getComputedStyle(document.querySelector("#heroTitle")).fontStyle,
       lang:document.documentElement.lang
@@ -39,7 +41,7 @@ const {chromium}=require("playwright");
    });
    const fail=why=>{throw Error(why+" at "+width+"px: "+JSON.stringify(status))};
    if(errors.length)fail("Browser errors: "+errors.join("|"));
-   if(!status.premiumCssLoaded)fail("New CSS was not served");
+   if(!status.premiumCssLoaded||!status.approvedLayoutCssLoaded)fail("New cinematic CSS was not served");
    if(status.documentWidth>width+2)fail("Horizontal overflow");
    if(Math.abs(status.navHeight-62)>2)fail("Approved 62px navigation changed");
    if(status.cards.length!==5)fail("Not five real game modes");
@@ -47,6 +49,10 @@ const {chromium}=require("playwright");
    if(status.imageLinks.length!==5||status.imageLinks.some(x=>!x.includes("vice-card-")&&!x.includes("vice-approved-protagonists")))fail("Missing cinematic carousel artwork");
    if(status.promoStage.display==="none"||status.promoStage.rect.height<110)fail("Cinema stage hidden");
    if(status.heroStats.rect.top<status.heroCopy.rect.bottom-4)fail("Top title overlaps the medal HUD");
+   if(Math.abs(status.heroArt.rect.width-status.hero.rect.width)>8)fail("Cinema is not a full-width hero banner");
+   if(Math.abs(status.heroArt.rect.top-status.heroCopy.rect.top)>30)fail("Hero title isn't layered on the cinematic banner");
+   if(status.heroStats.rect.top<status.heroArt.rect.bottom+4)fail("Separate medal strip overlaps the cinematic hero");
+
    if(status.cards.some(x=>x.rect.height<95))fail("Game card height too short");
    if(status.heroFont!=="italic")fail("Headline not upgraded");
    const artFiles=[
