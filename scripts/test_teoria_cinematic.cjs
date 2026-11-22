@@ -50,7 +50,7 @@ const {chromium}=require("playwright");
    if(status.documentWidth>width+2)fail("Horizontal overflow");
    if(Math.abs(status.navHeight-62)>2)fail("Approved 62px navigation changed");
    if(status.cards.length!==5)fail("Not five real game modes");
-   if(status.cards.some(x=>!x.background.includes("vice-card-")))fail("Any card has flat gradient instead of real illustration");
+   if(status.cards.some(x=>!x.background.includes("vice-hd-")))fail("HD character-art driving tiles not loaded");
    if(status.imageLinks.length!==5||status.imageLinks.some(x=>!x.includes("vice-card-")&&!x.includes("vice-approved-protagonists")&&!x.includes("vice-cinematic-duo")&&!x.includes("vice-cinematic-backdrop")))fail("Missing cinematic carousel artwork");
    if(status.promoStage.display==="none"||status.promoStage.rect.height<110)fail("Cinema stage hidden");
    if(status.heroStats.rect.top<status.heroCopy.rect.bottom-4)fail("Top title overlaps the medal HUD");
@@ -78,7 +78,7 @@ const {chromium}=require("playwright");
    if(status.activeFrame!=="0")fail("The neon experience must open on the spectacular first scene");
    const artFiles=[
     "vice-card-city.svg","vice-card-signs.svg","vice-card-exam.svg",
-    "vice-card-mistakes.svg","vice-card-marathon.svg","vice-cinematic-duo.svg","vice-cinematic-backdrop.svg","vice-hero-highlights.svg"
+    "vice-card-mistakes.svg","vice-card-marathon.svg","vice-cinematic-duo.svg","vice-cinematic-backdrop.svg","vice-hero-highlights.svg","vice-hd-city.svg","vice-hd-signs.svg","vice-hd-exam.svg","vice-hd-mistakes.svg","vice-hd-marathon.svg"
    ];
    const duoPhoto=await page.request.get("http://127.0.0.1:8765/assets/teoria/vice-approved-protagonists.webp");
    if(!duoPhoto.ok()||(await duoPhoto.body()).length<2300)fail("Missing original approved hero duo artwork");
@@ -87,6 +87,7 @@ const {chromium}=require("playwright");
     if(!response.ok())fail("Missing art asset "+asset);
     const content=await response.text();
     if(!content.startsWith("<svg")||!content.endsWith("</svg>"))fail("Malformed SVG "+asset);
+    if(asset.startsWith("vice-hd-")&&!content.includes("data:image/webp;base64,"))fail("HD composite lacks its local photo: "+asset);
    }
    await page.locator(".theory-promo-click").click();
    await page.waitForFunction(()=>document.querySelector("#gameGiftDialog")?.open===true);
