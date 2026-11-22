@@ -1,4 +1,4 @@
-/* NEOLINE optimized JS bundle 1/2. Exact source order; originals retained for rollback. */
+/* NEOLINE auto-bundle JS 1/2; exact original order. Do not edit. */
 
 /* SOURCE: teoria-ar.js */
 ;

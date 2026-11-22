@@ -1,4 +1,4 @@
-/* NEOLINE optimized JS bundle 2/2. Exact source order; originals retained. */
+/* NEOLINE auto-bundle JS 2/2; exact original order. Do not edit. */
 
 /* SOURCE: site-header.js */
 ;
