@@ -34,6 +34,12 @@ class NeolineAY8912 extends AudioWorkletProcessor{
     this.frames=raw;this.framesCount=raw.length/14;this.songIndex=0;
     this.frameSamples=sampleRate;
     this.phase.fill(0);this.noisePhase=0;
+   }else if(m.type==="seek"){
+    if(this.frames&&this.framesCount){
+     this.songIndex=Math.max(0,Math.min(this.framesCount-1,Math.floor(Number(m.frame)||0)));
+     this.frameSamples=sampleRate;
+     this.port.postMessage({type:"song-progress",frame:this.songIndex,frames:this.framesCount});
+    }
    }else if(m.type==="switch"){
     this.musicEnabled=!!m.music;
     this.effectsEnabled=!!m.effects;
@@ -66,8 +72,12 @@ class NeolineAY8912 extends AudioWorkletProcessor{
   if(this.musicEnabled&&this.frames&&this.framesCount){
    this.writeRegisters(this.songIndex);
    this.songIndex++;
+   if(this.songIndex%25===0){
+    this.port.postMessage({type:"song-progress",frame:this.songIndex,frames:this.framesCount});
+   }
    if(this.songIndex>=this.framesCount){
     this.songIndex=0;
+    this.port.postMessage({type:"song-progress",frame:0,frames:this.framesCount});
     // One event per completed original PT3 loop; game may choose a new track.
     this.port.postMessage({type:"song-loop"});
    }
