@@ -35,99 +35,77 @@ function notePeriod(note){
  const hz=440*Math.pow(2,(midi-69)/12);
  return Math.min(4095,Math.max(1,Math.round(CLOCK/(16*hz))));
 }
-const MENU={
- bpm:116,
- roots:"A2 F2 C3 G2 E2 A2 D3 E2".split(" "),
- chords:[
- ["A4","C5","E5"],["F4","A4","C5"],["C5","E5","G5"],["G4","B4","D5"],
- ["E4","G4","B4"],["A4","C5","E5"],["F4","A4","D5"],["E4","G#4","B4"]
- ],
- melody:[
- "E5 - G5 A5 C6 - B5 A5","G5 E5 F5 - A5 - C6 -",
- "G5 E5 C5 D5 E5 - G5 E5","D5 G5 B5 - A5 G5 E5 D5",
- "B4 E5 G5 B5 D6 - B5 G5","A5 C6 E6 - D6 C6 A5 E5",
- "F5 A5 D6 C6 A5 F5 E5 D5","E5 G#5 B5 D6 B5 G#5 E5 -"
- ].map(x=>x.split(" ")),
- arp:[0,1,2,1,0,2,1,2], beat:"sunset"
+// Tracker originals replay through an AY register stream, never synthesized.
+const GAME_MODES=new Set(["route","signs","exam","mistakes","marathon","daily"]);
+const GAME_IDS=["mary_jane","x_files","zoolook","downtown","behind_the_walls","magnetic_fields"];
+const SHUFFLE_KEY="neoline.vice.pt3.shuffle.v1";
+let manifestPromise=null,requestSerial=0,selectedGameSong=null,activeSong=null;
+const songBuffers=new Map();
+let shuffled;
+try{shuffled=JSON.parse(localStorage.getItem(SHUFFLE_KEY)||"null")}catch(_){}
+if(!shuffled||!Array.isArray(shuffled.bag)||shuffled.bag.some(id=>!GAME_IDS.includes(id)))
+ shuffled={bag:[],last:null};
+const rand=max=>{
+ if(max<=1)return 0;
+ const a=new Uint32Array(1);
+ if(window.crypto?.getRandomValues){window.crypto.getRandomValues(a);return a[0]%max}
+ return Math.floor(Math.random()*max);
 };
-const RESULT={...MENU,bpm:125,arp:[0,2,1,2,0,1,2,1],beat:"final"};
-const TRACKS={menu:MENU,...window.NEOLINE_AY_TRACKS,result:RESULT};
-const compiled=new Map();
-// For each 1/50-second frame, write the REAL PSG tone periods,
-// mixer gate, noise period, and one 4-bit volume per channel.
-function compileSong(track){
- const secs=32*60/track.bpm, frameCount=Math.round(secs*FPS);
- const bytes=new Uint8Array(frameCount*14);
- const leadSteps=[],leadAttacks=[];
- let active="-",attack=0;
- for(let step=0;step<128;step++){
-  if(step%2===0){
-   const token=track.melody[(step/16)|0][(step%16)/2];
-   if(token!=="-"){active=token;attack=step}
+function nextGameTrack(){
+ if(!shuffled.bag.length){
+  shuffled.bag=GAME_IDS.slice();
+  for(let i=shuffled.bag.length-1;i>0;i--){
+   const j=rand(i+1);
+   [shuffled.bag[i],shuffled.bag[j]]=[shuffled.bag[j],shuffled.bag[i]];
   }
-  leadSteps[step]=active;leadAttacks[step]=attack;
+  if(shuffled.bag[0]===shuffled.last&&shuffled.bag.length>1)
+   [shuffled.bag[0],shuffled.bag[1]]=[shuffled.bag[1],shuffled.bag[0]];
  }
- let previousStep=-1;
- for(let f=0;f<frameCount;f++){
-  const t=f/FPS,unit=t*track.bpm*4/60,step=Math.min(127,Math.floor(unit+1e-8));
-  const bar=(step/16)|0,pos=step%16,slot=step%8,beat=track.beat;
-  const off=f*14;
-  const period=(ch,value)=>{const p=notePeriod(value);bytes[off+ch*2]=p&255;bytes[off+ch*2+1]=(p>>8)&15};
-  let lead=leadSteps[step];
-  if(lead==="-")lead=null;
-  const leadAge=unit-leadAttacks[step];
-  period(0,lead);
-  let leadVolume=lead?Math.max(8,14-Math.floor(leadAge/2.0)):0;
-  if(leadAge<.18)leadVolume=15;
-  if(leadAge>12)leadVolume=7;
-  // Channel B: bass pulses, one-voice only.
-  const chord=track.chords[bar];
-  const lower=chord[2].replace(/([0-8])$/,(_,o)=>String(Math.max(1,Number(o)-2)));
-  const bassNote=(pos===4||pos===12)?lower:track.roots[bar];
-  period(1,bassNote);
-  const bassAge=unit-(step-(step%2));
-  let bassVolume=(beat==="rush"?12:10);
-  if(bassAge>1.5)bassVolume=5;
-  else if(bassAge<.20)bassVolume=Math.min(15,bassVolume+2);
-  const arpIndex=track.arp[pos%8]||0,arpNote=chord[arpIndex];
-  period(2,arpNote);
-  let arpVolume=beat==="pulse"?6:beat==="rush"?9:beat==="slow"?6:8;
-  if(unit-step>.7)arpVolume=Math.max(2,arpVolume-2);
-  // Noise generator is SHARED. Steal channel C for 20–60 ms at drum hits.
-  // No more than 3 AY channels sound simultaneously.
-  const stepElapsed=t-(step*60/track.bpm/4);
-  let kick=false,snare=false,hat=false;
-  if(beat==="rush"){
-   kick=pos%4===0;snare=pos===4||pos===12;hat=pos%2===0;
-  }else if(beat==="pulse"||beat==="slow"){
-   kick=pos===0||pos===8;snare=pos===12;hat=beat==="pulse"&&pos%4===2;
-  }else if(beat==="bouncy"||beat==="swing"){
-   kick=pos===0||pos===8||pos===10;snare=pos===4||pos===12;hat=pos%4===2;
-  }else{
-   kick=pos%4===0;snare=pos===4||pos===12;hat=pos%2===0;
-  }
-  let mixer=0x38,noiseP=1;
-  if(stepElapsed<.050 && (snare||kick||hat)){
-   mixer=0x1c; // tone A + B enabled; C noise only
-   noiseP=snare?13:kick?24:3;
-   arpVolume=snare?12:kick?11:5;
-   if(stepElapsed>.028)arpVolume=Math.max(2,arpVolume-4);
-  }
-  bytes[off+6]=noiseP;
-  bytes[off+7]=mixer;
-  bytes[off+8]=leadVolume;
-  bytes[off+9]=bassVolume;
-  bytes[off+10]=arpVolume;
-  bytes[off+11]=0;bytes[off+12]=0;
-  bytes[off+13]=255; // skip envelope retrigger unless explicitly set
-  previousStep=step;
- }
- return bytes;
+ const id=shuffled.bag.shift();shuffled.last=id;
+ try{localStorage.setItem(SHUFFLE_KEY,JSON.stringify(shuffled))}catch(_){}
+ return id;
 }
-function getSong(key){
- if(!TRACKS[key])key="menu";
- if(!compiled.has(key))compiled.set(key,compileSong(TRACKS[key]));
- return compiled.get(key);
+async function manifest(){
+ if(!manifestPromise)manifestPromise=fetch("./assets/teoria/ay/manifest.json?v=pt3-sonya-v1",{cache:"no-store"})
+  .then(r=>{if(!r.ok)throw Error("AY playlist manifest HTTP "+r.status);return r.json()})
+  .then(m=>{
+   if(m.menu!=="sonya"||m.frameRate!==50||m.clockHz!==1773400||
+      !m.tracks?.sonya||GAME_IDS.some(id=>!m.tracks?.[id]))throw Error("PT3 playlist invalid");
+   return m;
+  }).catch(e=>{manifestPromise=null;throw e});
+ return manifestPromise;
+}
+async function pt3Bytes(id){
+ if(songBuffers.has(id))return songBuffers.get(id);
+ const m=await manifest(),entry=m.tracks[id];
+ if(!entry||!String(entry.url).match(/^\.\/assets\/teoria\/ay\/[a-z_]+\.ay14$/))
+  throw Error("Bad PT3 tune "+id);
+ const response=await fetch(entry.url,{cache:"force-cache"});
+ if(!response.ok)throw Error("PT3 tune "+id+" HTTP "+response.status);
+ const frames=new Uint8Array(await response.arrayBuffer());
+ if(frames.length!==entry.frames*14||frames.length<14*250||frames.length>14*50*240)
+  throw Error("PT3 frame length mismatch "+id);
+ songBuffers.set(id,frames);
+ return frames;
+}
+async function loadScene(force=false){
+ if(!node)return;
+ const token=++requestSerial,requested=scene;
+ if(requested==="fail"){msg({type:"clearSong"});loadedScene="fail";activeSong=null;stateToChip();return}
+ const id=requested==="menu"?"sonya":requested==="result"?(selectedGameSong||"sonya"):
+          selectedGameSong||nextGameTrack();
+ if(GAME_MODES.has(requested))selectedGameSong=id;
+ if(!force&&loadedScene===requested&&activeSong===id){stateToChip();return}
+ try{
+  const frames=await pt3Bytes(id);
+  if(token!==requestSerial||!node||!isVice()||scene!==requested)return;
+  loadedScene=requested;activeSong=id;
+  msg({type:"song",frames});stateToChip();updateControls();
+ }catch(err){
+  if(token!==requestSerial)return;
+  console.warn("NEOLINE original PT3 unavailable",id,err);
+  msg({type:"clearSong"});loadedScene=null;activeSong=null;stateToChip();updateControls();
+ }
 }
 // SFX sequences are also AY register values, not synthesized outside the chip.
 // Note + length in 20ms frames + loudness (0..15) + noise period (0=no noise).
@@ -175,24 +153,13 @@ function guessScene(){
  if(byId("gameOver")&&!byId("gameOver").hidden)return "fail";
  if(byId("gameResult")&&!byId("gameResult").hidden)return "result";
  if(byId("gamePlaying")&&!byId("gamePlaying").hidden)
-  return currentMode&&TRACKS[currentMode]?currentMode:"route";
+  return currentMode&&GAME_MODES.has(currentMode)?currentMode:"route";
  return "menu";
 }
 const msg=data=>{if(node)node.port.postMessage(data)};
 function stateToChip(){
  msg({type:"switch",music:musicOn&&isVice()&&!document.hidden&&scene!=="fail",
   effects:sfxOn&&isVice()&&!document.hidden});
-}
-function loadScene(force=false){
- if(!node)return;
- if(scene==="fail"){
-  msg({type:"clearSong"});
-  loadedScene="fail";stateToChip();return;
- }
- if(!force&&loadedScene===scene){stateToChip();return;}
- loadedScene=scene;
- msg({type:"song",frames:getSong(scene)});
- stateToChip();
 }
 function syncScene(){
  const next=guessScene();
@@ -207,12 +174,16 @@ async function unlock(){
    const resumed=ctx.resume();
    boot=Promise.all([
     resumed,
-    ctx.audioWorklet.addModule("./teoria-ay8912-worklet.js?v=20261122-real-ay8912-v2")
+    ctx.audioWorklet.addModule("./teoria-ay8912-worklet.js?v=20261122-pt3-loop-v3")
    ]).then(()=>{
     node=new AudioWorkletNode(ctx,"neoline-ay8912",{
      numberOfInputs:0,numberOfOutputs:1,outputChannelCount:[2]
     });
-    const master=ctx.createGain();
+    node.port.onmessage=event=>{
+      if(event.data?.type!=="song-loop"||!isVice()||!musicOn||!GAME_MODES.has(scene))return;
+      selectedGameSong=nextGameTrack();loadScene(true);
+     };
+     const master=ctx.createGain();
     master.gain.value=.80;
     node.connect(master);master.connect(ctx.destination);
     scene=guessScene();
@@ -308,13 +279,16 @@ window.addEventListener("neoline:vice-theme",e=>{
   scene=guessScene();
   void unlock().then(ok=>{if(ok)playFx("enable")});
  }
- if(!enabled)stateToChip();else{syncScene();stateToChip()}
+ if(!enabled){requestSerial++;stateToChip()}else{syncScene();loadScene(true);stateToChip()}
  lastTheme=enabled;updateControls();
 });
 window.addEventListener("neoline:theory-quiz",e=>{
  const d=e.detail||{};
- if(d.mode&&TRACKS[d.mode])currentMode=d.mode;
- const previous=scene;syncScene();
+ if(d.mode&&GAME_MODES.has(d.mode))currentMode=d.mode;
+ const previous=scene;
+  const next=guessScene();
+  if(next!==previous&&GAME_MODES.has(next))selectedGameSong=nextGameTrack();
+  syncScene();
  if(!isVice())return;
  if(previous!==scene){lastDone=0;playFx("start");return;}
  if(scene!=="menu"&&scene!=="result"&&scene!=="fail"&&!d.answered&&Number.isFinite(d.done)&&d.done>lastDone){
