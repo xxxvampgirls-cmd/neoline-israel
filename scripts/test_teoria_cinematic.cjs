@@ -44,7 +44,7 @@ const {chromium}=require("playwright");
    if(Math.abs(status.navHeight-62)>2)fail("Approved 62px navigation changed");
    if(status.cards.length!==5)fail("Not five real game modes");
    if(status.cards.some(x=>!x.background.includes("vice-card-")))fail("Any card has flat gradient instead of real illustration");
-   if(status.imageLinks.length!==5||status.imageLinks.some(x=>!x.includes("vice-card-")&&!x.includes("vice-cinematic-duo")))fail("Missing cinematic carousel artwork");
+   if(status.imageLinks.length!==5||status.imageLinks.some(x=>!x.includes("vice-card-")&&!x.includes("vice-approved-protagonists")))fail("Missing cinematic carousel artwork");
    if(status.promoStage.display==="none"||status.promoStage.rect.height<110)fail("Cinema stage hidden");
    if(status.heroStats.rect.top<status.heroCopy.rect.bottom-4)fail("Top title overlaps the medal HUD");
    if(status.cards.some(x=>x.rect.height<95))fail("Game card height too short");
@@ -53,6 +53,8 @@ const {chromium}=require("playwright");
     "vice-card-city.svg","vice-card-signs.svg","vice-card-exam.svg",
     "vice-card-mistakes.svg","vice-card-marathon.svg","vice-cinematic-duo.svg"
    ];
+   const duoPhoto=await page.request.get("http://127.0.0.1:8765/assets/teoria/vice-approved-protagonists.webp");
+   if(!duoPhoto.ok()||(await duoPhoto.body()).length<2300)fail("Missing original approved hero duo artwork");
    for(const asset of artFiles){
     const response=await page.request.get("http://127.0.0.1:8765/assets/teoria/"+asset);
     if(!response.ok())fail("Missing art asset "+asset);
