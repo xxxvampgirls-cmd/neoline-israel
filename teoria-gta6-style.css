@@ -503,3 +503,164 @@ html[data-vice-theme="on"] .gameover-card :is(h2,h3,strong){
  .vice-theme-switch,.vice-theme-status{transition:none!important}
  html[data-vice-theme="on"] :is(.game-hero,.route-card,.answer,.hero-art){animation:none!important}
 }
+
+/* The licence picker, achievement book and Game Over are part of the skin,
+   not separate white islands. Original photos, data and reward 3D untouched. */
+html[data-vice-theme="on"] .game-progress-dialog{
+ background:linear-gradient(165deg,#281936,#43244f)!important;color:#fff1ed!important;
+ box-shadow:0 23px 68px #060014c4!important;
+}
+html[data-vice-theme="on"] .game-progress-dialog .game-progress-head{
+ background:#2e1b3cef!important;border-bottom-color:#a96fa6!important;
+}
+html[data-vice-theme="on"] .game-progress-header-brand,
+html[data-vice-theme="on"] .game-progress-kicker{
+ color:#ffb6d0!important;
+}
+html[data-vice-theme="on"] .game-progress-headline,
+html[data-vice-theme="on"] .game-progress-topstats>div{
+ background:linear-gradient(110deg,#523059,#322045)!important;
+ border-color:#9d649d!important;
+}
+html[data-vice-theme="on"] .game-progress-headline-icon,
+html[data-vice-theme="on"] .game-achievement__icon{
+ background:linear-gradient(135deg,#e85a9b,#ac55ae)!important;
+ color:#fff1eb!important;
+}
+html[data-vice-theme="on"] .game-progress-headline h2,
+html[data-vice-theme="on"] .game-progress-section h3{
+ color:#fff2ee!important;
+}
+html[data-vice-theme="on"] .game-progress-headline p,
+html[data-vice-theme="on"] .game-progress-section>p,
+html[data-vice-theme="on"] .game-progress-footnote{
+ color:#edc8e2!important;
+}
+html[data-vice-theme="on"] .game-progress-topstats strong,
+html[data-vice-theme="on"] .game-progress-chart .day__value,
+html[data-vice-theme="on"] .game-progress-history-item strong{
+ color:#ffc190!important;
+}
+html[data-vice-theme="on"] .game-progress-topstats>div>span:last-child,
+html[data-vice-theme="on"] .game-progress-chart .day__label{
+ color:#f5d3e9!important;
+}
+html[data-vice-theme="on"] .game-progress-chart .day__bar{
+ background:linear-gradient(120deg,#613a68,#4a2d59)!important;
+ border-color:#91639a!important;
+}
+html[data-vice-theme="on"] .game-progress-chart .day__fill{
+ background:linear-gradient(180deg,#ffbd91,#ea6aab)!important;
+}
+html[data-vice-theme="on"] .game-progress-chart .day[data-empty="true"] .day__bar{
+ background:repeating-linear-gradient(45deg,#4c2b59 0 5px,#392546 5px 10px)!important;
+}
+html[data-vice-theme="on"] .game-achievement,
+html[data-vice-theme="on"] .game-progress-history-item,
+html[data-vice-theme="on"] .game-progress-empty{
+ background:#452b52!important;border-color:#9965a0!important;color:#ffdfec!important;
+}
+html[data-vice-theme="on"] .game-achievement.is-locked{background:#362746!important;opacity:.7}
+html[data-vice-theme="on"] .game-achievement__text strong,
+html[data-vice-theme="on"] .game-progress-history-item time{
+ color:#fff2e5!important;
+}
+html[data-vice-theme="on"] .game-achievement__text span{
+ color:#e9bbd4!important;
+}
+html[data-vice-theme="on"] .game-progress-close,
+html[data-vice-theme="on"] .game-progress-gift,
+html[data-vice-theme="on"] .theory-licence-dialog__close{
+ background:#5d305f!important;border-color:#e08bb7!important;color:#ffedeb!important;
+}
+html[data-vice-theme="on"] .theory-licence-dialog{
+ background:linear-gradient(155deg,#42244b,#241935)!important;
+}
+html[data-vice-theme="on"] .theory-licence-dialog h2{
+ color:#fff3ea!important;
+}
+html[data-vice-theme="on"] .theory-licence-dialog__eyebrow{
+ color:#f7a6d0!important;
+}
+html[data-vice-theme="on"] .theory-licence-dialog__description{
+ color:#f4d6e8!important;background:#512b54!important;border-color:#9f6e9b!important;
+}
+html[data-vice-theme="on"] .theory-licence-option{
+ background:linear-gradient(115deg,#52315d,#3d284d)!important;
+ border-color:#90608e!important;color:#fff0eb!important;
+}
+html[data-vice-theme="on"] .theory-licence-option__text strong{
+ color:#fff0e8!important;
+}
+html[data-vice-theme="on"] .theory-licence-option__text small{
+ color:#efd0e3!important;
+}
+html[data-vice-theme="on"] .theory-licence-option.is-active{
+ background:linear-gradient(120deg,#844571,#673365)!important;
+ border-color:#ffc1ae!important;box-shadow:0 0 0 2px #e777a33a!important;
+}
+html[data-vice-theme="on"] .theory-licence-option__icon{
+ color:#fff0e7!important;background:#7f3a80!important;border-color:#ce8abb!important;
+}
+html[data-vice-theme="on"] #gameGiftDialog .game-gift-dialog__hero h2,
+html[data-vice-theme="on"] #gameGiftDialog .game-gift-dialog__option strong{
+ color:#fff4e8!important;
+}
+html[data-vice-theme="on"] #gameGiftDialog .game-gift-dialog__eyebrow,
+html[data-vice-theme="on"] #gameGiftDialog .game-gift-dialog__section-title{
+ color:#ffb4d2!important;
+}
+html[data-vice-theme="on"] #gameGiftDialog .game-gift-dialog__intro,
+html[data-vice-theme="on"] #gameGiftDialog .game-gift-dialog__option p,
+html[data-vice-theme="on"] #gameGiftDialog .game-gift-dialog__notice{
+ color:#f3cde1!important;
+}
+html[data-vice-theme="on"] #gameGiftDialog .game-gift-dialog__option,
+html[data-vice-theme="on"] #gameGiftDialog .game-gift-dialog__notice{
+ background:#432747ed!important;border-color:#9c6b9e!important;
+}
+html[data-vice-theme="on"] #gameGiftDialog .game-gift-dialog__close{
+ background:#602d61!important;color:#fff0ed!important;border-color:#d787b2!important;
+}
+html[data-vice-theme="on"] #gameGiftDialog .game-gift-dialog__ok{
+ background:linear-gradient(100deg,#f36e9c,#ffb487)!important;
+ color:#3c1a40!important;border-color:#ffdfcc!important;
+}
+/* Do not override gift-reveal-crate/lid/ray/star layers: maintain their
+   carefully tuned 3D effect, gold behind blue, and existing animation. */
+html[data-vice-theme="on"] .gameover-overlay .gameover-backdrop{
+ background:#190d2dbd!important;backdrop-filter:blur(9px)!important;
+}
+html[data-vice-theme="on"] .gameover-overlay .gameover-card{
+ background:radial-gradient(ellipse at 70% 5%,#f2809975,transparent 60%),
+ linear-gradient(150deg,#532a57,#251733)!important;
+ border-color:#d884b6!important;color:#fff2ee!important;
+ box-shadow:0 18px 40px #050014a3!important;
+}
+html[data-vice-theme="on"] .gameover-overlay .gameover-card::before{
+ opacity:.12!important;
+ filter:hue-rotate(102deg)!important;
+}
+html[data-vice-theme="on"] .gameover-overlay .gameover-card .gameover-title{
+ color:#fff0e8!important;text-shadow:0 3px 18px #ed6c9965!important;
+}
+html[data-vice-theme="on"] .gameover-overlay .gameover-card .gameover-message{
+ color:#ffdfec!important;
+}
+html[data-vice-theme="on"] .gameover-overlay .gameover-card .gameover-score{
+ color:#ffd8a8!important;background:#583054!important;border-color:#cb83a7!important;
+}
+html[data-vice-theme="on"] .gameover-overlay .gameover-card .gameover-promo{
+ background:#37234cbf!important;border-color:#aa68a2!important;
+}
+html[data-vice-theme="on"] .gameover-overlay .gameover-promo-copy :is(span,strong,small){
+ color:#ffecf4!important;
+}
+html[data-vice-theme="on"] .gameover-overlay .gameover-card .gameover-retry{
+ background:linear-gradient(110deg,#f36e9e,#ffb189)!important;
+ border-color:#ffdcba!important;color:#391939!important;
+}
+html[data-vice-theme="on"] .gameover-overlay .gameover-card .gameover-modes,
+html[data-vice-theme="on"] .gameover-overlay .gameover-promo-link{
+ background:#66345f!important;border-color:#d689b6!important;color:#fff0eb!important;
+}
