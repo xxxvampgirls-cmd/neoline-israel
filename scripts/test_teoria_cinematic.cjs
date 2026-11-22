@@ -98,6 +98,11 @@ const {chromium}=require("playwright");
     if(!content.startsWith("<svg")||!content.endsWith("</svg>"))fail("Malformed SVG "+asset);
     if(asset.startsWith("vice-hd-")&&!content.includes("data:image/webp;base64,"))fail("HD composite lacks its local photo: "+asset);
    }
+   // The screenshot-faithful gift glyph still has an actual transparent
+   // button over its exact position: it must work without force-clicks.
+   await page.locator("#gameGiftTrigger").click();
+   await page.waitForFunction(()=>document.querySelector("#gameGiftDialog")?.open===true);
+   await page.locator("#gameGiftClose").click();
    await page.locator(".theory-promo-click").click();
    await page.waitForFunction(()=>document.querySelector("#gameGiftDialog")?.open===true);
    await page.locator("#gameGiftClose").click();
