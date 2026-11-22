@@ -63,6 +63,7 @@ const {chromium}=require("playwright");
    // both the new cinematic frame and previous slide destination.
    await page.locator('.theory-promo-dot[data-slide="2"]').click();
    await page.waitForFunction(()=>document.querySelector('.vice-cinema-frame.is-active')?.dataset.slide==="2");
+   await page.waitForTimeout(850); // finish the carousel mask and text entrance before screenshot
    if(width===390 && process.env.SAVE_CINEMATIC_SCREENSHOTS){
      // Chunked log is review-only; no public media or personal data uploaded.
      await page.screenshot({type:"jpeg",quality:64,path:"/tmp/neoline-vice-390.jpg",fullPage:true});
