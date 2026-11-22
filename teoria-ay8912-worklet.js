@@ -23,6 +23,7 @@ class NeolineAY8912 extends AudioWorkletProcessor{
   this.frames=null;this.framesCount=0;this.songIndex=0;
   this.fxFrames=null;this.fxCount=0;this.fxIndex=0;this.fxReg=null;
   this.musicEnabled=true;this.effectsEnabled=true;
+  this.sfxMixGain=0.35; // Softer AY effects vs original tracker channels
   this.frameSamples=sampleRate;
   this.outputLevel=0;this.dc=0;
   this.port.onmessage=e=>{
@@ -143,7 +144,7 @@ class NeolineAY8912 extends AudioWorkletProcessor{
     const noisePass=!noiseEnabled||!!this.noiseLevel;
     if(tonePass&&noisePass&&volume){
      const level=(volume&16)?this.envValue:volume&15;
-     mix+=AY_LEVELS[level];
+     mix+=AY_LEVELS[level]*(ch===2&&fx?this.sfxMixGain:1);
     }
    }
    const active=(this.musicEnabled&&this.frames)||(this.effectsEnabled&&this.fxReg);
