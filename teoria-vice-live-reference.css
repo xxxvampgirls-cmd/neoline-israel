@@ -6,11 +6,11 @@
 
 /* Keep the same banner height as the carousel rotates: no jumping frame. */
 @media(max-width:760px){
- html[data-vice-theme="on"][lang^="ru"] .game-hero.theory-dashboard{
+ html.vice-reference-ready[data-vice-theme="on"][lang^="ru"] .game-hero.theory-dashboard{
   grid-template-rows:clamp(114px,30vw,204px) auto!important;
   row-gap:9px!important;
  }
- html[data-vice-theme="on"][lang^="ru"] .game-hero.theory-dashboard .hero-art{
+ html.vice-reference-ready[data-vice-theme="on"][lang^="ru"] .game-hero.theory-dashboard .hero-art{
   min-height:0!important;
   height:100%!important;
  }
@@ -18,7 +18,7 @@
 
 /* Reference image is deliberately first slide only.
    Accessible text and interactive buttons are still real website content. */
-html[data-vice-theme="on"][lang^="ru"] .theory-promo-host .vice-cinema-frame--city .vice-cinema-scene{
+html.vice-reference-ready[data-vice-theme="on"][lang^="ru"] .theory-promo-host .vice-cinema-frame--city .vice-cinema-scene{
  background-image:url("./assets/teoria/vice-hero-reference.avif")!important;
  background-repeat:no-repeat!important;
  background-size:100% 100%!important;
@@ -27,19 +27,19 @@ html[data-vice-theme="on"][lang^="ru"] .theory-promo-host .vice-cinema-frame--ci
  transform:none!important;
  animation:none!important;
 }
-html[data-vice-theme="on"][lang^="ru"] .theory-promo-host .vice-cinema-frame--city.is-active .vice-cinema-scene{
+html.vice-reference-ready[data-vice-theme="on"][lang^="ru"] .theory-promo-host .vice-cinema-frame--city.is-active .vice-cinema-scene{
  transform:none!important;
  animation:none!important;
 }
-html[data-vice-theme="on"][lang^="ru"] .theory-promo-host .vice-cinema-frame--city .vice-cinema-scene::before,
-html[data-vice-theme="on"][lang^="ru"] .theory-promo-host .vice-cinema-frame--city .vice-cinema-scene::after{
+html.vice-reference-ready[data-vice-theme="on"][lang^="ru"] .theory-promo-host .vice-cinema-frame--city .vice-cinema-scene::before,
+html.vice-reference-ready[data-vice-theme="on"][lang^="ru"] .theory-promo-host .vice-cinema-frame--city .vice-cinema-scene::after{
  display:none!important;
  content:none!important;
 }
-html[data-vice-theme="on"][lang^="ru"] .theory-promo-host .vice-cinema-frame--city .vice-cinema-mask{
+html.vice-reference-ready[data-vice-theme="on"][lang^="ru"] .theory-promo-host .vice-cinema-frame--city .vice-cinema-mask{
  display:none!important;
 }
-html[data-vice-theme="on"][lang^="ru"] .theory-promo-host .vice-cinema-frame--city .vice-cinema-story{
+html.vice-reference-ready[data-vice-theme="on"][lang^="ru"] .theory-promo-host .vice-cinema-frame--city .vice-cinema-story{
  visibility:hidden!important;
  opacity:0!important;
  pointer-events:none!important;
@@ -47,7 +47,7 @@ html[data-vice-theme="on"][lang^="ru"] .theory-promo-host .vice-cinema-frame--ci
 
 /* The Russian banner already contains its own title, promotional label
    and gift depiction. Keep semantic/live counterparts off the pixels only. */
-html[data-vice-theme="on"][lang^="ru"] .game-hero.theory-dashboard[data-vice-promo-slide="0"] .hero-copy{
+html.vice-reference-ready[data-vice-theme="on"][lang^="ru"] .game-hero.theory-dashboard[data-vice-promo-slide="0"] .hero-copy{
  height:100%!important;
  min-height:0!important;
  max-height:100%!important;
@@ -57,14 +57,14 @@ html[data-vice-theme="on"][lang^="ru"] .game-hero.theory-dashboard[data-vice-pro
  overflow:visible!important;
  position:relative!important;
 }
-html[data-vice-theme="on"][lang^="ru"] .game-hero.theory-dashboard[data-vice-promo-slide="0"] .game-hero-mini,
-html[data-vice-theme="on"][lang^="ru"] .game-hero.theory-dashboard[data-vice-promo-slide="0"] .eyebrow,
-html[data-vice-theme="on"][lang^="ru"] .game-hero.theory-dashboard[data-vice-promo-slide="0"] #heroTitle,
-html[data-vice-theme="on"][lang^="ru"] .game-hero.theory-dashboard[data-vice-promo-slide="0"] .hero-stroke{
+html.vice-reference-ready[data-vice-theme="on"][lang^="ru"] .game-hero.theory-dashboard[data-vice-promo-slide="0"] .game-hero-mini,
+html.vice-reference-ready[data-vice-theme="on"][lang^="ru"] .game-hero.theory-dashboard[data-vice-promo-slide="0"] .eyebrow,
+html.vice-reference-ready[data-vice-theme="on"][lang^="ru"] .game-hero.theory-dashboard[data-vice-promo-slide="0"] #heroTitle,
+html.vice-reference-ready[data-vice-theme="on"][lang^="ru"] .game-hero.theory-dashboard[data-vice-promo-slide="0"] .hero-stroke{
  opacity:0!important;
  visibility:hidden!important;
 }
-html[data-vice-theme="on"][lang^="ru"] .game-hero.theory-dashboard[data-vice-promo-slide="0"] .game-gift-trigger{
+html.vice-reference-ready[data-vice-theme="on"][lang^="ru"] .game-hero.theory-dashboard[data-vice-promo-slide="0"] .game-gift-trigger{
  position:absolute!important;
  left:10px!important;
  bottom:19%!important;
@@ -83,39 +83,33 @@ html[data-vice-theme="on"][lang^="ru"] .game-hero.theory-dashboard[data-vice-pro
 /* Overlay invisible but full-size action targets over the poster's baked
    arrows and pagination. This avoids double controls while preserving
    swipe, buttons, click actions and visible artwork. */
-html[data-vice-theme="on"][lang^="ru"] .theory-promo-host[data-vice-active-slide="0"] .vice-cinema-arrow,
-html[data-vice-theme="on"][lang^="ru"] .theory-promo-host[data-vice-active-slide="0"] .theory-promo-dots{
+html.vice-reference-ready[data-vice-theme="on"][lang^="ru"] .theory-promo-host[data-vice-active-slide="0"] .vice-cinema-arrow,
+html.vice-reference-ready[data-vice-theme="on"][lang^="ru"] .theory-promo-host[data-vice-active-slide="0"] .theory-promo-dots{
  opacity:0!important;
  background:transparent!important;
  box-shadow:none!important;
  border-color:transparent!important;
  pointer-events:auto!important;
 }
-html[data-vice-theme="on"][lang^="ru"] .theory-promo-host .vice-cinema-arrow--prev{
+html.vice-reference-ready[data-vice-theme="on"][lang^="ru"] .theory-promo-host .vice-cinema-arrow--prev{
  left:49%!important;
 }
-html[data-vice-theme="on"][lang^="ru"] .theory-promo-host .vice-cinema-arrow--next{
+html.vice-reference-ready[data-vice-theme="on"][lang^="ru"] .theory-promo-host .vice-cinema-arrow--next{
  right:4px!important;
 }
-html[data-vice-theme="on"][lang^="ru"] .theory-promo-host .vice-cinema-arrow{
+html.vice-reference-ready[data-vice-theme="on"][lang^="ru"] .theory-promo-host .vice-cinema-arrow{
  top:auto!important;
  bottom:4px!important;
  transform:none!important;
 }
-html[data-vice-theme="on"][lang^="ru"] .theory-promo-host .theory-promo-dots{
+html.vice-reference-ready[data-vice-theme="on"][lang^="ru"] .theory-promo-host .theory-promo-dots{
  left:70%!important;
  bottom:3px!important;
  transform:translateX(-50%)!important;
 }
 
-/* Browsers that cannot decode AVIF should reveal the normal live version. */
-@supports not (background-image:url("data:image/avif;base64,AAAA")){
- html[data-vice-theme="on"][lang^="ru"] .theory-promo-host .vice-cinema-frame--city .vice-cinema-scene{
-  background-image:url("./assets/teoria/vice-cinematic-backdrop.svg")!important;
- }
-}
 @media(prefers-reduced-motion:reduce){
- html[data-vice-theme="on"][lang^="ru"] .theory-promo-host .vice-cinema-frame--city .vice-cinema-scene{
+ html.vice-reference-ready[data-vice-theme="on"][lang^="ru"] .theory-promo-host .vice-cinema-frame--city .vice-cinema-scene{
   transition:none!important;
  }
 }
