@@ -2628,8 +2628,11 @@ const tapeCopy={
  ar:{stages:["محرك الشريط · PLAY ▶","نغمة البداية","توقف · بين الكتل","مزامنة الكتلة","قراءة البيانات","توقف · الكتلة التالية","تحميل المدينة","توقف · الكتلة الأخيرة","البيانات الأخيرة","التحقق من البيانات"],skip:"تخطي ►",tap:"المس الشاشة للصوت",block:"الكتلة"}
 };
 const words=()=>tapeCopy[language()]||tapeCopy.ru;
-const FULL_MS=5600,RELOAD_MS=5000,READY_PAUSE_MS=1700;
-let stageIndex=0,currentDuration=FULL_MS;
+// ZX Spectrum ROM header: 8063 uninterrupted pilot pulses at 2168 T-states,
+// clocked at 3.5 MHz (4.994 seconds). The first sound is never compressed.
+const PILOT_MS=Math.round(8063*2168*1000/3500000);
+const PILOT_GAP_MS=250,FULL_MS=5600,RELOAD_MS=5000,READY_PAUSE_MS=1700;
+let stageIndex=0,currentDuration=PILOT_MS+PILOT_GAP_MS+FULL_MS,dataDuration=FULL_MS;
 const reduce=window.matchMedia?.("(prefers-reduced-motion: reduce)")?.matches||false;
 const overlay=document.createElement("div");
 overlay.className="vice-boot-overlay";
@@ -2650,7 +2653,9 @@ overlay.innerHTML=[
  '<div class="vice-boot-tape-info" aria-hidden="true"><span class="vice-boot-tape-file">LOAD "NEOLINE_VICE"</span><span class="vice-boot-tape-block"></span><span class="vice-boot-tape-bytes">00000 / 49152</span><span class="vice-boot-tape-touch" hidden></span></div>',
  '</div>',
  '<button type="button" class="vice-boot-tape-skip"></button>',
- '<div class="vice-boot-bottomline"><span>NEON CITY  //  ZX 128K</span><span>EST. <b>1988</b></span></div>'
+ '<div class="vice-boot-bottomline"><span>NEON CITY  //  ZX 128K</span><span>EST. <b>1988</b></span></div>',
+ // Classic first 4.994s: only clean white screen, loading border and LOAD.
+ '<div class="vice-boot-pilot" aria-hidden="true"><span>LOAD</span></div>'
 ].join("");
 document.body.append(overlay);
 const kicker=overlay.querySelector(".vice-boot-kicker");
@@ -2704,6 +2709,7 @@ function finish(){
  entering=false;
  window.neolineCassetteLoading?.("hold");
  touch.hidden=true;
+ overlay.classList.remove("is-pilot");
  overlay.classList.add("is-ready");
  status.textContent=t().ready;
  skip.hidden=true;
@@ -2722,15 +2728,24 @@ function begin(initial=false){
  clearTimeout(shortTimer);clearTimeout(clearTimer);clearStages();
  hideWake();
  entering=true;shown=true;stageIndex=0;
- currentDuration=reduce?240:(initial?RELOAD_MS:FULL_MS);
- overlay.style.setProperty("--vice-boot-time",currentDuration+"ms");
+ dataDuration=reduce?240:(initial?RELOAD_MS:FULL_MS);
+ const opening=reduce?0:PILOT_MS+PILOT_GAP_MS;
+ currentDuration=opening+dataDuration;
+ overlay.style.setProperty("--vice-boot-time",dataDuration+"ms");
+ overlay.style.setProperty("--vice-boot-pilot-time",opening+"ms");
  overlay.setAttribute("aria-hidden","false");
  skip.hidden=true;
  bytes.textContent="00000 / 49152";
  translate();
- overlay.classList.remove("is-active","is-ready");
+ overlay.classList.remove("is-active","is-ready","is-pilot");
  void overlay.offsetHeight;
  overlay.classList.add("is-active");
+ if(!reduce){
+  overlay.classList.add("is-pilot");
+  stageTimers.push(setTimeout(()=>{
+   if(entering)overlay.classList.remove("is-pilot");
+  },opening));
+ }
  // One worklet emulates tape EAR pulses; the real AY music waits until finish.
  if(!reduce)window.neolineCassetteLoading?.(true,currentDuration);
  updateTapeHint();
@@ -2742,13 +2757,13 @@ function begin(initial=false){
   stageTimers.push(setTimeout(()=>{
    if(!entering)return;
    stageIndex=index;translate();
-  },Math.round(currentDuration*fraction)));
+  },opening+Math.round(dataDuration*fraction)));
  }
  if(!reduce){
   meterTimer=setInterval(()=>{
    if(!entering)return;
    const now=performance.now();
-   const fraction=Math.max(0,Math.min(1,(now-bootStartedAt)/currentDuration));
+   const fraction=Math.max(0,Math.min(1,(now-bootStartedAt-opening)/dataDuration));
    // Freeze the byte counter when tape blocks pause.
    const marks=[[0,0],[.08,.04],[.22,.24],[.265,.24],
     [.32,.32],[.56,.62],[.615,.62],[.75,.80],[.78,.80],[.92,1],[1,1]];
@@ -2763,7 +2778,7 @@ function begin(initial=false){
    bytes.textContent=String(fakeBytes).padStart(5,"0")+" / 49152";
   },240);
   // Skip appears only after the vintage pilot tone has been heard.
-  stageTimers.push(setTimeout(()=>{if(entering)skip.hidden=false},1600));
+  stageTimers.push(setTimeout(()=>{if(entering)skip.hidden=false},opening+1600));
  }
  bootStartedAt=performance.now();
  shortTimer=setTimeout(finish,currentDuration);
@@ -2774,7 +2789,7 @@ function cancel(){
  touch.hidden=true;
  entering=false;shown=false;dismissed=false;
  overlay.setAttribute("aria-hidden","true");
- overlay.classList.remove("is-active","is-ready");
+ overlay.classList.remove("is-active","is-ready","is-pilot");
  hideWake();
 }
 function switchTheme(enabled){
