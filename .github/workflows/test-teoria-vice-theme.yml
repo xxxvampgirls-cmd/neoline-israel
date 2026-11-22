@@ -14,6 +14,8 @@ on:
       - 'teoria-vice-reference-match.css'
       - 'teoria-vice-final-polish.css'
       - 'teoria-vice-live-reference.css'
+      - 'teoria-slide-frame-air.css'
+      - 'scripts/test_teoria_slide_frame_air.cjs'
       - 'teoria-vice-radar-wasted.css'
       - 'teoria-vice-radar-wasted.js'
       - 'scripts/test_teoria_vice_radar_wasted.cjs'
@@ -49,6 +51,7 @@ jobs:
           node --check teoria-gta6-style.js
           node --check teoria-hero-promo.js
           node scripts/test_teoria_vice_theme.cjs
+          node scripts/test_teoria_slide_frame_air.cjs
           node --check teoria-vice-radar-wasted.js
           node scripts/test_teoria_vice_radar_wasted.cjs
           node --check teoria-vice-cinematic.js
