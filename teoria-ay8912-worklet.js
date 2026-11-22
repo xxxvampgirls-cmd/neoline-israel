@@ -29,7 +29,7 @@ class NeolineAY8912 extends AudioWorkletProcessor{
   this.musicDucking=1; // gradual release avoids pops when short sounds finish
   // Recreated EAR/ULA tape pulses share this worklet, not the AY three voices.
   this.tapeActive=false;this.tapeArmed=false;this.tapeSamples=0;
-  this.tapeDurationSamples=sampleRate*5.6;
+  this.tapeDurationSamples=sampleRate*10.844;
   this.tapePhase=0;this.tapeNoise=0xACE1;this.tapeBit=0;
   this.tapeBitSamples=0;
   this.frameSamples=sampleRate;
@@ -58,7 +58,7 @@ class NeolineAY8912 extends AudioWorkletProcessor{
      this.tapeActive=true;this.tapeSamples=0;this.tapePhase=0;
      this.tapeBitSamples=0;this.tapeBit=0;this.tapeNoise=0xACE1;
      this.tapeDurationSamples=sampleRate*Math.max(.3,
-      Math.min(15,(Number(m.tapeDurationMs)||5600)/1000));
+      Math.min(15,(Number(m.tapeDurationMs)||10844)/1000));
     }else if(!shouldTape){this.tapeActive=false;this.tapeArmed=false;}
     if(!this.effectsEnabled){this.fxFrames=null;this.fxReg=null;}
    }else if(m.type==="fx"){
@@ -125,8 +125,20 @@ class NeolineAY8912 extends AudioWorkletProcessor{
  // Approximation of ZX ROM cassette pilot, sync and data-bit pulses.
  // Authentic in character, but it does not encode a playable TZX tape.
  tapeSample(sr){
-  const q=this.tapeSamples++/this.tapeDurationSamples;
-  if(q>=1){this.tapeActive=false;return 0;}
+  const sample=this.tapeSamples++;
+  if(sample>=this.tapeDurationSamples){this.tapeActive=false;return 0;}
+  // Uncut ZX Spectrum ROM header leader: 8063 pulses, each exactly
+  // 2168 CPU T-states at 3.5 MHz (~4.994 s). No preliminary tone/fade.
+  const pilotSamples=(8063*2168/3500000)*sr;
+  if(sample<pilotSamples){
+   const halfCycle=Math.floor(sample*3500000/(sr*2168));
+   return (halfCycle&1?-.165:.165);
+  }
+  // A brief natural tape-block silence separates the header from data.
+  const gapSamples=sr*.25;
+  if(sample<pilotSamples+gapSamples)return 0;
+  const dataSamples=Math.max(1,this.tapeDurationSamples-pilotSamples-gapSamples);
+  const q=Math.min(1,(sample-pilotSamples-gapSamples)/dataSamples);
   this.tapeBitSamples++;
   if(this.tapeBitSamples>=sr*.0075){
    this.tapeBitSamples=0;
@@ -135,12 +147,12 @@ class NeolineAY8912 extends AudioWorkletProcessor{
    this.tapeNoise=(this.tapeNoise>>1)|(bit<<15);
    this.tapeBit=this.tapeNoise&1;
   }
-  // Pilot / sync / data / silence: compressed ZX tape sequence with
+  // Following data bursts are shortened for game pacing, with
   // genuine gaps between simulated data blocks, not constant buzzing.
   const gaps=[[.22,.265],[.56,.615],[.75,.78],[.96,1]];
   if(gaps.some(([a,b])=>q>=a&&q<b))return 0;
   let hz,amp;
-  if(q<.08){hz=440;amp=.07;}
+  if(q<.08){hz=806;amp=.165;}
   else if(q<.22){hz=806;amp=.165;}
   else if(q<.32){hz=q<.292?1800:2530;amp=.15;}
   else if(q<.56){hz=this.tapeBit?2020:1035;amp=.17;}
