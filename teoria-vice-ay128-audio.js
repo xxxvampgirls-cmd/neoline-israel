@@ -267,7 +267,10 @@
    button.className="vice-ay-button";
    button.dataset.audio=kind;
    const sign=document.createElement("span");
-   sign.className="vice-ay-icon"; sign.textContent=icon;sign.setAttribute("aria-hidden","true");
+   sign.className="vice-ay-icon";sign.setAttribute("aria-hidden","true");
+   sign.innerHTML=kind==="music"
+    ?'<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 17V5l11-2v12"/><circle cx="6.2" cy="18.2" r="3.2"/><circle cx="17.2" cy="16.2" r="3.2"/></svg>'
+    :'<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9h4l5-4v14l-5-4H4z"/><path d="M17 9a4 4 0 0 1 0 6m2.5-9a8 8 0 0 1 0 12"/></svg>';
    const title=document.createElement("span");
    title.className="vice-ay-label";
    button.append(sign,title);
