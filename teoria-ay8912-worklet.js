@@ -29,7 +29,7 @@ class NeolineAY8912 extends AudioWorkletProcessor{
    const m=e.data||{};
    if(m.type==="song"){
     const raw=m.frames instanceof Uint8Array?m.frames:new Uint8Array(m.frames||[]);
-    if(raw.length<14||raw.length%14!==0||raw.length>14*50*240)return;
+    if(raw.length<14||raw.length%14!==0||raw.length>14*50*600)return;
     this.frames=raw;this.framesCount=raw.length/14;this.songIndex=0;
     this.frameSamples=sampleRate;
     this.phase.fill(0);this.noisePhase=0;
