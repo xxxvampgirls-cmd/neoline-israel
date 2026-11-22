@@ -129,8 +129,14 @@ function entrance(){
   document.querySelectorAll(".vice-is-entering").forEach(el=>el.classList.remove("vice-is-entering"));
  },1000);
 }
+function welcome(){
+ // Open the approved duo/XP poster immediately when the neon skin is entered.
+ // The regular five-slide timer continues rotating afterwards.
+ if(dots[2]?.getAttribute("aria-current")!=="true")dots[2]?.click();
+ entrance();
+}
 window.addEventListener("neoline:vice-theme",event=>{
- if(event.detail.enabled)entrance();
+ if(event.detail.enabled)welcome();
 });
-if(document.documentElement.dataset.viceTheme==="on")requestAnimationFrame(entrance);
+if(document.documentElement.dataset.viceTheme==="on")requestAnimationFrame(welcome);
 })();
