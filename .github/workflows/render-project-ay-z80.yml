@@ -28,7 +28,7 @@ jobs:
         with:
           workspaces: scripts/zxay_renderer -> target
       - name: Build Z80 / AY decoder
-        run: cargo build --locked --release --manifest-path scripts/zxay_renderer/Cargo.toml
+        run: cargo build --release --manifest-path scripts/zxay_renderer/Cargo.toml
       - name: Render the 3 remaining Project AY Z80 tracks for our own emulator
         shell: bash
         run: |
