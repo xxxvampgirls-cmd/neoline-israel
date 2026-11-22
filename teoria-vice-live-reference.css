@@ -1,0 +1,121 @@
+/* NEOLINE Israel / approved poster, 22 November 2026
+   User-supplied driving-theory poster, locally optimized as AVIF.
+   Russian neon mode uses the exact visual only for FIRST promo slide.
+   All controls remain real DOM elements, keyboard accessible and clickable.
+   EN/HE/AR and ordinary mode keep live localized text and layered artwork. */
+
+/* Keep the same banner height as the carousel rotates: no jumping frame. */
+@media(max-width:760px){
+ html[data-vice-theme="on"][lang^="ru"] .game-hero.theory-dashboard{
+  grid-template-rows:clamp(114px,30vw,204px) auto!important;
+  row-gap:9px!important;
+ }
+ html[data-vice-theme="on"][lang^="ru"] .game-hero.theory-dashboard .hero-art{
+  min-height:0!important;
+  height:100%!important;
+ }
+}
+
+/* Reference image is deliberately first slide only.
+   Accessible text and interactive buttons are still real website content. */
+html[data-vice-theme="on"][lang^="ru"] .theory-promo-host .vice-cinema-frame--city .vice-cinema-scene{
+ background-image:url("./assets/teoria/vice-hero-reference.avif")!important;
+ background-repeat:no-repeat!important;
+ background-size:100% 100%!important;
+ background-position:center!important;
+ filter:none!important;
+ transform:none!important;
+ animation:none!important;
+}
+html[data-vice-theme="on"][lang^="ru"] .theory-promo-host .vice-cinema-frame--city.is-active .vice-cinema-scene{
+ transform:none!important;
+ animation:none!important;
+}
+html[data-vice-theme="on"][lang^="ru"] .theory-promo-host .vice-cinema-frame--city .vice-cinema-scene::before,
+html[data-vice-theme="on"][lang^="ru"] .theory-promo-host .vice-cinema-frame--city .vice-cinema-scene::after{
+ display:none!important;
+ content:none!important;
+}
+html[data-vice-theme="on"][lang^="ru"] .theory-promo-host .vice-cinema-frame--city .vice-cinema-mask{
+ display:none!important;
+}
+html[data-vice-theme="on"][lang^="ru"] .theory-promo-host .vice-cinema-frame--city .vice-cinema-story{
+ visibility:hidden!important;
+ opacity:0!important;
+ pointer-events:none!important;
+}
+
+/* The Russian banner already contains its own title, promotional label
+   and gift depiction. Keep semantic/live counterparts off the pixels only. */
+html[data-vice-theme="on"][lang^="ru"] .game-hero.theory-dashboard[data-vice-promo-slide="0"] .hero-copy{
+ height:100%!important;
+ min-height:0!important;
+ max-height:100%!important;
+ align-self:stretch!important;
+ box-sizing:border-box!important;
+ padding:0!important;
+ overflow:visible!important;
+ position:relative!important;
+}
+html[data-vice-theme="on"][lang^="ru"] .game-hero.theory-dashboard[data-vice-promo-slide="0"] .game-hero-mini,
+html[data-vice-theme="on"][lang^="ru"] .game-hero.theory-dashboard[data-vice-promo-slide="0"] .eyebrow,
+html[data-vice-theme="on"][lang^="ru"] .game-hero.theory-dashboard[data-vice-promo-slide="0"] #heroTitle,
+html[data-vice-theme="on"][lang^="ru"] .game-hero.theory-dashboard[data-vice-promo-slide="0"] .hero-stroke{
+ opacity:0!important;
+ visibility:hidden!important;
+}
+html[data-vice-theme="on"][lang^="ru"] .game-hero.theory-dashboard[data-vice-promo-slide="0"] .game-gift-trigger{
+ position:absolute!important;
+ left:10px!important;
+ bottom:19%!important;
+ display:block!important;
+ width:clamp(84px,27vw,145px)!important;
+ height:clamp(26px,8vw,38px)!important;
+ min-height:26px!important;
+ opacity:0!important;
+ pointer-events:auto!important;
+ z-index:11!important;
+ margin:0!important;
+ padding:0!important;
+ border-radius:30px!important;
+}
+
+/* Overlay invisible but full-size action targets over the poster's baked
+   arrows and pagination. This avoids double controls while preserving
+   swipe, buttons, click actions and visible artwork. */
+html[data-vice-theme="on"][lang^="ru"] .theory-promo-host[data-vice-active-slide="0"] .vice-cinema-arrow,
+html[data-vice-theme="on"][lang^="ru"] .theory-promo-host[data-vice-active-slide="0"] .theory-promo-dots{
+ opacity:0!important;
+ background:transparent!important;
+ box-shadow:none!important;
+ border-color:transparent!important;
+ pointer-events:auto!important;
+}
+html[data-vice-theme="on"][lang^="ru"] .theory-promo-host .vice-cinema-arrow--prev{
+ left:49%!important;
+}
+html[data-vice-theme="on"][lang^="ru"] .theory-promo-host .vice-cinema-arrow--next{
+ right:4px!important;
+}
+html[data-vice-theme="on"][lang^="ru"] .theory-promo-host .vice-cinema-arrow{
+ top:auto!important;
+ bottom:4px!important;
+ transform:none!important;
+}
+html[data-vice-theme="on"][lang^="ru"] .theory-promo-host .theory-promo-dots{
+ left:70%!important;
+ bottom:3px!important;
+ transform:translateX(-50%)!important;
+}
+
+/* Browsers that cannot decode AVIF should reveal the normal live version. */
+@supports not (background-image:url("data:image/avif;base64,AAAA")){
+ html[data-vice-theme="on"][lang^="ru"] .theory-promo-host .vice-cinema-frame--city .vice-cinema-scene{
+  background-image:url("./assets/teoria/vice-cinematic-backdrop.svg")!important;
+ }
+}
+@media(prefers-reduced-motion:reduce){
+ html[data-vice-theme="on"][lang^="ru"] .theory-promo-host .vice-cinema-frame--city .vice-cinema-scene{
+  transition:none!important;
+ }
+}
