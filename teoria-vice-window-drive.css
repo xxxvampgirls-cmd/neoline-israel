@@ -82,7 +82,6 @@ html[data-vice-theme="on"] .topbar.neoline-site-header .neoline-site-header__inn
 }
 @keyframes viceWindowBirdFlight{
  0%{transform:translate3d(0,0,0)}
- 50%{transform:translate3d(calc(0px - var(--vice-window-tile) / 2),-2px,0)}
  100%{transform:translate3d(calc(0px - var(--vice-window-tile)),0,0)}
 }
 @keyframes viceWindowGlassReflection{
