@@ -1,0 +1,11 @@
+[package]
+name = "neoline-zxay-renderer"
+version = "0.1.0"
+edition = "2021"
+publish = false
+
+# Build-only decoder. Outputs 50 Hz AY register snapshots that are played
+# inside NEOLINE's EXISTING AY-3-8912 AudioWorklet, not an external player.
+[dependencies]
+ym2149-ay-replayer = "=0.9.1"
+ym2149 = "=0.9.1"
