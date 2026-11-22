@@ -36,7 +36,7 @@ def psg_to_ay14(data: bytes) -> bytes:
         if not r13_dirty:row[13]=0xff
         frames.extend(row)
         r13_dirty=False
-    i=16
+    i=17  # 16-byte PSG header + initial 0xfd overwritten by first frame
     ended=False
     while i<len(data):
         code=data[i];i+=1
@@ -44,9 +44,10 @@ def psg_to_ay14(data: bytes) -> bytes:
             frame()
         elif code==0xfe:
             if i>=len(data):raise ValueError("truncated PSG delay")
-            ticks=data[i] or 256;i+=1
-            for _ in range(ticks):frame()
+            groups=data[i] or 256;i+=1
+            for _ in range(groups*4):frame()  # ZXTune stores 4 ticks per 0xfe group
         elif code==0xfd:
+            frame()  # final buffered AY register state
             ended=True;break
         else:
             if i>=len(data):raise ValueError("truncated PSG register")
@@ -54,7 +55,7 @@ def psg_to_ay14(data: bytes) -> bytes:
             if code<=13:
                 registers[code]=value
                 if code==13:r13_dirty=True
-    if not ended:frame()
+    if not ended:raise ValueError("PSG stream missing 0xfd end marker")
     if len(frames)<14*50*3:raise ValueError("PSG shorter than three seconds")
     if not any(frames[i+8] or frames[i+9] or frames[i+10] for i in range(0,len(frames),14)):
         raise ValueError("All volume channels silent")
