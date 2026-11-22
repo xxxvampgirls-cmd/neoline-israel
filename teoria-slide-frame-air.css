@@ -1,0 +1,96 @@
+/* NEOLINE Israel — airier mobile promo carousel, approved 2026-11-22.
+   This is the REAL interactive slide container, not a picture of the page.
+   Applies to all five promo slides in the classic/light design only.
+   Keep GTA/neon mode, game logic, titles, medals and navigation unchanged. */
+@media (max-width:760px) {
+  html:not([data-vice-theme="on"]) .game-hero.theory-dashboard {
+    /* A few pixels from the title become usable room for the large poster.
+       fr tracks (unlike 39% + 61%) properly account for the column gap. */
+    grid-template-columns:minmax(0,39fr) minmax(0,61fr)!important;
+    grid-template-rows:clamp(123px,32.8vw,151px) auto!important;
+    column-gap:clamp(8px,2.25vw,13px)!important;
+    row-gap:9px!important;
+    padding:9px!important;
+    box-sizing:border-box!important;
+  }
+  html:not([data-vice-theme="on"]) .game-hero.theory-dashboard .hero-copy {
+    min-width:0!important;
+    padding:6px 0 5px 7px!important;
+  }
+  html:not([data-vice-theme="on"]) .game-hero.theory-dashboard .hero-art.theory-promo-host {
+    /* The new frame is larger; all artwork is inset to leave an actual
+       clear gutter between neon stroke and image / baked-in lettering. */
+    min-width:0!important;
+    min-height:0!important;
+    height:100%!important;
+    position:relative!important;
+    isolation:isolate!important;
+    overflow:hidden!important;
+    border:1.5px solid #b4daec!important;
+    border-radius:clamp(19px,5.25vw,24px)!important;
+    background:linear-gradient(140deg,#e9faff,#bde9ff)!important;
+    box-shadow:0 0 0 1px #ffffffd1,0 5px 14px #2b86b92b,inset 0 1px #ffffff!important;
+  }
+  html:not([data-vice-theme="on"]) .game-hero.theory-dashboard .hero-art.theory-promo-host::after {
+    display:none!important;
+  }
+  html:not([data-vice-theme="on"]) .theory-promo-host > .hero-studio-svg,
+  html:not([data-vice-theme="on"]) .theory-promo-host > .theory-promo-slide {
+    position:absolute!important;
+    inset:7px!important;
+    width:calc(100% - 14px)!important;
+    height:calc(100% - 14px)!important;
+    box-sizing:border-box!important;
+    overflow:hidden!important;
+    border-radius:clamp(13px,3.8vw,17px)!important;
+  }
+  html:not([data-vice-theme="on"]) .theory-promo-host .theory-promo-caption {
+    top:15px!important;
+    left:16px!important;
+    max-width:calc(100% - 32px)!important;
+  }
+  html:not([data-vice-theme="on"]) .theory-promo-host .theory-promo-dots {
+    bottom:12px!important;
+  }
+  /* Preserve the approved pink sunset when the GTA VI advert is selected.
+     The inner image still covers its frame, with 7px of genuine outer air. */
+  html:not([data-vice-theme="on"])[lang^="ru"] .theory-promo-host:has(> .vice-promo-slide.is-active) {
+    border-color:#ff9cce!important;
+    background:linear-gradient(135deg,#481954,#2b1648 60%,#5a215d)!important;
+    box-shadow:0 0 0 1px #ffc0de9c,0 0 18px #ee6cb888,
+      0 7px 18px #411c5680,inset 0 1px #fff0fa9c!important;
+  }
+  html:not([data-vice-theme="on"])[lang^="ru"] .theory-promo-host .vice-promo-slide {
+    background-position:center!important;
+    border:1px solid #ffabdc70!important;
+    box-shadow:inset 0 0 0 1px #ffffff15!important;
+  }
+  html:not([data-vice-theme="on"])[lang^="ru"] .theory-promo-host:has(> .vice-promo-slide.is-active) .theory-promo-dots {
+    bottom:12px!important;
+  }
+}
+@media(max-width:350px) {
+  html:not([data-vice-theme="on"]) .game-hero.theory-dashboard {
+    grid-template-columns:minmax(0,40fr) minmax(0,60fr)!important;
+    grid-template-rows:123px auto!important;
+    column-gap:7px!important;
+    padding:7px!important;
+  }
+  html:not([data-vice-theme="on"]) .theory-promo-host > .hero-studio-svg,
+  html:not([data-vice-theme="on"]) .theory-promo-host > .theory-promo-slide {
+    inset:6px!important;
+    width:calc(100% - 12px)!important;
+    height:calc(100% - 12px)!important;
+  }
+  html:not([data-vice-theme="on"]) .theory-promo-host .theory-promo-caption {
+    top:12px!important;
+    left:13px!important;
+  }
+}
+@media(prefers-reduced-motion:reduce) {
+  html:not([data-vice-theme="on"]) .theory-promo-host > .hero-studio-svg,
+  html:not([data-vice-theme="on"]) .theory-promo-host > .theory-promo-slide {
+    transition:none!important;
+    will-change:auto!important;
+  }
+}
