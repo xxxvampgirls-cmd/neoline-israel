@@ -234,6 +234,10 @@
    document.getElementById('gameGiftTrigger')?.click();
    return;
   }
+  if(current===0&&document.documentElement.dataset.viceTheme==="on"){
+   document.getElementById('gameGiftTrigger')?.click();
+   return;
+  }
   if(current===0)return jumpTo(document.querySelector('[data-mode="signs"]'));
   if(current===1)return jumpTo(document.querySelector('[data-mode="route"]'));
   if(current===3)return jumpTo(document.querySelector('[data-mode="exam"]'));
