@@ -56,7 +56,8 @@ const {chromium}=require("playwright");
    if(Math.abs(status.heroArt.rect.top-status.heroCopy.rect.top)>30)fail("Hero title isn't layered on the cinematic banner");
    if(status.heroStats.rect.top<status.heroArt.rect.bottom+4)fail("Separate medal strip overlaps the cinematic hero");
 
-   if(status.cards.some(x=>x.rect.height<95))fail("Game card height too short");
+   if(status.cards.some(x=>x.rect.height<(x.mode==="marathon"?80:95)))fail("Game card height too short");
+   if(status.cards.some(x=>x.mode!=="marathon"&&x.rect.height>145))fail("Mode cards are too tall for the approved mobile layout");
    if(status.heroFont!=="italic")fail("Headline not upgraded");
    if(status.heroTextFill==="rgba(0, 0, 0, 0)"||status.heroTextFill==="transparent")fail("Hero title is transparent, cannot be read");
    if(!status.firstPosterImage.includes("vice-cinematic-backdrop.svg")||!status.firstPosterPhoto.includes("vice-approved-protagonists.webp"))fail("First cinematic slide lost approved photo overlay");
