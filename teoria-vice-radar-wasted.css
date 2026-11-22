@@ -1,0 +1,431 @@
+/* NEOLINE Israel — GTA-inspired in-game radar & cinematic failure.
+   Only active when visitor opts into the neon visual theme.
+   Quiz data, answers, timing, XP and reward logic remain authoritative. */
+html[data-vice-theme="on"] body.theory-in-session #gamePlaying{
+ padding-top:58px!important;
+ margin-top:0!important;
+}
+html[data-vice-theme="on"] body.theory-in-session #gamePlaying .quiz-hud{
+ position:fixed!important;
+ z-index:112!important;
+ top:max(6px,env(safe-area-inset-top,0px))!important;
+ left:50%!important;
+ right:auto!important;
+ transform:translateX(-50%)!important;
+ width:min(720px,calc(100vw - 22px))!important;
+ min-height:43px!important;
+ height:43px!important;
+ padding:4px 7px!important;
+ display:flex!important;
+ align-items:center!important;
+ justify-content:space-between!important;
+ gap:9px!important;
+ border:1px solid #dca0c8!important;
+ border-radius:15px!important;
+ background:linear-gradient(105deg,#251433f2,#432047ee 68%,#271a40f0)!important;
+ box-shadow:0 0 0 1px #fc93c344,0 5px 16px #1d092d9e,inset 0 1px #ffe1ef55!important;
+ backdrop-filter:blur(10px)!important;
+ -webkit-backdrop-filter:blur(10px)!important;
+}
+html[data-vice-theme="on"] body.theory-in-session #gamePlaying .quiz-hud .game-quiz-route.road9,
+html[data-vice-theme="on"] body.theory-in-session #gamePlaying .quiz-hud .hud-progress{
+ display:none!important;
+}
+html[data-vice-theme="on"] body.theory-in-session #gamePlaying .hud-back{
+ position:relative!important;
+ flex:none!important;
+ grid-column:auto!important;
+ grid-row:auto!important;
+ width:37px!important;
+ min-width:37px!important;
+ height:35px!important;
+ min-height:35px!important;
+ padding:4px!important;
+ margin:0!important;
+ border-radius:10px!important;
+ border:1px solid #f9a1d2!important;
+ color:#ffddf1!important;
+ background:#432552!important;
+}
+html[data-vice-theme="on"] body.theory-in-session #gamePlaying .hud-info,
+html[data-vice-theme="on"] body.theory-in-session #gamePlaying .hud-info:has(#timerBox[hidden]){
+ display:flex!important;
+ flex:1 1 auto!important;
+ flex-direction:row!important;
+ align-items:center!important;
+ justify-content:space-between!important;
+ grid-column:auto!important;
+ grid-row:auto!important;
+ width:auto!important;
+ max-width:none!important;
+ min-width:0!important;
+ gap:5px!important;
+}
+html[data-vice-theme="on"] body.theory-in-session #gamePlaying .mode-pill{
+ display:block!important;
+ flex:1 1 auto!important;
+ max-width:none!important;
+ min-width:0!important;
+ margin:0!important;
+ padding:6px 8px!important;
+ overflow:hidden!important;
+ text-overflow:ellipsis!important;
+ white-space:nowrap!important;
+ border:0!important;
+ color:#ffe7ee!important;
+ background:transparent!important;
+ font-size:clamp(10px,2.7vw,12px)!important;
+ text-align:start!important;
+}
+html[data-vice-theme="on"] body.theory-in-session #gamePlaying .hud-metrics{display:flex!important;flex:none!important}
+html[data-vice-theme="on"] body.theory-in-session #gamePlaying #timerBox:not([hidden]){
+ margin:0!important;
+ padding:5px 7px!important;
+ background:#54295ff2!important;
+ border:1px solid #e38eb6!important;
+ border-radius:9px!important;
+ font-size:12px!important;
+ color:#fff1f4!important;
+}
+html[data-vice-theme="on"] body.theory-in-session #gamePlaying .question-card{
+ margin-top:5px!important;
+}
+/* Compact floating HUD; the route is now in a real circular mini-GPS. */
+html[data-vice-theme="on"] body.theory-in-session .theory-game-dock{
+ display:grid!important;
+ grid-template-columns:43px minmax(0,1fr) 45px!important;
+ align-items:center!important;
+ justify-items:center!important;
+ gap:3px!important;
+ width:min(570px,calc(100% - 12px))!important;
+ height:80px!important;
+ bottom:max(6px,env(safe-area-inset-bottom,0px))!important;
+ padding:5px 9px!important;
+ border:1.5px solid #ff9dc9!important;
+ border-radius:23px!important;
+ background:linear-gradient(115deg,#251531f4,#432345f5 58%,#1c2544f5)!important;
+ box-shadow:0 0 0 1px #f992bd4d,inset 0 1px #fff0da66,
+            0 0 17px #fd66b26d,0 12px 25px #1405259e!important;
+ color:#ffecf3!important;
+ backdrop-filter:blur(12px) saturate(1.2)!important;
+ -webkit-backdrop-filter:blur(12px) saturate(1.2)!important;
+ isolation:isolate;
+}
+html[data-vice-theme="on"] body.theory-in-session .theory-game-dock::before{
+ border-radius:20px!important;
+ border-color:#ffb4de45!important;
+}
+html[data-vice-theme="on"] body.theory-in-session .theory-game-dock .dock4-center{
+ grid-column:2!important;
+ grid-row:1!important;
+ display:grid!important;
+ grid-template-columns:78px minmax(44px,1fr) minmax(65px,1fr)!important;
+ align-items:center!important;
+ justify-items:center!important;
+ justify-content:center!important;
+ gap:clamp(4px,1.4vw,9px)!important;
+ width:100%!important;
+ min-width:0!important;
+ max-width:370px!important;
+}
+html[data-vice-theme="on"] body.theory-in-session .theory-game-dock .dock4-modes{
+ grid-column:1!important;grid-row:1!important;
+ justify-self:center!important;
+ width:41px!important;min-width:41px!important;
+ min-height:44px!important;
+ height:56px!important;
+ margin:0!important;
+ padding:4px 1px!important;
+ font-size:9px!important;
+ color:#ffdaee!important;
+ gap:2px!important;
+}
+html[data-vice-theme="on"] body.theory-in-session .theory-game-dock .dock4-modes svg{
+ color:#9ff7ff!important;
+ width:24px!important;height:24px!important;
+ filter:drop-shadow(0 0 5px #84ffff78);
+}
+html[data-vice-theme="on"] body.theory-in-session .theory-game-dock .dock4-action{
+ grid-column:3!important;grid-row:1!important;
+ justify-self:center!important;
+ width:43px!important;height:49px!important;min-height:49px!important;
+ margin:0!important;
+ border:1px solid #ffadd3!important;
+ border-radius:15px!important;
+ background:#432851ed!important;
+ box-shadow:inset 0 1px #ffe7f26b,0 0 11px #ff9fd25f!important;
+}
+html[data-vice-theme="on"] body.theory-in-session .theory-game-dock .dock4-action svg{
+ stroke:#97faff!important;
+ width:25px!important;height:25px!important;
+}
+html[data-vice-theme="on"] body.theory-in-session .theory-game-dock .dock4-action:disabled{
+ opacity:.42!important;
+ filter:grayscale(.5)!important;
+}
+html[data-vice-theme="on"] body.theory-in-session .theory-game-dock .dock4-hint-count{
+ background:#ff5fa7!important;
+ border-color:#ffd4e6!important;
+}
+html[data-vice-theme="on"] body.theory-in-session .theory-game-dock .dock4-count{
+ order:unset!important;
+ grid-column:1!important;grid-row:1!important;
+ position:relative!important;
+ width:76px!important;
+ height:76px!important;
+ min-width:76px!important;
+ padding:4px!important;
+ overflow:hidden!important;
+ border:2px solid #ffddaa!important;
+ background:conic-gradient(from -90deg,#62faff 0deg var(--dock-progress),
+  #6d4c83 var(--dock-progress) 360deg)!important;
+ box-shadow:0 0 0 2px #fe77b98c,0 0 18px #71f6ff9c,0 3px 11px #0c0825af!important;
+}
+html[data-vice-theme="on"] body.theory-in-session .theory-game-dock .dock4-count .vice-radar-map{
+ position:absolute;z-index:1;
+ inset:4px!important;
+ width:calc(100% - 8px)!important;
+ height:calc(100% - 8px)!important;
+ border-radius:50%;
+ display:block;
+ overflow:hidden;
+ background:#172d42;
+ pointer-events:none;
+}
+html[data-vice-theme="on"] body.theory-in-session .theory-game-dock .dock4-count strong{
+ position:absolute!important;z-index:2!important;
+ top:auto!important;bottom:3px!important;
+ left:50%!important;transform:translateX(-50%)!important;
+ width:auto!important;height:auto!important;
+ min-width:39px!important;
+ padding:2px 4px!important;
+ display:block!important;
+ border:1px solid #a8fafa66!important;
+ border-radius:7px!important;
+ color:#f8f8fa!important;
+ background:#192438dd!important;
+ text-align:center!important;
+ font:900 10px/1.15 Manrope,Arial,sans-serif!important;
+ letter-spacing:-.03em!important;
+ box-shadow:0 0 5px #0b132d88!important;
+}
+html[data-vice-theme="on"] body.theory-in-session .theory-game-dock .dock4-xp{
+ grid-column:2!important;grid-row:1!important;
+ order:unset!important;
+ display:flex!important;
+ flex-direction:column!important;
+ justify-content:center!important;
+ align-items:center!important;
+ gap:1px!important;
+ width:100%!important;
+ min-width:0!important;
+ background:none!important;
+ border:0!important;
+}
+html[data-vice-theme="on"] body.theory-in-session .theory-game-dock .dock4-xp>span{
+ font-size:20px!important;
+ line-height:1.1!important;
+ color:#ffd46d!important;
+ filter:drop-shadow(0 0 5px #ffa762b8)!important;
+}
+html[data-vice-theme="on"] body.theory-in-session .theory-game-dock .dock4-xp strong{
+ color:#fff4df!important;
+ font-size:clamp(9px,2.45vw,12px)!important;
+ font-weight:900!important;
+ letter-spacing:-.03em!important;
+}
+html[data-vice-theme="on"] body.theory-in-session .theory-game-dock .dock4-hearts{
+ grid-column:3!important;grid-row:1!important;
+ order:unset!important;
+ width:100%!important;
+ min-width:0!important;
+ font-size:clamp(17px,4.7vw,24px)!important;
+ line-height:1!important;
+ letter-spacing:-2px!important;
+ color:#ff638e!important;
+ text-shadow:0 2px 0 #8a183d,0 0 9px #ff5f9bb0!important;
+}
+html[data-vice-theme="on"] body.theory-in-session .theory-game-dock .dock4-hearts[data-exam="true"]{
+ font-size:19px!important;color:#d5f8ff!important;
+}
+html[data-vice-theme="on"] body.theory-in-session .theory-game-dock .dock4-hearts[data-unlimited="true"]{
+ color:#88ffe9!important;font-size:27px!important;
+}
+html[data-vice-theme="on"] body.theory-in-session{padding-bottom:calc(98px + env(safe-area-inset-bottom))!important}
+/* Modal 3-life failure: cinematic blurred world + dark red announcement. */
+html[data-vice-theme="on"] body.game-over-open #gameOver.gameover-overlay{
+ z-index:210!important;
+ padding:12px!important;
+ background:rgba(9,4,15,.1)!important;
+}
+html[data-vice-theme="on"] body.game-over-open #gameOver .gameover-backdrop{
+ background:linear-gradient(180deg,#0a0a14b6,#310c1abb 43%,#080810dc)!important;
+ backdrop-filter:blur(17px) grayscale(.78) saturate(.72)!important;
+ -webkit-backdrop-filter:blur(17px) grayscale(.78) saturate(.72)!important;
+}
+html[data-vice-theme="on"] body.game-over-open #gameOver .gameover-card{
+ width:min(760px,100%)!important;
+ max-height:calc(100dvh - 24px)!important;
+ border:0!important;
+ border-radius:10px!important;
+ background:transparent!important;
+ color:#fff4f3!important;
+ padding:18px 9px 22px!important;
+ box-shadow:none!important;
+ overflow:hidden!important;
+ animation:viceWastedAppear .5s ease-out both!important;
+}
+html[data-vice-theme="on"] body.game-over-open #gameOver .gameover-card::before,
+html[data-vice-theme="on"] body.game-over-open #gameOver .gameover-card::after,
+html[data-vice-theme="on"] body.game-over-open #gameOver .gameover-corner{
+ display:none!important;
+ content:none!important;
+}
+html[data-vice-theme="on"] body.game-over-open #gameOver .gameover-hearts{
+ margin:8px 0 18px!important;
+ color:#d44a60!important;
+ filter:drop-shadow(0 3px 9px #b6183d7a)!important;
+ gap:11px!important;
+}
+html[data-vice-theme="on"] body.game-over-open #gameOver .gameover-hearts svg{
+ width:clamp(27px,7vw,41px)!important;
+ height:clamp(27px,7vw,41px)!important;
+ animation:none!important;
+ opacity:.82!important;
+}
+html[data-vice-theme="on"] body.game-over-open #gameOver .gameover-title{
+ display:block!important;
+ width:100%!important;
+ max-width:100%!important;
+ overflow:visible!important;
+ margin:0 auto 13px!important;
+ padding:clamp(13px,3vh,20px) 0!important;
+ color:#f4e8e8!important;
+ background:linear-gradient(90deg,#12080c17,#7c101dbd 30%,#a8202bc4 50%,#7c101dbd 70%,#12080c17)!important;
+ border-top:1px solid #f56f7448!important;
+ border-bottom:1px solid #f56f7448!important;
+ box-shadow:0 0 37px #7c0b1a49,inset 0 0 24px #a6152141!important;
+ font:1000 clamp(39px,11vw,84px)/1 Manrope,Arial,sans-serif!important;
+ letter-spacing:-.07em!important;
+ text-shadow:0 2px 0 #370910,0 0 17px #ff536dba,0 5px 21px #0e0714!important;
+ white-space:nowrap!important;
+ animation:viceWastedBar .52s cubic-bezier(.15,.76,.33,1) both!important;
+}
+html[data-vice-theme="on"] body.game-over-open #gameOver .gameover-message{
+ color:#ffe2e5!important;
+ font-size:clamp(14px,3.9vw,18px)!important;
+ font-weight:800!important;
+ line-height:1.45!important;
+ margin:2px auto 8px!important;
+ text-shadow:0 3px 10px #080713!important;
+}
+html[data-vice-theme="on"] body.game-over-open #gameOver .gameover-score{
+ color:#ffe4b3!important;
+ background:#341624b8!important;
+ border:1px solid #aa5363!important;
+ border-radius:999px!important;
+ padding:8px 15px!important;
+ margin:10px auto 19px!important;
+ font-size:13px!important;
+ box-shadow:0 0 12px #8e172352!important;
+}
+html[data-vice-theme="on"] body.game-over-open #gameOver .gameover-promo{
+ display:none!important;
+}
+html[data-vice-theme="on"] body.game-over-open #gameOver .gameover-actions{
+ display:grid!important;
+ grid-template-columns:repeat(2,minmax(0,1fr))!important;
+ gap:9px!important;
+ width:min(510px,100%)!important;
+}
+html[data-vice-theme="on"] body.game-over-open #gameOver .gameover-retry,
+html[data-vice-theme="on"] body.game-over-open #gameOver .gameover-modes{
+ min-height:50px!important;
+ padding:10px 9px!important;
+ border-radius:13px!important;
+ font-size:clamp(12px,3.7vw,16px)!important;
+ line-height:1.15!important;
+}
+html[data-vice-theme="on"] body.game-over-open #gameOver .gameover-retry{
+ border:1px solid #ffb7bd!important;
+ color:#fff7f7!important;
+ background:linear-gradient(110deg,#b31e40,#ea4c5d)!important;
+ box-shadow:0 0 17px #cd204c8f,inset 0 1px #ffc5c87a!important;
+}
+html[data-vice-theme="on"] body.game-over-open #gameOver .gameover-modes{
+ border:1px solid #d2b0bf!important;
+ color:#fff2ec!important;
+ background:#3b2636ee!important;
+ box-shadow:0 0 11px #7d2d4e79!important;
+}
+html[data-vice-theme="on"] body.game-over-open #gameOver .gameover-close{
+ top:2px!important;right:6px!important;
+ width:36px!important;height:36px!important;min-width:36px!important;
+ border:1px solid #dca5a9!important;
+ background:#2b142bcf!important;color:#fff0f1!important;
+ box-shadow:0 0 8px #c74a6875!important;
+}
+@keyframes viceWastedAppear{
+ from{opacity:0;transform:scale(1.02);filter:blur(7px)}
+ to{opacity:1;transform:scale(1);filter:blur(0)}
+}
+@keyframes viceWastedBar{
+ 0%{opacity:0;transform:scaleX(1.09);filter:blur(10px)}
+ 56%{opacity:1;transform:scaleX(1.015);filter:blur(1px)}
+ 100%{opacity:1;transform:scaleX(1);filter:blur(0)}
+}
+@media(max-width:390px){
+ html[data-vice-theme="on"] body.theory-in-session .theory-game-dock{
+  grid-template-columns:38px minmax(0,1fr) 41px!important;
+  height:72px!important;
+  padding:4px 5px!important;
+  gap:2px!important;
+ }
+ html[data-vice-theme="on"] body.theory-in-session .theory-game-dock .dock4-center{
+  grid-template-columns:67px minmax(40px,1fr) minmax(57px,1fr)!important;
+  gap:4px!important;
+ }
+ html[data-vice-theme="on"] body.theory-in-session .theory-game-dock .dock4-count{
+  width:65px!important;height:65px!important;min-width:65px!important;padding:3px!important;
+ }
+ html[data-vice-theme="on"] body.theory-in-session .theory-game-dock .dock4-count .vice-radar-map{
+  inset:3px!important;width:calc(100% - 6px)!important;height:calc(100% - 6px)!important;
+ }
+ html[data-vice-theme="on"] body.theory-in-session .theory-game-dock .dock4-modes{
+  width:36px!important;min-width:36px!important;font-size:8px!important;
+ }
+ html[data-vice-theme="on"] body.theory-in-session .theory-game-dock .dock4-action{
+  width:40px!important;height:47px!important;min-height:47px!important;
+ }
+ html[data-vice-theme="on"] body.theory-in-session{padding-bottom:calc(88px + env(safe-area-inset-bottom))!important}
+}
+@media(max-width:350px){
+ html[data-vice-theme="on"] body.theory-in-session .theory-game-dock .dock4-center{
+  grid-template-columns:61px minmax(34px,1fr) minmax(50px,1fr)!important;
+  gap:3px!important;
+ }
+ html[data-vice-theme="on"] body.theory-in-session .theory-game-dock .dock4-count{
+  width:60px!important;height:60px!important;min-width:60px!important;
+ }
+ html[data-vice-theme="on"] body.theory-in-session .theory-game-dock .dock4-hearts{
+  font-size:17px!important;
+ }
+ html[data-vice-theme="on"] body.game-over-open #gameOver .gameover-title{
+  font-size:clamp(37px,10.4vw,43px)!important;
+ }
+}
+@media(max-height:600px){
+ html[data-vice-theme="on"] body.game-over-open #gameOver .gameover-hearts{margin:1px 0 5px!important}
+ html[data-vice-theme="on"] body.game-over-open #gameOver .gameover-title{padding:10px 0!important;margin-bottom:6px!important}
+ html[data-vice-theme="on"] body.game-over-open #gameOver .gameover-score{margin:6px auto 10px!important}
+ html[data-vice-theme="on"] body.game-over-open #gameOver .gameover-card{padding:6px!important}
+ html[data-vice-theme="on"] body.game-over-open #gameOver .gameover-retry,
+ html[data-vice-theme="on"] body.game-over-open #gameOver .gameover-modes{min-height:44px!important}
+}
+@media(prefers-reduced-motion:reduce){
+ html[data-vice-theme="on"] body.game-over-open #gameOver .gameover-card,
+ html[data-vice-theme="on"] body.game-over-open #gameOver .gameover-title{
+  animation:none!important;
+  filter:none!important;
+ }
+}
