@@ -56,8 +56,8 @@ const {chromium}=require("playwright");
    if(Math.abs(status.navHeight-62)>2)fail("Approved 62px navigation changed");
    if(status.cards.length!==5)fail("Not five real game modes");
    if(!status.cardRefReady||status.cards.some(x=>!x.background.includes("vice-reference-card-sprite.avif")))fail("Approved photographic game cards did not load");
-   if(status.imageLinks.length!==5||status.imageLinks.some(x=>!x.includes("vice-card-")&&!x.includes("vice-approved-protagonists")&&!x.includes("vice-cinematic-duo")&&!x.includes("vice-cinematic-backdrop")&&!x.includes("vice-hero-reference")&&!x.includes("vice-hd-")&&!x.includes("vice-sunset-boulevard.svg")))fail("Missing cinematic carousel artwork");
-   if(!status.imageLinks[1]?.includes("vice-sunset-boulevard.svg"))
+   if(status.imageLinks.length!==5||status.imageLinks.some(x=>!x.includes("vice-card-")&&!x.includes("vice-approved-protagonists")&&!x.includes("vice-cinematic-duo")&&!x.includes("vice-cinematic-backdrop")&&!x.includes("vice-hero-reference")&&!x.includes("vice-hd-")&&!x.includes("vice-sunset-boulevard-photo.svg")))fail("Missing cinematic carousel artwork");
+   if(!status.imageLinks[1]?.includes("vice-sunset-boulevard-photo.svg"))
     fail("Second neon slide still shows old giant route instead of the redesigned boulevard");
    if(![...status.imageLinks].every(Boolean))fail("At least one promotional slide has no artwork");
    if(status.promoStage.display==="none"||status.promoStage.rect.height<110)fail("Cinema stage hidden");
@@ -86,7 +86,7 @@ const {chromium}=require("playwright");
    if(status.activeFrame!=="0")fail("The neon experience must open on the spectacular first scene");
    const artFiles=[
     "vice-card-city.svg","vice-card-signs.svg","vice-card-exam.svg",
-    "vice-card-mistakes.svg","vice-card-marathon.svg","vice-cinematic-duo.svg","vice-cinematic-backdrop.svg","vice-hero-highlights.svg","vice-hd-city.svg","vice-hd-signs.svg","vice-hd-exam.svg","vice-hd-mistakes.svg","vice-hd-marathon.svg","vice-sunset-boulevard.svg"
+    "vice-card-mistakes.svg","vice-card-marathon.svg","vice-cinematic-duo.svg","vice-cinematic-backdrop.svg","vice-hero-highlights.svg","vice-hd-city.svg","vice-hd-signs.svg","vice-hd-exam.svg","vice-hd-mistakes.svg","vice-hd-marathon.svg","vice-sunset-boulevard-photo.svg"
    ];
    const cardsReference=await page.request.get("http://127.0.0.1:8765/assets/teoria/vice-reference-card-sprite.avif");
    if(!cardsReference.ok()||(await cardsReference.body()).length<5000)fail("Approved interactive card image sheet missing");
@@ -100,6 +100,7 @@ const {chromium}=require("playwright");
     const content=await response.text();
     if(!content.startsWith("<svg")||!content.endsWith("</svg>"))fail("Malformed SVG "+asset);
     if(asset.startsWith("vice-hd-")&&!content.includes("data:image/webp;base64,"))fail("HD composite lacks its local photo: "+asset);
+    if(asset==="vice-sunset-boulevard-photo.svg"&&!content.includes("data:image/webp;base64,"))fail("Premium slide missing embedded photographic scene");
    }
    // The screenshot-faithful gift glyph still has an actual transparent
    // button over its exact position: it must work without force-clicks.
