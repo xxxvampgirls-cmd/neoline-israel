@@ -38,7 +38,7 @@ const {chromium}=require("playwright");
    if(!state.title?.includes(state.current)||state.level!=="normal")throw Error("Timer must report real remaining seconds "+width+" "+JSON.stringify(state));
    // Timer already runs in the game engine; watch its authoritative 1-second tick.
    const before=state.current;
-   await page.waitForFunction(before=>document.getElementById("timer").textContent.trim()!==before,{timeout:2300},before);
+   await page.waitForFunction(before=>document.getElementById("timer").textContent.trim()!==before,before,{timeout:2300});
    await page.waitForFunction(()=>document.querySelector(".vice-quiz-timer")?.textContent.includes(document.getElementById("timer").textContent.trim()),{timeout:1500});
    // Exercise warning levels using DOM display text only, NOT engine deadlines.
    await page.evaluate(()=>{document.getElementById("timer").textContent="04:59"});
