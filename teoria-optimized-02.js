@@ -2403,19 +2403,21 @@ function translate(){
  const t=translations(),x=extraLabels();
  if(drawerTitle)drawerTitle.textContent=x.drawer;
  if(drawerSubtitle)drawerSubtitle.textContent=x.subtitle;
- if(drawerStat)drawerStat.textContent=x.count.replace("{a}",api.tracks.length).replace("{b}",pendingSongs.length);
+ if(drawerStat)drawerStat.textContent=x.count.replace("{a}",api.tracks.filter(t=>t.kind!=="original").length).replace("{b}",pendingSongs.length);
  playableHeader.textContent=x.ready+" · "+api.tracks.length;
  pendingHeader.textContent=x.waiting+" · "+pendingSongs.length;
  for(const {button,kind,track} of pendingButtons){
   const native=!!api.originalReady?.(track.file);
-  const label=native?(doc.lang==="ru"?"В ИГРЕ · ▶":"PLAY IN GAME ▶"):x.state;
+  const label=native?(doc.lang==="ru"?"ИГРАЕТ В НАШЕМ AY · ▶":"PLAY HERE · AY ▶"):x.state;
   kind.textContent=track.format+" · "+label;
+  const item=button.closest?.(".vice-soundtrack__item");
+  item?.classList.toggle("vice-soundtrack__item--pending",!native);
   button.setAttribute("aria-label",track.name+" — "+track.format+" — "+label);
   button.title=track.file+" · "+label;
  }
  eyebrow.textContent=t.eyebrow;
  title.textContent=t.title;
- count.textContent=x.count.replace("{a}",api.tracks.length).replace("{b}",pendingSongs.length);
+ count.textContent=x.count.replace("{a}",api.tracks.filter(t=>t.kind!=="original").length).replace("{b}",pendingSongs.length);
  nowLabel.textContent=t.now;
  btnList.textContent=t.list;
  foot.textContent=x.foot;
