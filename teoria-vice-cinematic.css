@@ -1,0 +1,641 @@
+/* NEOLINE · VICE SUNSET — cinematic recreation of the approved mockup.
+   Only active when user chooses the GTA VI-inspired visual skin.  No changes
+   to official Israeli exam logic, questions, answers, rewards or blue mode. */
+html[data-vice-theme="on"]{
+ --vice-outer:#1f1230;--vice-border:#ff79bf;--vice-hot:#ff6ab7;
+ --vice-orange:#ffb084;--vice-cool:#7ef5fa;--vice-copy:#fff2ec;
+}
+html[data-vice-theme="on"] body{
+ background:
+  radial-gradient(ellipse 100% 23% at 50% 9%,#b9498d68,transparent 95%),
+  linear-gradient(180deg,#251536 0%,#421e55 27%,#2c173d 68%,#1b1530 100%)!important;
+ color:#fff1e8!important;
+}
+html[data-vice-theme="on"] .topbar.neoline-site-header{
+ background-image:
+  linear-gradient(90deg,#ffedf1ec 0%,#ffe2eedd 45%,#f7d0f1bf 100%),
+  url("./assets/teoria/vice-card-city.svg")!important;
+ background-repeat:no-repeat!important;
+ background-size:cover!important;
+ background-position:center 32%!important;
+ border-bottom:2px solid #a94b9c!important;
+ box-shadow:0 4px 19px #380c4d70!important;
+}
+html[data-vice-theme="on"] .topbar.neoline-site-header .neoline-site-header__inner{
+ position:relative;z-index:1;
+}
+html[data-vice-theme="on"] .neoline-site-header__flags{
+ background:#fff8f7e3!important;
+ box-shadow:0 0 0 1px #f1b3cf70,0 3px 16px #641c6f28!important;
+}
+html[data-vice-theme="on"] .neoline-site-header__flag[aria-pressed="true"],
+html[data-vice-theme="on"] .neoline-site-header__flag.active{
+ border-color:#ed69ba!important;box-shadow:0 0 0 2px #f877bdcc!important;
+}
+html[data-vice-theme="on"] main.shell{
+ padding-top:8px!important;max-width:1060px!important;
+}
+html[data-vice-theme="on"] .game-hero.theory-dashboard{
+ display:grid!important;
+ grid-template-columns:minmax(0,.86fr) minmax(0,1.42fr)!important;
+ grid-template-rows:minmax(170px,auto) auto!important;
+ gap:9px 9px!important;align-items:stretch!important;
+ margin:8px 0 13px!important;padding:11px 11px 12px!important;
+ border:1.5px solid #fd91ca!important;border-radius:25px!important;
+ background:
+  linear-gradient(95deg,#281b49eb 0%,#33204fa1 35%,#5c2a6085 69%,#5f255ab5 100%),
+  url("./assets/teoria/vice-cinematic-duo.svg") center 47%/cover no-repeat!important;
+ box-shadow:0 0 0 1px #ff91c85c,inset 0 1px #ffdbed64,
+ 0 13px 28px #09031791,0 0 25px #e657aa2d!important;
+ isolation:isolate!important;
+ position:relative!important;overflow:hidden!important;
+}
+html[data-vice-theme="on"] .game-hero.theory-dashboard::before{
+ content:""!important;display:block!important;
+ position:absolute!important;inset:0!important;
+ width:100%!important;height:100%!important;
+ border:0!important;border-radius:inherit!important;
+ background:linear-gradient(90deg,#1d173f9b 0%,#2d1b4c2e 53%,#f75b962b 100%)!important;
+ clip-path:none!important;transform:none!important;z-index:0!important;
+ pointer-events:none!important;
+}
+html[data-vice-theme="on"] .game-hero.theory-dashboard::after{display:none!important}
+html[data-vice-theme="on"] .game-hero.theory-dashboard .hero-copy{
+ grid-column:1!important;grid-row:1!important;position:relative!important;z-index:3!important;
+ display:flex!important;flex-direction:column!important;align-items:flex-start!important;
+ justify-content:flex-start!important;min-width:0!important;
+ padding:6px 2px 5px 4px!important;overflow:visible!important;
+}
+html[data-vice-theme="on"] .game-hero.theory-dashboard #gameHeroMini,
+html[data-vice-theme="on"] .game-hero.theory-dashboard .game-hero-mini{
+ color:#ffe5cd!important;text-shadow:0 1px 7px #24091d!important;
+ font-size:clamp(8px,1.2vw,11px)!important;font-weight:850!important;
+ white-space:normal!important;
+}
+html[data-vice-theme="on"] .game-hero.theory-dashboard .hero-copy .eyebrow{
+ display:none!important;
+}
+html[data-vice-theme="on"] .game-hero.theory-dashboard #heroTitle{
+ display:block!important;position:relative!important;margin:9px 0 8px!important;
+ background:linear-gradient(170deg,#fef9f5 5%,#d6faff 44%,#69dbff 100%)!important;
+ color:transparent!important;-webkit-text-fill-color:transparent!important;
+ -webkit-background-clip:text!important;background-clip:text!important;
+ font-style:italic!important;font-weight:1000!important;
+ letter-spacing:-.055em!important;line-height:1.01!important;
+ font-size:clamp(25px,4.05vw,48px)!important;
+ filter:drop-shadow(0 3px 0 #422861) drop-shadow(0 3px 8px #ff5aa2a0);
+ max-width:100%!important;overflow-wrap:normal!important;
+}
+html[data-vice-theme="on"] .game-hero.theory-dashboard .hero-stroke{
+ display:block!important;flex:none!important;
+ margin:0 0 11px!important;width:85px!important;height:3px!important;border-radius:99px;
+ background:linear-gradient(90deg,#f65ab2,#ffbad9,transparent)!important;
+ box-shadow:0 0 9px #ff69ae!important;transform:rotate(-3deg);
+}
+html[data-vice-theme="on"] .game-hero.theory-dashboard .game-gift-trigger{
+ display:inline-flex!important;max-width:100%!important;
+ min-height:33px!important;padding:5px 10px!important;
+ border-radius:999px!important;
+ border:1px solid #ffc59b!important;
+ color:#fff8e3!important;
+ background:linear-gradient(125deg,#762e6d,#42244d)!important;
+ box-shadow:0 0 0 1px #f89db287,inset 0 1px #ffd2ce3b,0 0 17px #f45d8f8f!important;
+}
+html[data-vice-theme="on"] .game-hero.theory-dashboard .game-gift-trigger svg{
+ stroke:#ffd77e!important;
+}
+html[data-vice-theme="on"] .game-hero.theory-dashboard .hero-art{
+ grid-column:2!important;grid-row:1!important;position:relative!important;z-index:2!important;
+ min-width:0!important;height:auto!important;min-height:170px!important;
+ border:1.5px solid #ff8bc5!important;
+ border-radius:19px!important;overflow:hidden!important;
+ background:linear-gradient(135deg,#361d57,#d25995)!important;
+ box-shadow:0 0 0 1px #ffbed66b,0 0 14px #ff61c1ad,inset 0 0 14px #f78ec547!important;
+ isolation:isolate!important;
+}
+html[data-vice-theme="on"] .theory-promo-host > :is(svg.hero-studio-svg,.theory-promo-slide){
+ opacity:0!important;pointer-events:none!important;
+}
+html[data-vice-theme="on"] .theory-promo-caption{display:none!important}
+/* Dedicated scenic carousel slides follow the existing 5-item slider. */
+.vice-cinema-stage{display:none;position:absolute;inset:0;z-index:3;pointer-events:none;overflow:hidden;border-radius:inherit}
+.vice-cinema-frame{position:absolute;inset:0;overflow:hidden;opacity:0;visibility:hidden;
+ transform:translate3d(18%,0,0) scale(.98);will-change:transform,opacity;
+ transition:opacity .52s ease,transform .7s cubic-bezier(.17,.69,.22,1),visibility .52s;}
+.vice-cinema-frame.is-active{opacity:1;visibility:visible;transform:translateZ(0) scale(1)}
+.vice-cinema-scene{position:absolute;inset:0;
+ background-repeat:no-repeat;background-size:cover;background-position:center center;
+ transform:scale(1.04);transition:transform 7.3s ease-out;will-change:transform}
+.vice-cinema-frame.is-active .vice-cinema-scene{transform:scale(1.15) translate3d(-1%,0,0)}
+.vice-cinema-mask{position:absolute;inset:0;background:
+ linear-gradient(90deg,#2a164582 0%,transparent 42%),
+ linear-gradient(180deg,transparent 0%,#150d3190 100%);}
+.vice-cinema-story{position:absolute;left:10px;right:10px;bottom:21px;display:flex;flex-direction:column;
+ align-items:flex-start;gap:2px;text-align:start;max-width:92%;z-index:2;
+ color:#fff4e8;text-shadow:0 2px 7px #130320b5;direction:auto}
+.vice-cinema-tag{display:inline-block;max-width:100%;font:900 clamp(7px,1vw,11px)/1.2 Manrope,Arial,sans-serif;
+ letter-spacing:.065em;background:linear-gradient(105deg,#ffdfa8,#ffac93);
+ color:#4f1f4b;padding:4px 7px;border-radius:7px;text-shadow:none;}
+.vice-cinema-headline{display:block;font:italic 950 clamp(12px,1.8vw,25px)/1.04 Manrope,Arial,sans-serif;
+ max-width:100%;color:#fff3da;letter-spacing:-.035em;
+ text-shadow:0 2px #4c244d,0 4px 12px #170525;}
+.vice-cinema-sub{font:650 clamp(7px,1.08vw,11px)/1.35 Manrope,Arial,sans-serif;
+ color:#fff0ef;max-width:96%;}
+.vice-cinema-frame--rewards .vice-cinema-story,
+.vice-cinema-frame--duo .vice-cinema-story{left:auto;right:8px;bottom:25px;width:56%;}
+.vice-cinema-frame--rewards .vice-cinema-scene{background-position:46% 49%}
+.vice-cinema-frame--duo .vice-cinema-scene{background-position:57% 48%}
+.vice-cinema-frame--signs .vice-cinema-scene{background-position:52% 50%}
+.vice-cinema-frame--exam .vice-cinema-scene{background-position:40% 58%}
+.vice-cinema-arrow{display:none;position:absolute;z-index:8;top:50%;width:27px;height:27px;
+ padding:4px;border:1px solid #ffd5e4;border-radius:50%;
+ background:#2f1a4dbd;color:#fff;cursor:pointer;pointer-events:auto;
+ box-shadow:0 0 12px #f45aacbb;transform:translateY(-50%);
+ place-items:center;-webkit-tap-highlight-color:transparent;}
+.vice-cinema-arrow svg{display:block;width:17px;height:17px;fill:none;stroke:currentColor;stroke-width:3;
+ stroke-linecap:round;stroke-linejoin:round;}
+.vice-cinema-arrow--prev{left:4px}
+.vice-cinema-arrow--prev svg{transform:rotate(180deg)}
+.vice-cinema-arrow--next{right:4px}
+html[data-vice-theme="on"] .vice-cinema-stage{display:block}
+html[data-vice-theme="on"] .vice-cinema-arrow{display:grid}
+html[data-vice-theme="on"] .theory-promo-host .theory-promo-dots{
+ z-index:9!important;bottom:4px!important;
+ background:#30183fd4!important;border:1px solid #ef9bd2a6!important;
+ box-shadow:0 1px 9px #1d093591!important;
+}
+html[data-vice-theme="on"] .theory-promo-host .theory-promo-dot::before{
+ background:#f08bc9!important;
+}
+html[data-vice-theme="on"] .theory-promo-host .theory-promo-dot[aria-current="true"]::before{
+ background:#ffd18c!important;box-shadow:0 0 0 2px #fff0c8!important;
+}
+html[data-vice-theme="on"] .theory-promo-host .theory-promo-click{
+ z-index:6!important;
+}
+html[data-vice-theme="on"] .theory-promo-host:focus-within{
+ outline:2px solid #ffd4cf;outline-offset:2px;
+}
+/* Glass neon medal/stat strip like the approved mockup. */
+html[data-vice-theme="on"] .theory-dashboard .hero-orbs{
+ grid-column:1/-1!important;grid-row:2!important;
+ position:relative!important;z-index:4!important;
+ margin:0!important;padding:8px 8px 7px!important;min-height:105px!important;
+ display:grid!important;grid-template-columns:repeat(4,minmax(0,1fr))!important;gap:2px 5px!important;
+ border:1px solid #fca2d8!important;border-radius:18px!important;
+ background:linear-gradient(115deg,#2d194bd6,#512b5cca 55%,#261a4ce5)!important;
+ box-shadow:0 0 0 1px #f85da869,inset 0 1px #ffd1e768,0 0 18px #fd67b136!important;
+}
+html[data-vice-theme="on"] .theory-dashboard .hero-signal{opacity:.08!important}
+html[data-vice-theme="on"] .theory-dashboard .hero-orb,
+html[data-vice-theme="on"] .theory-dashboard .hero-progress-cell{
+ display:flex!important;flex-direction:column!important;align-items:center!important;justify-content:center!important;
+ min-width:0!important;gap:2px!important;
+}
+html[data-vice-theme="on"] .theory-dashboard .hero-orb-ring{
+ width:clamp(57px,8vw,94px)!important;height:clamp(57px,8vw,94px)!important;
+ max-width:94px!important;min-height:0!important;padding:3px!important;flex:none!important;
+ border-radius:50%!important;
+ border:1px solid #ffd0d6!important;
+ background:conic-gradient(from 45deg,#ffb78d,#ff6bb1,#8d89fb,#78faff,#ffb78d)!important;
+ box-shadow:0 0 13px #ff7bad95!important;
+}
+html[data-vice-theme="on"] .theory-dashboard .hero-orb-core{
+ width:100%!important;height:100%!important;border:1px solid #d07aaa!important;
+ border-radius:50%!important;background:radial-gradient(circle at 35% 25%,#4b3266,#1c1537 85%)!important;
+ box-shadow:inset 0 0 8px #0005!important;
+}
+html[data-vice-theme="on"] .theory-dashboard .hero-orb-icon{
+ color:#ffdfaa!important;stroke:#f7d0ce!important;
+ width:17px!important;height:17px!important;
+}
+html[data-vice-theme="on"] .theory-dashboard .hero-orb-number{
+ color:#fff8f4!important;font-size:clamp(16px,2.6vw,29px)!important;line-height:1!important;
+ text-shadow:0 2px 6px #ef74b65e!important;
+}
+html[data-vice-theme="on"] .theory-dashboard .hero-orb-denominator{
+ color:#f4dae5!important;font-size:clamp(7px,.95vw,10px)!important;line-height:1.2!important;
+}
+html[data-vice-theme="on"] .theory-dashboard .hero-orb-caption,
+html[data-vice-theme="on"] .theory-dashboard .hero-progress-caption{
+ display:block!important;max-width:100%!important;
+ padding:2px 4px!important;margin:0!important;
+ font-size:clamp(8px,1.13vw,11px)!important;line-height:1.15!important;
+ color:#fff1e8!important;white-space:normal!important;text-align:center!important;
+ background:#592b62ac!important;border:1px solid #b662a45a!important;
+ border-radius:7px!important;text-shadow:0 1px 3px #1c0b2b;
+}
+html[data-vice-theme="on"] .theory-dashboard .hero-progress-open{
+ width:clamp(59px,8vw,94px)!important;height:clamp(59px,8vw,94px)!important;
+ min-width:0!important;min-height:0!important;margin:0!important;
+ border-radius:50%!important;
+ border:2px solid #ffd590!important;
+ background:radial-gradient(circle at 34% 22%,#ffb987,#bd6ca8 60%,#39214f)!important;
+ box-shadow:0 0 0 3px #f7cf8965,0 0 16px #ffc47d97!important;
+}
+html[data-vice-theme="on"] .theory-dashboard .hero-progress-icon{
+ font-size:clamp(27px,4.6vw,47px)!important;filter:drop-shadow(0 2px 6px #3316387f);
+}
+html[data-vice-theme="on"] .theory-dashboard .hero-progress-cell{
+ grid-column:4!important;grid-row:1!important;
+}
+html[data-vice-theme="on"] .theory-dashboard .hero-orb--seen{grid-column:1!important}
+html[data-vice-theme="on"] .theory-dashboard .hero-orb--accuracy{grid-column:2!important}
+html[data-vice-theme="on"] .theory-dashboard .hero-orb--xp{grid-column:3!important}
+
+/* Daily challenge exactly after the hero, on a sunset skyline panorama. */
+html[data-vice-theme="on"] .theory-daily{
+ border:1.5px solid #f48dcb!important;
+ border-radius:24px!important;
+ background:
+  linear-gradient(95deg,#301b51f5 0%,#431d53ef 55%,#5b2c647a 100%),
+  url("./assets/teoria/vice-card-city.svg") center 39%/cover no-repeat!important;
+ box-shadow:0 0 0 1px #f784bc55,0 10px 25px #1705249b!important;
+ overflow:hidden!important;
+}
+html[data-vice-theme="on"] .theory-daily-icon{
+ background:linear-gradient(145deg,#ed66a9,#8f27a4)!important;
+ border:1px solid #fdb1cd!important;box-shadow:0 0 17px #ff6cc597!important;
+ color:#fff7ee!important;
+}
+html[data-vice-theme="on"] .theory-daily :is(h2,h3,strong,#modeDaily){
+ color:#fff4ec!important;font-style:italic!important;
+ text-shadow:0 2px 7px #1e0c2d8c;
+}
+html[data-vice-theme="on"] .theory-daily-text span{color:#ffdeed!important}
+html[data-vice-theme="on"] .theory-daily-streak{
+ background:#602654d9!important;color:#ffe8da!important;border-color:#e183bf!important;
+}
+html[data-vice-theme="on"] .theory-daily-start{
+ background:linear-gradient(105deg,#fd50a4,#ffb27c)!important;
+ color:#2d173d!important;border:1px solid #ffc9a7!important;
+ box-shadow:inset 0 1px #ffe2e5,0 3px 14px #fb67af70!important;
+ font-weight:900!important;
+}
+
+/* Mode selector cinematic sky panel, no ugly pastel oval overlays. */
+html[data-vice-theme="on"] #gameLobby{
+ border:1.5px solid #f189ca!important;border-radius:25px!important;
+ background:linear-gradient(145deg,#2a183e,#3b2054 70%,#241734)!important;
+ box-shadow:0 0 0 1px #f27bb647,0 13px 29px #0d0321a1!important;
+ padding:13px 12px 16px!important;overflow:hidden!important;
+}
+html[data-vice-theme="on"] #gameLobby::before{
+ display:block!important;content:""!important;position:absolute!important;
+ z-index:0!important;pointer-events:none!important;top:0!important;left:0!important;right:0!important;
+ width:100%!important;height:105px!important;border:0!important;border-radius:0!important;
+ background:linear-gradient(0deg,#211637e6,transparent 84%),
+ url("./assets/teoria/vice-card-city.svg") center 32%/cover no-repeat!important;
+ clip-path:none!important;transform:none!important;
+}
+html[data-vice-theme="on"] #gameLobby .panel-toolbar{
+ position:relative!important;z-index:2!important;
+ display:flex!important;align-items:flex-start!important;gap:8px!important;
+ padding:5px 2px 14px!important;border:0!important;
+ min-height:93px!important;flex-wrap:nowrap!important;
+}
+html[data-vice-theme="on"] #gameLobby .toolbar-title{
+ flex:1 1 0!important;min-width:0!important;
+}
+html[data-vice-theme="on"] #gameLobby .toolbar-title .tiny-label{display:none!important}
+html[data-vice-theme="on"] #gameLobby #selectTitle{
+ display:block!important;font:italic 950 clamp(20px,3.5vw,35px)/1.05 Manrope,Arial,sans-serif!important;
+ letter-spacing:-.055em!important;color:#fff5ee!important;
+ text-shadow:0 2px 9px #e955b493!important;max-width:100%!important;
+ margin:0 0 7px!important;
+}
+html[data-vice-theme="on"] #gameLobby .toolbar-title .vice-theme-switch{
+ display:inline-flex!important;max-width:100%!important;white-space:nowrap!important;
+ height:29px!important;min-height:29px!important;margin:3px 0 0!important;padding:3px 8px!important;
+ background:linear-gradient(110deg,#ff6db5,#ffc47c)!important;
+ color:#361744!important;border:1px solid #ffe2c7!important;
+ box-shadow:0 2px 11px #ff7fa37a!important;font-size:10px!important;
+}
+html[data-vice-theme="on"] #gameLobby .toolbar-title .vice-toggle-mark{
+ background:#382144!important;color:#ffe9a7!important;
+}
+html[data-vice-theme="on"] #gameLobby .settings{
+ position:relative!important;z-index:2!important;
+ flex:0 0 auto!important;align-self:center!important;
+ margin:0!important;min-width:0!important;
+}
+html[data-vice-theme="on"] #gameLobby .theory-licence-open{
+ background:#512a60f0!important;color:#fff1eb!important;
+ border:1px solid #ff91c2!important;box-shadow:0 2px 13px #10001f80!important;
+}
+html[data-vice-theme="on"] #gameLobby .class-select #licenseLabel{
+ color:#f6d7e8!important;font-size:10px!important;
+}
+html[data-vice-theme="on"] #gameLobby .bank-status:not(.loaded){
+ position:relative!important;z-index:2!important;
+ background:#3b2149e5!important;border-color:#b368a4!important;
+ color:#fff0ed!important;
+}
+html[data-vice-theme="on"] #gameLobby .routes{
+ position:relative!important;z-index:2!important;
+ display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;
+ gap:11px!important;margin:5px 0 0!important;
+}
+/* Real illustrated scene in EACH of the five clickable game-mode tiles. */
+html[data-vice-theme="on"] #gameLobby .routes .route-card{
+ display:flex!important;position:relative!important;
+ flex-direction:column!important;justify-content:flex-end!important;
+ align-items:stretch!important;grid-column:auto!important;
+ min-width:0!important;min-height:182px!important;
+ gap:3px!important;padding:10px 10px 12px!important;margin:0!important;
+ border:1.5px solid #ff90c9!important;border-radius:19px!important;
+ background:#3a214e!important;color:#fff4ef!important;
+ box-shadow:0 3px 13px #080314b8,0 0 0 1px #ff83c639,
+ inset 0 0 10px #ff91c733!important;
+ transform:translateZ(0);transition:transform .25s ease,box-shadow .25s ease!important;
+ overflow:hidden!important;isolation:isolate!important;
+}
+html[data-vice-theme="on"] #gameLobby .routes .route-card:nth-child(even){
+ border-color:#a8eff4!important;box-shadow:0 3px 13px #080314b8,0 0 0 1px #65f1f557,inset 0 0 12px #a0f9ff25!important;
+}
+html[data-vice-theme="on"] #gameLobby .routes .route-card:hover:not(:disabled){
+ transform:translate3d(0,-3px,0)!important;
+ box-shadow:0 8px 23px #0a021abd,0 0 18px #ff68a866!important;
+}
+html[data-vice-theme="on"] #gameLobby .routes .route-card:active:not(:disabled){transform:scale(.984)!important}
+html[data-vice-theme="on"] #gameLobby .routes .route-card:focus-visible{
+ outline:2px solid #fff1cd!important;outline-offset:2px!important;
+}
+html[data-vice-theme="on"] #gameLobby .route-card::before,
+html[data-vice-theme="on"] #gameLobby .route-card::after{display:none!important}
+html[data-vice-theme="on"] #gameLobby .route-card .game-mode-photo,
+html[data-vice-theme="on"] #gameLobby .route-card>span.game-mode-photo:not(.route-top):not(.route-cta){
+ display:block!important;position:absolute!important;inset:0!important;
+ z-index:0!important;order:unset!important;
+ width:100%!important;height:100%!important;max-height:none!important;min-height:0!important;
+ padding:0!important;margin:0!important;border:0!important;border-radius:inherit!important;
+ box-shadow:none!important;
+ background-size:cover!important;background-position:center!important;background-repeat:no-repeat!important;
+ flex:none!important;grid-column:auto!important;grid-row:auto!important;
+ transform:scale(1)!important;transition:transform .45s ease!important;
+ pointer-events:none!important;
+}
+html[data-vice-theme="on"] #gameLobby .route-card:hover .game-mode-photo{transform:scale(1.055)!important}
+html[data-vice-theme="on"] #gameLobby .route-blue .game-mode-photo{
+ background-image:url("./assets/teoria/vice-card-city.svg")!important;
+}
+html[data-vice-theme="on"] #gameLobby .route-mint .game-mode-photo{
+ background-image:url("./assets/teoria/vice-card-signs.svg")!important;
+}
+html[data-vice-theme="on"] #gameLobby .route-indigo .game-mode-photo{
+ background-image:url("./assets/teoria/vice-card-exam.svg")!important;
+}
+html[data-vice-theme="on"] #gameLobby .route-amber .game-mode-photo{
+ background-image:url("./assets/teoria/vice-card-mistakes.svg")!important;
+}
+html[data-vice-theme="on"] #gameLobby .route-full .game-mode-photo{
+ background-image:url("./assets/teoria/vice-card-marathon.svg")!important;
+}
+html[data-vice-theme="on"] #gameLobby .route-card .game-mode-photo::after{
+ content:"";position:absolute;inset:0;
+ background:linear-gradient(0deg,#170d30ee 0%,#25153a7f 33%,#24103e12 73%,transparent 100%);
+ pointer-events:none;
+}
+html[data-vice-theme="on"] #gameLobby .route-full .game-mode-photo::after{
+ background:linear-gradient(90deg,#261439ed 0%,#241741ca 40%,#2d18441f 93%)!important;
+}
+html[data-vice-theme="on"] #gameLobby .route-card .route-top{
+ order:1!important;position:absolute!important;top:9px!important;left:10px!important;right:10px!important;
+ z-index:3!important;width:auto!important;min-height:0!important;
+ margin:0!important;padding:0!important;
+ display:flex!important;align-items:center!important;justify-content:space-between!important;
+ pointer-events:none!important;
+}
+html[data-vice-theme="on"] #gameLobby .route-card .route-icon{
+ display:grid!important;place-items:center!important;
+ width:39px!important;height:39px!important;min-width:39px!important;max-width:39px!important;
+ padding:6px!important;
+ background:#401f57bd!important;color:#fffaf6!important;
+ border:1.5px solid #ff9bcb!important;border-radius:12px!important;
+ box-shadow:0 0 10px #fa64b68f!important;
+}
+html[data-vice-theme="on"] #gameLobby .route-card .route-icon svg{
+ width:26px!important;height:26px!important;color:#fff2e7!important;
+ stroke:currentColor!important;fill:none!important;
+}
+html[data-vice-theme="on"] #gameLobby .route-card .route-length{
+ display:grid!important;place-items:center!important;
+ padding:2px 7px!important;min-width:33px!important;height:32px!important;
+ background:#432252d9!important;border:1px solid #ef9dc6!important;border-radius:999px!important;
+ color:#fff4e9!important;font-size:15px!important;font-weight:900!important;
+ box-shadow:0 2px 9px #1c1031a6!important;
+}
+html[data-vice-theme="on"] #gameLobby .routes .route-card strong{
+ position:relative!important;z-index:2!important;order:2!important;grid-column:auto!important;grid-row:auto!important;
+ align-self:stretch!important;flex:none!important;
+ margin:auto 0 0!important;padding:0!important;
+ font:900 clamp(13px,2vw,21px)/1.14 Manrope,Arial,sans-serif!important;
+ letter-spacing:-.035em!important;color:#fff9f3!important;
+ text-shadow:0 2px 6px #120a2de3,0 0 12px #180b2cb6!important;
+ overflow-wrap:anywhere!important;
+}
+html[data-vice-theme="on"] #gameLobby .routes .route-card>span:not(.route-top):not(.route-cta):not(.game-mode-photo){
+ position:relative!important;z-index:2!important;
+ order:3!important;grid-column:auto!important;grid-row:auto!important;
+ flex:none!important;align-self:stretch!important;
+ margin:0!important;padding:0!important;
+ color:#f9deeb!important;text-shadow:0 1px 5px #1b0b2dd6!important;
+ font-size:clamp(9px,1.4vw,11px)!important;line-height:1.35!important;
+ max-height:30px!important;overflow:hidden!important;display:-webkit-box!important;
+ -webkit-line-clamp:2;-webkit-box-orient:vertical;
+}
+html[data-vice-theme="on"] #gameLobby .routes .route-card .route-cta{
+ display:none!important;
+}
+/* All tickets / marathon extends across both columns like the reference. */
+html[data-vice-theme="on"] #gameLobby .routes .route-full{
+ grid-column:1/-1!important;display:flex!important;flex-direction:column!important;
+ align-items:flex-start!important;justify-content:flex-end!important;
+ min-height:113px!important;height:auto!important;padding:10px 13px 12px 57px!important;
+}
+html[data-vice-theme="on"] #gameLobby .route-full .route-top{
+ display:flex!important;left:12px!important;right:auto!important;top:13px!important;
+}
+html[data-vice-theme="on"] #gameLobby .route-full .route-icon{
+ width:33px!important;height:33px!important;min-width:33px!important;max-width:33px!important;padding:4px!important;
+}
+html[data-vice-theme="on"] #gameLobby .route-full .route-length{display:none!important}
+html[data-vice-theme="on"] #gameLobby .route-full strong{
+ align-self:flex-start!important;margin:auto 0 0!important;
+ font-size:clamp(14px,2.3vw,22px)!important;max-width:62%!important;
+}
+html[data-vice-theme="on"] #gameLobby .route-full>span:not(.route-top):not(.route-cta):not(.game-mode-photo){
+ align-self:flex-start!important;max-width:65%!important;
+}
+html[data-vice-theme="on"] #gameLobby .source-note{
+ color:#f4cde2!important;background:#341d48c4!important;border-color:#b06eaf!important;
+}
+html[data-vice-theme="on"] #gameLobby .source-links a{color:#85f8eb!important}
+
+/* Neon navigation, keeping the same 62px size on all pages. */
+@media(max-width:760px){
+ html[data-vice-theme="on"] .theory-bottom{
+  background:linear-gradient(110deg,#391d49,#402049 55%,#321939)!important;
+  border-top:1px solid #f377b9!important;box-shadow:0 -5px 17px #1105228c!important;
+ }
+ html[data-vice-theme="on"] .theory-bottom > a{
+  color:#ffe1f3!important;
+ }
+ html[data-vice-theme="on"] .theory-bottom > a:is(.active,.neoline-current,[aria-current]){
+  color:#2e163d!important;
+  background:linear-gradient(115deg,#ff6bb7,#ff94ad)!important;
+  border-radius:17px!important;
+  box-shadow:inset 0 0 0 1px #fff1de,0 0 10px #ff79b9a5!important;
+ }
+ html[data-vice-theme="on"] .theory-bottom > a:is(.active,.neoline-current,[aria-current]) svg{
+  stroke:#4e1e53!important;
+ }
+}
+@keyframes viceCardEnter{
+ from{opacity:.3;transform:translate3d(0,13px,0) scale(.98)}
+ to{opacity:1;transform:translateZ(0) scale(1)}
+}
+@keyframes viceSlideCopy{
+ from{opacity:0;transform:translateY(12px)}
+ to{opacity:1;transform:translateY(0)}
+}
+@keyframes viceHeroAppear{
+ from{opacity:.68;transform:translateY(11px) scale(.987)}
+ to{opacity:1;transform:translateZ(0) scale(1)}
+}
+html[data-vice-theme="on"] .vice-is-entering{
+ animation:viceCardEnter .55s cubic-bezier(.17,.7,.21,1) both!important;
+ animation-delay:calc(var(--vice-reveal-order,0)*55ms)!important;
+}
+html[data-vice-theme="on"] .game-hero.theory-dashboard.vice-is-entering{
+ animation-name:viceHeroAppear!important;
+}
+html[data-vice-theme="on"] .vice-cinema-frame.is-active .vice-cinema-story{
+ animation:viceSlideCopy .46s .08s ease-out both;
+}
+/* Strongly optimize the small Android screen without modifying the dock. */
+@media(max-width:760px){
+ html[data-vice-theme="on"] .game-hero.theory-dashboard{
+  grid-template-columns:minmax(0,.85fr) minmax(0,1.4fr)!important;
+  grid-template-rows:clamp(138px,38vw,175px) auto!important;
+  gap:8px 6px!important;padding:8px!important;margin:8px 0 11px!important;
+  border-radius:21px!important;
+ }
+ html[data-vice-theme="on"] .game-hero.theory-dashboard .hero-copy{
+  padding:7px 0 2px 3px!important;
+ }
+ html[data-vice-theme="on"] .game-hero.theory-dashboard #heroTitle{
+  font-size:clamp(22px,6.4vw,28px)!important;
+  line-height:1.03!important;margin:6px 0 9px!important;
+  word-break:normal!important;
+ }
+ html[data-vice-theme="on"] .game-hero.theory-dashboard .hero-stroke{width:48px!important;margin:0 0 7px!important}
+ html[data-vice-theme="on"] .game-hero.theory-dashboard .game-gift-trigger{
+  font-size:10px!important;min-height:28px!important;padding:4px 7px!important;gap:5px!important;
+ }
+ html[data-vice-theme="on"] .game-hero.theory-dashboard .game-gift-trigger svg{width:16px!important;height:16px!important}
+ html[data-vice-theme="on"] .game-hero.theory-dashboard .hero-art{
+  min-height:clamp(138px,38vw,175px)!important;border-radius:15px!important;
+ }
+ .vice-cinema-story{left:8px;right:5px;bottom:23px;gap:2px}
+ .vice-cinema-tag{font-size:7px;padding:3px 5px}
+ .vice-cinema-headline{font-size:clamp(10px,2.7vw,14px)}
+ .vice-cinema-sub{font-size:clamp(7px,1.75vw,9px)}
+ .vice-cinema-frame--rewards .vice-cinema-story,
+ .vice-cinema-frame--duo .vice-cinema-story{width:67%;right:6px;bottom:22px}
+ .vice-cinema-arrow{width:21px;height:21px;padding:3px}
+ .vice-cinema-arrow svg{width:14px;height:14px}
+ html[data-vice-theme="on"] .theory-dashboard .hero-orbs{
+  grid-template-columns:repeat(4,minmax(0,1fr))!important;
+  min-height:98px!important;padding:7px 3px 6px!important;gap:2px!important;
+  border-radius:15px!important;
+ }
+ html[data-vice-theme="on"] .theory-dashboard .hero-orb-ring{
+  width:clamp(51px,15vw,74px)!important;height:clamp(51px,15vw,74px)!important;
+  padding:2px!important;
+ }
+ html[data-vice-theme="on"] .theory-dashboard .hero-orb-core{
+  min-width:0!important;min-height:0!important;
+ }
+ html[data-vice-theme="on"] .theory-dashboard .hero-orb-number{
+  font-size:clamp(16px,4.5vw,23px)!important;
+ }
+ html[data-vice-theme="on"] .theory-dashboard .hero-orb-icon{width:12px!important;height:12px!important}
+ html[data-vice-theme="on"] .theory-dashboard .hero-orb-caption,
+ html[data-vice-theme="on"] .theory-dashboard .hero-progress-caption{
+  font-size:clamp(8px,2vw,10px)!important;padding:2px 3px!important;
+ }
+ html[data-vice-theme="on"] .theory-dashboard .hero-progress-open{
+  width:clamp(53px,15vw,73px)!important;height:clamp(53px,15vw,73px)!important;
+ }
+ html[data-vice-theme="on"] .theory-dashboard .hero-progress-icon{font-size:clamp(26px,8vw,37px)!important}
+ html[data-vice-theme="on"] .theory-daily{
+  padding:13px!important;border-radius:21px!important;
+ }
+ html[data-vice-theme="on"] #gameLobby{
+  padding:12px 10px 15px!important;margin-top:12px!important;border-radius:22px!important;
+ }
+ html[data-vice-theme="on"] #gameLobby .panel-toolbar{
+  min-height:94px!important;align-items:flex-start!important;
+ }
+ html[data-vice-theme="on"] #gameLobby #selectTitle{
+  font-size:clamp(20px,5.5vw,26px)!important;
+  max-width:100%!important;
+ }
+ html[data-vice-theme="on"] #gameLobby .toolbar-title .vice-theme-switch{
+  font-size:9px!important;padding:3px 6px!important;min-height:27px!important;height:27px!important;
+ }
+ html[data-vice-theme="on"] #gameLobby .routes{
+  grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:10px!important;
+ }
+ html[data-vice-theme="on"] #gameLobby .routes .route-card{
+  min-height:166px!important;padding:9px 9px 10px!important;gap:2px!important;
+  border-radius:15px!important;
+ }
+ html[data-vice-theme="on"] #gameLobby .route-card .route-top{
+  top:8px!important;left:8px!important;right:8px!important;
+ }
+ html[data-vice-theme="on"] #gameLobby .route-card .route-icon{
+  width:34px!important;height:34px!important;min-width:34px!important;max-width:34px!important;padding:5px!important;border-radius:11px!important;
+ }
+ html[data-vice-theme="on"] #gameLobby .route-card .route-icon svg{width:22px!important;height:22px!important}
+ html[data-vice-theme="on"] #gameLobby .routes .route-card strong{
+  font-size:clamp(12px,3.3vw,17px)!important;line-height:1.16!important;
+ }
+ html[data-vice-theme="on"] #gameLobby .routes .route-card>span:not(.route-top):not(.route-cta):not(.game-mode-photo){
+  font-size:clamp(8px,2.1vw,10px)!important;
+ }
+ html[data-vice-theme="on"] #gameLobby .routes .route-full{
+  min-height:106px!important;padding:12px 11px 11px 53px!important;
+ }
+ html[data-vice-theme="on"] #gameLobby .route-full .route-top{left:9px!important;top:14px!important}
+ html[data-vice-theme="on"] #gameLobby .route-full .route-icon{width:32px!important;height:32px!important;min-width:32px!important;max-width:32px!important}
+ html[data-vice-theme="on"] #gameLobby .route-full strong{max-width:84%!important;font-size:clamp(13px,3.8vw,18px)!important}
+ html[data-vice-theme="on"] #gameLobby .route-full>span:not(.route-top):not(.route-cta):not(.game-mode-photo){max-width:84%!important}
+}
+@media(max-width:365px){
+ html[data-vice-theme="on"] .game-hero.theory-dashboard{
+  grid-template-columns:minmax(0,.84fr) minmax(0,1.42fr)!important;
+  grid-template-rows:132px auto!important;
+ }
+ html[data-vice-theme="on"] .game-hero.theory-dashboard .hero-art{min-height:132px!important}
+ html[data-vice-theme="on"] .game-hero.theory-dashboard #heroTitle{
+  font-size:clamp(20px,6.4vw,24px)!important;
+ }
+ html[data-vice-theme="on"] .theory-dashboard .hero-orb-ring{
+  width:49px!important;height:49px!important;
+ }
+ html[data-vice-theme="on"] .theory-dashboard .hero-orb-number{font-size:17px!important}
+ html[data-vice-theme="on"] .theory-dashboard .hero-progress-open{width:49px!important;height:49px!important}
+ html[data-vice-theme="on"] #gameLobby .routes .route-card{min-height:157px!important}
+ html[data-vice-theme="on"] #gameLobby .routes .route-full{min-height:101px!important}
+ html[data-vice-theme="on"] #gameLobby .class-select #licenseLabel{display:none!important}
+ html[data-vice-theme="on"] #gameLobby #selectTitle{font-size:20px!important}
+}
+@media(prefers-reduced-motion:reduce){
+ .vice-cinema-frame,.vice-cinema-scene{transition:none!important;animation:none!important;transform:none!important}
+ html[data-vice-theme="on"] .vice-is-entering,
+ html[data-vice-theme="on"] .vice-cinema-frame.is-active .vice-cinema-story{animation:none!important}
+ html[data-vice-theme="on"] #gameLobby .route-card,
+ html[data-vice-theme="on"] #gameLobby .route-card .game-mode-photo{transition:none!important}
+}
