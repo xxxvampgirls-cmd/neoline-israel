@@ -1,0 +1,150 @@
+{
+  "version": 1,
+  "format": "AY-3-8912 14-register 50Hz playback cache",
+  "note": "Tracks are not converted to PT3; originals remain intact.",
+  "clockHz": 1773400,
+  "frameRate": 50,
+  "tracks": {
+    "orig_jurassic_park_asc": {
+      "id": "orig_jurassic_park_asc",
+      "name": "Jurassic Park",
+      "file": "Jurassic_Park.asc",
+      "url": "./assets/teoria/ay-originals/orig_jurassic_park_asc.ay14",
+      "frames": 4864,
+      "seconds": 97.28,
+      "originalFormat": "ASC"
+    },
+    "orig_lyraii3_stc": {
+      "id": "orig_lyraii3_stc",
+      "name": "LyraII3",
+      "file": "LyraII3.stc",
+      "url": "./assets/teoria/ay-originals/orig_lyraii3_stc.ay14",
+      "frames": 8192,
+      "seconds": 163.84,
+      "originalFormat": "STC"
+    },
+    "orig_lyraii4_stc": {
+      "id": "orig_lyraii4_stc",
+      "name": "LyraII4",
+      "file": "LyraII4.stc",
+      "url": "./assets/teoria/ay-originals/orig_lyraii4_stc.ay14",
+      "frames": 18048,
+      "seconds": 360.96,
+      "originalFormat": "STC"
+    },
+    "orig_paradise_stc": {
+      "id": "orig_paradise_stc",
+      "name": "PARADISE",
+      "file": "PARADISE.stc",
+      "url": "./assets/teoria/ay-originals/orig_paradise_stc.ay14",
+      "frames": 7616,
+      "seconds": 152.32,
+      "originalFormat": "STC"
+    },
+    "orig_shock3_stc": {
+      "id": "orig_shock3_stc",
+      "name": "Shock3",
+      "file": "Shock3.stc",
+      "url": "./assets/teoria/ay-originals/orig_shock3_stc.ay14",
+      "frames": 11520,
+      "seconds": 230.4,
+      "originalFormat": "STC"
+    },
+    "orig_shock6_stc": {
+      "id": "orig_shock6_stc",
+      "name": "Shock6",
+      "file": "Shock6.stc",
+      "url": "./assets/teoria/ay-originals/orig_shock6_stc.ay14",
+      "frames": 8064,
+      "seconds": 161.28,
+      "originalFormat": "STC"
+    },
+    "orig_the_neverending_story_stc": {
+      "id": "orig_the_neverending_story_stc",
+      "name": "the neverending story",
+      "file": "the_neverending_story.stc",
+      "url": "./assets/teoria/ay-originals/orig_the_neverending_story_stc.ay14",
+      "frames": 23040,
+      "seconds": 460.8,
+      "originalFormat": "STC"
+    },
+    "orig_tim_follin_sqt": {
+      "id": "orig_tim_follin_sqt",
+      "name": "Tim Follin",
+      "file": "Tim_Follin.sqt",
+      "url": "./assets/teoria/ay-originals/orig_tim_follin_sqt.ay14",
+      "frames": 10493,
+      "seconds": 209.86,
+      "originalFormat": "SQT"
+    },
+    "orig_voyage_asc": {
+      "id": "orig_voyage_asc",
+      "name": "VOYAGE",
+      "file": "VOYAGE.asc",
+      "url": "./assets/teoria/ay-originals/orig_voyage_asc.ay14",
+      "frames": 15360,
+      "seconds": 307.2,
+      "originalFormat": "ASC"
+    },
+    "orig_4x4_puzzle_hi_pt2": {
+      "id": "orig_4x4_puzzle_hi_pt2",
+      "name": "4x4 puzzle Hi ",
+      "file": "4x4_puzzle_Hi_.pt2",
+      "url": "./assets/teoria/ay-originals/orig_4x4_puzzle_hi_pt2.ay14",
+      "frames": 5760,
+      "seconds": 115.2,
+      "originalFormat": "PT2"
+    },
+    "orig_63a_tdm_tdmschivapart2_sqt": {
+      "id": "orig_63a_tdm_tdmschivapart2_sqt",
+      "name": "63a tdm-TDMSchivaPart2",
+      "file": "63a_tdm-TDMSchivaPart2.sqt",
+      "url": "./assets/teoria/ay-originals/orig_63a_tdm_tdmschivapart2_sqt.ay14",
+      "frames": 13328,
+      "seconds": 266.56,
+      "originalFormat": "SQT"
+    },
+    "orig_dado_s_twin_peaks_stp": {
+      "id": "orig_dado_s_twin_peaks_stp",
+      "name": "dado s twin peaks",
+      "file": "dado_s_twin_peaks.stp",
+      "url": "./assets/teoria/ay-originals/orig_dado_s_twin_peaks_stp.ay14",
+      "frames": 11520,
+      "seconds": 230.4,
+      "originalFormat": "STP"
+    },
+    "orig_electric_city_sqt": {
+      "id": "orig_electric_city_sqt",
+      "name": "Electric city",
+      "file": "Electric_city.sqt",
+      "url": "./assets/teoria/ay-originals/orig_electric_city_sqt.ay14",
+      "frames": 12480,
+      "seconds": 249.6,
+      "originalFormat": "SQT"
+    },
+    "orig_galactic_pt2": {
+      "id": "orig_galactic_pt2",
+      "name": "Galactic",
+      "file": "Galactic.pt2",
+      "url": "./assets/teoria/ay-originals/orig_galactic_pt2.ay14",
+      "frames": 7296,
+      "seconds": 145.92,
+      "originalFormat": "PT2"
+    },
+    "orig_galaxy2_asc": {
+      "id": "orig_galaxy2_asc",
+      "name": "GALAXY2",
+      "file": "GALAXY2.asc",
+      "url": "./assets/teoria/ay-originals/orig_galaxy2_asc.ay14",
+      "frames": 12624,
+      "seconds": 252.48,
+      "originalFormat": "ASC"
+    }
+  },
+  "failures": {
+    "Ghostbusters_2.ay": "ZXTune output: usters_2.ay?#6' (type 'AY') due to convert impossibility.\nSkipping '/home/runner/work/neoline-israel/neoline-israel/assets/teoria/originals/Ghostbusters_2.ay?#7' (type 'AY') due to convert impossibility.\nSkipping '/home/runner/work/neo",
+    "Navy_Seals.ay": "ZXTune output: inals/Navy_Seals.ay?#4' (type 'AY') due to convert impossibility.\nSkipping '/home/runner/work/neoline-israel/neoline-israel/assets/teoria/originals/Navy_Seals.ay?#5' (type 'AY') due to convert impossibility.\nSkipping '/home/runner/work",
+    "Batman_The_Movie.ay": "ZXTune output: ovie.ay?#4' (type 'AY') due to convert impossibility.\nSkipping '/home/runner/work/neoline-israel/neoline-israel/assets/teoria/originals/Batman_The_Movie.ay?#5' (type 'AY') due to convert impossibility.\nSkipping '/home/runner/work/neoli",
+    "Cover_of_Hung_Up_by_Madonna_2xAY_ACB_.sqt": "Two AY chips (6 channels) need a dual-chip player"
+  }
+}
