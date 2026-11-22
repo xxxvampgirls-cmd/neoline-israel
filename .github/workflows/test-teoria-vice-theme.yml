@@ -15,6 +15,7 @@ on:
       - 'teoria-vice-final-polish.css'
       - 'teoria-vice-live-reference.css'
       - 'assets/teoria/vice-hero-reference.avif'
+      - 'assets/teoria/vice-reference-card-sprite.avif'
       - 'teoria-vice-cinematic.js'
       - 'assets/teoria/vice-card-city.svg'
       - 'assets/teoria/vice-card-signs.svg'
