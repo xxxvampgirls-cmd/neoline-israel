@@ -1,0 +1,3071 @@
+/* NEOLINE CSS optimized bundle 4/4. Original source files retained for rollback. */
+
+/* SOURCE: teoria-vice-reference-match.css */
+/* NEOLINE VICE SUNSET — mobile reference refinement, 2026-11-22.
+ * The approved image has ONE full-width cinematic hero and a SEPARATE
+ * medal bar. The real five-slide controls, prize button and game logic
+ * underneath remain live; this stylesheet ONLY affects the opt-in skin. */
+html[data-vice-theme="on"] .game-hero.theory-dashboard{
+ display:grid!important;
+ grid-template-columns:minmax(0,1fr)!important;
+ grid-template-rows:clamp(190px,29vw,270px) auto!important;
+ align-items:stretch!important;
+ column-gap:0!important;
+ row-gap:10px!important;
+ padding:0!important;
+ margin:8px 0 12px!important;
+ border:none!important;
+ border-radius:0!important;
+ background:none!important;
+ box-shadow:none!important;
+ overflow:visible!important;
+ isolation:isolate!important;
+}
+html[data-vice-theme="on"] .game-hero.theory-dashboard::before,
+html[data-vice-theme="on"] .game-hero.theory-dashboard::after{
+ display:none!important;
+}
+html[data-vice-theme="on"] .game-hero.theory-dashboard .hero-art{
+ grid-column:1!important;
+ grid-row:1!important;
+ position:relative!important;
+ inset:auto!important;
+ display:block!important;
+ width:100%!important;
+ min-width:0!important;
+ height:100%!important;
+ min-height:0!important;
+ border:1.5px solid #ffa4d4!important;
+ border-radius:23px!important;
+ background:linear-gradient(107deg,#33204ea8 0%,#4720513d 48%,#40144152 100%),
+  url("./assets/teoria/vice-cinematic-duo.svg") center / cover no-repeat!important;
+ box-shadow:0 0 0 1px #ff7ac26e,0 12px 26px #120921ab,
+  inset 0 1px #ffe7f9af,0 0 17px #fb6eb47a!important;
+ overflow:hidden!important;
+ z-index:1!important;
+ isolation:isolate!important;
+}
+html[data-vice-theme="on"] .game-hero.theory-dashboard .hero-copy{
+ grid-column:1!important;
+ grid-row:1!important;
+ z-index:7!important;
+ position:relative!important;
+ display:flex!important;
+ flex-direction:column!important;
+ justify-content:flex-start!important;
+ align-items:flex-start!important;
+ width:42%!important;
+ min-width:0!important;
+ max-width:42%!important;
+ margin:0!important;
+ padding:17px 0 18px 17px!important;
+ pointer-events:none!important;
+ overflow:visible!important;
+}
+html[data-vice-theme="on"] .game-hero.theory-dashboard #heroTitle{
+ font-size:clamp(24px,3.8vw,46px)!important;
+ line-height:1!important;
+ letter-spacing:-.047em!important;
+ margin:9px 0 10px!important;
+ max-width:100%!important;
+ overflow-wrap:normal!important;
+}
+html[data-vice-theme="on"] .game-hero.theory-dashboard .hero-stroke{
+ margin:0 0 6px!important;
+}
+html[data-vice-theme="on"] .game-hero.theory-dashboard .game-gift-trigger{
+ pointer-events:auto!important;
+ margin-top:auto!important;
+ min-height:34px!important;
+ padding:5px 10px!important;
+ border-color:#ffcf9b!important;
+ box-shadow:0 0 15px #fb64b49a,inset 0 1px #ffe5dbaa!important;
+}
+html[data-vice-theme="on"] .theory-promo-host .vice-cinema-stage{
+ z-index:3!important;
+}
+html[data-vice-theme="on"] .theory-promo-host .vice-cinema-mask{
+ background:
+  linear-gradient(90deg,#241136a3 0%,#24113637 37%,transparent 54%,#2411368a 100%),
+  linear-gradient(0deg,#1d103b6e,transparent 42%)!important;
+}
+html[data-vice-theme="on"] .theory-promo-host .vice-cinema-frame:is(.vice-cinema-frame--rewards,.vice-cinema-frame--duo) .vice-cinema-scene{
+ background-image:url("./assets/teoria/vice-approved-protagonists.webp"),url("./assets/teoria/vice-card-city.svg")!important;
+ background-repeat:no-repeat,no-repeat!important;
+ background-size:auto 125%,cover!important;
+ background-position:53% 56%,center 48%!important;
+}
+/* Right-hand banner is the actual, localized carousel story. It updates
+ * on every slide, rather than being an inert slogan over a picture. */
+html[data-vice-theme="on"] .theory-promo-host .vice-cinema-story,
+html[data-vice-theme="on"] .theory-promo-host .vice-cinema-frame--rewards .vice-cinema-story,
+html[data-vice-theme="on"] .theory-promo-host .vice-cinema-frame--duo .vice-cinema-story{
+ position:absolute!important;
+ left:auto!important;
+ right:12px!important;
+ top:27px!important;
+ bottom:auto!important;
+ display:flex!important;
+ flex-direction:column!important;
+ align-items:flex-start!important;
+ justify-content:flex-start!important;
+ gap:6px!important;
+ width:29%!important;
+ max-width:29%!important;
+ padding:0!important;
+ text-align:left!important;
+ z-index:4!important;
+}
+html[data-vice-theme="on"] .theory-promo-host .vice-cinema-tag{
+ display:block!important;
+ font-size:clamp(8px,.93vw,11px)!important;
+ font-weight:850!important;
+ padding:0!important;
+ background:none!important;
+ color:#fff0c8!important;
+ text-shadow:0 2px 6px #260d36c7!important;
+}
+html[data-vice-theme="on"] .theory-promo-host .vice-cinema-headline{
+ display:block!important;
+ font:italic 950 clamp(14px,2.1vw,28px)/.99 Manrope,Arial,sans-serif!important;
+ max-width:100%!important;
+ padding:7px 8px!important;
+ border-radius:10px!important;
+ border:1px solid #ffe8bb!important;
+ background:linear-gradient(140deg,#ffdb78,#ffab8b)!important;
+ color:#25183c!important;
+ text-shadow:none!important;
+ box-shadow:0 3px 16px #1c083e74,0 0 13px #ffa25b78!important;
+ transform:rotate(-3deg);
+ overflow-wrap:anywhere!important;
+}
+html[data-vice-theme="on"] .theory-promo-host .vice-cinema-sub{
+ color:#fff4e9!important;
+ font-size:clamp(10px,1.1vw,13px)!important;
+ font-weight:720!important;
+ line-height:1.23!important;
+ text-shadow:0 1px 8px #210d2ae3!important;
+}
+html[data-vice-theme="on"] .theory-promo-host .vice-cinema-arrow{
+ z-index:10!important;
+ background:#3c2357cf!important;
+ border:1px solid #ffbce0!important;
+ box-shadow:0 0 11px #ff7abbba!important;
+}
+html[data-vice-theme="on"] .theory-promo-host .theory-promo-click{
+ z-index:6!important;
+}
+html[data-vice-theme="on"] .theory-promo-host .theory-promo-dots{
+ z-index:11!important;
+ bottom:7px!important;
+ left:50%!important;
+ transform:translateX(-50%)!important;
+}
+html[data-vice-theme="on"] .game-hero.theory-dashboard .hero-orbs{
+ grid-column:1!important;
+ grid-row:2!important;
+ z-index:2!important;
+ margin:0 3px!important;
+ min-height:105px!important;
+ border-radius:19px!important;
+}
+html[data-vice-theme="on"] .theory-daily{
+ margin-top:6px!important;
+}
+html[data-vice-theme="on"] #gameLobby{
+ margin-top:10px!important;
+}
+/* Responsive spacing follows the approved Android screenshot. */
+@media(max-width:760px){
+ html[data-vice-theme="on"] .game-hero.theory-dashboard{
+  grid-template-columns:minmax(0,1fr)!important;
+  grid-template-rows:clamp(158px,39vw,183px) auto!important;
+  row-gap:10px!important;
+  padding:0!important;
+  margin:6px 0 11px!important;
+ }
+ html[data-vice-theme="on"] .game-hero.theory-dashboard .hero-art{
+  min-height:0!important;
+  border-radius:21px!important;
+ }
+ html[data-vice-theme="on"] .game-hero.theory-dashboard .hero-copy{
+  width:43%!important;
+  max-width:43%!important;
+  padding:13px 0 14px 13px!important;
+ }
+ html[data-vice-theme="on"] .game-hero.theory-dashboard #heroTitle{
+  font-size:clamp(21px,6vw,28px)!important;
+  margin:7px 0 6px!important;
+ }
+ html[data-vice-theme="on"] .game-hero.theory-dashboard .hero-stroke{
+  height:2px!important;width:43px!important;margin-bottom:4px!important;
+ }
+ html[data-vice-theme="on"] .game-hero.theory-dashboard .game-gift-trigger{
+  min-height:28px!important;
+  padding:3px 7px!important;
+  font-size:10px!important;
+ }
+ html[data-vice-theme="on"] .theory-promo-host .vice-cinema-story,
+ html[data-vice-theme="on"] .theory-promo-host .vice-cinema-frame--rewards .vice-cinema-story,
+ html[data-vice-theme="on"] .theory-promo-host .vice-cinema-frame--duo .vice-cinema-story{
+  right:9px!important;
+  top:17px!important;
+  bottom:auto!important;
+  width:30%!important;
+  max-width:30%!important;
+  gap:4px!important;
+ }
+ html[data-vice-theme="on"] .theory-promo-host .vice-cinema-headline{
+  font-size:clamp(12px,3.4vw,16px)!important;
+  padding:5px 6px!important;
+  border-radius:7px!important;
+ }
+ html[data-vice-theme="on"] .theory-promo-host .vice-cinema-tag{
+  font-size:clamp(7px,1.8vw,9px)!important;
+ }
+ html[data-vice-theme="on"] .theory-promo-host .vice-cinema-sub{
+  font-size:clamp(8px,2.15vw,10px)!important;
+  line-height:1.2!important;
+ }
+ html[data-vice-theme="on"] .theory-promo-host .vice-cinema-frame:is(.vice-cinema-frame--rewards,.vice-cinema-frame--duo) .vice-cinema-scene{
+  background-size:auto 110%,cover!important;
+  background-position:51% 48%,center 48%!important;
+ }
+ html[data-vice-theme="on"] .game-hero.theory-dashboard .hero-orbs{
+  margin:0 2px!important;
+  padding:7px 4px 6px!important;
+  min-height:97px!important;
+ }
+ html[data-vice-theme="on"] #gameLobby .routes .route-card:focus-visible,
+ html[data-vice-theme="on"] .game-gift-trigger:focus-visible,
+ html[data-vice-theme="on"] .theory-promo-host .vice-cinema-arrow:focus-visible{
+  outline:3px solid #fff0bd!important;
+  outline-offset:2px!important;
+ }
+}
+@media(max-width:365px){
+ html[data-vice-theme="on"] .game-hero.theory-dashboard{
+  grid-template-rows:153px auto!important;
+ }
+ html[data-vice-theme="on"] .game-hero.theory-dashboard #heroTitle{
+  font-size:clamp(20px,6vw,22px)!important;
+ }
+ html[data-vice-theme="on"] .game-hero.theory-dashboard .hero-copy{
+  padding:11px 0 11px 10px!important;
+ }
+ html[data-vice-theme="on"] .theory-promo-host .vice-cinema-story,
+ html[data-vice-theme="on"] .theory-promo-host .vice-cinema-frame--rewards .vice-cinema-story,
+ html[data-vice-theme="on"] .theory-promo-host .vice-cinema-frame--duo .vice-cinema-story{
+  right:6px!important;
+  width:32%!important;
+  max-width:32%!important;
+ }
+}
+@media(prefers-reduced-motion:reduce){
+ html[data-vice-theme="on"] .theory-promo-host .vice-cinema-headline{transform:none!important}
+}
+
+
+/* 2026-11-22 · Screenshot polish v2: sharper title, actual lead characters,
+ * less empty space, stronger illustrated tiles. Scoped to optional skin. */
+html[data-vice-theme="on"] .game-hero.theory-dashboard #heroTitle{
+ background:none!important;
+ color:#d8faff!important;
+ -webkit-text-fill-color:#d8faff!important;
+ background-clip:border-box!important;
+ -webkit-background-clip:border-box!important;
+ font-family:Manrope,Arial,sans-serif!important;
+ font-weight:950!important;
+ font-style:italic!important;
+ line-height:1.115!important;
+ letter-spacing:-.056em!important;
+ text-shadow:0 2px 0 #54256e,0 4px 10px #150b31cc!important;
+ filter:none!important;
+ overflow-wrap:normal!important;
+ word-break:keep-all!important;
+ hyphens:none!important;
+ text-wrap:normal!important;
+ isolation:isolate!important;
+}
+html[data-vice-theme="on"] .game-hero.theory-dashboard .hero-copy{
+ text-shadow:none!important;
+}
+html[data-vice-theme="on"] .game-hero.theory-dashboard .game-hero-mini{
+ letter-spacing:.085em!important;
+ font-weight:900!important;
+ text-shadow:0 1px 4px #1d063a!important;
+}
+html[data-vice-theme="on"] .theory-promo-host .vice-cinema-frame--city .vice-cinema-scene,
+html[data-vice-theme="on"] .theory-promo-host .vice-cinema-frame--rewards .vice-cinema-scene,
+html[data-vice-theme="on"] .theory-promo-host .vice-cinema-frame--duo .vice-cinema-scene{
+ background-image:url("./assets/teoria/vice-cinematic-duo.svg")!important;
+ background-repeat:no-repeat!important;
+ background-size:cover!important;
+ background-position:center 49%!important;
+}
+html[data-vice-theme="on"] .theory-promo-host .vice-cinema-frame--city .vice-cinema-scene{
+ transform:scale(1.02)!important;
+}
+html[data-vice-theme="on"] .theory-promo-host .vice-cinema-frame--city.is-active .vice-cinema-scene{
+ animation:viceHeroCruise 8.4s ease-out both!important;
+}
+@keyframes viceHeroCruise{
+ from{transform:scale(1.015) translate3d(0,0,0)}
+ to{transform:scale(1.075) translate3d(-.8%,0,0)}
+}
+html[data-vice-theme="on"] .theory-promo-host .vice-cinema-story{
+ text-shadow:0 1px 6px #1e0b35dd!important;
+}
+html[data-vice-theme="on"] .theory-promo-host .vice-cinema-frame--city .vice-cinema-headline{
+ transform:rotate(-2deg)!important;
+}
+html[data-vice-theme="on"] .theory-dashboard .hero-orbs{
+ background:
+  radial-gradient(ellipse 63% 87% at 80% 70%,#a63a8450,transparent 96%),
+  linear-gradient(120deg,#301742e8,#50265add 55%,#2c1a4af2)!important;
+}
+html[data-vice-theme="on"] .theory-dashboard .hero-orb-ring{
+ position:relative!important;
+ box-shadow:0 0 0 1px #ffb9d74f,0 0 17px #fa75b471!important;
+}
+html[data-vice-theme="on"] .theory-dashboard .hero-orb-ring::after{
+ content:"";position:absolute;z-index:2;pointer-events:none;
+ inset:4px 8px auto 8px;height:20%;border-radius:50%;
+ background:linear-gradient(180deg,#fffbff60,transparent);
+}
+html[data-vice-theme="on"] .theory-dashboard .hero-progress-open{
+ box-shadow:0 0 0 3px #f7c78c78,0 0 19px #ffd374a8!important;
+}
+html[data-vice-theme="on"] #theoryDaily .theory-daily-icon{
+ background:linear-gradient(137deg,#f379bb,#b13fc6)!important;
+ box-shadow:0 0 17px #ff5bb982,inset 0 1px #fff8!important;
+}
+html[data-vice-theme="on"] #theoryDaily .theory-daily-text{
+ border-color:#ed9cc8a6!important;
+}
+html[data-vice-theme="on"] #theoryDaily .theory-daily-start{
+ background:linear-gradient(105deg,#ff5eaf,#ffbd79)!important;
+ box-shadow:0 2px 13px #ff65b27a,inset 0 1px #ffecc9b8!important;
+}
+html[data-vice-theme="on"] #gameLobby .route-card .game-mode-photo::after{
+ background:linear-gradient(0deg,#170d30f2 0%,#25153a99 28%,#24103e15 73%,transparent)!important;
+}
+html[data-vice-theme="on"] #gameLobby .routes .route-card:hover .game-mode-photo,
+html[data-vice-theme="on"] #gameLobby .routes .route-card:focus-visible .game-mode-photo{
+ transform:scale(1.045)!important;
+}
+html[data-vice-theme="on"] #gameLobby .routes .route-card strong{
+ text-shadow:0 2px 6px #110829eb,0 0 12px #281439ab!important;
+}
+html[data-vice-theme="on"] #gameLobby .routes .route-card .route-top{
+ filter:drop-shadow(0 2px 4px #14082493);
+}
+html[data-vice-theme="on"] #gameLobby .routes .route-card{
+ transition:box-shadow .2s ease,transform .2s ease!important;
+}
+@media(max-width:760px){
+ /* Small top header is deliberately skin-specific: other pages are untouched. */
+ html[data-vice-theme="on"] .neoline-site-header .neoline-site-header__inner{
+  min-height:59px!important;
+  padding-block:3px!important;
+ }
+ html[data-vice-theme="on"] .neoline-site-header .neoline-site-header__logo img{
+  max-height:45px!important;
+ }
+ html[data-vice-theme="on"] .neoline-site-header .neoline-site-header__flag{
+  height:34px!important;
+ }
+ html[data-vice-theme="on"] .neoline-site-header .neoline-site-header__cart{
+  height:38px!important;
+ }
+ html[data-vice-theme="on"] .game-hero.theory-dashboard{
+  grid-template-rows:clamp(149px,38vw,167px) auto!important;
+  row-gap:10px!important;
+ }
+ html[data-vice-theme="on"] .game-hero.theory-dashboard .hero-copy{
+  width:43%!important;max-width:43%!important;
+  padding:13px 0 14px 14px!important;
+ }
+ html[data-vice-theme="on"] .game-hero.theory-dashboard #heroTitle{
+  font-size:clamp(21px,5.7vw,27px)!important;
+  line-height:1.11!important;
+  letter-spacing:-.055em!important;
+  margin:7px 0 6px!important;
+ }
+ html[data-vice-theme="on"] .theory-promo-host .vice-cinema-mask{
+  background:
+   linear-gradient(90deg,#180d38d7 0%,#210d3868 27%,transparent 46%,#27103581 100%),
+   linear-gradient(0deg,#1d103b77,transparent 44%)!important;
+ }
+ html[data-vice-theme="on"] .theory-promo-host .vice-cinema-frame--city .vice-cinema-scene,
+ html[data-vice-theme="on"] .theory-promo-host .vice-cinema-frame--rewards .vice-cinema-scene,
+ html[data-vice-theme="on"] .theory-promo-host .vice-cinema-frame--duo .vice-cinema-scene{
+  background-size:cover!important;
+  background-position:center 48%!important;
+ }
+ html[data-vice-theme="on"] .theory-promo-host .vice-cinema-story,
+ html[data-vice-theme="on"] .theory-promo-host .vice-cinema-frame--rewards .vice-cinema-story,
+ html[data-vice-theme="on"] .theory-promo-host .vice-cinema-frame--duo .vice-cinema-story{
+  top:23px!important;
+  right:9px!important;
+  width:29%!important;
+  max-width:29%!important;
+ }
+ html[data-vice-theme="on"] .theory-promo-host .vice-cinema-headline{
+  font-size:clamp(11px,3vw,15px)!important;
+  line-height:1.08!important;
+  padding:5px 6px!important;
+  word-break:normal!important;
+ }
+ html[data-vice-theme="on"] .theory-promo-host .vice-cinema-sub{
+  font-size:clamp(8px,2.05vw,10px)!important;
+  line-height:1.19!important;
+ }
+ html[data-vice-theme="on"] .theory-dashboard .hero-orbs{
+  min-height:0!important;
+  padding:7px 4px 6px!important;
+  gap:3px!important;
+ }
+ html[data-vice-theme="on"] .theory-dashboard .hero-orb-ring{
+  width:clamp(53px,16.2vw,76px)!important;
+  height:clamp(53px,16.2vw,76px)!important;
+ }
+ html[data-vice-theme="on"] .theory-dashboard .hero-progress-open{
+  width:clamp(53px,16.2vw,76px)!important;
+  height:clamp(53px,16.2vw,76px)!important;
+ }
+ html[data-vice-theme="on"] .theory-dashboard .hero-orb-caption,
+ html[data-vice-theme="on"] .theory-dashboard .hero-progress-caption{
+  padding:2px 3px!important;
+  font-size:clamp(8px,2vw,10px)!important;
+ }
+ html[data-vice-theme="on"] #theoryDaily{
+  padding:10px 11px!important;
+  gap:6px 10px!important;
+  margin:8px 0 9px!important;
+  border-radius:20px!important;
+ }
+ html[data-vice-theme="on"] #theoryDaily .theory-daily-icon{
+  width:40px!important;height:40px!important;border-radius:13px!important;
+ }
+ html[data-vice-theme="on"] #theoryDaily .theory-daily-text{
+  padding-inline-start:10px!important;gap:1px!important;
+ }
+ html[data-vice-theme="on"] #theoryDaily .theory-daily-text strong{
+  font-size:15px!important;line-height:1.1!important;
+ }
+ html[data-vice-theme="on"] #theoryDaily .theory-daily-text span{
+  font-size:10px!important;line-height:1.28!important;
+ }
+ html[data-vice-theme="on"] #theoryDaily .theory-daily-actions{
+  gap:8px!important;
+ }
+ html[data-vice-theme="on"] #theoryDaily .theory-daily-streak{
+  min-height:34px!important;padding:6px 9px!important;
+ }
+ html[data-vice-theme="on"] #theoryDaily .theory-daily-start{
+  min-height:36px!important;padding:7px 10px!important;
+  font-size:11px!important;
+  border-radius:11px!important;
+ }
+ html[data-vice-theme="on"] #gameLobby{
+  margin-top:8px!important;
+  padding:11px 10px 13px!important;
+ }
+ html[data-vice-theme="on"] #gameLobby::before{
+  height:91px!important;
+  opacity:.85!important;
+ }
+ html[data-vice-theme="on"] #gameLobby .panel-toolbar{
+  min-height:0!important;
+  display:grid!important;
+  grid-template-columns:minmax(0,1fr) auto!important;
+  align-items:end!important;
+  gap:5px 6px!important;
+  padding:4px 2px 10px!important;
+ }
+ html[data-vice-theme="on"] #gameLobby .toolbar-title{
+  grid-column:1!important;
+  min-width:0!important;
+ }
+ html[data-vice-theme="on"] #gameLobby #selectTitle{
+  font-size:clamp(21px,6vw,27px)!important;
+  margin:0 0 7px!important;
+  line-height:1.04!important;
+ }
+ html[data-vice-theme="on"] #gameLobby .toolbar-title .vice-theme-switch{
+  margin:0!important;
+  height:30px!important;min-height:30px!important;
+  font-size:9px!important;
+ }
+ html[data-vice-theme="on"] #gameLobby .settings{
+  grid-column:2!important;
+  min-width:0!important;
+  align-self:end!important;
+  margin:0!important;
+ }
+ html[data-vice-theme="on"] #gameLobby .class-select #licenseLabel{
+  display:none!important;
+ }
+ html[data-vice-theme="on"] #gameLobby .theory-licence-open{
+  min-width:87px!important;
+  min-height:35px!important;
+  padding:5px 9px!important;
+  border-radius:13px!important;
+ }
+ html[data-vice-theme="on"] #gameLobby .routes{
+  gap:9px!important;
+  margin-top:2px!important;
+ }
+ html[data-vice-theme="on"] #gameLobby .routes .route-card{
+  min-height:165px!important;
+  padding:9px 8px 9px!important;
+  border-radius:16px!important;
+  gap:3px!important;
+ }
+ html[data-vice-theme="on"] #gameLobby .routes .route-card strong{
+  font-size:clamp(12px,3.75vw,17px)!important;
+  line-height:1.1!important;
+ }
+ html[data-vice-theme="on"] #gameLobby .routes .route-card>span:not(.route-top):not(.route-cta):not(.game-mode-photo){
+  font-size:clamp(9px,2.25vw,10px)!important;
+  line-height:1.24!important;
+ }
+ html[data-vice-theme="on"] #gameLobby .routes .route-full{
+  min-height:100px!important;
+ }
+}
+@media(max-width:365px){
+ html[data-vice-theme="on"] .game-hero.theory-dashboard{
+  grid-template-rows:149px auto!important;
+ }
+ html[data-vice-theme="on"] .game-hero.theory-dashboard .hero-copy{
+  padding:11px 0 11px 10px!important;
+ }
+ html[data-vice-theme="on"] .game-hero.theory-dashboard #heroTitle{
+  font-size:clamp(19px,6vw,22px)!important;
+ }
+ html[data-vice-theme="on"] #gameLobby .theory-licence-open{
+  min-width:74px!important;padding:5px 6px!important;
+ }
+}
+@media(prefers-reduced-motion:reduce){
+ html[data-vice-theme="on"] .theory-promo-host .vice-cinema-frame--city.is-active .vice-cinema-scene{
+  animation:none!important;transform:none!important;
+ }
+}
+
+/* Cinematic artwork v3 and compact play-card geometry, 2026-11-22.
+ * Use the existing approved duo image as the central photograph, with an
+ * original character-free sunset SVG behind it. No text is baked into art. */
+html[data-vice-theme="on"] .theory-promo-host .vice-cinema-frame--city .vice-cinema-scene{
+ background-image:url("./assets/teoria/vice-cinematic-backdrop.svg")!important;
+ background-repeat:no-repeat!important;
+ background-size:cover!important;
+ background-position:center 48%!important;
+}
+html[data-vice-theme="on"] .theory-promo-host .vice-cinema-frame--city .vice-cinema-scene::before{
+ content:"";
+ position:absolute;inset:0 auto 0 24%;width:60%;height:100%;
+ pointer-events:none;
+ background:url("./assets/teoria/vice-approved-protagonists.webp") center 45%/cover no-repeat;
+ -webkit-mask-image:radial-gradient(ellipse 73% 88% at 51% 48%,#000 36%,#000d 60%,transparent 100%);
+ mask-image:radial-gradient(ellipse 73% 88% at 51% 48%,#000 36%,#000d 60%,transparent 100%);
+ filter:saturate(1.12) contrast(1.06);
+}
+html[data-vice-theme="on"] .game-hero.theory-dashboard #heroTitle{
+ font-size:clamp(28px,4.2vw,46px)!important;
+ font-weight:1000!important;
+}
+html[data-vice-theme="on"] .theory-promo-host .vice-cinema-frame--city .vice-cinema-tag{
+ display:none!important;
+}
+html[data-vice-theme="on"] .theory-promo-host .vice-cinema-frame--city .vice-cinema-story{
+ top:33%!important;
+}
+html[data-vice-theme="on"] .theory-promo-host .vice-cinema-frame--city .vice-cinema-headline{
+ background:linear-gradient(140deg,#ffdc77,#ffad72)!important;
+ box-shadow:0 2px 0 #c47569,0 3px 16px #fb97a3ba!important;
+ border:1px solid #ffe4b0!important;
+ color:#291539!important;
+}
+html[data-vice-theme="on"] #gameLobby .routes .route-card{
+ filter:saturate(1.08);
+}
+@media(max-width:760px){
+ html[data-vice-theme="on"] .game-hero.theory-dashboard #heroTitle{
+  font-size:clamp(25px,7.12vw,32px)!important;
+  line-height:1.05!important;
+  max-width:100%!important;
+ }
+ html[data-vice-theme="on"] .game-hero.theory-dashboard .hero-copy{
+  width:43%!important;max-width:43%!important;
+  padding:12px 0 12px 13px!important;
+ }
+ html[data-vice-theme="on"] .theory-promo-host .vice-cinema-frame--city .vice-cinema-scene::before{
+  left:21%;width:62%;
+  background-position:center 50%;
+ }
+ html[data-vice-theme="on"] .theory-promo-host .vice-cinema-frame--city .vice-cinema-story{
+  top:28%!important;right:7px!important;
+  width:30%!important;max-width:30%!important;
+  gap:5px!important;
+ }
+ html[data-vice-theme="on"] .theory-promo-host .vice-cinema-frame--city .vice-cinema-headline{
+  font-size:clamp(12px,3.35vw,17px)!important;
+  line-height:1!important;
+  padding:5px 6px!important;
+ }
+ html[data-vice-theme="on"] .theory-promo-host .vice-cinema-frame--city .vice-cinema-sub{
+  font-size:clamp(8px,2.05vw,10px)!important;
+  line-height:1.22!important;
+ }
+ html[data-vice-theme="on"] #gameLobby{
+  padding-bottom:12px!important;
+ }
+ html[data-vice-theme="on"] #gameLobby .panel-toolbar{
+  padding-bottom:7px!important;
+ }
+ html[data-vice-theme="on"] #gameLobby .routes .route-card:not(.route-full){
+  min-height:0!important;
+  height:clamp(110px,30vw,128px)!important;
+  padding:8px 9px 9px!important;
+  gap:2px!important;
+  border-radius:16px!important;
+ }
+ html[data-vice-theme="on"] #gameLobby .routes .route-card .route-top{
+  top:6px!important;left:7px!important;right:7px!important;
+ }
+ html[data-vice-theme="on"] #gameLobby .route-card .route-icon{
+  width:30px!important;height:30px!important;
+  min-width:30px!important;max-width:30px!important;
+  padding:4px!important;
+  border-radius:9px!important;
+ }
+ html[data-vice-theme="on"] #gameLobby .route-card .route-icon svg{
+  width:21px!important;height:21px!important;
+ }
+ html[data-vice-theme="on"] #gameLobby .route-card .route-length{
+  min-width:27px!important;width:auto!important;
+  height:27px!important;padding:2px 6px!important;
+  font-size:12px!important;
+ }
+ html[data-vice-theme="on"] #gameLobby .routes .route-card strong{
+  font-size:clamp(12px,3.65vw,17px)!important;
+  line-height:1.1!important;
+  margin:auto 0 0!important;
+  padding:0!important;
+ }
+ html[data-vice-theme="on"] #gameLobby .routes .route-card>span:not(.route-top):not(.route-cta):not(.game-mode-photo){
+  font-size:clamp(9px,2.15vw,10px)!important;
+  line-height:1.17!important;
+ }
+ html[data-vice-theme="on"] #gameLobby .routes .route-full{
+  min-height:90px!important;height:90px!important;
+  padding:11px 10px 10px 46px!important;
+ }
+ html[data-vice-theme="on"] #gameLobby .route-full .route-top{
+  top:11px!important;left:8px!important;
+ }
+ html[data-vice-theme="on"] #gameLobby .route-full .route-icon{
+  width:28px!important;height:28px!important;
+  min-width:28px!important;max-width:28px!important;
+ }
+ html[data-vice-theme="on"] #gameLobby .routes{
+  gap:8px!important;margin-top:2px!important;
+ }
+ html[data-vice-theme="on"] #gameLobby .source-note{
+  margin-top:8px!important;
+  padding:7px 9px!important;
+  line-height:1.32!important;font-size:9px!important;
+ }
+}
+@media(max-width:350px){
+ html[data-vice-theme="on"] .game-hero.theory-dashboard #heroTitle{
+  font-size:24px!important;
+ }
+ html[data-vice-theme="on"] #gameLobby .routes .route-card:not(.route-full){
+  min-height:112px!important;height:112px!important;
+ }
+}
+@media(prefers-reduced-motion:reduce){
+ html[data-vice-theme="on"] .theory-promo-host .vice-cinema-frame--city .vice-cinema-scene::before{transition:none!important}
+}
+
+/* Short Android screens: fit the whole five-card board like the reference.
+ * Only phone-height lobby is condensed; dialogs, gameplay and the classic
+ * look are not altered. The official question bank stays below the board. */
+@media(max-width:760px) and (max-height:850px){
+ html[data-vice-theme="on"] .game-hero.theory-dashboard{
+  grid-template-rows:125px auto!important;
+  row-gap:7px!important;
+  margin:5px 0 8px!important;
+ }
+ html[data-vice-theme="on"] .game-hero.theory-dashboard .hero-art{min-height:0!important}
+ html[data-vice-theme="on"] .game-hero.theory-dashboard .hero-copy{
+  padding:9px 0 10px 11px!important;
+ }
+ html[data-vice-theme="on"] .game-hero.theory-dashboard #heroTitle{
+  font-size:clamp(21px,6.6vw,27px)!important;
+  line-height:1.06!important;
+  margin:6px 0 5px!important;
+ }
+ html[data-vice-theme="on"] .game-hero.theory-dashboard .game-gift-trigger{
+  min-height:26px!important;
+  padding:3px 7px!important;
+  font-size:10px!important;
+ }
+ html[data-vice-theme="on"] .theory-promo-host .vice-cinema-frame--city .vice-cinema-story{
+  top:26%!important;gap:3px!important;
+ }
+ html[data-vice-theme="on"] .theory-dashboard .hero-orbs{
+  min-height:70px!important;
+  padding:5px 3px 4px!important;
+  gap:2px!important;
+ }
+ html[data-vice-theme="on"] .theory-dashboard .hero-orb-ring,
+ html[data-vice-theme="on"] .theory-dashboard .hero-progress-open{
+  width:clamp(45px,13.3vw,56px)!important;
+  height:clamp(45px,13.3vw,56px)!important;
+ }
+ html[data-vice-theme="on"] .theory-dashboard .hero-orb-number{
+  font-size:clamp(15px,4.3vw,19px)!important;
+ }
+ html[data-vice-theme="on"] .theory-dashboard .hero-progress-icon{
+  font-size:clamp(23px,6vw,30px)!important;
+ }
+ html[data-vice-theme="on"] .theory-dashboard .hero-orb-caption,
+ html[data-vice-theme="on"] .theory-dashboard .hero-progress-caption{
+  font-size:8px!important;
+  padding:1px 3px!important;
+ }
+ html[data-vice-theme="on"] #theoryDaily{
+  margin:5px 0 6px!important;
+  padding:6px 9px!important;
+  gap:3px 7px!important;
+  border-radius:17px!important;
+ }
+ html[data-vice-theme="on"] #theoryDaily .theory-daily-icon{
+  width:33px!important;height:33px!important;
+  font-size:21px!important;border-radius:11px!important;
+ }
+ html[data-vice-theme="on"] #theoryDaily .theory-daily-text strong{
+  font-size:14px!important;line-height:1.1!important;
+ }
+ html[data-vice-theme="on"] #theoryDaily .theory-daily-text span{
+  font-size:10px!important;
+  line-height:1.2!important;
+ }
+ html[data-vice-theme="on"] #theoryDaily .theory-daily-start{
+  min-height:29px!important;padding:4px 7px!important;
+  font-size:10px!important;
+ }
+ html[data-vice-theme="on"] #theoryDaily .theory-daily-streak{
+  min-height:31px!important;padding:5px 8px!important;
+  font-size:9px!important;
+ }
+ html[data-vice-theme="on"] #gameLobby{
+  margin-top:4px!important;
+  padding:6px 9px 11px!important;
+ }
+ html[data-vice-theme="on"] #gameLobby::before{height:76px!important}
+ html[data-vice-theme="on"] #gameLobby .panel-toolbar{
+  padding:1px 2px 4px!important;
+  gap:4px 6px!important;
+  min-height:0!important;
+ }
+ html[data-vice-theme="on"] #gameLobby #selectTitle{
+  font-size:clamp(19px,5.2vw,23px)!important;
+  margin:0 0 2px!important;
+ }
+ html[data-vice-theme="on"] #gameLobby .toolbar-title .vice-theme-switch{
+  height:25px!important;min-height:25px!important;
+  font-size:9px!important;
+  padding:2px 6px!important;
+ }
+ html[data-vice-theme="on"] #gameLobby .theory-licence-open{
+  min-height:31px!important;
+  padding:3px 7px!important;
+ }
+ html[data-vice-theme="on"] #gameLobby .routes{
+  gap:7px!important;
+  margin-top:0!important;
+ }
+ html[data-vice-theme="on"] #gameLobby .routes .route-card:not(.route-full){
+  min-height:82px!important;
+  height:82px!important;
+  padding:7px 8px!important;
+  gap:2px!important;
+ }
+ html[data-vice-theme="on"] #gameLobby .route-card .route-icon{
+  width:26px!important;height:26px!important;
+  min-width:26px!important;max-width:26px!important;
+  border-radius:8px!important;padding:3px!important;
+ }
+ html[data-vice-theme="on"] #gameLobby .route-card .route-icon svg{
+  width:18px!important;height:18px!important;
+ }
+ html[data-vice-theme="on"] #gameLobby .route-card .route-length{
+  height:24px!important;min-width:24px!important;
+  font-size:10px!important;
+ }
+ html[data-vice-theme="on"] #gameLobby .routes .route-card strong{
+  font-size:clamp(11px,3.3vw,14px)!important;
+  line-height:1.06!important;
+ }
+ html[data-vice-theme="on"] #gameLobby .routes .route-card>span:not(.route-top):not(.route-cta):not(.game-mode-photo){
+  font-size:clamp(8px,2.05vw,9px)!important;
+  line-height:1.1!important;
+ }
+ html[data-vice-theme="on"] #gameLobby .routes .route-full{
+  height:58px!important;min-height:58px!important;
+  padding:7px 8px 7px 40px!important;
+ }
+ html[data-vice-theme="on"] #gameLobby .route-full .route-top{
+  top:9px!important;left:8px!important;
+ }
+ html[data-vice-theme="on"] #gameLobby .route-full .route-icon{
+  width:25px!important;height:25px!important;
+  min-width:25px!important;max-width:25px!important;
+ }
+}
+@media(max-width:350px) and (max-height:850px){
+ html[data-vice-theme="on"] #gameLobby .routes .route-card:not(.route-full){
+  height:99px!important;min-height:99px!important;
+ }
+ html[data-vice-theme="on"] #gameLobby .routes .route-full{
+  height:70px!important;min-height:70px!important;
+ }
+}
+
+
+/* SOURCE: teoria-vice-final-polish.css */
+/* NEOLINE · VICE SUNSET · approved-screen polish
+   Fine adjustments only for the optional cinematic skin.
+   No changes to question data, results, dialogs, shop, or the site's shared dock. */
+html[data-vice-theme="on"]{
+ --vice-polish-hot:#ff83c8;
+ --vice-polish-aqua:#87f8ff;
+}
+html[data-vice-theme="on"] .topbar.neoline-site-header{
+ background-image:
+  linear-gradient(90deg,rgba(255,240,244,.86),rgba(255,215,233,.53) 58%,rgba(250,184,214,.4)),
+  url("./assets/teoria/vice-cinematic-backdrop.svg")!important;
+ background-size:cover!important;
+ background-position:center 34%!important;
+ border-bottom:1px solid #ff88c1!important;
+ box-shadow:0 4px 19px #2d104d65,0 1px 0 #ffe4e3 inset!important;
+}
+html[data-vice-theme="on"] .neoline-site-header__flags{
+ background:#fff9f5ec!important;
+ border-color:#efb8d5!important;
+ box-shadow:0 0 0 1px #ffeafa,0 3px 14px #dc83c04d!important;
+}
+html[data-vice-theme="on"] .neoline-site-header__flag:is(.active,[aria-pressed="true"]){
+ background:#fff8fb!important;
+ outline:1px solid #f38fca!important;
+ outline-offset:0!important;
+ box-shadow:0 0 0 2px #f982c6ab,0 2px 9px #c44a9561!important;
+}
+html[data-vice-theme="on"] .neoline-site-header__cart{
+ border:1px solid #f3bfd9!important;
+ background:#fff1f6f5!important;
+ box-shadow:0 3px 10px #6d266e31!important;
+}
+html[data-vice-theme="on"] .game-hero.theory-dashboard .hero-art{
+ border-color:#ffb8da!important;
+ box-shadow:0 0 0 1px #f474bba6,inset 0 0 13px #ffb4d93b,0 0 19px #fc6ea0a9,0 9px 27px #1e0b388c!important;
+}
+html[data-vice-theme="on"] .theory-promo-host .vice-cinema-frame--city .vice-cinema-scene{
+ filter:saturate(1.23) brightness(1.13)!important;
+}
+html[data-vice-theme="on"] .theory-promo-host .vice-cinema-frame--city .vice-cinema-scene::before{
+ background-size:cover!important;
+ background-position:center 46%!important;
+ filter:contrast(1.1) saturate(1.22) brightness(1.04)!important;
+ -webkit-mask-image:radial-gradient(ellipse 79% 95% at 49% 51%,#000 34%,#000e 58%,transparent 100%)!important;
+ mask-image:radial-gradient(ellipse 79% 95% at 49% 51%,#000 34%,#000e 58%,transparent 100%)!important;
+}
+html[data-vice-theme="on"] .theory-promo-host .vice-cinema-frame--city .vice-cinema-scene::after{
+ content:"";pointer-events:none;
+ position:absolute;inset:0;
+ background:url("./assets/teoria/vice-hero-highlights.svg") center center/cover no-repeat;
+ opacity:.94;
+}
+html[data-vice-theme="on"] .theory-promo-host .vice-cinema-frame--city .vice-cinema-mask{
+ background:
+  linear-gradient(90deg,#1a1038eb 0%,#291139b6 21%,#24103708 49%,#3213426e 100%),
+  linear-gradient(0deg,#24133c7b 0%,transparent 40%)!important;
+}
+html[data-vice-theme="on"] .game-hero.theory-dashboard .hero-copy{
+ z-index:7!important;
+ overflow:visible!important;
+}
+html[data-vice-theme="on"] .game-hero.theory-dashboard #heroTitle{
+ color:#b8f8ff!important;
+ -webkit-text-fill-color:#b8f8ff!important;
+ line-height:1.025!important;
+ font-weight:1000!important;
+ letter-spacing:-.069em!important;
+ text-shadow:0 2px 0 #4c246c,0 4px 9px #200b36db,0 0 14px #39d6f74c!important;
+}
+html[data-vice-theme="on"] .game-hero.theory-dashboard .game-hero-mini{
+ color:#ffeaf3!important;
+ letter-spacing:.11em!important;
+ font-weight:900!important;
+}
+html[data-vice-theme="on"] .game-hero.theory-dashboard .game-gift-trigger{
+ background:linear-gradient(105deg,#5c2359de,#472051df)!important;
+ border:1.5px solid #ffd19e!important;
+ box-shadow:0 0 0 1px #ff70bc4d,0 0 14px #ff67af94,inset 0 1px 0 #fff2c6a6!important;
+ color:#fff6ed!important;
+}
+html[data-vice-theme="on"] .theory-promo-host .vice-cinema-frame--city .vice-cinema-headline{
+ background:linear-gradient(160deg,#ffde82,#ffad76)!important;
+ border:1px solid #ffe9af!important;
+ color:#271439!important;
+ font-style:italic!important;
+ font-weight:1000!important;
+ text-shadow:none!important;
+ box-shadow:0 1px 0 #fff2bf inset,0 0 13px #ffd07c85,0 5px 14px #260f357f!important;
+}
+html[data-vice-theme="on"] .theory-promo-host .vice-cinema-frame--city .vice-cinema-sub{
+ color:#fff6f6!important;
+ font-weight:760!important;
+ text-shadow:0 1px 4px #231032,0 0 9px #150e25!important;
+}
+html[data-vice-theme="on"] .theory-promo-host .vice-cinema-arrow{
+ width:29px!important;height:29px!important;
+ border-color:#ffcae2!important;
+ box-shadow:0 0 12px #ff8bcaca,0 0 0 1px #f78fd64d!important;
+}
+html[data-vice-theme="on"] .theory-promo-host .theory-promo-dots{
+ background:#3b1c4bdb!important;
+ border-color:#ffb4ddb0!important;
+ box-shadow:0 0 12px #f364b37e!important;
+}
+html[data-vice-theme="on"] .theory-dashboard .hero-orbs{
+ border-color:#fda7d1!important;
+ background:
+  radial-gradient(ellipse at 85% 85%,#9b2e8780 0%,transparent 60%),
+  linear-gradient(118deg,#32183fef,#512653ef 60%,#2f1b4cf4)!important;
+ box-shadow:0 0 0 1px #ffb1cd61,inset 0 1px #ffe4f38e,0 0 17px #f779be5f!important;
+}
+html[data-vice-theme="on"] .theory-dashboard .hero-orb-ring{
+ padding:3px!important;
+ border:1px solid #fff1d1!important;
+ background:conic-gradient(from 210deg,#ff99af,#ffe0ac 20%,#80eefa 45%,#c390ff 73%,#ff99af)!important;
+ box-shadow:0 0 0 1px #ff8cc26b,0 0 14px #ff81bb81,inset 0 0 5px #fff3d5!important;
+}
+html[data-vice-theme="on"] .theory-dashboard .hero-orb-core{
+ background:radial-gradient(circle at 35% 22%,#50346d,#21142f 85%)!important;
+ box-shadow:inset 0 3px 6px #0003,inset 0 0 7px #ffffff14!important;
+}
+html[data-vice-theme="on"] .theory-dashboard .hero-progress-open{
+ border:3px solid #ffe2a5!important;
+ background:radial-gradient(circle at 33% 26%,#fed5a7,#cc79aa 53%,#4c285e)!important;
+ box-shadow:0 0 0 2px #fcbd73b3,0 0 18px #ffcb65e6,inset 0 0 8px #fff8d861!important;
+}
+html[data-vice-theme="on"] .theory-dashboard .hero-orb-caption,
+html[data-vice-theme="on"] .theory-dashboard .hero-progress-caption{
+ background:#5a2b60ad!important;
+ border-color:#cf76b48b!important;
+ color:#ffe9ef!important;
+}
+html[data-vice-theme="on"] #theoryDaily{
+ background:
+  linear-gradient(110deg,#2c173fd9,#492054b9 55%,#582b6b78),
+  url("./assets/teoria/vice-cinematic-backdrop.svg") 55% 55%/cover no-repeat!important;
+ border:1.5px solid #fc9ac6!important;
+ box-shadow:0 0 0 1px #f782b344,0 0 16px #ec60a23a,0 9px 20px #18092d87!important;
+}
+html[data-vice-theme="on"] #theoryDaily .theory-daily-icon{
+ background:linear-gradient(145deg,#fa78ba,#8b2bba)!important;
+ border:1px solid #ffc3df!important;
+ box-shadow:inset 0 1px #ffe8f6ab,0 0 13px #f456a692!important;
+}
+html[data-vice-theme="on"] #theoryDaily .theory-daily-text strong{
+ color:#fff2f5!important;
+ text-shadow:0 1px 4px #190a2b!important;
+}
+html[data-vice-theme="on"] #theoryDaily .theory-daily-text span{
+ color:#fce4f3!important;
+}
+html[data-vice-theme="on"] #theoryDaily .theory-daily-start{
+ background:linear-gradient(112deg,#fa56ab,#ffbb76)!important;
+ box-shadow:inset 0 1px 0 #fff1dedb,0 0 12px #ff75bba1!important;
+ color:#271331!important;
+ border-color:#ffd49e!important;
+}
+html[data-vice-theme="on"] #gameLobby{
+ border-color:#fca1d2!important;
+ box-shadow:0 0 0 1px #fd7abc50,0 0 13px #f778ba3b,0 12px 29px #11042196!important;
+ background:linear-gradient(140deg,#2a1642,#3a1d4d 65%,#2d173c)!important;
+}
+html[data-vice-theme="on"] #gameLobby::before{
+ background:
+  linear-gradient(0deg,#29183ce8,transparent 74%),
+  url("./assets/teoria/vice-card-city.svg") center 36%/cover no-repeat!important;
+ opacity:1!important;
+}
+html[data-vice-theme="on"] #gameLobby #selectTitle{
+ color:#fff0f6!important;
+ font-weight:1000!important;
+ text-shadow:0 2px 8px #110c28b5,0 0 9px #e575c68f!important;
+}
+html[data-vice-theme="on"] #gameLobby .toolbar-title .vice-theme-switch{
+ border-color:#ffe7b5!important;
+ background:linear-gradient(112deg,#ff71b9,#ffb678)!important;
+ box-shadow:0 3px 11px #d4419c83,inset 0 1px #fff2d59e!important;
+}
+html[data-vice-theme="on"] #gameLobby .theory-licence-open{
+ border:1px solid #fba6d8!important;
+ background:#52255edb!important;
+ box-shadow:0 0 8px #e45fbd3b,inset 0 1px #ffdbf16e!important;
+}
+html[data-vice-theme="on"] #gameLobby .theory-licence-open::before{
+ content:"Права";display:inline-block;
+ font:760 10px/1 Manrope,Arial,sans-serif;
+ color:#ffe7f3;margin-right:4px;
+}
+html[data-vice-theme="on"][lang="he"] #gameLobby .theory-licence-open::before{
+ content:"רישיון";
+}
+html[data-vice-theme="on"][lang="ar"] #gameLobby .theory-licence-open::before{
+ content:"رخصة";
+}
+html[data-vice-theme="on"][lang="en"] #gameLobby .theory-licence-open::before{
+ content:"Class";
+}
+html[data-vice-theme="on"] #gameLobby .routes .route-card{
+ filter:none!important;
+ border:1.5px solid #ff95cb!important;
+ box-shadow:0 0 0 1px #ed69b54d,0 0 13px #ec58b14f,inset 0 1px #ffe0f566,0 4px 10px #190d37ad!important;
+ background:#472456!important;
+}
+html[data-vice-theme="on"] #gameLobby .routes .route-card:nth-child(even){
+ border-color:#78edee!important;
+ box-shadow:0 0 0 1px #a1ffff50,0 0 13px #56daf44d,inset 0 1px #e2ffff75,0 4px 10px #190d37ad!important;
+}
+html[data-vice-theme="on"] #gameLobby .routes .route-card .game-mode-photo{
+ filter:brightness(1.18) saturate(1.29) contrast(1.04)!important;
+ background-position:center center!important;
+}
+html[data-vice-theme="on"] #gameLobby .route-card .game-mode-photo::after{
+ background:linear-gradient(to top,#160d2de0 0%,#25163d82 29%,#27133c24 56%,transparent 100%)!important;
+}
+html[data-vice-theme="on"] #gameLobby .routes .route-card strong{
+ color:#fff8ee!important;
+ text-shadow:0 2px 6px #11051bea,0 0 10px #1a0b24ed!important;
+ font-weight:1000!important;
+ letter-spacing:-.032em!important;
+}
+html[data-vice-theme="on"] #gameLobby .routes .route-card>span:not(.route-top):not(.route-cta):not(.game-mode-photo){
+ color:#fff5f3!important;
+ text-shadow:0 1px 6px #12081ee3!important;
+}
+html[data-vice-theme="on"] #gameLobby .route-card .route-icon{
+ background:#3c1b56d5!important;
+ border-color:#ffbedb!important;
+ box-shadow:0 0 11px #ff7bc69b,inset 0 0 5px #ca75a961!important;
+}
+html[data-vice-theme="on"] #gameLobby .route-card .route-length{
+ border-color:#ffc1db!important;
+ background:#40234edb!important;
+ box-shadow:0 0 9px #ff8ac07a!important;
+}
+html[data-vice-theme="on"] #gameLobby .route-card:nth-child(even) .route-icon{
+ border-color:#9cfbfa!important;
+ box-shadow:0 0 10px #7bf6e5a1!important;
+}
+html[data-vice-theme="on"] #gameLobby .routes .route-card:focus-visible{
+ outline:3px solid #fff5c1!important;
+ outline-offset:2px!important;
+}
+@media(max-width:760px){
+ html[data-vice-theme="on"] .game-hero.theory-dashboard #heroTitle{
+  font-size:clamp(26px,7.55vw,33px)!important;
+  letter-spacing:-.075em!important;
+  line-height:1.025!important;
+ }
+ html[data-vice-theme="on"] .game-hero.theory-dashboard .hero-copy{
+  width:46%!important;max-width:46%!important;
+  padding-left:13px!important;
+ }
+ html[data-vice-theme="on"] .game-hero.theory-dashboard .game-gift-trigger{
+  font-size:10px!important;
+ }
+ html[data-vice-theme="on"] .theory-promo-host .vice-cinema-frame--city .vice-cinema-story{
+  right:8px!important;max-width:31%!important;width:31%!important;
+  top:26%!important;
+ }
+ html[data-vice-theme="on"] .theory-promo-host .vice-cinema-frame--city .vice-cinema-headline{
+  font-size:clamp(12px,3.3vw,16px)!important;
+  padding:5px 7px!important;
+ }
+ html[data-vice-theme="on"] .theory-promo-host .vice-cinema-frame--city .vice-cinema-sub{
+  font-size:clamp(8px,2.12vw,10px)!important;
+  line-height:1.23!important;
+ }
+ html[data-vice-theme="on"] #gameLobby .theory-licence-open{
+  gap:3px!important;
+  padding:4px 7px!important;
+  min-width:94px!important;
+ }
+ html[data-vice-theme="on"] #gameLobby .routes .route-card strong{
+  font-size:clamp(13px,3.55vw,17px)!important;
+  line-height:1.1!important;
+ }
+ html[data-vice-theme="on"] #gameLobby .routes .route-full strong{
+  font-size:clamp(14px,3.5vw,19px)!important;
+ }
+}
+@media(max-width:760px) and (max-height:850px){
+ html[data-vice-theme="on"] .game-hero.theory-dashboard #heroTitle{
+  font-size:clamp(25px,7vw,29px)!important;
+  line-height:1.03!important;
+ }
+ html[data-vice-theme="on"] #gameLobby .theory-licence-open{
+  min-width:84px!important;
+ }
+ html[data-vice-theme="on"] #gameLobby .routes .route-card:not(.route-full) strong{
+  font-size:clamp(12px,3.28vw,14px)!important;
+  line-height:1.06!important;
+ }
+ html[data-vice-theme="on"] #gameLobby .routes .route-full strong{
+  font-size:clamp(12px,3.35vw,15px)!important;
+ }
+}
+@media(max-width:350px){
+ html[data-vice-theme="on"] .game-hero.theory-dashboard #heroTitle{
+  font-size:23px!important;
+ }
+ html[data-vice-theme="on"] #gameLobby .theory-licence-open::before{
+  display:none!important;
+ }
+}
+@media(prefers-reduced-motion:reduce){
+ html[data-vice-theme="on"] .theory-promo-host .vice-cinema-frame--city .vice-cinema-scene{
+  animation:none!important;transition:none!important;
+ }
+}
+
+/* The reference keeps the carousel navigation clear of the left title. */
+html[data-vice-theme="on"] .theory-promo-host .vice-cinema-arrow--prev{
+ left:59%!important;
+}
+html[data-vice-theme="on"] .theory-promo-host .vice-cinema-arrow--next{
+ right:7px!important;
+}
+html[data-vice-theme="on"] .theory-promo-host .theory-promo-dots{
+ left:65%!important;
+ transform:translateX(-50%)!important;
+}
+@media(max-width:365px){
+ html[data-vice-theme="on"] .theory-promo-host .vice-cinema-arrow--prev{left:60%!important}
+ html[data-vice-theme="on"] .theory-promo-host .theory-promo-dots{left:62%!important}
+}
+
+/* 2026-11-22 | HD neon photographic composites, approved game reference.
+ * Each data-backed SVG includes locally embedded game art so it renders
+ * offline and does not require any external image hosts. */
+html[data-vice-theme="on"] #gameLobby .routes .route-card.route-blue .game-mode-photo{
+ background-image:url("./assets/teoria/vice-hd-city.svg")!important;
+}
+html[data-vice-theme="on"] #gameLobby .routes .route-card.route-mint .game-mode-photo{
+ background-image:url("./assets/teoria/vice-hd-signs.svg")!important;
+}
+html[data-vice-theme="on"] #gameLobby .routes .route-card.route-indigo .game-mode-photo{
+ background-image:url("./assets/teoria/vice-hd-exam.svg")!important;
+}
+html[data-vice-theme="on"] #gameLobby .routes .route-card.route-amber .game-mode-photo{
+ background-image:url("./assets/teoria/vice-hd-mistakes.svg")!important;
+}
+html[data-vice-theme="on"] #gameLobby .routes .route-card.route-full .game-mode-photo{
+ background-image:url("./assets/teoria/vice-hd-marathon.svg")!important;
+}
+html[data-vice-theme="on"] #gameLobby .routes .route-card .game-mode-photo{
+ background-size:cover!important;
+ background-position:center center!important;
+ filter:brightness(1.08) saturate(1.12) contrast(1.045)!important;
+}
+html[data-vice-theme="on"] #gameLobby .routes .route-card:not(.route-full) .game-mode-photo::after{
+ background:linear-gradient(to top,#100923e8 0%,#1b1031ae 22%,#25123921 45%,transparent 72%)!important;
+}
+html[data-vice-theme="on"] #gameLobby .routes .route-full .game-mode-photo::after{
+ background:linear-gradient(90deg,#1b1035e8 0%,#2415389d 34%,#22133119 67%,transparent 100%)!important;
+}
+@media(prefers-reduced-motion:reduce){
+ html[data-vice-theme="on"] #gameLobby .routes .route-card .game-mode-photo{transition:none!important}
+}
+
+/* Place the slider controls in the bottom visual gutter, not on faces. */
+html[data-vice-theme="on"] .theory-promo-host .vice-cinema-arrow--prev,
+html[data-vice-theme="on"] .theory-promo-host .vice-cinema-arrow--next{
+ top:auto!important;
+ bottom:11px!important;
+ transform:none!important;
+}
+html[data-vice-theme="on"] .theory-promo-host .vice-cinema-arrow--prev{
+ left:52%!important;
+}
+html[data-vice-theme="on"] .theory-promo-host .vice-cinema-arrow--next{
+ right:7px!important;
+}
+html[data-vice-theme="on"] .theory-promo-host .theory-promo-dots{
+ bottom:11px!important;
+ left:70%!important;
+ transform:translateX(-50%)!important;
+}
+@media(max-width:365px){
+ html[data-vice-theme="on"] .theory-promo-host .vice-cinema-arrow--prev{left:49%!important}
+ html[data-vice-theme="on"] .theory-promo-host .theory-promo-dots{left:69%!important}
+}
+
+
+/* SOURCE: teoria-vice-live-reference.css */
+/* NEOLINE Israel / approved poster, 22 November 2026
+   User-supplied driving-theory poster, locally optimized as AVIF.
+   Russian neon mode uses the exact visual only for FIRST promo slide.
+   All controls remain real DOM elements, keyboard accessible and clickable.
+   EN/HE/AR and ordinary mode keep live localized text and layered artwork. */
+
+/* Keep the same banner height as the carousel rotates: no jumping frame. */
+@media(max-width:760px){
+ html.vice-reference-ready[data-vice-theme="on"][lang^="ru"] .game-hero.theory-dashboard{
+  grid-template-rows:clamp(114px,30vw,204px) auto!important;
+  row-gap:9px!important;
+ }
+ html.vice-reference-ready[data-vice-theme="on"][lang^="ru"] .game-hero.theory-dashboard .hero-art{
+  min-height:0!important;
+  height:100%!important;
+ }
+}
+
+/* Reference image is deliberately first slide only.
+   Accessible text and interactive buttons are still real website content. */
+html.vice-reference-ready[data-vice-theme="on"][lang^="ru"] .theory-promo-host .vice-cinema-frame--city .vice-cinema-scene{
+ background-image:url("./assets/teoria/vice-hero-reference.avif")!important;
+ background-repeat:no-repeat!important;
+ background-size:100% 100%!important;
+ background-position:center!important;
+ filter:none!important;
+ transform:none!important;
+ animation:none!important;
+}
+html.vice-reference-ready[data-vice-theme="on"][lang^="ru"] .theory-promo-host .vice-cinema-frame--city.is-active .vice-cinema-scene{
+ transform:none!important;
+ animation:none!important;
+}
+html.vice-reference-ready[data-vice-theme="on"][lang^="ru"] .theory-promo-host .vice-cinema-frame--city .vice-cinema-scene::before,
+html.vice-reference-ready[data-vice-theme="on"][lang^="ru"] .theory-promo-host .vice-cinema-frame--city .vice-cinema-scene::after{
+ display:none!important;
+ content:none!important;
+}
+html.vice-reference-ready[data-vice-theme="on"][lang^="ru"] .theory-promo-host .vice-cinema-frame--city .vice-cinema-mask{
+ display:none!important;
+}
+html.vice-reference-ready[data-vice-theme="on"][lang^="ru"] .theory-promo-host .vice-cinema-frame--city .vice-cinema-story{
+ visibility:hidden!important;
+ opacity:0!important;
+ pointer-events:none!important;
+}
+
+/* The Russian banner already contains its own title, promotional label
+   and gift depiction. Keep semantic/live counterparts off the pixels only. */
+html.vice-reference-ready[data-vice-theme="on"][lang^="ru"] .game-hero.theory-dashboard[data-vice-promo-slide="0"] .hero-copy{
+ height:100%!important;
+ min-height:0!important;
+ max-height:100%!important;
+ align-self:stretch!important;
+ box-sizing:border-box!important;
+ padding:0!important;
+ overflow:visible!important;
+ position:relative!important;
+}
+html.vice-reference-ready[data-vice-theme="on"][lang^="ru"] .game-hero.theory-dashboard[data-vice-promo-slide="0"] .game-hero-mini,
+html.vice-reference-ready[data-vice-theme="on"][lang^="ru"] .game-hero.theory-dashboard[data-vice-promo-slide="0"] .eyebrow,
+html.vice-reference-ready[data-vice-theme="on"][lang^="ru"] .game-hero.theory-dashboard[data-vice-promo-slide="0"] #heroTitle,
+html.vice-reference-ready[data-vice-theme="on"][lang^="ru"] .game-hero.theory-dashboard[data-vice-promo-slide="0"] .hero-stroke{
+ opacity:0!important;
+ visibility:hidden!important;
+}
+html.vice-reference-ready[data-vice-theme="on"][lang^="ru"] .game-hero.theory-dashboard[data-vice-promo-slide="0"] .game-gift-trigger{
+ position:absolute!important;
+ left:10px!important;
+ bottom:19%!important;
+ display:block!important;
+ width:clamp(84px,27vw,145px)!important;
+ height:clamp(26px,8vw,38px)!important;
+ min-height:26px!important;
+ opacity:0!important;
+ pointer-events:auto!important;
+ z-index:11!important;
+ margin:0!important;
+ padding:0!important;
+ border-radius:30px!important;
+}
+
+/* Overlay invisible but full-size action targets over the poster's baked
+   arrows and pagination. This avoids double controls while preserving
+   swipe, buttons, click actions and visible artwork. */
+html.vice-reference-ready[data-vice-theme="on"][lang^="ru"] .theory-promo-host[data-vice-active-slide="0"] .vice-cinema-arrow,
+html.vice-reference-ready[data-vice-theme="on"][lang^="ru"] .theory-promo-host[data-vice-active-slide="0"] .theory-promo-dots{
+ opacity:0!important;
+ background:transparent!important;
+ box-shadow:none!important;
+ border-color:transparent!important;
+ pointer-events:auto!important;
+}
+html.vice-reference-ready[data-vice-theme="on"][lang^="ru"] .theory-promo-host .vice-cinema-arrow--prev{
+ left:49%!important;
+}
+html.vice-reference-ready[data-vice-theme="on"][lang^="ru"] .theory-promo-host .vice-cinema-arrow--next{
+ right:4px!important;
+}
+html.vice-reference-ready[data-vice-theme="on"][lang^="ru"] .theory-promo-host .vice-cinema-arrow{
+ top:auto!important;
+ bottom:4px!important;
+ transform:none!important;
+}
+html.vice-reference-ready[data-vice-theme="on"][lang^="ru"] .theory-promo-host .theory-promo-dots{
+ left:70%!important;
+ bottom:3px!important;
+ transform:translateX(-50%)!important;
+}
+
+@media(prefers-reduced-motion:reduce){
+ html.vice-reference-ready[data-vice-theme="on"][lang^="ru"] .theory-promo-host .vice-cinema-frame--city .vice-cinema-scene{
+  transition:none!important;
+ }
+}
+/* Source-faithful cinematic PHOTO crops for the five playable route cards.
+   The asset contains only imagery, not game counters or tappable controls.
+   Live names, question counts and progress remain on the actual buttons.
+   Limited to the Russian neon view because the exam prop contains Russian. */
+html.vice-reference-cards-ready[data-vice-theme="on"][lang^="ru"] #gameLobby .routes .route-card .game-mode-photo{
+ background-image:url("./assets/teoria/vice-reference-card-sprite.avif")!important;
+ background-repeat:no-repeat!important;
+ background-size:200% 300%!important;
+ filter:saturate(1.09) contrast(1.04)!important;
+}
+html.vice-reference-cards-ready[data-vice-theme="on"][lang^="ru"] #gameLobby .routes .route-card.route-blue .game-mode-photo{
+ background-position:0% 0%!important;
+}
+html.vice-reference-cards-ready[data-vice-theme="on"][lang^="ru"] #gameLobby .routes .route-card.route-mint .game-mode-photo{
+ background-position:100% 0%!important;
+}
+html.vice-reference-cards-ready[data-vice-theme="on"][lang^="ru"] #gameLobby .routes .route-card.route-indigo .game-mode-photo{
+ background-position:0% 50%!important;
+}
+html.vice-reference-cards-ready[data-vice-theme="on"][lang^="ru"] #gameLobby .routes .route-card.route-amber .game-mode-photo{
+ background-position:100% 50%!important;
+}
+html.vice-reference-cards-ready[data-vice-theme="on"][lang^="ru"] #gameLobby .routes .route-card.route-full .game-mode-photo{
+ background-size:100% 300%!important;
+ background-position:50% 100%!important;
+}
+/* Readability without flattening the photographic roads and landmarks. */
+html.vice-reference-cards-ready[data-vice-theme="on"][lang^="ru"] #gameLobby .routes .route-card:not(.route-full) .game-mode-photo::after{
+ background:linear-gradient(0deg,#170c2bea 0%,#1a1035d8 22%,#1e103b53 45%,transparent 72%)!important;
+}
+html.vice-reference-cards-ready[data-vice-theme="on"][lang^="ru"] #gameLobby .routes .route-card.route-full .game-mode-photo::after{
+ background:linear-gradient(90deg,#1c1232f1 0%,#1c1232cf 30%,#1c123247 55%,transparent 75%)!important;
+}
+html.vice-reference-cards-ready[data-vice-theme="on"][lang^="ru"] #gameLobby .routes .route-card strong{
+ text-shadow:0 2px 5px #11081c,0 0 8px #11081c!important;
+}
+
+
+/* SOURCE: teoria-vice-radar-wasted.css */
+/* The lobby artwork must not sit ABOVE an active question.
+   Otherwise a long blank gap and dashboard medals remain visible in-game. */
+html[data-vice-theme="on"] body.theory-in-session .game-hero.theory-dashboard,
+html[data-vice-theme="on"] body.theory-in-session #theoryDaily,
+html[data-vice-theme="on"] body.theory-in-session .theory-daily,
+html[data-vice-theme="on"] body.theory-in-session #gameLobby{
+ display:none!important;
+}
+.vice-hud-title{display:none}
+html[data-vice-theme="on"] body.theory-in-session #gamePlaying .quiz-hud .vice-hud-title{
+ display:block!important;
+ flex:1 1 auto!important;
+ min-width:0!important;
+ color:#ffeaf1!important;
+ font:850 clamp(11px,3vw,13px)/1.15 Manrope,Arial,sans-serif!important;
+ overflow:hidden!important;
+ text-overflow:ellipsis!important;
+ white-space:nowrap!important;
+ text-shadow:0 1px 5px #180820!important;
+}
+html[data-vice-theme="on"] body.theory-in-session #gamePlaying .quiz-hud .mode-pill{
+ display:none!important;
+}
+html[data-vice-theme="on"] body.theory-in-session #gamePlaying .quiz-hud .hud-info{
+ flex:0 0 auto!important;
+ width:auto!important;
+ max-width:none!important;
+}
+html[data-vice-theme="on"] body.theory-in-session #gamePlaying .quiz-hud .hud-info:has(#timerBox[hidden]){
+ display:none!important;
+}
+/* Radar remains invisible in classic NEOLINE mode. */
+#dock4Progress .vice-radar-map{display:none}
+/* NEOLINE Israel — GTA-inspired in-game radar & cinematic failure.
+   Only active when visitor opts into the neon visual theme.
+   Quiz data, answers, timing, XP and reward logic remain authoritative. */
+html[data-vice-theme="on"] body.theory-in-session #gamePlaying{
+ padding-top:58px!important;
+ margin-top:0!important;
+}
+html[data-vice-theme="on"] body.theory-in-session #gamePlaying .quiz-hud{
+ position:fixed!important;
+ z-index:112!important;
+ top:max(6px,env(safe-area-inset-top,0px))!important;
+ left:50%!important;
+ right:auto!important;
+ transform:translateX(-50%)!important;
+ width:min(720px,calc(100vw - 22px))!important;
+ min-height:43px!important;
+ height:43px!important;
+ padding:4px 7px!important;
+ display:flex!important;
+ align-items:center!important;
+ justify-content:space-between!important;
+ gap:9px!important;
+ border:1px solid #dca0c8!important;
+ border-radius:15px!important;
+ background:linear-gradient(105deg,#251433f2,#432047ee 68%,#271a40f0)!important;
+ box-shadow:0 0 0 1px #fc93c344,0 5px 16px #1d092d9e,inset 0 1px #ffe1ef55!important;
+ backdrop-filter:blur(10px)!important;
+ -webkit-backdrop-filter:blur(10px)!important;
+}
+html[data-vice-theme="on"] body.theory-in-session #gamePlaying .quiz-hud .game-quiz-route.road9,
+html[data-vice-theme="on"] body.theory-in-session #gamePlaying .quiz-hud .hud-progress{
+ display:none!important;
+}
+html[data-vice-theme="on"] body.theory-in-session #gamePlaying .hud-back{
+ position:relative!important;
+ flex:none!important;
+ grid-column:auto!important;
+ grid-row:auto!important;
+ width:37px!important;
+ min-width:37px!important;
+ height:35px!important;
+ min-height:35px!important;
+ padding:4px!important;
+ margin:0!important;
+ border-radius:10px!important;
+ border:1px solid #f9a1d2!important;
+ color:#ffddf1!important;
+ background:#432552!important;
+}
+html[data-vice-theme="on"] body.theory-in-session #gamePlaying .hud-info,
+html[data-vice-theme="on"] body.theory-in-session #gamePlaying .hud-info:has(#timerBox[hidden]){
+ display:flex!important;
+ flex:1 1 auto!important;
+ flex-direction:row!important;
+ align-items:center!important;
+ justify-content:space-between!important;
+ grid-column:auto!important;
+ grid-row:auto!important;
+ width:auto!important;
+ max-width:none!important;
+ min-width:0!important;
+ gap:5px!important;
+}
+html[data-vice-theme="on"] body.theory-in-session #gamePlaying .mode-pill{
+ display:block!important;
+ flex:1 1 auto!important;
+ max-width:none!important;
+ min-width:0!important;
+ margin:0!important;
+ padding:6px 8px!important;
+ overflow:hidden!important;
+ text-overflow:ellipsis!important;
+ white-space:nowrap!important;
+ border:0!important;
+ color:#ffe7ee!important;
+ background:transparent!important;
+ font-size:clamp(10px,2.7vw,12px)!important;
+ text-align:start!important;
+}
+html[data-vice-theme="on"] body.theory-in-session #gamePlaying .hud-metrics{display:flex!important;flex:none!important}
+html[data-vice-theme="on"] body.theory-in-session #gamePlaying #timerBox:not([hidden]){
+ margin:0!important;
+ padding:5px 7px!important;
+ background:#54295ff2!important;
+ border:1px solid #e38eb6!important;
+ border-radius:9px!important;
+ font-size:12px!important;
+ color:#fff1f4!important;
+}
+html[data-vice-theme="on"] body.theory-in-session #gamePlaying .question-card{
+ margin-top:5px!important;
+}
+/* Compact floating HUD; the route is now in a real circular mini-GPS. */
+html[data-vice-theme="on"] body.theory-in-session .theory-game-dock{
+ display:grid!important;
+ grid-template-columns:43px minmax(0,1fr) 45px!important;
+ align-items:center!important;
+ justify-items:center!important;
+ gap:3px!important;
+ width:min(570px,calc(100% - 12px))!important;
+ height:80px!important;
+ bottom:max(6px,env(safe-area-inset-bottom,0px))!important;
+ padding:5px 9px!important;
+ border:1.5px solid #ff9dc9!important;
+ border-radius:23px!important;
+ background:linear-gradient(115deg,#251531f4,#432345f5 58%,#1c2544f5)!important;
+ box-shadow:0 0 0 1px #f992bd4d,inset 0 1px #fff0da66,
+            0 0 17px #fd66b26d,0 12px 25px #1405259e!important;
+ color:#ffecf3!important;
+ backdrop-filter:blur(12px) saturate(1.2)!important;
+ -webkit-backdrop-filter:blur(12px) saturate(1.2)!important;
+ isolation:isolate;
+}
+html[data-vice-theme="on"] body.theory-in-session .theory-game-dock::before{
+ border-radius:20px!important;
+ border-color:#ffb4de45!important;
+}
+html[data-vice-theme="on"] body.theory-in-session .theory-game-dock .dock4-center{
+ grid-column:2!important;
+ grid-row:1!important;
+ display:grid!important;
+ grid-template-columns:78px minmax(44px,1fr) minmax(65px,1fr)!important;
+ align-items:center!important;
+ justify-items:center!important;
+ justify-content:center!important;
+ gap:clamp(4px,1.4vw,9px)!important;
+ width:100%!important;
+ min-width:0!important;
+ max-width:370px!important;
+}
+html[data-vice-theme="on"] body.theory-in-session .theory-game-dock .dock4-modes{
+ grid-column:1!important;grid-row:1!important;
+ justify-self:center!important;
+ width:41px!important;min-width:41px!important;
+ min-height:44px!important;
+ height:56px!important;
+ margin:0!important;
+ padding:4px 1px!important;
+ font-size:9px!important;
+ color:#ffdaee!important;
+ gap:2px!important;
+}
+html[data-vice-theme="on"] body.theory-in-session .theory-game-dock .dock4-modes svg{
+ color:#9ff7ff!important;
+ width:24px!important;height:24px!important;
+ filter:drop-shadow(0 0 5px #84ffff78);
+}
+html[data-vice-theme="on"] body.theory-in-session .theory-game-dock .dock4-action{
+ grid-column:3!important;grid-row:1!important;
+ justify-self:center!important;
+ width:43px!important;height:49px!important;min-height:49px!important;
+ margin:0!important;
+ border:1px solid #ffadd3!important;
+ border-radius:15px!important;
+ background:#432851ed!important;
+ box-shadow:inset 0 1px #ffe7f26b,0 0 11px #ff9fd25f!important;
+}
+html[data-vice-theme="on"] body.theory-in-session .theory-game-dock .dock4-action svg{
+ stroke:#97faff!important;
+ width:25px!important;height:25px!important;
+}
+html[data-vice-theme="on"] body.theory-in-session .theory-game-dock .dock4-action:disabled{
+ opacity:.42!important;
+ filter:grayscale(.5)!important;
+}
+html[data-vice-theme="on"] body.theory-in-session .theory-game-dock .dock4-hint-count{
+ background:#ff5fa7!important;
+ border-color:#ffd4e6!important;
+}
+html[data-vice-theme="on"] body.theory-in-session .theory-game-dock .dock4-count{
+ order:unset!important;
+ grid-column:1!important;grid-row:1!important;
+ position:relative!important;
+ width:76px!important;
+ height:76px!important;
+ min-width:76px!important;
+ padding:4px!important;
+ overflow:hidden!important;
+ border:2px solid #ffddaa!important;
+ background:conic-gradient(from -90deg,#62faff 0deg var(--dock-progress),
+  #6d4c83 var(--dock-progress) 360deg)!important;
+ box-shadow:0 0 0 2px #fe77b98c,0 0 18px #71f6ff9c,0 3px 11px #0c0825af!important;
+}
+html[data-vice-theme="on"] body.theory-in-session .theory-game-dock .dock4-count .vice-radar-map{
+ position:absolute;z-index:1;
+ inset:4px!important;
+ width:calc(100% - 8px)!important;
+ height:calc(100% - 8px)!important;
+ border-radius:50%;
+ display:block!important;
+ overflow:hidden;
+ background:#172d42;
+ pointer-events:none;
+}
+html[data-vice-theme="on"] body.theory-in-session .theory-game-dock .dock4-count strong{
+ position:absolute!important;z-index:2!important;
+ top:auto!important;bottom:3px!important;
+ left:50%!important;transform:translateX(-50%)!important;
+ width:auto!important;height:auto!important;
+ min-width:39px!important;
+ padding:2px 4px!important;
+ display:block!important;
+ border:1px solid #a8fafa66!important;
+ border-radius:7px!important;
+ color:#f8f8fa!important;
+ background:#192438dd!important;
+ text-align:center!important;
+ font:900 10px/1.15 Manrope,Arial,sans-serif!important;
+ letter-spacing:-.03em!important;
+ box-shadow:0 0 5px #0b132d88!important;
+}
+html[data-vice-theme="on"] body.theory-in-session .theory-game-dock .dock4-xp{
+ grid-column:2!important;grid-row:1!important;
+ order:unset!important;
+ display:flex!important;
+ flex-direction:column!important;
+ justify-content:center!important;
+ align-items:center!important;
+ gap:1px!important;
+ width:100%!important;
+ min-width:0!important;
+ background:none!important;
+ border:0!important;
+}
+html[data-vice-theme="on"] body.theory-in-session .theory-game-dock .dock4-xp>span{
+ font-size:20px!important;
+ line-height:1.1!important;
+ color:#ffd46d!important;
+ filter:drop-shadow(0 0 5px #ffa762b8)!important;
+}
+html[data-vice-theme="on"] body.theory-in-session .theory-game-dock .dock4-xp strong{
+ color:#fff4df!important;
+ font-size:clamp(9px,2.45vw,12px)!important;
+ font-weight:900!important;
+ letter-spacing:-.03em!important;
+}
+html[data-vice-theme="on"] body.theory-in-session .theory-game-dock .dock4-hearts{
+ grid-column:3!important;grid-row:1!important;
+ order:unset!important;
+ width:100%!important;
+ min-width:0!important;
+ font-size:clamp(17px,4.7vw,24px)!important;
+ line-height:1!important;
+ letter-spacing:-2px!important;
+ color:#ff638e!important;
+ text-shadow:0 2px 0 #8a183d,0 0 9px #ff5f9bb0!important;
+}
+html[data-vice-theme="on"] body.theory-in-session .theory-game-dock .dock4-hearts[data-exam="true"]{
+ font-size:19px!important;color:#d5f8ff!important;
+}
+html[data-vice-theme="on"] body.theory-in-session .theory-game-dock .dock4-hearts[data-unlimited="true"]{
+ color:#88ffe9!important;font-size:27px!important;
+}
+html[data-vice-theme="on"] body.theory-in-session{padding-bottom:calc(98px + env(safe-area-inset-bottom))!important}
+/* Modal 3-life failure: cinematic blurred world + dark red announcement. */
+html[data-vice-theme="on"] body.game-over-open #gameOver.gameover-overlay{
+ z-index:210!important;
+ padding:12px!important;
+ background:rgba(9,4,15,.1)!important;
+}
+html[data-vice-theme="on"] body.game-over-open #gameOver .gameover-backdrop{
+ background:linear-gradient(180deg,#0a0a14b6,#310c1abb 43%,#080810dc)!important;
+ backdrop-filter:blur(17px) grayscale(.78) saturate(.72)!important;
+ -webkit-backdrop-filter:blur(17px) grayscale(.78) saturate(.72)!important;
+}
+html[data-vice-theme="on"] body.game-over-open #gameOver .gameover-card{
+ width:min(760px,100%)!important;
+ max-height:calc(100dvh - 24px)!important;
+ border:0!important;
+ border-radius:10px!important;
+ background:transparent!important;
+ color:#fff4f3!important;
+ padding:18px 9px 22px!important;
+ box-shadow:none!important;
+ overflow:hidden!important;
+ animation:viceWastedAppear .5s ease-out both!important;
+}
+html[data-vice-theme="on"] body.game-over-open #gameOver .gameover-card::before,
+html[data-vice-theme="on"] body.game-over-open #gameOver .gameover-card::after,
+html[data-vice-theme="on"] body.game-over-open #gameOver .gameover-corner{
+ display:none!important;
+ content:none!important;
+}
+html[data-vice-theme="on"] body.game-over-open #gameOver .gameover-hearts{
+ margin:8px 0 18px!important;
+ color:#d44a60!important;
+ filter:drop-shadow(0 3px 9px #b6183d7a)!important;
+ gap:11px!important;
+}
+html[data-vice-theme="on"] body.game-over-open #gameOver .gameover-hearts svg{
+ width:clamp(27px,7vw,41px)!important;
+ height:clamp(27px,7vw,41px)!important;
+ animation:none!important;
+ opacity:.82!important;
+}
+html[data-vice-theme="on"] body.game-over-open #gameOver .gameover-title{
+ display:block!important;
+ width:100%!important;
+ max-width:100%!important;
+ overflow:visible!important;
+ margin:0 auto 13px!important;
+ padding:clamp(13px,3vh,20px) 0!important;
+ color:#f4e8e8!important;
+ background:linear-gradient(90deg,#12080c17,#7c101dbd 30%,#a8202bc4 50%,#7c101dbd 70%,#12080c17)!important;
+ border-top:1px solid #f56f7448!important;
+ border-bottom:1px solid #f56f7448!important;
+ box-shadow:0 0 37px #7c0b1a49,inset 0 0 24px #a6152141!important;
+ font:1000 clamp(39px,11vw,84px)/1 Manrope,Arial,sans-serif!important;
+ letter-spacing:-.07em!important;
+ text-shadow:0 2px 0 #370910,0 0 17px #ff536dba,0 5px 21px #0e0714!important;
+ white-space:nowrap!important;
+ animation:viceWastedBar .52s cubic-bezier(.15,.76,.33,1) both!important;
+}
+html[data-vice-theme="on"] body.game-over-open #gameOver .gameover-message{
+ color:#ffe2e5!important;
+ font-size:clamp(14px,3.9vw,18px)!important;
+ font-weight:800!important;
+ line-height:1.45!important;
+ margin:2px auto 8px!important;
+ text-shadow:0 3px 10px #080713!important;
+}
+html[data-vice-theme="on"] body.game-over-open #gameOver .gameover-score{
+ color:#ffe4b3!important;
+ background:#341624b8!important;
+ border:1px solid #aa5363!important;
+ border-radius:999px!important;
+ padding:8px 15px!important;
+ margin:10px auto 19px!important;
+ font-size:13px!important;
+ box-shadow:0 0 12px #8e172352!important;
+}
+html[data-vice-theme="on"] body.game-over-open #gameOver .gameover-promo{
+ display:none!important;
+}
+html[data-vice-theme="on"] body.game-over-open #gameOver .gameover-actions{
+ display:grid!important;
+ grid-template-columns:repeat(2,minmax(0,1fr))!important;
+ gap:9px!important;
+ width:min(510px,100%)!important;
+}
+html[data-vice-theme="on"] body.game-over-open #gameOver .gameover-retry,
+html[data-vice-theme="on"] body.game-over-open #gameOver .gameover-modes{
+ min-height:50px!important;
+ padding:10px 9px!important;
+ border-radius:13px!important;
+ font-size:clamp(12px,3.7vw,16px)!important;
+ line-height:1.15!important;
+}
+html[data-vice-theme="on"] body.game-over-open #gameOver .gameover-retry{
+ border:1px solid #ffb7bd!important;
+ color:#fff7f7!important;
+ background:linear-gradient(110deg,#b31e40,#ea4c5d)!important;
+ box-shadow:0 0 17px #cd204c8f,inset 0 1px #ffc5c87a!important;
+}
+html[data-vice-theme="on"] body.game-over-open #gameOver .gameover-modes{
+ border:1px solid #d2b0bf!important;
+ color:#fff2ec!important;
+ background:#3b2636ee!important;
+ box-shadow:0 0 11px #7d2d4e79!important;
+}
+html[data-vice-theme="on"] body.game-over-open #gameOver .gameover-close{
+ top:2px!important;right:6px!important;
+ width:36px!important;height:36px!important;min-width:36px!important;
+ border:1px solid #dca5a9!important;
+ background:#2b142bcf!important;color:#fff0f1!important;
+ box-shadow:0 0 8px #c74a6875!important;
+}
+@keyframes viceWastedAppear{
+ from{opacity:0;transform:scale(1.02);filter:blur(7px)}
+ to{opacity:1;transform:scale(1);filter:blur(0)}
+}
+@keyframes viceWastedBar{
+ 0%{opacity:0;transform:scaleX(1.09);filter:blur(10px)}
+ 56%{opacity:1;transform:scaleX(1.015);filter:blur(1px)}
+ 100%{opacity:1;transform:scaleX(1);filter:blur(0)}
+}
+@media(max-width:390px){
+ html[data-vice-theme="on"] body.theory-in-session .theory-game-dock{
+  grid-template-columns:38px minmax(0,1fr) 41px!important;
+  height:72px!important;
+  padding:4px 5px!important;
+  gap:2px!important;
+ }
+ html[data-vice-theme="on"] body.theory-in-session .theory-game-dock .dock4-center{
+  grid-template-columns:67px minmax(40px,1fr) minmax(57px,1fr)!important;
+  gap:4px!important;
+ }
+ html[data-vice-theme="on"] body.theory-in-session .theory-game-dock .dock4-count{
+  width:65px!important;height:65px!important;min-width:65px!important;padding:3px!important;
+ }
+ html[data-vice-theme="on"] body.theory-in-session .theory-game-dock .dock4-count .vice-radar-map{
+  inset:3px!important;width:calc(100% - 6px)!important;height:calc(100% - 6px)!important;
+ }
+ html[data-vice-theme="on"] body.theory-in-session .theory-game-dock .dock4-modes{
+  width:36px!important;min-width:36px!important;font-size:8px!important;
+ }
+ html[data-vice-theme="on"] body.theory-in-session .theory-game-dock .dock4-action{
+  width:40px!important;height:47px!important;min-height:47px!important;
+ }
+ html[data-vice-theme="on"] body.theory-in-session{padding-bottom:calc(88px + env(safe-area-inset-bottom))!important}
+}
+@media(max-width:350px){
+ html[data-vice-theme="on"] body.theory-in-session .theory-game-dock .dock4-center{
+  grid-template-columns:61px minmax(34px,1fr) minmax(50px,1fr)!important;
+  gap:3px!important;
+ }
+ html[data-vice-theme="on"] body.theory-in-session .theory-game-dock .dock4-count{
+  width:60px!important;height:60px!important;min-width:60px!important;
+ }
+ html[data-vice-theme="on"] body.theory-in-session .theory-game-dock .dock4-hearts{
+  font-size:17px!important;
+ }
+ html[data-vice-theme="on"] body.game-over-open #gameOver .gameover-title{
+  font-size:clamp(37px,10.4vw,43px)!important;
+ }
+}
+@media(max-height:600px){
+ html[data-vice-theme="on"] body.game-over-open #gameOver .gameover-hearts{margin:1px 0 5px!important}
+ html[data-vice-theme="on"] body.game-over-open #gameOver .gameover-title{padding:10px 0!important;margin-bottom:6px!important}
+ html[data-vice-theme="on"] body.game-over-open #gameOver .gameover-score{margin:6px auto 10px!important}
+ html[data-vice-theme="on"] body.game-over-open #gameOver .gameover-card{padding:6px!important}
+ html[data-vice-theme="on"] body.game-over-open #gameOver .gameover-retry,
+ html[data-vice-theme="on"] body.game-over-open #gameOver .gameover-modes{min-height:44px!important}
+}
+@media(prefers-reduced-motion:reduce){
+ html[data-vice-theme="on"] body.game-over-open #gameOver .gameover-card,
+ html[data-vice-theme="on"] body.game-over-open #gameOver .gameover-title{
+  animation:none!important;
+  filter:none!important;
+ }
+}
+
+/* No temporary theme-switch toast over the final death cinematic. */
+html[data-vice-theme="on"] body.game-over-open .vice-theme-status{
+ display:none!important;
+}
+/* Other promo scenes use detailed real image assets; the source-faithful
+   first slide and its accessible controls are intentionally untouched. */
+html[data-vice-theme="on"] .theory-promo-host .vice-cinema-frame--signs .vice-cinema-scene{
+ background-image:url("./assets/teoria/vice-hd-marathon.svg")!important;
+ background-size:cover!important;
+ background-position:center 51%!important;
+ filter:saturate(1.12) contrast(1.06)!important;
+}
+html[data-vice-theme="on"] .theory-promo-host .vice-cinema-frame--rewards .vice-cinema-scene{
+ background-image:url("./assets/teoria/vice-cinematic-backdrop.svg")!important;
+ background-size:cover!important;
+ background-position:center 55%!important;
+ filter:saturate(1.18) contrast(1.08)!important;
+}
+html[data-vice-theme="on"] .theory-promo-host .vice-cinema-frame--exam .vice-cinema-scene{
+ background-image:url("./assets/teoria/vice-hd-exam.svg")!important;
+ background-size:cover!important;
+ background-position:center 46%!important;
+ filter:saturate(1.12) contrast(1.04)!important;
+}
+
+/* When the final heart breaks, keep the last question blurred behind the
+   cinematic card. Do not let the lobby dashboard flash back into view. */
+html[data-vice-theme="on"] body.game-over-open .game-hero.theory-dashboard,
+html[data-vice-theme="on"] body.game-over-open #theoryDaily,
+html[data-vice-theme="on"] body.game-over-open .theory-daily,
+html[data-vice-theme="on"] body.game-over-open #gameLobby,
+html[data-vice-theme="on"] body.game-over-open .theory-bottom,
+html[data-vice-theme="on"] body.game-over-open > .topbar{
+ display:none!important;
+}
+
+/* 2026-11-22 — game question takes priority: remove the entire redundant
+   upper route/title bar in the optional neon game. The fixed bottom HUD
+   remains the single place for navigation, XP, lives and hints. */
+html[data-vice-theme="on"] body.theory-in-session #gamePlaying .game-quiz-topline,
+html[data-vice-theme="on"] body.theory-in-session #gamePlaying .quiz-hud{
+ display:none!important;
+ visibility:hidden!important;
+}
+html[data-vice-theme="on"] body.theory-in-session #gamePlaying{
+ padding-top:0!important;
+ margin-top:0!important;
+ scroll-margin-top:8px!important;
+}
+html[data-vice-theme="on"] body.theory-in-session #gamePlaying .question-card{
+ margin-top:0!important;
+}
+html[data-vice-theme="on"] body.theory-in-session #gamePlaying .question-eyebrow{
+ flex-wrap:wrap!important;
+ gap:5px 8px!important;
+}
+/* Preserve the exam's real countdown when hiding its parent HUD.
+   A read-only mirror appears as a small chip inside the question header. */
+.vice-quiz-timer[hidden],.vice-quiz-timer{display:none!important}
+html[data-vice-theme="on"] body.theory-in-session #gamePlaying .question-eyebrow .vice-quiz-timer:not([hidden]){
+ display:inline-flex!important;
+ align-items:center!important;
+ justify-content:center!important;
+ flex:none!important;
+ direction:ltr!important;
+ white-space:nowrap!important;
+ color:#ffe2a4!important;
+ border:1px solid #e2aa76!important;
+ background:#4a2649!important;
+ border-radius:8px!important;
+ padding:3px 7px!important;
+ font:850 11px/1.15 Manrope,Arial,sans-serif!important;
+}
+
+/* 2026-11-22 — approved HUD, not just a screenshot.
+   LAYOUT: Modes | XP | LARGE CENTRED GPS | Hearts | Hint.
+   The thin HUD rail passes BEHIND the oversize radar, whose top and
+   bottom deliberately extend beyond the rail. Retain real game controls. */
+html[data-vice-theme="on"] body.theory-in-session .theory-game-dock{
+ --vice-radar-diameter:clamp(84px,25vw,104px);
+ grid-template-columns:42px minmax(0,1fr) 44px!important;
+ gap:3px!important;
+ width:min(570px,calc(100vw - 10px))!important;
+ height:54px!important;
+ min-height:54px!important;
+ padding:2px 6px!important;
+ bottom:max(32px,env(safe-area-inset-bottom,0px))!important;
+ border-radius:999px!important;
+ border:1.5px solid #ff9ed5!important;
+ overflow:visible!important;
+ box-shadow:0 0 0 1px #ff8bca7c,inset 0 1px #ffe6f88c,0 0 13px #fc69be9c,0 8px 20px #1307229a!important;
+}
+html[data-vice-theme="on"] body.theory-in-session .theory-game-dock::before{
+ border-radius:999px!important;
+ inset:3px!important;
+ border-color:#f99bc678!important;
+}
+html[data-vice-theme="on"] body.theory-in-session .theory-game-dock .dock4-center{
+ grid-column:2!important;
+ grid-row:1!important;
+ display:grid!important;
+ grid-template-columns:minmax(0,1fr) var(--vice-radar-diameter) minmax(0,1fr)!important;
+ grid-template-rows:54px!important;
+ align-items:center!important;
+ justify-items:center!important;
+ justify-content:center!important;
+ gap:clamp(1px,.75vw,5px)!important;
+ width:100%!important;
+ max-width:none!important;
+ height:54px!important;
+ min-width:0!important;
+ margin:0!important;
+ direction:ltr!important;
+}
+html[data-vice-theme="on"] body.theory-in-session .theory-game-dock .dock4-modes{
+ grid-column:1!important;
+ grid-row:1!important;
+ align-self:center!important;
+ justify-self:center!important;
+ min-height:44px!important;
+ width:40px!important;
+ min-width:40px!important;
+ height:46px!important;
+ margin:0!important;
+ padding:3px 0!important;
+}
+html[data-vice-theme="on"] body.theory-in-session .theory-game-dock .dock4-modes svg{
+ width:23px!important;
+ height:23px!important;
+}
+html[data-vice-theme="on"] body.theory-in-session .theory-game-dock .dock4-action{
+ grid-column:3!important;
+ grid-row:1!important;
+ align-self:center!important;
+ justify-self:center!important;
+ margin:0!important;
+ width:43px!important;
+ min-width:43px!important;
+ height:46px!important;
+ min-height:46px!important;
+ border-radius:15px!important;
+}
+html[data-vice-theme="on"] body.theory-in-session .theory-game-dock .dock4-xp{
+ grid-column:1!important;
+ grid-row:1!important;
+ order:1!important;
+ width:100%!important;
+ min-width:0!important;
+ min-height:0!important;
+ margin:0!important;
+ padding:0!important;
+ gap:1px!important;
+ align-self:center!important;
+ justify-self:center!important;
+}
+html[data-vice-theme="on"] body.theory-in-session .theory-game-dock .dock4-xp>span{
+ font-size:clamp(18px,5vw,23px)!important;
+ line-height:1.02!important;
+}
+html[data-vice-theme="on"] body.theory-in-session .theory-game-dock .dock4-xp strong{
+ font-size:clamp(9px,2.65vw,12px)!important;
+ line-height:1.16!important;
+ white-space:nowrap!important;
+}
+html[data-vice-theme="on"] body.theory-in-session .theory-game-dock .dock4-count{
+ grid-column:2!important;
+ grid-row:1!important;
+ order:2!important;
+ position:relative!important;
+ z-index:5!important;
+ align-self:center!important;
+ justify-self:center!important;
+ flex:none!important;
+ width:var(--vice-radar-diameter)!important;
+ min-width:var(--vice-radar-diameter)!important;
+ max-width:var(--vice-radar-diameter)!important;
+ height:var(--vice-radar-diameter)!important;
+ min-height:var(--vice-radar-diameter)!important;
+ margin:0!important;
+ padding:4px!important;
+ border-radius:50%!important;
+ border:3px solid #ffcd9b!important;
+ background:conic-gradient(from -90deg,#77f8ff 0deg var(--dock-progress),#bc648c var(--dock-progress) 360deg)!important;
+ box-shadow:0 0 0 2px #ff78bbdd,0 0 17px #ff6eafa6,0 0 7px #ffcc95a6,0 7px 17px #110824ad!important;
+}
+html[data-vice-theme="on"] body.theory-in-session .theory-game-dock .dock4-count .vice-radar-map{
+ inset:4px!important;
+ width:calc(100% - 8px)!important;
+ height:calc(100% - 8px)!important;
+}
+html[data-vice-theme="on"] body.theory-in-session .theory-game-dock .dock4-count strong{
+ font-size:clamp(11px,3.55vw,15px)!important;
+ min-width:clamp(42px,12vw,59px)!important;
+ padding:3px 5px!important;
+ bottom:5px!important;
+}
+html[data-vice-theme="on"] body.theory-in-session .theory-game-dock .dock4-hearts{
+ grid-column:3!important;
+ grid-row:1!important;
+ order:3!important;
+ justify-self:center!important;
+ align-self:center!important;
+ width:100%!important;
+ max-width:100%!important;
+ min-width:0!important;
+ margin:0!important;
+ padding:0!important;
+ font-size:clamp(17px,5vw,24px)!important;
+ letter-spacing:-2px!important;
+ white-space:nowrap!important;
+ line-height:1!important;
+ justify-content:center!important;
+ text-align:center!important;
+}
+html[data-vice-theme="on"] body.theory-in-session .theory-game-dock .dock4-hearts[data-exam="true"]{
+ font-size:clamp(11px,3vw,14px)!important;
+ letter-spacing:0!important;
+}
+html[data-vice-theme="on"] body.theory-in-session .theory-game-dock .dock4-hearts[data-unlimited="true"]{
+ font-size:clamp(22px,5.6vw,28px)!important;
+}
+/* Prevent the large circular map from disappearing behind viewport edge. */
+html[data-vice-theme="on"] body.theory-in-session{
+ padding-bottom:calc(110px + env(safe-area-inset-bottom,0px))!important;
+}
+@media(max-width:350px){
+ html[data-vice-theme="on"] body.theory-in-session .theory-game-dock{
+  grid-template-columns:36px minmax(0,1fr) 39px!important;
+  padding:2px 4px!important;
+  gap:2px!important;
+  --vice-radar-diameter:84px;
+ }
+ html[data-vice-theme="on"] body.theory-in-session .theory-game-dock .dock4-modes{
+  width:35px!important;min-width:35px!important;
+ }
+ html[data-vice-theme="on"] body.theory-in-session .theory-game-dock .dock4-action{
+  width:39px!important;min-width:39px!important;
+ }
+ html[data-vice-theme="on"] body.theory-in-session .theory-game-dock .dock4-hearts{
+  font-size:16px!important;
+  letter-spacing:-2.2px!important;
+ }
+}
+
+/* 2026-11-22 · breathing room for the two edge controls.
+   The GPS stays exactly centered, with symmetric extra space from both
+   sides of the neon rail. Middle contents never overlap the tap targets. */
+html[data-vice-theme="on"] body.theory-in-session .theory-game-dock{
+ grid-template-columns:clamp(58px,15vw,70px) minmax(0,1fr) clamp(58px,15vw,70px)!important;
+ column-gap:3px!important;
+ padding-inline:clamp(10px,2.6vw,15px)!important;
+}
+html[data-vice-theme="on"] body.theory-in-session .theory-game-dock .dock4-modes,
+html[data-vice-theme="on"] body.theory-in-session .theory-game-dock .dock4-action{
+ justify-self:center!important;
+ align-self:center!important;
+ margin-inline:0!important;
+ width:43px!important;
+ min-width:43px!important;
+ max-width:43px!important;
+}
+html[data-vice-theme="on"] body.theory-in-session .theory-game-dock .dock4-center{
+ width:100%!important;
+ min-width:0!important;
+ max-width:none!important;
+ justify-self:stretch!important;
+ margin-inline:0!important;
+ grid-template-columns:minmax(0,1fr) var(--vice-radar-diameter) minmax(0,1fr)!important;
+ column-gap:3px!important;
+}
+html[data-vice-theme="on"] body.theory-in-session .theory-game-dock .dock4-hearts,
+html[data-vice-theme="on"] body.theory-in-session .theory-game-dock .dock4-xp{
+ min-width:0!important;
+ justify-self:center!important;
+}
+@media(max-width:390px){
+ html[data-vice-theme="on"] body.theory-in-session .theory-game-dock{
+  grid-template-columns:54px minmax(0,1fr) 54px!important;
+  padding-inline:9px!important;
+  column-gap:2px!important;
+ }
+ html[data-vice-theme="on"] body.theory-in-session .theory-game-dock .dock4-modes,
+ html[data-vice-theme="on"] body.theory-in-session .theory-game-dock .dock4-action{
+  width:41px!important;
+  min-width:41px!important;
+  max-width:41px!important;
+ }
+ html[data-vice-theme="on"] body.theory-in-session .theory-game-dock .dock4-center{
+  column-gap:2px!important;
+ }
+}
+@media(max-width:350px){
+ html[data-vice-theme="on"] body.theory-in-session .theory-game-dock{
+  grid-template-columns:50px minmax(0,1fr) 50px!important;
+  padding-inline:7px!important;
+  gap:2px!important;
+ }
+ html[data-vice-theme="on"] body.theory-in-session .theory-game-dock .dock4-modes,
+ html[data-vice-theme="on"] body.theory-in-session .theory-game-dock .dock4-action{
+  width:40px!important;
+  min-width:40px!important;
+  max-width:40px!important;
+ }
+}
+
+
+/* SOURCE: teoria-vice-ay128-audio.css */
+/* Ocean-era AY sound controls.
+   Two icon-only toggles replace the cart in teoria.html's top header.
+   All previous duplicated bars in lobby/question/results are removed. */
+.neoline-site-header .vice-ay-controls{
+ display:none;box-sizing:border-box;align-items:center;justify-content:flex-end;
+ gap:5px;flex:0 0 auto;margin:0;min-width:0;
+ direction:ltr;white-space:nowrap;
+}
+html[data-vice-theme="on"] .neoline-site-header .vice-ay-controls{display:flex!important}
+.neoline-site-header .vice-ay-button{
+ position:relative;box-sizing:border-box;display:grid;place-items:center;
+ padding:0;flex:0 0 39px;width:39px;height:42px;min-width:0;
+ border:1px solid #e7b0d5;border-radius:13px;
+ color:#5b3169;background:#fff4fb;
+ box-shadow:inset 0 1px #ffffffb5,0 2px 7px #4b22571f;
+ cursor:pointer;touch-action:manipulation;
+ transition:background .16s,box-shadow .16s,opacity .16s;
+}
+html[data-vice-theme="on"] .neoline-site-header .vice-ay-button[aria-pressed="true"]{
+ color:#522858;
+ background:linear-gradient(140deg,#ffe3f4,#ffd5a9);
+ border-color:#f09dca;
+ box-shadow:inset 0 1px #ffffffa9,0 0 0 1px #f7a6dc55;
+}
+.neoline-site-header .vice-ay-button.is-off{
+ color:#9487a0;background:#f1e9ef;border-color:#ded1e0;
+ box-shadow:none;
+}
+.neoline-site-header .vice-ay-button.is-off::after{
+ content:"";position:absolute;width:23px;height:2px;
+ background:#d3547a;border-radius:3px;transform:rotate(-43deg);
+ box-shadow:0 1px 1px #fff9;
+}
+.neoline-site-header .vice-ay-button:disabled{cursor:not-allowed;opacity:.48}
+.neoline-site-header .vice-ay-button:focus-visible{
+ outline:3px solid #f179a5;outline-offset:2px;
+}
+.neoline-site-header .vice-ay-icon{
+ display:grid;place-items:center;width:24px;height:24px;line-height:1;
+}
+.neoline-site-header .vice-ay-icon svg{
+ width:24px;height:24px;display:block;
+ stroke:currentColor;stroke-width:1.8;fill:none;
+ stroke-linecap:round;stroke-linejoin:round;
+}
+.neoline-site-header .vice-ay-label,.neoline-site-header .vice-ay-state{
+ position:absolute!important;width:1px!important;height:1px!important;
+ padding:0!important;margin:-1px!important;overflow:hidden!important;
+ clip:rect(0,0,0,0)!important;white-space:nowrap!important;border:0!important;
+}
+@media(hover:hover) and (pointer:fine){
+ .neoline-site-header .vice-ay-button:hover:not(:disabled){background:#fff;box-shadow:0 3px 12px #b8428947}
+}
+/* Preserve logo + four languages + TWO usable sound buttons on phones.
+   Make room inside the existing header instead of growing its height. */
+@media(max-width:650px){
+ .neoline-site-header .neoline-site-header__inner{
+  gap:5px;padding-inline:8px!important;
+ }
+ .neoline-site-header .neoline-site-header__logo img{
+  width:clamp(103px,31vw,142px)!important;max-width:none;
+ }
+ .neoline-site-header .neoline-site-header__actions{gap:5px}
+ .neoline-site-header__flags{gap:2px;padding:3px 4px}
+ .neoline-site-header .neoline-site-header__flag{
+  flex:0 0 29px;width:29px;height:37px;
+  padding:2px;
+ }
+ .neoline-site-header .neoline-site-header__flag--ar{
+  flex-basis:41px;width:41px;font-size:10px!important;
+ }
+ .neoline-site-header .vice-ay-controls{gap:4px}
+ .neoline-site-header .vice-ay-button{
+  flex-basis:36px;width:36px;height:39px;border-radius:12px;
+ }
+ .neoline-site-header .vice-ay-icon,
+ .neoline-site-header .vice-ay-icon svg{width:22px;height:22px}
+}
+@media(max-width:370px){
+ .neoline-site-header .neoline-site-header__inner{gap:3px;padding-inline:5px!important}
+ .neoline-site-header .neoline-site-header__logo img{width:clamp(95px,31vw,111px)!important}
+ .neoline-site-header .neoline-site-header__actions{gap:3px}
+ .neoline-site-header__flags{gap:1px;padding:2px 3px}
+ .neoline-site-header .neoline-site-header__flag{
+  flex-basis:26px;width:26px;height:35px;
+ }
+ .neoline-site-header .neoline-site-header__flag--ar{
+  flex-basis:36px;width:36px;font-size:9px!important;
+ }
+ .neoline-site-header .neoline-site-header__flag .flag-graphic,
+ .neoline-site-header .neoline-site-header__flag .flag-graphic svg,
+ .neoline-site-header .neoline-site-header__flag .flag-graphic img{
+  width:24px;height:18px;
+ }
+ .neoline-site-header .vice-ay-controls{gap:3px}
+ .neoline-site-header .vice-ay-button{
+  flex-basis:32px;width:32px;height:36px;border-radius:10px;
+ }
+ .neoline-site-header .vice-ay-icon,
+ .neoline-site-header .vice-ay-icon svg{width:21px;height:21px}
+}
+@media(prefers-reduced-motion:reduce){
+ .neoline-site-header .vice-ay-button{transition:none}
+}
+
+/* During gameplay the sticky header is hidden, so the same toggles appear
+   inside each question's first row. Both instances share saved state. */
+#gamePlaying .question-eyebrow .vice-ay-controls,
+#gameResult .vice-ay-controls,
+#gameOver .gameover-card .vice-ay-controls{
+ display:none;box-sizing:border-box;align-items:center;justify-content:center;
+ direction:ltr;gap:5px;min-width:0;
+}
+html[data-vice-theme="on"] #gamePlaying:not([hidden]) .question-eyebrow .vice-ay-controls,
+html[data-vice-theme="on"] #gameResult:not([hidden]) .vice-ay-controls,
+html[data-vice-theme="on"] #gameOver:not([hidden]) .gameover-card .vice-ay-controls{
+ display:inline-flex!important;
+}
+#gamePlaying .question-eyebrow .vice-ay-button,
+#gameResult .vice-ay-button,
+#gameOver .vice-ay-button{
+ position:relative;box-sizing:border-box;display:inline-grid;place-items:center;
+ width:35px;height:35px;min-width:35px;min-height:35px;padding:0;
+ flex:none;border-radius:11px;border:1px solid #e8a1d7;
+ background:linear-gradient(130deg,#4a254f,#673765);
+ color:#ffe2f3;box-shadow:inset 0 1px #ffffff35;
+ cursor:pointer;touch-action:manipulation;
+}
+html[data-vice-theme="on"] #gamePlaying .vice-ay-button[aria-pressed="true"],
+html[data-vice-theme="on"] #gameResult .vice-ay-button[aria-pressed="true"],
+html[data-vice-theme="on"] #gameOver .vice-ay-button[aria-pressed="true"]{
+ background:linear-gradient(140deg,#fa9cc6,#ffbd8e);color:#421f46;
+ border-color:#ffcde3;box-shadow:0 0 0 1px #fca8d555,inset 0 1px #fff9;
+}
+#gamePlaying .vice-ay-button.is-off,
+#gameResult .vice-ay-button.is-off,
+#gameOver .vice-ay-button.is-off{
+ background:#302139;color:#aa9fb4;border-color:#80627f;box-shadow:none;
+}
+#gamePlaying .vice-ay-button.is-off::after,
+#gameResult .vice-ay-button.is-off::after,
+#gameOver .vice-ay-button.is-off::after{
+ content:"";position:absolute;left:7px;top:16px;width:20px;height:2px;
+ background:#f183a8;transform:rotate(-42deg);border-radius:3px;
+}
+#gamePlaying .vice-ay-icon,
+#gameResult .vice-ay-icon,
+#gameOver .vice-ay-icon{display:grid;place-items:center;width:21px;height:21px}
+#gamePlaying .vice-ay-icon svg,
+#gameResult .vice-ay-icon svg,
+#gameOver .vice-ay-icon svg{
+ display:block;width:21px;height:21px;fill:none;stroke:currentColor;
+ stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;
+}
+#gamePlaying .vice-ay-label,#gamePlaying .vice-ay-state,
+#gameResult .vice-ay-label,#gameResult .vice-ay-state,
+#gameOver .vice-ay-label,#gameOver .vice-ay-state{
+ position:absolute!important;width:1px!important;height:1px!important;
+ padding:0!important;margin:-1px!important;overflow:hidden!important;
+ clip:rect(0,0,0,0)!important;white-space:nowrap!important;border:0!important;
+}
+#gamePlaying .vice-ay-button:focus-visible,#gameResult .vice-ay-button:focus-visible,
+#gameOver .vice-ay-button:focus-visible{
+ outline:3px solid #fff1ae;outline-offset:2px;
+}
+html[data-vice-theme="on"] #gamePlaying .question-eyebrow{
+ display:flex;align-items:center;justify-content:flex-end;flex-wrap:wrap;
+ gap:6px 8px;
+}
+html[data-vice-theme="on"] #gamePlaying .question-eyebrow #questionTopic{
+ flex:1 1 auto;min-width:80px;
+}
+html[data-vice-theme="on"] #gamePlaying .question-eyebrow #questionId{
+ flex:none;margin:0;white-space:nowrap;
+}
+html[data-vice-theme="on"] #gamePlaying .question-eyebrow .vice-ay-controls{
+ flex:none;gap:4px;margin:0;
+}
+html[data-vice-theme="on"] #gameResult .vice-ay-controls{
+ justify-content:center;margin:13px auto 3px;
+}
+/* The defeat screen is a separate overlay, so it also gets sound switches.
+   Left corner leaves the right-hand Close control unobstructed. */
+html[data-vice-theme="on"] #gameOver .gameover-card{position:relative}
+html[data-vice-theme="on"] #gameOver .gameover-card .vice-ay-controls{
+ position:absolute;top:9px;left:10px;z-index:6;margin:0;
+}
+@media(max-width:420px){
+ #gamePlaying .question-eyebrow .vice-ay-button{
+  width:32px;height:33px;min-width:32px;min-height:33px;border-radius:10px;
+ }
+ #gamePlaying .question-eyebrow .vice-ay-controls{gap:4px}
+ #gamePlaying .question-eyebrow .vice-ay-icon,
+ #gamePlaying .question-eyebrow .vice-ay-icon svg{width:19px;height:19px}
+ html[data-vice-theme="on"] #gamePlaying .question-eyebrow{gap:5px}
+}
+
+
+/* SOURCE: teoria-vice-neon-route-slide.css */
+/* NEOLINE — original cinematic route advertisement, 22 Nov 2026.
+ * Replaces ONLY the small fifth GTA-style carousel artwork in the ordinary
+ * Russian page with the user-approved neon sunset scene.
+ * All dots, swipes and the click-to-toggle-GTA button stay live.
+ * Other languages retain their translated, text-based promo artwork. */
+html:not([data-vice-theme="on"])[lang^="ru"] .theory-promo-host .theory-promo-slide.vice-promo-slide{
+ background:#261643 url("./assets/teoria/vice-neon-route-promo.webp") center / cover no-repeat!important;
+ isolation:isolate;
+}
+html:not([data-vice-theme="on"])[lang^="ru"] .theory-promo-host .theory-promo-slide.vice-promo-slide > svg{
+ visibility:hidden!important;
+ opacity:0!important;
+}
+html:not([data-vice-theme="on"])[lang^="ru"] .theory-promo-host:has(>.vice-promo-slide.is-active){
+ border-color:#ed8cc4!important;
+ box-shadow:0 0 0 1px #ff93cc88,0 0 17px #f077bb7a,0 8px 21px #411c5683!important;
+}
+html:not([data-vice-theme="on"])[lang^="ru"] .theory-promo-host:has(>.vice-promo-slide.is-active) .theory-promo-caption{
+ visibility:hidden!important;
+ opacity:0!important;
+}
+html:not([data-vice-theme="on"])[lang^="ru"] .theory-promo-host:has(>.vice-promo-slide.is-active) .theory-promo-dots{
+ background:#2b1649dd!important;
+ border:1px solid #ffbfe59e!important;
+ box-shadow:0 2px 12px #250f3fa8!important;
+ bottom:6px!important;
+}
+html:not([data-vice-theme="on"])[lang^="ru"] .theory-promo-host:has(>.vice-promo-slide.is-active) .theory-promo-dot::before{
+ background:#fbaed8!important;
+}
+html:not([data-vice-theme="on"])[lang^="ru"] .theory-promo-host:has(>.vice-promo-slide.is-active) .theory-promo-dot[aria-current="true"]::before{
+ background:#ffe1a8!important;
+ box-shadow:0 0 0 1px #ffefc7,0 0 8px #ffcd6da3!important;
+}
+@media(max-width:720px){
+ html:not([data-vice-theme="on"])[lang^="ru"] .theory-promo-host:has(>.vice-promo-slide.is-active) .theory-promo-dots{
+  bottom:4px!important;
+ }
+}
+@media(prefers-reduced-motion:reduce){
+ html:not([data-vice-theme="on"])[lang^="ru"] .theory-promo-host .vice-promo-slide{
+  animation:none!important;
+ }
+}
+
+
+/* SOURCE: teoria-slide-frame-air.css */
+/* NEOLINE Israel — airier mobile promo carousel, approved 2026-11-22.
+   This is the REAL interactive slide container, not a picture of the page.
+   Applies to all five promo slides in the classic/light design only.
+   Keep GTA/neon mode, game logic, titles, medals and navigation unchanged. */
+@media (max-width:760px) {
+  html:not([data-vice-theme="on"]) .game-hero.theory-dashboard {
+    /* A few pixels from the title become usable room for the large poster.
+       fr tracks (unlike 39% + 61%) properly account for the column gap. */
+    grid-template-columns:minmax(0,39fr) minmax(0,61fr)!important;
+    grid-template-rows:clamp(123px,32.8vw,151px) auto!important;
+    column-gap:clamp(8px,2.25vw,13px)!important;
+    row-gap:9px!important;
+    padding:9px!important;
+    box-sizing:border-box!important;
+  }
+  html:not([data-vice-theme="on"]) .game-hero.theory-dashboard .hero-copy {
+    min-width:0!important;
+    padding:6px 0 5px 7px!important;
+  }
+  html:not([data-vice-theme="on"]) .game-hero.theory-dashboard .hero-art.theory-promo-host {
+    /* The new frame is larger; all artwork is inset to leave an actual
+       clear gutter between neon stroke and image / baked-in lettering. */
+    min-width:0!important;
+    min-height:0!important;
+    height:100%!important;
+    position:relative!important;
+    isolation:isolate!important;
+    overflow:hidden!important;
+    border:1.5px solid #b4daec!important;
+    border-radius:clamp(19px,5.25vw,24px)!important;
+    background:linear-gradient(140deg,#e9faff,#bde9ff)!important;
+    box-shadow:0 0 0 1px #ffffffd1,0 5px 14px #2b86b92b,inset 0 1px #ffffff!important;
+  }
+  html:not([data-vice-theme="on"]) .game-hero.theory-dashboard .hero-art.theory-promo-host::after {
+    display:none!important;
+  }
+  html:not([data-vice-theme="on"]) .theory-promo-host > .hero-studio-svg,
+  html:not([data-vice-theme="on"]) .theory-promo-host > .theory-promo-slide {
+    position:absolute!important;
+    inset:7px!important;
+    width:calc(100% - 14px)!important;
+    height:calc(100% - 14px)!important;
+    box-sizing:border-box!important;
+    overflow:hidden!important;
+    border-radius:clamp(13px,3.8vw,17px)!important;
+  }
+  html:not([data-vice-theme="on"]) .theory-promo-host .theory-promo-caption {
+    top:15px!important;
+    left:16px!important;
+    max-width:calc(100% - 32px)!important;
+  }
+  html:not([data-vice-theme="on"]) .theory-promo-host .theory-promo-dots {
+    bottom:12px!important;
+  }
+  /* Preserve the approved pink sunset when the GTA VI advert is selected.
+     The inner image still covers its frame, with 7px of genuine outer air. */
+  html:not([data-vice-theme="on"])[lang^="ru"] .theory-promo-host:has(> .vice-promo-slide.is-active) {
+    border-color:#ff9cce!important;
+    background:linear-gradient(135deg,#481954,#2b1648 60%,#5a215d)!important;
+    box-shadow:0 0 0 1px #ffc0de9c,0 0 18px #ee6cb888,
+      0 7px 18px #411c5680,inset 0 1px #fff0fa9c!important;
+  }
+  html:not([data-vice-theme="on"])[lang^="ru"] .theory-promo-host .vice-promo-slide {
+    background-position:center!important;
+    border:1px solid #ffabdc70!important;
+    box-shadow:inset 0 0 0 1px #ffffff15!important;
+  }
+  html:not([data-vice-theme="on"])[lang^="ru"] .theory-promo-host:has(> .vice-promo-slide.is-active) .theory-promo-dots {
+    bottom:12px!important;
+  }
+}
+@media(max-width:350px) {
+  html:not([data-vice-theme="on"]) .game-hero.theory-dashboard {
+    grid-template-columns:minmax(0,40fr) minmax(0,60fr)!important;
+    grid-template-rows:123px auto!important;
+    column-gap:7px!important;
+    padding:7px!important;
+  }
+  html:not([data-vice-theme="on"]) .theory-promo-host > .hero-studio-svg,
+  html:not([data-vice-theme="on"]) .theory-promo-host > .theory-promo-slide {
+    inset:6px!important;
+    width:calc(100% - 12px)!important;
+    height:calc(100% - 12px)!important;
+  }
+  html:not([data-vice-theme="on"]) .theory-promo-host .theory-promo-caption {
+    top:12px!important;
+    left:13px!important;
+  }
+}
+@media(prefers-reduced-motion:reduce) {
+  html:not([data-vice-theme="on"]) .theory-promo-host > .hero-studio-svg,
+  html:not([data-vice-theme="on"]) .theory-promo-host > .theory-promo-slide {
+    transition:none!important;
+    will-change:auto!important;
+  }
+}
+
+
+/* SOURCE: teoria-vice-boot.css */
+/* NEOLINE • Approved VICE MODE loading screen (concepts 1 + 3).
+   Full-height neon sunset, striped sun, palms, skyline and reflections.
+   Live typography/progress translated into RU/EN/HE/AR.
+   Only displays during opt-in Vice mode transition. */
+.vice-boot-overlay{
+ position:fixed;inset:0;z-index:2147482000;overflow:hidden;isolation:isolate;
+ display:block;visibility:hidden;opacity:0;pointer-events:none;
+ background:#0d0927;color:#fff4ed;
+ transition:opacity .22s ease,visibility .22s;
+ -webkit-font-smoothing:antialiased;
+}
+.vice-boot-overlay.is-active{visibility:visible;opacity:1;pointer-events:auto}
+.vice-boot-art{
+ position:absolute;inset:0;width:100%;height:100%;
+ display:block;object-fit:cover;object-position:50% 50%;
+ z-index:0;pointer-events:none;user-select:none;-webkit-user-drag:none;
+}
+.vice-boot-overlay.is-active .vice-boot-art{
+ animation:vice-boot-scene 1.65s cubic-bezier(.2,.48,.26,1) both;
+}
+.vice-boot-overlay::before{
+ content:"";position:absolute;inset:-15%;z-index:4;pointer-events:none;
+ background:linear-gradient(105deg,transparent 38%,#ffffff4f 49%,transparent 57%);
+ transform:translate3d(-100%,0,0);opacity:0;
+}
+.vice-boot-overlay.is-active::before{
+ animation:vice-boot-wipe 1.5s cubic-bezier(.18,.52,.2,1) .05s both;
+}
+.vice-boot-grain{
+ position:absolute;inset:0;z-index:3;opacity:.17;pointer-events:none;
+ background:repeating-linear-gradient(0deg,#10052014 0 1px,transparent 1px 3px);
+ mix-blend-mode:multiply;
+}
+.vice-boot-topline,.vice-boot-bottomline{
+ position:absolute;z-index:8;left:clamp(15px,4.4vw,65px);
+ right:clamp(15px,4.4vw,65px);display:flex;
+ justify-content:space-between;align-items:center;gap:9px;
+ color:#fddaf0;
+ font:800 clamp(8px,2.2vw,12px)/1.2 Manrope,Arial,sans-serif;
+ letter-spacing:.12em;white-space:nowrap;
+ filter:drop-shadow(0 1px 3px #1a0d35);
+}
+.vice-boot-topline{top:max(28px,calc(env(safe-area-inset-top,0px) + 21px))}
+.vice-boot-bottomline{bottom:max(26px,calc(env(safe-area-inset-bottom,0px) + 19px))}
+.vice-boot-topline b,.vice-boot-bottomline b{color:#69f7fa}
+.vice-boot-body{
+ position:absolute;top:29%;left:0;right:0;z-index:7;
+ box-sizing:border-box;margin:0;padding:0 clamp(14px,5vw,55px);
+ display:flex;flex-direction:column;align-items:center;text-align:center;
+ width:100%;max-width:none;pointer-events:none;
+}
+/* The upper symbol is now an authentic, readable compact ZX 128K cassette.
+   Two separate wheels, a window and a label — not the old VI/gamepad mix. */
+.vice-boot-icon{
+ position:relative;flex:none;box-sizing:border-box;
+ display:grid;place-items:center;
+ width:clamp(108px,31vw,150px);
+ height:auto;aspect-ratio:154/101;
+ margin:0 0 clamp(7px,1.2vh,13px);
+ padding:0;
+ border:0;border-radius:0;background:none;box-shadow:none;
+ transform:rotate(-3deg);
+ filter:drop-shadow(0 5px 0 #1a1034bb) drop-shadow(0 0 13px #ff95d7b6);
+}
+.vice-boot-icon::before,.vice-boot-icon::after{content:none}
+.vice-boot-cassette{
+ display:block;width:100%;height:100%;max-width:100%;
+ overflow:visible;pointer-events:none;
+}
+.vice-boot-reel{
+ transform-box:fill-box;transform-origin:center;
+}
+.vice-boot-overlay.is-active .vice-boot-reel--left{
+ animation:vice-cassette-spin 1.35s linear infinite;
+}
+.vice-boot-overlay.is-active .vice-boot-reel--right{
+ animation:vice-cassette-spin 1.35s linear infinite;
+}
+@keyframes vice-cassette-spin{to{transform:rotate(360deg)}}
+.vice-boot-kicker{
+ max-width:100%;color:#74f5f6;text-transform:uppercase;
+ font:900 clamp(10px,2.4vw,15px)/1.25 Manrope,Arial,sans-serif;
+ letter-spacing:clamp(.1em,.50vw,.22em);
+ white-space:nowrap;text-shadow:0 2px 5px #22143a,0 0 15px #30fffb6e;
+}
+.vice-boot-title{
+ margin:5px 0 0;max-width:100%;white-space:nowrap;
+ font:italic 1000 clamp(46px,13.65vw,111px)/.99 Impact,"Arial Black",Manrope,sans-serif;
+ font-stretch:condensed;letter-spacing:-.037em;
+ transform:translateY(16px) scale(.94);opacity:0;
+ filter:drop-shadow(0 7px 1px #530e56) drop-shadow(0 12px 9px #160b32);
+}
+.vice-boot-title span{
+ color:#fff3d9;
+ text-shadow:0 2px #fec8b6,0 4px #f27ca6;
+ -webkit-text-stroke:.65px #ffefdc;
+}
+.vice-boot-title em{
+ font-style:inherit;
+ color:#ff8bc0;
+ text-shadow:0 2px #f6abd1,0 4px #d63398;
+ -webkit-text-stroke:.5px #f9b3d8;
+}
+.vice-boot-overlay.is-active .vice-boot-title{
+ animation:vice-boot-title-come .68s cubic-bezier(.17,.75,.19,1) .11s both;
+}
+.vice-boot-deck{
+ margin:8px 0 0;max-width:95%;
+ color:#fff4f8;font:800 clamp(11px,2.7vw,16px)/1.5 Manrope,Arial,sans-serif;
+ letter-spacing:clamp(.08em,.35vw,.21em);text-shadow:0 2px 7px #270c37;
+}
+.vice-boot-meter{
+ position:fixed;z-index:9;left:10%;width:80%;top:74%;
+ box-sizing:border-box;height:clamp(15px,2.3vh,22px);
+ padding:3px;border:1px solid #ffc5e8;border-radius:99px;
+ background:linear-gradient(180deg,#261334d9,#170e2dd9);
+ box-shadow:0 0 0 2px #5c285d,0 0 17px #ff6fcac7,inset 0 0 10px #ff7dba7a;
+ overflow:hidden;
+}
+.vice-boot-meter span{
+ display:block;width:100%;height:100%;
+ border-radius:99px;transform:scaleX(0);transform-origin:left center;
+ background:linear-gradient(90deg,#63f4f2 0%,#84eafa 25%,#c8d1fc 50%,#f7b8e6 73%,#fff0c0 100%);
+ box-shadow:0 0 11px #ffdafd,inset 0 1px #fffffff0;will-change:transform;
+}
+.vice-boot-overlay.is-active .vice-boot-meter span{
+ animation:vice-boot-progress 1.18s cubic-bezier(.17,.32,.19,1) .22s forwards;
+}
+.vice-boot-status{
+ position:fixed;top:calc(74% + 29px);left:7%;width:86%;
+ margin:0;min-height:20px;box-sizing:border-box;
+ color:#87fbff;font:900 clamp(10px,2.5vw,14px)/1.4 Manrope,Arial,sans-serif;
+ letter-spacing:clamp(.1em,.38vw,.25em);text-transform:uppercase;
+ text-shadow:0 1px 6px #150f2c,0 0 12px #1cd9dd68;
+}
+.vice-boot-status::before,.vice-boot-status::after{
+ content:"";display:inline-block;vertical-align:middle;width:clamp(15px,8vw,60px);
+ height:1px;margin:0 12px;background:linear-gradient(90deg,transparent,#ee62bb);
+}
+.vice-boot-status::after{transform:scaleX(-1)}
+.vice-boot-overlay.is-ready .vice-boot-status{color:#a5feef}
+/* Sound authorization is handled by browser restrictions, not a fake autoplay. */
+.vice-audio-wake{
+ position:fixed;right:14px;bottom:calc(82px + env(safe-area-inset-bottom,0px));
+ z-index:2147481000;display:none;align-items:center;gap:9px;
+ max-width:calc(100vw - 28px);padding:10px 10px 10px 15px;
+ border:1px solid #f5a4d2;border-radius:16px;
+ background:linear-gradient(125deg,#40234ae8,#6a3064f5);
+ box-shadow:0 10px 30px #1d102a9e,0 0 14px #ff84ba47;
+ backdrop-filter:blur(12px);color:#fff1e8;
+ font:900 12px/1.25 Manrope,Arial,sans-serif;
+}
+.vice-audio-wake.is-visible{display:flex}
+.vice-audio-wake-start,.vice-audio-wake-dismiss{
+ cursor:pointer;touch-action:manipulation;color:inherit;
+ border:0;background:none;font:inherit;
+}
+.vice-audio-wake-start{padding:5px 8px;text-align:left}
+.vice-audio-wake-dismiss{
+ width:29px;height:29px;flex:none;border-radius:50%;
+ background:#ffffff24;font-size:18px;line-height:1;
+}
+.vice-audio-wake-start:focus-visible,.vice-audio-wake-dismiss:focus-visible{outline:2px solid #fff;outline-offset:2px}
+@keyframes vice-boot-scene{from{opacity:.65;transform:scale(1.045)}to{opacity:1;transform:scale(1)}}
+@keyframes vice-boot-wipe{
+ 0%{opacity:0;transform:translate3d(-105%,0,0)}
+ 30%{opacity:.2}75%{opacity:.08}
+ 100%{opacity:0;transform:translate3d(105%,0,0)}
+}
+@keyframes vice-boot-title-come{
+ from{opacity:0;transform:translateY(16px) scale(.94);filter:blur(5px)}
+ to{opacity:1;transform:translateY(0) scale(1);filter:drop-shadow(0 7px 1px #530e56) drop-shadow(0 12px 9px #160b32)}
+}
+@keyframes vice-boot-progress{
+ 0%{transform:scaleX(0)}23%{transform:scaleX(.23)}
+ 60%{transform:scaleX(.69)}100%{transform:scaleX(1)}
+}
+@media(max-width:420px){
+ .vice-boot-body{top:29%}
+ .vice-boot-icon{width:clamp(105px,31vw,135px);margin-bottom:9px}
+ .vice-boot-kicker{font-size:clamp(10px,2.65vw,12px);letter-spacing:.11em}
+ .vice-boot-title{font-size:clamp(42px,13.25vw,57px);letter-spacing:-.02em}
+ .vice-boot-deck{font-size:clamp(11px,2.8vw,13px);margin-top:8px;max-width:94%;letter-spacing:.07em}
+ .vice-boot-topline,.vice-boot-bottomline{letter-spacing:.04em;font-size:clamp(8px,2.05vw,10px)}
+ .vice-boot-status{letter-spacing:.06em}
+ .vice-boot-status::before,.vice-boot-status::after{width:12px;margin:0 5px}
+}
+@media(max-width:350px){
+ .vice-boot-body{padding-inline:8px;top:29%}
+ .vice-boot-kicker{letter-spacing:.095em;font-size:9px}
+ .vice-boot-title{font-size:clamp(39px,13vw,48px)}
+ .vice-boot-deck{font-size:10px;letter-spacing:.075em}
+ .vice-boot-icon{width:105px;height:auto}
+ .vice-boot-status{font-size:9px;letter-spacing:.08em}
+ .vice-audio-wake{right:9px;bottom:calc(77px + env(safe-area-inset-bottom,0px))}
+}
+@media(max-height:650px) and (orientation:landscape){
+ .vice-boot-body{top:10%}
+ .vice-boot-icon{width:65px;height:auto;margin-bottom:3px}
+ .vice-boot-kicker{font-size:9px}
+ .vice-boot-title{font-size:clamp(38px,9.5vh,62px);margin-top:2px}
+ .vice-boot-deck{font-size:10px;margin-top:1px}
+ .vice-boot-meter{top:78%;height:14px}
+ .vice-boot-status{top:calc(78% + 20px);font-size:9px}
+ .vice-boot-topline{top:13px}.vice-boot-bottomline{bottom:11px}
+}
+@media(prefers-reduced-motion:reduce){
+ .vice-boot-overlay,.vice-boot-overlay::before,.vice-boot-overlay *,
+ .vice-boot-overlay *::after{animation:none!important;transition:none!important}
+ .vice-boot-title{opacity:1;transform:none;filter:none}
+ .vice-boot-reel{animation:none!important}
+ .vice-boot-meter span{transform:none}
+}
+
+/* SOURCE: teoria-vice-sunset-boulevard.css */
+/* NEOLINE VICE / SECOND AD — sunset boulevard, 22 Nov 2026
+   Replaces the oversized turquoise route artwork on slide 2 ONLY.
+   The five working carousel buttons/dots/swipes and four translations remain real.
+   No map path, no extra baked-in text, no changes to classic or quiz HUD. */
+html[data-vice-theme="on"] .theory-promo-host
+ .vice-cinema-frame--signs .vice-cinema-scene{
+ background-image:url("./assets/teoria/vice-sunset-boulevard-photo.svg?v=20261122-premium-cinema-v3")!important;
+ background-repeat:no-repeat!important;
+ background-position:48% 52%!important;
+ background-size:cover!important;
+ filter:saturate(1.17) contrast(1.045) brightness(1.05)!important;
+ transform:scale(1.025)!important;
+}
+html[data-vice-theme="on"] .theory-promo-host
+ .vice-cinema-frame--signs.is-active .vice-cinema-scene{
+ transform:scale(1.065) translate3d(-.3%,0,0)!important;
+ transition:transform 8.5s ease-out!important;
+}
+html[data-vice-theme="on"] .theory-promo-host
+ .vice-cinema-frame--signs .vice-cinema-mask{
+ background:
+  linear-gradient(90deg,#1c0f354a 0%,#1d113314 34%,#2510344f 59%,#2a153cc4 100%),
+  linear-gradient(0deg,#210d37a4 0%,transparent 42%)!important;
+}
+html[data-vice-theme="on"] .theory-promo-host
+ .vice-cinema-frame--signs .vice-cinema-story{
+ z-index:4!important;
+ color:#fff5eb!important;
+ text-shadow:0 2px 8px #130824d6!important;
+}
+html[data-vice-theme="on"] .theory-promo-host
+ .vice-cinema-frame--signs .vice-cinema-headline{
+ transform:rotate(-2deg)!important;
+ border:1px solid #ffe7ab!important;
+ border-radius:11px!important;
+ padding:5px 8px!important;
+ background:linear-gradient(125deg,#ffe1a0,#ffc278 72%,#f9a98c)!important;
+ color:#30203e!important;
+ box-shadow:inset 0 1px #fff4c5,0 0 11px #ffc38b70,0 5px 13px #1e0e326b!important;
+ text-shadow:none!important;
+ font-weight:1000!important;
+}
+html[data-vice-theme="on"] .theory-promo-host
+ .vice-cinema-frame--signs .vice-cinema-sub{
+ color:#fff8f0!important;
+ font-weight:750!important;
+ text-shadow:0 2px 7px #130920,0 0 5px #25112d!important;
+}
+@media(max-width:760px){
+ html[data-vice-theme="on"] .theory-promo-host
+  .vice-cinema-frame--signs .vice-cinema-story{
+  right:clamp(8px,2.5vw,14px)!important;
+  max-width:31%!important;
+  width:31%!important;
+  gap:4px!important;
+ }
+ html[data-vice-theme="on"] .theory-promo-host
+  .vice-cinema-frame--signs .vice-cinema-headline{
+  padding:5px 7px!important;
+  border-radius:9px!important;
+  line-height:1.12!important;
+  font-size:clamp(10px,3.2vw,14px)!important;
+ }
+ html[data-vice-theme="on"] .theory-promo-host
+  .vice-cinema-frame--signs .vice-cinema-tag{
+  font-size:clamp(6px,1.9vw,9px)!important;
+ }
+}
+@media(max-width:350px){
+ html[data-vice-theme="on"] .theory-promo-host
+  .vice-cinema-frame--signs .vice-cinema-story{
+  right:7px!important;
+  width:32%!important;
+  max-width:32%!important;
+  gap:2px!important;
+ }
+}
+@media(prefers-reduced-motion:reduce){
+ html[data-vice-theme="on"] .theory-promo-host
+  .vice-cinema-frame--signs .vice-cinema-scene{
+  transform:none!important;
+  transition:none!important;
+ }
+}
+
+
+/* SOURCE: teoria-vice-soundtrack.css */
+/* NEOLINE · GTA VI Style · on-page ZX 128K music library.
+   Regular content at bottom of game page; never replaces the unified nav. */
+.vice-soundtrack{display:none}
+html[data-vice-theme="on"] .vice-soundtrack{
+ display:block;position:relative;isolation:isolate;overflow:hidden;
+ box-sizing:border-box;margin:25px auto 110px;padding:clamp(14px,3vw,25px);
+ border:1px solid #e68abac2;border-radius:23px;
+ background:
+  radial-gradient(ellipse at 84% 4%,#d16d8851,transparent 44%),
+  radial-gradient(ellipse at 8% 100%,#692e7f6b,transparent 45%),
+  linear-gradient(148deg,#21152c 0%,#432443 53%,#211a36 100%);
+ color:#fff2ed;
+ box-shadow:0 16px 45px #1f0e3852,inset 0 1px #ffdeee55;
+}
+.vice-soundtrack *{box-sizing:border-box}
+.vice-soundtrack::before{
+ content:"";position:absolute;inset:0 0 auto;height:3px;
+ background:linear-gradient(90deg,#7aede4,#f599d2,#ffd1a5);
+ opacity:.85;z-index:2
+}
+.vice-soundtrack__head{
+ display:flex;align-items:flex-start;justify-content:space-between;
+ gap:10px 18px;flex-wrap:wrap;margin-bottom:17px;position:relative;z-index:1
+}
+.vice-soundtrack__eyebrow{
+ display:block;margin-bottom:3px;
+ font:900 10px/1.4 Manrope,Arial,sans-serif;letter-spacing:.15em;
+ color:#8feddf;text-transform:uppercase;
+}
+.vice-soundtrack__head h2{
+ margin:0;color:#fff4eb;font:900 clamp(20px,4.7vw,30px)/1.13 Manrope,Arial,sans-serif;
+ text-transform:none;letter-spacing:-.025em
+}
+.vice-soundtrack__count{
+ align-self:flex-start;display:inline-block;padding:7px 11px;border-radius:999px;
+ color:#ffe8ed;font:800 10px/1.1 Manrope,Arial,sans-serif;
+ letter-spacing:.055em;border:1px solid #f1a7cf70;background:#ffffff15;white-space:nowrap;
+}
+.vice-soundtrack__deck{
+ border:1px solid #f19ec56b;border-radius:17px;
+ background:linear-gradient(135deg,#442347ef,#5c3055d9);
+ padding:14px 15px 13px;box-shadow:inset 0 1px #ffffff23;
+ position:relative
+}
+.vice-soundtrack__now{
+ display:flex;align-items:center;gap:12px;margin-bottom:10px
+}
+.vice-soundtrack__art{
+ flex:0 0 55px;width:55px;height:55px;border-radius:13px;
+ border:1px solid #ffacc6ab;display:grid;place-items:center;
+ background:linear-gradient(160deg,#df7ab3,#a04790 55%,#3b2a68);
+ box-shadow:0 4px 15px #230e35a6;
+ color:#fff9dc;font:1000 19px/1 Manrope,Arial,sans-serif;letter-spacing:-.06em
+}
+.vice-soundtrack__titleblock{flex:1;min-width:0;line-height:1.35}
+.vice-soundtrack__label{
+ display:block;color:#aaf6e9;font:800 9px/1.2 Manrope,Arial,sans-serif;
+ letter-spacing:.15em;text-transform:uppercase
+}
+.vice-soundtrack__title{
+ display:block;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;
+ color:#fff9ee;font:900 clamp(15px,3vw,20px)/1.25 Manrope,Arial,sans-serif
+}
+.vice-soundtrack__status{
+ display:block;color:#f8cede;line-height:1.4;font:700 11px/1.4 Manrope,Arial,sans-serif;
+}
+.vice-soundtrack__eq{
+ display:flex;align-items:flex-end;gap:3px;width:24px;height:22px;
+ flex:0 0 auto;opacity:.45
+}
+.vice-soundtrack__eq span{
+ background:linear-gradient(#b4fff1,#fbaad5);
+ width:4px;height:25%;border-radius:2px;transform-origin:bottom;
+}
+.vice-soundtrack.is-playing .vice-soundtrack__eq{opacity:1}
+.vice-soundtrack.is-playing .vice-soundtrack__eq span:nth-child(1){animation:vs-level .68s ease-in-out infinite alternate}
+.vice-soundtrack.is-playing .vice-soundtrack__eq span:nth-child(2){animation:vs-level .49s ease-in-out .14s infinite alternate}
+.vice-soundtrack.is-playing .vice-soundtrack__eq span:nth-child(3){animation:vs-level .82s ease-in-out .25s infinite alternate}
+.vice-soundtrack.is-playing .vice-soundtrack__eq span:nth-child(4){animation:vs-level .57s ease-in-out .1s infinite alternate}
+@keyframes vs-level{0%{height:24%}100%{height:100%}}
+.vice-soundtrack__progress{display:flex;align-items:center;gap:9px;min-width:0}
+.vice-soundtrack__time{
+ display:inline-block;min-width:31px;text-align:center;
+ color:#edcfdf;font:800 10px/1.2 Manrope,Arial,sans-serif;
+ font-variant-numeric:tabular-nums
+}
+.vice-soundtrack__seek{
+ appearance:none;-webkit-appearance:none;flex:1;min-width:50px;
+ width:auto;height:6px;border-radius:99px;
+ background:linear-gradient(90deg,#9ef0e4 var(--vs-progress,0%),#eed2e25c var(--vs-progress,0%));
+ cursor:pointer;touch-action:pan-y
+}
+.vice-soundtrack__seek::-webkit-slider-thumb{
+ -webkit-appearance:none;width:17px;height:17px;border-radius:50%;
+ border:2px solid #fff5df;background:#fa9aca;box-shadow:0 0 0 2px #fba5d055;
+}
+.vice-soundtrack__seek::-moz-range-thumb{
+ width:15px;height:15px;border-radius:50%;border:2px solid #fff5df;background:#fa9aca;
+}
+.vice-soundtrack__seek:disabled{opacity:.5;cursor:default}
+.vice-soundtrack__controls{
+ display:flex;align-items:center;justify-content:center;gap:9px;margin-top:13px
+}
+.vice-soundtrack__control{
+ flex:0 0 43px;display:grid;place-items:center;width:43px;height:43px;padding:0;
+ border:1px solid #ffc2dd89;border-radius:13px;
+ color:#ffeaf5;background:#ffffff12;
+ font:900 19px/1 Arial,sans-serif;cursor:pointer;touch-action:manipulation;
+ transition:background .15s,transform .15s;
+}
+.vice-soundtrack__control--play{
+ flex-basis:52px;width:52px;height:52px;
+ background:linear-gradient(145deg,#ffd1a6,#f99ccb);color:#50284f;
+ border-color:#ffe8d3;box-shadow:0 3px 13px #f698c066;
+ border-radius:16px;font-size:22px;
+}
+.vice-soundtrack__control:disabled{opacity:.38;cursor:not-allowed}
+@media(hover:hover) and (pointer:fine){
+ .vice-soundtrack__control:not(:disabled):hover{background:#ae5a8c;transform:translateY(-1px)}
+ .vice-soundtrack__control--play:not(:disabled):hover{background:#ffe8c1}
+}
+.vice-soundtrack__control:focus-visible,
+.vice-soundtrack__track:focus-visible,
+.vice-soundtrack__seek:focus-visible,
+.vice-soundtrack__fold summary:focus-visible{
+ outline:3px solid #affaf0;outline-offset:3px
+}
+.vice-soundtrack__fold{margin-top:17px}
+.vice-soundtrack__fold summary{
+ display:flex;justify-content:space-between;align-items:center;gap:14px;
+ cursor:pointer;list-style:none;padding:2px 3px 12px;
+ color:#ffe8ee;font:900 12px/1.3 Manrope,Arial,sans-serif;
+ letter-spacing:.045em;
+}
+.vice-soundtrack__fold summary::-webkit-details-marker{display:none}
+.vice-soundtrack__fold summary::after{content:"⌄";font-size:21px;line-height:.8;color:#edb2d0;transform:rotate(-90deg)}
+.vice-soundtrack__fold[open] summary::after{transform:rotate(0)}
+.vice-soundtrack__list{
+ list-style:none;margin:0;padding:0;display:grid;gap:7px;
+ grid-template-columns:repeat(2,minmax(0,1fr));
+}
+.vice-soundtrack__item{margin:0;padding:0;min-width:0}
+.vice-soundtrack__track{
+ width:100%;display:flex;align-items:center;text-align:start;
+ border:1px solid #f6b6d354;border-radius:12px;gap:11px;
+ padding:11px 12px;min-width:0;min-height:55px;
+ color:#ffeff3;background:#ffffff0c;
+ cursor:pointer;touch-action:manipulation;
+ transition:background .15s,border-color .15s,box-shadow .15s;
+}
+.vice-soundtrack__track:hover{background:#ffffff19;border-color:#f4b1ce91}
+.vice-soundtrack__track[aria-pressed="true"]{
+ background:linear-gradient(90deg,#ca619844,#e6a36f26);
+ border-color:#a2f8e0bd;box-shadow:inset 3px 0 #8ff4df;
+}
+.vice-soundtrack__index{
+ display:grid;place-items:center;flex:0 0 30px;width:30px;height:30px;
+ border:1px solid #e5b4d56b;border-radius:9px;color:#fbd6e8;
+ background:#2516346b;font:900 12px/1 Manrope,Arial,sans-serif;
+}
+.vice-soundtrack__trackname{flex:1;display:flex;flex-direction:column;min-width:0;gap:3px}
+.vice-soundtrack__trackname b{
+ font:800 13px/1.25 Manrope,Arial,sans-serif;color:#fff6ed;
+ overflow:hidden;text-overflow:ellipsis;white-space:nowrap;
+}
+.vice-soundtrack__trackname small{
+ font:800 9px/1.2 Manrope,Arial,sans-serif;letter-spacing:.055em;
+ color:#d8acd6;text-transform:uppercase
+}
+.vice-soundtrack__playicon{color:#abf9ea;font-size:15px;flex:0 0 19px;text-align:center}
+.vice-soundtrack__foot{
+ margin:14px 2px 0;font:700 11px/1.5 Manrope,Arial,sans-serif;
+ color:#e4c4dc;text-align:center
+}
+html[data-vice-theme="on"] .vice-soundtrack[aria-busy="true"] .vice-soundtrack__playicon{opacity:.45}
+@media(max-width:620px){
+ html[data-vice-theme="on"] .vice-soundtrack{
+  padding:15px 12px;margin:18px auto 100px;border-radius:18px;
+ }
+ .vice-soundtrack__list{grid-template-columns:1fr}
+ .vice-soundtrack__track{padding:10px;min-height:51px}
+ .vice-soundtrack__head h2{font-size:22px}
+ .vice-soundtrack__art{flex-basis:46px;width:46px;height:46px}
+ .vice-soundtrack__deck{padding:12px}
+ .vice-soundtrack__controls{gap:8px}
+}
+@media(prefers-reduced-motion:reduce){
+ .vice-soundtrack__eq span{animation:none!important}
+ .vice-soundtrack__control,.vice-soundtrack__track{transition:none}
+}
+
+/* Expandable music library, folded by default on every page load.
+   All player content stays out of view until summary is activated. */
+html[data-vice-theme="on"] .vice-soundtrack{
+ padding:0!important;margin-top:19px;overflow:hidden;
+ background:linear-gradient(135deg,#251b38,#492a56 70%,#2e203c);
+}
+.vice-soundtrack__drawer{width:100%;margin:0}
+.vice-soundtrack__drawer summary::-webkit-details-marker{display:none}
+.vice-soundtrack__drawer-summary{
+ box-sizing:border-box;min-height:82px;
+ display:flex;align-items:center;gap:13px;
+ list-style:none;cursor:pointer;touch-action:manipulation;
+ padding:16px clamp(14px,3.5vw,24px);
+ color:#fff1ed;user-select:none;
+ background:linear-gradient(105deg,#49304d60,#9a497f20);
+}
+.vice-soundtrack__drawer-summary:hover{background:linear-gradient(105deg,#6f385c70,#b55f8b27)}
+.vice-soundtrack__drawer-summary:focus-visible{outline:3px solid #a8f9e9;outline-offset:-4px;border-radius:18px}
+.vice-soundtrack__drawer-symbol{
+ display:grid;place-items:center;flex:0 0 47px;
+ width:47px;height:47px;border:1px solid #f7c4d7;
+ border-radius:14px;
+ background:linear-gradient(135deg,#ffb6d6,#b95da0);
+ color:#472248;font:900 28px/1 Arial,sans-serif;
+ box-shadow:0 2px 15px #ed8bcb38,inset 0 1px #fff8;
+}
+.vice-soundtrack__drawer-copy{display:flex;min-width:0;flex:1;flex-direction:column;gap:4px}
+.vice-soundtrack__drawer-copy strong{
+ font:900 clamp(15px,3.5vw,21px)/1.15 Manrope,Arial,sans-serif;
+ color:#fff3ec;letter-spacing:-.02em;
+}
+.vice-soundtrack__drawer-copy small{
+ font:700 11px/1.35 Manrope,Arial,sans-serif;color:#e9c4e0;
+}
+.vice-soundtrack__drawer-stat{
+ border:1px solid #ffb7da75;white-space:nowrap;
+ padding:6px 9px;border-radius:11px;color:#a8f5e9;
+ font:900 10px/1.2 Manrope,Arial,sans-serif;
+ background:#ffffff0d;
+}
+.vice-soundtrack__drawer-chevron{
+ flex:0 0 auto;color:#fbc5e0;font:900 23px/1 Arial,sans-serif;
+ transition:transform .2s;
+}
+.vice-soundtrack__drawer[open] .vice-soundtrack__drawer-chevron{transform:rotate(180deg)}
+.vice-soundtrack__drawer[open] .vice-soundtrack__drawer-summary{
+ border-bottom:1px solid #f2bbd64d;
+}
+.vice-soundtrack__drawer-content{padding:clamp(13px,3vw,24px)}
+.vice-soundtrack__list .vice-soundtrack__group{
+ grid-column:1/-1;list-style:none;
+ padding:12px 4px 5px;margin-top:4px;
+ color:#a5f9eb;font:900 11px/1.3 Manrope,Arial,sans-serif;
+ letter-spacing:.045em;border-bottom:1px solid #c784b06b;
+}
+.vice-soundtrack__item--pending .vice-soundtrack__track{
+ opacity:.73;cursor:default;background:#1c183026;
+ border-color:#b78ca745;
+}
+.vice-soundtrack__item--pending .vice-soundtrack__track:disabled{opacity:.73;cursor:not-allowed}
+.vice-soundtrack__item--pending .vice-soundtrack__trackname small{color:#d9bbd1}
+.vice-soundtrack__item--pending .vice-soundtrack__playicon{color:#e8bdb7;font-size:14px}
+.vice-soundtrack__track[disabled]:hover{background:#1c183026;border-color:#b78ca745}
+.vice-soundtrack__foot strong{color:#a5f9eb}
+@media(max-width:620px){
+ html[data-vice-theme="on"] .vice-soundtrack{padding:0!important;margin-top:16px}
+ .vice-soundtrack__drawer-summary{padding:12px 11px;gap:9px;min-height:72px}
+ .vice-soundtrack__drawer-symbol{flex-basis:41px;width:41px;height:41px;font-size:25px;border-radius:12px}
+ .vice-soundtrack__drawer-stat{font-size:9px;padding:6px 7px}
+ .vice-soundtrack__drawer-copy strong{font-size:15px}
+ .vice-soundtrack__drawer-copy small{font-size:10px}
+ .vice-soundtrack__drawer-content{padding:12px}
+}
+@media(max-width:370px){
+ .vice-soundtrack__drawer-stat{display:none}
+ .vice-soundtrack__drawer-chevron{font-size:21px}
+}
+@media(prefers-reduced-motion:reduce){
+ .vice-soundtrack__drawer-chevron{transition:none}
+}
+
