@@ -1,0 +1,65 @@
+name: NEOLINE Theory - refresh optimized game bundles
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'teoria*.css'
+      - 'teoria*.js'
+      - 'nav-*.css'
+      - 'nav-current.js'
+      - 'site-header.css'
+      - 'site-header.js'
+      - 'scripts/build_teoria_bundles.py'
+      - '.github/workflows/refresh-teoria-bundles.yml'
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency:
+  group: neoline-theory-bundles
+  cancel-in-progress: false
+jobs:
+  bundle:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - name: Get current game sources
+        uses: actions/checkout@v4
+        with:
+          ref: main
+          persist-credentials: true
+      - name: Rebuild from source without changing gameplay logic
+        run: python3 scripts/build_teoria_bundles.py
+      - name: Validate both optimized JavaScript bundles
+        run: |
+          node --check teoria-optimized-01.js
+          node --check teoria-optimized-02.js
+      - name: Verify loader references and bundle sizes
+        run: |
+          python3 - <<'PY'
+          import pathlib, re
+          html=pathlib.Path('teoria.html').read_text(encoding='utf-8')
+          for ext, count in [('css',4),('js',2)]:
+              refs=re.findall(r'teoria-optimized-\d{2}\.'+ext+r'\?v=[0-9a-f]{12}',html)
+              assert len(refs)==count,(ext,refs)
+          for i in range(1,5):
+              assert (pathlib.Path(f'teoria-optimized-{i:02d}.css').stat().st_size)>1000
+          for i in range(1,3):
+              assert (pathlib.Path(f'teoria-optimized-{i:02d}.js').stat().st_size)>1000
+          print('NEOLINE game: 4 CSS requests + 2 JS requests, all bundles valid')
+          PY
+      - name: Publish bundles if source changed
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add teoria-optimized-0*.css teoria-optimized-0*.js teoria.html
+          if git diff --cached --quiet; then
+            echo "Bundles already match current originals"
+            exit 0
+          fi
+          git commit -m "chore: refresh optimized NEOLINE Theory bundles"
+          for attempt in 1 2 3 4; do
+            git pull --rebase origin main || { git rebase --abort || true; exit 1; }
+            git push origin HEAD:main && exit 0
+            sleep 3
+          done
+          exit 1
