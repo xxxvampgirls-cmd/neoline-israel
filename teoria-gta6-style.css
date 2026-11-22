@@ -119,12 +119,12 @@ html[data-vice-theme="on"] .game-gift-trigger{
  color:#ffebd8!important;background:#743266cc!important;border:1px solid #ffa4b5!important;
  box-shadow:0 2px 14px #ff729445!important;
 }
-html[data-vice-theme="on"] .game-hero .vice-theme-switch{
+html[data-vice-theme="on"] #gameLobby .vice-theme-switch{
  background:linear-gradient(112deg,#ff6c99,#ffb27e)!important;
  color:#351335!important;border-color:#ffdbce!important;
  box-shadow:0 3px 11px #410a355f!important;
 }
-html[data-vice-theme="on"] .game-hero .vice-theme-switch .vice-toggle-mark{
+html[data-vice-theme="on"] #gameLobby .vice-theme-switch .vice-toggle-mark{
  background:#391c4d!important;color:#ffddab!important;
 }
 html[data-vice-theme="on"] .theory-dashboard .hero-art{
@@ -177,6 +177,18 @@ html[data-vice-theme="on"] .hero-progress-open{
  border:2px solid #f5b1ab!important;color:#fff0e8!important;
  box-shadow:0 0 16px #fc8dae62!important;
 }
+
+/* The visible toggle is below "Choose mode", never squeezed into the
+   fixed-height hero area above the four saved progress medals. */
+#gameLobby .toolbar-title .vice-theme-switch{
+ margin:4px 0 1px;min-height:29px;white-space:nowrap;
+}
+#gamePlaying .game-quiz-topline{
+ display:flex;align-items:center;justify-content:space-between;
+ flex-wrap:wrap;gap:5px 8px;
+}
+#gamePlaying .game-quiz-topline .game-quiz-warning{flex:1 1 140px}
+#gamePlaying .game-quiz-topline .vice-theme-switch{flex:none;margin-left:auto}
 
 /* Daily challenge + mode selection: nightlife neon storefronts. */
 html[data-vice-theme="on"] .theory-daily{
@@ -467,9 +479,9 @@ html[data-vice-theme="on"] .gameover-card :is(h2,h3,strong){
   stroke:#532047!important;color:#532047!important;
  }
  html[data-vice-theme="on"] .theory-bottom>a svg{stroke:currentColor!important}
- .game-hero .vice-theme-switch{min-height:27px;margin-top:4px;padding:3px 6px;gap:5px}
- .game-hero .vice-toggle-mark{width:20px;height:20px;flex-basis:20px;font-size:12px}
- .game-hero .vice-toggle-text{font-size:8px}
+ #gameLobby .vice-theme-switch{min-height:27px;margin-top:4px;padding:3px 6px;gap:5px}
+ #gameLobby .vice-toggle-mark{width:20px;height:20px;flex-basis:20px;font-size:12px}
+ #gameLobby .vice-toggle-text{font-size:8px}
  .vice-theme-switch--quiz .vice-toggle-text{font-size:8px}
  html[data-vice-theme="on"] .game-hero.theory-dashboard::after{
   bottom:2px;left:9px;font-size:6px;letter-spacing:.12em;
@@ -483,8 +495,8 @@ html[data-vice-theme="on"] .gameover-card :is(h2,h3,strong){
  html[data-vice-theme="on"] #gamePlaying .question-card h2{font-size:clamp(18px,4.5vw,23px)!important}
 }
 @media(max-width:365px){
- .game-hero .vice-toggle-text{font-size:7px}
- .game-hero .vice-theme-switch{padding:2px 4px}
+ #gameLobby .vice-toggle-text{font-size:7px}
+ #gameLobby .vice-theme-switch{padding:2px 4px}
  html[data-vice-theme="on"] .game-hero.theory-dashboard::after{opacity:.35}
 }
 @media(prefers-reduced-motion:reduce){
