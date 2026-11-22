@@ -27,6 +27,11 @@ class NeolineAY8912 extends AudioWorkletProcessor{
   this.sfxMixGain=2.55;
   this.gameplay=false;this.giftActive=false;
   this.musicDucking=1; // gradual release avoids pops when short sounds finish
+  // Recreated EAR/ULA tape pulses share this worklet, not the AY three voices.
+  this.tapeActive=false;this.tapeSamples=0;
+  this.tapeDurationSamples=sampleRate*8.2;
+  this.tapePhase=0;this.tapeNoise=0xACE1;this.tapeBit=0;
+  this.tapeBitSamples=0;
   this.frameSamples=sampleRate;
   this.outputLevel=0;this.dc=0;
   this.port.onmessage=e=>{
@@ -47,6 +52,13 @@ class NeolineAY8912 extends AudioWorkletProcessor{
     this.musicEnabled=!!m.music;
     this.effectsEnabled=!!m.effects;
     this.gameplay=!!m.gameplay;this.giftActive=!!m.gift;
+    const shouldTape=!!m.tape;
+    if(shouldTape&&!this.tapeActive){
+     this.tapeActive=true;this.tapeSamples=0;this.tapePhase=0;
+     this.tapeBitSamples=0;this.tapeBit=0;this.tapeNoise=0xACE1;
+     this.tapeDurationSamples=sampleRate*Math.max(.3,
+      Math.min(15,(Number(m.tapeDurationMs)||8200)/1000));
+    }else if(!shouldTape)this.tapeActive=false;
     if(!this.effectsEnabled){this.fxFrames=null;this.fxReg=null;}
    }else if(m.type==="fx"){
     if(!this.effectsEnabled)return;
@@ -109,12 +121,44 @@ class NeolineAY8912 extends AudioWorkletProcessor{
   const upward=alternate&&(cycle&1)?!attack:attack;
   return upward?position:15-position;
  }
+ // Approximation of ZX ROM cassette pilot, sync and data-bit pulses.
+ // Authentic in character, but it does not encode a playable TZX tape.
+ tapeSample(sr){
+  const q=this.tapeSamples++/this.tapeDurationSamples;
+  if(q>=1){this.tapeActive=false;return 0;}
+  this.tapeBitSamples++;
+  if(this.tapeBitSamples>=sr*.0075){
+   this.tapeBitSamples=0;
+   const bit=((this.tapeNoise>>0)^(this.tapeNoise>>2)^
+              (this.tapeNoise>>3)^(this.tapeNoise>>5))&1;
+   this.tapeNoise=(this.tapeNoise>>1)|(bit<<15);
+   this.tapeBit=this.tapeNoise&1;
+  }
+  let hz,amp;
+  if(q<.055){hz=420;amp=.045;}
+  else if(q<.245){hz=806;amp=.17;}
+  else if(q<.276){hz=q<.26?1800:2530;amp=.15;}
+  else if(q<.745){hz=this.tapeBit?2020:1035;amp=.17;}
+  else if(q<.815){hz=806;amp=.165;}
+  else if(q<.956){hz=this.tapeBit?2210:1235;amp=.16;}
+  else{hz=1240;amp=.1;}
+  this.tapePhase+=hz/sr;
+  if(this.tapePhase>=1)this.tapePhase-=Math.floor(this.tapePhase);
+  const gate=q<.055?Math.sin(Math.PI*Math.min(1,q/.055)):
+     q>.96?Math.min(1,(1-q)/.04):1;
+  return (this.tapePhase<.5?1:-1)*amp*gate;
+ }
  process(_inputs,outputs){
   const out=outputs[0];if(!out||!out.length)return true;
   const left=out[0],right=out[1];
   const r=this.regs;
   const sr=sampleRate;
   for(let i=0;i<left.length;i++){
+   if(this.tapeActive){
+    const v=this.tapeSample(sr);
+    left[i]=v;if(right)right[i]=v;
+    continue;
+   }
    if(this.frameSamples>=sr){
     this.frameSamples-=sr;
     this.frameTick();
