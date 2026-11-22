@@ -40,6 +40,9 @@ async function capture(page,label){
       dock:box(dock),radar:box(radar),topbar:box(topbar),question:box(question),
       heroVisible:getComputedStyle(document.querySelector(".game-hero.theory-dashboard")).display,
       modeTitle:document.querySelector(".vice-hud-title")?.textContent,
+      headerVisible:getComputedStyle(topbar).display,
+      toplineVisible:getComputedStyle(document.querySelector("#gamePlaying .game-quiz-topline")).display,
+      cardMarginTop:getComputedStyle(question).marginTop,
       dockVisible:getComputedStyle(dock).display,
       routeVisible:getComputedStyle(route).display,
       radarVisible:getComputedStyle(radar).display,
@@ -55,6 +58,18 @@ async function capture(page,label){
    if(h.scrollWidth>width+2||h.dock.left<0||h.dock.right>width+2)throw Error("HUD horizontal overflow "+width+" "+JSON.stringify(h));
    if(h.routeVisible!=="none"||h.radarVisible==="none"||h.topbar.height>47||h.dock.height<69||!h.bodySession)throw Error("Wrong in-game HUD "+width+" "+JSON.stringify(h));
    if(h.heroVisible!=="none"||h.question.top>160||!h.modeTitle)throw Error("Lobby dashboard leaked above an active question "+width+" "+JSON.stringify(h));
+   if(h.headerVisible!=="none"||h.toplineVisible!=="none"||h.cardMarginTop!=="0px")throw Error("Old gameplay title bar still takes space "+width+" "+JSON.stringify(h));
+   // The existing exam engine must still be able to display its 40-minute countdown.
+   await page.evaluate(()=>{
+     document.getElementById("timerBox").hidden=false;
+     document.getElementById("timer").textContent="12:34";
+   });
+   await page.waitForFunction(()=>{
+     const e=document.querySelector(".vice-quiz-timer");
+     return e&&!e.hidden&&e.textContent.includes("12:34")&&getComputedStyle(e).display!=="none";
+   });
+   await page.evaluate(()=>document.getElementById("timerBox").hidden=true);
+   await page.waitForFunction(()=>document.querySelector(".vice-quiz-timer")?.hidden===true);
    if(!h.hasXP||!h.hasHearts||!h.hasHint||h.siteNav!=="none")throw Error("Lost working HUD buttons "+width+" "+JSON.stringify(h));
    // Actual quiz engine reports these values via neoline:theory-quiz.
    await page.evaluate(()=>window.dispatchEvent(new CustomEvent("neoline:theory-quiz",{
