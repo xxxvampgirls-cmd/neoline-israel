@@ -38,6 +38,8 @@ async function capture(page,label){
     const question=document.querySelector("#gamePlaying .question-card");
     return {
       dock:box(dock),radar:box(radar),topbar:box(topbar),question:box(question),
+      heroVisible:getComputedStyle(document.querySelector(".game-hero.theory-dashboard")).display,
+      modeTitle:document.querySelector(".vice-hud-title")?.textContent,
       dockVisible:getComputedStyle(dock).display,
       routeVisible:getComputedStyle(route).display,
       radarVisible:getComputedStyle(radar).display,
@@ -52,6 +54,7 @@ async function capture(page,label){
    if(errors.length)throw Error("Browser JS error "+errors.join("|"));
    if(h.scrollWidth>width+2||h.dock.left<0||h.dock.right>width+2)throw Error("HUD horizontal overflow "+width+" "+JSON.stringify(h));
    if(h.routeVisible!=="none"||h.radarVisible==="none"||h.topbar.height>47||h.dock.height<69||!h.bodySession)throw Error("Wrong in-game HUD "+width+" "+JSON.stringify(h));
+   if(h.heroVisible!=="none"||h.question.top>160||!h.modeTitle)throw Error("Lobby dashboard leaked above an active question "+width+" "+JSON.stringify(h));
    if(!h.hasXP||!h.hasHearts||!h.hasHint||h.siteNav!=="none")throw Error("Lost working HUD buttons "+width+" "+JSON.stringify(h));
    // Actual quiz engine reports these values via neoline:theory-quiz.
    await page.evaluate(()=>window.dispatchEvent(new CustomEvent("neoline:theory-quiz",{
@@ -86,6 +89,7 @@ async function capture(page,label){
    });
    if(!wasted.blur.includes("blur")||wasted.promo!=="none"||wasted.headingHeight<42||wasted.retries.includes(true)||wasted.overflow>width+2)
     throw Error("WASTED overlay check "+width+" "+JSON.stringify(wasted));
+   await page.waitForTimeout(650); // Wait for cinematic headline to become visible before screenshot.
    if(width===390)await capture(page,"WASTED");
    await page.evaluate(()=>{document.documentElement.lang="en"});
    await page.waitForFunction(()=>document.getElementById("gameOverTitle").textContent==="WASTED");
