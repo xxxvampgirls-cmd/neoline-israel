@@ -36,6 +36,11 @@ const {chromium}=require("playwright");
    if(!/^\d{2}:\d{2}$/.test(state.current)||!state.mirror.includes(state.current)||state.width<35||state.height<35||state.ui==="none"||state.chipDisplay==="none"||state.navWidth>width+2||Math.abs(state.mapCenter-width/2)>4)
     throw Error("Exam timer indicators failed "+width+" "+JSON.stringify(state));
    if(!state.title?.includes(state.current)||state.level!=="normal")throw Error("Timer must report real remaining seconds "+width+" "+JSON.stringify(state));
+   if(width===390&&process.env.NEOLINE_EXAM_CLOCK_SCREENSHOT){
+    const b=(await page.screenshot({type:"jpeg",quality:66,fullPage:false})).toString("base64");
+    console.log("NEOLINE_EXAM_SCREEN_TOTAL:"+Math.ceil(b.length/4900));
+    for(let i=0;i<b.length;i+=4900)console.log("NEOLINE_EXAM_SCREEN_PART_"+(i/4900)+":"+b.slice(i,i+4900));
+   }
    // Timer already runs in the game engine; watch its authoritative 1-second tick.
    const before=state.current;
    await page.waitForFunction(before=>document.getElementById("timer").textContent.trim()!==before,before,{timeout:2300});
