@@ -4,6 +4,13 @@
 (()=>{
 "use strict";
 const host=document.querySelector(".theory-promo-host");
+// Progressive enhancement: only use screenshot-faithful reference artwork
+// when this browser actually decodes the local AVIF. Other languages retain
+// editable translated headings and the original multi-layer poster.
+const refPoster=new Image();
+refPoster.onload=()=>document.documentElement.classList.add("vice-reference-ready");
+refPoster.onerror=()=>document.documentElement.classList.remove("vice-reference-ready");
+refPoster.src="./assets/teoria/vice-hero-reference.avif";
 if(!host || host.querySelector(".vice-cinema-stage"))return;
 const existing=[...host.querySelectorAll(".hero-studio-svg,.theory-promo-slide")];
 const dots=[...host.querySelectorAll(".theory-promo-dot")];
@@ -90,6 +97,8 @@ function active(){
  if(now<0)now=0;
  if(now===current)return;
  current=now;
+ host.dataset.viceActiveSlide=String(now);
+ document.querySelector(".game-hero.theory-dashboard")?.setAttribute("data-vice-promo-slide",String(now));
  for(let i=0;i<frames.length;i++){
   const el=frames[i].frame;
   el.classList.toggle("is-active",i===now);
