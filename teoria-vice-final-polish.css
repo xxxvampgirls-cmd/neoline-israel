@@ -323,3 +323,36 @@ html[data-vice-theme="on"] .theory-promo-host .theory-promo-dots{
  html[data-vice-theme="on"] .theory-promo-host .vice-cinema-arrow--prev{left:60%!important}
  html[data-vice-theme="on"] .theory-promo-host .theory-promo-dots{left:62%!important}
 }
+
+/* 2026-11-22 | HD neon photographic composites, approved game reference.
+ * Each data-backed SVG includes locally embedded game art so it renders
+ * offline and does not require any external image hosts. */
+html[data-vice-theme="on"] #gameLobby .routes .route-card.route-blue .game-mode-photo{
+ background-image:url("./assets/teoria/vice-hd-city.svg")!important;
+}
+html[data-vice-theme="on"] #gameLobby .routes .route-card.route-mint .game-mode-photo{
+ background-image:url("./assets/teoria/vice-hd-signs.svg")!important;
+}
+html[data-vice-theme="on"] #gameLobby .routes .route-card.route-indigo .game-mode-photo{
+ background-image:url("./assets/teoria/vice-hd-exam.svg")!important;
+}
+html[data-vice-theme="on"] #gameLobby .routes .route-card.route-amber .game-mode-photo{
+ background-image:url("./assets/teoria/vice-hd-mistakes.svg")!important;
+}
+html[data-vice-theme="on"] #gameLobby .routes .route-card.route-full .game-mode-photo{
+ background-image:url("./assets/teoria/vice-hd-marathon.svg")!important;
+}
+html[data-vice-theme="on"] #gameLobby .routes .route-card .game-mode-photo{
+ background-size:cover!important;
+ background-position:center center!important;
+ filter:brightness(1.08) saturate(1.12) contrast(1.045)!important;
+}
+html[data-vice-theme="on"] #gameLobby .routes .route-card:not(.route-full) .game-mode-photo::after{
+ background:linear-gradient(to top,#100923e8 0%,#1b1031ae 22%,#25123921 45%,transparent 72%)!important;
+}
+html[data-vice-theme="on"] #gameLobby .routes .route-full .game-mode-photo::after{
+ background:linear-gradient(90deg,#1b1035e8 0%,#2415389d 34%,#22133119 67%,transparent 100%)!important;
+}
+@media(prefers-reduced-motion:reduce){
+ html[data-vice-theme="on"] #gameLobby .routes .route-card .game-mode-photo{transition:none!important}
+}
