@@ -112,10 +112,10 @@ const pendingSongs=[
 ];
 // One identical Batman_The_Movie_3.ay duplicate intentionally omitted.
 const extra={
- ru:{drawer:"Музыкальная коллекция ZX 128K",subtitle:"Плеер и вся музыка · нажми, чтобы открыть",ready:"ДОСТУПНО ДЛЯ ПРОСЛУШИВАНИЯ",waiting:"ОРИГИНАЛЫ · AY / STC / SQT / ASC / STP / PT2",state:"Открыть в ZXTune ↗",count:"{a} PT3 · {b} оригиналов",foot:"Оригинальные PT3 играют через AY-3-8912. Пока дополнительные записи не подготовлены к нашему AY-проигрывателю, они открываются в отдельном ZXTune. Нажми ▶ для запуска."},
- en:{drawer:"ZX 128K Music Collection",subtitle:"Player and complete list · tap to expand",ready:"READY TO LISTEN",waiting:"ORIGINALS · AY / STC / SQT / ASC / STP / PT2",state:"Open original",count:"{a} PT3 · {b} originals",foot:"The original PT3 modules use our AY chip. Other original formats open in ZXTune until a verified AY register playback cache is available."},
- he:{drawer:"אוסף מוזיקה ZX 128K",subtitle:"נגן וכל המוזיקה · לחצו לפתיחה",ready:"מוכן להאזנה",waiting:"פורמטים מקוריים · AY / STC / SQT",state:"פתח את המקור",count:"{a} PT3 · {b} מקוריים",foot:"PT3 מופעל דרך AY. פורמטים אחרים מופעלים ב-ZXTune ללא המרה. טען את new.zip ב-ZXTune עד שקובצי המקור יפורסמו באתר."},
- ar:{drawer:"مجموعة موسيقى ZX 128K",subtitle:"المشغل وكل المقاطع · اضغط للفتح",ready:"جاهز للاستماع",waiting:"الملفات الأصلية · AY / STC / SQT",state:"فتح الأصل",count:"{a} PT3 · {b} أصلية",foot:"يعمل PT3 عبر AY. تُشغَّل التنسيقات الأخرى في ZXTune بدون تحويل. حمّل new.zip داخل ZXTune حتى نشر الملفات الأصلية."}
+ ru:{drawer:"Музыкальная коллекция ZX 128K",subtitle:"Плеер и вся музыка · нажми, чтобы открыть",ready:"ИГРОВАЯ МУЗЫКА",waiting:"ОРИГИНАЛЫ · ▶ ВОСПРОИЗВЕДЕНИЕ",state:"ВСТРОЕННЫЙ ПЛЕЕР ▶",count:"{a} PT3 · {n} AY · {e} Z80",foot:"{n} оригиналов играют здесь на AY-3-8912. Остальные {e} файла Z80 / 2×AY запускаются во встроенном проигрывателе. Все исходные записи сохранены."},
+ en:{drawer:"ZX 128K Music Collection",subtitle:"Player and complete list · tap to expand",ready:"READY TO LISTEN",waiting:"ORIGINALS · AY / STC / SQT / ASC / STP / PT2",state:"Embedded player ▶",count:"{a} PT3 · {n} AY · {e} Z80",foot:"{n} originals play natively through the AY-3-8912 chip. The remaining {e} Z80 / dual-chip files use the embedded player."},
+ he:{drawer:"אוסף מוזיקה ZX 128K",subtitle:"נגן וכל המוזיקה · לחצו לפתיחה",ready:"מוכן להאזנה",waiting:"פורמטים מקוריים · AY / STC / SQT",state:"נגן משובץ ▶",count:"{a} PT3 · {n} AY · {e} Z80",foot:"{n} שירים פועלים דרך AY. שאר {e} השירים פועלים בנגן משובץ."},
+ ar:{drawer:"مجموعة موسيقى ZX 128K",subtitle:"المشغل وكل المقاطع · اضغط للفتح",ready:"جاهز للاستماع",waiting:"الملفات الأصلية · AY / STC / SQT",state:"مشغّل مدمج ▶",count:"{a} PT3 · {n} AY · {e} Z80",foot:"تعمل {n} مقاطع عبر AY. تعمل {e} مقاطع أخرى في مشغّل مدمج."}
 };
 const extraLabels=()=>extra[(doc.lang||"ru").split("-")[0]]||extra.ru;
 const drawerTitle=$("viceSoundtrackDrawerTitle"),drawerSubtitle=$("viceSoundtrackDrawerSubtitle"),drawerStat=$("viceSoundtrackDrawerStat");
@@ -142,120 +142,139 @@ for(const [index,track] of api.tracks.entries()){
  trackButtons.set(track.id,{button,kind,action});
 }
 
-// Original tracker formats require a compatible Z80/AY player, not the PT3-only decoder.
-// ZXTune handles STC, ASC, SQT, STP, PT2, AY, including Z80 code in .ay.
-const ZXTUNE_URL="https://zxtune.com/player.html";
-const originalDialog=document.createElement("dialog");
-originalDialog.className="vice-soundtrack-original-dialog";
-originalDialog.setAttribute("aria-label","ZX Spectrum original-format player");
-const originalBox=document.createElement("div");
-originalBox.className="vice-soundtrack-original";
-const modalTitle=document.createElement("strong");
-const modalClose=document.createElement("button");
-modalClose.type="button";modalClose.textContent="×";
-modalClose.className="vice-soundtrack-original__close";
-modalClose.setAttribute("aria-label","Close");
-const modalTop=document.createElement("div");
-modalTop.className="vice-soundtrack-original__top";
-modalTop.append(modalTitle,modalClose);
-const modalMessage=document.createElement("p");
-modalMessage.className="vice-soundtrack-original__message";
-modalMessage.setAttribute("role","status");
-const modalLink=document.createElement("a");
-modalLink.href=ZXTUNE_URL;modalLink.target="_blank";
-modalLink.rel="noopener noreferrer";
-modalLink.textContent="Открыть ZXTune ↗";
-modalLink.className="vice-soundtrack-original__link";
-const modalFrame=document.createElement("iframe");
-modalFrame.className="vice-soundtrack-original__frame";
-modalFrame.title="ZXTune Web — original ZX Spectrum player";
-modalFrame.loading="lazy";modalFrame.allow="autoplay";
-modalFrame.referrerPolicy="no-referrer";
-modalFrame.setAttribute("sandbox","allow-scripts allow-same-origin allow-forms allow-downloads allow-popups");
-originalBox.append(modalTop,modalMessage,modalLink,modalFrame);
-originalDialog.append(originalBox);
-document.body.append(originalDialog);
-let modalSequence=0;
-function closeOriginalDialog(){
- ++modalSequence;
- modalFrame.removeAttribute("src");
- if(originalDialog.open)originalDialog.close();
- api.suspendForOriginalPlayer?.(false);
-}
-modalClose.addEventListener("click",closeOriginalDialog);
-originalDialog.addEventListener("cancel",()=>{
- ++modalSequence;
- modalFrame.removeAttribute("src");
- api.suspendForOriginalPlayer?.(false);
-});
-originalDialog.addEventListener("click",e=>{if(e.target===originalDialog)closeOriginalDialog()});
-async function openOriginalTrack(track){
- // Browser extensions/CSP may block third-party player iframes.
- // Open its own real player on a direct user gesture instead.
- // Sources are hosted as original binary files on Cloudflare Pages, not
- // reconstructed or re-arranged, and CORS is enabled for ZXTune.
- const fileURL=new URL("./assets/teoria/originals/"+encodeURIComponent(track.file),location.href).href;
- const playerURL=ZXTUNE_URL+"?url="+encodeURIComponent(fileURL);
- const win=window.open(playerURL,"_blank");
- if(win)try{win.opener=null}catch(_){}
- if(!win){
-  modalTitle.textContent=track.name+" · "+track.format;
-  modalLink.href=playerURL;
-  modalMessage.textContent=doc.lang==="ru"
-   ?"Нажми «Открыть ZXTune», затем ▶ в проигрывателе. Это оригинальный файл."
-   :"Open ZXTune, then press ▶ to play the original file.";
+// Native PSG register streams use our actual AY-3-8912 chip.
+ // Z80 code-based AY and dual-chip SQT modules need full Z80 / 2×AY:
+ // load the compatible ZXTune WebAssembly player INSIDE the game.
+ const ZXTUNE_URL="https://zxtune.com/player.html";
+ const originalDialog=document.createElement("dialog");
+ originalDialog.className="vice-soundtrack-original-dialog";
+ originalDialog.setAttribute("aria-label","ZX original music player");
+ const originalBox=document.createElement("div");
+ originalBox.className="vice-soundtrack-original";
+ const modalTitle=document.createElement("strong");
+ const modalClose=document.createElement("button");
+ modalClose.type="button";modalClose.textContent="×";
+ modalClose.className="vice-soundtrack-original__close";
+ modalClose.setAttribute("aria-label","Close");
+ const modalTop=document.createElement("div");
+ modalTop.className="vice-soundtrack-original__top";
+ modalTop.append(modalTitle,modalClose);
+ const modalMessage=document.createElement("p");
+ modalMessage.className="vice-soundtrack-original__message";
+ modalMessage.setAttribute("role","status");
+ const modalLink=document.createElement("a");
+ modalLink.target="_blank";modalLink.rel="noopener noreferrer";
+ modalLink.className="vice-soundtrack-original__link";
+ modalLink.hidden=true;
+ const modalFrame=document.createElement("iframe");
+ modalFrame.className="vice-soundtrack-original__frame";
+ modalFrame.title="ZXTune Web: original ZX Spectrum modules";
+ modalFrame.loading="eager";modalFrame.allow="autoplay";
+ modalFrame.referrerPolicy="strict-origin-when-cross-origin";
+ modalFrame.setAttribute("sandbox","allow-scripts allow-same-origin allow-forms allow-downloads allow-popups");
+ originalBox.append(modalTop,modalMessage,modalFrame,modalLink);
+ originalDialog.append(originalBox);document.body.append(originalDialog);
+ let originalSelected=null,modalSequence=0,modalFallback=0;
+ const EMBED_COPY={
+  ru:{loading:"Загружаем встроенный Z80 / 2×AY плеер…",ready:"Нажми ▶ в проигрывателе ниже. Страница игры остаётся открытой.",external:"Открыть отдельно ↗"},
+  en:{loading:"Loading embedded Z80 / 2×AY player…",ready:"Tap ▶ inside the player below. You stay on the game page.",external:"Open separately ↗"},
+  he:{loading:"טוען נגן Z80 / 2×AY משובץ…",ready:"לחצו ▶ בנגן למטה, בלי לעזוב את המשחק.",external:"פתיחה בנפרד ↗"},
+  ar:{loading:"تحميل مشغّل Z80 / 2×AY المدمج…",ready:"اضغط ▶ في المشغّل أدناه دون مغادرة اللعبة.",external:"فتح منفصل ↗"}
+ };
+ const embedCopy=()=>EMBED_COPY[(doc.lang||"ru").split("-")[0]]||EMBED_COPY.ru;
+ function closeOriginalDialog(){
+  ++modalSequence;originalSelected=null;
+  clearTimeout(modalFallback);modalFallback=0;
   modalFrame.removeAttribute("src");
-  if(!originalDialog.open)originalDialog.showModal();
+  if(originalDialog.open)originalDialog.close();
+  api.suspendForOriginalPlayer?.(false);
+  draw();
  }
-}
+ modalClose.addEventListener("click",closeOriginalDialog);
+ originalDialog.addEventListener("cancel",e=>{e.preventDefault();closeOriginalDialog()});
+ originalDialog.addEventListener("click",e=>{if(e.target===originalDialog)closeOriginalDialog()});
+ modalFrame.addEventListener("load",()=>{
+  if(originalDialog.open&&originalSelected)modalMessage.textContent=embedCopy().ready;
+ });
+ function openOriginalTrack(track){
+  const fileURL=new URL("./assets/teoria/originals/"+encodeURIComponent(track.file),location.href).href;
+  const playerURL=ZXTUNE_URL+"?url="+encodeURIComponent(fileURL);
+  const token=++modalSequence;
+  originalSelected=track.file;modalTitle.textContent=track.name+" · "+track.format;
+  modalMessage.textContent=embedCopy().loading;
+  modalLink.href=playerURL;modalLink.textContent=embedCopy().external;modalLink.hidden=true;
+  api.suspendForOriginalPlayer?.(true);
+  if(!originalDialog.open)originalDialog.showModal();
+  modalFrame.src=playerURL;
+  clearTimeout(modalFallback);
+  modalFallback=setTimeout(()=>{
+   if(token===modalSequence&&originalDialog.open)modalLink.hidden=false;
+  },10000);
+  draw();
+ }
 
 const pendingHeader=listHeader();
 const pendingButtons=[];
 for(const track of pendingSongs){
- const li=document.createElement("li");li.className="vice-soundtrack__item vice-soundtrack__item--pending";
+ const li=document.createElement("li");li.className="vice-soundtrack__item vice-soundtrack__item--original";
  const button=document.createElement("button");
- button.type="button";
- button.className="vice-soundtrack__track";
+ button.type="button";button.className="vice-soundtrack__track";
  button.dataset.original=track.file;
- button.setAttribute("aria-haspopup","dialog");
- button.addEventListener("click",()=>{
- if(api.originalReady?.(track.file))void api.playOriginal(track.file);
-});
- const number=document.createElement("span");number.className="vice-soundtrack__index";
- number.textContent=String(api.tracks.length+pendingButtons.length+1).padStart(2,"0");
+ const number=document.createElement("span");
+ number.className="vice-soundtrack__index";
+ number.textContent=String(api.tracks.filter(t=>t.kind!=="original").length+pendingButtons.length+1).padStart(2,"0");
  const copy=document.createElement("span");copy.className="vice-soundtrack__trackname";
  const label=document.createElement("b");label.textContent=track.name;
  const kind=document.createElement("small");
  const action=document.createElement("span");action.className="vice-soundtrack__playicon";
- action.textContent="↗";action.setAttribute("aria-hidden","true");
+ action.textContent="▶";action.setAttribute("aria-hidden","true");
  copy.append(label,kind);button.append(number,copy,action);
+ button.addEventListener("click",()=>{
+  if(api.originalReady?.(track.file)){
+   if(originalDialog.open)closeOriginalDialog();
+   void api.playOriginal(track.file);
+  }else openOriginalTrack(track);
+ });
  li.append(button);list.append(li);
- pendingButtons.push({button,kind,track});
+ pendingButtons.push({button,kind,action,track});
+}
+function availableCounts(){
+ const a=api.tracks.filter(t=>t.kind!=="original").length;
+ const n=pendingSongs.filter(t=>api.originalReady?.(t.file)).length;
+ return {a,n,e:pendingSongs.length-n};
+}
+function countsLabel(pattern){
+ const {a,n,e}=availableCounts();
+ return pattern.replaceAll("{a}",String(a)).replaceAll("{n}",String(n))
+  .replaceAll("{e}",String(e)).replaceAll("{b}",String(pendingSongs.length));
 }
 
 function translate(){
  const t=translations(),x=extraLabels();
  if(drawerTitle)drawerTitle.textContent=x.drawer;
  if(drawerSubtitle)drawerSubtitle.textContent=x.subtitle;
- if(drawerStat)drawerStat.textContent=x.count.replace("{a}",api.tracks.filter(t=>t.kind!=="original").length).replace("{b}",pendingSongs.length);
- playableHeader.textContent=x.ready+" · "+api.tracks.length;
+ if(drawerStat)drawerStat.textContent=countsLabel(x.count);
+ playableHeader.textContent=x.ready+" · "+availableCounts().a;
  pendingHeader.textContent=x.waiting+" · "+pendingSongs.length;
- for(const {button,kind,track} of pendingButtons){
+ for(const {button,kind,action,track} of pendingButtons){
   const native=!!api.originalReady?.(track.file);
-  button.disabled=!native;
-  const label=native?(doc.lang==="ru"?"СЛУШАТЬ В ИГРЕ · ▶":"PLAY HERE · AY ▶"):(doc.lang==="ru"?"Ожидает подготовки":"Preparing playback data");
+  const language=(doc.lang||"ru").split("-")[0];
+  const inGame={ru:"В ИГРЕ · AY",en:"IN GAME · AY",he:"במשחק · AY",ar:"داخل اللعبة · AY"};
+  const label=native?(inGame[language]||inGame.ru):x.state;
+  button.disabled=false;button.dataset.player=native?"ay":"zxtune";
+  if(native)button.removeAttribute("aria-haspopup");
+  else button.setAttribute("aria-haspopup","dialog");
   kind.textContent=track.format+" · "+label;
-  const item=button.closest?.(".vice-soundtrack__item");
-  item?.classList.toggle("vice-soundtrack__item--pending",!native);
-  button.setAttribute("aria-label",track.name+" — "+track.format+" — "+label);
-  button.title=track.file+" · "+label;
+  action.textContent="▶";
+  button.setAttribute("aria-label",t.play+" — "+track.name+" — "+label);
+  button.title=track.name+" · "+label;
  }
  eyebrow.textContent=t.eyebrow;
  title.textContent=t.title;
- count.textContent=x.count.replace("{a}",api.tracks.filter(t=>t.kind!=="original").length).replace("{b}",pendingSongs.length);
+ count.textContent=countsLabel(x.count);
  nowLabel.textContent=t.now;
  btnList.textContent=t.list;
- foot.textContent=x.foot;
+ foot.textContent=countsLabel(x.foot);
  btnPrev.setAttribute("aria-label",t.prev);btnPrev.title=t.prev;
  btnNext.setAttribute("aria-label",t.next);btnNext.title=t.next;
  btnStop.setAttribute("aria-label",t.stop);btnStop.title=t.stop;
@@ -300,15 +319,17 @@ function draw(){
   x.button.classList.toggle("is-playing",selected&&playing);
   x.button.setAttribute("aria-label",(selected&&playing?t.pause:t.play)+" — "+track.name);
  }
- for(const {button,kind,track} of pendingButtons){
+ for(const {button,kind,action,track} of pendingButtons){
   const selected=!!current&&current.file===track.file;
   const native=!!api.originalReady?.(track.file);
-  button.disabled=!native;
-  button.closest?.(".vice-soundtrack__item")?.classList.toggle("vice-soundtrack__item--pending",!native);
-  button.setAttribute("aria-pressed",String(selected));
-  button.classList.toggle("is-playing",selected&&playing);
-  if(native&&selected)kind.textContent=track.format+" · "+(playing?"▶":paused?"Ⅱ":"AY");
+  const embedded=originalDialog.open&&originalSelected===track.file;
+  button.disabled=false;button.dataset.player=native?"ay":"zxtune";
+  button.setAttribute("aria-pressed",String(selected||embedded));
+  button.classList.toggle("is-playing",(selected&&playing)||embedded);
+  action.textContent=embedded||(selected&&playing)?"Ⅱ":"▶";
+  if(native&&selected)kind.textContent=track.format+" · "+(playing?"ИГРАЕТ":paused?"ПАУЗА":"AY");
  }
+
 }
 btnPrev.addEventListener("click",()=>{void api.previous()});
 btnNext.addEventListener("click",()=>{void api.next()});
