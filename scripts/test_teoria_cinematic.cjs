@@ -38,6 +38,7 @@ const {chromium}=require("playwright");
       heroFont:getComputedStyle(document.querySelector("#heroTitle")).fontStyle,
       heroTextFill:getComputedStyle(document.querySelector("#heroTitle")).webkitTextFillColor,
       firstPosterImage:getComputedStyle(document.querySelector('.vice-cinema-frame[data-slide="0"] .vice-cinema-scene')).backgroundImage,
+      firstPosterPhoto:getComputedStyle(document.querySelector('.vice-cinema-frame[data-slide="0"] .vice-cinema-scene'),"::before").backgroundImage,
       lang:document.documentElement.lang
     };
    });
@@ -48,7 +49,7 @@ const {chromium}=require("playwright");
    if(Math.abs(status.navHeight-62)>2)fail("Approved 62px navigation changed");
    if(status.cards.length!==5)fail("Not five real game modes");
    if(status.cards.some(x=>!x.background.includes("vice-card-")))fail("Any card has flat gradient instead of real illustration");
-   if(status.imageLinks.length!==5||status.imageLinks.some(x=>!x.includes("vice-card-")&&!x.includes("vice-approved-protagonists")&&!x.includes("vice-cinematic-duo")))fail("Missing cinematic carousel artwork");
+   if(status.imageLinks.length!==5||status.imageLinks.some(x=>!x.includes("vice-card-")&&!x.includes("vice-approved-protagonists")&&!x.includes("vice-cinematic-duo")&&!x.includes("vice-cinematic-backdrop")))fail("Missing cinematic carousel artwork");
    if(status.promoStage.display==="none"||status.promoStage.rect.height<110)fail("Cinema stage hidden");
    if(status.heroStats.rect.top<status.heroCopy.rect.bottom-4)fail("Top title overlaps the medal HUD");
    if(Math.abs(status.heroArt.rect.width-status.hero.rect.width)>8)fail("Cinema is not a full-width hero banner");
@@ -58,11 +59,11 @@ const {chromium}=require("playwright");
    if(status.cards.some(x=>x.rect.height<95))fail("Game card height too short");
    if(status.heroFont!=="italic")fail("Headline not upgraded");
    if(status.heroTextFill==="rgba(0, 0, 0, 0)"||status.heroTextFill==="transparent")fail("Hero title is transparent, cannot be read");
-   if(!status.firstPosterImage.includes("vice-cinematic-duo.svg"))fail("First cinematic slide lost the original protagonist artwork");
+   if(!status.firstPosterImage.includes("vice-cinematic-backdrop.svg")||!status.firstPosterPhoto.includes("vice-approved-protagonists.webp"))fail("First cinematic slide lost approved photo overlay");
    if(status.activeFrame!=="0")fail("The neon experience must open on the spectacular first scene");
    const artFiles=[
     "vice-card-city.svg","vice-card-signs.svg","vice-card-exam.svg",
-    "vice-card-mistakes.svg","vice-card-marathon.svg","vice-cinematic-duo.svg"
+    "vice-card-mistakes.svg","vice-card-marathon.svg","vice-cinematic-duo.svg","vice-cinematic-backdrop.svg"
    ];
    const duoPhoto=await page.request.get("http://127.0.0.1:8765/assets/teoria/vice-approved-protagonists.webp");
    if(!duoPhoto.ok()||(await duoPhoto.body()).length<2300)fail("Missing original approved hero duo artwork");
