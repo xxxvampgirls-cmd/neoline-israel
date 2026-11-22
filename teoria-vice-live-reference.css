@@ -113,3 +113,39 @@ html.vice-reference-ready[data-vice-theme="on"][lang^="ru"] .theory-promo-host .
   transition:none!important;
  }
 }
+/* Source-faithful cinematic PHOTO crops for the five playable route cards.
+   The asset contains only imagery, not game counters or tappable controls.
+   Live names, question counts and progress remain on the actual buttons.
+   Limited to the Russian neon view because the exam prop contains Russian. */
+html.vice-reference-cards-ready[data-vice-theme="on"][lang^="ru"] #gameLobby .routes .route-card .game-mode-photo{
+ background-image:url("./assets/teoria/vice-reference-card-sprite.avif")!important;
+ background-repeat:no-repeat!important;
+ background-size:200% 300%!important;
+ filter:saturate(1.09) contrast(1.04)!important;
+}
+html.vice-reference-cards-ready[data-vice-theme="on"][lang^="ru"] #gameLobby .routes .route-card.route-blue .game-mode-photo{
+ background-position:0% 0%!important;
+}
+html.vice-reference-cards-ready[data-vice-theme="on"][lang^="ru"] #gameLobby .routes .route-card.route-mint .game-mode-photo{
+ background-position:100% 0%!important;
+}
+html.vice-reference-cards-ready[data-vice-theme="on"][lang^="ru"] #gameLobby .routes .route-card.route-indigo .game-mode-photo{
+ background-position:0% 50%!important;
+}
+html.vice-reference-cards-ready[data-vice-theme="on"][lang^="ru"] #gameLobby .routes .route-card.route-amber .game-mode-photo{
+ background-position:100% 50%!important;
+}
+html.vice-reference-cards-ready[data-vice-theme="on"][lang^="ru"] #gameLobby .routes .route-card.route-full .game-mode-photo{
+ background-size:100% 300%!important;
+ background-position:50% 100%!important;
+}
+/* Readability without flattening the photographic roads and landmarks. */
+html.vice-reference-cards-ready[data-vice-theme="on"][lang^="ru"] #gameLobby .routes .route-card:not(.route-full) .game-mode-photo::after{
+ background:linear-gradient(0deg,#170c2bea 0%,#1a1035d8 22%,#1e103b53 45%,transparent 72%)!important;
+}
+html.vice-reference-cards-ready[data-vice-theme="on"][lang^="ru"] #gameLobby .routes .route-card.route-full .game-mode-photo::after{
+ background:linear-gradient(90deg,#1c1232f1 0%,#1c1232cf 30%,#1c123247 55%,transparent 75%)!important;
+}
+html.vice-reference-cards-ready[data-vice-theme="on"][lang^="ru"] #gameLobby .routes .route-card strong{
+ text-shadow:0 2px 5px #11081c,0 0 8px #11081c!important;
+}
