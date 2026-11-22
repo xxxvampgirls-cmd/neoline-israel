@@ -229,6 +229,7 @@
    case "enable": p("A4",0,.11,.25);p("E5",.095,.12,.27);p("A5",.20,.18,.32);p("C6",.32,.25,.2);break;
    case "start": p("A4",0,.075,.3);p("C5",.095,.08,.26);p("E5",.19,.09,.26);p("A5",.31,.18,.35);break;
    case "question": p("E5",0,.055,.15);p("A5",.058,.072,.13);break;
+   case "confirm": p("C5",0,.07,.19);p("G5",.09,.11,.17);break;
    case "correct": p("C5",0,.09,.25);p("E5",.09,.1,.27);p("G5",.18,.11,.28);p("C6",.285,.23,.31);break;
    case "wrong": p("B4",0,.115,.24,"F4");p("G4",.12,.16,.25,"C4");noise(.075,t+.05,.16,"fx");break;
    case "hint": p("D6",0,.078,.17,"A5");p("F5",.10,.19,.2,"C5");break;
@@ -359,7 +360,9 @@
   }
  });
  window.addEventListener("neoline:theory-answer",e=>{
-  if(isVice())fx(e.detail?.correct?"correct":"wrong");
+  if(!isVice())return;
+  // A mock exam must never reveal whether an answer is correct before results.
+  fx(e.detail?.mode==="exam"?"confirm":e.detail?.correct?"correct":"wrong");
  });
  window.addEventListener("neoline:theory-hint",()=>{if(isVice())fx("hint")});
  window.addEventListener("neoline:theory-finish",e=>{
