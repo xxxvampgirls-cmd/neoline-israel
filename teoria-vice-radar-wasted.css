@@ -1,3 +1,34 @@
+/* The lobby artwork must not sit ABOVE an active question.
+   Otherwise a long blank gap and dashboard medals remain visible in-game. */
+html[data-vice-theme="on"] body.theory-in-session .game-hero.theory-dashboard,
+html[data-vice-theme="on"] body.theory-in-session #theoryDaily,
+html[data-vice-theme="on"] body.theory-in-session .theory-daily,
+html[data-vice-theme="on"] body.theory-in-session #gameLobby{
+ display:none!important;
+}
+.vice-hud-title{display:none}
+html[data-vice-theme="on"] body.theory-in-session #gamePlaying .quiz-hud .vice-hud-title{
+ display:block!important;
+ flex:1 1 auto!important;
+ min-width:0!important;
+ color:#ffeaf1!important;
+ font:850 clamp(11px,3vw,13px)/1.15 Manrope,Arial,sans-serif!important;
+ overflow:hidden!important;
+ text-overflow:ellipsis!important;
+ white-space:nowrap!important;
+ text-shadow:0 1px 5px #180820!important;
+}
+html[data-vice-theme="on"] body.theory-in-session #gamePlaying .quiz-hud .mode-pill{
+ display:none!important;
+}
+html[data-vice-theme="on"] body.theory-in-session #gamePlaying .quiz-hud .hud-info{
+ flex:0 0 auto!important;
+ width:auto!important;
+ max-width:none!important;
+}
+html[data-vice-theme="on"] body.theory-in-session #gamePlaying .quiz-hud .hud-info:has(#timerBox[hidden]){
+ display:none!important;
+}
 /* Radar remains invisible in classic NEOLINE mode. */
 #dock4Progress .vice-radar-map{display:none}
 /* NEOLINE Israel — GTA-inspired in-game radar & cinematic failure.
