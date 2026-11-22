@@ -3147,6 +3147,7 @@ async function loadHomepageNews(){
   // Prefer the freshest genuine snapshot: Cloudflare Pages or GitHub raw.
   const version=Math.floor(Date.now()/600000);
   const endpoints=[
+   './api/news?v='+version,
    './assets/news/news.json?v='+version,
    'https://raw.githubusercontent.com/xxxvampgirls-cmd/neoline-israel/main/assets/news/news.json?v='+version
   ];
