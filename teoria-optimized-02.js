@@ -2356,7 +2356,7 @@ async function openOriginalTrack(track){
   const playerURL=ZXTUNE_URL+"?url="+encodeURIComponent(originalURL);
   modalLink.href=playerURL;
   modalFrame.src=playerURL;
-  modalMessage.textContent=(doc.lang==="ru"?"Играет оригинал, без конвертации в PT3: ":"Original module, without PT3 conversion: ")+track.file;
+  modalMessage.textContent=(doc.lang==="ru"?"Открой ZXTune и нажми ▶ для запуска оригинального файла: ":"Open ZXTune and press ▶ to play the original: ")+track.file;
  }else{
   modalMessage.textContent=(doc.lang==="ru"
    ?"Оригинальный файл пока не загружен на сайт. В ZXTune нажми «Choose files», выбери архив new.zip, затем композицию "+track.name+"."
@@ -2373,7 +2373,10 @@ for(const track of pendingSongs){
  button.className="vice-soundtrack__track";
  button.dataset.original=track.file;
  button.setAttribute("aria-haspopup","dialog");
- button.addEventListener("click",()=>{void openOriginalTrack(track)});
+ button.addEventListener("click",()=>{
+ if(api.originalReady?.(track.file))void api.playOriginal(track.file);
+ else void openOriginalTrack(track);
+});
  const number=document.createElement("span");number.className="vice-soundtrack__index";
  number.textContent=String(api.tracks.length+pendingButtons.length+1).padStart(2,"0");
  const copy=document.createElement("span");copy.className="vice-soundtrack__trackname";
@@ -2394,9 +2397,11 @@ function translate(){
  playableHeader.textContent=x.ready+" · "+api.tracks.length;
  pendingHeader.textContent=x.waiting+" · "+pendingSongs.length;
  for(const {button,kind,track} of pendingButtons){
-  kind.textContent=track.format+" · "+x.state;
-  button.setAttribute("aria-label",track.name+" — "+track.format+" — "+x.state);
-  button.title=track.file+" · "+x.state;
+  const native=!!api.originalReady?.(track.file);
+  const label=native?(doc.lang==="ru"?"В ИГРЕ · ▶":"PLAY IN GAME ▶"):x.state;
+  kind.textContent=track.format+" · "+label;
+  button.setAttribute("aria-label",track.name+" — "+track.format+" — "+label);
+  button.title=track.file+" · "+label;
  }
  eyebrow.textContent=t.eyebrow;
  title.textContent=t.title;
@@ -2409,7 +2414,9 @@ function translate(){
  btnStop.setAttribute("aria-label",t.stop);btnStop.title=t.stop;
  range.setAttribute("aria-label",t.seek);
  for(const track of api.tracks){
-  const {button,kind}=trackButtons.get(track.id);
+  const entry=trackButtons.get(track.id);
+  if(!entry)continue;
+  const {button,kind}=entry;
   kind.textContent=track.kind==="intro"?t.intro:t.game;
   button.setAttribute("aria-label",t.play+" — "+track.name);
  }
@@ -2439,11 +2446,19 @@ function draw(){
  btnStop.disabled=!current;
  for(const track of api.tracks){
   const x=trackButtons.get(track.id);
+  if(!x)continue;
   const selected=!!current&&track.id===current.id;
   x.button.setAttribute("aria-pressed",String(selected));
   x.action.textContent=selected&&playing?"Ⅱ":"▶";
   x.button.classList.toggle("is-playing",selected&&playing);
   x.button.setAttribute("aria-label",(selected&&playing?t.pause:t.play)+" — "+track.name);
+ }
+ for(const {button,kind,track} of pendingButtons){
+  const selected=!!current&&current.file===track.file;
+  const native=!!api.originalReady?.(track.file);
+  button.setAttribute("aria-pressed",String(selected));
+  button.classList.toggle("is-playing",selected&&playing);
+  if(native&&selected)kind.textContent=track.format+" · "+(playing?"▶":paused?"Ⅱ":"AY");
  }
 }
 btnPrev.addEventListener("click",()=>{void api.previous()});
@@ -2481,6 +2496,9 @@ for(const panel of [lobby,...activePanels]){
 }
 syncLibraryPlacement();
 
+window.addEventListener("neoline:ay-originals-ready",()=>{
+ translate();draw();
+});
 window.addEventListener("neoline:ay-player",draw);
 window.addEventListener("neoline:ay-status",draw);
 window.addEventListener("neoline:vice-theme",draw);
