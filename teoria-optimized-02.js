@@ -2628,11 +2628,23 @@ const tapeCopy={
  ar:{stages:["محرك الشريط · PLAY ▶","نغمة البداية","توقف · بين الكتل","مزامنة الكتلة","قراءة البيانات","توقف · الكتلة التالية","تحميل المدينة","توقف · الكتلة الأخيرة","البيانات الأخيرة","التحقق من البيانات"],skip:"تخطي ►",tap:"المس الشاشة للصوت",block:"الكتلة"}
 };
 const words=()=>tapeCopy[language()]||tapeCopy.ru;
-// ZX Spectrum ROM header: 8063 uninterrupted pilot pulses at 2168 T-states,
-// clocked at 3.5 MHz (4.994 seconds). The first sound is never compressed.
-const PILOT_MS=Math.round(8063*2168*1000/3500000);
-const PILOT_GAP_MS=250,FULL_MS=5600,RELOAD_MS=5000,READY_PAUSE_MS=1700;
-let stageIndex=0,currentDuration=PILOT_MS+PILOT_GAP_MS+FULL_MS,dataDuration=FULL_MS;
+// The only timing authority is the same ZX ROM pulse table as the audio
+// worklet. The complete first header pilot, sync and bytes are uncut.
+const ZX_CLOCK=3500000;
+const HEADER_BYTES=[0,3,78,69,79,76,73,78,69,32,32,32,0,192,0,0,0,0];
+HEADER_BYTES.push(HEADER_BYTES.reduce((sum,byte)=>sum^byte,0));
+const PILOT_MS=8063*2168*1000/ZX_CLOCK;
+const HEADER_MS=(667+735+HEADER_BYTES.reduce((total,byte)=>{
+ for(let bit=7;bit>=0;bit--)total+=(byte&(1<<bit))?3420:1710;
+ return total;
+},0))*1000/ZX_CLOCK;
+const INTERBLOCK_MS=1000; // genuine between-block silence, never before sync
+const DATA_PILOT_MS=3223*2168*1000/ZX_CLOCK;
+const DATA_SYNC_MS=(667+735)*1000/ZX_CLOCK;
+const OPEN_MS=PILOT_MS+HEADER_MS+INTERBLOCK_MS+DATA_PILOT_MS+DATA_SYNC_MS;
+const FULL_MS=3800,RELOAD_MS=3200,READY_PAUSE_MS=1700;
+let stageIndex=0,currentDuration=OPEN_MS+FULL_MS,dataDuration=FULL_MS;
+let timelineStarted=false,phaseDriven=false,pendingFallback=0;
 const reduce=window.matchMedia?.("(prefers-reduced-motion: reduce)")?.matches||false;
 const overlay=document.createElement("div");
 overlay.className="vice-boot-overlay";
@@ -2655,7 +2667,7 @@ overlay.innerHTML=[
  '<button type="button" class="vice-boot-tape-skip"></button>',
  '<div class="vice-boot-bottomline"><span>NEON CITY  //  ZX 128K</span><span>EST. <b>1988</b></span></div>',
  // Classic first 4.994s: only clean white screen, loading border and LOAD.
- '<div class="vice-boot-pilot" aria-hidden="true"><span>LOAD</span></div>'
+ '<div class="vice-boot-pilot" aria-hidden="true"><div class="vice-boot-pilot__border"></div><div class="vice-boot-pilot__line"><span class="vice-boot-pilot__load">LOAD</span><span class="vice-boot-pilot__cursor"></span></div></div>'
 ].join("");
 document.body.append(overlay);
 const kicker=overlay.querySelector(".vice-boot-kicker");
@@ -2702,6 +2714,60 @@ function refreshWake(){
 function clearStages(){
  for(const tid of stageTimers)clearTimeout(tid);
  stageTimers=[];clearInterval(meterTimer);meterTimer=0;
+ clearTimeout(pendingFallback);pendingFallback=0;
+}
+function onTapePhase(phase){
+ if(!entering||!isOn())return;
+ phaseDriven=true;
+ overlay.dataset.tapePhase=phase;
+ if(phase==="pilot-header")startTimeline();
+ if(phase==="data"||phase==="data-pause"||phase==="data-end"){
+  if(!timelineStarted)startTimeline();
+  overlay.classList.remove("is-pilot");
+  overlay.classList.add("is-data");
+ }
+}
+window.addEventListener("neoline:tape-phase",e=>onTapePhase(e.detail?.phase));
+function startTimeline(){
+ if(timelineStarted||!entering)return;
+ timelineStarted=true;
+ clearTimeout(pendingFallback);pendingFallback=0;
+ bootStartedAt=performance.now();
+ const schedule=[
+  [.08,1],[.22,2],[.265,3],[.32,4],[.56,5],
+  [.615,6],[.75,7],[.78,8],[.90,9]
+ ];
+ // These later visual stages begin only AFTER both genuine ROM pilot blocks.
+ for(const [fraction,index] of schedule){
+  stageTimers.push(setTimeout(()=>{
+   if(!entering)return;
+   stageIndex=index;translate();
+  },OPEN_MS+Math.round(dataDuration*fraction)));
+ }
+ stageTimers.push(setTimeout(()=>{
+  if(!entering)return;
+  overlay.classList.remove("is-pilot");
+  overlay.classList.add("is-data");
+ },OPEN_MS));
+ if(!reduce){
+  meterTimer=setInterval(()=>{
+   if(!entering)return;
+   const fraction=Math.max(0,Math.min(1,
+      (performance.now()-bootStartedAt-OPEN_MS)/dataDuration));
+   const marks=[[0,0],[.08,.04],[.22,.24],[.265,.24],
+    [.32,.32],[.56,.62],[.615,.62],[.75,.80],[.78,.80],[.92,1],[1,1]];
+   let progress=1;
+   for(let i=1;i<marks.length;i++){
+    if(fraction<=marks[i][0]){
+     const [t0,p0]=marks[i-1],[t1,p1]=marks[i];
+     progress=p0+(p1-p0)*(fraction-t0)/(t1-t0);break;
+    }
+   }
+   bytes.textContent=String(Math.floor(49152*progress)).padStart(5,"0")+" / 49152";
+  },160);
+  stageTimers.push(setTimeout(()=>{if(entering)skip.hidden=false},OPEN_MS+1200));
+ }
+ shortTimer=setTimeout(finish,currentDuration);
 }
 function finish(){
  if(!entering)return;
@@ -2709,7 +2775,7 @@ function finish(){
  entering=false;
  window.neolineCassetteLoading?.("hold");
  touch.hidden=true;
- overlay.classList.remove("is-pilot");
+ overlay.classList.remove("is-pilot","is-data");
  overlay.classList.add("is-ready");
  status.textContent=t().ready;
  skip.hidden=true;
@@ -2728,68 +2794,47 @@ function begin(initial=false){
  clearTimeout(shortTimer);clearTimeout(clearTimer);clearStages();
  hideWake();
  entering=true;shown=true;stageIndex=0;
+ timelineStarted=false;phaseDriven=false;
  dataDuration=reduce?240:(initial?RELOAD_MS:FULL_MS);
- const opening=reduce?0:PILOT_MS+PILOT_GAP_MS;
- currentDuration=opening+dataDuration;
+ currentDuration=reduce?240:OPEN_MS+dataDuration;
  overlay.style.setProperty("--vice-boot-time",dataDuration+"ms");
- overlay.style.setProperty("--vice-boot-pilot-time",opening+"ms");
  overlay.setAttribute("aria-hidden","false");
  skip.hidden=true;
  bytes.textContent="00000 / 49152";
+ overlay.dataset.tapePhase="pilot-header";
  translate();
- overlay.classList.remove("is-active","is-ready","is-pilot");
+ overlay.classList.remove("is-active","is-ready","is-pilot","is-data");
  void overlay.offsetHeight;
  overlay.classList.add("is-active");
- if(!reduce){
-  overlay.classList.add("is-pilot");
-  stageTimers.push(setTimeout(()=>{
-   if(entering)overlay.classList.remove("is-pilot");
-  },opening));
- }
- // One worklet emulates tape EAR pulses; the real AY music waits until finish.
+ if(!reduce)overlay.classList.add("is-pilot");
+ // The worklet tells the screen when the first sound REALLY starts.
+ // For disabled/unavailable sound we retain a deterministic visual fallback.
  if(!reduce)window.neolineCassetteLoading?.(true,currentDuration);
- updateTapeHint();
- const schedule=[
-  [.08,1],[.22,2],[.265,3],[.32,4],[.56,5],
-  [.615,6],[.75,7],[.78,8],[.90,9]
- ];
- for(const [fraction,index] of schedule){
-  stageTimers.push(setTimeout(()=>{
-   if(!entering)return;
-   stageIndex=index;translate();
-  },opening+Math.round(dataDuration*fraction)));
+ const info=window.neolineGetAYAudioState?.()||{};
+ if(reduce){
+  startTimeline();
+ }else if(!info.sfxOn||info.error||typeof window.neolineCassetteLoading!=="function"){
+  startTimeline();
+ }else{
+  pendingFallback=setTimeout(()=>{
+   if(!entering||timelineStarted)return;
+   const state=window.neolineGetAYAudioState?.()||{};
+   // Never run through the pilot silently while Android blocks playback;
+   // touching the white LOAD screen can unlock the worklet.
+   if(state.blocked&&!state.error)return;
+   startTimeline();
+  },1800);
  }
- if(!reduce){
-  meterTimer=setInterval(()=>{
-   if(!entering)return;
-   const now=performance.now();
-   const fraction=Math.max(0,Math.min(1,(now-bootStartedAt-opening)/dataDuration));
-   // Freeze the byte counter when tape blocks pause.
-   const marks=[[0,0],[.08,.04],[.22,.24],[.265,.24],
-    [.32,.32],[.56,.62],[.615,.62],[.75,.80],[.78,.80],[.92,1],[1,1]];
-   let progress=1;
-   for(let i=1;i<marks.length;i++){
-    if(fraction<=marks[i][0]){
-     const [t0,p0]=marks[i-1],[t1,p1]=marks[i];
-     progress=p0+(p1-p0)*(fraction-t0)/(t1-t0);break;
-    }
-   }
-   const fakeBytes=Math.floor(49152*progress);
-   bytes.textContent=String(fakeBytes).padStart(5,"0")+" / 49152";
-  },240);
-  // Skip appears only after the vintage pilot tone has been heard.
-  stageTimers.push(setTimeout(()=>{if(entering)skip.hidden=false},opening+1600));
- }
- bootStartedAt=performance.now();
- shortTimer=setTimeout(finish,currentDuration);
 }
+
 function cancel(){
  clearTimeout(shortTimer);clearTimeout(clearTimer);clearStages();
  window.neolineCassetteLoading?.(false);
  touch.hidden=true;
- entering=false;shown=false;dismissed=false;
+ entering=false;shown=false;dismissed=false;timelineStarted=false;phaseDriven=false;
  overlay.setAttribute("aria-hidden","true");
- overlay.classList.remove("is-active","is-ready","is-pilot");
+ overlay.classList.remove("is-active","is-ready","is-pilot","is-data");
+ delete overlay.dataset.tapePhase;
  hideWake();
 }
 function switchTheme(enabled){
@@ -2809,6 +2854,13 @@ startButton.addEventListener("click",()=>{
 });
 dismissButton.addEventListener("click",()=>{dismissed=true;hideWake()});
 skip.addEventListener("click",finish);
+// Gesture unlock: the white ROM screen stays visually pure (LOAD + cursor).
+// A tap starts audio on browsers that disallow automatic playback.
+overlay.addEventListener("pointerdown",()=>{
+ if(!entering||!isOn())return;
+ if(window.neolineGetAYAudioState?.().blocked)
+  void window.neolineStartAYAudio?.().catch(()=>{});
+});
 document.addEventListener("visibilitychange",()=>{
  if(document.hidden&&entering)cancel();
 });
