@@ -55,7 +55,7 @@ const {chromium}=require("playwright");
    if(Math.abs(status.navHeight-62)>2)fail("Approved 62px navigation changed");
    if(status.cards.length!==5)fail("Not five real game modes");
    if(status.cards.some(x=>!x.background.includes("vice-hd-")))fail("HD character-art driving tiles not loaded");
-   if(status.imageLinks.length!==5||status.imageLinks.some(x=>!x.includes("vice-card-")&&!x.includes("vice-approved-protagonists")&&!x.includes("vice-cinematic-duo")&&!x.includes("vice-cinematic-backdrop")))fail("Missing cinematic carousel artwork");
+   if(status.imageLinks.length!==5||status.imageLinks.some(x=>!x.includes("vice-card-")&&!x.includes("vice-approved-protagonists")&&!x.includes("vice-cinematic-duo")&&!x.includes("vice-cinematic-backdrop")&&!x.includes("vice-hero-reference")))fail("Missing cinematic carousel artwork");
    if(status.promoStage.display==="none"||status.promoStage.rect.height<110)fail("Cinema stage hidden");
    if(status.heroStats.rect.top<status.heroCopy.rect.bottom-4)fail("Top title overlaps the medal HUD");
    if(Math.abs(status.heroArt.rect.width-status.hero.rect.width)>8)fail("Cinema is not a full-width hero banner");
