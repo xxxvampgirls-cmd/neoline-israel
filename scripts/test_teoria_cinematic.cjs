@@ -34,17 +34,19 @@ const {chromium}=require("playwright");
       activeFrame:document.querySelector(".vice-cinema-frame.is-active")?.dataset.slide,
       premiumCssLoaded:[...document.styleSheets].some(x=>x.href?.includes("teoria-vice-cinematic.css")),
       approvedLayoutCssLoaded:[...document.styleSheets].some(x=>x.href?.includes("teoria-vice-reference-match.css")),
+      finalPolishCssLoaded:[...document.styleSheets].some(x=>x.href?.includes("teoria-vice-final-polish.css")),
       promoStage:inspect(document.querySelector(".vice-cinema-stage")),
       heroFont:getComputedStyle(document.querySelector("#heroTitle")).fontStyle,
       heroTextFill:getComputedStyle(document.querySelector("#heroTitle")).webkitTextFillColor,
       firstPosterImage:getComputedStyle(document.querySelector('.vice-cinema-frame[data-slide="0"] .vice-cinema-scene')).backgroundImage,
       firstPosterPhoto:getComputedStyle(document.querySelector('.vice-cinema-frame[data-slide="0"] .vice-cinema-scene'),"::before").backgroundImage,
+      firstPosterAccents:getComputedStyle(document.querySelector('.vice-cinema-frame[data-slide="0"] .vice-cinema-scene'),"::after").backgroundImage,
       lang:document.documentElement.lang
     };
    });
    const fail=why=>{throw Error(why+" at "+width+"px: "+JSON.stringify(status))};
    if(errors.length)fail("Browser errors: "+errors.join("|"));
-   if(!status.premiumCssLoaded||!status.approvedLayoutCssLoaded)fail("New cinematic CSS was not served");
+   if(!status.premiumCssLoaded||!status.approvedLayoutCssLoaded||!status.finalPolishCssLoaded)fail("Final cinematic stylesheet was not served");
    if(status.documentWidth>width+2)fail("Horizontal overflow");
    if(Math.abs(status.navHeight-62)>2)fail("Approved 62px navigation changed");
    if(status.cards.length!==5)fail("Not five real game modes");
@@ -60,7 +62,7 @@ const {chromium}=require("playwright");
    if(status.cards.some(x=>x.mode!=="marathon"&&x.rect.height>145))fail("Mode cards are too tall for the approved mobile layout");
    if(status.heroFont!=="italic")fail("Headline not upgraded");
    if(status.heroTextFill==="rgba(0, 0, 0, 0)"||status.heroTextFill==="transparent")fail("Hero title is transparent, cannot be read");
-   if(!status.firstPosterImage.includes("vice-cinematic-backdrop.svg")||!status.firstPosterPhoto.includes("vice-approved-protagonists.webp"))fail("First cinematic slide lost approved photo overlay");
+   if(!status.firstPosterImage.includes("vice-cinematic-backdrop.svg")||!status.firstPosterPhoto.includes("vice-approved-protagonists.webp")||!status.firstPosterAccents.includes("vice-hero-highlights.svg"))fail("First cinematic slide lost approved poster or special effects");
    if(width===390){
     await page.setViewportSize({width,height:780});
     await page.waitForTimeout(110);
@@ -76,7 +78,7 @@ const {chromium}=require("playwright");
    if(status.activeFrame!=="0")fail("The neon experience must open on the spectacular first scene");
    const artFiles=[
     "vice-card-city.svg","vice-card-signs.svg","vice-card-exam.svg",
-    "vice-card-mistakes.svg","vice-card-marathon.svg","vice-cinematic-duo.svg","vice-cinematic-backdrop.svg"
+    "vice-card-mistakes.svg","vice-card-marathon.svg","vice-cinematic-duo.svg","vice-cinematic-backdrop.svg","vice-hero-highlights.svg"
    ];
    const duoPhoto=await page.request.get("http://127.0.0.1:8765/assets/teoria/vice-approved-protagonists.webp");
    if(!duoPhoto.ok()||(await duoPhoto.body()).length<2300)fail("Missing original approved hero duo artwork");
