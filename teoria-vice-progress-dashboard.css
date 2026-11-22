@@ -1,0 +1,441 @@
+/* NEOLINE VICE · My Game / progress redesign, 2026-11-22
+   Only the opt-in sunset theme. Original JS IDs, controls, real XP,
+   earned badges, seven-day data and game history remain untouched. */
+html[data-vice-theme="on"] .game-progress-dialog{
+ --vp-sunset:#ff90c1;
+ --vp-peach:#ffc58f;
+ --vp-sky:#91f1ff;
+ --vp-glass:#412749;
+ color:#fff4f4!important;
+ background:
+  radial-gradient(ellipse 85% 37% at 96% -3%,#d96ca24c,transparent 76%),
+  radial-gradient(ellipse 80% 65% at -13% 41%,#69337665,transparent 76%),
+  linear-gradient(165deg,#27172f 0%,#332044 43%,#25182f 100%)!important;
+ border:1px solid #d384b288!important;
+ box-shadow:0 28px 70px #100620c9!important;
+}
+html[data-vice-theme="on"] .game-progress-dialog::backdrop{
+ background:#120918d9!important;backdrop-filter:blur(10px)!important;
+}
+html[data-vice-theme="on"] .game-progress-dialog .game-progress-panel{
+ width:min(100%,780px)!important;max-width:100%;
+ padding:17px clamp(14px,2.5vw,26px) 28px!important;
+ position:relative;isolation:isolate;
+}
+/* Subtle atmospheric color at the page edges, never over the content. */
+html[data-vice-theme="on"] .game-progress-dialog .game-progress-panel::before{
+ content:"";position:absolute;left:0;right:0;top:0;height:340px;
+ background:radial-gradient(ellipse 72% 75% at 87% 3%,#ffc49117,transparent 74%);
+ pointer-events:none;z-index:-1;
+}
+html[data-vice-theme="on"] .game-progress-dialog .game-progress-head{
+ position:sticky;top:0;z-index:15;
+ display:grid!important;grid-template-columns:52px minmax(0,1fr) 52px!important;
+ gap:12px!important;align-items:center!important;
+ width:100%;min-height:63px!important;
+ padding:6px 0 9px!important;margin:0 0 13px!important;
+ background:#2d1b3aeF!important;
+ border:0!important;border-bottom:1px solid #f2a8cc31!important;
+ -webkit-backdrop-filter:blur(15px);backdrop-filter:blur(15px);
+}
+html[data-vice-theme="on"] .game-progress-dialog .game-progress-header-brand{
+ display:block;max-width:100%;
+ margin:0;text-align:center;justify-self:center;
+ color:#ffcfda!important;font-size:clamp(10px,1.9vw,13px)!important;
+ font-weight:950!important;letter-spacing:.125em!important;white-space:normal;
+ text-shadow:0 0 13px #ff77b744;
+}
+html[data-vice-theme="on"] .game-progress-dialog .game-progress-close,
+html[data-vice-theme="on"] .game-progress-dialog .game-progress-gift{
+ display:grid!important;place-items:center!important;
+ justify-self:center;width:47px!important;height:47px!important;
+ min-width:47px!important;min-height:47px!important;
+ margin:0!important;padding:0!important;
+ border-radius:15px!important;border:1px solid #ffa4cb8e!important;
+ background:linear-gradient(148deg,#69375eeb,#3a254dea)!important;
+ color:#ffe5f2!important;
+ box-shadow:inset 0 1px 0 #fff2f42d,0 5px 15px #09051c38!important;
+}
+html[data-vice-theme="on"] .game-progress-dialog .game-progress-close{
+ justify-self:start;font-size:27px!important;
+}
+html[data-vice-theme="on"] .game-progress-dialog .game-progress-gift{
+ justify-self:end;overflow:visible;
+}
+html[data-vice-theme="on"] .game-progress-dialog :is(
+ .game-progress-close,.game-progress-gift,.game-progress-more,
+ .game-progress-fold-heading):focus-visible{
+ outline:3px solid #aaf6ff!important;outline-offset:3px!important;
+}
+html[data-vice-theme="on"] .game-progress-dialog .game-progress-headline{
+ position:relative;display:flex;align-items:center;
+ min-height:178px;margin:4px 0 14px!important;
+ padding:22px clamp(14px,3vw,29px)!important;gap:18px!important;
+ overflow:hidden;isolation:isolate;
+ border-radius:23px!important;border:1px solid #ffbcda8f!important;
+ background:
+  radial-gradient(circle at 83% 30%,#ffe1a87a 0 7%,transparent 24%),
+  linear-gradient(110deg,#512b60ee 0%,#733d75d7 48%,#9c5079b0 100%),
+  url("./assets/teoria/vice-drive-skyline-far.svg?v=1") center bottom/cover no-repeat!important;
+ box-shadow:inset 0 1px 0 #fff4f237,0 11px 30px #180b2f5c!important;
+}
+html[data-vice-theme="on"] .game-progress-dialog .game-progress-headline::before{
+ content:"";position:absolute;inset:auto 0 0;height:67%;
+ background:url("./assets/teoria/vice-drive-skyline-mid.svg?v=1") center 98%/auto 112% repeat-x;
+ opacity:.32;z-index:-1;pointer-events:none;
+}
+html[data-vice-theme="on"] .game-progress-dialog .game-progress-headline::after{
+ content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;
+ background:
+  linear-gradient(90deg,#3a244cf5 0%,#48274d9a 48%,#3d235214 100%),
+  linear-gradient(0deg,#25143672,transparent 44%);
+}
+html[data-vice-theme="on"] .game-progress-dialog .game-progress-headline-icon{
+ position:relative;z-index:1;
+ flex:0 0 clamp(67px,12vw,87px)!important;
+ width:clamp(67px,12vw,87px)!important;height:clamp(67px,12vw,87px)!important;
+ border:1px solid #ffe6bcab!important;border-radius:22px!important;
+ background:linear-gradient(135deg,#f8b3d5,#ed71b0 58%,#bc65bb)!important;
+ box-shadow:0 0 0 5px #ffffff16,0 9px 27px #300c3261,inset 0 1px 0 #fff9e0c0!important;
+ font-size:clamp(35px,6vw,48px)!important;transform:rotate(-5deg);
+ animation:viceProgressMedalFloat 5s ease-in-out infinite;
+}
+html[data-vice-theme="on"] .game-progress-dialog .game-progress-headline>div{
+ position:relative;z-index:1;min-width:0;
+}
+html[data-vice-theme="on"] .game-progress-dialog .game-progress-kicker{
+ display:inline-block;color:#ffd9a6!important;
+ font-weight:950!important;letter-spacing:.15em!important;
+ font-size:clamp(9px,1.65vw,12px)!important;
+}
+html[data-vice-theme="on"] .game-progress-dialog .game-progress-headline h2{
+ margin:5px 0 7px!important;
+ color:#fff7f1!important;font-weight:950!important;
+ font-size:clamp(27px,5.2vw,42px)!important;line-height:1.02!important;
+ letter-spacing:-.04em!important;
+ text-shadow:0 4px 13px #16071b70!important;
+}
+html[data-vice-theme="on"] .game-progress-dialog .game-progress-headline p{
+ max-width:300px;color:#ffe0e9!important;
+ font-size:clamp(11px,1.8vw,13px)!important;line-height:1.45!important;
+ font-weight:650;
+}
+/* The four real metrics become two legible columns on phones. */
+html[data-vice-theme="on"] .game-progress-dialog .game-progress-topstats{
+ display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;
+ gap:10px!important;margin:0!important;
+}
+html[data-vice-theme="on"] .game-progress-dialog .game-progress-topstats>div{
+ --vp-stat-color:#8fefff;
+ position:relative;display:grid!important;
+ grid-template-columns:minmax(0,1fr) 54px;
+ grid-template-rows:min-content min-content;
+ gap:5px 3px!important;
+ align-content:center!important;align-items:center!important;
+ justify-items:start!important;min-width:0;
+ min-height:111px!important;padding:17px 17px!important;
+ overflow:hidden;border:1px solid #a875b083!important;
+ border-radius:18px!important;
+ background:linear-gradient(145deg,#57305bdb,#362343ed)!important;
+ box-shadow:0 6px 17px #12051f3d,inset 0 1px 0 #ffffff1b!important;
+}
+html[data-vice-theme="on"] .game-progress-dialog .game-progress-topstats>div::before{
+ content:"";position:absolute;left:0;top:13px;bottom:13px;width:3px;
+ border-radius:0 4px 4px 0;background:var(--vp-stat-color);
+ box-shadow:0 0 12px var(--vp-stat-color);
+}
+html[data-vice-theme="on"] .game-progress-dialog .game-progress-topstats>div:nth-child(2){
+ --vp-stat-color:#ffa4d6;
+}
+html[data-vice-theme="on"] .game-progress-dialog .game-progress-topstats>div:nth-child(3){
+ --vp-stat-color:#ffd18b;
+}
+html[data-vice-theme="on"] .game-progress-dialog .game-progress-topstats>div:nth-child(4){
+ --vp-stat-color:#beb2ff;
+}
+html[data-vice-theme="on"] .game-progress-dialog .game-progress-topstats .game-progress-stat-icon{
+ grid-column:2;grid-row:1/3;justify-self:center;
+ position:relative;z-index:2;align-self:center;
+ font-size:27px!important;line-height:1!important;
+ filter:drop-shadow(0 3px 5px #1309195c);
+}
+html[data-vice-theme="on"] .game-progress-dialog .game-progress-topstats strong{
+ grid-column:1;grid-row:1;
+ color:#fff2e8!important;text-align:start;
+ font:950 clamp(25px,4.2vw,35px)/1.1 Manrope,Arial,sans-serif!important;
+ white-space:nowrap;letter-spacing:-.025em;
+ font-variant-numeric:tabular-nums;text-shadow:0 1px 8px #08051a50;
+}
+html[data-vice-theme="on"] .game-progress-dialog .game-progress-topstats>div>span:last-child{
+ grid-column:1;grid-row:2;text-align:start!important;
+ color:#f6c6df!important;
+ font:750 clamp(10px,1.6vw,12px)/1.22 Manrope,Arial,sans-serif!important;
+}
+html[data-vice-theme="on"] .game-progress-dialog .game-progress-topstats>div:nth-child(2)::after{
+ content:"";position:absolute;right:13px;top:50%;
+ width:64px;height:64px;border-radius:50%;
+ transform:translateY(-50%);
+ background:conic-gradient(var(--vp-stat-color) 0 var(--vice-accuracy-pct,0%),
+  #ffffff22 var(--vice-accuracy-pct,0%) 100%);
+ -webkit-mask:radial-gradient(farthest-side,transparent calc(100% - 5px),#000 calc(100% - 4px));
+ mask:radial-gradient(farthest-side,transparent calc(100% - 5px),#000 calc(100% - 4px));
+ opacity:.93;pointer-events:none;
+}
+/* Unlocked medals and real completion ratio. */
+html[data-vice-theme="on"] .game-progress-dialog .game-progress-achievements{
+ width:100%!important;max-width:none!important;margin:22px 0 0!important;
+ text-align:start!important;
+}
+html[data-vice-theme="on"] .game-progress-dialog .game-progress-section-heading{
+ position:relative;display:flex!important;justify-content:flex-start!important;
+ align-items:center!important;gap:10px!important;
+ margin:0 0 14px!important;padding:0 0 13px!important;
+ border-bottom:1px solid #fdacd036!important;
+}
+html[data-vice-theme="on"] .game-progress-dialog .game-progress-section-heading::after{
+ content:"";position:absolute;left:0;bottom:-1px;width:100%;height:3px;
+ border-radius:99px;
+ background:linear-gradient(90deg,#ffca87 0 var(--vice-badge-progress,0%),
+ #ffffff20 var(--vice-badge-progress,0%) 100%);
+}
+html[data-vice-theme="on"] .game-progress-dialog .game-progress-section-heading h3{
+ color:#fff4e9!important;font:950 clamp(17px,3vw,21px)/1.2 Manrope,Arial,sans-serif!important;
+ letter-spacing:-.025em;
+}
+html[data-vice-theme="on"] .game-progress-dialog .game-progress-badges-count{
+ border:1px solid #ffd5a7b3!important;
+ background:#ffbf8c1c!important;color:#ffdbab!important;
+ border-radius:999px!important;padding:4px 10px!important;
+ font-size:12px!important;
+}
+html[data-vice-theme="on"] .game-progress-dialog .game-progress-more{
+ margin-inline-start:auto!important;width:auto!important;
+ padding:7px 12px!important;min-height:35px!important;max-width:none!important;
+ border:1px solid #ffa9d07d!important;border-radius:11px!important;
+ background:linear-gradient(135deg,#60335ee8,#41264fea)!important;
+ color:#fff1f0!important;font-size:11px!important;
+ font-weight:850!important;
+ box-shadow:none!important;
+}
+html[data-vice-theme="on"] .game-progress-dialog .game-achievement-grid{
+ width:100%!important;max-width:none!important;
+ display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;
+ gap:10px!important;
+}
+html[data-vice-theme="on"] .game-progress-dialog .game-achievement{
+ position:relative;display:flex;align-items:center;
+ min-width:0;min-height:83px!important;gap:10px!important;
+ padding:12px 13px!important;overflow:hidden;
+ border:1px solid #e8a2c47e!important;border-radius:16px!important;
+ background:linear-gradient(125deg,#513057f2,#3a2747e8)!important;
+ box-shadow:0 6px 17px #16062133,inset 0 1px 0 #ffffff13!important;
+}
+html[data-vice-theme="on"] .game-progress-dialog .game-achievement:not(.is-locked)::after{
+ content:"✦";position:absolute;top:8px;right:10px;
+ font-size:11px;color:#ffcf8d;opacity:.7;
+}
+html[data-vice-theme="on"] .game-progress-dialog .game-achievement__icon{
+ display:grid!important;place-items:center!important;
+ flex:0 0 46px!important;width:46px!important;height:46px!important;
+ padding:0!important;border-radius:13px!important;
+ background:linear-gradient(140deg,#f3a0c9,#c95aa8)!important;
+ border:1px solid #ffd4d866;box-shadow:0 4px 11px #1b092a48!important;
+ font-size:24px!important;
+}
+html[data-vice-theme="on"] .game-progress-dialog .game-achievement__text{
+ min-width:0;overflow-wrap:anywhere;
+}
+html[data-vice-theme="on"] .game-progress-dialog .game-achievement__text strong{
+ color:#fff0ed!important;font-size:clamp(11px,1.9vw,13px)!important;
+ font-weight:850!important;line-height:1.22!important;
+}
+html[data-vice-theme="on"] .game-progress-dialog .game-achievement__text span{
+ color:#f4b9d5!important;font-size:clamp(9px,1.55vw,11px)!important;
+ line-height:1.25!important;margin-top:4px!important;
+}
+html[data-vice-theme="on"] .game-progress-dialog .game-achievement.is-locked{
+ opacity:.68;filter:none!important;
+ border-style:dashed!important;border-color:#94769980!important;
+ background:linear-gradient(130deg,#3a2946dc,#32253bd9)!important;
+}
+html[data-vice-theme="on"] .game-progress-dialog .game-achievement.is-locked .game-achievement__icon{
+ background:#8d6d8950!important;box-shadow:none!important;filter:grayscale(.5);
+}
+/* Turn the two huge white empty-row buttons into content-rich dark panels.
+   The existing HTML <details> remains accessible and user-toggleable. */
+html[data-vice-theme="on"] .game-progress-dialog .game-progress-insights{
+ display:grid!important;grid-template-columns:1fr!important;
+ gap:12px!important;margin:20px 0 0!important;
+ width:100%!important;max-width:none!important;
+ align-items:stretch!important;
+}
+html[data-vice-theme="on"] .game-progress-dialog .game-progress-insights>.game-progress-fold{
+ display:block!important;grid-column:1/-1!important;
+ width:100%!important;max-width:none!important;
+ margin:0!important;overflow:hidden;
+ border:1px solid #bd7eac87!important;border-radius:18px!important;
+ background:linear-gradient(145deg,#4a2b51ed,#322240f5)!important;
+ box-shadow:0 8px 21px #1005183d!important;
+}
+html[data-vice-theme="on"] .game-progress-dialog .game-progress-fold-heading{
+ min-height:57px!important;justify-content:flex-start!important;
+ gap:11px!important;padding:14px 18px!important;
+ color:#ffedf3!important;font-size:clamp(13px,2vw,15px)!important;
+ font-weight:900!important;letter-spacing:0!important;
+ text-align:start;
+ background:linear-gradient(100deg,#ffffff0b,transparent)!important;
+ border-bottom:0!important;
+}
+html[data-vice-theme="on"] .game-progress-dialog .game-progress-fold-heading>span:first-child{
+ font-size:21px!important;
+}
+html[data-vice-theme="on"] .game-progress-dialog .game-progress-fold-chevron{
+ margin-inline-start:auto!important;flex:none;
+ border-color:#ffbcd6!important;width:9px!important;height:9px!important;
+}
+html[data-vice-theme="on"] .game-progress-dialog .game-progress-fold[open] .game-progress-fold-heading{
+ color:#ffe6ca!important;border-bottom:1px solid #ffd8e52b!important;
+}
+html[data-vice-theme="on"] .game-progress-dialog .game-progress-fold-content{
+ padding:17px 17px 20px!important;text-align:start!important;
+}
+html[data-vice-theme="on"] .game-progress-dialog .game-progress-fold-content>p{
+ color:#ddb2ce!important;font-size:11px!important;
+ text-align:start!important;margin:0 0 15px!important;
+}
+html[data-vice-theme="on"] .game-progress-dialog .game-progress-chart{
+ display:grid!important;grid-template-columns:repeat(7,minmax(0,1fr))!important;
+ max-width:none!important;width:100%;gap:7px!important;
+ padding:9px 0 0;
+}
+html[data-vice-theme="on"] .game-progress-dialog .game-progress-chart .day{
+ min-width:0;gap:6px!important;
+}
+html[data-vice-theme="on"] .game-progress-dialog .game-progress-chart .day__value{
+ color:#ffe1b7!important;font-size:10px!important;
+}
+html[data-vice-theme="on"] .game-progress-dialog .game-progress-chart .day__label{
+ color:#e4b2d6!important;font-size:10px!important;
+}
+html[data-vice-theme="on"] .game-progress-dialog .game-progress-chart .day__bar{
+ height:114px!important;min-width:0;border:1px solid #ffffff16!important;
+ border-radius:12px!important;padding:4px!important;
+ background:linear-gradient(0deg,#2b1e39,#53335f)!important;
+}
+html[data-vice-theme="on"] .game-progress-dialog .game-progress-chart .day__fill{
+ background:linear-gradient(180deg,#ffd09f,#ff81b5 53%,#cb5db4)!important;
+ border-radius:8px!important;box-shadow:0 0 13px #ff82b457;
+ transition:height .4s ease;
+}
+html[data-vice-theme="on"] .game-progress-dialog .game-progress-chart .day[data-empty="true"] .day__bar{
+ background:repeating-linear-gradient(150deg,#3f2a4a 0 8px,#49304f 8px 16px)!important;
+}
+html[data-vice-theme="on"] .game-progress-dialog .game-progress-history{
+ max-width:none!important;width:100%!important;
+ display:grid;grid-template-columns:1fr;gap:8px!important;
+}
+html[data-vice-theme="on"] .game-progress-dialog .game-progress-history-item{
+ display:grid!important;grid-template-columns:minmax(0,1fr) auto auto!important;
+ gap:10px!important;align-items:center!important;min-width:0;
+ padding:12px 14px!important;border-radius:13px!important;
+ border:1px solid #a06b9b64!important;
+ background:#35243fce!important;color:#ffe5f1!important;
+ font-size:12px!important;
+}
+html[data-vice-theme="on"] .game-progress-dialog .game-progress-history-item>span{
+ min-width:0;overflow-wrap:anywhere;font-weight:700;
+}
+html[data-vice-theme="on"] .game-progress-dialog .game-progress-history-item strong{
+ color:#ffd09c!important;font-size:12px!important;font-variant-numeric:tabular-nums;
+}
+html[data-vice-theme="on"] .game-progress-dialog .game-progress-history-item time{
+ color:#dbaac8!important;font-size:10px!important;
+}
+html[data-vice-theme="on"] .game-progress-dialog .game-progress-empty{
+ color:#f5d4e7!important;background:#5639595e!important;
+ border:1px dashed #ffb3c077!important;padding:14px!important;
+}
+html[data-vice-theme="on"] .game-progress-dialog .game-progress-footnote{
+ position:relative;max-width:none!important;width:100%;
+ margin:18px auto 0!important;padding:12px 15px!important;
+ color:#d4acc7!important;background:#ffffff0b;
+ border:1px solid #f5a1c526;border-radius:13px!important;
+ font-size:11px!important;text-align:center!important;line-height:1.5!important;
+}
+@keyframes viceProgressMedalFloat{
+ 0%,100%{transform:translateY(0) rotate(-5deg)}
+ 50%{transform:translateY(-4px) rotate(0)}
+}
+@media(max-width:720px){
+ html[data-vice-theme="on"] .game-progress-dialog{
+  box-sizing:border-box!important;position:fixed!important;inset:0!important;
+  width:100vw!important;max-width:100vw!important;
+  height:100dvh!important;max-height:100dvh!important;
+  overflow-x:hidden!important;overflow-y:auto!important;
+  border:0!important;border-radius:0!important;
+  overscroll-behavior:contain;
+ }
+ html[data-vice-theme="on"] .game-progress-dialog .game-progress-panel{
+  padding:10px max(14px,env(safe-area-inset-left))
+   calc(26px + env(safe-area-inset-bottom))
+   max(14px,env(safe-area-inset-right))!important;
+ }
+ html[data-vice-theme="on"] .game-progress-dialog .game-progress-head{
+  margin-bottom:11px!important;
+ }
+ html[data-vice-theme="on"] .game-progress-dialog .game-progress-headline{
+  min-height:157px;margin:0 0 12px!important;
+ }
+ html[data-vice-theme="on"] .game-progress-dialog .game-progress-topstats>div{
+  min-height:106px!important;padding:14px!important;
+ }
+ html[data-vice-theme="on"] .game-progress-dialog .game-progress-achievements{
+  margin-top:20px!important;
+ }
+}
+@media(max-width:395px){
+ html[data-vice-theme="on"] .game-progress-dialog .game-progress-panel{
+  padding-left:11px!important;padding-right:11px!important;
+ }
+ html[data-vice-theme="on"] .game-progress-dialog .game-progress-head{
+  gap:6px!important;grid-template-columns:46px minmax(0,1fr) 46px!important;
+ }
+ html[data-vice-theme="on"] .game-progress-dialog .game-progress-headline{
+  min-height:144px;padding:15px 12px!important;gap:12px!important;
+ }
+ html[data-vice-theme="on"] .game-progress-dialog .game-progress-headline-icon{
+  flex-basis:57px!important;width:57px!important;height:57px!important;
+  font-size:31px!important;
+ }
+ html[data-vice-theme="on"] .game-progress-dialog .game-progress-topstats>div{
+  grid-template-columns:minmax(0,1fr) 38px!important;
+  min-height:96px!important;padding:11px!important;
+ }
+ html[data-vice-theme="on"] .game-progress-dialog .game-progress-topstats strong{
+  font-size:23px!important;
+ }
+ html[data-vice-theme="on"] .game-progress-dialog .game-progress-topstats .game-progress-stat-icon{
+  font-size:23px!important;
+ }
+ html[data-vice-theme="on"] .game-progress-dialog .game-progress-topstats>div:nth-child(2)::after{
+  width:47px;height:47px;right:7px;
+ }
+ html[data-vice-theme="on"] .game-progress-dialog .game-achievement{
+  min-height:75px!important;padding:9px 8px!important;gap:7px!important;
+ }
+ html[data-vice-theme="on"] .game-progress-dialog .game-achievement__icon{
+  flex-basis:37px!important;width:37px!important;height:37px!important;
+  font-size:20px!important;
+ }
+ html[data-vice-theme="on"] .game-progress-dialog .game-progress-chart .day__bar{
+  height:92px!important;
+ }
+}
+@media(prefers-reduced-motion:reduce){
+ html[data-vice-theme="on"] .game-progress-dialog .game-progress-headline-icon{
+  animation:none!important;transform:none!important;
+ }
+ html[data-vice-theme="on"] .game-progress-dialog .game-progress-chart .day__fill{
+  transition:none!important;
+ }
+}
