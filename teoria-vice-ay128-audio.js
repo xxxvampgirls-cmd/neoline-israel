@@ -251,8 +251,8 @@
    default:break;
   }
  }
- // A short interactive bar is repeated in lobby, quiz and results,
- // never placed in the fixed navigation, so mobile bottom bars stay unchanged.
+ // One shared compact audio control in the sticky game header, replacing the bag.
+ // Remains accessible while answering questions and never changes the bottom navigation.
  const bars=[];
  function makeBar(host) {
   if(!host) return;
@@ -290,13 +290,10 @@
   state.className="vice-ay-state";
   state.setAttribute("aria-live","polite");
   wrap.append(state);
-  if(host.id==="gameResult") host.insertBefore(wrap,host.children[1]||null);
-  else host.append(wrap);
+  host.append(wrap);
   bars.push({wrap,music,sound,state});
  }
- makeBar(byId("gameLobby")?.querySelector(".toolbar-title"));
- makeBar(byId("gamePlaying")?.querySelector(".question-eyebrow"));
- makeBar(byId("gameResult"));
+ makeBar(document.querySelector(".neoline-site-header__actions"));
  function updateControls() {
   const t=labels();
   for(const bar of bars) {
