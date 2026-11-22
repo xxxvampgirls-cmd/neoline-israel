@@ -184,6 +184,7 @@
  }
  function tick() {
   if(!ctx || ctx.state!=="running" || document.hidden || !musicOn || !isVice() || scene==="fail") return;
+  if(nextStep<ctx.currentTime-0.05) nextStep=ctx.currentTime+0.015;
   let safety=0;
   while(nextStep<ctx.currentTime+0.17 && safety++<8) {
    playStep(nextStep);
@@ -236,6 +237,8 @@
    case "shake": p("A3",0,.075,.1,"E3");break;
    case "burst": noise(.19,t,.25,"fx");p("C5",.025,.17,.23,"C6");p("G5",.11,.2,.2,"D6");break;
    case "reveal": p("C6",0,.075,.17);p("E6",.08,.1,.21);p("G6",.18,.25,.27);break;
+   case "countdown": p("A5",0,.065,.17);break;
+   case "finale": noise(.21,t,.24,"fx");["A5","C6","E6","A6","C7"].forEach((n,i)=>p(n,i*.095,.16,.2));break;
    case "victory":
     ["C5","E5","G5","C6","E6","G6","C7"].forEach((n,i)=>p(n,i*.112,i===6?.46:.13,.23+(i*.013)));
     break;
@@ -284,11 +287,12 @@
   state.className="vice-ay-state";
   state.setAttribute("aria-live","polite");
   wrap.append(state);
-  host.append(wrap);
+  if(host.id==="gameResult") host.insertBefore(wrap,host.children[1]||null);
+  else host.append(wrap);
   bars.push({wrap,music,sound,state});
  }
  makeBar(byId("gameLobby")?.querySelector(".toolbar-title"));
- makeBar(byId("gamePlaying")?.querySelector(".game-quiz-topline"));
+ makeBar(byId("gamePlaying")?.querySelector(".question-eyebrow"));
  makeBar(byId("gameResult"));
  function updateControls() {
   const t=labels();
@@ -373,6 +377,27 @@
    else if(phase==="burst")fx("burst");
    else if(phase==="revealed")fx("reveal");
   }).observe(gift,{attributes:true,attributeFilter:["data-phase"]});
+ }
+ const firework=byId("gameGiftScreenBurst");
+ if(firework){
+  let hadRing=false;
+  new MutationObserver(()=>{
+   const hasRing=!!firework.querySelector(".gift-burst-ring");
+   if(!hadRing && hasRing && dialog?.open)fx("finale");
+   hadRing=hasRing;
+  }).observe(firework,{childList:true});
+ }
+ const clock=byId("timer");
+ if(clock) {
+  let lastSecond=null;
+  new MutationObserver(()=>{
+   if(!isVice() || scene!=="quiz" || byId("timerBox")?.hidden)return;
+   const m=/^(\d\d):(\d\d)$/.exec(clock.textContent.trim());
+   if(!m)return;
+   const sec=+m[1]*60 + +m[2];
+   if(sec>0 && sec<=10 && sec!==lastSecond)fx("countdown");
+   lastSecond=sec;
+  }).observe(clock,{childList:true,characterData:true,subtree:true});
  }
  if(dialog){
   new MutationObserver(()=>{
