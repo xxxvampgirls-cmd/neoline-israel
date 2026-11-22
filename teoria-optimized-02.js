@@ -2503,7 +2503,7 @@ for(const [index,track] of api.tracks.entries()){
  modalFrame.setAttribute("sandbox","allow-scripts allow-same-origin allow-forms allow-downloads allow-popups");
  originalBox.append(modalTop,modalMessage,modalFrame,modalLink);
  originalDialog.append(originalBox);document.body.append(originalDialog);
- let originalSelected=null,modalSequence=0,modalFallback=0;
+ let originalSelected=null,modalSequence=0,modalFallback=0,modalLoaded=false;
  const EMBED_COPY={
   ru:{loading:"Загружаем встроенный Z80 / 2×AY плеер…",ready:"Нажми ▶ в проигрывателе ниже. Страница игры остаётся открытой.",external:"Открыть отдельно ↗"},
   en:{loading:"Loading embedded Z80 / 2×AY player…",ready:"Tap ▶ inside the player below. You stay on the game page.",external:"Open separately ↗"},
@@ -2514,7 +2514,7 @@ for(const [index,track] of api.tracks.entries()){
  function closeOriginalDialog(){
   ++modalSequence;originalSelected=null;
   clearTimeout(modalFallback);modalFallback=0;
-  modalFrame.removeAttribute("src");
+  modalFrame.removeAttribute("src");modalLoaded=false;
   if(originalDialog.open)originalDialog.close();
   api.suspendForOriginalPlayer?.(false);
   draw();
@@ -2523,13 +2523,15 @@ for(const [index,track] of api.tracks.entries()){
  originalDialog.addEventListener("cancel",e=>{e.preventDefault();closeOriginalDialog()});
  originalDialog.addEventListener("click",e=>{if(e.target===originalDialog)closeOriginalDialog()});
  modalFrame.addEventListener("load",()=>{
-  if(originalDialog.open&&originalSelected)modalMessage.textContent=embedCopy().ready;
+  if(!originalDialog.open||!originalSelected)return;
+  modalLoaded=true;clearTimeout(modalFallback);modalFallback=0;
+  modalMessage.textContent=embedCopy().ready;
  });
  function openOriginalTrack(track){
   const fileURL=new URL("./assets/teoria/originals/"+encodeURIComponent(track.file),location.href).href;
   const playerURL=ZXTUNE_URL+"?url="+encodeURIComponent(fileURL);
   const token=++modalSequence;
-  originalSelected=track.file;modalTitle.textContent=track.name+" · "+track.format;
+  originalSelected=track.file;modalLoaded=false;modalTitle.textContent=track.name+" · "+track.format;
   modalMessage.textContent=embedCopy().loading;
   modalLink.href=playerURL;modalLink.textContent=embedCopy().external;modalLink.hidden=true;
   api.suspendForOriginalPlayer?.(true);
@@ -2537,7 +2539,7 @@ for(const [index,track] of api.tracks.entries()){
   modalFrame.src=playerURL;
   clearTimeout(modalFallback);
   modalFallback=setTimeout(()=>{
-   if(token===modalSequence&&originalDialog.open)modalLink.hidden=false;
+   if(token===modalSequence&&originalDialog.open&&!modalLoaded)modalLink.hidden=false;
   },10000);
   draw();
  }
