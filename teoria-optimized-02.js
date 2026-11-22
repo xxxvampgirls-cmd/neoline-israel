@@ -1537,7 +1537,7 @@ const getSaved=(key,defaultValue)=>{try{const s=localStorage.getItem(key);return
 const save=(key,on)=>{try{localStorage.setItem(key,on?"1":"0")}catch(_){}};
 let musicOn=getSaved(KEY_MUSIC,true),sfxOn=getSaved(KEY_SFX,true);
 let ctx=null,node=null,boot=null,audioError=false;
-let tapeLoading=false,tapeDurationMs=8200;
+let tapeLoading=false,tapeHolding=false,tapeDurationMs=5600;
 let scene="menu",currentMode=null,loadedScene=null;
 let lastDone=-1,lastHover=0,lastClick=0,lastTheme=isVice();
 const CLOCK=1773400,FPS=50;
@@ -1813,7 +1813,7 @@ function guessScene(){
 const msg=data=>{if(node)node.port.postMessage(data)};
 function stateToChip(){
  const inGift=giftOpen();
- const cassette=tapeLoading&&isVice()&&sfxOn&&!document.hidden&&!originalPlayerOpen;
+ const cassette=tapeLoading&&!tapeHolding&&isVice()&&sfxOn&&!document.hidden&&!originalPlayerOpen;
  msg({type:"switch",
   music:musicOn&&isVice()&&!tapeLoading&&!document.hidden&&!originalPlayerOpen&&(preview?!preview.paused:scene!=="fail"),
   effects:sfxOn&&audioAllowed()&&!tapeLoading&&!document.hidden&&!originalPlayerOpen,
@@ -1850,7 +1850,7 @@ function prepareAudio(forceGift=false){
  try{
   ctx=new Ctx({latencyHint:"interactive"});
   ctx.addEventListener("statechange",()=>{updateControls();reportAudio()});
-  boot=ctx.audioWorklet.addModule("./teoria-ay8912-worklet.js?v=20261122-spectrum-tape-v8")
+  boot=ctx.audioWorklet.addModule("./teoria-ay8912-worklet.js?v=20261122-spectrum-tape-pauses-v9")
    .then(()=>{
     node=new AudioWorkletNode(ctx,"neoline-ay8912",{
      numberOfInputs:0,numberOfOutputs:1,outputChannelCount:[2]
@@ -1921,8 +1921,9 @@ window.neolineStartAYAudio=unlock;
 window.neolineCassetteLoading=(enabled,durationMs)=>{
  if(enabled&&!isVice())return false;
  tapeLoading=!!enabled;
+ tapeHolding=enabled==="hold";
  if(Number.isFinite(durationMs))tapeDurationMs=Math.max(300,Math.min(15000,durationMs));
- if(tapeLoading&&sfxOn){
+ if(tapeLoading&&!tapeHolding&&sfxOn){
   const ready=prepareAudio();
   requestResume(); // synchronous: caller is usually the user's click
   if(ready)void ready.then(ok=>{if(ok)stateToChip()}).catch(()=>{});
@@ -2621,13 +2622,13 @@ const copy={
 };
 const t=()=>copy[language()]||copy.ru;
 const tapeCopy={
- ru:{stages:["МОТОР КАССЕТЫ · PLAY ▶","ПОИСК ЗАГОЛОВКА","СИНХРОНИЗАЦИЯ БЛОКА","ЧТЕНИЕ ДАННЫХ ZX","ЗАГРУЗКА ГОРОДА","СЛЕДУЮЩИЙ БЛОК","ПРОВЕРКА ДАННЫХ"],skip:"ПРОПУСТИТЬ ►",tap:"КОСНИСЬ ЭКРАНА ДЛЯ ЗВУКА",block:"БЛОК"},
- en:{stages:["TAPE MOTOR · PLAY ▶","SEARCHING HEADER","SYNCING BLOCK","READING ZX DATA","LOADING CITY","NEXT DATA BLOCK","VERIFYING CHECKSUM"],skip:"SKIP ►",tap:"TAP FOR TAPE AUDIO",block:"BLOCK"},
- he:{stages:["מנוע הקלטת · PLAY ▶","מחפש כותרת","מסנכרן בלוק","קורא נתונים","טוען את העיר","בלוק נוסף","בדיקת נתונים"],skip:"דלג ►",tap:"געו במסך לשמע",block:"בלוק"},
- ar:{stages:["محرك الشريط · PLAY ▶","البحث عن العنوان","مزامنة الكتلة","قراءة البيانات","تحميل المدينة","كتلة بيانات جديدة","التحقق من البيانات"],skip:"تخطي ►",tap:"المس الشاشة للصوت",block:"الكتلة"}
+ ru:{stages:["МОТОР КАССЕТЫ · PLAY ▶","ПИЛОТ-СИГНАЛ","ПАУЗА · МЕЖДУ БЛОКАМИ","СИНХРОНИЗАЦИЯ БЛОКА","ЧТЕНИЕ ДАННЫХ ZX","ПАУЗА · ЗАПИСЬ БЛОКА","ЗАГРУЗКА ГОРОДА","ПАУЗА · СЛЕДУЮЩИЙ БЛОК","ДАННЫЕ ZX · ФИНАЛ","ПРОВЕРКА ДАННЫХ"],skip:"ПРОПУСТИТЬ ►",tap:"КОСНИСЬ ЭКРАНА ДЛЯ ЗВУКА",block:"БЛОК"},
+ en:{stages:["TAPE MOTOR · PLAY ▶","PILOT TONE","PAUSE · BETWEEN BLOCKS","SYNCING BLOCK","READING ZX DATA","PAUSE · NEXT BLOCK","LOADING CITY","PAUSE · FINAL BLOCK","ZX DATA · FINAL","VERIFYING CHECKSUM"],skip:"SKIP ►",tap:"TAP FOR TAPE AUDIO",block:"BLOCK"},
+ he:{stages:["מנוע הקלטת · PLAY ▶","אות פתיחה","הפסקה · בין בלוקים","סנכרון בלוק","קריאת נתונים","הפסקה · בלוק הבא","טעינת העיר","הפסקה · סיום","נתונים · בלוק סופי","בדיקת נתונים"],skip:"דלג ►",tap:"געו במסך לשמע",block:"בלוק"},
+ ar:{stages:["محرك الشريط · PLAY ▶","نغمة البداية","توقف · بين الكتل","مزامنة الكتلة","قراءة البيانات","توقف · الكتلة التالية","تحميل المدينة","توقف · الكتلة الأخيرة","البيانات الأخيرة","التحقق من البيانات"],skip:"تخطي ►",tap:"المس الشاشة للصوت",block:"الكتلة"}
 };
 const words=()=>tapeCopy[language()]||tapeCopy.ru;
-const FULL_MS=8200,RELOAD_MS=6400;
+const FULL_MS=5600,RELOAD_MS=5000,READY_PAUSE_MS=1700;
 let stageIndex=0,currentDuration=FULL_MS;
 const reduce=window.matchMedia?.("(prefers-reduced-motion: reduce)")?.matches||false;
 const overlay=document.createElement("div");
@@ -2675,7 +2676,7 @@ function translate(){
  kicker.textContent=x.kicker;
  deck.textContent=x.deck;
  status.textContent=entering?w.stages[stageIndex]:(shown?x.ready:x.loading);
- blocks.textContent=w.block+" "+(stageIndex>=5?"02":"01")+" / 02";
+ blocks.textContent=w.block+" "+(stageIndex>=6?"02":"01")+" / 02";
  skip.textContent=w.skip;
  touch.textContent=w.tap;
  startButton.textContent=x.start;
@@ -2701,7 +2702,7 @@ function finish(){
  if(!entering)return;
  clearTimeout(shortTimer);clearStages();
  entering=false;
- window.neolineCassetteLoading?.(false);
+ window.neolineCassetteLoading?.("hold");
  touch.hidden=true;
  overlay.classList.add("is-ready");
  status.textContent=t().ready;
@@ -2712,8 +2713,9 @@ function finish(){
   overlay.classList.remove("is-active","is-ready");
   overlay.setAttribute("aria-hidden","true");
   shown=false;
+  window.neolineCassetteLoading?.(false);
   refreshWake();
- },reduce?60:480);
+ },reduce?60:READY_PAUSE_MS);
 }
 function begin(initial=false){
  if(document.hidden)return;
@@ -2733,7 +2735,8 @@ function begin(initial=false){
  if(!reduce)window.neolineCassetteLoading?.(true,currentDuration);
  updateTapeHint();
  const schedule=[
-  [.075,1],[.245,2],[.275,3],[.49,4],[.745,5],[.82,6]
+  [.08,1],[.22,2],[.265,3],[.32,4],[.56,5],
+  [.615,6],[.75,7],[.78,8],[.90,9]
  ];
  for(const [fraction,index] of schedule){
   stageTimers.push(setTimeout(()=>{
@@ -2746,11 +2749,21 @@ function begin(initial=false){
    if(!entering)return;
    const now=performance.now();
    const fraction=Math.max(0,Math.min(1,(now-bootStartedAt)/currentDuration));
-   const fakeBytes=Math.floor(49152*Math.pow(fraction,.82));
+   // Keep the byte counter frozen during deliberate tape-block pauses.
+   const marks=[[0,0],[.08,.04],[.22,.24],[.265,.24],
+    [.32,.32],[.56,.62],[.615,.62],[.75,.80],[.78,.80],[.92,1],[1,1]];
+   let progress=1;
+   for(let i=1;i<marks.length;i++){
+    if(fraction<=marks[i][0]){
+     const [t0,p0]=marks[i-1],[t1,p1]=marks[i];
+     progress=p0+(p1-p0)*(fraction-t0)/(t1-t0);break;
+    }
+   }
+   const fakeBytes=Math.floor(49152*progress);
    bytes.textContent=String(fakeBytes).padStart(5,"0")+" / 49152";
   },240);
   // Skip appears only after the vintage pilot tone has been heard.
-  stageTimers.push(setTimeout(()=>{if(entering)skip.hidden=false},2100));
+  stageTimers.push(setTimeout(()=>{if(entering)skip.hidden=false},1600));
  }
  bootStartedAt=performance.now();
  shortTimer=setTimeout(finish,currentDuration);
