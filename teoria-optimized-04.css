@@ -2513,7 +2513,7 @@ html:not([data-vice-theme="on"])[lang^="ru"] .theory-promo-host:has(>.vice-promo
  z-index:0;pointer-events:none;user-select:none;-webkit-user-drag:none;
 }
 .vice-boot-overlay.is-active .vice-boot-art{
- animation:vice-boot-tape-reveal var(--vice-boot-time,5600ms) steps(72,end) both;
+ animation:vice-boot-tape-reveal var(--vice-boot-time,5600ms) steps(72,end) var(--vice-boot-pilot-time,5244ms) both;
 }
 .vice-boot-overlay.is-ready .vice-boot-art{
  animation:none;clip-path:none;filter:none;
@@ -2733,7 +2733,7 @@ html:not([data-vice-theme="on"])[lang^="ru"] .theory-promo-host:has(>.vice-promo
 }
 .vice-boot-overlay.is-active .vice-boot-tape-border{
  animation:vice-boot-tape-flash .32s steps(4,end) infinite,
-           vice-boot-tape-gaps var(--vice-boot-time,5600ms) linear both;
+           vice-boot-tape-gaps var(--vice-boot-time,5600ms) linear var(--vice-boot-pilot-time,5244ms) both;
 }
 .vice-boot-tape-screen{
  position:absolute;left:8px;right:8px;top:20%;height:45%;z-index:2;
@@ -2744,10 +2744,10 @@ html:not([data-vice-theme="on"])[lang^="ru"] .theory-promo-host:has(>.vice-promo
 }
 .vice-boot-overlay.is-active .vice-boot-tape-screen{
  animation:vice-boot-data-scroll .33s steps(3,end) infinite,
-           vice-boot-data-gaps var(--vice-boot-time,5600ms) linear both;
+           vice-boot-data-gaps var(--vice-boot-time,5600ms) linear var(--vice-boot-pilot-time,5244ms) both;
 }
 .vice-boot-overlay.is-active .vice-boot-meter span{
- animation:vice-boot-tape-progress var(--vice-boot-time,8200ms) steps(64,end) both;
+ animation:vice-boot-tape-progress var(--vice-boot-time,5600ms) steps(64,end) var(--vice-boot-pilot-time,5244ms) both;
 }
 .vice-boot-tape-info{
  position:fixed;z-index:10;top:calc(74% + 55px);left:8%;width:84%;
@@ -2834,6 +2834,44 @@ html:not([data-vice-theme="on"])[lang^="ru"] .theory-promo-host:has(>.vice-promo
  text-shadow:0 0 10px #fff38fa3,0 1px 4px #241033;
 }
 .vice-boot-tape-touch[hidden]{display:none!important}
+
+
+/* First ZX Spectrum ROM header: ~5 seconds of the untouched pilot sound.
+   The ONLY visible content is white paper, ULA cassette border stripes
+   and the literal LOAD command at the bottom. No branding or progress. */
+.vice-boot-pilot{
+ position:absolute;inset:0;z-index:30;display:none;
+ background:#fff;color:#151515;overflow:hidden;
+}
+.vice-boot-overlay.is-pilot .vice-boot-pilot{display:block}
+.vice-boot-pilot::before{
+ content:"";position:absolute;inset:0;pointer-events:none;
+ background:
+  repeating-linear-gradient(90deg,#24c4cd 0 18px,#e33d68 18px 36px) top left/100% 8px no-repeat,
+  repeating-linear-gradient(90deg,#e33d68 0 18px,#24c4cd 18px 36px) bottom left/100% 8px no-repeat,
+  repeating-linear-gradient(0deg,#24c4cd 0 18px,#e33d68 18px 36px) top left/8px 100% no-repeat,
+  repeating-linear-gradient(0deg,#e33d68 0 18px,#24c4cd 18px 36px) top right/8px 100% no-repeat;
+ animation:vice-boot-rom-stripes .24s steps(2,end) infinite;
+}
+@keyframes vice-boot-rom-stripes{
+ 0%{opacity:1;filter:none}
+ 49%{opacity:1;filter:none}
+ 50%,100%{opacity:1;filter:hue-rotate(180deg)}
+}
+.vice-boot-pilot span{
+ position:absolute;left:50%;bottom:max(42px,calc(env(safe-area-inset-bottom,0px) + 32px));
+ transform:translateX(-50%);color:#111;
+ font:700 clamp(23px,6.5vw,35px)/1 "Courier New",monospace;
+ letter-spacing:.03em;white-space:nowrap;
+}
+@media(max-width:420px){
+ .vice-boot-pilot::before{
+  background-size:100% 6px,100% 6px,6px 100%,6px 100%;
+ }
+}
+@media(prefers-reduced-motion:reduce){
+ .vice-boot-pilot::before{animation:none}
+}
 
 
 /* SOURCE: teoria-vice-sunset-boulevard.css */

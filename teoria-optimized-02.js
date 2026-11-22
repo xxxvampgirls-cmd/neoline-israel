@@ -1850,7 +1850,7 @@ function prepareAudio(forceGift=false){
  try{
   ctx=new Ctx({latencyHint:"interactive"});
   ctx.addEventListener("statechange",()=>{updateControls();reportAudio()});
-  boot=ctx.audioWorklet.addModule("./teoria-ay8912-worklet.js?v=20261122-spectrum-tape-pauses-v9")
+  boot=ctx.audioWorklet.addModule("./teoria-ay8912-worklet.js?v=20261122-zx-original-pilot-v10")
    .then(()=>{
     node=new AudioWorkletNode(ctx,"neoline-ay8912",{
      numberOfInputs:0,numberOfOutputs:1,outputChannelCount:[2]
