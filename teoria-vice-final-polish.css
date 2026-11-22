@@ -307,3 +307,19 @@ html[data-vice-theme="on"] #gameLobby .routes .route-card:focus-visible{
   animation:none!important;transition:none!important;
  }
 }
+
+/* The reference keeps the carousel navigation clear of the left title. */
+html[data-vice-theme="on"] .theory-promo-host .vice-cinema-arrow--prev{
+ left:51%!important;
+}
+html[data-vice-theme="on"] .theory-promo-host .vice-cinema-arrow--next{
+ right:7px!important;
+}
+html[data-vice-theme="on"] .theory-promo-host .theory-promo-dots{
+ left:65%!important;
+ transform:translateX(-50%)!important;
+}
+@media(max-width:365px){
+ html[data-vice-theme="on"] .theory-promo-host .vice-cinema-arrow--prev{left:49%!important}
+ html[data-vice-theme="on"] .theory-promo-host .theory-promo-dots{left:62%!important}
+}
