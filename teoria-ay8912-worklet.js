@@ -29,7 +29,7 @@ class NeolineAY8912 extends AudioWorkletProcessor{
    const m=e.data||{};
    if(m.type==="song"){
     const raw=m.frames instanceof Uint8Array?m.frames:new Uint8Array(m.frames||[]);
-    if(raw.length<14||raw.length%14!==0||raw.length>14*50*180)return;
+    if(raw.length<14||raw.length%14!==0||raw.length>14*50*240)return;
     this.frames=raw;this.framesCount=raw.length/14;this.songIndex=0;
     this.frameSamples=sampleRate;
     this.phase.fill(0);this.noisePhase=0;
@@ -64,7 +64,12 @@ class NeolineAY8912 extends AudioWorkletProcessor{
  frameTick(){
   if(this.musicEnabled&&this.frames&&this.framesCount){
    this.writeRegisters(this.songIndex);
-   this.songIndex=(this.songIndex+1)%this.framesCount;
+   this.songIndex++;
+   if(this.songIndex>=this.framesCount){
+    this.songIndex=0;
+    // One event per completed original PT3 loop; game may choose a new track.
+    this.port.postMessage({type:"song-loop"});
+   }
   }else{
    this.regs[8]=this.regs[9]=this.regs[10]=0;
   }
