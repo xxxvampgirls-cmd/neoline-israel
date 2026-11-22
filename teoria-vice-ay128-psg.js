@@ -208,7 +208,18 @@ async function songBytes(id){
 async function loadScene(force=false){
  if(!node||preview)return;
  const token=++requestSerial,requested=scene;
- if(requested==="fail"){msg({type:"clearSong"});loadedScene="fail";activeSong=null;stateToChip();return}
+ if(requested==="fail"){
+  loadedScene="fail";
+  if(musicOn&&isVice()){
+   activeSong="wasted-theme";
+   msg({type:"song",frames:buildWastedTheme(),once:true});
+  }else{
+   activeSong=null;
+   msg({type:"clearSong"});
+  }
+  stateToChip();
+  return;
+ }
  const id=requested==="menu"?"sonya":requested==="result"?(selectedGameSong||"sonya"):
           selectedGameSong||nextGameTrack();
  if(GAME_MODES.has(requested))selectedGameSong=id;
@@ -231,6 +242,66 @@ async function loadScene(force=false){
   msg({type:"clearSong"});loadedScene=null;activeSong=null;stateToChip();updateControls();
  }
 }
+// An original one-shot 3-voice Game Over cue, 260 AY register frames
+// (5.2 seconds at 50 Hz). Entirely AY-3-8912: no MP3, MIDI or samples.
+// A descending minor-key theme, chiptune counter-melody and pulsing bass
+// resolve into a held, fading final note instead of a harsh cutoff.
+let wastedThemeFrames=null;
+function buildWastedTheme(){
+ if(wastedThemeFrames)return wastedThemeFrames;
+ const melody=[
+  ["E5",18],["D5",16],["C5",18],["B4",18],["G4",16],
+  ["A4",12],["B4",14],["D5",16],["C5",18],["B4",16],
+  ["A4",18],["G4",16],["F#4",14],["E4",50]
+ ];
+ const bass=[
+  ["E3",44],["C3",44],["A2",44],["B2",44],["G2",34],["E3",50]
+ ];
+ const chords=[
+  ["E4","G4","B4","G4"],["C4","E4","G4","E4"],
+  ["A3","C4","E4","C4"],["B3","D4","F#4","D4"],
+  ["G3","B3","D4","B3"],["E4","G4","B4","E5"]
+ ];
+ const length=melody.reduce((n,item)=>n+item[1],0);
+ const frames=new Uint8Array(length*14);
+ let leadIndex=0,leadStart=0,bassIndex=0,bassStart=0;
+ const clamp=x=>Math.max(0,Math.min(15,Math.round(x)));
+ function writePeriod(data,at,ch,note){
+  const p=notePeriod(note);
+  data[at+ch*2]=p&255;data[at+ch*2+1]=(p>>8)&15;
+ }
+ for(let f=0;f<length;f++){
+  while(leadIndex<melody.length-1&&f>=leadStart+melody[leadIndex][1])
+   leadStart+=melody[leadIndex++][1];
+  while(bassIndex<bass.length-1&&f>=bassStart+bass[bassIndex][1])
+   bassStart+=bass[bassIndex++][1];
+  const [leadNote,leadLength]=melody[leadIndex];
+  const inNote=f-leadStart,remaining=leadLength-inNote;
+  const bassNote=bass[bassIndex][0];
+  const chord=chords[Math.min(chords.length-1,bassIndex)];
+  const midNote=chord[Math.floor(f/6)%4];
+  const at=f*14;
+  writePeriod(frames,at,0,leadNote);
+  writePeriod(frames,at,1,midNote);
+  writePeriod(frames,at,2,bassNote);
+  const tail=f>=length-43?Math.max(0,(length-f)/43):1;
+  const attack=inNote<2?1:0;
+  const leadRelease=remaining<=4?remaining/5:1;
+  const bassPulse=(f-bassStart)%12<7?1:.72;
+  // Short, gritty opening impact on the AY noise generator only.
+  frames[at+6]=f<10?9:3;
+  frames[at+7]=f<10?0x18:0x38; // Tone A/B/C; noise C at impact.
+  frames[at+8]=clamp((attack?14:12.5)*leadRelease*tail);
+  frames[at+9]=clamp((f%6<4?8.5:6.5)*tail*(f>length-49?.48:1));
+  frames[at+10]=clamp((f<10?14:10.8)*bassPulse*tail);
+  frames[at+11]=0;
+  frames[at+12]=0;
+  frames[at+13]=255; // do not retrigger chip envelope.
+ }
+ wastedThemeFrames=frames;
+ return frames;
+}
+
 // SFX sequences are also AY register values, not synthesized outside the chip.
 // Note + length in 20ms frames + loudness (0..15) + noise period (0=no noise).
 const FX={
@@ -262,7 +333,8 @@ const FX={
  victory:[["C5",5,12],["E5",5,13],["G5",6,13],["C6",6,14],["E6",8,14],["G6",11,15]],
  finish:[["E5",5,11],["A5",7,12],["C6",12,13]],
  "exam-fail":[["E5",8,12],["C5",9,12],["A4",17,12]],
- wasted:[["E5",11,12],["B4",13,11],["G4",16,12],["NOISE",10,11,17],["E3",30,10]]
+ wasted:[["E5",11,12],["B4",13,11],["G4",16,12],["NOISE",10,11,17],["E3",30,10]],
+ "wasted-hit":[["NOISE",6,14,8],["E3",8,13,14]]
 };
 const fxCache=new Map();
 function compileFx(name){
@@ -296,7 +368,7 @@ function stateToChip(){
  const inGift=giftOpen();
  const cassette=tapeLoading&&!tapeHolding&&isVice()&&sfxOn&&!document.hidden&&!originalPlayerOpen;
  msg({type:"switch",
-  music:musicOn&&isVice()&&!tapeLoading&&!document.hidden&&!originalPlayerOpen&&(preview?!preview.paused:scene!=="fail"),
+  music:musicOn&&isVice()&&!tapeLoading&&!document.hidden&&!originalPlayerOpen&&(preview?!preview.paused:(scene!=="fail"||activeSong==="wasted-theme")),
   effects:sfxOn&&audioAllowed()&&!tapeLoading&&!document.hidden&&!originalPlayerOpen,
   gameplay:GAME_MODES.has(scene),gift:inGift,
   tape:cassette,tapeDurationMs
@@ -331,7 +403,7 @@ function prepareAudio(forceGift=false){
  try{
   ctx=new Ctx({latencyHint:"interactive"});
   ctx.addEventListener("statechange",()=>{updateControls();reportAudio()});
-  boot=ctx.audioWorklet.addModule("./teoria-ay8912-worklet.js?v=20261122-trim-opening-one-second-v13")
+  boot=ctx.audioWorklet.addModule("./teoria-ay8912-worklet.js?v=20261122-game-over-3voice-v14")
    .then(()=>{
     node=new AudioWorkletNode(ctx,"neoline-ay8912",{
      numberOfInputs:0,numberOfOutputs:1,outputChannelCount:[2]
@@ -539,6 +611,10 @@ function makeBar(host){
   button.addEventListener("click",()=>{
    if(kind==="music"){musicOn=!musicOn;save(KEY_MUSIC,musicOn)}
    else{sfxOn=!sfxOn;save(KEY_SFX,sfxOn)}
+   if(kind==="music"&&scene==="fail"){
+    if(!musicOn){msg({type:"clearSong"});activeSong=null}
+    else if(node)void loadScene(true); // restart the complete 5.2s cue
+   }
    stateToChip();updateControls();notifyPreview();
    if(isVice()&&(musicOn||sfxOn))void unlock().then(ok=>{if(ok&&kind==="sfx"&&sfxOn)playFx("ui")});
   });
@@ -627,7 +703,7 @@ window.addEventListener("neoline:theory-finish",e=>{
  syncScene();
  if(!isVice())return;
  const d=e.detail||{};
- if(d.gameOver)playFx("wasted");
+ if(d.gameOver)playFx(musicOn?"wasted-hit":"wasted");
  else if(d.mode==="exam")playFx(d.correct>=26?"victory":"exam-fail");
  else playFx(d.total>0&&d.correct/d.total>=.8?"victory":"finish");
 });
