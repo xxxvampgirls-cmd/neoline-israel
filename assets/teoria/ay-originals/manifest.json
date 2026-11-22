@@ -139,12 +139,39 @@
       "frames": 12624,
       "seconds": 252.48,
       "originalFormat": "ASC"
+    },
+    "orig_ghostbusters_2_ay": {
+      "id": "orig_ghostbusters_2_ay",
+      "name": "Ghostbusters 2",
+      "file": "Ghostbusters_2.ay",
+      "url": "./assets/teoria/ay-originals/orig_ghostbusters_2_ay.ay14",
+      "frames": 4500,
+      "seconds": 90.0,
+      "originalFormat": "AY",
+      "decoder": "Z80 Project AY code via ym2149-ay-replayer 0.9.1"
+    },
+    "orig_navy_seals_ay": {
+      "id": "orig_navy_seals_ay",
+      "name": "Navy Seals",
+      "file": "Navy_Seals.ay",
+      "url": "./assets/teoria/ay-originals/orig_navy_seals_ay.ay14",
+      "frames": 15000,
+      "seconds": 300.0,
+      "originalFormat": "AY",
+      "decoder": "Z80 Project AY code via ym2149-ay-replayer 0.9.1"
+    },
+    "orig_batman_the_movie_ay": {
+      "id": "orig_batman_the_movie_ay",
+      "name": "Batman: The Movie",
+      "file": "Batman_The_Movie.ay",
+      "url": "./assets/teoria/ay-originals/orig_batman_the_movie_ay.ay14",
+      "frames": 15000,
+      "seconds": 300.0,
+      "originalFormat": "AY",
+      "decoder": "Z80 Project AY code via ym2149-ay-replayer 0.9.1"
     }
   },
   "failures": {
-    "Ghostbusters_2.ay": "ZXTune output: usters_2.ay?#6' (type 'AY') due to convert impossibility.\nSkipping '/home/runner/work/neoline-israel/neoline-israel/assets/teoria/originals/Ghostbusters_2.ay?#7' (type 'AY') due to convert impossibility.\nSkipping '/home/runner/work/neo",
-    "Navy_Seals.ay": "ZXTune output: inals/Navy_Seals.ay?#4' (type 'AY') due to convert impossibility.\nSkipping '/home/runner/work/neoline-israel/neoline-israel/assets/teoria/originals/Navy_Seals.ay?#5' (type 'AY') due to convert impossibility.\nSkipping '/home/runner/work",
-    "Batman_The_Movie.ay": "ZXTune output: ovie.ay?#4' (type 'AY') due to convert impossibility.\nSkipping '/home/runner/work/neoline-israel/neoline-israel/assets/teoria/originals/Batman_The_Movie.ay?#5' (type 'AY') due to convert impossibility.\nSkipping '/home/runner/work/neoli",
     "Cover_of_Hung_Up_by_Madonna_2xAY_ACB_.sqt": "Two AY chips (6 channels) need a dual-chip player"
   }
 }
