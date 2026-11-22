@@ -43,6 +43,8 @@ class NeolineAY8912 extends AudioWorkletProcessor{
     if(raw.length<5||raw.length%5!==0||raw.length>5*200)return;
     this.fxFrames=raw;this.fxCount=raw.length/5;this.fxIndex=0;
     this.fxReg=null;
+   }else if(m.type==="clearSong"){
+    this.frames=null;this.regs[8]=this.regs[9]=this.regs[10]=0;
    }else if(m.type==="stop"){
     this.frames=null;this.fxFrames=null;this.fxReg=null;
     this.regs[8]=this.regs[9]=this.regs[10]=0;
