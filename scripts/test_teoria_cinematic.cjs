@@ -81,11 +81,14 @@ const {chromium}=require("playwright");
    await page.waitForFunction(()=>document.querySelector('.vice-cinema-frame.is-active')?.dataset.slide==="2");
    await page.waitForTimeout(850); // finish the carousel mask and text entrance before screenshot
    if(width===390 && process.env.SAVE_CINEMATIC_SCREENSHOTS){
+     await page.locator('.theory-promo-dot[data-slide="0"]').click();
+     await page.waitForTimeout(850);
      // Chunked log is review-only; no public media or personal data uploaded.
      await page.screenshot({type:"jpeg",quality:64,path:"/tmp/neoline-vice-390.jpg",fullPage:true});
      const fs=require("node:fs"),jpg=fs.readFileSync("/tmp/neoline-vice-390.jpg").toString("base64");
      console.log("NEOLINE_SCREEN_PARTS_TOTAL:"+Math.ceil(jpg.length/4800));
      for(let i=0;i<jpg.length;i+=4800)console.log("NEOLINE_SCREEN_PART_"+(i/4800)+":"+jpg.slice(i,i+4800));
+     await page.locator('.theory-promo-dot[data-slide="2"]').click();
    }
    const snapshots=[];
    for(const lang of ["ru","en","he","ar"]){
