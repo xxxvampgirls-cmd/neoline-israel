@@ -434,7 +434,9 @@ function updateNewsFreshnessLabel(){
   {ru:"ru-RU",en:"en-GB",he:"he-IL",ar:"ar-IL"}[state.lang]||"ru-RU",
   {timeZone:"Asia/Jerusalem",day:"numeric",month:"short",hour:"2-digit",minute:"2-digit"}
  ).format(new Date(newsFeedDate));
- const clean=({ru:"Обновлено",en:"Updated",he:"עודכן",ar:"تم التحديث"})[state.lang];
+ const clean=(newsFeedOrigin==="live"?
+  {ru:"Проверены источники",en:"Sources checked",he:"המקורות נבדקו",ar:"تم فحص المصادر"}:
+  {ru:"Обновлено",en:"Updated",he:"עודכן",ar:"تم التحديث"})[state.lang];
  const warning=({ru:"⚠ Лента обновляется с задержкой",en:"⚠ News refresh is delayed",he:"⚠ עדכון החדשות מתעכב",ar:"⚠ تحديث الأخبار متأخر"})[state.lang];
  node.dataset.stale=stale?"true":"false";
  node.textContent=(stale?warning:clean)+" · "+format;
@@ -486,6 +488,8 @@ async function load(){
  // cache, but visitors do not generate one unique URL per visit.
  const version=Math.floor(newsFetchAt/600000);
  const sources=[
+  // On-demand Cloudflare RSS fallback when scheduled GitHub Actions run late.
+  ["./api/news?v="+version,"live"],
   ["./assets/news/news.json?v="+version,"pages"],
   [NEWS_REMOTE_BASE+"assets/news/news.json?v="+version,"github"]
  ];
