@@ -53,7 +53,9 @@ jobs:
                   for entry in manifest_native.get("tracks", {}).values()
               )
               assert len(native_files) > 1, "Native original music manifest contains no tracks"
-          files = shop_files + game_files + verified_data + feature_art + native_files
+          # AudioWorklet is loaded dynamically by the optimized script, not by an HTML tag.
+          # Verify Cloudflare serves its updated bytes too (no stale SFX renderer).
+          files = shop_files + game_files + verified_data + feature_art + native_files + ("teoria-ay8912-worklet.js",)
           local_pages = {
               "index.html": Path("index.html").read_text(encoding="utf-8"),
               "teoria.html": Path("teoria.html").read_text(encoding="utf-8")
