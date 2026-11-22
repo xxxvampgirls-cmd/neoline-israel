@@ -3341,3 +3341,49 @@ html[data-vice-theme="on"] .vice-soundtrack{
  .vice-soundtrack-original__frame{height:67dvh}
 }
 
+/* The 19 originals are playable items, not dead preparation links.
+   A native AY register cache uses the site's chip; Z80/2×AY opens
+   the compatible player in an in-site modal with the same ▶ affordance. */
+html[data-vice-theme="on"] .vice-soundtrack__item--original .vice-soundtrack__track{
+ opacity:1;cursor:pointer;
+ border:1px solid #df9dce89;border-radius:14px;
+ background:linear-gradient(115deg,#563251b2,#3924459e);
+ min-height:64px;gap:11px;
+}
+html[data-vice-theme="on"] .vice-soundtrack__item--original .vice-soundtrack__track:hover{
+ background:linear-gradient(115deg,#674065e8,#432957de);
+ border-color:#afffe4;
+}
+html[data-vice-theme="on"] .vice-soundtrack__item--original .vice-soundtrack__track:focus-visible{
+ outline:3px solid #a0ffee;outline-offset:2px;
+}
+html[data-vice-theme="on"] .vice-soundtrack__item--original .vice-soundtrack__playicon{
+ display:grid;place-items:center;
+ flex:0 0 38px;width:38px;height:38px;
+ border-radius:50%;border:1px solid #b6fff5a6;
+ color:#103c40;background:linear-gradient(135deg,#bffcf1,#67e3cf);
+ box-shadow:0 3px 12px #12eac53b,inset 0 1px #ffffffbf;
+ text-align:center;font:900 16px/1 Manrope,Arial,sans-serif;
+}
+html[data-vice-theme="on"] .vice-soundtrack__item--original .vice-soundtrack__track[data-player="zxtune"] .vice-soundtrack__playicon{
+ background:linear-gradient(140deg,#ffd7dc,#ffa4ce);
+ border-color:#ffecf3;color:#522349;box-shadow:0 4px 12px #ff77b932;
+}
+html[data-vice-theme="on"] .vice-soundtrack__item--original .vice-soundtrack__track[aria-pressed="true"]{
+ border-color:#92f7ea;background:linear-gradient(100deg,#aa57906e,#4d37667a);
+ box-shadow:inset 4px 0 #a6f9e6,0 0 17px #ff83b32a;
+}
+.vice-soundtrack-original__link[hidden]{display:none!important}
+.vice-soundtrack-original__frame{display:block}
+@media(max-width:620px){
+ html[data-vice-theme="on"] .vice-soundtrack__item--original .vice-soundtrack__track{
+  padding:8px 11px;min-height:64px;
+ }
+ html[data-vice-theme="on"] .vice-soundtrack__item--original .vice-soundtrack__playicon{
+  flex-basis:36px;width:36px;height:36px;
+ }
+}
+@media(prefers-reduced-motion:reduce){
+ html[data-vice-theme="on"] .vice-soundtrack__item--original .vice-soundtrack__track{transition:none}
+}
+
