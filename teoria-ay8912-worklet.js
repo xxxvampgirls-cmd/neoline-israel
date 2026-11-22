@@ -48,7 +48,7 @@ class NeolineAY8912 extends AudioWorkletProcessor{
   this.noiseShift=0x1ffff;
   this.noiseLevel=1;
   this.envPhase=0;this.envStep=0;this.envShape=0;this.envValue=15;
-  this.frames=null;this.framesCount=0;this.songIndex=0;
+  this.frames=null;this.framesCount=0;this.songIndex=0;this.songOnce=false;
   this.fxFrames=null;this.fxCount=0;this.fxIndex=0;this.fxReg=null;
   this.musicEnabled=true;this.effectsEnabled=true;
   // Preserve the authentic three AY voices; temporarily borrow voice C for FX.
@@ -70,7 +70,7 @@ class NeolineAY8912 extends AudioWorkletProcessor{
    if(m.type==="song"){
     const raw=m.frames instanceof Uint8Array?m.frames:new Uint8Array(m.frames||[]);
     if(raw.length<14||raw.length%14!==0||raw.length>14*50*600)return;
-    this.frames=raw;this.framesCount=raw.length/14;this.songIndex=0;
+    this.frames=raw;this.framesCount=raw.length/14;this.songIndex=0;this.songOnce=!!m.once;
     this.frameSamples=sampleRate;
     this.phase.fill(0);this.noisePhase=0;
    }else if(m.type==="seek"){
@@ -103,7 +103,7 @@ class NeolineAY8912 extends AudioWorkletProcessor{
    }else if(m.type==="clearFx"){
     this.fxFrames=null;this.fxReg=null;this.fxCount=0;this.fxIndex=0;
    }else if(m.type==="clearSong"){
-    this.frames=null;this.regs[8]=this.regs[9]=this.regs[10]=0;
+    this.frames=null;this.framesCount=0;this.songOnce=false;this.regs[8]=this.regs[9]=this.regs[10]=0;
    }else if(m.type==="stop"){
     this.frames=null;this.fxFrames=null;this.fxReg=null;
     this.regs[8]=this.regs[9]=this.regs[10]=0;
@@ -128,10 +128,17 @@ class NeolineAY8912 extends AudioWorkletProcessor{
     this.port.postMessage({type:"song-progress",frame:this.songIndex,frames:this.framesCount});
    }
    if(this.songIndex>=this.framesCount){
-    this.songIndex=0;
-    this.port.postMessage({type:"song-progress",frame:0,frames:this.framesCount});
-    // One event per completed original PT3 loop; game may choose a new track.
-    this.port.postMessage({type:"song-loop"});
+    if(this.songOnce){
+     // Game Over jingle ends once; do not loop like the original PT3 tracks.
+     this.songOnce=false;this.frames=null;this.framesCount=0;this.songIndex=0;
+     this.regs[8]=this.regs[9]=this.regs[10]=0;
+     this.port.postMessage({type:"song-end",once:true});
+    }else{
+     this.songIndex=0;
+     this.port.postMessage({type:"song-progress",frame:0,frames:this.framesCount});
+     // Original PT3 recordings keep their previous loop behavior.
+     this.port.postMessage({type:"song-loop"});
+    }
    }
   }else{
    this.regs[8]=this.regs[9]=this.regs[10]=0;
