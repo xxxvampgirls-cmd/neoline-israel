@@ -87,7 +87,7 @@ async function pt3Bytes(id){
  const decompressed=new Blob([zipped]).stream().pipeThrough(new DecompressionStream("deflate"));
  const raw=new Uint8Array(await new Response(decompressed).arrayBuffer());
  if(raw.length<201||raw.length>65536||
-    String.fromCharCode(...raw.subarray(0,12))!=="ProTracker 3.")
+    String.fromCharCode(...raw.subarray(0,13))!=="ProTracker 3.")
   throw Error("Invalid ProTracker module "+id);
  const pt3=window.NEOLINE_PT3;
  const instance=pt3.pt3_setup_music(raw);
