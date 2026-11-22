@@ -1,0 +1,47 @@
+name: Verify Cloudflare live news RSS fallback on deployed site
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - 'functions/api/news.js'
+      - 'news-ui.js'
+      - 'news.html'
+      - '.github/workflows/verify-news-live.yml'
+permissions:
+  contents: read
+jobs:
+  live-check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v4
+      - name: Verify production RSS backup is actually deployed
+        run: |
+          python - <<'PY'
+          import json,time,datetime as dt,urllib.request,urllib.error
+          base='https://neoline-israel.pages.dev'
+          error=''
+          for attempt in range(12):
+              try:
+                  request=urllib.request.Request(base+'/api/news?v=release',headers={'Cache-Control':'no-cache'})
+                  with urllib.request.urlopen(request,timeout=25) as resp:
+                      assert resp.status==200,resp.status
+                      data=json.load(resp)
+                  assert data.get('version')==1 and data.get('retentionDays')==30 and data.get('lawsRetentionMonths')==6
+                  assert isinstance(data.get('items'),list) and len(data['items'])>0
+                  assert all(x.get('url','').startswith('https://') and x.get('titleOriginal') for x in data['items'])
+                  assert not any('image' in x or 'imageType' in x or 'sourcePhoto' in x for x in data['items'])
+                  with urllib.request.urlopen(base+'/news.html?check=news',timeout=18) as resp:
+                      html=resp.read().decode('utf-8')
+                  assert 'news-ui.js?v=20261122-cloudflare-live-rss-v10' in html
+                  print('PASS: actual Cloudflare deployed news REST backup:',len(data['items']),
+                        'headlines, checked at',data.get('updated'),'mode',data.get('mode','static'))
+                  break
+              except Exception as exc:
+                  error=f'{type(exc).__name__}: {exc}'
+                  print(f'Attempt {attempt+1}/12 failed: {error}',flush=True)
+                  if attempt<11:time.sleep(15)
+          else:
+              raise SystemExit('FAIL Cloudflare live news endpoint: '+error)
+          PY
