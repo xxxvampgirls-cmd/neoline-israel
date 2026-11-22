@@ -270,66 +270,10 @@ html[data-vice-theme="on"] .vice-soundtrack{
  .vice-soundtrack__drawer-chevron{transition:none}
 }
 
-/* Original non-PT3 song previews via a separate compatible ZXTune AY/Z80 engine.
-   Loaded only on demand; the active quiz never sees this player. */
-.vice-soundtrack__item--pending .vice-soundtrack__track{
- opacity:1;cursor:pointer;
- background:linear-gradient(110deg,#322042ab,#58304b67);
- border-color:#aa80ab80;
-}
-.vice-soundtrack__item--pending .vice-soundtrack__track:not(:disabled):hover{
- background:linear-gradient(110deg,#51316bbd,#7a426a85);
- border-color:#adf7ea;
-}
-.vice-soundtrack__item--pending .vice-soundtrack__playicon{
- color:#a6f0e3;font-size:19px;
-}
-.vice-soundtrack-original-dialog{
- max-width:min(980px,96vw);max-height:96dvh;
- width:min(900px,96vw);padding:0;margin:auto;
- color:#fff7f2;border:1px solid #ffc3dfb3;border-radius:21px;
- background:linear-gradient(130deg,#21172f,#5a2856);
- box-shadow:0 22px 70px #080412d8;
-}
-.vice-soundtrack-original-dialog::backdrop{
- background:#120e1ccc;backdrop-filter:blur(6px);
-}
-.vice-soundtrack-original{
- padding:13px 14px 15px;display:flex;flex-direction:column;gap:10px;
-}
-.vice-soundtrack-original__top{display:flex;align-items:center;gap:12px;justify-content:space-between}
-.vice-soundtrack-original__top strong{
- font:900 17px/1.2 Manrope,Arial,sans-serif;color:#ffebf3;
-}
-.vice-soundtrack-original__close{
- display:grid;place-items:center;flex:0 0 36px;
- border:1px solid #ffcce8a9;background:#ffe4ee19;
- color:#fff5f4;width:36px;height:36px;border-radius:10px;
- font-size:24px;cursor:pointer;
-}
-.vice-soundtrack-original__message{
- margin:0;padding:7px 2px;color:#d2eee9;
- font:700 12px/1.55 Manrope,Arial,sans-serif;
-}
-.vice-soundtrack-original__link{
- display:inline-flex;align-items:center;justify-content:center;
- align-self:flex-start;padding:9px 15px;border-radius:11px;
- color:#23152a!important;background:#abf1e1;text-decoration:none;
- font:900 12px/1.2 Manrope,Arial,sans-serif;
-}
-.vice-soundtrack-original__frame{
- width:100%;height:min(66dvh,650px);min-height:260px;
- border:1px solid #e8a9d680;border-radius:11px;background:#170f29;
-}
-@media(max-width:600px){
- .vice-soundtrack-original-dialog{width:97vw;max-width:97vw;max-height:97dvh}
- .vice-soundtrack-original{padding:10px}
- .vice-soundtrack-original__frame{height:67dvh}
-}
-
-/* The 19 originals are playable items, not dead preparation links.
-   A native AY register cache uses the site's chip; Z80/2×AY opens
-   the compatible player in an in-site modal with the same ▶ affordance. */
+/* 18 of 19 original music modules are decoded to native AY register
+   streams and play through our own AY-3-8912 AudioWorklet. The remaining
+   dual-chip SQT has a disabled control until faithful 6-channel decoding
+   is available. There is no external or embedded third-party player. */
 html[data-vice-theme="on"] .vice-soundtrack__item--original .vice-soundtrack__track{
  opacity:1;cursor:pointer;
  border:1px solid #df9dce89;border-radius:14px;
