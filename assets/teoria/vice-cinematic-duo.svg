@@ -1,0 +1,127 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 860 420" preserveAspectRatio="xMidYMid slice">
+<defs>
+ <linearGradient id="vsky" x2=".06" y2="1"><stop stop-color="#211e53"/><stop offset=".34" stop-color="#8d3c83"/><stop offset=".69" stop-color="#eb6998"/><stop offset="1" stop-color="#ffb08e"/></linearGradient>
+ <radialGradient id="vsun"><stop stop-color="#fff4cb"/><stop offset=".73" stop-color="#ffc48c"/><stop offset="1" stop-color="#f2799c"/></radialGradient>
+ <linearGradient id="vwater" x2="0" y2="1"><stop stop-color="#ff92ac"/><stop offset=".38" stop-color="#713970"/><stop offset="1" stop-color="#171434"/></linearGradient>
+ <linearGradient id="vskin" x2=".9" y2="1"><stop stop-color="#ffe2bb"/><stop offset=".38" stop-color="#ec9d85"/><stop offset=".84" stop-color="#be6477"/><stop offset="1" stop-color="#873f65"/></linearGradient>
+ <linearGradient id="vmanskin" x2="1" y2="1"><stop stop-color="#fbcaa1"/><stop offset=".5" stop-color="#c37e72"/><stop offset="1" stop-color="#75415e"/></linearGradient>
+ <linearGradient id="vblack" x2="1" y2="1"><stop stop-color="#3e2550"/><stop offset=".4" stop-color="#1b1938"/><stop offset=".76" stop-color="#33213b"/><stop offset="1" stop-color="#0a1223"/></linearGradient>
+ <linearGradient id="vpink" x2="1" y2=".8"><stop stop-color="#ffb8c8"/><stop offset=".28" stop-color="#f15fa8"/><stop offset=".66" stop-color="#aa377e"/><stop offset="1" stop-color="#4d255d"/></linearGradient>
+ <linearGradient id="vshirt" x2=".8" y2="1"><stop stop-color="#2d3457"/><stop offset=".49" stop-color="#151d39"/><stop offset="1" stop-color="#391e49"/></linearGradient>
+ <linearGradient id="vcar" x2=".5" y2="1"><stop stop-color="#9b527b"/><stop offset=".33" stop-color="#27254f"/><stop offset=".7" stop-color="#14172f"/><stop offset="1" stop-color="#0b1221"/></linearGradient>
+ <linearGradient id="vribbon" x2="1" y2="1"><stop stop-color="#fffbbd"/><stop offset=".37" stop-color="#ffdd68"/><stop offset="1" stop-color="#e69643"/></linearGradient>
+ <filter id="vblur"><feGaussianBlur stdDeviation="10"/></filter>
+ <filter id="vglow" x="-60%" y="-60%" width="220%" height="220%"><feGaussianBlur stdDeviation="3"/></filter>
+ <filter id="vshadow" x="-30%" y="-40%" width="170%" height="190%"><feDropShadow dx="0" dy="9" stdDeviation="11" flood-color="#180b35" flood-opacity=".65"/></filter>
+ <pattern id="vflower" patternUnits="userSpaceOnUse" width="39" height="44"><path d="M15 12q-12 1-7 10 8 2 7-9Zm5 5q1-11 10-8 5 9-8 12Zm-4 5q-12 6-3 12 10 0 6-12" fill="#f8a5ba" opacity=".82"/><path d="M15 14l9 23" stroke="#f4cfcf" stroke-width="2"/></pattern>
+</defs>
+<rect width="860" height="420" fill="url(#vsky)"/>
+<circle cx="666" cy="153" r="104" fill="url(#vsun)" opacity=".98"/>
+<g stroke="#f7b2bd" stroke-width="3" opacity=".64"><path d="M566 192h194M570 204h190M579 220h171"/></g>
+<g fill="#3f265b" opacity=".86">
+ <path d="M0 276v-77h30v-46h39v123h22v-86h25v86h14v-134h24v134h20v-82h41v82h21v-137h34v137h14v-72h44v72h17V120h40v156h24v-105h31v105h22v-62h38v62h15v-158h35v158h19v-93h39v93h23v-121h31v121h26v-66h31v66h16v-136h27v136h15v-82h36v82h22v-117h41v117h43v144H0Z"/>
+</g>
+<g fill="#ffbaaf" opacity=".49"><rect x="18" y="158" width="4" height="3" rx="1"/><rect x="97" y="201" width="2" height="4" rx="1"/><rect x="176" y="244" width="2" height="5" rx="1"/><rect x="255" y="184" width="4" height="6" rx="1"/><rect x="334" y="227" width="2" height="3" rx="1"/><rect x="413" y="167" width="2" height="4" rx="1"/><rect x="492" y="210" width="4" height="5" rx="1"/><rect x="571" y="253" width="2" height="6" rx="1"/><rect x="650" y="193" width="2" height="3" rx="1"/><rect x="729" y="236" width="4" height="4" rx="1"/><rect x="808" y="176" width="2" height="5" rx="1"/><rect x="31" y="219" width="2" height="6" rx="1"/><rect x="110" y="159" width="4" height="3" rx="1"/><rect x="189" y="202" width="2" height="4" rx="1"/><rect x="268" y="245" width="2" height="5" rx="1"/><rect x="347" y="185" width="4" height="6" rx="1"/><rect x="426" y="228" width="2" height="3" rx="1"/><rect x="505" y="168" width="2" height="4" rx="1"/><rect x="584" y="211" width="4" height="5" rx="1"/><rect x="663" y="254" width="2" height="6" rx="1"/><rect x="742" y="194" width="2" height="3" rx="1"/><rect x="821" y="237" width="4" height="4" rx="1"/><rect x="44" y="177" width="2" height="5" rx="1"/><rect x="123" y="220" width="2" height="6" rx="1"/><rect x="202" y="160" width="4" height="3" rx="1"/><rect x="281" y="203" width="2" height="4" rx="1"/><rect x="360" y="246" width="2" height="5" rx="1"/><rect x="439" y="186" width="4" height="6" rx="1"/><rect x="518" y="229" width="2" height="3" rx="1"/><rect x="597" y="169" width="2" height="4" rx="1"/><rect x="676" y="212" width="4" height="5" rx="1"/><rect x="755" y="255" width="2" height="6" rx="1"/><rect x="834" y="195" width="2" height="3" rx="1"/><rect x="57" y="238" width="4" height="4" rx="1"/><rect x="136" y="178" width="2" height="5" rx="1"/><rect x="215" y="221" width="2" height="6" rx="1"/><rect x="294" y="161" width="4" height="3" rx="1"/><rect x="373" y="204" width="2" height="4" rx="1"/><rect x="452" y="247" width="2" height="5" rx="1"/><rect x="531" y="187" width="4" height="6" rx="1"/><rect x="610" y="230" width="2" height="3" rx="1"/><rect x="689" y="170" width="2" height="4" rx="1"/><rect x="768" y="213" width="4" height="5" rx="1"/><rect x="847" y="256" width="2" height="6" rx="1"/><rect x="70" y="196" width="2" height="3" rx="1"/><rect x="149" y="239" width="4" height="4" rx="1"/><rect x="228" y="179" width="2" height="5" rx="1"/><rect x="307" y="222" width="2" height="6" rx="1"/><rect x="386" y="162" width="4" height="3" rx="1"/><rect x="465" y="205" width="2" height="4" rx="1"/><rect x="544" y="248" width="2" height="5" rx="1"/><rect x="623" y="188" width="4" height="6" rx="1"/><rect x="702" y="231" width="2" height="3" rx="1"/><rect x="781" y="171" width="2" height="4" rx="1"/><rect x="4" y="214" width="4" height="5" rx="1"/><rect x="83" y="257" width="2" height="6" rx="1"/><rect x="162" y="197" width="2" height="3" rx="1"/><rect x="241" y="240" width="4" height="4" rx="1"/><rect x="320" y="180" width="2" height="5" rx="1"/><rect x="399" y="223" width="2" height="6" rx="1"/><rect x="478" y="163" width="4" height="3" rx="1"/><rect x="557" y="206" width="2" height="4" rx="1"/><rect x="636" y="249" width="2" height="5" rx="1"/><rect x="715" y="189" width="4" height="6" rx="1"/><rect x="794" y="232" width="2" height="3" rx="1"/><rect x="17" y="172" width="2" height="4" rx="1"/><rect x="96" y="215" width="4" height="5" rx="1"/><rect x="175" y="258" width="2" height="6" rx="1"/><rect x="254" y="198" width="2" height="3" rx="1"/><rect x="333" y="241" width="4" height="4" rx="1"/><rect x="412" y="181" width="2" height="5" rx="1"/><rect x="491" y="224" width="2" height="6" rx="1"/><rect x="570" y="164" width="4" height="3" rx="1"/><rect x="649" y="207" width="2" height="4" rx="1"/><rect x="728" y="250" width="2" height="5" rx="1"/><rect x="807" y="190" width="4" height="6" rx="1"/><rect x="30" y="233" width="2" height="3" rx="1"/><rect x="109" y="173" width="2" height="4" rx="1"/><rect x="188" y="216" width="4" height="5" rx="1"/><rect x="267" y="259" width="2" height="6" rx="1"/><rect x="346" y="199" width="2" height="3" rx="1"/><rect x="425" y="242" width="4" height="4" rx="1"/><rect x="504" y="182" width="2" height="5" rx="1"/><rect x="583" y="225" width="2" height="6" rx="1"/><rect x="662" y="165" width="4" height="3" rx="1"/><rect x="741" y="208" width="2" height="4" rx="1"/><rect x="820" y="251" width="2" height="5" rx="1"/><rect x="43" y="191" width="4" height="6" rx="1"/><rect x="122" y="234" width="2" height="3" rx="1"/><rect x="201" y="174" width="2" height="4" rx="1"/><rect x="280" y="217" width="4" height="5" rx="1"/><rect x="359" y="260" width="2" height="6" rx="1"/><rect x="438" y="200" width="2" height="3" rx="1"/><rect x="517" y="243" width="4" height="4" rx="1"/><rect x="596" y="183" width="2" height="5" rx="1"/><rect x="675" y="226" width="2" height="6" rx="1"/></g>
+<rect x="0" y="273" width="860" height="147" fill="url(#vwater)"/>
+<path d="M0 287q180 19 314-2t230 0 316 0" stroke="#ffb2c1" stroke-width="5" fill="none" opacity=".32"/>
+<g stroke="#fff0ce" opacity=".2" stroke-width="2"><path d="M21 319h810M0 347h760M55 382h805"/></g>
+<path d="M0 417 72 323l123-13 119 110ZM530 420 704 306l156 2v112Z" fill="#1e173d" opacity=".74"/>
+<!-- Palm silhouettes across the coast -->
+<g stroke="#24163d" fill="#231738" stroke-linecap="round">
+ <path d="M84 299q-9-126-8-217" stroke-width="15" fill="none"/>
+ <path d="M77 111Q26 34-10 47Q27 96 80 121ZM78 109Q77 46 108 1Q115 63 80 114ZM78 111Q119 45 162 75Q111 108 79 117ZM78 111Q24 106 9 159Q60 142 79 116ZM80 115Q120 112 148 162Q102 150 78 119Z"/>
+ <path d="M786 323q0-133 24-244" stroke-width="17" fill="none"/>
+ <path d="M809 115Q757 31 706 49Q770 95 807 120ZM812 114Q810 50 845 6Q855 64 813 122ZM808 113Q851 70 888 91Q849 122 808 126ZM808 121Q757 120 736 165Q785 153 806 123ZM811 126Q846 131 872 180Q822 158 808 123Z"/>
+</g>
+<!-- Night sports car under characters -->
+<g filter="url(#vshadow)">
+ <ellipse cx="324" cy="382" rx="310" ry="43" fill="#130d2a" opacity=".74"/>
+ <path d="M41 323Q58 275 122 277l85-46q117-21 217 0l96 41q59 8 66 58l15 63H23l9-51Z" fill="url(#vcar)" stroke="#d37db0" stroke-width="5"/>
+ <path d="M207 235q101-23 206 0l84 45H129Z" fill="#141c39" stroke="#cb82ab" stroke-width="4"/>
+ <path d="m270 226-9 58M418 235l35 45" stroke="#786595" stroke-width="3"/>
+ <path d="M44 320h141l-19 32H27Zm406 0h136l7 32H457Z" fill="#fd3c8b"/>
+ <path d="M59 336h103M467 336h109" stroke="#fce7df" stroke-width="12" stroke-linecap="round" filter="url(#vglow)"/>
+ <path d="M59 336h103M467 336h109" stroke="#ffeae2" stroke-width="6" stroke-linecap="round"/>
+ <path d="M177 374h257" stroke="#e58daf" stroke-width="3" opacity=".64"/>
+ <path d="M125 389h-68l-7-31q40-5 86 1Zm359 0h79l12-31q-47-7-90 1Z" fill="#110f24"/>
+</g>
+<!-- Woman, an original fashionable neon-game heroine -->
+<g filter="url(#vshadow)">
+ <!-- long flowing hair behind torso -->
+ <path d="M260 186Q249 123 283 76q39-53 100-22 45 23 33 83-21 30 0 65 20 48-5 120l-32-8q14-64-27-66-20 68-73 67-37-43-19-129Z" fill="url(#vblack)" stroke="#843b70" stroke-width="4"/>
+ <path d="M252 306q-28-23-32-72 29-34 58-37l46 9 37 5 38 26 31 82-58 73H225Z" fill="url(#vpink)" stroke="#ffb5d3" stroke-width="4"/>
+ <path d="M234 300q-8 19-1 51l34 28m136-105q25 41 16 69l-46 40" fill="none" stroke="#ff93c7" stroke-width="8" opacity=".74"/>
+ <path d="M280 204q27 36 71 5l15 25-14 63h-76l-10-64Z" fill="#fff1e9" stroke="#fbd2d6" stroke-width="3"/>
+ <!-- neck shoulder -->
+ <path d="M306 198l1-34 58-5-10 44q21 6 28 29-53 41-104 0 2-24 27-34Z" fill="url(#vskin)"/>
+ <!-- face -->
+ <path d="M285 105q18-46 57-48 44 8 48 48l-8 51q-20 39-52 43-39-8-51-53Z" fill="url(#vskin)" stroke="#ce7980" stroke-width="2"/>
+ <path d="M282 134q-9 8-5 26 4 11 13 10" fill="#cb7782"/>
+ <path d="M325 163q18 12 37-4" fill="none" stroke="#912d65" stroke-width="5" stroke-linecap="round"/>
+ <path d="M336 145q-3 12 5 14" fill="none" stroke="#ac6574" stroke-width="2"/>
+ <!-- flying black bangs -->
+ <path d="M284 111Q291 63 326 57q28-4 57 23-14-34-47-43-49-9-67 48-5 19 0 38Z" fill="#14172e"/>
+ <path d="M286 111q21-32 50-34-12-18-33-15" fill="none" stroke="#573455" stroke-width="8"/>
+ <!-- sunglasses -->
+ <path d="m291 120 34 0 6 23q-17 11-31 0Zm49 1 32-3-6 25q-14 12-27-1Z" fill="#bd347f" stroke="#35173b" stroke-width="6"/>
+ <path d="m295 125 27 1m23 0 24-3" stroke="#ffc6ce" stroke-width="4" opacity=".65"/>
+ <path d="M323 121h19" stroke="#33152d" stroke-width="5"/>
+ <!-- earring and jewellery -->
+ <circle cx="286" cy="164" r="8" fill="none" stroke="#ffcf7e" stroke-width="4"/>
+ <path d="M309 198q28 35 51 4" stroke="#ffcd78" stroke-width="3" fill="none"/>
+ <!-- jacket sleeve and zipper -->
+ <path d="M239 239q11-30 39-22l22 32-32 69-36 2-18-39Z" fill="#dd5aa1" stroke="#ffafd3" stroke-width="3"/>
+ <path d="M370 233q29-16 44 21l14 67h-46l-10-58Z" fill="#b23d91" stroke="#ffc3cf" stroke-width="3"/>
+ <path d="M276 229 296 246M389 234l-13 21M245 265l31 17M385 289l29-11" stroke="#ffb1d2" stroke-width="5" opacity=".65"/>
+ </g>
+<!-- Man, an original contemporary tropical-shirt hero -->
+<g filter="url(#vshadow)">
+ <!-- body shirt -->
+ <path d="M453 217q18-32 54-42l57-2q39 7 60 38l33 115-44 87H424l-15-109Z" fill="url(#vshirt)" stroke="#e48ab6" stroke-width="5"/>
+ <path d="M510 190 539 225l17-33-10-18Zm-47 16 34 31 8-50-14-14Z" fill="#faf1e8" stroke="#f9d2d6" stroke-width="3"/>
+ <path d="M533 222v182" stroke="#ae728d" stroke-width="3" opacity=".6"/>
+ <path d="M450 222q23-12 43-32m77 7q43 12 60 34" stroke="#fc9cba" stroke-width="3" opacity=".8"/>
+ <!-- tropical shirt leaf highlights -->
+ <g fill="url(#vflower)" opacity=".95"><path d="M426 215h68v157h-68Zm120-20h74v161h-74Z"/></g>
+ <g fill="#f2b0be" opacity=".8">
+ <path d="M453 240q5-24 15-23-7 16-11 27 24-17 35-12-16 18-39 18 20 8 22 19-18-5-25-21Z"/>
+ <path d="M568 251q2-26 16-26-8 15-11 26 22-20 33-14-12 18-34 19 19 11 23 20-20-8-28-20Z"/>
+ <path d="M462 320q8-26 17-23-8 17-13 27 25-20 35-11-14 16-38 18 20 7 23 18-20-6-28-20Z"/>
+ <path d="M571 326q8-24 18-24-7 17-13 26 23-17 36-11-14 17-37 19 21 9 22 18-20-6-27-19Z"/>
+ </g>
+ <!-- neck -->
+ <path d="m508 188 5-34 58 3-1 35-26 35Z" fill="url(#vmanskin)"/>
+ <!-- head -->
+ <path d="M494 101q5-47 48-53 52 4 61 51l-7 67q-23 37-52 34-47-14-51-66Z" fill="url(#vmanskin)" stroke="#9b5764" stroke-width="2"/>
+ <!-- beard and chin -->
+ <path d="M504 153q12 30 31 29 34 5 53-23-14 42-48 42-26-9-36-48Z" fill="#442a3f" opacity=".62"/>
+ <path d="M527 173q17 8 35-1" stroke="#542838" stroke-width="4" fill="none"/>
+ <path d="M544 149l-1 10 10 2" stroke="#9f6471" stroke-width="2" fill="none"/>
+ <!-- hair -->
+ <path d="M494 108Q481 74 500 48q20-31 52-25 21-17 42 0 32 8 29 51l-20 35-7-37q-29-12-65-5-14 12-37 41Z" fill="url(#vblack)"/>
+ <path d="M502 45q-4-17 10-21m8 14q-1-21 17-21m14 15q14-26 30-13m-10 20q25-24 40 4" stroke="#382948" stroke-width="11" stroke-linecap="round" fill="none"/>
+ <!-- Sunglasses -->
+ <path d="m505 111 38 5-7 25q-14 10-32-6Zm48 5 39-5-8 23q-16 13-32 1Z" fill="#14223e" stroke="#24182b" stroke-width="6"/>
+ <path d="M544 118h13M510 118l26 3m26-2 27-5" stroke="#ffbdd0" stroke-width="3" opacity=".65"/>
+ <!-- arms crossed -->
+ <path d="M456 269q16-21 36-4l71 28q30-10 38-36l22 10q-7 46-61 58l-83-21q-31-5-23-35Z" fill="url(#vmanskin)" stroke="#b27073" stroke-width="4"/>
+ <path d="M620 272q-12 10-34 16l-83 9q-35 0-43-21-6-18 16-24 26-2 48 15l58-14q25-12 38 19Z" fill="url(#vmanskin)" stroke="#c98683" stroke-width="4"/>
+ <path d="M506 293q14 8 38 7m23-19q17-7 31-15" stroke="#f2c8aa" stroke-width="3" opacity=".55"/>
+ <!-- wristwatch -->
+ <rect x="578" y="247" width="22" height="37" rx="7" transform="rotate(14 589 266)" fill="#17273d" stroke="#ffe3ac" stroke-width="3"/>
+ </g>
+<!-- luminous side gift box -->
+<g transform="translate(675 279)" filter="url(#vshadow)">
+ <path d="M1 38 65 8 129 38v68l-64 28L1 106Z" fill="#d64ab0" stroke="#ffb4d0" stroke-width="4"/>
+ <path d="M1 38 65 67 129 38 65 8Z" fill="#f47dc2"/>
+ <path d="M65 66v69" stroke="url(#vribbon)" stroke-width="19"/>
+ <path d="M1 38 65 66 129 38" stroke="url(#vribbon)" stroke-width="12" fill="none"/>
+ <path d="M66 9C35-27 18 3 47 11l18 2C53-10 85-22 94-5q8 17-28 18" fill="none" stroke="#ffe49c" stroke-width="12" stroke-linecap="round"/>
+ <path d="m-4-8 5 14 14 5-14 5-5 15-5-15-14-5 14-5Z" fill="#fff7b7"/>
+ <path d="m134-22 5 9 10 4-10 4-5 10-4-10-10-4 10-4Z" fill="#b2ffef"/>
+</g>
+<!-- glints and neon road streaks -->
+<path d="M-5 417q246-54 480-32t401-23" fill="none" stroke="#f85db1" stroke-width="7" opacity=".7" filter="url(#vglow)"/>
+<path d="M0 409q246-54 480-32t400-23" fill="none" stroke="#ffb1c7" stroke-width="2" opacity=".85"/>
+<g fill="#d0fff3"><path d="m720 23 7 15 15 7-15 6-7 16-6-16-16-6 16-7Z"/><path d="m170 52 5 11 11 5-11 5-5 11-5-11-11-5 11-5Z"/></g>
+</svg>
