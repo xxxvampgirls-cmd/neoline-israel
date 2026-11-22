@@ -2709,6 +2709,98 @@ html:not([data-vice-theme="on"])[lang^="ru"] .theory-promo-host:has(>.vice-promo
  .vice-boot-meter span{transform:none}
 }
 
+/* ZX Spectrum cassette loading: 8s of EAR pulse stripes and tape telemetry.
+   Preserve the approved city, retro cassette art and existing layout. */
+.vice-boot-tape-border{
+ position:absolute;inset:0;z-index:11;pointer-events:none;opacity:0;
+ background:
+  repeating-linear-gradient(90deg,#faf3b7 0 15px,#284ad5 15px 31px,#e756a7 31px 46px,#53dfff 46px 61px) left top/100% 8px no-repeat,
+  repeating-linear-gradient(90deg,#e756a7 0 14px,#53dfff 14px 28px,#fff1ac 28px 44px,#3448be 44px 58px) left bottom/100% 8px no-repeat,
+  repeating-linear-gradient(0deg,#fcde80 0 15px,#2454d0 15px 31px,#f478b9 31px 46px,#6ff5f2 46px 61px) left top/8px 100% no-repeat,
+  repeating-linear-gradient(0deg,#8becff 0 15px,#f4cc6f 15px 31px,#2a50ce 31px 46px,#ff8fcf 46px 61px) right top/8px 100% no-repeat;
+ filter:drop-shadow(0 0 7px #d370e6a0);
+}
+.vice-boot-overlay.is-active .vice-boot-tape-border{
+ opacity:.9;animation:vice-boot-tape-flash .18s steps(2,end) infinite;
+}
+.vice-boot-tape-screen{
+ position:absolute;left:8px;right:8px;top:20%;height:45%;z-index:2;
+ opacity:0;pointer-events:none;
+ background:
+  repeating-linear-gradient(180deg,transparent 0 3px,#fff0c522 3px 7px,transparent 7px 13px,#353ec132 13px 17px);
+ background-size:100% 64px;
+}
+.vice-boot-overlay.is-active .vice-boot-tape-screen{
+ opacity:.4;animation:vice-boot-data-scroll .18s steps(3,end) infinite;
+}
+.vice-boot-overlay.is-active .vice-boot-meter span{
+ animation:vice-boot-tape-progress var(--vice-boot-time,8200ms) steps(64,end) both;
+}
+.vice-boot-tape-info{
+ position:fixed;z-index:10;top:calc(74% + 55px);left:8%;width:84%;
+ display:flex;flex-wrap:wrap;align-items:center;justify-content:center;
+ gap:5px 13px;padding:0;margin:0;text-align:center;pointer-events:none;
+ font:800 clamp(9px,2.15vw,12px)/1.4 "Courier New",monospace;
+ letter-spacing:.07em;color:#f5d9eb;
+ text-shadow:0 2px 5px #181025,0 0 8px #121034;
+}
+.vice-boot-tape-file{color:#fff2c8;white-space:nowrap}
+.vice-boot-tape-block{color:#78f3f0;white-space:nowrap}
+.vice-boot-tape-bytes{color:#ffc4e6;white-space:nowrap;font-variant-numeric:tabular-nums}
+.vice-boot-tape-skip{
+ position:fixed;left:50%;bottom:clamp(52px,9.2vh,95px);
+ z-index:13;transform:translateX(-50%);cursor:pointer;touch-action:manipulation;
+ border:1px solid #ffc8e3ad;border-radius:999px;
+ background:#221832b8;padding:8px 17px;color:#fff6ea;
+ box-shadow:0 4px 16px #13082466;
+ font:900 11px/1.1 Manrope,Arial,sans-serif;letter-spacing:.1em;
+ backdrop-filter:blur(7px);
+}
+.vice-boot-tape-skip[hidden]{display:none!important}
+.vice-boot-tape-skip:focus-visible{outline:3px solid #86f4ed;outline-offset:3px}
+.vice-boot-tape-skip:hover{background:#603f65ee}
+.vice-boot-overlay.is-ready .vice-boot-tape-border{
+ opacity:0;animation:none;transition:opacity .22s
+}
+.vice-boot-overlay.is-ready .vice-boot-tape-screen{
+ opacity:0;animation:none
+}
+@keyframes vice-boot-tape-flash{
+ 0%,100%{opacity:.95;filter:drop-shadow(0 0 6px #f69cd8a8)}
+ 49%{opacity:.66;filter:hue-rotate(30deg)}
+}
+@keyframes vice-boot-data-scroll{
+ 0%{background-position:0 0}
+ 100%{background-position:0 64px}
+}
+@keyframes vice-boot-tape-progress{
+ 0%{transform:scaleX(0)}
+ 7%{transform:scaleX(.03)}23%{transform:scaleX(.23)}
+ 27%{transform:scaleX(.24)}
+ 47%{transform:scaleX(.54)}
+ 74%{transform:scaleX(.73)}
+ 82%{transform:scaleX(.78)}
+ 96%{transform:scaleX(.98)}
+ 100%{transform:scaleX(1)}
+}
+@media(max-width:420px){
+ .vice-boot-tape-border{
+  background-size:100% 6px,100% 6px,6px 100%,6px 100%;
+ }
+ .vice-boot-tape-info{left:5%;width:90%;top:calc(74% + 55px);gap:3px 8px;font-size:9px}
+ .vice-boot-tape-skip{bottom:max(60px,calc(env(safe-area-inset-bottom,0px) + 42px));font-size:10px}
+}
+@media(max-height:650px) and (orientation:landscape){
+ .vice-boot-tape-info{top:calc(78% + 40px);font-size:9px}
+ .vice-boot-tape-skip{bottom:27px;font-size:9px;padding:5px 11px}
+}
+@media(prefers-reduced-motion:reduce){
+ .vice-boot-overlay.is-active .vice-boot-tape-border{animation:none;opacity:.38}
+ .vice-boot-overlay.is-active .vice-boot-tape-screen{animation:none;opacity:.12}
+ .vice-boot-overlay.is-active .vice-boot-meter span{animation:none;transform:scaleX(1)}
+}
+
+
 /* SOURCE: teoria-vice-sunset-boulevard.css */
 /* NEOLINE VICE / SECOND AD — sunset boulevard, 22 Nov 2026
    Replaces the oversized turquoise route artwork on slide 2 ONLY.
