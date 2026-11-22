@@ -2867,7 +2867,7 @@ function finish(){
  bytes.textContent="49152 / 49152";
  clearTimeout(clearTimer);
  clearTimer=setTimeout(()=>{
-  overlay.classList.remove("is-active","is-ready");
+  overlay.classList.remove("is-active","is-ready","is-first-paint");
   overlay.setAttribute("aria-hidden","true");
   shown=false;
   window.neolineCassetteLoading?.(false);
@@ -2888,10 +2888,15 @@ function begin(initial=false){
  bytes.textContent="00000 / 49152";
  overlay.dataset.tapePhase="pilot-header";
  translate();
- overlay.classList.remove("is-active","is-ready","is-pilot","is-data");
+ overlay.classList.remove("is-active","is-ready","is-pilot","is-data","is-first-paint");
  void overlay.offsetHeight;
+ // The HTML head paints the white LOAD screen before any deferred JavaScript.
+ // Hand over to the real loader without ever exposing the game beneath it.
+ const hasFirstPaint=root.dataset.viceBootPending==="1";
+ if(hasFirstPaint)overlay.classList.add("is-first-paint");
  overlay.classList.add("is-active");
  if(!reduce)overlay.classList.add("is-pilot");
+ if(hasFirstPaint)root.removeAttribute("data-vice-boot-pending");
  // The worklet tells the screen when the first sound REALLY starts.
  // For disabled/unavailable sound we retain a deterministic visual fallback.
  if(!reduce)window.neolineCassetteLoading?.(true,currentDuration);
@@ -2918,13 +2923,13 @@ function cancel(){
  touch.hidden=true;
  entering=false;shown=false;dismissed=false;timelineStarted=false;phaseDriven=false;
  overlay.setAttribute("aria-hidden","true");
- overlay.classList.remove("is-active","is-ready","is-pilot","is-data");
+ overlay.classList.remove("is-active","is-ready","is-pilot","is-data","is-first-paint");
  delete overlay.dataset.tapePhase;
  hideWake();
 }
 function switchTheme(enabled){
  if(enabled&&!prevOn){dismissed=false;begin(false)}
- else if(!enabled&&prevOn)cancel();
+ else if(!enabled&&prevOn){cancel();root.removeAttribute("data-vice-boot-pending")}
  prevOn=enabled;
 }
 startButton.addEventListener("click",()=>{
@@ -2946,8 +2951,21 @@ overlay.addEventListener("pointerdown",()=>{
  if(window.neolineGetAYAudioState?.().blocked)
   void window.neolineStartAYAudio?.().catch(()=>{});
 });
+// Full navigation and Android's back/forward cache must keep the first
+// visible paint covered, even when the game was already loaded previously.
+window.addEventListener("pagehide",()=>{
+ if(isOn())root.dataset.viceBootPending="1";
+});
+window.addEventListener("pageshow",event=>{
+ if(event.persisted&&isOn()){
+  root.dataset.viceBootPending="1";
+  begin(true);
+ }
+});
 document.addEventListener("visibilitychange",()=>{
  if(document.hidden&&entering)cancel();
+ else if(!document.hidden&&isOn()&&root.dataset.viceBootPending==="1"&&!entering)
+  begin(true);
 });
 window.addEventListener("neoline:vice-theme",e=>switchTheme(!!e.detail?.enabled));
 window.addEventListener("neoline:ay-status",e=>{
@@ -2958,5 +2976,6 @@ window.addEventListener("neoline:ay-status",e=>{
 new MutationObserver(translate).observe(root,{attributes:true,attributeFilter:["lang"]});
 translate();
 if(prevOn)begin(true);
+else root.removeAttribute("data-vice-boot-pending");
 })();
 ;
