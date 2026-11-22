@@ -42,9 +42,9 @@ const artClasses=["city","signs","rewards","exam","duo"];
 const sceneURLs=[
  "./assets/teoria/vice-card-signs.svg",
  "./assets/teoria/vice-card-marathon.svg",
- "./assets/teoria/vice-cinematic-duo.svg",
+ "./assets/teoria/vice-approved-protagonists.webp",
  "./assets/teoria/vice-card-exam.svg",
- "./assets/teoria/vice-cinematic-duo.svg"
+ "./assets/teoria/vice-approved-protagonists.webp"
 ];
 const stage=document.createElement("div");
 stage.className="vice-cinema-stage";
