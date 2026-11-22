@@ -4,13 +4,16 @@ No conversion to PT3/MP3/MIDI. Original AY/STC/SQT/ASC/PT2/STP file bytes
 are extracted verbatim so ZXTune can emulate native tracker formats.
 """
 from __future__ import annotations
+import base64
 import hashlib
+import io
 import json
 from pathlib import Path
 from zipfile import ZipFile, BadZipFile
 
 ROOT = Path(__file__).resolve().parents[1]
 SOURCE = ROOT / "assets/teoria/source/new.zip"
+SOURCE_B64 = ROOT / "assets/teoria/source/new.zip.b64"
 DEST = ROOT / "assets/teoria/originals"
 ALLOWED_ARCHIVES = {
     "eb9e6a012483eb91d4ad158f58fb4fb8b39bf616899c6616a788df24e106e532",
@@ -29,9 +32,14 @@ NAMES = (
 EXTRAS = {"Robocop.pt3", "38_-_Axel_Force_Remix.pt3", "Batman_The_Movie_3.ay"}
 
 def main():
-    if not SOURCE.is_file():
-        raise SystemExit("Upload the user-provided archive to assets/teoria/source/new.zip first")
-    archive = SOURCE.read_bytes()
+    if SOURCE.is_file():
+        archive = SOURCE.read_bytes()
+    elif SOURCE_B64.is_file():
+        # The connector accepts UTF-8 files. Base64 is a lossless transport
+        # envelope only; the original ZIP entries are published byte-for-byte.
+        archive = base64.b64decode(SOURCE_B64.read_text(encoding="ascii").strip(), validate=True)
+    else:
+        raise SystemExit("User archive not found at assets/teoria/source/new.zip[.b64]")
     if not (1000 < len(archive) < 2_000_000):
         raise ValueError("Archive size is implausible")
     digest = hashlib.sha256(archive).hexdigest()
@@ -40,7 +48,7 @@ def main():
     DEST.mkdir(parents=True, exist_ok=True)
     manifest = {"format": "Native ZX Spectrum music, not converted", "originalZipSha256": digest, "files": []}
     try:
-        with ZipFile(SOURCE) as zipfile:
+        with ZipFile(io.BytesIO(archive)) as zipfile:
             filenames = zipfile.namelist()
             if len(filenames) != len(set(filenames)):
                 raise ValueError("Duplicate ZIP members")
