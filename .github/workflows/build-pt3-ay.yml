@@ -1,0 +1,62 @@
+name: Build original PT3 music for AY-3-8912 (NEOLINE)
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - 'tools/pt3/**'
+      - 'scripts/build_pt3_ay.py'
+      - 'assets/teoria/pt3-src/*.z64'
+      - '.github/workflows/build-pt3-ay.yml'
+permissions:
+  contents: write
+concurrency:
+  group: neoline-build-pt3-ay
+  cancel-in-progress: false
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - name: Checkout NEOLINE
+        uses: actions/checkout@v4
+        with:
+          ref: main
+          persist-credentials: true
+      - name: Build MIT ProTracker 3 AY replayer
+        run: |
+          gcc -std=gnu11 -O2 -Wall -Wno-unused-function \
+            -o tools/pt3/pt3convert tools/pt3/convert_pt3.c -lm
+      - name: Render exact PT3 tracker patterns into AY registers
+        run: python3 scripts/build_pt3_ay.py
+      - name: Confirm all 7 tunes and genuine registers
+        run: |
+          python3 - <<'PY'
+          import json,pathlib
+          manifest=json.loads(pathlib.Path('assets/teoria/ay/manifest.json').read_text())
+          assert manifest['menu']=='sonya'
+          assert len(manifest['games'])==6 and len(manifest['tracks'])==7
+          for key,item in manifest['tracks'].items():
+            p=pathlib.Path('assets/teoria/ay')/(key+'.ay14')
+            b=p.read_bytes()
+            assert len(b)==item['frames']*14
+            assert any(b[n+8] or b[n+9] or b[n+10] for n in range(0,len(b),14)),key
+            assert all(b[n+13] <= 15 or b[n+13] == 255 for n in range(0,len(b),14)),key
+            print(key,item['seconds'],'seconds',len(b),'bytes')
+          PY
+      - name: Commit the actual AY register assets
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add assets/teoria/ay/
+          if git diff --cached --quiet; then
+            echo 'Sound registry already current'
+            exit 0
+          fi
+          git commit -m 'Publish seven authentic PT3-to-AY chiptune files'
+          for attempt in 1 2 3 4; do
+            git pull --rebase origin main || { git rebase --abort || true; exit 1; }
+            git push origin HEAD:main && exit 0
+            sleep 3
+          done
+          exit 1
