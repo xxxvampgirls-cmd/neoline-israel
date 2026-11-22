@@ -38,6 +38,18 @@ function notePeriod(note){
 // Tracker originals replay through an AY register stream, never synthesized.
 const GAME_MODES=new Set(["route","signs","exam","mistakes","marathon","daily"]);
 const GAME_IDS=["mary_jane","x_files","zoolook","downtown","behind_the_walls","magnetic_fields","robocop","axel_force_remix"];
+const PLAYER_TRACKS=[
+ {id:"sonya",name:"Sonya VTX",kind:"intro"},
+ {id:"mary_jane",name:"Mary Jane",kind:"game"},
+ {id:"x_files",name:"X-Files",kind:"game"},
+ {id:"zoolook",name:"Zoolook",kind:"game"},
+ {id:"downtown",name:"Downtown",kind:"game"},
+ {id:"behind_the_walls",name:"Behind The Walls",kind:"game"},
+ {id:"magnetic_fields",name:"Magnetic Fields",kind:"game"},
+ {id:"robocop",name:"RoboCop",kind:"game"},
+ {id:"axel_force_remix",name:"Axel Force Remix",kind:"game"}
+];
+let preview=null,previewSerial=0;
 const SHUFFLE_KEY="neoline.vice.pt3.shuffle.v2"; // refresh bag for 8 distinct PT3 songs
 let manifestPromise=null,requestSerial=0,selectedGameSong=null,activeSong=null;
 const songBuffers=new Map();
@@ -121,7 +133,7 @@ async function decodePT3Original(id){
  return frames;
 }
 async function loadScene(force=false){
- if(!node)return;
+ if(!node||preview)return;
  const token=++requestSerial,requested=scene;
  if(requested==="fail"){msg({type:"clearSong"});loadedScene="fail";activeSong=null;stateToChip();return}
  const id=requested==="menu"?"sonya":requested==="result"?(selectedGameSong||"sonya"):
@@ -190,20 +202,23 @@ function guessScene(){
 }
 const msg=data=>{if(node)node.port.postMessage(data)};
 function stateToChip(){
- msg({type:"switch",music:musicOn&&isVice()&&!document.hidden&&scene!=="fail",
+ msg({type:"switch",music:musicOn&&isVice()&&!document.hidden&&(preview?!preview.paused:scene!=="fail"),
   effects:sfxOn&&isVice()&&!document.hidden});
  reportAudio();
 }
 function syncScene(){
  const next=guessScene();
- if(scene!==next){scene=next;loadScene(true)}
+ if(scene!==next){
+  if(preview)stopPreview(false);
+  scene=next;loadScene(true);
+ }
 }
 // Browser sound policy: decode and initialize the PSG early. Try autoplay,
 // but do not wait for a blocked ctx.resume() promise: on mobile it may remain
 // pending until an actual user gesture. The very first tap resumes the chip.
 function audioSnapshot(){
  return {
-  playing:!!(ctx&&ctx.state==="running"&&node&&musicOn&&isVice()&&!document.hidden),
+  playing:!!(ctx&&ctx.state==="running"&&node&&musicOn&&isVice()&&!document.hidden&&(!preview||!preview.paused)),
   ready:!!node,
   blocked:!!(ctx&&ctx.state!=="running"&&isVice()&&musicOn),
   musicOn,sfxOn,error:audioError
@@ -225,7 +240,20 @@ function prepareAudio(){
      numberOfInputs:0,numberOfOutputs:1,outputChannelCount:[2]
     });
     node.port.onmessage=event=>{
-     if(event.data?.type!=="song-loop"||!isVice()||!musicOn||!GAME_MODES.has(scene))return;
+     const m=event.data||{};
+     if(m.type==="song-progress"){
+      if(preview&&!preview.loading){
+       preview.frame=Math.max(0,Math.min(preview.frames,m.frame||0));
+       notifyPreview();
+      }
+      return;
+     }
+     if(m.type!=="song-loop"||!isVice()||!musicOn)return;
+     if(preview){
+      if(!preview.paused)void shiftPreview(1);
+      return;
+     }
+     if(!GAME_MODES.has(scene))return;
      selectedGameSong=nextGameTrack();
      void loadScene(true);
     };
@@ -270,6 +298,91 @@ async function unlock(){
  return ctx?.state==="running";
 }
 window.neolineStartAYAudio=unlock;
+// One player and one physical AY emulation: previews replace the current
+// register stream, never create a second AudioContext or synth.
+function previewState(){
+ return {
+  id:preview?.id||null,
+  loading:!!preview?.loading,
+  paused:!!preview?.paused,
+  frame:preview?.frame||0,
+  frames:preview?.frames||0,
+  error:preview?.error||null,
+  musicOn,
+  ready:!!node,
+  blocked:!!ctx&&ctx.state!=="running",
+  enabled:isVice()
+ };
+}
+function notifyPreview(){
+ window.dispatchEvent(new CustomEvent("neoline:ay-player",{detail:previewState()}));
+}
+function stopPreview(restore=true){
+ if(!preview)return;
+ preview=null;previewSerial++;requestSerial++;
+ if(restore&&isVice()&&node)void loadScene(true);
+ else if(node){msg({type:"clearSong"});stateToChip()}
+ notifyPreview();
+}
+async function playPreview(id){
+ if(!isVice()||!PLAYER_TRACKS.some(track=>track.id===id))return false;
+ if(preview?.id===id&&!preview.loading){
+  if(preview.paused){preview.paused=false;stateToChip();requestResume();notifyPreview()}
+  else{preview.paused=true;stateToChip();notifyPreview()}
+  return true;
+ }
+ const token=++previewSerial;
+ preview={id,loading:true,paused:false,frame:0,frames:0,error:null};
+ requestSerial++; // cancel any queued background soundtrack
+ if(!musicOn){musicOn=true;save(KEY_MUSIC,true);updateControls()}
+ notifyPreview();
+ // unlock invokes resume() synchronously during the originating click.
+ const initialized=unlock();
+ try{
+  await initialized;
+  if(token!==previewSerial||preview?.id!==id)return false;
+  if(!node)throw Error("AY-3-8912 audio unavailable");
+  const frames=await pt3Bytes(id);
+  if(token!==previewSerial||preview?.id!==id||!isVice())return false;
+  preview.frames=frames.length/14;preview.frame=0;preview.loading=false;
+  msg({type:"song",frames});
+  stateToChip();notifyPreview();
+  return true;
+ }catch(error){
+  if(token!==previewSerial||preview?.id!==id)return false;
+  preview.loading=false;preview.paused=true;
+  preview.error=String(error.message||error);
+  console.warn("NEOLINE AY library:",id,error);
+  msg({type:"clearSong"});stateToChip();notifyPreview();
+  return false;
+ }
+}
+function shiftPreview(offset){
+ const idx=preview?PLAYER_TRACKS.findIndex(t=>t.id===preview.id):-1;
+ const at=(idx+offset+PLAYER_TRACKS.length)%PLAYER_TRACKS.length;
+ return playPreview(PLAYER_TRACKS[at].id);
+}
+function seekPreview(sec){
+ if(!preview||preview.loading||!preview.frames)return false;
+ const f=Math.max(0,Math.min(preview.frames-1,Math.floor(Number(sec)*50)||0));
+ preview.frame=f;
+ msg({type:"seek",frame:f});notifyPreview();
+ return true;
+}
+window.neolineAYPlayer={
+ tracks:PLAYER_TRACKS.map(t=>({...t})),
+ play:playPreview,
+ next:()=>shiftPreview(1),
+ previous:()=>shiftPreview(-1),
+ toggle:()=>{
+  if(!preview)return playPreview("sonya");
+  return playPreview(preview.id);
+ },
+ stop:()=>stopPreview(true),
+ seek:seekPreview,
+ state:previewState
+};
+
 function playFx(name){
  if(!isVice()||!sfxOn||!node||ctx?.state!=="running"||document.hidden)return;
  msg({type:"fx",frames:compileFx(name)});
@@ -293,7 +406,7 @@ function makeBar(host){
   button.addEventListener("click",()=>{
    if(kind==="music"){musicOn=!musicOn;save(KEY_MUSIC,musicOn)}
    else{sfxOn=!sfxOn;save(KEY_SFX,sfxOn)}
-   stateToChip();updateControls();
+   stateToChip();updateControls();notifyPreview();
    if(isVice()&&(musicOn||sfxOn))void unlock().then(ok=>{if(ok&&kind==="sfx"&&sfxOn)playFx("ui")});
   });
   wrap.append(button);
@@ -329,7 +442,7 @@ document.addEventListener("keydown",e=>{
 document.addEventListener("click",e=>{
  if(!isVice())return;
  const b=e.target.closest("button,a,[role='button']");
- if(!b||b.closest(".vice-ay-controls")||b.matches("[data-vice-theme-toggle],.answer,[data-mode]"))return;
+ if(!b||b.closest(".vice-ay-controls,.vice-soundtrack")||b.matches("[data-vice-theme-toggle],.answer,[data-mode]"))return;
  const now=performance.now();if(now-lastClick<55)return;lastClick=now;
  if(b.matches(".theory-promo-dot,.vice-cinema-arrow"))playFx("slide");
  else if(b.matches("#exitQuiz,#dock4Modes,#backToModes,#gameOverModes,#gameOverClose"))playFx("back");
@@ -339,7 +452,7 @@ document.addEventListener("click",e=>{
 document.addEventListener("pointerover",e=>{
  if(!isVice()||e.pointerType!=="mouse"||!sfxOn)return;
  const b=e.target.closest("button");
- if(!b||b.contains(e.relatedTarget)||performance.now()-lastHover<125)return;
+ if(!b||b.closest(".vice-soundtrack")||b.contains(e.relatedTarget)||performance.now()-lastHover<125)return;
  lastHover=performance.now();if(!b.disabled)playFx("ui");
 },{passive:true});
 window.addEventListener("neoline:vice-theme",e=>{
@@ -348,10 +461,14 @@ window.addEventListener("neoline:vice-theme",e=>{
   scene=guessScene();
   void unlock().then(ok=>{if(ok)playFx("enable")});
  }
- if(!enabled){requestSerial++;stateToChip()}else{syncScene();loadScene(true);stateToChip()}
+ if(!enabled){
+  if(preview)stopPreview(false);
+  requestSerial++;stateToChip();
+ }else{syncScene();loadScene(true);stateToChip()}
  lastTheme=enabled;updateControls();
 });
 window.addEventListener("neoline:theory-quiz",e=>{
+ if(preview)stopPreview(false);
  const d=e.detail||{};
  if(d.mode&&GAME_MODES.has(d.mode))currentMode=d.mode;
  const previous=scene;
@@ -424,7 +541,7 @@ window.addEventListener("pageshow",()=>{if(ctx&&isVice()&&!document.hidden)void 
 window.addEventListener("storage",e=>{
  if(e.key!==KEY_MUSIC&&e.key!==KEY_SFX)return;
  musicOn=getSaved(KEY_MUSIC,true);sfxOn=getSaved(KEY_SFX,true);
- stateToChip();updateControls();
+ stateToChip();updateControls();notifyPreview();
 });
 new MutationObserver(updateControls).observe(root,{attributes:true,attributeFilter:["lang"]});
 updateControls();
