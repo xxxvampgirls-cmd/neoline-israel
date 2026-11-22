@@ -233,6 +233,30 @@ range.addEventListener("input",()=>{
  range.style.setProperty("--vs-progress",((Number(range.value)/max)*100).toFixed(2)+"%");
 });
 range.addEventListener("change",()=>api.seek(Number(range.value)));
+// Keep the full music-library player ONLY on the mode-selection screen.
+// Active questions, results and GAME OVER need maximum room for gameplay.
+// The AY music engine and its small music/SFX toggles remain unaffected.
+const lobby=document.getElementById("gameLobby");
+const activePanels=["gamePlaying","gameResult","gameOver"]
+ .map(id=>document.getElementById(id)).filter(Boolean);
+const drawer=document.getElementById("viceSoundtrackDrawer");
+function syncLibraryPlacement(){
+ const inSession=activePanels.some(panel=>!panel.hidden);
+ const showInMenu=!!lobby&&!lobby.hidden&&!inSession;
+ root.hidden=!showInMenu;
+ if(!showInMenu){
+  if(drawer)drawer.open=false;
+  // Release library preview if player was open when a quiz began.
+  // The ordinary game soundtrack continues via the same AY emulator.
+  if(api.state().id)api.stop();
+ }
+}
+for(const panel of [lobby,...activePanels]){
+ if(panel)new MutationObserver(syncLibraryPlacement)
+  .observe(panel,{attributes:true,attributeFilter:["hidden"]});
+}
+syncLibraryPlacement();
+
 window.addEventListener("neoline:ay-player",draw);
 window.addEventListener("neoline:ay-status",draw);
 window.addEventListener("neoline:vice-theme",draw);
