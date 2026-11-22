@@ -10,7 +10,7 @@
  transition:opacity .2s ease-out,visibility .2s;
  -webkit-font-smoothing:antialiased;
 }
-.vice-boot-overlay.is-active{visibility:visible;opacity:1}
+.vice-boot-overlay.is-active{visibility:visible;opacity:1;pointer-events:auto}
 .vice-boot-overlay::before{
  content:"";position:absolute;inset:-30%;
  background:repeating-linear-gradient(111deg,transparent 0 78px,#fff6 79px 80px,transparent 81px 174px);
