@@ -1,0 +1,71 @@
+/* NEOLINE home · road news dashboard, directly after delivery. */
+/* Existing ДТП bars are sourced from news-accidents.js; daily fine data are
+   deliberately shown as unavailable, not a fictitious second series. */
+#homeRoadNews{margin-top:clamp(20px,3.3vw,44px);margin-bottom:clamp(36px,5vw,72px);max-width:1160px}
+#homeRoadNews .home-stats-header{display:flex;align-items:end;justify-content:space-between;gap:20px;margin-bottom:16px}
+#homeRoadNews .home-stats-eyebrow{font-size:11px;font-weight:900;letter-spacing:.16em;color:#167dbf;margin-bottom:7px;text-transform:uppercase}
+#homeRoadNews .home-stats-header h2{margin:0 0 7px;color:#163c60;font-size:clamp(24px,4vw,37px);font-weight:900;letter-spacing:-.045em;line-height:1.13}
+#homeRoadNews .home-stats-intro{color:#637f98;font-size:13px;line-height:1.65;margin:0;max-width:720px}
+#homeRoadNews .home-stats-grid{display:grid;grid-template-columns:minmax(0,1.72fr) minmax(240px,.95fr);gap:14px;align-items:stretch}
+#homeRoadNews .accident-strip{margin:0;padding:17px 18px 13px;min-width:0;box-shadow:0 12px 26px #17497310;background:linear-gradient(125deg,#fff 17%,#eaf6ff 100%)}
+#homeRoadNews .accident-chart{height:99px}
+#homeRoadNews .accident-day-rail{height:78px}
+#homeRoadNews .accident-chart-disclaimer{margin:13px 0 3px}
+#homeRoadNews .accident-chart-bottom{min-height:23px}
+#homeRoadNews .home-stats-fine-card{--home-fines:#bc4346;min-width:0;padding:18px 18px 14px;border-radius:18px;
+ background:linear-gradient(145deg,#ffffff,#f4f9fd);border:1px solid #d9e6f1;box-shadow:0 12px 26px #1749730e;color:#30536e}
+#homeRoadNews .home-stats-fine-top{display:flex;justify-content:space-between;align-items:center;gap:10px}
+#homeRoadNews .home-stats-fine-kicker{font-size:10px;font-weight:900;letter-spacing:.085em;text-transform:uppercase;color:var(--home-fines)}
+#homeRoadNews .home-stats-fine-year{color:#8f5f63;font-size:11px;font-weight:850;padding:5px 8px;background:#fff1f1;border-radius:7px}
+#homeRoadNews .home-stats-fine-main{display:block;font-size:clamp(29px,3vw,39px);line-height:1.15;font-weight:900;color:var(--home-fines);font-variant-numeric:tabular-nums;letter-spacing:-.04em;margin:9px 0 2px}
+#homeRoadNews .home-stats-fine-caption{font-size:11px;font-weight:760;color:#597b93;line-height:1.45;margin:0 0 16px}
+#homeRoadNews .home-stats-fine-bars{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));align-items:end;gap:10px;
+ border-bottom:1px solid #d7e3ed;padding:0 6px 0;margin-bottom:12px;height:66px}
+#homeRoadNews .home-stats-fine-bar{display:flex;align-items:end;justify-content:center;position:relative;height:100%;min-width:0}
+#homeRoadNews .home-stats-fine-bar i{display:block;width:66%;max-width:62px;border-radius:7px 7px 0 0;
+ background:linear-gradient(0deg,#d36063,#e4a4a5);height:var(--home-fines-height);min-height:9px}
+#homeRoadNews .home-stats-fine-bar.is-latest i{background:linear-gradient(0deg,#a83136,#dd666b)}
+#homeRoadNews .home-stats-fine-bar strong{position:absolute;top:-3px;left:0;right:0;text-align:center;
+ font-size:10px;color:#9a5b60;font-weight:900;font-variant-numeric:tabular-nums}
+#homeRoadNews .home-stats-fine-labels{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;
+ font-size:10px;text-align:center;font-weight:850;color:#718fa4;margin:-7px 6px 10px}
+#homeRoadNews .home-stats-fine-note{margin:0;color:#698497;font-size:10px;line-height:1.55}
+#homeRoadNews .home-stats-fine-source{display:inline-flex;margin-top:8px;color:#a34148;font-size:10px;font-weight:850;text-decoration:underline;text-underline-offset:3px}
+#homeRoadNews .home-stats-actions{display:flex;justify-content:center;margin-top:19px}
+#homeRoadNews .home-stats-all{display:inline-flex;align-items:center;justify-content:center;gap:12px;padding:13px 24px;min-height:46px;
+ border-radius:13px;text-align:center;font-size:13px;font-weight:900;text-decoration:none;
+ color:#fff;background:linear-gradient(110deg,#116fac,#159bdd);border:1px solid #137fbd;
+ box-shadow:0 9px 22px #148ac42a;transition:transform .18s,box-shadow .18s}
+#homeRoadNews .home-stats-all:hover{transform:translateY(-2px);box-shadow:0 13px 25px #148ac43a}
+#homeRoadNews .home-stats-all:focus-visible{outline:3px solid #56bafb;outline-offset:4px}
+#homeRoadNews .home-stats-all-arrow{font-size:18px;font-weight:700;line-height:1}
+#homeRoadNews .hot-events-link{font-size:10px}
+#homeRoadNews .accident-strip-ident{min-width:0}
+#homeRoadNews .accident-strip-head{align-items:center}
+#homeRoadNews .accident-strip-ident strong{color:#1b5276}
+#homeRoadNews .accident-chart-legend{margin-top:10px}
+#homeRoadNews .accident-chart-scroll{margin-top:8px}
+#homeRoadNews .accident-day:focus-visible{outline-offset:1px}
+@media(max-width:770px){
+ #homeRoadNews{margin-top:21px;margin-bottom:38px}
+ #homeRoadNews .home-stats-header{margin-bottom:12px}
+ #homeRoadNews .home-stats-header h2{font-size:26px}
+ #homeRoadNews .home-stats-intro{font-size:12px}
+ #homeRoadNews .home-stats-grid{grid-template-columns:minmax(0,1fr);gap:11px}
+ #homeRoadNews .accident-strip{padding:13px 12px 10px}
+ #homeRoadNews .accident-chart{height:87px}
+ #homeRoadNews .accident-day-rail{height:66px}
+ #homeRoadNews .home-stats-fine-card{padding:13px 14px;border-radius:14px}
+ #homeRoadNews .home-stats-fine-main{font-size:32px;margin:7px 0 1px}
+ #homeRoadNews .home-stats-fine-caption{margin-bottom:12px}
+ #homeRoadNews .home-stats-fine-bars{height:57px}
+ #homeRoadNews .home-stats-actions{margin-top:14px}
+ #homeRoadNews .home-stats-all{width:100%}
+}
+@media(max-width:365px){
+ #homeRoadNews .hot-events-link{font-size:9px;padding:7px 5px}
+ #homeRoadNews .accident-strip-symbol{display:none}
+ #homeRoadNews .accident-strip-ident{gap:3px}
+ #homeRoadNews .accident-chart-legend{gap:4px 7px}
+}
+@media(prefers-reduced-motion:reduce){#homeRoadNews .home-stats-all{transition:none}}
