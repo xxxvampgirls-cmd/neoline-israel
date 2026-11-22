@@ -135,8 +135,13 @@ function welcome(){
  if(dots[0]?.getAttribute("aria-current")!=="true")dots[0]?.click();
  entrance();
 }
+let wasEnabled=document.documentElement.dataset.viceTheme==="on";
 window.addEventListener("neoline:vice-theme",event=>{
- if(event.detail.enabled)welcome();
+ const nowEnabled=Boolean(event.detail?.enabled);
+ // Localization refreshes this event too. Do not reset an open carousel slide
+ // just because the visitor switched Russian, English, Hebrew or Arabic.
+ if(nowEnabled&&!wasEnabled)welcome();
+ wasEnabled=nowEnabled;
 });
-if(document.documentElement.dataset.viceTheme==="on")requestAnimationFrame(welcome);
+if(wasEnabled)requestAnimationFrame(welcome);
 })();
