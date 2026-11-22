@@ -9,6 +9,15 @@ on:
       - 'teoria-gta6-style.js'
       - 'teoria-hero-promo.js'
       - 'scripts/test_teoria_vice_theme.cjs'
+      - 'scripts/test_teoria_cinematic.cjs'
+      - 'teoria-vice-cinematic.css'
+      - 'teoria-vice-cinematic.js'
+      - 'assets/teoria/vice-card-city.svg'
+      - 'assets/teoria/vice-card-signs.svg'
+      - 'assets/teoria/vice-card-exam.svg'
+      - 'assets/teoria/vice-card-mistakes.svg'
+      - 'assets/teoria/vice-card-marathon.svg'
+      - 'assets/teoria/vice-cinematic-duo.svg'
       - '.github/workflows/test-teoria-vice-theme.yml'
 permissions:
   contents: read
@@ -28,3 +37,5 @@ jobs:
           node --check teoria-gta6-style.js
           node --check teoria-hero-promo.js
           node scripts/test_teoria_vice_theme.cjs
+          node --check teoria-vice-cinematic.js
+          SAVE_CINEMATIC_SCREENSHOTS=1 node scripts/test_teoria_cinematic.cjs
