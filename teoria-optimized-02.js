@@ -1530,6 +1530,9 @@ const Ctx=window.AudioContext||window.webkitAudioContext;
 const KEY_MUSIC="neoline.vice.ay128.music.v1", KEY_SFX="neoline.vice.ay128.sfx.v1";
 const byId=id=>document.getElementById(id);
 const isVice=()=>root.dataset.viceTheme==="on";
+const giftDialog=byId("gameGiftDialog");
+const giftOpen=()=>!!giftDialog?.open;
+const audioAllowed=()=>isVice()||giftOpen();
 const getSaved=(key,defaultValue)=>{try{const s=localStorage.getItem(key);return s===null?defaultValue:s!=="0"}catch(_){return defaultValue}};
 const save=(key,on)=>{try{localStorage.setItem(key,on?"1":"0")}catch(_){}};
 let musicOn=getSaved(KEY_MUSIC,true),sfxOn=getSaved(KEY_SFX,true);
@@ -1759,8 +1762,19 @@ const FX={
  hint:[["D6",5,11],["A5",4,10],["F5",6,10]],
  xp:[["G5",3,11],["C6",7,12]],
  open:[["F5",3,10],["A5",6,11]],
- shake:[["A3",2,9,15]],burst:[["NOISE",7,14,6],["C5",5,12],["G5",7,12]],
- reveal:[["C6",4,11],["E6",5,13],["G6",14,14]],
+ // 8-bit gift score: escalating box rattle, lid, glittering stars and finale.
+ "gift-rise":[["E3",6,11,22],["A3",5,11,16]],
+ "gift-rattle-1":[["NOISE",2,9,11],["A3",2,10,19]],
+ "gift-rattle-2":[["NOISE",2,11,7],["B3",2,12,15]],
+ "gift-rattle-3":[["NOISE",2,14,4],["C4",2,14,12]],
+ "gift-burst":[["NOISE",6,15,3],["C4",4,15,10],["G4",5,15,8],["C5",7,15]],
+ "gift-star-1":[["C6",3,14],["E6",3,15],["A6",6,14]],
+ "gift-star-2":[["E6",3,13],["G6",4,15],["C7",6,14]],
+ "gift-star-3":[["G5",3,12],["C6",3,14],["E6",5,15]],
+ "gift-reward":[["C5",3,14],["E5",4,15],["G5",4,15],["C6",7,15]],
+ "gift-finale":[["NOISE",5,15,4],["G4",4,15],["C5",4,15],
+                ["E5",4,15],["G5",5,15],["C6",5,15],["E6",7,15]],
+ "gift-finale-stars":[["C7",3,15],["G6",4,15],["E6",4,14],["C7",8,15]],
  countdown:[["A5",3,10]],
  finale:[["NOISE",5,12,7],["A5",5,11],["C6",5,12],["E6",5,12],["A6",10,14]],
  victory:[["C5",5,12],["E5",5,13],["G5",6,13],["C6",6,14],["E6",8,14],["G6",11,15]],
@@ -1780,7 +1794,7 @@ function compileFx(name){
   for(let i=0;i<length;i++){
    const j=(frame++)*5;
    data[j]=note&255;data[j+1]=(note>>8)&15;
-   data[j+2]=Math.max(0,Math.min(15,Math.round(volume*(1-.60*i/length))));
+   data[j+2]=Math.max(0,Math.min(15,Math.round(volume*(1-.40*i/length))));
    data[j+3]=noisep||1;
    data[j+4]=name==="NOISE"?2:noisep?3:1;
   }
@@ -1797,8 +1811,12 @@ function guessScene(){
 }
 const msg=data=>{if(node)node.port.postMessage(data)};
 function stateToChip(){
- msg({type:"switch",music:musicOn&&isVice()&&!document.hidden&&!originalPlayerOpen&&(preview?!preview.paused:scene!=="fail"),
-  effects:sfxOn&&isVice()&&!document.hidden&&!originalPlayerOpen});
+ const inGift=giftOpen();
+ msg({type:"switch",
+  music:musicOn&&isVice()&&!document.hidden&&!originalPlayerOpen&&(preview?!preview.paused:scene!=="fail"),
+  effects:sfxOn&&audioAllowed()&&!document.hidden&&!originalPlayerOpen,
+  gameplay:GAME_MODES.has(scene),gift:inGift
+ });
  reportAudio();
 }
 function syncScene(){
@@ -1823,13 +1841,13 @@ function reportAudio(){
  window.dispatchEvent(new CustomEvent("neoline:ay-status",{detail:audioSnapshot()}));
 }
 window.neolineGetAYAudioState=audioSnapshot;
-function prepareAudio(){
- if(!isVice()||!Ctx||audioError)return null;
+function prepareAudio(forceGift=false){
+ if(!(audioAllowed()||forceGift)||!Ctx||audioError)return null;
  if(boot)return boot;
  try{
   ctx=new Ctx({latencyHint:"interactive"});
   ctx.addEventListener("statechange",()=>{updateControls();reportAudio()});
-  boot=ctx.audioWorklet.addModule("./teoria-ay8912-worklet.js?v=20261122-library-progress-v6")
+  boot=ctx.audioWorklet.addModule("./teoria-ay8912-worklet.js?v=20261122-louder-gift-sfx-v7")
    .then(()=>{
     node=new AudioWorkletNode(ctx,"neoline-ay8912",{
      numberOfInputs:0,numberOfOutputs:1,outputChannelCount:[2]
@@ -1853,10 +1871,11 @@ function prepareAudio(){
      void loadScene(true);
     };
     const master=ctx.createGain();
-    master.gain.value=.80;
+    master.gain.value=.88;
     node.connect(master);master.connect(ctx.destination);
     scene=guessScene();
-    void loadScene(true);
+    if(isVice())void loadScene(true);
+    stateToChip();
     updateControls();reportAudio();
     return true;
    }).catch(error=>{
@@ -1865,7 +1884,7 @@ function prepareAudio(){
    });
   // Decode the original lobby tracker ahead of time, without starting sound.
   // A user gesture can then resume already-prepared chip audio immediately.
-  void pt3Bytes("sonya").catch(err=>console.warn("NEOLINE Sonya PT3 preload:",err));
+  if(isVice())void pt3Bytes("sonya").catch(err=>console.warn("NEOLINE Sonya PT3 preload:",err));
   void primeNativeAY();
   return boot;
  }catch(error){
@@ -1879,13 +1898,13 @@ function requestResume(){
   // Must be invoked synchronously inside pointerdown/click to retain
   // browser's transient user activation on Chrome/Safari/Android.
   void ctx.resume().then(()=>{
-   if(isVice()){stateToChip();updateControls();reportAudio()}
+   if(audioAllowed()){stateToChip();updateControls();reportAudio()}
   }).catch(err=>console.warn("NEOLINE audio blocked by browser:",err));
  }catch(error){console.warn("NEOLINE audio gesture:",error)}
 }
-async function unlock(){
- if(!isVice()||!Ctx||audioError)return false;
- const ready=prepareAudio();
+async function unlock(forceGift=false){
+ if(!(audioAllowed()||forceGift)||!Ctx||audioError)return false;
+ const ready=prepareAudio(forceGift);
  if(!ready)return false;
  requestResume(); // Called BEFORE first await, while gesture is active.
  const prepared=await ready;
@@ -1992,8 +2011,9 @@ window.neolineAYPlayer={
 };
 
 function playFx(name){
- if(!isVice()||!sfxOn||!node||ctx?.state!=="running"||document.hidden)return;
+ if(!audioAllowed()||!sfxOn||!node||ctx?.state!=="running"||document.hidden)return false;
  msg({type:"fx",frames:compileFx(name)});
+ return true;
 }
 const bars=[];
 function makeBar(host){
@@ -2041,11 +2061,15 @@ function updateControls(){
   bar.status.textContent=audioError||!Ctx?t.unavailable:node&&ctx?.state==="running"?"AY-3-8912 · 3CH":t.tap;
  }
 }
-document.addEventListener("pointerdown",()=>{
- if(isVice()&&ctx?.state!=="running")void unlock();
+// Audio unlock on the first actual tap, including a gift in normal NEOLINE mode.
+document.addEventListener("pointerdown",e=>{
+ const giftGesture=!!e.target?.closest?.("[data-gift-preview],#gameGiftRevealReplay");
+ if((isVice()||giftGesture)&&ctx?.state!=="running")void unlock(giftGesture);
 },{capture:true,passive:true});
 document.addEventListener("keydown",e=>{
- if(isVice()&&!e.repeat&&e.key!=="Shift"&&e.key!=="Control"&&e.key!=="Alt"&&e.key!=="Meta"&&ctx?.state!=="running")void unlock();
+ const giftGesture=!!e.target?.closest?.("[data-gift-preview],#gameGiftRevealReplay");
+ if((isVice()||giftGesture)&&!e.repeat&&
+    !["Shift","Control","Alt","Meta"].includes(e.key)&&ctx?.state!=="running")void unlock(giftGesture);
 },{capture:true});
 document.addEventListener("click",e=>{
  if(!isVice())return;
@@ -2101,25 +2125,60 @@ window.addEventListener("neoline:theory-finish",e=>{
  else if(d.mode==="exam")playFx(d.correct>=26?"victory":"exam-fail");
  else playFx(d.total>0&&d.correct/d.total>=.8?"victory":"finish");
 });
-const gift=byId("gameGiftReveal"),dialog=byId("gameGiftDialog");
-if(gift&&dialog){
- new MutationObserver(()=>{
-  if(!isVice()||!dialog.open)return;
-  const phase=gift.dataset.phase;
-  if(phase==="shake")playFx("shake");
-  else if(phase==="burst")playFx("burst");
-  else if(phase==="revealed")playFx("reveal");
- }).observe(gift,{attributes:true,attributeFilter:["data-phase"]});
+// Synchronize AY channel C to exact phases of the existing three-round gift.
+// Repeated rattles accelerate over 2350ms; each star gets a distinct chime.
+const giftTimers=[];
+let giftSerial=0;
+function clearGiftSounds(clearVoice=false){
+ giftSerial++;
+ for(const timer of giftTimers)clearTimeout(timer);
+ giftTimers.length=0;
+ if(clearVoice)msg({type:"clearFx"});
 }
-const burst=byId("gameGiftScreenBurst");
-if(burst){
- let hadRing=false;
- new MutationObserver(()=>{
-  const ring=!!burst.querySelector(".gift-burst-ring");
-  if(!hadRing&&ring&&dialog?.open)playFx("finale");
-  hadRing=ring;
- }).observe(burst,{childList:true});
+function scheduleGiftFx(name,delay,serial){
+ giftTimers.push(setTimeout(()=>{
+  if(serial===giftSerial&&giftOpen()&&!document.hidden)playFx(name);
+ },delay));
 }
+window.addEventListener("neoline:gift-audio",e=>{
+ const cue=e.detail?.cue;
+ if(cue==="stop"){
+  clearGiftSounds(true);stateToChip();
+  return;
+ }
+ if(!giftOpen()||document.hidden)return;
+ // Pointerdown has already requested browser audio permission.
+ if(!node)void unlock(true);
+ if(cue==="shake"){
+  clearGiftSounds(true);stateToChip();
+  const serial=giftSerial;
+  playFx("gift-rise");
+  for(let i=0;i<15;i++){
+   const ms=Math.round(2250*(1-Math.pow(1-i/15,1.9)));
+   const name=i<4?"gift-rattle-1":i<9?"gift-rattle-2":"gift-rattle-3";
+   scheduleGiftFx(name,90+ms,serial);
+  }
+ }else if(cue==="burst"){
+  clearGiftSounds(true);
+  const serial=giftSerial;
+  playFx("gift-burst");
+  scheduleGiftFx("gift-star-1",205,serial);
+  scheduleGiftFx("gift-star-2",423,serial);
+ }else if(cue==="revealed"){
+  clearGiftSounds(false);
+  const serial=giftSerial;
+  playFx("gift-reward");
+  scheduleGiftFx("gift-star-3",225,serial);
+ }else if(cue==="finale"){
+  clearGiftSounds(true);
+  const serial=giftSerial;
+  playFx("gift-finale");
+  scheduleGiftFx("gift-finale-stars",585,serial);
+ }
+});
+giftDialog?.addEventListener("close",()=>{
+ clearGiftSounds(true);stateToChip();
+});
 const clock=byId("timer");
 if(clock){
  let lastSec=null;
@@ -2139,6 +2198,7 @@ for(const id of ["gamePlaying","gameResult","gameOver"]){
 document.addEventListener("visibilitychange",()=>{
  if(!ctx)return;
  if(document.hidden){
+  clearGiftSounds(true);
   stateToChip();void ctx.suspend().catch(()=>{});
  }else if(isVice()){
   void ctx.resume().then(()=>{syncScene();stateToChip()}).catch(()=>{});
