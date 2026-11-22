@@ -92,10 +92,10 @@ async function pt3Bytes(id){
  const pt3=window.NEOLINE_PT3;
  const instance=pt3.pt3_setup_music(raw);
  if(!instance)throw Error("PT3 engine rejected "+id);
- const result=new Uint8Array(14*50*240);
+ const result=new Uint8Array(14*50*600);
  let count=0;
  try {
-  while(count<50*240&&!instance.looped){
+  while(count<50*600&&!instance.looped){
    pt3.pt3_play_tick(instance);
    const r=pt3.pt3_get_regs(instance);
    if(!r||r.length<14)throw Error("Corrupt PT3 registers "+id);
