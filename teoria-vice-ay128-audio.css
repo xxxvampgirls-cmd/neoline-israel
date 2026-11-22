@@ -102,3 +102,95 @@ html[data-vice-theme="on"] .neoline-site-header .vice-ay-button[aria-pressed="tr
 @media(prefers-reduced-motion:reduce){
  .neoline-site-header .vice-ay-button{transition:none}
 }
+
+/* During gameplay the sticky header is hidden, so the same toggles appear
+   inside each question's first row. Both instances share saved state. */
+#gamePlaying .question-eyebrow .vice-ay-controls,
+#gameResult .vice-ay-controls,
+#gameOver .gameover-card .vice-ay-controls{
+ display:none;box-sizing:border-box;align-items:center;justify-content:center;
+ direction:ltr;gap:5px;min-width:0;
+}
+html[data-vice-theme="on"] #gamePlaying:not([hidden]) .question-eyebrow .vice-ay-controls,
+html[data-vice-theme="on"] #gameResult:not([hidden]) .vice-ay-controls,
+html[data-vice-theme="on"] #gameOver:not([hidden]) .gameover-card .vice-ay-controls{
+ display:inline-flex!important;
+}
+#gamePlaying .question-eyebrow .vice-ay-button,
+#gameResult .vice-ay-button,
+#gameOver .vice-ay-button{
+ position:relative;box-sizing:border-box;display:inline-grid;place-items:center;
+ width:35px;height:35px;min-width:35px;min-height:35px;padding:0;
+ flex:none;border-radius:11px;border:1px solid #e8a1d7;
+ background:linear-gradient(130deg,#4a254f,#673765);
+ color:#ffe2f3;box-shadow:inset 0 1px #ffffff35;
+ cursor:pointer;touch-action:manipulation;
+}
+html[data-vice-theme="on"] #gamePlaying .vice-ay-button[aria-pressed="true"],
+html[data-vice-theme="on"] #gameResult .vice-ay-button[aria-pressed="true"],
+html[data-vice-theme="on"] #gameOver .vice-ay-button[aria-pressed="true"]{
+ background:linear-gradient(140deg,#fa9cc6,#ffbd8e);color:#421f46;
+ border-color:#ffcde3;box-shadow:0 0 0 1px #fca8d555,inset 0 1px #fff9;
+}
+#gamePlaying .vice-ay-button.is-off,
+#gameResult .vice-ay-button.is-off,
+#gameOver .vice-ay-button.is-off{
+ background:#302139;color:#aa9fb4;border-color:#80627f;box-shadow:none;
+}
+#gamePlaying .vice-ay-button.is-off::after,
+#gameResult .vice-ay-button.is-off::after,
+#gameOver .vice-ay-button.is-off::after{
+ content:"";position:absolute;left:7px;top:16px;width:20px;height:2px;
+ background:#f183a8;transform:rotate(-42deg);border-radius:3px;
+}
+#gamePlaying .vice-ay-icon,
+#gameResult .vice-ay-icon,
+#gameOver .vice-ay-icon{display:grid;place-items:center;width:21px;height:21px}
+#gamePlaying .vice-ay-icon svg,
+#gameResult .vice-ay-icon svg,
+#gameOver .vice-ay-icon svg{
+ display:block;width:21px;height:21px;fill:none;stroke:currentColor;
+ stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;
+}
+#gamePlaying .vice-ay-label,#gamePlaying .vice-ay-state,
+#gameResult .vice-ay-label,#gameResult .vice-ay-state,
+#gameOver .vice-ay-label,#gameOver .vice-ay-state{
+ position:absolute!important;width:1px!important;height:1px!important;
+ padding:0!important;margin:-1px!important;overflow:hidden!important;
+ clip:rect(0,0,0,0)!important;white-space:nowrap!important;border:0!important;
+}
+#gamePlaying .vice-ay-button:focus-visible,#gameResult .vice-ay-button:focus-visible,
+#gameOver .vice-ay-button:focus-visible{
+ outline:3px solid #fff1ae;outline-offset:2px;
+}
+html[data-vice-theme="on"] #gamePlaying .question-eyebrow{
+ display:flex;align-items:center;justify-content:flex-end;flex-wrap:wrap;
+ gap:6px 8px;
+}
+html[data-vice-theme="on"] #gamePlaying .question-eyebrow #questionTopic{
+ flex:1 1 auto;min-width:80px;
+}
+html[data-vice-theme="on"] #gamePlaying .question-eyebrow #questionId{
+ flex:none;margin:0;white-space:nowrap;
+}
+html[data-vice-theme="on"] #gamePlaying .question-eyebrow .vice-ay-controls{
+ flex:none;gap:4px;margin:0;
+}
+html[data-vice-theme="on"] #gameResult .vice-ay-controls{
+ justify-content:center;margin:13px auto 3px;
+}
+/* The defeat screen is a separate overlay, so it also gets sound switches.
+   Left corner leaves the right-hand Close control unobstructed. */
+html[data-vice-theme="on"] #gameOver .gameover-card{position:relative}
+html[data-vice-theme="on"] #gameOver .gameover-card .vice-ay-controls{
+ position:absolute;top:9px;left:10px;z-index:6;margin:0;
+}
+@media(max-width:420px){
+ #gamePlaying .question-eyebrow .vice-ay-button{
+  width:32px;height:33px;min-width:32px;min-height:33px;border-radius:10px;
+ }
+ #gamePlaying .question-eyebrow .vice-ay-controls{gap:4px}
+ #gamePlaying .question-eyebrow .vice-ay-icon,
+ #gamePlaying .question-eyebrow .vice-ay-icon svg{width:19px;height:19px}
+ html[data-vice-theme="on"] #gamePlaying .question-eyebrow{gap:5px}
+}
