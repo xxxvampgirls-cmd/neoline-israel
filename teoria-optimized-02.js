@@ -2388,7 +2388,6 @@ for(const track of pendingSongs){
  button.setAttribute("aria-haspopup","dialog");
  button.addEventListener("click",()=>{
  if(api.originalReady?.(track.file))void api.playOriginal(track.file);
- else void openOriginalTrack(track);
 });
  const number=document.createElement("span");number.className="vice-soundtrack__index";
  number.textContent=String(api.tracks.length+pendingButtons.length+1).padStart(2,"0");
@@ -2411,7 +2410,8 @@ function translate(){
  pendingHeader.textContent=x.waiting+" · "+pendingSongs.length;
  for(const {button,kind,track} of pendingButtons){
   const native=!!api.originalReady?.(track.file);
-  const label=native?(doc.lang==="ru"?"ИГРАЕТ В НАШЕМ AY · ▶":"PLAY HERE · AY ▶"):x.state;
+  button.disabled=!native;
+  const label=native?(doc.lang==="ru"?"СЛУШАТЬ В ИГРЕ · ▶":"PLAY HERE · AY ▶"):(doc.lang==="ru"?"Ожидает подготовки":"Preparing playback data");
   kind.textContent=track.format+" · "+label;
   const item=button.closest?.(".vice-soundtrack__item");
   item?.classList.toggle("vice-soundtrack__item--pending",!native);
@@ -2471,6 +2471,8 @@ function draw(){
  for(const {button,kind,track} of pendingButtons){
   const selected=!!current&&current.file===track.file;
   const native=!!api.originalReady?.(track.file);
+  button.disabled=!native;
+  button.closest?.(".vice-soundtrack__item")?.classList.toggle("vice-soundtrack__item--pending",!native);
   button.setAttribute("aria-pressed",String(selected));
   button.classList.toggle("is-playing",selected&&playing);
   if(native&&selected)kind.textContent=track.format+" · "+(playing?"▶":paused?"Ⅱ":"AY");
