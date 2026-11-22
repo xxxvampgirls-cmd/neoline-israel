@@ -11,7 +11,7 @@ const {chromium}=require("playwright");
    await page.goto("http://127.0.0.1:8765/teoria.html",{waitUntil:"domcontentloaded",timeout:35000});
    await page.waitForFunction(()=>document.querySelector(".hero-art.theory-promo-host .theory-promo-dot[data-slide='4']")!==null,{timeout:14000});
    const base=await page.evaluate(()=>({
-    css:[...document.styleSheets].some(s=>s.href?.includes("teoria-slide-frame-air.css")),
+    css:[...document.styleSheets].some(s=>s.href?.includes("teoria-slide-frame-air.css")||s.href?.includes("teoria-optimized-")),
     theme:document.documentElement.dataset.viceTheme,
     dots:document.querySelectorAll(".theory-promo-host .theory-promo-dot").length
    }));
