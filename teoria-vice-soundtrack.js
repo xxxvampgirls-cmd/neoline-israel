@@ -112,8 +112,8 @@ const pendingSongs=[
 ];
 // One identical Batman_The_Movie_3.ay duplicate intentionally omitted.
 const extra={
- ru:{drawer:"Музыкальная коллекция ZX 128K",subtitle:"Плеер и вся музыка · нажми, чтобы открыть",ready:"ДОСТУПНО ДЛЯ ПРОСЛУШИВАНИЯ",waiting:"ОРИГИНАЛЫ · AY / STC / SQT / ASC / STP / PT2",state:"Открыть оригинал",count:"{a} PT3 · {b} оригиналов",foot:"Оригинальные PT3 играют через AY-3-8912. Другие форматы можно слушать в ZXTune без PT3-конвертации. Пока исходники не опубликованы на сайте, загрузите new.zip прямо в ZXTune."},
- en:{drawer:"ZX 128K Music Collection",subtitle:"Player and complete list · tap to expand",ready:"READY TO LISTEN",waiting:"ORIGINALS · AY / STC / SQT / ASC / STP / PT2",state:"Open original",count:"{a} PT3 · {b} originals",foot:"The original PT3 modules use our AY chip. Other formats can be played in ZXTune without PT3 conversion. Until sources are hosted, import new.zip in ZXTune."},
+ ru:{drawer:"Музыкальная коллекция ZX 128K",subtitle:"Плеер и вся музыка · нажми, чтобы открыть",ready:"ДОСТУПНО ДЛЯ ПРОСЛУШИВАНИЯ",waiting:"ОРИГИНАЛЫ · AY / STC / SQT / ASC / STP / PT2",state:"Открыть в ZXTune ↗",count:"{a} PT3 · {b} оригиналов",foot:"Оригинальные PT3 играют через AY-3-8912. Пока дополнительные записи не подготовлены к нашему AY-проигрывателю, они открываются в отдельном ZXTune. Нажми ▶ для запуска."},
+ en:{drawer:"ZX 128K Music Collection",subtitle:"Player and complete list · tap to expand",ready:"READY TO LISTEN",waiting:"ORIGINALS · AY / STC / SQT / ASC / STP / PT2",state:"Open original",count:"{a} PT3 · {b} originals",foot:"The original PT3 modules use our AY chip. Other original formats open in ZXTune until a verified AY register playback cache is available."},
  he:{drawer:"אוסף מוזיקה ZX 128K",subtitle:"נגן וכל המוזיקה · לחצו לפתיחה",ready:"מוכן להאזנה",waiting:"פורמטים מקוריים · AY / STC / SQT",state:"פתח את המקור",count:"{a} PT3 · {b} מקוריים",foot:"PT3 מופעל דרך AY. פורמטים אחרים מופעלים ב-ZXTune ללא המרה. טען את new.zip ב-ZXTune עד שקובצי המקור יפורסמו באתר."},
  ar:{drawer:"مجموعة موسيقى ZX 128K",subtitle:"المشغل وكل المقاطع · اضغط للفتح",ready:"جاهز للاستماع",waiting:"الملفات الأصلية · AY / STC / SQT",state:"فتح الأصل",count:"{a} PT3 · {b} أصلية",foot:"يعمل PT3 عبر AY. تُشغَّل التنسيقات الأخرى في ZXTune بدون تحويل. حمّل new.zip داخل ZXTune حتى نشر الملفات الأصلية."}
 };
@@ -190,33 +190,21 @@ originalDialog.addEventListener("cancel",()=>{
 });
 originalDialog.addEventListener("click",e=>{if(e.target===originalDialog)closeOriginalDialog()});
 async function openOriginalTrack(track){
- const serial=++modalSequence;
- if(api.state().id)api.stop();
- api.suspendForOriginalPlayer?.(true);
- modalTitle.textContent=track.name+" · "+track.format;
- modalLink.href=ZXTUNE_URL;
- modalMessage.textContent="ZX Spectrum · original "+track.format;
- modalFrame.src=ZXTUNE_URL;
- if(!originalDialog.open)originalDialog.showModal();
- const url="./assets/teoria/originals/"+encodeURIComponent(track.file);
- let isHosted=false;
- try{
-  const abort=new AbortController();
-  const timeout=setTimeout(()=>abort.abort(),3000);
-  try{const response=await fetch(url,{method:"HEAD",cache:"no-store",signal:abort.signal});isHosted=response.ok&&!/text\/html/i.test(response.headers.get("content-type")||"")}
-  finally{clearTimeout(timeout)}
- }catch(_){}
- if(serial!==modalSequence||!originalDialog.open)return;
- if(isHosted){
-  const originalURL=new URL(url,location.href).href;
-  const playerURL=ZXTUNE_URL+"?url="+encodeURIComponent(originalURL);
+ // Browser extensions/CSP may block third-party player iframes.
+ // Open its own real player on a direct user gesture instead.
+ // Sources are hosted as original binary files on Cloudflare Pages, not
+ // reconstructed or re-arranged, and CORS is enabled for ZXTune.
+ const fileURL=new URL("./assets/teoria/originals/"+encodeURIComponent(track.file),location.href).href;
+ const playerURL=ZXTUNE_URL+"?url="+encodeURIComponent(fileURL);
+ const win=window.open(playerURL,"_blank","noopener");
+ if(!win){
+  modalTitle.textContent=track.name+" · "+track.format;
   modalLink.href=playerURL;
-  modalFrame.src=playerURL;
-  modalMessage.textContent=(doc.lang==="ru"?"Открой ZXTune и нажми ▶ для запуска оригинального файла: ":"Open ZXTune and press ▶ to play the original: ")+track.file;
- }else{
-  modalMessage.textContent=(doc.lang==="ru"
-   ?"Оригинальный файл пока не загружен на сайт. В ZXTune нажми «Choose files», выбери архив new.zip, затем композицию "+track.name+"."
-   :"Original not hosted yet. In ZXTune choose files, load your new.zip archive and select "+track.name+".");
+  modalMessage.textContent=doc.lang==="ru"
+   ?"Нажми «Открыть ZXTune», затем ▶ в проигрывателе. Это оригинальный файл."
+   :"Open ZXTune, then press ▶ to play the original file.";
+  modalFrame.removeAttribute("src");
+  if(!originalDialog.open)originalDialog.showModal();
  }
 }
 
