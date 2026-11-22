@@ -1,0 +1,44 @@
+/* NEOLINE — original cinematic route advertisement, 22 Nov 2026.
+ * Replaces ONLY the small fifth GTA-style carousel artwork in the ordinary
+ * Russian page with the user-approved neon sunset scene.
+ * All dots, swipes and the click-to-toggle-GTA button stay live.
+ * Other languages retain their translated, text-based promo artwork. */
+html:not([data-vice-theme="on"])[lang^="ru"] .theory-promo-host .theory-promo-slide.vice-promo-slide{
+ background:#261643 url("./assets/teoria/vice-neon-route-promo.webp") center / cover no-repeat!important;
+ isolation:isolate;
+}
+html:not([data-vice-theme="on"])[lang^="ru"] .theory-promo-host .theory-promo-slide.vice-promo-slide > svg{
+ visibility:hidden!important;
+ opacity:0!important;
+}
+html:not([data-vice-theme="on"])[lang^="ru"] .theory-promo-host:has(>.vice-promo-slide.is-active){
+ border-color:#ed8cc4!important;
+ box-shadow:0 0 0 1px #ff93cc88,0 0 17px #f077bb7a,0 8px 21px #411c5683!important;
+}
+html:not([data-vice-theme="on"])[lang^="ru"] .theory-promo-host:has(>.vice-promo-slide.is-active) .theory-promo-caption{
+ visibility:hidden!important;
+ opacity:0!important;
+}
+html:not([data-vice-theme="on"])[lang^="ru"] .theory-promo-host:has(>.vice-promo-slide.is-active) .theory-promo-dots{
+ background:#2b1649dd!important;
+ border:1px solid #ffbfe59e!important;
+ box-shadow:0 2px 12px #250f3fa8!important;
+ bottom:6px!important;
+}
+html:not([data-vice-theme="on"])[lang^="ru"] .theory-promo-host:has(>.vice-promo-slide.is-active) .theory-promo-dot::before{
+ background:#fbaed8!important;
+}
+html:not([data-vice-theme="on"])[lang^="ru"] .theory-promo-host:has(>.vice-promo-slide.is-active) .theory-promo-dot[aria-current="true"]::before{
+ background:#ffe1a8!important;
+ box-shadow:0 0 0 1px #ffefc7,0 0 8px #ffcd6da3!important;
+}
+@media(max-width:720px){
+ html:not([data-vice-theme="on"])[lang^="ru"] .theory-promo-host:has(>.vice-promo-slide.is-active) .theory-promo-dots{
+  bottom:4px!important;
+ }
+}
+@media(prefers-reduced-motion:reduce){
+ html:not([data-vice-theme="on"])[lang^="ru"] .theory-promo-host .vice-promo-slide{
+  animation:none!important;
+ }
+}
