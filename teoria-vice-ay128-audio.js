@@ -57,8 +57,17 @@
   "F5 A5 D6 A5 C6 A5 F5 D5",
   "E5 G#5 B5 E6 D6 B5 G#5 E5"
  ].map(bar => bar.split(" "));
- const LEADS = {menu:MELODY,quiz:CHASE_MELODY,result:MELODY};
- const BPM = {menu:116,quiz:141,result:125};
+ // The individual Ocean-era scores are loaded before this player.
+ // A fallback melody keeps playback safe if an old cached page omitted them.
+ const AY_MODES=window.NEOLINE_AY_TRACKS||{};
+ const TRACKS={
+  menu:{bpm:116,roots:ROOTS,chords:CHORDS,melody:MELODY,arp:[0,1,2,1,0,2,1,2],beat:"sunset"},
+  ...AY_MODES,
+  result:{bpm:125,roots:ROOTS,chords:CHORDS,melody:MELODY,arp:[0,2,1,2,0,1,2,1],beat:"final"}
+ };
+ let currentMode=null;
+ const isQuizScene=()=>!["menu","result","fail"].includes(scene);
+
  const noiseBits = new Float32Array(8192);
  let rng = 0x5EED;
  for (let i=0;i<noiseBits.length;i++) {
@@ -154,33 +163,48 @@
  function guessScene() {
   if (byId("gameOver") && !byId("gameOver").hidden) return "fail";
   if (byId("gameResult") && !byId("gameResult").hidden) return "result";
-  if (byId("gamePlaying") && !byId("gamePlaying").hidden) return "quiz";
+  if (byId("gamePlaying") && !byId("gamePlaying").hidden) return TRACKS[currentMode] ? currentMode : "menu";
   return "menu";
  }
  function playStep(at) {
-  const tempo = BPM[scene] || 116;
-  const stepLen = 60/tempo/4;
-  const step = sequence % 128, bar=Math.floor(step/16), pos=step%16;
-  const sceneLead = LEADS[scene] || MELODY;
-  if ((pos&1)===0) {
-   const note=sceneLead[bar][pos/2];
-   if(note && note!=="-" && note!==".") {
+  const track=TRACKS[scene]||TRACKS.menu;
+  const stepLen=60/track.bpm/4;
+  const step=sequence%128,bar=Math.floor(step/16),pos=step%16;
+  const melody=track.melody[bar],beat=track.beat;
+  // Distinct melodies, basslines, rhythms and arpeggios for all six modes.
+  if((pos&1)===0){
+   const note=melody[pos/2];
+   if(note && note!=="-" && note!=="."){
     let length=2;
-    for(let j=pos/2+1;j<8&&sceneLead[bar][j]==="-";j++) length+=2;
-    tone(note,Math.min(stepLen*length*.91,0.76),at,scene==="quiz"?.30:.28,musicBus);
+    for(let j=pos/2+1;j<8&&melody[j]==="-";j++)length+=2;
+    tone(note,Math.min(stepLen*length*.89,1.0),at,beat==="pulse"?.24:beat==="rush"?.30:.26,musicBus);
    }
-   const root=ROOTS[bar], fifth=CHORDS[bar][2];
-   const bass = (pos===4 || pos===12) ? fifth.replace(/[45]$/,"3") : root;
-   tone(bass,stepLen*(pos===0||pos===8?3:1.45),at,scene==="quiz"?.19:.17,musicBus);
+   const bass=pos===4||pos===12?track.chords[bar][2]:track.roots[bar];
+   const bassTone=bass===track.roots[bar]?bass:bass.replace(/([0-8])$/,(_,oct)=>String(Math.max(1,Number(oct)-1)));
+   const duration=beat==="pulse"?(pos===0||pos===8?2.4:1.0):beat==="rush"?1.45:pos===0||pos===8?3:1.45;
+   tone(bassTone,stepLen*duration,at,beat==="rush"?.18:.155,musicBus);
   }
-  const chord=CHORDS[bar];
-  const arpSteps=scene==="quiz"?[0,2,1,2,0,1,2,1]:[0,1,2,1,0,2,1,2];
-  let arp=chord[arpSteps[pos%8]];
-  if(scene==="quiz" && pos>=8 && pos%4===3) arp=chord[2].replace("5","6");
-  tone(arp,stepLen*.79,at,scene==="quiz"?.074:.058,musicBus);
-  if(pos%4===0) noise(0.07,at,0.12,"kick");
-  if(pos===4||pos===12) noise(0.085,at,0.115,"snare");
-  if(pos%2===0) noise(0.027,at,0.045,"hat");
+  const chord=track.chords[bar];
+  const arp=chord[track.arp[pos%8]];
+  if(beat!=="pulse"||pos%2===0)
+   tone(arp,stepLen*(beat==="slow"?.91:.74),at,beat==="pulse"?.043:beat==="slow"?.047:beat==="rush"?.079:.061,musicBus);
+  if(beat==="rush"){
+   if(pos%4===0)noise(.065,at,.135,"kick");
+   if(pos===4||pos===12)noise(.085,at,.14,"snare");
+   if(pos%2===0)noise(.024,at,.052,"hat");
+  }else if(beat==="pulse"||beat==="slow"){
+   if(pos===0||pos===8)noise(.075,at,.077,"kick");
+   if(pos===12)noise(.085,at,.065,"snare");
+   if(beat==="pulse"&&pos%4===2)noise(.016,at,.024,"hat");
+  }else if(beat==="bouncy"||beat==="swing"){
+   if(pos===0||pos===8||pos===10)noise(.06,at,.10,"kick");
+   if(pos===4||pos===12)noise(.067,at,.084,"snare");
+   if(pos%4===2)noise(.023,at,.031,"hat");
+  }else{
+   if(pos%4===0)noise(.068,at,.115,"kick");
+   if(pos===4||pos===12)noise(.081,at,.107,"snare");
+   if(pos%2===0)noise(.025,at,.039,"hat");
+  }
  }
  function tick() {
   if(!ctx || ctx.state!=="running" || document.hidden || !musicOn || !isVice() || scene==="fail") return;
@@ -188,7 +212,7 @@
   let safety=0;
   while(nextStep<ctx.currentTime+0.17 && safety++<8) {
    playStep(nextStep);
-   nextStep+=60/(BPM[scene]||116)/4;
+   nextStep+=60/(TRACKS[scene]?.bpm||116)/4;
    sequence++;
   }
  }
@@ -199,7 +223,7 @@
   if(timer && !force) return;
   stopMusic();
   sequence=0;nextStep=ctx.currentTime+0.035;
-  setBus(byId("gameGiftDialog")?.open ? .095 : scene==="quiz" ? .22 : .185,0.055);
+  setBus(byId("gameGiftDialog")?.open ? .095 : isQuizScene() ? .22 : .185,0.055);
   timer=setInterval(tick,42);
   tick();
  }
@@ -297,6 +321,11 @@
   bars.push({wrap,music,sound,state});
  }
  makeBar(document.querySelector(".neoline-site-header__actions"));
+ // Active quizzes deliberately hide the main header: these synchronized
+ // switches stay visible within the question card in ALL practice modes.
+ makeBar(document.querySelector("#gamePlaying .question-eyebrow"));
+ makeBar(document.querySelector("#gameResult"));
+ makeBar(document.querySelector("#gameOver .gameover-card"));
  function updateControls() {
   const t=labels();
   for(const bar of bars) {
@@ -353,10 +382,11 @@
  window.addEventListener("neoline:theory-quiz",e=>{
   if(!isVice())return;
   const d=e.detail||{};
+  if(d.mode && TRACKS[d.mode]) currentMode=d.mode;
   const wasScene=scene;
   changeScene(guessScene());
-  if(scene==="quiz"&&wasScene!=="quiz") {lastDone=0;fx("start");return}
-  if(scene==="quiz" && !d.answered && Number.isFinite(d.done) && d.done>lastDone) {
+  if(isQuizScene()&&wasScene!==scene) {lastDone=0;fx("start");return}
+  if(isQuizScene() && !d.answered && Number.isFinite(d.done) && d.done>lastDone) {
    if(lastDone>=0) fx("question");
    lastDone=d.done;
   }
@@ -399,7 +429,7 @@
  if(clock) {
   let lastSecond=null;
   new MutationObserver(()=>{
-   if(!isVice() || scene!=="quiz" || byId("timerBox")?.hidden)return;
+   if(!isVice() || scene!=="exam" || byId("timerBox")?.hidden)return;
    const m=/^(\d\d):(\d\d)$/.exec(clock.textContent.trim());
    if(!m)return;
    const sec=+m[1]*60 + +m[2];
@@ -410,7 +440,7 @@
  if(dialog){
   new MutationObserver(()=>{
    if(ctx&&musicOn&&isVice()&&ctx.state==="running"&&scene!=="fail")
-    setBus(dialog.open?.085:scene==="quiz"?.22:.185);
+    setBus(dialog.open?.085:isQuizScene()?.22:.185);
   }).observe(dialog,{attributes:true,attributeFilter:["open"]});
  }
  document.addEventListener("visibilitychange",()=>{
