@@ -6,6 +6,31 @@
    Original implementation, not an imported third-party library. */
 "use strict";
 const AY_CLOCK=1773400;
+// ROM block timings. Driven by the same samples as the sound; no fake gap
+// between the 8063 leader pulses, two sync pulses and the header data.
+const ZX_TSTATES=3500000;
+const ZX_HEADER_BYTES=(()=>{
+ const header=[0,3,78,69,79,76,73,78,69,32,32,32,0,192,0,0,0,0];
+ const checksum=header.reduce((sum,byte)=>sum^byte,0);
+ return [...header,checksum];
+})();
+const ZX_HEADER_PULSES=(()=>{
+ const lengths=[667,735];
+ for(const byte of ZX_HEADER_BYTES){
+  for(let bit=7;bit>=0;bit--){
+   const half=(byte&(1<<bit))?1710:855;
+   lengths.push(half,half);
+  }
+ }
+ let cumulative=0;
+ return lengths.map(t=>{cumulative+=t;return cumulative;});
+})();
+const ZX_HEADER_PILOT_SECONDS=8063*2168/ZX_TSTATES;
+const ZX_HEADER_AFTER_PILOT_SECONDS=ZX_HEADER_PULSES[ZX_HEADER_PULSES.length-1]/ZX_TSTATES;
+const ZX_INTERBLOCK_SECONDS=1;
+const ZX_DATA_PILOT_SECONDS=3223*2168/ZX_TSTATES;
+const ZX_DATA_SYNC_SECONDS=(667+735)/ZX_TSTATES;
+
 const AY_LEVELS=new Float32Array([
  0,.009,.013,.019,.027,.038,.055,.078,
  .110,.158,.223,.315,.445,.630,.795,1
@@ -29,9 +54,12 @@ class NeolineAY8912 extends AudioWorkletProcessor{
   this.musicDucking=1; // gradual release avoids pops when short sounds finish
   // Recreated EAR/ULA tape pulses share this worklet, not the AY three voices.
   this.tapeActive=false;this.tapeArmed=false;this.tapeSamples=0;
-  this.tapeDurationSamples=sampleRate*10.844;
-  this.tapePhase=0;this.tapeNoise=0xACE1;this.tapeBit=0;
-  this.tapeBitSamples=0;
+  this.tapeDurationSamples=sampleRate*12.4;
+  this.tapePhaseName="";
+  this.tapeNoise=0xACE1;
+  this.tapeHeaderPulseIndex=0;this.tapeDataPulseIndex=0;
+  this.tapeDataEdge=0;this.tapeDataLevel=1;
+  this.tapeBitSamples=0;this.tapeBit=0;
   this.frameSamples=sampleRate;
   this.outputLevel=0;this.dc=0;
   this.port.onmessage=e=>{
@@ -55,10 +83,12 @@ class NeolineAY8912 extends AudioWorkletProcessor{
     const shouldTape=!!m.tape;
     if(shouldTape&&!this.tapeArmed){
      this.tapeArmed=true;
-     this.tapeActive=true;this.tapeSamples=0;this.tapePhase=0;
+     this.tapeActive=true;this.tapeSamples=0;this.tapePhaseName="";
+     this.tapeHeaderPulseIndex=0;this.tapeDataPulseIndex=0;
+     this.tapeDataEdge=0;this.tapeDataLevel=1;
      this.tapeBitSamples=0;this.tapeBit=0;this.tapeNoise=0xACE1;
-     this.tapeDurationSamples=sampleRate*Math.max(.3,
-      Math.min(15,(Number(m.tapeDurationMs)||10844)/1000));
+     this.tapeDurationSamples=sampleRate*Math.max(8,
+      Math.min(18,(Number(m.tapeDurationMs)||12400)/1000));
     }else if(!shouldTape){this.tapeActive=false;this.tapeArmed=false;}
     if(!this.effectsEnabled){this.fxFrames=null;this.fxReg=null;}
    }else if(m.type==="fx"){
@@ -122,52 +152,80 @@ class NeolineAY8912 extends AudioWorkletProcessor{
   const upward=alternate&&(cycle&1)?!attack:attack;
   return upward?position:15-position;
  }
- // Approximation of ZX ROM cassette pilot, sync and data-bit pulses.
- // Authentic in character, but it does not encode a playable TZX tape.
+ // 48K ROM leader + sync + 19-byte header with real 855/1710
+ // T-state half-pulses. The second block starts with the full 3223
+ // pulse pilot. Its data is intentionally shortened for this arcade intro.
+ tapePhaseEvent(phase){
+  if(phase===this.tapePhaseName)return;
+  this.tapePhaseName=phase;
+  this.port.postMessage({type:"tape-phase",phase});
+ }
  tapeSample(sr){
   const sample=this.tapeSamples++;
-  if(sample>=this.tapeDurationSamples){this.tapeActive=false;return 0;}
-  // Uncut ZX Spectrum ROM header leader: 8063 pulses, each exactly
-  // 2168 CPU T-states at 3.5 MHz (~4.994 s). No preliminary tone/fade.
-  const pilotSamples=(8063*2168/3500000)*sr;
-  if(sample<pilotSamples){
-   const halfCycle=Math.floor(sample*3500000/(sr*2168));
-   return (halfCycle&1?-.165:.165);
+  const elapsed=sample/sr;
+  const total=this.tapeDurationSamples/sr;
+  if(sample>=this.tapeDurationSamples){
+   this.tapeActive=false;this.tapePhaseEvent("done");
+   return 0;
   }
-  // A brief natural tape-block silence separates the header from data.
-  const gapSamples=sr*.25;
-  if(sample<pilotSamples+gapSamples)return 0;
-  const dataSamples=Math.max(1,this.tapeDurationSamples-pilotSamples-gapSamples);
-  const q=Math.min(1,(sample-pilotSamples-gapSamples)/dataSamples);
-  this.tapeBitSamples++;
-  if(this.tapeBitSamples>=sr*.0075){
-   this.tapeBitSamples=0;
-   const bit=((this.tapeNoise>>0)^(this.tapeNoise>>2)^
-              (this.tapeNoise>>3)^(this.tapeNoise>>5))&1;
-   this.tapeNoise=(this.tapeNoise>>1)|(bit<<15);
-   this.tapeBit=this.tapeNoise&1;
+  const firstEnd=ZX_HEADER_PILOT_SECONDS;
+  const headerEnd=firstEnd+ZX_HEADER_AFTER_PILOT_SECONDS;
+  const gapEnd=headerEnd+ZX_INTERBLOCK_SECONDS;
+  const dataPilotEnd=gapEnd+ZX_DATA_PILOT_SECONDS;
+  const dataStart=dataPilotEnd+ZX_DATA_SYNC_SECONDS;
+  // No fade, delay or silence at the start of the authentic ~4.99s pilot.
+  if(elapsed<firstEnd){
+   this.tapePhaseEvent("pilot-header");
+   const pulse=Math.floor(elapsed*ZX_TSTATES/2168);
+   return pulse&1?-.165:.165;
   }
-  // Following data bursts are shortened for game pacing, with
-  // genuine gaps between simulated data blocks, not constant buzzing.
+  if(elapsed<headerEnd){
+   const tstate=(elapsed-firstEnd)*ZX_TSTATES;
+   this.tapePhaseEvent(tstate<1402?"sync-header":"header-data");
+   while(this.tapeHeaderPulseIndex<ZX_HEADER_PULSES.length &&
+      ZX_HEADER_PULSES[this.tapeHeaderPulseIndex]<=tstate){
+    this.tapeHeaderPulseIndex++;
+   }
+   return this.tapeHeaderPulseIndex&1?-.16:.16;
+  }
+  if(elapsed<gapEnd){
+   this.tapePhaseEvent("interblock-pause");
+   return 0;
+  }
+  if(elapsed<dataPilotEnd){
+   this.tapePhaseEvent("pilot-data");
+   const pulse=Math.floor((elapsed-gapEnd)*ZX_TSTATES/2168);
+   return pulse&1?-.16:.16;
+  }
+  if(elapsed<dataStart){
+   this.tapePhaseEvent("sync-data");
+   const tstate=(elapsed-dataPilotEnd)*ZX_TSTATES;
+   return tstate<667?.16:-.16;
+  }
+  const duration=Math.max(.3,total-dataStart);
+  const q=Math.min(1,(elapsed-dataStart)/duration);
+  // Pauses between shortened data bursts: both the audio and ULA border
+  // switch state based on this same AudioWorklet sample clock.
   const gaps=[[.22,.265],[.56,.615],[.75,.78],[.96,1]];
-  if(gaps.some(([a,b])=>q>=a&&q<b))return 0;
-  let hz,amp;
-  if(q<.08){hz=806;amp=.165;}
-  else if(q<.22){hz=806;amp=.165;}
-  else if(q<.32){hz=q<.292?1800:2530;amp=.15;}
-  else if(q<.56){hz=this.tapeBit?2020:1035;amp=.17;}
-  else if(q<.75){hz=this.tapeBit?2210:1180;amp=.16;}
-  else if(q<.90){hz=this.tapeBit?2020:1035;amp=.17;}
-  else{hz=1240;amp=.11;}
-  this.tapePhase+=hz/sr;
-  if(this.tapePhase>=1)this.tapePhase-=Math.floor(this.tapePhase);
-  let gate=q<.018?Math.min(1,q/.018):1;
-  // Short edge fades stop hard clicks before and after each pause.
-  for(const [a,b] of gaps){
-   if(q>=a-.004&&q<a)gate*=Math.max(0,(a-q)/.004);
-   if(q>=b&&q<b+.004)gate*=Math.max(0,(q-b)/.004);
+  if(gaps.some(([p0,p1])=>q>=p0&&q<p1)){
+   this.tapePhaseEvent(q>=.96?"data-end":"data-pause");
+   return 0;
   }
-  return (this.tapePhase<.5?1:-1)*amp*gate;
+  this.tapePhaseEvent("data");
+  // Follow original 855/1710 T-state pulse lengths for the compressed
+  // data section too, with deterministic simulated data bits.
+  if(this.tapeDataEdge<=0){
+   if((this.tapeDataPulseIndex++&1)===0){
+    const bit=((this.tapeNoise>>0)^(this.tapeNoise>>2)^
+      (this.tapeNoise>>3)^(this.tapeNoise>>5))&1;
+    this.tapeNoise=(this.tapeNoise>>1)|(bit<<15);
+    this.tapeBit=this.tapeNoise&1;
+   }
+   this.tapeDataEdge=Math.max(1,Math.round((this.tapeBit?1710:855)*sr/ZX_TSTATES));
+   this.tapeDataLevel=-this.tapeDataLevel;
+  }
+  this.tapeDataEdge--;
+  return this.tapeDataLevel*.16;
  }
  process(_inputs,outputs){
   const out=outputs[0];if(!out||!out.length)return true;
