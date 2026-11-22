@@ -28,7 +28,7 @@ class NeolineAY8912 extends AudioWorkletProcessor{
   this.gameplay=false;this.giftActive=false;
   this.musicDucking=1; // gradual release avoids pops when short sounds finish
   // Recreated EAR/ULA tape pulses share this worklet, not the AY three voices.
-  this.tapeActive=false;this.tapeSamples=0;
+  this.tapeActive=false;this.tapeArmed=false;this.tapeSamples=0;
   this.tapeDurationSamples=sampleRate*8.2;
   this.tapePhase=0;this.tapeNoise=0xACE1;this.tapeBit=0;
   this.tapeBitSamples=0;
@@ -53,12 +53,13 @@ class NeolineAY8912 extends AudioWorkletProcessor{
     this.effectsEnabled=!!m.effects;
     this.gameplay=!!m.gameplay;this.giftActive=!!m.gift;
     const shouldTape=!!m.tape;
-    if(shouldTape&&!this.tapeActive){
+    if(shouldTape&&!this.tapeArmed){
+     this.tapeArmed=true;
      this.tapeActive=true;this.tapeSamples=0;this.tapePhase=0;
      this.tapeBitSamples=0;this.tapeBit=0;this.tapeNoise=0xACE1;
      this.tapeDurationSamples=sampleRate*Math.max(.3,
       Math.min(15,(Number(m.tapeDurationMs)||8200)/1000));
-    }else if(!shouldTape)this.tapeActive=false;
+    }else if(!shouldTape){this.tapeActive=false;this.tapeArmed=false;}
     if(!this.effectsEnabled){this.fxFrames=null;this.fxReg=null;}
    }else if(m.type==="fx"){
     if(!this.effectsEnabled)return;
