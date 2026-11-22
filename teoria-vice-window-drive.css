@@ -1,0 +1,119 @@
+/* NEOLINE · VICE MODE · continuous driving-window city panorama
+   The header controls remain fully interactive and perfectly still.
+   Four independent repeatable SVG layers travel LEFT at different speeds:
+   distant skyline, nearby city, palm trees, and flying birds. */
+.vice-window-panorama{
+ display:none;
+}
+html[data-vice-theme="on"] .topbar.neoline-site-header{
+ isolation:isolate;
+ background-color:#f1bed2!important;
+ background-image:
+  radial-gradient(ellipse 46% 170% at 79% 12%,#ffe9caed 0%,#ffbdcba8 45%,transparent 90%),
+  linear-gradient(100deg,#f2d9e9 0%,#e9c7e6 23%,#e0a9cf 50%,#e19fbb 78%,#f6b7ab 100%)!important;
+ background-size:cover!important;
+ background-position:center!important;
+ background-repeat:no-repeat!important;
+}
+html[data-vice-theme="on"] .topbar.neoline-site-header > .vice-window-panorama{
+ display:block;position:absolute;inset:0;z-index:0;
+ overflow:hidden;pointer-events:none;user-select:none;
+ contain:paint;
+}
+html[data-vice-theme="on"] .topbar.neoline-site-header .neoline-site-header__inner{
+ position:relative;z-index:2!important;
+}
+.vice-window-panorama__layer{
+ position:absolute;top:0;bottom:0;left:0;
+ width:calc(100% + var(--vice-window-tile));
+ display:block;
+ pointer-events:none;
+ background-repeat:repeat-x;
+ background-size:var(--vice-window-tile) 100%;
+ background-position:left center;
+ will-change:transform;
+ transform:translate3d(0,0,0);
+ animation:viceWindowDriveLeft var(--vice-window-speed) linear infinite;
+}
+.vice-window-panorama__layer--far{
+ --vice-window-tile:1100px;--vice-window-speed:80s;
+ z-index:1;opacity:.68;
+ background-image:url("./assets/teoria/vice-drive-skyline-far.svg?v=1");
+}
+.vice-window-panorama__layer--mid{
+ --vice-window-tile:910px;--vice-window-speed:43s;
+ z-index:2;opacity:.74;
+ background-image:url("./assets/teoria/vice-drive-skyline-mid.svg?v=1");
+}
+.vice-window-panorama__layer--palms{
+ --vice-window-tile:770px;--vice-window-speed:16s;
+ z-index:3;opacity:.79;
+ background-image:url("./assets/teoria/vice-drive-palms.svg?v=1");
+}
+.vice-window-panorama__layer--birds{
+ --vice-window-tile:1310px;--vice-window-speed:34s;
+ z-index:4;opacity:.87;
+ background-image:url("./assets/teoria/vice-drive-birds.svg?v=1");
+ animation-name:viceWindowBirdFlight;
+}
+.vice-window-panorama__glaze{
+ position:absolute;inset:0;z-index:5;
+ pointer-events:none;
+ background:
+  linear-gradient(98deg,#fff9fc25 0%,transparent 19%,#fff8fa21 47%,transparent 54%,#fff0fa29 100%),
+  linear-gradient(0deg,#8d52872d 0%,transparent 22%);
+}
+.vice-window-panorama__glaze::before{
+ content:"";position:absolute;inset:0;
+ background:linear-gradient(105deg,transparent 24%,#fffefb33 48%,transparent 58%);
+ transform:translate3d(-150%,0,0);
+ animation:viceWindowGlassReflection 18s ease-in-out infinite;
+}
+.vice-window-panorama__road{
+ position:absolute;left:0;right:0;bottom:0;height:5px;z-index:6;
+ opacity:.44;
+ background:repeating-linear-gradient(90deg,#fbdce9 0 95px,#dc84bb 95px 125px,transparent 125px 210px);
+ background-size:420px 100%;
+ animation:viceWindowRoad 6s linear infinite;
+}
+@keyframes viceWindowDriveLeft{
+ from{transform:translate3d(0,0,0)}
+ to{transform:translate3d(calc(0px - var(--vice-window-tile)),0,0)}
+}
+@keyframes viceWindowBirdFlight{
+ 0%{transform:translate3d(0,0,0)}
+ 50%{transform:translate3d(calc(0px - var(--vice-window-tile) / 2),-2px,0)}
+ 100%{transform:translate3d(calc(0px - var(--vice-window-tile)),0,0)}
+}
+@keyframes viceWindowGlassReflection{
+ 0%,32%{transform:translate3d(-150%,0,0);opacity:0}
+ 41%{opacity:.62}
+ 59%{transform:translate3d(150%,0,0);opacity:0}
+ 100%{transform:translate3d(150%,0,0);opacity:0}
+}
+@keyframes viceWindowRoad{
+ from{background-position:0 bottom}
+ to{background-position:-420px bottom}
+}
+@media(max-width:700px){
+ .vice-window-panorama__layer--far{
+  --vice-window-tile:790px;--vice-window-speed:66s;opacity:.62;
+ }
+ .vice-window-panorama__layer--mid{
+  --vice-window-tile:670px;--vice-window-speed:36s;opacity:.69;
+ }
+ .vice-window-panorama__layer--palms{
+  --vice-window-tile:560px;--vice-window-speed:15s;opacity:.68;
+ }
+ .vice-window-panorama__layer--birds{
+  --vice-window-tile:960px;--vice-window-speed:30s;opacity:.85;
+ }
+ .vice-window-panorama__glaze::before{animation-duration:23s;opacity:.28}
+}
+@media(prefers-reduced-motion:reduce){
+ .vice-window-panorama__layer,
+ .vice-window-panorama__road,
+ .vice-window-panorama__glaze::before{
+  animation:none!important;transform:none!important;will-change:auto;
+ }
+}
