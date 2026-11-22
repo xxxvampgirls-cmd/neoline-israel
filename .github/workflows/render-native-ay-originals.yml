@@ -1,0 +1,72 @@
+name: NEOLINE original ZX music to AY playback cache
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - 'scripts/render_native_ay_originals.py'
+      - 'assets/teoria/originals/**'
+      - '.github/workflows/render-native-ay-originals.yml'
+permissions:
+  contents: write
+concurrency:
+  group: neoline-native-ay-originals
+  cancel-in-progress: false
+jobs:
+  render:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - name: Checkout NEOLINE music sources
+        uses: actions/checkout@v4
+        with:
+          ref: main
+          persist-credentials: true
+      - name: Install ZXTune build dependencies
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y --no-install-recommends \
+            g++ make zlib1g-dev libboost-dev libboost-filesystem-dev libboost-system-dev
+      - name: Build upstream ZXTune CLI (native AY tracker decoder)
+        run: |
+          git clone --depth 1 --branch develop https://github.com/vitamin-caig/zxtune.git /tmp/zxtune-src
+          make -C /tmp/zxtune-src/apps/zxtune123 -j2 system.zlib=1 \
+            support.alsa=0 support.pulse_audio=0 support.openal=0 \
+            support.sdl=0 support.mp3=0 support.ogg=0 support.flac=0
+          ZXTUNE=$(find /tmp/zxtune-src/bin -type f -name zxtune123 -perm /111 | head -1)
+          test -n "$ZXTUNE"
+          "$ZXTUNE" --help | head -30 || true
+          echo "ZXTUNE_BIN=$ZXTUNE" >> "$GITHUB_ENV"
+      - name: Decode originals faithfully to AY register frames
+        run: python3 scripts/render_native_ay_originals.py --zxtune "$ZXTUNE_BIN"
+      - name: Validate new AY files
+        run: |
+          python3 - <<'PY'
+          import json,pathlib
+          path=pathlib.Path('assets/teoria/ay-originals')
+          manifest=json.loads((path/'manifest.json').read_text())
+          assert manifest['frameRate']==50 and manifest['clockHz']==1773400
+          for id,track in manifest['tracks'].items():
+              raw=(path/(id+'.ay14')).read_bytes()
+              assert len(raw)==track['frames']*14
+              assert 150<track['frames']<=50*600
+              assert any(raw[i+8]|raw[i+9]|raw[i+10] for i in range(0,len(raw),14))
+              print(track['file'],track['frames'],'AY frames')
+          print(len(manifest['tracks']),'converted',len(manifest['failures']),'unavailable')
+          PY
+      - name: Commit only verified playback cache
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add assets/teoria/ay-originals/
+          if git diff --cached --quiet; then
+            echo 'Original AY cache unchanged'
+            exit 0
+          fi
+          git commit -m "Publish native ZX original AY register tracks for game rotation"
+          for attempt in 1 2 3 4; do
+            git pull --rebase origin main || { git rebase --abort || true; exit 1; }
+            git push origin HEAD:main && exit 0
+            sleep 4
+          done
+          exit 1
