@@ -552,13 +552,13 @@ jobs:
             await page.waitForFunction(()=>document.querySelectorAll('.news-card').length>0 || !document.getElementById('newsEmpty').hidden,{timeout:30000});
             const data=await page.evaluate(async()=>await (await fetch('./assets/news/news.json')).json());
             if(data.version!==1||data.retentionDays!==30||data.lawsRetentionMonths!==6)throw Error('Wrong archive configuration');
-            const carousel=page.locator('#newsFeatureCarousel');
+            const newsCarousel=page.locator('#newsFeatureCarousel');
             await page.waitForFunction(()=>document.querySelectorAll('.news-feature-dot').length===10,{timeout:15000});
-            if(!await carousel.isVisible())throw Error('Top ten-news carousel is hidden');
-            const firstFeature=await carousel.locator('.news-feature-title').innerText();
-            if(await carousel.locator('img,picture').count())
+            if(!await newsCarousel.isVisible())throw Error('Top ten-news carousel is hidden');
+            const firstFeature=await newsCarousel.locator('.news-feature-title').innerText();
+            if(await newsCarousel.locator('img,picture').count())
               throw Error('No news story photos in broadcast slider');
-            const corners=carousel.locator('#newsFeatureSlide .news-studio-corners');
+            const corners=newsCarousel.locator('#newsFeatureSlide .news-studio-corners');
             if(await corners.count()!==1)
               throw Error('Static cyan news corners must always be present');
             const fixedCorners=await corners.evaluate(el=>{
@@ -622,33 +622,33 @@ jobs:
                edges.motion!=='none'||edges.mirror!=='none')
               throw Error('Both corner diagonals need restrained matching static dark edges: '+JSON.stringify(edges));
             await corners.evaluate(el=>{el.dataset.fixedCorners='original'});
-            const pearl=await carousel.locator('.news-broadcast-stage').evaluate(el=>({
+            const pearl=await newsCarousel.locator('.news-broadcast-stage').evaluate(el=>({
               glows:getComputedStyle(el,'::before').animationName,
               sweep:getComputedStyle(el,'::after').animationName,
               layers:el.querySelectorAll('.news-mask-accent').length
             }));
             if(!pearl.glows.includes('newsPearlStudioFloat')||!pearl.sweep.includes('newsPearlStudioWave'))
               throw Error('The white-blue studio light must float vertically and horizontally: '+JSON.stringify(pearl));
-            const foreground=carousel.locator('.news-broadcast-foreground');
+            const foreground=newsCarousel.locator('.news-broadcast-foreground');
             const theme=await page.locator('#newsFeatureSlide').getAttribute('data-news-theme');
             if(!['accidents','laws','speed','roads','cars'].includes(theme))
               throw Error('News article has no valid category color: '+theme);
             // Neither text nor URL may be contained inside any background mask.
-            if(await carousel.locator('.news-broadcast-stage .news-feature-title').count())
+            if(await newsCarousel.locator('.news-broadcast-stage .news-feature-title').count())
               throw Error('News text was duplicated inside a background mask');
             const masks=['ribbons','chevron','shutters','diagonal','diamond'];
             for(let i=0;i<masks.length;i++){
               const effect=masks[i];
               await page.locator('#newsFeatureNext').click();
-              if(await carousel.locator('.news-broadcast-stage .news-feature-title').count())
+              if(await newsCarousel.locator('.news-broadcast-stage .news-feature-title').count())
                 throw Error(effect+' background transition contains duplicate text');
               if(await foreground.count()!==1)
                 throw Error('Foreground link was remounted during '+effect);
               if(await corners.count()!==1||await corners.getAttribute('data-fixed-corners')!=='original')
                 throw Error('Stationary corner decorations were replaced during '+effect);
-              if(await carousel.locator('.news-copy-enter').count()!==1)
+              if(await newsCarousel.locator('.news-copy-enter').count()!==1)
                 throw Error('New title should fade in separately during '+effect);
-              const accents=carousel.locator('.news-mask-accent');
+              const accents=newsCarousel.locator('.news-mask-accent');
               if(await accents.count()!==3)throw Error('Expected three colored mask bands during '+effect);
               const stripe=await accents.first().evaluate(el=>({
                 animation:getComputedStyle(el).animationName,
@@ -657,7 +657,7 @@ jobs:
               if(!stripe.animation.includes('newsAccentSweep')||!stripe.background.includes('linear-gradient'))
                 throw Error('Colored accent strips not applied: '+JSON.stringify(stripe));
               if(effect==='ribbons'||effect==='shutters'){
-                const segments=carousel.locator('.news-bg-fragment--'+effect);
+                const segments=newsCarousel.locator('.news-bg-fragment--'+effect);
                 if(await segments.count()!==5)
                   throw Error(effect+' must mask five strips of the BACKGROUND only');
                 const testSegment=await segments.nth(2).evaluate(el=>({
@@ -668,7 +668,7 @@ jobs:
                 if(!testSegment.animation.includes('newsBgStripFrom')||testSegment.clip==='none'||testSegment.containsText)
                   throw Error('Masked background fragment invalid: '+JSON.stringify(testSegment));
               }else{
-                const layer=carousel.locator('.news-bg-wipe--'+effect);
+                const layer=newsCarousel.locator('.news-bg-wipe--'+effect);
                 if(await layer.count()!==1)
                   throw Error('Background geometric mask '+effect+' missing');
                 const animation=await layer.evaluate(el=>getComputedStyle(el).animationName);
@@ -677,24 +677,24 @@ jobs:
                   throw Error('Background '+effect+' has no mask animation');
               }
               await page.waitForTimeout(1120);
-              if(await carousel.locator('.news-bg-layer').count()!==1 ||
-                 await carousel.locator('.news-mask-accent').count())
+              if(await newsCarousel.locator('.news-bg-layer').count()!==1 ||
+                 await newsCarousel.locator('.news-mask-accent').count())
                 throw Error(effect+' left stray background layers or stripes');
-              if(await carousel.locator('.news-feature-title').count()!==1)
+              if(await newsCarousel.locator('.news-feature-title').count()!==1)
                 throw Error(effect+' left an old headline in the foreground');
             }
-            if(await carousel.locator('.news-feature-title').innerText()===firstFeature)
+            if(await newsCarousel.locator('.news-feature-title').innerText()===firstFeature)
               throw Error('Broadcast transitions did not change news story');
             const counter=await page.locator('#newsFeatureCounter').textContent();
             if(!/06\s*\/\s*10/.test(counter))
               throw Error('Wrong current slide after five transitions: '+counter);
             await page.locator('#newsFeaturePrev').click();
-            if(await carousel.locator('.news-bg-fragment--ribbons.news-bg-from-prev').count()!==5)
+            if(await newsCarousel.locator('.news-bg-fragment--ribbons.news-bg-from-prev').count()!==5)
               throw Error('Reverse diagonal ribbons did not move in opposite direction');
             await page.locator('#newsFeatureNext').click();
             await page.waitForTimeout(1120);
-            if(await carousel.locator('.news-bg-layer').count()!==1 ||
-               await carousel.locator('.news-feature-title').count()!==1)
+            if(await newsCarousel.locator('.news-bg-layer').count()!==1 ||
+               await newsCarousel.locator('.news-feature-title').count()!==1)
               throw Error('Rapid taps left orphaned masks or headlines');
             // Headline slider retains the existing compact mobile geometry.
             const geometry=await page.evaluate(()=>{
