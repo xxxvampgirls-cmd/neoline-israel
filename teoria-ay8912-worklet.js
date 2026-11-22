@@ -206,8 +206,10 @@ class NeolineAY8912 extends AudioWorkletProcessor{
   const q=Math.min(1,(elapsed-dataStart)/duration);
   // Pauses between shortened data bursts: both the audio and ULA border
   // switch state based on this same AudioWorklet sample clock.
-  const gaps=[[.22,.265],[.56,.615],[.75,.78],[.96,1]];
-  if(gaps.some(([p0,p1])=>q>=p0&&q<p1)){
+  // Do not allocate arrays per audio sample: Chrome's AudioWorklet must
+  // remain realtime-safe on Android even during many edge transitions.
+  if((q>=.22&&q<.265)||(q>=.56&&q<.615)||
+     (q>=.75&&q<.78)||q>=.96){
    this.tapePhaseEvent(q>=.96?"data-end":"data-pause");
    return 0;
   }
