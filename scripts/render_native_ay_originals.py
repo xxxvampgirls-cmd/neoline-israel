@@ -36,7 +36,7 @@ def psg_to_ay14(data: bytes) -> bytes:
         if not r13_dirty:row[13]=0xff
         frames.extend(row)
         r13_dirty=False
-    i=17  # 16-byte PSG header + initial 0xfd overwritten by first frame
+    i=16  # ZXTune PSG uses 16-byte header; first frame overwrites initial 0xfd
     ended=False
     while i<len(data):
         code=data[i];i+=1
