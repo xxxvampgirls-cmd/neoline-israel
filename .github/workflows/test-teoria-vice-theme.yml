@@ -19,6 +19,8 @@ on:
       - 'assets/teoria/vice-card-mistakes.svg'
       - 'assets/teoria/vice-card-marathon.svg'
       - 'assets/teoria/vice-cinematic-duo.svg'
+      - 'assets/teoria/vice-cinematic-backdrop.svg'
+      - 'assets/teoria/vice-approved-protagonists.webp'
       - '.github/workflows/test-teoria-vice-theme.yml'
 permissions:
   contents: read
@@ -33,8 +35,6 @@ jobs:
           npm install --no-save playwright
           npx playwright install chromium
       - name: Serve source and test normal and neon styles on mobile
-        env:
-          SAVE_CINEMATIC_SCREENSHOTS: '1'
         run: |
           python3 -m http.server 8765 --bind 127.0.0.1 >/tmp/vice-theme.log 2>&1 &
           node --check teoria-gta6-style.js
