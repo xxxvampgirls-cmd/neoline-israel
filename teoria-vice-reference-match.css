@@ -376,7 +376,7 @@ html[data-vice-theme="on"] #gameLobby .routes .route-card{
   height:38px!important;
  }
  html[data-vice-theme="on"] .game-hero.theory-dashboard{
-  grid-template-rows:clamp(168px,43vw,191px) auto!important;
+  grid-template-rows:clamp(149px,38vw,167px) auto!important;
   row-gap:10px!important;
  }
  html[data-vice-theme="on"] .game-hero.theory-dashboard .hero-copy{
@@ -534,7 +534,7 @@ html[data-vice-theme="on"] #gameLobby .routes .route-card{
 }
 @media(max-width:365px){
  html[data-vice-theme="on"] .game-hero.theory-dashboard{
-  grid-template-rows:159px auto!important;
+  grid-template-rows:149px auto!important;
  }
  html[data-vice-theme="on"] .game-hero.theory-dashboard .hero-copy{
   padding:11px 0 11px 10px!important;
