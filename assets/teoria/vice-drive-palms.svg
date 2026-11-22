@@ -1,0 +1,54 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 180" preserveAspectRatio="none">
+<!-- Nearby palm silhouettes move fastest to give an in-car perspective -->
+<g transform="translate(88 188) scale(0.82)" opacity="0.6" fill="#785078" stroke="#785078" stroke-linejoin="round" stroke-linecap="round">
+<path d="M0 0Q-4-40-9-78T-17-122" stroke-width="7" fill="none"/>
+<g transform="translate(-17 -122)">
+<path d="M0 1Q-29-37-72-28Q-40-23-25-9Q-12-1 0 1Z"/>
+<path d="M0 0Q-15-58-53-62Q-32-46-19-25Q-10-8 0 0Z"/>
+<path d="M0 0Q-1-57 18-73Q22-39 9-13Z"/>
+<path d="M0 0Q33-52 74-42Q40-25 23-11Z"/>
+<path d="M0 2Q46-19 87 5Q55 0 23 6Z"/>
+<path d="M0 0Q36 16 53 48Q25 27 0 5Z"/>
+<path d="M0 0Q-35 0-53 29Q-30 25 0 6Z"/>
+<path d="M0 0Q-31-17-62-9Q-35-6 0 5Z"/>
+</g></g>
+<g transform="translate(386 186) scale(1.15)" opacity="0.53" fill="#785078" stroke="#785078" stroke-linejoin="round" stroke-linecap="round">
+<path d="M0 0Q-4-40-9-78T-17-122" stroke-width="7" fill="none"/>
+<g transform="translate(-17 -122)">
+<path d="M0 1Q-29-37-72-28Q-40-23-25-9Q-12-1 0 1Z"/>
+<path d="M0 0Q-15-58-53-62Q-32-46-19-25Q-10-8 0 0Z"/>
+<path d="M0 0Q-1-57 18-73Q22-39 9-13Z"/>
+<path d="M0 0Q33-52 74-42Q40-25 23-11Z"/>
+<path d="M0 2Q46-19 87 5Q55 0 23 6Z"/>
+<path d="M0 0Q36 16 53 48Q25 27 0 5Z"/>
+<path d="M0 0Q-35 0-53 29Q-30 25 0 6Z"/>
+<path d="M0 0Q-31-17-62-9Q-35-6 0 5Z"/>
+</g></g>
+<g transform="translate(699 190) scale(0.88)" opacity="0.57" fill="#785078" stroke="#785078" stroke-linejoin="round" stroke-linecap="round">
+<path d="M0 0Q-4-40-9-78T-17-122" stroke-width="7" fill="none"/>
+<g transform="translate(-17 -122)">
+<path d="M0 1Q-29-37-72-28Q-40-23-25-9Q-12-1 0 1Z"/>
+<path d="M0 0Q-15-58-53-62Q-32-46-19-25Q-10-8 0 0Z"/>
+<path d="M0 0Q-1-57 18-73Q22-39 9-13Z"/>
+<path d="M0 0Q33-52 74-42Q40-25 23-11Z"/>
+<path d="M0 2Q46-19 87 5Q55 0 23 6Z"/>
+<path d="M0 0Q36 16 53 48Q25 27 0 5Z"/>
+<path d="M0 0Q-35 0-53 29Q-30 25 0 6Z"/>
+<path d="M0 0Q-31-17-62-9Q-35-6 0 5Z"/>
+</g></g>
+<g transform="translate(1012 191) scale(1.23)" opacity="0.53" fill="#785078" stroke="#785078" stroke-linejoin="round" stroke-linecap="round">
+<path d="M0 0Q-4-40-9-78T-17-122" stroke-width="7" fill="none"/>
+<g transform="translate(-17 -122)">
+<path d="M0 1Q-29-37-72-28Q-40-23-25-9Q-12-1 0 1Z"/>
+<path d="M0 0Q-15-58-53-62Q-32-46-19-25Q-10-8 0 0Z"/>
+<path d="M0 0Q-1-57 18-73Q22-39 9-13Z"/>
+<path d="M0 0Q33-52 74-42Q40-25 23-11Z"/>
+<path d="M0 2Q46-19 87 5Q55 0 23 6Z"/>
+<path d="M0 0Q36 16 53 48Q25 27 0 5Z"/>
+<path d="M0 0Q-35 0-53 29Q-30 25 0 6Z"/>
+<path d="M0 0Q-31-17-62-9Q-35-6 0 5Z"/>
+</g></g>
+<g opacity=".32" fill="#9c6799">
+<path d="M0 174Q49 170 89 175T206 175 320 173 460 175 600 173 770 174 950 172 1200 174V180H0Z"/>
+</g>
+</svg>
