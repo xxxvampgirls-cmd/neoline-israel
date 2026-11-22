@@ -18,6 +18,7 @@ const getSaved=(key,defaultValue)=>{try{const s=localStorage.getItem(key);return
 const save=(key,on)=>{try{localStorage.setItem(key,on?"1":"0")}catch(_){}};
 let musicOn=getSaved(KEY_MUSIC,true),sfxOn=getSaved(KEY_SFX,true);
 let ctx=null,node=null,boot=null,audioError=false;
+let tapeLoading=false,tapeDurationMs=8200;
 let scene="menu",currentMode=null,loadedScene=null;
 let lastDone=-1,lastHover=0,lastClick=0,lastTheme=isVice();
 const CLOCK=1773400,FPS=50;
@@ -293,10 +294,12 @@ function guessScene(){
 const msg=data=>{if(node)node.port.postMessage(data)};
 function stateToChip(){
  const inGift=giftOpen();
+ const cassette=tapeLoading&&isVice()&&sfxOn&&!document.hidden&&!originalPlayerOpen;
  msg({type:"switch",
-  music:musicOn&&isVice()&&!document.hidden&&!originalPlayerOpen&&(preview?!preview.paused:scene!=="fail"),
-  effects:sfxOn&&audioAllowed()&&!document.hidden&&!originalPlayerOpen,
-  gameplay:GAME_MODES.has(scene),gift:inGift
+  music:musicOn&&isVice()&&!tapeLoading&&!document.hidden&&!originalPlayerOpen&&(preview?!preview.paused:scene!=="fail"),
+  effects:sfxOn&&audioAllowed()&&!tapeLoading&&!document.hidden&&!originalPlayerOpen,
+  gameplay:GAME_MODES.has(scene),gift:inGift,
+  tape:cassette,tapeDurationMs
  });
  reportAudio();
 }
@@ -328,7 +331,7 @@ function prepareAudio(forceGift=false){
  try{
   ctx=new Ctx({latencyHint:"interactive"});
   ctx.addEventListener("statechange",()=>{updateControls();reportAudio()});
-  boot=ctx.audioWorklet.addModule("./teoria-ay8912-worklet.js?v=20261122-louder-gift-sfx-v7")
+  boot=ctx.audioWorklet.addModule("./teoria-ay8912-worklet.js?v=20261122-spectrum-tape-v8")
    .then(()=>{
     node=new AudioWorkletNode(ctx,"neoline-ay8912",{
      numberOfInputs:0,numberOfOutputs:1,outputChannelCount:[2]
@@ -394,6 +397,20 @@ async function unlock(forceGift=false){
  return ctx?.state==="running";
 }
 window.neolineStartAYAudio=unlock;
+// Tell the existing three-channel AY engine when the simulated ULA/EAR
+// cassette takes over. The original PT3 music waits, untouched, until loaded.
+window.neolineCassetteLoading=(enabled,durationMs)=>{
+ if(enabled&&!isVice())return false;
+ tapeLoading=!!enabled;
+ if(Number.isFinite(durationMs))tapeDurationMs=Math.max(300,Math.min(15000,durationMs));
+ if(tapeLoading&&sfxOn){
+  const ready=prepareAudio();
+  requestResume(); // synchronous: caller is usually the user's click
+  if(ready)void ready.then(ok=>{if(ok)stateToChip()}).catch(()=>{});
+ }
+ stateToChip();
+ return tapeLoading;
+};
 // One player and one physical AY emulation: previews replace the current
 // register stream, never create a second AudioContext or synth.
 function previewState(){
@@ -492,7 +509,7 @@ window.neolineAYPlayer={
 };
 
 function playFx(name){
- if(!audioAllowed()||!sfxOn||!node||ctx?.state!=="running"||document.hidden)return false;
+ if(tapeLoading||!audioAllowed()||!sfxOn||!node||ctx?.state!=="running"||document.hidden)return false;
  msg({type:"fx",frames:compileFx(name)});
  return true;
 }
@@ -575,6 +592,7 @@ window.addEventListener("neoline:vice-theme",e=>{
   void unlock().then(ok=>{if(ok)playFx("enable")});
  }
  if(!enabled){
+  tapeLoading=false;
   if(preview)stopPreview(false);
   requestSerial++;stateToChip();
  }else{syncScene();loadScene(true);stateToChip()}
