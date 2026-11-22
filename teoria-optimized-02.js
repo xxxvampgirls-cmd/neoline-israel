@@ -1569,6 +1569,7 @@ const PLAYER_TRACKS=[
  {id:"axel_force_remix",name:"Axel Force Remix",kind:"game"}
 ];
 let preview=null,previewSerial=0;
+let originalPlayerOpen=false;
 const SHUFFLE_KEY="neoline.vice.pt3.shuffle.v2"; // refresh bag for 8 distinct PT3 songs
 let manifestPromise=null,requestSerial=0,selectedGameSong=null,activeSong=null;
 const songBuffers=new Map();
@@ -1721,8 +1722,8 @@ function guessScene(){
 }
 const msg=data=>{if(node)node.port.postMessage(data)};
 function stateToChip(){
- msg({type:"switch",music:musicOn&&isVice()&&!document.hidden&&(preview?!preview.paused:scene!=="fail"),
-  effects:sfxOn&&isVice()&&!document.hidden});
+ msg({type:"switch",music:musicOn&&isVice()&&!document.hidden&&!originalPlayerOpen&&(preview?!preview.paused:scene!=="fail"),
+  effects:sfxOn&&isVice()&&!document.hidden&&!originalPlayerOpen});
  reportAudio();
 }
 function syncScene(){
@@ -1892,6 +1893,11 @@ function seekPreview(sec){
 }
 window.neolineAYPlayer={
  tracks:PLAYER_TRACKS.map(t=>({...t})),
+ suspendForOriginalPlayer(open){
+  originalPlayerOpen=!!open;
+  stateToChip();
+  return originalPlayerOpen;
+ },
  play:playPreview,
  next:()=>shiftPreview(1),
  previous:()=>shiftPreview(-1),
