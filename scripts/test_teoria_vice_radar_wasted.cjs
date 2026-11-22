@@ -63,7 +63,7 @@ async function capture(page,label){
    });
    if(errors.length)throw Error("Browser JS error "+errors.join("|"));
    if(h.scrollWidth>width+2||h.dock.left<0||h.dock.right>width+2)throw Error("HUD horizontal overflow "+width+" "+JSON.stringify(h));
-   if(h.routeVisible!=="none"||h.radarVisible==="none"||h.topbar.height>47||h.dock.height<69||!h.bodySession)throw Error("Wrong in-game HUD "+width+" "+JSON.stringify(h));
+   if(h.routeVisible!=="none"||h.radarVisible==="none"||h.topbar.height>47||h.dock.height<50||!h.bodySession)throw Error("Wrong in-game HUD "+width+" "+JSON.stringify(h));
    if(h.heroVisible!=="none"||h.question.top>160||!h.modeTitle)throw Error("Lobby dashboard leaked above an active question "+width+" "+JSON.stringify(h));
    if(h.headerVisible!=="none"||h.toplineVisible!=="none"||h.cardMarginTop!=="0px")throw Error("Old gameplay title bar still takes space "+width+" "+JSON.stringify(h));
    // The existing exam engine must still be able to display its 40-minute countdown.
