@@ -1,0 +1,29 @@
+name: Verify NEOLINE cinematic neon route slide
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - 'teoria.html'
+      - 'teoria-vice-neon-route-slide.css'
+      - 'teoria-hero-promo.js'
+      - 'assets/teoria/vice-neon-route-promo.webp'
+      - 'scripts/test_teoria_neon_route_slide.cjs'
+      - '.github/workflows/test-teoria-neon-route-slide.yml'
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 6
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install Playwright Chromium
+        run: |
+          npm install --no-save playwright
+          npx playwright install chromium
+      - name: Test high-detail promo on Android widths
+        run: |
+          python3 -m http.server 8765 --bind 127.0.0.1 >/tmp/neon-route.log 2>&1 &
+          node --check scripts/test_teoria_neon_route_slide.cjs
+          node scripts/test_teoria_neon_route_slide.cjs
