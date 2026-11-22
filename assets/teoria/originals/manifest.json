@@ -1,0 +1,139 @@
+{
+  "format": "Native ZX Spectrum music, not converted",
+  "originalZipSha256": "a66a0ff2689426745e0496204d4679bc613d0c800d5c0088f1f3083cdb851e05",
+  "files": [
+    {
+      "name": "Ghostbusters_2.ay",
+      "format": "AY",
+      "bytes": 11065,
+      "sha256": "47f551105a5a5225ff2989c65f7b82a0751c3f4ac6f7a2a55dc062d82da4a991",
+      "url": "./assets/teoria/originals/Ghostbusters_2.ay"
+    },
+    {
+      "name": "Jurassic_Park.asc",
+      "format": "ASC",
+      "bytes": 3682,
+      "sha256": "7927beea1c3ba80342f4618293c8bf6a01c99a12ceb72cb8de9a21fd55a44ffc",
+      "url": "./assets/teoria/originals/Jurassic_Park.asc"
+    },
+    {
+      "name": "LyraII3.stc",
+      "format": "STC",
+      "bytes": 1607,
+      "sha256": "6753799e18b6b92dbda298832a20fbd94b1cfa29b4e48ad0517a277bf8d7bb37",
+      "url": "./assets/teoria/originals/LyraII3.stc"
+    },
+    {
+      "name": "LyraII4.stc",
+      "format": "STC",
+      "bytes": 4268,
+      "sha256": "3aef36899098df6c8dd96ee2d49ae9cfe4c14dd6c3c8c3d675bd6a553e893912",
+      "url": "./assets/teoria/originals/LyraII4.stc"
+    },
+    {
+      "name": "Navy_Seals.ay",
+      "format": "AY",
+      "bytes": 5742,
+      "sha256": "fb2fd9d744dd9e3c4766552b8f74bf17d2d8911fa60ea51164df8d6676afaa12",
+      "url": "./assets/teoria/originals/Navy_Seals.ay"
+    },
+    {
+      "name": "PARADISE.stc",
+      "format": "STC",
+      "bytes": 1663,
+      "sha256": "9c67a33ed948e105656d4f809c9c5c313fc6119521a57ec695bb4571c3f53c27",
+      "url": "./assets/teoria/originals/PARADISE.stc"
+    },
+    {
+      "name": "Shock3.stc",
+      "format": "STC",
+      "bytes": 3076,
+      "sha256": "91abf86645357cbab18c1dd1f62ba5d5dc0a6b783c60950b1c47a707d0601c49",
+      "url": "./assets/teoria/originals/Shock3.stc"
+    },
+    {
+      "name": "Shock6.stc",
+      "format": "STC",
+      "bytes": 1813,
+      "sha256": "1d2cd1ec817615cfbec78036c0d2ed1262173b91cddb31bce9dee4569c988848",
+      "url": "./assets/teoria/originals/Shock6.stc"
+    },
+    {
+      "name": "the_neverending_story.stc",
+      "format": "STC",
+      "bytes": 2481,
+      "sha256": "33fc3038ad04fedbe848445a6d5a4a57a6556a16f83bcc1135966eea2c2c1b95",
+      "url": "./assets/teoria/originals/the_neverending_story.stc"
+    },
+    {
+      "name": "Tim_Follin.sqt",
+      "format": "SQT",
+      "bytes": 2623,
+      "sha256": "c838f05b405b259eb6d9782c64624cca2aaddfa32f301704a537fdf059845fbd",
+      "url": "./assets/teoria/originals/Tim_Follin.sqt"
+    },
+    {
+      "name": "VOYAGE.asc",
+      "format": "ASC",
+      "bytes": 3833,
+      "sha256": "be2ce0b4480191b3f536c48ad48b8ab752767fd8446194e2994cd53803c4c5dc",
+      "url": "./assets/teoria/originals/VOYAGE.asc"
+    },
+    {
+      "name": "4x4_puzzle_Hi_.pt2",
+      "format": "PT2",
+      "bytes": 3147,
+      "sha256": "cc07fbb959ab58dd2c6863153e7e5e26c5b4bebd4de0dece50091b847cf342d4",
+      "url": "./assets/teoria/originals/4x4_puzzle_Hi_.pt2"
+    },
+    {
+      "name": "63a_tdm-TDMSchivaPart2.sqt",
+      "format": "SQT",
+      "bytes": 7109,
+      "sha256": "5ea107982831658b380198e4f9f531c783f6760093de7bd6451ccc3f7d3f2c3e",
+      "url": "./assets/teoria/originals/63a_tdm-TDMSchivaPart2.sqt"
+    },
+    {
+      "name": "Batman_The_Movie.ay",
+      "format": "AY",
+      "bytes": 7276,
+      "sha256": "50edabefb292a9aa9d1ec6cfef4c67f5384c81f0382e733c9c873ecbbe415fec",
+      "url": "./assets/teoria/originals/Batman_The_Movie.ay"
+    },
+    {
+      "name": "Cover_of_Hung_Up_by_Madonna_2xAY_ACB_.sqt",
+      "format": "SQT",
+      "bytes": 13424,
+      "sha256": "c29c7b62dd3b415564786b3c5023eedf2e374f8681fd4600b3540f9630b0a555",
+      "url": "./assets/teoria/originals/Cover_of_Hung_Up_by_Madonna_2xAY_ACB_.sqt"
+    },
+    {
+      "name": "dado_s_twin_peaks.stp",
+      "format": "STP",
+      "bytes": 3861,
+      "sha256": "8040fb3347dfa2b2c2eda6a79849ce514d7b897091cd80391bf2839f0c748c50",
+      "url": "./assets/teoria/originals/dado_s_twin_peaks.stp"
+    },
+    {
+      "name": "Electric_city.sqt",
+      "format": "SQT",
+      "bytes": 6344,
+      "sha256": "09fb1cd5ac70b283f2b305b9bde177b3462764414c94e8c857874a6db778edba",
+      "url": "./assets/teoria/originals/Electric_city.sqt"
+    },
+    {
+      "name": "Galactic.pt2",
+      "format": "PT2",
+      "bytes": 6118,
+      "sha256": "3a3fc8368ae13aa649eac92835ac4e26c6e3b54cf6e229271272537b377767ae",
+      "url": "./assets/teoria/originals/Galactic.pt2"
+    },
+    {
+      "name": "GALAXY2.asc",
+      "format": "ASC",
+      "bytes": 8623,
+      "sha256": "7612c76cfd0bbeb0a78e04b9eb94ba259edb03944205307608046cacf1c64ec8",
+      "url": "./assets/teoria/originals/GALAXY2.asc"
+    }
+  ]
+}
