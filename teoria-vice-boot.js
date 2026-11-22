@@ -18,12 +18,11 @@ const overlay=document.createElement("div");
 overlay.className="vice-boot-overlay";
 overlay.setAttribute("aria-hidden","true");
 overlay.innerHTML=[
+ '<img class="vice-boot-art" src="./assets/teoria/vice-boot-sunset-city.svg?v=20261122-approved-neon-art-v1" alt="" aria-hidden="true" decoding="async">',
  '<div class="vice-boot-grain"></div>',
- '<div class="vice-boot-sun"></div><div class="vice-boot-city"></div>',
- '<div class="vice-boot-horizon"></div>',
  '<div class="vice-boot-topline"><span><b>NEOLINE</b> // ARCADE SYSTEM</span><span>128K · AY-3-8912</span></div>',
  '<div class="vice-boot-body">',
- '<div class="vice-boot-icon">VI</div>',
+ '<div class="vice-boot-icon" aria-hidden="true"><strong>VI</strong><svg viewBox="0 0 44 22" role="presentation" aria-hidden="true"><path d="M4 5h13l4-2 4 2h14c3 0 4 2 4 5l-2 7c-.5 2-3 2-4 .5l-4-4H11l-4 4c-1 1.5-3.5 1.5-4-.5L1 10C1 7 2 5 4 5Z" fill="#1d1131" stroke="#ffc9e5" stroke-width="1.5"/><path d="M9 8v6M6 11h6" stroke="#91f8fa" stroke-width="1.8" stroke-linecap="round"/><circle cx="31" cy="9" r="1.8" fill="#ffbc64"/><circle cx="35" cy="12" r="1.8" fill="#fa6bf2"/></svg></div>',
  '<div class="vice-boot-kicker"></div>',
  '<div class="vice-boot-title"><span>VICE</span> <em>MODE</em></div>',
  '<p class="vice-boot-deck"></p>',
