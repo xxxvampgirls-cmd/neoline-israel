@@ -536,3 +536,173 @@ html[data-vice-theme="on"] body.theory-in-session #gamePlaying .question-eyebrow
  padding:3px 7px!important;
  font:850 11px/1.15 Manrope,Arial,sans-serif!important;
 }
+
+/* 2026-11-22 — approved HUD, not just a screenshot.
+   LAYOUT: Modes | XP | LARGE CENTRED GPS | Hearts | Hint.
+   The thin HUD rail passes BEHIND the oversize radar, whose top and
+   bottom deliberately extend beyond the rail. Retain real game controls. */
+html[data-vice-theme="on"] body.theory-in-session .theory-game-dock{
+ --vice-radar-diameter:clamp(84px,25vw,104px);
+ grid-template-columns:42px minmax(0,1fr) 44px!important;
+ gap:3px!important;
+ width:min(570px,calc(100vw - 10px))!important;
+ height:54px!important;
+ min-height:54px!important;
+ padding:2px 6px!important;
+ bottom:max(24px,env(safe-area-inset-bottom,0px))!important;
+ border-radius:999px!important;
+ border:1.5px solid #ff9ed5!important;
+ overflow:visible!important;
+ box-shadow:0 0 0 1px #ff8bca7c,inset 0 1px #ffe6f88c,0 0 13px #fc69be9c,0 8px 20px #1307229a!important;
+}
+html[data-vice-theme="on"] body.theory-in-session .theory-game-dock::before{
+ border-radius:999px!important;
+ inset:3px!important;
+ border-color:#f99bc678!important;
+}
+html[data-vice-theme="on"] body.theory-in-session .theory-game-dock .dock4-center{
+ grid-column:2!important;
+ grid-row:1!important;
+ display:grid!important;
+ grid-template-columns:minmax(0,1fr) var(--vice-radar-diameter) minmax(0,1fr)!important;
+ grid-template-rows:54px!important;
+ align-items:center!important;
+ justify-items:center!important;
+ justify-content:center!important;
+ gap:clamp(1px,.75vw,5px)!important;
+ width:100%!important;
+ max-width:none!important;
+ height:54px!important;
+ min-width:0!important;
+ margin:0!important;
+ direction:ltr!important;
+}
+html[data-vice-theme="on"] body.theory-in-session .theory-game-dock .dock4-modes{
+ grid-column:1!important;
+ grid-row:1!important;
+ align-self:center!important;
+ justify-self:center!important;
+ min-height:44px!important;
+ width:40px!important;
+ min-width:40px!important;
+ height:46px!important;
+ margin:0!important;
+ padding:3px 0!important;
+}
+html[data-vice-theme="on"] body.theory-in-session .theory-game-dock .dock4-modes svg{
+ width:23px!important;
+ height:23px!important;
+}
+html[data-vice-theme="on"] body.theory-in-session .theory-game-dock .dock4-action{
+ grid-column:3!important;
+ grid-row:1!important;
+ align-self:center!important;
+ justify-self:center!important;
+ margin:0!important;
+ width:43px!important;
+ min-width:43px!important;
+ height:46px!important;
+ min-height:46px!important;
+ border-radius:15px!important;
+}
+html[data-vice-theme="on"] body.theory-in-session .theory-game-dock .dock4-xp{
+ grid-column:1!important;
+ grid-row:1!important;
+ order:1!important;
+ width:100%!important;
+ min-width:0!important;
+ min-height:0!important;
+ margin:0!important;
+ padding:0!important;
+ gap:1px!important;
+ align-self:center!important;
+ justify-self:center!important;
+}
+html[data-vice-theme="on"] body.theory-in-session .theory-game-dock .dock4-xp>span{
+ font-size:clamp(18px,5vw,23px)!important;
+ line-height:1.02!important;
+}
+html[data-vice-theme="on"] body.theory-in-session .theory-game-dock .dock4-xp strong{
+ font-size:clamp(9px,2.65vw,12px)!important;
+ line-height:1.16!important;
+ white-space:nowrap!important;
+}
+html[data-vice-theme="on"] body.theory-in-session .theory-game-dock .dock4-count{
+ grid-column:2!important;
+ grid-row:1!important;
+ order:2!important;
+ position:relative!important;
+ z-index:5!important;
+ align-self:center!important;
+ justify-self:center!important;
+ flex:none!important;
+ width:var(--vice-radar-diameter)!important;
+ min-width:var(--vice-radar-diameter)!important;
+ max-width:var(--vice-radar-diameter)!important;
+ height:var(--vice-radar-diameter)!important;
+ min-height:var(--vice-radar-diameter)!important;
+ margin:0!important;
+ padding:4px!important;
+ border-radius:50%!important;
+ border:3px solid #ffcd9b!important;
+ background:conic-gradient(from -90deg,#77f8ff 0deg var(--dock-progress),#bc648c var(--dock-progress) 360deg)!important;
+ box-shadow:0 0 0 2px #ff78bbdd,0 0 17px #ff6eafa6,0 0 7px #ffcc95a6,0 7px 17px #110824ad!important;
+}
+html[data-vice-theme="on"] body.theory-in-session .theory-game-dock .dock4-count .vice-radar-map{
+ inset:4px!important;
+ width:calc(100% - 8px)!important;
+ height:calc(100% - 8px)!important;
+}
+html[data-vice-theme="on"] body.theory-in-session .theory-game-dock .dock4-count strong{
+ font-size:clamp(11px,3.55vw,15px)!important;
+ min-width:clamp(42px,12vw,59px)!important;
+ padding:3px 5px!important;
+ bottom:5px!important;
+}
+html[data-vice-theme="on"] body.theory-in-session .theory-game-dock .dock4-hearts{
+ grid-column:3!important;
+ grid-row:1!important;
+ order:3!important;
+ justify-self:center!important;
+ align-self:center!important;
+ width:100%!important;
+ max-width:100%!important;
+ min-width:0!important;
+ margin:0!important;
+ padding:0!important;
+ font-size:clamp(17px,5vw,24px)!important;
+ letter-spacing:-2px!important;
+ white-space:nowrap!important;
+ line-height:1!important;
+ justify-content:center!important;
+ text-align:center!important;
+}
+html[data-vice-theme="on"] body.theory-in-session .theory-game-dock .dock4-hearts[data-exam="true"]{
+ font-size:clamp(11px,3vw,14px)!important;
+ letter-spacing:0!important;
+}
+html[data-vice-theme="on"] body.theory-in-session .theory-game-dock .dock4-hearts[data-unlimited="true"]{
+ font-size:clamp(22px,5.6vw,28px)!important;
+}
+/* Prevent the large circular map from disappearing behind viewport edge. */
+html[data-vice-theme="on"] body.theory-in-session{
+ padding-bottom:calc(110px + env(safe-area-inset-bottom,0px))!important;
+}
+@media(max-width:350px){
+ html[data-vice-theme="on"] body.theory-in-session .theory-game-dock{
+  grid-template-columns:36px minmax(0,1fr) 39px!important;
+  padding:2px 4px!important;
+  gap:2px!important;
+  --vice-radar-diameter:84px;
+ }
+ html[data-vice-theme="on"] body.theory-in-session .theory-game-dock .dock4-modes{
+  width:35px!important;min-width:35px!important;
+ }
+ html[data-vice-theme="on"] body.theory-in-session .theory-game-dock .dock4-action{
+  width:39px!important;min-width:39px!important;
+ }
+ html[data-vice-theme="on"] body.theory-in-session .theory-game-dock .dock4-hearts{
+  font-size:16px!important;
+  letter-spacing:-2.2px!important;
+ }
+}
