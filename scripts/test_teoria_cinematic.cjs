@@ -34,6 +34,10 @@ const {chromium}=require("playwright");
       activeFrame:document.querySelector(".vice-cinema-frame.is-active")?.dataset.slide,
       premiumCssLoaded:[...document.styleSheets].some(x=>x.href?.includes("teoria-vice-cinematic.css")),
       approvedLayoutCssLoaded:[...document.styleSheets].some(x=>x.href?.includes("teoria-vice-reference-match.css")),
+      livePosterCssLoaded:[...document.styleSheets].some(x=>x.href?.includes("teoria-vice-live-reference.css")),
+      refReady:document.documentElement.classList.contains("vice-reference-ready"),
+      activePosterSlide:document.querySelector(".game-hero.theory-dashboard")?.dataset.vicePromoSlide,
+      titleVisibility:getComputedStyle(document.querySelector("#heroTitle")).visibility,
       finalPolishCssLoaded:[...document.styleSheets].some(x=>x.href?.includes("teoria-vice-final-polish.css")),
       promoStage:inspect(document.querySelector(".vice-cinema-stage")),
       heroFont:getComputedStyle(document.querySelector("#heroTitle")).fontStyle,
@@ -46,7 +50,7 @@ const {chromium}=require("playwright");
    });
    const fail=why=>{throw Error(why+" at "+width+"px: "+JSON.stringify(status))};
    if(errors.length)fail("Browser errors: "+errors.join("|"));
-   if(!status.premiumCssLoaded||!status.approvedLayoutCssLoaded||!status.finalPolishCssLoaded)fail("Final cinematic stylesheet was not served");
+   if(!status.premiumCssLoaded||!status.approvedLayoutCssLoaded||!status.finalPolishCssLoaded||!status.livePosterCssLoaded)fail("Final cinematic stylesheet was not served");
    if(status.documentWidth>width+2)fail("Horizontal overflow");
    if(Math.abs(status.navHeight-62)>2)fail("Approved 62px navigation changed");
    if(status.cards.length!==5)fail("Not five real game modes");
@@ -62,7 +66,7 @@ const {chromium}=require("playwright");
    if(status.cards.some(x=>x.mode!=="marathon"&&x.rect.height>145))fail("Mode cards are too tall for the approved mobile layout");
    if(status.heroFont!=="italic")fail("Headline not upgraded");
    if(status.heroTextFill==="rgba(0, 0, 0, 0)"||status.heroTextFill==="transparent")fail("Hero title is transparent, cannot be read");
-   if(!status.firstPosterImage.includes("vice-cinematic-backdrop.svg")||!status.firstPosterPhoto.includes("vice-approved-protagonists.webp")||!status.firstPosterAccents.includes("vice-hero-highlights.svg"))fail("First cinematic slide lost approved poster or special effects");
+   if(!status.refReady||!status.firstPosterImage.includes("vice-hero-reference.avif")||status.activePosterSlide!=="0"||status.titleVisibility!=="hidden")fail("Original reference hero did not replace redundant layers");
    if(width===390){
     await page.setViewportSize({width,height:780});
     await page.waitForTimeout(110);
@@ -80,6 +84,8 @@ const {chromium}=require("playwright");
     "vice-card-city.svg","vice-card-signs.svg","vice-card-exam.svg",
     "vice-card-mistakes.svg","vice-card-marathon.svg","vice-cinematic-duo.svg","vice-cinematic-backdrop.svg","vice-hero-highlights.svg","vice-hd-city.svg","vice-hd-signs.svg","vice-hd-exam.svg","vice-hd-mistakes.svg","vice-hd-marathon.svg"
    ];
+   const originalPoster=await page.request.get("http://127.0.0.1:8765/assets/teoria/vice-hero-reference.avif");
+   if(!originalPoster.ok()||(await originalPoster.body()).length<4500)fail("Approved local AVIF artwork is missing");
    const duoPhoto=await page.request.get("http://127.0.0.1:8765/assets/teoria/vice-approved-protagonists.webp");
    if(!duoPhoto.ok()||(await duoPhoto.body()).length<2300)fail("Missing original approved hero duo artwork");
    for(const asset of artFiles){
@@ -116,6 +122,12 @@ const {chromium}=require("playwright");
     snapshots.push(await page.locator('.vice-cinema-frame[data-slide="2"] .vice-cinema-headline').textContent());
    }
    if(new Set(snapshots).size!==4)fail("Missing four-language cinematic copy "+JSON.stringify(snapshots));
+   await page.evaluate(()=>document.documentElement.lang="en");
+   const nonRussian=await page.evaluate(()=>({
+     heroImage:getComputedStyle(document.querySelector('.vice-cinema-frame[data-slide="0"] .vice-cinema-scene')).backgroundImage,
+     titleVisible:getComputedStyle(document.querySelector('#heroTitle')).visibility
+   }));
+   if(nonRussian.heroImage.includes("vice-hero-reference.avif")||nonRussian.titleVisible!=="visible")fail("Translated text is hidden behind Russian-only poster");
    await page.locator(".vice-cinema-arrow--next").click();
    await page.waitForFunction(()=>document.querySelector('.vice-cinema-frame.is-active')?.dataset.slide==="3");
    await page.locator("#gtaModeToggle").click();
