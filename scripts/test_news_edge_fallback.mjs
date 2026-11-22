@@ -1,7 +1,6 @@
 import assert from "node:assert/strict";
 import {readFileSync} from "node:fs";
-import {webcrypto} from "node:crypto";
-globalThis.crypto=webcrypto;
+// Node 24 already exposes globalThis.crypto as a read-only WebCrypto getter.
 
 // The project is a static site without package.json / ESM flags.
 const src=readFileSync("functions/api/news.js","utf8");
