@@ -7,6 +7,20 @@
  const overlay=document.getElementById("gameOver");
  const title=document.getElementById("gameOverTitle");
  if(!progress||!overlay||!title)return;
+ const quizHeader=document.querySelector("#gamePlaying .quiz-hud");
+ const backButton=document.getElementById("exitQuiz");
+ const modeTitle=document.createElement("span");
+ modeTitle.className="vice-hud-title";
+ const modeNames={
+  ru:{route:"Поездка по городу",signs:"Охота за знаками",exam:"Экзамен",mistakes:"Исправь ошибки",marathon:"Путь по всем билетам",daily:"Задание дня"},
+  en:{route:"City drive",signs:"Road signs",exam:"Driving exam",mistakes:"Review mistakes",marathon:"All tickets",daily:"Daily challenge"},
+  he:{route:"נסיעה בעיר",signs:"תמרורים",exam:"מבחן",mistakes:"תיקון טעויות",marathon:"כל השאלות",daily:"אתגר יומי"},
+  ar:{route:"قيادة في المدينة",signs:"إشارات المرور",exam:"الامتحان",mistakes:"راجع الأخطاء",marathon:"كل الأسئلة",daily:"تحدي اليوم"}
+ };
+ let currentMode="route";
+ const updateTitle=()=>{const lang=(root.lang||"ru").split("-")[0],d=modeNames[lang]||modeNames.ru;modeTitle.textContent=d[currentMode]||d.route};
+ if(quizHeader&&backButton){backButton.insertAdjacentElement("afterend",modeTitle);updateTitle()}
+
 
  // A real vector route with a moving location marker. It is intentionally
  // aria-hidden because the parent progressbar already announces done / total.
@@ -68,6 +82,7 @@
  }
  window.addEventListener("neoline:theory-quiz",e=>{
   const d=e.detail||{};
+  if(d.mode){currentMode=d.mode;updateTitle()}
   paintRoute(d.done,d.total);
  });
  const initial=(document.getElementById("dock4Count")?.textContent||"0/10").split("/");
@@ -82,7 +97,7 @@
   overlay.classList.toggle("vice-wasted",neon&&gameOverVisible);
  }
  new MutationObserver(syncWasted).observe(overlay,{attributes:true,attributeFilter:["hidden"]});
- new MutationObserver(syncWasted).observe(root,{attributes:true,attributeFilter:["lang","data-vice-theme"]});
+ new MutationObserver(()=>{updateTitle();syncWasted()}).observe(root,{attributes:true,attributeFilter:["lang","data-vice-theme"]});
  window.addEventListener("neoline:vice-theme",syncWasted);
  window.addEventListener("neoline:theory-finish",syncWasted);
  syncWasted();
