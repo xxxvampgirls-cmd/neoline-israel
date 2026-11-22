@@ -61,6 +61,18 @@ const {chromium}=require("playwright");
    if(status.heroFont!=="italic")fail("Headline not upgraded");
    if(status.heroTextFill==="rgba(0, 0, 0, 0)"||status.heroTextFill==="transparent")fail("Hero title is transparent, cannot be read");
    if(!status.firstPosterImage.includes("vice-cinematic-backdrop.svg")||!status.firstPosterPhoto.includes("vice-approved-protagonists.webp"))fail("First cinematic slide lost approved photo overlay");
+   if(width===390){
+    await page.setViewportSize({width,height:780});
+    await page.waitForTimeout(110);
+    const compact=await page.evaluate(()=>{
+     const last=document.querySelector('#gameLobby .routes .route-full').getBoundingClientRect();
+     const dock=document.querySelector('.theory-bottom').getBoundingClientRect();
+     const first=document.querySelector('#gameLobby .routes .route-card:not(.route-full)').getBoundingClientRect();
+     return {lastBottom:last.bottom,dockTop:dock.top,cardHeight:first.height,scroll:document.documentElement.scrollWidth};
+    });
+    if(compact.scroll>width+2||compact.cardHeight>103||compact.lastBottom>compact.dockTop+3)fail("Short Android phone cannot view all five modes before navigation: "+JSON.stringify(compact));
+    await page.setViewportSize({width,height:940});
+   }
    if(status.activeFrame!=="0")fail("The neon experience must open on the spectacular first scene");
    const artFiles=[
     "vice-card-city.svg","vice-card-signs.svg","vice-card-exam.svg",
@@ -84,12 +96,14 @@ const {chromium}=require("playwright");
    await page.waitForTimeout(850); // finish the carousel mask and text entrance before screenshot
    if(width===390 && process.env.SAVE_CINEMATIC_SCREENSHOTS){
      await page.locator('.theory-promo-dot[data-slide="0"]').click();
+     await page.setViewportSize({width,height:780});
      await page.waitForTimeout(850);
      // Chunked log is review-only; no public media or personal data uploaded.
-     await page.screenshot({type:"jpeg",quality:64,path:"/tmp/neoline-vice-390.jpg",fullPage:true});
+     await page.screenshot({type:"jpeg",quality:70,path:"/tmp/neoline-vice-390.jpg",fullPage:false});
      const fs=require("node:fs"),jpg=fs.readFileSync("/tmp/neoline-vice-390.jpg").toString("base64");
      console.log("NEOLINE_SCREEN_PARTS_TOTAL:"+Math.ceil(jpg.length/4800));
      for(let i=0;i<jpg.length;i+=4800)console.log("NEOLINE_SCREEN_PART_"+(i/4800)+":"+jpg.slice(i,i+4800));
+     await page.setViewportSize({width,height:940});
      await page.locator('.theory-promo-dot[data-slide="2"]').click();
    }
    const snapshots=[];
