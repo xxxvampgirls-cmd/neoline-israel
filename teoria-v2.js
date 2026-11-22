@@ -153,6 +153,15 @@ function drawProgress(){
  set("gameProgressXP",num(data.xp));set("gameProgressGames",num(history.length));
  const grid=$("gameAchievementGrid");grid.replaceChildren();
  const earned=earnedAchievements(data,history);
+ // Keep the cinematic stat rings truthful to locally stored results.
+ // These decorative CSS variables never affect gameplay or saved progress.
+ if(dialog){
+  const accuracy=Number.isFinite(Number(data.accuracy))
+   ?Math.max(0,Math.min(100,Number(data.accuracy))):0;
+  const earnedPct=copy.badges.length?earned.size/copy.badges.length*100:0;
+  dialog.style.setProperty("--vice-accuracy-pct",accuracy.toFixed(1)+"%");
+  dialog.style.setProperty("--vice-badge-progress",earnedPct.toFixed(1)+"%");
+ }
  set("gameProgressBadgeCount",num(earned.size)+"/"+num(copy.badges.length));
  $("gameProgressBadgeCount")?.setAttribute("aria-label",copy.badgeCount+": "+num(earned.size)+"/"+num(copy.badges.length));
  const badges=[...copy.badges].sort((a,b)=>Number(earned.has(b.id))-Number(earned.has(a.id)));
@@ -218,9 +227,16 @@ function updateCopy(){
 }
 function openProgress(trigger){
  if(!dialog)return;
- openedBy=trigger;current=localStats();achievementsExpanded=false;
- $("gameProgressWeekFold")?.removeAttribute("open");
- $("gameProgressHistoryFold")?.removeAttribute("open");
+ openedBy=trigger;current=localStats();
+ const cinematic=document.documentElement.dataset.viceTheme==="on";
+ // Show real achievement badges and 7-day/game history immediately in
+ // Vice Mode; classic light theme keeps its original compact behavior.
+ achievementsExpanded=cinematic;
+ for(const id of ["gameProgressWeekFold","gameProgressHistoryFold"]){
+  const fold=$(id);if(!fold)continue;
+  if(cinematic)fold.setAttribute("open","");
+  else fold.removeAttribute("open");
+ }
  updateCopy();drawProgress();
  if(typeof dialog.showModal==="function"){if(!dialog.open)dialog.showModal()}
  else dialog.setAttribute("open","");
