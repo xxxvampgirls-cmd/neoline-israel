@@ -2,7 +2,7 @@ name: Refresh Israel automotive news (general + six-month law archive)
 on:
   workflow_dispatch:
   schedule:
-    - cron: '17,47 * * * *'  # twice hourly; backup watchdog triggers when overdue
+    - cron: '11,26,41,56 * * * *'  # four opportunities per hour; GitHub may delay scheduled jobs
   push:
     branches: [main]
     paths:
@@ -14,6 +14,7 @@ on:
       - '.github/workflows/sync-news.yml'
 permissions:
   contents: write
+  issues: write
 concurrency:
   group: israel-automotive-news-refresh
   cancel-in-progress: false
@@ -75,4 +76,16 @@ jobs:
             done
             echo "News snapshot still unpublished" >&2
             exit 1
+          fi
+
+      - name: Close persistent stale-news alert after verified refresh
+        if: success()
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
+        run: |
+          set -euo pipefail
+          id="$(gh issue list --state open --limit 100 --json number,title --jq '.[] | select(.title == "NEOLINE NEWS: automatic feed refresh stalled") | .number' | head -n 1)"
+          if [ -n "$id" ]; then
+            gh issue close "$id" --comment "News archive refreshed and independently validated. The live Cloudflare RSS fallback is also enabled for delayed schedules."
           fi
