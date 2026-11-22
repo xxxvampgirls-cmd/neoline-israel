@@ -1,0 +1,22 @@
+name: Test text-only live RSS fallback for Israeli road news
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - 'functions/api/news.js'
+      - 'scripts/test_news_edge_fallback.mjs'
+      - 'news-ui.js'
+      - '.github/workflows/test-news-edge.yml'
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - name: Verify Cloudflare news fallback in offline simulations
+        run: node scripts/test_news_edge_fallback.mjs
+      - name: Check client-side news JavaScript
+        run: node --check news-ui.js
