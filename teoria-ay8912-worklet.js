@@ -23,7 +23,7 @@ class NeolineAY8912 extends AudioWorkletProcessor{
   this.frames=null;this.framesCount=0;this.songIndex=0;
   this.fxFrames=null;this.fxCount=0;this.fxIndex=0;this.fxReg=null;
   this.musicEnabled=true;this.effectsEnabled=true;
-  this.sfxMixGain=0.35; // Softer AY effects vs original tracker channels
+  this.sfxMixGain=1.20; // Louder AY effects while retaining original 3-channel chip voices
   this.frameSamples=sampleRate;
   this.outputLevel=0;this.dc=0;
   this.port.onmessage=e=>{
