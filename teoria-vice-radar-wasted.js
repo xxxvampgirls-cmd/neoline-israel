@@ -21,6 +21,28 @@
  const updateTitle=()=>{const lang=(root.lang||"ru").split("-")[0],d=modeNames[lang]||modeNames.ru;modeTitle.textContent=d[currentMode]||d.route};
  if(quizHeader&&backButton){backButton.insertAdjacentElement("afterend",modeTitle);updateTitle()}
 
+ // Exam countdown continues to be controlled by the existing game engine.
+ // Its original DOM remains in the hidden top HUD; this is display-only.
+ const clockBox=document.getElementById("timerBox");
+ const clockText=document.getElementById("timer");
+ const questionEye=document.querySelector("#gamePlaying .question-eyebrow");
+ const clockMirror=document.createElement("span");
+ clockMirror.className="vice-quiz-timer";
+ clockMirror.hidden=true;
+ clockMirror.setAttribute("aria-live","off");
+ if(questionEye&&clockBox&&clockText){
+  const id=document.getElementById("questionId");
+  if(id&&id.parentElement===questionEye)questionEye.insertBefore(clockMirror,id);
+  else questionEye.append(clockMirror);
+  const syncClock=()=>{
+   clockMirror.hidden=clockBox.hidden;
+   clockMirror.textContent="◷ "+clockText.textContent.trim();
+  };
+  new MutationObserver(syncClock).observe(clockBox,{attributes:true,attributeFilter:["hidden"]});
+  new MutationObserver(syncClock).observe(clockText,{childList:true,subtree:true,characterData:true});
+  syncClock();
+ }
+
 
  // A real vector route with a moving location marker. It is intentionally
  // aria-hidden because the parent progressbar already announces done / total.
