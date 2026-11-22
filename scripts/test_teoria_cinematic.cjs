@@ -56,7 +56,10 @@ const {chromium}=require("playwright");
    if(Math.abs(status.navHeight-62)>2)fail("Approved 62px navigation changed");
    if(status.cards.length!==5)fail("Not five real game modes");
    if(!status.cardRefReady||status.cards.some(x=>!x.background.includes("vice-reference-card-sprite.avif")))fail("Approved photographic game cards did not load");
-   if(status.imageLinks.length!==5||status.imageLinks.some(x=>!x.includes("vice-card-")&&!x.includes("vice-approved-protagonists")&&!x.includes("vice-cinematic-duo")&&!x.includes("vice-cinematic-backdrop")&&!x.includes("vice-hero-reference")&&!x.includes("vice-hd-")))fail("Missing cinematic carousel artwork");
+   if(status.imageLinks.length!==5||status.imageLinks.some(x=>!x.includes("vice-card-")&&!x.includes("vice-approved-protagonists")&&!x.includes("vice-cinematic-duo")&&!x.includes("vice-cinematic-backdrop")&&!x.includes("vice-hero-reference")&&!x.includes("vice-hd-")&&!x.includes("vice-sunset-boulevard.svg")))fail("Missing cinematic carousel artwork");
+   if(!status.imageLinks[1]?.includes("vice-sunset-boulevard.svg"))
+    fail("Second neon slide still shows old giant route instead of the redesigned boulevard");
+   if(![...status.imageLinks].every(Boolean))fail("At least one promotional slide has no artwork");
    if(status.promoStage.display==="none"||status.promoStage.rect.height<110)fail("Cinema stage hidden");
    if(status.heroStats.rect.top<status.heroCopy.rect.bottom-4)fail("Top title overlaps the medal HUD");
    if(Math.abs(status.heroArt.rect.width-status.hero.rect.width)>8)fail("Cinema is not a full-width hero banner");
@@ -83,7 +86,7 @@ const {chromium}=require("playwright");
    if(status.activeFrame!=="0")fail("The neon experience must open on the spectacular first scene");
    const artFiles=[
     "vice-card-city.svg","vice-card-signs.svg","vice-card-exam.svg",
-    "vice-card-mistakes.svg","vice-card-marathon.svg","vice-cinematic-duo.svg","vice-cinematic-backdrop.svg","vice-hero-highlights.svg","vice-hd-city.svg","vice-hd-signs.svg","vice-hd-exam.svg","vice-hd-mistakes.svg","vice-hd-marathon.svg"
+    "vice-card-mistakes.svg","vice-card-marathon.svg","vice-cinematic-duo.svg","vice-cinematic-backdrop.svg","vice-hero-highlights.svg","vice-hd-city.svg","vice-hd-signs.svg","vice-hd-exam.svg","vice-hd-mistakes.svg","vice-hd-marathon.svg","vice-sunset-boulevard.svg"
    ];
    const cardsReference=await page.request.get("http://127.0.0.1:8765/assets/teoria/vice-reference-card-sprite.avif");
    if(!cardsReference.ok()||(await cardsReference.body()).length<5000)fail("Approved interactive card image sheet missing");
@@ -106,6 +109,15 @@ const {chromium}=require("playwright");
    await page.locator(".theory-promo-click").click();
    await page.waitForFunction(()=>document.querySelector("#gameGiftDialog")?.open===true);
    await page.locator("#gameGiftClose").click();
+   // Verify the revised second frame is selectable with the same real dots.
+   await page.locator('.theory-promo-dot[data-slide="1"]').click();
+   await page.waitForFunction(()=>document.querySelector('.vice-cinema-frame.is-active')?.dataset.slide==="1");
+   if(width===390 && process.env.SAVE_BOULEVARD_SCREENSHOTS){
+     await page.waitForTimeout(700);
+     const jpg=(await page.screenshot({type:"jpeg",quality:67,fullPage:false})).toString("base64");
+     console.log("NEOLINE_BOULEVARD_SCREEN_PARTS_TOTAL:"+Math.ceil(jpg.length/4800));
+     for(let i=0;i<jpg.length;i+=4800)console.log("NEOLINE_BOULEVARD_SCREEN_PART_"+(i/4800)+":"+jpg.slice(i,i+4800));
+   }
    // The existing carousel remains interactive, the original dot click drives
    // both the new cinematic frame and previous slide destination.
    await page.locator('.theory-promo-dot[data-slide="2"]').click();
