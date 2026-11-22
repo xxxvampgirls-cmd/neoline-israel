@@ -1,6 +1,73 @@
 <!doctype html>
 <html lang="ru"><head>
-<meta charset="utf-8"><link rel="canonical" href="https://neoline-israel.pages.dev/teoria.html"><meta name="viewport" content="width=device-width, initial-scale=1">
+<meta charset="utf-8"><script data-vice-boot-first-paint>
+/* Restore the selected Vice skin before the browser's very first paint.
+   Never wait for the deferred theme, animation or music bundles. */
+(()=>{try{
+ if(localStorage.getItem("neoline.theory.visualTheme.v1")==="vice"){
+  document.documentElement.dataset.viceTheme="on";
+  document.documentElement.dataset.viceBootPending="1";
+ }
+}catch(_){}
+ // A failed bundle must not leave the visitor behind an endless white mask.
+ setTimeout(()=>{
+  if(document.documentElement.dataset.viceBootPending==="1")
+   document.documentElement.removeAttribute("data-vice-boot-pending");
+ },15000);
+})();
+</script>
+<style id="vice-boot-first-paint-css">
+/* Initial frame, painted before game content: white ZX LOAD screen. */
+#vice-boot-first-paint{display:none!important}
+html[data-vice-boot-pending="1"] #vice-boot-first-paint{
+ display:block!important;position:fixed!important;inset:0!important;
+ z-index:2147483600!important;overflow:hidden!important;
+ background:#fff!important;color:#080808!important;
+ pointer-events:auto!important;contain:paint;
+}
+#vice-boot-first-paint .vice-boot-preborder{
+ position:absolute;inset:0;pointer-events:none;
+ background:
+  repeating-linear-gradient(90deg,#ec3b38 0 18px,#37d9d7 18px 36px) left top/100% 8px no-repeat,
+  repeating-linear-gradient(90deg,#37d9d7 0 18px,#ec3b38 18px 36px) left bottom/100% 8px no-repeat,
+  repeating-linear-gradient(0deg,#ec3b38 0 18px,#37d9d7 18px 36px) left top/8px 100% no-repeat,
+  repeating-linear-gradient(0deg,#37d9d7 0 18px,#ec3b38 18px 36px) right top/8px 100% no-repeat;
+ animation:vicePrepaintBorder .22s steps(4,end) infinite;
+}
+#vice-boot-first-paint .vice-boot-preline{
+ position:absolute;left:clamp(26px,4vw,46px);
+ bottom:max(26px,calc(env(safe-area-inset-bottom,0px) + 30px));
+ display:flex;align-items:center;gap:3px;white-space:nowrap;
+ font:700 clamp(19px,3vw,28px)/1 "Courier New",monospace;
+}
+#vice-boot-first-paint .vice-boot-precursor{
+ display:inline-block;width:clamp(12px,2.1vw,19px);
+ height:clamp(19px,3vw,27px);background:#080808;
+ animation:vicePrepaintCursor .64s steps(1,end) infinite;
+}
+.vice-boot-overlay.is-active.is-first-paint{
+ opacity:1!important;visibility:visible!important;transition:none!important;
+}
+@keyframes vicePrepaintBorder{
+ from{background-position:0 0,0 100%,0 0,100% 0}
+ to{background-position:36px 0,-36px 100%,0 -36px,100% 36px}
+}
+@keyframes vicePrepaintCursor{0%,49%{opacity:1}50%,100%{opacity:0}}
+@media(max-width:420px){
+ #vice-boot-first-paint .vice-boot-preline{
+  left:24px;bottom:max(23px,calc(env(safe-area-inset-bottom,0px) + 24px));
+  font-size:21px;
+ }
+ #vice-boot-first-paint .vice-boot-precursor{width:14px;height:21px}
+ #vice-boot-first-paint .vice-boot-preborder{
+  background-size:100% 6px,100% 6px,6px 100%,6px 100%;
+ }
+}
+@media(prefers-reduced-motion:reduce){
+ #vice-boot-first-paint .vice-boot-preborder,
+ #vice-boot-first-paint .vice-boot-precursor{animation:none!important}
+}
+</style><link rel="canonical" href="https://neoline-israel.pages.dev/teoria.html"><meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="theme-color" content="#f5fbff">
 <title>Теория Израиля — игровая подготовка · NEOLINE</title>
 <meta name="description" content="Игровая подготовка к израильскому теоретическому экзамену на водительские права: настоящие вопросы Министерства транспорта, дорожные знаки, экзамен 30 вопросов и работа над ошибками.">
@@ -31,7 +98,7 @@
 
 
 <link rel="stylesheet" href="./teoria-optimized-04.css?v=6ab8826f4369"><link rel="stylesheet" href="./teoria-vice-window-drive.css?v=20261122-vice-city-parallax-v1">
-<link rel="stylesheet" href="./teoria-vice-progress-dashboard.css?v=20261122-vice-progress-redesign-v1"><link rel="stylesheet" href="./teoria-vice-exam-clock.css?v=20261122-exam-clock-v1"><link rel="preload" as="image" href="./assets/teoria/vice-boot-sunset-city.svg?v=20261122-approved-neon-art-v1"></head><body>
+<link rel="stylesheet" href="./teoria-vice-progress-dashboard.css?v=20261122-vice-progress-redesign-v1"><link rel="stylesheet" href="./teoria-vice-exam-clock.css?v=20261122-exam-clock-v1"><link rel="preload" as="image" href="./assets/teoria/vice-boot-sunset-city.svg?v=20261122-approved-neon-art-v1"></head><body><div id="vice-boot-first-paint" aria-hidden="true"><div class="vice-boot-preborder"></div><div class="vice-boot-preline">LOAD <span class="vice-boot-precursor"></span></div></div>
 <header class="topbar neoline-site-header"><div class="vice-window-panorama" aria-hidden="true"><span class="vice-window-panorama__layer vice-window-panorama__layer--far"></span><span class="vice-window-panorama__layer vice-window-panorama__layer--mid"></span><span class="vice-window-panorama__layer vice-window-panorama__layer--palms"></span><span class="vice-window-panorama__layer vice-window-panorama__layer--birds"></span><span class="vice-window-panorama__glaze"></span><span class="vice-window-panorama__road"></span></div><div class="neoline-site-header__inner">
 <a class="neoline-site-header__logo" href="./" aria-label="NEOLINE — главная страница"><img src="./assets/neoline-clean.svg?v=20261116-compact" width="501" height="108" alt="NEOLINE"></a>
 <div class="neoline-site-header__actions"><div class="neoline-site-header__flags" role="group" aria-label="Язык / Language / שפה / اللغة"><button class="neoline-site-header__flag active" type="button" data-lang="ru" title="Русский" aria-label="Русский язык" aria-pressed="true"><span class="flag-graphic" aria-hidden="true"><svg viewBox="0 0 36 24" xmlns="http://www.w3.org/2000/svg" focusable="false"><rect width="36" height="24" fill="#fff"/><path d="M0 8h36v8H0z" fill="#0039a6"/><path d="M0 16h36v8H0z" fill="#d52b1e"/></svg></span></button><button class="neoline-site-header__flag" type="button" data-lang="he" title="עברית" aria-label="עברית - Hebrew" aria-pressed="false"><span class="flag-graphic" aria-hidden="true"><img src="./assets/flag-israel.svg?v=20261118-fixed-star-v1" width="36" height="24" loading="eager" alt="" aria-hidden="true"></span></button><button class="neoline-site-header__flag" type="button" data-lang="en" title="English" aria-label="English language" aria-pressed="false"><span class="flag-graphic" aria-hidden="true"><svg viewBox="0 0 36 24" xmlns="http://www.w3.org/2000/svg" focusable="false"><rect width="36" height="24" fill="#012169"/><path d="M0 0l36 24M36 0L0 24" stroke="#fff" stroke-width="6"/><path d="M0 0l36 24M36 0L0 24" stroke="#c8102e" stroke-width="2.5"/><path d="M18 0v24M0 12h36" stroke="#fff" stroke-width="9"/><path d="M18 0v24M0 12h36" stroke="#c8102e" stroke-width="4.6"/></svg></span></button><button class="neoline-site-header__flag neoline-site-header__flag--ar" type="button" data-lang="ar" title="العربية" aria-label="اللغة العربية" aria-pressed="false" lang="ar" dir="rtl">عربي</button></div></div>
