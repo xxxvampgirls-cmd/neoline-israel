@@ -180,6 +180,7 @@ const msg=data=>{if(node)node.port.postMessage(data)};
 function stateToChip(){
  msg({type:"switch",music:musicOn&&isVice()&&!document.hidden&&scene!=="fail",
   effects:sfxOn&&isVice()&&!document.hidden});
+ reportAudio();
 }
 function syncScene(){
  const next=guessScene();
@@ -188,14 +189,18 @@ function syncScene(){
 // Browser sound policy: decode and initialize the PSG early. Try autoplay,
 // but do not wait for a blocked ctx.resume() promise: on mobile it may remain
 // pending until an actual user gesture. The very first tap resumes the chip.
-function reportAudio(){
- window.dispatchEvent(new CustomEvent("neoline:ay-status",{detail:{
+function audioSnapshot(){
+ return {
   playing:!!(ctx&&ctx.state==="running"&&node&&musicOn&&isVice()&&!document.hidden),
   ready:!!node,
   blocked:!!(ctx&&ctx.state!=="running"&&isVice()&&musicOn),
   musicOn,sfxOn,error:audioError
- }}));
+ };
 }
+function reportAudio(){
+ window.dispatchEvent(new CustomEvent("neoline:ay-status",{detail:audioSnapshot()}));
+}
+window.neolineGetAYAudioState=audioSnapshot;
 function prepareAudio(){
  if(!isVice()||!Ctx||audioError)return null;
  if(boot)return boot;
