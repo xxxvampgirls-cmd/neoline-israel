@@ -12,6 +12,7 @@ on:
       - 'scripts/test_teoria_cinematic.cjs'
       - 'teoria-vice-cinematic.css'
       - 'teoria-vice-reference-match.css'
+      - 'teoria-vice-final-polish.css'
       - 'teoria-vice-cinematic.js'
       - 'assets/teoria/vice-card-city.svg'
       - 'assets/teoria/vice-card-signs.svg'
@@ -20,6 +21,7 @@ on:
       - 'assets/teoria/vice-card-marathon.svg'
       - 'assets/teoria/vice-cinematic-duo.svg'
       - 'assets/teoria/vice-cinematic-backdrop.svg'
+      - 'assets/teoria/vice-hero-highlights.svg'
       - 'assets/teoria/vice-approved-protagonists.webp'
       - '.github/workflows/test-teoria-vice-theme.yml'
 permissions:
