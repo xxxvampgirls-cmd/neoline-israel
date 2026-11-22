@@ -250,7 +250,7 @@ function prepareAudio(){
      }
      if(m.type!=="song-loop"||!isVice()||!musicOn)return;
      if(preview){
-      if(!preview.paused)void shiftPreview(1);
+      if(!preview.paused&&!preview.loading)void shiftPreview(1);
       return;
      }
      if(!GAME_MODES.has(scene))return;
@@ -327,8 +327,10 @@ function stopPreview(restore=true){
 async function playPreview(id){
  if(!isVice()||!PLAYER_TRACKS.some(track=>track.id===id))return false;
  if(preview?.id===id&&!preview.loading){
-  if(preview.paused){preview.paused=false;stateToChip();requestResume();notifyPreview()}
-  else{preview.paused=true;stateToChip();notifyPreview()}
+  if(preview.paused||!musicOn){
+   if(!musicOn){musicOn=true;save(KEY_MUSIC,true);updateControls()}
+   preview.paused=false;stateToChip();requestResume();notifyPreview();
+  }else{preview.paused=true;stateToChip();notifyPreview()}
   return true;
  }
  const token=++previewSerial;
