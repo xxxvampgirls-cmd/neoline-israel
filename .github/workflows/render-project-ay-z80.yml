@@ -1,0 +1,103 @@
+name: NEOLINE native Project AY to internal AY-3-8912 player
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - "scripts/zxay_renderer/**"
+      - ".github/workflows/render-project-ay-z80.yml"
+      - "assets/teoria/originals/*.ay"
+permissions:
+  contents: write
+concurrency:
+  group: neoline-z80-ay-decoder
+  cancel-in-progress: false
+jobs:
+  render-ay:
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          persist-credentials: true
+      - name: Install current stable Rust
+        uses: dtolnay/rust-toolchain@stable
+      - name: Cache Rust build
+        uses: Swatinem/rust-cache@v2
+        with:
+          workspaces: scripts/zxay_renderer -> target
+      - name: Build Z80 / AY decoder
+        run: cargo build --locked --release --manifest-path scripts/zxay_renderer/Cargo.toml
+      - name: Render the 3 remaining Project AY Z80 tracks for our own emulator
+        shell: bash
+        run: |
+          set -u
+          mkdir -p assets/teoria/ay-originals
+          player=scripts/zxay_renderer/target/release/neoline-zxay-renderer
+          failures=0
+          for spec in 'Ghostbusters_2.ay:orig_ghostbusters_2_ay' 'Navy_Seals.ay:orig_navy_seals_ay' 'Batman_The_Movie.ay:orig_batman_the_movie_ay'; do
+            filename="${spec%%:*}"
+            ident="${spec##*:}"
+            printf '%s\n' "Preparing ${filename} with real Z80 emulation…"
+            if ! "$player" "assets/teoria/originals/$filename" "assets/teoria/ay-originals/${ident}.ay14"; then
+              echo "::warning::Z80 replay failed for $filename — do not fake a track"
+              failures=$((failures+1))
+              rm -f "assets/teoria/ay-originals/${ident}.ay14"
+            fi
+          done
+          echo "${failures} original AY tracks still need Z80 debugging"
+      - name: Merge only verified AY streams into existing soundtrack manifest
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          import json
+          target=Path("assets/teoria/ay-originals")
+          manifest_path=target/"manifest.json"
+          m=json.loads(manifest_path.read_text(encoding="utf-8"))
+          originals=[
+              ("orig_ghostbusters_2_ay","Ghostbusters_2.ay","Ghostbusters 2"),
+              ("orig_navy_seals_ay","Navy_Seals.ay","Navy Seals"),
+              ("orig_batman_the_movie_ay","Batman_The_Movie.ay","Batman: The Movie"),
+          ]
+          for ident,filename,name in originals:
+              p=target/(ident+".ay14")
+              if not p.exists():
+                  print("No valid native track yet:",filename)
+                  continue
+              data=p.read_bytes()
+              if len(data)%14 or len(data)<150*14 or len(data)>30000*14:
+                  raise ValueError("Invalid AY register stream: "+filename)
+              audible=sum(bool(data[i+8] or data[i+9] or data[i+10]) for i in range(0,len(data),14))
+              if audible<40:
+                  raise ValueError("Silent Z80 register stream: "+filename)
+              frames=len(data)//14
+              m["tracks"][ident]={
+                  "id":ident,"name":name,"file":filename,
+                  "url":"./assets/teoria/ay-originals/"+ident+".ay14",
+                  "frames":frames,"seconds":round(frames/50,2),
+                  "originalFormat":"AY",
+                  "decoder":"Z80 Project AY code via ym2149-ay-replayer 0.9.1",
+              }
+              m.get("failures",{}).pop(filename,None)
+              print("NEOLINE original AY ready:",name,frames,"frames")
+          manifest_path.write_text(json.dumps(m,ensure_ascii=False,indent=2)+"\n",encoding="utf-8")
+          PY
+      - name: Commit verified native AY register caches to the game
+        shell: bash
+        run: |
+          set -e
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add assets/teoria/ay-originals/
+          if git diff --cached --quiet; then
+            echo "::warning::No new AY audio rendered."
+            exit 0
+          fi
+          git commit -m "Make Project AY Z80 originals playable inside NEOLINE AY-3-8912"
+          for attempt in 1 2 3 4; do
+            git pull --rebase origin main
+            if git push origin HEAD:main; then exit 0; fi
+            sleep 4
+          done
+          exit 1
