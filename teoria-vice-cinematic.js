@@ -10,28 +10,28 @@ const dots=[...host.querySelectorAll(".theory-promo-dot")];
 if(existing.length!==5||dots.length!==5)return;
 const i18n={
  ru:[
-  {tag:"СТАРТ ПУТЕШЕСТВИЯ",headline:"ПОКОРЯЙ ДОРОГИ",body:"Изучи знаки · Отточить вождение"},
+  {tag:"ИЗРАИЛЬ · ИГРА",headline:"НОВЫЙ СЕЗОН ИГРЫ",body:"Проходи задания · Получай XP · Открывай подарки"},
   {tag:"ПЯТЬ РЕЖИМОВ",headline:"ТВОЙ МАРШРУТ",body:"Выбирай задания · Играй каждый день"},
   {tag:"XP И НАГРАДЫ",headline:"НОВЫЙ СЕЗОН ИГРЫ",body:"Проходи задания · Получай XP · Открывай подарки"},
   {tag:"КАК НА ЭКЗАМЕНЕ",headline:"ПРОВЕРЬ СЕБЯ",body:"30 вопросов · 40 минут · Настоящие правила"},
   {tag:"NEOLINE · VICE SUNSET",headline:"GTA VI STYLE",body:"Включи неоновый мир · Верни обычный стиль"}
  ],
  en:[
-  {tag:"START YOUR JOURNEY",headline:"OWN THE ROAD",body:"Learn signs · Train every day"},
+  {tag:"ISRAEL · GAME",headline:"NEW GAME SEASON",body:"Complete missions · Earn XP · Unlock rewards"},
   {tag:"FIVE GAME MODES",headline:"YOUR ROUTE",body:"Choose a mission · Earn experience"},
   {tag:"XP & REWARDS",headline:"A NEW GAME SEASON",body:"Complete missions · Earn XP · Unlock gifts"},
   {tag:"EXAM TRAINING",headline:"TEST YOUR SKILLS",body:"30 questions · 40 minutes · Real rules"},
   {tag:"NEOLINE · VICE SUNSET",headline:"GTA VI STYLE",body:"Enter the neon world · Switch back at any time"}
  ],
  he:[
-  {tag:"מתחילים במסע",headline:"שולטים בכביש",body:"לומדים תמרורים · מתרגלים נהיגה"},
+  {tag:"ישראל · משחק",headline:"עונת משחק חדשה",body:"משלימים משימות · צוברים XP · פותחים פרסים"},
   {tag:"חמישה מצבי משחק",headline:"המסלול שלך",body:"בוחרים משימות · לומדים כל יום"},
   {tag:"XP ופרסים",headline:"עונת משחק חדשה",body:"משלימים משימות · צוברים XP · פותחים מתנות"},
   {tag:"הכנה למבחן",headline:"בוחנים את עצמכם",body:"30 שאלות · 40 דקות · חוקי תנועה"},
   {tag:"NEOLINE · VICE SUNSET",headline:"GTA VI STYLE",body:"מצב ניאון · חזרה לעיצוב המקורי"}
  ],
  ar:[
-  {tag:"ابدأ الرحلة",headline:"أتقن الطريق",body:"تعلم الإشارات · تدرب كل يوم"},
+  {tag:"إسرائيل · لعبة",headline:"موسم لعب جديد",body:"أكمل المهام · اكسب XP · افتح الهدايا"},
   {tag:"خمسة أنماط",headline:"طريقك الخاص",body:"اختر المهام · واكتسب الخبرة"},
   {tag:"نقاط XP والهدايا",headline:"موسم لعبة جديد",body:"أكمل المهام · اكسب XP · افتح الهدايا"},
   {tag:"الامتحان التجريبي",headline:"اختبر مهاراتك",body:"30 سؤالًا · 40 دقيقة · قوانين المرور"},
@@ -40,7 +40,7 @@ const i18n={
 };
 const artClasses=["city","signs","rewards","exam","duo"];
 const sceneURLs=[
- "./assets/teoria/vice-card-signs.svg",
+ "./assets/teoria/vice-cinematic-duo.svg",
  "./assets/teoria/vice-card-marathon.svg",
  "./assets/teoria/vice-approved-protagonists.webp",
  "./assets/teoria/vice-card-exam.svg",
@@ -130,9 +130,9 @@ function entrance(){
  },1000);
 }
 function welcome(){
- // Open the approved duo/XP poster immediately when the neon skin is entered.
+ // Open the cinematic protagonist poster as the FIRST slide of the neon mode.
  // The regular five-slide timer continues rotating afterwards.
- if(dots[2]?.getAttribute("aria-current")!=="true")dots[2]?.click();
+ if(dots[0]?.getAttribute("aria-current")!=="true")dots[0]?.click();
  entrance();
 }
 window.addEventListener("neoline:vice-theme",event=>{
