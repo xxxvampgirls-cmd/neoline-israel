@@ -65,26 +65,46 @@ function nextGameTrack(){
  try{localStorage.setItem(SHUFFLE_KEY,JSON.stringify(shuffled))}catch(_){}
  return id;
 }
-async function manifest(){
- if(!manifestPromise)manifestPromise=fetch("./assets/teoria/ay/manifest.json?v=pt3-sonya-v1",{cache:"no-store"})
-  .then(r=>{if(!r.ok)throw Error("AY playlist manifest HTTP "+r.status);return r.json()})
-  .then(m=>{
-   if(m.menu!=="sonya"||m.frameRate!==50||m.clockHz!==1773400||
-      !m.tracks?.sonya||GAME_IDS.some(id=>!m.tracks?.[id]))throw Error("PT3 playlist invalid");
-   return m;
-  }).catch(e=>{manifestPromise=null;throw e});
- return manifestPromise;
-}
+// Lossless tracker loader. Decompress the user's original PT3 module
+// and run its original note/sample/ornament commands through a PT3 player.
+// Then deliver 14 AY registers x 50 Hz to the existing AY chip emulator.
+// No synthesized melody, MIDI, MP3, samples or changes to the PT3 arrangement.
 async function pt3Bytes(id){
  if(songBuffers.has(id))return songBuffers.get(id);
- const m=await manifest(),entry=m.tracks[id];
- if(!entry||!String(entry.url).match(/^\.\/assets\/teoria\/ay\/[a-z_]+\.ay14$/))
-  throw Error("Bad PT3 tune "+id);
- const response=await fetch(entry.url,{cache:"force-cache"});
- if(!response.ok)throw Error("PT3 tune "+id+" HTTP "+response.status);
- const frames=new Uint8Array(await response.arrayBuffer());
- if(frames.length!==entry.frames*14||frames.length<14*250||frames.length>14*50*240)
-  throw Error("PT3 frame length mismatch "+id);
+ if(!["sonya",...GAME_IDS].includes(id))throw Error("Unrecognized PT3 soundtrack "+id);
+ if(!window.NEOLINE_PT3)throw Error("PT3 decoder unavailable");
+ if(typeof DecompressionStream!=="function")throw Error("Browser cannot decode lossless PT3 archive");
+ const file="./assets/teoria/pt3-src/"+id+".z64";
+ const response=await fetch(file,{cache:"force-cache"});
+ if(!response.ok)throw Error("Original PT3 "+id+" HTTP "+response.status);
+ const text=(await response.text()).trim();
+ if(text.length<100||text.length>90000||!/^[A-Za-z0-9+/=\s]+$/.test(text))
+  throw Error("Invalid PT3 compressed source "+id);
+ const base64=text.replace(/\s/g,"");
+ const decoded=atob(base64);
+ const zipped=new Uint8Array(decoded.length);
+ for(let i=0;i<decoded.length;i++)zipped[i]=decoded.charCodeAt(i);
+ const decompressed=new Blob([zipped]).stream().pipeThrough(new DecompressionStream("deflate"));
+ const raw=new Uint8Array(await new Response(decompressed).arrayBuffer());
+ if(raw.length<201||raw.length>65536||
+    String.fromCharCode(...raw.subarray(0,12))!=="ProTracker 3.")
+  throw Error("Invalid ProTracker module "+id);
+ const pt3=window.NEOLINE_PT3;
+ const instance=pt3.pt3_setup_music(raw);
+ if(!instance)throw Error("PT3 engine rejected "+id);
+ const result=new Uint8Array(14*50*240);
+ let count=0;
+ try {
+  while(count<50*240&&!instance.looped){
+   pt3.pt3_play_tick(instance);
+   const r=pt3.pt3_get_regs(instance);
+   if(!r||r.length<14)throw Error("Corrupt PT3 registers "+id);
+   result.set(r.subarray(0,14),count*14);
+   count++;
+  }
+ }catch(error){throw new Error("PT3 tracker decoding failed for "+id+": "+error.message)}
+ if(count<50*3||!instance.looped)throw Error("Invalid or nonlooping original PT3 "+id);
+ const frames=result.slice(0,count*14);
  songBuffers.set(id,frames);
  return frames;
 }
