@@ -37,15 +37,19 @@ function notePeriod(note){
 }
 // Tracker originals replay through an AY register stream, never synthesized.
 const GAME_MODES=new Set(["route","signs","exam","mistakes","marathon","daily"]);
-const GAME_IDS=["mary_jane","x_files","zoolook","downtown","behind_the_walls","magnetic_fields"];
-const SHUFFLE_KEY="neoline.vice.pt3.shuffle.v1";
+const GAME_IDS=["mary_jane","x_files","zoolook","downtown","behind_the_walls","magnetic_fields","robocop","axel_force_remix"];
+const SHUFFLE_KEY="neoline.vice.pt3.shuffle.v2"; // refresh bag for 8 distinct PT3 songs
 let manifestPromise=null,requestSerial=0,selectedGameSong=null,activeSong=null;
 const songBuffers=new Map();
 const songLoads=new Map(); // Deduplicate PT3 warm-up vs first visible scene
 let shuffled;
 try{shuffled=JSON.parse(localStorage.getItem(SHUFFLE_KEY)||"null")}catch(_){}
-if(!shuffled||!Array.isArray(shuffled.bag)||shuffled.bag.some(id=>!GAME_IDS.includes(id)))
- shuffled={bag:[],last:null};
+if(!shuffled||!Array.isArray(shuffled.bag)||shuffled.bag.some(id=>!GAME_IDS.includes(id))||
+   new Set(shuffled.bag).size!==shuffled.bag.length){
+ let oldLast=null;
+ try{oldLast=JSON.parse(localStorage.getItem("neoline.vice.pt3.shuffle.v1")||"null")?.last}catch(_){}
+ shuffled={bag:[],last:GAME_IDS.includes(oldLast)?oldLast:null};
+}
 const rand=max=>{
  if(max<=1)return 0;
  const a=new Uint32Array(1);
