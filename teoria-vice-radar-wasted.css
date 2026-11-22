@@ -487,3 +487,14 @@ html[data-vice-theme="on"] .theory-promo-host .vice-cinema-frame--exam .vice-cin
  background-position:center 46%!important;
  filter:saturate(1.12) contrast(1.04)!important;
 }
+
+/* When the final heart breaks, keep the last question blurred behind the
+   cinematic card. Do not let the lobby dashboard flash back into view. */
+html[data-vice-theme="on"] body.game-over-open .game-hero.theory-dashboard,
+html[data-vice-theme="on"] body.game-over-open #theoryDaily,
+html[data-vice-theme="on"] body.game-over-open .theory-daily,
+html[data-vice-theme="on"] body.game-over-open #gameLobby,
+html[data-vice-theme="on"] body.game-over-open .theory-bottom,
+html[data-vice-theme="on"] body.game-over-open > .topbar{
+ display:none!important;
+}
