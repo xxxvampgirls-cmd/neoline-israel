@@ -1,0 +1,493 @@
+/* NEOLINE × VICE SUNSET
+   Original, GTA VI-inspired cosmetic mode. No Rockstar imagery/logos/assets.
+   Scope EVERYTHING to html[data-vice-theme="on"]: classic skin is unchanged.
+   Gameplay, original Israeli signs, score/lives, gift opening remain untouched. */
+
+/* Classic button is a real switch, not a new game mode or an extra question. */
+.vice-theme-switch{
+ display:inline-flex;align-items:center;justify-content:center;gap:6px;
+ max-width:100%;min-height:29px;padding:4px 9px;margin-top:7px;
+ border:1px solid #e7a3d0;border-radius:999px;cursor:pointer;
+ background:linear-gradient(115deg,#fde6ef,#dbdcff);color:#662976;
+ box-shadow:0 2px 9px #7d348721;
+ font:900 9px/1.1 Manrope,Arial,sans-serif;letter-spacing:.04em;
+ -webkit-tap-highlight-color:transparent;
+ transition:background .2s ease,box-shadow .2s ease,transform .2s ease;
+}
+.vice-theme-switch:hover{box-shadow:0 2px 14px #b53a8b42;transform:translateY(-1px)}
+.vice-theme-switch:focus-visible{outline:3px solid #f79fd3;outline-offset:3px}
+.vice-toggle-mark{
+ display:grid;place-items:center;width:22px;height:22px;flex:0 0 22px;
+ font:italic 950 13px/1 Georgia,serif;
+ border-radius:7px;color:#fff;background:linear-gradient(150deg,#a23d96,#f97087);
+ text-shadow:0 1px 2px #4b1647bb
+}
+.vice-toggle-light{width:5px;height:5px;flex:none;border-radius:50%;background:#b67bb0}
+.vice-theme-switch[aria-pressed="true"]{border-color:#ff8aac;background:linear-gradient(120deg,#422147,#9e306e);color:#fff}
+.vice-theme-switch[aria-pressed="true"] .vice-toggle-light{background:#79ffe9;box-shadow:0 0 9px #58ffe3}
+.vice-theme-status{
+ position:fixed;z-index:600;left:50%;bottom:calc(82px + env(safe-area-inset-bottom,0px));
+ transform:translate(-50%,12px);opacity:0;visibility:hidden;pointer-events:none;
+ padding:9px 15px;border-radius:11px;background:#251537;color:white;
+ border:1px solid #fd91be;font:850 12px/1.35 Manrope,Arial,sans-serif;
+ box-shadow:0 12px 35px #0a002e64;transition:opacity .2s,transform .2s,visibility .2s;
+ white-space:nowrap;max-width:90vw;text-overflow:ellipsis;overflow:hidden;
+}
+.vice-theme-status.is-visible{opacity:1;visibility:visible;transform:translate(-50%,0)}
+.vice-theme-switch--quiz{margin:0;min-height:27px;padding:3px 6px;font-size:9px}
+.vice-theme-switch--quiz .vice-toggle-mark{width:19px;height:19px;flex-basis:19px;font-size:11px}
+.vice-theme-switch--result{display:flex;margin:0 0 8px auto;max-width:max-content}
+
+html[data-vice-theme="on"]{
+ --vice-night:#1f112b;--vice-indigo:#392044;--vice-pink:#ff6aa9;
+ --vice-peach:#ffac84;--vice-cyan:#7df7f4;--vice-cream:#fff2ee;
+ --vice-outline:#c375a9;--vice-soft:#ead4ea;
+ color-scheme:dark;
+ scroll-behavior:smooth;
+}
+html[data-vice-theme="on"] body{
+ color:var(--vice-cream)!important;
+ background:
+  radial-gradient(ellipse 65% 32% at 83% 12%,#f67a9d71 0%,transparent 82%),
+  radial-gradient(ellipse 55% 38% at 6% 38%,#952e9d76 0%,transparent 78%),
+  linear-gradient(180deg,#2d163e 0%,#4a2657 27%,#261838 62%,#15132d 100%)!important;
+ background-attachment:fixed;
+}
+html[data-vice-theme="on"] body::before{
+ content:"";position:fixed;pointer-events:none;inset:0;z-index:0;
+ background:repeating-linear-gradient(0deg,#f78dbb08 0 1px,transparent 1px 28px);
+ opacity:.54;
+}
+html[data-vice-theme="on"] body>main{position:relative;z-index:1}
+html[data-vice-theme="on"] .topbar.neoline-site-header{
+ background:linear-gradient(105deg,#fff1ed 0%,#ffe0e9 42%,#e8d7fc 100%)!important;
+ border-bottom:1px solid #f2aecf!important;
+ box-shadow:0 7px 24px #2a043b34!important;
+}
+html[data-vice-theme="on"] .neoline-site-header__flag[aria-pressed="true"],
+html[data-vice-theme="on"] .neoline-site-header__flag.active{
+ box-shadow:0 0 0 2px #f172a3,0 3px 11px #d44b985b!important;
+}
+html[data-vice-theme="on"] .neoline-site-header__cart{
+ background:#fff0f8!important;border-color:#efb4d5!important;color:#8e377b!important;
+}
+html[data-vice-theme="on"] main.shell{max-width:1160px}
+
+/* Sunset skyline: a layered, geometric 1980s resort atmosphere.
+   Completely new shapes, not borrowed from any copyrighted game. */
+html[data-vice-theme="on"] .game-hero.theory-dashboard{
+ position:relative;overflow:hidden;isolation:isolate;
+ border:1px solid #e580bb!important;border-radius:24px!important;
+ background:
+  radial-gradient(circle at 74% 19%,#ffd7a6dd 0 5%,#fa8c98be 7%,transparent 34%),
+  linear-gradient(134deg,#321e57 0%,#743d7e 48%,#d35c91 79%,#ee997d 100%)!important;
+ box-shadow:0 12px 36px #0400167a,inset 0 1px #ffc4e75a!important;
+}
+html[data-vice-theme="on"] .game-hero.theory-dashboard::before{
+ content:"";display:block!important;
+ position:absolute;z-index:0;left:-4%;right:-4%;bottom:27%;top:auto;
+ width:108%;height:30%;border:0;border-radius:0;transform:none;
+ background:linear-gradient(to bottom,transparent 0 32%,#28143b 32% 100%);
+ clip-path:polygon(0 96%,0 68%,8% 68%,8% 47%,15% 47%,15% 69%,22% 69%,22% 30%,
+  28% 30%,28% 49%,36% 49%,36% 19%,41% 19%,41% 60%,50% 60%,50% 37%,
+  56% 37%,56% 56%,64% 56%,64% 14%,70% 14%,70% 49%,77% 49%,77% 61%,
+  84% 61%,84% 35%,91% 35%,91% 72%,100% 72%,100% 100%,0 100%);
+ opacity:.25;pointer-events:none;
+}
+html[data-vice-theme="on"] .game-hero.theory-dashboard::after{
+ content:"VICE CITY • DRIVING THEORY";display:block!important;
+ position:absolute;bottom:5px;left:17px;z-index:1;
+ color:#ffcbac;font:800 8px/1 Manrope,Arial,sans-serif;
+ letter-spacing:.2em;opacity:.7;pointer-events:none;
+}
+html[data-vice-theme="on"] .theory-dashboard .hero-copy,
+html[data-vice-theme="on"] .theory-dashboard .hero-orbs{position:relative;z-index:2}
+html[data-vice-theme="on"] .theory-dashboard h1{
+ color:#fff6ed!important;
+ text-shadow:0 3px 0 #682c6d,0 4px 18px #f467b552!important;
+ font-weight:950!important;letter-spacing:-.045em;
+}
+html[data-vice-theme="on"] .theory-dashboard .game-hero-mini,
+html[data-vice-theme="on"] .theory-dashboard .eyebrow{
+ color:#ffe8bb!important;letter-spacing:.115em;text-shadow:0 1px 5px #31102a73;
+}
+html[data-vice-theme="on"] .theory-dashboard .hero-stroke{
+ background:linear-gradient(90deg,#fc709b,#ffa78c,#88fff2)!important;
+ box-shadow:0 0 13px #ff9cbd88;
+}
+html[data-vice-theme="on"] .game-gift-trigger{
+ color:#ffebd8!important;background:#743266cc!important;border:1px solid #ffa4b5!important;
+ box-shadow:0 2px 14px #ff729445!important;
+}
+html[data-vice-theme="on"] .game-hero .vice-theme-switch{
+ background:linear-gradient(112deg,#ff6c99,#ffb27e)!important;
+ color:#351335!important;border-color:#ffdbce!important;
+ box-shadow:0 3px 11px #410a355f!important;
+}
+html[data-vice-theme="on"] .game-hero .vice-theme-switch .vice-toggle-mark{
+ background:#391c4d!important;color:#ffddab!important;
+}
+html[data-vice-theme="on"] .theory-dashboard .hero-art{
+ background:linear-gradient(145deg,#f071a2,#f9b584)!important;
+ border-color:#ffa2be!important;
+ box-shadow:0 7px 20px #270a374b!important;
+}
+html[data-vice-theme="on"] .theory-promo-host .hero-studio-svg:not(.is-active),
+html[data-vice-theme="on"] .theory-promo-host .theory-promo-slide:not(.is-active){pointer-events:none}
+html[data-vice-theme="on"] .theory-promo-host .hero-studio-svg.is-active,
+html[data-vice-theme="on"] .theory-promo-host .theory-promo-slide.is-active:not(.vice-promo-slide){
+ filter:hue-rotate(93deg) saturate(1.24) contrast(1.04);
+}
+html[data-vice-theme="on"] .theory-promo-host .theory-promo-caption{
+ color:#411233!important;background:#ffccbd!important;
+ border-color:#fff3e1!important;
+}
+html[data-vice-theme="on"] .theory-promo-host .theory-promo-dots{
+ background:#2d1b42d9!important;border:1px solid #e780b68c!important;
+}
+html[data-vice-theme="on"] .theory-promo-host .theory-promo-dot::before{
+ background:#c47ab9!important;
+}
+html[data-vice-theme="on"] .theory-promo-host .theory-promo-dot[aria-current="true"]::before{
+ background:#ffb38c!important;box-shadow:0 0 0 2px #fff3ea!important;
+}
+html[data-vice-theme="on"] .theory-dashboard .hero-orbs{
+ border:1px solid #d27ca7!important;
+ background:linear-gradient(125deg,#321a43e5,#502358e0)!important;
+ box-shadow:inset 0 1px #ffcce83d!important;
+}
+html[data-vice-theme="on"] .theory-dashboard .hero-orb-caption,
+html[data-vice-theme="on"] .hero-progress-caption{
+ color:#ffd9ea!important;background:#6c3768!important;
+}
+html[data-vice-theme="on"] .theory-dashboard .hero-orb-ring{
+ background:conic-gradient(from 210deg,#ff7d9f,#fbc387,#67ebdf,#ac83ee,#ff7d9f)!important;
+ border-color:#ffbfd1!important;box-shadow:0 0 15px #f993af47!important;
+}
+html[data-vice-theme="on"] .theory-dashboard .hero-orb-core{
+ background:radial-gradient(circle at 32% 23%,#552a60,#20112e 83%)!important;
+ color:white!important;border-color:#ffc2df!important;
+}
+html[data-vice-theme="on"] .theory-dashboard .hero-orb-number,
+html[data-vice-theme="on"] .theory-dashboard .hero-orb-denominator{
+ color:#fff1e9!important;text-shadow:0 0 9px #ff86b680!important;
+}
+html[data-vice-theme="on"] .hero-progress-open{
+ background:linear-gradient(140deg,#58305b,#281833)!important;
+ border:2px solid #f5b1ab!important;color:#fff0e8!important;
+ box-shadow:0 0 16px #fc8dae62!important;
+}
+
+/* Daily challenge + mode selection: nightlife neon storefronts. */
+html[data-vice-theme="on"] .theory-daily{
+ background:linear-gradient(115deg,#301b49,#51245d 67%,#742a64)!important;
+ border:1px solid #b970b5!important;border-radius:22px!important;
+ box-shadow:0 9px 28px #12021d6b!important;
+}
+html[data-vice-theme="on"] .theory-daily strong,
+html[data-vice-theme="on"] .theory-daily-text strong{
+ color:#fff6e9!important;
+}
+html[data-vice-theme="on"] .theory-daily .theory-daily-text span{
+ color:#f8cae4!important;
+}
+html[data-vice-theme="on"] .theory-daily-icon{
+ color:#fff3e6!important;
+ background:linear-gradient(150deg,#e95b9b,#8a39ac)!important;
+ box-shadow:0 5px 19px #fb67b975!important;
+}
+html[data-vice-theme="on"] .theory-daily-streak{
+ color:#ffdec5!important;
+ background:#612b5a!important;border-color:#ac608d!important;
+}
+html[data-vice-theme="on"] .theory-daily-start{
+ background:linear-gradient(105deg,#ee579d,#f89a80)!important;
+ border-color:#ffbdac!important;color:#301331!important;
+ box-shadow:0 7px 16px #db4c955b!important;
+}
+html[data-vice-theme="on"] .theory-daily-start:disabled{opacity:.58!important}
+html[data-vice-theme="on"] #gameLobby{
+ position:relative;overflow:hidden;
+ border:1px solid #a86eac!important;border-radius:24px!important;
+ background:linear-gradient(155deg,#261a3a 0%,#392148 58%,#311b42 100%)!important;
+ box-shadow:0 12px 29px #0a00175c!important;
+}
+html[data-vice-theme="on"] #gameLobby::before{
+ content:"";display:block;position:absolute;pointer-events:none;
+ inset:0 0 auto;height:3px;background:linear-gradient(90deg,#fa689a,#fed0a5,#7af8ee);
+}
+html[data-vice-theme="on"] #gameLobby .toolbar-title h2,
+html[data-vice-theme="on"] #gameLobby h2,
+html[data-vice-theme="on"] #selectTitle{
+ color:#fff0ea!important;text-shadow:0 2px 12px #f65b9b3c!important;
+}
+html[data-vice-theme="on"] #gameLobby .tiny-label,
+html[data-vice-theme="on"] #gameLobby .bank-status,
+html[data-vice-theme="on"] #gameLobby .source-note,
+html[data-vice-theme="on"] #gameLobby .settings,
+html[data-vice-theme="on"] #gameLobby #licenseLabel{
+ color:#e8b9dd!important;
+}
+html[data-vice-theme="on"] #gameLobby .source-links a{
+ color:#8cf4e4!important;text-decoration-color:#83eae2;
+}
+html[data-vice-theme="on"] #gameLobby .theory-licence-open{
+ border:1px solid #e788b7!important;background:#4b2758!important;
+ color:#ffe9ea!important;box-shadow:0 3px 9px #1c0727a8!important;
+}
+html[data-vice-theme="on"] #gameLobby .bank-status{
+ background:#3e264e!important;border-color:#854879!important;
+}
+html[data-vice-theme="on"] #gameLobby .routes .route-card{
+ --tile-glow:#fda8b8!important;--tile-line:#d786bc!important;
+ color:#fff4f1!important;
+ border:1px solid #a867a6!important;
+ background:linear-gradient(147deg,#482657 0%,#65315e 67%,#842e6d 100%)!important;
+ box-shadow:0 8px 22px #13021b87,inset 0 1px #ffb7ce51!important;
+ border-radius:18px!important;
+}
+html[data-vice-theme="on"] #gameLobby .routes .route-card:nth-child(2){
+ background:linear-gradient(147deg,#274862,#326a79 58%,#614575)!important;
+ border-color:#69b7c0!important;
+}
+html[data-vice-theme="on"] #gameLobby .routes .route-card:nth-child(3){
+ background:linear-gradient(147deg,#352d65,#63477c 55%,#8d3976)!important;
+}
+html[data-vice-theme="on"] #gameLobby .routes .route-card:nth-child(4){
+ background:linear-gradient(147deg,#593045,#b45472 65%,#da7a7d)!important;
+}
+html[data-vice-theme="on"] #gameLobby .routes .route-card:nth-child(5){
+ background:linear-gradient(147deg,#184954,#2d7a82 49%,#714e86)!important;
+}
+html[data-vice-theme="on"] #gameLobby .routes .route-card .game-mode-photo{
+ border-color:#ffb9d195!important;box-shadow:inset 0 -1px #ffc0ca69!important;
+ background:linear-gradient(120deg,#963e7d,#ff9c88)!important;
+}
+html[data-vice-theme="on"] #gameLobby .routes .route-card .game-mode-photo img{
+ filter:sepia(.25) hue-rotate(255deg) saturate(1.45) contrast(1.04);
+}
+html[data-vice-theme="on"] #gameLobby .routes .route-card strong{
+ color:#fff0ea!important;text-shadow:0 1px 9px #2c063a6f!important;
+}
+html[data-vice-theme="on"] #gameLobby .routes .route-card .route-length,
+html[data-vice-theme="on"] #gameLobby .routes .route-card .route-icon{
+ background:#552957de!important;color:#fff4e7!important;
+ border:1px solid #ffafbfbb!important;
+}
+html[data-vice-theme="on"] #gameLobby .routes .route-card .route-cta{
+ color:#fff2c8!important;background:#9b3c7899!important;
+ border-color:#e59fba!important;font-weight:900!important;
+}
+html[data-vice-theme="on"] #gameLobby .routes .route-card>span:not(.game-mode-photo):not(.route-top):not(.route-cta){
+ color:#f6d4e8!important;
+}
+html[data-vice-theme="on"] #gameLobby .routes .route-card:disabled{
+ filter:grayscale(.25)!important;opacity:.6!important;
+}
+
+/* Active quiz: neon GPS HUD, dark legible question and exam answers. */
+html[data-vice-theme="on"] #gamePlaying{
+ color:#fff0f2!important;background:transparent!important;border-color:transparent!important;
+}
+html[data-vice-theme="on"] #gamePlaying .game-quiz-topline{
+ color:#ffbfd8!important;
+}
+html[data-vice-theme="on"] #gamePlaying .game-quiz-label{
+ color:#fff2c7!important;
+}
+html[data-vice-theme="on"] #gamePlaying .game-quiz-warning{color:#ffc7dd!important}
+html[data-vice-theme="on"] #gamePlaying .quiz-hud{
+ border:1px solid #d46ca7!important;
+ background:linear-gradient(120deg,#342045,#4e2b57 53%,#332348)!important;
+ box-shadow:0 7px 24px #0a001d9c,inset 0 1px #ffbdca61!important;
+}
+html[data-vice-theme="on"] #gamePlaying .game-quiz-route{
+ background:transparent!important;
+}
+html[data-vice-theme="on"] #gamePlaying .nav9-route-guide{
+ stroke:#b969b9!important;
+}
+html[data-vice-theme="on"] #gamePlaying .nav9-route-active{
+ stroke:#5cffd7!important;filter:drop-shadow(0 0 5px #7afddd96)!important;
+}
+html[data-vice-theme="on"] #gamePlaying .nav9-current-marker{
+ filter:drop-shadow(0 0 7px #ffe392b5)!important;
+}
+html[data-vice-theme="on"] #gamePlaying .hud-back{
+ color:#ffe5e8!important;background:#60345f!important;border-color:#c47daa!important;
+}
+html[data-vice-theme="on"] #gamePlaying .hud-progress{
+ background:conic-gradient(from 0deg,#ffb37e,#fd68b6,#58f7e8,#ffb37e)!important;
+ box-shadow:0 0 0 2px #ab6894,0 0 16px #f35ba782!important;
+}
+html[data-vice-theme="on"] #gamePlaying .hud-progress-inner{
+ background:radial-gradient(circle,#45234e,#271834)!important;
+ color:#fff5ed!important;
+}
+html[data-vice-theme="on"] #gamePlaying .hud-progress strong,
+html[data-vice-theme="on"] #gamePlaying .hud-progress small,
+html[data-vice-theme="on"] #gamePlaying .hud-lives,
+html[data-vice-theme="on"] #gamePlaying .hud-xp,
+html[data-vice-theme="on"] #gamePlaying .mode-pill,
+html[data-vice-theme="on"] #gamePlaying .timer{
+ color:#fff0e1!important;
+}
+html[data-vice-theme="on"] #gamePlaying .mode-pill,
+html[data-vice-theme="on"] #gamePlaying .hud-xp{
+ background:#64345e!important;border-color:#c071ab!important;
+}
+html[data-vice-theme="on"] #gamePlaying .question-card{
+ background:linear-gradient(158deg,#281d3d,#342043 60%,#281b3c)!important;
+ border:1px solid #ba72ad!important;
+ border-radius:21px!important;
+ box-shadow:0 12px 25px #08001391!important;
+}
+html[data-vice-theme="on"] #gamePlaying .question-card::before{
+ background:linear-gradient(90deg,#ff8eb1,#ffc28b,#6ffde5)!important;
+}
+html[data-vice-theme="on"] #gamePlaying .question-eyebrow,
+html[data-vice-theme="on"] #gamePlaying #questionTopic,
+html[data-vice-theme="on"] #gamePlaying #questionId{
+ color:#ffb8d9!important;
+}
+html[data-vice-theme="on"] #gamePlaying .question-card h2,
+html[data-vice-theme="on"] #gamePlaying #questionText{
+ color:#fff3ec!important;text-shadow:none!important;font-weight:850;
+}
+html[data-vice-theme="on"] #gamePlaying .question-picture{
+ background:#fff8f4!important;border-color:#ca75ac!important;
+}
+html[data-vice-theme="on"] #gamePlaying .answer-list .answer{
+ background:linear-gradient(110deg,#4f315a,#3a2849)!important;
+ color:#fff3f1!important;border:1px solid #80598b!important;
+ box-shadow:0 3px 9px #09051a53!important;
+ font-weight:760!important;
+}
+html[data-vice-theme="on"] #gamePlaying .answer-list .answer:hover:not(:disabled),
+html[data-vice-theme="on"] #gamePlaying .answer-list .answer:focus-visible{
+ border-color:#f4a2c7!important;background:#673a65!important;
+}
+html[data-vice-theme="on"] #gamePlaying .answer-list .answer .letter{
+ color:#351937!important;background:#ffc7db!important;border-color:#ffdfe7!important;
+}
+html[data-vice-theme="on"] #gamePlaying .answer-list .answer.correct{
+ background:linear-gradient(110deg,#125f55,#1d795e)!important;
+ border-color:#78f6cc!important;color:#edfff9!important;
+}
+html[data-vice-theme="on"] #gamePlaying .answer-list .answer.correct .letter{
+ background:#a3ffe2!important;color:#064f49!important;border-color:#a3ffe2!important;
+}
+html[data-vice-theme="on"] #gamePlaying .answer-list .answer.wrong{
+ background:linear-gradient(110deg,#742b4e,#973c59)!important;
+ border-color:#ff8f9b!important;color:#fff4f2!important;
+}
+html[data-vice-theme="on"] #gamePlaying .answer-list .answer.wrong .letter{
+ color:#731e3a!important;background:#ffe5e5!important;
+}
+html[data-vice-theme="on"] #gamePlaying .answer-list .answer.selected:not(.correct):not(.wrong){
+ border-color:#ffc28a!important;background:#76475b!important;color:#fff3ed!important;
+}
+html[data-vice-theme="on"] #gamePlaying .question-bottom,
+html[data-vice-theme="on"] #gamePlaying #questionTip{color:#e7bedd!important}
+html[data-vice-theme="on"] #gamePlaying .feedback:not(.negative){
+ color:#80ffe0!important;background:#1c574c!important;border-color:#5fffd5!important;
+}
+html[data-vice-theme="on"] #gamePlaying .feedback.negative{
+ background:#6c2b47!important;color:#ffe8eb!important;border-color:#ff8b9e!important;
+}
+html[data-vice-theme="on"] #gamePlaying .primary,
+html[data-vice-theme="on"] #gameResult .primary{
+ border-color:#ffb89e!important;color:#391837!important;
+ background:linear-gradient(110deg,#fd6b9e,#ffac83)!important;
+ box-shadow:0 4px 15px #fb57965e!important;
+}
+html[data-vice-theme="on"] #gameResult.outcome{
+ color:#fff0ea!important;
+ background:linear-gradient(155deg,#372048,#512853 60%,#42224c)!important;
+ border:1px solid #ce81b9!important;
+ box-shadow:0 14px 33px #10001e9a!important;
+}
+html[data-vice-theme="on"] #gameResult .game-result-art{
+ filter:hue-rotate(102deg) saturate(1.7)!important;
+}
+html[data-vice-theme="on"] #gameResult .tiny-label,
+html[data-vice-theme="on"] #gameResult #resultSubtitle{
+ color:#ffd2e1!important;
+}
+html[data-vice-theme="on"] #gameResult #resultTitle{
+ color:#fff0e8!important;text-shadow:0 0 14px #e15ea96b!important;
+}
+html[data-vice-theme="on"] #gameResult .result-details>div{
+ background:#372545!important;border:1px solid #9e63a0!important;
+}
+html[data-vice-theme="on"] #gameResult .result-details strong{
+ color:#ffc18c!important;
+}
+html[data-vice-theme="on"] #gameResult .result-details span{
+ color:#ffd9e7!important;
+}
+html[data-vice-theme="on"] #gameResult .game-results-progress,
+html[data-vice-theme="on"] #gameResult .game-gift-result-trigger,
+html[data-vice-theme="on"] #gameResult .secondary{
+ color:#ffe3ec!important;
+ background:#5d2d61!important;border-color:#ca7ca7!important;
+}
+html[data-vice-theme="on"] #gameResult .game-result-gauge{
+ filter:hue-rotate(130deg) saturate(1.2)!important;
+}
+
+/* Open dialogs inherit the resort-at-night atmosphere; don't touch the 3D box. */
+html[data-vice-theme="on"] :is(.game-progress-dialog,.theory-licence-dialog,#gameGiftDialog){
+ color:#fff1e9!important;
+ background:#301d43!important;border-color:#ca81b2!important;
+}
+html[data-vice-theme="on"] :is(.game-progress-dialog,.theory-licence-dialog,#gameGiftDialog)::backdrop{
+ background:#160b2fc9!important;backdrop-filter:blur(5px);
+}
+html[data-vice-theme="on"] .gameover-card{
+ background:linear-gradient(145deg,#45234e,#281831)!important;
+ border-color:#da76a1!important;color:#ffefee!important;
+}
+html[data-vice-theme="on"] .gameover-card :is(h2,h3,strong){
+ color:#fff0e8!important;
+}
+
+/* Keep the existing five-tab layout dimensions EXACTLY as approved. */
+@media (max-width:760px){
+ html[data-vice-theme="on"] :is(.theory-bottom,.theory-bottom.nav-scroll-hidden){
+  background:#301c41f4!important;border-top-color:#9d608d!important;
+  box-shadow:0 -8px 23px #10051a99!important;
+ }
+ html[data-vice-theme="on"] .theory-bottom>a{color:#f0c7e6!important}
+ html[data-vice-theme="on"] .theory-bottom>a:is(.neoline-current,.active,[aria-current]){
+  background:#ed7fac!important;color:#281839!important;
+  box-shadow:inset 0 0 0 1px #ffc6d9!important;
+ }
+ html[data-vice-theme="on"] .theory-bottom>a:is(.neoline-current,.active,[aria-current]) svg{
+  stroke:#532047!important;color:#532047!important;
+ }
+ html[data-vice-theme="on"] .theory-bottom>a svg{stroke:currentColor!important}
+ .game-hero .vice-theme-switch{min-height:27px;margin-top:4px;padding:3px 6px;gap:5px}
+ .game-hero .vice-toggle-mark{width:20px;height:20px;flex-basis:20px;font-size:12px}
+ .game-hero .vice-toggle-text{font-size:8px}
+ .vice-theme-switch--quiz .vice-toggle-text{font-size:8px}
+ html[data-vice-theme="on"] .game-hero.theory-dashboard::after{
+  bottom:2px;left:9px;font-size:6px;letter-spacing:.12em;
+ }
+ html[data-vice-theme="on"] .theory-dashboard .hero-orbs{padding-bottom:7px!important}
+ html[data-vice-theme="on"] #gameLobby .routes .route-card .game-mode-photo{
+  margin-bottom:2px!important;
+ }
+ html[data-vice-theme="on"] #gamePlaying .question-card{padding:13px!important}
+ html[data-vice-theme="on"] #gamePlaying .answer-list .answer{min-height:58px!important}
+ html[data-vice-theme="on"] #gamePlaying .question-card h2{font-size:clamp(18px,4.5vw,23px)!important}
+}
+@media(max-width:365px){
+ .game-hero .vice-toggle-text{font-size:7px}
+ .game-hero .vice-theme-switch{padding:2px 4px}
+ html[data-vice-theme="on"] .game-hero.theory-dashboard::after{opacity:.35}
+}
+@media(prefers-reduced-motion:reduce){
+ .vice-theme-switch,.vice-theme-status{transition:none!important}
+ html[data-vice-theme="on"] :is(.game-hero,.route-card,.answer,.hero-art){animation:none!important}
+}
