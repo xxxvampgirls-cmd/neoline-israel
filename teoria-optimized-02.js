@@ -2441,10 +2441,10 @@ const pendingSongs=[
 ];
 // One identical Batman_The_Movie_3.ay duplicate intentionally omitted.
 const extra={
- ru:{drawer:"Музыкальная коллекция ZX 128K",subtitle:"Плеер и вся музыка · нажми, чтобы открыть",ready:"ИГРОВАЯ МУЗЫКА",waiting:"ОРИГИНАЛЫ · ▶ ВОСПРОИЗВЕДЕНИЕ",state:"ВСТРОЕННЫЙ ПЛЕЕР ▶",count:"{a} PT3 · {n} AY · {e} Z80",foot:"{n} оригиналов играют здесь на AY-3-8912. Остальные {e} файла Z80 / 2×AY запускаются во встроенном проигрывателе. Все исходные записи сохранены."},
- en:{drawer:"ZX 128K Music Collection",subtitle:"Player and complete list · tap to expand",ready:"READY TO LISTEN",waiting:"ORIGINALS · AY / STC / SQT / ASC / STP / PT2",state:"Embedded player ▶",count:"{a} PT3 · {n} AY · {e} Z80",foot:"{n} originals play natively through the AY-3-8912 chip. The remaining {e} Z80 / dual-chip files use the embedded player."},
- he:{drawer:"אוסף מוזיקה ZX 128K",subtitle:"נגן וכל המוזיקה · לחצו לפתיחה",ready:"מוכן להאזנה",waiting:"פורמטים מקוריים · AY / STC / SQT",state:"נגן משובץ ▶",count:"{a} PT3 · {n} AY · {e} Z80",foot:"{n} שירים פועלים דרך AY. שאר {e} השירים פועלים בנגן משובץ."},
- ar:{drawer:"مجموعة موسيقى ZX 128K",subtitle:"المشغل وكل المقاطع · اضغط للفتح",ready:"جاهز للاستماع",waiting:"الملفات الأصلية · AY / STC / SQT",state:"مشغّل مدمج ▶",count:"{a} PT3 · {n} AY · {e} Z80",foot:"تعمل {n} مقاطع عبر AY. تعمل {e} مقاطع أخرى في مشغّل مدمج."}
+ ru:{drawer:"Музыкальная коллекция ZX 128K",subtitle:"Плеер и вся музыка · нажми, чтобы открыть",ready:"ИГРОВАЯ МУЗЫКА",waiting:"ОРИГИНАЛЫ · ▶ ВОСПРОИЗВЕДЕНИЕ",state:"НАШ ПЛЕЕР · AY",count:"{a} PT3 · {n} AY · {e} Z80",foot:"{n} оригиналов работают напрямую в NEOLINE через AY-3-8912. Для недоступных пока композиций нет внешнего плеера — они будут активированы только после подготовки оригинальных регистров."},
+ en:{drawer:"ZX 128K Music Collection",subtitle:"Player and complete list · tap to expand",ready:"READY TO LISTEN",waiting:"ORIGINALS · AY / STC / SQT / ASC / STP / PT2",state:"NEOLINE AY player",count:"{a} PT3 · {n} AY · {e} Z80",foot:"{n} original modules play through NEOLINE AY-3-8912. Unsupported modules stay disabled until their native engine is ready; no external player is used."},
+ he:{drawer:"אוסף מוזיקה ZX 128K",subtitle:"נגן וכל המוזיקה · לחצו לפתיחה",ready:"מוכן להאזנה",waiting:"פורמטים מקוריים · AY / STC / SQT",state:"נגן AY מקורי",count:"{a} PT3 · {n} AY · {e} Z80",foot:"{n} שירים פועלים ישירות בנגן NEOLINE AY. לא נפתח נגן חיצוני."},
+ ar:{drawer:"مجموعة موسيقى ZX 128K",subtitle:"المشغل وكل المقاطع · اضغط للفتح",ready:"جاهز للاستماع",waiting:"الملفات الأصلية · AY / STC / SQT",state:"مشغّل AY الأصلي",count:"{a} PT3 · {n} AY · {e} Z80",foot:"يعمل {n} مقطعًا في مشغّل AY الخاص بنا. لا يوجد مشغّل خارجي."}
 };
 const extraLabels=()=>extra[(doc.lang||"ru").split("-")[0]]||extra.ru;
 const drawerTitle=$("viceSoundtrackDrawerTitle"),drawerSubtitle=$("viceSoundtrackDrawerSubtitle"),drawerStat=$("viceSoundtrackDrawerStat");
@@ -2474,76 +2474,9 @@ for(const [index,track] of api.tracks.entries()){
 // Native PSG register streams use our actual AY-3-8912 chip.
  // Z80 code-based AY and dual-chip SQT modules need full Z80 / 2×AY:
  // load the compatible ZXTune WebAssembly player INSIDE the game.
- const ZXTUNE_URL="https://zxtune.com/player.html";
- const originalDialog=document.createElement("dialog");
- originalDialog.className="vice-soundtrack-original-dialog";
- originalDialog.setAttribute("aria-label","ZX original music player");
- const originalBox=document.createElement("div");
- originalBox.className="vice-soundtrack-original";
- const modalTitle=document.createElement("strong");
- const modalClose=document.createElement("button");
- modalClose.type="button";modalClose.textContent="×";
- modalClose.className="vice-soundtrack-original__close";
- modalClose.setAttribute("aria-label","Close");
- const modalTop=document.createElement("div");
- modalTop.className="vice-soundtrack-original__top";
- modalTop.append(modalTitle,modalClose);
- const modalMessage=document.createElement("p");
- modalMessage.className="vice-soundtrack-original__message";
- modalMessage.setAttribute("role","status");
- const modalLink=document.createElement("a");
- modalLink.target="_blank";modalLink.rel="noopener noreferrer";
- modalLink.className="vice-soundtrack-original__link";
- modalLink.hidden=true;
- const modalFrame=document.createElement("iframe");
- modalFrame.className="vice-soundtrack-original__frame";
- modalFrame.title="ZXTune Web: original ZX Spectrum modules";
- modalFrame.loading="eager";modalFrame.allow="autoplay";
- modalFrame.referrerPolicy="strict-origin-when-cross-origin";
- modalFrame.setAttribute("sandbox","allow-scripts allow-same-origin allow-forms allow-downloads allow-popups");
- originalBox.append(modalTop,modalMessage,modalFrame,modalLink);
- originalDialog.append(originalBox);document.body.append(originalDialog);
- let originalSelected=null,modalSequence=0,modalFallback=0,modalLoaded=false;
- const EMBED_COPY={
-  ru:{loading:"Загружаем встроенный Z80 / 2×AY плеер…",ready:"Нажми ▶ в проигрывателе ниже. Страница игры остаётся открытой.",external:"Открыть отдельно ↗"},
-  en:{loading:"Loading embedded Z80 / 2×AY player…",ready:"Tap ▶ inside the player below. You stay on the game page.",external:"Open separately ↗"},
-  he:{loading:"טוען נגן Z80 / 2×AY משובץ…",ready:"לחצו ▶ בנגן למטה, בלי לעזוב את המשחק.",external:"פתיחה בנפרד ↗"},
-  ar:{loading:"تحميل مشغّل Z80 / 2×AY المدمج…",ready:"اضغط ▶ في المشغّل أدناه دون مغادرة اللعبة.",external:"فتح منفصل ↗"}
- };
- const embedCopy=()=>EMBED_COPY[(doc.lang||"ru").split("-")[0]]||EMBED_COPY.ru;
- function closeOriginalDialog(){
-  ++modalSequence;originalSelected=null;
-  clearTimeout(modalFallback);modalFallback=0;
-  modalFrame.removeAttribute("src");modalLoaded=false;
-  if(originalDialog.open)originalDialog.close();
-  api.suspendForOriginalPlayer?.(false);
-  draw();
- }
- modalClose.addEventListener("click",closeOriginalDialog);
- originalDialog.addEventListener("cancel",e=>{e.preventDefault();closeOriginalDialog()});
- originalDialog.addEventListener("click",e=>{if(e.target===originalDialog)closeOriginalDialog()});
- modalFrame.addEventListener("load",()=>{
-  if(!originalDialog.open||!originalSelected)return;
-  modalLoaded=true;clearTimeout(modalFallback);modalFallback=0;
-  modalMessage.textContent=embedCopy().ready;
- });
- function openOriginalTrack(track){
-  const fileURL=new URL("./assets/teoria/originals/"+encodeURIComponent(track.file),location.href).href;
-  const playerURL=ZXTUNE_URL+"?url="+encodeURIComponent(fileURL);
-  const token=++modalSequence;
-  originalSelected=track.file;modalLoaded=false;modalTitle.textContent=track.name+" · "+track.format;
-  modalMessage.textContent=embedCopy().loading;
-  modalLink.href=playerURL;modalLink.textContent=embedCopy().external;modalLink.hidden=true;
-  api.suspendForOriginalPlayer?.(true);
-  if(!originalDialog.open)originalDialog.showModal();
-  modalFrame.src=playerURL;
-  clearTimeout(modalFallback);
-  modalFallback=setTimeout(()=>{
-   if(token===modalSequence&&originalDialog.open&&!modalLoaded)modalLink.hidden=false;
-  },10000);
-  draw();
- }
-
+ // All supported originals are played by NEOLINE's own AY-3-8912
+// AudioWorklet via the native AY14 register streams. No external iframe,
+// ZXTune popup or remote audio player is ever instantiated.
 const pendingHeader=listHeader();
 const pendingButtons=[];
 for(const track of pendingSongs){
@@ -2561,10 +2494,7 @@ for(const track of pendingSongs){
  action.textContent="▶";action.setAttribute("aria-hidden","true");
  copy.append(label,kind);button.append(number,copy,action);
  button.addEventListener("click",()=>{
-  if(api.originalReady?.(track.file)){
-   if(originalDialog.open)closeOriginalDialog();
-   void api.playOriginal(track.file);
-  }else openOriginalTrack(track);
+  if(api.originalReady?.(track.file))void api.playOriginal(track.file);
  });
  li.append(button);list.append(li);
  pendingButtons.push({button,kind,action,track});
@@ -2589,16 +2519,22 @@ function translate(){
  pendingHeader.textContent=x.waiting+" · "+pendingSongs.length;
  for(const {button,kind,action,track} of pendingButtons){
   const native=!!api.originalReady?.(track.file);
-  const language=(doc.lang||"ru").split("-")[0];
-  const inGame={ru:"В ИГРЕ · AY",en:"IN GAME · AY",he:"במשחק · AY",ar:"داخل اللعبة · AY"};
-  const label=native?(inGame[language]||inGame.ru):x.state;
-  button.disabled=false;button.dataset.player=native?"ay":"zxtune";
-  if(native)button.removeAttribute("aria-haspopup");
-  else button.setAttribute("aria-haspopup","dialog");
+  const lang=(doc.lang||"ru").split("-")[0];
+  const copy={
+   ru:{ready:"В НАШЕМ ПЛЕЕРЕ · AY",waiting:"ГОТОВИТСЯ Z80",dual:"2 ЧИПА · ПОКА НЕДОСТУПНО"},
+   en:{ready:"IN OUR PLAYER · AY",waiting:"Z80 PREPARING",dual:"2 CHIPS · NOT READY"},
+   he:{ready:"בנגן שלנו · AY",waiting:"הכנת Z80",dual:"2 שבבים · לא זמין"},
+   ar:{ready:"في مشغّلنا · AY",waiting:"تجهيز Z80",dual:"شريحتان · غير جاهز"}
+  }[lang]||{ready:"AY",waiting:"Z80",dual:"2×AY"};
+  const label=native?copy.ready:track.file.includes("2xAY")?copy.dual:copy.waiting;
+  button.disabled=!native;
+  button.dataset.player=native?"ay":"unavailable";
+  button.removeAttribute("aria-haspopup");
   kind.textContent=track.format+" · "+label;
-  action.textContent="▶";
-  button.setAttribute("aria-label",t.play+" — "+track.name+" — "+label);
+  action.textContent=native?"▶":"◌";
+  button.setAttribute("aria-label",track.name+" — "+label);
   button.title=track.name+" · "+label;
+  button.closest(".vice-soundtrack__item")?.classList.toggle("vice-soundtrack__item--pending",!native);
  }
  eyebrow.textContent=t.eyebrow;
  title.textContent=t.title;
@@ -2653,11 +2589,10 @@ function draw(){
  for(const {button,kind,action,track} of pendingButtons){
   const selected=!!current&&current.file===track.file;
   const native=!!api.originalReady?.(track.file);
-  const embedded=originalDialog.open&&originalSelected===track.file;
-  button.disabled=false;button.dataset.player=native?"ay":"zxtune";
-  button.setAttribute("aria-pressed",String(selected||embedded));
-  button.classList.toggle("is-playing",(selected&&playing)||embedded);
-  action.textContent=embedded||(selected&&playing)?"Ⅱ":"▶";
+  button.disabled=!native;button.dataset.player=native?"ay":"unavailable";
+  button.setAttribute("aria-pressed",String(selected));
+  button.classList.toggle("is-playing",selected&&playing);
+  action.textContent=selected&&playing?"Ⅱ":native?"▶":"◌";
   if(native&&selected)kind.textContent=track.format+" · "+(playing?"ИГРАЕТ":paused?"ПАУЗА":"AY");
  }
 
@@ -2684,7 +2619,7 @@ function syncLibraryPlacement(){
  const showInMenu=!!lobby&&!lobby.hidden&&!inSession;
  root.hidden=!showInMenu;
  if(!showInMenu){
-  if(originalDialog.open)closeOriginalDialog();
+ 
   if(drawer)drawer.open=false;
   // Release library preview if player was open when a quiz began.
   // The ordinary game soundtrack continues via the same AY emulator.
