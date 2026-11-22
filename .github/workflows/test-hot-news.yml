@@ -56,6 +56,6 @@ jobs:
           check(chart.includes('NOT actual traffic crashes'),'Missing chart disclosure');
           check(hotJs.includes('traffic-live/assets/traffic/live.json'),'Official police feed disconnected');
           check(hotJs.includes('news.json'),'Recent stories feed disconnected');
-          check(read('.github/workflows/sync-news.yml').includes("17 * * * *"),'Hourly news sync missing');
+          check(/cron:.*(?:11,26,41,56|17,47)/.test(read('.github/workflows/sync-news.yml')),'News sync cron missing');
           console.log('PASS: chart, official source disclaimers, 30-day feed, standalone hot page and Waze');
           JS
