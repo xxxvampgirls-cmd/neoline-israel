@@ -58,12 +58,17 @@ const songBuffers=new Map();
 const songLoads=new Map(); // Deduplicate PT3 warm-up vs first visible scene
 let shuffled;
 try{shuffled=JSON.parse(localStorage.getItem(SHUFFLE_KEY)||"null")}catch(_){}
-if(!shuffled||!Array.isArray(shuffled.bag)||shuffled.bag.some(id=>!GAME_IDS.includes(id))||
+if(!shuffled||!Array.isArray(shuffled.bag)||
+   shuffled.bag.some(id=>!BASE_GAME_IDS.includes(id)&&!/^orig_[a-z0-9_]+$/.test(id))||
    new Set(shuffled.bag).size!==shuffled.bag.length){
  let oldLast=null;
  try{oldLast=JSON.parse(localStorage.getItem("neoline.vice.pt3.shuffle.v1")||"null")?.last}catch(_){}
  shuffled={bag:[],last:GAME_IDS.includes(oldLast)?oldLast:null};
 }
+// Keep previously unplayed originals aside until the server confirms
+// their actual chip register files. Never enqueue a missing track.
+let savedOriginalBag=shuffled.bag.filter(id=>!BASE_GAME_IDS.includes(id));
+shuffled.bag=shuffled.bag.filter(id=>BASE_GAME_IDS.includes(id));
 const rand=max=>{
  if(max<=1)return 0;
  const a=new Uint32Array(1);
@@ -155,7 +160,23 @@ function primeNativeAY(){
   }
   if(nativeById.size){
    GAME_IDS=[...BASE_GAME_IDS,...nativeById.keys()];
-   shuffled.bag=[]; // shuffle will now include new game soundtracks
+   const oldPool=shuffled.pool||"";
+   const pool=GAME_IDS.join("|");
+   const validSaved=savedOriginalBag.filter(id=>nativeById.has(id));
+   if(oldPool===pool){
+    shuffled.bag=[...shuffled.bag,...validSaved];
+   }else{
+    const missing=GAME_IDS.filter(id=>id!==shuffled.last&&
+      !shuffled.bag.includes(id)&&!validSaved.includes(id));
+    shuffled.bag=[...shuffled.bag,...validSaved,...missing];
+    for(let i=shuffled.bag.length-1;i>0;i--){
+     const j=rand(i+1);
+     [shuffled.bag[i],shuffled.bag[j]]=[shuffled.bag[j],shuffled.bag[i]];
+    }
+    if(shuffled.bag[0]===shuffled.last&&shuffled.bag.length>1)
+     [shuffled.bag[0],shuffled.bag[1]]=[shuffled.bag[1],shuffled.bag[0]];
+   }
+   shuffled.pool=pool;savedOriginalBag=[];
    try{localStorage.setItem(SHUFFLE_KEY,JSON.stringify(shuffled))}catch(_){}
   }
   window.dispatchEvent(new CustomEvent("neoline:ay-originals-ready",
