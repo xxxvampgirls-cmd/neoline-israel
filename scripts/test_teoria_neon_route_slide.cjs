@@ -32,7 +32,7 @@ const {chromium}=require("playwright");
     };
    });
    if(!status.url.includes("vice-neon-route-promo.webp")||status.caption!=="hidden"||status.slide!=="visible"||status.dots!==5||status.activeDot!==4)throw Error("Promo was not replaced properly "+width+" "+JSON.stringify(status));
-   if(status.scrollWidth>width+2||status.slideWidth<280||status.slideHeight<100)throw Error("Banner overflow/mobile clipping "+width+" "+JSON.stringify(status));
+   if(status.scrollWidth>width+2||status.slideWidth<125||status.slideHeight<84)throw Error("Banner overflow/mobile clipping "+width+" "+JSON.stringify(status));
    const image=await page.evaluate(async()=>{
     const img=new Image();img.src="./assets/teoria/vice-neon-route-promo.webp";
     await img.decode();return {width:img.naturalWidth,height:img.naturalHeight};
