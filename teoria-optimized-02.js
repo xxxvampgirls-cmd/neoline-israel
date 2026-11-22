@@ -1850,13 +1850,19 @@ function prepareAudio(forceGift=false){
  try{
   ctx=new Ctx({latencyHint:"interactive"});
   ctx.addEventListener("statechange",()=>{updateControls();reportAudio()});
-  boot=ctx.audioWorklet.addModule("./teoria-ay8912-worklet.js?v=20261122-zx-original-pilot-v10")
+  boot=ctx.audioWorklet.addModule("./teoria-ay8912-worklet.js?v=20261122-rom-pulse-sync-v11")
    .then(()=>{
     node=new AudioWorkletNode(ctx,"neoline-ay8912",{
      numberOfInputs:0,numberOfOutputs:1,outputChannelCount:[2]
     });
     node.port.onmessage=event=>{
      const m=event.data||{};
+     if(m.type==="tape-phase"){
+      window.dispatchEvent(new CustomEvent("neoline:tape-phase",{
+       detail:{phase:m.phase}
+      }));
+      return;
+     }
      if(m.type==="song-progress"){
       if(preview&&!preview.loading){
        preview.frame=Math.max(0,Math.min(preview.frames,m.frame||0));
