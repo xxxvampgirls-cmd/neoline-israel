@@ -218,7 +218,10 @@ async function loadScene(force=false){
   if(token!==requestSerial)return;
   console.warn("NEOLINE game soundtrack failed",id,err);
   if(nativeById.has(id)&&GAME_MODES.has(requested)){
-   nativeById.delete(id);GAME_IDS=GAME_IDS.filter(x=>x!==id);
+   const bad=nativeById.get(id);
+   nativeById.delete(id);if(bad)nativeByFile.delete(bad.file);
+   GAME_IDS=GAME_IDS.filter(x=>x!==id);
+   shuffled.bag=shuffled.bag.filter(x=>x!==id);
    selectedGameSong=nextGameTrack();void loadScene(true);return;
   }
   msg({type:"clearSong"});loadedScene=null;activeSong=null;stateToChip();updateControls();
