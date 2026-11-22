@@ -41,6 +41,7 @@ const GAME_IDS=["mary_jane","x_files","zoolook","downtown","behind_the_walls","m
 const SHUFFLE_KEY="neoline.vice.pt3.shuffle.v1";
 let manifestPromise=null,requestSerial=0,selectedGameSong=null,activeSong=null;
 const songBuffers=new Map();
+const songLoads=new Map(); // Deduplicate PT3 warm-up vs first visible scene
 let shuffled;
 try{shuffled=JSON.parse(localStorage.getItem(SHUFFLE_KEY)||"null")}catch(_){}
 if(!shuffled||!Array.isArray(shuffled.bag)||shuffled.bag.some(id=>!GAME_IDS.includes(id)))
@@ -71,6 +72,13 @@ function nextGameTrack(){
 // No synthesized melody, MIDI, MP3, samples or changes to the PT3 arrangement.
 async function pt3Bytes(id){
  if(songBuffers.has(id))return songBuffers.get(id);
+ if(!songLoads.has(id)){
+  const promise=decodePT3Original(id).finally(()=>songLoads.delete(id));
+  songLoads.set(id,promise);
+ }
+ return songLoads.get(id);
+}
+async function decodePT3Original(id){
  if(!["sonya",...GAME_IDS].includes(id))throw Error("Unrecognized PT3 soundtrack "+id);
  if(!window.NEOLINE_PT3)throw Error("PT3 decoder unavailable");
  if(typeof DecompressionStream!=="function")throw Error("Browser cannot decode lossless PT3 archive");
