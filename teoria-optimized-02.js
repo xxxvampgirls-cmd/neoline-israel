@@ -2650,7 +2650,8 @@ const overlay=document.createElement("div");
 overlay.className="vice-boot-overlay";
 overlay.setAttribute("aria-hidden","true");
 overlay.innerHTML=[
- '<img class="vice-boot-art" src="./assets/teoria/vice-boot-sunset-city.svg?v=20261122-approved-neon-art-v1" alt="" aria-hidden="true" decoding="async">',
+ '<img class="vice-boot-art vice-boot-art--ink" src="./assets/teoria/vice-boot-sunset-city.svg?v=20261122-approved-neon-art-v1" alt="" aria-hidden="true" decoding="async">',
+ '<img class="vice-boot-art vice-boot-art--color" src="./assets/teoria/vice-boot-sunset-city.svg?v=20261122-approved-neon-art-v1" alt="" aria-hidden="true" decoding="async">',
  '<div class="vice-boot-grain"></div>',
  '<div class="vice-boot-tape-border" aria-hidden="true"></div>',
  '<div class="vice-boot-tape-screen" aria-hidden="true"></div>',
