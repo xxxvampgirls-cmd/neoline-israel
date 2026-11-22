@@ -23,7 +23,10 @@ class NeolineAY8912 extends AudioWorkletProcessor{
   this.frames=null;this.framesCount=0;this.songIndex=0;
   this.fxFrames=null;this.fxCount=0;this.fxIndex=0;this.fxReg=null;
   this.musicEnabled=true;this.effectsEnabled=true;
-  this.sfxMixGain=1.20; // Louder AY effects while retaining original 3-channel chip voices
+  // Preserve the authentic three AY voices; temporarily borrow voice C for FX.
+  this.sfxMixGain=2.55;
+  this.gameplay=false;this.giftActive=false;
+  this.musicDucking=1; // gradual release avoids pops when short sounds finish
   this.frameSamples=sampleRate;
   this.outputLevel=0;this.dc=0;
   this.port.onmessage=e=>{
@@ -43,6 +46,7 @@ class NeolineAY8912 extends AudioWorkletProcessor{
    }else if(m.type==="switch"){
     this.musicEnabled=!!m.music;
     this.effectsEnabled=!!m.effects;
+    this.gameplay=!!m.gameplay;this.giftActive=!!m.gift;
     if(!this.effectsEnabled){this.fxFrames=null;this.fxReg=null;}
    }else if(m.type==="fx"){
     if(!this.effectsEnabled)return;
@@ -50,6 +54,8 @@ class NeolineAY8912 extends AudioWorkletProcessor{
     if(raw.length<5||raw.length%5!==0||raw.length>5*200)return;
     this.fxFrames=raw;this.fxCount=raw.length/5;this.fxIndex=0;
     this.fxReg=null;
+   }else if(m.type==="clearFx"){
+    this.fxFrames=null;this.fxReg=null;this.fxCount=0;this.fxIndex=0;
    }else if(m.type==="clearSong"){
     this.frames=null;this.regs[8]=this.regs[9]=this.regs[10]=0;
    }else if(m.type==="stop"){
@@ -135,6 +141,11 @@ class NeolineAY8912 extends AudioWorkletProcessor{
    }
    this.envValue=this.envelope();
    let mix=0;
+   const audibleFx=!!(this.effectsEnabled&&this.fxReg);
+   const targetDuck=audibleFx?(this.giftActive?0.26:0.42):1;
+   this.musicDucking+=(targetDuck-this.musicDucking)*(audibleFx?0.013:0.0018);
+   const musicGain=(this.gameplay?0.48:0.64)*this.musicDucking;
+   const fxGain=this.giftActive?2.85:this.sfxMixGain;
    const mixer=r[7];
    for(let ch=0;ch<3;ch++){
     let period=(r[ch*2]|(r[ch*2+1]<<8))&4095;
@@ -154,7 +165,7 @@ class NeolineAY8912 extends AudioWorkletProcessor{
     const noisePass=!noiseEnabled||!!this.noiseLevel;
     if(tonePass&&noisePass&&volume){
      const level=(volume&16)?this.envValue:volume&15;
-     mix+=AY_LEVELS[level]*(ch===2&&fx?this.sfxMixGain:1);
+     mix+=AY_LEVELS[level]*(ch===2&&fx?fxGain:musicGain);
     }
    }
    const active=(this.musicEnabled&&this.frames)||(this.effectsEnabled&&this.fxReg);
@@ -162,7 +173,11 @@ class NeolineAY8912 extends AudioWorkletProcessor{
    this.outputLevel+=(target-this.outputLevel)*0.004;
    const raw=(mix/3)*this.outputLevel;
    this.dc+=0.0016*(raw-this.dc);
-   const sample=Math.max(-1,Math.min(1,(raw-this.dc)*2.25));
+   const v=(raw-this.dc)*2.25;
+   // Gentle soft ceiling; prevent overlapping prize fireworks clipping.
+   const mag=Math.abs(v),over=Math.max(0,mag-0.86);
+   const limited=mag>0.86?0.86+over/(1+over*7):mag;
+   const sample=Math.sign(v)*Math.min(0.995,limited);
    left[i]=sample;
    if(right)right[i]=sample;
   }
