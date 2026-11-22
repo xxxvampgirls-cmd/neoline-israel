@@ -4,6 +4,7 @@ on:
     branches: [main]
     paths:
       - 'assets/teoria/source/new.zip'
+      - 'assets/teoria/source/new.zip.b64'
       - 'scripts/publish_neoline_originals.py'
       - '.github/workflows/publish-neoline-originals.yml'
   workflow_dispatch:
@@ -25,7 +26,7 @@ jobs:
         id: source
         shell: bash
         run: |
-          if [ -f assets/teoria/source/new.zip ]; then
+          if [ -f assets/teoria/source/new.zip ] || [ -f assets/teoria/source/new.zip.b64 ]; then
             echo "ready=true" >> "$GITHUB_OUTPUT"
           else
             echo "ready=false" >> "$GITHUB_OUTPUT"
