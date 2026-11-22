@@ -261,3 +261,293 @@ html[data-vice-theme="on"] #gameLobby{
 @media(prefers-reduced-motion:reduce){
  html[data-vice-theme="on"] .theory-promo-host .vice-cinema-headline{transform:none!important}
 }
+
+
+/* 2026-11-22 · Screenshot polish v2: sharper title, actual lead characters,
+ * less empty space, stronger illustrated tiles. Scoped to optional skin. */
+html[data-vice-theme="on"] .game-hero.theory-dashboard #heroTitle{
+ background:none!important;
+ color:#d8faff!important;
+ -webkit-text-fill-color:#d8faff!important;
+ background-clip:border-box!important;
+ -webkit-background-clip:border-box!important;
+ font-family:Manrope,Arial,sans-serif!important;
+ font-weight:950!important;
+ font-style:italic!important;
+ line-height:1.115!important;
+ letter-spacing:-.056em!important;
+ text-shadow:0 2px 0 #54256e,0 4px 10px #150b31cc!important;
+ filter:none!important;
+ overflow-wrap:normal!important;
+ word-break:keep-all!important;
+ hyphens:none!important;
+ text-wrap:normal!important;
+ isolation:isolate!important;
+}
+html[data-vice-theme="on"] .game-hero.theory-dashboard .hero-copy{
+ text-shadow:none!important;
+}
+html[data-vice-theme="on"] .game-hero.theory-dashboard .game-hero-mini{
+ letter-spacing:.085em!important;
+ font-weight:900!important;
+ text-shadow:0 1px 4px #1d063a!important;
+}
+html[data-vice-theme="on"] .theory-promo-host .vice-cinema-frame--city .vice-cinema-scene,
+html[data-vice-theme="on"] .theory-promo-host .vice-cinema-frame--rewards .vice-cinema-scene,
+html[data-vice-theme="on"] .theory-promo-host .vice-cinema-frame--duo .vice-cinema-scene{
+ background-image:url("./assets/teoria/vice-cinematic-duo.svg")!important;
+ background-repeat:no-repeat!important;
+ background-size:cover!important;
+ background-position:center 49%!important;
+}
+html[data-vice-theme="on"] .theory-promo-host .vice-cinema-frame--city .vice-cinema-scene{
+ transform:scale(1.02)!important;
+}
+html[data-vice-theme="on"] .theory-promo-host .vice-cinema-frame--city.is-active .vice-cinema-scene{
+ animation:viceHeroCruise 8.4s ease-out both!important;
+}
+@keyframes viceHeroCruise{
+ from{transform:scale(1.015) translate3d(0,0,0)}
+ to{transform:scale(1.075) translate3d(-.8%,0,0)}
+}
+html[data-vice-theme="on"] .theory-promo-host .vice-cinema-story{
+ text-shadow:0 1px 6px #1e0b35dd!important;
+}
+html[data-vice-theme="on"] .theory-promo-host .vice-cinema-frame--city .vice-cinema-headline{
+ transform:rotate(-2deg)!important;
+}
+html[data-vice-theme="on"] .theory-dashboard .hero-orbs{
+ background:
+  radial-gradient(ellipse 63% 87% at 80% 70%,#a63a8450,transparent 96%),
+  linear-gradient(120deg,#301742e8,#50265add 55%,#2c1a4af2)!important;
+}
+html[data-vice-theme="on"] .theory-dashboard .hero-orb-ring{
+ position:relative!important;
+ box-shadow:0 0 0 1px #ffb9d74f,0 0 17px #fa75b471!important;
+}
+html[data-vice-theme="on"] .theory-dashboard .hero-orb-ring::after{
+ content:"";position:absolute;z-index:2;pointer-events:none;
+ inset:4px 8px auto 8px;height:20%;border-radius:50%;
+ background:linear-gradient(180deg,#fffbff60,transparent);
+}
+html[data-vice-theme="on"] .theory-dashboard .hero-progress-open{
+ box-shadow:0 0 0 3px #f7c78c78,0 0 19px #ffd374a8!important;
+}
+html[data-vice-theme="on"] #theoryDaily .theory-daily-icon{
+ background:linear-gradient(137deg,#f379bb,#b13fc6)!important;
+ box-shadow:0 0 17px #ff5bb982,inset 0 1px #fff8!important;
+}
+html[data-vice-theme="on"] #theoryDaily .theory-daily-text{
+ border-color:#ed9cc8a6!important;
+}
+html[data-vice-theme="on"] #theoryDaily .theory-daily-start{
+ background:linear-gradient(105deg,#ff5eaf,#ffbd79)!important;
+ box-shadow:0 2px 13px #ff65b27a,inset 0 1px #ffecc9b8!important;
+}
+html[data-vice-theme="on"] #gameLobby .route-card .game-mode-photo::after{
+ background:linear-gradient(0deg,#170d30f2 0%,#25153a99 28%,#24103e15 73%,transparent)!important;
+}
+html[data-vice-theme="on"] #gameLobby .routes .route-card:hover .game-mode-photo,
+html[data-vice-theme="on"] #gameLobby .routes .route-card:focus-visible .game-mode-photo{
+ transform:scale(1.045)!important;
+}
+html[data-vice-theme="on"] #gameLobby .routes .route-card strong{
+ text-shadow:0 2px 6px #110829eb,0 0 12px #281439ab!important;
+}
+html[data-vice-theme="on"] #gameLobby .routes .route-card .route-top{
+ filter:drop-shadow(0 2px 4px #14082493);
+}
+html[data-vice-theme="on"] #gameLobby .routes .route-card{
+ transition:box-shadow .2s ease,transform .2s ease!important;
+}
+@media(max-width:760px){
+ /* Small top header is deliberately skin-specific: other pages are untouched. */
+ html[data-vice-theme="on"] .neoline-site-header .neoline-site-header__inner{
+  min-height:59px!important;
+  padding-block:3px!important;
+ }
+ html[data-vice-theme="on"] .neoline-site-header .neoline-site-header__logo img{
+  max-height:45px!important;
+ }
+ html[data-vice-theme="on"] .neoline-site-header .neoline-site-header__flag{
+  height:34px!important;
+ }
+ html[data-vice-theme="on"] .neoline-site-header .neoline-site-header__cart{
+  height:38px!important;
+ }
+ html[data-vice-theme="on"] .game-hero.theory-dashboard{
+  grid-template-rows:clamp(168px,43vw,191px) auto!important;
+  row-gap:10px!important;
+ }
+ html[data-vice-theme="on"] .game-hero.theory-dashboard .hero-copy{
+  width:43%!important;max-width:43%!important;
+  padding:13px 0 14px 14px!important;
+ }
+ html[data-vice-theme="on"] .game-hero.theory-dashboard #heroTitle{
+  font-size:clamp(21px,5.7vw,27px)!important;
+  line-height:1.11!important;
+  letter-spacing:-.055em!important;
+  margin:7px 0 6px!important;
+ }
+ html[data-vice-theme="on"] .theory-promo-host .vice-cinema-mask{
+  background:
+   linear-gradient(90deg,#180d38d7 0%,#210d3868 27%,transparent 46%,#27103581 100%),
+   linear-gradient(0deg,#1d103b77,transparent 44%)!important;
+ }
+ html[data-vice-theme="on"] .theory-promo-host .vice-cinema-frame--city .vice-cinema-scene,
+ html[data-vice-theme="on"] .theory-promo-host .vice-cinema-frame--rewards .vice-cinema-scene,
+ html[data-vice-theme="on"] .theory-promo-host .vice-cinema-frame--duo .vice-cinema-scene{
+  background-size:cover!important;
+  background-position:center 48%!important;
+ }
+ html[data-vice-theme="on"] .theory-promo-host .vice-cinema-story,
+ html[data-vice-theme="on"] .theory-promo-host .vice-cinema-frame--rewards .vice-cinema-story,
+ html[data-vice-theme="on"] .theory-promo-host .vice-cinema-frame--duo .vice-cinema-story{
+  top:23px!important;
+  right:9px!important;
+  width:29%!important;
+  max-width:29%!important;
+ }
+ html[data-vice-theme="on"] .theory-promo-host .vice-cinema-headline{
+  font-size:clamp(11px,3vw,15px)!important;
+  line-height:1.08!important;
+  padding:5px 6px!important;
+  word-break:normal!important;
+ }
+ html[data-vice-theme="on"] .theory-promo-host .vice-cinema-sub{
+  font-size:clamp(8px,2.05vw,10px)!important;
+  line-height:1.19!important;
+ }
+ html[data-vice-theme="on"] .theory-dashboard .hero-orbs{
+  min-height:0!important;
+  padding:7px 4px 6px!important;
+  gap:3px!important;
+ }
+ html[data-vice-theme="on"] .theory-dashboard .hero-orb-ring{
+  width:clamp(53px,16.2vw,76px)!important;
+  height:clamp(53px,16.2vw,76px)!important;
+ }
+ html[data-vice-theme="on"] .theory-dashboard .hero-progress-open{
+  width:clamp(53px,16.2vw,76px)!important;
+  height:clamp(53px,16.2vw,76px)!important;
+ }
+ html[data-vice-theme="on"] .theory-dashboard .hero-orb-caption,
+ html[data-vice-theme="on"] .theory-dashboard .hero-progress-caption{
+  padding:2px 3px!important;
+  font-size:clamp(8px,2vw,10px)!important;
+ }
+ html[data-vice-theme="on"] #theoryDaily{
+  padding:10px 11px!important;
+  gap:6px 10px!important;
+  margin:8px 0 9px!important;
+  border-radius:20px!important;
+ }
+ html[data-vice-theme="on"] #theoryDaily .theory-daily-icon{
+  width:40px!important;height:40px!important;border-radius:13px!important;
+ }
+ html[data-vice-theme="on"] #theoryDaily .theory-daily-text{
+  padding-inline-start:10px!important;gap:1px!important;
+ }
+ html[data-vice-theme="on"] #theoryDaily .theory-daily-text strong{
+  font-size:15px!important;line-height:1.1!important;
+ }
+ html[data-vice-theme="on"] #theoryDaily .theory-daily-text span{
+  font-size:10px!important;line-height:1.28!important;
+ }
+ html[data-vice-theme="on"] #theoryDaily .theory-daily-actions{
+  gap:8px!important;
+ }
+ html[data-vice-theme="on"] #theoryDaily .theory-daily-streak{
+  min-height:34px!important;padding:6px 9px!important;
+ }
+ html[data-vice-theme="on"] #theoryDaily .theory-daily-start{
+  min-height:36px!important;padding:7px 10px!important;
+  font-size:11px!important;
+  border-radius:11px!important;
+ }
+ html[data-vice-theme="on"] #gameLobby{
+  margin-top:8px!important;
+  padding:11px 10px 13px!important;
+ }
+ html[data-vice-theme="on"] #gameLobby::before{
+  height:91px!important;
+  opacity:.85!important;
+ }
+ html[data-vice-theme="on"] #gameLobby .panel-toolbar{
+  min-height:0!important;
+  display:grid!important;
+  grid-template-columns:minmax(0,1fr) auto!important;
+  align-items:end!important;
+  gap:5px 6px!important;
+  padding:4px 2px 10px!important;
+ }
+ html[data-vice-theme="on"] #gameLobby .toolbar-title{
+  grid-column:1!important;
+  min-width:0!important;
+ }
+ html[data-vice-theme="on"] #gameLobby #selectTitle{
+  font-size:clamp(21px,6vw,27px)!important;
+  margin:0 0 7px!important;
+  line-height:1.04!important;
+ }
+ html[data-vice-theme="on"] #gameLobby .toolbar-title .vice-theme-switch{
+  margin:0!important;
+  height:30px!important;min-height:30px!important;
+  font-size:9px!important;
+ }
+ html[data-vice-theme="on"] #gameLobby .settings{
+  grid-column:2!important;
+  min-width:0!important;
+  align-self:end!important;
+  margin:0!important;
+ }
+ html[data-vice-theme="on"] #gameLobby .class-select #licenseLabel{
+  display:none!important;
+ }
+ html[data-vice-theme="on"] #gameLobby .theory-licence-open{
+  min-width:87px!important;
+  min-height:35px!important;
+  padding:5px 9px!important;
+  border-radius:13px!important;
+ }
+ html[data-vice-theme="on"] #gameLobby .routes{
+  gap:9px!important;
+  margin-top:2px!important;
+ }
+ html[data-vice-theme="on"] #gameLobby .routes .route-card{
+  min-height:165px!important;
+  padding:9px 8px 9px!important;
+  border-radius:16px!important;
+  gap:3px!important;
+ }
+ html[data-vice-theme="on"] #gameLobby .routes .route-card strong{
+  font-size:clamp(12px,3.75vw,17px)!important;
+  line-height:1.1!important;
+ }
+ html[data-vice-theme="on"] #gameLobby .routes .route-card>span:not(.route-top):not(.route-cta):not(.game-mode-photo){
+  font-size:clamp(9px,2.25vw,10px)!important;
+  line-height:1.24!important;
+ }
+ html[data-vice-theme="on"] #gameLobby .routes .route-full{
+  min-height:100px!important;
+ }
+}
+@media(max-width:365px){
+ html[data-vice-theme="on"] .game-hero.theory-dashboard{
+  grid-template-rows:159px auto!important;
+ }
+ html[data-vice-theme="on"] .game-hero.theory-dashboard .hero-copy{
+  padding:11px 0 11px 10px!important;
+ }
+ html[data-vice-theme="on"] .game-hero.theory-dashboard #heroTitle{
+  font-size:clamp(19px,6vw,22px)!important;
+ }
+ html[data-vice-theme="on"] #gameLobby .theory-licence-open{
+  min-width:74px!important;padding:5px 6px!important;
+ }
+}
+@media(prefers-reduced-motion:reduce){
+ html[data-vice-theme="on"] .theory-promo-host .vice-cinema-frame--city.is-active .vice-cinema-scene{
+  animation:none!important;transform:none!important;
+ }
+}
