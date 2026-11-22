@@ -376,20 +376,26 @@ html[data-vice-theme="on"] #gameLobby .route-card>span.game-mode-photo:not(.rout
  pointer-events:none!important;
 }
 html[data-vice-theme="on"] #gameLobby .route-card:hover .game-mode-photo{transform:scale(1.055)!important}
-html[data-vice-theme="on"] #gameLobby .route-blue .game-mode-photo{
+html[data-vice-theme="on"] #gameLobby .routes .route-card.route-blue .game-mode-photo{
  background-image:url("./assets/teoria/vice-card-city.svg")!important;
 }
-html[data-vice-theme="on"] #gameLobby .route-mint .game-mode-photo{
+html[data-vice-theme="on"] #gameLobby .routes .route-card.route-mint .game-mode-photo{
  background-image:url("./assets/teoria/vice-card-signs.svg")!important;
 }
-html[data-vice-theme="on"] #gameLobby .route-indigo .game-mode-photo{
+html[data-vice-theme="on"] #gameLobby .routes .route-card.route-indigo .game-mode-photo{
  background-image:url("./assets/teoria/vice-card-exam.svg")!important;
 }
-html[data-vice-theme="on"] #gameLobby .route-amber .game-mode-photo{
+html[data-vice-theme="on"] #gameLobby .routes .route-card.route-amber .game-mode-photo{
  background-image:url("./assets/teoria/vice-card-mistakes.svg")!important;
 }
-html[data-vice-theme="on"] #gameLobby .route-full .game-mode-photo{
+html[data-vice-theme="on"] #gameLobby .routes .route-card.route-full .game-mode-photo{
  background-image:url("./assets/teoria/vice-card-marathon.svg")!important;
+}
+/* More specific than the old !important gradient shorthand: ensures
+   real illustrations render instead of the flat colors in the screenshot. */
+html[data-vice-theme="on"] #gameLobby .routes .route-card .game-mode-photo{
+ background-size:cover!important;background-repeat:no-repeat!important;
+ background-position:center center!important;
 }
 html[data-vice-theme="on"] #gameLobby .route-card .game-mode-photo::after{
  content:"";position:absolute;inset:0;
