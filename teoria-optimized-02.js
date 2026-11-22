@@ -2340,7 +2340,8 @@ async function openOriginalTrack(track){
  // reconstructed or re-arranged, and CORS is enabled for ZXTune.
  const fileURL=new URL("./assets/teoria/originals/"+encodeURIComponent(track.file),location.href).href;
  const playerURL=ZXTUNE_URL+"?url="+encodeURIComponent(fileURL);
- const win=window.open(playerURL,"_blank","noopener");
+ const win=window.open(playerURL,"_blank");
+ if(win)try{win.opener=null}catch(_){}
  if(!win){
   modalTitle.textContent=track.name+" · "+track.format;
   modalLink.href=playerURL;
