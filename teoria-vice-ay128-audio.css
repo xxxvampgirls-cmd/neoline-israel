@@ -1,0 +1,62 @@
+/* Optional ZX Spectrum 128K / Ocean-era audio controls for Vice theme only.
+   No changes to classic NEOLINE UI or fixed five-icon navigation. */
+.vice-ay-controls{
+ display:none;align-items:center;justify-content:flex-start;
+ flex-wrap:wrap;gap:6px;max-width:100%;
+ margin:6px 0 3px;direction:ltr;
+}
+html[data-vice-theme="on"] .vice-ay-controls{display:flex}
+.vice-ay-button{
+ box-sizing:border-box;display:inline-flex;gap:6px;align-items:center;
+ justify-content:center;min-height:35px;padding:6px 10px;
+ white-space:nowrap;cursor:pointer;
+ color:#fff0e9;background:#3b2454ed;
+ border:1px solid #fa9fd3;border-radius:10px;
+ box-shadow:inset 0 1px 0 #ffffff30;
+ font:800 10px/1.1 Manrope,Arial,sans-serif;
+ letter-spacing:.015em;touch-action:manipulation;
+ transition:border-color .14s,background-color .14s,opacity .14s;
+}
+.vice-ay-button[aria-pressed="true"]{
+ border-color:#ffb57d;color:#fff6d7;
+ background:linear-gradient(115deg,#593064,#733061);
+}
+.vice-ay-button.is-off{
+ background:#1f1a36ed;color:#bcaec9;
+ border-color:#61516f;box-shadow:none;
+}
+.vice-ay-button:disabled{cursor:not-allowed;opacity:.45}
+.vice-ay-button:focus-visible{outline:3px solid #fff1ae;outline-offset:2px}
+.vice-ay-icon{font-size:18px;line-height:1;min-width:16px;text-align:center}
+.vice-ay-state{
+ display:inline-flex;align-items:center;gap:5px;
+ color:#f6c6e4;font:800 9px/1.25 Manrope,Arial,sans-serif;
+ letter-spacing:.055em;padding-inline:4px;
+}
+.vice-ay-state::before{content:"";width:5px;height:5px;flex:none;border-radius:50%;background:#75f6da;box-shadow:0 0 7px #75f6daaa}
+#gameLobby .toolbar-title .vice-ay-controls{margin-top:5px;margin-bottom:2px}
+#gamePlaying .question-eyebrow .vice-ay-controls{
+ margin:0 0 0 auto;flex:none;gap:5px;max-width:100%;
+}
+#gamePlaying .question-eyebrow .vice-ay-button{
+ min-height:37px;min-width:38px;padding:6px 8px;border-radius:10px;
+}
+#gamePlaying .question-eyebrow .vice-ay-button .vice-ay-label{
+ position:absolute;width:1px;height:1px;overflow:hidden;
+ clip:rect(0,0,0,0);white-space:nowrap;
+}
+#gamePlaying .question-eyebrow .vice-ay-state{
+ position:absolute;width:1px;height:1px;overflow:hidden;
+ clip:rect(0,0,0,0);white-space:nowrap;
+}
+#gameResult .vice-ay-controls{justify-content:center;margin:6px auto 14px}
+@media(max-width:450px){
+ #gameLobby .toolbar-title .vice-ay-controls{gap:5px}
+ #gameLobby .toolbar-title .vice-ay-button{font-size:9px;padding:5px 8px;min-height:34px}
+ #gameLobby .toolbar-title .vice-ay-state{font-size:8px}
+ #gamePlaying .question-eyebrow .vice-ay-controls{gap:4px}
+ #gamePlaying .question-eyebrow .vice-ay-button{min-height:35px;min-width:35px;padding:5px 7px}
+}
+@media(prefers-reduced-motion:reduce){
+ .vice-ay-button{transition:none!important}
+}
