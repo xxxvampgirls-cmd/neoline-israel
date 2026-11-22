@@ -14,6 +14,8 @@ on:
       - 'teoria-vice-reference-match.css'
       - 'teoria-vice-final-polish.css'
       - 'teoria-vice-live-reference.css'
+      - 'teoria-vice-sunset-boulevard.css'
+      - 'assets/teoria/vice-sunset-boulevard.svg'
       - 'teoria-slide-frame-air.css'
       - 'scripts/test_teoria_slide_frame_air.cjs'
       - 'teoria-vice-radar-wasted.css'
