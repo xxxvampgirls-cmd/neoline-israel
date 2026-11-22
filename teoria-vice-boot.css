@@ -44,34 +44,39 @@
 .vice-boot-bottomline{bottom:max(26px,calc(env(safe-area-inset-bottom,0px) + 19px))}
 .vice-boot-topline b,.vice-boot-bottomline b{color:#69f7fa}
 .vice-boot-body{
- position:absolute;top:31%;left:0;right:0;z-index:7;
+ position:absolute;top:29%;left:0;right:0;z-index:7;
  box-sizing:border-box;margin:0;padding:0 clamp(14px,5vw,55px);
  display:flex;flex-direction:column;align-items:center;text-align:center;
  width:100%;max-width:none;pointer-events:none;
 }
-/* The approved tiny VI module: no round button, no bulky square. */
+/* The upper symbol is now an authentic, readable compact ZX 128K cassette.
+   Two separate wheels, a window and a label — not the old VI/gamepad mix. */
 .vice-boot-icon{
  position:relative;flex:none;box-sizing:border-box;
- display:flex;flex-direction:column;justify-content:center;align-items:center;
- width:clamp(62px,18vw,91px);height:clamp(43px,11vw,57px);
- margin:0 0 clamp(10px,1.6vh,17px);padding:2px 5px 4px;
- border:2px solid #ffb2d9;border-radius:9px;
- background:linear-gradient(135deg,#542050b0 6%,#150c36cf 63%,#a92f79ba 100%);
- box-shadow:0 0 0 2px #fff0e130,0 0 22px #ff81c5b2,inset 0 0 16px #f680b33b;
- transform:skewX(-3deg);
+ display:grid;place-items:center;
+ width:clamp(108px,31vw,150px);
+ height:auto;aspect-ratio:154/101;
+ margin:0 0 clamp(7px,1.2vh,13px);
+ padding:0;
+ border:0;border-radius:0;background:none;box-shadow:none;
+ transform:rotate(-3deg);
+ filter:drop-shadow(0 5px 0 #1a1034bb) drop-shadow(0 0 13px #ff95d7b6);
 }
-.vice-boot-icon::before,.vice-boot-icon::after{
- content:"";position:absolute;top:47%;height:2px;width:clamp(12px,8vw,63px);
- background:linear-gradient(90deg,transparent,#6bf8fc);
- box-shadow:0 0 8px #56f6fb;opacity:.94;
+.vice-boot-icon::before,.vice-boot-icon::after{content:none}
+.vice-boot-cassette{
+ display:block;width:100%;height:100%;max-width:100%;
+ overflow:visible;pointer-events:none;
 }
-.vice-boot-icon::before{right:calc(100% + 8px)}
-.vice-boot-icon::after{left:calc(100% + 8px);transform:scaleX(-1)}
-.vice-boot-icon strong{
- display:block;margin:0;color:#fff5ef;font:italic 900 clamp(16px,4.8vw,25px)/.90 Georgia,serif;
- letter-spacing:-.04em;text-shadow:0 2px 5px #320d3c,0 0 9px #ff96d0;
+.vice-boot-reel{
+ transform-box:fill-box;transform-origin:center;
 }
-.vice-boot-icon svg{display:block;flex:none;width:45px;max-width:85%;height:22px;filter:drop-shadow(0 0 3px #fb90d0)}
+.vice-boot-overlay.is-active .vice-boot-reel--left{
+ animation:vice-cassette-spin 1.35s linear infinite;
+}
+.vice-boot-overlay.is-active .vice-boot-reel--right{
+ animation:vice-cassette-spin 1.35s linear infinite;
+}
+@keyframes vice-cassette-spin{to{transform:rotate(360deg)}}
 .vice-boot-kicker{
  max-width:100%;color:#74f5f6;text-transform:uppercase;
  font:900 clamp(10px,2.4vw,15px)/1.25 Manrope,Arial,sans-serif;
@@ -79,7 +84,7 @@
  white-space:nowrap;text-shadow:0 2px 5px #22143a,0 0 15px #30fffb6e;
 }
 .vice-boot-title{
- margin:7px 0 0;max-width:100%;white-space:nowrap;
+ margin:5px 0 0;max-width:100%;white-space:nowrap;
  font:italic 1000 clamp(46px,13.65vw,111px)/.99 Impact,"Arial Black",Manrope,sans-serif;
  font-stretch:condensed;letter-spacing:-.037em;
  transform:translateY(16px) scale(.94);opacity:0;
@@ -100,7 +105,7 @@
  animation:vice-boot-title-come .68s cubic-bezier(.17,.75,.19,1) .11s both;
 }
 .vice-boot-deck{
- margin:9px 0 0;max-width:95%;
+ margin:8px 0 0;max-width:95%;
  color:#fff4f8;font:800 clamp(11px,2.7vw,16px)/1.5 Manrope,Arial,sans-serif;
  letter-spacing:clamp(.08em,.35vw,.21em);text-shadow:0 2px 7px #270c37;
 }
@@ -171,36 +176,38 @@
  60%{transform:scaleX(.69)}100%{transform:scaleX(1)}
 }
 @media(max-width:420px){
- .vice-boot-icon{margin-bottom:12px}
- .vice-boot-deck{margin-top:9px;max-width:94%}
- .vice-boot-topline,.vice-boot-bottomline{letter-spacing:.08em;font-size:clamp(8px,2.1vw,10px)}
- .vice-boot-title{font-size:clamp(42px,13.8vw,58px)}
- .vice-boot-status::before,.vice-boot-status::after{width:clamp(10px,6vw,25px);margin:0 5px}
+ .vice-boot-body{top:29%}
+ .vice-boot-icon{width:clamp(105px,31vw,135px);margin-bottom:9px}
+ .vice-boot-kicker{font-size:clamp(10px,2.65vw,12px);letter-spacing:.11em}
+ .vice-boot-title{font-size:clamp(42px,13.25vw,57px);letter-spacing:-.02em}
+ .vice-boot-deck{font-size:clamp(11px,2.8vw,13px);margin-top:8px;max-width:94%;letter-spacing:.07em}
+ .vice-boot-topline,.vice-boot-bottomline{letter-spacing:.04em;font-size:clamp(8px,2.05vw,10px)}
+ .vice-boot-status{letter-spacing:.06em}
+ .vice-boot-status::before,.vice-boot-status::after{width:12px;margin:0 5px}
 }
 @media(max-width:350px){
- .vice-boot-body{padding-inline:8px;top:32%}
+ .vice-boot-body{padding-inline:8px;top:29%}
  .vice-boot-kicker{letter-spacing:.095em;font-size:9px}
  .vice-boot-title{font-size:clamp(39px,13vw,48px)}
  .vice-boot-deck{font-size:10px;letter-spacing:.075em}
- .vice-boot-icon{width:58px;height:42px}
+ .vice-boot-icon{width:105px;height:auto}
  .vice-boot-status{font-size:9px;letter-spacing:.08em}
  .vice-audio-wake{right:9px;bottom:calc(77px + env(safe-area-inset-bottom,0px))}
 }
 @media(max-height:650px) and (orientation:landscape){
- .vice-boot-body{top:17%}
- .vice-boot-icon{width:48px;height:38px;margin-bottom:4px}
- .vice-boot-icon strong{font-size:13px}
- .vice-boot-icon svg{height:17px}
- .vice-boot-kicker{font-size:10px}
- .vice-boot-title{font-size:clamp(40px,9vh,65px)}
- .vice-boot-deck{font-size:11px;margin-top:1px}
- .vice-boot-meter{top:76%}
- .vice-boot-status{top:calc(76% + 26px)}
- .vice-boot-topline{top:14px}.vice-boot-bottomline{bottom:12px}
+ .vice-boot-body{top:10%}
+ .vice-boot-icon{width:65px;height:auto;margin-bottom:3px}
+ .vice-boot-kicker{font-size:9px}
+ .vice-boot-title{font-size:clamp(38px,9.5vh,62px);margin-top:2px}
+ .vice-boot-deck{font-size:10px;margin-top:1px}
+ .vice-boot-meter{top:78%;height:14px}
+ .vice-boot-status{top:calc(78% + 20px);font-size:9px}
+ .vice-boot-topline{top:13px}.vice-boot-bottomline{bottom:11px}
 }
 @media(prefers-reduced-motion:reduce){
  .vice-boot-overlay,.vice-boot-overlay::before,.vice-boot-overlay *,
  .vice-boot-overlay *::after{animation:none!important;transition:none!important}
  .vice-boot-title{opacity:1;transform:none;filter:none}
+ .vice-boot-reel{animation:none!important}
  .vice-boot-meter span{transform:none}
 }
