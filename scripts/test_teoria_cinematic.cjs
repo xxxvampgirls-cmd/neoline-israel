@@ -36,6 +36,7 @@ const {chromium}=require("playwright");
       approvedLayoutCssLoaded:[...document.styleSheets].some(x=>x.href?.includes("teoria-vice-reference-match.css")),
       livePosterCssLoaded:[...document.styleSheets].some(x=>x.href?.includes("teoria-vice-live-reference.css")),
       refReady:document.documentElement.classList.contains("vice-reference-ready"),
+      cardRefReady:document.documentElement.classList.contains("vice-reference-cards-ready"),
       activePosterSlide:document.querySelector(".game-hero.theory-dashboard")?.dataset.vicePromoSlide,
       titleVisibility:getComputedStyle(document.querySelector("#heroTitle")).visibility,
       finalPolishCssLoaded:[...document.styleSheets].some(x=>x.href?.includes("teoria-vice-final-polish.css")),
@@ -54,7 +55,7 @@ const {chromium}=require("playwright");
    if(status.documentWidth>width+2)fail("Horizontal overflow");
    if(Math.abs(status.navHeight-62)>2)fail("Approved 62px navigation changed");
    if(status.cards.length!==5)fail("Not five real game modes");
-   if(status.cards.some(x=>!x.background.includes("vice-hd-")))fail("HD character-art driving tiles not loaded");
+   if(!status.cardRefReady||status.cards.some(x=>!x.background.includes("vice-reference-card-sprite.avif")))fail("Approved photographic game cards did not load");
    if(status.imageLinks.length!==5||status.imageLinks.some(x=>!x.includes("vice-card-")&&!x.includes("vice-approved-protagonists")&&!x.includes("vice-cinematic-duo")&&!x.includes("vice-cinematic-backdrop")&&!x.includes("vice-hero-reference")))fail("Missing cinematic carousel artwork");
    if(status.promoStage.display==="none"||status.promoStage.rect.height<110)fail("Cinema stage hidden");
    if(status.heroStats.rect.top<status.heroCopy.rect.bottom-4)fail("Top title overlaps the medal HUD");
@@ -84,6 +85,8 @@ const {chromium}=require("playwright");
     "vice-card-city.svg","vice-card-signs.svg","vice-card-exam.svg",
     "vice-card-mistakes.svg","vice-card-marathon.svg","vice-cinematic-duo.svg","vice-cinematic-backdrop.svg","vice-hero-highlights.svg","vice-hd-city.svg","vice-hd-signs.svg","vice-hd-exam.svg","vice-hd-mistakes.svg","vice-hd-marathon.svg"
    ];
+   const cardsReference=await page.request.get("http://127.0.0.1:8765/assets/teoria/vice-reference-card-sprite.avif");
+   if(!cardsReference.ok()||(await cardsReference.body()).length<5000)fail("Approved interactive card image sheet missing");
    const originalPoster=await page.request.get("http://127.0.0.1:8765/assets/teoria/vice-hero-reference.avif");
    if(!originalPoster.ok()||(await originalPoster.body()).length<4500)fail("Approved local AVIF artwork is missing");
    const duoPhoto=await page.request.get("http://127.0.0.1:8765/assets/teoria/vice-approved-protagonists.webp");
@@ -128,6 +131,8 @@ const {chromium}=require("playwright");
      titleVisible:getComputedStyle(document.querySelector('#heroTitle')).visibility
    }));
    if(nonRussian.heroImage.includes("vice-hero-reference.avif")||nonRussian.titleVisible!=="visible")fail("Translated text is hidden behind Russian-only poster");
+   const otherCards=await page.evaluate(()=>getComputedStyle(document.querySelector('#gameLobby .route-blue .game-mode-photo')).backgroundImage);
+   if(otherCards.includes("vice-reference-card-sprite.avif"))fail("Russian-only exam prop leaked into translated mode");
    await page.locator(".vice-cinema-arrow--next").click();
    await page.waitForFunction(()=>document.querySelector('.vice-cinema-frame.is-active')?.dataset.slide==="3");
    await page.locator("#gtaModeToggle").click();
