@@ -38,4 +38,4 @@ jobs:
           node --check teoria-hero-promo.js
           node scripts/test_teoria_vice_theme.cjs
           node --check teoria-vice-cinematic.js
-          SAVE_CINEMATIC_SCREENSHOTS=1 node scripts/test_teoria_cinematic.cjs
+          node scripts/test_teoria_cinematic.cjs
