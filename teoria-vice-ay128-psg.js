@@ -37,7 +37,8 @@ function notePeriod(note){
 }
 // Tracker originals replay through an AY register stream, never synthesized.
 const GAME_MODES=new Set(["route","signs","exam","mistakes","marathon","daily"]);
-const GAME_IDS=["mary_jane","x_files","zoolook","downtown","behind_the_walls","magnetic_fields","robocop","axel_force_remix"];
+const BASE_GAME_IDS=["mary_jane","x_files","zoolook","downtown","behind_the_walls","magnetic_fields","robocop","axel_force_remix"];
+let GAME_IDS=BASE_GAME_IDS.slice();
 const PLAYER_TRACKS=[
  {id:"sonya",name:"Sonya VTX",kind:"intro"},
  {id:"mary_jane",name:"Mary Jane",kind:"game"},
@@ -51,7 +52,7 @@ const PLAYER_TRACKS=[
 ];
 let preview=null,previewSerial=0;
 let originalPlayerOpen=false;
-const SHUFFLE_KEY="neoline.vice.pt3.shuffle.v2"; // refresh bag for 8 distinct PT3 songs
+const SHUFFLE_KEY="neoline.vice.ay-originals.shuffle.v3";
 let manifestPromise=null,requestSerial=0,selectedGameSong=null,activeSong=null;
 const songBuffers=new Map();
 const songLoads=new Map(); // Deduplicate PT3 warm-up vs first visible scene
@@ -133,6 +134,52 @@ async function decodePT3Original(id){
  songBuffers.set(id,frames);
  return frames;
 }
+// Faithful tracker files are untouched. Native ZXTune playback logs are
+// cached as chip-register frames, not new PT3 arrangements.
+const nativeById=new Map(),nativeByFile=new Map();
+let nativeLoad=null;
+function primeNativeAY(){
+ if(nativeLoad)return nativeLoad;
+ nativeLoad=fetch("./assets/teoria/ay-originals/manifest.json?v=20261122-native-v1",
+  {cache:"no-store"})
+ .then(r=>{if(!r.ok)throw Error("Native AY not published (HTTP "+r.status+")");return r.json()})
+ .then(m=>{
+  if(m.frameRate!==50||m.clockHz!==1773400||!m.tracks)throw Error("Invalid AY manifest");
+  for(const [id,entry] of Object.entries(m.tracks)){
+   if(!/^orig_[a-z0-9_]+$/.test(id)||!entry||typeof entry.file!=="string"||
+      entry.url!=="./assets/teoria/ay-originals/"+id+".ay14"||
+      !Number.isInteger(entry.frames)||entry.frames<150||entry.frames>30000)continue;
+   nativeById.set(id,entry);nativeByFile.set(entry.file,id);
+   if(!PLAYER_TRACKS.some(t=>t.id===id))
+    PLAYER_TRACKS.push({id,name:entry.name||entry.file,kind:"original",file:entry.file});
+  }
+  if(nativeById.size){
+   GAME_IDS=[...BASE_GAME_IDS,...nativeById.keys()];
+   shuffled.bag=[]; // shuffle will now include new game soundtracks
+   try{localStorage.setItem(SHUFFLE_KEY,JSON.stringify(shuffled))}catch(_){}
+  }
+  window.dispatchEvent(new CustomEvent("neoline:ay-originals-ready",
+   {detail:{files:[...nativeByFile.keys()],total:nativeById.size}}));
+  return m;
+ }).catch(e=>{console.warn("Native AY cache not ready:",e.message||e);return null});
+ return nativeLoad;
+}
+async function songBytes(id){
+ if(!nativeById.has(id))return pt3Bytes(id);
+ if(songBuffers.has(id))return songBuffers.get(id);
+ if(songLoads.has(id))return songLoads.get(id);
+ const entry=nativeById.get(id);
+ const promise=fetch(entry.url,{cache:"force-cache"}).then(async r=>{
+  if(!r.ok)throw Error("AY playback file HTTP "+r.status+": "+id);
+  const frames=new Uint8Array(await r.arrayBuffer());
+  if(frames.length!==entry.frames*14||frames.length<14*150)
+   throw Error("AY playback data corrupted: "+id);
+  songBuffers.set(id,frames);return frames;
+ }).finally(()=>songLoads.delete(id));
+ songLoads.set(id,promise);
+ return promise;
+}
+
 async function loadScene(force=false){
  if(!node||preview)return;
  const token=++requestSerial,requested=scene;
@@ -142,13 +189,17 @@ async function loadScene(force=false){
  if(GAME_MODES.has(requested))selectedGameSong=id;
  if(!force&&loadedScene===requested&&activeSong===id){stateToChip();return}
  try{
-  const frames=await pt3Bytes(id);
+  const frames=await songBytes(id);
   if(token!==requestSerial||!node||!isVice()||scene!==requested)return;
   loadedScene=requested;activeSong=id;
   msg({type:"song",frames});stateToChip();updateControls();
  }catch(err){
   if(token!==requestSerial)return;
-  console.warn("NEOLINE original PT3 unavailable",id,err);
+  console.warn("NEOLINE game soundtrack failed",id,err);
+  if(nativeById.has(id)&&GAME_MODES.has(requested)){
+   nativeById.delete(id);GAME_IDS=GAME_IDS.filter(x=>x!==id);
+   selectedGameSong=nextGameTrack();void loadScene(true);return;
+  }
   msg({type:"clearSong"});loadedScene=null;activeSong=null;stateToChip();updateControls();
  }
 }
@@ -272,6 +323,7 @@ function prepareAudio(){
   // Decode the original lobby tracker ahead of time, without starting sound.
   // A user gesture can then resume already-prepared chip audio immediately.
   void pt3Bytes("sonya").catch(err=>console.warn("NEOLINE Sonya PT3 preload:",err));
+  void primeNativeAY();
   return boot;
  }catch(error){
   audioError=true;console.warn("NEOLINE AY8912 setup:",error);
@@ -345,7 +397,7 @@ async function playPreview(id){
   await initialized;
   if(token!==previewSerial||preview?.id!==id)return false;
   if(!node)throw Error("AY-3-8912 audio unavailable");
-  const frames=await pt3Bytes(id);
+  const frames=await songBytes(id);
   if(token!==previewSerial||preview?.id!==id||!isVice())return false;
   preview.frames=frames.length/14;preview.frame=0;preview.loading=false;
   msg({type:"song",frames});
@@ -373,7 +425,12 @@ function seekPreview(sec){
  return true;
 }
 window.neolineAYPlayer={
- tracks:PLAYER_TRACKS.map(t=>({...t})),
+ tracks:PLAYER_TRACKS,
+ originalReady:file=>nativeByFile.has(file),
+ playOriginal:file=>{
+  const id=nativeByFile.get(file);return id?playPreview(id):Promise.resolve(false);
+ },
+ originalCount:()=>nativeById.size,
  suspendForOriginalPlayer(open){
   originalPlayerOpen=!!open;
   stateToChip();
@@ -553,6 +610,7 @@ window.addEventListener("storage",e=>{
 });
 new MutationObserver(updateControls).observe(root,{attributes:true,attributeFilter:["lang"]});
 updateControls();
+void primeNativeAY();
 // On reload in saved GTA mode, prepare the entire sound engine right away.
 // Browsers that permit autoplay will play immediately; others can start it
 // with the first tap anywhere or the prominent sound start button.
