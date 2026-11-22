@@ -40,7 +40,7 @@ jobs:
           base = "https://neoline-israel.pages.dev/"
           revision = os.environ.get("GITHUB_COMMIT","")[:12]
           shop_files = ("catalog-ui.js","catalog-ui.css","catalog-i18n.js","catalog-video.js","neoline-academy.js","neoline-academy.css")
-          game_files = ("teoria.js","teoria-ar.js","teoria-v2.js","teoria-daily.css")
+          game_files = ("teoria-optimized-01.js","teoria-optimized-02.js", "teoria-optimized-01.css","teoria-optimized-02.css","teoria-optimized-03.css","teoria-optimized-04.css")
           verified_data = ("assets/catalog/tutorial-videos.json","assets/catalog/catalog.json","assets/catalog/feature-media.json")
           feature_art = tuple(str(p) for p in sorted(Path("assets/catalog/feature-images").glob("*.webp")))
           files = shop_files + game_files + verified_data + feature_art
