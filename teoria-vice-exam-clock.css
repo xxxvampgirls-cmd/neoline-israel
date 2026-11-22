@@ -1,0 +1,167 @@
+/* NEOLINE / exam clock: visual indicator only, the official timer remains authoritative.
+   Applies ONLY inside GTA VI STYLE while an exam is in progress. */
+html[data-vice-theme="on"] body.theory-in-session
+ #theoryGameDock #dock4Hearts[data-exam="true"]{
+ --vice-clock-angle:360deg;
+ --vice-clock-hand:0deg;
+ --vice-clock-accent:#8af7ff;
+ --vice-clock-halo:#72d9f67a;
+ display:flex!important;
+ justify-content:center!important;
+ align-items:center!important;
+ position:relative!important;
+ width:100%!important;
+ min-width:0!important;
+ overflow:visible!important;
+ font-size:0!important;
+ letter-spacing:0!important;
+}
+html[data-vice-theme="on"] body.theory-in-session
+ #theoryGameDock #dock4Hearts[data-exam="true"] > span{
+ display:flex!important;
+ align-items:center!important;
+ justify-content:center!important;
+ width:clamp(38px,10.8vw,46px)!important;
+ height:clamp(38px,10.8vw,46px)!important;
+ min-width:clamp(38px,10.8vw,46px)!important;
+ min-height:clamp(38px,10.8vw,46px)!important;
+ max-width:46px!important;
+ max-height:46px!important;
+ font-size:0!important;
+ line-height:1!important;
+}
+html[data-vice-theme="on"] body.theory-in-session
+ #theoryGameDock #dock4Hearts[data-exam="true"] .vice-exam-clock{
+ position:relative;
+ display:grid;
+ place-items:center;
+ isolation:isolate;
+ width:100%;
+ height:100%;
+ min-height:0;
+ min-width:0;
+ flex:none;
+ color:#dffaff;
+ border-radius:50%;
+ border:2px solid #ffc59f;
+ background:conic-gradient(from 0deg,var(--vice-clock-accent) 0deg var(--vice-clock-angle),#4b345d var(--vice-clock-angle) 360deg);
+ box-shadow:0 0 0 1px #ff8abc9c,0 0 9px var(--vice-clock-halo),inset 0 0 4px #fff0d0a1;
+ transition:background-color .3s ease,border-color .3s ease;
+ animation:viceExamClockGlow 2.2s ease-in-out infinite;
+}
+html[data-vice-theme="on"] body.theory-in-session
+ #theoryGameDock #dock4Hearts[data-exam="true"] .vice-exam-clock::before{
+ content:"";
+ position:absolute;
+ inset:3px;
+ border-radius:50%;
+ z-index:0;
+ background:radial-gradient(circle at 37% 26%,#405371,#1b2545 72%);
+ border:1px solid #a6effa69;
+}
+html[data-vice-theme="on"] body.theory-in-session
+ #theoryGameDock #dock4Hearts[data-exam="true"] .vice-exam-clock svg{
+ position:relative;
+ z-index:1;
+ display:block;
+ width:clamp(26px,7.8vw,33px);
+ height:clamp(26px,7.8vw,33px);
+ min-width:0;
+ min-height:0;
+ color:#f6fafc;
+ overflow:visible;
+ filter:drop-shadow(0 0 3px #a3efff9c);
+}
+html[data-vice-theme="on"] body.theory-in-session
+ #theoryGameDock #dock4Hearts[data-exam="true"] .vice-exam-sweep{
+ transform:rotate(var(--vice-clock-hand));
+ transform-origin:16px 16px;
+}
+html[data-vice-theme="on"] body.theory-in-session
+ #theoryGameDock #dock4Hearts[data-exam="true"][data-time-level="warning"]{
+ --vice-clock-accent:#ffcc72;
+ --vice-clock-halo:#ffc66d91;
+}
+html[data-vice-theme="on"] body.theory-in-session
+ #theoryGameDock #dock4Hearts[data-exam="true"][data-time-level="critical"]{
+ --vice-clock-accent:#ff557d;
+ --vice-clock-halo:#ff3b6da8;
+}
+html[data-vice-theme="on"] body.theory-in-session
+ #theoryGameDock #dock4Hearts[data-exam="true"][data-time-level="critical"] .vice-exam-clock{
+ border-color:#ff8fa1;
+ animation-duration:.75s;
+}
+/* The actual countdown stays visible above the question. Its glow,
+   live dot and urgent state derive from the same existing #timer value. */
+html[data-vice-theme="on"] body.theory-in-session
+ #gamePlaying .question-eyebrow .vice-quiz-timer.is-live:not([hidden]){
+ position:relative!important;
+ display:inline-flex!important;
+ min-height:30px!important;
+ align-items:center!important;
+ gap:5px!important;
+ padding:5px 13px 5px 8px!important;
+ overflow:visible!important;
+ border:1.5px solid #f7c789!important;
+ border-radius:11px!important;
+ color:#ffdf9b!important;
+ background:linear-gradient(125deg,#4f2c54,#342342)!important;
+ box-shadow:inset 0 1px #fff1db57,0 0 11px #ffd07a70!important;
+ font-variant-numeric:tabular-nums!important;
+ font-size:clamp(12px,3vw,15px)!important;
+ font-weight:950!important;
+ letter-spacing:.025em!important;
+ white-space:nowrap!important;
+ direction:ltr!important;
+}
+html[data-vice-theme="on"] body.theory-in-session
+ #gamePlaying .question-eyebrow .vice-quiz-timer.is-live:not([hidden])::after{
+ content:"";
+ position:absolute;
+ right:5px;
+ top:5px;
+ width:5px;
+ height:5px;
+ border-radius:50%;
+ background:#8ffff5;
+ box-shadow:0 0 7px #70ffff,0 0 12px #70ffff77;
+ animation:viceExamClockLive 1s ease-in-out infinite;
+}
+html[data-vice-theme="on"] body.theory-in-session
+ #gamePlaying .question-eyebrow .vice-quiz-timer.is-live:not([hidden])[data-time-level="warning"]{
+ color:#ffdd92!important;
+ border-color:#ffb755!important;
+ box-shadow:0 0 14px #ffab537a!important;
+}
+html[data-vice-theme="on"] body.theory-in-session
+ #gamePlaying .question-eyebrow .vice-quiz-timer.is-live:not([hidden])[data-time-level="critical"]{
+ color:#fff0f2!important;
+ border-color:#ff698b!important;
+ background:#702e47!important;
+ box-shadow:0 0 15px #ff416bbd!important;
+ animation:viceExamClockGlow .75s ease-in-out infinite;
+}
+html[data-vice-theme="on"] body.theory-in-session
+ #gamePlaying .question-eyebrow .vice-quiz-timer.is-live:not([hidden])[data-time-level="critical"]::after{
+ background:#ff6c7b;
+ box-shadow:0 0 9px #ff4c79;
+}
+@keyframes viceExamClockGlow{
+ 0%,100%{filter:brightness(1); }
+ 50%{filter:brightness(1.16);}
+}
+@keyframes viceExamClockLive{
+ 0%,100%{opacity:1;transform:scale(1)}
+ 50%{opacity:.38;transform:scale(.76)}
+}
+@media(prefers-reduced-motion:reduce){
+ html[data-vice-theme="on"] body.theory-in-session
+ #theoryGameDock #dock4Hearts[data-exam="true"] .vice-exam-clock,
+ html[data-vice-theme="on"] body.theory-in-session
+ #gamePlaying .question-eyebrow .vice-quiz-timer.is-live:not([hidden]),
+ html[data-vice-theme="on"] body.theory-in-session
+ #gamePlaying .question-eyebrow .vice-quiz-timer.is-live:not([hidden])::after{
+ animation:none!important;
+ }
+}
