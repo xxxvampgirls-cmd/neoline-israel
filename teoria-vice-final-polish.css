@@ -356,3 +356,26 @@ html[data-vice-theme="on"] #gameLobby .routes .route-full .game-mode-photo::afte
 @media(prefers-reduced-motion:reduce){
  html[data-vice-theme="on"] #gameLobby .routes .route-card .game-mode-photo{transition:none!important}
 }
+
+/* Place the slider controls in the bottom visual gutter, not on faces. */
+html[data-vice-theme="on"] .theory-promo-host .vice-cinema-arrow--prev,
+html[data-vice-theme="on"] .theory-promo-host .vice-cinema-arrow--next{
+ top:auto!important;
+ bottom:11px!important;
+ transform:none!important;
+}
+html[data-vice-theme="on"] .theory-promo-host .vice-cinema-arrow--prev{
+ left:52%!important;
+}
+html[data-vice-theme="on"] .theory-promo-host .vice-cinema-arrow--next{
+ right:7px!important;
+}
+html[data-vice-theme="on"] .theory-promo-host .theory-promo-dots{
+ bottom:11px!important;
+ left:70%!important;
+ transform:translateX(-50%)!important;
+}
+@media(max-width:365px){
+ html[data-vice-theme="on"] .theory-promo-host .vice-cinema-arrow--prev{left:49%!important}
+ html[data-vice-theme="on"] .theory-promo-host .theory-promo-dots{left:69%!important}
+}
