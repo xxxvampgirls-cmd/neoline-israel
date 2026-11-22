@@ -240,6 +240,8 @@
    case "reveal": p("C6",0,.075,.17);p("E6",.08,.1,.21);p("G6",.18,.25,.27);break;
    case "countdown": p("A5",0,.065,.17);break;
    case "finale": noise(.21,t,.24,"fx");["A5","C6","E6","A6","C7"].forEach((n,i)=>p(n,i*.095,.16,.2));break;
+   case "finish": p("E5",0,.1,.18);p("A5",.10,.15,.22);p("C6",.28,.28,.21);break;
+   case "exam-fail": p("E5",0,.16,.23);p("C5",.18,.21,.24);p("A4",.42,.37,.23);break;
    case "victory":
     ["C5","E5","G5","C6","E6","G6","C7"].forEach((n,i)=>p(n,i*.112,i===6?.46:.13,.23+(i*.013)));
     break;
@@ -368,7 +370,10 @@
  window.addEventListener("neoline:theory-finish",e=>{
   if(!isVice())return;
   changeScene(e.detail?.gameOver?"fail":"result");
-  fx(e.detail?.gameOver?"wasted":"victory");
+  const d=e.detail||{};
+  if(d.gameOver)fx("wasted");
+  else if(d.mode==="exam")fx(d.correct>=26?"victory":"exam-fail");
+  else fx(d.total>0 && d.correct/d.total>=.8?"victory":"finish");
  });
  const gift=byId("gameGiftReveal");
  const dialog=byId("gameGiftDialog");
