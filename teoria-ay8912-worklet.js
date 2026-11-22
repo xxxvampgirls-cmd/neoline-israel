@@ -29,7 +29,7 @@ class NeolineAY8912 extends AudioWorkletProcessor{
   this.musicDucking=1; // gradual release avoids pops when short sounds finish
   // Recreated EAR/ULA tape pulses share this worklet, not the AY three voices.
   this.tapeActive=false;this.tapeArmed=false;this.tapeSamples=0;
-  this.tapeDurationSamples=sampleRate*8.2;
+  this.tapeDurationSamples=sampleRate*5.6;
   this.tapePhase=0;this.tapeNoise=0xACE1;this.tapeBit=0;
   this.tapeBitSamples=0;
   this.frameSamples=sampleRate;
@@ -58,7 +58,7 @@ class NeolineAY8912 extends AudioWorkletProcessor{
      this.tapeActive=true;this.tapeSamples=0;this.tapePhase=0;
      this.tapeBitSamples=0;this.tapeBit=0;this.tapeNoise=0xACE1;
      this.tapeDurationSamples=sampleRate*Math.max(.3,
-      Math.min(15,(Number(m.tapeDurationMs)||8200)/1000));
+      Math.min(15,(Number(m.tapeDurationMs)||5600)/1000));
     }else if(!shouldTape){this.tapeActive=false;this.tapeArmed=false;}
     if(!this.effectsEnabled){this.fxFrames=null;this.fxReg=null;}
    }else if(m.type==="fx"){
@@ -135,18 +135,26 @@ class NeolineAY8912 extends AudioWorkletProcessor{
    this.tapeNoise=(this.tapeNoise>>1)|(bit<<15);
    this.tapeBit=this.tapeNoise&1;
   }
+  // Pilot / sync / data / silence: compressed ZX tape sequence with
+  // genuine gaps between simulated data blocks, not constant buzzing.
+  const gaps=[[.22,.265],[.56,.615],[.75,.78],[.96,1]];
+  if(gaps.some(([a,b])=>q>=a&&q<b))return 0;
   let hz,amp;
-  if(q<.055){hz=420;amp=.045;}
-  else if(q<.245){hz=806;amp=.17;}
-  else if(q<.276){hz=q<.26?1800:2530;amp=.15;}
-  else if(q<.745){hz=this.tapeBit?2020:1035;amp=.17;}
-  else if(q<.815){hz=806;amp=.165;}
-  else if(q<.956){hz=this.tapeBit?2210:1235;amp=.16;}
-  else{hz=1240;amp=.1;}
+  if(q<.08){hz=440;amp=.07;}
+  else if(q<.22){hz=806;amp=.165;}
+  else if(q<.32){hz=q<.292?1800:2530;amp=.15;}
+  else if(q<.56){hz=this.tapeBit?2020:1035;amp=.17;}
+  else if(q<.75){hz=this.tapeBit?2210:1180;amp=.16;}
+  else if(q<.90){hz=this.tapeBit?2020:1035;amp=.17;}
+  else{hz=1240;amp=.11;}
   this.tapePhase+=hz/sr;
   if(this.tapePhase>=1)this.tapePhase-=Math.floor(this.tapePhase);
-  const gate=q<.055?Math.sin(Math.PI*Math.min(1,q/.055)):
-     q>.96?Math.min(1,(1-q)/.04):1;
+  let gate=q<.018?Math.min(1,q/.018):1;
+  // Short edge fades stop hard clicks before and after each pause.
+  for(const [a,b] of gaps){
+   if(q>=a-.004&&q<a)gate*=Math.max(0,(a-q)/.004);
+   if(q>=b&&q<b+.004)gate*=Math.max(0,(q-b)/.004);
+  }
   return (this.tapePhase<.5?1:-1)*amp*gate;
  }
  process(_inputs,outputs){
