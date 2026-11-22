@@ -4,7 +4,7 @@
    No map path, no extra baked-in text, no changes to classic or quiz HUD. */
 html[data-vice-theme="on"] .theory-promo-host
  .vice-cinema-frame--signs .vice-cinema-scene{
- background-image:url("./assets/teoria/vice-sunset-boulevard.svg")!important;
+ background-image:url("./assets/teoria/vice-sunset-boulevard.svg?v=20261122-boulevard-wheels-v2")!important;
  background-repeat:no-repeat!important;
  background-position:48% 52%!important;
  background-size:cover!important;
