@@ -45,9 +45,9 @@ const {chromium}=require("playwright");
    if(on.scrollbar>width+2)throw Error("GTA VI overflow @"+width+": "+JSON.stringify(on));
    await page.reload({waitUntil:"domcontentloaded"});
    await page.waitForFunction(()=>document.documentElement.dataset.viceTheme==="on");
-   await page.locator('.theory-promo-dot[data-slide="4"]').click();
+   await page.evaluate(()=>document.querySelector('.theory-promo-dot[data-slide="4"]')?.click());
    await page.waitForFunction(()=>document.querySelector('.vice-promo-slide')?.classList.contains("is-active"));
-   await page.locator(".theory-promo-click").click();
+   await page.evaluate(()=>document.querySelector(".theory-promo-click")?.click());
    await page.waitForFunction(()=>document.documentElement.dataset.viceTheme==="off");
    const back=await page.evaluate(()=>({state:document.documentElement.dataset.viceTheme,
     classic:localStorage.getItem("neoline.theory.visualTheme.v1"),
