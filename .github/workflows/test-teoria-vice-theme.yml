@@ -58,9 +58,9 @@ jobs:
           python3 -m http.server 8765 --bind 127.0.0.1 >/tmp/vice-theme.log 2>&1 &
           node --check teoria-gta6-style.js
           node --check teoria-hero-promo.js
-          node scripts/test_teoria_vice_theme.cjs
           node --check scripts/test_teoria_rtl_layout.cjs
           node scripts/test_teoria_rtl_layout.cjs
+          node scripts/test_teoria_vice_theme.cjs
           node --check teoria-vice-exam-clock.js
           node --check scripts/test_teoria_vice_exam_clock.cjs
           node scripts/test_teoria_vice_exam_clock.cjs
