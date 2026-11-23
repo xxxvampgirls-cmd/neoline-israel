@@ -1,10 +1,10 @@
 {
   "version": 1,
   "retentionDays": 30,
-  "updated": "2026-11-23T01:04:58Z",
+  "updated": "2026-11-23T09:39:11Z",
   "status": "ok",
   "sourceCount": 10,
-  "searchUpdated": "2026-11-22T19:55:38Z",
+  "searchUpdated": "2026-11-23T09:39:11Z",
   "sources": [
     {
       "id": "news13",
@@ -33,6 +33,19 @@
     }
   ],
   "items": [
+    {
+      "id": "rJLrnE8KqAc",
+      "title": "מפקד משטרת התנועה הארצית פגע עם רכב ברוכב אופניים, מצבו בינוני",
+      "date": "2026-11-23T07:15:31Z",
+      "source": "ynet",
+      "publisher": "ynet",
+      "category": "police",
+      "url": "https://www.youtube.com/watch?v=rJLrnE8KqAc",
+      "tags": [
+        "police"
+      ],
+      "channelId": "UCpSSzrovhI4fA2PQNItecUA"
+    },
     {
       "id": "V4EVtjnCCKE",
       "title": "במבצע אכיפה נרחב: המשטרה מבשרת לנהגים שקיבלו קנס - ב-SMS",
