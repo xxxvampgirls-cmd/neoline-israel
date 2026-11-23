@@ -1,0 +1,116 @@
+name: Import five user AY originals and render via NEOLINE AY chip
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'assets/teoria/user-ay-pack-20261123/**'
+      - 'scripts/import_user_ay_20261123.py'
+      - '.github/workflows/import-five-original-ay-20261123.yml'
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency:
+  group: neoline-five-native-ay-import
+  cancel-in-progress: false
+jobs:
+  restore-and-render:
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    steps:
+      - name: Checkout user supplied native music pack
+        uses: actions/checkout@v4
+        with:
+          ref: main
+          persist-credentials: true
+      - name: Recover and SHA256 verify the exact five uploaded AY files
+        run: python3 scripts/import_user_ay_20261123.py
+      - name: Use stable Rust compiler for Project AY Z80 execution
+        uses: dtolnay/rust-toolchain@stable
+      - name: Cache Z80 replay build
+        uses: Swatinem/rust-cache@v2
+        with:
+          workspaces: scripts/zxay_renderer -> target
+      - name: Compile original Z80 / AY frame renderer
+        run: cargo build --release --manifest-path scripts/zxay_renderer/Cargo.toml
+      - name: Replay untouched Z80 routines to our native 50Hz AY registers
+        shell: bash
+        run: |
+          set -u
+          mkdir -p assets/teoria/ay-originals
+          player=scripts/zxay_renderer/target/release/neoline-zxay-renderer
+          for spec in \
+            'Back_To_The_Future_2.ay:orig_back_to_the_future_2_ay' \
+            'Beverly_Hills_Cop.ay:orig_beverly_hills_cop_ay' \
+            'Cj_In_Usa.ay:orig_cj_in_usa_ay' \
+            'Golden_Axe.ay:orig_golden_axe_ay' \
+            'Rambo_3.ay:orig_rambo_3_ay'; do
+            filename="${spec%%:*}"
+            identifier="${spec##*:}"
+            echo "::group::Native Z80 replay: ${filename}"
+            if "$player" "assets/teoria/originals/${filename}" "assets/teoria/ay-originals/${identifier}.ay14"; then
+              echo "Playable original: ${filename}"
+            else
+              echo "::warning::Not playable by the current Z80 AY engine: ${filename}"
+              rm -f "assets/teoria/ay-originals/${identifier}.ay14"
+            fi
+            echo "::endgroup::"
+          done
+      - name: Validate AY-3-8912 signal and update music library manifest
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          import json, pathlib
+          from importlib.util import spec_from_file_location,module_from_spec
+          root=pathlib.Path("assets/teoria/ay-originals")
+          path=root/"manifest.json"
+          doc=json.loads(path.read_text(encoding="utf-8"))
+          mpath=pathlib.Path("scripts/import_user_ay_20261123.py")
+          spec=spec_from_file_location("user_music_import",mpath)
+          module=module_from_spec(spec);spec.loader.exec_module(module)
+          verified=0
+          for name,size,sha,title in module.TRACKS:
+              ident="orig_"+name.lower().replace(".","_")
+              file=root/(ident+".ay14")
+              if not file.is_file():
+                  doc.setdefault("failures",{})[name]="Native Project AY Z80 replay did not produce usable chip frames"
+                  continue
+              data=file.read_bytes()
+              frames=len(data)//14
+              audible=sum(bool(data[i+8]&31 or data[i+9]&31 or data[i+10]&31) for i in range(0,len(data),14))
+              if len(data)%14 or frames<150 or frames>15000 or audible<40:
+                  file.unlink()
+                  doc.setdefault("failures",{})[name]="Invalid or silent AY-3-8912 register frames"
+                  continue
+              doc["tracks"][ident]={
+                  "id":ident,"name":title,"file":name,
+                  "url":"./assets/teoria/ay-originals/"+ident+".ay14",
+                  "frames":frames,"seconds":round(frames/50,2),
+                  "originalFormat":"AY",
+                  "decoder":"Uploaded Project AY Z80 replay into NEOLINE native AY-3-8912 registers",
+                  "userProvided":True
+              }
+              doc.setdefault("failures",{}).pop(name,None)
+              verified+=1
+              print("PLAYABLE AY:",title,frames,"frames,",audible,"audible")
+          path.write_text(json.dumps(doc,ensure_ascii=False,indent=2)+"\n",encoding="utf-8")
+          print("Verified five-user-song count:",verified,"out of",len(module.TRACKS))
+          if verified==0:raise SystemExit("No user tracks decoded; publishing no false playable claims")
+          PY
+      - name: Commit restored binary AY originals and verified 3-channel AY playback data
+        shell: bash
+        run: |
+          set -eu
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add assets/teoria/originals assets/teoria/ay-originals
+          if git diff --cached --quiet; then
+            echo "No audio changes required"
+            exit 0
+          fi
+          git commit -m "Add 5 original AY ZX Spectrum tracks to NEOLINE player and shuffle"
+          for attempt in 1 2 3 4 5; do
+            git pull --rebase origin main || { git rebase --abort || true; exit 1; }
+            if git push origin HEAD:main; then exit 0; fi
+            sleep 5
+          done
+          exit 1
