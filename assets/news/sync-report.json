@@ -1,5 +1,5 @@
 {
-  "attempted": "2026-11-23T12:42:11.388018Z",
+  "attempted": "2026-11-23T21:14:26.344266Z",
   "feeds": {
     "Walla · Авто": 30,
     "Walla · Безопасность": 30,
@@ -26,16 +26,16 @@
   "telegram": {
     "Дорожная полиция Израиля · Telegram": 0,
     "Полиция Израиля · Telegram": 0,
-    "Ихуд Ацала · Telegram": 93,
+    "Ихуд Ацала · Telegram": 95,
     "Алексей Железнов · Telegram": 1,
-    "NEWSru.co.il · Telegram": 8,
+    "NEWSru.co.il · Telegram": 10,
     "Минтранс Израиля · Telegram": 0,
     "Calcalist · Telegram": 1,
-    "Маген Давид Адом · ДТП · Telegram": 66
+    "Маген Давид Адом · ДТП · Telegram": 70
   },
   "facebook": {},
   "facebookState": "not_configured",
-  "new": 55,
+  "new": 66,
   "retained": 300,
   "discardedGoogleLinks": 0,
   "errors": {
@@ -48,27 +48,27 @@
   "directLinksOnly": true,
   "manuallyVerified": 8,
   "lawsRetentionMonths": 6,
-  "lawsStories": 1,
+  "lawsStories": 0,
   "sourceCount": 19,
   "sources": {
-    "NEWSru.co.il · Telegram": 22,
     "Ихуд Ацала · Telegram": 65,
-    "Autonews Israel": 13,
-    "Maariv": 47,
-    "News08": 28,
-    "Маген Давид Адом · ДТП · Telegram": 52,
+    "Маген Давид Адом · ДТП · Telegram": 51,
+    "Walla": 19,
+    "News08": 26,
+    "Maariv": 51,
+    "NEWSru.co.il · Telegram": 24,
+    "Ynet": 6,
+    "Autonews Israel": 10,
     "Arutz Sheva · Israel National News": 20,
     "The Jerusalem Post": 5,
     "Srugim": 5,
-    "Walla": 17,
     "TheCar · Автоновости": 2,
-    "Ynet": 5,
-    "Mako · Израиль": 5,
-    "Wheel · Автоновости": 6,
+    "Mako · Израиль": 4,
+    "Wheel · Автоновости": 5,
     "Haaretz": 3,
     "Алексей Железнов · Telegram": 1,
     "Walla · Новости Израиля": 1,
     "Calcalist": 1,
-    "Walla · Авто": 2
+    "Walla · Авто": 1
   }
 }
