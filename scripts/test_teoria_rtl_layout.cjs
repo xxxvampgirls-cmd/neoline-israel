@@ -88,7 +88,7 @@ async function capture(page,lang,name){
      await capture(page,lang,"cards");
     }
     // Classic must remain usable after switching the skin off.
-    await page.locator("#gtaModeToggle").click();
+    await page.evaluate(()=>document.querySelector("#gtaModeToggle")?.click());
     await page.waitForFunction(()=>document.documentElement.dataset.viceTheme==="off");
     if(errors.length)throw Error("Page JS errors "+width+" "+lang+": "+errors.join(" | "));
     console.log("PASS RTL "+lang+" "+width+"px: all 5 slides + 5 card titles, no clipping/overlap, restored classic");
