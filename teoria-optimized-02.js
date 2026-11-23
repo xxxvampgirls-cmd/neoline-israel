@@ -2360,15 +2360,15 @@ const LANG={
  ru:{
   eyebrow:"NEOLINE · АУДИОТЕКА 128K",
   title:"Музыка из игры",
-  count:"{n} треков · PT3",
+  count:"{n} треков · PT3 + AY",
   now:"СЕЙЧАС ИГРАЕТ",
   idle:"Выбери трек из списка",
   info:"ZX Spectrum 128K · AY-3-8912",
-  loading:"Загружаем оригинальный PT3…",
+  loading:"Загружаем оригинальную AY-композицию…",
   paused:"Пауза · нажми ▶, чтобы продолжить",
   playing:"Звучит через AY-3-8912",
   blocked:"Нажми ▶, чтобы разрешить звук",
-  error:"Не удалось прочитать этот PT3-файл",
+  error:"Не удалось прочитать этот аудиофайл",
   list:"ВСЕ КОМПОЗИЦИИ",
   intro:"ЗАСТАВКА",
   game:"ИГРОВАЯ",
@@ -2378,38 +2378,38 @@ const LANG={
   next:"Следующая композиция",
   stop:"Остановить и вернуть музыку игры",
   seek:"Перемотать композицию",
-  foot:"Оригинальные PT3 · 3 канала AY · без MP3. При прослушивании игровая музыка временно заменяется выбранным треком."
+  foot:"Оригинальные PT3 и AY · 3 канала AY · без MP3. При прослушивании игровая музыка временно заменяется выбранным треком."
  },
  en:{
   eyebrow:"NEOLINE · 128K AUDIO LIBRARY",title:"Game soundtrack",
-  count:"{n} tracks · PT3",now:"NOW PLAYING",idle:"Choose a track below",
-  info:"ZX Spectrum 128K · AY-3-8912",loading:"Loading original PT3…",
+  count:"{n} tracks · PT3 + AY",now:"NOW PLAYING",idle:"Choose a track below",
+  info:"ZX Spectrum 128K · AY-3-8912",loading:"Loading original AY composition…",
   paused:"Paused · tap ▶ to resume",playing:"Playing through AY-3-8912",
-  blocked:"Tap ▶ to enable audio",error:"Unable to load this PT3 module",
+  blocked:"Tap ▶ to enable audio",error:"Unable to load the AY music file",
   list:"ALL TRACKS",intro:"TITLE SCREEN",game:"GAMEPLAY",
   play:"Play",pause:"Pause",prev:"Previous track",next:"Next track",
   stop:"Stop and restore game soundtrack",seek:"Seek",
-  foot:"Original PT3 · 3-channel AY · no MP3. Preview temporarily replaces the game's music."
+  foot:"Original PT3 and AY · 3-channel AY · no MP3. Preview temporarily replaces the game's music."
  },
  he:{
-  eyebrow:"NEOLINE · ספריית 128K",title:"מוזיקה מהמשחק",count:"{n} קטעים · PT3",
+  eyebrow:"NEOLINE · ספריית 128K",title:"מוזיקה מהמשחק",count:"{n} קטעים · PT3 + AY",
   now:"מושמע כעת",idle:"בחרו קטע מהרשימה",info:"ZX Spectrum 128K · AY-3-8912",
-  loading:"טוען קובץ PT3 מקורי…",paused:"מושהה · לחצו ▶ להמשך",
+  loading:"טוען מוזיקה מקורית AY…",paused:"מושהה · לחצו ▶ להמשך",
   playing:"מושמע דרך AY-3-8912",blocked:"לחצו ▶ להפעלת צליל",
   error:"לא ניתן לטעון את הקובץ",list:"כל הקטעים",intro:"מסך פתיחה",game:"משחק",
   play:"נגן",pause:"השהה",prev:"הקודם",next:"הבא",
   stop:"עצור וחזור למוזיקת המשחק",seek:"מיקום השמעה",
-  foot:"PT3 מקורי · שלושה ערוצי AY · ללא MP3. ההאזנה מחליפה זמנית את מוזיקת המשחק."
+  foot:"PT3 ו-AY מקוריים · שלושה ערוצי AY · ללא MP3. ההאזנה מחליפה זמנית את מוזיקת המשחק."
  },
  ar:{
-  eyebrow:"NEOLINE · مكتبة 128K",title:"موسيقى اللعبة",count:"{n} مقاطع · PT3",
+  eyebrow:"NEOLINE · مكتبة 128K",title:"موسيقى اللعبة",count:"{n} مقاطع · PT3 + AY",
   now:"يعمل الآن",idle:"اختر مقطعًا من القائمة",info:"ZX Spectrum 128K · AY-3-8912",
-  loading:"تحميل PT3 الأصلي…",paused:"متوقف مؤقتًا · اضغط ▶ للمتابعة",
+  loading:"تحميل مقطع AY الأصلي…",paused:"متوقف مؤقتًا · اضغط ▶ للمتابعة",
   playing:"يعمل عبر AY-3-8912",blocked:"اضغط ▶ لتفعيل الصوت",
   error:"تعذّر تحميل ملف PT3",list:"جميع المقاطع",intro:"شاشة البداية",game:"اللعب",
   play:"تشغيل",pause:"إيقاف مؤقت",prev:"السابق",next:"التالي",
   stop:"إيقاف واستعادة موسيقى اللعبة",seek:"تقديم وتأخير",
-  foot:"PT3 أصلي · ثلاث قنوات AY · دون MP3. التشغيل يستبدل موسيقى اللعبة مؤقتًا."
+  foot:"PT3 وAY أصليان · ثلاث قنوات AY · دون MP3. التشغيل يستبدل موسيقى اللعبة مؤقتًا."
  }
 };
 const translations=()=>LANG[(doc.lang||"ru").split("-")[0]]||LANG.ru;
@@ -2420,6 +2420,11 @@ const fmt=sec=>{
 
 const pendingSongs=[
  {name:"Ghostbusters 2",format:"AY",file:"Ghostbusters_2.ay"},
+ {name:"Beverly Hills Cop",format:"AY",file:"Beverly_Hills_Cop.ay"},
+ {name:"CJ in USA",format:"AY",file:"Cj_In_Usa.ay"},
+ {name:"Golden Axe",format:"AY",file:"Golden_Axe.ay"},
+ {name:"Rambo 3",format:"AY",file:"Rambo_3.ay"},
+ {name:"Back to the Future 2",format:"AY",file:"Back_To_The_Future_2.ay"},
  {name:"Jurassic Park",format:"ASC",file:"Jurassic_Park.asc"},
  {name:"Lyra II 3",format:"STC",file:"LyraII3.stc"},
  {name:"Lyra II 4",format:"STC",file:"LyraII4.stc"},
