@@ -107,6 +107,10 @@ const {chromium}=require("playwright");
    await page.locator("#gameGiftTrigger").click();
    await page.waitForFunction(()=>document.querySelector("#gameGiftDialog")?.open===true);
    await page.locator("#gameGiftClose").click();
+   // Auto-rotation may select a different destination: reselect the gift
+   // advert before clicking its real interactive poster hotspot.
+   await page.evaluate(()=>document.querySelector('.theory-promo-dot[data-slide="0"]')?.click());
+   await page.waitForFunction(()=>document.querySelector('.vice-cinema-frame.is-active')?.dataset.slide==="0");
    await page.locator(".theory-promo-click").click();
    await page.waitForFunction(()=>document.querySelector("#gameGiftDialog")?.open===true);
    await page.locator("#gameGiftClose").click();
