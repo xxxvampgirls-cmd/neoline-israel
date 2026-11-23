@@ -1,10 +1,10 @@
 {
   "version": 1,
   "retentionDays": 30,
-  "updated": "2026-11-23T09:39:11Z",
+  "updated": "2026-11-23T22:11:42Z",
   "status": "ok",
   "sourceCount": 10,
-  "searchUpdated": "2026-11-23T09:39:11Z",
+  "searchUpdated": "2026-11-23T22:11:42Z",
   "sources": [
     {
       "id": "news13",
@@ -33,6 +33,33 @@
     }
   ],
   "items": [
+    {
+      "id": "fQ6yMhHrUVg",
+      "title": "צפצפת? שילמת: הערים שמחלקות קנסות על צפירות מיותרות בכביש",
+      "date": "2026-11-23T21:11:33Z",
+      "source": "news13",
+      "publisher": "חדשות 13",
+      "category": "police",
+      "url": "https://www.youtube.com/watch?v=fQ6yMhHrUVg",
+      "tags": [
+        "police"
+      ],
+      "channelId": "UCvQmPpU20hw1Trss_CVwaew"
+    },
+    {
+      "id": "2mw0uo7Djh0",
+      "title": "רגע לפני התאונה הקשה: מפקד משטרת התנועה הארצית בבילוי קריוקי עם עינת שרוף",
+      "date": "2026-11-23T13:30:29Z",
+      "source": "ynet",
+      "publisher": "ynet",
+      "category": "accidents",
+      "url": "https://www.youtube.com/watch?v=2mw0uo7Djh0",
+      "tags": [
+        "accidents",
+        "police"
+      ],
+      "channelId": "UCpSSzrovhI4fA2PQNItecUA"
+    },
     {
       "id": "rJLrnE8KqAc",
       "title": "מפקד משטרת התנועה הארצית פגע עם רכב ברוכב אופניים, מצבו בינוני",
