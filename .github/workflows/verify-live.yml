@@ -53,6 +53,24 @@ jobs:
                   for entry in manifest_native.get("tracks", {}).values()
               )
               assert len(native_files) > 1, "Native original music manifest contains no tracks"
+              expected_user_songs = {
+                  "Back_To_The_Future_2.ay",
+                  "Beverly_Hills_Cop.ay",
+                  "Cj_In_Usa.ay",
+                  "Golden_Axe.ay",
+                  "Rambo_3.ay",
+              }
+              published_user_songs = {
+                  entry["file"] for entry in manifest_native.get("tracks", {}).values()
+              }
+              assert expected_user_songs <= published_user_songs, (
+                  "Five supplied AY originals missing from the playable manifest: "
+                  + repr(expected_user_songs-published_user_songs)
+              )
+              native_files += tuple(
+                  "assets/teoria/originals/"+name
+                  for name in sorted(expected_user_songs)
+              )
           # AudioWorklet is loaded dynamically by the optimized script, not by an HTML tag.
           # Verify Cloudflare serves its updated bytes too (no stale SFX renderer).
           files = shop_files + game_files + verified_data + feature_art + native_files + ("teoria-ay8912-worklet.js",)
