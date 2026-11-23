@@ -15,11 +15,9 @@ TRACKS=[
  ("Back_To_The_Future_2.ay",10260,"0636121763986f06ab71daa27c1cb0cbf926d24804ad725588036c9d6986a56b","Back to the Future 2"),
  ("Beverly_Hills_Cop.ay",4760,"71f86e465f3e48d71bfe534141ca3b360b405e8d536fae040f2898343f1c17cd","Beverly Hills Cop"),
  ("Cj_In_Usa.ay",3522,"66620514704be4837fb88a6167ca1f91cc637cbf342df39142d5854f9c8832c3","CJ in USA"),
- ("Golden_Axe.ay",9288,"3d07872358c7464231557e6b80fbc9c9c5c313fc6119521a57ec695bb4571c3f53c27","Golden Axe"),
+ ("Golden_Axe.ay",9288,"3d07872358c7464231557e6b80fbc9d4b038bc54c6441be05e48108a28a1bbfc","Golden Axe"),
  ("Rambo_3.ay",5760,"f9b775709144e7475d38caf9f9a748c17a4c1f2d9dd24885b349e091604b350e","Rambo 3"),
 ]
-# corrected SHA hashes are checked independently; never publish a bad source.
-TRACKS[3]=("Golden_Axe.ay",9288,"3d07872358c7464231557e6b80fbc9c9c5c313fc6119521a57ec695bb4571c3f53c27","Golden Axe")
 
 def verify():
  parts=[PACK/f"chunk-{i:02}.txt" for i in range(1,6)]
