@@ -134,6 +134,46 @@
       "bytes": 8623,
       "sha256": "7612c76cfd0bbeb0a78e04b9eb94ba259edb03944205307608046cacf1c64ec8",
       "url": "./assets/teoria/originals/GALAXY2.asc"
+    },
+    {
+      "name": "Back_To_The_Future_2.ay",
+      "format": "AY",
+      "bytes": 10260,
+      "sha256": "0636121763986f06ab71daa27c1cb0cbf926d24804ad725588036c9d6986a56b",
+      "url": "./assets/teoria/originals/Back_To_The_Future_2.ay",
+      "userProvided": true
+    },
+    {
+      "name": "Beverly_Hills_Cop.ay",
+      "format": "AY",
+      "bytes": 4760,
+      "sha256": "71f86e465f3e48d71bfe534141ca3b360b405e8d536fae040f2898343f1c17cd",
+      "url": "./assets/teoria/originals/Beverly_Hills_Cop.ay",
+      "userProvided": true
+    },
+    {
+      "name": "Cj_In_Usa.ay",
+      "format": "AY",
+      "bytes": 3522,
+      "sha256": "66620514704be4837fb88a6167ca1f91cc637cbf342df39142d5854f9c8832c3",
+      "url": "./assets/teoria/originals/Cj_In_Usa.ay",
+      "userProvided": true
+    },
+    {
+      "name": "Golden_Axe.ay",
+      "format": "AY",
+      "bytes": 9288,
+      "sha256": "3d07872358c7464231557e6b80fbc9d4b038bc54c6441be05e48108a28a1bbfc",
+      "url": "./assets/teoria/originals/Golden_Axe.ay",
+      "userProvided": true
+    },
+    {
+      "name": "Rambo_3.ay",
+      "format": "AY",
+      "bytes": 5760,
+      "sha256": "f9b775709144e7475d38caf9f9a748c17a4c1f2d9dd24885b349e091604b350e",
+      "url": "./assets/teoria/originals/Rambo_3.ay",
+      "userProvided": true
     }
   ]
 }

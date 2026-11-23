@@ -169,6 +169,61 @@
       "seconds": 300.0,
       "originalFormat": "AY",
       "decoder": "Z80 Project AY code via ym2149-ay-replayer 0.9.1"
+    },
+    "orig_back_to_the_future_2_ay": {
+      "id": "orig_back_to_the_future_2_ay",
+      "name": "Back to the Future 2",
+      "file": "Back_To_The_Future_2.ay",
+      "url": "./assets/teoria/ay-originals/orig_back_to_the_future_2_ay.ay14",
+      "frames": 4500,
+      "seconds": 90.0,
+      "originalFormat": "AY",
+      "decoder": "Uploaded Project AY Z80 replay into NEOLINE native AY-3-8912 registers",
+      "userProvided": true
+    },
+    "orig_beverly_hills_cop_ay": {
+      "id": "orig_beverly_hills_cop_ay",
+      "name": "Beverly Hills Cop",
+      "file": "Beverly_Hills_Cop.ay",
+      "url": "./assets/teoria/ay-originals/orig_beverly_hills_cop_ay.ay14",
+      "frames": 15000,
+      "seconds": 300.0,
+      "originalFormat": "AY",
+      "decoder": "Uploaded Project AY Z80 replay into NEOLINE native AY-3-8912 registers",
+      "userProvided": true
+    },
+    "orig_cj_in_usa_ay": {
+      "id": "orig_cj_in_usa_ay",
+      "name": "CJ in USA",
+      "file": "Cj_In_Usa.ay",
+      "url": "./assets/teoria/ay-originals/orig_cj_in_usa_ay.ay14",
+      "frames": 4608,
+      "seconds": 92.16,
+      "originalFormat": "AY",
+      "decoder": "Uploaded Project AY Z80 replay into NEOLINE native AY-3-8912 registers",
+      "userProvided": true
+    },
+    "orig_golden_axe_ay": {
+      "id": "orig_golden_axe_ay",
+      "name": "Golden Axe",
+      "file": "Golden_Axe.ay",
+      "url": "./assets/teoria/ay-originals/orig_golden_axe_ay.ay14",
+      "frames": 7500,
+      "seconds": 150.0,
+      "originalFormat": "AY",
+      "decoder": "Uploaded Project AY Z80 replay into NEOLINE native AY-3-8912 registers",
+      "userProvided": true
+    },
+    "orig_rambo_3_ay": {
+      "id": "orig_rambo_3_ay",
+      "name": "Rambo 3",
+      "file": "Rambo_3.ay",
+      "url": "./assets/teoria/ay-originals/orig_rambo_3_ay.ay14",
+      "frames": 10368,
+      "seconds": 207.36,
+      "originalFormat": "AY",
+      "decoder": "Uploaded Project AY Z80 replay into NEOLINE native AY-3-8912 registers",
+      "userProvided": true
     }
   },
   "failures": {
