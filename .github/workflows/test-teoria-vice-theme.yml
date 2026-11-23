@@ -22,6 +22,8 @@ on:
       - 'teoria-vice-radar-wasted.css'
       - 'teoria-vice-radar-wasted.js'
       - 'teoria-vice-exam-clock.css'
+      - 'teoria-rtl-layout-fix.css'
+      - 'scripts/test_teoria_rtl_layout.cjs'
       - 'teoria-vice-exam-clock.js'
       - 'scripts/test_teoria_vice_exam_clock.cjs'
       - 'scripts/test_teoria_vice_radar_wasted.cjs'
@@ -57,6 +59,8 @@ jobs:
           node --check teoria-gta6-style.js
           node --check teoria-hero-promo.js
           node scripts/test_teoria_vice_theme.cjs
+          node --check scripts/test_teoria_rtl_layout.cjs
+          node scripts/test_teoria_rtl_layout.cjs
           node --check teoria-vice-exam-clock.js
           node --check scripts/test_teoria_vice_exam_clock.cjs
           node scripts/test_teoria_vice_exam_clock.cjs
