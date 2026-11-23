@@ -21,12 +21,14 @@ async function capture(page,lang,name){
    for(const lang of langs){
     const ctx=await browser.newContext({viewport:{width,height:852},isMobile:true,hasTouch:true,deviceScaleFactor:1});
     const page=await ctx.newPage(),errors=[];
+    page.setDefaultTimeout(10000);
+    console.log("RTL audit starting "+lang+" "+width+"px");
     page.on("pageerror",e=>errors.push(e.message));
     await page.goto("http://127.0.0.1:8765/teoria.html",{waitUntil:"domcontentloaded",timeout:35000});
     await page.waitForFunction(()=>document.querySelectorAll(".theory-promo-dot").length===5,{timeout:20000});
-    await page.locator('.neoline-site-header__flag[data-lang="'+lang+'"]').click();
+    await page.evaluate(lang=>document.querySelector('.neoline-site-header__flag[data-lang="'+lang+'"]')?.click(),lang);
     await page.waitForFunction(lang=>document.documentElement.lang===lang&&document.documentElement.dir==="rtl",lang);
-    await page.locator("#gtaModeToggle").click();
+    await page.evaluate(()=>document.querySelector("#gtaModeToggle")?.click());
     await page.waitForFunction(()=>document.documentElement.dataset.viceTheme==="on");
     await page.waitForFunction(()=>document.querySelector(".vice-cinema-frame.is-active .vice-cinema-story"),{timeout:20000});
     const source=await page.evaluate(()=>({
@@ -35,9 +37,11 @@ async function capture(page,lang,name){
       width:document.documentElement.scrollWidth
     }));
     if(!source.loaded||source.rtl!=="rtl"||source.lang!==lang)throw Error("RTL stylesheet/lang not loaded "+width+" "+lang+" "+JSON.stringify(source));
+    console.log("RTL theme + locale ready "+lang+" "+width+"px");
     for(let index=0;index<5;index++){
+     console.log("RTL slide audit "+lang+" "+width+"px #"+index);
      await page.evaluate(index=>document.querySelector('.theory-promo-dot[data-slide="'+index+'"]')?.click(),index);
-     await page.waitForFunction(index=>document.querySelector('.vice-cinema-frame.is-active')?.dataset.slide===String(index),index);
+     await page.waitForFunction(index=>document.querySelector('.vice-cinema-frame.is-active')?.dataset.slide===String(index),index,{timeout:8000});
      const geometry=await page.evaluate(()=>{
       const rect=e=>{let r=e?.getBoundingClientRect();return r?{left:r.left,right:r.right,top:r.top,bottom:r.bottom,width:r.width,height:r.height}:null};
       const hero=document.querySelector(".game-hero.theory-dashboard");
