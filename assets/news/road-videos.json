@@ -1,7 +1,7 @@
 {
   "version": 1,
   "retentionDays": 30,
-  "updated": "2026-11-22T19:55:38Z",
+  "updated": "2026-11-23T01:04:58Z",
   "status": "ok",
   "sourceCount": 10,
   "searchUpdated": "2026-11-22T19:55:38Z",
@@ -36,15 +36,16 @@
     {
       "id": "V4EVtjnCCKE",
       "title": "במבצע אכיפה נרחב: המשטרה מבשרת לנהגים שקיבלו קנס - ב-SMS",
-      "date": "2026-11-20T06:53:38Z",
       "source": "news13",
       "publisher": "חדשות 13",
+      "channelId": "UCvQmPpU20hw1Trss_CVwaew",
+      "localVerified": false,
       "category": "police",
-      "url": "https://www.youtube.com/watch?v=V4EVtjnCCKE",
       "tags": [
         "police"
       ],
-      "channelId": "UCvQmPpU20hw1Trss_CVwaew"
+      "date": "2026-11-20T06:53:38Z",
+      "url": "https://www.youtube.com/watch?v=V4EVtjnCCKE"
     },
     {
       "id": "Qqa0339oIRM",
