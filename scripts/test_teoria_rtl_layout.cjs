@@ -36,7 +36,7 @@ async function capture(page,lang,name){
     }));
     if(!source.loaded||source.rtl!=="rtl"||source.lang!==lang)throw Error("RTL stylesheet/lang not loaded "+width+" "+lang+" "+JSON.stringify(source));
     for(let index=0;index<5;index++){
-     await page.locator('.theory-promo-dot[data-slide="'+index+'"]').click();
+     await page.evaluate(index=>document.querySelector('.theory-promo-dot[data-slide="'+index+'"]')?.click(),index);
      await page.waitForFunction(index=>document.querySelector('.vice-cinema-frame.is-active')?.dataset.slide===String(index),index);
      const geometry=await page.evaluate(()=>{
       const rect=e=>{let r=e?.getBoundingClientRect();return r?{left:r.left,right:r.right,top:r.top,bottom:r.bottom,width:r.width,height:r.height}:null};
