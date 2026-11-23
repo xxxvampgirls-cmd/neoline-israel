@@ -1668,7 +1668,7 @@ const nativeById=new Map(),nativeByFile=new Map();
 let nativeLoad=null;
 function primeNativeAY(){
  if(nativeLoad)return nativeLoad;
- nativeLoad=fetch("./assets/teoria/ay-originals/manifest.json?v=20261122-native-v1",
+ nativeLoad=fetch("./assets/teoria/ay-originals/manifest.json?v=20261123-five-originals-v1",
   {cache:"no-store"})
  .then(r=>{if(!r.ok)throw Error("Native AY not published (HTTP "+r.status+")");return r.json()})
  .then(m=>{
