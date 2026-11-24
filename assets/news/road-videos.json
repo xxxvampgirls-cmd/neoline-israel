@@ -1,10 +1,10 @@
 {
   "version": 1,
   "retentionDays": 30,
-  "updated": "2026-11-24T06:18:59Z",
+  "updated": "2026-11-24T18:10:15Z",
   "status": "ok",
   "sourceCount": 10,
-  "searchUpdated": "2026-11-23T22:11:42Z",
+  "searchUpdated": "2026-11-24T18:10:15Z",
   "sources": [
     {
       "id": "news13",
@@ -63,15 +63,16 @@
     {
       "id": "rJLrnE8KqAc",
       "title": "מפקד משטרת התנועה הארצית פגע עם רכב ברוכב אופניים, מצבו בינוני",
-      "date": "2026-11-23T07:15:31Z",
       "source": "ynet",
       "publisher": "ynet",
+      "channelId": "UCpSSzrovhI4fA2PQNItecUA",
+      "localVerified": false,
       "category": "police",
-      "url": "https://www.youtube.com/watch?v=rJLrnE8KqAc",
       "tags": [
         "police"
       ],
-      "channelId": "UCpSSzrovhI4fA2PQNItecUA"
+      "date": "2026-11-23T07:15:31Z",
+      "url": "https://www.youtube.com/watch?v=rJLrnE8KqAc"
     },
     {
       "id": "V4EVtjnCCKE",
@@ -137,19 +138,6 @@
       "publisher": "משטרת ישראל",
       "category": "police",
       "url": "https://www.youtube.com/watch?v=feYlQtGtGGc",
-      "tags": [
-        "police"
-      ],
-      "channelId": "UCrwyHUb4iIrpknhP6MTvnww"
-    },
-    {
-      "id": "KYeButZCIEA",
-      "title": "משטובות וליקויים מסוכנים | אכיפה בכבישי בנימין",
-      "date": "2026-10-25T08:26:56Z",
-      "source": "police",
-      "publisher": "משטרת ישראל",
-      "category": "police",
-      "url": "https://www.youtube.com/watch?v=KYeButZCIEA",
       "tags": [
         "police"
       ],
