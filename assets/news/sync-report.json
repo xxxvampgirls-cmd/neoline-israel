@@ -1,5 +1,5 @@
 {
-  "attempted": "2026-11-23T21:14:26.344266Z",
+  "attempted": "2026-11-24T00:25:04.371579Z",
   "feeds": {
     "Walla · Авто": 30,
     "Walla · Безопасность": 30,
@@ -35,7 +35,7 @@
   },
   "facebook": {},
   "facebookState": "not_configured",
-  "new": 66,
+  "new": 62,
   "retained": 300,
   "discardedGoogleLinks": 0,
   "errors": {
@@ -52,14 +52,14 @@
   "sourceCount": 19,
   "sources": {
     "Ихуд Ацала · Telegram": 65,
-    "Маген Давид Адом · ДТП · Telegram": 51,
+    "Arutz Sheva · Israel National News": 21,
+    "Маген Давид Адом · ДТП · Telegram": 50,
     "Walla": 19,
     "News08": 26,
     "Maariv": 51,
     "NEWSru.co.il · Telegram": 24,
     "Ynet": 6,
     "Autonews Israel": 10,
-    "Arutz Sheva · Israel National News": 20,
     "The Jerusalem Post": 5,
     "Srugim": 5,
     "TheCar · Автоновости": 2,
