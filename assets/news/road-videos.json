@@ -1,7 +1,7 @@
 {
   "version": 1,
   "retentionDays": 30,
-  "updated": "2026-11-25T13:23:55Z",
+  "updated": "2026-11-25T22:41:05Z",
   "status": "ok",
   "sourceCount": 10,
   "searchUpdated": "2026-11-25T13:23:55Z",
@@ -33,6 +33,19 @@
     }
   ],
   "items": [
+    {
+      "id": "jBazClkJ-Yg",
+      "title": "מפגינים חרדים חסמו את התנועה בצומת גבעת משה בירושלים",
+      "date": "2026-11-25T20:05:18Z",
+      "source": "ynet",
+      "publisher": "ynet",
+      "category": "reports",
+      "url": "https://www.youtube.com/watch?v=jBazClkJ-Yg",
+      "tags": [
+        "reports"
+      ],
+      "channelId": "UCpSSzrovhI4fA2PQNItecUA"
+    },
     {
       "id": "fQ6yMhHrUVg",
       "title": "צפצפת? שילמת: הערים שמחלקות קנסות על צפירות מיותרות בכביש",
