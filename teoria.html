@@ -99,7 +99,34 @@ html[data-vice-boot-pending="1"] #vice-boot-first-paint{
 
 <link rel="stylesheet" href="./teoria-optimized-04.css?v=cedc6a2254e7"><link rel="stylesheet" href="./teoria-vice-window-drive.css?v=20261122-vice-city-parallax-v1">
 <link rel="stylesheet" href="./teoria-vice-progress-dashboard.css?v=20261122-vice-progress-redesign-v1"><link rel="stylesheet" href="./teoria-vice-exam-clock.css?v=20261122-exam-clock-v1">
-<link rel="stylesheet" href="./teoria-rtl-layout-fix.css?v=20261123-rtl-he-ar-lobby-v1"><link rel="preload" as="image" href="./assets/teoria/vice-boot-sunset-city.svg?v=20261122-approved-neon-art-v1"></head><body><div id="vice-boot-first-paint" aria-hidden="true"><div class="vice-boot-preborder"></div><div class="vice-boot-preline">LOAD <span class="vice-boot-precursor"></span></div></div>
+<link rel="stylesheet" href="./teoria-rtl-layout-fix.css?v=20261123-rtl-he-ar-lobby-v1"><link rel="preload" as="image" href="./assets/teoria/vice-boot-sunset-city.svg?v=20261122-approved-neon-art-v1"><style id="vice-bottom-window-css">
+/* The same moving city as the upper header, tuned for the dark site dock. */
+@media(max-width:720px){
+ html[data-vice-theme="on"] #theoryBottomNav{
+  isolation:isolate;
+  background:linear-gradient(110deg,#42224f 0%,#65365e 58%,#402143 100%)!important;
+ }
+ html[data-vice-theme="on"] #theoryBottomNav > .vice-window-panorama{
+  display:block;position:absolute;inset:0;z-index:0;overflow:hidden;
+  pointer-events:none;user-select:none;contain:paint;
+ }
+ html[data-vice-theme="on"] #theoryBottomNav > a{
+  position:relative;z-index:1;
+ }
+ #theoryBottomNav .vice-window-panorama__layer--far{opacity:.80}
+ #theoryBottomNav .vice-window-panorama__layer--mid{opacity:.74}
+ #theoryBottomNav .vice-window-panorama__layer--palms{opacity:.85;filter:brightness(.65)}
+ #theoryBottomNav .vice-window-panorama__layer--birds{opacity:.70;filter:brightness(1.45)}
+ #theoryBottomNav .vice-window-panorama__glaze{
+  background:linear-gradient(180deg,#26112c10 0%,#29133348 70%,#26112c8c 100%);
+ }
+ #theoryBottomNav .vice-window-panorama__glaze::before{display:none}
+ #theoryBottomNav .vice-window-panorama__road{height:2px;opacity:.22}
+ #theoryBottomNav.nav-scroll-hidden .vice-window-panorama__layer,
+ #theoryBottomNav.nav-scroll-hidden .vice-window-panorama__road{animation-play-state:paused}
+}
+</style>
+</head><body><div id="vice-boot-first-paint" aria-hidden="true"><div class="vice-boot-preborder"></div><div class="vice-boot-preline">LOAD <span class="vice-boot-precursor"></span></div></div>
 <header class="topbar neoline-site-header"><div class="vice-window-panorama" aria-hidden="true"><span class="vice-window-panorama__layer vice-window-panorama__layer--far"></span><span class="vice-window-panorama__layer vice-window-panorama__layer--mid"></span><span class="vice-window-panorama__layer vice-window-panorama__layer--palms"></span><span class="vice-window-panorama__layer vice-window-panorama__layer--birds"></span><span class="vice-window-panorama__glaze"></span><span class="vice-window-panorama__road"></span></div><div class="neoline-site-header__inner">
 <a class="neoline-site-header__logo" href="./" aria-label="NEOLINE — главная страница"><img src="./assets/neoline-clean.svg?v=20261116-compact" width="501" height="108" alt="NEOLINE"></a>
 <div class="neoline-site-header__actions"><div class="neoline-site-header__flags" role="group" aria-label="Язык / Language / שפה / اللغة"><button class="neoline-site-header__flag active" type="button" data-lang="ru" title="Русский" aria-label="Русский язык" aria-pressed="true"><span class="flag-graphic" aria-hidden="true"><svg viewBox="0 0 36 24" xmlns="http://www.w3.org/2000/svg" focusable="false"><rect width="36" height="24" fill="#fff"/><path d="M0 8h36v8H0z" fill="#0039a6"/><path d="M0 16h36v8H0z" fill="#d52b1e"/></svg></span></button><button class="neoline-site-header__flag" type="button" data-lang="he" title="עברית" aria-label="עברית - Hebrew" aria-pressed="false"><span class="flag-graphic" aria-hidden="true"><img src="./assets/flag-israel.svg?v=20261118-fixed-star-v1" width="36" height="24" loading="eager" alt="" aria-hidden="true"></span></button><button class="neoline-site-header__flag" type="button" data-lang="en" title="English" aria-label="English language" aria-pressed="false"><span class="flag-graphic" aria-hidden="true"><svg viewBox="0 0 36 24" xmlns="http://www.w3.org/2000/svg" focusable="false"><rect width="36" height="24" fill="#012169"/><path d="M0 0l36 24M36 0L0 24" stroke="#fff" stroke-width="6"/><path d="M0 0l36 24M36 0L0 24" stroke="#c8102e" stroke-width="2.5"/><path d="M18 0v24M0 12h36" stroke="#fff" stroke-width="9"/><path d="M18 0v24M0 12h36" stroke="#c8102e" stroke-width="4.6"/></svg></span></button><button class="neoline-site-header__flag neoline-site-header__flag--ar" type="button" data-lang="ar" title="العربية" aria-label="اللغة العربية" aria-pressed="false" lang="ar" dir="rtl">عربي</button></div></div>
@@ -507,6 +534,7 @@ html[data-vice-boot-pending="1"] #vice-boot-first-paint{
  </button>
 </nav>
 <nav class="theory-bottom" id="theoryBottomNav" aria-label="Основная навигация NEOLINE">
+  <div class="vice-window-panorama" aria-hidden="true"><span class="vice-window-panorama__layer vice-window-panorama__layer--far"></span><span class="vice-window-panorama__layer vice-window-panorama__layer--mid"></span><span class="vice-window-panorama__layer vice-window-panorama__layer--palms"></span><span class="vice-window-panorama__layer vice-window-panorama__layer--birds"></span><span class="vice-window-panorama__glaze"></span><span class="vice-window-panorama__road"></span></div>
   <a href="./" data-theory-nav="home" id="theoryNavHome" aria-label="Главная"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m3 10 9-7 9 7v10a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V10Z"/><path d="M9 21v-8h6v8"/></svg><span>Главная</span></a>
   <a href="./#catalog" data-theory-nav="catalog" id="theoryNavCatalog" aria-label="Каталог"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></svg><span>Каталог</span></a>
   <a href="./news.html" data-theory-nav="news" id="theoryNavNews" aria-label="Новости"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M7 8h4v4H7zM14 8h4M14 11h4M7 16h11"/></svg><span>Новости</span></a>
