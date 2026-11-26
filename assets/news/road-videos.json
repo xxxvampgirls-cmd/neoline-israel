@@ -1,7 +1,7 @@
 {
   "version": 1,
   "retentionDays": 30,
-  "updated": "2026-11-26T05:21:55Z",
+  "updated": "2026-11-26T15:40:11Z",
   "status": "ok",
   "sourceCount": 10,
   "searchUpdated": "2026-11-26T05:21:55Z",
@@ -33,6 +33,19 @@
     }
   ],
   "items": [
+    {
+      "id": "FveQm-Nl51s",
+      "title": "מכלית דלק התהפכה, מכוניות עלו באש: 31 הרוגים באסון בכביש המהיר במצרים",
+      "date": "2026-11-26T10:16:10Z",
+      "source": "ynet",
+      "publisher": "ynet",
+      "category": "accidents",
+      "url": "https://www.youtube.com/watch?v=FveQm-Nl51s",
+      "tags": [
+        "accidents"
+      ],
+      "channelId": "UCpSSzrovhI4fA2PQNItecUA"
+    },
     {
       "id": "jBazClkJ-Yg",
       "title": "מפגינים חרדים חסמו את התנועה בצומת גבעת משה בירושלים",
