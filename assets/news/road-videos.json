@@ -1,10 +1,10 @@
 {
   "version": 1,
   "retentionDays": 30,
-  "updated": "2026-11-26T15:40:11Z",
+  "updated": "2026-11-27T00:45:16Z",
   "status": "ok",
   "sourceCount": 10,
-  "searchUpdated": "2026-11-26T05:21:55Z",
+  "searchUpdated": "2026-11-27T00:45:16Z",
   "sources": [
     {
       "id": "news13",
@@ -34,6 +34,32 @@
   ],
   "items": [
     {
+      "id": "hOUzkcf9w5c",
+      "title": "תאונה קשה במעלה אדומים: ליעם ויינשטיין בן השנתיים נהרג – חשד לפגע וברח",
+      "date": "2026-11-26T19:07:52Z",
+      "source": "kan11",
+      "publisher": "כאן חדשות",
+      "category": "accidents",
+      "url": "https://www.youtube.com/watch?v=hOUzkcf9w5c",
+      "tags": [
+        "accidents"
+      ],
+      "channelId": "UC_HwfTAcjBESKZRJq6BTCpg"
+    },
+    {
+      "id": "XRvc9a2jUJg",
+      "title": "פגע וברח במעלה אדומים: הובא למנוחות ליעם וויינשטיין בן השנתיים שנהרג בתאונת דרכים",
+      "date": "2026-11-26T18:27:56Z",
+      "source": "i24he",
+      "publisher": "i24NEWS עברית",
+      "category": "accidents",
+      "url": "https://www.youtube.com/watch?v=XRvc9a2jUJg",
+      "tags": [
+        "accidents"
+      ],
+      "channelId": "UCisowXt5wZkp2sR3rFh9lnQ"
+    },
+    {
       "id": "FveQm-Nl51s",
       "title": "מכלית דלק התהפכה, מכוניות עלו באש: 31 הרוגים באסון בכביש המהיר במצרים",
       "date": "2026-11-26T10:16:10Z",
@@ -49,15 +75,16 @@
     {
       "id": "jBazClkJ-Yg",
       "title": "מפגינים חרדים חסמו את התנועה בצומת גבעת משה בירושלים",
-      "date": "2026-11-25T20:05:18Z",
       "source": "ynet",
       "publisher": "ynet",
+      "channelId": "UCpSSzrovhI4fA2PQNItecUA",
+      "localVerified": false,
       "category": "reports",
-      "url": "https://www.youtube.com/watch?v=jBazClkJ-Yg",
       "tags": [
         "reports"
       ],
-      "channelId": "UCpSSzrovhI4fA2PQNItecUA"
+      "date": "2026-11-25T20:05:18Z",
+      "url": "https://www.youtube.com/watch?v=jBazClkJ-Yg"
     },
     {
       "id": "fQ6yMhHrUVg",
