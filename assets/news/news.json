@@ -2,8 +2,318 @@
   "version": 1,
   "retentionDays": 30,
   "lawsRetentionMonths": 6,
-  "updated": "2026-11-27T11:22:04.291721Z",
+  "updated": "2026-11-27T18:58:05.280444Z",
   "items": [
+    {
+      "id": "b785c04db4f2576fc40a",
+      "titleOriginal": "גבר בן 34 נפצע באורח בינוני בהתהפכות רכב בכביש 25 סמוך לדימונה",
+      "sourceLanguage": "he",
+      "date": "2026-11-27T16:51:57Z",
+      "url": "https://www.maariv.co.il/breaking-news/article-1392908",
+      "publisher": "Maariv",
+      "category": "accidents",
+      "official": false,
+      "translations": {
+        "he": {
+          "title": "גבר בן 34 נפצע באורח בינוני בהתהפכות רכב בכביש 25 סמוך לדימונה",
+          "summary": "דיווח על תאונת דרכים בישראל. פרטים ועדכונים בכתבת המקור."
+        },
+        "ru": {
+          "title": "34-летний мужчина получил травмы средней степени тяжести в результате переворота автомобиля на шоссе 25 недалеко от Димоны.",
+          "summary": "Дорожное происшествие в Израиле. Обстоятельства и актуальные сведения — в материале источника."
+        },
+        "en": {
+          "title": "A 34-year-old man was moderately injured in a car rollover on Highway 25 near Dimona",
+          "summary": "A reported road incident in Israel. Details and updates are in the original report."
+        },
+        "ar": {
+          "title": "إصابة شاب (34 عاما) بجروح متوسطة في حادث انقلاب سيارة على طريق رقم 25 قرب ديمونة",
+          "summary": "تقرير عن حادث مروري في إسرائيل. التفاصيل والتحديثات في المصدر."
+        }
+      },
+      "title": "34-летний мужчина получил травмы средней степени тяжести в результате переворота автомобиля на шоссе 25 недалеко от Димоны.",
+      "summary": "Дорожное происшествие в Израиле. Обстоятельства и актуальные сведения — в материале источника.",
+      "translated": true
+    },
+    {
+      "id": "334ae6f90ca5f04d23b8",
+      "titleOriginal": "ДТП с участием мотоциклистов в районе Цур-Адасы и возле Бейт-Гуврина",
+      "sourceLanguage": "en",
+      "date": "2026-11-27T14:49:30Z",
+      "url": "https://t.me/NEWSruIsrael/127036",
+      "publisher": "NEWSru.co.il · Telegram",
+      "category": "accidents",
+      "official": false,
+      "translations": {
+        "he": {
+          "title": "תאונות שבהן מעורבים רוכבי אופנוע באזור צור עדסי וליד בית גוברין",
+          "summary": "דיווח על תאונת דרכים בישראל. פרטים ועדכונים בכתבת המקור."
+        },
+        "ru": {
+          "title": "ДТП с участием мотоциклистов в районе Цур-Адасы и возле Бейт-Гуврина",
+          "summary": "Дорожное происшествие в Израиле. Обстоятельства и актуальные сведения — в материале источника."
+        },
+        "en": {
+          "title": "ДТП с участием мотоциклистов в районе Цур-Адасы и возле Бейт-Гуврина",
+          "summary": "A reported road incident in Israel. Details and updates are in the original report."
+        },
+        "ar": {
+          "title": "حوادث دراجات نارية في منطقة تسور عداسي وقرب بيت جبرين",
+          "summary": "تقرير عن حادث مروري في إسرائيل. التفاصيل والتحديثات في المصدر."
+        }
+      },
+      "title": "ДТП с участием мотоциклистов в районе Цур-Адасы и возле Бейт-Гуврина",
+      "summary": "Дорожное происшествие в Израиле. Обстоятельства и актуальные сведения — в материале источника.",
+      "translated": true
+    },
+    {
+      "id": "7d885829d8e176fec286",
+      "titleOriginal": "שלושה פצועים בתאונת דרכים באשקלון, בהם אישה במצב בינוני",
+      "sourceLanguage": "he",
+      "date": "2026-11-27T14:10:03Z",
+      "url": "https://www.news08.net/%d7%a9%d7%9c%d7%95%d7%a9%d7%94-%d7%a4%d7%a6%d7%95%d7%a2%d7%99%d7%9d-%d7%91%d7%aa%d7%90%d7%95%d7%a0%d7%aa-%d7%93%d7%a8%d7%9b%d7%99%d7%9d-%d7%91%d7%90%d7%a9%d7%a7%d7%9c%d7%95%d7%9f-%d7%91%d7%94%d7%9d/",
+      "publisher": "News08",
+      "category": "accidents",
+      "official": false,
+      "translations": {
+        "he": {
+          "title": "שלושה פצועים בתאונת דרכים באשקלון, בהם אישה במצב בינוני",
+          "summary": "דיווח על תאונת דרכים בישראל. פרטים ועדכונים בכתבת המקור."
+        },
+        "ru": {
+          "title": "В автокатастрофе в Ашкелоне пострадали трое, в том числе женщина в состоянии средней степени тяжести",
+          "summary": "Дорожное происшествие в Израиле. Обстоятельства и актуальные сведения — в материале источника."
+        },
+        "en": {
+          "title": "Three injured in a car accident in Ashkelon, including a woman in moderate condition",
+          "summary": "A reported road incident in Israel. Details and updates are in the original report."
+        },
+        "ar": {
+          "title": "ثلاثة جرحى في حادث سير في عسقلان، بينهم امرأة في حالة متوسطة",
+          "summary": "تقرير عن حادث مروري في إسرائيل. التفاصيل والتحديثات في المصدر."
+        }
+      },
+      "title": "В автокатастрофе в Ашкелоне пострадали трое, в том числе женщина в состоянии средней степени тяжести",
+      "summary": "Дорожное происшествие в Израиле. Обстоятельства и актуальные сведения — в материале источника.",
+      "translated": true
+    },
+    {
+      "id": "c4eea139ba07a8e6ef8e",
+      "titleOriginal": "צעירה בת 21 נפצעה באורח בינוני בתאונה בין רכב לטרקטורון סמוך לעין ורד",
+      "sourceLanguage": "he",
+      "date": "2026-11-27T15:44:43Z",
+      "url": "https://www.maariv.co.il/breaking-news/article-1392897",
+      "publisher": "Maariv",
+      "category": "accidents",
+      "official": false,
+      "translations": {
+        "he": {
+          "title": "צעירה בת 21 נפצעה באורח בינוני בתאונה בין רכב לטרקטורון סמוך לעין ורד",
+          "summary": "דיווח על תאונת דרכים בישראל. פרטים ועדכונים בכתבת המקור."
+        },
+        "ru": {
+          "title": "21-летняя женщина получила травмы средней степени тяжести в результате ДТП между автомобилем и квадроциклом возле Эйн-Вареда.",
+          "summary": "Дорожное происшествие в Израиле. Обстоятельства и актуальные сведения — в материале источника."
+        },
+        "en": {
+          "title": "A 21-year-old woman was moderately injured in an accident between a car and an ATV near Ein Vared",
+          "summary": "A reported road incident in Israel. Details and updates are in the original report."
+        },
+        "ar": {
+          "title": "إصابة شابة (21 عاما) بجراح متوسطة في حادث سير بين سيارة ومركبة قرب عين فارد",
+          "summary": "تقرير عن حادث مروري في إسرائيل. التفاصيل والتحديثات في المصدر."
+        }
+      },
+      "title": "21-летняя женщина получила травмы средней степени тяжести в результате ДТП между автомобилем и квадроциклом возле Эйн-Вареда.",
+      "summary": "Дорожное происшествие в Израиле. Обстоятельства и актуальные сведения — в материале источника.",
+      "translated": true
+    },
+    {
+      "id": "61b2f10142128be86f1b",
+      "titleOriginal": "כביש 386: פצועים קשה ובינוני בתאונת אופנוע",
+      "sourceLanguage": "he",
+      "date": "2026-11-27T13:34:20Z",
+      "url": "https://t.me/uh1221/27699",
+      "publisher": "Ихуд Ацала · Telegram",
+      "category": "accidents",
+      "official": false,
+      "translations": {
+        "he": {
+          "title": "כביש 386: פצועים קשה ובינוני בתאונת אופנוע",
+          "summary": "דיווח על תאונת דרכים בישראל. פרטים ועדכונים בכתבת המקור."
+        },
+        "ru": {
+          "title": "Шоссе 386: пострадавшие серьезной и средней степени тяжести в результате аварии на мотоцикле",
+          "summary": "Дорожное происшествие в Израиле. Обстоятельства и актуальные сведения — в материале источника."
+        },
+        "en": {
+          "title": "Highway 386: seriously and moderately injured in a motorcycle accident",
+          "summary": "A reported road incident in Israel. Details and updates are in the original report."
+        },
+        "ar": {
+          "title": "الطريق السريع 386: إصابة خطيرة ومتوسطة في حادث دراجة نارية",
+          "summary": "تقرير عن حادث مروري في إسرائيل. التفاصيل والتحديثات في المصدر."
+        }
+      },
+      "title": "Шоссе 386: пострадавшие серьезной и средней степени тяжести в результате аварии на мотоцикле",
+      "summary": "Дорожное происшествие в Израиле. Обстоятельства и актуальные сведения — в материале источника.",
+      "translated": true
+    },
+    {
+      "id": "a2fdbb9edbf5745483da",
+      "titleOriginal": "רוכב אופנוע נפצע קשה בכביש 386 בין בר גיורא לצור הדסה",
+      "sourceLanguage": "he",
+      "date": "2026-11-27T14:08:04Z",
+      "url": "https://www.news08.net/%d7%a8%d7%95%d7%9b%d7%91-%d7%90%d7%95%d7%a4%d7%a0%d7%95%d7%a2-%d7%a0%d7%a4%d7%a6%d7%a2-%d7%a7%d7%a9%d7%94-%d7%91%d7%9b%d7%91%d7%99%d7%a9-386-%d7%91%d7%99%d7%9f-%d7%91%d7%a8-%d7%92%d7%99%d7%95%d7%a8/",
+      "publisher": "News08",
+      "category": "accidents",
+      "official": false,
+      "translations": {
+        "he": {
+          "title": "רוכב אופנוע נפצע קשה בכביש 386 בין בר גיורא לצור הדסה",
+          "summary": "דיווח על תאונת דרכים בישראל. פרטים ועדכונים בכתבת המקור."
+        },
+        "ru": {
+          "title": "Мотоциклист серьезно пострадал на дороге 386 между Бар-Гиорой и Цур-Хадассой.",
+          "summary": "Дорожное происшествие в Израиле. Обстоятельства и актуальные сведения — в материале источника."
+        },
+        "en": {
+          "title": "A motorcyclist was seriously injured on road 386 between Bar Giora and Zur Hadassah",
+          "summary": "A reported road incident in Israel. Details and updates are in the original report."
+        },
+        "ar": {
+          "title": "أصيب سائق دراجة نارية بجروح خطيرة على شارع 386 بين بار جيورا وتسور هداسا",
+          "summary": "تقرير عن حادث مروري في إسرائيل. التفاصيل والتحديثات في المصدر."
+        }
+      },
+      "title": "Мотоциклист серьезно пострадал на дороге 386 между Бар-Гиорой и Цур-Хадассой.",
+      "summary": "Дорожное происшествие в Израиле. Обстоятельства и актуальные сведения — в материале источника.",
+      "translated": true
+    },
+    {
+      "id": "e399db74f17234aabe39",
+      "titleOriginal": "נער בן 16 נפצע באורח בינוני לאחר שנפגע מרכב ברהט",
+      "sourceLanguage": "he",
+      "date": "2026-11-27T15:27:40Z",
+      "url": "https://www.maariv.co.il/breaking-news/article-1392894",
+      "publisher": "Maariv",
+      "category": "accidents",
+      "official": false,
+      "translations": {
+        "he": {
+          "title": "נער בן 16 נפצע באורח בינוני לאחר שנפגע מרכב ברהט",
+          "summary": "דיווח על תאונת דרכים בישראל. פרטים ועדכונים בכתבת המקור."
+        },
+        "ru": {
+          "title": "16-летний мальчик получил травмы средней степени тяжести после того, как его сбила машина в Берхате.",
+          "summary": "Дорожное происшествие в Израиле. Обстоятельства и актуальные сведения — в материале источника."
+        },
+        "en": {
+          "title": "A 16-year-old boy was moderately injured after being hit by a vehicle in Berhat",
+          "summary": "A reported road incident in Israel. Details and updates are in the original report."
+        },
+        "ar": {
+          "title": "أصيب فتى (16 عاما) بجروح متوسطة بعد أن صدمته سيارة في منطقة بيرهات",
+          "summary": "تقرير عن حادث مروري في إسرائيل. التفاصيل والتحديثات في المصدر."
+        }
+      },
+      "title": "16-летний мальчик получил травмы средней степени тяжести после того, как его сбила машина в Берхате.",
+      "summary": "Дорожное происшествие в Израиле. Обстоятельства и актуальные сведения — в материале источника.",
+      "translated": true
+    },
+    {
+      "id": "9d01d97dae0bd4515713",
+      "titleOriginal": "פרדס חנה: רוכב קורקינט חשמלי נפצע בינוני בתאונה עצמית",
+      "sourceLanguage": "he",
+      "date": "2026-11-27T13:15:26Z",
+      "url": "https://t.me/uh1221/27698",
+      "publisher": "Ихуд Ацала · Telegram",
+      "category": "accidents",
+      "official": false,
+      "translations": {
+        "he": {
+          "title": "פרדס חנה: רוכב קורקינט חשמלי נפצע בינוני בתאונה עצמית",
+          "summary": "דיווח על תאונת דרכים בישראל. פרטים ועדכונים בכתבת המקור."
+        },
+        "ru": {
+          "title": "Пардес Хана: водитель электросамоката получил травмы средней степени тяжести в результате несчастного случая, причиненного самому себе",
+          "summary": "Дорожное происшествие в Израиле. Обстоятельства и актуальные сведения — в материале источника."
+        },
+        "en": {
+          "title": "Pardes Hana: An electric scooter rider was moderately injured in a self-inflicted accident",
+          "summary": "A reported road incident in Israel. Details and updates are in the original report."
+        },
+        "ar": {
+          "title": "برديس حنا: أصيب راكب سكوتر كهربائي بجروح متوسطة في حادث ألحق نفسه",
+          "summary": "تقرير عن حادث مروري في إسرائيل. التفاصيل والتحديثات في المصدر."
+        }
+      },
+      "title": "Пардес Хана: водитель электросамоката получил травмы средней степени тяжести в результате несчастного случая, причиненного самому себе",
+      "summary": "Дорожное происшествие в Израиле. Обстоятельства и актуальные сведения — в материале источника.",
+      "translated": true
+    },
+    {
+      "id": "c74ddd4c2f7967093c06",
+      "titleOriginal": "לקראת מכבי תל אביב מול הפועל פתח תקווה: חסימות כבישים והגבלות חניה סביב בלומפילד",
+      "sourceLanguage": "he",
+      "date": "2026-11-27T12:48:18Z",
+      "url": "https://www.news08.net/%d7%9c%d7%a7%d7%a8%d7%90%d7%aa-%d7%9e%d7%9b%d7%91%d7%99-%d7%aa%d7%9c-%d7%90%d7%91%d7%99%d7%91-%d7%9e%d7%95%d7%9c-%d7%94%d7%a4%d7%95%d7%a2%d7%9c-%d7%a4%d7%aa%d7%97-%d7%aa%d7%a7%d7%95%d7%95%d7%94-%d7%97/",
+      "publisher": "News08",
+      "category": "roads",
+      "official": false,
+      "translations": {
+        "he": {
+          "title": "לקראת מכבי תל אביב מול הפועל פתח תקווה: חסימות כבישים והגבלות חניה סביב בלומפילד",
+          "summary": "עדכון על מצב התנועה. לפני הנסיעה בדקו אם ההגבלות עדיין בתוקף."
+        },
+        "ru": {
+          "title": "На пути к «Маккаби Тель-Авив» против «Хапоэль Петах-Тиква»: дорожные заграждения и ограничения на парковку вокруг Блумфилда",
+          "summary": "Информация о дорожной ситуации. Перед поездкой проверьте, действуют ли ограничения сейчас."
+        },
+        "en": {
+          "title": "Towards Maccabi Tel Aviv against Hapoel Petah Tikva: road blocks and parking restrictions around Bloomfield",
+          "summary": "A road-conditions update. Check whether restrictions still apply before travelling."
+        },
+        "ar": {
+          "title": "نحو مكابي تل أبيب مقابل هبوعيل بيتاح تكفا: حواجز طرق وقيود على مواقف السيارات حول بلومفيلد",
+          "summary": "تحديث عن حالة الطرق. تحقق من استمرار القيود قبل السفر."
+        }
+      },
+      "title": "На пути к «Маккаби Тель-Авив» против «Хапоэль Петах-Тиква»: дорожные заграждения и ограничения на парковку вокруг Блумфилда",
+      "summary": "Информация о дорожной ситуации. Перед поездкой проверьте, действуют ли ограничения сейчас.",
+      "translated": true
+    },
+    {
+      "id": "43717f3ede0c9ea29994",
+      "titleOriginal": "רוכב אופנוע כבן 50 נפצע קשה לאחר שהתנגש במעקה בטיחות סמוך לבית גוברין",
+      "sourceLanguage": "he",
+      "date": "2026-11-27T14:25:41Z",
+      "url": "https://www.maariv.co.il/breaking-news/article-1392887",
+      "publisher": "Maariv",
+      "category": "accidents",
+      "official": false,
+      "translations": {
+        "he": {
+          "title": "רוכב אופנוע כבן 50 נפצע קשה לאחר שהתנגש במעקה בטיחות סמוך לבית גוברין",
+          "summary": "דיווח על תאונת דרכים בישראל. פרטים ועדכונים בכתבת המקור."
+        },
+        "ru": {
+          "title": "50-летний мотоциклист получил серьезные травмы, врезавшись в ограждение возле Бейт-Говрина.",
+          "summary": "Дорожное происшествие в Израиле. Обстоятельства и актуальные сведения — в материале источника."
+        },
+        "en": {
+          "title": "A 50-year-old motorcyclist was seriously injured after crashing into a guardrail near Beit Govrin",
+          "summary": "A reported road incident in Israel. Details and updates are in the original report."
+        },
+        "ar": {
+          "title": "أصيب سائق دراجة نارية (50 عاما) بجروح خطيرة بعد اصطدامه بحاجز حماية بالقرب من بيت جبرين",
+          "summary": "تقرير عن حادث مروري في إسرائيل. التفاصيل والتحديثات في المصدر."
+        }
+      },
+      "title": "50-летний мотоциклист получил серьезные травмы, врезавшись в ограждение возле Бейт-Говрина.",
+      "summary": "Дорожное происшествие в Израиле. Обстоятельства и актуальные сведения — в материале источника.",
+      "translated": true
+    },
     {
       "id": "57da8cdb70d479b2947a",
       "titleOriginal": "אשקלון: פצועים בינוני וקל בתאונת דרכים",
@@ -36,33 +346,64 @@
       "translated": true
     },
     {
-      "id": "d7385692561a93499764",
-      "titleOriginal": "חולון: נהגת בת 25 נפצעה לאחר שרכבה התהפך",
+      "id": "d80e5f13e1ef23c88aaf",
+      "titleOriginal": "אשדוד: כלב ננעל ברכב וחולץ בשלום על ידי מתנדבי ידידים",
       "sourceLanguage": "he",
-      "date": "2026-11-27T10:29:17Z",
-      "url": "https://www.news08.net/%d7%97%d7%95%d7%9c%d7%95%d7%9f-%d7%a0%d7%94%d7%92%d7%aa-%d7%91%d7%aa-25-%d7%a0%d7%a4%d7%a6%d7%a2%d7%94-%d7%9c%d7%90%d7%97%d7%a8-%d7%a9%d7%a8%d7%9b%d7%91%d7%94-%d7%94%d7%aa%d7%94%d7%a4%d7%9a/",
+      "date": "2026-11-27T12:37:27Z",
+      "url": "https://www.news08.net/%d7%90%d7%a9%d7%93%d7%95%d7%93-%d7%9b%d7%9c%d7%91-%d7%a0%d7%a0%d7%a2%d7%9c-%d7%91%d7%a8%d7%9b%d7%91-%d7%95%d7%97%d7%95%d7%9c%d7%a5-%d7%91%d7%a9%d7%9c%d7%95%d7%9d-%d7%a2%d7%9c-%d7%99%d7%93%d7%99-%d7%9e/",
       "publisher": "News08",
+      "category": "cars",
+      "official": false,
+      "translations": {
+        "he": {
+          "title": "אשדוד: כלב ננעל ברכב וחולץ בשלום על ידי מתנדבי ידידים",
+          "summary": "כתבה על מכוניות או שוק הרכב בישראל. פרטים באתר המקור."
+        },
+        "ru": {
+          "title": "Ашдод: Собака застряла в машине и была благополучно спасена волонтерами Ядид",
+          "summary": "Материал об автомобиле или автомобильном рынке Израиля. Подробности — на сайте издания."
+        },
+        "en": {
+          "title": "Ashdod: A dog got locked in a car and was rescued safely by Yadid volunteers",
+          "summary": "An update about vehicles or Israel's car market. Details are available at the source."
+        },
+        "ar": {
+          "title": "أشدود: تم احتجاز كلب في سيارة وتم إنقاذه بأمان من قبل متطوعي ياديد",
+          "summary": "تحديث عن السيارات أو سوق المركبات في إسرائيل. التفاصيل في المصدر."
+        }
+      },
+      "title": "Ашдод: Собака застряла в машине и была благополучно спасена волонтерами Ядид",
+      "summary": "Материал об автомобиле или автомобильном рынке Израиля. Подробности — на сайте издания.",
+      "translated": true
+    },
+    {
+      "id": "6c8b17a4396aa825071c",
+      "titleOriginal": "רוכב אופנוע נפצע קשה ואדם נוסף נפצע קל בכביש 386 סמוך לצור הדסה",
+      "sourceLanguage": "he",
+      "date": "2026-11-27T13:43:51Z",
+      "url": "https://www.maariv.co.il/breaking-news/article-1392870",
+      "publisher": "Maariv",
       "category": "accidents",
       "official": false,
       "translations": {
         "he": {
-          "title": "חולון: נהגת בת 25 נפצעה לאחר שרכבה התהפך",
+          "title": "רוכב אופנוע נפצע קשה ואדם נוסף נפצע קל בכביש 386 סמוך לצור הדסה",
           "summary": "דיווח על תאונת דרכים בישראל. פרטים ועדכונים בכתבת המקור."
         },
         "ru": {
-          "title": "Холон: 25-летняя женщина-водитель получила травмы после того, как ее машина перевернулась",
+          "title": "Мотоциклист получил серьезные ранения, а еще один человек получил легкие ранения на трассе 386 возле Цур Хадасса.",
           "summary": "Дорожное происшествие в Израиле. Обстоятельства и актуальные сведения — в материале источника."
         },
         "en": {
-          "title": "Holon: A 25-year-old female driver was injured after her car overturned",
+          "title": "A motorcyclist was seriously injured and another person was slightly injured on Route 386 near Zur Hadassah",
           "summary": "A reported road incident in Israel. Details and updates are in the original report."
         },
         "ar": {
-          "title": "حولون: أصيبت سائقة (25 عاما) بجروح بعد انقلاب سيارتها",
+          "title": "أصيب سائق دراجة نارية بجروح خطيرة وشخص آخر بجروح طفيفة على شارع 386 بالقرب من تسور هداسا",
           "summary": "تقرير عن حادث مروري في إسرائيل. التفاصيل والتحديثات في المصدر."
         }
       },
-      "title": "Холон: 25-летняя женщина-водитель получила травмы после того, как ее машина перевернулась",
+      "title": "Мотоциклист получил серьезные ранения, а еще один человек получил легкие ранения на трассе 386 возле Цур Хадасса.",
       "summary": "Дорожное происшествие в Израиле. Обстоятельства и актуальные сведения — в материале источника.",
       "translated": true
     },
@@ -98,6 +439,68 @@
       "translated": true
     },
     {
+      "id": "fd8bd3741e7bf3d79665",
+      "titleOriginal": "אשדוד: גבר כבן 70 נפצע בתאונת דרכים ברחוב קיבוץ גלויות",
+      "sourceLanguage": "he",
+      "date": "2026-11-27T12:36:29Z",
+      "url": "https://www.news08.net/%d7%90%d7%a9%d7%93%d7%95%d7%93-%d7%92%d7%91%d7%a8-%d7%9b%d7%91%d7%9f-70-%d7%a0%d7%a4%d7%a6%d7%a2-%d7%91%d7%aa%d7%90%d7%95%d7%a0%d7%aa-%d7%93%d7%a8%d7%9b%d7%99%d7%9d-%d7%91%d7%a8%d7%97%d7%95%d7%91/",
+      "publisher": "News08",
+      "category": "accidents",
+      "official": false,
+      "translations": {
+        "he": {
+          "title": "אשדוד: גבר כבן 70 נפצע בתאונת דרכים ברחוב קיבוץ גלויות",
+          "summary": "דיווח על תאונת דרכים בישראל. פרטים ועדכונים בכתבת המקור."
+        },
+        "ru": {
+          "title": "Ашдод: 70-летний мужчина пострадал в автокатастрофе на улице кибуца Галуйот",
+          "summary": "Дорожное происшествие в Израиле. Обстоятельства и актуальные сведения — в материале источника."
+        },
+        "en": {
+          "title": "Ashdod: A 70-year-old man was injured in a car accident on Kibbutz Galuyot Street",
+          "summary": "A reported road incident in Israel. Details and updates are in the original report."
+        },
+        "ar": {
+          "title": "أشدود: أصيب رجل يبلغ من العمر 70 عاما بحادث سير في شارع كيبوتس جالويوت",
+          "summary": "تقرير عن حادث مروري في إسرائيل. التفاصيل والتحديثات في المصدر."
+        }
+      },
+      "title": "Ашдод: 70-летний мужчина пострадал в автокатастрофе на улице кибуца Галуйот",
+      "summary": "Дорожное происшествие в Израиле. Обстоятельства и актуальные сведения — в материале источника.",
+      "translated": true
+    },
+    {
+      "id": "493265adef7a49fc15d9",
+      "titleOriginal": "ילד בן 3 נפצע באורח בינוני מפגיעת קורקינט חשמלי בתל אביב",
+      "sourceLanguage": "he",
+      "date": "2026-11-27T11:52:29Z",
+      "url": "https://www.maariv.co.il/breaking-news/article-1392849",
+      "publisher": "Maariv",
+      "category": "accidents",
+      "official": false,
+      "translations": {
+        "he": {
+          "title": "ילד בן 3 נפצע באורח בינוני מפגיעת קורקינט חשמלי בתל אביב",
+          "summary": "דיווח על תאונת דרכים בישראל. פרטים ועדכונים בכתבת המקור."
+        },
+        "ru": {
+          "title": "В Тель-Авиве 3-летний мальчик получил травмы средней степени тяжести на электросамокате.",
+          "summary": "Дорожное происшествие в Израиле. Обстоятельства и актуальные сведения — в материале источника."
+        },
+        "en": {
+          "title": "A 3-year-old boy was moderately injured by an electric scooter in Tel Aviv",
+          "summary": "A reported road incident in Israel. Details and updates are in the original report."
+        },
+        "ar": {
+          "title": "أصيب طفل يبلغ من العمر 3 سنوات بجراح متوسطة بعد أن صدمه سكوتر كهربائي في تل أبيب",
+          "summary": "تقرير عن حادث مروري في إسرائيل. التفاصيل والتحديثات في المصدر."
+        }
+      },
+      "title": "В Тель-Авиве 3-летний мальчик получил травмы средней степени тяжести на электросамокате.",
+      "summary": "Дорожное происшествие в Израиле. Обстоятельства и актуальные сведения — в материале источника.",
+      "translated": true
+    },
+    {
       "id": "c3c41209e08ce5826e9f",
       "titleOriginal": "תאונה עם מעורבות שני כלי רכב אירעה בכביש 40 צומת ביל״ו.",
       "sourceLanguage": "he",
@@ -129,33 +532,33 @@
       "translated": true
     },
     {
-      "id": "c3a89dec76eceb9e4062",
-      "titleOriginal": "חמישה פצועים בתאונה בצומת ביל״ו, בהם אם ושני ילדיה",
+      "id": "d7385692561a93499764",
+      "titleOriginal": "חולון: נהגת בת 25 נפצעה לאחר שרכבה התהפך",
       "sourceLanguage": "he",
-      "date": "2026-11-27T10:10:26Z",
-      "url": "https://www.news08.net/%d7%97%d7%9e%d7%99%d7%a9%d7%94-%d7%a4%d7%a6%d7%95%d7%a2%d7%99%d7%9d-%d7%91%d7%aa%d7%90%d7%95%d7%a0%d7%94-%d7%91%d7%a6%d7%95%d7%9e%d7%aa-%d7%91%d7%99%d7%9c%d7%95-%d7%91%d7%94%d7%9d-%d7%90%d7%9d-%d7%95/",
+      "date": "2026-11-27T10:29:17Z",
+      "url": "https://www.news08.net/%d7%97%d7%95%d7%9c%d7%95%d7%9f-%d7%a0%d7%94%d7%92%d7%aa-%d7%91%d7%aa-25-%d7%a0%d7%a4%d7%a6%d7%a2%d7%94-%d7%9c%d7%90%d7%97%d7%a8-%d7%a9%d7%a8%d7%9b%d7%91%d7%94-%d7%94%d7%aa%d7%94%d7%a4%d7%9a/",
       "publisher": "News08",
       "category": "accidents",
       "official": false,
       "translations": {
         "he": {
-          "title": "חמישה פצועים בתאונה בצומת ביל״ו, בהם אם ושני ילדיה",
+          "title": "חולון: נהגת בת 25 נפצעה לאחר שרכבה התהפך",
           "summary": "דיווח על תאונת דרכים בישראל. פרטים ועדכונים בכתבת המקור."
         },
         "ru": {
-          "title": "В результате аварии на перекрестке Било пострадали пятеро, в том числе мать и двое ее детей.",
+          "title": "Холон: 25-летняя женщина-водитель получила травмы после того, как ее машина перевернулась",
           "summary": "Дорожное происшествие в Израиле. Обстоятельства и актуальные сведения — в материале источника."
         },
         "en": {
-          "title": "Five were injured in the accident at the Bilo intersection, including a mother and her two children",
+          "title": "Holon: A 25-year-old female driver was injured after her car overturned",
           "summary": "A reported road incident in Israel. Details and updates are in the original report."
         },
         "ar": {
-          "title": "وأصيب خمسة أشخاص في الحادث الذي وقع على مفرق بيلو، بينهم أم وطفليها",
+          "title": "حولون: أصيبت سائقة (25 عاما) بجروح بعد انقلاب سيارتها",
           "summary": "تقرير عن حادث مروري في إسرائيل. التفاصيل والتحديثات في المصدر."
         }
       },
-      "title": "В результате аварии на перекрестке Било пострадали пятеро, в том числе мать и двое ее детей.",
+      "title": "Холон: 25-летняя женщина-водитель получила травмы после того, как ее машина перевернулась",
       "summary": "Дорожное происшествие в Израиле. Обстоятельства и актуальные сведения — в материале источника.",
       "translated": true
     },
@@ -222,33 +625,33 @@
       "translated": true
     },
     {
-      "id": "61871a94beeb80b676b2",
-      "titleOriginal": "שני פצועים בתאונת דרכים בין שלושה כלי רכב סמוך לאורטל",
+      "id": "c3a89dec76eceb9e4062",
+      "titleOriginal": "חמישה פצועים בתאונה בצומת ביל״ו, בהם אם ושני ילדיה",
       "sourceLanguage": "he",
-      "date": "2026-11-27T09:01:40Z",
-      "url": "https://www.maariv.co.il/breaking-news/article-1392798",
-      "publisher": "Maariv",
+      "date": "2026-11-27T10:10:26Z",
+      "url": "https://www.news08.net/%d7%97%d7%9e%d7%99%d7%a9%d7%94-%d7%a4%d7%a6%d7%95%d7%a2%d7%99%d7%9d-%d7%91%d7%aa%d7%90%d7%95%d7%a0%d7%94-%d7%91%d7%a6%d7%95%d7%9e%d7%aa-%d7%91%d7%99%d7%9c%d7%95-%d7%91%d7%94%d7%9d-%d7%90%d7%9d-%d7%95/",
+      "publisher": "News08",
       "category": "accidents",
       "official": false,
       "translations": {
         "he": {
-          "title": "שני פצועים בתאונת דרכים בין שלושה כלי רכב סמוך לאורטל",
+          "title": "חמישה פצועים בתאונה בצומת ביל״ו, בהם אם ושני ילדיה",
           "summary": "דיווח על תאונת דרכים בישראל. פרטים ועדכונים בכתבת המקור."
         },
         "ru": {
-          "title": "Двое пострадали в ДТП между тремя автомобилями возле Ортала",
+          "title": "В результате аварии на перекрестке Било пострадали пятеро, в том числе мать и двое ее детей.",
           "summary": "Дорожное происшествие в Израиле. Обстоятельства и актуальные сведения — в материале источника."
         },
         "en": {
-          "title": "Two injured in a car accident between three vehicles near Ortal",
+          "title": "Five were injured in the accident at the Bilo intersection, including a mother and her two children",
           "summary": "A reported road incident in Israel. Details and updates are in the original report."
         },
         "ar": {
-          "title": "جريحان في حادث سير بين ثلاث مركبات قرب أورتال",
+          "title": "وأصيب خمسة أشخاص في الحادث الذي وقع على مفرق بيلو، بينهم أم وطفليها",
           "summary": "تقرير عن حادث مروري في إسرائيل. التفاصيل والتحديثات في المصدر."
         }
       },
-      "title": "Двое пострадали в ДТП между тремя автомобилями возле Ортала",
+      "title": "В результате аварии на перекрестке Било пострадали пятеро, в том числе мать и двое ее детей.",
       "summary": "Дорожное происшествие в Израиле. Обстоятельства и актуальные сведения — в материале источника.",
       "translated": true
     },
@@ -311,6 +714,37 @@
         }
       },
       "title": "Дорога 7253: получил травмы средней и легкой степени в автокатастрофе.",
+      "summary": "Дорожное происшествие в Израиле. Обстоятельства и актуальные сведения — в материале источника.",
+      "translated": true
+    },
+    {
+      "id": "61871a94beeb80b676b2",
+      "titleOriginal": "שני פצועים בתאונת דרכים בין שלושה כלי רכב סמוך לאורטל",
+      "sourceLanguage": "he",
+      "date": "2026-11-27T09:01:40Z",
+      "url": "https://www.maariv.co.il/breaking-news/article-1392798",
+      "publisher": "Maariv",
+      "category": "accidents",
+      "official": false,
+      "translations": {
+        "he": {
+          "title": "שני פצועים בתאונת דרכים בין שלושה כלי רכב סמוך לאורטל",
+          "summary": "דיווח על תאונת דרכים בישראל. פרטים ועדכונים בכתבת המקור."
+        },
+        "ru": {
+          "title": "Двое пострадали в ДТП между тремя автомобилями возле Ортала",
+          "summary": "Дорожное происшествие в Израиле. Обстоятельства и актуальные сведения — в материале источника."
+        },
+        "en": {
+          "title": "Two injured in a car accident between three vehicles near Ortal",
+          "summary": "A reported road incident in Israel. Details and updates are in the original report."
+        },
+        "ar": {
+          "title": "جريحان في حادث سير بين ثلاث مركبات قرب أورتال",
+          "summary": "تقرير عن حادث مروري في إسرائيل. التفاصيل والتحديثات في المصدر."
+        }
+      },
+      "title": "Двое пострадали в ДТП между тремя автомобилями возле Ортала",
       "summary": "Дорожное происшествие в Израиле. Обстоятельства и актуальные сведения — в материале источника.",
       "translated": true
     },
@@ -6050,68 +6484,6 @@
       "translated": true
     },
     {
-      "id": "3eef20b3a776c564e3d2",
-      "titleOriginal": "רוכב אופנוע נהרג בתאונה בכביש 40",
-      "sourceLanguage": "he",
-      "date": "2026-11-23T13:36:46Z",
-      "url": "https://t.me/uh1221/27586",
-      "publisher": "Ихуд Ацала · Telegram",
-      "category": "accidents",
-      "official": false,
-      "translations": {
-        "he": {
-          "title": "רוכב אופנוע נהרג בתאונה בכביש 40",
-          "summary": "דיווח על תאונת דרכים בישראל. פרטים ועדכונים בכתבת המקור."
-        },
-        "ru": {
-          "title": "Мотоциклист погиб в аварии на 40-м шоссе.",
-          "summary": "Дорожное происшествие в Израиле. Обстоятельства и актуальные сведения — в материале источника."
-        },
-        "en": {
-          "title": "A motorcyclist was killed in an accident on Route 40",
-          "summary": "A reported road incident in Israel. Details and updates are in the original report."
-        },
-        "ar": {
-          "title": "لقي سائق دراجة نارية مصرعه في حادث سير على طريق رقم 40",
-          "summary": "تقرير عن حادث مروري في إسرائيل. التفاصيل والتحديثات في المصدر."
-        }
-      },
-      "title": "Мотоциклист погиб в аварии на 40-м шоссе.",
-      "summary": "Дорожное происшествие в Израиле. Обстоятельства и актуальные сведения — в материале источника.",
-      "translated": true
-    },
-    {
-      "id": "3e8ddeae9ade130f0fbd",
-      "titleOriginal": "רוכב אופנוע בן 40 נהרג בתאונה עם משאית בכביש 40 לצפון",
-      "sourceLanguage": "he",
-      "date": "2026-11-23T13:20:39Z",
-      "url": "https://www.maariv.co.il/breaking-news/article-1391478",
-      "publisher": "Maariv",
-      "category": "accidents",
-      "official": false,
-      "translations": {
-        "he": {
-          "title": "רוכב אופנוע בן 40 נהרג בתאונה עם משאית בכביש 40 לצפון",
-          "summary": "דיווח על תאונת דרכים בישראל. פרטים ועדכונים בכתבת המקור."
-        },
-        "ru": {
-          "title": "40-летний мотоциклист погиб в ДТП с грузовиком на 40-м шоссе на севере.",
-          "summary": "Дорожное происшествие в Израиле. Обстоятельства и актуальные сведения — в материале источника."
-        },
-        "en": {
-          "title": "A 40-year-old motorcyclist was killed in an accident with a truck on Route 40 to the north",
-          "summary": "A reported road incident in Israel. Details and updates are in the original report."
-        },
-        "ar": {
-          "title": "لقي سائق دراجة نارية 40 عاما مصرعه في حادث سير بشاحنة على شارع 40 شمالا.",
-          "summary": "تقرير عن حادث مروري في إسرائيل. التفاصيل والتحديثات في المصدر."
-        }
-      },
-      "title": "40-летний мотоциклист погиб в ДТП с грузовиком на 40-м шоссе на севере.",
-      "summary": "Дорожное происшествие в Израиле. Обстоятельства и актуальные сведения — в материале источника.",
-      "translated": true
-    },
-    {
       "id": "4e2db5301444c37df442",
       "titleOriginal": "פייפליין / יונדאי 2030 (עדכון נובמבר 2026)",
       "sourceLanguage": "he",
@@ -6143,65 +6515,34 @@
       "translated": true
     },
     {
-      "id": "7e5c1c8d9eb0f67d8ef1",
-      "titleOriginal": "תאונה עם מעורבות שני כלי רכב אירעה ברחוב לח״י בבני ברק.",
+      "id": "3e8ddeae9ade130f0fbd",
+      "titleOriginal": "רוכב אופנוע בן 40 נהרג בתאונה עם משאית בכביש 40 לצפון",
       "sourceLanguage": "he",
-      "date": "2026-11-23T12:34:22Z",
-      "url": "https://t.me/uh1221/27584",
-      "publisher": "Ихуд Ацала · Telegram",
+      "date": "2026-11-23T13:20:39Z",
+      "url": "https://www.maariv.co.il/breaking-news/article-1391478",
+      "publisher": "Maariv",
       "category": "accidents",
       "official": false,
       "translations": {
         "he": {
-          "title": "תאונה עם מעורבות שני כלי רכב אירעה ברחוב לח״י בבני ברק.",
+          "title": "רוכב אופנוע בן 40 נהרג בתאונה עם משאית בכביש 40 לצפון",
           "summary": "דיווח על תאונת דרכים בישראל. פרטים ועדכונים בכתבת המקור."
         },
         "ru": {
-          "title": "Авария с участием двух транспортных средств произошла на улице Лехи в Бней-Браке.",
+          "title": "40-летний мотоциклист погиб в ДТП с грузовиком на 40-м шоссе на севере.",
           "summary": "Дорожное происшествие в Израиле. Обстоятельства и актуальные сведения — в материале источника."
         },
         "en": {
-          "title": "An accident involving two vehicles happened on Lehi Street in Bnei Brak.",
+          "title": "A 40-year-old motorcyclist was killed in an accident with a truck on Route 40 to the north",
           "summary": "A reported road incident in Israel. Details and updates are in the original report."
         },
         "ar": {
-          "title": "وقع حادث سير بين مركبتين على شارع ليهي في بني براك.",
+          "title": "لقي سائق دراجة نارية 40 عاما مصرعه في حادث سير بشاحنة على شارع 40 شمالا.",
           "summary": "تقرير عن حادث مروري في إسرائيل. التفاصيل والتحديثات في المصدر."
         }
       },
-      "title": "Авария с участием двух транспортных средств произошла на улице Лехи в Бней-Браке.",
+      "title": "40-летний мотоциклист погиб в ДТП с грузовиком на 40-м шоссе на севере.",
       "summary": "Дорожное происшествие в Израиле. Обстоятельства и актуальные сведения — в материале источника.",
-      "translated": true
-    },
-    {
-      "id": "bd0676bcb21a0e39c003",
-      "titleOriginal": "רכב התהפך בכביש 20 - בן 60 במצב בינוני",
-      "sourceLanguage": "he",
-      "date": "2026-11-23T12:30:01Z",
-      "url": "https://www.maariv.co.il/breaking-news/article-1391456",
-      "publisher": "Maariv",
-      "category": "cars",
-      "official": false,
-      "translations": {
-        "he": {
-          "title": "רכב התהפך בכביש 20 - בן 60 במצב בינוני",
-          "summary": "כתבה על מכוניות או שוק הרכב בישראל. פרטים באתר המקור."
-        },
-        "ru": {
-          "title": "На трассе 20-60 перевернулся автомобиль возрастом 20-60 лет в среднем состоянии",
-          "summary": "Материал об автомобиле или автомобильном рынке Израиля. Подробности — на сайте издания."
-        },
-        "en": {
-          "title": "A vehicle overturned on Route 20 - 60 years old in moderate condition",
-          "summary": "An update about vehicles or Israel's car market. Details are available at the source."
-        },
-        "ar": {
-          "title": "مركبة منقلبة على طريق 20 - 60 سنة بحالة متوسطة",
-          "summary": "تحديث عن السيارات أو سوق المركبات في إسرائيل. التفاصيل في المصدر."
-        }
-      },
-      "title": "На трассе 20-60 перевернулся автомобиль возрастом 20-60 лет в среднем состоянии",
-      "summary": "Материал об автомобиле или автомобильном рынке Израиля. Подробности — на сайте издания.",
       "translated": true
     },
     {
@@ -6267,34 +6608,34 @@
       "translated": true
     },
     {
-      "id": "4e8bbf328bbe5b1619ca",
-      "titleOriginal": "תאונת דרכים בין שלושה רכבים בכביש 4 - גבר כבן 70 במצב בינוני",
+      "id": "bd0676bcb21a0e39c003",
+      "titleOriginal": "רכב התהפך בכביש 20 - בן 60 במצב בינוני",
       "sourceLanguage": "he",
-      "date": "2026-11-23T12:25:57Z",
-      "url": "https://www.maariv.co.il/breaking-news/article-1391454",
+      "date": "2026-11-23T12:30:01Z",
+      "url": "https://www.maariv.co.il/breaking-news/article-1391456",
       "publisher": "Maariv",
-      "category": "accidents",
+      "category": "cars",
       "official": false,
       "translations": {
         "he": {
-          "title": "תאונת דרכים בין שלושה רכבים בכביש 4 - גבר כבן 70 במצב בינוני",
-          "summary": "דיווח על תאונת דרכים בישראל. פרטים ועדכונים בכתבת המקור."
+          "title": "רכב התהפך בכביש 20 - בן 60 במצב בינוני",
+          "summary": "כתבה על מכוניות או שוק הרכב בישראל. פרטים באתר המקור."
         },
         "ru": {
-          "title": "На 4-м маршруте произошло ДТП между тремя автомобилями - 70-летний мужчина находится в состоянии средней степени тяжести",
-          "summary": "Дорожное происшествие в Израиле. Обстоятельства и актуальные сведения — в материале источника."
+          "title": "На трассе 20-60 перевернулся автомобиль возрастом 20-60 лет в среднем состоянии",
+          "summary": "Материал об автомобиле или автомобильном рынке Израиля. Подробности — на сайте издания."
         },
         "en": {
-          "title": "A car accident between three vehicles on Route 4 - a 70-year-old man is in moderate condition",
-          "summary": "A reported road incident in Israel. Details and updates are in the original report."
+          "title": "A vehicle overturned on Route 20 - 60 years old in moderate condition",
+          "summary": "An update about vehicles or Israel's car market. Details are available at the source."
         },
         "ar": {
-          "title": "حادث سيارة بين ثلاث مركبات على طريق رقم 4 - رجل يبلغ من العمر 70 عاما وحالته متوسطة",
-          "summary": "تقرير عن حادث مروري في إسرائيل. التفاصيل والتحديثات في المصدر."
+          "title": "مركبة منقلبة على طريق 20 - 60 سنة بحالة متوسطة",
+          "summary": "تحديث عن السيارات أو سوق المركبات في إسرائيل. التفاصيل في المصدر."
         }
       },
-      "title": "На 4-м маршруте произошло ДТП между тремя автомобилями - 70-летний мужчина находится в состоянии средней степени тяжести",
-      "summary": "Дорожное происшествие в Израиле. Обстоятельства и актуальные сведения — в материале источника.",
+      "title": "На трассе 20-60 перевернулся автомобиль возрастом 20-60 лет в среднем состоянии",
+      "summary": "Материал об автомобиле или автомобильном рынке Израиля. Подробности — на сайте издания.",
       "translated": true
     },
     {
@@ -6360,33 +6701,33 @@
       "translated": true
     },
     {
-      "id": "b7cc73d1774575812bbe",
-      "titleOriginal": "רוכב אופנוע נפגע מרכב במחלף לוד - מצבו קשה",
+      "id": "4e8bbf328bbe5b1619ca",
+      "titleOriginal": "תאונת דרכים בין שלושה רכבים בכביש 4 - גבר כבן 70 במצב בינוני",
       "sourceLanguage": "he",
-      "date": "2026-11-23T12:17:08Z",
-      "url": "https://www.maariv.co.il/breaking-news/article-1391448",
+      "date": "2026-11-23T12:25:57Z",
+      "url": "https://www.maariv.co.il/breaking-news/article-1391454",
       "publisher": "Maariv",
       "category": "accidents",
       "official": false,
       "translations": {
         "he": {
-          "title": "רוכב אופנוע נפגע מרכב במחלף לוד - מצבו קשה",
+          "title": "תאונת דרכים בין שלושה רכבים בכביש 4 - גבר כבן 70 במצב בינוני",
           "summary": "דיווח על תאונת דרכים בישראל. פרטים ועדכונים בכתבת המקור."
         },
         "ru": {
-          "title": "На развязке Лод мотоциклиста сбила машина - его состояние тяжелое",
+          "title": "На 4-м маршруте произошло ДТП между тремя автомобилями - 70-летний мужчина находится в состоянии средней степени тяжести",
           "summary": "Дорожное происшествие в Израиле. Обстоятельства и актуальные сведения — в материале источника."
         },
         "en": {
-          "title": "A motorcyclist was hit by a car at the Lod interchange - his condition is serious",
+          "title": "A car accident between three vehicles on Route 4 - a 70-year-old man is in moderate condition",
           "summary": "A reported road incident in Israel. Details and updates are in the original report."
         },
         "ar": {
-          "title": "صدمت سيارة سائق دراجة نارية عند مفرق اللد، وحالته خطيرة",
+          "title": "حادث سيارة بين ثلاث مركبات على طريق رقم 4 - رجل يبلغ من العمر 70 عاما وحالته متوسطة",
           "summary": "تقرير عن حادث مروري في إسرائيل. التفاصيل والتحديثات في المصدر."
         }
       },
-      "title": "На развязке Лод мотоциклиста сбила машина - его состояние тяжелое",
+      "title": "На 4-м маршруте произошло ДТП между тремя автомобилями - 70-летний мужчина находится в состоянии средней степени тяжести",
       "summary": "Дорожное происшествие в Израиле. Обстоятельства и актуальные сведения — в материале источника.",
       "translated": true
     },
@@ -6453,33 +6794,33 @@
       "translated": true
     },
     {
-      "id": "ccc5c3d11f3bb1cd8288",
-      "titleOriginal": "ירידה של 34% בתאונות הדרכים: הנתונים החדשים נחשפים",
+      "id": "b7cc73d1774575812bbe",
+      "titleOriginal": "רוכב אופנוע נפגע מרכב במחלף לוד - מצבו קשה",
       "sourceLanguage": "he",
-      "date": "2026-11-23T12:08:37Z",
-      "url": "https://www.maariv.co.il/news/israel/article-1391444",
+      "date": "2026-11-23T12:17:08Z",
+      "url": "https://www.maariv.co.il/breaking-news/article-1391448",
       "publisher": "Maariv",
       "category": "accidents",
       "official": false,
       "translations": {
         "he": {
-          "title": "ירידה של 34% בתאונות הדרכים: הנתונים החדשים נחשפים",
+          "title": "רוכב אופנוע נפגע מרכב במחלף לוד - מצבו קשה",
           "summary": "דיווח על תאונת דרכים בישראל. פרטים ועדכונים בכתבת המקור."
         },
         "ru": {
-          "title": "ДТП снизились на 34%: появились новые данные",
+          "title": "На развязке Лод мотоциклиста сбила машина - его состояние тяжелое",
           "summary": "Дорожное происшествие в Израиле. Обстоятельства и актуальные сведения — в материале источника."
         },
         "en": {
-          "title": "34% decrease in traffic accidents: the new data is revealed",
+          "title": "A motorcyclist was hit by a car at the Lod interchange - his condition is serious",
           "summary": "A reported road incident in Israel. Details and updates are in the original report."
         },
         "ar": {
-          "title": "انخفاض بنسبة 34% في حوادث المرور: الكشف عن البيانات الجديدة",
+          "title": "صدمت سيارة سائق دراجة نارية عند مفرق اللد، وحالته خطيرة",
           "summary": "تقرير عن حادث مروري في إسرائيل. التفاصيل والتحديثات في المصدر."
         }
       },
-      "title": "ДТП снизились на 34%: появились новые данные",
+      "title": "На развязке Лод мотоциклиста сбила машина - его состояние тяжелое",
       "summary": "Дорожное происшествие в Израиле. Обстоятельства и актуальные сведения — в материале источника.",
       "translated": true
     },
@@ -6546,33 +6887,33 @@
       "translated": true
     },
     {
-      "id": "b3eb5a31352f711c9582",
-      "titleOriginal": "תאונת דרכים בחיפה - גבר כבן 80 במצב בינוני, שניים נוספים במצב קל",
+      "id": "ccc5c3d11f3bb1cd8288",
+      "titleOriginal": "ירידה של 34% בתאונות הדרכים: הנתונים החדשים נחשפים",
       "sourceLanguage": "he",
-      "date": "2026-11-23T10:35:42Z",
-      "url": "https://www.maariv.co.il/breaking-news/article-1391394",
+      "date": "2026-11-23T12:08:37Z",
+      "url": "https://www.maariv.co.il/news/israel/article-1391444",
       "publisher": "Maariv",
       "category": "accidents",
       "official": false,
       "translations": {
         "he": {
-          "title": "תאונת דרכים בחיפה - גבר כבן 80 במצב בינוני, שניים נוספים במצב קל",
+          "title": "ירידה של 34% בתאונות הדרכים: הנתונים החדשים נחשפים",
           "summary": "דיווח על תאונת דרכים בישראל. פרטים ועדכונים בכתבת המקור."
         },
         "ru": {
-          "title": "Автокатастрофа в Хайфе - мужчина около 80 лет находится в состоянии средней степени тяжести, еще двое - в состоянии средней тяжести",
+          "title": "ДТП снизились на 34%: появились новые данные",
           "summary": "Дорожное происшествие в Израиле. Обстоятельства и актуальные сведения — в материале источника."
         },
         "en": {
-          "title": "Car accident in Haifa - a man about 80 years old is in a moderate condition, two others are in a minor condition",
+          "title": "34% decrease in traffic accidents: the new data is revealed",
           "summary": "A reported road incident in Israel. Details and updates are in the original report."
         },
         "ar": {
-          "title": "حادث سيارة في حيفا - رجل يبلغ من العمر حوالي 80 عاما في حالة متوسطة، واثنين آخرين في حالة طفيفة",
+          "title": "انخفاض بنسبة 34% في حوادث المرور: الكشف عن البيانات الجديدة",
           "summary": "تقرير عن حادث مروري في إسرائيل. التفاصيل والتحديثات في المصدر."
         }
       },
-      "title": "Автокатастрофа в Хайфе - мужчина около 80 лет находится в состоянии средней степени тяжести, еще двое - в состоянии средней тяжести",
+      "title": "ДТП снизились на 34%: появились новые данные",
       "summary": "Дорожное происшествие в Израиле. Обстоятельства и актуальные сведения — в материале источника.",
       "translated": true
     },
@@ -6639,6 +6980,37 @@
       "translated": true
     },
     {
+      "id": "b3eb5a31352f711c9582",
+      "titleOriginal": "תאונת דרכים בחיפה - גבר כבן 80 במצב בינוני, שניים נוספים במצב קל",
+      "sourceLanguage": "he",
+      "date": "2026-11-23T10:35:42Z",
+      "url": "https://www.maariv.co.il/breaking-news/article-1391394",
+      "publisher": "Maariv",
+      "category": "accidents",
+      "official": false,
+      "translations": {
+        "he": {
+          "title": "תאונת דרכים בחיפה - גבר כבן 80 במצב בינוני, שניים נוספים במצב קל",
+          "summary": "דיווח על תאונת דרכים בישראל. פרטים ועדכונים בכתבת המקור."
+        },
+        "ru": {
+          "title": "Автокатастрофа в Хайфе - мужчина около 80 лет находится в состоянии средней степени тяжести, еще двое - в состоянии средней тяжести",
+          "summary": "Дорожное происшествие в Израиле. Обстоятельства и актуальные сведения — в материале источника."
+        },
+        "en": {
+          "title": "Car accident in Haifa - a man about 80 years old is in a moderate condition, two others are in a minor condition",
+          "summary": "A reported road incident in Israel. Details and updates are in the original report."
+        },
+        "ar": {
+          "title": "حادث سيارة في حيفا - رجل يبلغ من العمر حوالي 80 عاما في حالة متوسطة، واثنين آخرين في حالة طفيفة",
+          "summary": "تقرير عن حادث مروري في إسرائيل. التفاصيل والتحديثات في المصدر."
+        }
+      },
+      "title": "Автокатастрофа в Хайфе - мужчина около 80 лет находится в состоянии средней степени тяжести, еще двое - в состоянии средней тяжести",
+      "summary": "Дорожное происшествие в Израиле. Обстоятельства и актуальные сведения — в материале источника.",
+      "translated": true
+    },
+    {
       "id": "edad08f7e12af3add65a",
       "titleOriginal": "חולון: 43 בני אדם נפצעו קשה בתאונות דרכים אשתקד",
       "sourceLanguage": "he",
@@ -6666,37 +7038,6 @@
         }
       },
       "title": "Холон: в прошлом году в дорожно-транспортных происшествиях серьезно пострадали 43 человека",
-      "summary": "Дорожное происшествие в Израиле. Обстоятельства и актуальные сведения — в материале источника.",
-      "translated": true
-    },
-    {
-      "id": "f37bf6a6d69d8e1d0c2d",
-      "titleOriginal": "תאונת דרכים בין מספר כלי רכב ומשאית בכביש 6 - חמישה פצועים במקום, בהם שניים במצב בינוני",
-      "sourceLanguage": "he",
-      "date": "2026-11-23T08:06:48Z",
-      "url": "https://www.maariv.co.il/breaking-news/article-1391313",
-      "publisher": "Maariv",
-      "category": "accidents",
-      "official": false,
-      "translations": {
-        "he": {
-          "title": "תאונת דרכים בין מספר כלי רכב ומשאית בכביש 6 - חמישה פצועים במקום, בהם שניים במצב בינוני",
-          "summary": "דיווח על תאונת דרכים בישראל. פרטים ועדכונים בכתבת המקור."
-        },
-        "ru": {
-          "title": "ДТП между несколькими автомобилями и грузовиком на 6-м маршруте: пятеро пострадали на месте, двое из них в состоянии средней степени тяжести",
-          "summary": "Дорожное происшествие в Израиле. Обстоятельства и актуальные сведения — в материале источника."
-        },
-        "en": {
-          "title": "Road accident between several vehicles and a truck on Route 6 - five injured on the spot, two of them in moderate condition",
-          "summary": "A reported road incident in Israel. Details and updates are in the original report."
-        },
-        "ar": {
-          "title": "حادث سير بين عدة مركبات وشاحنة على شارع رقم 6 - خمسة جرحى على الفور، اثنان منهم في حالة متوسطة",
-          "summary": "تقرير عن حادث مروري في إسرائيل. التفاصيل والتحديثات في المصدر."
-        }
-      },
-      "title": "ДТП между несколькими автомобилями и грузовиком на 6-м маршруте: пятеро пострадали на месте, двое из них в состоянии средней степени тяжести",
       "summary": "Дорожное происшествие в Израиле. Обстоятельства и актуальные сведения — в материале источника.",
       "translated": true
     },
@@ -6732,6 +7073,37 @@
       "translated": true
     },
     {
+      "id": "f37bf6a6d69d8e1d0c2d",
+      "titleOriginal": "תאונת דרכים בין מספר כלי רכב ומשאית בכביש 6 - חמישה פצועים במקום, בהם שניים במצב בינוני",
+      "sourceLanguage": "he",
+      "date": "2026-11-23T08:06:48Z",
+      "url": "https://www.maariv.co.il/breaking-news/article-1391313",
+      "publisher": "Maariv",
+      "category": "accidents",
+      "official": false,
+      "translations": {
+        "he": {
+          "title": "תאונת דרכים בין מספר כלי רכב ומשאית בכביש 6 - חמישה פצועים במקום, בהם שניים במצב בינוני",
+          "summary": "דיווח על תאונת דרכים בישראל. פרטים ועדכונים בכתבת המקור."
+        },
+        "ru": {
+          "title": "ДТП между несколькими автомобилями и грузовиком на 6-м маршруте: пятеро пострадали на месте, двое из них в состоянии средней степени тяжести",
+          "summary": "Дорожное происшествие в Израиле. Обстоятельства и актуальные сведения — в материале источника."
+        },
+        "en": {
+          "title": "Road accident between several vehicles and a truck on Route 6 - five injured on the spot, two of them in moderate condition",
+          "summary": "A reported road incident in Israel. Details and updates are in the original report."
+        },
+        "ar": {
+          "title": "حادث سير بين عدة مركبات وشاحنة على شارع رقم 6 - خمسة جرحى على الفور، اثنان منهم في حالة متوسطة",
+          "summary": "تقرير عن حادث مروري في إسرائيل. التفاصيل والتحديثات في المصدر."
+        }
+      },
+      "title": "ДТП между несколькими автомобилями и грузовиком на 6-м маршруте: пятеро пострадали на месте, двое из них в состоянии средней степени тяжести",
+      "summary": "Дорожное происшествие в Израиле. Обстоятельства и актуальные сведения — в материале источника.",
+      "translated": true
+    },
+    {
       "id": "e797dcab2119b329960c",
       "titleOriginal": "אשקלון: 44 בני אדם נפצעו קשה בתאונות דרכים ב־2025",
       "sourceLanguage": "he",
@@ -6759,37 +7131,6 @@
         }
       },
       "title": "Ашкелон: в 2025 году в ДТП серьезно пострадали 44 человека",
-      "summary": "Дорожное происшествие в Израиле. Обстоятельства и актуальные сведения — в материале источника.",
-      "translated": true
-    },
-    {
-      "id": "1c4c34ef31d4157db177",
-      "titleOriginal": "תאונת דרכים בין 3 רכבים בצומת מי עמי - 9 פצועים במצב קל באירוע",
-      "sourceLanguage": "he",
-      "date": "2026-11-23T07:18:14Z",
-      "url": "https://www.maariv.co.il/breaking-news/article-1391289",
-      "publisher": "Maariv",
-      "category": "accidents",
-      "official": false,
-      "translations": {
-        "he": {
-          "title": "תאונת דרכים בין 3 רכבים בצומת מי עמי - 9 פצועים במצב קל באירוע",
-          "summary": "דיווח על תאונת דרכים בישראל. פרטים ועדכונים בכתבת המקור."
-        },
-        "ru": {
-          "title": "Автомобильная авария между тремя автомобилями на перекрестке Ми-Ами: в результате инцидента 9 человек получили легкие ранения",
-          "summary": "Дорожное происшествие в Израиле. Обстоятельства и актуальные сведения — в материале источника."
-        },
-        "en": {
-          "title": "Car accident between 3 vehicles at Mi Ami junction - 9 injured in a minor condition in the incident",
-          "summary": "A reported road incident in Israel. Details and updates are in the original report."
-        },
-        "ar": {
-          "title": "حادث سيارة بين 3 مركبات على مفرق مي عامي - 9 جرحى بحالة طفيفة في الحادث",
-          "summary": "تقرير عن حادث مروري في إسرائيل. التفاصيل والتحديثات في المصدر."
-        }
-      },
-      "title": "Автомобильная авария между тремя автомобилями на перекрестке Ми-Ами: в результате инцидента 9 человек получили легкие ранения",
       "summary": "Дорожное происшествие в Израиле. Обстоятельства и актуальные сведения — в материале источника.",
       "translated": true
     },
@@ -6825,6 +7166,37 @@
       "translated": true
     },
     {
+      "id": "1c4c34ef31d4157db177",
+      "titleOriginal": "תאונת דרכים בין 3 רכבים בצומת מי עמי - 9 פצועים במצב קל באירוע",
+      "sourceLanguage": "he",
+      "date": "2026-11-23T07:18:14Z",
+      "url": "https://www.maariv.co.il/breaking-news/article-1391289",
+      "publisher": "Maariv",
+      "category": "accidents",
+      "official": false,
+      "translations": {
+        "he": {
+          "title": "תאונת דרכים בין 3 רכבים בצומת מי עמי - 9 פצועים במצב קל באירוע",
+          "summary": "דיווח על תאונת דרכים בישראל. פרטים ועדכונים בכתבת המקור."
+        },
+        "ru": {
+          "title": "Автомобильная авария между тремя автомобилями на перекрестке Ми-Ами: в результате инцидента 9 человек получили легкие ранения",
+          "summary": "Дорожное происшествие в Израиле. Обстоятельства и актуальные сведения — в материале источника."
+        },
+        "en": {
+          "title": "Car accident between 3 vehicles at Mi Ami junction - 9 injured in a minor condition in the incident",
+          "summary": "A reported road incident in Israel. Details and updates are in the original report."
+        },
+        "ar": {
+          "title": "حادث سيارة بين 3 مركبات على مفرق مي عامي - 9 جرحى بحالة طفيفة في الحادث",
+          "summary": "تقرير عن حادث مروري في إسرائيل. التفاصيل والتحديثات في المصدر."
+        }
+      },
+      "title": "Автомобильная авария между тремя автомобилями на перекрестке Ми-Ами: в результате инцидента 9 человек получили легкие ранения",
+      "summary": "Дорожное происшествие в Израиле. Обстоятельства и актуальные сведения — в материале источника.",
+      "translated": true
+    },
+    {
       "id": "4b050ee65745d405c039",
       "titleOriginal": "מכת תאונות הדרכים | אשדוד: 46 בני אדם נפצעו קשה בתאונות דרכים בשנה שעברה",
       "sourceLanguage": "he",
@@ -6852,6 +7224,37 @@
         }
       },
       "title": "Бич дорожно-транспортных происшествий Ашдод: в прошлом году в дорожно-транспортных происшествиях серьезно пострадали 46 человек",
+      "summary": "Дорожное происшествие в Израиле. Обстоятельства и актуальные сведения — в материале источника.",
+      "translated": true
+    },
+    {
+      "id": "57485e5e997182362e61",
+      "titleOriginal": "Число жертв ДТП с участием электровелосипедов и электросамокатов в Израиле выросло на 79%",
+      "sourceLanguage": "en",
+      "date": "2026-11-23T06:51:23Z",
+      "url": "https://t.me/NEWSruIsrael/126568",
+      "publisher": "NEWSru.co.il · Telegram",
+      "category": "accidents",
+      "official": false,
+      "translations": {
+        "he": {
+          "title": "מספר נפגעי תאונות עם אופניים חשמליים וקורקינטים חשמליים בישראל עלה ב-79%",
+          "summary": "דיווח על תאונת דרכים בישראל. פרטים ועדכונים בכתבת המקור."
+        },
+        "ru": {
+          "title": "Число жертв ДТП с участием электровелосипедов и электросамокатов в Израиле выросло на 79%",
+          "summary": "Дорожное происшествие в Израиле. Обстоятельства и актуальные сведения — в материале источника."
+        },
+        "en": {
+          "title": "Число жертв ДТП с участием электровелосипедов и электросамокатов в Израиле выросло на 79%",
+          "summary": "A reported road incident in Israel. Details and updates are in the original report."
+        },
+        "ar": {
+          "title": "عدد ضحايا حوادث الدراجات الكهربائية والسكوترات الكهربائية في إسرائيل ارتفع بنسبة 79%",
+          "summary": "تقرير عن حادث مروري في إسرائيل. التفاصيل والتحديثات في المصدر."
+        }
+      },
+      "title": "Число жертв ДТП с участием электровелосипедов и электросамокатов в Израиле выросло на 79%",
       "summary": "Дорожное происшествие в Израиле. Обстоятельства и актуальные сведения — в материале источника.",
       "translated": true
     },
@@ -6884,37 +7287,6 @@
       },
       "title": "Без приложения и без регистрации: смена зарядных станций для электромобилей с 1 января",
       "summary": "Материал об автомобиле или автомобильном рынке Израиля. Подробности — на сайте издания.",
-      "translated": true
-    },
-    {
-      "id": "57485e5e997182362e61",
-      "titleOriginal": "Число жертв ДТП с участием электровелосипедов и электросамокатов в Израиле выросло на 79%",
-      "sourceLanguage": "en",
-      "date": "2026-11-23T06:51:23Z",
-      "url": "https://t.me/NEWSruIsrael/126568",
-      "publisher": "NEWSru.co.il · Telegram",
-      "category": "accidents",
-      "official": false,
-      "translations": {
-        "he": {
-          "title": "מספר נפגעי תאונות עם אופניים חשמליים וקורקינטים חשמליים בישראל עלה ב-79%",
-          "summary": "דיווח על תאונת דרכים בישראל. פרטים ועדכונים בכתבת המקור."
-        },
-        "ru": {
-          "title": "Число жертв ДТП с участием электровелосипедов и электросамокатов в Израиле выросло на 79%",
-          "summary": "Дорожное происшествие в Израиле. Обстоятельства и актуальные сведения — в материале источника."
-        },
-        "en": {
-          "title": "Число жертв ДТП с участием электровелосипедов и электросамокатов в Израиле выросло на 79%",
-          "summary": "A reported road incident in Israel. Details and updates are in the original report."
-        },
-        "ar": {
-          "title": "عدد ضحايا حوادث الدراجات الكهربائية والسكوترات الكهربائية في إسرائيل ارتفع بنسبة 79%",
-          "summary": "تقرير عن حادث مروري في إسرائيل. التفاصيل والتحديثات في المصدر."
-        }
-      },
-      "title": "Число жертв ДТП с участием электровелосипедов и электросамокатов в Израиле выросло на 79%",
-      "summary": "Дорожное происшествие в Израиле. Обстоятельства и актуальные сведения — в материале источника.",
       "translated": true
     },
     {
@@ -8930,378 +9302,6 @@
       },
       "title": "Под Герцлией: двое 15-летних подростков пострадали в результате аварии на скутере - один в состоянии средней степени тяжести",
       "summary": "Дорожное происшествие в Израиле. Обстоятельства и актуальные сведения — в материале источника.",
-      "translated": true
-    },
-    {
-      "id": "99269355898d93fa48e0",
-      "titleOriginal": "בשעה 22:18 התקבל דיווח במוקד 101 של מד\"א במרחב ירקון על גלגינוע (קורקינט חשמלי) עם 2 רוכבים שנפגע מרכב סמוך למחלף המעפילים לכיוון הרצליה. חובשים ופראמדיקים של מד\"א מעניקים טיפול רפואי ומפנים לבי\"ח 2 פצועים, בהם:…",
-      "sourceLanguage": "he",
-      "date": "2026-11-21T20:50:29Z",
-      "url": "https://t.me/mdaisrael/26881",
-      "publisher": "Маген Давид Адом · ДТП · Telegram",
-      "category": "accidents",
-      "official": false,
-      "translations": {
-        "he": {
-          "title": "בשעה 22:18 התקבל דיווח במוקד 101 של מד\"א במרחב ירקון על גלגינוע (קורקינט חשמלי) עם 2 רוכבים שנפגע מרכב סמוך למחלף המעפילים לכיוון הרצליה. חובשים ופראמדיקים של מד\"א מעניקים טיפול רפואי ומפנים לבי\"ח 2 פצועים, בהם:…",
-          "summary": "דיווח על תאונת דרכים בישראל. פרטים ועדכונים בכתבת המקור."
-        },
-        "ru": {
-          "title": "В 22:18 в центр 101 MDA в районе Яркон поступило сообщение о сбитии скутера (электроскутера) с двумя водителями транспортным средством возле развязки Маафилим в направлении Герцлии. Медики и парамедики МДА оказывают медицинскую помощь и направляют в ",
-          "summary": "Дорожное происшествие в Израиле. Обстоятельства и актуальные сведения — в материале источника."
-        },
-        "en": {
-          "title": "At 10:18 p.m., a report was received at MDA's 101 center in the Yarkon region about a scooter (electric scooter) with 2 riders hit by a vehicle near the Ma'afilim interchange in the direction of Herzliya. MDA medics and paramedics provide medical tre",
-          "summary": "A reported road incident in Israel. Details and updates are in the original report."
-        },
-        "ar": {
-          "title": "عند الساعة 10:18 مساءً، وصل بلاغ إلى مركز نجمة داود الحمراء رقم 101 في منطقة اليركون حول وجود دراجة نارية (سكوتر كهربائي) يستقلها راكبان صدمتهما مركبة بالقرب من تقاطع معافيليم في اتجاه هرتسليا. طواقم نجمة داوود الحمراء والمسعفون يقدمون العلاج ويحولون",
-          "summary": "تقرير عن حادث مروري في إسرائيل. التفاصيل والتحديثات في المصدر."
-        }
-      },
-      "title": "В 22:18 в центр 101 MDA в районе Яркон поступило сообщение о сбитии скутера (электроскутера) с двумя водителями транспортным средством возле развязки Маафилим в направлении Герцлии. Медики и парамедики МДА оказывают медицинскую помощь и направляют в ",
-      "summary": "Дорожное происшествие в Израиле. Обстоятельства и актуальные сведения — в материале источника.",
-      "translated": true
-    },
-    {
-      "id": "9d20022b023e32afa7f1",
-      "titleOriginal": "רישומים שבוע 47/2026 / טויוטה הוביל את השבוע; טסלה שני בחודש חזק",
-      "sourceLanguage": "he",
-      "date": "2026-11-21T20:34:27Z",
-      "url": "https://autonews.co.il/%d7%a8%d7%99%d7%a9%d7%95%d7%9e%d7%99%d7%9d-%d7%a9%d7%91%d7%95%d7%a2-47-2026-%d7%98%d7%95%d7%99%d7%95%d7%98%d7%94-%d7%94%d7%95%d7%91%d7%99%d7%9c-%d7%90%d7%aa-%d7%94%d7%a9%d7%91%d7%95%d7%a2-%d7%98/",
-      "publisher": "Autonews Israel",
-      "category": "cars",
-      "official": false,
-      "translations": {
-        "he": {
-          "title": "רישומים שבוע 47/2026 / טויוטה הוביל את השבוע; טסלה שני בחודש חזק",
-          "summary": "כתבה על מכוניות או שוק הרכב בישראל. פרטים באתר המקור."
-        },
-        "ru": {
-          "title": "Неделя регистрации 47/2026 / Toyota лидировала на неделе; У Tesla сильный второй месяц",
-          "summary": "Материал об автомобиле или автомобильном рынке Израиля. Подробности — на сайте издания."
-        },
-        "en": {
-          "title": "Registrations week 47/2026 / Toyota led the week; Tesla has a strong second month",
-          "summary": "An update about vehicles or Israel's car market. Details are available at the source."
-        },
-        "ar": {
-          "title": "أسبوع التسجيلات 47/2026 / تويوتا تصدرت الأسبوع؛ تسلا لديها شهر ثاني قوي",
-          "summary": "تحديث عن السيارات أو سوق المركبات في إسرائيل. التفاصيل في المصدر."
-        }
-      },
-      "title": "Неделя регистрации 47/2026 / Toyota лидировала на неделе; У Tesla сильный второй месяц",
-      "summary": "Материал об автомобиле или автомобильном рынке Израиля. Подробности — на сайте издания.",
-      "translated": true
-    },
-    {
-      "id": "404345f0a1a1b4312a6e",
-      "titleOriginal": "מילד בודד למספר אגדות: ״אנדרסן״ מגיע לנס ציונה",
-      "sourceLanguage": "he",
-      "date": "2026-11-21T21:37:06Z",
-      "url": "https://www.news08.net/%d7%9e%d7%99%d7%9c%d7%93-%d7%91%d7%95%d7%93%d7%93-%d7%9c%d7%9e%d7%a1%d7%a4%d7%a8-%d7%90%d7%92%d7%93%d7%95%d7%aa-%d7%90%d7%a0%d7%93%d7%a8%d7%a1%d7%9f-%d7%9e%d7%92%d7%99%d7%a2-%d7%9c%d7%a0%d7%a1-%d7%a6/",
-      "publisher": "News08",
-      "category": "accidents",
-      "official": false,
-      "translations": {
-        "he": {
-          "title": "מילד בודד למספר אגדות: ״אנדרסן״ מגיע לנס ציונה",
-          "summary": "דיווח על תאונת דרכים בישראל. פרטים ועדכונים בכתבת המקור."
-        },
-        "ru": {
-          "title": "От одинокого ребенка до ряда легенд: «Андерсен» прибывает в Нес-Циону",
-          "summary": "Дорожное происшествие в Израиле. Обстоятельства и актуальные сведения — в материале источника."
-        },
-        "en": {
-          "title": "From a lonely child to a number of legends: \"Andersen\" arrives at Nes Ziona",
-          "summary": "A reported road incident in Israel. Details and updates are in the original report."
-        },
-        "ar": {
-          "title": "من طفل وحيد إلى عدد من الأساطير: \"أندرسن\" يصل إلى نيس زيونا",
-          "summary": "تقرير عن حادث مروري في إسرائيل. التفاصيل والتحديثات في المصدر."
-        }
-      },
-      "title": "От одинокого ребенка до ряда легенд: «Андерсен» прибывает в Нес-Циону",
-      "summary": "Дорожное происшествие в Израиле. Обстоятельства и актуальные сведения — в материале источника.",
-      "translated": true
-    },
-    {
-      "id": "37afe94471b9d9fd505b",
-      "titleOriginal": "דרמה: שופט בהולנד אסר על BYD למכור באירופה \"חיקוי ללנד רובר\"",
-      "sourceLanguage": "he",
-      "date": "2026-11-21T19:46:00Z",
-      "url": "https://cars.walla.co.il/item/3877109",
-      "publisher": "Walla",
-      "category": "cars",
-      "official": false,
-      "translations": {
-        "he": {
-          "title": "דרמה: שופט בהולנד אסר על BYD למכור באירופה \"חיקוי ללנד רובר\"",
-          "summary": "כתבה על מכוניות או שוק הרכב בישראל. פרטים באתר המקור."
-        },
-        "ru": {
-          "title": "Драма: судья в Нидерландах запретил BYD продавать в Европе «имитацию Land Rover»",
-          "summary": "Материал об автомобиле или автомобильном рынке Израиля. Подробности — на сайте издания."
-        },
-        "en": {
-          "title": "Drama: A judge in the Netherlands banned BYD from selling in Europe a \"Land Rover imitation\"",
-          "summary": "An update about vehicles or Israel's car market. Details are available at the source."
-        },
-        "ar": {
-          "title": "دراما: منع قاض في هولندا شركة BYD من بيع سيارة \"تقليد لاند روفر\" في أوروبا",
-          "summary": "تحديث عن السيارات أو سوق المركبات في إسرائيل. التفاصيل في المصدر."
-        }
-      },
-      "title": "Драма: судья в Нидерландах запретил BYD продавать в Европе «имитацию Land Rover»",
-      "summary": "Материал об автомобиле или автомобильном рынке Израиля. Подробности — на сайте издания.",
-      "translated": true
-    },
-    {
-      "id": "a8c95db75c26abcc9546",
-      "titleOriginal": "בשעה 19:09 התקבל דיווח במוקד 101 של מד\"א במרחב כרמל על רוכב אופניים חשמליים שנפגע מרכב בשדרות ירושלים בקרית ים. חובשים ופראמדיקים של מד\"א מעניקים טיפול רפואי ומפנים לבי\"ח רמב\"ם נער בן 17 במצב בינוני עם פגיעה רב…",
-      "sourceLanguage": "he",
-      "date": "2026-11-21T19:14:11Z",
-      "url": "https://t.me/mdaisrael/26880",
-      "publisher": "Маген Давид Адом · ДТП · Telegram",
-      "category": "accidents",
-      "official": false,
-      "translations": {
-        "he": {
-          "title": "בשעה 19:09 התקבל דיווח במוקד 101 של מד\"א במרחב כרמל על רוכב אופניים חשמליים שנפגע מרכב בשדרות ירושלים בקרית ים. חובשים ופראמדיקים של מד\"א מעניקים טיפול רפואי ומפנים לבי\"ח רמב\"ם נער בן 17 במצב בינוני עם פגיעה רב…",
-          "summary": "דיווח על תאונת דרכים בישראל. פרטים ועדכונים בכתבת המקור."
-        },
-        "ru": {
-          "title": "В 19:09 на горячую линию 101 MDA в районе Кармель поступило сообщение о велосипедисте на электровелосипеде, которого сбила машина на Иерусалимском проспекте в Кирьят-Яме. Медики и парамедики МДА оказывают медицинскую помощь и направляют 17-летнего ма",
-          "summary": "Дорожное происшествие в Израиле. Обстоятельства и актуальные сведения — в материале источника."
-        },
-        "en": {
-          "title": "At 19:09, a report was received at MDA's 101 hotline in the Carmel area about an electric bicycle rider who was hit by a vehicle on Jerusalem Avenue in Kiryat Yam. MDA medics and paramedics provide medical treatment and refer a 17-year-old boy to Ram",
-          "summary": "A reported road incident in Israel. Details and updates are in the original report."
-        },
-        "ar": {
-          "title": "الساعة 19:09 وصل بلاغ على الخط الساخن 101 لنجمة داوود الحمراء في منطقة الكرمل، حول إصابة سائق دراجة كهربائية بصدمة من مركبة على شارع القدس في كريات يام. مسعفون ومسعفون في نجمة داوود الحمراء يقدمون العلاج الطبي ويحولون فتى يبلغ من العمر 17 عاماً إلى م",
-          "summary": "تقرير عن حادث مروري في إسرائيل. التفاصيل والتحديثات في المصدر."
-        }
-      },
-      "title": "В 19:09 на горячую линию 101 MDA в районе Кармель поступило сообщение о велосипедисте на электровелосипеде, которого сбила машина на Иерусалимском проспекте в Кирьят-Яме. Медики и парамедики МДА оказывают медицинскую помощь и направляют 17-летнего ма",
-      "summary": "Дорожное происшествие в Израиле. Обстоятельства и актуальные сведения — в материале источника.",
-      "translated": true
-    },
-    {
-      "id": "44af6c91576fae2c2df7",
-      "titleOriginal": "בן 17 נפצע באורח בינוני מפגיעת רכב בעת שרכב על אופניים חשמליים בקרית ים",
-      "sourceLanguage": "he",
-      "date": "2026-11-21T18:51:10Z",
-      "url": "https://www.maariv.co.il/breaking-news/article-1390801",
-      "publisher": "Maariv",
-      "category": "accidents",
-      "official": false,
-      "translations": {
-        "he": {
-          "title": "בן 17 נפצע באורח בינוני מפגיעת רכב בעת שרכב על אופניים חשמליים בקרית ים",
-          "summary": "דיווח על תאונת דרכים בישראל. פרטים ועדכונים בכתבת המקור."
-        },
-        "ru": {
-          "title": "17-летний подросток получил травмы средней степени тяжести во время езды на электровелосипеде в Кирьят-Яме.",
-          "summary": "Дорожное происшествие в Израиле. Обстоятельства и актуальные сведения — в материале источника."
-        },
-        "en": {
-          "title": "A 17-year-old was moderately injured by a car while riding an electric bicycle in Kiryat Yam",
-          "summary": "A reported road incident in Israel. Details and updates are in the original report."
-        },
-        "ar": {
-          "title": "أصيب شاب (17 عاما) بجراح متوسطة بعد أن دهسته سيارة أثناء ركوبه دراجة كهربائية في كريات يام",
-          "summary": "تقرير عن حادث مروري في إسرائيل. التفاصيل والتحديثات في المصدر."
-        }
-      },
-      "title": "17-летний подросток получил травмы средней степени тяжести во время езды на электровелосипеде в Кирьят-Яме.",
-      "summary": "Дорожное происшествие в Израиле. Обстоятельства и актуальные сведения — в материале источника.",
-      "translated": true
-    },
-    {
-      "id": "8025f2fc80f0de9a29cd",
-      "titleOriginal": "רוכב אופניים חשמליים נפצע בינוני מפגיעת רכב בקריית ים",
-      "sourceLanguage": "he",
-      "date": "2026-11-21T18:45:52Z",
-      "url": "https://www.inn.co.il/flashes/1141891",
-      "publisher": "Arutz Sheva · Israel National News",
-      "category": "accidents",
-      "official": false,
-      "translations": {
-        "he": {
-          "title": "רוכב אופניים חשמליים נפצע בינוני מפגיעת רכב בקריית ים",
-          "summary": "דיווח על תאונת דרכים בישראל. פרטים ועדכונים בכתבת המקור."
-        },
-        "ru": {
-          "title": "Водитель электровелосипеда получил травмы средней степени тяжести после того, как его сбила машина в Кирьят-Яме.",
-          "summary": "Дорожное происшествие в Израиле. Обстоятельства и актуальные сведения — в материале источника."
-        },
-        "en": {
-          "title": "An electric bicycle rider was moderately injured after being hit by a car in Kiryat Yam",
-          "summary": "A reported road incident in Israel. Details and updates are in the original report."
-        },
-        "ar": {
-          "title": "أصيب سائق دراجة كهربائية بجروح متوسطة بعد أن صدمته سيارة في كريات يام",
-          "summary": "تقرير عن حادث مروري في إسرائيل. التفاصيل والتحديثات في المصدر."
-        }
-      },
-      "title": "Водитель электровелосипеда получил травмы средней степени тяжести после того, как его сбила машина в Кирьят-Яме.",
-      "summary": "Дорожное происшествие в Израиле. Обстоятельства и актуальные сведения — в материале источника.",
-      "translated": true
-    },
-    {
-      "id": "390c6de4f0a00ebea1ea",
-      "titleOriginal": "BYD דולפין G במבחן: הרבה מכונית, מעט מאוד ביקורים בתחנת הדלק",
-      "sourceLanguage": "he",
-      "date": "2026-11-21T17:23:47Z",
-      "url": "https://wheel.co.il/byd-%d7%93%d7%95%d7%9c%d7%a4%d7%99%d7%9f-g-%d7%97%d7%95%d7%95%d7%aa-%d7%93%d7%a2%d7%aa/",
-      "publisher": "Wheel · Автоновости",
-      "category": "cars",
-      "official": false,
-      "translations": {
-        "he": {
-          "title": "BYD דולפין G במבחן: הרבה מכונית, מעט מאוד ביקורים בתחנת הדלק",
-          "summary": "כתבה על מכוניות או שוק הרכב בישראל. פרטים באתר המקור."
-        },
-        "ru": {
-          "title": "BYD Dolphin G на тесте: много машин, очень мало посещений заправки",
-          "summary": "Материал об автомобиле или автомобильном рынке Израиля. Подробности — на сайте издания."
-        },
-        "en": {
-          "title": "BYD Dolphin G on test: a lot of car, very few visits to the gas station",
-          "summary": "An update about vehicles or Israel's car market. Details are available at the source."
-        },
-        "ar": {
-          "title": "BYD Dolphin G قيد الاختبار: عدد كبير من السيارات، وزيارات قليلة جدًا لمحطة الوقود",
-          "summary": "تحديث عن السيارات أو سوق المركبات في إسرائيل. التفاصيل في المصدر."
-        }
-      },
-      "title": "BYD Dolphin G на тесте: много машин, очень мало посещений заправки",
-      "summary": "Материал об автомобиле или автомобильном рынке Израиля. Подробности — на сайте издания.",
-      "translated": true
-    },
-    {
-      "id": "9d4cac60b7919c10bad7",
-      "titleOriginal": "1.6 מיליון כלי רכב: הונדה וטויוטה יוצאות למבצע חסר תקדים",
-      "sourceLanguage": "he",
-      "date": "2026-11-21T18:50:14Z",
-      "url": "https://www.maariv.co.il/news/world/article-1390796",
-      "publisher": "Maariv",
-      "category": "cars",
-      "official": false,
-      "translations": {
-        "he": {
-          "title": "1.6 מיליון כלי רכב: הונדה וטויוטה יוצאות למבצע חסר תקדים",
-          "summary": "כתבה על מכוניות או שוק הרכב בישראל. פרטים באתר המקור."
-        },
-        "ru": {
-          "title": "1,6 миллиона автомобилей: Honda и Toyota начинают беспрецедентную кампанию",
-          "summary": "Материал об автомобиле или автомобильном рынке Израиля. Подробности — на сайте издания."
-        },
-        "en": {
-          "title": "1.6 million vehicles: Honda and Toyota embark on an unprecedented campaign",
-          "summary": "An update about vehicles or Israel's car market. Details are available at the source."
-        },
-        "ar": {
-          "title": "1.6 مليون مركبة: تشرع هوندا وتويوتا في حملة غير مسبوقة",
-          "summary": "تحديث عن السيارات أو سوق المركبات في إسرائيل. التفاصيل في المصدر."
-        }
-      },
-      "title": "1,6 миллиона автомобилей: Honda и Toyota начинают беспрецедентную кампанию",
-      "summary": "Материал об автомобиле или автомобильном рынке Израиля. Подробности — на сайте издания.",
-      "translated": true
-    },
-    {
-      "id": "4e1623023ec4e23a3434",
-      "titleOriginal": "רוכב אופנוע בן 22 נפצע באורח בינוני מפגיעת רכב באום אל פחם",
-      "sourceLanguage": "he",
-      "date": "2026-11-21T17:09:34Z",
-      "url": "https://www.inn.co.il/flashes/1141880",
-      "publisher": "Arutz Sheva · Israel National News",
-      "category": "accidents",
-      "official": false,
-      "translations": {
-        "he": {
-          "title": "רוכב אופנוע בן 22 נפצע באורח בינוני מפגיעת רכב באום אל פחם",
-          "summary": "דיווח על תאונת דרכים בישראל. פרטים ועדכונים בכתבת המקור."
-        },
-        "ru": {
-          "title": "22-летний мотоциклист получил травмы средней степени тяжести после того, как его сбила машина в Умм-эль-Фахме.",
-          "summary": "Дорожное происшествие в Израиле. Обстоятельства и актуальные сведения — в материале источника."
-        },
-        "en": {
-          "title": "A 22-year-old motorcyclist was moderately injured after being hit by a car in Umm El Fahm",
-          "summary": "A reported road incident in Israel. Details and updates are in the original report."
-        },
-        "ar": {
-          "title": "إصابة سائق دراجة نارية 22 عاما بجروح متوسطة بعد أن صدمته سيارة في أم الفحم",
-          "summary": "تقرير عن حادث مروري في إسرائيل. التفاصيل والتحديثات في المصدر."
-        }
-      },
-      "title": "22-летний мотоциклист получил травмы средней степени тяжести после того, как его сбила машина в Умм-эль-Фахме.",
-      "summary": "Дорожное происшествие в Израиле. Обстоятельства и актуальные сведения — в материале источника.",
-      "translated": true
-    },
-    {
-      "id": "1c44bbb76c009ed6af98",
-      "titleOriginal": "מצפה רמון, גן יבנה והנגב: הרוג ופצועים קשה בסוף שבוע של תאונות דרכים",
-      "sourceLanguage": "he",
-      "date": "2026-11-21T07:22:42Z",
-      "url": "https://www.news08.net/%d7%9e%d7%a6%d7%a4%d7%94-%d7%a8%d7%9e%d7%95%d7%9f-%d7%92%d7%9f-%d7%99%d7%91%d7%a0%d7%94-%d7%95%d7%94%d7%a0%d7%92%d7%91-%d7%94%d7%a8%d7%95%d7%92-%d7%95%d7%a4%d7%a6%d7%95%d7%a2%d7%99%d7%9d-%d7%a7/",
-      "publisher": "News08",
-      "category": "accidents",
-      "official": false,
-      "translations": {
-        "he": {
-          "title": "מצפה רמון, גן יבנה והנגב: הרוג ופצועים קשה בסוף שבוע של תאונות דרכים",
-          "summary": "דיווח על תאונת דרכים בישראל. פרטים ועדכונים בכתבת המקור."
-        },
-        "ru": {
-          "title": "Мицпе-Рамон, Ган-Явне и Негев: один человек погиб и серьезно пострадал в автомобильных авариях на выходных",
-          "summary": "Дорожное происшествие в Израиле. Обстоятельства и актуальные сведения — в материале источника."
-        },
-        "en": {
-          "title": "Mitzpe Ramon, Gan Yavne and the Negev: one dead and seriously injured in a weekend of car accidents",
-          "summary": "A reported road incident in Israel. Details and updates are in the original report."
-        },
-        "ar": {
-          "title": "متسبيه رامون وغان يفنه والنقب: قتيل واحد وأصيب بجروح خطيرة في حوادث سيارات نهاية الأسبوع",
-          "summary": "تقرير عن حادث مروري في إسرائيل. التفاصيل والتحديثات في المصدر."
-        }
-      },
-      "title": "Мицпе-Рамон, Ган-Явне и Негев: один человек погиб и серьезно пострадал в автомобильных авариях на выходных",
-      "summary": "Дорожное происшествие в Израиле. Обстоятельства и актуальные сведения — в материале источника.",
-      "translated": true
-    },
-    {
-      "id": "f3457308a774ed8b198f",
-      "titleOriginal": "חשד לרצח בכפר ריינה: צעיר כבן 20 נורה למוות בתוך רכב",
-      "sourceLanguage": "he",
-      "date": "2026-11-21T17:28:40Z",
-      "url": "https://www.maariv.co.il/breaking-news/article-1390771",
-      "publisher": "Maariv",
-      "category": "cars",
-      "official": false,
-      "translations": {
-        "he": {
-          "title": "חשד לרצח בכפר ריינה: צעיר כבן 20 נורה למוות בתוך רכב",
-          "summary": "כתבה על מכוניות או שוק הרכב בישראל. פרטים באתר המקור."
-        },
-        "ru": {
-          "title": "Предполагаемое убийство в селе Райна: 20-летнего мужчину застрелили в машине",
-          "summary": "Материал об автомобиле или автомобильном рынке Израиля. Подробности — на сайте издания."
-        },
-        "en": {
-          "title": "Suspected murder in the village of Rayna: a 20-year-old man was shot to death in a car",
-          "summary": "An update about vehicles or Israel's car market. Details are available at the source."
-        },
-        "ar": {
-          "title": "جريمة قتل مشتبه بها في قرية رينا: قُتل شاب يبلغ من العمر 20 عامًا بالرصاص داخل سيارة",
-          "summary": "تحديث عن السيارات أو سوق المركبات في إسرائيل. التفاصيل في المصدر."
-        }
-      },
-      "title": "Предполагаемое убийство в селе Райна: 20-летнего мужчину застрелили в машине",
-      "summary": "Материал об автомобиле или автомобильном рынке Израиля. Подробности — на сайте издания.",
       "translated": true
     }
   ]
