@@ -1,7 +1,7 @@
 {
   "version": 1,
   "retentionDays": 30,
-  "updated": "2026-11-27T00:45:16Z",
+  "updated": "2026-11-27T10:02:51Z",
   "status": "ok",
   "sourceCount": 10,
   "searchUpdated": "2026-11-27T00:45:16Z",
@@ -35,7 +35,7 @@
   "items": [
     {
       "id": "hOUzkcf9w5c",
-      "title": "תאונה קשה במעלה אדומים: ליעם ויינשטיין בן השנתיים נהרג – חשד לפגע וברח",
+      "title": "תאונה קשה במעלה אדומים: ליעם ויינשטיין בן השנתיים נהרג - חשד לפגע וברח",
       "date": "2026-11-26T19:07:52Z",
       "source": "kan11",
       "publisher": "כאן חדשות",
@@ -62,15 +62,16 @@
     {
       "id": "FveQm-Nl51s",
       "title": "מכלית דלק התהפכה, מכוניות עלו באש: 31 הרוגים באסון בכביש המהיר במצרים",
-      "date": "2026-11-26T10:16:10Z",
       "source": "ynet",
       "publisher": "ynet",
+      "channelId": "UCpSSzrovhI4fA2PQNItecUA",
+      "localVerified": false,
       "category": "accidents",
-      "url": "https://www.youtube.com/watch?v=FveQm-Nl51s",
       "tags": [
         "accidents"
       ],
-      "channelId": "UCpSSzrovhI4fA2PQNItecUA"
+      "date": "2026-11-26T10:16:10Z",
+      "url": "https://www.youtube.com/watch?v=FveQm-Nl51s"
     },
     {
       "id": "jBazClkJ-Yg",
