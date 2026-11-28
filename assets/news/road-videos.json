@@ -1,7 +1,7 @@
 {
   "version": 1,
   "retentionDays": 30,
-  "updated": "2026-11-27T19:37:15Z",
+  "updated": "2026-11-28T02:54:40Z",
   "status": "ok",
   "sourceCount": 10,
   "searchUpdated": "2026-11-27T19:37:15Z",
@@ -49,15 +49,16 @@
     {
       "id": "XRvc9a2jUJg",
       "title": "פגע וברח במעלה אדומים: הובא למנוחות ליעם וויינשטיין בן השנתיים שנהרג בתאונת דרכים",
-      "date": "2026-11-26T18:27:56Z",
       "source": "i24he",
       "publisher": "i24NEWS עברית",
+      "channelId": "UCisowXt5wZkp2sR3rFh9lnQ",
+      "localVerified": false,
       "category": "accidents",
-      "url": "https://www.youtube.com/watch?v=XRvc9a2jUJg",
       "tags": [
         "accidents"
       ],
-      "channelId": "UCisowXt5wZkp2sR3rFh9lnQ"
+      "date": "2026-11-26T18:27:56Z",
+      "url": "https://www.youtube.com/watch?v=XRvc9a2jUJg"
     },
     {
       "id": "FveQm-Nl51s",
