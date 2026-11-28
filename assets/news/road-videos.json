@@ -1,10 +1,10 @@
 {
   "version": 1,
   "retentionDays": 30,
-  "updated": "2026-11-28T02:54:40Z",
+  "updated": "2026-11-28T12:12:43Z",
   "status": "ok",
   "sourceCount": 10,
-  "searchUpdated": "2026-11-27T19:37:15Z",
+  "searchUpdated": "2026-11-28T12:12:43Z",
   "sources": [
     {
       "id": "news13",
@@ -33,6 +33,19 @@
     }
   ],
   "items": [
+    {
+      "id": "Ykn109j_K9s",
+      "title": "בלב לונדון: מאות מפגינים פרו-פלסטינים חסמו כבישים בזמן הבלאק פריידי ופרצו לכלבו יוקרתי (דב גיל-הר)",
+      "date": "2026-11-28T07:18:21Z",
+      "source": "kan11",
+      "publisher": "כאן חדשות",
+      "category": "reports",
+      "url": "https://www.youtube.com/watch?v=Ykn109j_K9s",
+      "tags": [
+        "reports"
+      ],
+      "channelId": "UC_HwfTAcjBESKZRJq6BTCpg"
+    },
     {
       "id": "hOUzkcf9w5c",
       "title": "תאונה קשה במעלה אדומים: ליעם ויינשטיין בן השנתיים נהרג - חשד לפגע וברח",
@@ -91,15 +104,16 @@
     {
       "id": "fQ6yMhHrUVg",
       "title": "צפצפת? שילמת: הערים שמחלקות קנסות על צפירות מיותרות בכביש",
-      "date": "2026-11-23T21:11:33Z",
       "source": "news13",
       "publisher": "חדשות 13",
+      "channelId": "UCvQmPpU20hw1Trss_CVwaew",
+      "localVerified": false,
       "category": "police",
-      "url": "https://www.youtube.com/watch?v=fQ6yMhHrUVg",
       "tags": [
         "police"
       ],
-      "channelId": "UCvQmPpU20hw1Trss_CVwaew"
+      "date": "2026-11-23T21:11:33Z",
+      "url": "https://www.youtube.com/watch?v=fQ6yMhHrUVg"
     },
     {
       "id": "2mw0uo7Djh0",
