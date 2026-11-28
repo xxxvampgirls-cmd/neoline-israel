@@ -1,7 +1,7 @@
 {
   "version": 1,
   "retentionDays": 30,
-  "updated": "2026-11-28T12:12:43Z",
+  "updated": "2026-11-28T20:29:41Z",
   "status": "ok",
   "sourceCount": 10,
   "searchUpdated": "2026-11-28T12:12:43Z",
@@ -34,6 +34,19 @@
   ],
   "items": [
     {
+      "id": "eYjoqXefO2I",
+      "title": "ניצל ברגע האחרון: ניסה להספיק לרכבת שלו וכמעט נדרס ע\"י רכבת אחרת",
+      "date": "2026-11-28T17:55:11Z",
+      "source": "ynet",
+      "publisher": "ynet",
+      "category": "accidents",
+      "url": "https://www.youtube.com/watch?v=eYjoqXefO2I",
+      "tags": [
+        "accidents"
+      ],
+      "channelId": "UCpSSzrovhI4fA2PQNItecUA"
+    },
+    {
       "id": "Ykn109j_K9s",
       "title": "בלב לונדון: מאות מפגינים פרו-פלסטינים חסמו כבישים בזמן הבלאק פריידי ופרצו לכלבו יוקרתי (דב גיל-הר)",
       "date": "2026-11-28T07:18:21Z",
@@ -49,15 +62,16 @@
     {
       "id": "hOUzkcf9w5c",
       "title": "תאונה קשה במעלה אדומים: ליעם ויינשטיין בן השנתיים נהרג - חשד לפגע וברח",
-      "date": "2026-11-26T19:07:52Z",
       "source": "kan11",
       "publisher": "כאן חדשות",
+      "channelId": "UC_HwfTAcjBESKZRJq6BTCpg",
+      "localVerified": false,
       "category": "accidents",
-      "url": "https://www.youtube.com/watch?v=hOUzkcf9w5c",
       "tags": [
         "accidents"
       ],
-      "channelId": "UC_HwfTAcjBESKZRJq6BTCpg"
+      "date": "2026-11-26T19:07:52Z",
+      "url": "https://www.youtube.com/watch?v=hOUzkcf9w5c"
     },
     {
       "id": "XRvc9a2jUJg",
