@@ -1,5 +1,5 @@
 {
-  "attempted": "2026-11-28T10:25:06.741586Z",
+  "attempted": "2026-11-28T10:50:40.681269Z",
   "feeds": {
     "Walla · Авто": 30,
     "Walla · Безопасность": 30,
@@ -32,7 +32,7 @@
   },
   "facebook": {},
   "facebookState": "not_configured",
-  "new": 85,
+  "new": 80,
   "retained": 300,
   "discardedGoogleLinks": 0,
   "errors": {
